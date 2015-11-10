@@ -1,11 +1,6 @@
 (function($) {
   $(document).ready(function() {
 /******************************** ADS STUFF ********************************/
-    //Start the accordion
-    $('div#mf-options-accordion').accordion({
-      heightStyle: "content"
-    });
-
     //Show/Hide ads areas
     $('.mf_ad_enable').each(function() {
       if($(this).is(":checked")) {
