@@ -1,0 +1,1583 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle-forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-15 12:15-0700\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: Tadej Trstenjak <tadej.trstenjak@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Poedit-Language: Slovenian\n"
+"X-Poedit-Country: SLOVENIA\n"
+
+#: feed.php:24
+#: feed.php:25
+msgid "Forum Feed"
+msgstr "Tok novic foruma:"
+
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "Tema foruma:"
+
+#: feed.php:30
+#: wpf.class.php:1808
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Forum"
+
+#: feed.php:30
+#: wpf.class.php:859
+msgid "Topic: "
+msgstr "Tema:"
+
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "Prispevki so onemogoceni"
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "Uporabnik ne obstaja"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "Niste naročeni na noben prispevek"
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "Uredi možnosti foruma"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "Dovoli drugim da vidijo moj profil?"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "Naročen si na naslednje teme:"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:552
+msgid "Save options"
+msgstr "Shrani možnosti"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:615
+#: wpf.class.php:2071
+#: wpf.class.php:2097
+#: wpf.class.php:2115
+#: wpf.class.php:2137
+#: wpf.class.php:2146
+#: wpf.class.php:2204
+msgid "Cheating, are we?"
+msgstr "Goljufamo, ali ne?"
+
+#: wpf-insert.php:98
+#, fuzzy
+msgid "Security code does not match"
+msgstr "Varnostna koda se ne ujema"
+
+#: wpf-insert.php:113
+#: wpf-insert.php:118
+#: wpf-insert.php:188
+#: wpf-insert.php:193
+#: wpf-insert.php:246
+#: wpf-insert.php:251
+msgid "An error occured"
+msgstr "Prišlo je do napake"
+
+#: wpf-insert.php:114
+#: wpf-insert.php:189
+#: wpf-insert.php:247
+msgid "You must enter a subject"
+msgstr "Vpisati moraš naslov teme"
+
+#: wpf-insert.php:119
+#: wpf-insert.php:194
+#: wpf-insert.php:252
+msgid "You must enter a message"
+msgstr "Vpisati moraš sporočilo"
+
+#: wpf-insert.php:138
+msgid "created the forum topic:"
+msgstr "ustvaril temo na forumu:"
+
+#: wpf-insert.php:205
+msgid "replied to the forum topic:"
+msgstr "odgovoril na temo na forumu:"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Citiraj od"
+
+#: wpf-post.php:10
+#: wpf.class.php:678
+#: wpf.class.php:687
+#: wpf.class.php:1156
+msgid "on"
+msgstr "dne"
+
+#: wpf-post.php:20
+#: wpf.class.php:1281
+#: wpf.class.php:1854
+msgid "Post Reply"
+msgstr "Objavi odgovor"
+
+#: wpf-post.php:23
+#: wpf-post.php:76
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Tema:"
+
+#: wpf-post.php:24
+#: wpf.class.php:909
+msgid "Re:"
+msgstr "Odg:"
+
+#: wpf-post.php:27
+#: wpf-post.php:80
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Sporočilo:"
+
+#: wpf-post.php:40
+#: wpf-thread.php:30
+#, fuzzy
+msgid "Images:"
+msgstr "Slika"
+
+#: wpf-post.php:51
+#: wpf-thread.php:41
+msgid "Submit"
+msgstr "Dodaj"
+
+#: wpf-post.php:73
+#: wpf.class.php:1278
+#: wpf.class.php:1857
+msgid "Edit Post"
+msgstr "Uredo objavo"
+
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "Shrani objavo"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Objavi novo temo"
+
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "Oprosti, ampak nimaš dovoljenja za objavo."
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:441
+msgid "Newbie"
+msgstr "Novinec"
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:445
+msgid "Beginner"
+msgstr "Začetnik"
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:453
+msgid "Advanced"
+msgstr "Napreduje"
+
+#: wpf.class.php:154
+#: fs-admin/fs-admin.php:461
+msgid "Pro"
+msgstr "Pro"
+
+#: wpf.class.php:172
+#: wpf.class.php:173
+msgid "Mingle Forum - Options"
+msgstr "Mingle Forum >> Možnosti"
+
+#: wpf.class.php:173
+msgid "Options"
+msgstr "Možnosti"
+
+#: wpf.class.php:174
+msgid "Ads"
+msgstr "Oglasi"
+
+#: wpf.class.php:175
+msgid "Skins"
+msgstr "Preobleke"
+
+#: wpf.class.php:176
+#, fuzzy
+msgid "Forum Structure - Categories & Forums"
+msgstr "Kategorije & Forumi"
+
+#: wpf.class.php:176
+msgid "Forum Structure"
+msgstr "Struktura foruma"
+
+#: wpf.class.php:177
+msgid "Moderators"
+msgstr "Moderatorji"
+
+#: wpf.class.php:178
+msgid "User Groups"
+msgstr "Uporabniške skupine"
+
+#: wpf.class.php:179
+msgid "About"
+msgstr "O forumu"
+
+#: wpf.class.php:190
+#: wpf.class.php:191
+msgid "Forums Latest Activity"
+msgstr "Zadnje aktivnosti na forumu"
+
+#: wpf.class.php:210
+#: wpf.class.php:230
+msgid "by:"
+msgstr "od:"
+
+#: wpf.class.php:247
+msgid "Title to display in the sidebar:"
+msgstr "Naslov za prikaz v stranski vsrtici:"
+
+#: wpf.class.php:249
+msgid "How many items would you like to display?"
+msgstr "Koliko stvari bi rad prikazal?"
+
+#: wpf.class.php:646
+msgid "Page loaded in:"
+msgstr "Stran naložena v:"
+
+#: wpf.class.php:646
+msgid "seconds."
+msgstr "sekunde."
+
+#: wpf.class.php:649
+msgid "Mingle Forum "
+msgstr "Mingle Forum "
+
+#: wpf.class.php:650
+msgid "Version:"
+msgstr "Različica:"
+
+#: wpf.class.php:669
+#: wpf.class.php:2268
+msgid "Guest"
+msgstr "Gost"
+
+#: wpf.class.php:678
+#: wpf.class.php:1155
+msgid "by"
+msgstr "od"
+
+#: wpf.class.php:687
+msgid "Latest Post by"
+msgstr "Zadnji objavljal"
+
+#: wpf.class.php:710
+#: wpf.class.php:841
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Do tega foruma nimaš dostopa"
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+msgid "Status"
+msgstr "Status"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Topic Title"
+msgstr "Naslov teme"
+
+#: wpf.class.php:722
+#: wpf.class.php:2358
+#: wpf.class.php:2546
+msgid "Started by"
+msgstr "Začel"
+
+#: wpf.class.php:723
+#: wpf.class.php:2359
+msgid "Replies"
+msgstr "Odgovori"
+
+#: wpf.class.php:724
+msgid "Views"
+msgstr "Ogledov"
+
+#: wpf.class.php:725
+#: wpf.class.php:1155
+#: wpf.class.php:2360
+msgid "Last post"
+msgstr "Zadnja objava"
+
+#: wpf.class.php:729
+msgid "Sticky Topics"
+msgstr "Prilepljene teme"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+#: wpf.class.php:1642
+#: wpf.class.php:1659
+msgid "Move Topic"
+msgstr "Premakni temo"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+msgid "Delete Topic"
+msgstr "Izbriši temo"
+
+#: wpf.class.php:745
+#: wpf.class.php:774
+msgid "New posts since last visit"
+msgstr "Nove objave od zadnjega obiska"
+
+#: wpf.class.php:762
+msgid "Forum Topics"
+msgstr "Teme foruma"
+
+#: wpf.class.php:829
+msgid "Remove this topic from your email notifications?"
+msgstr "Odstranim to temo iz email obvestil?"
+
+#: wpf.class.php:831
+msgid "Add this topic to your email notifications?"
+msgstr "Dodam to temo k email obvestilom?"
+
+#: wpf.class.php:852
+msgid "TOPIC CLOSED"
+msgstr "TEMA ZAKLENJENA"
+
+#: wpf.class.php:858
+msgid "Author"
+msgstr "Avtor"
+
+#: wpf.class.php:874
+#: wpf.class.php:2412
+msgid "Posts:"
+msgstr "Objave:"
+
+#: wpf.class.php:907
+msgid "Quick Reply"
+msgstr "Hiter odgovor"
+
+#: wpf.class.php:916
+msgid "Submit Quick Reply"
+msgstr "Objavi hiter odgovor"
+
+#: wpf.class.php:938
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Objava"
+
+#: wpf.class.php:941
+msgid "on:"
+msgstr "dne:"
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: wpf.class.php:2284
+msgid "Quote"
+msgstr "Citiraj"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:971
+msgid "Remove"
+msgstr "Odstrani"
+
+#: wpf.class.php:949
+#: wpf.class.php:958
+msgid "Edit"
+msgstr "Uredi"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Topics: "
+msgstr "Teme:"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Posts: "
+msgstr "Objave:"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "New posts"
+msgstr "Nove objave"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "No new posts"
+msgstr "Ni novih objav"
+
+#: wpf.class.php:1042
+msgid "Mark All Read"
+msgstr "Označi vse 'Prebrano'"
+
+#: wpf.class.php:1153
+msgid "No topics yet"
+msgstr "Ni še objavljenih tem."
+
+#: wpf.class.php:1156
+msgid "in"
+msgstr "v temi"
+
+#: wpf.class.php:1207
+msgid "Forums RSS"
+msgstr "RSS Forumov"
+
+#: wpf.class.php:1218
+msgid "Are you sure you want to remove this?"
+msgstr "Se prepričan, da želiš to odstraniti?"
+
+#: wpf.class.php:1272
+#: wpf.class.php:1847
+msgid "Search Results"
+msgstr "Rezultati iskanja"
+
+#: wpf.class.php:1275
+msgid "Profile"
+msgstr "Profil"
+
+#: wpf.class.php:1284
+#: wpf.class.php:1504
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+#: wpf.class.php:1860
+msgid "New Topic"
+msgstr "Nova Tema"
+
+#: wpf.class.php:1351
+msgid "Moderators:"
+msgstr "Moderatorji:"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Undo Sticky"
+msgstr "Razveljavi Prilepljeno"
+
+#: wpf.class.php:1529
+#: wpf.class.php:1542
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Sticky"
+msgstr "Prilepljeno"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1641
+#: wpf.class.php:1658
+msgid "Re-open"
+msgstr "Ponovno odpri"
+
+#: wpf.class.php:1534
+#: wpf.class.php:1547
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Close"
+msgstr "Zapri"
+
+#: wpf.class.php:1554
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "Reply"
+msgstr "Odgovori"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Unsubscribe"
+msgstr "Odjavi se"
+
+#: wpf.class.php:1563
+#: wpf.class.php:1579
+msgid "Subscribe"
+msgstr "Prijavi se"
+
+#: wpf.class.php:1566
+msgid "RSS feed"
+msgstr "RSS tok novic"
+
+#: wpf.class.php:1582
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "RSS-Feed"
+msgstr "RSS-Tok novic"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My profile"
+msgstr "Moj profil"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My Profile"
+msgstr "Moj profil"
+
+#: wpf.class.php:1631
+#: wpf.class.php:1648
+msgid "Forum Home"
+msgstr "Forum Domov"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:1925
+msgid "Log out"
+msgstr "Odjava"
+
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:2455
+msgid "Search"
+msgstr "Iskanje"
+
+#: wpf.class.php:1722
+msgid "You are logged in as:"
+msgstr "Prijavljen si kot: "
+
+#: wpf.class.php:1728
+msgid "Username: "
+msgstr "Uporabniško ime:"
+
+#: wpf.class.php:1729
+msgid "Password: "
+msgstr "Geslo:"
+
+#: wpf.class.php:1731
+msgid "Remember Me"
+msgstr "Zapomni si me"
+
+#: wpf.class.php:1767
+msgid "Administrator"
+msgstr "Administrator"
+
+#: wpf.class.php:1771
+msgid "Moderator"
+msgstr "Moderator"
+
+#: wpf.class.php:1841
+msgid "New Topics since last visit"
+msgstr "Nove teme od zadnjega obiska"
+
+#: wpf.class.php:1851
+msgid "Profile Info"
+msgstr "Informacije profila:"
+
+#: wpf.class.php:1915
+msgid "Edit Profile"
+msgstr "Uredi profil"
+
+#: wpf.class.php:1919
+#: wpf.class.php:1931
+msgid "Welcome"
+msgstr "Pozdravljen"
+
+#: wpf.class.php:1920
+msgid "Your last visit was:"
+msgstr "Tvoj zadnji obisk:"
+
+#: wpf.class.php:1922
+msgid "Show new topics since your last visit"
+msgstr "Pokaži nove teme od zadnjega obiska"
+
+#: wpf.class.php:1923
+msgid "Edit your forum options"
+msgstr "Uredi možnosti foruma"
+
+#: wpf.class.php:1930
+msgid "Welcome Guest, please login or"
+msgstr "Pozdravljen Gost, prosim prijavi se ali "
+
+#: wpf.class.php:1930
+msgid "register."
+msgstr "registriraj."
+
+#: wpf.class.php:1935
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Pozdravljen Gost, objavljanje v tem forumu zahteva"
+
+#: wpf.class.php:1935
+msgid "registration."
+msgstr "registracijo."
+
+#: wpf.class.php:1943
+msgid "Show/Hide Header"
+msgstr "Pokaži/Skrij Glavo"
+
+#: wpf.class.php:1957
+msgid "Search forums"
+msgstr "Išči po forumih"
+
+#: wpf.class.php:1992
+#: wpf.class.php:2023
+msgid "Pages:"
+msgstr "Strani:"
+
+#: wpf.class.php:2005
+#: wpf.class.php:2036
+msgid "First"
+msgstr "Prvi"
+
+#: wpf.class.php:2016
+#: wpf.class.php:2047
+msgid "Last"
+msgstr "Zadnji"
+
+#: wpf.class.php:2134
+msgid "Post deleted"
+msgstr "Objava izbrisana"
+
+#: wpf.class.php:2261
+#: wpf.class.php:2265
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "Poglej profil"
+
+#: wpf.class.php:2279
+msgid "Bold"
+msgstr "Krepko"
+
+#: wpf.class.php:2280
+msgid "Italic"
+msgstr "Ležeče"
+
+#: wpf.class.php:2281
+msgid "Underline"
+msgstr "Podčrtaj"
+
+#: wpf.class.php:2282
+msgid "Strikethrough"
+msgstr "Prečrtaj"
+
+#: wpf.class.php:2283
+msgid "Code"
+msgstr "Koda"
+
+#: wpf.class.php:2285
+msgid "List"
+msgstr "Seznam"
+
+#: wpf.class.php:2286
+msgid "List item"
+msgstr "Polje seznama"
+
+#: wpf.class.php:2287
+msgid "Link"
+msgstr "Povezava"
+
+#: wpf.class.php:2288
+msgid "Image"
+msgstr "Slika"
+
+#: wpf.class.php:2289
+msgid "Email"
+msgstr "Email"
+
+#: wpf.class.php:2290
+msgid "Add Hex Color"
+msgstr "Dodaj Hex barvo"
+
+#: wpf.class.php:2291
+msgid "Embed YouTube Video"
+msgstr "Dodaj YouTube Video"
+
+#: wpf.class.php:2292
+msgid "Embed Google Map"
+msgstr "Vgradi Google zemljevid"
+
+#: wpf.class.php:2298
+msgid "Smile"
+msgstr "Nasmeh"
+
+#: wpf.class.php:2299
+msgid "Big Grin"
+msgstr "Velik nasmeh"
+
+#: wpf.class.php:2300
+msgid "Sad"
+msgstr "Žalosten"
+
+#: wpf.class.php:2301
+msgid "Neutral"
+msgstr "Nevtralen"
+
+#: wpf.class.php:2302
+msgid "Razz"
+msgstr "Razz"
+
+#: wpf.class.php:2303
+msgid "Mad"
+msgstr "Jezen"
+
+#: wpf.class.php:2304
+msgid "Confused"
+msgstr "Zmeden"
+
+#: wpf.class.php:2305
+msgid "Eek!"
+msgstr "Eek!"
+
+#: wpf.class.php:2306
+msgid "Wink"
+msgstr "Pomežik"
+
+#: wpf.class.php:2307
+msgid "Surprised"
+msgstr "Presenečen"
+
+#: wpf.class.php:2308
+msgid "Cool"
+msgstr "Kul"
+
+#: wpf.class.php:2320
+msgid "Info Center"
+msgstr "Info Center"
+
+#: wpf.class.php:2327
+msgid "Posts in"
+msgstr "objav v"
+
+#: wpf.class.php:2327
+msgid "Topics Made by"
+msgstr "temah, ustvarjenih od:"
+
+#: wpf.class.php:2327
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "članov"
+
+#: wpf.class.php:2327
+msgid "Latest Member:"
+msgstr "Zadnji član:"
+
+#: wpf.class.php:2353
+msgid "New topics since your last visit"
+msgstr "Nove teme od zadnjega obiska"
+
+#: wpf.class.php:2397
+msgid "Summary"
+msgstr "Povzetek"
+
+#: wpf.class.php:2403
+#: wpf.class.php:2689
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "Ime:"
+
+#: wpf.class.php:2408
+msgid "Registered:"
+msgstr "Registriran:"
+
+#: wpf.class.php:2416
+msgid "Position:"
+msgstr "Postavitev:"
+
+#: wpf.class.php:2419
+msgid "Website:"
+msgstr "Spletna stran:"
+
+#: wpf.class.php:2423
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2427
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2430
+msgid "Jabber/google Talk:"
+msgstr "Jabber/Google Talk:"
+
+#: wpf.class.php:2434
+msgid "Biographical Info:"
+msgstr "Biografija:"
+
+#: wpf.class.php:2459
+msgid "Search for:"
+msgstr "Išči izraz:"
+
+#: wpf.class.php:2463
+msgid "By user:"
+msgstr "Po uporabniku:"
+
+#: wpf.class.php:2468
+msgid "Message Age:"
+msgstr "Starosti sporočila:"
+
+#: wpf.class.php:2469
+msgid "Between"
+msgstr "Med"
+
+#: wpf.class.php:2469
+msgid "and"
+msgstr "in "
+
+#: wpf.class.php:2469
+msgid "days"
+msgstr "dnevi"
+
+#: wpf.class.php:2475
+msgid "Click to choose Forum(s) to  search"
+msgstr "Izberi Forum(e) po katerih bo potekalo iskanje"
+
+#: wpf.class.php:2497
+msgid "Check all"
+msgstr "Označi vse"
+
+#: wpf.class.php:2502
+msgid "Start Search"
+msgstr "Začni iskanje"
+
+#: wpf.class.php:2544
+msgid "Subject"
+msgstr "Tema"
+
+#: wpf.class.php:2545
+msgid "Relevance"
+msgstr "Ustreznost"
+
+#: wpf.class.php:2547
+msgid "Posted"
+msgstr "Objavljeno"
+
+#: wpf.class.php:2613
+msgid "Closed topic"
+msgstr "Zaprta tema"
+
+#: wpf.class.php:2616
+msgid "Normal topic"
+msgstr "Normalna tema"
+
+#: wpf.class.php:2619
+msgid "Hot topic"
+msgstr "Vroča tema"
+
+#: wpf.class.php:2622
+msgid "Very Hot topic"
+msgstr "Zelo vroča tema"
+
+#: wpf.class.php:2654
+msgid "Security Code:"
+msgstr "Varnostna koda:"
+
+#: wpf.class.php:2673
+msgid "Enter Security Code: (required)"
+msgstr "Vnesti moraš Varnostno kodo: (obvezno)"
+
+#: wpf.class.php:2687
+#, fuzzy
+msgid "New post in forum:"
+msgstr "Nov odgovor na temo foruma:"
+
+#: wpf.class.php:2688
+msgid "DETAILS:"
+msgstr "PODROBNOSTI:"
+
+#: wpf.class.php:2691
+msgid "Date:"
+msgstr "Datum:"
+
+#: wpf.class.php:2692
+msgid "Reply Content:"
+msgstr "Vsebina odgovora:"
+
+#: wpf.class.php:2693
+msgid "View Topic Here:"
+msgstr "Poglej temo tukaj:"
+
+#: wpf.class.php:2742
+#: wpf.class.php:2752
+msgid "Inbox"
+msgstr "Prejeto"
+
+#: wpf.class.php:2768
+#: wpf.class.php:2781
+msgid "Send Message"
+msgstr "Pošlji sporočilo"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Kategorijo"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Tema"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "Izbrati moraš ime Uporabniške skupine."
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:692
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "Izbral si ime, ki v bazi podatkov že obstaja, prosim izberi drugo ime"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "Uporabniška skupina uspešno ustvarjena."
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "Dodal nisi nobenega uporabnika:"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "Izbrati moraš uporabniško skupino"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "Napaka"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "Takšen uporabnik ne obstaja:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "Opozorilo"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "Uporabnik"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "je že v tej skupini"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "uspešno dodan"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "Napake:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "Opozorila:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "Dodani uporabniki:"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "Uporabniške skupine uspešno izbrisane."
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "Član uspešno odstranjen"
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Forum >> Urejanje Uporabniških skupin"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:757
+#: fs-admin/fs-admin.php:957
+msgid "add new"
+msgstr "Dodaj novo"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:811
+msgid "Delete"
+msgstr "Izbriši"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "Dodaj člane"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "V tej skupini ni članov"
+
+#: fs-admin/fs-admin.php:222
+msgid "Skin successfully activated."
+msgstr "Preobleka uspoešno aktivirana."
+
+#: fs-admin/fs-admin.php:228
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingle Forum >> Možnosti preoblek"
+
+#: fs-admin/fs-admin.php:229
+msgid "Get More Skins"
+msgstr "Več Preoblek"
+
+#: fs-admin/fs-admin.php:230
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "POMEMBNO: Od različice 1.0.03 se datoteka za preobleke nahaja v /wp-content/mingle-forum-skins/"
+
+#: fs-admin/fs-admin.php:230
+msgid "Why did you change it?"
+msgstr "Zakaj ste spremenili?"
+
+#: fs-admin/fs-admin.php:233
+msgid "Screenshot"
+msgstr "Zaslonska slika"
+
+#: fs-admin/fs-admin.php:234
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "Ime"
+
+#: fs-admin/fs-admin.php:235
+msgid "Version"
+msgstr "Različica"
+
+#: fs-admin/fs-admin.php:236
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "Opis"
+
+#: fs-admin/fs-admin.php:237
+msgid "Action"
+msgstr "Dejanje"
+
+#: fs-admin/fs-admin.php:251
+#: fs-admin/fs-admin.php:266
+msgid "In Use"
+msgstr "V uporabi"
+
+#: fs-admin/fs-admin.php:253
+#: fs-admin/fs-admin.php:268
+msgid "Activate"
+msgstr "Aktiviraj"
+
+#: fs-admin/fs-admin.php:296
+msgid "About Mingle Forum"
+msgstr "O Mingle Forumu"
+
+#: fs-admin/fs-admin.php:299
+msgid "Current Version: "
+msgstr "Trenutna različica:"
+
+#: fs-admin/fs-admin.php:303
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Mingle forum ima eno preprosto poslanstvo; da 'OSTANE PREPROST!' Je močno izboljšano nadaljevanje WP Foruma. Popolnoma podpira integracijo z ali brez Mingle vtičnika (avtor Blair Williams). Rad bi se zahvalil Ericu Hambyu za njegovo preteklo delo na skripti foruma."
+
+#: fs-admin/fs-admin.php:305
+msgid "Author: "
+msgstr "Avtor: "
+
+#: fs-admin/fs-admin.php:306
+msgid "Plugin Page:"
+msgstr "Stran s vtičniki:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Support Forum:"
+msgstr "Forum s podporo:"
+
+#: fs-admin/fs-admin.php:308
+msgid "Mingle Forum Skins:"
+msgstr "Mingle Forum Preobleke:"
+
+#: fs-admin/fs-admin.php:355
+msgid "Options successfully saved."
+msgstr "Možnosti uspešno shranjene."
+
+#: fs-admin/fs-admin.php:360
+msgid "Mingle Forum"
+msgstr "Mingle Forum"
+
+#: fs-admin/fs-admin.php:364
+msgid "Statistic"
+msgstr "Statistika"
+
+#: fs-admin/fs-admin.php:365
+msgid "Value"
+msgstr "Vrednost"
+
+#: fs-admin/fs-admin.php:369
+msgid "Number of posts:"
+msgstr "Število objav:"
+
+#: fs-admin/fs-admin.php:373
+msgid "Number of threads:"
+msgstr "Število tem:"
+
+#: fs-admin/fs-admin.php:377
+msgid "Number of users:"
+msgstr "Število uporabnikov:"
+
+#: fs-admin/fs-admin.php:381
+msgid "Total database size:"
+msgstr "Skupna velikost baze podatkov:"
+
+#: fs-admin/fs-admin.php:385
+msgid "Database server:"
+msgstr "Server baze podatkov:"
+
+#: fs-admin/fs-admin.php:389
+msgid "Mingle Forum version:"
+msgstr "Različica Mingle Foruma:"
+
+#: fs-admin/fs-admin.php:394
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Forum >> Splošne možnosti"
+
+#: fs-admin/fs-admin.php:399
+msgid "default "
+msgstr "privzeto"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Name"
+msgstr "Ime izbire:"
+
+#: fs-admin/fs-admin.php:404
+msgid "Option Input"
+msgstr "Možnost izbire"
+
+#: fs-admin/fs-admin.php:409
+msgid "Posts per page:"
+msgstr "Objav na stran:"
+
+#: fs-admin/fs-admin.php:413
+msgid "Threads per page:"
+msgstr "Tem na stran:"
+
+#: fs-admin/fs-admin.php:419
+msgid "Number of posts for Hot Topic:"
+msgstr "Št. objav za Vročo temo:"
+
+#: fs-admin/fs-admin.php:423
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Št. objav za Zelo vročo temo:"
+
+#: fs-admin/fs-admin.php:427
+msgid "Username Display:"
+msgstr "Izbira prikazanega uporabniškega imena:"
+
+#: fs-admin/fs-admin.php:440
+msgid "New User's Title:"
+msgstr "Naziv novega uporabnika: "
+
+#: fs-admin/fs-admin.php:444
+msgid "User Level 1 Title:"
+msgstr "Uporabnik Stopnje 1:"
+
+#: fs-admin/fs-admin.php:448
+msgid "User Level 1 Count:"
+msgstr "Št. uporabnikov Stopnje 1:"
+
+#: fs-admin/fs-admin.php:449
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:452
+msgid "User Level 2 Title:"
+msgstr "Uporabnik Stopnje 2:"
+
+#: fs-admin/fs-admin.php:456
+msgid "User Level 2 Count:"
+msgstr "Št. uporabnikov Stopnje 2:"
+
+#: fs-admin/fs-admin.php:457
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:460
+msgid "User Level 3 Title:"
+msgstr "Uporabnik Stopnje 3:"
+
+#: fs-admin/fs-admin.php:464
+msgid "User Level 3 Count:"
+msgstr "Št. uporabnikov Stopnje 3:"
+
+#: fs-admin/fs-admin.php:465
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:468
+msgid "Notify Admin on new posts:"
+msgstr "Obvesti admina o novih objavah"
+
+#: fs-admin/fs-admin.php:472
+#: fs-admin/fs-admin.php:495
+#: fs-admin/fs-admin.php:519
+msgid "Off"
+msgstr "Izklopljeno"
+
+#: fs-admin/fs-admin.php:475
+msgid "Show Forum Login Form:"
+msgstr "Prikaži obrazec za vpis v forum:"
+
+#: fs-admin/fs-admin.php:479
+#: fs-admin/fs-admin.php:487
+#: fs-admin/fs-admin.php:503
+#: fs-admin/fs-admin.php:511
+#: fs-admin/fs-admin.php:527
+msgid "On"
+msgstr "Vklopljeno"
+
+#: fs-admin/fs-admin.php:483
+msgid "Show Avatars in the forum:"
+msgstr "Pokaži Avatarje v forumu:"
+
+#: fs-admin/fs-admin.php:491
+msgid "Allow Images to be uploaded:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:499
+msgid "Show users Bio at the bottom of posts:"
+msgstr "Pokaži uporabnikov Bio na dnu objav:"
+
+#: fs-admin/fs-admin.php:507
+msgid "Use Forum RSS:"
+msgstr "Uporabi RSS novice foruma:"
+
+#: fs-admin/fs-admin.php:515
+msgid "Use SEO friendly URLs:"
+msgstr "Uporabi SEO prijazne URLje"
+
+#: fs-admin/fs-admin.php:515
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "POMEMBNO: Ne potrdi te možnosti če imaš permalinke nastavljene na 'privzeto'"
+
+#: fs-admin/fs-admin.php:523
+msgid "Registration required to post:"
+msgstr "Za objavo je potrebna registracija:"
+
+#: fs-admin/fs-admin.php:532
+msgid "Installed version:"
+msgstr "Nameščena različica:"
+
+#: fs-admin/fs-admin.php:536
+msgid "GD Library is not installed"
+msgstr "GD Knjižnica ni nameščena"
+
+#: fs-admin/fs-admin.php:539
+msgid "Use Captcha for unregistered users:"
+msgstr "Uporabi Captcha za neregistrirane uporabnike:"
+
+#: fs-admin/fs-admin.php:543
+msgid "Requires "
+msgstr "Potrebuje "
+
+#: fs-admin/fs-admin.php:543
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Če je možnost 'Za objavo je potrebna registracija' vklopljena, potem pusti izklopljeno"
+
+#: fs-admin/fs-admin.php:547
+msgid "Date format:"
+msgstr "Oblika datuma:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Default date:"
+msgstr "Privzet datum:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Check "
+msgstr "Preveri "
+
+#: fs-admin/fs-admin.php:547
+msgid "for date formatting."
+msgstr "za oblike datumov."
+
+#: fs-admin/fs-admin.php:663
+msgid "Groups deleted:"
+msgstr "Izbrisane skupine:"
+
+#: fs-admin/fs-admin.php:664
+msgid "Forums deleted:"
+msgstr "Forumi izbrisani:"
+
+#: fs-admin/fs-admin.php:665
+msgid "Threads deleted:"
+msgstr "Izbrisane teme"
+
+#: fs-admin/fs-admin.php:666
+msgid "Posts deleted:"
+msgstr "Izbrisane objave:"
+
+#: fs-admin/fs-admin.php:690
+#: fs-admin/fs-admin.php:714
+msgid "You must enter a name"
+msgstr "Vpisati moraš ime"
+
+#: fs-admin/fs-admin.php:699
+msgid "Category added successfully"
+msgstr "Kategorija je bila uspešno dodana"
+
+#: fs-admin/fs-admin.php:711
+msgid "You must select a category"
+msgstr "Izbrati moraš kategorijo"
+
+#: fs-admin/fs-admin.php:717
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Izbral si ime foruma, ki v tej skupini že obstaja, prosim izberi drugega"
+
+#: fs-admin/fs-admin.php:724
+msgid "Forum added successfully"
+msgstr "Forum je bil uspešno dodan"
+
+#: fs-admin/fs-admin.php:751
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Forum >> Kategorije in Forumi"
+
+#: fs-admin/fs-admin.php:773
+#: fs-admin/fs-admin.php:803
+msgid "Modify"
+msgstr "Spremeni"
+
+#: fs-admin/fs-admin.php:812
+msgid "Add forum"
+msgstr "Dodaj forum"
+
+#: fs-admin/fs-admin.php:837
+msgid "Group Moved Down"
+msgstr "Skupina pomaknjena dol"
+
+#: fs-admin/fs-admin.php:847
+msgid "Forum Moved Down"
+msgstr "Forum pomaknjen navzdol"
+
+#: fs-admin/fs-admin.php:857
+msgid "Group Moved Up"
+msgstr "Skupina pomaknjena gor"
+
+#: fs-admin/fs-admin.php:867
+msgid "Forum Moved Up"
+msgstr "Forum pomaknjen gor"
+
+#: fs-admin/fs-admin.php:904
+#: fs-admin/fs-admin.php:911
+msgid "Moderator successfully removed."
+msgstr "Moderator uspešno odstranjen."
+
+#: fs-admin/fs-admin.php:906
+msgid "Moderator successfully saved."
+msgstr "Moderator uspešno shranjen."
+
+#: fs-admin/fs-admin.php:913
+msgid "Moderator NOT removed."
+msgstr "Moderator NI odstranjen."
+
+#: fs-admin/fs-admin.php:927
+msgid "You must select a user"
+msgstr "Izbrati moraš uporabnika"
+
+#: fs-admin/fs-admin.php:931
+msgid "Global Moderator added successfully"
+msgstr "Globalni moderator je bil uspešno dodan"
+
+#: fs-admin/fs-admin.php:935
+msgid "Moderator added successfully"
+msgstr "Moderator je bil uspešno dodan"
+
+#: fs-admin/fs-admin.php:957
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Forum >> Uredi Moderatorje"
+
+#: fs-admin/fs-admin.php:966
+msgid "Currently moderating"
+msgstr "Trenutno moderira"
+
+#: fs-admin/fs-admin.php:970
+msgid "Update"
+msgstr "Posodobi"
+
+#: fs-admin/fs-admin.php:980
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Globalni moderator: (Uporabnik lahko moderira vse forume)"
+
+#: fs-admin/fs-admin.php:999
+msgid "No moderators yet"
+msgstr "Ni še moderatorjev"
+
+#: fs-admin/fs-admin.php:1024
+msgid "Ads saved successfully"
+msgstr "Oglas uspešno dodan"
+
+#: fs-admin/fs-admin.php:1029
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingle Forum >> Možnosti"
+
+#: fs-admin/fs-admin.php:1031
+msgid "HTML is allowed in all ad areas below"
+msgstr "V spodnjih poljih za oglase je dovoljen HTML"
+
+#: fs-admin/fs-admin.php:1035
+msgid "Ads Option"
+msgstr "Možnosti oglasov"
+
+#: fs-admin/fs-admin.php:1042
+msgid "Enable Area Above Forum"
+msgstr "Omogoči prostor nad forumom"
+
+#: fs-admin/fs-admin.php:1044
+#: fs-admin/fs-admin.php:1052
+#: fs-admin/fs-admin.php:1060
+#: fs-admin/fs-admin.php:1068
+#: fs-admin/fs-admin.php:1076
+#: fs-admin/fs-admin.php:1084
+#: fs-admin/fs-admin.php:1092
+msgid "css-value:"
+msgstr "css-vrednost:"
+
+#: fs-admin/fs-admin.php:1050
+msgid "Enable Area Below Forum"
+msgstr "Omogoči prostor pod forumom"
+
+#: fs-admin/fs-admin.php:1058
+msgid "Enable Area Above Branding"
+msgstr "Omogoči prostor nad logotipom"
+
+#: fs-admin/fs-admin.php:1066
+msgid "Enable Area Above Info Center"
+msgstr "Omogoči prostor nad info centrom"
+
+#: fs-admin/fs-admin.php:1074
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Omogoči prostor nad novičkami"
+
+#: fs-admin/fs-admin.php:1082
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Omogoči prostor nad obrazcom 'Hiter odgovor'"
+
+#: fs-admin/fs-admin.php:1090
+msgid "Enable Area Below First Post"
+msgstr "Omogoči prostor pod prvim odgovorom"
+
+#: fs-admin/fs-admin.php:1097
+msgid "Below you can modify/add your own CSS"
+msgstr "Spodaj lahko spreminjate/dodate lasten CSS"
+
+#: fs-admin/fs-admin.php:1098
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "SPOROČILO: Če ne veste čemu služi to, pustite praznlo"
+
+#: fs-admin/fs-admin.php:1105
+#, fuzzy
+msgid "Save Options"
+msgstr "Shrani možnosti"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "Dodaj forum k"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "Opis:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "Shrani forum"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "Dodaj kategorijo"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "Shrani kategorijo"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "Shrani Uporabniško skupino"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "Izberi Uporabniško skupino"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "Dodaj uporabnike"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "Potrebno je poimenovati skupino"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "Skupina je bila uspešno dodana"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "Potrebno je poimenovati forum"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "Forum je bil uspešno posodobljen"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "Uredi kategorijo"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "Uporabniške skupine"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "Člani označene uporabniške skupine imajo dostop do forumov v tej kategoriji:"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "Ni Uporabniških skupin"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "Shrani skupino"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "Uredi forum"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "Izberi uporabnika"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "Dodaj moderatorja"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "Potrebno je doličiti ime Uporabniške skupine"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "Uporabniška skupina je bila uspešno posodobljena"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "Uredi Uporabniško skupino"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "Shrani Uporabniško skupino"
+
+#~ msgid "General Options"
+#~ msgstr "Splošne možnosti"
+
+#~ msgid "Categories and forums"
+#~ msgstr "Kategorije in forumi"

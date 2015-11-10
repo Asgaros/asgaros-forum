@@ -1,0 +1,1797 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-20 21:23-0700\n"
+"PO-Revision-Date: 2013-01-21 18:24+0100\n"
+"Last-Translator: Michael Fitzen <email@michael-fitzen.de>\n"
+"Language-Team: Michael Fitzen <email@be-infected.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\\pms\n"
+"X-Poedit-SearchPath-2: .\\fs-admin\n"
+
+#: feed.php:24 feed.php:25
+msgid "Forum Feed"
+msgstr "Forum Feed"
+
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "Forum Thema:"
+
+#: feed.php:30 wpf.class.php:1803 wpf_define.php:34
+msgid "Forum"
+msgstr "Forum"
+
+#: feed.php:30 wpf.class.php:882
+msgid "Topic: "
+msgstr "Thema:"
+
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "Feeds deaktiviert"
+
+#: wpf-edit-profile.php:11
+msgid "No such user"
+msgstr "Dieser User existiert nicht"
+
+#: wpf-edit-profile.php:27
+msgid "You have no Topic subscriptions at this time"
+msgstr "Du hast aktuell keine Themen abonniert"
+
+#: wpf-edit-profile.php:37
+msgid "You have no Forum subscriptions at this time"
+msgstr "Du hast aktuell keine Foren abonniert"
+
+#: wpf-edit-profile.php:41
+msgid "Edit forum options"
+msgstr "Persönliche Einstellungen für Foren bearbeiten"
+
+#: wpf-edit-profile.php:46
+msgid "Allow others to view my profile?"
+msgstr "Andere dürfen mein Profil sehen?"
+
+#: wpf-edit-profile.php:49
+msgid "Edit Signature:"
+msgstr "Signatur bearbeiten:"
+
+#: wpf-edit-profile.php:54
+msgid "You have email notifications for these Forums:"
+msgstr "Du hast folgende Foren per E-Mailbenachrichtigung abonniert:"
+
+#: wpf-edit-profile.php:57
+msgid "You have email notifications for these Topics:"
+msgstr "Du hast folgende Themen per E-Mailbenachrichtigung abonniert:"
+
+#: wpf-edit-profile.php:60 fs-admin/fs-admin.php:596
+#: .\fs-admin/fs-admin.php:596
+msgid "Save options"
+msgstr "Einstellungen speichern"
+
+#: wpf-edit-profile.php:66 wpf.class.php:634 wpf.class.php:2065
+#: wpf.class.php:2090 wpf.class.php:2106 wpf.class.php:2127 wpf.class.php:2135
+#: wpf.class.php:2269
+msgid "An unknown error has occured. Please try again."
+msgstr "Ein unerwarteter Fehler ist aufgetreten. Versuche es nochmal."
+
+#: wpf-insert.php:26
+msgid "Oops only Administrators can post in this Forum!"
+msgstr "Nur Administratoren dürfen in diesem Forum schreiben!"
+
+#: wpf-insert.php:35
+msgid "To help prevent spam, we require that you wait"
+msgstr "Um Spam vorzubeugen, gibt es eine Wartezeit von"
+
+#: wpf-insert.php:35
+msgid ""
+"minutes before posting again. Please use your browsers back button to return."
+msgstr ""
+"Minuten bevor ein neuer Beitrag verfasst werden kann. Benutze bitte den "
+"Zurück Button des Browsers um zurück zu gehen."
+
+#: wpf-insert.php:134
+msgid "Security code does not match"
+msgstr "Der eingegebene Code stimmt nicht"
+
+#: wpf-insert.php:149 wpf-insert.php:154 wpf-insert.php:227 wpf-insert.php:232
+#: wpf-insert.php:287 wpf-insert.php:292 wpf-insert.php:298
+msgid "An error occured"
+msgstr "Ein Fehler ist aufgetreten"
+
+#: wpf-insert.php:150 wpf-insert.php:228 wpf-insert.php:288
+msgid "You must enter a subject"
+msgstr "Du musst einen Betreff eingeben"
+
+#: wpf-insert.php:155 wpf-insert.php:233 wpf-insert.php:293
+msgid "You must enter a message"
+msgstr "Du musst einen Nachrichtentext eingeben"
+
+#: wpf-insert.php:175
+msgid "created the forum topic:"
+msgstr "Forenthema erstellen:"
+
+#: wpf-insert.php:244
+msgid "replied to the forum topic:"
+msgstr "auf das Forenthema antworten:"
+
+#: wpf-insert.php:299
+msgid "You do not have permission to edit this post!"
+msgstr "Du hast keine Berechtigung, diesen Beitrag zu bearbeiten!"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Zitat von"
+
+#: wpf-post.php:10 wpf.class.php:702 wpf.class.php:711 wpf.class.php:1201
+msgid "on"
+msgstr "am"
+
+#: wpf-post.php:20 wpf.class.php:1326 wpf.class.php:1849
+msgid "Post Reply"
+msgstr "Antwort schreiben"
+
+#: wpf-post.php:23 wpf-post.php:76 wpf-thread.php:13
+msgid "Subject:"
+msgstr "Betreff:"
+
+#: wpf-post.php:24 wpf.class.php:937
+msgid "Re:"
+msgstr "Re:"
+
+#: wpf-post.php:27 wpf-post.php:80 wpf-thread.php:17
+msgid "Message:"
+msgstr "Nachricht:"
+
+#: wpf-post.php:40 wpf-thread.php:30
+msgid "Images:"
+msgstr "Bilder:"
+
+#: wpf-post.php:51 wpf-thread.php:41
+msgid "Submit"
+msgstr "Absenden"
+
+#: wpf-post.php:73 wpf.class.php:1323 wpf.class.php:1852
+msgid "Edit Post"
+msgstr "Beitrag bearbeiten"
+
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "Beitrag speichern"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Neues Thema erstellen"
+
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "Dir fehlen die Berechtigungen um Beiträge zu verfassen."
+
+#: wpf.class.php:156 fs-admin/fs-admin.php:458 .\fs-admin/fs-admin.php:458
+msgid "Newbie"
+msgstr "Neuling"
+
+#: wpf.class.php:157 fs-admin/fs-admin.php:462 .\fs-admin/fs-admin.php:462
+msgid "Beginner"
+msgstr "Anfänger"
+
+#: wpf.class.php:158 fs-admin/fs-admin.php:470 .\fs-admin/fs-admin.php:470
+msgid "Advanced"
+msgstr "Erfahrener"
+
+#: wpf.class.php:159 fs-admin/fs-admin.php:478 .\fs-admin/fs-admin.php:478
+msgid "Pro"
+msgstr "Profi"
+
+#: wpf.class.php:181 wpf.class.php:182
+msgid "Mingle Forum - Options"
+msgstr "Mingle Forum - Einstellungen"
+
+#: wpf.class.php:182
+msgid "Options"
+msgstr "Einstellungen"
+
+#: wpf.class.php:183
+msgid "Ads"
+msgstr "Werbeanzeigen"
+
+#: wpf.class.php:184
+msgid "Skins"
+msgstr "Skins"
+
+#: wpf.class.php:185
+msgid "Forum Structure - Categories & Forums"
+msgstr "Forenstruktur - Kategorien und Foren"
+
+#: wpf.class.php:185
+msgid "Forum Structure"
+msgstr "Forenstruktur"
+
+#: wpf.class.php:186
+msgid "Moderators"
+msgstr "Moderatoren"
+
+#: wpf.class.php:187
+msgid "User Groups"
+msgstr "Benutzergruppen"
+
+#: wpf.class.php:188
+msgid "About"
+msgstr "Über"
+
+#: wpf.class.php:199 wpf.class.php:200
+msgid "Forums Latest Activity"
+msgstr "Letzte Aktivität im Forum"
+
+#: wpf.class.php:219 wpf.class.php:239
+msgid "by:"
+msgstr "von:"
+
+#: wpf.class.php:256
+msgid "Title to display in the sidebar:"
+msgstr "Titel, der in der Sidebar angezeigt wird:"
+
+#: wpf.class.php:258
+msgid "How many items would you like to display?"
+msgstr "Wieviele Einträge sollen angezeigt werden?"
+
+#: wpf.class.php:665
+msgid "Page loaded in:"
+msgstr "Die Seite wurde geladen in:"
+
+#: wpf.class.php:665
+msgid "seconds."
+msgstr "Sekunden."
+
+#: wpf.class.php:671
+msgid "Mingle Forum "
+msgstr "Mingle Forum"
+
+#: wpf.class.php:672
+msgid "Version:"
+msgstr "Version:"
+
+#: wpf.class.php:693 wpf.class.php:2333
+msgid "Guest"
+msgstr "Gast"
+
+#: wpf.class.php:702 wpf.class.php:1200
+msgid "by"
+msgstr "von"
+
+#: wpf.class.php:711
+msgid "Latest Post by"
+msgstr "Letzter Beitrag von:"
+
+#: wpf.class.php:730
+msgid "Remove this Forum from your email notifications?"
+msgstr "Dieses Forum aus Deiner E-Mail-Benachrichtigung entfernen?"
+
+#: wpf.class.php:732
+msgid ""
+"This will notify you of all new Topics created in this Forum. Are you sure "
+"that is what you want to do?"
+msgstr ""
+"Dies wird Dich über alle neuen Themen in diesem Forum informieren. Bist Du "
+"sicher, dass Du das möchtest?"
+
+#: wpf.class.php:738 wpf.class.php:864
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Dir fehlen die Berechtigungen um auf dieses Forum zuzugreifen."
+
+#: wpf.class.php:748 wpf.class.php:2398
+msgid "Status"
+msgstr "Status"
+
+#: wpf.class.php:749 wpf.class.php:2399
+msgid "Topic Title"
+msgstr "Titel des Themas"
+
+#: wpf.class.php:750 wpf.class.php:2400 wpf.class.php:2513
+msgid "Started by"
+msgstr "Verfasser"
+
+#: wpf.class.php:751 wpf.class.php:2401
+msgid "Replies"
+msgstr "Antworten"
+
+#: wpf.class.php:752
+msgid "Views"
+msgstr "Aufrufe"
+
+#: wpf.class.php:753 wpf.class.php:1200 wpf.class.php:2402
+msgid "Last post"
+msgstr "Letzter Beitrag"
+
+#: wpf.class.php:757
+msgid "Sticky Topics"
+msgstr "Fixierte Themen"
+
+#: wpf.class.php:761 wpf.class.php:763 wpf.class.php:807 wpf.class.php:809
+#: wpf.class.php:1667 wpf.class.php:1675
+msgid "Move Topic"
+msgstr "Thema verschieben"
+
+#: wpf.class.php:761 wpf.class.php:763 wpf.class.php:807 wpf.class.php:809
+msgid "Delete Topic"
+msgstr "Thema löschen"
+
+#: wpf.class.php:773 wpf.class.php:802
+msgid "New posts since last visit"
+msgstr "Neue Beiträge seit dem letzten Besuch"
+
+#: wpf.class.php:790
+msgid "Forum Topics"
+msgstr "Themen"
+
+#: wpf.class.php:854
+msgid "Remove this Topic from your email notifications?"
+msgstr "Dieses Thema aus Deiner E-Mail-Benachrichtigung entfernen?"
+
+#: wpf.class.php:856
+msgid ""
+" This will notify you of all responses to this Topic. Are you sure that is "
+"what you want to do?"
+msgstr ""
+"Dies wird Dich über alle Antworten zu diesem Thema informieren. Bist Du "
+"sicher, dass Du das möchtest?"
+
+#: wpf.class.php:875
+msgid "TOPIC CLOSED"
+msgstr "Thema geschlossen"
+
+#: wpf.class.php:881
+msgid "Author"
+msgstr "Autor"
+
+#: wpf.class.php:897 wpf.class.php:2457
+msgid "Posts:"
+msgstr "Beiträge:"
+
+#: wpf.class.php:935
+msgid "Quick Reply"
+msgstr "Direktantwort"
+
+#: wpf.class.php:944
+msgid "Submit Quick Reply"
+msgstr "Schnellantwort absenden"
+
+#: wpf.class.php:967 wpf_define.php:36
+msgid "Post"
+msgstr "Beitrag"
+
+#: wpf.class.php:970
+msgid "on:"
+msgstr "am"
+
+#: wpf.class.php:976 wpf.class.php:985 wpf.class.php:2344
+msgid "Quote"
+msgstr "Zitat"
+
+#: wpf.class.php:978 wpf.class.php:987 fs-admin/fs-admin.php:157
+#: fs-admin/fs-admin.php:1016 .\fs-admin/fs-admin.php:157
+#: .\fs-admin/fs-admin.php:1016
+msgid "Remove"
+msgstr "Entfernen"
+
+#: wpf.class.php:980 wpf.class.php:989
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: wpf.class.php:1069 wpf.class.php:1120
+msgid "Topics: "
+msgstr "Themen:"
+
+#: wpf.class.php:1069 wpf.class.php:1120
+msgid "Posts: "
+msgstr "Beiträge:"
+
+#: wpf.class.php:1079 wpf.class.php:1130
+msgid "New posts"
+msgstr "Neue Beiträge"
+
+#: wpf.class.php:1079 wpf.class.php:1130
+msgid "No new posts"
+msgstr "Keine neuen Beiträge"
+
+#: wpf.class.php:1079
+msgid "Mark All Read"
+msgstr "Alle als gelesen markieren"
+
+#: wpf.class.php:1198
+msgid "No topics yet"
+msgstr "Noch keine Themen"
+
+#: wpf.class.php:1201
+msgid "in"
+msgstr "in"
+
+#: wpf.class.php:1252
+msgid "Forums RSS"
+msgstr "Foren RSS"
+
+#: wpf.class.php:1263
+msgid "Are you sure you want to remove this?"
+msgstr "Bist Du sicher, dass Du das löschen möchtest?"
+
+#: wpf.class.php:1317 wpf.class.php:1842
+msgid "Search Results"
+msgstr "Suchergebnisse"
+
+#: wpf.class.php:1320
+msgid "Profile"
+msgstr "Profil "
+
+#: wpf.class.php:1329 wpf.class.php:1548 wpf.class.php:1855
+msgid "New Topic"
+msgstr "Neues Thema"
+
+#: wpf.class.php:1396
+msgid "Moderators:"
+msgstr "Moderatoren:"
+
+#: wpf.class.php:1552 wpf.class.php:1612
+msgid "Unsubscribe"
+msgstr "Abonnement beenden"
+
+#: wpf.class.php:1554 wpf.class.php:1614
+msgid "Subscribe"
+msgstr "Abonnieren"
+
+#: wpf.class.php:1578 wpf.class.php:1591
+msgid "Undo Sticky"
+msgstr "Fixierung aufheben"
+
+#: wpf.class.php:1580 wpf.class.php:1593
+msgid "Sticky"
+msgstr "Fixieren"
+
+#: wpf.class.php:1583 wpf.class.php:1596
+msgid "Re-open"
+msgstr "wieder öffnen"
+
+#: wpf.class.php:1585 wpf.class.php:1598
+msgid "Close"
+msgstr "Schließen"
+
+#: wpf.class.php:1607
+msgid "Reply"
+msgstr "Antwort"
+
+#: wpf.class.php:1617
+msgid "RSS feed"
+msgstr "RSS-Feed"
+
+#: wpf.class.php:1654 wpf.class.php:1658
+msgid "My profile"
+msgstr "Mein Profil"
+
+#: wpf.class.php:1654 wpf.class.php:1658
+msgid "My Profile"
+msgstr "Mein Profil"
+
+#: wpf.class.php:1665 wpf.class.php:1673
+msgid "Forum Home"
+msgstr "Foren Übersicht"
+
+#: wpf.class.php:1717
+msgid "You are logged in as:"
+msgstr "Du bist angemeldet als:"
+
+#: wpf.class.php:1723
+msgid "Username: "
+msgstr "Benutzername:"
+
+#: wpf.class.php:1724
+msgid "Password: "
+msgstr "Passwort:"
+
+#: wpf.class.php:1726
+msgid "Remember Me"
+msgstr "An mich erinnern"
+
+#: wpf.class.php:1762
+msgid "Administrator"
+msgstr "Administrator"
+
+#: wpf.class.php:1766
+msgid "Moderator"
+msgstr "Moderator"
+
+#: wpf.class.php:1836
+msgid "New Topics since last visit"
+msgstr "Neue Themen seit dem letzten Besuch"
+
+#: wpf.class.php:1846
+msgid "Profile Info"
+msgstr "Profil-Informationen"
+
+#: wpf.class.php:1910
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"
+
+#: wpf.class.php:1914 wpf.class.php:1926
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: wpf.class.php:1915
+msgid "Your last visit was:"
+msgstr "Dein letzter Besuch war am:"
+
+#: wpf.class.php:1917
+msgid "Show new topics since your last visit"
+msgstr "Neue Themen seit Deinem letzten Besuch"
+
+#: wpf.class.php:1918
+msgid "Edit your forum options"
+msgstr "Deine Foreneinstellungen bearbeiten"
+
+#: wpf.class.php:1920
+msgid "Log out"
+msgstr "Abmelden"
+
+#: wpf.class.php:1925
+msgid "Welcome Guest, please login or"
+msgstr "Willkommen Gast! Bitte melde Dich an oder"
+
+#: wpf.class.php:1925
+msgid "register."
+msgstr "registriere Dich."
+
+#: wpf.class.php:1930
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Willkommen Gast! Um Beiträge zu verfassen musst Du"
+
+#: wpf.class.php:1930
+msgid "registration."
+msgstr "registriert sein."
+
+#: wpf.class.php:1938
+msgid "Show/Hide Header"
+msgstr "Infos ein-/ausblenden"
+
+#: wpf.class.php:1952
+msgid "Search forums"
+msgstr "Foren durchsuchen"
+
+#: wpf.class.php:1987 wpf.class.php:2018
+msgid "Pages:"
+msgstr "Seiten:"
+
+#: wpf.class.php:2000 wpf.class.php:2031
+msgid "First"
+msgstr "Erster"
+
+#: wpf.class.php:2011 wpf.class.php:2042
+msgid "Last"
+msgstr "Letzter"
+
+#: wpf.class.php:2125
+msgid "Post deleted"
+msgstr "Beitrag gelöscht"
+
+#: wpf.class.php:2326 wpf.class.php:2330 fs-admin/fs-admin.php:159
+#: .\fs-admin/fs-admin.php:159
+msgid "View profile"
+msgstr "Profil anzeigen"
+
+#: wpf.class.php:2344
+msgid "Bold"
+msgstr "Fett"
+
+#: wpf.class.php:2344
+msgid "Italic"
+msgstr "Kursiv"
+
+#: wpf.class.php:2344
+msgid "Underline"
+msgstr "Unterstreichen"
+
+#: wpf.class.php:2344
+msgid "Strikethrough"
+msgstr "Durchgestrichen"
+
+#: wpf.class.php:2344
+msgid "Code"
+msgstr "Code"
+
+#: wpf.class.php:2344
+msgid "List"
+msgstr "Liste"
+
+#: wpf.class.php:2344
+msgid "List item"
+msgstr "Listenpunkt"
+
+#: wpf.class.php:2344
+msgid "Link"
+msgstr "Link"
+
+#: wpf.class.php:2344
+msgid "Image"
+msgstr "Bild"
+
+#: wpf.class.php:2344
+msgid "Email"
+msgstr "E-Mail"
+
+#: wpf.class.php:2344
+msgid "Add Hex Color"
+msgstr "Farbangabe in hexadezimalen Farbwerten"
+
+#: wpf.class.php:2344
+msgid "Embed YouTube Video"
+msgstr "YouTube Video einbetten"
+
+#: wpf.class.php:2344
+msgid "Embed Google Map"
+msgstr "Google Maps einbetten"
+
+#: wpf.class.php:2350
+msgid "Smile"
+msgstr "Lächeln"
+
+#: wpf.class.php:2350
+msgid "Big Grin"
+msgstr "Grinsen"
+
+#: wpf.class.php:2350
+msgid "Sad"
+msgstr "Traurig"
+
+#: wpf.class.php:2350
+msgid "Neutral"
+msgstr "Neutral"
+
+#: wpf.class.php:2350
+msgid "Razz"
+msgstr "Razz"
+
+#: wpf.class.php:2350
+msgid "Mad"
+msgstr "Verrückt"
+
+#: wpf.class.php:2350
+msgid "Confused"
+msgstr "Verwirrt"
+
+#: wpf.class.php:2350
+msgid "Eek!"
+msgstr "Eek!"
+
+#: wpf.class.php:2350
+msgid "Wink"
+msgstr "Zwinkern"
+
+#: wpf.class.php:2350
+msgid "Surprised"
+msgstr "Überrascht"
+
+#: wpf.class.php:2350
+msgid "Cool"
+msgstr "Cool"
+
+#: wpf.class.php:2362
+msgid "Info Center"
+msgstr "Info-Center"
+
+#: wpf.class.php:2369
+msgid "Posts in"
+msgstr "Beiträge:"
+
+#: wpf.class.php:2369
+msgid "Topics Made by"
+msgstr "Themen von"
+
+#: wpf.class.php:2369 fs-admin/fs-admin.php:151 .\fs-admin/fs-admin.php:151
+msgid "Members"
+msgstr "Mitglieder"
+
+#: wpf.class.php:2369
+msgid "Latest Member:"
+msgstr "Neustes Mitglied:"
+
+#: wpf.class.php:2395
+msgid "New topics since your last visit"
+msgstr "Neue Themen seit Deinem letzten Besuch"
+
+#: wpf.class.php:2442
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+#: wpf.class.php:2448 wpf.class.php:2656 wpf.class.php:2678 wpf.class.php:2700
+#: fs-admin/wpf-add-forum.php:10 fs-admin/wpf-edit-forum-group.php:55
+#: fs-admin/wpf-edit-forum-group.php:125 fs-admin/wpf-usergroup-edit.php:31
+#: .\fs-admin/wpf-add-forum.php:10 .\fs-admin/wpf-edit-forum-group.php:55
+#: .\fs-admin/wpf-edit-forum-group.php:125
+#: .\fs-admin/wpf-usergroup-edit.php:31
+msgid "Name:"
+msgstr "Name:"
+
+#: wpf.class.php:2453
+msgid "Registered:"
+msgstr "Registriert:"
+
+#: wpf.class.php:2461
+msgid "Position:"
+msgstr "Position:"
+
+#: wpf.class.php:2464
+msgid "Website:"
+msgstr "Website:"
+
+#: wpf.class.php:2468
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2472
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2475
+msgid "Jabber/google Talk:"
+msgstr "Jabber / Google Talk:"
+
+#: wpf.class.php:2479
+msgid "Biographical Info:"
+msgstr "Persönliche Informationen:"
+
+#: wpf.class.php:2511
+msgid "Subject"
+msgstr "Betreff"
+
+#: wpf.class.php:2512
+msgid "Relevance"
+msgstr "Relevanz"
+
+#: wpf.class.php:2514
+msgid "Posted"
+msgstr "geschrieben"
+
+#: wpf.class.php:2579
+msgid "Closed topic"
+msgstr "Geschlossenes Thema"
+
+#: wpf.class.php:2582
+msgid "Normal topic"
+msgstr "Normales Thema"
+
+#: wpf.class.php:2585
+msgid "Hot topic"
+msgstr "Beliebtes Thema"
+
+#: wpf.class.php:2588
+msgid "Very Hot topic"
+msgstr "Sehr beliebtes Thema"
+
+#: wpf.class.php:2620
+msgid "Security Code:"
+msgstr "Sicherheits Code:"
+
+#: wpf.class.php:2640
+msgid "Enter Security Code: (required)"
+msgstr "Sicherheitscode eingeben (erforderlich):"
+
+#: wpf.class.php:2654 wpf.class.php:2676
+msgid "Forum post - "
+msgstr "Thema - "
+
+#: wpf.class.php:2655 wpf.class.php:2677 wpf.class.php:2699
+msgid "DETAILS:"
+msgstr "DETAILS:"
+
+#: wpf.class.php:2658 wpf.class.php:2680 wpf.class.php:2702
+msgid "Date:"
+msgstr "Datum:"
+
+#: wpf.class.php:2659 wpf.class.php:2681 wpf.class.php:2703
+msgid "Reply Content:"
+msgstr "Inhalt der Antwort:"
+
+#: wpf.class.php:2660 wpf.class.php:2682 wpf.class.php:2704
+msgid "View Post Here:"
+msgstr "Thema hier anzeigen:"
+
+#: wpf.class.php:2698
+msgid "New Forum content - "
+msgstr "Neuer Foreninhalt - "
+
+#: wpf.class.php:2701
+msgid "Email:"
+msgstr "E-Mail:"
+
+#: wpf.class.php:2740 wpf.class.php:2750
+msgid "Inbox"
+msgstr "Posteingang"
+
+#: wpf.class.php:2767 wpf.class.php:2780
+msgid "Send Message"
+msgstr "Nachricht senden"
+
+#: wpf.class.php:2956
+msgid "Mingle Forum Post Options"
+msgstr "Mingle Forum - Beitragseinstellungen"
+
+#: wpf.class.php:2962
+msgid "Add this post to"
+msgstr "Diesen Beitrag hinzufügen zu"
+
+#: wpf.class.php:2966
+msgid "Do not check this if this post has already been linked to the forum!"
+msgstr ""
+"Aktiviere diese Option nicht, wenn der Beitrag bereits mit dem Forum "
+"verlinkt wurde!"
+
+#: wpf.class.php:2998
+msgid "Join the Forum discussion on this post"
+msgstr "Diskutiere diesen Beitrag im Forum"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Kategorie"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Thema"
+
+#: fs-admin/fs-admin.php:34 .\fs-admin/fs-admin.php:34
+msgid "You must specify a user group name."
+msgstr "Du musst einen Gruppennamen angeben."
+
+#: fs-admin/fs-admin.php:36 fs-admin/fs-admin.php:740
+#: fs-admin/wpf-edit-forum-group.php:17 fs-admin/wpf-usergroup-edit.php:14
+#: .\fs-admin/fs-admin.php:36 .\fs-admin/fs-admin.php:740
+#: .\fs-admin/wpf-edit-forum-group.php:17 .\fs-admin/wpf-usergroup-edit.php:14
+msgid ""
+"You have choosen a name that already exists in the database, please specify "
+"another"
+msgstr ""
+"Du hast einen bereits vorhandenen Namen angegeben. Bitte einen anderen "
+"wählen."
+
+#: fs-admin/fs-admin.php:38 .\fs-admin/fs-admin.php:38
+msgid "User Group successfully added."
+msgstr "Benutzergruppe wurde erfolgreich hinzugefügt."
+
+#: fs-admin/fs-admin.php:56 .\fs-admin/fs-admin.php:56
+msgid "You haven't specified any user to add:"
+msgstr "Es wurde kein hinzuzufügender Benutzer angegeben:"
+
+#: fs-admin/fs-admin.php:60 .\fs-admin/fs-admin.php:60
+msgid "You must choose a user group"
+msgstr "Es muss eine Benutzer-Gruppe gewählt werden"
+
+#: fs-admin/fs-admin.php:68 .\fs-admin/fs-admin.php:68
+msgid "Error"
+msgstr "Fehler"
+
+#: fs-admin/fs-admin.php:68 .\fs-admin/fs-admin.php:68
+msgid "No such user:"
+msgstr "Kein solcher Benutzer:"
+
+#: fs-admin/fs-admin.php:73 .\fs-admin/fs-admin.php:73
+msgid "Warning"
+msgstr "Warnung"
+
+#: fs-admin/fs-admin.php:73 fs-admin/fs-admin.php:78
+#: .\fs-admin/fs-admin.php:73 .\fs-admin/fs-admin.php:78
+msgid "User"
+msgstr "Benutzer"
+
+#: fs-admin/fs-admin.php:73 .\fs-admin/fs-admin.php:73
+msgid "is already in this group"
+msgstr "ist bereits in dieser Gruppe"
+
+#: fs-admin/fs-admin.php:78 .\fs-admin/fs-admin.php:78
+msgid "added successfully"
+msgstr "erfolgreich hinzugefügt"
+
+#: fs-admin/fs-admin.php:86 .\fs-admin/fs-admin.php:86
+msgid "Errors:"
+msgstr "Fehler:"
+
+#: fs-admin/fs-admin.php:87 .\fs-admin/fs-admin.php:87
+msgid "Warnings:"
+msgstr "Warnhinweise:"
+
+#: fs-admin/fs-admin.php:88 .\fs-admin/fs-admin.php:88
+msgid "Users added:"
+msgstr "Benutzer hinzugefügt:"
+
+#: fs-admin/fs-admin.php:102 .\fs-admin/fs-admin.php:102
+msgid "User Group(s) successfully deleted."
+msgstr "Benutzergruppe(n) erfolgreich gelöscht."
+
+#: fs-admin/fs-admin.php:110 .\fs-admin/fs-admin.php:110
+msgid "Member successfully removed."
+msgstr "Mitglied erfolgreich entfernt."
+
+#: fs-admin/fs-admin.php:116 .\fs-admin/fs-admin.php:116
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Forum >> Benutzer-Gruppen verwalten"
+
+#: fs-admin/fs-admin.php:116 fs-admin/fs-admin.php:805
+#: fs-admin/fs-admin.php:1002 .\fs-admin/fs-admin.php:116
+#: .\fs-admin/fs-admin.php:805 .\fs-admin/fs-admin.php:1002
+msgid "add new"
+msgstr "Hinzufügen"
+
+#: fs-admin/fs-admin.php:123 fs-admin/fs-admin.php:859
+#: .\fs-admin/fs-admin.php:123 .\fs-admin/fs-admin.php:859
+msgid "Delete"
+msgstr "Löschen"
+
+#: fs-admin/fs-admin.php:163 fs-admin/fs-admin.php:169
+#: .\fs-admin/fs-admin.php:163 .\fs-admin/fs-admin.php:169
+msgid "Add members"
+msgstr "Mitglieder hinzufügen"
+
+#: fs-admin/fs-admin.php:168 .\fs-admin/fs-admin.php:168
+msgid "No members in this group"
+msgstr "Es sind keine Mitglieder in dieser Gruppe"
+
+#: fs-admin/fs-admin.php:231 .\fs-admin/fs-admin.php:231
+msgid "Skin successfully activated."
+msgstr "Skin erfolgreich aktiviert."
+
+#: fs-admin/fs-admin.php:237 .\fs-admin/fs-admin.php:237
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingle Forum >> Skin-Einstellungen"
+
+#: fs-admin/fs-admin.php:238 .\fs-admin/fs-admin.php:238
+msgid "Get More Skins"
+msgstr "Lade mehr \"Skins\""
+
+#: fs-admin/fs-admin.php:239 .\fs-admin/fs-admin.php:239
+msgid ""
+"IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-"
+"content/mingle-forum-skins/"
+msgstr ""
+"WICHTIG: Seit version 1.0.03 wurde das Verzeichnis für Skins nach /wp-"
+"content/mingle-forum-skins/ verschoben"
+
+#: fs-admin/fs-admin.php:239 .\fs-admin/fs-admin.php:239
+msgid "Why did you change it?"
+msgstr "Was ist der Grund der Änderung?"
+
+#: fs-admin/fs-admin.php:242 .\fs-admin/fs-admin.php:242
+msgid "Screenshot"
+msgstr "Bildschirmfoto"
+
+#: fs-admin/fs-admin.php:243 fs-admin/wpf-add-group.php:12
+#: .\fs-admin/fs-admin.php:243 .\fs-admin/wpf-add-group.php:12
+msgid "Name"
+msgstr "Name"
+
+#: fs-admin/fs-admin.php:244 .\fs-admin/fs-admin.php:244
+msgid "Version"
+msgstr "Version"
+
+#: fs-admin/fs-admin.php:245 fs-admin/wpf-add-group.php:13
+#: fs-admin/wpf-edit-forum-group.php:59 .\fs-admin/fs-admin.php:245
+#: .\fs-admin/wpf-add-group.php:13 .\fs-admin/wpf-edit-forum-group.php:59
+msgid "Description"
+msgstr "Beschreibung"
+
+#: fs-admin/fs-admin.php:246 .\fs-admin/fs-admin.php:246
+msgid "Action"
+msgstr "Aktion"
+
+#: fs-admin/fs-admin.php:260 fs-admin/fs-admin.php:275
+#: .\fs-admin/fs-admin.php:260 .\fs-admin/fs-admin.php:275
+msgid "In Use"
+msgstr "In Verwendung"
+
+#: fs-admin/fs-admin.php:262 fs-admin/fs-admin.php:277
+#: .\fs-admin/fs-admin.php:262 .\fs-admin/fs-admin.php:277
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: fs-admin/fs-admin.php:305 .\fs-admin/fs-admin.php:305
+msgid "About Mingle Forum"
+msgstr "Über Mingle Forum"
+
+#: fs-admin/fs-admin.php:308 .\fs-admin/fs-admin.php:308
+msgid "Current Version: "
+msgstr "Aktuelle Version:"
+
+#: fs-admin/fs-admin.php:312 .\fs-admin/fs-admin.php:312
+msgid ""
+"Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over "
+"from WP Forum and has been improved upon GREATLY. It now fully supports "
+"integration with or without the Mingle plugin (by Blair Williams). Also I "
+"want to give a big thanks to Eric Hamby for his previous work on the forum "
+"script."
+msgstr ""
+"Mingle Forum hat eine einfache Mission, nämlich es \"EINFACH ZU HALTEN!\" Es "
+"wurde aus WP Forum übernommen und WESENTLICH verbessert. Es unterstützt die "
+"vollständige Integration des Mingle Plugins von Blair Williams, funktioniert "
+"aber auch ohne Mingle Plugin. Auch möchte ich ein großes Dankeschön an Eric "
+"Hamby für seine frühere Arbeit am Forum Script aussprechen."
+
+#: fs-admin/fs-admin.php:314 .\fs-admin/fs-admin.php:314
+msgid "Author: "
+msgstr "Autor:"
+
+#: fs-admin/fs-admin.php:315 .\fs-admin/fs-admin.php:315
+msgid "Plugin Page:"
+msgstr "Plugin Seite:"
+
+#: fs-admin/fs-admin.php:316 .\fs-admin/fs-admin.php:316
+msgid "Support Forum:"
+msgstr "Support Forum:"
+
+#: fs-admin/fs-admin.php:317 .\fs-admin/fs-admin.php:317
+msgid "Mingle Forum Skins:"
+msgstr "Mingle Forum Skins:"
+
+#: fs-admin/fs-admin.php:364 .\fs-admin/fs-admin.php:364
+msgid "Options successfully saved."
+msgstr "Einstellungen erfolgreich gespeichert."
+
+#: fs-admin/fs-admin.php:369 .\fs-admin/fs-admin.php:369
+msgid "Mingle Forum"
+msgstr "Mingle Forum"
+
+#: fs-admin/fs-admin.php:373 .\fs-admin/fs-admin.php:373
+msgid "Statistic"
+msgstr "Statistik"
+
+#: fs-admin/fs-admin.php:374 .\fs-admin/fs-admin.php:374
+msgid "Value"
+msgstr "Wert"
+
+#: fs-admin/fs-admin.php:378 .\fs-admin/fs-admin.php:378
+msgid "Number of posts:"
+msgstr "Anzahl der Beiträge:"
+
+#: fs-admin/fs-admin.php:382 .\fs-admin/fs-admin.php:382
+msgid "Number of threads:"
+msgstr "Anzahl der Threads:"
+
+#: fs-admin/fs-admin.php:386 .\fs-admin/fs-admin.php:386
+msgid "Number of users:"
+msgstr "Anzahl der Benutzer:"
+
+#: fs-admin/fs-admin.php:390 .\fs-admin/fs-admin.php:390
+msgid "Total database size:"
+msgstr "Gesamtgröße der Datenbank:"
+
+#: fs-admin/fs-admin.php:394 .\fs-admin/fs-admin.php:394
+msgid "Database server:"
+msgstr "Datenbank-Server:"
+
+#: fs-admin/fs-admin.php:398 .\fs-admin/fs-admin.php:398
+msgid "Mingle Forum version:"
+msgstr "Mingle Forum-Version:"
+
+#: fs-admin/fs-admin.php:403 .\fs-admin/fs-admin.php:403
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Forum >> Allgemeine Einstellungen"
+
+#: fs-admin/fs-admin.php:408 .\fs-admin/fs-admin.php:408
+msgid "default "
+msgstr "Standard"
+
+#: fs-admin/fs-admin.php:412 .\fs-admin/fs-admin.php:412
+msgid "Option Name"
+msgstr "Einstellung Name"
+
+#: fs-admin/fs-admin.php:413 .\fs-admin/fs-admin.php:413
+msgid "Option Input"
+msgstr "Einstellung Eingabe"
+
+#: fs-admin/fs-admin.php:418 .\fs-admin/fs-admin.php:418
+msgid "Integrate WordPress Posts with Forum:"
+msgstr "WordPress Artikel ins Forum integrieren:"
+
+#: fs-admin/fs-admin.php:422 fs-admin/fs-admin.php:489
+#: fs-admin/fs-admin.php:512 fs-admin/fs-admin.php:536
+#: fs-admin/fs-admin.php:579 fs-admin/fs-admin.php:592
+#: .\fs-admin/fs-admin.php:422 .\fs-admin/fs-admin.php:489
+#: .\fs-admin/fs-admin.php:512 .\fs-admin/fs-admin.php:536
+#: .\fs-admin/fs-admin.php:579 .\fs-admin/fs-admin.php:592
+msgid "Off"
+msgstr "Aus"
+
+#: fs-admin/fs-admin.php:426 .\fs-admin/fs-admin.php:426
+msgid "Posts per page:"
+msgstr "Beiträge pro Seite:"
+
+#: fs-admin/fs-admin.php:430 .\fs-admin/fs-admin.php:430
+msgid "Threads per page:"
+msgstr "Themen pro Seite:"
+
+#: fs-admin/fs-admin.php:436 .\fs-admin/fs-admin.php:436
+msgid "Number of posts for Hot Topic:"
+msgstr "Anzahl der Beiträge für heiße Themen:"
+
+#: fs-admin/fs-admin.php:440 .\fs-admin/fs-admin.php:440
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Anzahl der Beiträge für sehr heiße Themen:"
+
+#: fs-admin/fs-admin.php:444 .\fs-admin/fs-admin.php:444
+msgid "Username Display:"
+msgstr "Anzeige des Benutzernamen:"
+
+#: fs-admin/fs-admin.php:457 .\fs-admin/fs-admin.php:457
+msgid "New User's Title:"
+msgstr "Bezeichnung neuer Benutzer:"
+
+#: fs-admin/fs-admin.php:461 .\fs-admin/fs-admin.php:461
+msgid "User Level 1 Title:"
+msgstr "Bezeichnung Benutzerrang 1:"
+
+#: fs-admin/fs-admin.php:465 .\fs-admin/fs-admin.php:465
+msgid "User Level 1 Count:"
+msgstr "Beitragsanzahl für Benutzerrang 1:"
+
+#: fs-admin/fs-admin.php:466 .\fs-admin/fs-admin.php:466
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:469 .\fs-admin/fs-admin.php:469
+msgid "User Level 2 Title:"
+msgstr "Bezeichnung Benutzerrang 2:"
+
+#: fs-admin/fs-admin.php:473 .\fs-admin/fs-admin.php:473
+msgid "User Level 2 Count:"
+msgstr "Beitragsanzahl für Benutzerrang 2:"
+
+#: fs-admin/fs-admin.php:474 .\fs-admin/fs-admin.php:474
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:477 .\fs-admin/fs-admin.php:477
+msgid "User Level 3 Title:"
+msgstr "Bezeichnung Benutzerrang 3:"
+
+#: fs-admin/fs-admin.php:481 .\fs-admin/fs-admin.php:481
+msgid "User Level 3 Count:"
+msgstr "Beitragsanzahl für Benutzerrang 3:"
+
+#: fs-admin/fs-admin.php:482 .\fs-admin/fs-admin.php:482
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:485 .\fs-admin/fs-admin.php:485
+msgid "Notify Admin on new posts:"
+msgstr "Administrator bei neuen Beiträgen benachrichtigen:"
+
+#: fs-admin/fs-admin.php:492 .\fs-admin/fs-admin.php:492
+msgid "Show Forum Login Form:"
+msgstr "Zeige Loginformular des Forums:"
+
+#: fs-admin/fs-admin.php:496 fs-admin/fs-admin.php:504
+#: fs-admin/fs-admin.php:520 fs-admin/fs-admin.php:528
+#: fs-admin/fs-admin.php:544 .\fs-admin/fs-admin.php:496
+#: .\fs-admin/fs-admin.php:504 .\fs-admin/fs-admin.php:520
+#: .\fs-admin/fs-admin.php:528 .\fs-admin/fs-admin.php:544
+msgid "On"
+msgstr "Ein"
+
+#: fs-admin/fs-admin.php:500 .\fs-admin/fs-admin.php:500
+msgid "Show Avatars in the forum:"
+msgstr "Zeige Avatare im Forum:"
+
+#: fs-admin/fs-admin.php:508 .\fs-admin/fs-admin.php:508
+msgid "Allow Images to be uploaded:"
+msgstr "Den Upload von Bildern erlauben:"
+
+#: fs-admin/fs-admin.php:516 .\fs-admin/fs-admin.php:516
+msgid "Show users Signature at the bottom of posts:"
+msgstr "Signatur unterhalb der Beiträge anzeigen:"
+
+#: fs-admin/fs-admin.php:524 .\fs-admin/fs-admin.php:524
+msgid "Use Forum RSS:"
+msgstr "Foren RSS"
+
+#: fs-admin/fs-admin.php:532 .\fs-admin/fs-admin.php:532
+msgid "Use SEO friendly URLs:"
+msgstr "SEO-freundliche URLs verwenden:"
+
+#: fs-admin/fs-admin.php:532 .\fs-admin/fs-admin.php:532
+msgid ""
+"IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr ""
+"WICHTIG: Lasse diese Einstellung deaktiviert, wenn die Permalinks auf "
+"Standard gesetzt wurden."
+
+#: fs-admin/fs-admin.php:540 .\fs-admin/fs-admin.php:540
+msgid "Registration required to post:"
+msgstr "Registrierung zum Posten von Beiträgen erforderlich:"
+
+#: fs-admin/fs-admin.php:549 .\fs-admin/fs-admin.php:549
+msgid "Installed version:"
+msgstr "Installierte Version:"
+
+#: fs-admin/fs-admin.php:553 .\fs-admin/fs-admin.php:553
+msgid "GD Library is not installed"
+msgstr "GD-Bibliothek ist nicht installiert"
+
+#: fs-admin/fs-admin.php:556 .\fs-admin/fs-admin.php:556
+msgid "Use Captcha for unregistered users:"
+msgstr "Verwende Captcha für nicht registrierte Benutzer:"
+
+#: fs-admin/fs-admin.php:560 .\fs-admin/fs-admin.php:560
+msgid "Requires "
+msgstr "Erfordert "
+
+#: fs-admin/fs-admin.php:560 .\fs-admin/fs-admin.php:560
+msgid ""
+"If you have 'Registration required to post' above enabled, leave this off"
+msgstr ""
+"Wenn Du die Einstellung \"Registrierung zum Posten von Beiträgen erforderlich"
+"\" aktiviert hast, lasse dieses Feld leer"
+
+#: fs-admin/fs-admin.php:564 .\fs-admin/fs-admin.php:564
+msgid "Date format:"
+msgstr "Datumsformat:"
+
+#: fs-admin/fs-admin.php:564 .\fs-admin/fs-admin.php:564
+msgid "Default date:"
+msgstr "Standard-Datum:"
+
+#: fs-admin/fs-admin.php:564 .\fs-admin/fs-admin.php:564
+msgid "Check "
+msgstr "Überprüfen"
+
+#: fs-admin/fs-admin.php:564 .\fs-admin/fs-admin.php:564
+msgid "for date formatting."
+msgstr "für die Formatierung der Datumsangabe."
+
+#: fs-admin/fs-admin.php:569 .\fs-admin/fs-admin.php:569
+msgid "Closed Categories (Admin posting only):"
+msgstr "Geschlossene Kategorien (Nur Admin Beiträge):"
+
+#: fs-admin/fs-admin.php:569 .\fs-admin/fs-admin.php:569
+msgid "Comma separated list of Category ID's (Ex: 1, 2, 3)"
+msgstr "Kommagetrennte Liste der Kategorie IDs (Bsp.: 1, 2, 3)"
+
+#: fs-admin/fs-admin.php:571 .\fs-admin/fs-admin.php:571
+msgid "Users can reply in locked categories"
+msgstr "Benutzer können in geschlossenen Kategorien antworten"
+
+#: fs-admin/fs-admin.php:584 .\fs-admin/fs-admin.php:584
+msgid "Time limit between posting:"
+msgstr "Zeitlimit zwischen den Postings:"
+
+#: fs-admin/fs-admin.php:584 .\fs-admin/fs-admin.php:584
+msgid "Prevent lots of SPAM by making users wait a time period between posts."
+msgstr ""
+"Beugt Spam vor, in dem der Benutzer erst nach einer gewissen Wartezeit "
+"erneut antworten darf."
+
+#: fs-admin/fs-admin.php:584 .\fs-admin/fs-admin.php:584
+msgid "seconds"
+msgstr "Sekunden"
+
+#: fs-admin/fs-admin.php:588 .\fs-admin/fs-admin.php:588
+msgid "Disable Branding:"
+msgstr "Branding deaktivieren:"
+
+#: fs-admin/fs-admin.php:711 .\fs-admin/fs-admin.php:711
+msgid "Groups deleted:"
+msgstr "Gruppen gelöscht:"
+
+#: fs-admin/fs-admin.php:712 .\fs-admin/fs-admin.php:712
+msgid "Forums deleted:"
+msgstr "Foren gelöscht:"
+
+#: fs-admin/fs-admin.php:713 .\fs-admin/fs-admin.php:713
+msgid "Threads deleted:"
+msgstr "Themen gelöscht:"
+
+#: fs-admin/fs-admin.php:714 .\fs-admin/fs-admin.php:714
+msgid "Posts deleted:"
+msgstr "Beiträge gelöscht:"
+
+#: fs-admin/fs-admin.php:738 fs-admin/fs-admin.php:762
+#: .\fs-admin/fs-admin.php:738 .\fs-admin/fs-admin.php:762
+msgid "You must enter a name"
+msgstr "Du musst einen Namen eingeben"
+
+#: fs-admin/fs-admin.php:747 .\fs-admin/fs-admin.php:747
+msgid "Category added successfully"
+msgstr "Kategorie wurde erfolgreich hinzugefügt"
+
+#: fs-admin/fs-admin.php:759 .\fs-admin/fs-admin.php:759
+msgid "You must select a category"
+msgstr "Du musst eine Kategorie auswählen"
+
+#: fs-admin/fs-admin.php:765 .\fs-admin/fs-admin.php:765
+msgid ""
+"You have choosen a forum name that already exists in this group, please "
+"specify another"
+msgstr ""
+"Du hast einen Namen gewählt, der in dieser Gruppe bereits existiert. Bitte "
+"gib einen anderen Namen ein."
+
+#: fs-admin/fs-admin.php:772 .\fs-admin/fs-admin.php:772
+msgid "Forum added successfully"
+msgstr "Forum wurde erfolgreich hinzugefügt"
+
+#: fs-admin/fs-admin.php:799 .\fs-admin/fs-admin.php:799
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Forum >> Kategorien und Foren"
+
+#: fs-admin/fs-admin.php:821 fs-admin/fs-admin.php:851
+#: .\fs-admin/fs-admin.php:821 .\fs-admin/fs-admin.php:851
+msgid "Modify"
+msgstr "Modifizieren"
+
+#: fs-admin/fs-admin.php:860 .\fs-admin/fs-admin.php:860
+msgid "Add forum"
+msgstr "Forum hinzufügen"
+
+#: fs-admin/fs-admin.php:884 .\fs-admin/fs-admin.php:884
+msgid "Group Moved Down"
+msgstr "Gruppe nach unten verschoben"
+
+#: fs-admin/fs-admin.php:894 .\fs-admin/fs-admin.php:894
+msgid "Forum Moved Down"
+msgstr "Forum nach unten verschoben"
+
+#: fs-admin/fs-admin.php:904 .\fs-admin/fs-admin.php:904
+msgid "Group Moved Up"
+msgstr "Gruppe nach oben verschoben"
+
+#: fs-admin/fs-admin.php:914 .\fs-admin/fs-admin.php:914
+msgid "Forum Moved Up"
+msgstr "Forum nach oben verschoben"
+
+#: fs-admin/fs-admin.php:950 fs-admin/fs-admin.php:957
+#: .\fs-admin/fs-admin.php:950 .\fs-admin/fs-admin.php:957
+msgid "Moderator successfully removed."
+msgstr "Moderator erfolgreich entfernt."
+
+#: fs-admin/fs-admin.php:952 .\fs-admin/fs-admin.php:952
+msgid "Moderator successfully saved."
+msgstr "Moderator erfolgreich gespeichert."
+
+#: fs-admin/fs-admin.php:959 .\fs-admin/fs-admin.php:959
+msgid "Moderator NOT removed."
+msgstr "Moderator wurde nicht entfernt."
+
+#: fs-admin/fs-admin.php:972 .\fs-admin/fs-admin.php:972
+msgid "You must select a user"
+msgstr "Du musst einen Benutzer auswählen"
+
+#: fs-admin/fs-admin.php:976 .\fs-admin/fs-admin.php:976
+msgid "Global Moderator added successfully"
+msgstr "Globaler Moderator wurde erfolgreich hinzugefügt"
+
+#: fs-admin/fs-admin.php:980 .\fs-admin/fs-admin.php:980
+msgid "Moderator added successfully"
+msgstr "Moderator wurde erfolgreich hinzugefügt"
+
+#: fs-admin/fs-admin.php:1002 .\fs-admin/fs-admin.php:1002
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Forum >> Moderatoren verwalten"
+
+#: fs-admin/fs-admin.php:1011 .\fs-admin/fs-admin.php:1011
+msgid "Currently moderating"
+msgstr "Derzeit moderieren"
+
+#: fs-admin/fs-admin.php:1015 .\fs-admin/fs-admin.php:1015
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: fs-admin/fs-admin.php:1025 fs-admin/wpf-moderator.php:25
+#: .\fs-admin/fs-admin.php:1025 .\fs-admin/wpf-moderator.php:25
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Globaler Moderator: (Benutzer kann alle Foren moderieren)"
+
+#: fs-admin/fs-admin.php:1044 .\fs-admin/fs-admin.php:1044
+msgid "No moderators yet"
+msgstr "Noch keine Moderatoren definiert"
+
+#: fs-admin/fs-admin.php:1069 .\fs-admin/fs-admin.php:1069
+msgid "Ads saved successfully"
+msgstr "Werbeanzeigen erfolgreich gespeichert"
+
+#: fs-admin/fs-admin.php:1074 .\fs-admin/fs-admin.php:1074
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingle Forum Werbeanzeigen >> Einstellungen"
+
+#: fs-admin/fs-admin.php:1076 .\fs-admin/fs-admin.php:1076
+msgid "HTML is allowed in all ad areas below"
+msgstr "In allen Bereichen für Werbeanzeigen ist HTML erlaubt"
+
+#: fs-admin/fs-admin.php:1080 .\fs-admin/fs-admin.php:1080
+msgid "Ads Option"
+msgstr "Einstellungen für Werbeanzeigen"
+
+#: fs-admin/fs-admin.php:1087 .\fs-admin/fs-admin.php:1087
+msgid "Enable Area Above Forum"
+msgstr "Aktiviere Bereich über dem Forum"
+
+#: fs-admin/fs-admin.php:1089 fs-admin/fs-admin.php:1097
+#: fs-admin/fs-admin.php:1105 fs-admin/fs-admin.php:1113
+#: fs-admin/fs-admin.php:1121 fs-admin/fs-admin.php:1129
+#: fs-admin/fs-admin.php:1137 .\fs-admin/fs-admin.php:1089
+#: .\fs-admin/fs-admin.php:1097 .\fs-admin/fs-admin.php:1105
+#: .\fs-admin/fs-admin.php:1113 .\fs-admin/fs-admin.php:1121
+#: .\fs-admin/fs-admin.php:1129 .\fs-admin/fs-admin.php:1137
+msgid "css-value:"
+msgstr "CSS-Wert:"
+
+#: fs-admin/fs-admin.php:1095 .\fs-admin/fs-admin.php:1095
+msgid "Enable Area Below Forum"
+msgstr "Aktiviere Bereich unter dem Forum"
+
+#: fs-admin/fs-admin.php:1103 .\fs-admin/fs-admin.php:1103
+msgid "Enable Area Above Branding"
+msgstr "Aktiviere Bereich über den Foren-Credits"
+
+#: fs-admin/fs-admin.php:1111 .\fs-admin/fs-admin.php:1111
+msgid "Enable Area Above Info Center"
+msgstr "Aktiviere Bereich über dem Info-Center"
+
+#: fs-admin/fs-admin.php:1119 .\fs-admin/fs-admin.php:1119
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Aktiviere Bereich über der Breadcrumb-Navigation"
+
+#: fs-admin/fs-admin.php:1127 .\fs-admin/fs-admin.php:1127
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Aktiviere Bereich unter dem Direktantwort-Formular"
+
+#: fs-admin/fs-admin.php:1135 .\fs-admin/fs-admin.php:1135
+msgid "Enable Area Below First Post"
+msgstr "Aktiviere Bereich unter dem ersten Beitrag"
+
+#: fs-admin/fs-admin.php:1142 .\fs-admin/fs-admin.php:1142
+msgid "Below you can modify/add your own CSS"
+msgstr "Unten kannst Du Deine eigenen CSS-Anweisungen bearbeiten/hinzufügen"
+
+#: fs-admin/fs-admin.php:1143 .\fs-admin/fs-admin.php:1143
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr ""
+"BEACHTE: Wenn Du nicht weißt, wozu diese Einstellungen dienen, lasse das "
+"Feld leer"
+
+#: fs-admin/fs-admin.php:1150 .\fs-admin/fs-admin.php:1150
+msgid "Save Options"
+msgstr "Einstellungen speichern"
+
+#: fs-admin/wpf-add-forum.php:5 .\fs-admin/wpf-add-forum.php:5
+msgid "Add forum to"
+msgstr "Forum hinzufügen zu"
+
+#: fs-admin/wpf-add-forum.php:14 fs-admin/wpf-edit-forum-group.php:129
+#: fs-admin/wpf-usergroup-edit.php:35 .\fs-admin/wpf-add-forum.php:14
+#: .\fs-admin/wpf-edit-forum-group.php:129
+#: .\fs-admin/wpf-usergroup-edit.php:35
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#: fs-admin/wpf-add-forum.php:31 fs-admin/wpf-edit-forum-group.php:134
+#: .\fs-admin/wpf-add-forum.php:31 .\fs-admin/wpf-edit-forum-group.php:134
+msgid "Save forum"
+msgstr "Forum speichern"
+
+#: fs-admin/wpf-add-group.php:7 .\fs-admin/wpf-add-group.php:7
+msgid "Add category"
+msgstr "Kategorie hinzufügen"
+
+#: fs-admin/wpf-add-group.php:21 .\fs-admin/wpf-add-group.php:21
+msgid "Save category"
+msgstr "Kategorie speichern"
+
+#: fs-admin/wpf-add-usergroup.php:23 .\fs-admin/wpf-add-usergroup.php:23
+msgid "Save user group"
+msgstr "Benutzergruppe speichern"
+
+#: fs-admin/wpf-addusers.php:21 .\fs-admin/wpf-addusers.php:21
+msgid "Select User group"
+msgstr "Benutzergruppe auswählen"
+
+#: fs-admin/wpf-addusers.php:31 .\fs-admin/wpf-addusers.php:31
+msgid "Add users"
+msgstr "Benutzer hinzufügen"
+
+#: fs-admin/wpf-edit-forum-group.php:12 .\fs-admin/wpf-edit-forum-group.php:12
+msgid "You must specify a group name"
+msgstr "Du musst einen Gruppennamen angeben"
+
+#: fs-admin/wpf-edit-forum-group.php:24 .\fs-admin/wpf-edit-forum-group.php:24
+msgid "Group updated successfully"
+msgstr "Gruppe erfolgreich aktualisiert"
+
+#: fs-admin/wpf-edit-forum-group.php:34 .\fs-admin/wpf-edit-forum-group.php:34
+msgid "You must specify a forum name"
+msgstr "Du musst einen Forennamen angeben"
+
+#: fs-admin/wpf-edit-forum-group.php:37 .\fs-admin/wpf-edit-forum-group.php:37
+msgid "Forum updated successfully"
+msgstr "Forum erfolgreich aktualisiert"
+
+#: fs-admin/wpf-edit-forum-group.php:49 .\fs-admin/wpf-edit-forum-group.php:49
+msgid "Edit category"
+msgstr "Kategorie bearbeiten"
+
+#: fs-admin/wpf-edit-forum-group.php:63 .\fs-admin/wpf-edit-forum-group.php:63
+msgid "User Groups:"
+msgstr "Benutzergruppen:"
+
+#: fs-admin/wpf-edit-forum-group.php:66 .\fs-admin/wpf-edit-forum-group.php:66
+msgid ""
+"Members of the checked User Groups have access to the forums in this "
+"category:"
+msgstr ""
+"Mitglieder der markierten Benutzergruppen haben Zugriff auf die Foren dieser "
+"Kategorie:"
+
+#: fs-admin/wpf-edit-forum-group.php:98 .\fs-admin/wpf-edit-forum-group.php:98
+msgid "There are no User Groups"
+msgstr "Es gibt keine Benutzergruppen"
+
+#: fs-admin/wpf-edit-forum-group.php:105
+#: .\fs-admin/wpf-edit-forum-group.php:105
+msgid "Save group"
+msgstr "Gruppe speichern"
+
+#: fs-admin/wpf-edit-forum-group.php:121
+#: .\fs-admin/wpf-edit-forum-group.php:121
+msgid "Edit forum"
+msgstr "Forum bearbeiten"
+
+#: fs-admin/wpf-moderator.php:19 .\fs-admin/wpf-moderator.php:19
+msgid "Select user"
+msgstr "Benutzer wählen"
+
+#: fs-admin/wpf-moderator.php:36 .\fs-admin/wpf-moderator.php:36
+msgid "Add moderator"
+msgstr "Moderator hinzufügen"
+
+#: fs-admin/wpf-usergroup-edit.php:11 .\fs-admin/wpf-usergroup-edit.php:11
+msgid "You must specify a name for the User Group"
+msgstr "Du musst einen Namen für diese Benutzergruppe angeben"
+
+#: fs-admin/wpf-usergroup-edit.php:18 .\fs-admin/wpf-usergroup-edit.php:18
+msgid "User Group updated successfully"
+msgstr "Benutzergruppe erfolgreich aktualisiert"
+
+#: fs-admin/wpf-usergroup-edit.php:26 .\fs-admin/wpf-usergroup-edit.php:26
+msgid "Edit User Group"
+msgstr "Benutzergruppe bearbeiten"
+
+#: fs-admin/wpf-usergroup-edit.php:40 .\fs-admin/wpf-usergroup-edit.php:40
+msgid "Save User Group"
+msgstr "Benutzergruppe speichern"
+
+#~ msgid "Cheating, are we?"
+#~ msgstr "Nicht wirklich, oder?"
+
+#~ msgid "RSS-Feed"
+#~ msgstr "RSS-Feed"
+
+#~ msgid "Add this topic to your email notifications?"
+#~ msgstr "Dieses Thema zu Deiner E-Mail-Benachrichtigung hinzufügen?"
+
+#~ msgid "Search"
+#~ msgstr "Suche"
+
+#~ msgid "Search for:"
+#~ msgstr "Suche nach:"
+
+#~ msgid "By user:"
+#~ msgstr "Nach Benutzer:"
+
+#~ msgid "Message Age:"
+#~ msgstr "Alter des Beitrags:"
+
+#~ msgid "Between"
+#~ msgstr "Zwischen"
+
+#~ msgid "and"
+#~ msgstr "und"
+
+#~ msgid "days"
+#~ msgstr "Tage"
+
+#~ msgid "Click to choose Forum(s) to  search"
+#~ msgstr "Wähle das zu durchsuchende Forum/die zu durchsuchenden Foren"
+
+#~ msgid "Check all"
+#~ msgstr "Prüfe alle"
+
+#~ msgid "Start Search"
+#~ msgstr "Suche starten"
+
+#~ msgid "New post in forum:"
+#~ msgstr "Neue Beiträge im Forum:"
+
+#~ msgid "General Options"
+#~ msgstr "Allgemeine Einstellungen"
+
+#~ msgid "Categories and forums"
+#~ msgstr "Kategorien und Foren"
+
+#~ msgid ""
+#~ "Valid Options: user_login, nickname, display_name, first_name, last_name"
+#~ msgstr ""
+#~ "Valide Einstellungen: user_login, nickname, display_name, first_name, "
+#~ "last_name"
+
+#~ msgid "Notify me when I get new Messages?"
+#~ msgstr "Benachrichtigung bei neuen Nachrichten?"
+
+#~ msgid "Feed"
+#~ msgstr "Feed"
+
+#~ msgid "Messages"
+#~ msgstr "Nachrichten"
+
+#~ msgid "New Message"
+#~ msgstr "Neue Nachricht"
+
+#~ msgid "Read Message Thread"
+#~ msgstr "Nachrichten zu diesem Thema lesen"
+
+#~ msgid "new"
+#~ msgstr "neu"
+
+#~ msgid "Use Private Messages:"
+#~ msgstr "Private Nachrichten verwenden:"
+
+#~ msgid "I recommend disabling this and using"
+#~ msgstr "Ich empfehle dies zu deaktivieren und dafür"
+
+#~ msgid "instead."
+#~ msgstr "zu verwenden."
+
+#~ msgid "Maximum Messages In Inbox (0 = unlimited):"
+#~ msgstr "Maximale Nachrichten im Posteingang (0 = unbegrenzt):"
+
+#~ msgid "Administratos always have unlimited messages"
+#~ msgstr "Administratoren haben kein Nachrichtenlimit"
+
+#~ msgid "Message Deleted"
+#~ msgstr "Nachricht gelöscht"
+
+#~ msgid "Your Message Was Deleted!"
+#~ msgstr "Deine Nachricht wurde gelöscht!"
+
+#~ msgid "Back To Your Inbox"
+#~ msgstr "Zurück zum Posteingang"
+
+#~ msgid "ERROR"
+#~ msgstr "FEHLER"
+
+#~ msgid "Create New Message"
+#~ msgstr "Neue Nachricht erstellen"
+
+#~ msgid "Unlimited"
+#~ msgstr "Unbegrenzt"
+
+#~ msgid "Message Box Size"
+#~ msgstr "Postfachgröße"
+
+#~ msgid "of"
+#~ msgstr "von"
+
+#~ msgid "Message Box Is Full!"
+#~ msgstr "Postfach ist voll!"
+
+#~ msgid "You cannot send/receive any new messages"
+#~ msgstr "Du kannst keine neuen Nachricht senden/empfangen"
+
+#~ msgid "Started By"
+#~ msgstr "begonnen von"
+
+#~ msgid "Last Reply"
+#~ msgstr "beantwortet von"
+
+#~ msgid "Unread"
+#~ msgstr "ungelesen"
+
+#~ msgid "Read"
+#~ msgstr "gelesen"
+
+#~ msgid "No Messages"
+#~ msgstr "keine Nachrichten"
+
+#~ msgid "Sorry You Have No Messages!"
+#~ msgstr "Du hast leider keine Nachrichten!"
+
+#~ msgid "Message Sent"
+#~ msgstr "Nachricht gesendet"
+
+#~ msgid "The Message Was Successfully Sent!"
+#~ msgstr "Die Nachricht wurde erfolgreich versendet!"
+
+#~ msgid "Back To Your Messages"
+#~ msgstr "Zurück zu den Nachrichten"
+
+#~ msgid "You have recieved a new message from"
+#~ msgstr "Du hast eine neue Nachricht erhalten von"
+
+#~ msgid "follow this link to view:"
+#~ msgstr "zum Lesen folge diesem Link:"
+
+#~ msgid "Message Could Not Be Sent!"
+#~ msgstr "Nachricht konnte nicht gesendet werden!"
+
+#~ msgid "The recipients inbox is FULL!"
+#~ msgstr "Der Posteingang des Empfängers ist voll!"
+
+#~ msgid "Please fill in all fields before submitting message!"
+#~ msgstr "Bitte alle Felder ausfüllen, bevor Du die Nachricht sendest!"
+
+#~ msgid "To:"
+#~ msgstr "An:"
+
+#~ msgid "Select User"
+#~ msgstr "Benutzer wählen"
+
+#~ msgid "Click this box and begin typing the username to find them faster"
+#~ msgstr "Klicke in dieses Feld und tippe den zu suchenden Benutzernamen ein"
+
+#~ msgid "You Must Be Logged In To Create Private Messages!"
+#~ msgstr ""
+#~ "Du musst angemeldet sein, um private Nachrichten erstellen zu können!"
+
+#~ msgid "Sender"
+#~ msgstr "Absender"
+
+#~ msgid "Message Contents"
+#~ msgstr "Inhalt der Nachricht"
+
+#~ msgid "Reply:"
+#~ msgstr "Antwort:"
+
+#~ msgid "Mingle Forum Themes:"
+#~ msgstr "Mingle Forum Themes:"
+
+#~ msgid "Posts"
+#~ msgstr "Beiträge"
+
+#~ msgid "Topics "
+#~ msgstr "Themen"
+
+#~ msgid "Posted on: "
+#~ msgstr "Geschrieben am:"
+
+#~ msgid "Allow email notifications?"
+#~ msgstr "Lassen Sie E-Mail-Benachrichtigungen?"
+
+#~ msgid "Notify"
+#~ msgstr "Benachrichtigen"
+
+#~ msgid "View Inbox"
+#~ msgstr "Profil Posteingang"
+
+#~ msgid "Contact:"
+#~ msgstr "Kontakt:"
+
+#~ msgid "Inbox size"
+#~ msgstr "Posteingang Größe"
+
+#~ msgid "total"
+#~ msgstr "gesamt"
+
+#~ msgid "From"
+#~ msgstr "Von"
+
+#~ msgid "NEW"
+#~ msgstr "NEU"
+
+#~ msgid "OLD"
+#~ msgstr "OLD"
+
+#~ msgid "Empty Inbox"
+#~ msgstr "Leeren Posteingang"
+
+#~ msgid "Your Inbox Is Empty!"
+#~ msgstr "Ihr Posteingang ist leer!"
+
+#~ msgid "Try Again"
+#~ msgstr "Try Again"
+
+#~ msgid "Reply To Message"
+#~ msgstr "Auf Nachricht antworten"

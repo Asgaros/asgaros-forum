@@ -1,0 +1,1912 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum HU\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-13 20:06-0700\n"
+"PO-Revision-Date: 2011-07-14 14:49-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: FYGureout <webmester@wordpress2you.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Hungarian\n"
+"X-Poedit-Country: HUNGARY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ mingleforum
+#: feed.php:24
+#: feed.php:25
+msgid "Forum Feed"
+msgstr "Fórum RSS"
+
+# @ mingleforum
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "Fórum téma:"
+
+# @ mingleforum
+#: feed.php:30
+#: wpf.class.php:1815
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Fórum"
+
+# @ mingleforum
+#: feed.php:30
+#: wpf.class.php:866
+msgid "Topic: "
+msgstr "Téma:"
+
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "RSS kikapcsolva"
+
+# @ mingleforum
+#: wpf-edit-profile.php:12
+msgid "No such user"
+msgstr "Nincs ilyen felhasználó!"
+
+#: wpf-edit-profile.php:27
+msgid "You have no subscriptions at this time"
+msgstr "Nincs feliratkozása egy témához sem!"
+
+# @ mingleforum
+#: wpf-edit-profile.php:32
+msgid "Edit forum options"
+msgstr "Fórum beállításainak szerkesztése"
+
+# @ mingleforum
+#: wpf-edit-profile.php:37
+msgid "Allow others to view my profile?"
+msgstr "Adatlapomat mások is megtekinthetik?"
+
+#: wpf-edit-profile.php:39
+msgid "Edit Signature (HTML is allowed):"
+msgstr ""
+
+# @ mingleforum
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "A következő témákra az email értesítés beállítva:"
+
+# @ mingleforum
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:560
+msgid "Save options"
+msgstr "Beállítások mentése"
+
+# @ mingleforum
+#: wpf-edit-profile.php:53
+#: wpf.class.php:622
+#: wpf.class.php:2078
+#: wpf.class.php:2104
+#: wpf.class.php:2122
+#: wpf.class.php:2144
+#: wpf.class.php:2153
+#: wpf.class.php:2212
+msgid "Cheating, are we?"
+msgstr ""
+
+# @ mingleforum
+#: wpf-insert.php:98
+msgid "Security code does not match"
+msgstr "Biztonsági kód nem egyezik!"
+
+# @ mingleforum
+#: wpf-insert.php:113
+#: wpf-insert.php:118
+#: wpf-insert.php:189
+#: wpf-insert.php:194
+#: wpf-insert.php:248
+#: wpf-insert.php:253
+msgid "An error occured"
+msgstr "Hiba történt a folyamatban"
+
+# @ mingleforum
+#: wpf-insert.php:114
+#: wpf-insert.php:190
+#: wpf-insert.php:249
+msgid "You must enter a subject"
+msgstr "Tárgy beírása kötelező"
+
+# @ mingleforum
+#: wpf-insert.php:119
+#: wpf-insert.php:195
+#: wpf-insert.php:254
+msgid "You must enter a message"
+msgstr "Üzenet beírása kötelező"
+
+# @ mingleforum
+#: wpf-insert.php:138
+msgid "created the forum topic:"
+msgstr "a következő fórumtéma létrehozva:"
+
+# @ mingleforum
+#: wpf-insert.php:206
+msgid "replied to the forum topic:"
+msgstr "válasz a következő fórum témához:"
+
+# @ mingleforum
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Idézet >> "
+
+# @ mingleforum
+#: wpf-post.php:10
+#: wpf.class.php:685
+#: wpf.class.php:694
+#: wpf.class.php:1163
+msgid "on"
+msgstr ". "
+
+# @ mingleforum
+#: wpf-post.php:20
+#: wpf.class.php:1288
+#: wpf.class.php:1861
+msgid "Post Reply"
+msgstr "Válasz a hozzászólásra"
+
+# @ mingleforum
+#: wpf-post.php:23
+#: wpf-post.php:76
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Tárgy:"
+
+#: wpf-post.php:24
+#: wpf.class.php:916
+msgid "Re:"
+msgstr "Válasz:"
+
+# @ mingleforum
+#: wpf-post.php:27
+#: wpf-post.php:80
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Üzenet:"
+
+# @ mingleforum
+#: wpf-post.php:40
+#: wpf-thread.php:30
+msgid "Images:"
+msgstr "Képek:"
+
+# @ mingleforum
+#: wpf-post.php:51
+#: wpf-thread.php:41
+msgid "Submit"
+msgstr "Beküld"
+
+# @ mingleforum
+#: wpf-post.php:73
+#: wpf.class.php:1285
+#: wpf.class.php:1864
+msgid "Edit Post"
+msgstr "Hozzászólás szerkesztése"
+
+# @ mingleforum
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "Hozzászólás mentése"
+
+# @ mingleforum
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Új téma küldése"
+
+# @ mingleforum
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "Elnézés, nincs megfelelő jogosultság a küldéshez."
+
+#: wpf.class.php:158
+#: fs-admin/fs-admin.php:449
+msgid "Newbie"
+msgstr "Újonc"
+
+#: wpf.class.php:159
+#: fs-admin/fs-admin.php:453
+msgid "Beginner"
+msgstr "Fórumozgató"
+
+#: wpf.class.php:160
+#: fs-admin/fs-admin.php:461
+msgid "Advanced"
+msgstr "Fórumfüggő"
+
+# @ mingleforum
+#: wpf.class.php:161
+#: fs-admin/fs-admin.php:469
+msgid "Pro"
+msgstr "Fórumprofesszor"
+
+# @ mingleforum
+#: wpf.class.php:179
+#: wpf.class.php:180
+msgid "Mingle Forum - Options"
+msgstr "Mingle Forum - Beállítások"
+
+# @ mingleforum
+#: wpf.class.php:180
+msgid "Options"
+msgstr "Beállítások"
+
+#: wpf.class.php:181
+msgid "Ads"
+msgstr "Hirdetések"
+
+# @ mingleforum
+#: wpf.class.php:182
+msgid "Skins"
+msgstr "Fórum sablonok"
+
+# @ mingleforum
+#: wpf.class.php:183
+msgid "Forum Structure - Categories & Forums"
+msgstr "Fórum szerkezete - Kategóriák és Fórumok"
+
+#: wpf.class.php:183
+msgid "Forum Structure"
+msgstr "Fórum szerkezete"
+
+# @ mingleforum
+#: wpf.class.php:184
+msgid "Moderators"
+msgstr "Moderátorok"
+
+# @ mingleforum
+#: wpf.class.php:185
+msgid "User Groups"
+msgstr "Felhasználói csoportok"
+
+# @ mingleforum
+#: wpf.class.php:186
+msgid "About"
+msgstr "Névjegy"
+
+# @ mingleforum
+#: wpf.class.php:197
+#: wpf.class.php:198
+msgid "Forums Latest Activity"
+msgstr "Legutóbbi fórum-történések"
+
+# @ mingleforum
+#: wpf.class.php:217
+#: wpf.class.php:237
+msgid "by:"
+msgstr "Szerző:"
+
+# @ mingleforum
+#: wpf.class.php:254
+msgid "Title to display in the sidebar:"
+msgstr "Rang megjelenítése az oldalsávban:"
+
+# @ mingleforum
+#: wpf.class.php:256
+msgid "How many items would you like to display?"
+msgstr "Hány elemet jelenítsünk meg?"
+
+# @ mingleforum
+#: wpf.class.php:653
+msgid "Page loaded in:"
+msgstr "Oldal betöltése:"
+
+# @ mingleforum
+#: wpf.class.php:653
+msgid "seconds."
+msgstr "másodperc"
+
+# @ mingleforum
+#: wpf.class.php:656
+msgid "Mingle Forum "
+msgstr "Mingle Forum "
+
+# @ mingleforum
+#: wpf.class.php:657
+msgid "Version:"
+msgstr "Verzió:"
+
+# @ mingleforum
+#: wpf.class.php:676
+#: wpf.class.php:2276
+msgid "Guest"
+msgstr "Vendég"
+
+# @ mingleforum
+#: wpf.class.php:685
+#: wpf.class.php:1162
+msgid "by"
+msgstr "szerző "
+
+# @ mingleforum
+#: wpf.class.php:694
+msgid "Latest Post by"
+msgstr "Legutóbbi hozzászóló"
+
+# @ mingleforum
+#: wpf.class.php:717
+#: wpf.class.php:848
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Elnézést, nincs jogosutság ehhez a fórumhoz"
+
+# @ mingleforum
+#: wpf.class.php:727
+#: wpf.class.php:2364
+msgid "Status"
+msgstr "Állapot"
+
+# @ mingleforum
+#: wpf.class.php:728
+#: wpf.class.php:2365
+msgid "Topic Title"
+msgstr "Téma címe"
+
+# @ mingleforum
+#: wpf.class.php:729
+#: wpf.class.php:2366
+#: wpf.class.php:2557
+msgid "Started by"
+msgstr "Indította"
+
+# @ mingleforum
+#: wpf.class.php:730
+#: wpf.class.php:2367
+msgid "Replies"
+msgstr "Válaszok"
+
+# @ mingleforum
+#: wpf.class.php:731
+msgid "Views"
+msgstr "Megtekintések"
+
+# @ mingleforum
+#: wpf.class.php:732
+#: wpf.class.php:1162
+#: wpf.class.php:2368
+msgid "Last post"
+msgstr "Legutolsó hozzászólás"
+
+# @ mingleforum
+#: wpf.class.php:736
+msgid "Sticky Topics"
+msgstr "Ragadós témák"
+
+# @ mingleforum
+#: wpf.class.php:740
+#: wpf.class.php:742
+#: wpf.class.php:786
+#: wpf.class.php:788
+#: wpf.class.php:1649
+#: wpf.class.php:1666
+msgid "Move Topic"
+msgstr "Téma áthelyezése"
+
+# @ mingleforum
+#: wpf.class.php:740
+#: wpf.class.php:742
+#: wpf.class.php:786
+#: wpf.class.php:788
+msgid "Delete Topic"
+msgstr "Téma törlése"
+
+# @ mingleforum
+#: wpf.class.php:752
+#: wpf.class.php:781
+msgid "New posts since last visit"
+msgstr "Új hozzászólások"
+
+# @ mingleforum
+#: wpf.class.php:769
+msgid "Forum Topics"
+msgstr "Fórum témák"
+
+# @ mingleforum
+#: wpf.class.php:836
+msgid "Remove this topic from your email notifications?"
+msgstr "Eltávolítsuk az email értesítések közül ezt a témát?"
+
+# @ mingleforum
+#: wpf.class.php:838
+msgid "Add this topic to your email notifications?"
+msgstr "Hozzáadjuk ezt a témát az email értesítésekhez?"
+
+#: wpf.class.php:859
+msgid "TOPIC CLOSED"
+msgstr "TÉMA LEZÁRVA!"
+
+# @ mingleforum
+#: wpf.class.php:865
+msgid "Author"
+msgstr "Szerző"
+
+# @ mingleforum
+#: wpf.class.php:881
+#: wpf.class.php:2423
+msgid "Posts:"
+msgstr "Hozzászólások:"
+
+# @ mingleforum
+#: wpf.class.php:914
+msgid "Quick Reply"
+msgstr "Gyorsválasz"
+
+#: wpf.class.php:923
+msgid "Submit Quick Reply"
+msgstr "Gyorsválasz küldése"
+
+# @ mingleforum
+#: wpf.class.php:945
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Hozzászólás"
+
+# @ mingleforum
+#: wpf.class.php:948
+msgid "on:"
+msgstr ":"
+
+# @ mingleforum
+#: wpf.class.php:952
+#: wpf.class.php:961
+#: wpf.class.php:2292
+msgid "Quote"
+msgstr "Idézet"
+
+# @ mingleforum
+#: wpf.class.php:954
+#: wpf.class.php:963
+#: fs-admin/fs-admin.php:152
+#: fs-admin/fs-admin.php:980
+msgid "Remove"
+msgstr "Eltávolítás"
+
+# @ mingleforum
+#: wpf.class.php:956
+#: wpf.class.php:965
+msgid "Edit"
+msgstr "Szerkesztés"
+
+# @ mingleforum
+#: wpf.class.php:1039
+#: wpf.class.php:1090
+msgid "Topics: "
+msgstr "Témák:"
+
+# @ mingleforum
+#: wpf.class.php:1039
+#: wpf.class.php:1090
+msgid "Posts: "
+msgstr "Hozzászólások:"
+
+# @ mingleforum
+#: wpf.class.php:1049
+#: wpf.class.php:1100
+msgid "New posts"
+msgstr "Új hozzászólások"
+
+# @ mingleforum
+#: wpf.class.php:1049
+#: wpf.class.php:1100
+msgid "No new posts"
+msgstr "Nincs új hozzászólás"
+
+#: wpf.class.php:1049
+msgid "Mark All Read"
+msgstr "Valamennyi megjelölése olvasottként"
+
+# @ mingleforum
+#: wpf.class.php:1160
+msgid "No topics yet"
+msgstr "Még nincs téma"
+
+# @ mingleforum
+#: wpf.class.php:1163
+msgid "in"
+msgstr " -"
+
+# @ mingleforum
+#: wpf.class.php:1214
+msgid "Forums RSS"
+msgstr "Fórumok RSS"
+
+#: wpf.class.php:1225
+msgid "Are you sure you want to remove this?"
+msgstr "Bizonyos, hogy ezt eltávolítsuk?"
+
+# @ mingleforum
+#: wpf.class.php:1279
+#: wpf.class.php:1854
+msgid "Search Results"
+msgstr "Keresés eredménye"
+
+# @ mingleforum
+#: wpf.class.php:1282
+msgid "Profile"
+msgstr "Adatlap"
+
+# @ mingleforum
+#: wpf.class.php:1291
+#: wpf.class.php:1511
+#: wpf.class.php:1643
+#: wpf.class.php:1660
+#: wpf.class.php:1867
+msgid "New Topic"
+msgstr "Új téma"
+
+# @ mingleforum
+#: wpf.class.php:1358
+msgid "Moderators:"
+msgstr "Moderátorok:"
+
+# @ mingleforum
+#: wpf.class.php:1534
+#: wpf.class.php:1547
+#: wpf.class.php:1646
+#: wpf.class.php:1663
+msgid "Undo Sticky"
+msgstr "Ragadós visszavonása"
+
+# @ mingleforum
+#: wpf.class.php:1536
+#: wpf.class.php:1549
+#: wpf.class.php:1645
+#: wpf.class.php:1662
+msgid "Sticky"
+msgstr "Ragadós"
+
+# @ mingleforum
+#: wpf.class.php:1539
+#: wpf.class.php:1552
+#: wpf.class.php:1648
+#: wpf.class.php:1665
+msgid "Re-open"
+msgstr "Újranyitás"
+
+# @ mingleforum
+#: wpf.class.php:1541
+#: wpf.class.php:1554
+#: wpf.class.php:1647
+#: wpf.class.php:1664
+msgid "Close"
+msgstr "Bezárás"
+
+# @ mingleforum
+#: wpf.class.php:1561
+#: wpf.class.php:1642
+#: wpf.class.php:1659
+msgid "Reply"
+msgstr "Válasz"
+
+# @ mingleforum
+#: wpf.class.php:1568
+#: wpf.class.php:1584
+msgid "Unsubscribe"
+msgstr "Leiratkozás"
+
+# @ mingleforum
+#: wpf.class.php:1570
+#: wpf.class.php:1586
+msgid "Subscribe"
+msgstr "Feliratkozás"
+
+# @ mingleforum
+#: wpf.class.php:1573
+msgid "RSS feed"
+msgstr "RSS"
+
+# @ mingleforum
+#: wpf.class.php:1589
+#: wpf.class.php:1644
+#: wpf.class.php:1661
+msgid "RSS-Feed"
+msgstr "RSS"
+
+# @ mingleforum
+#: wpf.class.php:1627
+#: wpf.class.php:1631
+msgid "My profile"
+msgstr "Adatlapom"
+
+# @ mingleforum
+#: wpf.class.php:1627
+#: wpf.class.php:1631
+msgid "My Profile"
+msgstr "Adatlapom"
+
+# @ mingleforum
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Forum Home"
+msgstr "Fórum kezdőlap"
+
+# @ mingleforum
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+#: wpf.class.php:1932
+msgid "Log out"
+msgstr "Kilépés"
+
+# @ mingleforum
+#: wpf.class.php:1641
+#: wpf.class.php:1658
+#: wpf.class.php:2466
+msgid "Search"
+msgstr "Keresés"
+
+# @ mingleforum
+#: wpf.class.php:1729
+msgid "You are logged in as:"
+msgstr "Bejelentkezve, mint"
+
+# @ mingleforum
+#: wpf.class.php:1735
+msgid "Username: "
+msgstr "Felhasználónév:"
+
+# @ mingleforum
+#: wpf.class.php:1736
+msgid "Password: "
+msgstr "Jelszó:"
+
+# @ mingleforum
+#: wpf.class.php:1738
+msgid "Remember Me"
+msgstr "Jegyezzen meg!"
+
+# @ mingleforum
+#: wpf.class.php:1774
+msgid "Administrator"
+msgstr "Adminisztrátor"
+
+# @ mingleforum
+#: wpf.class.php:1778
+msgid "Moderator"
+msgstr "Moderátor"
+
+# @ mingleforum
+#: wpf.class.php:1848
+msgid "New Topics since last visit"
+msgstr "Új témák a legutóbbi belépés óta"
+
+# @ mingleforum
+#: wpf.class.php:1858
+msgid "Profile Info"
+msgstr "Adatlap információ"
+
+# @ mingleforum
+#: wpf.class.php:1922
+msgid "Edit Profile"
+msgstr "Adatlap szerkesztése"
+
+# @ mingleforum
+#: wpf.class.php:1926
+#: wpf.class.php:1938
+msgid "Welcome"
+msgstr "Üdvözlet"
+
+# @ mingleforum
+#: wpf.class.php:1927
+msgid "Your last visit was:"
+msgstr "Legutóbbi belépés ideje:"
+
+# @ mingleforum
+#: wpf.class.php:1929
+msgid "Show new topics since your last visit"
+msgstr "Mutassa az új témákat a legutóbbi belépés óta"
+
+# @ mingleforum
+#: wpf.class.php:1930
+msgid "Edit your forum options"
+msgstr "Fórumbeállítások szerkesztése"
+
+# @ mingleforum
+#: wpf.class.php:1937
+msgid "Welcome Guest, please login or"
+msgstr "Üdvözöljük kedves Vendégeinket a Fórumban! Belépés, vagy"
+
+# @ mingleforum
+#: wpf.class.php:1937
+msgid "register."
+msgstr "regisztráció."
+
+# @ mingleforum
+#: wpf.class.php:1942
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Üdvözöljük kedves Vendég! A hozzászólás nálunk elvárás, melyhez kötelező a"
+
+# @ mingleforum
+#: wpf.class.php:1942
+msgid "registration."
+msgstr "regisztráció!"
+
+#: wpf.class.php:1950
+msgid "Show/Hide Header"
+msgstr "Mutat / Elrejt"
+
+# @ mingleforum
+#: wpf.class.php:1964
+msgid "Search forums"
+msgstr "Keresés a fórumokban"
+
+# @ mingleforum
+#: wpf.class.php:1999
+#: wpf.class.php:2030
+msgid "Pages:"
+msgstr "Oldalak:"
+
+# @ mingleforum
+#: wpf.class.php:2012
+#: wpf.class.php:2043
+msgid "First"
+msgstr "Első"
+
+# @ mingleforum
+#: wpf.class.php:2023
+#: wpf.class.php:2054
+msgid "Last"
+msgstr "Utolsó"
+
+# @ mingleforum
+#: wpf.class.php:2141
+msgid "Post deleted"
+msgstr "Hozzászólás törölve"
+
+# @ mingleforum
+#: wpf.class.php:2269
+#: wpf.class.php:2273
+#: fs-admin/fs-admin.php:154
+msgid "View profile"
+msgstr "Adatlap megtekintése"
+
+# @ mingleforum
+#: wpf.class.php:2287
+msgid "Bold"
+msgstr "Vastagított"
+
+# @ mingleforum
+#: wpf.class.php:2288
+msgid "Italic"
+msgstr "Dőlt"
+
+# @ mingleforum
+#: wpf.class.php:2289
+msgid "Underline"
+msgstr "Aláhúzott"
+
+# @ mingleforum
+#: wpf.class.php:2290
+msgid "Strikethrough"
+msgstr "Áthúzás"
+
+# @ mingleforum
+#: wpf.class.php:2291
+msgid "Code"
+msgstr "Kód"
+
+# @ mingleforum
+#: wpf.class.php:2293
+msgid "List"
+msgstr "Lista"
+
+# @ mingleforum
+#: wpf.class.php:2294
+msgid "List item"
+msgstr "Lista elem"
+
+# @ mingleforum
+#: wpf.class.php:2295
+msgid "Link"
+msgstr "Link"
+
+# @ mingleforum
+#: wpf.class.php:2296
+msgid "Image"
+msgstr "Kép"
+
+# @ mingleforum
+#: wpf.class.php:2297
+msgid "Email"
+msgstr "Email"
+
+# @ mingleforum
+#: wpf.class.php:2298
+msgid "Add Hex Color"
+msgstr "Szín hexa-kód hozzáadása"
+
+# @ mingleforum
+#: wpf.class.php:2299
+msgid "Embed YouTube Video"
+msgstr "YouTube videó beágyazása"
+
+#: wpf.class.php:2300
+msgid "Embed Google Map"
+msgstr "Google Map beágyazása"
+
+# @ mingleforum
+#: wpf.class.php:2306
+msgid "Smile"
+msgstr "Mosolygó"
+
+#: wpf.class.php:2307
+msgid "Big Grin"
+msgstr "Nagy vigyorgó"
+
+# @ mingleforum
+#: wpf.class.php:2308
+msgid "Sad"
+msgstr "Szomorú"
+
+#: wpf.class.php:2309
+msgid "Neutral"
+msgstr "Semleges"
+
+#: wpf.class.php:2310
+msgid "Razz"
+msgstr "Kiröhög"
+
+# @ mingleforum
+#: wpf.class.php:2311
+msgid "Mad"
+msgstr "Őrült"
+
+#: wpf.class.php:2312
+msgid "Confused"
+msgstr "Zavarodott"
+
+#: wpf.class.php:2313
+msgid "Eek!"
+msgstr "Tudós"
+
+# @ mingleforum
+#: wpf.class.php:2314
+msgid "Wink"
+msgstr "Kacsint"
+
+#: wpf.class.php:2315
+msgid "Surprised"
+msgstr "Csoálkozó"
+
+#: wpf.class.php:2316
+msgid "Cool"
+msgstr "Dögös"
+
+# @ mingleforum
+#: wpf.class.php:2328
+msgid "Info Center"
+msgstr "Info Center"
+
+# @ mingleforum
+#: wpf.class.php:2335
+msgid "Posts in"
+msgstr "hozzászólás"
+
+# @ mingleforum
+#: wpf.class.php:2335
+msgid "Topics Made by"
+msgstr "Témaindítók:"
+
+# @ mingleforum
+#: wpf.class.php:2335
+#: fs-admin/fs-admin.php:146
+msgid "Members"
+msgstr "tag"
+
+# @ mingleforum
+#: wpf.class.php:2335
+msgid "Latest Member:"
+msgstr "Legutóbbi tag:"
+
+# @ mingleforum
+#: wpf.class.php:2361
+msgid "New topics since your last visit"
+msgstr "Új témák a legutóbbi belépés óta"
+
+# @ mingleforum
+#: wpf.class.php:2408
+msgid "Summary"
+msgstr "Adatlap"
+
+# @ mingleforum
+#: wpf.class.php:2414
+#: wpf.class.php:2700
+#: fs-admin/wpf-add-forum.php:10
+msgid "Name:"
+msgstr "Név:"
+
+# @ mingleforum
+#: wpf.class.php:2419
+msgid "Registered:"
+msgstr "Regisztrált:"
+
+# @ mingleforum
+#: wpf.class.php:2427
+msgid "Position:"
+msgstr "Rangja:"
+
+# @ mingleforum
+#: wpf.class.php:2430
+msgid "Website:"
+msgstr "Honlap:"
+
+# @ mingleforum
+#: wpf.class.php:2434
+msgid "AIM:"
+msgstr "AIM:"
+
+# @ mingleforum
+#: wpf.class.php:2438
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+# @ mingleforum
+#: wpf.class.php:2441
+msgid "Jabber/google Talk:"
+msgstr "Jabber/Google Talk:"
+
+# @ mingleforum
+#: wpf.class.php:2445
+msgid "Biographical Info:"
+msgstr "Életrajzi információ:"
+
+# @ mingleforum
+#: wpf.class.php:2470
+msgid "Search for:"
+msgstr "Keresés szóra, kifejezésre:"
+
+# @ mingleforum
+#: wpf.class.php:2474
+msgid "By user:"
+msgstr "Felhasználó:"
+
+# @ mingleforum
+#: wpf.class.php:2479
+msgid "Message Age:"
+msgstr "Mikor történt a hozzászólás?"
+
+# @ mingleforum
+#: wpf.class.php:2480
+msgid "Between"
+msgstr "Keressünk"
+
+# @ mingleforum
+#: wpf.class.php:2480
+msgid "and"
+msgstr "és"
+
+# @ mingleforum
+#: wpf.class.php:2480
+msgid "days"
+msgstr "nappal ezelőtti hozzászólásokat."
+
+# @ mingleforum
+#: wpf.class.php:2486
+msgid "Click to choose Forum(s) to  search"
+msgstr "Ide kattintva kijelölhető, hogy melyik Fórumokban akarunk keresni."
+
+# @ mingleforum
+#: wpf.class.php:2508
+msgid "Check all"
+msgstr "Összes ellenőrzése"
+
+# @ mingleforum
+#: wpf.class.php:2513
+msgid "Start Search"
+msgstr "Keresés indítása"
+
+# @ mingleforum
+#: wpf.class.php:2555
+msgid "Subject"
+msgstr "Állapot"
+
+# @ mingleforum
+#: wpf.class.php:2556
+msgid "Relevance"
+msgstr "Tárgyhoz tartozik"
+
+# @ mingleforum
+#: wpf.class.php:2558
+msgid "Posted"
+msgstr "Beküldve"
+
+# @ mingleforum
+#: wpf.class.php:2624
+msgid "Closed topic"
+msgstr "Lezárt téma"
+
+# @ mingleforum
+#: wpf.class.php:2627
+msgid "Normal topic"
+msgstr "Normál téma"
+
+# @ mingleforum
+#: wpf.class.php:2630
+msgid "Hot topic"
+msgstr "Menő téma"
+
+# @ mingleforum
+#: wpf.class.php:2633
+msgid "Very Hot topic"
+msgstr "Nagyon menő téma"
+
+# @ mingleforum
+#: wpf.class.php:2665
+msgid "Security Code:"
+msgstr "Biztonsági kód:"
+
+# @ mingleforum
+#: wpf.class.php:2684
+msgid "Enter Security Code: (required)"
+msgstr "Biztonsági kód megadása (kötelező):"
+
+# @ mingleforum
+#: wpf.class.php:2698
+msgid "New post in forum:"
+msgstr "Új hozzászólás a fórumon:"
+
+# @ mingleforum
+#: wpf.class.php:2699
+msgid "DETAILS:"
+msgstr "RÉSZLETEK:"
+
+# @ mingleforum
+#: wpf.class.php:2702
+msgid "Date:"
+msgstr "Dátum:"
+
+# @ mingleforum
+#: wpf.class.php:2703
+msgid "Reply Content:"
+msgstr "Válasz tartalma:"
+
+# @ mingleforum
+#: wpf.class.php:2704
+msgid "View Topic Here:"
+msgstr "Téma megtekintése itt:"
+
+#: wpf.class.php:2753
+#: wpf.class.php:2763
+msgid "Inbox"
+msgstr "Bejövő fiók"
+
+# @ mingleforum
+#: wpf.class.php:2779
+#: wpf.class.php:2792
+msgid "Send Message"
+msgstr "Üzenet küldése"
+
+# @ mingleforum
+#: wpf.class.php:2970
+#, fuzzy
+msgid "Mingle Forum Post Options"
+msgstr "Mingle Forum - Beállítások"
+
+#: wpf.class.php:2976
+msgid "Add this post to"
+msgstr ""
+
+#: wpf.class.php:2980
+msgid "Do not check this if this post has already been linked to the forum!"
+msgstr ""
+
+#: wpf.class.php:3012
+msgid "Join the Forum discussion on this post"
+msgstr ""
+
+# @ mingleforum
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Kategória"
+
+# @ mingleforum
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Téma"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:32
+msgid "You must specify a user group name."
+msgstr "Meg kell adni egy felhasználói csoport nevet."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:34
+#: fs-admin/fs-admin.php:701
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "A választott név már létezik az adatbázisban, egy másikat kell választani"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:36
+msgid "User Group successfully added."
+msgstr "Felhasználói csoport sikeresen hozzáadva."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:54
+msgid "You haven't specified any user to add:"
+msgstr "Még egyetlen felhasználó sem lett megjelölve a hozzáadáshoz:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:58
+msgid "You must choose a user group"
+msgstr "Ki kell választani egy felhasználói csoportot"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:65
+msgid "Error"
+msgstr "Hiba"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:65
+msgid "No such user:"
+msgstr "Nincs ilyen felhasználó:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:69
+msgid "Warning"
+msgstr "Figyelmeztetés"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:69
+#: fs-admin/fs-admin.php:73
+msgid "User"
+msgstr "Felhasználó"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:69
+msgid "is already in this group"
+msgstr "már ebben a csoportban van"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:73
+msgid "added successfully"
+msgstr "sikeresen hozzáadva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:81
+msgid "Errors:"
+msgstr "Hibák:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:82
+msgid "Warnings:"
+msgstr "Figyelmeztetések:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:83
+msgid "Users added:"
+msgstr "Felhasználók hozzáadva:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:97
+msgid "User Group(s) successfully deleted."
+msgstr "Felhasználói Csoport(ok) sikeresen törlésre került(ek)."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:105
+msgid "Member successfully removed."
+msgstr "Tag sikeresen eltávolítva."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:111
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Forum >> Felhasználói csoportok kezelése"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:111
+#: fs-admin/fs-admin.php:766
+#: fs-admin/fs-admin.php:966
+msgid "add new"
+msgstr "új hozzáadása"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:118
+#: fs-admin/fs-admin.php:820
+msgid "Delete"
+msgstr "Törlés"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:158
+#: fs-admin/fs-admin.php:164
+msgid "Add members"
+msgstr "Tagok hozzáadása"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:163
+msgid "No members in this group"
+msgstr "Nincsenek tagok ebben a csoportban"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:222
+msgid "Skin successfully activated."
+msgstr "Fórumsablon sikeresen aktivizálva."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:228
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingle Forum >> Fórumsablon beállítások"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:229
+msgid "Get More Skins"
+msgstr "További fórumsablonok (angol)"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:230
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "FONTOS: 1.0.03 verziótól kezdődően a fórumsablonok könytárát a /wp-content/mingle-forum-skins/ könyvtárba helyeztük."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:230
+msgid "Why did you change it?"
+msgstr "Miért is kellett megváltoztatni? (angol)"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:233
+msgid "Screenshot"
+msgstr "Képernyőkép"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:234
+#: fs-admin/wpf-add-group.php:12
+msgid "Name"
+msgstr "Név"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:235
+msgid "Version"
+msgstr "Verzió"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:236
+#: fs-admin/wpf-add-group.php:13
+msgid "Description"
+msgstr "Leírás"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:237
+msgid "Action"
+msgstr "Tevékenység"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:251
+#: fs-admin/fs-admin.php:266
+msgid "In Use"
+msgstr "Használatban"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:253
+#: fs-admin/fs-admin.php:268
+msgid "Activate"
+msgstr "Bekapcsolás"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:296
+msgid "About Mingle Forum"
+msgstr "Mingle Forum névjegy"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:299
+msgid "Current Version: "
+msgstr "Jelenlegi verzió:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:303
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "A Mingle Forumnak küldetése egyszerű: 'LEGYÜNK EGYSZERŰEK!'. Ezt a WP Forum-tól vettük át és fejlesztettünk jelentősen. Teljes az integráció a Mingle bővítménnyel, vagy nélküle (Blair Williams). Nagy köszönenet mondok Eric Hamby-nek korábbi munkájáért, amit a fórum kódján végzett!"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:305
+msgid "Author: "
+msgstr "Szerző:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:306
+msgid "Plugin Page:"
+msgstr "Bővítmény oldala:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:307
+msgid "Support Forum:"
+msgstr "Támogatói fórum:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:308
+msgid "Mingle Forum Skins:"
+msgstr "Mingle Forum forumsablonok:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:355
+msgid "Options successfully saved."
+msgstr "Beállítások sikeresen mentve."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:360
+msgid "Mingle Forum"
+msgstr "Mingle Forum"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:364
+msgid "Statistic"
+msgstr "Statisztika"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:365
+msgid "Value"
+msgstr "Érték"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:369
+msgid "Number of posts:"
+msgstr "Hozzászólások száma:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:373
+msgid "Number of threads:"
+msgstr "Összefűzött hozzászólások száma:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:377
+msgid "Number of users:"
+msgstr "Felhasználók száma:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:381
+msgid "Total database size:"
+msgstr "Teljes adatbázis mérete:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:385
+msgid "Database server:"
+msgstr "Adatbázis szerver:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:389
+msgid "Mingle Forum version:"
+msgstr "Mingle Forum verzió:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:394
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Forum >> Általános beállítások"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:399
+msgid "default "
+msgstr "alapértelmezés"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:403
+msgid "Option Name"
+msgstr "Funkció megnevezése"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:404
+msgid "Option Input"
+msgstr "Érték beállítása"
+
+#: fs-admin/fs-admin.php:409
+msgid "Integrate WordPress Posts with Forum:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:413
+#: fs-admin/fs-admin.php:480
+#: fs-admin/fs-admin.php:503
+#: fs-admin/fs-admin.php:527
+msgid "Off"
+msgstr "Kikapcsolva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:417
+msgid "Posts per page:"
+msgstr "Hozzászólás oldalanként:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:421
+msgid "Threads per page:"
+msgstr "Összefűzött hozzászólások oldalanként:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:427
+msgid "Number of posts for Hot Topic:"
+msgstr "A 'Menő Téma'-hoz szükséges hozzászólások száma:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:431
+msgid "Number of posts for Very Hot Topic:"
+msgstr "A 'Nagyon Menő Téma' hozzászólásainak minimális mennyisége:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:435
+msgid "Username Display:"
+msgstr "Felhasználó nevének megjelenítési formája:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:448
+msgid "New User's Title:"
+msgstr "Az új felhasználó rangja:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:452
+msgid "User Level 1 Title:"
+msgstr "Első szintű felhasználó rangja:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:456
+msgid "User Level 1 Count:"
+msgstr "Első szintű felhasználó számlálója:"
+
+#: fs-admin/fs-admin.php:457
+msgid "25"
+msgstr "25"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:460
+msgid "User Level 2 Title:"
+msgstr "Második szintű felhasználó rangja:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:464
+msgid "User Level 2 Count:"
+msgstr "Második szintű felhasználó számlálója:"
+
+#: fs-admin/fs-admin.php:465
+msgid "50"
+msgstr "50"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:468
+msgid "User Level 3 Title:"
+msgstr "Harmadik szintű felhasználó rangja:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:472
+msgid "User Level 3 Count:"
+msgstr "Harmadik szintű felhasználó számlálója:"
+
+#: fs-admin/fs-admin.php:473
+msgid "100"
+msgstr "100"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:476
+msgid "Notify Admin on new posts:"
+msgstr "Admin figyelmeztetése új hozzászólásról:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:483
+msgid "Show Forum Login Form:"
+msgstr "Mutassa a Fórum bejelentkezési űrlapot:"
+
+#: fs-admin/fs-admin.php:487
+#: fs-admin/fs-admin.php:495
+#: fs-admin/fs-admin.php:511
+#: fs-admin/fs-admin.php:519
+#: fs-admin/fs-admin.php:535
+msgid "On"
+msgstr "Bekapcsolva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:491
+msgid "Show Avatars in the forum:"
+msgstr "Mutassa az avatarokat a fórumban:"
+
+#: fs-admin/fs-admin.php:499
+msgid "Allow Images to be uploaded:"
+msgstr "Képek feltöltésének engedélyezése:"
+
+#: fs-admin/fs-admin.php:507
+#, fuzzy
+msgid "Show users Signature at the bottom of posts:"
+msgstr "Mutassa a felhasználó adatait a bejegyzések tetején"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:515
+msgid "Use Forum RSS:"
+msgstr "Fórum RSS használata:"
+
+#: fs-admin/fs-admin.php:523
+msgid "Use SEO friendly URLs:"
+msgstr "SEO-barát URL-ek használata:"
+
+#: fs-admin/fs-admin.php:523
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "FONTOS: Ezt az opciót kikapcsolva kell tartani, amennyiben az 'Alap' közvetlen link struktúra van használatban!"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:531
+msgid "Registration required to post:"
+msgstr "Regisztráció szükséges a hozzászóláshoz:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:540
+msgid "Installed version:"
+msgstr "Telepített változat:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:544
+msgid "GD Library is not installed"
+msgstr "GD könyvtár nincs telepítve"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:547
+msgid "Use Captcha for unregistered users:"
+msgstr "Captcha használata nem regisztrált felhasználóknál:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:551
+msgid "Requires "
+msgstr "Kötelező"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:551
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Ha a 'Regisztráció szükséges a bejegyzéshez' engedélyezett, akkor ezt üresen kell hagyni"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:555
+msgid "Date format:"
+msgstr "Dátum formátuma:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:555
+msgid "Default date:"
+msgstr "Alapértelmezett formátum:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:555
+msgid "Check "
+msgstr "Ellenőrizzük a"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:555
+msgid "for date formatting."
+msgstr "oldalon a php dátum formázás beállítási lehetőségeit (angol)."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:672
+msgid "Groups deleted:"
+msgstr "Törölt csoportok:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:673
+msgid "Forums deleted:"
+msgstr "Törölt fórumok:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:674
+msgid "Threads deleted:"
+msgstr "Törölt összefűzütt hozzászólások:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:675
+msgid "Posts deleted:"
+msgstr "Törölt hozzászólások:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:699
+#: fs-admin/fs-admin.php:723
+msgid "You must enter a name"
+msgstr "Egy nevet meg kell adni!"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:708
+msgid "Category added successfully"
+msgstr "Kategória sikeresen hozzáadva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:720
+msgid "You must select a category"
+msgstr "Ki kell választani egy kategóriát!"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:726
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Olyan fórumnév került kiválasztásra, amely már ebben a csoportban létezik, ezért egy másikat kell megadni"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:733
+msgid "Forum added successfully"
+msgstr "Fórum sikeresen hozzáadva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:760
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Forum >> Kategóriák és Fórumok"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:782
+#: fs-admin/fs-admin.php:812
+msgid "Modify"
+msgstr "Módosítás"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:821
+msgid "Add forum"
+msgstr "Fórum hozzáadása"
+
+#: fs-admin/fs-admin.php:846
+msgid "Group Moved Down"
+msgstr "Csoport mozgatása lefelé"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:856
+msgid "Forum Moved Down"
+msgstr "Fórum mozgatása lefelé"
+
+#: fs-admin/fs-admin.php:866
+msgid "Group Moved Up"
+msgstr "Csoport mozgatása felfelé"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:876
+msgid "Forum Moved Up"
+msgstr "Fórum mozgatása felfelé"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:913
+#: fs-admin/fs-admin.php:920
+msgid "Moderator successfully removed."
+msgstr "Moderátor sikeresen eltávolítva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:915
+msgid "Moderator successfully saved."
+msgstr "Moderátor sikeresen elmentve"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:922
+msgid "Moderator NOT removed."
+msgstr "Moderátor NINCS eltávolítva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:936
+msgid "You must select a user"
+msgstr "Ki kell választani egy felhasználót"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:940
+msgid "Global Moderator added successfully"
+msgstr "Globális moderátor sikeresen hozzáadva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:944
+msgid "Moderator added successfully"
+msgstr "Moderátor sikeresen hozzáadva"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:966
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Forum >> Moderátorok kezelése"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:975
+msgid "Currently moderating"
+msgstr "Moderációs területe"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:979
+msgid "Update"
+msgstr "Frissítés"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:989
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Globális moderátor: (A felhasználó moderálhatja az öszes fórumot)"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1008
+msgid "No moderators yet"
+msgstr "Még nincs moderátor"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1033
+msgid "Ads saved successfully"
+msgstr "Hirdetések mentése sikeres"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1038
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingle Forum Hirdetések >> Beállítások"
+
+#: fs-admin/fs-admin.php:1040
+msgid "HTML is allowed in all ad areas below"
+msgstr "A HTML engedélyezett az alábbi területeken"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1044
+msgid "Ads Option"
+msgstr "Hirdetések beállítása"
+
+#: fs-admin/fs-admin.php:1051
+msgid "Enable Area Above Forum"
+msgstr "Fórum feletti terület bekapcsolása"
+
+#: fs-admin/fs-admin.php:1053
+#: fs-admin/fs-admin.php:1061
+#: fs-admin/fs-admin.php:1069
+#: fs-admin/fs-admin.php:1077
+#: fs-admin/fs-admin.php:1085
+#: fs-admin/fs-admin.php:1093
+#: fs-admin/fs-admin.php:1101
+msgid "css-value:"
+msgstr "css-érték:"
+
+#: fs-admin/fs-admin.php:1059
+msgid "Enable Area Below Forum"
+msgstr "Fórum alatti terület bekapcsolása"
+
+#: fs-admin/fs-admin.php:1067
+msgid "Enable Area Above Branding"
+msgstr "Fórumnév feletti terület bekapcsolása"
+
+#: fs-admin/fs-admin.php:1075
+msgid "Enable Area Above Info Center"
+msgstr "Infóközpont feletti terület bekapcsolása"
+
+#: fs-admin/fs-admin.php:1083
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Navigáció feletti terület bekapcsolása"
+
+#: fs-admin/fs-admin.php:1091
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Gyorsválasz űrlap feletti rész bekapcsolása"
+
+#: fs-admin/fs-admin.php:1099
+msgid "Enable Area Below First Post"
+msgstr "Első hozzászólás alatti rész bekapcsolása"
+
+#: fs-admin/fs-admin.php:1106
+msgid "Below you can modify/add your own CSS"
+msgstr "Saját CSS módosítása/hozzáadása az alul lévő részen lehetséges"
+
+#: fs-admin/fs-admin.php:1107
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "FIGYELMEZTETÉS: amennyiben nem vagyunk tisztában, hogy mi fog történni, hagyjuk üresen!"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1114
+msgid "Save Options"
+msgstr "Beállítások mentése"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:5
+msgid "Add forum to"
+msgstr "Fórum hozzáadása ehhez a helyhez"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:14
+msgid "Description:"
+msgstr "Leírás:"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:30
+msgid "Save forum"
+msgstr "Fórum mentése"
+
+# @ mingleforum
+#: fs-admin/wpf-add-group.php:7
+msgid "Add category"
+msgstr "Kategória hozzáadása"
+
+# @ mingleforum
+#: fs-admin/wpf-add-group.php:21
+msgid "Save category"
+msgstr "Kategória mentése"
+
+# @ mingleforum
+#: fs-admin/wpf-add-usergroup.php:23
+#: .\fs-admin/wpf-add-usergroup.php:23
+msgid "Save user group"
+msgstr "Felhasználói csoport mentése"
+
+# @ mingleforum
+#: fs-admin/wpf-addusers.php:21
+#: .\fs-admin/wpf-addusers.php:21
+msgid "Select User group"
+msgstr "Felhasználói csoport kiválasztása"
+
+# @ mingleforum
+#: fs-admin/wpf-addusers.php:31
+#: .\fs-admin/wpf-addusers.php:31
+msgid "Add users"
+msgstr "Felhasználók hozzáadása"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:12
+#: .\fs-admin/wpf-edit-forum-group.php:12
+msgid "You must specify a group name"
+msgstr "Meg kell adni egy csoportnevet"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:24
+#: .\fs-admin/wpf-edit-forum-group.php:24
+msgid "Group updated successfully"
+msgstr "Csoport sikeresen módosítva"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:34
+#: .\fs-admin/wpf-edit-forum-group.php:34
+msgid "You must specify a forum name"
+msgstr "Egy fórum nevet meg kell adni"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:37
+#: .\fs-admin/wpf-edit-forum-group.php:37
+msgid "Forum updated successfully"
+msgstr "Fórum sikeresen frissítve"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:49
+#: .\fs-admin/wpf-edit-forum-group.php:49
+msgid "Edit category"
+msgstr "Kategória szerkesztése"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:63
+#: .\fs-admin/wpf-edit-forum-group.php:63
+msgid "User Groups:"
+msgstr "Felhasználói csoportok:"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:66
+#: .\fs-admin/wpf-edit-forum-group.php:66
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "A bejelölt felhasználói csoportoknak van hozzáférésük a fórumokhoz ebben a kategóriában:"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:98
+#: .\fs-admin/wpf-edit-forum-group.php:98
+msgid "There are no User Groups"
+msgstr "Nincs felhasználói csoport"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:105
+#: .\fs-admin/wpf-edit-forum-group.php:105
+msgid "Save group"
+msgstr "Csoport mentése"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:119
+#: .\fs-admin/wpf-edit-forum-group.php:119
+msgid "Edit forum"
+msgstr "Fórum szerkesztése"
+
+# @ mingleforum
+#: fs-admin/wpf-moderator.php:19
+#: .\fs-admin/wpf-moderator.php:19
+msgid "Select user"
+msgstr "Felhasználó kiválasztása"
+
+# @ mingleforum
+#: fs-admin/wpf-moderator.php:36
+#: .\fs-admin/wpf-moderator.php:36
+msgid "Add moderator"
+msgstr "Moderátor hozzáadása"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:11
+#: .\fs-admin/wpf-usergroup-edit.php:11
+msgid "You must specify a name for the User Group"
+msgstr "A felhasználói csoportnak meg kell adni a nevét"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:18
+#: .\fs-admin/wpf-usergroup-edit.php:18
+msgid "User Group updated successfully"
+msgstr "Felhasználói csoport sikeresen frissítve"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:25
+#: .\fs-admin/wpf-usergroup-edit.php:25
+msgid "Edit User Group"
+msgstr "Felhasználói csoport szerkesztése"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:39
+#: .\fs-admin/wpf-usergroup-edit.php:39
+msgid "Save User Group"
+msgstr "Felhasználói csoport mentése"
+

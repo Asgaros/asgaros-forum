@@ -1,0 +1,1582 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-15 12:15-0700\n"
+"PO-Revision-Date: 2011-04-15 16:04-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\\pms\n"
+"X-Poedit-SearchPath-2: .\\fs-admin\n"
+
+#: feed.php:24
+#: feed.php:25
+msgid "Forum Feed"
+msgstr "Foorumi uudisvoog"
+
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "Foorumi teema"
+
+#: feed.php:30
+#: wpf.class.php:1808
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Foorum"
+
+#: feed.php:30
+#: wpf.class.php:859
+msgid "Topic: "
+msgstr "Teema"
+
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "ANdmevood on välja lülitatud"
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "Ei ole sellist kasutajat"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "Sul ei ole hetkel tellimusi"
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "Muuda foorumi seadeid"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "Luban teistel näha minu profiili?"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "Sulle on meiliteade nende teemade kohta:"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:552
+msgid "Save options"
+msgstr "Salvesta seaded"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:615
+#: wpf.class.php:2071
+#: wpf.class.php:2097
+#: wpf.class.php:2115
+#: wpf.class.php:2137
+#: wpf.class.php:2146
+#: wpf.class.php:2204
+msgid "Cheating, are we?"
+msgstr "Viga, kas on?"
+
+#: wpf-insert.php:98
+#, fuzzy
+msgid "Security code does not match"
+msgstr "Turvakood ei sobi"
+
+#: wpf-insert.php:113
+#: wpf-insert.php:118
+#: wpf-insert.php:188
+#: wpf-insert.php:193
+#: wpf-insert.php:246
+#: wpf-insert.php:251
+msgid "An error occured"
+msgstr "Juhtus viga!"
+
+#: wpf-insert.php:114
+#: wpf-insert.php:189
+#: wpf-insert.php:247
+msgid "You must enter a subject"
+msgstr "Sa pead sisestama teema"
+
+#: wpf-insert.php:119
+#: wpf-insert.php:194
+#: wpf-insert.php:252
+msgid "You must enter a message"
+msgstr "Sa pead sisestama sõnumi"
+
+#: wpf-insert.php:138
+msgid "created the forum topic:"
+msgstr "alustas foorumi teema:"
+
+#: wpf-insert.php:205
+msgid "replied to the forum topic:"
+msgstr "vastas foorumi teemale:"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Tsitaat kasutajalt "
+
+#: wpf-post.php:10
+#: wpf.class.php:678
+#: wpf.class.php:687
+#: wpf.class.php:1156
+msgid "on"
+msgstr "-"
+
+#: wpf-post.php:20
+#: wpf.class.php:1281
+#: wpf.class.php:1854
+msgid "Post Reply"
+msgstr "Postita vastus"
+
+#: wpf-post.php:23
+#: wpf-post.php:76
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Teema:"
+
+#: wpf-post.php:24
+#: wpf.class.php:909
+msgid "Re:"
+msgstr "Re:"
+
+#: wpf-post.php:27
+#: wpf-post.php:80
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Sõnum:"
+
+#: wpf-post.php:40
+#: wpf-thread.php:30
+#, fuzzy
+msgid "Images:"
+msgstr "Pilt"
+
+#: wpf-post.php:51
+#: wpf-thread.php:41
+msgid "Submit"
+msgstr "Salvesta"
+
+#: wpf-post.php:73
+#: wpf.class.php:1278
+#: wpf.class.php:1857
+msgid "Edit Post"
+msgstr "Muuda postitust"
+
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "Salvesta postitus"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Alusta uut teemat"
+
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "Vabandust, Sul puudub õigus postitamiseks."
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:441
+msgid "Newbie"
+msgstr "Uustulnuk"
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:445
+msgid "Beginner"
+msgstr "Alustaja"
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:453
+msgid "Advanced"
+msgstr "Edasijõudnu"
+
+#: wpf.class.php:154
+#: fs-admin/fs-admin.php:461
+msgid "Pro"
+msgstr "Proff"
+
+#: wpf.class.php:172
+#: wpf.class.php:173
+msgid "Mingle Forum - Options"
+msgstr "Mingle Foorum - Valikud"
+
+#: wpf.class.php:173
+msgid "Options"
+msgstr "Valikud"
+
+#: wpf.class.php:174
+msgid "Ads"
+msgstr "Reklaamid"
+
+#: wpf.class.php:175
+msgid "Skins"
+msgstr "Kujundused"
+
+#: wpf.class.php:176
+msgid "Forum Structure - Categories & Forums"
+msgstr "Foorumi struktuur - Kategooriad & Foorumid"
+
+#: wpf.class.php:176
+msgid "Forum Structure"
+msgstr "Foorumi struktuur"
+
+#: wpf.class.php:177
+msgid "Moderators"
+msgstr "Moderaatorid"
+
+#: wpf.class.php:178
+msgid "User Groups"
+msgstr "Kasutajagrupid"
+
+#: wpf.class.php:179
+msgid "About"
+msgstr "Lisainfo"
+
+#: wpf.class.php:190
+#: wpf.class.php:191
+msgid "Forums Latest Activity"
+msgstr "Viimased tegevused"
+
+#: wpf.class.php:210
+#: wpf.class.php:230
+msgid "by:"
+msgstr "kasutajalt:"
+
+#: wpf.class.php:247
+msgid "Title to display in the sidebar:"
+msgstr "Tiitel, mida kuvame küljeveerus:"
+
+#: wpf.class.php:249
+msgid "How many items would you like to display?"
+msgstr "Kui palju postitusi soovid kuvada?"
+
+#: wpf.class.php:646
+msgid "Page loaded in:"
+msgstr "Lehekülg laeti üles:"
+
+#: wpf.class.php:646
+msgid "seconds."
+msgstr "sekundiga."
+
+#: wpf.class.php:649
+msgid "Mingle Forum "
+msgstr "Mingle Foorum "
+
+#: wpf.class.php:650
+msgid "Version:"
+msgstr "Versioon:"
+
+#: wpf.class.php:669
+#: wpf.class.php:2268
+msgid "Guest"
+msgstr "Külaline"
+
+#: wpf.class.php:678
+#: wpf.class.php:1155
+msgid "by"
+msgstr "kasutajalt"
+
+#: wpf.class.php:687
+msgid "Latest Post by"
+msgstr "Viimased postitused kasutajalt"
+
+#: wpf.class.php:710
+#: wpf.class.php:841
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Vabandust, Sul pole ligipääsu sellele foorumile."
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+msgid "Status"
+msgstr "Staatus"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Topic Title"
+msgstr "Teema pealkiri"
+
+#: wpf.class.php:722
+#: wpf.class.php:2358
+#: wpf.class.php:2546
+msgid "Started by"
+msgstr "Alustas"
+
+#: wpf.class.php:723
+#: wpf.class.php:2359
+msgid "Replies"
+msgstr "Vastuseid"
+
+#: wpf.class.php:724
+msgid "Views"
+msgstr "Vaatamisi"
+
+#: wpf.class.php:725
+#: wpf.class.php:1155
+#: wpf.class.php:2360
+msgid "Last post"
+msgstr "Viimane postitus"
+
+#: wpf.class.php:729
+msgid "Sticky Topics"
+msgstr "Tähtsaimad teemad"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+#: wpf.class.php:1642
+#: wpf.class.php:1659
+msgid "Move Topic"
+msgstr "Liiguta teemat"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+msgid "Delete Topic"
+msgstr "Kustuta teema"
+
+#: wpf.class.php:745
+#: wpf.class.php:774
+msgid "New posts since last visit"
+msgstr "Uued postitused viimasest külastusest"
+
+#: wpf.class.php:762
+msgid "Forum Topics"
+msgstr "Foorumi teemad"
+
+#: wpf.class.php:829
+msgid "Remove this topic from your email notifications?"
+msgstr "Kas eemaldada see teema sinu meiliteadetest?"
+
+#: wpf.class.php:831
+msgid "Add this topic to your email notifications?"
+msgstr "Kas lisada see teema sinu meiliteadetesse?"
+
+#: wpf.class.php:852
+msgid "TOPIC CLOSED"
+msgstr "TEEMA SULETUD"
+
+#: wpf.class.php:858
+msgid "Author"
+msgstr "Autor"
+
+#: wpf.class.php:874
+#: wpf.class.php:2412
+msgid "Posts:"
+msgstr "Postitused:"
+
+#: wpf.class.php:907
+msgid "Quick Reply"
+msgstr "Kiirvastus"
+
+#: wpf.class.php:916
+msgid "Submit Quick Reply"
+msgstr "Lisa kiirvastus"
+
+#: wpf.class.php:938
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Postitus"
+
+#: wpf.class.php:941
+msgid "on:"
+msgstr " postitatud:"
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: wpf.class.php:2284
+msgid "Quote"
+msgstr "Tsitaat"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:971
+msgid "Remove"
+msgstr "Eemalda"
+
+#: wpf.class.php:949
+#: wpf.class.php:958
+msgid "Edit"
+msgstr "Muuda"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Topics: "
+msgstr "Teemad:"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Posts: "
+msgstr "Postitused:"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "New posts"
+msgstr "Uued postitused"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "No new posts"
+msgstr "Uusi  postitusi pole"
+
+#: wpf.class.php:1042
+msgid "Mark All Read"
+msgstr "Märgi kõik loetuks"
+
+#: wpf.class.php:1153
+msgid "No topics yet"
+msgstr "Pole veel teemasid"
+
+#: wpf.class.php:1156
+msgid "in"
+msgstr " "
+
+#: wpf.class.php:1207
+msgid "Forums RSS"
+msgstr "Foorumi RSS"
+
+#: wpf.class.php:1218
+msgid "Are you sure you want to remove this?"
+msgstr "Oled kindel, et tahad selle kustutada?"
+
+#: wpf.class.php:1272
+#: wpf.class.php:1847
+msgid "Search Results"
+msgstr "Otsingu tulemused"
+
+#: wpf.class.php:1275
+msgid "Profile"
+msgstr "Profiil"
+
+#: wpf.class.php:1284
+#: wpf.class.php:1504
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+#: wpf.class.php:1860
+msgid "New Topic"
+msgstr "Uus teema"
+
+#: wpf.class.php:1351
+msgid "Moderators:"
+msgstr "Moderaatorid:"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Undo Sticky"
+msgstr "Pole enam kuum teema"
+
+#: wpf.class.php:1529
+#: wpf.class.php:1542
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Sticky"
+msgstr "Kuum teema"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1641
+#: wpf.class.php:1658
+msgid "Re-open"
+msgstr "Ava uuesti"
+
+#: wpf.class.php:1534
+#: wpf.class.php:1547
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Close"
+msgstr "Sulge"
+
+#: wpf.class.php:1554
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "Reply"
+msgstr "Vasta"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Unsubscribe"
+msgstr "Loobu tellimusest"
+
+#: wpf.class.php:1563
+#: wpf.class.php:1579
+msgid "Subscribe"
+msgstr "Telli"
+
+#: wpf.class.php:1566
+msgid "RSS feed"
+msgstr "RSS voog"
+
+#: wpf.class.php:1582
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "RSS-Feed"
+msgstr "RSS-voog"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My profile"
+msgstr "Minu profiil"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My Profile"
+msgstr "Minu profiil"
+
+#: wpf.class.php:1631
+#: wpf.class.php:1648
+msgid "Forum Home"
+msgstr "Foorumi avakülg"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:1925
+msgid "Log out"
+msgstr "Logi välja"
+
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:2455
+msgid "Search"
+msgstr "Otsi"
+
+#: wpf.class.php:1722
+msgid "You are logged in as:"
+msgstr "Oled sisse logitud:"
+
+#: wpf.class.php:1728
+msgid "Username: "
+msgstr "Kasutajanimi:"
+
+#: wpf.class.php:1729
+msgid "Password: "
+msgstr "Parool:"
+
+#: wpf.class.php:1731
+msgid "Remember Me"
+msgstr "Jäta meelde"
+
+#: wpf.class.php:1767
+msgid "Administrator"
+msgstr "Administraator"
+
+#: wpf.class.php:1771
+msgid "Moderator"
+msgstr "Moderaator"
+
+#: wpf.class.php:1841
+msgid "New Topics since last visit"
+msgstr "Uued teemad viimasest külastusest"
+
+#: wpf.class.php:1851
+msgid "Profile Info"
+msgstr "Profiili info"
+
+#: wpf.class.php:1915
+msgid "Edit Profile"
+msgstr "Muuda profiili"
+
+#: wpf.class.php:1919
+#: wpf.class.php:1931
+msgid "Welcome"
+msgstr "Tere!"
+
+#: wpf.class.php:1920
+msgid "Your last visit was:"
+msgstr "Sinu viimane külastus oli:"
+
+#: wpf.class.php:1922
+msgid "Show new topics since your last visit"
+msgstr "Näita viimaseid teemasid pärast viimast külastust"
+
+#: wpf.class.php:1923
+msgid "Edit your forum options"
+msgstr "Muuda foorumi seadeid"
+
+#: wpf.class.php:1930
+msgid "Welcome Guest, please login or"
+msgstr "Tere tulemast, Külaline, palun logi sisse või"
+
+#: wpf.class.php:1930
+msgid "register."
+msgstr "registreeru!"
+
+#: wpf.class.php:1935
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Tere tulemast, Külaline! Sellesse foorumisse postitamine eeldab"
+
+#: wpf.class.php:1935
+msgid "registration."
+msgstr "registreerumist."
+
+#: wpf.class.php:1943
+msgid "Show/Hide Header"
+msgstr "Näita/peida päis"
+
+#: wpf.class.php:1957
+msgid "Search forums"
+msgstr "Otsi foorumitest"
+
+#: wpf.class.php:1992
+#: wpf.class.php:2023
+msgid "Pages:"
+msgstr "Lehed:"
+
+#: wpf.class.php:2005
+#: wpf.class.php:2036
+msgid "First"
+msgstr "Esimene"
+
+#: wpf.class.php:2016
+#: wpf.class.php:2047
+msgid "Last"
+msgstr "Viimane"
+
+#: wpf.class.php:2134
+msgid "Post deleted"
+msgstr "Postitus kustutatud"
+
+#: wpf.class.php:2261
+#: wpf.class.php:2265
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "Vaata profiili"
+
+#: wpf.class.php:2279
+msgid "Bold"
+msgstr "Bold"
+
+#: wpf.class.php:2280
+msgid "Italic"
+msgstr "Italic"
+
+#: wpf.class.php:2281
+msgid "Underline"
+msgstr "Jooni alla"
+
+#: wpf.class.php:2282
+msgid "Strikethrough"
+msgstr "Kriipsuta läbi"
+
+#: wpf.class.php:2283
+msgid "Code"
+msgstr "Lisa kood"
+
+#: wpf.class.php:2285
+msgid "List"
+msgstr "List"
+
+#: wpf.class.php:2286
+msgid "List item"
+msgstr "List item"
+
+#: wpf.class.php:2287
+msgid "Link"
+msgstr "Link"
+
+#: wpf.class.php:2288
+msgid "Image"
+msgstr "Pilt"
+
+#: wpf.class.php:2289
+msgid "Email"
+msgstr "Email"
+
+#: wpf.class.php:2290
+msgid "Add Hex Color"
+msgstr "Lisa värv"
+
+#: wpf.class.php:2291
+msgid "Embed YouTube Video"
+msgstr "YouTube Video"
+
+#: wpf.class.php:2292
+msgid "Embed Google Map"
+msgstr "Sisesta Google Map"
+
+#: wpf.class.php:2298
+msgid "Smile"
+msgstr "Naeratus"
+
+#: wpf.class.php:2299
+msgid "Big Grin"
+msgstr "Suu kõrvuni"
+
+#: wpf.class.php:2300
+msgid "Sad"
+msgstr "Kurb"
+
+#: wpf.class.php:2301
+msgid "Neutral"
+msgstr "Neutraalne"
+
+#: wpf.class.php:2302
+msgid "Razz"
+msgstr "Näitan keelt"
+
+#: wpf.class.php:2303
+msgid "Mad"
+msgstr "Vihane"
+
+#: wpf.class.php:2304
+msgid "Confused"
+msgstr "Sassis"
+
+#: wpf.class.php:2305
+msgid "Eek!"
+msgstr "Mida värki?"
+
+#: wpf.class.php:2306
+msgid "Wink"
+msgstr "Silmapilgutus"
+
+#: wpf.class.php:2307
+msgid "Surprised"
+msgstr "Üllatunud"
+
+#: wpf.class.php:2308
+msgid "Cool"
+msgstr "Eriti kõva mees"
+
+#: wpf.class.php:2320
+msgid "Info Center"
+msgstr "Infokeskus"
+
+#: wpf.class.php:2327
+msgid "Posts in"
+msgstr "postitust"
+
+#: wpf.class.php:2327
+msgid "Topics Made by"
+msgstr "teemal on teinud"
+
+#: wpf.class.php:2327
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "kasutajat."
+
+#: wpf.class.php:2327
+msgid "Latest Member:"
+msgstr "Viimane kasutaja:"
+
+#: wpf.class.php:2353
+msgid "New topics since your last visit"
+msgstr "Uued teemad pärast sinu viimast külastust"
+
+#: wpf.class.php:2397
+msgid "Summary"
+msgstr "Ülevaade"
+
+#: wpf.class.php:2403
+#: wpf.class.php:2689
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "Nimi:"
+
+#: wpf.class.php:2408
+msgid "Registered:"
+msgstr "Registreeritud:"
+
+#: wpf.class.php:2416
+msgid "Position:"
+msgstr "Positsioon:"
+
+#: wpf.class.php:2419
+msgid "Website:"
+msgstr "Veebikülg:"
+
+#: wpf.class.php:2423
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2427
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2430
+msgid "Jabber/google Talk:"
+msgstr "Jabber/google Talk:"
+
+#: wpf.class.php:2434
+msgid "Biographical Info:"
+msgstr "Lisainfo:"
+
+#: wpf.class.php:2459
+msgid "Search for:"
+msgstr "Mida otsid?"
+
+#: wpf.class.php:2463
+msgid "By user:"
+msgstr "Milliselt kasutajalt?"
+
+#: wpf.class.php:2468
+msgid "Message Age:"
+msgstr "Sõnumi vanus"
+
+#: wpf.class.php:2469
+msgid "Between"
+msgstr "Vahemikus"
+
+#: wpf.class.php:2469
+msgid "and"
+msgstr "kuni"
+
+#: wpf.class.php:2469
+msgid "days"
+msgstr "päeva."
+
+#: wpf.class.php:2475
+msgid "Click to choose Forum(s) to  search"
+msgstr "Klikka ja vali foorum(id), millest otsida!"
+
+#: wpf.class.php:2497
+msgid "Check all"
+msgstr "Valik kõik"
+
+#: wpf.class.php:2502
+msgid "Start Search"
+msgstr "Otsi"
+
+#: wpf.class.php:2544
+msgid "Subject"
+msgstr "Teema"
+
+#: wpf.class.php:2545
+msgid "Relevance"
+msgstr "Sobivus"
+
+#: wpf.class.php:2547
+msgid "Posted"
+msgstr "Postitatud"
+
+#: wpf.class.php:2613
+msgid "Closed topic"
+msgstr "Suletud teema"
+
+#: wpf.class.php:2616
+msgid "Normal topic"
+msgstr "Tavaline teema"
+
+#: wpf.class.php:2619
+msgid "Hot topic"
+msgstr "Kuum teema"
+
+#: wpf.class.php:2622
+msgid "Very Hot topic"
+msgstr "Väga kuum teema"
+
+#: wpf.class.php:2654
+msgid "Security Code:"
+msgstr "Turvakood:"
+
+#: wpf.class.php:2673
+msgid "Enter Security Code: (required)"
+msgstr "Sisesta turvakood (nõutud)"
+
+#: wpf.class.php:2687
+msgid "New post in forum:"
+msgstr "Uus postitus foorumis:"
+
+#: wpf.class.php:2688
+msgid "DETAILS:"
+msgstr "Detailid:"
+
+#: wpf.class.php:2691
+msgid "Date:"
+msgstr "Kuupäev:"
+
+#: wpf.class.php:2692
+msgid "Reply Content:"
+msgstr "Vastuse sisu:"
+
+#: wpf.class.php:2693
+msgid "View Topic Here:"
+msgstr "Vaata teemat siit:"
+
+#: wpf.class.php:2742
+#: wpf.class.php:2752
+msgid "Inbox"
+msgstr "Kirjakast"
+
+#: wpf.class.php:2768
+#: wpf.class.php:2781
+msgid "Send Message"
+msgstr "Saada sõnum"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Kategooria"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Teema"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "Pead märkima kasutajagrupi nime."
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:692
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "Valisid nime, mis on juba kasutusel. Vali uus!"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "Kasutajagrupp edukalt lisatud"
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "Sa pole lisamiseks valinud ühtki kasutajat:"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "Pead valima kasutajagrupi"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "Viga"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "Pole sellist kasutajat:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "Hoiatus"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "Kasutaja"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "on juba selles grupis"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "lisatud edukalt"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "Vead:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "Hoiatused:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "Kasutajaid lisatud:"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "Kasutajagrupp/grupid kustutatud."
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "Kasutaja kustutatud."
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Foorum >> Kasutajagruppide haldus"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:757
+#: fs-admin/fs-admin.php:957
+msgid "add new"
+msgstr "Lisa uus"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:811
+msgid "Delete"
+msgstr "Kustuta"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "Lisa liikmeid"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "Selles grupis pole liikmeid."
+
+#: fs-admin/fs-admin.php:222
+msgid "Skin successfully activated."
+msgstr "Kujundus aktiveeritud."
+
+#: fs-admin/fs-admin.php:228
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingle Foorum >> Kujundusseaded"
+
+#: fs-admin/fs-admin.php:229
+msgid "Get More Skins"
+msgstr "Rohkem kujundusi"
+
+#: fs-admin/fs-admin.php:230
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "OLULINE: Versioonist 1.0.03 on kujunduste kausta leiad /wp-content/mingle-forum-skins/"
+
+#: fs-admin/fs-admin.php:230
+msgid "Why did you change it?"
+msgstr "Miks seda muudetud on?"
+
+#: fs-admin/fs-admin.php:233
+msgid "Screenshot"
+msgstr "Ekraanipilt"
+
+#: fs-admin/fs-admin.php:234
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "Nimi"
+
+#: fs-admin/fs-admin.php:235
+msgid "Version"
+msgstr "Versioon"
+
+#: fs-admin/fs-admin.php:236
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "Kirjeldus"
+
+#: fs-admin/fs-admin.php:237
+msgid "Action"
+msgstr "Tegevus"
+
+#: fs-admin/fs-admin.php:251
+#: fs-admin/fs-admin.php:266
+msgid "In Use"
+msgstr "Kasutuses"
+
+#: fs-admin/fs-admin.php:253
+#: fs-admin/fs-admin.php:268
+msgid "Activate"
+msgstr "Aktiveeri"
+
+#: fs-admin/fs-admin.php:296
+msgid "About Mingle Forum"
+msgstr "Mingle Foorumist"
+
+#: fs-admin/fs-admin.php:299
+msgid "Current Version: "
+msgstr "Praegune versioon:"
+
+#: fs-admin/fs-admin.php:303
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Mingle Foorumil on lihtne missioon: FOORUM OLGU LIHTNE! Foorum baseerub WP Forum pluginal ning on sellest VÄGA PALJU edasi arendatud. Praegu toetab see täielikult Blair Williamsi tehtud Mingle pluginat. Tahan suure tänu öelda ka Eric Hambyle oma töö eest foorumi koodi kirjutamisel."
+
+#: fs-admin/fs-admin.php:305
+msgid "Author: "
+msgstr "Autor: "
+
+#: fs-admin/fs-admin.php:306
+msgid "Plugin Page:"
+msgstr "Plugina lehekülg:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Support Forum:"
+msgstr "Abifoorum:"
+
+#: fs-admin/fs-admin.php:308
+msgid "Mingle Forum Skins:"
+msgstr "Kujundused:"
+
+#: fs-admin/fs-admin.php:355
+msgid "Options successfully saved."
+msgstr "Seaded edukalt mudetud."
+
+#: fs-admin/fs-admin.php:360
+msgid "Mingle Forum"
+msgstr "Mingle Foorum"
+
+#: fs-admin/fs-admin.php:364
+msgid "Statistic"
+msgstr "Statistika"
+
+#: fs-admin/fs-admin.php:365
+msgid "Value"
+msgstr "Väärtus"
+
+#: fs-admin/fs-admin.php:369
+msgid "Number of posts:"
+msgstr "Postituste arv:"
+
+#: fs-admin/fs-admin.php:373
+msgid "Number of threads:"
+msgstr "Teemade arv:"
+
+#: fs-admin/fs-admin.php:377
+msgid "Number of users:"
+msgstr "Kasutajate arv:"
+
+#: fs-admin/fs-admin.php:381
+msgid "Total database size:"
+msgstr "Andmebaasi maht:"
+
+#: fs-admin/fs-admin.php:385
+msgid "Database server:"
+msgstr "Andmebaasi server:"
+
+#: fs-admin/fs-admin.php:389
+msgid "Mingle Forum version:"
+msgstr "Mingle Foorumi versioon:"
+
+#: fs-admin/fs-admin.php:394
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Foorum >> Põhiseaded"
+
+#: fs-admin/fs-admin.php:399
+msgid "default "
+msgstr "vaikimisi"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Name"
+msgstr "Nimi"
+
+#: fs-admin/fs-admin.php:404
+msgid "Option Input"
+msgstr "Sisend"
+
+#: fs-admin/fs-admin.php:409
+msgid "Posts per page:"
+msgstr "Postitusi lehel:"
+
+#: fs-admin/fs-admin.php:413
+msgid "Threads per page:"
+msgstr "Teemasid lehel:"
+
+#: fs-admin/fs-admin.php:419
+msgid "Number of posts for Hot Topic:"
+msgstr "Minimaalne postituste arv, et teema oleks Kuum:"
+
+#: fs-admin/fs-admin.php:423
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Minimaalne postituste arv, et teema oleks Väga Kuum:"
+
+#: fs-admin/fs-admin.php:427
+msgid "Username Display:"
+msgstr "Kasutajanime näitamine:"
+
+#: fs-admin/fs-admin.php:440
+msgid "New User's Title:"
+msgstr "Uue kasutaja tiitel:"
+
+#: fs-admin/fs-admin.php:444
+msgid "User Level 1 Title:"
+msgstr "1. taseme kasutaja tiitel:"
+
+#: fs-admin/fs-admin.php:448
+msgid "User Level 1 Count:"
+msgstr "1. taseme jaoks vajalik postituste hulk"
+
+#: fs-admin/fs-admin.php:449
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:452
+msgid "User Level 2 Title:"
+msgstr "2. taseme kasutaja tiitel:"
+
+#: fs-admin/fs-admin.php:456
+msgid "User Level 2 Count:"
+msgstr "2. taseme jaoks vajalik postituste hulk"
+
+#: fs-admin/fs-admin.php:457
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:460
+msgid "User Level 3 Title:"
+msgstr "3. taseme kasutaja tiitel:"
+
+#: fs-admin/fs-admin.php:464
+msgid "User Level 3 Count:"
+msgstr "3. taseme jaoks vajalik postituste hulk"
+
+#: fs-admin/fs-admin.php:465
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:468
+msgid "Notify Admin on new posts:"
+msgstr "Saada Haldurile teade uute postituste korral:"
+
+#: fs-admin/fs-admin.php:472
+#: fs-admin/fs-admin.php:495
+#: fs-admin/fs-admin.php:519
+msgid "Off"
+msgstr "Väljas"
+
+#: fs-admin/fs-admin.php:475
+msgid "Show Forum Login Form:"
+msgstr "Näita foorumi sisselogimisvormi:"
+
+#: fs-admin/fs-admin.php:479
+#: fs-admin/fs-admin.php:487
+#: fs-admin/fs-admin.php:503
+#: fs-admin/fs-admin.php:511
+#: fs-admin/fs-admin.php:527
+msgid "On"
+msgstr "Sees"
+
+#: fs-admin/fs-admin.php:483
+msgid "Show Avatars in the forum:"
+msgstr "Näita foorumis avatare:"
+
+#: fs-admin/fs-admin.php:491
+msgid "Allow Images to be uploaded:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:499
+msgid "Show users Bio at the bottom of posts:"
+msgstr "Näita kasutajate lisainfot postituse lõpus:"
+
+#: fs-admin/fs-admin.php:507
+msgid "Use Forum RSS:"
+msgstr "Kasuta foorumis RSS-voogu:"
+
+#: fs-admin/fs-admin.php:515
+msgid "Use SEO friendly URLs:"
+msgstr "Kasuta SEO-sõbralikke URL-e:"
+
+#: fs-admin/fs-admin.php:515
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "TÄHTIS: Lülita see välja, kui saidi püsiviited on vaikimisi seadistustega"
+
+#: fs-admin/fs-admin.php:523
+msgid "Registration required to post:"
+msgstr "Postitamiseks on vajalik registreerimine:"
+
+#: fs-admin/fs-admin.php:532
+msgid "Installed version:"
+msgstr "Installeeritud versioon:"
+
+#: fs-admin/fs-admin.php:536
+msgid "GD Library is not installed"
+msgstr "GD Library ei ole installeeritud"
+
+#: fs-admin/fs-admin.php:539
+msgid "Use Captcha for unregistered users:"
+msgstr "Kasuta registreerimata kasutajate jaoks turvatesti (captcha):"
+
+#: fs-admin/fs-admin.php:543
+msgid "Requires "
+msgstr "Vajalik "
+
+#: fs-admin/fs-admin.php:543
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Kui oled märkinud, et \"Postitamiseks on vajalik registreerimine\", siis jäta see märkimata."
+
+#: fs-admin/fs-admin.php:547
+msgid "Date format:"
+msgstr "Kuupäevaformaat:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Default date:"
+msgstr "Vaikimisi kuupäev:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Check "
+msgstr "Vaata lisaks "
+
+#: fs-admin/fs-admin.php:547
+msgid "for date formatting."
+msgstr "kuupäeva seadistamiseks."
+
+#: fs-admin/fs-admin.php:663
+msgid "Groups deleted:"
+msgstr "Gruppe kustutatud:"
+
+#: fs-admin/fs-admin.php:664
+msgid "Forums deleted:"
+msgstr "Foorumeid kustutatud:"
+
+#: fs-admin/fs-admin.php:665
+msgid "Threads deleted:"
+msgstr "Teemasid kustutatud:"
+
+#: fs-admin/fs-admin.php:666
+msgid "Posts deleted:"
+msgstr "Postitusi kustutatud:"
+
+#: fs-admin/fs-admin.php:690
+#: fs-admin/fs-admin.php:714
+msgid "You must enter a name"
+msgstr "Sa pead sisestama nime"
+
+#: fs-admin/fs-admin.php:699
+msgid "Category added successfully"
+msgstr "Kategooria edukalt lisatud"
+
+#: fs-admin/fs-admin.php:711
+msgid "You must select a category"
+msgstr "Sa pead valima kategooria"
+
+#: fs-admin/fs-admin.php:717
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Oled valinud foorumi nime, mis juba on olemas, palun muuda nime."
+
+#: fs-admin/fs-admin.php:724
+msgid "Forum added successfully"
+msgstr "Foorum edukalt lisatud."
+
+#: fs-admin/fs-admin.php:751
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Foorum >> Kategooriad ja foorumid"
+
+#: fs-admin/fs-admin.php:773
+#: fs-admin/fs-admin.php:803
+msgid "Modify"
+msgstr "Muuda"
+
+#: fs-admin/fs-admin.php:812
+msgid "Add forum"
+msgstr "Lisa foorum"
+
+#: fs-admin/fs-admin.php:837
+msgid "Group Moved Down"
+msgstr "Grupp liigutatud alla"
+
+#: fs-admin/fs-admin.php:847
+msgid "Forum Moved Down"
+msgstr "Foorum liigutatud alla"
+
+#: fs-admin/fs-admin.php:857
+msgid "Group Moved Up"
+msgstr "Grupp liigutatud üles"
+
+#: fs-admin/fs-admin.php:867
+msgid "Forum Moved Up"
+msgstr "Foorum liigutatud üles"
+
+#: fs-admin/fs-admin.php:904
+#: fs-admin/fs-admin.php:911
+msgid "Moderator successfully removed."
+msgstr "Moderaator kustutatud."
+
+#: fs-admin/fs-admin.php:906
+msgid "Moderator successfully saved."
+msgstr "Moderaator edukalt salvestatud."
+
+#: fs-admin/fs-admin.php:913
+msgid "Moderator NOT removed."
+msgstr "Moderaator EI OLE kustutatud."
+
+#: fs-admin/fs-admin.php:927
+msgid "You must select a user"
+msgstr "Pead valima kasutaja."
+
+#: fs-admin/fs-admin.php:931
+msgid "Global Moderator added successfully"
+msgstr "Üldmoderaator edukalt lisatud."
+
+#: fs-admin/fs-admin.php:935
+msgid "Moderator added successfully"
+msgstr "Moderaator edukalt lisatud."
+
+#: fs-admin/fs-admin.php:957
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Foorum >> Seadista moderaatoreid"
+
+#: fs-admin/fs-admin.php:966
+msgid "Currently moderating"
+msgstr "Hetkel modereerimas"
+
+#: fs-admin/fs-admin.php:970
+msgid "Update"
+msgstr "Uuenda"
+
+#: fs-admin/fs-admin.php:980
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Üldmoderaator: (Kasutaja saab modereerida kõiki foorumeid)"
+
+#: fs-admin/fs-admin.php:999
+msgid "No moderators yet"
+msgstr "Hetkel ei ole veel ühtegi moderaatorit"
+
+#: fs-admin/fs-admin.php:1024
+msgid "Ads saved successfully"
+msgstr "Reklaamid salvestati edukalt"
+
+#: fs-admin/fs-admin.php:1029
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingle Foorum Reklaamid >> valikud"
+
+#: fs-admin/fs-admin.php:1031
+msgid "HTML is allowed in all ad areas below"
+msgstr "Kõigis alljärgnevates lahtrites saab kasutada HTML-koodi."
+
+#: fs-admin/fs-admin.php:1035
+msgid "Ads Option"
+msgstr "Reklaami seaded"
+
+#: fs-admin/fs-admin.php:1042
+msgid "Enable Area Above Forum"
+msgstr "Foorumi alguses"
+
+#: fs-admin/fs-admin.php:1044
+#: fs-admin/fs-admin.php:1052
+#: fs-admin/fs-admin.php:1060
+#: fs-admin/fs-admin.php:1068
+#: fs-admin/fs-admin.php:1076
+#: fs-admin/fs-admin.php:1084
+#: fs-admin/fs-admin.php:1092
+msgid "css-value:"
+msgstr "css-väärtus:"
+
+#: fs-admin/fs-admin.php:1050
+msgid "Enable Area Below Forum"
+msgstr "Foorumi allosas"
+
+#: fs-admin/fs-admin.php:1058
+msgid "Enable Area Above Branding"
+msgstr "Brändingust üleval"
+
+#: fs-admin/fs-admin.php:1066
+msgid "Enable Area Above Info Center"
+msgstr "Infokeskusest üleval"
+
+#: fs-admin/fs-admin.php:1074
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Navigatsiooniteest (breadcrumbs) üleval"
+
+#: fs-admin/fs-admin.php:1082
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Kiirvastuse kohal"
+
+#: fs-admin/fs-admin.php:1090
+msgid "Enable Area Below First Post"
+msgstr "Esimese postituse järel"
+
+#: fs-admin/fs-admin.php:1097
+msgid "Below you can modify/add your own CSS"
+msgstr "Allpool saad muuta/lisada oma CSS-koodi"
+
+#: fs-admin/fs-admin.php:1098
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "MÄRKUS: Kui sa ei tea, mille jaoks see on, siis jäta see tühjaks"
+
+#: fs-admin/fs-admin.php:1105
+msgid "Save Options"
+msgstr "Salvesta seaded"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "Lisa foorum kategooriasse"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "Kirjeldus:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "Salvesta foorum"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "Lisa kategooria"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "Salvesta kategooria"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "Salvesta kasutajagrupp"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "Vali kasutajagrupp"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "Lisa kasutajaid"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "Pead märkima grupi nime"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "Grupp edukalt uuendatud"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "Pead märkima foorumi nime"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "Foorum edukalt uuendatud"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "Muuda kategooriat"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "Kasutajagrupid:"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "Valitud kasutajagruppide liikmetel on ligipääs foorumitele selles kategoorias:"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "Kasutajagrupid puuduvad"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "Salvesta grupp"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "Muuda foorumit"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "Vali kasutaja"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "Lisa moderaator"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "Pead märkima nime kasutajagrupile"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "Kasutajagrupp edukalt uuendatud"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "Muuda kasutajagruppi"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "Salvesta kasutajagrupp"
+
+#~ msgid "General Options"
+#~ msgstr "Põhiseaded"
+
+#~ msgid "Categories and forums"
+#~ msgstr "Kategooriad ja foorumid"

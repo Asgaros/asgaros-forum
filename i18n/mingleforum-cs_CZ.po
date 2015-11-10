@@ -1,0 +1,1718 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-21 21:58-0700\n"
+"PO-Revision-Date: 2011-04-15 12:14-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: /wp-content/plugins/mingle-forum/i18n\n"
+"Plural-Forms: Plural-Forms: nplurals=3; \\ plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\\pms\n"
+"X-Poedit-SearchPath-2: .\\fs-admin\n"
+
+#: feed.php:18
+#: feed.php:19
+msgid "Forum Feed"
+msgstr "Zdroj fóra"
+
+#: feed.php:23
+msgid "Forum Topic:"
+msgstr "Téma:"
+
+#: feed.php:24
+#: wpf.class.php:1806
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Fórum"
+
+#: feed.php:24
+#: wpf.class.php:857
+msgid "Topic: "
+msgstr "Téma:"
+
+#: feed.php:65
+msgid "Feeds are disabled"
+msgstr "RSS je vypnuto"
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "Neznámý uživatel"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "You have no subscriptions at this time"
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "Upravit nastavení"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "Zobrazit můj profil ostatním?"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "Budete dostávat upozornění z těchto témat:"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:543
+msgid "Save options"
+msgstr "Uložit nastavení"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:614
+#: wpf.class.php:2069
+#: wpf.class.php:2095
+#: wpf.class.php:2113
+#: wpf.class.php:2135
+#: wpf.class.php:2144
+#: wpf.class.php:2202
+msgid "Cheating, are we?"
+msgstr "Promluvme si."
+
+#: wpf-insert.php:28
+msgid "Security code does not mach"
+msgstr "Bezpečnostní kód není správný"
+
+#: wpf-insert.php:43
+#: wpf-insert.php:48
+#: wpf-insert.php:106
+#: wpf-insert.php:111
+#: wpf-insert.php:152
+#: wpf-insert.php:157
+msgid "An error occured"
+msgstr "Došlo k chybě"
+
+#: wpf-insert.php:44
+#: wpf-insert.php:107
+#: wpf-insert.php:153
+msgid "You must enter a subject"
+msgstr "Musíte zadat předmět"
+
+#: wpf-insert.php:49
+#: wpf-insert.php:112
+#: wpf-insert.php:158
+msgid "You must enter a message"
+msgstr "Musíte zadat zprávu"
+
+#: wpf-insert.php:68
+msgid "created the forum topic:"
+msgstr "vytvořeno téma fóra:"
+
+#: wpf-insert.php:123
+msgid "replied to the forum topic:"
+msgstr "odpověděl na téma fóra:"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Citováno z"
+
+#: wpf-post.php:10
+#: wpf.class.php:677
+#: wpf.class.php:685
+#: wpf.class.php:1154
+msgid "on"
+msgstr "dne"
+
+#: wpf-post.php:20
+#: wpf.class.php:1279
+#: wpf.class.php:1852
+msgid "Post Reply"
+msgstr "Odpovědět"
+
+#: wpf-post.php:23
+#: wpf-post.php:63
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Předmět:"
+
+#: wpf-post.php:24
+#: wpf.class.php:907
+msgid "Re:"
+msgstr "Re:"
+
+#: wpf-post.php:27
+#: wpf-post.php:67
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Zpráva:"
+
+#: wpf-post.php:38
+#: wpf-thread.php:28
+msgid "Submit"
+msgstr "Odeslat"
+
+#: wpf-post.php:60
+#: wpf.class.php:1276
+#: wpf.class.php:1855
+msgid "Edit Post"
+msgstr "Uprav příspěvek"
+
+#: wpf-post.php:76
+msgid "Save Post"
+msgstr "Ulož příspěvek"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Přidat nové téma"
+
+#: wpf-thread.php:36
+msgid "Sorry. you don't have permission to post."
+msgstr "Nemáte oprávnění přidat příspěvek."
+
+#: wpf.class.php:150
+#: fs-admin/fs-admin.php:440
+msgid "Newbie"
+msgstr "Nováček"
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:444
+msgid "Beginner"
+msgstr "Začátečník"
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:452
+msgid "Advanced"
+msgstr "Zkušený uživatel"
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:460
+msgid "Pro"
+msgstr "Pro"
+
+#: wpf.class.php:171
+#: wpf.class.php:172
+msgid "Mingle Forum - Options"
+msgstr "Mingle Forum - Nastavení "
+
+#: wpf.class.php:172
+msgid "Options"
+msgstr "Nastavení"
+
+#: wpf.class.php:173
+msgid "Ads"
+msgstr "Ads"
+
+#: wpf.class.php:174
+msgid "Skins"
+msgstr "Vzhled"
+
+#: wpf.class.php:175
+msgid "Forum Structure - Categories & Forums"
+msgstr "Mingle Forum >> Kategorie a Fora"
+
+#: wpf.class.php:175
+msgid "Forum Structure"
+msgstr "Struktura fora"
+
+#: wpf.class.php:176
+msgid "Moderators"
+msgstr "Moderátoři"
+
+#: wpf.class.php:177
+msgid "User Groups"
+msgstr "Skupiny uživatelů"
+
+#: wpf.class.php:178
+msgid "About"
+msgstr "O fóru"
+
+#: wpf.class.php:189
+#: wpf.class.php:190
+msgid "Forums Latest Activity"
+msgstr "Poslední aktivity na fóru"
+
+#: wpf.class.php:209
+#: wpf.class.php:229
+msgid "by:"
+msgstr "od:"
+
+#: wpf.class.php:246
+msgid "Title to display in the sidebar:"
+msgstr "Název se zobrazí v postranním panelu:"
+
+#: wpf.class.php:248
+msgid "How many items would you like to display?"
+msgstr "Kolik položek chcete zobrazit?"
+
+#: wpf.class.php:645
+msgid "Page loaded in:"
+msgstr "Stránka načtena za"
+
+#: wpf.class.php:645
+msgid "seconds."
+msgstr "vteřin."
+
+#: wpf.class.php:648
+msgid "Mingle Forum "
+msgstr "Mingle Fórum "
+
+#: wpf.class.php:649
+msgid "Version:"
+msgstr "Verze"
+
+#: wpf.class.php:668
+#: wpf.class.php:2266
+msgid "Guest"
+msgstr "Host"
+
+#: wpf.class.php:677
+#: wpf.class.php:1153
+msgid "by"
+msgstr "od "
+
+#: wpf.class.php:685
+msgid "Latest Post by"
+msgstr "Poslední příspěvek od"
+
+#: wpf.class.php:708
+#: wpf.class.php:839
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Je nám líto, ale nemáte přístup k tomuto fóru"
+
+#: wpf.class.php:718
+#: wpf.class.php:2354
+msgid "Status"
+msgstr "Stav"
+
+#: wpf.class.php:719
+#: wpf.class.php:2355
+msgid "Topic Title"
+msgstr "Název příspěvku"
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+#: wpf.class.php:2544
+msgid "Started by"
+msgstr "Započato"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Replies"
+msgstr "Odpovědí"
+
+#: wpf.class.php:722
+msgid "Views"
+msgstr "Zhlédnutí"
+
+#: wpf.class.php:723
+#: wpf.class.php:1153
+#: wpf.class.php:2358
+msgid "Last post"
+msgstr "Poslední příspěvek"
+
+#: wpf.class.php:727
+msgid "Sticky Topics"
+msgstr "Důležitá témata"
+
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Move Topic"
+msgstr "Přesuň téma"
+
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+msgid "Delete Topic"
+msgstr "Vymaž téma"
+
+#: wpf.class.php:743
+#: wpf.class.php:772
+msgid "New posts since last visit"
+msgstr "Nové příspěvky od poslední návštěvy"
+
+#: wpf.class.php:760
+msgid "Forum Topics"
+msgstr "Témata fóra"
+
+#: wpf.class.php:827
+msgid "Remove this topic from your email notifications?"
+msgstr "Odstranit toto téma z vašeho e-mailového upozornění?"
+
+#: wpf.class.php:829
+msgid "Add this topic to your email notifications?"
+msgstr "Přidat toto téma na váše e-maiové upozornění?"
+
+#: wpf.class.php:850
+msgid "TOPIC CLOSED"
+msgstr "Téma bylo uzavřeno"
+
+#: wpf.class.php:856
+msgid "Author"
+msgstr "Autor"
+
+#: wpf.class.php:872
+#: wpf.class.php:2410
+msgid "Posts:"
+msgstr "Příspěvků:"
+
+#: wpf.class.php:905
+msgid "Quick Reply"
+msgstr "Rychlá odpověď:"
+
+#: wpf.class.php:914
+msgid "Submit Quick Reply"
+msgstr "Odeslat:"
+
+#: wpf.class.php:936
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Příspěvek"
+
+#: wpf.class.php:939
+msgid "on:"
+msgstr "dne:"
+
+#: wpf.class.php:943
+#: wpf.class.php:952
+#: wpf.class.php:2282
+msgid "Quote"
+msgstr "Citovat"
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:961
+msgid "Remove"
+msgstr "Odstranit"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+msgid "Edit"
+msgstr "Upravit"
+
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Topics: "
+msgstr "Témata:"
+
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Posts: "
+msgstr "Příspěvky:"
+
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "New posts"
+msgstr "Nové příspěvky"
+
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "No new posts"
+msgstr "Žádné nové téma"
+
+#: wpf.class.php:1040
+msgid "Mark All Read"
+msgstr "Označ vše přečtené"
+
+#: wpf.class.php:1151
+msgid "No topics yet"
+msgstr "Zatím žádná témata"
+
+#: wpf.class.php:1154
+msgid "in"
+msgstr "v"
+
+#: wpf.class.php:1205
+msgid "Forums RSS"
+msgstr "RSS fóra"
+
+#: wpf.class.php:1216
+msgid "Are you sure you want to remove this?"
+msgstr "Jste si jistý, že to chcete opravdu odstranit?"
+
+#: wpf.class.php:1270
+#: wpf.class.php:1845
+msgid "Search Results"
+msgstr "Výsledky hledání"
+
+#: wpf.class.php:1273
+msgid "Profile"
+msgstr "Profil"
+
+#: wpf.class.php:1282
+#: wpf.class.php:1502
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:1858
+msgid "New Topic"
+msgstr "Nové téma"
+
+#: wpf.class.php:1349
+msgid "Moderators:"
+msgstr "Moderátoři:"
+
+#: wpf.class.php:1525
+#: wpf.class.php:1538
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "Undo Sticky"
+msgstr "Odebrat důležité"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+msgid "Sticky"
+msgstr "Důležité"
+
+#: wpf.class.php:1530
+#: wpf.class.php:1543
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Re-open"
+msgstr "Znovu otevřít"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Close"
+msgstr "Zavřít"
+
+#: wpf.class.php:1552
+#: wpf.class.php:1633
+#: wpf.class.php:1650
+msgid "Reply"
+msgstr "Odpověď"
+
+#: wpf.class.php:1559
+#: wpf.class.php:1575
+msgid "Unsubscribe"
+msgstr "Zrušit odebírání"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Subscribe"
+msgstr "Odebírat"
+
+#: wpf.class.php:1564
+msgid "RSS feed"
+msgstr "RSS kanál"
+
+#: wpf.class.php:1580
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "RSS-Feed"
+msgstr "RSS kanál"
+
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My profile"
+msgstr "Můj profil"
+
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My Profile"
+msgstr "Můj profil"
+
+#: wpf.class.php:1629
+#: wpf.class.php:1646
+msgid "Forum Home"
+msgstr "Přehled fóra"
+
+#: wpf.class.php:1630
+#: wpf.class.php:1647
+#: wpf.class.php:1923
+msgid "Log out"
+msgstr "Odhlásit"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:2453
+msgid "Search"
+msgstr "Hledat"
+
+#: wpf.class.php:1720
+msgid "You are logged in as:"
+msgstr "Jste přihlášen jako:"
+
+#: wpf.class.php:1726
+msgid "Username: "
+msgstr "Uživatel: "
+
+#: wpf.class.php:1727
+msgid "Password: "
+msgstr "Heslo: "
+
+#: wpf.class.php:1729
+msgid "Remember Me"
+msgstr "Pamatuj si mne"
+
+#: wpf.class.php:1765
+msgid "Administrator"
+msgstr "Administrátor"
+
+#: wpf.class.php:1769
+msgid "Moderator"
+msgstr "Moderátor"
+
+#: wpf.class.php:1839
+msgid "New Topics since last visit"
+msgstr "Nová témata od poslední návštěvy"
+
+#: wpf.class.php:1849
+msgid "Profile Info"
+msgstr "Info o profilu"
+
+#: wpf.class.php:1913
+msgid "Edit Profile"
+msgstr "Uprav profil"
+
+#: wpf.class.php:1917
+#: wpf.class.php:1929
+msgid "Welcome"
+msgstr "Vítejte"
+
+#: wpf.class.php:1918
+msgid "Your last visit was:"
+msgstr "Tvá poslední návštěva:"
+
+#: wpf.class.php:1920
+msgid "Show new topics since your last visit"
+msgstr "Ukázat nová témata od poslední návštěvy"
+
+#: wpf.class.php:1921
+msgid "Edit your forum options"
+msgstr "Upravte své nastavení fóra"
+
+#: wpf.class.php:1928
+msgid "Welcome Guest, please login or"
+msgstr "Vítejte, přihlaste se prosím, nebo"
+
+#: wpf.class.php:1928
+msgid "register."
+msgstr "se registrujte"
+
+#: wpf.class.php:1933
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Vítejte, zadání příspěvku v tomto fóru vyžaduje"
+
+#: wpf.class.php:1933
+msgid "registration."
+msgstr "registraci."
+
+#: wpf.class.php:1941
+msgid "Show/Hide Header"
+msgstr "Zobraz/skryj hlavičku"
+
+#: wpf.class.php:1955
+msgid "Search forums"
+msgstr "Prohledej fóra"
+
+#: wpf.class.php:1990
+#: wpf.class.php:2021
+msgid "Pages:"
+msgstr "Stránky:"
+
+#: wpf.class.php:2003
+#: wpf.class.php:2034
+msgid "First"
+msgstr "První"
+
+#: wpf.class.php:2014
+#: wpf.class.php:2045
+msgid "Last"
+msgstr "Poslední"
+
+#: wpf.class.php:2132
+msgid "Post deleted"
+msgstr "Příspěvek smazán"
+
+#: wpf.class.php:2259
+#: wpf.class.php:2263
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "Ukázat profil"
+
+#: wpf.class.php:2277
+msgid "Bold"
+msgstr "Tučné"
+
+#: wpf.class.php:2278
+msgid "Italic"
+msgstr "Zkosené"
+
+#: wpf.class.php:2279
+msgid "Underline"
+msgstr "Podtržení"
+
+#: wpf.class.php:2280
+msgid "Strikethrough"
+msgstr "Přeškrtnuté"
+
+#: wpf.class.php:2281
+msgid "Code"
+msgstr "Kód"
+
+#: wpf.class.php:2283
+msgid "List"
+msgstr "Seznam"
+
+#: wpf.class.php:2284
+msgid "List item"
+msgstr "Položka seznamu"
+
+#: wpf.class.php:2285
+msgid "Link"
+msgstr "Odkaz"
+
+#: wpf.class.php:2286
+msgid "Image"
+msgstr "Obrázek"
+
+#: wpf.class.php:2287
+msgid "Email"
+msgstr "E-mail"
+
+#: wpf.class.php:2288
+msgid "Add Hex Color"
+msgstr "Zadej Hex kód barvy"
+
+#: wpf.class.php:2289
+msgid "Embed YouTube Video"
+msgstr "Vložit YouTube Video"
+
+#: wpf.class.php:2290
+msgid "Embed Google Map"
+msgstr "Embed Google Map"
+
+#: wpf.class.php:2296
+msgid "Smile"
+msgstr "Úsměv"
+
+#: wpf.class.php:2297
+msgid "Big Grin"
+msgstr "Velký úsměv"
+
+#: wpf.class.php:2298
+msgid "Sad"
+msgstr "Smutný"
+
+#: wpf.class.php:2299
+msgid "Neutral"
+msgstr "Neutrální"
+
+#: wpf.class.php:2300
+msgid "Razz"
+msgstr "Razz"
+
+#: wpf.class.php:2301
+msgid "Mad"
+msgstr "Šílený"
+
+#: wpf.class.php:2302
+msgid "Confused"
+msgstr "Zmatený"
+
+#: wpf.class.php:2303
+msgid "Eek!"
+msgstr "Eek!"
+
+#: wpf.class.php:2304
+msgid "Wink"
+msgstr "Mrkejte"
+
+#: wpf.class.php:2305
+msgid "Surprised"
+msgstr "Překvapený"
+
+#: wpf.class.php:2306
+msgid "Cool"
+msgstr "Cool"
+
+#: wpf.class.php:2318
+msgid "Info Center"
+msgstr "Centrum informací"
+
+#: wpf.class.php:2325
+msgid "Posts in"
+msgstr "Uveřejněno v"
+
+#: wpf.class.php:2325
+msgid "Topics Made by"
+msgstr "Vytvořil"
+
+#: wpf.class.php:2325
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "Členové"
+
+#: wpf.class.php:2325
+msgid "Latest Member:"
+msgstr "Poslední člen:"
+
+#: wpf.class.php:2351
+msgid "New topics since your last visit"
+msgstr "Nová témata od vaší poslední návštěvy"
+
+#: wpf.class.php:2395
+msgid "Summary"
+msgstr "Souhrn"
+
+#: wpf.class.php:2401
+#: wpf.class.php:2687
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "Jméno:"
+
+#: wpf.class.php:2406
+msgid "Registered:"
+msgstr "Registrován:"
+
+#: wpf.class.php:2414
+msgid "Position:"
+msgstr "Pozice:"
+
+#: wpf.class.php:2417
+msgid "Website:"
+msgstr "Web:"
+
+#: wpf.class.php:2421
+msgid "AIM:"
+msgstr "ICQ:"
+
+#: wpf.class.php:2425
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2428
+msgid "Jabber/google Talk:"
+msgstr "Jabber/google Talk:"
+
+#: wpf.class.php:2432
+msgid "Biographical Info:"
+msgstr "Info:"
+
+#: wpf.class.php:2457
+msgid "Search for:"
+msgstr "Hledej:"
+
+#: wpf.class.php:2461
+msgid "By user:"
+msgstr "Mezi členy:"
+
+#: wpf.class.php:2466
+msgid "Message Age:"
+msgstr "Stáří zprávy:"
+
+#: wpf.class.php:2467
+msgid "Between"
+msgstr "Mezi"
+
+#: wpf.class.php:2467
+msgid "and"
+msgstr "a"
+
+#: wpf.class.php:2467
+msgid "days"
+msgstr "dny"
+
+#: wpf.class.php:2473
+msgid "Click to choose Forum(s) to  search"
+msgstr "Vyber fórum k prohledávání"
+
+#: wpf.class.php:2495
+msgid "Check all"
+msgstr "Vybrat vše"
+
+#: wpf.class.php:2500
+msgid "Start Search"
+msgstr "Hledej"
+
+#: wpf.class.php:2542
+msgid "Subject"
+msgstr "Předmět"
+
+#: wpf.class.php:2543
+msgid "Relevance"
+msgstr "Relevantnost"
+
+#: wpf.class.php:2545
+msgid "Posted"
+msgstr "Přidáno"
+
+#: wpf.class.php:2611
+msgid "Closed topic"
+msgstr "Uzavřené téma"
+
+#: wpf.class.php:2614
+msgid "Normal topic"
+msgstr "Obyčejné téma"
+
+#: wpf.class.php:2617
+msgid "Hot topic"
+msgstr "Horké téma"
+
+#: wpf.class.php:2620
+msgid "Very Hot topic"
+msgstr "Velmi horké téma"
+
+#: wpf.class.php:2652
+msgid "Security Code:"
+msgstr "Bezpečnostní kód:"
+
+#: wpf.class.php:2671
+msgid "Enter Security Code: (required)"
+msgstr "Zadejte bezpečnostní kód: (vyžadováno)"
+
+#: wpf.class.php:2685
+msgid "New post in forum:"
+msgstr "Nový příspěvek ve foru:"
+
+#: wpf.class.php:2686
+msgid "DETAILS:"
+msgstr "Detaily"
+
+#: wpf.class.php:2689
+msgid "Date:"
+msgstr "Datum:"
+
+#: wpf.class.php:2690
+msgid "Reply Content:"
+msgstr "Obsah zprávy:"
+
+#: wpf.class.php:2691
+msgid "View Topic Here:"
+msgstr "Nové téma"
+
+#: wpf.class.php:2740
+#: wpf.class.php:2750
+msgid "Inbox"
+msgstr "Přijaté"
+
+#: wpf.class.php:2766
+#: wpf.class.php:2779
+msgid "Send Message"
+msgstr "Pošli zprávu"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Kategorie"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Téma"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "Musíte zadat uživatelské jméno skupiny."
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:682
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "Vybrali jste si jméno, které již existuje v databázi, vyberte jiné"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "Skupina úspěšně přidána."
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "Nezadali jste žádného uživatele k přidání:"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "Musíte vybrat skupinu uživatelů"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "Chyba"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "Žádný takový uživatel:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "Upozornění"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "Člen"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "už v této skupině existuje"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "přidán úzpěšně"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "Chyby:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "Upozornění:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "Přidaní členové:"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "Skupina uživatelů odstraněna úspěšně."
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "Člen odstraněn úspěšně."
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Forum >> Spravuj skupiny uživatelů"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:747
+#: fs-admin/fs-admin.php:947
+msgid "add new"
+msgstr "Přidat"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:801
+msgid "Delete"
+msgstr "Smazat"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "Přidej členy"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "V této skupině nejso žádní členové."
+
+#: fs-admin/fs-admin.php:221
+msgid "Skin successfully activated."
+msgstr "Motiv aktivován úspěšně."
+
+#: fs-admin/fs-admin.php:227
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingle Forum >> Nastavení motivu"
+
+#: fs-admin/fs-admin.php:228
+msgid "Get More Skins"
+msgstr "Stáhni víc motivů"
+
+#: fs-admin/fs-admin.php:229
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "Upozornění: Od verze 1.0.03 byl adresář skins přesunut do /wp-content/mingle-forum-skins/"
+
+#: fs-admin/fs-admin.php:229
+msgid "Why did you change it?"
+msgstr "Proč se to změnilo?"
+
+#: fs-admin/fs-admin.php:232
+msgid "Screenshot"
+msgstr "Náhled"
+
+#: fs-admin/fs-admin.php:233
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "Jméno"
+
+#: fs-admin/fs-admin.php:234
+msgid "Version"
+msgstr "Verze"
+
+#: fs-admin/fs-admin.php:235
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "Popis"
+
+#: fs-admin/fs-admin.php:236
+msgid "Action"
+msgstr "Akce"
+
+#: fs-admin/fs-admin.php:250
+#: fs-admin/fs-admin.php:265
+msgid "In Use"
+msgstr "Používán"
+
+#: fs-admin/fs-admin.php:252
+#: fs-admin/fs-admin.php:267
+msgid "Activate"
+msgstr "Aktivovat"
+
+#: fs-admin/fs-admin.php:295
+msgid "About Mingle Forum"
+msgstr "O aplikaci"
+
+#: fs-admin/fs-admin.php:298
+msgid "Current Version: "
+msgstr "Současná verze:"
+
+#: fs-admin/fs-admin.php:302
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Mingle Forum má jediný jednoduchý úkol, a to 'Zůstat s úsměvem!'. Bylo přejato z WP Fora a bylo velmi vylepšeno. Nyní je nožno jej použít s a nebo i bez Mingle pluginu od Blaira Williamse. Také velmi děkujeme Ericu Hambymu, za jeho předešlou práci na skriptu fóra."
+
+#: fs-admin/fs-admin.php:304
+msgid "Author: "
+msgstr "Autor:"
+
+#: fs-admin/fs-admin.php:305
+msgid "Plugin Page:"
+msgstr "Stránka pluginu:"
+
+#: fs-admin/fs-admin.php:306
+msgid "Support Forum:"
+msgstr "Fórum podpory:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Mingle Forum Skins:"
+msgstr "Mingle Forum skiny "
+
+#: fs-admin/fs-admin.php:354
+msgid "Options successfully saved."
+msgstr "Nastavení úspěšně uloženo."
+
+#: fs-admin/fs-admin.php:359
+msgid "Mingle Forum"
+msgstr "Mingle Forum"
+
+#: fs-admin/fs-admin.php:363
+msgid "Statistic"
+msgstr "Statistika"
+
+#: fs-admin/fs-admin.php:364
+msgid "Value"
+msgstr "Hodnota"
+
+#: fs-admin/fs-admin.php:368
+msgid "Number of posts:"
+msgstr "Počet příspěvků:"
+
+#: fs-admin/fs-admin.php:372
+msgid "Number of threads:"
+msgstr "Počet vláken:"
+
+#: fs-admin/fs-admin.php:376
+msgid "Number of users:"
+msgstr "Počet členů:"
+
+#: fs-admin/fs-admin.php:380
+msgid "Total database size:"
+msgstr "Velikost databáze:"
+
+#: fs-admin/fs-admin.php:384
+msgid "Database server:"
+msgstr "Server databáze:"
+
+#: fs-admin/fs-admin.php:388
+msgid "Mingle Forum version:"
+msgstr "Verze Mingle forum:"
+
+#: fs-admin/fs-admin.php:393
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Forum >> Základní nastavení"
+
+#: fs-admin/fs-admin.php:398
+msgid "default "
+msgstr "výchozí"
+
+#: fs-admin/fs-admin.php:402
+msgid "Option Name"
+msgstr "Volba názvu"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Input"
+msgstr "Volba vstupu"
+
+#: fs-admin/fs-admin.php:408
+msgid "Posts per page:"
+msgstr "Příspěvků na stránku:"
+
+#: fs-admin/fs-admin.php:412
+msgid "Threads per page:"
+msgstr "Vláken na stránku:"
+
+#: fs-admin/fs-admin.php:418
+msgid "Number of posts for Hot Topic:"
+msgstr "Počet příspěvků pro horké téma"
+
+#: fs-admin/fs-admin.php:422
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Počet příspěvků pro velmi horké téma"
+
+#: fs-admin/fs-admin.php:426
+msgid "Username Display:"
+msgstr "Uživatel: "
+
+#: fs-admin/fs-admin.php:439
+msgid "New User's Title:"
+msgstr "Nováček:"
+
+#: fs-admin/fs-admin.php:443
+msgid "User Level 1 Title:"
+msgstr "Uživatel 1. stupeň:"
+
+#: fs-admin/fs-admin.php:447
+msgid "User Level 1 Count:"
+msgstr "Uživatel 1. stupeň počet:"
+
+#: fs-admin/fs-admin.php:448
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:451
+msgid "User Level 2 Title:"
+msgstr "Uživatel 2. stupeň:"
+
+#: fs-admin/fs-admin.php:455
+msgid "User Level 2 Count:"
+msgstr "Uživatel 2. stupeň počet:"
+
+#: fs-admin/fs-admin.php:456
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:459
+msgid "User Level 3 Title:"
+msgstr "Uživatel 3. stupeň:"
+
+#: fs-admin/fs-admin.php:463
+msgid "User Level 3 Count:"
+msgstr "Uživatel 3. stupeň počet:"
+
+#: fs-admin/fs-admin.php:464
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:467
+msgid "Notify Admin on new posts:"
+msgstr "Upozornit admina na nové téma:"
+
+#: fs-admin/fs-admin.php:471
+#: fs-admin/fs-admin.php:510
+msgid "Off"
+msgstr "Vypnuto"
+
+#: fs-admin/fs-admin.php:474
+msgid "Show Forum Login Form:"
+msgstr "Zobraz přihlašovací formulář"
+
+#: fs-admin/fs-admin.php:478
+#: fs-admin/fs-admin.php:486
+#: fs-admin/fs-admin.php:494
+#: fs-admin/fs-admin.php:502
+#: fs-admin/fs-admin.php:518
+msgid "On"
+msgstr "Zapnuto"
+
+#: fs-admin/fs-admin.php:482
+msgid "Show Avatars in the forum:"
+msgstr "Ukazuj Avatary ve fóru:"
+
+#: fs-admin/fs-admin.php:490
+msgid "Show users Bio at the bottom of posts:"
+msgstr "Zobraz informace o uživateli pod příspěvkem"
+
+#: fs-admin/fs-admin.php:498
+msgid "Use Forum RSS:"
+msgstr "RSS fóra"
+
+#: fs-admin/fs-admin.php:506
+msgid "Use SEO friendly URLs:"
+msgstr "Použij URL vhodné k SEO"
+
+#: fs-admin/fs-admin.php:506
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "Důležité: Nechejte tuto možnost vypnutou, jestliže máte nastaveny trvalé odkazy na \"základní\""
+
+#: fs-admin/fs-admin.php:514
+msgid "Registration required to post:"
+msgstr "Přispívat mohou pouze registrovaní:"
+
+#: fs-admin/fs-admin.php:523
+msgid "Installed version:"
+msgstr "Instalovaná verze:"
+
+#: fs-admin/fs-admin.php:527
+msgid "GD Library is not installed"
+msgstr "Knihovna GD není nainstalována"
+
+#: fs-admin/fs-admin.php:530
+msgid "Use Captcha for unregistered users:"
+msgstr "Použít Captcha pro neregistrované uživatele"
+
+#: fs-admin/fs-admin.php:534
+msgid "Requires "
+msgstr "Vyžaduje"
+
+#: fs-admin/fs-admin.php:534
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Jestliže máte horní položku \"Pro možnost přidání příspěvku se zaregistrujte\" zapnutou, pak nechte toto vypnuté"
+
+#: fs-admin/fs-admin.php:538
+msgid "Date format:"
+msgstr "Formát data:"
+
+#: fs-admin/fs-admin.php:538
+msgid "Default date:"
+msgstr "Výchozí datum:"
+
+#: fs-admin/fs-admin.php:538
+msgid "Check "
+msgstr "Vybrat"
+
+#: fs-admin/fs-admin.php:538
+msgid "for date formatting."
+msgstr "pro formátování data."
+
+#: fs-admin/fs-admin.php:653
+msgid "Groups deleted:"
+msgstr "Smazané skupiny:"
+
+#: fs-admin/fs-admin.php:654
+msgid "Forums deleted:"
+msgstr "Smazaná fóra:"
+
+#: fs-admin/fs-admin.php:655
+msgid "Threads deleted:"
+msgstr "Smazaná vlákna:"
+
+#: fs-admin/fs-admin.php:656
+msgid "Posts deleted:"
+msgstr "Smazané příspěvky:"
+
+#: fs-admin/fs-admin.php:680
+#: fs-admin/fs-admin.php:704
+msgid "You must enter a name"
+msgstr "Musíte zadat jméno"
+
+#: fs-admin/fs-admin.php:689
+msgid "Category added successfully"
+msgstr "Kategorie úspěšně vložena"
+
+#: fs-admin/fs-admin.php:701
+msgid "You must select a category"
+msgstr "Musíte vybrat kategorii"
+
+#: fs-admin/fs-admin.php:707
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Vybrali jste název fóra, které zde už existuje. Prosím vyberte jiné"
+
+#: fs-admin/fs-admin.php:714
+msgid "Forum added successfully"
+msgstr "Fórum úspěšně vloženo"
+
+#: fs-admin/fs-admin.php:741
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Forum >> Kategorie a Fóra"
+
+#: fs-admin/fs-admin.php:763
+#: fs-admin/fs-admin.php:793
+msgid "Modify"
+msgstr "Uprav"
+
+#: fs-admin/fs-admin.php:802
+msgid "Add forum"
+msgstr "Přidej fórum"
+
+#: fs-admin/fs-admin.php:827
+msgid "Group Moved Down"
+msgstr "Skupina přesunuta níže"
+
+#: fs-admin/fs-admin.php:837
+msgid "Forum Moved Down"
+msgstr "Forum přesunuto níže"
+
+#: fs-admin/fs-admin.php:847
+msgid "Group Moved Up"
+msgstr "Skupina přesunuta výše"
+
+#: fs-admin/fs-admin.php:857
+msgid "Forum Moved Up"
+msgstr "Forum přesunuto výše"
+
+#: fs-admin/fs-admin.php:894
+#: fs-admin/fs-admin.php:901
+msgid "Moderator successfully removed."
+msgstr "Moderátor úspěšně odebrán."
+
+#: fs-admin/fs-admin.php:896
+msgid "Moderator successfully saved."
+msgstr "Moderátor úspěšně uložen."
+
+#: fs-admin/fs-admin.php:903
+msgid "Moderator NOT removed."
+msgstr "Moderátor NEBYL odebrán."
+
+#: fs-admin/fs-admin.php:917
+msgid "You must select a user"
+msgstr "Musíte vybrat uživatele"
+
+#: fs-admin/fs-admin.php:921
+msgid "Global Moderator added successfully"
+msgstr "Hlavní moderátor úspěšně přidán"
+
+#: fs-admin/fs-admin.php:925
+msgid "Moderator added successfully"
+msgstr "Moderátor úspěšně přidán"
+
+#: fs-admin/fs-admin.php:947
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Forum >> Správa moderátorů"
+
+#: fs-admin/fs-admin.php:956
+msgid "Currently moderating"
+msgstr "Právě upravovaný"
+
+#: fs-admin/fs-admin.php:960
+msgid "Update"
+msgstr "Aktuální"
+
+#: fs-admin/fs-admin.php:970
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Hlavní  moderátor: (Člen může moderovat všechna fora)"
+
+#: fs-admin/fs-admin.php:989
+msgid "No moderators yet"
+msgstr "Zatím bez moderátorů"
+
+#: fs-admin/fs-admin.php:1014
+msgid "Ads saved successfully"
+msgstr "Příspěvky přidány úspěšně"
+
+#: fs-admin/fs-admin.php:1019
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingle Forum příspěvky >> Nastavení "
+
+#: fs-admin/fs-admin.php:1021
+msgid "HTML is allowed in all ad areas below"
+msgstr "Ve všech oblastech je povoleno HTML"
+
+#: fs-admin/fs-admin.php:1025
+msgid "Ads Option"
+msgstr "Nastavení příspěvků"
+
+#: fs-admin/fs-admin.php:1032
+msgid "Enable Area Above Forum"
+msgstr "Povolit oblast nad forem"
+
+#: fs-admin/fs-admin.php:1034
+#: fs-admin/fs-admin.php:1042
+#: fs-admin/fs-admin.php:1050
+#: fs-admin/fs-admin.php:1058
+#: fs-admin/fs-admin.php:1066
+#: fs-admin/fs-admin.php:1074
+#: fs-admin/fs-admin.php:1082
+msgid "css-value:"
+msgstr "css-hodnota:"
+
+#: fs-admin/fs-admin.php:1040
+msgid "Enable Area Below Forum"
+msgstr "Povolit oblast pod forem"
+
+#: fs-admin/fs-admin.php:1048
+msgid "Enable Area Above Branding"
+msgstr "Povolit oblast nad značkou"
+
+#: fs-admin/fs-admin.php:1056
+msgid "Enable Area Above Info Center"
+msgstr "Povolit oblast nad centrem informací"
+
+#: fs-admin/fs-admin.php:1064
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Enable Area Above Breadcrumbs"
+
+#: fs-admin/fs-admin.php:1072
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Povolit oblast nad formulářem rychlé odpovědi"
+
+#: fs-admin/fs-admin.php:1080
+msgid "Enable Area Below First Post"
+msgstr "Povolit oblast pod prvním příspěvkem"
+
+#: fs-admin/fs-admin.php:1087
+msgid "Below you can modify/add your own CSS"
+msgstr "Níže můžete modifikovat kód CSS nebo přidat svůj vlastní"
+
+#: fs-admin/fs-admin.php:1088
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "Důležité: Jestli nevíš na cotohle je, tak na to nesahej"
+
+#: fs-admin/fs-admin.php:1095
+msgid "Save Options"
+msgstr "Uložit nastavení"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "Přidej fórum"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "Popis:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "Ulož fórum"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "Přidej kategorii"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "Ulož kategorii"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "Ulož skupinu"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "Vyber skupinu"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "Přidej člena"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "Musíte specifikovat jméno skupiny"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "Skupina úspěšně upravena"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "Musíte upřesnit jméno fóra"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "Forum úspěšně upraveno"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "Uprav kategorii"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "Skupiny:"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "Členové vybraných skupin mají přístup k fórům v této kategorii:"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "Zde nejsou žádné skupiny"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "Ulož skupinu"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "Uprav fórum"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "Vyber člena"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "Přidej moderátora"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "Musíte upřesnit jméno skupiny"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "Skupina úspěšně změněna"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "Uprav skupinu"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "Ulož skupinu"
+
+#~ msgid "Administratos always have unlimited messages"
+#~ msgstr "Administrátoři mají vždy neomezený počet zpráv ve schránce"
+
+#~ msgid "Back To Your Inbox"
+#~ msgstr "Zpět do zpráv"
+
+#~ msgid "Back To Your Messages"
+#~ msgstr "Zpět k vašim zprávám"
+
+#~ msgid "Categories and forums"
+#~ msgstr "Kategorie a témata"
+
+#~ msgid "Click this box and begin typing the username to find them faster"
+#~ msgstr "Začněte psát členovo jméno, najdete ho rychleji"
+
+#~ msgid "Create New Message"
+#~ msgstr "Vytvoř novou zprávu"
+
+#~ msgid "ERROR"
+#~ msgstr "CHYBA"
+
+#~ msgid "Feed"
+#~ msgstr "Zdroj"
+
+#~ msgid "General Options"
+#~ msgstr "Základní nastavení"
+
+#~ msgid "I recommend disabling this and using"
+#~ msgstr "Doporučuji vypnout tuto volbu a použít"
+
+#~ msgid "Last Reply"
+#~ msgstr "Poslední odpověď"
+
+#~ msgid "Maximum Messages In Inbox (0 = unlimited):"
+#~ msgstr "Maximální počet zpráv ve schránce (0=neomezený)"
+
+#~ msgid "Message Box Is Full!"
+#~ msgstr "Složka zpráv je plná!"
+
+#~ msgid "Message Box Size"
+#~ msgstr "velikost složky zpráv"
+
+#~ msgid "Message Could Not Be Sent!"
+#~ msgstr "Zpráva nebyla odeslána!"
+
+#~ msgid "Message Deleted"
+#~ msgstr "Zpráva vymazána"
+
+#~ msgid "Message Sent"
+#~ msgstr "Zpráva odeslána"
+
+#~ msgid "Messages"
+#~ msgstr "Zprávy"
+
+#~ msgid "Mingle Forum Themes:"
+#~ msgstr "Mingle Forum motivy:"
+
+#~ msgid "New Message"
+#~ msgstr "Nová zpráva"
+
+#~ msgid "New reply on topic:"
+#~ msgstr "Nová odpověď k tématu:"
+
+#~ msgid "No Messages"
+#~ msgstr "Žádné zprávy"
+
+#~ msgid "Notify me when I get new Messages?"
+#~ msgstr "Informovat při příchodu nové zprávy?"
+
+#~ msgid "Please fill in all fields before submitting message!"
+#~ msgstr "Prosím vyplňte všechna pole před odesláním zprávy."
+
+#~ msgid "Posted on: "
+#~ msgstr "Publikováno:"
+
+#~ msgid "Posts"
+#~ msgstr "Příspěvky"
+
+#~ msgid "Read"
+#~ msgstr "Číst"
+
+#~ msgid "Read Message Thread"
+#~ msgstr "Přečtěte si vlákno téma"
+
+#~ msgid "Remove this post?"
+#~ msgstr "Odstranit tento příspěvek?"
+
+#~ msgid "Reply:"
+#~ msgstr "Odpověď:"
+
+#~ msgid "Select User"
+#~ msgstr "Vyber člena"
+
+#~ msgid "Sender"
+#~ msgstr "Odesilatel"
+
+#~ msgid "Sorry You Have No Messages!"
+#~ msgstr "Nemáte žádné nové zprávy!"
+
+#~ msgid "Started By"
+#~ msgstr "Započato"
+
+#~ msgid "The Message Was Successfully Sent!"
+#~ msgstr "Zpráva byla úspěšně odeslána!"
+
+#~ msgid "The recipients inbox is FULL!"
+#~ msgstr "Adresátova schránka je plná!"
+
+#~ msgid "To:"
+#~ msgstr "Pro:"
+
+#~ msgid "Topics "
+#~ msgstr "Témata"
+
+#~ msgid "Unlimited"
+#~ msgstr "Nelimitováno"
+
+#~ msgid "Unread"
+#~ msgstr "Nepřečteno"
+
+#~ msgid "Use Private Messages:"
+#~ msgstr "Soukromé zprávy:"
+
+#~ msgid "You Do Not Have Permission To View This!"
+#~ msgstr "Nejste oprávněn toto prohlížet."
+
+#~ msgid "You Must Be Logged In To Create Private Messages!"
+#~ msgstr "Pro psaní soukromých zpráv musíte být přihlášen."
+
+#~ msgid "You cannot send/receive any new messages"
+#~ msgstr "Nemůžete přijímat/odesílat nové zprávy"
+
+#~ msgid "You have recieved a new message from"
+#~ msgstr "Přijal jste novou zprávu od"
+
+#~ msgid "Your Message Was Deleted!"
+#~ msgstr "Vaše zpráva byla smazána!"
+
+#~ msgid "follow this link to view:"
+#~ msgstr "následuj tento odkaz k přečtení:"
+
+#~ msgid "instead."
+#~ msgstr "místo toho."
+
+#~ msgid "new"
+#~ msgstr "nový"
+
+#~ msgid "of"
+#~ msgstr "z"

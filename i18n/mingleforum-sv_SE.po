@@ -1,0 +1,1770 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-15 12:15-0700\n"
+"PO-Revision-Date: 2011-04-15 15:58-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\\pms\n"
+"X-Poedit-SearchPath-2: .\\fs-admin\n"
+
+#: feed.php:24
+#: feed.php:25
+msgid "Forum Feed"
+msgstr "Forum Flöde"
+
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "Forumets ämne:"
+
+#: feed.php:30
+#: wpf.class.php:1808
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Forum"
+
+#: feed.php:30
+#: wpf.class.php:859
+msgid "Topic: "
+msgstr "Ämne:"
+
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "Flöden är avstängda"
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "Ingen användare med det namnet finns"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "Du har inga prenumeranter vi denna tidpunkt"
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "Redigera forumalternativ"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "Tillåt andra att se min profil?"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "Du har fått meddelanden i dessa ämnen:"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:552
+msgid "Save options"
+msgstr "Spara alternativ"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:615
+#: wpf.class.php:2071
+#: wpf.class.php:2097
+#: wpf.class.php:2115
+#: wpf.class.php:2137
+#: wpf.class.php:2146
+#: wpf.class.php:2204
+msgid "Cheating, are we?"
+msgstr "Fuskar du?"
+
+#: wpf-insert.php:98
+#, fuzzy
+msgid "Security code does not match"
+msgstr "Säkerhetskoden matchar inte"
+
+#: wpf-insert.php:113
+#: wpf-insert.php:118
+#: wpf-insert.php:188
+#: wpf-insert.php:193
+#: wpf-insert.php:246
+#: wpf-insert.php:251
+msgid "An error occured"
+msgstr "Ett fel uppstod"
+
+#: wpf-insert.php:114
+#: wpf-insert.php:189
+#: wpf-insert.php:247
+msgid "You must enter a subject"
+msgstr "Du måste ange ett ämne"
+
+#: wpf-insert.php:119
+#: wpf-insert.php:194
+#: wpf-insert.php:252
+msgid "You must enter a message"
+msgstr "Du måste skriva ett meddelande"
+
+#: wpf-insert.php:138
+msgid "created the forum topic:"
+msgstr "skapade forumämnet:"
+
+#: wpf-insert.php:205
+msgid "replied to the forum topic:"
+msgstr "besvarade forumämnet:"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Citat från"
+
+#: wpf-post.php:10
+#: wpf.class.php:678
+#: wpf.class.php:687
+#: wpf.class.php:1156
+msgid "on"
+msgstr "på"
+
+#: wpf-post.php:20
+#: wpf.class.php:1281
+#: wpf.class.php:1854
+msgid "Post Reply"
+msgstr "Svara"
+
+#: wpf-post.php:23
+#: wpf-post.php:76
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Ämne:"
+
+#: wpf-post.php:24
+#: wpf.class.php:909
+msgid "Re:"
+msgstr "Sv:"
+
+#: wpf-post.php:27
+#: wpf-post.php:80
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Meddelande:"
+
+#: wpf-post.php:40
+#: wpf-thread.php:30
+#, fuzzy
+msgid "Images:"
+msgstr "Bild"
+
+#: wpf-post.php:51
+#: wpf-thread.php:41
+msgid "Submit"
+msgstr "Skicka"
+
+#: wpf-post.php:73
+#: wpf.class.php:1278
+#: wpf.class.php:1857
+msgid "Edit Post"
+msgstr "Redigera inlägg"
+
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "Spara inlägg"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Nytt ämne"
+
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "Tyvärr, du har inte behörighet att skicka meddelanden."
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:441
+msgid "Newbie"
+msgstr "Mini"
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:445
+msgid "Beginner"
+msgstr "Nybörjare"
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:453
+msgid "Advanced"
+msgstr "Proffs"
+
+#: wpf.class.php:154
+#: fs-admin/fs-admin.php:461
+msgid "Pro"
+msgstr "Proffs"
+
+#: wpf.class.php:172
+#: wpf.class.php:173
+msgid "Mingle Forum - Options"
+msgstr "Mingel Forum>> Inställningar"
+
+#: wpf.class.php:173
+msgid "Options"
+msgstr "Inställningar"
+
+#: wpf.class.php:174
+msgid "Ads"
+msgstr "Reklam"
+
+#: wpf.class.php:175
+msgid "Skins"
+msgstr "Tema"
+
+#: wpf.class.php:176
+msgid "Forum Structure - Categories & Forums"
+msgstr "Forums Uppbyggnad - Kategorier & Ämnen"
+
+#: wpf.class.php:176
+msgid "Forum Structure"
+msgstr "Forums Uppbyggnad"
+
+#: wpf.class.php:177
+msgid "Moderators"
+msgstr "Moderatorer"
+
+#: wpf.class.php:178
+msgid "User Groups"
+msgstr "Användargrupper"
+
+#: wpf.class.php:179
+msgid "About"
+msgstr "Om"
+
+#: wpf.class.php:190
+#: wpf.class.php:191
+msgid "Forums Latest Activity"
+msgstr "Senaste forumaktivitet"
+
+#: wpf.class.php:210
+#: wpf.class.php:230
+msgid "by:"
+msgstr "av:"
+
+#: wpf.class.php:247
+msgid "Title to display in the sidebar:"
+msgstr "Titel som ska visas i sidomenyn:"
+
+#: wpf.class.php:249
+msgid "How many items would you like to display?"
+msgstr "Hur många inlägg vill du visa?"
+
+#: wpf.class.php:646
+msgid "Page loaded in:"
+msgstr "Sidan laddades på:"
+
+#: wpf.class.php:646
+msgid "seconds."
+msgstr "sekunder."
+
+#: wpf.class.php:649
+msgid "Mingle Forum "
+msgstr "Mingel Forum"
+
+#: wpf.class.php:650
+msgid "Version:"
+msgstr "Version:"
+
+#: wpf.class.php:669
+#: wpf.class.php:2268
+msgid "Guest"
+msgstr "Gäst"
+
+#: wpf.class.php:678
+#: wpf.class.php:1155
+msgid "by"
+msgstr "av"
+
+#: wpf.class.php:687
+msgid "Latest Post by"
+msgstr "Senaste inlägg av"
+
+#: wpf.class.php:710
+#: wpf.class.php:841
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Ledsen, men du har inte tillträde till forumet"
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+msgid "Status"
+msgstr "Status"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Topic Title"
+msgstr "Ämnesrubrik"
+
+#: wpf.class.php:722
+#: wpf.class.php:2358
+#: wpf.class.php:2546
+msgid "Started by"
+msgstr "Startad av"
+
+#: wpf.class.php:723
+#: wpf.class.php:2359
+msgid "Replies"
+msgstr "Svar"
+
+#: wpf.class.php:724
+msgid "Views"
+msgstr "Visningar"
+
+#: wpf.class.php:725
+#: wpf.class.php:1155
+#: wpf.class.php:2360
+msgid "Last post"
+msgstr "Senaste inlägget"
+
+#: wpf.class.php:729
+msgid "Sticky Topics"
+msgstr "Klistrade ämnen"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+#: wpf.class.php:1642
+#: wpf.class.php:1659
+msgid "Move Topic"
+msgstr "Flytta ämnet"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+msgid "Delete Topic"
+msgstr "Ta bort ämnet"
+
+#: wpf.class.php:745
+#: wpf.class.php:774
+msgid "New posts since last visit"
+msgstr "Nya inlägg sedan ditt senaste besök"
+
+#: wpf.class.php:762
+msgid "Forum Topics"
+msgstr "Forumämnen"
+
+#: wpf.class.php:829
+msgid "Remove this topic from your email notifications?"
+msgstr "Ta bort detta ämne från dina e-postuppdateringar?"
+
+#: wpf.class.php:831
+msgid "Add this topic to your email notifications?"
+msgstr "Lägg till detta ämne till din e-postuppdateringar?"
+
+#: wpf.class.php:852
+msgid "TOPIC CLOSED"
+msgstr "ÄMNE LÅST"
+
+#: wpf.class.php:858
+msgid "Author"
+msgstr "Författare"
+
+#: wpf.class.php:874
+#: wpf.class.php:2412
+msgid "Posts:"
+msgstr "Inlägg:"
+
+#: wpf.class.php:907
+msgid "Quick Reply"
+msgstr "Snabbsvar:"
+
+#: wpf.class.php:916
+msgid "Submit Quick Reply"
+msgstr "Skicka Snabbsvar"
+
+#: wpf.class.php:938
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Inlägg"
+
+#: wpf.class.php:941
+msgid "on:"
+msgstr "på"
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: wpf.class.php:2284
+msgid "Quote"
+msgstr "Citat"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:971
+msgid "Remove"
+msgstr "Ta bort"
+
+#: wpf.class.php:949
+#: wpf.class.php:958
+msgid "Edit"
+msgstr "Redigera"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Topics: "
+msgstr "Ämnen:"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Posts: "
+msgstr "Inlägg:"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "New posts"
+msgstr "Nya inlägg"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "No new posts"
+msgstr "Inga nya inlägg"
+
+#: wpf.class.php:1042
+msgid "Mark All Read"
+msgstr "Markera alla som lästa"
+
+#: wpf.class.php:1153
+msgid "No topics yet"
+msgstr "Inga inlägg ännu"
+
+#: wpf.class.php:1156
+msgid "in"
+msgstr "i"
+
+#: wpf.class.php:1207
+msgid "Forums RSS"
+msgstr "RSS-flöden"
+
+#: wpf.class.php:1218
+msgid "Are you sure you want to remove this?"
+msgstr "Är du säker att du vill ta bort detta?"
+
+#: wpf.class.php:1272
+#: wpf.class.php:1847
+msgid "Search Results"
+msgstr "Sökresultat"
+
+#: wpf.class.php:1275
+msgid "Profile"
+msgstr "Profil"
+
+#: wpf.class.php:1284
+#: wpf.class.php:1504
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+#: wpf.class.php:1860
+msgid "New Topic"
+msgstr "Nytt ämne"
+
+#: wpf.class.php:1351
+msgid "Moderators:"
+msgstr "Moderatorer:"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Undo Sticky"
+msgstr "Ångra klistrad"
+
+#: wpf.class.php:1529
+#: wpf.class.php:1542
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Sticky"
+msgstr "Klistrad"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1641
+#: wpf.class.php:1658
+msgid "Re-open"
+msgstr "Lås upp"
+
+#: wpf.class.php:1534
+#: wpf.class.php:1547
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Close"
+msgstr "Stäng"
+
+#: wpf.class.php:1554
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "Reply"
+msgstr "Svara"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Unsubscribe"
+msgstr "Avregistrera"
+
+#: wpf.class.php:1563
+#: wpf.class.php:1579
+msgid "Subscribe"
+msgstr "Prenumerera"
+
+#: wpf.class.php:1566
+msgid "RSS feed"
+msgstr "RSS-flöde"
+
+#: wpf.class.php:1582
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "RSS-Feed"
+msgstr "RSS-flöde"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My profile"
+msgstr "Min profil"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My Profile"
+msgstr "Min profil"
+
+#: wpf.class.php:1631
+#: wpf.class.php:1648
+msgid "Forum Home"
+msgstr "Forum Hem"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:1925
+msgid "Log out"
+msgstr "Logga ut"
+
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:2455
+msgid "Search"
+msgstr "Sök"
+
+#: wpf.class.php:1722
+msgid "You are logged in as:"
+msgstr "Du är inloggad som:"
+
+#: wpf.class.php:1728
+msgid "Username: "
+msgstr "Användarnamn:"
+
+#: wpf.class.php:1729
+msgid "Password: "
+msgstr "Lösenord:"
+
+#: wpf.class.php:1731
+msgid "Remember Me"
+msgstr "Kom ihåg mig"
+
+#: wpf.class.php:1767
+msgid "Administrator"
+msgstr "Administratör"
+
+#: wpf.class.php:1771
+msgid "Moderator"
+msgstr "Moderator"
+
+#: wpf.class.php:1841
+msgid "New Topics since last visit"
+msgstr "Nya ämnen sedan senaste besök"
+
+#: wpf.class.php:1851
+msgid "Profile Info"
+msgstr "Profilinfo"
+
+#: wpf.class.php:1915
+msgid "Edit Profile"
+msgstr "Redigera profil"
+
+#: wpf.class.php:1919
+#: wpf.class.php:1931
+msgid "Welcome"
+msgstr "Välkommen"
+
+#: wpf.class.php:1920
+msgid "Your last visit was:"
+msgstr "Ditt senaste besök var:"
+
+#: wpf.class.php:1922
+msgid "Show new topics since your last visit"
+msgstr "Visa nya ämnen sedan ditt senaste besök"
+
+#: wpf.class.php:1923
+msgid "Edit your forum options"
+msgstr "Redigera forumalternativ"
+
+#: wpf.class.php:1930
+msgid "Welcome Guest, please login or"
+msgstr "Välkommen gäst, logga in eller"
+
+#: wpf.class.php:1930
+msgid "register."
+msgstr "registrera nytt konto."
+
+#: wpf.class.php:1935
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Välkommen Gäst. För att skriva i forumet krävs"
+
+#: wpf.class.php:1935
+msgid "registration."
+msgstr "registrering."
+
+#: wpf.class.php:1943
+msgid "Show/Hide Header"
+msgstr "Visa/Göm Menyn"
+
+#: wpf.class.php:1957
+msgid "Search forums"
+msgstr "Sök i forumen"
+
+#: wpf.class.php:1992
+#: wpf.class.php:2023
+msgid "Pages:"
+msgstr "Sidor:"
+
+#: wpf.class.php:2005
+#: wpf.class.php:2036
+msgid "First"
+msgstr "Först"
+
+#: wpf.class.php:2016
+#: wpf.class.php:2047
+msgid "Last"
+msgstr "Sist"
+
+#: wpf.class.php:2134
+msgid "Post deleted"
+msgstr "Post raderad"
+
+#: wpf.class.php:2261
+#: wpf.class.php:2265
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "Visa profil"
+
+#: wpf.class.php:2279
+msgid "Bold"
+msgstr "Fet"
+
+#: wpf.class.php:2280
+msgid "Italic"
+msgstr "Kursiv"
+
+#: wpf.class.php:2281
+msgid "Underline"
+msgstr "Understruken"
+
+#: wpf.class.php:2282
+msgid "Strikethrough"
+msgstr "Genomstruken"
+
+#: wpf.class.php:2283
+msgid "Code"
+msgstr "Kod"
+
+#: wpf.class.php:2285
+msgid "List"
+msgstr "Lista"
+
+#: wpf.class.php:2286
+msgid "List item"
+msgstr "Listobjekt"
+
+#: wpf.class.php:2287
+msgid "Link"
+msgstr "Länk"
+
+#: wpf.class.php:2288
+msgid "Image"
+msgstr "Bild"
+
+#: wpf.class.php:2289
+msgid "Email"
+msgstr "E-post"
+
+#: wpf.class.php:2290
+msgid "Add Hex Color"
+msgstr "Lägg till Hex Color"
+
+#: wpf.class.php:2291
+msgid "Embed YouTube Video"
+msgstr "Bädda in YouTube-video"
+
+#: wpf.class.php:2292
+msgid "Embed Google Map"
+msgstr "Bädda in Google Map"
+
+#: wpf.class.php:2298
+msgid "Smile"
+msgstr "Le"
+
+#: wpf.class.php:2299
+msgid "Big Grin"
+msgstr "Stort Flin"
+
+#: wpf.class.php:2300
+msgid "Sad"
+msgstr "Ledsen"
+
+#: wpf.class.php:2301
+msgid "Neutral"
+msgstr "Neutral"
+
+#: wpf.class.php:2302
+msgid "Razz"
+msgstr "Glad"
+
+#: wpf.class.php:2303
+msgid "Mad"
+msgstr "Arg"
+
+#: wpf.class.php:2304
+msgid "Confused"
+msgstr "Förvirrad"
+
+#: wpf.class.php:2305
+msgid "Eek!"
+msgstr "EEk!!!!"
+
+#: wpf.class.php:2306
+msgid "Wink"
+msgstr "Flört"
+
+#: wpf.class.php:2307
+msgid "Surprised"
+msgstr "Överraskad"
+
+#: wpf.class.php:2308
+msgid "Cool"
+msgstr "Cool"
+
+#: wpf.class.php:2320
+msgid "Info Center"
+msgstr "InfoCenter"
+
+#: wpf.class.php:2327
+msgid "Posts in"
+msgstr "Skapat i"
+
+#: wpf.class.php:2327
+msgid "Topics Made by"
+msgstr "Ämne skapad av"
+
+#: wpf.class.php:2327
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "Medlemmar"
+
+#: wpf.class.php:2327
+msgid "Latest Member:"
+msgstr "Senaste medlemmen:"
+
+#: wpf.class.php:2353
+msgid "New topics since your last visit"
+msgstr "Nya ämnen sedan ditt senaste besök"
+
+#: wpf.class.php:2397
+msgid "Summary"
+msgstr "Sammanfattning"
+
+#: wpf.class.php:2403
+#: wpf.class.php:2689
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "Namn:"
+
+#: wpf.class.php:2408
+msgid "Registered:"
+msgstr "Registrerad:"
+
+#: wpf.class.php:2416
+msgid "Position:"
+msgstr "Position:"
+
+#: wpf.class.php:2419
+msgid "Website:"
+msgstr "Webbplats:"
+
+#: wpf.class.php:2423
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2427
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2430
+msgid "Jabber/google Talk:"
+msgstr "Jabber/Google Talk:"
+
+#: wpf.class.php:2434
+msgid "Biographical Info:"
+msgstr "Biografi/Om:"
+
+#: wpf.class.php:2459
+msgid "Search for:"
+msgstr "Sök efter:"
+
+#: wpf.class.php:2463
+msgid "By user:"
+msgstr "Av:"
+
+#: wpf.class.php:2468
+msgid "Message Age:"
+msgstr "Meddelandeålder:"
+
+#: wpf.class.php:2469
+msgid "Between"
+msgstr "Mellan"
+
+#: wpf.class.php:2469
+msgid "and"
+msgstr "och"
+
+#: wpf.class.php:2469
+msgid "days"
+msgstr "dagar"
+
+#: wpf.class.php:2475
+msgid "Click to choose Forum(s) to  search"
+msgstr "Klicka för att välja Forum att genomsöka"
+
+#: wpf.class.php:2497
+msgid "Check all"
+msgstr "Markera alla"
+
+#: wpf.class.php:2502
+msgid "Start Search"
+msgstr "Börja sökning"
+
+#: wpf.class.php:2544
+msgid "Subject"
+msgstr "Ämne"
+
+#: wpf.class.php:2545
+msgid "Relevance"
+msgstr "Relevans"
+
+#: wpf.class.php:2547
+msgid "Posted"
+msgstr "Tillagd"
+
+#: wpf.class.php:2613
+msgid "Closed topic"
+msgstr "Stängt ämne"
+
+#: wpf.class.php:2616
+msgid "Normal topic"
+msgstr "Vanligt ämne"
+
+#: wpf.class.php:2619
+msgid "Hot topic"
+msgstr "Hett ämne"
+
+#: wpf.class.php:2622
+msgid "Very Hot topic"
+msgstr "Mycket hett ämne"
+
+#: wpf.class.php:2654
+msgid "Security Code:"
+msgstr "Säkerhetskod:"
+
+#: wpf.class.php:2673
+msgid "Enter Security Code: (required)"
+msgstr "Säkerhetskod (Obligatorisk):"
+
+#: wpf.class.php:2687
+msgid "New post in forum:"
+msgstr "Nytt svar i Forum:"
+
+#: wpf.class.php:2688
+msgid "DETAILS:"
+msgstr "Detaljer"
+
+#: wpf.class.php:2691
+msgid "Date:"
+msgstr "Datum:"
+
+#: wpf.class.php:2692
+msgid "Reply Content:"
+msgstr "Svars innehåll:"
+
+#: wpf.class.php:2693
+msgid "View Topic Here:"
+msgstr "Visa rubrik här:"
+
+#: wpf.class.php:2742
+#: wpf.class.php:2752
+msgid "Inbox"
+msgstr "Inkorgen"
+
+#: wpf.class.php:2768
+#: wpf.class.php:2781
+msgid "Send Message"
+msgstr "Skicka meddelande"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Kategori"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Ämne"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "Du måste ange ett namn på användargruppen."
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:692
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "Du har valt ett namn som redan finns i databasen, vänligen ange ett annat"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "Användargruppen lades till."
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "Du har inte angivit någon användare att lägga till:"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "Du måste välja en användargrupp"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "Fel"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "Ingen användare med det namnet:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "Varning"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "Användare"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "är redan medlem i gruppen"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "lades till"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "Fel:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "Varningar:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "Tillagda användare:"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "Användargruppen/ -grupperna har tagits bort."
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "Medlem borttagen."
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingel Forum>> Hantera användargrupper"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:757
+#: fs-admin/fs-admin.php:957
+msgid "add new"
+msgstr "lägg till ny"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:811
+msgid "Delete"
+msgstr "Ta bort"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "Lägg till medlemmar"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "Inga medlemmar i denna grupp"
+
+#: fs-admin/fs-admin.php:222
+msgid "Skin successfully activated."
+msgstr "Skalet aktiverat."
+
+#: fs-admin/fs-admin.php:228
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingel Forum>> Skalalternativ"
+
+#: fs-admin/fs-admin.php:229
+msgid "Get More Skins"
+msgstr "Hämta fler skal"
+
+#: fs-admin/fs-admin.php:230
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "Viktigt: Sedan version 1.0.03 är tema mappen flyttad till /wp-content/mingle-forum-skins/"
+
+#: fs-admin/fs-admin.php:230
+msgid "Why did you change it?"
+msgstr "Varför då?"
+
+#: fs-admin/fs-admin.php:233
+msgid "Screenshot"
+msgstr "Skärmdump"
+
+#: fs-admin/fs-admin.php:234
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "Namn"
+
+#: fs-admin/fs-admin.php:235
+msgid "Version"
+msgstr "Version"
+
+#: fs-admin/fs-admin.php:236
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "Beskrivning"
+
+#: fs-admin/fs-admin.php:237
+msgid "Action"
+msgstr "Åtgärd"
+
+#: fs-admin/fs-admin.php:251
+#: fs-admin/fs-admin.php:266
+msgid "In Use"
+msgstr "Används"
+
+#: fs-admin/fs-admin.php:253
+#: fs-admin/fs-admin.php:268
+msgid "Activate"
+msgstr "Aktivera"
+
+#: fs-admin/fs-admin.php:296
+msgid "About Mingle Forum"
+msgstr "Om Mingel Forum"
+
+#: fs-admin/fs-admin.php:299
+msgid "Current Version: "
+msgstr "Aktuell version:"
+
+#: fs-admin/fs-admin.php:303
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Mingel Forumet har ett enda syfte, att \"Gör det enkelt!\" Det togs över ifrån WP forumet och har förbättrats kraftigt. Det har nu fullt stöd för integration med Mingel-pluginet av Blair Williams och kan köras både med och utan detta. Heder åt Eric Hamby för hans tidigare arbete med Forumscriptet."
+
+#: fs-admin/fs-admin.php:305
+msgid "Author: "
+msgstr "Författare:"
+
+#: fs-admin/fs-admin.php:306
+msgid "Plugin Page:"
+msgstr "Plugin-sida:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Support Forum:"
+msgstr "Supportforum:"
+
+#: fs-admin/fs-admin.php:308
+msgid "Mingle Forum Skins:"
+msgstr "Mingel Forum Teman"
+
+#: fs-admin/fs-admin.php:355
+msgid "Options successfully saved."
+msgstr "Alternativen sparade."
+
+#: fs-admin/fs-admin.php:360
+msgid "Mingle Forum"
+msgstr "Mingel Forum"
+
+#: fs-admin/fs-admin.php:364
+msgid "Statistic"
+msgstr "Statistik"
+
+#: fs-admin/fs-admin.php:365
+msgid "Value"
+msgstr "Värde"
+
+#: fs-admin/fs-admin.php:369
+msgid "Number of posts:"
+msgstr "Antal inlägg:"
+
+#: fs-admin/fs-admin.php:373
+msgid "Number of threads:"
+msgstr "Antal trådar:"
+
+#: fs-admin/fs-admin.php:377
+msgid "Number of users:"
+msgstr "Antal användare:"
+
+#: fs-admin/fs-admin.php:381
+msgid "Total database size:"
+msgstr "Totalt databasstorlek:"
+
+#: fs-admin/fs-admin.php:385
+msgid "Database server:"
+msgstr "Databasservern:"
+
+#: fs-admin/fs-admin.php:389
+msgid "Mingle Forum version:"
+msgstr "Mingel Forum-version:"
+
+#: fs-admin/fs-admin.php:394
+msgid "Mingle Forum >> General Options"
+msgstr "Mingel Forum>> Allmänna alternativ"
+
+#: fs-admin/fs-admin.php:399
+msgid "default "
+msgstr "standard"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Name"
+msgstr "Alternativ Namn"
+
+#: fs-admin/fs-admin.php:404
+msgid "Option Input"
+msgstr "Alternativ inmatning"
+
+#: fs-admin/fs-admin.php:409
+msgid "Posts per page:"
+msgstr "Inlägg per sida:"
+
+#: fs-admin/fs-admin.php:413
+msgid "Threads per page:"
+msgstr "Trådar per sida:"
+
+#: fs-admin/fs-admin.php:419
+msgid "Number of posts for Hot Topic:"
+msgstr "Antalet inlägg under hett ämne:"
+
+#: fs-admin/fs-admin.php:423
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Antalet inlägg under Mycket hett ämne:"
+
+#: fs-admin/fs-admin.php:427
+msgid "Username Display:"
+msgstr "Användarnamn:"
+
+#: fs-admin/fs-admin.php:440
+msgid "New User's Title:"
+msgstr "Titel för nya användare:"
+
+#: fs-admin/fs-admin.php:444
+msgid "User Level 1 Title:"
+msgstr "Titel på Nivå 1-användare:"
+
+#: fs-admin/fs-admin.php:448
+msgid "User Level 1 Count:"
+msgstr "Antal användare på Nivå 1:"
+
+#: fs-admin/fs-admin.php:449
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:452
+msgid "User Level 2 Title:"
+msgstr "Titel på Nivå 2-användare:"
+
+#: fs-admin/fs-admin.php:456
+msgid "User Level 2 Count:"
+msgstr "Antal användare på Nivå 2:"
+
+#: fs-admin/fs-admin.php:457
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:460
+msgid "User Level 3 Title:"
+msgstr "Titel på Nivå 3-användare:"
+
+#: fs-admin/fs-admin.php:464
+msgid "User Level 3 Count:"
+msgstr "Antal användare på Nivå 3:"
+
+#: fs-admin/fs-admin.php:465
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:468
+msgid "Notify Admin on new posts:"
+msgstr "Informera Administratören om nya inlägg:"
+
+#: fs-admin/fs-admin.php:472
+#: fs-admin/fs-admin.php:495
+#: fs-admin/fs-admin.php:519
+msgid "Off"
+msgstr "Av"
+
+#: fs-admin/fs-admin.php:475
+msgid "Show Forum Login Form:"
+msgstr "Visa Forumets Loggin mall:"
+
+#: fs-admin/fs-admin.php:479
+#: fs-admin/fs-admin.php:487
+#: fs-admin/fs-admin.php:503
+#: fs-admin/fs-admin.php:511
+#: fs-admin/fs-admin.php:527
+msgid "On"
+msgstr "På"
+
+#: fs-admin/fs-admin.php:483
+msgid "Show Avatars in the forum:"
+msgstr "Visa avatarer i forumet:"
+
+#: fs-admin/fs-admin.php:491
+msgid "Allow Images to be uploaded:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:499
+msgid "Show users Bio at the bottom of posts:"
+msgstr "Visa användarnas Profil info i slutet av inlägg:"
+
+#: fs-admin/fs-admin.php:507
+msgid "Use Forum RSS:"
+msgstr "RSS-flöden"
+
+#: fs-admin/fs-admin.php:515
+msgid "Use SEO friendly URLs:"
+msgstr "Använd SEO vänliga URLs:"
+
+#: fs-admin/fs-admin.php:515
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "VIKTIGT: Lämna denna AV om dina permalänkar är satta till  'default'"
+
+#: fs-admin/fs-admin.php:523
+msgid "Registration required to post:"
+msgstr "Registrering krävs för att skriva:"
+
+#: fs-admin/fs-admin.php:532
+msgid "Installed version:"
+msgstr "Installerad versionen:"
+
+#: fs-admin/fs-admin.php:536
+msgid "GD Library is not installed"
+msgstr "GD-biblioteket är inte installerat"
+
+#: fs-admin/fs-admin.php:539
+msgid "Use Captcha for unregistered users:"
+msgstr "Använd Captcha för oregistrerade användare:"
+
+#: fs-admin/fs-admin.php:543
+msgid "Requires "
+msgstr "Kräver"
+
+#: fs-admin/fs-admin.php:543
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Om du har 'Måste vara medlem för att göra inlägg' aktiverat, lämmna denna AV"
+
+#: fs-admin/fs-admin.php:547
+msgid "Date format:"
+msgstr "Datumformat:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Default date:"
+msgstr "Standard datum:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Check "
+msgstr "Kontrollera"
+
+#: fs-admin/fs-admin.php:547
+msgid "for date formatting."
+msgstr "för datum formatering."
+
+#: fs-admin/fs-admin.php:663
+msgid "Groups deleted:"
+msgstr "Grupper raderade:"
+
+#: fs-admin/fs-admin.php:664
+msgid "Forums deleted:"
+msgstr "Forum raderade:"
+
+#: fs-admin/fs-admin.php:665
+msgid "Threads deleted:"
+msgstr "Trådar raderade:"
+
+#: fs-admin/fs-admin.php:666
+msgid "Posts deleted:"
+msgstr "Inlägg raderade:"
+
+#: fs-admin/fs-admin.php:690
+#: fs-admin/fs-admin.php:714
+msgid "You must enter a name"
+msgstr "Du måste ange ett namn"
+
+#: fs-admin/fs-admin.php:699
+msgid "Category added successfully"
+msgstr "Kategori tillagd"
+
+#: fs-admin/fs-admin.php:711
+msgid "You must select a category"
+msgstr "Du måste välja en kategori"
+
+#: fs-admin/fs-admin.php:717
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Du har valt ett forumnamn som redan finns i den här gruppen. Vänligen ange ett annat"
+
+#: fs-admin/fs-admin.php:724
+msgid "Forum added successfully"
+msgstr "Forum tillagt"
+
+#: fs-admin/fs-admin.php:751
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingel Forum>> Kategorier och forum"
+
+#: fs-admin/fs-admin.php:773
+#: fs-admin/fs-admin.php:803
+msgid "Modify"
+msgstr "Ändra"
+
+#: fs-admin/fs-admin.php:812
+msgid "Add forum"
+msgstr "Lägg till forum"
+
+#: fs-admin/fs-admin.php:837
+msgid "Group Moved Down"
+msgstr "Flytta upp Grupp"
+
+#: fs-admin/fs-admin.php:847
+msgid "Forum Moved Down"
+msgstr "Flytta ner Forum"
+
+#: fs-admin/fs-admin.php:857
+msgid "Group Moved Up"
+msgstr "Flytta ner Grupp"
+
+#: fs-admin/fs-admin.php:867
+msgid "Forum Moved Up"
+msgstr "Flytta upp Forum"
+
+#: fs-admin/fs-admin.php:904
+#: fs-admin/fs-admin.php:911
+msgid "Moderator successfully removed."
+msgstr "Moderator borttagen."
+
+#: fs-admin/fs-admin.php:906
+msgid "Moderator successfully saved."
+msgstr "Moderator sparad."
+
+#: fs-admin/fs-admin.php:913
+msgid "Moderator NOT removed."
+msgstr "Moderator EJ borttagen."
+
+#: fs-admin/fs-admin.php:927
+msgid "You must select a user"
+msgstr "Du måste välja en användare"
+
+#: fs-admin/fs-admin.php:931
+msgid "Global Moderator added successfully"
+msgstr "Global Moderator tillagd"
+
+#: fs-admin/fs-admin.php:935
+msgid "Moderator added successfully"
+msgstr "Moderator tillagd"
+
+#: fs-admin/fs-admin.php:957
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingel Forum>> Hantera Moderatorer"
+
+#: fs-admin/fs-admin.php:966
+msgid "Currently moderating"
+msgstr "Modererar just nu"
+
+#: fs-admin/fs-admin.php:970
+msgid "Update"
+msgstr "Uppdatera"
+
+#: fs-admin/fs-admin.php:980
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Global moderator: (Medlemmen kan moderera alla forum)"
+
+#: fs-admin/fs-admin.php:999
+msgid "No moderators yet"
+msgstr "Inga moderatorer ännu"
+
+#: fs-admin/fs-admin.php:1024
+msgid "Ads saved successfully"
+msgstr "Reklamen sparades"
+
+#: fs-admin/fs-admin.php:1029
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingel Forum Reklam>> Alternativ"
+
+#: fs-admin/fs-admin.php:1031
+msgid "HTML is allowed in all ad areas below"
+msgstr "HTML är godkända i alla reklam områden nedanför"
+
+#: fs-admin/fs-admin.php:1035
+msgid "Ads Option"
+msgstr "Reklam Inställningar"
+
+#: fs-admin/fs-admin.php:1042
+msgid "Enable Area Above Forum"
+msgstr "Aktivera området ovanför Forum"
+
+#: fs-admin/fs-admin.php:1044
+#: fs-admin/fs-admin.php:1052
+#: fs-admin/fs-admin.php:1060
+#: fs-admin/fs-admin.php:1068
+#: fs-admin/fs-admin.php:1076
+#: fs-admin/fs-admin.php:1084
+#: fs-admin/fs-admin.php:1092
+msgid "css-value:"
+msgstr "css-värde:"
+
+#: fs-admin/fs-admin.php:1050
+msgid "Enable Area Below Forum"
+msgstr "Aktivera området nedanför Forum"
+
+#: fs-admin/fs-admin.php:1058
+msgid "Enable Area Above Branding"
+msgstr "Aktivera området ovanför Märkningen"
+
+#: fs-admin/fs-admin.php:1066
+msgid "Enable Area Above Info Center"
+msgstr "Aktivera område ovanför Informationen"
+
+#: fs-admin/fs-admin.php:1074
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Aktivera området ovanför brödsmulorna"
+
+#: fs-admin/fs-admin.php:1082
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Aktivera området ovanför Snabbsvars mallen"
+
+#: fs-admin/fs-admin.php:1090
+msgid "Enable Area Below First Post"
+msgstr "Aktivera området nedanför första inlägget"
+
+#: fs-admin/fs-admin.php:1097
+msgid "Below you can modify/add your own CSS"
+msgstr "Nedanför kan du ändra/lägga till den egen CSS"
+
+#: fs-admin/fs-admin.php:1098
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "NOTERING: Om du inte vet vad detta är till för, lämmna det tomt"
+
+#: fs-admin/fs-admin.php:1105
+msgid "Save Options"
+msgstr "Spara inställningar"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "Lägg till forum till"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "Beskrivning:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "Spara forum"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "Lägg till Kategori"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "Spara Kategori"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "Spara användargrupp"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "Välj användargrupp"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "Lägg till användare"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "Du måste ange ett gruppnamn"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "Gruppen har uppdaterats"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "Du måste ange ett forumnamn"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "Forumet har uppdaterats"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "Redigera kategori"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "Användargrupper:"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "Medlemmarna i  markerade användargrupper har tillgång till forumen i den här kategorin:"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "Det finns inga användargrupper"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "Spara grupp"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "Redigera forum"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "Välj användare"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "Lägg till moderator"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "Du måste ange ett namn för användargruppen"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "Användargruppen har uppdaterats"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "Redigera användragruppen"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "Spara användargruppen"
+
+#~ msgid "General Options"
+#~ msgstr "Allmänna alternativ"
+
+#~ msgid "Categories and forums"
+#~ msgstr "Kategorier och forum"
+
+#~ msgid "Remove this post?"
+#~ msgstr "Ta bort det här inlägget?"
+
+#~ msgid "Notify me when I get new Messages?"
+#~ msgstr "Meddela mig när jag får nya meddelanden?"
+
+#~ msgid "Messages"
+#~ msgstr "Meddelanden:"
+
+#~ msgid "New Message"
+#~ msgstr "Nytt meddelande"
+
+#~ msgid "Read Message Thread"
+#~ msgstr "Läs meddelandetråd"
+
+#~ msgid "new"
+#~ msgstr "nytt"
+
+#~ msgid "Use Private Messages:"
+#~ msgstr "Använd Privata meddelanden:"
+
+#~ msgid "I recommend disabling this and using"
+#~ msgstr "Jag rekommenderar att inaktivera denna och använda"
+
+#~ msgid "instead."
+#~ msgstr " istället."
+
+#~ msgid "Maximum Messages In Inbox (0 = unlimited):"
+#~ msgstr "Max antal meddelanden i Inkorgen (0 = obegränsat):"
+
+#~ msgid "Administratos always have unlimited messages"
+#~ msgstr "Adminstratörer har obegränsad storlek på inkorgen"
+
+#~ msgid "Message Deleted"
+#~ msgstr "Meddelandet raderat"
+
+#~ msgid "Your Message Was Deleted!"
+#~ msgstr "Ditt meddelande har raderats!"
+
+#~ msgid "Back To Your Inbox"
+#~ msgstr "Tillbaka till inkorgen"
+
+#~ msgid "ERROR"
+#~ msgstr "FEL"
+
+#~ msgid "You Do Not Have Permission To View This!"
+#~ msgstr "Du har inte behörighet att visa denna!"
+
+#~ msgid "Create New Message"
+#~ msgstr "Skapa nytt meddelande"
+
+#~ msgid "Unlimited"
+#~ msgstr "Obegränsat"
+
+#~ msgid "Message Box Size"
+#~ msgstr "Meddelandeboxens storlek"
+
+#~ msgid "of"
+#~ msgstr "av"
+
+#~ msgid "Message Box Is Full!"
+#~ msgstr "Inkorgen är full!"
+
+#~ msgid "You cannot send/receive any new messages"
+#~ msgstr "Du kan inte skicka eller ta emot några nya meddelanden"
+
+#~ msgid "Started By"
+#~ msgstr "Startad av"
+
+#~ msgid "Last Reply"
+#~ msgstr "Senaste svar"
+
+#~ msgid "Unread"
+#~ msgstr "Oläst(a)"
+
+#~ msgid "Read"
+#~ msgstr "Läst(a)"
+
+#~ msgid "No Messages"
+#~ msgstr "Inga meddelanden"
+
+#~ msgid "Sorry You Have No Messages!"
+#~ msgstr "Du har inga nya meddelanden"
+
+#~ msgid "Message Sent"
+#~ msgstr "Meddelandet skickat"
+
+#~ msgid "The Message Was Successfully Sent!"
+#~ msgstr "Meddelandet har skickats!"
+
+#~ msgid "Back To Your Messages"
+#~ msgstr "Tillbaka till inkorgen"
+
+#~ msgid "You have recieved a new message from"
+#~ msgstr "Du har fått ett nytt meddelande från"
+
+#~ msgid "follow this link to view:"
+#~ msgstr "följ denna länk för att se:"
+
+#~ msgid "Message Could Not Be Sent!"
+#~ msgstr "Meddelandet kunde inte skickas!"
+
+#~ msgid "The recipients inbox is FULL!"
+#~ msgstr "Mottagarens inkorg är full!"
+
+#~ msgid "Please fill in all fields before submitting message!"
+#~ msgstr "Fyll i alla fält innan du skickar meddelandet!"
+
+#~ msgid "To:"
+#~ msgstr "Till:"
+
+#~ msgid "Select User"
+#~ msgstr "Välj användare"
+
+#~ msgid "Click this box and begin typing the username to find them faster"
+#~ msgstr ""
+#~ "Klicka i fältet och börja skriva medlemsnamnet för at hitta dem snabbare"
+
+#~ msgid "You Must Be Logged In To Create Private Messages!"
+#~ msgstr "Du måste vara inloggad för att kunna skapa personliga meddelanden!"
+
+#~ msgid "Sender"
+#~ msgstr "Avsändare"
+
+#~ msgid "Message Contents"
+#~ msgstr "Meddelandeinnehåll"
+
+#~ msgid "Reply:"
+#~ msgstr "Svara:"
+
+#~ msgid "Feed"
+#~ msgstr "Feed"
+
+#, fuzzy
+#~ msgid "Email:"
+#~ msgstr "E-post"
+
+#~ msgid "Mingle Forum Themes:"
+#~ msgstr "Mingel Forum-teman:"
+
+#~ msgid "Posts"
+#~ msgstr "Inlägg"
+
+#~ msgid "Topics "
+#~ msgstr "Ämnen"
+
+#~ msgid "Posted on: "
+#~ msgstr "Skrivet den:"
+
+#~ msgid "Allow email notifications?"
+#~ msgstr "Tillåt e-postmeddelanden?"
+
+#~ msgid "Notify"
+#~ msgstr "Underrätta"
+
+#~ msgid "View Inbox"
+#~ msgstr "Visa Inkorgen"
+
+#~ msgid "Contact:"
+#~ msgstr "Kontakt:"
+
+#~ msgid "Inbox size"
+#~ msgstr "Inkorgen storlek"
+
+#~ msgid "total"
+#~ msgstr "totalt"
+
+#~ msgid "From"
+#~ msgstr "Från"
+
+#~ msgid "NEW"
+#~ msgstr "NY"
+
+#~ msgid "OLD"
+#~ msgstr "GAMMAL"
+
+#~ msgid "Empty Inbox"
+#~ msgstr "Tomma Inkorg"
+
+#~ msgid "Your Inbox Is Empty!"
+#~ msgstr "Inkorgen är tom!"
+
+#~ msgid "Try Again"
+#~ msgstr "Försök igen"
+
+#~ msgid "Reply To Message"
+#~ msgstr "Svara på meddelande"

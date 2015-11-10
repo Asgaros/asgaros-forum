@@ -1,0 +1,1904 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum v1.0.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-21 21:58-0700\n"
+"PO-Revision-Date: 2011-01-21 23:36-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ mingleforum
+#: feed.php:18
+#: feed.php:19
+msgid "Forum Feed"
+msgstr "フォーラムのフィード"
+
+# @ mingleforum
+#: feed.php:23
+msgid "Forum Topic:"
+msgstr "フォーラムのトピック："
+
+# @ mingleforum
+#: feed.php:24
+#: wpf.class.php:1806
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "フォーラム"
+
+# @ mingleforum
+#: feed.php:24
+#: wpf.class.php:857
+msgid "Topic: "
+msgstr "トピック："
+
+#: feed.php:65
+msgid "Feeds are disabled"
+msgstr ""
+
+# @ mingleforum
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "そのようなユーザはいません"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr ""
+
+# @ mingleforum
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "フォーラムオプションを編集"
+
+# @ mingleforum
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "自分のプロフィールを公開しますか？"
+
+# @ mingleforum
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "これらのトピックに更新があった場合メールでお知らせします："
+
+# @ mingleforum
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:543
+msgid "Save options"
+msgstr "オプションを保存"
+
+# @ mingleforum
+#: wpf-edit-profile.php:53
+#: wpf.class.php:614
+#: wpf.class.php:2069
+#: wpf.class.php:2095
+#: wpf.class.php:2113
+#: wpf.class.php:2135
+#: wpf.class.php:2144
+#: wpf.class.php:2202
+msgid "Cheating, are we?"
+msgstr "不正行為は、私達は何ですか？"
+
+# @ mingleforum
+#: wpf-insert.php:28
+msgid "Security code does not mach"
+msgstr "セキュリティコードが一致しません"
+
+# @ mingleforum
+#: wpf-insert.php:43
+#: wpf-insert.php:48
+#: wpf-insert.php:106
+#: wpf-insert.php:111
+#: wpf-insert.php:152
+#: wpf-insert.php:157
+msgid "An error occured"
+msgstr "エラーが発生しました"
+
+# @ mingleforum
+#: wpf-insert.php:44
+#: wpf-insert.php:107
+#: wpf-insert.php:153
+msgid "You must enter a subject"
+msgstr "件名を入力してください"
+
+# @ mingleforum
+#: wpf-insert.php:49
+#: wpf-insert.php:112
+#: wpf-insert.php:158
+msgid "You must enter a message"
+msgstr "メッセージを入力してください"
+
+# @ mingleforum
+#: wpf-insert.php:68
+msgid "created the forum topic:"
+msgstr "フォーラムのトピックを作成："
+
+# @ mingleforum
+#: wpf-insert.php:123
+msgid "replied to the forum topic:"
+msgstr "フォーラムのトピックに返信："
+
+# @ mingleforum
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "引用"
+
+# @ mingleforum
+#: wpf-post.php:10
+#: wpf.class.php:677
+#: wpf.class.php:685
+#: wpf.class.php:1154
+msgid "on"
+msgstr "に"
+
+# @ mingleforum
+#: wpf-post.php:20
+#: wpf.class.php:1279
+#: wpf.class.php:1852
+msgid "Post Reply"
+msgstr "投稿に返信"
+
+# @ mingleforum
+#: wpf-post.php:23
+#: wpf-post.php:63
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "件名："
+
+#: wpf-post.php:24
+#: wpf.class.php:907
+msgid "Re:"
+msgstr ""
+
+# @ mingleforum
+#: wpf-post.php:27
+#: wpf-post.php:67
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "メッセージ："
+
+# @ mingleforum
+#: wpf-post.php:38
+#: wpf-thread.php:28
+msgid "Submit"
+msgstr "送信"
+
+# @ mingleforum
+#: wpf-post.php:60
+#: wpf.class.php:1276
+#: wpf.class.php:1855
+msgid "Edit Post"
+msgstr "投稿の編集"
+
+# @ mingleforum
+#: wpf-post.php:76
+msgid "Save Post"
+msgstr "投稿の保存"
+
+# @ mingleforum
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "新しいトピックを投稿"
+
+# @ mingleforum
+#: wpf-thread.php:36
+msgid "Sorry. you don't have permission to post."
+msgstr "申し訳ありません。投稿にアクセスする権限がありません。"
+
+#: wpf.class.php:150
+#: fs-admin/fs-admin.php:440
+msgid "Newbie"
+msgstr ""
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:444
+msgid "Beginner"
+msgstr ""
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:452
+msgid "Advanced"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:460
+#, fuzzy
+msgid "Pro"
+msgstr "プロフィール"
+
+# @ mingleforum
+#: wpf.class.php:171
+#: wpf.class.php:172
+#, fuzzy
+msgid "Mingle Forum - Options"
+msgstr "Mingle Forum >> スキンオプション"
+
+# @ mingleforum
+#: wpf.class.php:172
+#, fuzzy
+msgid "Options"
+msgstr "オプション名"
+
+#: wpf.class.php:173
+msgid "Ads"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:174
+msgid "Skins"
+msgstr "スキン"
+
+# @ mingleforum
+#: wpf.class.php:175
+#, fuzzy
+msgid "Forum Structure - Categories & Forums"
+msgstr "カテゴリとフォーラム"
+
+#: wpf.class.php:175
+msgid "Forum Structure"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:176
+msgid "Moderators"
+msgstr "モデレーター"
+
+# @ mingleforum
+#: wpf.class.php:177
+msgid "User Groups"
+msgstr "ユーザグループ"
+
+# @ mingleforum
+#: wpf.class.php:178
+msgid "About"
+msgstr "アバウト"
+
+# @ mingleforum
+#: wpf.class.php:189
+#: wpf.class.php:190
+msgid "Forums Latest Activity"
+msgstr "フォーラムの最新情報"
+
+# @ mingleforum
+#: wpf.class.php:209
+#: wpf.class.php:229
+msgid "by:"
+msgstr "by:"
+
+# @ mingleforum
+#: wpf.class.php:246
+msgid "Title to display in the sidebar:"
+msgstr "サイドバーに表示するタイトル："
+
+# @ mingleforum
+#: wpf.class.php:248
+msgid "How many items would you like to display?"
+msgstr "表示する項目数"
+
+# @ mingleforum
+#: wpf.class.php:645
+msgid "Page loaded in:"
+msgstr "表示するページ："
+
+# @ mingleforum
+#: wpf.class.php:645
+msgid "seconds."
+msgstr "秒。"
+
+# @ mingleforum
+#: wpf.class.php:648
+msgid "Mingle Forum "
+msgstr "Mingle Forum "
+
+# @ mingleforum
+#: wpf.class.php:649
+msgid "Version:"
+msgstr "バージョン："
+
+# @ mingleforum
+#: wpf.class.php:668
+#: wpf.class.php:2266
+msgid "Guest"
+msgstr "ゲスト"
+
+# @ mingleforum
+#: wpf.class.php:677
+#: wpf.class.php:1153
+msgid "by"
+msgstr "by"
+
+# @ mingleforum
+#: wpf.class.php:685
+msgid "Latest Post by"
+msgstr "最新の投稿"
+
+# @ mingleforum
+#: wpf.class.php:708
+#: wpf.class.php:839
+msgid "Sorry, but you don't have access to this forum"
+msgstr "申し訳ありませんが、あなたはこのフォーラムへアクセスできません"
+
+# @ mingleforum
+#: wpf.class.php:718
+#: wpf.class.php:2354
+msgid "Status"
+msgstr "ステータス"
+
+# @ mingleforum
+#: wpf.class.php:719
+#: wpf.class.php:2355
+msgid "Topic Title"
+msgstr "トピックのタイトル"
+
+# @ mingleforum
+#: wpf.class.php:720
+#: wpf.class.php:2356
+#: wpf.class.php:2544
+msgid "Started by"
+msgstr "Started by"
+
+# @ mingleforum
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Replies"
+msgstr "返信"
+
+# @ mingleforum
+#: wpf.class.php:722
+msgid "Views"
+msgstr "Views"
+
+# @ mingleforum
+#: wpf.class.php:723
+#: wpf.class.php:1153
+#: wpf.class.php:2358
+msgid "Last post"
+msgstr "最新の投稿"
+
+# @ mingleforum
+#: wpf.class.php:727
+msgid "Sticky Topics"
+msgstr "付箋トピックス"
+
+# @ mingleforum
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Move Topic"
+msgstr "トピックを移動"
+
+# @ mingleforum
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+msgid "Delete Topic"
+msgstr "トピックを削除"
+
+# @ mingleforum
+#: wpf.class.php:743
+#: wpf.class.php:772
+msgid "New posts since last visit"
+msgstr "最終訪問日以降の新しい投稿"
+
+# @ mingleforum
+#: wpf.class.php:760
+msgid "Forum Topics"
+msgstr "フォーラムのトピックス"
+
+# @ mingleforum
+#: wpf.class.php:827
+msgid "Remove this topic from your email notifications?"
+msgstr "このトピックの更新を、メールでのお知らせしないようにしますか？"
+
+# @ mingleforum
+#: wpf.class.php:829
+msgid "Add this topic to your email notifications?"
+msgstr "このトピックに更新があったらメールでお知らせしますか？"
+
+#: wpf.class.php:850
+msgid "TOPIC CLOSED"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:856
+msgid "Author"
+msgstr "著者"
+
+# @ mingleforum
+#: wpf.class.php:872
+#: wpf.class.php:2410
+msgid "Posts:"
+msgstr "投稿："
+
+# @ mingleforum
+#: wpf.class.php:905
+#, fuzzy
+msgid "Quick Reply"
+msgstr "返信"
+
+#: wpf.class.php:914
+msgid "Submit Quick Reply"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:936
+#: wpf_define.php:36
+msgid "Post"
+msgstr "投稿"
+
+# @ mingleforum
+#: wpf.class.php:939
+#, fuzzy
+msgid "on:"
+msgstr "に"
+
+# @ mingleforum
+#: wpf.class.php:943
+#: wpf.class.php:952
+#: wpf.class.php:2282
+msgid "Quote"
+msgstr "引用"
+
+# @ mingleforum
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:961
+msgid "Remove"
+msgstr "削除"
+
+# @ mingleforum
+#: wpf.class.php:947
+#: wpf.class.php:956
+msgid "Edit"
+msgstr "編集"
+
+# @ mingleforum
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Topics: "
+msgstr "トピック："
+
+# @ mingleforum
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Posts: "
+msgstr "投稿："
+
+# @ mingleforum
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "New posts"
+msgstr "新規投稿"
+
+# @ mingleforum
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "No new posts"
+msgstr "新しい投稿はありません"
+
+#: wpf.class.php:1040
+msgid "Mark All Read"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:1151
+msgid "No topics yet"
+msgstr "まだトピックがありません"
+
+# @ mingleforum
+#: wpf.class.php:1154
+msgid "in"
+msgstr "in"
+
+# @ mingleforum
+#: wpf.class.php:1205
+msgid "Forums RSS"
+msgstr "Forums RSS"
+
+#: wpf.class.php:1216
+msgid "Are you sure you want to remove this?"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:1270
+#: wpf.class.php:1845
+msgid "Search Results"
+msgstr "検索結果"
+
+# @ mingleforum
+#: wpf.class.php:1273
+msgid "Profile"
+msgstr "プロフィール"
+
+# @ mingleforum
+#: wpf.class.php:1282
+#: wpf.class.php:1502
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:1858
+msgid "New Topic"
+msgstr "新規トピック"
+
+# @ mingleforum
+#: wpf.class.php:1349
+msgid "Moderators:"
+msgstr "モデレーター："
+
+# @ mingleforum
+#: wpf.class.php:1525
+#: wpf.class.php:1538
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "Undo Sticky"
+msgstr "付箋を元に戻す"
+
+# @ mingleforum
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+msgid "Sticky"
+msgstr "付箋"
+
+# @ mingleforum
+#: wpf.class.php:1530
+#: wpf.class.php:1543
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+#, fuzzy
+msgid "Re-open"
+msgstr "削除"
+
+# @ mingleforum
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+#, fuzzy
+msgid "Close"
+msgstr "コード"
+
+# @ mingleforum
+#: wpf.class.php:1552
+#: wpf.class.php:1633
+#: wpf.class.php:1650
+msgid "Reply"
+msgstr "返信"
+
+# @ mingleforum
+#: wpf.class.php:1559
+#: wpf.class.php:1575
+#, fuzzy
+msgid "Unsubscribe"
+msgstr "登録"
+
+# @ mingleforum
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Subscribe"
+msgstr "登録"
+
+# @ mingleforum
+#: wpf.class.php:1564
+#, fuzzy
+msgid "RSS feed"
+msgstr "RSS feed"
+
+# @ mingleforum
+#: wpf.class.php:1580
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+#, fuzzy
+msgid "RSS-Feed"
+msgstr "RSS feed"
+
+# @ mingleforum
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My profile"
+msgstr "私のプロフィール"
+
+# @ mingleforum
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My Profile"
+msgstr "私のプロフィール"
+
+# @ mingleforum
+#: wpf.class.php:1629
+#: wpf.class.php:1646
+msgid "Forum Home"
+msgstr "フォーラムトップ"
+
+# @ mingleforum
+#: wpf.class.php:1630
+#: wpf.class.php:1647
+#: wpf.class.php:1923
+msgid "Log out"
+msgstr "ログアウト"
+
+# @ mingleforum
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:2453
+msgid "Search"
+msgstr "検索"
+
+# @ mingleforum
+#: wpf.class.php:1720
+msgid "You are logged in as:"
+msgstr "あなたはログイン中です："
+
+# @ mingleforum
+#: wpf.class.php:1726
+msgid "Username: "
+msgstr "ユーザー名："
+
+# @ mingleforum
+#: wpf.class.php:1727
+msgid "Password: "
+msgstr "パスワード："
+
+# @ mingleforum
+#: wpf.class.php:1729
+msgid "Remember Me"
+msgstr "ログイン状態を記憶する"
+
+# @ mingleforum
+#: wpf.class.php:1765
+msgid "Administrator"
+msgstr "管理者"
+
+# @ mingleforum
+#: wpf.class.php:1769
+msgid "Moderator"
+msgstr "モデレーター"
+
+# @ mingleforum
+#: wpf.class.php:1839
+msgid "New Topics since last visit"
+msgstr "最終訪問日以降の新しいトピック"
+
+# @ mingleforum
+#: wpf.class.php:1849
+msgid "Profile Info"
+msgstr "プロフィール情報"
+
+# @ mingleforum
+#: wpf.class.php:1913
+msgid "Edit Profile"
+msgstr "プロフィールを編集"
+
+# @ mingleforum
+#: wpf.class.php:1917
+#: wpf.class.php:1929
+msgid "Welcome"
+msgstr "ようこそ"
+
+# @ mingleforum
+#: wpf.class.php:1918
+msgid "Your last visit was:"
+msgstr "最終訪問日："
+
+# @ mingleforum
+#: wpf.class.php:1920
+msgid "Show new topics since your last visit"
+msgstr "最終訪問日以降の新しい投稿を表示"
+
+# @ mingleforum
+#: wpf.class.php:1921
+msgid "Edit your forum options"
+msgstr "あなたのフォーラムオプションを編集"
+
+# @ mingleforum
+#: wpf.class.php:1928
+msgid "Welcome Guest, please login or"
+msgstr "ようこそ、ゲストさん。ログインまたは"
+
+# @ mingleforum
+#: wpf.class.php:1928
+msgid "register."
+msgstr "ユーザ登録をしてください。"
+
+# @ mingleforum
+#: wpf.class.php:1933
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "ようこそゲストさん。このフォーラムに投稿するには"
+
+# @ mingleforum
+#: wpf.class.php:1933
+msgid "registration."
+msgstr "ユーザ登録が必要です。"
+
+#: wpf.class.php:1941
+msgid "Show/Hide Header"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:1955
+msgid "Search forums"
+msgstr "フォーラムを検索"
+
+# @ mingleforum
+#: wpf.class.php:1990
+#: wpf.class.php:2021
+msgid "Pages:"
+msgstr "ページ："
+
+# @ mingleforum
+#: wpf.class.php:2003
+#: wpf.class.php:2034
+#, fuzzy
+msgid "First"
+msgstr "リスト"
+
+# @ mingleforum
+#: wpf.class.php:2014
+#: wpf.class.php:2045
+#, fuzzy
+msgid "Last"
+msgstr "リスト"
+
+# @ mingleforum
+#: wpf.class.php:2132
+msgid "Post deleted"
+msgstr "投稿は削除されました"
+
+# @ mingleforum
+#: wpf.class.php:2259
+#: wpf.class.php:2263
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "プロフィールを表示"
+
+# @ mingleforum
+#: wpf.class.php:2277
+msgid "Bold"
+msgstr "太字"
+
+# @ mingleforum
+#: wpf.class.php:2278
+msgid "Italic"
+msgstr "斜体"
+
+# @ mingleforum
+#: wpf.class.php:2279
+msgid "Underline"
+msgstr "下線"
+
+# @ mingleforum
+#: wpf.class.php:2280
+msgid "Strikethrough"
+msgstr "打消線"
+
+# @ mingleforum
+#: wpf.class.php:2281
+msgid "Code"
+msgstr "コード"
+
+# @ mingleforum
+#: wpf.class.php:2283
+msgid "List"
+msgstr "リスト"
+
+# @ mingleforum
+#: wpf.class.php:2284
+msgid "List item"
+msgstr "リスト項目"
+
+# @ mingleforum
+#: wpf.class.php:2285
+msgid "Link"
+msgstr "リンク"
+
+# @ mingleforum
+#: wpf.class.php:2286
+msgid "Image"
+msgstr "画像"
+
+# @ mingleforum
+#: wpf.class.php:2287
+msgid "Email"
+msgstr "Email"
+
+# @ mingleforum
+#: wpf.class.php:2288
+msgid "Add Hex Color"
+msgstr "16進数のカラーを追加"
+
+# @ mingleforum
+#: wpf.class.php:2289
+msgid "Embed YouTube Video"
+msgstr "YouTube動画の埋め込み"
+
+#: wpf.class.php:2290
+msgid "Embed Google Map"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:2296
+#, fuzzy
+msgid "Smile"
+msgstr "Email"
+
+#: wpf.class.php:2297
+msgid "Big Grin"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:2298
+#, fuzzy
+msgid "Sad"
+msgstr "and"
+
+#: wpf.class.php:2299
+msgid "Neutral"
+msgstr ""
+
+#: wpf.class.php:2300
+msgid "Razz"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:2301
+#, fuzzy
+msgid "Mad"
+msgstr "and"
+
+#: wpf.class.php:2302
+msgid "Confused"
+msgstr ""
+
+#: wpf.class.php:2303
+msgid "Eek!"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:2304
+#, fuzzy
+msgid "Wink"
+msgstr "リンク"
+
+#: wpf.class.php:2305
+msgid "Surprised"
+msgstr ""
+
+#: wpf.class.php:2306
+msgid "Cool"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:2318
+msgid "Info Center"
+msgstr "情報センター"
+
+# @ mingleforum
+#: wpf.class.php:2325
+msgid "Posts in"
+msgstr "Posts in"
+
+# @ mingleforum
+#: wpf.class.php:2325
+msgid "Topics Made by"
+msgstr "トピック作成者"
+
+# @ mingleforum
+#: wpf.class.php:2325
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "メンバー"
+
+# @ mingleforum
+#: wpf.class.php:2325
+msgid "Latest Member:"
+msgstr "最新メンバー："
+
+# @ mingleforum
+#: wpf.class.php:2351
+msgid "New topics since your last visit"
+msgstr "最終訪問日以降の新しいトピック"
+
+# @ mingleforum
+#: wpf.class.php:2395
+msgid "Summary"
+msgstr "要約"
+
+# @ mingleforum
+#: wpf.class.php:2401
+#: wpf.class.php:2687
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "名前："
+
+# @ mingleforum
+#: wpf.class.php:2406
+msgid "Registered:"
+msgstr "登録："
+
+# @ mingleforum
+#: wpf.class.php:2414
+msgid "Position:"
+msgstr "等級："
+
+# @ mingleforum
+#: wpf.class.php:2417
+msgid "Website:"
+msgstr "ウェブサイト："
+
+# @ mingleforum
+#: wpf.class.php:2421
+msgid "AIM:"
+msgstr "AIM:"
+
+# @ mingleforum
+#: wpf.class.php:2425
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+# @ mingleforum
+#: wpf.class.php:2428
+msgid "Jabber/google Talk:"
+msgstr "Jabber/google Talk:"
+
+# @ mingleforum
+#: wpf.class.php:2432
+msgid "Biographical Info:"
+msgstr "生い立ち："
+
+# @ mingleforum
+#: wpf.class.php:2457
+msgid "Search for:"
+msgstr "探しているもの："
+
+# @ mingleforum
+#: wpf.class.php:2461
+msgid "By user:"
+msgstr "By user:"
+
+# @ mingleforum
+#: wpf.class.php:2466
+msgid "Message Age:"
+msgstr "Message Age:"
+
+# @ mingleforum
+#: wpf.class.php:2467
+msgid "Between"
+msgstr "Between"
+
+# @ mingleforum
+#: wpf.class.php:2467
+msgid "and"
+msgstr "and"
+
+# @ mingleforum
+#: wpf.class.php:2467
+msgid "days"
+msgstr "days"
+
+# @ mingleforum
+#: wpf.class.php:2473
+msgid "Click to choose Forum(s) to  search"
+msgstr "検索するフォーラムをクリックして選択"
+
+# @ mingleforum
+#: wpf.class.php:2495
+msgid "Check all"
+msgstr "すべてをチェック"
+
+# @ mingleforum
+#: wpf.class.php:2500
+msgid "Start Search"
+msgstr "検索開始"
+
+# @ mingleforum
+#: wpf.class.php:2542
+msgid "Subject"
+msgstr "件名"
+
+# @ mingleforum
+#: wpf.class.php:2543
+msgid "Relevance"
+msgstr "関連"
+
+# @ mingleforum
+#: wpf.class.php:2545
+msgid "Posted"
+msgstr "Posted"
+
+# @ mingleforum
+#: wpf.class.php:2611
+msgid "Closed topic"
+msgstr "クローズドトピック"
+
+# @ mingleforum
+#: wpf.class.php:2614
+msgid "Normal topic"
+msgstr "通常のトピック"
+
+# @ mingleforum
+#: wpf.class.php:2617
+msgid "Hot topic"
+msgstr "ホットトピック"
+
+# @ mingleforum
+#: wpf.class.php:2620
+msgid "Very Hot topic"
+msgstr "とてもホットなトピック"
+
+# @ mingleforum
+#: wpf.class.php:2652
+msgid "Security Code:"
+msgstr "セキュリティコード："
+
+# @ mingleforum
+#: wpf.class.php:2671
+#, fuzzy
+msgid "Enter Security Code: (required)"
+msgstr "セキュリティコード："
+
+# @ mingleforum
+#: wpf.class.php:2685
+#, fuzzy
+msgid "New post in forum:"
+msgstr "フォーラムトピックの新しい返信："
+
+# @ mingleforum
+#: wpf.class.php:2686
+msgid "DETAILS:"
+msgstr "詳細："
+
+# @ mingleforum
+#: wpf.class.php:2689
+msgid "Date:"
+msgstr "日付："
+
+# @ mingleforum
+#: wpf.class.php:2690
+msgid "Reply Content:"
+msgstr "返信内容："
+
+# @ mingleforum
+#: wpf.class.php:2691
+msgid "View Topic Here:"
+msgstr "トピックを表示："
+
+#: wpf.class.php:2740
+#: wpf.class.php:2750
+msgid "Inbox"
+msgstr ""
+
+# @ mingleforum
+#: wpf.class.php:2766
+#: wpf.class.php:2779
+msgid "Send Message"
+msgstr "メッセージを送る"
+
+# @ mingleforum
+#: wpf_define.php:33
+msgid "Category"
+msgstr "カテゴリ"
+
+# @ mingleforum
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "トピック"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "ユーザグループの名前を指定してください"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:682
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "その名前は存在します。別のものを指定して下さい。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "ユーザグループが追加されました。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "任意のユーザを指定してください："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "ユーザグループを選択してください"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "エラー"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "ユーザがありません："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "警告"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "ユーザ"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "既にこのグループにあります"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "追加されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "エラー："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "警告："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "ユーザーを追加しました："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "ユーザグループが削除されました。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "メンバーを削除しました。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Forum >> ユーザーグループの管理"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:747
+#: fs-admin/fs-admin.php:947
+msgid "add new"
+msgstr "新しく追加"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:801
+msgid "Delete"
+msgstr "削除"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "メンバー追加"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "このグループにはメンバーがいません"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:221
+msgid "Skin successfully activated."
+msgstr "スキンを適用しました。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:227
+msgid "Mingle Forum >> Skin options"
+msgstr "Mingle Forum >> スキンオプション"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:228
+msgid "Get More Skins"
+msgstr "更にスキンを入手"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:229
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "重要：バージョン1.0.03 より、スキンのディレクトリが wp-content/mingle-forum-skins/ に移動しました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:229
+msgid "Why did you change it?"
+msgstr "変更した理由は？"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:232
+msgid "Screenshot"
+msgstr "スクリーンショット"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:233
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "名前"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:234
+msgid "Version"
+msgstr "バージョン"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:235
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "説明"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:236
+msgid "Action"
+msgstr "アクション"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:250
+#: fs-admin/fs-admin.php:265
+msgid "In Use"
+msgstr "使用中"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:252
+#: fs-admin/fs-admin.php:267
+msgid "Activate"
+msgstr "アクティブ"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:295
+msgid "About Mingle Forum"
+msgstr "Mingle Forum について"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:298
+msgid "Current Version: "
+msgstr "現在のバージョン："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:302
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Mingle Forum は、「シンプルなままに！」という1つの使命を持っています。これは、WP Forum から引き継がれ、大幅に改善されました。今ではMingle plugin (by Blair Williams)との完全な統合、またはそれなしでの統合をサポートします。また、私は Eric Hamby の作成したフォーラムスクリプトに非常に感謝しています。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:304
+msgid "Author: "
+msgstr "著者："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:305
+msgid "Plugin Page:"
+msgstr "プラグインのページ："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:306
+msgid "Support Forum:"
+msgstr "サポートフォーラム："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:307
+#, fuzzy
+msgid "Mingle Forum Skins:"
+msgstr "Mingle Forum "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:354
+msgid "Options successfully saved."
+msgstr "オプションは保存されました。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:359
+msgid "Mingle Forum"
+msgstr "Mingle Forum"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:363
+msgid "Statistic"
+msgstr "統計"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:364
+msgid "Value"
+msgstr "値"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:368
+msgid "Number of posts:"
+msgstr "投稿数："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:372
+msgid "Number of threads:"
+msgstr "スレッド数："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:376
+msgid "Number of users:"
+msgstr "ユーザー数："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:380
+msgid "Total database size:"
+msgstr "全てのデータベースのサイズ："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:384
+msgid "Database server:"
+msgstr "データベースサーバー："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:388
+msgid "Mingle Forum version:"
+msgstr "Mingle Forum のバージョン："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:393
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Forum >> 一般的なオプション"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:398
+msgid "default "
+msgstr "デフォルト"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:402
+msgid "Option Name"
+msgstr "オプション名"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:403
+msgid "Option Input"
+msgstr "オプション入力"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:408
+msgid "Posts per page:"
+msgstr "1ページあたりの投稿："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:412
+msgid "Threads per page:"
+msgstr "1ページあたりのスレッド："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:418
+#, fuzzy
+msgid "Number of posts for Hot Topic:"
+msgstr "ホットトピックの投稿数："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:422
+msgid "Number of posts for Very Hot Topic:"
+msgstr "とてもホットなトピックの投稿数："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:426
+msgid "Username Display:"
+msgstr "ユーザー名の表示："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:439
+msgid "New User's Title:"
+msgstr "新規ユーザーの名称："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:443
+msgid "User Level 1 Title:"
+msgstr "ユーザーレベル1の名称："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:447
+msgid "User Level 1 Count:"
+msgstr "ユーザーレベル1のカウント："
+
+#: fs-admin/fs-admin.php:448
+msgid "25"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:451
+msgid "User Level 2 Title:"
+msgstr "ユーザレベル2の名称："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:455
+msgid "User Level 2 Count:"
+msgstr "ユーザレベル2のカウント："
+
+#: fs-admin/fs-admin.php:456
+msgid "50"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:459
+msgid "User Level 3 Title:"
+msgstr "ユーザーレベル3の名称："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:463
+msgid "User Level 3 Count:"
+msgstr "ユーザーレベル3のカウント："
+
+#: fs-admin/fs-admin.php:464
+msgid "100"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:467
+#, fuzzy
+msgid "Notify Admin on new posts:"
+msgstr "新しい投稿はありません"
+
+#: fs-admin/fs-admin.php:471
+#: fs-admin/fs-admin.php:510
+msgid "Off"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:474
+msgid "Show Forum Login Form:"
+msgstr "フォーラムにログインフォームを表示："
+
+#: fs-admin/fs-admin.php:478
+#: fs-admin/fs-admin.php:486
+#: fs-admin/fs-admin.php:494
+#: fs-admin/fs-admin.php:502
+#: fs-admin/fs-admin.php:518
+msgid "On"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:482
+msgid "Show Avatars in the forum:"
+msgstr "アバターをフォーラムで表示："
+
+#: fs-admin/fs-admin.php:490
+msgid "Show users Bio at the bottom of posts:"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:498
+#, fuzzy
+msgid "Use Forum RSS:"
+msgstr "Forums RSS"
+
+#: fs-admin/fs-admin.php:506
+msgid "Use SEO friendly URLs:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:506
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:514
+msgid "Registration required to post:"
+msgstr "投稿するにはユーザ登録を必須とする："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:523
+msgid "Installed version:"
+msgstr "インストール済みのバージョン："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:527
+msgid "GD Library is not installed"
+msgstr "GDライブラリがインストールされていません"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:530
+msgid "Use Captcha for unregistered users:"
+msgstr "未登録ユーザの登録にはキャプチャを使用する："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:534
+msgid "Requires "
+msgstr "必須"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:534
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "投稿するにはユーザ登録を必須とする場合は、こちらをオフにして下さい"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:538
+msgid "Date format:"
+msgstr "日付フォーマット："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:538
+msgid "Default date:"
+msgstr "デフォルトの日付："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:538
+msgid "Check "
+msgstr "チェック"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:538
+msgid "for date formatting."
+msgstr "日付の書式設定"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:653
+msgid "Groups deleted:"
+msgstr "グループは削除されました："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:654
+msgid "Forums deleted:"
+msgstr "フォーラムは削除されました："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:655
+msgid "Threads deleted:"
+msgstr "スレッドは削除されました："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:656
+msgid "Posts deleted:"
+msgstr "投稿は削除されました："
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:680
+#: fs-admin/fs-admin.php:704
+msgid "You must enter a name"
+msgstr "名前を入力してください"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:689
+msgid "Category added successfully"
+msgstr "カテゴリーは追加されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:701
+msgid "You must select a category"
+msgstr "カテゴリを選択してください"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:707
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "その名前は存在します。別のものを指定して下さい。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:714
+msgid "Forum added successfully"
+msgstr "フォーラムは追加されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:741
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Forum >> カテゴリとフォーラム"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:763
+#: fs-admin/fs-admin.php:793
+msgid "Modify"
+msgstr "変更"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:802
+msgid "Add forum"
+msgstr "フォーラムを追加"
+
+#: fs-admin/fs-admin.php:827
+msgid "Group Moved Down"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:837
+#, fuzzy
+msgid "Forum Moved Down"
+msgstr "フォーラムのフィード"
+
+#: fs-admin/fs-admin.php:847
+msgid "Group Moved Up"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:857
+#, fuzzy
+msgid "Forum Moved Up"
+msgstr "フォーラムのフィード"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:894
+#: fs-admin/fs-admin.php:901
+msgid "Moderator successfully removed."
+msgstr "モデレーターは解除されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:896
+msgid "Moderator successfully saved."
+msgstr "モデレーターは保存されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:903
+msgid "Moderator NOT removed."
+msgstr "モデレーターを解除できませんでした。"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:917
+msgid "You must select a user"
+msgstr "ユーザーを選択してください"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:921
+msgid "Global Moderator added successfully"
+msgstr "グローバルモデレーターが追加されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:925
+msgid "Moderator added successfully"
+msgstr "モデレーターが追加されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:947
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Forum >> モデレーター管理"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:956
+msgid "Currently moderating"
+msgstr "現在のモデレーター"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:960
+msgid "Update"
+msgstr "更新"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:970
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "グローバルモデレーター：すべてのフォーラムを管理することができます"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:989
+msgid "No moderators yet"
+msgstr "モデレーターがいません"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1014
+#, fuzzy
+msgid "Ads saved successfully"
+msgstr "追加されました"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1019
+#, fuzzy
+msgid "Mingle Forum Ads >> options"
+msgstr "Mingle Forum >> スキンオプション"
+
+#: fs-admin/fs-admin.php:1021
+msgid "HTML is allowed in all ad areas below"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1025
+#, fuzzy
+msgid "Ads Option"
+msgstr "オプション名"
+
+#: fs-admin/fs-admin.php:1032
+msgid "Enable Area Above Forum"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1034
+#: fs-admin/fs-admin.php:1042
+#: fs-admin/fs-admin.php:1050
+#: fs-admin/fs-admin.php:1058
+#: fs-admin/fs-admin.php:1066
+#: fs-admin/fs-admin.php:1074
+#: fs-admin/fs-admin.php:1082
+msgid "css-value:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1040
+msgid "Enable Area Below Forum"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1048
+msgid "Enable Area Above Branding"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1056
+msgid "Enable Area Above Info Center"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1064
+msgid "Enable Area Above Breadcrumbs"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1072
+msgid "Enable Area Above Quick Reply Form"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1080
+msgid "Enable Area Below First Post"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1087
+msgid "Below you can modify/add your own CSS"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1088
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1095
+#, fuzzy
+msgid "Save Options"
+msgstr "オプションを保存"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "フォーラムに追加"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "概要："
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "フォーラムを保存"
+
+# @ mingleforum
+#: fs-admin/wpf-add-group.php:5
+#, fuzzy
+msgid "Add category"
+msgstr "カテゴリーの編集"
+
+# @ mingleforum
+#: fs-admin/wpf-add-group.php:19
+#, fuzzy
+msgid "Save category"
+msgstr "カテゴリーの編集"
+
+# @ mingleforum
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "ユーザグループを保存"
+
+# @ mingleforum
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "ユーザーグループを選択"
+
+# @ mingleforum
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "ユーザを追加"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "グループ名を指定してください"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "グループが更新されました"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "フォーラム名を指定してください"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "フォーラムが更新されました"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "カテゴリーの編集"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "ユーザグループ："
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "チェックしたユーザグループのメンバーは、このカテゴリ内のフォーラムへアクセスできます："
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "ユーザグループがありません"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "グループを保存"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "フォーラムを編集"
+
+# @ mingleforum
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "ユーザを選択"
+
+# @ mingleforum
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "モデレーターを追加"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "ユーザグループの名前を指定してください"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "ユーザグループが更新されました"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "ユーザーグループを編集"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "ユーザグループを保存"
+

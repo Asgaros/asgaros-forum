@@ -1,0 +1,1819 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mingle-forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-21 21:58-0700\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team:  <mostafa.s1990@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-KeywordsList: __;_e\n"
+
+#: feed.php:18
+#: feed.php:19
+msgid "Forum Feed"
+msgstr "خوراک ( RSS ) انجمن"
+
+#: feed.php:23
+msgid "Forum Topic:"
+msgstr "عناوین انجمن"
+
+#: feed.php:24
+#: wpf.class.php:1806
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "انجمن"
+
+#: feed.php:24
+#: wpf.class.php:857
+msgid "Topic: "
+msgstr "عنوان ها :"
+
+#: feed.php:65
+msgid "Feeds are disabled"
+msgstr ""
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "همچین کاربری وجود ندارد"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr ""
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "تغییر تنظیمات تالار گفتمان"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "دیگران بتوانند مشخصات من راببینند"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "شما یک اخطاریه برای این موضوع دارید!"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:543
+msgid "Save options"
+msgstr "ذخیره تنظیمات"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:614
+#: wpf.class.php:2069
+#: wpf.class.php:2095
+#: wpf.class.php:2113
+#: wpf.class.php:2135
+#: wpf.class.php:2144
+#: wpf.class.php:2202
+msgid "Cheating, are we?"
+msgstr "ما متقلب هستیم ؟"
+
+#: wpf-insert.php:28
+msgid "Security code does not mach"
+msgstr "کد امنیتی را به درستی وارد نمائید"
+
+#: wpf-insert.php:43
+#: wpf-insert.php:48
+#: wpf-insert.php:106
+#: wpf-insert.php:111
+#: wpf-insert.php:152
+#: wpf-insert.php:157
+msgid "An error occured"
+msgstr "خطایی رخ داده است"
+
+#: wpf-insert.php:44
+#: wpf-insert.php:107
+#: wpf-insert.php:153
+msgid "You must enter a subject"
+msgstr "شما باید یک موضوع برای مطلب خود وارد نمائید"
+
+#: wpf-insert.php:49
+#: wpf-insert.php:112
+#: wpf-insert.php:158
+msgid "You must enter a message"
+msgstr "شما باید پیغامی را وارد نمائید"
+
+#: wpf-insert.php:68
+msgid "created the forum topic:"
+msgstr "ساختن موضوع تالار:"
+
+#: wpf-insert.php:123
+msgid "replied to the forum topic:"
+msgstr "پاسخ به موضوع تالار:"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "نقل قول تالار گفتمان"
+
+#: wpf-post.php:10
+#: wpf.class.php:677
+#: wpf.class.php:685
+#: wpf.class.php:1154
+msgid "on"
+msgstr "در"
+
+#: wpf-post.php:20
+#: wpf.class.php:1279
+#: wpf.class.php:1852
+msgid "Post Reply"
+msgstr "ارسال جواب"
+
+#: wpf-post.php:23
+#: wpf-post.php:63
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "موضوع:"
+
+#: wpf-post.php:24
+#: wpf.class.php:907
+msgid "Re:"
+msgstr "پاسخ:"
+
+#: wpf-post.php:27
+#: wpf-post.php:67
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "پیغام:"
+
+#: wpf-post.php:38
+#: wpf-thread.php:28
+msgid "Submit"
+msgstr "ارسال"
+
+#: wpf-post.php:60
+#: wpf.class.php:1276
+#: wpf.class.php:1855
+msgid "Edit Post"
+msgstr "ویرایش پست"
+
+#: wpf-post.php:76
+msgid "Save Post"
+msgstr "ذخیره پست"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "ارسال پست جدید"
+
+#: wpf-thread.php:36
+msgid "Sorry. you don't have permission to post."
+msgstr "متاسفانه دسترسی شما برای ارسال پست محدود میباشد"
+
+#: wpf.class.php:150
+#: fs-admin/fs-admin.php:440
+msgid "Newbie"
+msgstr ""
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:444
+msgid "Beginner"
+msgstr ""
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:452
+msgid "Advanced"
+msgstr ""
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:460
+#, fuzzy
+msgid "Pro"
+msgstr "مشخصات"
+
+#: wpf.class.php:171
+#: wpf.class.php:172
+#, fuzzy
+msgid "Mingle Forum - Options"
+msgstr "مینگل فروم » تنظیمات پوسته"
+
+#: wpf.class.php:172
+#, fuzzy
+msgid "Options"
+msgstr "تنظیمات نام"
+
+#: wpf.class.php:173
+msgid "Ads"
+msgstr ""
+
+#: wpf.class.php:174
+msgid "Skins"
+msgstr " قالب ها "
+
+#: wpf.class.php:175
+#, fuzzy
+msgid "Forum Structure - Categories & Forums"
+msgstr "دسته ها و انجمن ها"
+
+#: wpf.class.php:175
+msgid "Forum Structure"
+msgstr ""
+
+#: wpf.class.php:176
+msgid "Moderators"
+msgstr " مدیران "
+
+#: wpf.class.php:177
+msgid "User Groups"
+msgstr "گروه کاربران"
+
+#: wpf.class.php:178
+msgid "About"
+msgstr " درباره "
+
+#: wpf.class.php:189
+#: wpf.class.php:190
+msgid "Forums Latest Activity"
+msgstr "آخرین فعالیت های تالار گفتمان"
+
+#: wpf.class.php:209
+#: wpf.class.php:229
+msgid "by:"
+msgstr "توسط:"
+
+#: wpf.class.php:246
+msgid "Title to display in the sidebar:"
+msgstr "عنوان نمایش در ابزارک:"
+
+#: wpf.class.php:248
+msgid "How many items would you like to display?"
+msgstr "چه تعداد نمایش داده شود؟"
+
+#: wpf.class.php:645
+msgid "Page loaded in:"
+msgstr "زمان بارگزاری صفحه :"
+
+#: wpf.class.php:645
+msgid "seconds."
+msgstr "ثانیه."
+
+#: wpf.class.php:648
+msgid "Mingle Forum "
+msgstr "Mingle Forum "
+
+#: wpf.class.php:649
+msgid "Version:"
+msgstr "نسخه:"
+
+#: wpf.class.php:668
+#: wpf.class.php:2266
+msgid "Guest"
+msgstr "مهمان"
+
+#: wpf.class.php:677
+#: wpf.class.php:1153
+msgid "by"
+msgstr "توسط"
+
+#: wpf.class.php:685
+msgid "Latest Post by"
+msgstr "آخرین ارسال کننده:"
+
+#: wpf.class.php:708
+#: wpf.class.php:839
+msgid "Sorry, but you don't have access to this forum"
+msgstr "متاسفانه دسترسی شما به  بخش محدود میباشد"
+
+#: wpf.class.php:718
+#: wpf.class.php:2354
+msgid "Status"
+msgstr "آمار"
+
+#: wpf.class.php:719
+#: wpf.class.php:2355
+msgid "Topic Title"
+msgstr "عنوان پست"
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+#: wpf.class.php:2544
+msgid "Started by"
+msgstr "شروع توسط"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Replies"
+msgstr "پاسخ"
+
+#: wpf.class.php:722
+msgid "Views"
+msgstr "نمایش"
+
+#: wpf.class.php:723
+#: wpf.class.php:1153
+#: wpf.class.php:2358
+msgid "Last post"
+msgstr "آخرین ارسالی"
+
+#: wpf.class.php:727
+msgid "Sticky Topics"
+msgstr "سنجاق کردن پست"
+
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Move Topic"
+msgstr "موضوع جدید"
+
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+msgid "Delete Topic"
+msgstr "حذف پست"
+
+#: wpf.class.php:743
+#: wpf.class.php:772
+msgid "New posts since last visit"
+msgstr "ارسال های جدید بعد از آخرین ورود شما"
+
+#: wpf.class.php:760
+msgid "Forum Topics"
+msgstr "پست های تالار گفتمان"
+
+#: wpf.class.php:827
+msgid "Remove this topic from your email notifications?"
+msgstr "حذف این پست از اخطاریه شما؟"
+
+#: wpf.class.php:829
+msgid "Add this topic to your email notifications?"
+msgstr "ارسال این پست به اخطاریه شما ؟"
+
+#: wpf.class.php:850
+msgid "TOPIC CLOSED"
+msgstr "تایپیک بسته است"
+
+#: wpf.class.php:856
+msgid "Author"
+msgstr "نوسینده"
+
+#: wpf.class.php:872
+#: wpf.class.php:2410
+msgid "Posts:"
+msgstr "پست ها:"
+
+#: wpf.class.php:905
+#, fuzzy
+msgid "Quick Reply"
+msgstr "پاسخ سریع:"
+
+#: wpf.class.php:914
+#, fuzzy
+msgid "Submit Quick Reply"
+msgstr "پاسخ سریع:"
+
+#: wpf.class.php:936
+#: wpf_define.php:36
+msgid "Post"
+msgstr "پست"
+
+#: wpf.class.php:939
+msgid "on:"
+msgstr "در"
+
+#: wpf.class.php:943
+#: wpf.class.php:952
+#: wpf.class.php:2282
+msgid "Quote"
+msgstr "نقل قول"
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:961
+msgid "Remove"
+msgstr "حذف"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+msgid "Edit"
+msgstr "ویرایش"
+
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Topics: "
+msgstr "موضوع :"
+
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Posts: "
+msgstr "پست ها:"
+
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "New posts"
+msgstr "پست های جدید"
+
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "No new posts"
+msgstr "پست جدیدی وجود ندارد"
+
+#: wpf.class.php:1040
+msgid "Mark All Read"
+msgstr ""
+
+#: wpf.class.php:1151
+msgid "No topics yet"
+msgstr "هیچ موضوع وجود ندارد"
+
+#: wpf.class.php:1154
+msgid "in"
+msgstr "در"
+
+#: wpf.class.php:1205
+msgid "Forums RSS"
+msgstr "فید تالار گفتمان"
+
+#: wpf.class.php:1216
+msgid "Are you sure you want to remove this?"
+msgstr ""
+
+#: wpf.class.php:1270
+#: wpf.class.php:1845
+msgid "Search Results"
+msgstr "نتایج جستجو"
+
+#: wpf.class.php:1273
+msgid "Profile"
+msgstr "مشخصات"
+
+#: wpf.class.php:1282
+#: wpf.class.php:1502
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:1858
+msgid "New Topic"
+msgstr "موضوع جدید"
+
+#: wpf.class.php:1349
+msgid "Moderators:"
+msgstr "مدیر این تالار:"
+
+#: wpf.class.php:1525
+#: wpf.class.php:1538
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "Undo Sticky"
+msgstr "عدم علامت گذاری برای سنجاق کردن"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+msgid "Sticky"
+msgstr "سنجاق کردن پست"
+
+#: wpf.class.php:1530
+#: wpf.class.php:1543
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Re-open"
+msgstr "بازکردن مجدد"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Close"
+msgstr "بسته"
+
+#: wpf.class.php:1552
+#: wpf.class.php:1633
+#: wpf.class.php:1650
+msgid "Reply"
+msgstr "پاسخ"
+
+#: wpf.class.php:1559
+#: wpf.class.php:1575
+#, fuzzy
+msgid "Unsubscribe"
+msgstr "اشتراک"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Subscribe"
+msgstr "اشتراک"
+
+#: wpf.class.php:1564
+msgid "RSS feed"
+msgstr "فید خوان"
+
+#: wpf.class.php:1580
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "RSS-Feed"
+msgstr "فید خوان"
+
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My profile"
+msgstr "مشخصات شما"
+
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My Profile"
+msgstr "مشخصات شما"
+
+#: wpf.class.php:1629
+#: wpf.class.php:1646
+msgid "Forum Home"
+msgstr "خوراک ( RSS ) انجمن"
+
+#: wpf.class.php:1630
+#: wpf.class.php:1647
+#: wpf.class.php:1923
+msgid "Log out"
+msgstr "خروج"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:2453
+msgid "Search"
+msgstr "جستجو"
+
+#: wpf.class.php:1720
+msgid "You are logged in as:"
+msgstr "زمان بارگزاری صفحه:"
+
+#: wpf.class.php:1726
+msgid "Username: "
+msgstr "نام کاربری:"
+
+#: wpf.class.php:1727
+msgid "Password: "
+msgstr "رمز عبور:"
+
+#: wpf.class.php:1729
+msgid "Remember Me"
+msgstr "مرا به خاطر بسپار"
+
+#: wpf.class.php:1765
+msgid "Administrator"
+msgstr "مدیریت"
+
+#: wpf.class.php:1769
+msgid "Moderator"
+msgstr "ناظم"
+
+#: wpf.class.php:1839
+msgid "New Topics since last visit"
+msgstr "ارسال های جدید بعد از آخرین ورود شما"
+
+#: wpf.class.php:1849
+msgid "Profile Info"
+msgstr "دیدن مشخصات"
+
+#: wpf.class.php:1913
+msgid "Edit Profile"
+msgstr "ویرایش مشخصات"
+
+#: wpf.class.php:1917
+#: wpf.class.php:1929
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+#: wpf.class.php:1918
+msgid "Your last visit was:"
+msgstr "آخرین بازدید شما:"
+
+#: wpf.class.php:1920
+msgid "Show new topics since your last visit"
+msgstr "نمایش آخرین تایپیک هاش شما "
+
+#: wpf.class.php:1921
+msgid "Edit your forum options"
+msgstr "تغییر تنظیمات تالار گفتمان"
+
+#: wpf.class.php:1928
+msgid "Welcome Guest, please login or"
+msgstr "کاربر مهمان خوش امدید لطفا به سیستم وارد شوید یا"
+
+#: wpf.class.php:1928
+msgid "register."
+msgstr "ثبت نام کنید"
+
+#: wpf.class.php:1933
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "کاربر مهمان خوش امدید برای ارسال مطلب در این تالار گفتمان باید "
+
+#: wpf.class.php:1933
+msgid "registration."
+msgstr "ثبت نام کنید"
+
+#: wpf.class.php:1941
+msgid "Show/Hide Header"
+msgstr "نمایش یا پنهان کردن سربرگ"
+
+#: wpf.class.php:1955
+msgid "Search forums"
+msgstr "جستجو برای:"
+
+#: wpf.class.php:1990
+#: wpf.class.php:2021
+msgid "Pages:"
+msgstr "صفحات:"
+
+#: wpf.class.php:2003
+#: wpf.class.php:2034
+#, fuzzy
+msgid "First"
+msgstr "لیست"
+
+#: wpf.class.php:2014
+#: wpf.class.php:2045
+#, fuzzy
+msgid "Last"
+msgstr "لیست"
+
+#: wpf.class.php:2132
+msgid "Post deleted"
+msgstr "حذف پوست"
+
+#: wpf.class.php:2259
+#: wpf.class.php:2263
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "دیدن مشخصات"
+
+#: wpf.class.php:2277
+msgid "Bold"
+msgstr "پررنگ"
+
+#: wpf.class.php:2278
+msgid "Italic"
+msgstr "کج"
+
+#: wpf.class.php:2279
+msgid "Underline"
+msgstr "زیر خط دار"
+
+#: wpf.class.php:2280
+msgid "Strikethrough"
+msgstr "خط خورده"
+
+#: wpf.class.php:2281
+msgid "Code"
+msgstr "کد"
+
+#: wpf.class.php:2283
+msgid "List"
+msgstr "لیست"
+
+#: wpf.class.php:2284
+msgid "List item"
+msgstr "لیست بخش ها"
+
+#: wpf.class.php:2285
+msgid "Link"
+msgstr "اتصال"
+
+#: wpf.class.php:2286
+msgid "Image"
+msgstr "عکس"
+
+#: wpf.class.php:2287
+msgid "Email"
+msgstr "پست الکترونیکی"
+
+#: wpf.class.php:2288
+msgid "Add Hex Color"
+msgstr "افزودن رنگ"
+
+#: wpf.class.php:2289
+msgid "Embed YouTube Video"
+msgstr "قراردادن ویدیو یوتوب"
+
+#: wpf.class.php:2290
+msgid "Embed Google Map"
+msgstr ""
+
+#: wpf.class.php:2296
+msgid "Smile"
+msgstr "شکلک"
+
+#: wpf.class.php:2297
+msgid "Big Grin"
+msgstr "پوزخند"
+
+#: wpf.class.php:2298
+msgid "Sad"
+msgstr "غمگین"
+
+#: wpf.class.php:2299
+msgid "Neutral"
+msgstr "خنثی"
+
+#: wpf.class.php:2300
+msgid "Razz"
+msgstr "شوخ"
+
+#: wpf.class.php:2301
+msgid "Mad"
+msgstr "دیوانه"
+
+#: wpf.class.php:2302
+msgid "Confused"
+msgstr "سرافکنده"
+
+#: wpf.class.php:2303
+msgid "Eek!"
+msgstr "Eek!"
+
+#: wpf.class.php:2304
+msgid "Wink"
+msgstr "چشمک"
+
+#: wpf.class.php:2305
+msgid "Surprised"
+msgstr "متعجب"
+
+#: wpf.class.php:2306
+msgid "Cool"
+msgstr "خونسرد"
+
+#: wpf.class.php:2318
+msgid "Info Center"
+msgstr "مرکز اطلاعات"
+
+#: wpf.class.php:2325
+msgid "Posts in"
+msgstr "نوشته در"
+
+#: wpf.class.php:2325
+msgid "Topics Made by"
+msgstr "تایپیک های ایجاد شده توسط"
+
+#: wpf.class.php:2325
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "کاربر"
+
+#: wpf.class.php:2325
+msgid "Latest Member:"
+msgstr "آخرین کاربر"
+
+#: wpf.class.php:2351
+msgid "New topics since your last visit"
+msgstr "آخرین ارسال های شما"
+
+#: wpf.class.php:2395
+msgid "Summary"
+msgstr "خلاصه"
+
+#: wpf.class.php:2401
+#: wpf.class.php:2687
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "نام :"
+
+#: wpf.class.php:2406
+msgid "Registered:"
+msgstr "ثبت نام شده ها:"
+
+#: wpf.class.php:2414
+msgid "Position:"
+msgstr "موقعیت:"
+
+#: wpf.class.php:2417
+msgid "Website:"
+msgstr "سایت:"
+
+#: wpf.class.php:2421
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2425
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2428
+msgid "Jabber/google Talk:"
+msgstr "Jabber/google Talk:"
+
+#: wpf.class.php:2432
+msgid "Biographical Info:"
+msgstr "دیدن مشخصات:"
+
+#: wpf.class.php:2457
+msgid "Search for:"
+msgstr "جستجو برای:"
+
+#: wpf.class.php:2461
+msgid "By user:"
+msgstr "توسط کاربر:"
+
+#: wpf.class.php:2466
+msgid "Message Age:"
+msgstr "زمان پیغام:"
+
+#: wpf.class.php:2467
+msgid "Between"
+msgstr "میان"
+
+#: wpf.class.php:2467
+msgid "and"
+msgstr "و"
+
+#: wpf.class.php:2467
+msgid "days"
+msgstr "روز"
+
+#: wpf.class.php:2473
+msgid "Click to choose Forum(s) to  search"
+msgstr "برای انتخاب جستجو در انجمن کلیک کنید"
+
+#: wpf.class.php:2495
+msgid "Check all"
+msgstr "انتخاب همه"
+
+#: wpf.class.php:2500
+msgid "Start Search"
+msgstr "شروع جستجو"
+
+#: wpf.class.php:2542
+msgid "Subject"
+msgstr "موضوع"
+
+#: wpf.class.php:2543
+msgid "Relevance"
+msgstr "ارتباط"
+
+#: wpf.class.php:2545
+msgid "Posted"
+msgstr "ارسال شده"
+
+#: wpf.class.php:2611
+msgid "Closed topic"
+msgstr "موضوع بسته شده است"
+
+#: wpf.class.php:2614
+msgid "Normal topic"
+msgstr "موضوع های عادی"
+
+#: wpf.class.php:2617
+msgid "Hot topic"
+msgstr "موضوع های داغ"
+
+#: wpf.class.php:2620
+msgid "Very Hot topic"
+msgstr "موضوع های خیلی داغ:"
+
+#: wpf.class.php:2652
+msgid "Security Code:"
+msgstr "کد امنیتی :"
+
+#: wpf.class.php:2671
+#, fuzzy
+msgid "Enter Security Code: (required)"
+msgstr "کد امنیتی :"
+
+#: wpf.class.php:2685
+#, fuzzy
+msgid "New post in forum:"
+msgstr "پست های جدید در تایپیک:"
+
+#: wpf.class.php:2686
+msgid "DETAILS:"
+msgstr "مشخصات:"
+
+#: wpf.class.php:2689
+msgid "Date:"
+msgstr "تاریخ:"
+
+#: wpf.class.php:2690
+msgid "Reply Content:"
+msgstr "محتوای پاسخ:"
+
+#: wpf.class.php:2691
+msgid "View Topic Here:"
+msgstr "نمایش موضوع اینجا:"
+
+#: wpf.class.php:2740
+#: wpf.class.php:2750
+msgid "Inbox"
+msgstr ""
+
+#: wpf.class.php:2766
+#: wpf.class.php:2779
+msgid "Send Message"
+msgstr "ارسال پیغام"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "دسته ها:"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "موضوع"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "شما باید یک گروه کاربری را انتخاب نمائید"
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:682
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "نام انتخاب شده شما قبلا درپایگاه داده ثبت شده است لطفا نام دیگری را انتخاب نمائید"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "گروه کاربران با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "شما هیچ کاربری را برای اضافه کردن انتخاب نکرده اید"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "شما باید یک گروه کاربری را انتخاب نمائید"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "خطا"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "چنین کاربری وجود ندارد:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "خطا"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "کاربران"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "قبلا در این گروه انتخاب شده است"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "خطا ها:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "اخطار ها:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "کاربران اضافه شده"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "گروه کاربری با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "کاربران با موفقیت حذف شدند"
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "مینگل فروم » مدیریت گروهی کاربران"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:747
+#: fs-admin/fs-admin.php:947
+msgid "add new"
+msgstr "اضافه کردن جدید"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:801
+msgid "Delete"
+msgstr "حذف"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "اضافه کردن کاربر"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "هیچ کاربری در این گروه قرار ندارد"
+
+#: fs-admin/fs-admin.php:221
+msgid "Skin successfully activated."
+msgstr "پوسته با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:227
+msgid "Mingle Forum >> Skin options"
+msgstr "مینگل فروم » تنظیمات پوسته"
+
+#: fs-admin/fs-admin.php:228
+msgid "Get More Skins"
+msgstr "دریافت پوسته های بیشتر"
+
+#: fs-admin/fs-admin.php:229
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "مهم: پوسته های نسخه 1.0.03 باید در مسیر wp-content/mingle-forum-skins باشند."
+
+#: fs-admin/fs-admin.php:229
+msgid "Why did you change it?"
+msgstr "چگونه این را تغییر دهم؟"
+
+#: fs-admin/fs-admin.php:232
+msgid "Screenshot"
+msgstr "پیش نمایش"
+
+#: fs-admin/fs-admin.php:233
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "نام"
+
+#: fs-admin/fs-admin.php:234
+msgid "Version"
+msgstr "نسخه"
+
+#: fs-admin/fs-admin.php:235
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "توضیحات"
+
+#: fs-admin/fs-admin.php:236
+msgid "Action"
+msgstr "اقدام کردن"
+
+#: fs-admin/fs-admin.php:250
+#: fs-admin/fs-admin.php:265
+msgid "In Use"
+msgstr "در حال استفاده"
+
+#: fs-admin/fs-admin.php:252
+#: fs-admin/fs-admin.php:267
+msgid "Activate"
+msgstr "فعال"
+
+#: fs-admin/fs-admin.php:295
+msgid "About Mingle Forum"
+msgstr "درباره مینگل فروم"
+
+#: fs-admin/fs-admin.php:298
+msgid "Current Version: "
+msgstr "نسخه جاری:"
+
+#: fs-admin/fs-admin.php:302
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "مینگل فروم یک افزونه ساده برای راه اندازی انجمن است! این افزونه به حد زیادی بهبود یافته 'KEEP IT SIMPLE!' است. در حال حاظر پشتیبانی به طور کامل و ادغام چندین پلاگین توسط Blair Williams صورت گرفته است. همچنین با لطف Eric Hamby می خواهم اسکریپت فروم را گسترش بدهم."
+
+#: fs-admin/fs-admin.php:304
+msgid "Author: "
+msgstr "نویسنده:"
+
+#: fs-admin/fs-admin.php:305
+msgid "Plugin Page:"
+msgstr "برگه افزونه:"
+
+#: fs-admin/fs-admin.php:306
+msgid "Support Forum:"
+msgstr "انجمن پشتیبانی:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Mingle Forum Skins:"
+msgstr "پوسته های مینگل فروم:"
+
+#: fs-admin/fs-admin.php:354
+msgid "Options successfully saved."
+msgstr "تنظیمات با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:359
+msgid "Mingle Forum"
+msgstr "مینگل فروم"
+
+#: fs-admin/fs-admin.php:363
+msgid "Statistic"
+msgstr "آمر"
+
+#: fs-admin/fs-admin.php:364
+msgid "Value"
+msgstr "مقدار"
+
+#: fs-admin/fs-admin.php:368
+msgid "Number of posts:"
+msgstr "تعداد پست ها"
+
+#: fs-admin/fs-admin.php:372
+msgid "Number of threads:"
+msgstr "تعداد زیر بخش ها"
+
+#: fs-admin/fs-admin.php:376
+msgid "Number of users:"
+msgstr "تعداد کاربران"
+
+#: fs-admin/fs-admin.php:380
+msgid "Total database size:"
+msgstr "حجم پایگاه داده"
+
+#: fs-admin/fs-admin.php:384
+msgid "Database server:"
+msgstr "میزبان دیتا بیس"
+
+#: fs-admin/fs-admin.php:388
+msgid "Mingle Forum version:"
+msgstr "نسخه تالار گفتمان پ"
+
+#: fs-admin/fs-admin.php:393
+msgid "Mingle Forum >> General Options"
+msgstr "مینگل فروم » تنظیمات عمومی"
+
+#: fs-admin/fs-admin.php:398
+msgid "default "
+msgstr "پیشفرض"
+
+#: fs-admin/fs-admin.php:402
+msgid "Option Name"
+msgstr "تنظیمات نام"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Input"
+msgstr "تنظیمات خروجی"
+
+#: fs-admin/fs-admin.php:408
+msgid "Posts per page:"
+msgstr "تعداد پست ها در هر صفحه:"
+
+#: fs-admin/fs-admin.php:412
+msgid "Threads per page:"
+msgstr "تعداد موضوعات صفحه:"
+
+#: fs-admin/fs-admin.php:418
+msgid "Number of posts for Hot Topic:"
+msgstr "تعداد پست برای موضوعات داغ:"
+
+#: fs-admin/fs-admin.php:422
+msgid "Number of posts for Very Hot Topic:"
+msgstr "تعداد پست برای موضوعات خیلی داغ:"
+
+#: fs-admin/fs-admin.php:426
+msgid "Username Display:"
+msgstr "نمایش نام کاربری:"
+
+#: fs-admin/fs-admin.php:439
+msgid "New User's Title:"
+msgstr "عنوان سطح کاربر جدید:"
+
+#: fs-admin/fs-admin.php:443
+msgid "User Level 1 Title:"
+msgstr "عنوان سطح کاربری 1:"
+
+#: fs-admin/fs-admin.php:447
+msgid "User Level 1 Count:"
+msgstr "تعداد نوشته برای صعود به سطح 1:"
+
+#: fs-admin/fs-admin.php:448
+msgid "25"
+msgstr ""
+
+#: fs-admin/fs-admin.php:451
+msgid "User Level 2 Title:"
+msgstr "عنوان نام کاریری سطح 2:"
+
+#: fs-admin/fs-admin.php:455
+msgid "User Level 2 Count:"
+msgstr "تعداد نوشته برای صعود به سطح 2:"
+
+#: fs-admin/fs-admin.php:456
+msgid "50"
+msgstr ""
+
+#: fs-admin/fs-admin.php:459
+msgid "User Level 3 Title:"
+msgstr "عنوان نام کاربری سطح 3:"
+
+#: fs-admin/fs-admin.php:463
+msgid "User Level 3 Count:"
+msgstr "تعداد نوشته برای صعود به سطح 3:"
+
+#: fs-admin/fs-admin.php:464
+msgid "100"
+msgstr ""
+
+#: fs-admin/fs-admin.php:467
+#, fuzzy
+msgid "Notify Admin on new posts:"
+msgstr "پست جدیدی وجود ندارد"
+
+#: fs-admin/fs-admin.php:471
+#: fs-admin/fs-admin.php:510
+msgid "Off"
+msgstr ""
+
+#: fs-admin/fs-admin.php:474
+msgid "Show Forum Login Form:"
+msgstr "نمایش فرم ورود به انجمن:"
+
+#: fs-admin/fs-admin.php:478
+#: fs-admin/fs-admin.php:486
+#: fs-admin/fs-admin.php:494
+#: fs-admin/fs-admin.php:502
+#: fs-admin/fs-admin.php:518
+msgid "On"
+msgstr ""
+
+#: fs-admin/fs-admin.php:482
+msgid "Show Avatars in the forum:"
+msgstr "نمایش آواتور کاربران در انجمن:"
+
+#: fs-admin/fs-admin.php:490
+msgid "Show users Bio at the bottom of posts:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:498
+#, fuzzy
+msgid "Use Forum RSS:"
+msgstr "فید تالار گفتمان"
+
+#: fs-admin/fs-admin.php:506
+msgid "Use SEO friendly URLs:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:506
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr ""
+
+#: fs-admin/fs-admin.php:514
+msgid "Registration required to post:"
+msgstr "نیاز به ثبت نام برای ارسال پست:"
+
+#: fs-admin/fs-admin.php:523
+msgid "Installed version:"
+msgstr "نسخه نصب شده:"
+
+#: fs-admin/fs-admin.php:527
+msgid "GD Library is not installed"
+msgstr "کتابخوانه GD نصب نیست"
+
+#: fs-admin/fs-admin.php:530
+msgid "Use Captcha for unregistered users:"
+msgstr "استفاده از کدامنیتی برای ثبت نام کاربران:"
+
+#: fs-admin/fs-admin.php:534
+msgid "Requires "
+msgstr "نیاز"
+
+#: fs-admin/fs-admin.php:534
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "اگر گزینه \"نیاز به ثبت نام برای پست جدید\" فعال باشد"
+
+#: fs-admin/fs-admin.php:538
+msgid "Date format:"
+msgstr "فرمت تاریخ:"
+
+#: fs-admin/fs-admin.php:538
+msgid "Default date:"
+msgstr "تاریخ پیشفرض:"
+
+#: fs-admin/fs-admin.php:538
+msgid "Check "
+msgstr "انتخاب همه"
+
+#: fs-admin/fs-admin.php:538
+msgid "for date formatting."
+msgstr "برای قالب بندی تاریخ."
+
+#: fs-admin/fs-admin.php:653
+msgid "Groups deleted:"
+msgstr "گروه حذف شد"
+
+#: fs-admin/fs-admin.php:654
+msgid "Forums deleted:"
+msgstr "انجمن حذف شد"
+
+#: fs-admin/fs-admin.php:655
+msgid "Threads deleted:"
+msgstr "موضوع های پاک شده:"
+
+#: fs-admin/fs-admin.php:656
+msgid "Posts deleted:"
+msgstr "پست ها حذف شد"
+
+#: fs-admin/fs-admin.php:680
+#: fs-admin/fs-admin.php:704
+msgid "You must enter a name"
+msgstr "شما باید یک نام را وارد کنید"
+
+#: fs-admin/fs-admin.php:689
+msgid "Category added successfully"
+msgstr "موضوع با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:701
+msgid "You must select a category"
+msgstr "شما باید یک موضوع انتخاب کنید"
+
+#: fs-admin/fs-admin.php:707
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "شما باید نام آن کاربر را برای این گروه انتخاب کنید, لطفا دیگران را مشخص کنید"
+
+#: fs-admin/fs-admin.php:714
+msgid "Forum added successfully"
+msgstr "انجمن با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:741
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "مینگل فروم » مدیریت موضوع ها و تالارها"
+
+#: fs-admin/fs-admin.php:763
+#: fs-admin/fs-admin.php:793
+msgid "Modify"
+msgstr "اصلاح کردن"
+
+#: fs-admin/fs-admin.php:802
+msgid "Add forum"
+msgstr "اضافه کردن تالار گفتمان"
+
+#: fs-admin/fs-admin.php:827
+msgid "Group Moved Down"
+msgstr ""
+
+#: fs-admin/fs-admin.php:837
+#, fuzzy
+msgid "Forum Moved Down"
+msgstr "خوراک ( RSS ) انجمن"
+
+#: fs-admin/fs-admin.php:847
+msgid "Group Moved Up"
+msgstr ""
+
+#: fs-admin/fs-admin.php:857
+#, fuzzy
+msgid "Forum Moved Up"
+msgstr "خوراک ( RSS ) انجمن"
+
+#: fs-admin/fs-admin.php:894
+#: fs-admin/fs-admin.php:901
+msgid "Moderator successfully removed."
+msgstr "ناظم با موفقیت حذف شد"
+
+#: fs-admin/fs-admin.php:896
+msgid "Moderator successfully saved."
+msgstr "ناظم با موفقیت ذخیره شد"
+
+#: fs-admin/fs-admin.php:903
+msgid "Moderator NOT removed."
+msgstr "ناظم حذف نشد"
+
+#: fs-admin/fs-admin.php:917
+msgid "You must select a user"
+msgstr "شما باید یک کاربر را انتخاب نمائید"
+
+#: fs-admin/fs-admin.php:921
+msgid "Global Moderator added successfully"
+msgstr "ناظم های عمومی با موفقیت اضافه شدند"
+
+#: fs-admin/fs-admin.php:925
+msgid "Moderator added successfully"
+msgstr "ناظم ها با موفقیت اضافه شدند"
+
+#: fs-admin/fs-admin.php:947
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "مینگل فروم » مدیریت ناظم ها"
+
+#: fs-admin/fs-admin.php:956
+msgid "Currently moderating"
+msgstr "مدیران فعلی"
+
+#: fs-admin/fs-admin.php:960
+msgid "Update"
+msgstr "بروز رسانی"
+
+#: fs-admin/fs-admin.php:970
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "ناظم های عمومی :(کاربران میتوانند تمام قسمت ها رامدیریت کنند)"
+
+#: fs-admin/fs-admin.php:989
+msgid "No moderators yet"
+msgstr "هیچ ناظمی وجود ندارد"
+
+#: fs-admin/fs-admin.php:1014
+#, fuzzy
+msgid "Ads saved successfully"
+msgstr "با موفقیت اضافه شد"
+
+#: fs-admin/fs-admin.php:1019
+#, fuzzy
+msgid "Mingle Forum Ads >> options"
+msgstr "مینگل فروم » تنظیمات پوسته"
+
+#: fs-admin/fs-admin.php:1021
+msgid "HTML is allowed in all ad areas below"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1025
+#, fuzzy
+msgid "Ads Option"
+msgstr "تنظیمات نام"
+
+#: fs-admin/fs-admin.php:1032
+msgid "Enable Area Above Forum"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1034
+#: fs-admin/fs-admin.php:1042
+#: fs-admin/fs-admin.php:1050
+#: fs-admin/fs-admin.php:1058
+#: fs-admin/fs-admin.php:1066
+#: fs-admin/fs-admin.php:1074
+#: fs-admin/fs-admin.php:1082
+msgid "css-value:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1040
+msgid "Enable Area Below Forum"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1048
+msgid "Enable Area Above Branding"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1056
+msgid "Enable Area Above Info Center"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1064
+msgid "Enable Area Above Breadcrumbs"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1072
+msgid "Enable Area Above Quick Reply Form"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1080
+msgid "Enable Area Below First Post"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1087
+msgid "Below you can modify/add your own CSS"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1088
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr ""
+
+#: fs-admin/fs-admin.php:1095
+#, fuzzy
+msgid "Save Options"
+msgstr "ذخیره تنظیمات"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "اضافه کردن تالار گفتمان در"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "توضیحات:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "ذخیره تالار گفتمان"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "اضافه کردن دسته"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "ذخیره دسته"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "ذخیره کرن گروهی کاربرن"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "انتخاب گروه کاربران"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "اضافه کردن کاربر"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "شما باید یک گروه کاربری را انتخاب نمائید"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "بروز رسانی گروه کاربری با موفقیت انجام شد"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "شما بای نام یک تالار گفتمان را انتخاب نمائید"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "بروز رسانی تالار گفتمان با موفقیت انجام شد"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "ویرایش دسته ها"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "گروه های کاربری:"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "کاربران انتخاب شده گروه کاربری به تالار های گفتمان موضوع زیر دسترسی دارند"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "هیچ گروه کاربری وجود ندارد"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "ذخیره کردن گروه کاربری"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "ویرایش تالار گفتمان"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "انتخاب کاربر :"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "اضافه کردن مدیر"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "شما باید یک گروه کاربری را انتخاب نمائید"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "گروه کاربری با موفقیت بروز رسانی شد"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "ویرایش گروه کاربری"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "ذخیره کردن گروه کاربری"
+
+#~ msgid "General Options"
+#~ msgstr " تنظیمات عمومی "
+
+#~ msgid "Categories and forums"
+#~ msgstr " موضوعات "
+
+#~ msgid "Remove this post?"
+#~ msgstr "حذف این پست ؟"
+
+#~ msgid ""
+#~ "Valid Options: user_login, nickname, display_name, first_name, last_name"
+#~ msgstr ""
+#~ "گزینه های معتبر: user_login, nickname, display_name, first_name, last_name"
+
+#~ msgid "Notify me when I get new Messages?"
+#~ msgstr "اطلاع من از دریافت پیغام جدید؟"
+
+#~ msgid "Messages"
+#~ msgstr "پیغام"
+
+#~ msgid "New Message"
+#~ msgstr "پیغام جدید"
+
+#~ msgid "Read Message Thread"
+#~ msgstr "خواندن پیغام"
+
+#~ msgid "new"
+#~ msgstr "جدید"
+
+#~ msgid "Use Private Messages:"
+#~ msgstr "استفاده از پیغام خصوصی:"
+
+#~ msgid "I recommend disabling this and using"
+#~ msgstr "توصیه می کنم غیرفعال باشد"
+
+#~ msgid "instead."
+#~ msgstr "استفاده کنید."
+
+#~ msgid "Maximum Messages In Inbox (0 = unlimited):"
+#~ msgstr "حداکثر پیغام در صندوق (0 = بینهایت):"
+
+#~ msgid "Administratos always have unlimited messages"
+#~ msgstr "مدیریت همیشه می تواند بینهایت پیغام داشته باشد"
+
+#~ msgid "Message Deleted"
+#~ msgstr "پیغام حذف شد"
+
+#~ msgid "Your Message Was Deleted!"
+#~ msgstr "پیغام شما حذف شد!"
+
+#~ msgid "Back To Your Inbox"
+#~ msgstr "بازگشت به صندوق  پیام شما"
+
+#~ msgid "ERROR"
+#~ msgstr "خطا"
+
+#~ msgid "You Do Not Have Permission To View This!"
+#~ msgstr "شما اجازه مشاهده را ندارید!"
+
+#~ msgid "Create New Message"
+#~ msgstr "پیام جدید"
+
+#~ msgid "Unlimited"
+#~ msgstr "نامحدود"
+
+#~ msgid "Message Box Size"
+#~ msgstr "اندازه صندوق پیغام"
+
+#~ msgid "of"
+#~ msgstr "از"
+
+#~ msgid "Message Box Is Full!"
+#~ msgstr "صندوق پیام پر است!"
+
+#~ msgid "You cannot send/receive any new messages"
+#~ msgstr "شما نمی توانید پیغام جدیدی را ارسال و یا دریافت کنید"
+
+#~ msgid "Started By"
+#~ msgstr "ایجاد توسط"
+
+#~ msgid "Last Reply"
+#~ msgstr "ارسال پاسخ"
+
+#~ msgid "Unread"
+#~ msgstr "خوانده نشده"
+
+#~ msgid "Read"
+#~ msgstr "خواندن"
+
+#~ msgid "No Messages"
+#~ msgstr "بدون پیغام"
+
+#~ msgid "Sorry You Have No Messages!"
+#~ msgstr "متاسفانه شما پیغامی ندارید!"
+
+#~ msgid "Message Sent"
+#~ msgstr "ارسال پیغام"
+
+#~ msgid "The Message Was Successfully Sent!"
+#~ msgstr "پیغام شما با موفقیت ارسال شد!"
+
+#~ msgid "Back To Your Messages"
+#~ msgstr "بازگشت به پیغام های شما"
+
+#~ msgid "You have recieved a new message from"
+#~ msgstr "شما یک پیغام جدید دریافت کرده اید از"
+
+#~ msgid "follow this link to view:"
+#~ msgstr "دنبالک این پیوند برای مشاهده:"
+
+#~ msgid "Message Could Not Be Sent!"
+#~ msgstr "پیغام نمی تواند ارسال شود!"
+
+#~ msgid "The recipients inbox is FULL!"
+#~ msgstr "صندوق دریافت پر است!"
+
+#~ msgid "Please fill in all fields before submitting message!"
+#~ msgstr "لطفا تمام فیلدها را قبل از ثبت پیام پر کنید!"
+
+#~ msgid "To:"
+#~ msgstr "به:"
+
+#~ msgid "Select User"
+#~ msgstr "انتخاب کاربر"
+
+#~ msgid "Click this box and begin typing the username to find them faster"
+#~ msgstr ""
+#~ "با کلیک بر روی صندوق و سپس شروع به تایپ نام کاربری کنید تا سریعتر یافت "
+#~ "کنید"
+
+#~ msgid "You Must Be Logged In To Create Private Messages!"
+#~ msgstr "برای ساختن پیغام جدید باید وارد شوید!"
+
+#~ msgid "Sender"
+#~ msgstr "ارسال کننده"
+
+#~ msgid "Message Contents"
+#~ msgstr "محتوای پیغام"
+
+#~ msgid "Reply:"
+#~ msgstr "پاسخ:"
+
+#~ msgid "Feed"
+#~ msgstr "فید"
+
+#~ msgid "Email:"
+#~ msgstr "پست الکترونیک:"
+
+#~ msgid "Skin/Theme "
+#~ msgstr "پوسته/قالب"
+
+#~ msgid "Very, Very Hot topic"
+#~ msgstr "موضوع های خیلی داغ:"
+
+#~ msgid "Mingle Forum Themes:"
+#~ msgstr "پوسته های افزونه انجمن:"
+
+#~ msgid "Number of posts for hot Topic:"
+#~ msgstr "تعداد پست برای موضوعات داغ:"
+
+#~ msgid "Number of posts for Very, Very Hot Topic:"
+#~ msgstr "تعداد پست برای موضوعات خیلی داغ:"
+
+#~ msgid "Activate email notifications for topics?"
+#~ msgstr "فعال سازی ایمیل اخطار برای این موضوع"
+
+#~ msgid "WP-Forum Options"
+#~ msgstr "تنظیمات تالار گفتمان"
+
+#~ msgid "in:"
+#~ msgstr "در:"
+
+#~ msgid "WP-Forum by:"
+#~ msgstr "تالار گفتمان توسط:"
+
+#~ msgid "Mark as sticky"
+#~ msgstr "علامت گذاری برای سنجاق کردن"
+
+#~ msgid "Notify"
+#~ msgstr "آگاهی دادن"
+
+#~ msgid "Home"
+#~ msgstr "صفحه اول انجمن"
+
+#~ msgid "Mark as Sticky"
+#~ msgstr "علامت گذاری برای سنجاق کردن"
+
+#~ msgid "Unmark as sticky"
+#~ msgstr "عدم علامت گذاری برای سنجاق کردن"
+
+#~ msgid "Member"
+#~ msgstr "عضو"
+
+#~ msgid "Forum Statistics"
+#~ msgstr "آمار تالار گفتمان"
+
+#~ msgid "Posts"
+#~ msgstr "پست"
+
+#~ msgid "Topics "
+#~ msgstr "موضوع ها"
+
+#~ msgid "Edit personal options"
+#~ msgstr "ویرایش تنظیمات شخصی"
+
+#~ msgid "Choose a forum to search in, or search all"
+#~ msgstr "انتخاب یک تالار گفتمان برای جستجو یا جستجو در همه"
+
+#~ msgid "Posted on: "
+#~ msgstr "ارسال شده در:"
+
+#~ msgid "Add User Group"
+#~ msgstr "اضافه کردن گروهی کاربران"
+
+#~ msgid "Separate user names by comma sign ( , )"
+#~ msgstr "جدا کردن نام کاربر توسط کاما  ( , )"
+
+#~ msgid "User group:"
+#~ msgstr "گروه کاربران:"
+
+#~ msgid "Skin options"
+#~ msgstr "تنظیمات پوسته"
+
+#~ msgid "Forum statistics"
+#~ msgstr "آمار تالار گفتمان"
+
+#~ msgid "add category"
+#~ msgstr "اضافه کردن موضوع"
+
+#~ msgid "User:"
+#~ msgstr "کاربران :"
+
+#~ msgid "Moderate:"
+#~ msgstr "اداره کردن:"
+
+#~ msgid "WP-Forum"
+#~ msgstr "تالار گفتمان"

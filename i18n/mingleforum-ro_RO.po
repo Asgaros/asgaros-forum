@@ -1,0 +1,1566 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-21 21:58-0700\n"
+"PO-Revision-Date: 2011-01-21 23:38-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\\fs-admin\n"
+
+#: feed.php:18
+#: feed.php:19
+msgid "Forum Feed"
+msgstr "Forum Feed"
+
+#: feed.php:23
+msgid "Forum Topic:"
+msgstr "Topicul Forumului"
+
+#: feed.php:24
+#: wpf.class.php:1806
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Forum"
+
+#: feed.php:24
+#: wpf.class.php:857
+msgid "Topic: "
+msgstr "Topic:"
+
+#: feed.php:65
+msgid "Feeds are disabled"
+msgstr ""
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "Niciun user"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "In acest moment nu esti abonat "
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "Editeaza optiunile forumului"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "Permiti si altora sa vada profilul tau?"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "Ai notificare pe email in legatura cu aceste topicuri:"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:543
+msgid "Save options"
+msgstr "Salveaza optiunile"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:614
+#: wpf.class.php:2069
+#: wpf.class.php:2095
+#: wpf.class.php:2113
+#: wpf.class.php:2135
+#: wpf.class.php:2144
+#: wpf.class.php:2202
+msgid "Cheating, are we?"
+msgstr "Trisam, nu-i asa?"
+
+#: wpf-insert.php:28
+msgid "Security code does not mach"
+msgstr "Codul de securitate nu se potriveste"
+
+#: wpf-insert.php:43
+#: wpf-insert.php:48
+#: wpf-insert.php:106
+#: wpf-insert.php:111
+#: wpf-insert.php:152
+#: wpf-insert.php:157
+msgid "An error occured"
+msgstr "Undeva a avut loc o eroare"
+
+#: wpf-insert.php:44
+#: wpf-insert.php:107
+#: wpf-insert.php:153
+msgid "You must enter a subject"
+msgstr "Trebuie sa introduci un subiect"
+
+#: wpf-insert.php:49
+#: wpf-insert.php:112
+#: wpf-insert.php:158
+msgid "You must enter a message"
+msgstr "Trebuie sa introduci un mesaj"
+
+#: wpf-insert.php:68
+msgid "created the forum topic:"
+msgstr "a creat topicul forumului"
+
+#: wpf-insert.php:123
+msgid "replied to the forum topic:"
+msgstr "a raspuns catre topicul forumului"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Citat din"
+
+#: wpf-post.php:10
+#: wpf.class.php:677
+#: wpf.class.php:685
+#: wpf.class.php:1154
+msgid "on"
+msgstr "pe"
+
+#: wpf-post.php:20
+#: wpf.class.php:1279
+#: wpf.class.php:1852
+msgid "Post Reply"
+msgstr "Raspunde"
+
+#: wpf-post.php:23
+#: wpf-post.php:63
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Subiect:"
+
+#: wpf-post.php:24
+#: wpf.class.php:907
+msgid "Re:"
+msgstr "Re:"
+
+#: wpf-post.php:27
+#: wpf-post.php:67
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Mesaj:"
+
+#: wpf-post.php:38
+#: wpf-thread.php:28
+msgid "Submit"
+msgstr "Trimite"
+
+#: wpf-post.php:60
+#: wpf.class.php:1276
+#: wpf.class.php:1855
+msgid "Edit Post"
+msgstr "Editeaza Postarea"
+
+#: wpf-post.php:76
+msgid "Save Post"
+msgstr "Salveaza Postarea"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Deschide un subiect nou"
+
+#: wpf-thread.php:36
+msgid "Sorry. you don't have permission to post."
+msgstr "Imi pare rau. Nu ai permisiunea sa postezi."
+
+#: wpf.class.php:150
+#: fs-admin/fs-admin.php:440
+msgid "Newbie"
+msgstr "Nou venit"
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:444
+msgid "Beginner"
+msgstr "Incepator"
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:452
+msgid "Advanced"
+msgstr "Avansat"
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:460
+msgid "Pro"
+msgstr "Profesionist"
+
+#: wpf.class.php:171
+#: wpf.class.php:172
+msgid "Mingle Forum - Options"
+msgstr "Forum Eject - Optiuni"
+
+#: wpf.class.php:172
+msgid "Options"
+msgstr "Optiuni"
+
+#: wpf.class.php:173
+msgid "Ads"
+msgstr "Anunturi"
+
+#: wpf.class.php:174
+msgid "Skins"
+msgstr "Skinuri"
+
+#: wpf.class.php:175
+msgid "Forum Structure - Categories & Forums"
+msgstr "Structura Forumului - Categorii & Forumuri"
+
+#: wpf.class.php:175
+msgid "Forum Structure"
+msgstr "Structura Forumului"
+
+#: wpf.class.php:176
+msgid "Moderators"
+msgstr "Moderatori"
+
+#: wpf.class.php:177
+msgid "User Groups"
+msgstr "Grupuri de utilizatori"
+
+#: wpf.class.php:178
+msgid "About"
+msgstr "Despre"
+
+#: wpf.class.php:189
+#: wpf.class.php:190
+msgid "Forums Latest Activity"
+msgstr "Cele mai noi activitati ale Forumului"
+
+#: wpf.class.php:209
+#: wpf.class.php:229
+msgid "by:"
+msgstr "de:"
+
+#: wpf.class.php:246
+msgid "Title to display in the sidebar:"
+msgstr "Titlul care doresti sa fie afisat in sidebar:"
+
+#: wpf.class.php:248
+msgid "How many items would you like to display?"
+msgstr "Cate elemente doresti sa fie afisate?"
+
+#: wpf.class.php:645
+msgid "Page loaded in:"
+msgstr "Pagina incarcata in:"
+
+#: wpf.class.php:645
+msgid "seconds."
+msgstr "secunde."
+
+#: wpf.class.php:648
+msgid "Mingle Forum "
+msgstr "Forum Eject"
+
+#: wpf.class.php:649
+msgid "Version:"
+msgstr "Versiune:"
+
+#: wpf.class.php:668
+#: wpf.class.php:2266
+msgid "Guest"
+msgstr "Vizitator"
+
+#: wpf.class.php:677
+#: wpf.class.php:1153
+msgid "by"
+msgstr "de"
+
+#: wpf.class.php:685
+msgid "Latest Post by"
+msgstr "Cea mai noua Postare de"
+
+#: wpf.class.php:708
+#: wpf.class.php:839
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Imi pare rau, dar nu ai acces la acest forum"
+
+#: wpf.class.php:718
+#: wpf.class.php:2354
+msgid "Status"
+msgstr "Stare"
+
+#: wpf.class.php:719
+#: wpf.class.php:2355
+msgid "Topic Title"
+msgstr "Titlul topicului"
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+#: wpf.class.php:2544
+msgid "Started by"
+msgstr "Deschis de"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Replies"
+msgstr "Raspunsuri"
+
+#: wpf.class.php:722
+msgid "Views"
+msgstr "Vizualizari"
+
+#: wpf.class.php:723
+#: wpf.class.php:1153
+#: wpf.class.php:2358
+msgid "Last post"
+msgstr "Ultima postare"
+
+#: wpf.class.php:727
+msgid "Sticky Topics"
+msgstr "Topicuri Lipicioase - Sticky"
+
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Move Topic"
+msgstr "Muta Topicul"
+
+#: wpf.class.php:731
+#: wpf.class.php:733
+#: wpf.class.php:777
+#: wpf.class.php:779
+msgid "Delete Topic"
+msgstr "Sterge Topicul"
+
+#: wpf.class.php:743
+#: wpf.class.php:772
+msgid "New posts since last visit"
+msgstr "Postari noi de la ultima vizita"
+
+#: wpf.class.php:760
+msgid "Forum Topics"
+msgstr "Topicurile Forumului"
+
+#: wpf.class.php:827
+msgid "Remove this topic from your email notifications?"
+msgstr "Nu vrei sa mai primesti notificari prin email in legatura cu aces topic?"
+
+#: wpf.class.php:829
+msgid "Add this topic to your email notifications?"
+msgstr "Vrei sa primesti notificari prin email in legatura cu aces topic?"
+
+#: wpf.class.php:850
+msgid "TOPIC CLOSED"
+msgstr "TOPIC INCHIS"
+
+#: wpf.class.php:856
+msgid "Author"
+msgstr "Autor"
+
+#: wpf.class.php:872
+#: wpf.class.php:2410
+msgid "Posts:"
+msgstr "Postari:"
+
+#: wpf.class.php:905
+msgid "Quick Reply"
+msgstr "Raspuns rapid"
+
+#: wpf.class.php:914
+msgid "Submit Quick Reply"
+msgstr "Trimite Raspuns Rapid"
+
+#: wpf.class.php:936
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Posteaza"
+
+#: wpf.class.php:939
+msgid "on:"
+msgstr "pe:"
+
+#: wpf.class.php:943
+#: wpf.class.php:952
+#: wpf.class.php:2282
+msgid "Quote"
+msgstr "Citat"
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:961
+msgid "Remove"
+msgstr "Elimina"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+msgid "Edit"
+msgstr "Modifica"
+
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Topics: "
+msgstr "Subiecte:"
+
+#: wpf.class.php:1030
+#: wpf.class.php:1081
+msgid "Posts: "
+msgstr "Postari:"
+
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "New posts"
+msgstr "Postari noi"
+
+#: wpf.class.php:1040
+#: wpf.class.php:1091
+msgid "No new posts"
+msgstr "Nici o postare noua"
+
+#: wpf.class.php:1040
+msgid "Mark All Read"
+msgstr "Marcheaza toate ca fiind citite"
+
+#: wpf.class.php:1151
+msgid "No topics yet"
+msgstr "Inca nu exista subiecte noi"
+
+#: wpf.class.php:1154
+msgid "in"
+msgstr "in"
+
+#: wpf.class.php:1205
+msgid "Forums RSS"
+msgstr "Forum RSS"
+
+#: wpf.class.php:1216
+msgid "Are you sure you want to remove this?"
+msgstr "Esti sigur ca vrei sa elimini aceasta?"
+
+#: wpf.class.php:1270
+#: wpf.class.php:1845
+msgid "Search Results"
+msgstr "Rezultatele cautarii"
+
+#: wpf.class.php:1273
+msgid "Profile"
+msgstr "Profil"
+
+#: wpf.class.php:1282
+#: wpf.class.php:1502
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:1858
+msgid "New Topic"
+msgstr "Subiect nou"
+
+#: wpf.class.php:1349
+msgid "Moderators:"
+msgstr "Moderatori"
+
+#: wpf.class.php:1525
+#: wpf.class.php:1538
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "Undo Sticky"
+msgstr "Anuleaza Sticky"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+msgid "Sticky"
+msgstr "Sticky - Lipicios"
+
+#: wpf.class.php:1530
+#: wpf.class.php:1543
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Re-open"
+msgstr "Re-Deschide"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Close"
+msgstr "Inchide"
+
+#: wpf.class.php:1552
+#: wpf.class.php:1633
+#: wpf.class.php:1650
+msgid "Reply"
+msgstr "Raspunde"
+
+#: wpf.class.php:1559
+#: wpf.class.php:1575
+#, fuzzy
+msgid "Unsubscribe"
+msgstr "Subscrie"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Subscribe"
+msgstr "Subscrie"
+
+#: wpf.class.php:1564
+msgid "RSS feed"
+msgstr "Feed RSS"
+
+#: wpf.class.php:1580
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "RSS-Feed"
+msgstr "Feed RSS"
+
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My profile"
+msgstr "Profilul meu"
+
+#: wpf.class.php:1618
+#: wpf.class.php:1622
+msgid "My Profile"
+msgstr "Profilul Meu"
+
+#: wpf.class.php:1629
+#: wpf.class.php:1646
+msgid "Forum Home"
+msgstr "Forum Home"
+
+#: wpf.class.php:1630
+#: wpf.class.php:1647
+#: wpf.class.php:1923
+msgid "Log out"
+msgstr "Iesi din cont"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:2453
+msgid "Search"
+msgstr "Cautare"
+
+#: wpf.class.php:1720
+msgid "You are logged in as:"
+msgstr "Esti logat ca:"
+
+#: wpf.class.php:1726
+msgid "Username: "
+msgstr "Nume de utilizator"
+
+#: wpf.class.php:1727
+msgid "Password: "
+msgstr "Parola"
+
+#: wpf.class.php:1729
+msgid "Remember Me"
+msgstr "Tine minte"
+
+#: wpf.class.php:1765
+msgid "Administrator"
+msgstr "Administrator"
+
+#: wpf.class.php:1769
+msgid "Moderator"
+msgstr "Moderator"
+
+#: wpf.class.php:1839
+msgid "New Topics since last visit"
+msgstr "Subiecte noi de la ultima vizita"
+
+#: wpf.class.php:1849
+msgid "Profile Info"
+msgstr "Informatii de Profil"
+
+#: wpf.class.php:1913
+msgid "Edit Profile"
+msgstr "Modifica Profilul"
+
+#: wpf.class.php:1917
+#: wpf.class.php:1929
+msgid "Welcome"
+msgstr "Bine ai venit,"
+
+#: wpf.class.php:1918
+msgid "Your last visit was:"
+msgstr "Ultima ta vizita a fost:"
+
+#: wpf.class.php:1920
+msgid "Show new topics since your last visit"
+msgstr "Arata subiecte noi de la ultima ta vizita"
+
+#: wpf.class.php:1921
+msgid "Edit your forum options"
+msgstr "Editeaza optiune forumului"
+
+#: wpf.class.php:1928
+msgid "Welcome Guest, please login or"
+msgstr "Bine ai venit, Vizitatorule. Intra in cont sau"
+
+#: wpf.class.php:1928
+msgid "register."
+msgstr "inregistreaza-te."
+
+#: wpf.class.php:1933
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Bine ai venit! Pentru a posta in acest forum necesita"
+
+#: wpf.class.php:1933
+msgid "registration."
+msgstr "inregistrare"
+
+#: wpf.class.php:1941
+msgid "Show/Hide Header"
+msgstr "Arata/Ascunde Antet"
+
+#: wpf.class.php:1955
+msgid "Search forums"
+msgstr "Cauta"
+
+#: wpf.class.php:1990
+#: wpf.class.php:2021
+msgid "Pages:"
+msgstr "Pagini:"
+
+#: wpf.class.php:2003
+#: wpf.class.php:2034
+msgid "First"
+msgstr "Prima"
+
+#: wpf.class.php:2014
+#: wpf.class.php:2045
+msgid "Last"
+msgstr "Ultima"
+
+#: wpf.class.php:2132
+msgid "Post deleted"
+msgstr "Postare stearsa"
+
+#: wpf.class.php:2259
+#: wpf.class.php:2263
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "Vezi profil"
+
+#: wpf.class.php:2277
+msgid "Bold"
+msgstr "Bolduit"
+
+#: wpf.class.php:2278
+msgid "Italic"
+msgstr "Italic"
+
+#: wpf.class.php:2279
+msgid "Underline"
+msgstr "Subliniat"
+
+#: wpf.class.php:2280
+msgid "Strikethrough"
+msgstr "Taiat"
+
+#: wpf.class.php:2281
+msgid "Code"
+msgstr "Cod"
+
+#: wpf.class.php:2283
+msgid "List"
+msgstr "Listeaza"
+
+#: wpf.class.php:2284
+msgid "List item"
+msgstr "Listeaza element"
+
+#: wpf.class.php:2285
+msgid "Link"
+msgstr "Legatura"
+
+#: wpf.class.php:2286
+msgid "Image"
+msgstr "Imagine"
+
+#: wpf.class.php:2287
+msgid "Email"
+msgstr "Email"
+
+#: wpf.class.php:2288
+msgid "Add Hex Color"
+msgstr "Adauga Hex Color"
+
+#: wpf.class.php:2289
+msgid "Embed YouTube Video"
+msgstr "Embed YouTube Video"
+
+#: wpf.class.php:2290
+msgid "Embed Google Map"
+msgstr ""
+
+#: wpf.class.php:2296
+msgid "Smile"
+msgstr "Zambet"
+
+#: wpf.class.php:2297
+msgid "Big Grin"
+msgstr "Big Grin"
+
+#: wpf.class.php:2298
+msgid "Sad"
+msgstr "Trist"
+
+#: wpf.class.php:2299
+msgid "Neutral"
+msgstr "Neutru"
+
+#: wpf.class.php:2300
+msgid "Razz"
+msgstr "Razz"
+
+#: wpf.class.php:2301
+msgid "Mad"
+msgstr "Nebun"
+
+#: wpf.class.php:2302
+msgid "Confused"
+msgstr "Confuzat"
+
+#: wpf.class.php:2303
+msgid "Eek!"
+msgstr "Eek!"
+
+#: wpf.class.php:2304
+msgid "Wink"
+msgstr "Fa cu ochiul"
+
+#: wpf.class.php:2305
+msgid "Surprised"
+msgstr "Surprins"
+
+#: wpf.class.php:2306
+msgid "Cool"
+msgstr "Cool"
+
+#: wpf.class.php:2318
+msgid "Info Center"
+msgstr "Info Center"
+
+#: wpf.class.php:2325
+msgid "Posts in"
+msgstr "Postari in"
+
+#: wpf.class.php:2325
+msgid "Topics Made by"
+msgstr "Subiecte initiate de:"
+
+#: wpf.class.php:2325
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "Membri"
+
+#: wpf.class.php:2325
+msgid "Latest Member:"
+msgstr "Cel mai nou Membru"
+
+#: wpf.class.php:2351
+msgid "New topics since your last visit"
+msgstr "Subiecte noi de la ultima ta vizita"
+
+#: wpf.class.php:2395
+msgid "Summary"
+msgstr "Sumar"
+
+#: wpf.class.php:2401
+#: wpf.class.php:2687
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "Nume:"
+
+#: wpf.class.php:2406
+msgid "Registered:"
+msgstr "Inregistrat:"
+
+#: wpf.class.php:2414
+msgid "Position:"
+msgstr "Pozitie:"
+
+#: wpf.class.php:2417
+msgid "Website:"
+msgstr "Website:"
+
+#: wpf.class.php:2421
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2425
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2428
+msgid "Jabber/google Talk:"
+msgstr "Jabber/google Talk:"
+
+#: wpf.class.php:2432
+msgid "Biographical Info:"
+msgstr "Biografie:"
+
+#: wpf.class.php:2457
+msgid "Search for:"
+msgstr "Cauta:"
+
+#: wpf.class.php:2461
+msgid "By user:"
+msgstr "De utilizatorul"
+
+#: wpf.class.php:2466
+msgid "Message Age:"
+msgstr "Vechimea Mesajului"
+
+#: wpf.class.php:2467
+msgid "Between"
+msgstr "Intre"
+
+#: wpf.class.php:2467
+msgid "and"
+msgstr "si"
+
+#: wpf.class.php:2467
+msgid "days"
+msgstr "zile"
+
+#: wpf.class.php:2473
+msgid "Click to choose Forum(s) to  search"
+msgstr "Apasa pentru a alege ce Forum(uri) sa cauti"
+
+#: wpf.class.php:2495
+msgid "Check all"
+msgstr "Selecteaza-le pe toate"
+
+#: wpf.class.php:2500
+msgid "Start Search"
+msgstr "Porneste Cautarea"
+
+#: wpf.class.php:2542
+msgid "Subject"
+msgstr "Subiect"
+
+#: wpf.class.php:2543
+msgid "Relevance"
+msgstr "Relevanta"
+
+#: wpf.class.php:2545
+msgid "Posted"
+msgstr "Postata"
+
+#: wpf.class.php:2611
+msgid "Closed topic"
+msgstr "Subiect inchis"
+
+#: wpf.class.php:2614
+msgid "Normal topic"
+msgstr "Subiect normal"
+
+#: wpf.class.php:2617
+msgid "Hot topic"
+msgstr "Subiect FIERBINTE"
+
+#: wpf.class.php:2620
+msgid "Very Hot topic"
+msgstr "Subiect FOARTE FIERBINTE"
+
+#: wpf.class.php:2652
+msgid "Security Code:"
+msgstr "Cod de siguranta"
+
+#: wpf.class.php:2671
+msgid "Enter Security Code: (required)"
+msgstr "Introdu Codul de Siguranta (obligatoriu)"
+
+#: wpf.class.php:2685
+msgid "New post in forum:"
+msgstr "Subiect nou in forum:"
+
+#: wpf.class.php:2686
+msgid "DETAILS:"
+msgstr "DETALII:"
+
+#: wpf.class.php:2689
+msgid "Date:"
+msgstr "Data:"
+
+#: wpf.class.php:2690
+msgid "Reply Content:"
+msgstr "Continutul Raspunsului"
+
+#: wpf.class.php:2691
+msgid "View Topic Here:"
+msgstr "Vezi subiectul aici:"
+
+#: wpf.class.php:2740
+#: wpf.class.php:2750
+msgid "Inbox"
+msgstr "Inbox"
+
+#: wpf.class.php:2766
+#: wpf.class.php:2779
+msgid "Send Message"
+msgstr "Trimite Mesaj"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Categorie"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Subiect"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "Trebuie sa specifici un nume de grup de utilizatori."
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:682
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "Ai ales un nume care deja exista in baza de date, te rog sa specifici altul"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "Grup de utilizatori adaugat cu succes"
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "Nu ai specificat niciun utilizator care sa fie adaugat:"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "Trebuie sa alegi un grup de utilizatori"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "Eroare"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "Nu exista acest utilizator:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "Avertisment"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "Utilizator"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "exista deja in acest grup"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "adaugat cu succes"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "Erori:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "Avertismente:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "Utilizatori adaugati:"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "Grup(uri)de utilizatori eliminat(e) cu succes"
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "Membru sters cu succes"
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Forum Eject>> Administrare grupuri de utilizatori"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:747
+#: fs-admin/fs-admin.php:947
+msgid "add new"
+msgstr "adauga nou"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:801
+msgid "Delete"
+msgstr "Sterge"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "Adauga membri"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "Niciun membru din acest grup"
+
+#: fs-admin/fs-admin.php:221
+msgid "Skin successfully activated."
+msgstr "Skin activat cu succes."
+
+#: fs-admin/fs-admin.php:227
+msgid "Mingle Forum >> Skin options"
+msgstr "Forum Eject>> Skin optiuni"
+
+#: fs-admin/fs-admin.php:228
+msgid "Get More Skins"
+msgstr "Mai multe skinuri"
+
+#: fs-admin/fs-admin.php:229
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+
+#: fs-admin/fs-admin.php:229
+msgid "Why did you change it?"
+msgstr "De ce l-ai schimba?"
+
+#: fs-admin/fs-admin.php:232
+msgid "Screenshot"
+msgstr "Screenshot"
+
+#: fs-admin/fs-admin.php:233
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "Nume"
+
+#: fs-admin/fs-admin.php:234
+msgid "Version"
+msgstr "Versiune"
+
+#: fs-admin/fs-admin.php:235
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "Descriere"
+
+#: fs-admin/fs-admin.php:236
+msgid "Action"
+msgstr "Actiune"
+
+#: fs-admin/fs-admin.php:250
+#: fs-admin/fs-admin.php:265
+msgid "In Use"
+msgstr "In uz"
+
+#: fs-admin/fs-admin.php:252
+#: fs-admin/fs-admin.php:267
+msgid "Activate"
+msgstr "Activeaza"
+
+#: fs-admin/fs-admin.php:295
+msgid "About Mingle Forum"
+msgstr "Despre Forumul Eject"
+
+#: fs-admin/fs-admin.php:298
+msgid "Current Version: "
+msgstr "Versiune Curenta:"
+
+#: fs-admin/fs-admin.php:302
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+
+#: fs-admin/fs-admin.php:304
+msgid "Author: "
+msgstr "Autor:"
+
+#: fs-admin/fs-admin.php:305
+msgid "Plugin Page:"
+msgstr "Plugin Pagina:"
+
+#: fs-admin/fs-admin.php:306
+msgid "Support Forum:"
+msgstr "Sustine Forum:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Mingle Forum Skins:"
+msgstr "Skinurile Forumului Eject:"
+
+#: fs-admin/fs-admin.php:354
+msgid "Options successfully saved."
+msgstr "Optiuni salvate cu succes."
+
+#: fs-admin/fs-admin.php:359
+msgid "Mingle Forum"
+msgstr "Forum Eject"
+
+#: fs-admin/fs-admin.php:363
+msgid "Statistic"
+msgstr "Statistici"
+
+#: fs-admin/fs-admin.php:364
+msgid "Value"
+msgstr "Valoare"
+
+#: fs-admin/fs-admin.php:368
+msgid "Number of posts:"
+msgstr "Numarul postarilor:"
+
+#: fs-admin/fs-admin.php:372
+msgid "Number of threads:"
+msgstr "Numar de discutii:"
+
+#: fs-admin/fs-admin.php:376
+msgid "Number of users:"
+msgstr "Numar de utilizatori:"
+
+#: fs-admin/fs-admin.php:380
+msgid "Total database size:"
+msgstr "Marimea totala a bazei de date:"
+
+#: fs-admin/fs-admin.php:384
+msgid "Database server:"
+msgstr "Baza de date a serverului"
+
+#: fs-admin/fs-admin.php:388
+msgid "Mingle Forum version:"
+msgstr "Versiune Forum Eject"
+
+#: fs-admin/fs-admin.php:393
+msgid "Mingle Forum >> General Options"
+msgstr "Forum Eject>> Optiuni Generale"
+
+#: fs-admin/fs-admin.php:398
+msgid "default "
+msgstr "implicit"
+
+#: fs-admin/fs-admin.php:402
+msgid "Option Name"
+msgstr "Numele optiunii"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Input"
+msgstr "Optiunea de intrare"
+
+#: fs-admin/fs-admin.php:408
+msgid "Posts per page:"
+msgstr "Postari pe pagina:"
+
+#: fs-admin/fs-admin.php:412
+msgid "Threads per page:"
+msgstr "Discutii pe pagina:"
+
+#: fs-admin/fs-admin.php:418
+msgid "Number of posts for Hot Topic:"
+msgstr "Numar de postari pentru SUBIECT FIERBINTE"
+
+#: fs-admin/fs-admin.php:422
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Numar de postari pentru SUBIECT FOARTE FIERBINTE"
+
+#: fs-admin/fs-admin.php:426
+msgid "Username Display:"
+msgstr "Afiseaza Numele de Utilizator"
+
+#: fs-admin/fs-admin.php:439
+msgid "New User's Title:"
+msgstr "Titlul Noului Utilizator"
+
+#: fs-admin/fs-admin.php:443
+msgid "User Level 1 Title:"
+msgstr "User Level 1 Title:"
+
+#: fs-admin/fs-admin.php:447
+msgid "User Level 1 Count:"
+msgstr "User Level 1 Count:"
+
+#: fs-admin/fs-admin.php:448
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:451
+msgid "User Level 2 Title:"
+msgstr "User Level 2 Title:"
+
+#: fs-admin/fs-admin.php:455
+msgid "User Level 2 Count:"
+msgstr "User Level 2 Count:"
+
+#: fs-admin/fs-admin.php:456
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:459
+msgid "User Level 3 Title:"
+msgstr "User Level 3 Title:"
+
+#: fs-admin/fs-admin.php:463
+msgid "User Level 3 Count:"
+msgstr "User Level 3 Count:"
+
+#: fs-admin/fs-admin.php:464
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:467
+msgid "Notify Admin on new posts:"
+msgstr "Anunta Admin in legatura cu posturi noi:"
+
+#: fs-admin/fs-admin.php:471
+#: fs-admin/fs-admin.php:510
+msgid "Off"
+msgstr "Inchis"
+
+#: fs-admin/fs-admin.php:474
+msgid "Show Forum Login Form:"
+msgstr "Arata Forum Login Form:"
+
+#: fs-admin/fs-admin.php:478
+#: fs-admin/fs-admin.php:486
+#: fs-admin/fs-admin.php:494
+#: fs-admin/fs-admin.php:502
+#: fs-admin/fs-admin.php:518
+msgid "On"
+msgstr "Deschis"
+
+#: fs-admin/fs-admin.php:482
+msgid "Show Avatars in the forum:"
+msgstr "Arata Avatare in cadrum forumului:"
+
+#: fs-admin/fs-admin.php:490
+msgid "Show users Bio at the bottom of posts:"
+msgstr "Arata biografia utilizatorulor in partea de jos a postarilor:"
+
+#: fs-admin/fs-admin.php:498
+msgid "Use Forum RSS:"
+msgstr "Foloseste Forum RSS"
+
+#: fs-admin/fs-admin.php:506
+msgid "Use SEO friendly URLs:"
+msgstr "Use SEO friendly URLs:"
+
+#: fs-admin/fs-admin.php:506
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "IMPORTANT: Lasa aceasta optiune inchisa daca legaturile sunt setate 'default'"
+
+#: fs-admin/fs-admin.php:514
+msgid "Registration required to post:"
+msgstr "Inregistrare este necesara pentru a putea posta:"
+
+#: fs-admin/fs-admin.php:523
+msgid "Installed version:"
+msgstr "Versiune instalata:"
+
+#: fs-admin/fs-admin.php:527
+msgid "GD Library is not installed"
+msgstr "GD Library nu este instalata:"
+
+#: fs-admin/fs-admin.php:530
+msgid "Use Captcha for unregistered users:"
+msgstr "Foloseste Captcha pentru utilizatorii neinregistrati:"
+
+#: fs-admin/fs-admin.php:534
+msgid "Requires "
+msgstr "Necesita"
+
+#: fs-admin/fs-admin.php:534
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Daca aveti 'Inregistrare este necesara pentru a putea posta:', lasati-o pe off"
+
+#: fs-admin/fs-admin.php:538
+msgid "Date format:"
+msgstr "Format data:"
+
+#: fs-admin/fs-admin.php:538
+msgid "Default date:"
+msgstr "Data implicita:"
+
+#: fs-admin/fs-admin.php:538
+msgid "Check "
+msgstr "Verifica:"
+
+#: fs-admin/fs-admin.php:538
+msgid "for date formatting."
+msgstr "Pentru formatarea datei."
+
+#: fs-admin/fs-admin.php:653
+msgid "Groups deleted:"
+msgstr "Grupuri sterse:"
+
+#: fs-admin/fs-admin.php:654
+msgid "Forums deleted:"
+msgstr "Forumuri sterse:"
+
+#: fs-admin/fs-admin.php:655
+msgid "Threads deleted:"
+msgstr "Discutii sterse:"
+
+#: fs-admin/fs-admin.php:656
+msgid "Posts deleted:"
+msgstr "Postari sterse:"
+
+#: fs-admin/fs-admin.php:680
+#: fs-admin/fs-admin.php:704
+msgid "You must enter a name"
+msgstr "Introdu un nume"
+
+#: fs-admin/fs-admin.php:689
+msgid "Category added successfully"
+msgstr "Categorie adaugata cu succes"
+
+#: fs-admin/fs-admin.php:701
+msgid "You must select a category"
+msgstr "Necesita selectarea unei categorii"
+
+#: fs-admin/fs-admin.php:707
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Ai ales un nume de forum care deja exista in grup, te rog sa alegi altul"
+
+#: fs-admin/fs-admin.php:714
+msgid "Forum added successfully"
+msgstr "Forum adaugat cu succes"
+
+#: fs-admin/fs-admin.php:741
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Forum Eject >> Categorii si Forumuri"
+
+#: fs-admin/fs-admin.php:763
+#: fs-admin/fs-admin.php:793
+msgid "Modify"
+msgstr "Modifica"
+
+#: fs-admin/fs-admin.php:802
+msgid "Add forum"
+msgstr "Adauga forum"
+
+#: fs-admin/fs-admin.php:827
+msgid "Group Moved Down"
+msgstr "Grup Mutat Jos"
+
+#: fs-admin/fs-admin.php:837
+msgid "Forum Moved Down"
+msgstr "Forum Mutat Jos"
+
+#: fs-admin/fs-admin.php:847
+msgid "Group Moved Up"
+msgstr "Grup Mutat Sus"
+
+#: fs-admin/fs-admin.php:857
+msgid "Forum Moved Up"
+msgstr "Forum Mutat Sus"
+
+#: fs-admin/fs-admin.php:894
+#: fs-admin/fs-admin.php:901
+msgid "Moderator successfully removed."
+msgstr "Moderator eliminat cu succes."
+
+#: fs-admin/fs-admin.php:896
+msgid "Moderator successfully saved."
+msgstr "Moderator inregistrat cu succes."
+
+#: fs-admin/fs-admin.php:903
+msgid "Moderator NOT removed."
+msgstr "Moderator care nu a fost eliminat."
+
+#: fs-admin/fs-admin.php:917
+msgid "You must select a user"
+msgstr "Trebuie sa selectezi un utilizator"
+
+#: fs-admin/fs-admin.php:921
+msgid "Global Moderator added successfully"
+msgstr "Moderator Global adaugat cu succes"
+
+#: fs-admin/fs-admin.php:925
+msgid "Moderator added successfully"
+msgstr "Moderator adaugat cu succes"
+
+#: fs-admin/fs-admin.php:947
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Forum Eject>> Gestioneaza Moderatori"
+
+#: fs-admin/fs-admin.php:956
+msgid "Currently moderating"
+msgstr "In curs de moderare"
+
+#: fs-admin/fs-admin.php:960
+msgid "Update"
+msgstr "Update"
+
+#: fs-admin/fs-admin.php:970
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Moderator Global: (Utilizator ce poate modera toate forumurile)"
+
+#: fs-admin/fs-admin.php:989
+msgid "No moderators yet"
+msgstr "Nici un moderator inca"
+
+#: fs-admin/fs-admin.php:1014
+#, fuzzy
+msgid "Ads saved successfully"
+msgstr "Anunturi adaugate cu succes"
+
+#: fs-admin/fs-admin.php:1019
+msgid "Mingle Forum Ads >> options"
+msgstr "Anunturi Amesteca Forum >> optiuni"
+
+#: fs-admin/fs-admin.php:1021
+msgid "HTML is allowed in all ad areas below"
+msgstr "HTML este permis in toate domeniile de anunturi de mai jos"
+
+#: fs-admin/fs-admin.php:1025
+msgid "Ads Option"
+msgstr "Optiune Anunturi"
+
+#: fs-admin/fs-admin.php:1032
+msgid "Enable Area Above Forum"
+msgstr "Zona de activare in partea de sus a Forumului"
+
+#: fs-admin/fs-admin.php:1034
+#: fs-admin/fs-admin.php:1042
+#: fs-admin/fs-admin.php:1050
+#: fs-admin/fs-admin.php:1058
+#: fs-admin/fs-admin.php:1066
+#: fs-admin/fs-admin.php:1074
+#: fs-admin/fs-admin.php:1082
+msgid "css-value:"
+msgstr "css-value:"
+
+#: fs-admin/fs-admin.php:1040
+msgid "Enable Area Below Forum"
+msgstr "Zona de activare in partea de jos a Forumului"
+
+#: fs-admin/fs-admin.php:1048
+msgid "Enable Area Above Branding"
+msgstr "Activeaza zona de Deasupra Branding"
+
+#: fs-admin/fs-admin.php:1056
+msgid "Enable Area Above Info Center"
+msgstr "Activeaza zona Deasupra Info Center"
+
+#: fs-admin/fs-admin.php:1064
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Activeaza zona Deasupra  Breadcrumbs"
+
+#: fs-admin/fs-admin.php:1072
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Activeaza zona formularului de raspuns rapid"
+
+#: fs-admin/fs-admin.php:1080
+msgid "Enable Area Below First Post"
+msgstr "Activeaza Zona de sub Prima Postare"
+
+#: fs-admin/fs-admin.php:1087
+msgid "Below you can modify/add your own CSS"
+msgstr "Dedesubt poti modifica/aduce propriul tau CSS"
+
+#: fs-admin/fs-admin.php:1088
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "NOTE: If you do not know what this is for, leave it blank"
+
+#: fs-admin/fs-admin.php:1095
+msgid "Save Options"
+msgstr "Salveaza Optiuni"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "Adauga forum la"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "Descriere:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "Salveaza forum:"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "Adauga o categorie"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "Salveaza categorie"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "Salveaza grup de utilizatori"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "Alege Grupul de utilizatori"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "Adauga utilizatori"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "Trebuie sa specifici un nume de grup"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "Grup adaugat cu succes"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "Trebuie sa specifici un nume de forum"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "Forum updatat cu succces"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "Modificare categorie"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "Grupuri de utilizatori"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "Membrii grupurilor de utilizatori verificati au acces la forumuri in aceasta categorie:"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "Nu exista grupuri de utilizatori"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "Salveaza grup"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "Modificare forum"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "Alege utilizator"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "Adauga moderator"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "Trebuie sa specifici un nume pentru Grupul de Utilizatori"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "Grup de Utilizatori actualizat cu succes"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "Modifica Grupul de Utilizatori"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "Salveaza Grupul de Utilizatori"
+

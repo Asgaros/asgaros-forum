@@ -1,0 +1,1767 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-15 12:15-0700\n"
+"PO-Revision-Date: 2011-04-15 16:07-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\\pms\n"
+"X-Poedit-SearchPath-2: .\\fs-admin\n"
+
+#: feed.php:24
+#: feed.php:25
+msgid "Forum Feed"
+msgstr "Feed форума"
+
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "Тема форума:"
+
+#: feed.php:30
+#: wpf.class.php:1808
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "Форум"
+
+#: feed.php:30
+#: wpf.class.php:859
+msgid "Topic: "
+msgstr "Тема: "
+
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "Фиды отключены"
+
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "Нет такого пользователя"
+
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "У вас нет подписок в настоящее время"
+
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "Изменить параметры форума"
+
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "Разрешить другим пользователям видеть мой профиль?"
+
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "У вас есть уведомления на e-mail для этих тем:"
+
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:552
+msgid "Save options"
+msgstr "Сохранить параметры"
+
+#: wpf-edit-profile.php:53
+#: wpf.class.php:615
+#: wpf.class.php:2071
+#: wpf.class.php:2097
+#: wpf.class.php:2115
+#: wpf.class.php:2137
+#: wpf.class.php:2146
+#: wpf.class.php:2204
+msgid "Cheating, are we?"
+msgstr "Пытаемся схитрить?"
+
+#: wpf-insert.php:98
+#, fuzzy
+msgid "Security code does not match"
+msgstr "Защитный код не совпадает"
+
+#: wpf-insert.php:113
+#: wpf-insert.php:118
+#: wpf-insert.php:188
+#: wpf-insert.php:193
+#: wpf-insert.php:246
+#: wpf-insert.php:251
+msgid "An error occured"
+msgstr "Произошла ошибка"
+
+#: wpf-insert.php:114
+#: wpf-insert.php:189
+#: wpf-insert.php:247
+msgid "You must enter a subject"
+msgstr "Вы должны ввести тему"
+
+#: wpf-insert.php:119
+#: wpf-insert.php:194
+#: wpf-insert.php:252
+msgid "You must enter a message"
+msgstr "Вы должны ввести сообщение"
+
+#: wpf-insert.php:138
+msgid "created the forum topic:"
+msgstr "создал(а) тему форума:"
+
+#: wpf-insert.php:205
+msgid "replied to the forum topic:"
+msgstr "ответил(а) в теме форума:"
+
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "Цитата"
+
+#: wpf-post.php:10
+#: wpf.class.php:678
+#: wpf.class.php:687
+#: wpf.class.php:1156
+msgid "on"
+msgstr " "
+
+#: wpf-post.php:20
+#: wpf.class.php:1281
+#: wpf.class.php:1854
+msgid "Post Reply"
+msgstr "Ответить"
+
+#: wpf-post.php:23
+#: wpf-post.php:76
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "Тема: "
+
+#: wpf-post.php:24
+#: wpf.class.php:909
+msgid "Re:"
+msgstr "Ответ на:"
+
+#: wpf-post.php:27
+#: wpf-post.php:80
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "Сообщение:"
+
+#: wpf-post.php:40
+#: wpf-thread.php:30
+#, fuzzy
+msgid "Images:"
+msgstr "Изображение"
+
+#: wpf-post.php:51
+#: wpf-thread.php:41
+msgid "Submit"
+msgstr "Отправить"
+
+#: wpf-post.php:73
+#: wpf.class.php:1278
+#: wpf.class.php:1857
+msgid "Edit Post"
+msgstr "Изменить сообщение"
+
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "Сохранить сообщение"
+
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "Начать новую тему"
+
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "Извините, у вас нет разрешения на отправку сообщений."
+
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:441
+msgid "Newbie"
+msgstr "Новичок"
+
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:445
+msgid "Beginner"
+msgstr "Осваивающийся"
+
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:453
+msgid "Advanced"
+msgstr "Продвинутый"
+
+#: wpf.class.php:154
+#: fs-admin/fs-admin.php:461
+msgid "Pro"
+msgstr "Про"
+
+#: wpf.class.php:172
+#: wpf.class.php:173
+msgid "Mingle Forum - Options"
+msgstr "Форум - Настройки"
+
+#: wpf.class.php:173
+msgid "Options"
+msgstr "Настройки"
+
+#: wpf.class.php:174
+msgid "Ads"
+msgstr "Объявления"
+
+#: wpf.class.php:175
+msgid "Skins"
+msgstr "Скины"
+
+#: wpf.class.php:176
+msgid "Forum Structure - Categories & Forums"
+msgstr "Структура форума - Категории и Форумы"
+
+#: wpf.class.php:176
+msgid "Forum Structure"
+msgstr "Структура форума"
+
+#: wpf.class.php:177
+msgid "Moderators"
+msgstr "Модераторы"
+
+#: wpf.class.php:178
+msgid "User Groups"
+msgstr "Группы пользователей"
+
+#: wpf.class.php:179
+msgid "About"
+msgstr "О себе"
+
+#: wpf.class.php:190
+#: wpf.class.php:191
+msgid "Forums Latest Activity"
+msgstr "Последние события форума"
+
+#: wpf.class.php:210
+#: wpf.class.php:230
+msgid "by:"
+msgstr "Автор:"
+
+#: wpf.class.php:247
+msgid "Title to display in the sidebar:"
+msgstr "Название для отображения на боковой панели:"
+
+#: wpf.class.php:249
+msgid "How many items would you like to display?"
+msgstr "Сколько элементов вы хотели бы показывать?"
+
+#: wpf.class.php:646
+msgid "Page loaded in:"
+msgstr "Страница загружена за"
+
+#: wpf.class.php:646
+msgid "seconds."
+msgstr "секунд."
+
+#: wpf.class.php:649
+msgid "Mingle Forum "
+msgstr "Mingle Forum "
+
+#: wpf.class.php:650
+msgid "Version:"
+msgstr "Версия:"
+
+#: wpf.class.php:669
+#: wpf.class.php:2268
+msgid "Guest"
+msgstr "гость"
+
+#: wpf.class.php:678
+#: wpf.class.php:1155
+msgid "by"
+msgstr "от пользователя"
+
+#: wpf.class.php:687
+msgid "Latest Post by"
+msgstr "Последнее сообщение от пользователя"
+
+#: wpf.class.php:710
+#: wpf.class.php:841
+msgid "Sorry, but you don't have access to this forum"
+msgstr "Извините, но у вас нет доступа к этому форуму"
+
+#: wpf.class.php:720
+#: wpf.class.php:2356
+msgid "Status"
+msgstr "Статус"
+
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Topic Title"
+msgstr "Название темы"
+
+#: wpf.class.php:722
+#: wpf.class.php:2358
+#: wpf.class.php:2546
+msgid "Started by"
+msgstr "Автор"
+
+#: wpf.class.php:723
+#: wpf.class.php:2359
+msgid "Replies"
+msgstr "Ответов"
+
+#: wpf.class.php:724
+msgid "Views"
+msgstr "Просмотров"
+
+#: wpf.class.php:725
+#: wpf.class.php:1155
+#: wpf.class.php:2360
+msgid "Last post"
+msgstr "Последнее сообщение"
+
+#: wpf.class.php:729
+msgid "Sticky Topics"
+msgstr "Важная тема"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+#: wpf.class.php:1642
+#: wpf.class.php:1659
+msgid "Move Topic"
+msgstr "Переместить тему"
+
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+msgid "Delete Topic"
+msgstr "Удалить тему"
+
+#: wpf.class.php:745
+#: wpf.class.php:774
+msgid "New posts since last visit"
+msgstr "Новые сообщения с последнего посещения"
+
+#: wpf.class.php:762
+msgid "Forum Topics"
+msgstr "Темы форума"
+
+#: wpf.class.php:829
+msgid "Remove this topic from your email notifications?"
+msgstr "Удалить эту тему из ваших уведомлений по электронной почте?"
+
+#: wpf.class.php:831
+msgid "Add this topic to your email notifications?"
+msgstr "Добавить эту тему в список ваших уведомлений по электронной почте?"
+
+#: wpf.class.php:852
+msgid "TOPIC CLOSED"
+msgstr "ТЕМА ЗАКРЫТА"
+
+#: wpf.class.php:858
+msgid "Author"
+msgstr "Автор"
+
+#: wpf.class.php:874
+#: wpf.class.php:2412
+msgid "Posts:"
+msgstr "Сообщения:"
+
+#: wpf.class.php:907
+msgid "Quick Reply"
+msgstr "Быстрый ответ"
+
+#: wpf.class.php:916
+msgid "Submit Quick Reply"
+msgstr "Отправить быстрый ответ"
+
+#: wpf.class.php:938
+#: wpf_define.php:36
+msgid "Post"
+msgstr "Сообщение"
+
+#: wpf.class.php:941
+msgid "on:"
+msgstr " "
+
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: wpf.class.php:2284
+msgid "Quote"
+msgstr "Цитата"
+
+#: wpf.class.php:947
+#: wpf.class.php:956
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:971
+msgid "Remove"
+msgstr "Удалить"
+
+#: wpf.class.php:949
+#: wpf.class.php:958
+msgid "Edit"
+msgstr "Редактировать"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Topics: "
+msgstr "Темы:"
+
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Posts: "
+msgstr "Сообщения:"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "New posts"
+msgstr "Новые сообщения"
+
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "No new posts"
+msgstr "Нет новых сообщений"
+
+#: wpf.class.php:1042
+msgid "Mark All Read"
+msgstr "Пометить все как прочтенные"
+
+#: wpf.class.php:1153
+msgid "No topics yet"
+msgstr "Пока нет тем"
+
+#: wpf.class.php:1156
+msgid "in"
+msgstr "в"
+
+#: wpf.class.php:1207
+msgid "Forums RSS"
+msgstr "Форумы в RSS"
+
+#: wpf.class.php:1218
+msgid "Are you sure you want to remove this?"
+msgstr "Вы уверены, что хотите удалить это?"
+
+#: wpf.class.php:1272
+#: wpf.class.php:1847
+msgid "Search Results"
+msgstr "Результаты поиска"
+
+#: wpf.class.php:1275
+msgid "Profile"
+msgstr "Профиль"
+
+#: wpf.class.php:1284
+#: wpf.class.php:1504
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+#: wpf.class.php:1860
+msgid "New Topic"
+msgstr "Новая тема"
+
+#: wpf.class.php:1351
+msgid "Moderators:"
+msgstr "Модераторы:"
+
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Undo Sticky"
+msgstr "Убрать из прикрепленных"
+
+#: wpf.class.php:1529
+#: wpf.class.php:1542
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Sticky"
+msgstr "Прикрепить"
+
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1641
+#: wpf.class.php:1658
+msgid "Re-open"
+msgstr "Открыть заново"
+
+#: wpf.class.php:1534
+#: wpf.class.php:1547
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Close"
+msgstr "Закрыть"
+
+#: wpf.class.php:1554
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "Reply"
+msgstr "Ответить"
+
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Unsubscribe"
+msgstr "Отписаться"
+
+#: wpf.class.php:1563
+#: wpf.class.php:1579
+msgid "Subscribe"
+msgstr "Подписаться"
+
+#: wpf.class.php:1566
+msgid "RSS feed"
+msgstr "RSS фид"
+
+#: wpf.class.php:1582
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "RSS-Feed"
+msgstr "RSS фид"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My profile"
+msgstr "Мой профиль"
+
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My Profile"
+msgstr "Мой профиль"
+
+#: wpf.class.php:1631
+#: wpf.class.php:1648
+msgid "Forum Home"
+msgstr "Форум - главная"
+
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:1925
+msgid "Log out"
+msgstr "Выйти"
+
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:2455
+msgid "Search"
+msgstr "Поиск"
+
+#: wpf.class.php:1722
+msgid "You are logged in as:"
+msgstr "Вы вошли как:"
+
+#: wpf.class.php:1728
+msgid "Username: "
+msgstr "Имя пользователя:"
+
+#: wpf.class.php:1729
+msgid "Password: "
+msgstr "Пароль:"
+
+#: wpf.class.php:1731
+msgid "Remember Me"
+msgstr "Запомнить меня"
+
+#: wpf.class.php:1767
+msgid "Administrator"
+msgstr "Администратор"
+
+#: wpf.class.php:1771
+msgid "Moderator"
+msgstr "Модератор"
+
+#: wpf.class.php:1841
+msgid "New Topics since last visit"
+msgstr "Новые темы с момента последнего посещения"
+
+#: wpf.class.php:1851
+msgid "Profile Info"
+msgstr "Профиль пользователя"
+
+#: wpf.class.php:1915
+msgid "Edit Profile"
+msgstr "Изменить профиль"
+
+#: wpf.class.php:1919
+#: wpf.class.php:1931
+msgid "Welcome"
+msgstr "Добро пожаловать,"
+
+#: wpf.class.php:1920
+msgid "Your last visit was:"
+msgstr "Последний раз вы были здесь:"
+
+#: wpf.class.php:1922
+msgid "Show new topics since your last visit"
+msgstr "Показать новые темы со времени вашего последнего визита"
+
+#: wpf.class.php:1923
+msgid "Edit your forum options"
+msgstr "Изменить параметры форума"
+
+#: wpf.class.php:1930
+msgid "Welcome Guest, please login or"
+msgstr "Добро пожаловать, гость! Пожалуйста, войдите под своим именем или"
+
+#: wpf.class.php:1930
+msgid "register."
+msgstr "зарегистрируйтесь."
+
+#: wpf.class.php:1935
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "Добро пожаловать, гость! Для участия в форуме требуется"
+
+#: wpf.class.php:1935
+msgid "registration."
+msgstr "регистрация."
+
+#: wpf.class.php:1943
+msgid "Show/Hide Header"
+msgstr "Показать / спрятать"
+
+#: wpf.class.php:1957
+msgid "Search forums"
+msgstr "Поиск по форуму"
+
+#: wpf.class.php:1992
+#: wpf.class.php:2023
+msgid "Pages:"
+msgstr "Страниц:"
+
+#: wpf.class.php:2005
+#: wpf.class.php:2036
+msgid "First"
+msgstr "Перв."
+
+#: wpf.class.php:2016
+#: wpf.class.php:2047
+msgid "Last"
+msgstr "Посл."
+
+#: wpf.class.php:2134
+msgid "Post deleted"
+msgstr "Сообщение удалено"
+
+#: wpf.class.php:2261
+#: wpf.class.php:2265
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "Просмотр профиля"
+
+#: wpf.class.php:2279
+msgid "Bold"
+msgstr "Полужирный"
+
+#: wpf.class.php:2280
+msgid "Italic"
+msgstr "Курсив"
+
+#: wpf.class.php:2281
+msgid "Underline"
+msgstr "Подчеркнутый"
+
+#: wpf.class.php:2282
+msgid "Strikethrough"
+msgstr "Зачеркнутый"
+
+#: wpf.class.php:2283
+msgid "Code"
+msgstr "Код"
+
+#: wpf.class.php:2285
+msgid "List"
+msgstr "Список"
+
+#: wpf.class.php:2286
+msgid "List item"
+msgstr "Элемент списка"
+
+#: wpf.class.php:2287
+msgid "Link"
+msgstr "Ссылка"
+
+#: wpf.class.php:2288
+msgid "Image"
+msgstr "Изображение"
+
+#: wpf.class.php:2289
+msgid "Email"
+msgstr "Email"
+
+#: wpf.class.php:2290
+msgid "Add Hex Color"
+msgstr "Добавить цвет Hex "
+
+#: wpf.class.php:2291
+msgid "Embed YouTube Video"
+msgstr "Внедрить видео из YouTube"
+
+#: wpf.class.php:2292
+msgid "Embed Google Map"
+msgstr "Внедрить Google Map"
+
+#: wpf.class.php:2298
+msgid "Smile"
+msgstr "Смайл"
+
+#: wpf.class.php:2299
+msgid "Big Grin"
+msgstr "Широкий оскал"
+
+#: wpf.class.php:2300
+msgid "Sad"
+msgstr "Грустный"
+
+#: wpf.class.php:2301
+msgid "Neutral"
+msgstr "Нейтральный"
+
+#: wpf.class.php:2302
+msgid "Razz"
+msgstr "Высмеивающий"
+
+#: wpf.class.php:2303
+msgid "Mad"
+msgstr "Взбешенный"
+
+#: wpf.class.php:2304
+msgid "Confused"
+msgstr "Сконфуженный"
+
+#: wpf.class.php:2305
+msgid "Eek!"
+msgstr "Иик!"
+
+#: wpf.class.php:2306
+msgid "Wink"
+msgstr "Подмигивающий"
+
+#: wpf.class.php:2307
+msgid "Surprised"
+msgstr "Удивленный"
+
+#: wpf.class.php:2308
+msgid "Cool"
+msgstr "Круто"
+
+#: wpf.class.php:2320
+msgid "Info Center"
+msgstr "Информационный центр"
+
+#: wpf.class.php:2327
+msgid "Posts in"
+msgstr "сообщ. в"
+
+#: wpf.class.php:2327
+msgid "Topics Made by"
+msgstr "темах. Участников:"
+
+#: wpf.class.php:2327
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "."
+
+#: wpf.class.php:2327
+msgid "Latest Member:"
+msgstr "Последний пользователь:"
+
+#: wpf.class.php:2353
+msgid "New topics since your last visit"
+msgstr "Новые темы со времени вашего последнего визита"
+
+#: wpf.class.php:2397
+msgid "Summary"
+msgstr "Резюме"
+
+#: wpf.class.php:2403
+#: wpf.class.php:2689
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "Имя:"
+
+#: wpf.class.php:2408
+msgid "Registered:"
+msgstr "Зарегистрирован:"
+
+#: wpf.class.php:2416
+msgid "Position:"
+msgstr "Статус:"
+
+#: wpf.class.php:2419
+msgid "Website:"
+msgstr "Веб-сайт:"
+
+#: wpf.class.php:2423
+msgid "AIM:"
+msgstr "AIM:"
+
+#: wpf.class.php:2427
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+#: wpf.class.php:2430
+msgid "Jabber/google Talk:"
+msgstr "Jabber / Google Talk:"
+
+#: wpf.class.php:2434
+msgid "Biographical Info:"
+msgstr "О себе:"
+
+#: wpf.class.php:2459
+msgid "Search for:"
+msgstr "Искать:"
+
+#: wpf.class.php:2463
+msgid "By user:"
+msgstr "По пользователю:"
+
+#: wpf.class.php:2468
+msgid "Message Age:"
+msgstr "Давность сообщения:"
+
+#: wpf.class.php:2469
+msgid "Between"
+msgstr "Между"
+
+#: wpf.class.php:2469
+msgid "and"
+msgstr "и"
+
+#: wpf.class.php:2469
+msgid "days"
+msgstr "дней"
+
+#: wpf.class.php:2475
+msgid "Click to choose Forum(s) to  search"
+msgstr "Нажмите, чтобы выбрать форум(ы) для поиска"
+
+#: wpf.class.php:2497
+msgid "Check all"
+msgstr "Все"
+
+#: wpf.class.php:2502
+msgid "Start Search"
+msgstr "Начать поиск"
+
+#: wpf.class.php:2544
+msgid "Subject"
+msgstr "Предмет"
+
+#: wpf.class.php:2545
+msgid "Relevance"
+msgstr "Релевантность"
+
+#: wpf.class.php:2547
+msgid "Posted"
+msgstr "Написал"
+
+#: wpf.class.php:2613
+msgid "Closed topic"
+msgstr "Закрытая тема"
+
+#: wpf.class.php:2616
+msgid "Normal topic"
+msgstr "Обычная тема"
+
+#: wpf.class.php:2619
+msgid "Hot topic"
+msgstr "Горячая тема"
+
+#: wpf.class.php:2622
+msgid "Very Hot topic"
+msgstr "Очень популярная тема"
+
+#: wpf.class.php:2654
+msgid "Security Code:"
+msgstr "Защитный код:"
+
+#: wpf.class.php:2673
+msgid "Enter Security Code: (required)"
+msgstr "Введите код (обязательно):"
+
+#: wpf.class.php:2687
+msgid "New post in forum:"
+msgstr "Новое сообщение в форуме:"
+
+#: wpf.class.php:2688
+msgid "DETAILS:"
+msgstr "ПОДРОБНОСТИ:"
+
+#: wpf.class.php:2691
+msgid "Date:"
+msgstr "Дата:"
+
+#: wpf.class.php:2692
+msgid "Reply Content:"
+msgstr "Содержание ответа:"
+
+#: wpf.class.php:2693
+msgid "View Topic Here:"
+msgstr "Просмотр темы:"
+
+#: wpf.class.php:2742
+#: wpf.class.php:2752
+msgid "Inbox"
+msgstr "Входящие"
+
+#: wpf.class.php:2768
+#: wpf.class.php:2781
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
+#: wpf_define.php:33
+msgid "Category"
+msgstr "Категория"
+
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "Тема"
+
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "Вы должны указать название группы пользователей."
+
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:692
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "Вы выбрали имя, которое уже существует в базе данных, пожалуйста, укажите другое"
+
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "Группа пользователей успешно создана"
+
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "Вы не выбрали пользователей для добавления:"
+
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "Вы должны выбрать группу пользователей"
+
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "Ошибка"
+
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "Нет такого пользователя:"
+
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "Предупреждение"
+
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "Пользователь"
+
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "уже в этой группе"
+
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "успешно добавлен"
+
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "Ошибки:"
+
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "Предупреждения:"
+
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "Добавленные пользователи:"
+
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "Группа(ы) успешно удалена(ы)."
+
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "Участник успешно удален."
+
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "Mingle Forum >>Управление группами пользователей"
+
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:757
+#: fs-admin/fs-admin.php:957
+msgid "add new"
+msgstr "добавить новый"
+
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:811
+msgid "Delete"
+msgstr "Удалять"
+
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "Добавить участников"
+
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "В этой группе нет участников"
+
+#: fs-admin/fs-admin.php:222
+msgid "Skin successfully activated."
+msgstr "Оформление успешно активировано."
+
+#: fs-admin/fs-admin.php:228
+msgid "Mingle Forum >> Skin options"
+msgstr "Навесы Форум>> Параметры оформления"
+
+#: fs-admin/fs-admin.php:229
+msgid "Get More Skins"
+msgstr "Дополнительные варианты оформления"
+
+#: fs-admin/fs-admin.php:230
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "ВАЖНО: Начиная с версии 1.0.03 для новых скинов используется папка /wp-content/mingle-forum-skins/"
+
+#: fs-admin/fs-admin.php:230
+msgid "Why did you change it?"
+msgstr "Почему вы поменяли это?"
+
+#: fs-admin/fs-admin.php:233
+msgid "Screenshot"
+msgstr "Скриншот"
+
+#: fs-admin/fs-admin.php:234
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "Имя"
+
+#: fs-admin/fs-admin.php:235
+msgid "Version"
+msgstr "Версия"
+
+#: fs-admin/fs-admin.php:236
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "Описание"
+
+#: fs-admin/fs-admin.php:237
+msgid "Action"
+msgstr "Действие"
+
+#: fs-admin/fs-admin.php:251
+#: fs-admin/fs-admin.php:266
+msgid "In Use"
+msgstr "Используется"
+
+#: fs-admin/fs-admin.php:253
+#: fs-admin/fs-admin.php:268
+msgid "Activate"
+msgstr "Активировать"
+
+#: fs-admin/fs-admin.php:296
+msgid "About Mingle Forum"
+msgstr "О Mingle Forum"
+
+#: fs-admin/fs-admin.php:299
+msgid "Current Version: "
+msgstr "Текущая версия:"
+
+#: fs-admin/fs-admin.php:303
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "Миссия Mingle Forum проста: \"Keep It Simple! - не усложняй!\". Он продолжает WP Forum, но был очень существенно улучшен.Сейчас он полностью интегрируется, независимо от наличия Mingle plugin (by Blair Williams). Кроме того, огромное спасибо Эрику Хамби (Eric Hamby) за его работу над скриптом форума."
+
+#: fs-admin/fs-admin.php:305
+msgid "Author: "
+msgstr "Автор:"
+
+#: fs-admin/fs-admin.php:306
+msgid "Plugin Page:"
+msgstr "Страница плагина:"
+
+#: fs-admin/fs-admin.php:307
+msgid "Support Forum:"
+msgstr "Форум поддержки:"
+
+#: fs-admin/fs-admin.php:308
+msgid "Mingle Forum Skins:"
+msgstr "Скины форума Mingle:"
+
+#: fs-admin/fs-admin.php:355
+msgid "Options successfully saved."
+msgstr "Функция успешно сохранена."
+
+#: fs-admin/fs-admin.php:360
+msgid "Mingle Forum"
+msgstr "Mingle Forum"
+
+#: fs-admin/fs-admin.php:364
+msgid "Statistic"
+msgstr "Статистика"
+
+#: fs-admin/fs-admin.php:365
+msgid "Value"
+msgstr "Значение"
+
+#: fs-admin/fs-admin.php:369
+msgid "Number of posts:"
+msgstr "Количество сообщений:"
+
+#: fs-admin/fs-admin.php:373
+msgid "Number of threads:"
+msgstr "Количество веток:"
+
+#: fs-admin/fs-admin.php:377
+msgid "Number of users:"
+msgstr "Количество пользователей:"
+
+#: fs-admin/fs-admin.php:381
+msgid "Total database size:"
+msgstr "Общий размер базы данных:"
+
+#: fs-admin/fs-admin.php:385
+msgid "Database server:"
+msgstr "Сервер баз данных:"
+
+#: fs-admin/fs-admin.php:389
+msgid "Mingle Forum version:"
+msgstr "Версия Mingle Forum:"
+
+#: fs-admin/fs-admin.php:394
+msgid "Mingle Forum >> General Options"
+msgstr "Mingle Forum>> Общие настройки"
+
+#: fs-admin/fs-admin.php:399
+msgid "default "
+msgstr "по умолчанию"
+
+#: fs-admin/fs-admin.php:403
+msgid "Option Name"
+msgstr "Название настройки"
+
+#: fs-admin/fs-admin.php:404
+msgid "Option Input"
+msgstr "Значение настройки"
+
+#: fs-admin/fs-admin.php:409
+msgid "Posts per page:"
+msgstr "Сообщений на странице:"
+
+#: fs-admin/fs-admin.php:413
+msgid "Threads per page:"
+msgstr "Тем на странице:"
+
+#: fs-admin/fs-admin.php:419
+msgid "Number of posts for Hot Topic:"
+msgstr "Количество сообщений в горячей теме:"
+
+#: fs-admin/fs-admin.php:423
+msgid "Number of posts for Very Hot Topic:"
+msgstr "Количество сообщений в очень популярной теме:"
+
+#: fs-admin/fs-admin.php:427
+msgid "Username Display:"
+msgstr "Отображение имени пользователя:"
+
+#: fs-admin/fs-admin.php:440
+msgid "New User's Title:"
+msgstr "Название для нового пользователя:"
+
+#: fs-admin/fs-admin.php:444
+msgid "User Level 1 Title:"
+msgstr "Название для пользователя 1 уровня:"
+
+#: fs-admin/fs-admin.php:448
+msgid "User Level 1 Count:"
+msgstr "Количество сообщений для пользователя 1 уровня::"
+
+#: fs-admin/fs-admin.php:449
+msgid "25"
+msgstr "25"
+
+#: fs-admin/fs-admin.php:452
+msgid "User Level 2 Title:"
+msgstr "Название для пользователя 2 уровня:"
+
+#: fs-admin/fs-admin.php:456
+msgid "User Level 2 Count:"
+msgstr "Кол-во сообщений для пользователя 2 уровня::"
+
+#: fs-admin/fs-admin.php:457
+msgid "50"
+msgstr "50"
+
+#: fs-admin/fs-admin.php:460
+msgid "User Level 3 Title:"
+msgstr "Название для пользователя 3 уровня::"
+
+#: fs-admin/fs-admin.php:464
+msgid "User Level 3 Count:"
+msgstr "Кол-во сообщений для для пользователя 3 уровня::"
+
+#: fs-admin/fs-admin.php:465
+msgid "100"
+msgstr "100"
+
+#: fs-admin/fs-admin.php:468
+msgid "Notify Admin on new posts:"
+msgstr "Уведомлять администратора о новых сообщения"
+
+#: fs-admin/fs-admin.php:472
+#: fs-admin/fs-admin.php:495
+#: fs-admin/fs-admin.php:519
+msgid "Off"
+msgstr "Выкл"
+
+#: fs-admin/fs-admin.php:475
+msgid "Show Forum Login Form:"
+msgstr "Показывать форму авторизации на Форуме:"
+
+#: fs-admin/fs-admin.php:479
+#: fs-admin/fs-admin.php:487
+#: fs-admin/fs-admin.php:503
+#: fs-admin/fs-admin.php:511
+#: fs-admin/fs-admin.php:527
+msgid "On"
+msgstr "Вкл"
+
+#: fs-admin/fs-admin.php:483
+msgid "Show Avatars in the forum:"
+msgstr "Показывать аватары в форуме:"
+
+#: fs-admin/fs-admin.php:491
+msgid "Allow Images to be uploaded:"
+msgstr ""
+
+#: fs-admin/fs-admin.php:499
+msgid "Show users Bio at the bottom of posts:"
+msgstr "Показывать биографию пользователей внизу сообщений:"
+
+#: fs-admin/fs-admin.php:507
+msgid "Use Forum RSS:"
+msgstr "Использовать RSS форума"
+
+#: fs-admin/fs-admin.php:515
+msgid "Use SEO friendly URLs:"
+msgstr "Использовать SEO URLы:"
+
+#: fs-admin/fs-admin.php:515
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "ВАЖНО: Оставьте эту опцию \"выкл\", если ваши постоянные ссылки установлены как \"по умолчанию\""
+
+#: fs-admin/fs-admin.php:523
+msgid "Registration required to post:"
+msgstr "Регистрация обязательна для участия в форуме:"
+
+#: fs-admin/fs-admin.php:532
+msgid "Installed version:"
+msgstr "Установленная версия:"
+
+#: fs-admin/fs-admin.php:536
+msgid "GD Library is not installed"
+msgstr "Библиотека GD не установлена"
+
+#: fs-admin/fs-admin.php:539
+msgid "Use Captcha for unregistered users:"
+msgstr "Использование Captcha для незарегистрированных пользователей:"
+
+#: fs-admin/fs-admin.php:543
+msgid "Requires "
+msgstr "Требует"
+
+#: fs-admin/fs-admin.php:543
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "Оставьте это \"выкл\", если у вас включена опция \"Регистрация обязательна для участия в форуме\"."
+
+#: fs-admin/fs-admin.php:547
+msgid "Date format:"
+msgstr "Формат даты:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Default date:"
+msgstr "По умолчанию дата:"
+
+#: fs-admin/fs-admin.php:547
+msgid "Check "
+msgstr "Проверка"
+
+#: fs-admin/fs-admin.php:547
+msgid "for date formatting."
+msgstr "на дату форматирования."
+
+#: fs-admin/fs-admin.php:663
+msgid "Groups deleted:"
+msgstr "Группы удалены:"
+
+#: fs-admin/fs-admin.php:664
+msgid "Forums deleted:"
+msgstr "Форумы удалены:"
+
+#: fs-admin/fs-admin.php:665
+msgid "Threads deleted:"
+msgstr "Темы удалены:"
+
+#: fs-admin/fs-admin.php:666
+msgid "Posts deleted:"
+msgstr "Сообщения удалены:"
+
+#: fs-admin/fs-admin.php:690
+#: fs-admin/fs-admin.php:714
+msgid "You must enter a name"
+msgstr "Вы должны ввести имя"
+
+#: fs-admin/fs-admin.php:699
+msgid "Category added successfully"
+msgstr "Категория успешно добавлена"
+
+#: fs-admin/fs-admin.php:711
+msgid "You must select a category"
+msgstr "Вы должны выбрать категорию"
+
+#: fs-admin/fs-admin.php:717
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "Вы выбрали название, которые уже существует в этой группе, пожалуйста, укажите другое"
+
+#: fs-admin/fs-admin.php:724
+msgid "Forum added successfully"
+msgstr "Форум успешно добавлен"
+
+#: fs-admin/fs-admin.php:751
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "Mingle Forum >> Категории и форумы"
+
+#: fs-admin/fs-admin.php:773
+#: fs-admin/fs-admin.php:803
+msgid "Modify"
+msgstr "Изменить"
+
+#: fs-admin/fs-admin.php:812
+msgid "Add forum"
+msgstr "Добавить форум"
+
+#: fs-admin/fs-admin.php:837
+msgid "Group Moved Down"
+msgstr "Группа перемещена вниз"
+
+#: fs-admin/fs-admin.php:847
+msgid "Forum Moved Down"
+msgstr "Форум перемещен вниз"
+
+#: fs-admin/fs-admin.php:857
+msgid "Group Moved Up"
+msgstr "Группа перемещена вверх"
+
+#: fs-admin/fs-admin.php:867
+msgid "Forum Moved Up"
+msgstr "Форум перемещен вверх"
+
+#: fs-admin/fs-admin.php:904
+#: fs-admin/fs-admin.php:911
+msgid "Moderator successfully removed."
+msgstr "Модератор успешно удален."
+
+#: fs-admin/fs-admin.php:906
+msgid "Moderator successfully saved."
+msgstr "Модератор успешно сохранен."
+
+#: fs-admin/fs-admin.php:913
+msgid "Moderator NOT removed."
+msgstr "Модератор НЕ удален."
+
+#: fs-admin/fs-admin.php:927
+msgid "You must select a user"
+msgstr "Вы должны выбрать пользователя"
+
+#: fs-admin/fs-admin.php:931
+msgid "Global Moderator added successfully"
+msgstr "Старший модератор успешно добавлен"
+
+#: fs-admin/fs-admin.php:935
+msgid "Moderator added successfully"
+msgstr "Модератор успешно добавлен"
+
+#: fs-admin/fs-admin.php:957
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "Mingle Forum >> Управление модераторами"
+
+#: fs-admin/fs-admin.php:966
+msgid "Currently moderating"
+msgstr "Сейчас модерируют"
+
+#: fs-admin/fs-admin.php:970
+msgid "Update"
+msgstr "Обновление"
+
+#: fs-admin/fs-admin.php:980
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "Старший модератор: (Может модерировать все форумы)"
+
+#: fs-admin/fs-admin.php:999
+msgid "No moderators yet"
+msgstr "Пока нет модераторов"
+
+#: fs-admin/fs-admin.php:1024
+msgid "Ads saved successfully"
+msgstr "Объявления успешно сохранены"
+
+#: fs-admin/fs-admin.php:1029
+msgid "Mingle Forum Ads >> options"
+msgstr "Объявления форума >> настройки"
+
+#: fs-admin/fs-admin.php:1031
+msgid "HTML is allowed in all ad areas below"
+msgstr "HTML разрешен во всех зонах объявлений ниже"
+
+#: fs-admin/fs-admin.php:1035
+msgid "Ads Option"
+msgstr "Настройка объявлений"
+
+#: fs-admin/fs-admin.php:1042
+msgid "Enable Area Above Forum"
+msgstr "Разрешить зону над форумом"
+
+#: fs-admin/fs-admin.php:1044
+#: fs-admin/fs-admin.php:1052
+#: fs-admin/fs-admin.php:1060
+#: fs-admin/fs-admin.php:1068
+#: fs-admin/fs-admin.php:1076
+#: fs-admin/fs-admin.php:1084
+#: fs-admin/fs-admin.php:1092
+msgid "css-value:"
+msgstr "значение css:"
+
+#: fs-admin/fs-admin.php:1050
+msgid "Enable Area Below Forum"
+msgstr "Разрешить зону под форумом"
+
+#: fs-admin/fs-admin.php:1058
+msgid "Enable Area Above Branding"
+msgstr "Разрешить зону над информацией о форуме внизу"
+
+#: fs-admin/fs-admin.php:1066
+msgid "Enable Area Above Info Center"
+msgstr "Разрешить зону над информационным центром"
+
+#: fs-admin/fs-admin.php:1074
+msgid "Enable Area Above Breadcrumbs"
+msgstr "Разрешить зону над информацией о новых сообщениях"
+
+#: fs-admin/fs-admin.php:1082
+msgid "Enable Area Above Quick Reply Form"
+msgstr "Разрешить зону над формой быстрого ответа"
+
+#: fs-admin/fs-admin.php:1090
+msgid "Enable Area Below First Post"
+msgstr "Разрешить зону под первым постом"
+
+#: fs-admin/fs-admin.php:1097
+msgid "Below you can modify/add your own CSS"
+msgstr "Здесь вы можете изменить/добавить свой CSS"
+
+#: fs-admin/fs-admin.php:1098
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "ПРИМЕЧЕНИЕ: Если вы не знаете, зачем это нужно, оставьте пустым"
+
+#: fs-admin/fs-admin.php:1105
+msgid "Save Options"
+msgstr "Сохранить настройки"
+
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "Добавить форум"
+
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "Описание:"
+
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "Сохранить форум"
+
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "Добавить категорию"
+
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "Сохранить категорию"
+
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "Сохранить группы пользователей"
+
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "Выберите группу пользователей"
+
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "Добавить пользователей"
+
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "Вы должны указать имя группы"
+
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "Группа успешно обновлена"
+
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "Вы должны указать название форума"
+
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "Форум успешно обновлен"
+
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "Изменить категорию"
+
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "Группы пользователей:"
+
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "Члены данной группы пользователей имеют доступ к форумам в этой категории:"
+
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "Нет групп пользователей"
+
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "Сохранить группу"
+
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "Редактировать"
+
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "Выберите пользователя"
+
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "Добавить модератора"
+
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "Вы должны указать имя для группы пользователей"
+
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "Группа пользователей успешно обновлена"
+
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "Редактировать группу пользователей"
+
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "Сохранить группу пользователей"
+
+#~ msgid "General Options"
+#~ msgstr "Общие параметры"
+
+#~ msgid "Categories and forums"
+#~ msgstr "Категории и форумы"
+
+#~ msgid "Remove this post?"
+#~ msgstr "Удалить это сообщение?"
+
+#~ msgid "Notify me when I get new Messages?"
+#~ msgstr "Присылать уведомление при получении новых сообщений?"
+
+#~ msgid "Messages"
+#~ msgstr "Сообщения"
+
+#~ msgid "New Message"
+#~ msgstr "Новое сообщение"
+
+#~ msgid "Read Message Thread"
+#~ msgstr "Читать ветку с сообщением"
+
+#~ msgid "new"
+#~ msgstr "новое"
+
+#~ msgid "Use Private Messages:"
+#~ msgstr "Использовать личные сообщения:"
+
+#~ msgid "I recommend disabling this and using"
+#~ msgstr "Рекомендую отключить это и использовать"
+
+#~ msgid "Maximum Messages In Inbox (0 = unlimited):"
+#~ msgstr ""
+#~ "Максимальное кол-во сообщений в папке Входящие (0 = без ограничений):"
+
+#~ msgid "Administratos always have unlimited messages"
+#~ msgstr "Количество сообщений у администраторов всегда неограничено."
+
+#~ msgid "Message Deleted"
+#~ msgstr "Сообщение удалено"
+
+#~ msgid "Your Message Was Deleted!"
+#~ msgstr "Ваше сообщение было удалено!"
+
+#~ msgid "Back To Your Inbox"
+#~ msgstr "Вернуться к папке \"Входящие\""
+
+#~ msgid "ERROR"
+#~ msgstr "ОШИБКА"
+
+#~ msgid "You Do Not Have Permission To View This!"
+#~ msgstr "У вас нет прав для просмотра!"
+
+#~ msgid "Create New Message"
+#~ msgstr "Новое сообщение"
+
+#~ msgid "Unlimited"
+#~ msgstr "Неограничено"
+
+#~ msgid "Message Box Size"
+#~ msgstr "Размер почтового ящика"
+
+#~ msgid "of"
+#~ msgstr "от"
+
+#~ msgid "Message Box Is Full!"
+#~ msgstr "Почтовый ящик переполнен!"
+
+#~ msgid "You cannot send/receive any new messages"
+#~ msgstr "Вы не можете отпралять/получать новые сообщения"
+
+#~ msgid "Started By"
+#~ msgstr "Начато"
+
+#~ msgid "Last Reply"
+#~ msgstr "Последний ответ"
+
+#~ msgid "Unread"
+#~ msgstr "Непрочтенные"
+
+#~ msgid "Read"
+#~ msgstr "Прочтенные"
+
+#~ msgid "No Messages"
+#~ msgstr "Нет сообщений"
+
+#~ msgid "Sorry You Have No Messages!"
+#~ msgstr "У вас нет сообщений"
+
+#~ msgid "Message Sent"
+#~ msgstr "Отправлено"
+
+#~ msgid "The Message Was Successfully Sent!"
+#~ msgstr "Сообщение отправлено!"
+
+#~ msgid "Back To Your Messages"
+#~ msgstr "Вернуться к вашим сообщениям"
+
+#~ msgid "You have recieved a new message from"
+#~ msgstr "Вы получили новое сообщение от"
+
+#~ msgid "follow this link to view:"
+#~ msgstr "Перейдите по этой ссылке для просмотра:"
+
+#~ msgid "Message Could Not Be Sent!"
+#~ msgstr "Сообщение не может быть отправлено!"
+
+#~ msgid "The recipients inbox is FULL!"
+#~ msgstr "Папка \"Входящие\" у получателя переполнена!"
+
+#~ msgid "Please fill in all fields before submitting message!"
+#~ msgstr "Пожалуйста, заполните все поля перед отправкой сообщения!"
+
+#~ msgid "To:"
+#~ msgstr "Кому:"
+
+#~ msgid "Select User"
+#~ msgstr "Выберите пользователя"
+
+#~ msgid "Click this box and begin typing the username to find them faster"
+#~ msgstr "Начните набирать имя пользователя для быстрого поиска"
+
+#~ msgid "You Must Be Logged In To Create Private Messages!"
+#~ msgstr "Вы должны войти, чтобы отправлять личные сообщения!"
+
+#~ msgid "Sender"
+#~ msgstr "Отправитель"
+
+#~ msgid "Message Contents"
+#~ msgstr "Содержание сообщения"
+
+#~ msgid "Reply:"
+#~ msgstr "Ответить:"
+
+#~ msgid "Feed"
+#~ msgstr "Feed"
+
+#, fuzzy
+#~ msgid "Email:"
+#~ msgstr "Email"
+
+#~ msgid "Mingle Forum Themes:"
+#~ msgstr "Темы Mingle Forum:"
+
+#~ msgid "Posts"
+#~ msgstr "Сообщений"
+
+#~ msgid "Topics "
+#~ msgstr "Темы"
+
+#~ msgid "Posted on: "
+#~ msgstr "Опубликован:"
+
+#~ msgid "Allow email notifications?"
+#~ msgstr "Разрешить уведомления по электронной почте?"
+
+#~ msgid "Notify"
+#~ msgstr "Уведомлять"
+
+#~ msgid "View Inbox"
+#~ msgstr "Открыть папку Входящие"
+
+#~ msgid "Contact:"
+#~ msgstr "Контактная информация:"
+
+#~ msgid "Inbox size"
+#~ msgstr "Входящие размера"
+
+#~ msgid "total"
+#~ msgstr "общий"
+
+#~ msgid "From"
+#~ msgstr "От"
+
+#~ msgid "NEW"
+#~ msgstr "NEW"
+
+#~ msgid "OLD"
+#~ msgstr "OLD"
+
+#~ msgid "Empty Inbox"
+#~ msgstr "Пустые папки Входящие"
+
+#~ msgid "Your Inbox Is Empty!"
+#~ msgstr "Папку \"Входящие\" пуст!"
+
+#~ msgid "Try Again"
+#~ msgstr "Try Again"
+
+#~ msgid "Reply To Message"
+#~ msgstr "Ответить на сообщение"

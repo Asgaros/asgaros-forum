@@ -1,0 +1,1927 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mingle Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-15 12:15-0700\n"
+"PO-Revision-Date: 2011-04-15 16:03-0700\n"
+"Last-Translator: Paul <cartpauj@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ mingleforum
+#: feed.php:24
+#: feed.php:25
+msgid "Forum Feed"
+msgstr "مغذّي المنتدى"
+
+# @ mingleforum
+#: feed.php:29
+msgid "Forum Topic:"
+msgstr "موضوع المنتدى:"
+
+# @ mingleforum
+#: feed.php:30
+#: wpf.class.php:1808
+#: wpf_define.php:34
+msgid "Forum"
+msgstr "منتدى"
+
+# @ mingleforum
+#: feed.php:30
+#: wpf.class.php:859
+msgid "Topic: "
+msgstr "موضوع: "
+
+# @ mingleforum
+#: feed.php:71
+msgid "Feeds are disabled"
+msgstr "المغذّيات غير مفعّلة"
+
+# @ mingleforum
+#: wpf-edit-profile.php:14
+msgid "No such user"
+msgstr "هذا المستخدم غير موجود"
+
+# @ mingleforum
+#: wpf-edit-profile.php:29
+msgid "You have no subscriptions at this time"
+msgstr "لا يوجد لديك اشتراك في الوقت الحالي"
+
+# @ mingleforum
+#: wpf-edit-profile.php:34
+msgid "Edit forum options"
+msgstr "تحرير خيارات المنتدى"
+
+# @ mingleforum
+#: wpf-edit-profile.php:39
+msgid "Allow others to view my profile?"
+msgstr "السماح للآخرين لرؤية ملفي الشخصي؟"
+
+# @ mingleforum
+#: wpf-edit-profile.php:44
+msgid "You have email notifications for these topics:"
+msgstr "لديك بريد الكتروني لهذه المواضيع:"
+
+# @ mingleforum
+#: wpf-edit-profile.php:47
+#: fs-admin/fs-admin.php:552
+msgid "Save options"
+msgstr "حفظ الخيارات"
+
+# @ mingleforum
+#: wpf-edit-profile.php:53
+#: wpf.class.php:615
+#: wpf.class.php:2071
+#: wpf.class.php:2097
+#: wpf.class.php:2115
+#: wpf.class.php:2137
+#: wpf.class.php:2146
+#: wpf.class.php:2204
+msgid "Cheating, are we?"
+msgstr "نغش، اليس كذلك؟"
+
+# @ mingleforum
+#: wpf-insert.php:98
+#, fuzzy
+msgid "Security code does not match"
+msgstr "رمز الأمان لا يتطابق"
+
+# @ mingleforum
+#: wpf-insert.php:113
+#: wpf-insert.php:118
+#: wpf-insert.php:188
+#: wpf-insert.php:193
+#: wpf-insert.php:246
+#: wpf-insert.php:251
+msgid "An error occured"
+msgstr "حدث خطأ"
+
+# @ mingleforum
+#: wpf-insert.php:114
+#: wpf-insert.php:189
+#: wpf-insert.php:247
+msgid "You must enter a subject"
+msgstr "يجب إدخال موضوع"
+
+# @ mingleforum
+#: wpf-insert.php:119
+#: wpf-insert.php:194
+#: wpf-insert.php:252
+msgid "You must enter a message"
+msgstr "يجب إدخال رسالة"
+
+# @ mingleforum
+#: wpf-insert.php:138
+msgid "created the forum topic:"
+msgstr "إنشاء مواضيع المنتدى:"
+
+# @ mingleforum
+#: wpf-insert.php:205
+msgid "replied to the forum topic:"
+msgstr "الرد على موضوع المنتدى:"
+
+# @ mingleforum
+#: wpf-post.php:10
+msgid "Quote from"
+msgstr "إقتباس من"
+
+# @ mingleforum
+#: wpf-post.php:10
+#: wpf.class.php:678
+#: wpf.class.php:687
+#: wpf.class.php:1156
+msgid "on"
+msgstr "على"
+
+# @ mingleforum
+#: wpf-post.php:20
+#: wpf.class.php:1281
+#: wpf.class.php:1854
+msgid "Post Reply"
+msgstr "إضافة رد"
+
+# @ mingleforum
+#: wpf-post.php:23
+#: wpf-post.php:76
+#: wpf-thread.php:13
+msgid "Subject:"
+msgstr "الموضوع:"
+
+# @ mingleforum
+#: wpf-post.php:24
+#: wpf.class.php:909
+msgid "Re:"
+msgstr "بخصوص:"
+
+# @ mingleforum
+#: wpf-post.php:27
+#: wpf-post.php:80
+#: wpf-thread.php:17
+msgid "Message:"
+msgstr "الرسالة:"
+
+# @ mingleforum
+#: wpf-post.php:40
+#: wpf-thread.php:30
+#, fuzzy
+msgid "Images:"
+msgstr "صورة"
+
+# @ mingleforum
+#: wpf-post.php:51
+#: wpf-thread.php:41
+msgid "Submit"
+msgstr "تسليم"
+
+# @ mingleforum
+#: wpf-post.php:73
+#: wpf.class.php:1278
+#: wpf.class.php:1857
+msgid "Edit Post"
+msgstr "تحرير المقال"
+
+# @ mingleforum
+#: wpf-post.php:89
+msgid "Save Post"
+msgstr "حفظ المقال"
+
+# @ mingleforum
+#: wpf-thread.php:10
+msgid "Post new Topic"
+msgstr "إضافة موضوع جديد"
+
+# @ mingleforum
+#: wpf-thread.php:49
+msgid "Sorry. you don't have permission to post."
+msgstr "نأسف، لا توجد لديك صلاحيات لإضافة مقالة."
+
+# @ mingleforum
+#: wpf.class.php:151
+#: fs-admin/fs-admin.php:441
+msgid "Newbie"
+msgstr "مستجد"
+
+# @ mingleforum
+#: wpf.class.php:152
+#: fs-admin/fs-admin.php:445
+msgid "Beginner"
+msgstr "مبتدئ"
+
+# @ mingleforum
+#: wpf.class.php:153
+#: fs-admin/fs-admin.php:453
+msgid "Advanced"
+msgstr "متقدم"
+
+# @ mingleforum
+#: wpf.class.php:154
+#: fs-admin/fs-admin.php:461
+msgid "Pro"
+msgstr "محترف"
+
+# @ mingleforum
+#: wpf.class.php:172
+#: wpf.class.php:173
+msgid "Mingle Forum - Options"
+msgstr "إختيارات - منتدى Mingle"
+
+# @ mingleforum
+#: wpf.class.php:173
+msgid "Options"
+msgstr "إختيارات"
+
+# @ mingleforum
+#: wpf.class.php:174
+msgid "Ads"
+msgstr "الإعلانات"
+
+# @ mingleforum
+#: wpf.class.php:175
+msgid "Skins"
+msgstr "الجلود"
+
+# @ mingleforum
+#: wpf.class.php:176
+msgid "Forum Structure - Categories & Forums"
+msgstr "هيكل المنتدى - التصنيفات والمنتديات"
+
+# @ mingleforum
+#: wpf.class.php:176
+msgid "Forum Structure"
+msgstr "هيكل المنتدى"
+
+# @ mingleforum
+#: wpf.class.php:177
+msgid "Moderators"
+msgstr "الملطّفين"
+
+# @ mingleforum
+#: wpf.class.php:178
+msgid "User Groups"
+msgstr "مجموعات المستخدمين"
+
+# @ mingleforum
+#: wpf.class.php:179
+msgid "About"
+msgstr "عــن"
+
+# @ mingleforum
+#: wpf.class.php:190
+#: wpf.class.php:191
+msgid "Forums Latest Activity"
+msgstr "آخر أنشطة المنتدى"
+
+# @ mingleforum
+#: wpf.class.php:210
+#: wpf.class.php:230
+msgid "by:"
+msgstr "بواسطة:"
+
+# @ mingleforum
+#: wpf.class.php:247
+msgid "Title to display in the sidebar:"
+msgstr "العنوان المراد عرضه في القائمة الجانبية:"
+
+# @ mingleforum
+#: wpf.class.php:249
+msgid "How many items would you like to display?"
+msgstr "كم من المواد ترغب بعرضها؟"
+
+# @ mingleforum
+#: wpf.class.php:646
+msgid "Page loaded in:"
+msgstr "تم تحميل الصفحة في:"
+
+# @ mingleforum
+#: wpf.class.php:646
+msgid "seconds."
+msgstr "ثواني."
+
+# @ mingleforum
+#: wpf.class.php:649
+msgid "Mingle Forum "
+msgstr "منتدى Mingle "
+
+# @ mingleforum
+#: wpf.class.php:650
+msgid "Version:"
+msgstr "الإصدارة:"
+
+# @ mingleforum
+#: wpf.class.php:669
+#: wpf.class.php:2268
+msgid "Guest"
+msgstr "ضيف"
+
+# @ mingleforum
+#: wpf.class.php:678
+#: wpf.class.php:1155
+msgid "by"
+msgstr "عن طريق"
+
+# @ mingleforum
+#: wpf.class.php:687
+msgid "Latest Post by"
+msgstr "آخر مقالة بواسطة "
+
+# @ mingleforum
+#: wpf.class.php:710
+#: wpf.class.php:841
+msgid "Sorry, but you don't have access to this forum"
+msgstr "نأسف، فليس لديك ولوج إلى هذا المنتدى"
+
+# @ mingleforum
+#: wpf.class.php:720
+#: wpf.class.php:2356
+msgid "Status"
+msgstr "الوضعية"
+
+# @ mingleforum
+#: wpf.class.php:721
+#: wpf.class.php:2357
+msgid "Topic Title"
+msgstr "عنوان الموضوع"
+
+# @ mingleforum
+#: wpf.class.php:722
+#: wpf.class.php:2358
+#: wpf.class.php:2546
+msgid "Started by"
+msgstr "بُدأت بواسطة"
+
+# @ mingleforum
+#: wpf.class.php:723
+#: wpf.class.php:2359
+msgid "Replies"
+msgstr "الردود"
+
+# @ mingleforum
+#: wpf.class.php:724
+msgid "Views"
+msgstr "مشاهدات"
+
+# @ mingleforum
+#: wpf.class.php:725
+#: wpf.class.php:1155
+#: wpf.class.php:2360
+msgid "Last post"
+msgstr "آخر مقالة"
+
+# @ mingleforum
+#: wpf.class.php:729
+msgid "Sticky Topics"
+msgstr "مواضيع مثبّتة"
+
+# @ mingleforum
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+#: wpf.class.php:1642
+#: wpf.class.php:1659
+msgid "Move Topic"
+msgstr "نقل موضوع"
+
+# @ mingleforum
+#: wpf.class.php:733
+#: wpf.class.php:735
+#: wpf.class.php:779
+#: wpf.class.php:781
+msgid "Delete Topic"
+msgstr "حذف موضوع"
+
+# @ mingleforum
+#: wpf.class.php:745
+#: wpf.class.php:774
+msgid "New posts since last visit"
+msgstr "المواضيع الجديدة منذ آخر زيارة"
+
+# @ mingleforum
+#: wpf.class.php:762
+msgid "Forum Topics"
+msgstr "مواضيع المنتدى"
+
+# @ mingleforum
+#: wpf.class.php:829
+msgid "Remove this topic from your email notifications?"
+msgstr "إزالة هذا الموضوع من تنبيهات البريد الالكتروني؟"
+
+# @ mingleforum
+#: wpf.class.php:831
+msgid "Add this topic to your email notifications?"
+msgstr "إضافة هذا الموضوع إلى تنبيهات البريد الالكتروني"
+
+# @ mingleforum
+#: wpf.class.php:852
+msgid "TOPIC CLOSED"
+msgstr "الموضوع مغلق"
+
+# @ mingleforum
+#: wpf.class.php:858
+msgid "Author"
+msgstr "المؤلف"
+
+# @ mingleforum
+#: wpf.class.php:874
+#: wpf.class.php:2412
+msgid "Posts:"
+msgstr "المواضيع:"
+
+# @ mingleforum
+#: wpf.class.php:907
+msgid "Quick Reply"
+msgstr "رد سريع"
+
+# @ mingleforum
+#: wpf.class.php:916
+msgid "Submit Quick Reply"
+msgstr "تسليم الرد السريع"
+
+# @ mingleforum
+#: wpf.class.php:938
+#: wpf_define.php:36
+msgid "Post"
+msgstr "موضوع"
+
+# @ mingleforum
+#: wpf.class.php:941
+msgid "on:"
+msgstr "في:"
+
+# @ mingleforum
+#: wpf.class.php:945
+#: wpf.class.php:954
+#: wpf.class.php:2284
+msgid "Quote"
+msgstr "إقتباس"
+
+# @ mingleforum
+#: wpf.class.php:947
+#: wpf.class.php:956
+#: fs-admin/fs-admin.php:153
+#: fs-admin/fs-admin.php:971
+msgid "Remove"
+msgstr "أزالة"
+
+# @ mingleforum
+#: wpf.class.php:949
+#: wpf.class.php:958
+msgid "Edit"
+msgstr "تحرير"
+
+# @ mingleforum
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Topics: "
+msgstr "مواضيع: "
+
+# @ mingleforum
+#: wpf.class.php:1032
+#: wpf.class.php:1083
+msgid "Posts: "
+msgstr "مقالات: "
+
+# @ mingleforum
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "New posts"
+msgstr "مقالات جديدة"
+
+# @ mingleforum
+#: wpf.class.php:1042
+#: wpf.class.php:1093
+msgid "No new posts"
+msgstr "لا توجد مقالات جديدة"
+
+# @ mingleforum
+#: wpf.class.php:1042
+msgid "Mark All Read"
+msgstr "وضع علامة: الكل مقرئ"
+
+# @ mingleforum
+#: wpf.class.php:1153
+msgid "No topics yet"
+msgstr "لا توجد مواضيع بعد"
+
+# @ mingleforum
+#: wpf.class.php:1156
+msgid "in"
+msgstr "في"
+
+# @ mingleforum
+#: wpf.class.php:1207
+msgid "Forums RSS"
+msgstr "مغذي RSS للمنتديات"
+
+# @ mingleforum
+#: wpf.class.php:1218
+msgid "Are you sure you want to remove this?"
+msgstr "هل أنت متأكد لإزالة هذه؟"
+
+# @ mingleforum
+#: wpf.class.php:1272
+#: wpf.class.php:1847
+msgid "Search Results"
+msgstr "نتائج البحث"
+
+# @ mingleforum
+#: wpf.class.php:1275
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+# @ mingleforum
+#: wpf.class.php:1284
+#: wpf.class.php:1504
+#: wpf.class.php:1636
+#: wpf.class.php:1653
+#: wpf.class.php:1860
+msgid "New Topic"
+msgstr "موضوع جديد"
+
+# @ mingleforum
+#: wpf.class.php:1351
+msgid "Moderators:"
+msgstr "المُلطّفين:"
+
+# @ mingleforum
+#: wpf.class.php:1527
+#: wpf.class.php:1540
+#: wpf.class.php:1639
+#: wpf.class.php:1656
+msgid "Undo Sticky"
+msgstr "التراجع عن التثبيت"
+
+# @ mingleforum
+#: wpf.class.php:1529
+#: wpf.class.php:1542
+#: wpf.class.php:1638
+#: wpf.class.php:1655
+msgid "Sticky"
+msgstr "تثبيت"
+
+# @ mingleforum
+#: wpf.class.php:1532
+#: wpf.class.php:1545
+#: wpf.class.php:1641
+#: wpf.class.php:1658
+msgid "Re-open"
+msgstr "إعادة فتح"
+
+# @ mingleforum
+#: wpf.class.php:1534
+#: wpf.class.php:1547
+#: wpf.class.php:1640
+#: wpf.class.php:1657
+msgid "Close"
+msgstr "إغلاق"
+
+# @ mingleforum
+#: wpf.class.php:1554
+#: wpf.class.php:1635
+#: wpf.class.php:1652
+msgid "Reply"
+msgstr "رد"
+
+# @ mingleforum
+#: wpf.class.php:1561
+#: wpf.class.php:1577
+msgid "Unsubscribe"
+msgstr "إلغاء الإشتراك"
+
+# @ mingleforum
+#: wpf.class.php:1563
+#: wpf.class.php:1579
+msgid "Subscribe"
+msgstr "إشتراك"
+
+# @ mingleforum
+#: wpf.class.php:1566
+msgid "RSS feed"
+msgstr "مغذي RSS"
+
+# @ mingleforum
+#: wpf.class.php:1582
+#: wpf.class.php:1637
+#: wpf.class.php:1654
+msgid "RSS-Feed"
+msgstr "مغذي RSS"
+
+# @ mingleforum
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My profile"
+msgstr "ملفي الشخصي"
+
+# @ mingleforum
+#: wpf.class.php:1620
+#: wpf.class.php:1624
+msgid "My Profile"
+msgstr "ملفي الشخصي"
+
+# @ mingleforum
+#: wpf.class.php:1631
+#: wpf.class.php:1648
+msgid "Forum Home"
+msgstr "الصفحة الرئيسية للمنتدى"
+
+# @ mingleforum
+#: wpf.class.php:1632
+#: wpf.class.php:1649
+#: wpf.class.php:1925
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+# @ mingleforum
+#: wpf.class.php:1634
+#: wpf.class.php:1651
+#: wpf.class.php:2455
+msgid "Search"
+msgstr "بحث"
+
+# @ mingleforum
+#: wpf.class.php:1722
+msgid "You are logged in as:"
+msgstr "تم تسجيل دخولك بإسم: "
+
+# @ mingleforum
+#: wpf.class.php:1728
+msgid "Username: "
+msgstr "إسم المستخدم: "
+
+# @ mingleforum
+#: wpf.class.php:1729
+msgid "Password: "
+msgstr "كلمة المرور: "
+
+# @ mingleforum
+#: wpf.class.php:1731
+msgid "Remember Me"
+msgstr "تذكرني"
+
+# @ mingleforum
+#: wpf.class.php:1767
+msgid "Administrator"
+msgstr "المدير"
+
+# @ mingleforum
+#: wpf.class.php:1771
+msgid "Moderator"
+msgstr "ملطّف"
+
+# @ mingleforum
+#: wpf.class.php:1841
+msgid "New Topics since last visit"
+msgstr "عدد المواضيع منذ الزيارة الأخيرة"
+
+# @ mingleforum
+#: wpf.class.php:1851
+msgid "Profile Info"
+msgstr "بينات الملف الشخصي"
+
+# @ mingleforum
+#: wpf.class.php:1915
+msgid "Edit Profile"
+msgstr "تعديل الملف الشخصي"
+
+# @ mingleforum
+#: wpf.class.php:1919
+#: wpf.class.php:1931
+msgid "Welcome"
+msgstr "مـرحبــاً"
+
+# @ mingleforum
+#: wpf.class.php:1920
+msgid "Your last visit was:"
+msgstr "زيارتك الأخيرة كانت في: "
+
+# @ mingleforum
+#: wpf.class.php:1922
+msgid "Show new topics since your last visit"
+msgstr "عرض جميع المواضيع منذ زيارتك الأخيرة"
+
+# @ mingleforum
+#: wpf.class.php:1923
+msgid "Edit your forum options"
+msgstr "تحرير إختيارات المنتدى الخاص بك"
+
+# @ mingleforum
+#: wpf.class.php:1930
+msgid "Welcome Guest, please login or"
+msgstr "مرحبـاً بضيفنا الكريم، يرجى تسجيل الدخول، أو "
+
+# @ mingleforum
+#: wpf.class.php:1930
+msgid "register."
+msgstr "التـسجيـل"
+
+# @ mingleforum
+#: wpf.class.php:1935
+msgid "Welcome Guest, posting in this forum requires"
+msgstr "مرحبـاً بالضيف الكريم، الكتابة في هذا المنتدى يتطلب "
+
+# @ mingleforum
+#: wpf.class.php:1935
+msgid "registration."
+msgstr "الـتسجيــل."
+
+# @ mingleforum
+#: wpf.class.php:1943
+msgid "Show/Hide Header"
+msgstr "عرض/إخفاء الترويسة"
+
+# @ mingleforum
+#: wpf.class.php:1957
+msgid "Search forums"
+msgstr "البحث في المنتدى"
+
+# @ mingleforum
+#: wpf.class.php:1992
+#: wpf.class.php:2023
+msgid "Pages:"
+msgstr "الصفحات:"
+
+# @ mingleforum
+#: wpf.class.php:2005
+#: wpf.class.php:2036
+msgid "First"
+msgstr "الأول"
+
+# @ mingleforum
+#: wpf.class.php:2016
+#: wpf.class.php:2047
+msgid "Last"
+msgstr "الأخير"
+
+# @ mingleforum
+#: wpf.class.php:2134
+msgid "Post deleted"
+msgstr "تم إلغاء المقالة"
+
+# @ mingleforum
+#: wpf.class.php:2261
+#: wpf.class.php:2265
+#: fs-admin/fs-admin.php:155
+msgid "View profile"
+msgstr "مشاهدة الملف الشخصي"
+
+# @ mingleforum
+#: wpf.class.php:2279
+msgid "Bold"
+msgstr "غامق"
+
+# @ mingleforum
+#: wpf.class.php:2280
+msgid "Italic"
+msgstr "مائل"
+
+# @ mingleforum
+#: wpf.class.php:2281
+msgid "Underline"
+msgstr "تسطير"
+
+# @ mingleforum
+#: wpf.class.php:2282
+msgid "Strikethrough"
+msgstr "يتوسطه خط"
+
+# @ mingleforum
+#: wpf.class.php:2283
+msgid "Code"
+msgstr "رمز"
+
+# @ mingleforum
+#: wpf.class.php:2285
+msgid "List"
+msgstr "قائمة"
+
+# @ mingleforum
+#: wpf.class.php:2286
+msgid "List item"
+msgstr "عرض مادة"
+
+# @ mingleforum
+#: wpf.class.php:2287
+msgid "Link"
+msgstr "رابط"
+
+# @ mingleforum
+#: wpf.class.php:2288
+msgid "Image"
+msgstr "صورة"
+
+# @ mingleforum
+#: wpf.class.php:2289
+msgid "Email"
+msgstr "بريد الكتروني"
+
+# @ mingleforum
+#: wpf.class.php:2290
+msgid "Add Hex Color"
+msgstr "إضافة لون (عشري)"
+
+# @ mingleforum
+#: wpf.class.php:2291
+msgid "Embed YouTube Video"
+msgstr "تضمين فيديو \\\"يوتيوب\\\""
+
+# @ mingleforum
+#: wpf.class.php:2292
+msgid "Embed Google Map"
+msgstr "تضمين خريطة جوجل"
+
+# @ mingleforum
+#: wpf.class.php:2298
+msgid "Smile"
+msgstr "ابتسامة"
+
+# @ mingleforum
+#: wpf.class.php:2299
+msgid "Big Grin"
+msgstr "ابتسامة كبيرة"
+
+# @ mingleforum
+#: wpf.class.php:2300
+msgid "Sad"
+msgstr "حزين"
+
+# @ mingleforum
+#: wpf.class.php:2301
+msgid "Neutral"
+msgstr "محايد"
+
+# @ mingleforum
+#: wpf.class.php:2302
+msgid "Razz"
+msgstr "اشجب"
+
+# @ mingleforum
+#: wpf.class.php:2303
+msgid "Mad"
+msgstr "مجنون"
+
+# @ mingleforum
+#: wpf.class.php:2304
+msgid "Confused"
+msgstr "مشوّش"
+
+# @ mingleforum
+#: wpf.class.php:2305
+msgid "Eek!"
+msgstr "يعع!"
+
+# @ mingleforum
+#: wpf.class.php:2306
+msgid "Wink"
+msgstr "غمزة"
+
+# @ mingleforum
+#: wpf.class.php:2307
+msgid "Surprised"
+msgstr "متفاجئ"
+
+# @ mingleforum
+#: wpf.class.php:2308
+msgid "Cool"
+msgstr "عجيب!!"
+
+# @ mingleforum
+#: wpf.class.php:2320
+msgid "Info Center"
+msgstr "مركز المعلومات"
+
+# @ mingleforum
+#: wpf.class.php:2327
+msgid "Posts in"
+msgstr "مقالات في"
+
+# @ mingleforum
+#: wpf.class.php:2327
+msgid "Topics Made by"
+msgstr "إنشاء المواضيح بواسطة"
+
+# @ mingleforum
+#: wpf.class.php:2327
+#: fs-admin/fs-admin.php:147
+msgid "Members"
+msgstr "أعضاء"
+
+# @ mingleforum
+#: wpf.class.php:2327
+msgid "Latest Member:"
+msgstr "آخر الأعضاء: "
+
+# @ mingleforum
+#: wpf.class.php:2353
+msgid "New topics since your last visit"
+msgstr "المواضيع الجديدة منذ زيارتك الأخيرة"
+
+# @ mingleforum
+#: wpf.class.php:2397
+msgid "Summary"
+msgstr "ملخص"
+
+# @ mingleforum
+#: wpf.class.php:2403
+#: wpf.class.php:2689
+#: fs-admin/wpf-add-forum.php:8
+msgid "Name:"
+msgstr "الاسم:"
+
+# @ mingleforum
+#: wpf.class.php:2408
+msgid "Registered:"
+msgstr "المسجلين:"
+
+# @ mingleforum
+#: wpf.class.php:2416
+msgid "Position:"
+msgstr "الوضع:"
+
+# @ mingleforum
+#: wpf.class.php:2419
+msgid "Website:"
+msgstr "صفحة ويب:"
+
+# @ mingleforum
+#: wpf.class.php:2423
+msgid "AIM:"
+msgstr "AIM:"
+
+# @ mingleforum
+#: wpf.class.php:2427
+msgid "Yahoo:"
+msgstr "Yahoo:"
+
+# @ mingleforum
+#: wpf.class.php:2430
+msgid "Jabber/google Talk:"
+msgstr "Jabber/google Talk:"
+
+# @ mingleforum
+#: wpf.class.php:2434
+msgid "Biographical Info:"
+msgstr "المعلومات الشخصية:"
+
+# @ mingleforum
+#: wpf.class.php:2459
+msgid "Search for:"
+msgstr "بحث عن:"
+
+# @ mingleforum
+#: wpf.class.php:2463
+msgid "By user:"
+msgstr "بواسطة المستخدم:"
+
+# @ mingleforum
+#: wpf.class.php:2468
+msgid "Message Age:"
+msgstr "عمر الرسالة:"
+
+# @ mingleforum
+#: wpf.class.php:2469
+msgid "Between"
+msgstr "بين"
+
+# @ mingleforum
+#: wpf.class.php:2469
+msgid "and"
+msgstr "و"
+
+# @ mingleforum
+#: wpf.class.php:2469
+msgid "days"
+msgstr "أيام"
+
+# @ mingleforum
+#: wpf.class.php:2475
+msgid "Click to choose Forum(s) to  search"
+msgstr "اختر المنتدى/المنتديات للبحث فيها"
+
+# @ mingleforum
+#: wpf.class.php:2497
+msgid "Check all"
+msgstr "اختيار الكل"
+
+# @ mingleforum
+#: wpf.class.php:2502
+msgid "Start Search"
+msgstr "ابدأ البحث"
+
+# @ mingleforum
+#: wpf.class.php:2544
+msgid "Subject"
+msgstr "الموضوع"
+
+# @ mingleforum
+#: wpf.class.php:2545
+msgid "Relevance"
+msgstr "الصلة"
+
+# @ mingleforum
+#: wpf.class.php:2547
+msgid "Posted"
+msgstr "منشورة"
+
+# @ mingleforum
+#: wpf.class.php:2613
+msgid "Closed topic"
+msgstr "موضوع مغلق"
+
+# @ mingleforum
+#: wpf.class.php:2616
+msgid "Normal topic"
+msgstr "موضوع عادي"
+
+# @ mingleforum
+#: wpf.class.php:2619
+msgid "Hot topic"
+msgstr "موضوع ساخن"
+
+# @ mingleforum
+#: wpf.class.php:2622
+msgid "Very Hot topic"
+msgstr "موضوع ساخن جداً"
+
+# @ mingleforum
+#: wpf.class.php:2654
+msgid "Security Code:"
+msgstr "رمز الأمان:"
+
+# @ mingleforum
+#: wpf.class.php:2673
+msgid "Enter Security Code: (required)"
+msgstr "أدخل رمز الأمان (مطلوب):"
+
+# @ mingleforum
+#: wpf.class.php:2687
+msgid "New post in forum:"
+msgstr "مواضيع جديدة في المنتدى:"
+
+# @ mingleforum
+#: wpf.class.php:2688
+msgid "DETAILS:"
+msgstr "التفاصيل:"
+
+# @ mingleforum
+#: wpf.class.php:2691
+msgid "Date:"
+msgstr "التاريخ:"
+
+# @ mingleforum
+#: wpf.class.php:2692
+msgid "Reply Content:"
+msgstr "محتويات الرد:"
+
+# @ mingleforum
+#: wpf.class.php:2693
+msgid "View Topic Here:"
+msgstr "عرض موضوع هنا:"
+
+# @ mingleforum
+#: wpf.class.php:2742
+#: wpf.class.php:2752
+msgid "Inbox"
+msgstr "صندوق الوارد"
+
+# @ mingleforum
+#: wpf.class.php:2768
+#: wpf.class.php:2781
+msgid "Send Message"
+msgstr "إرسال الرسالة"
+
+# @ mingleforum
+#: wpf_define.php:33
+msgid "Category"
+msgstr "التصنيف"
+
+# @ mingleforum
+#: wpf_define.php:35
+msgid "Topic"
+msgstr "الموضوع"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:33
+msgid "You must specify a user group name."
+msgstr "يجب تحديد اسم مجموعة المستخدم."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:35
+#: fs-admin/fs-admin.php:692
+msgid "You have choosen a name that already exists in the database, please specify another"
+msgstr "لقد قمت باختيار اسم موجود مسبقاً في قاعدة البيانات، يرجى اختيار اسم آخر"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:37
+msgid "User Group successfully added."
+msgstr "تم إضافة مجموعة المستخدم بنجاح."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:55
+msgid "You haven't specified any user to add:"
+msgstr "لم تقم بتحديد أي مستخدم للإضافة:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:59
+msgid "You must choose a user group"
+msgstr "لابد من أن تختار مجموعة مستخدم"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:66
+msgid "Error"
+msgstr "خطـأ"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:66
+msgid "No such user:"
+msgstr "لا وجود لهذا المستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:70
+msgid "Warning"
+msgstr "تحذيـر"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:70
+#: fs-admin/fs-admin.php:74
+msgid "User"
+msgstr "مستخدم"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:70
+msgid "is already in this group"
+msgstr "بالفعل موجود في هذه المجموعة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:74
+msgid "added successfully"
+msgstr "تمت الإضافة بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:82
+msgid "Errors:"
+msgstr "أخطاء:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:83
+msgid "Warnings:"
+msgstr "تحذيرات:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:84
+msgid "Users added:"
+msgstr "تم إضافة المستخدمين:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:98
+msgid "User Group(s) successfully deleted."
+msgstr "تم إضافة المجموعة/المجموعات بنجاح."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:106
+msgid "Member successfully removed."
+msgstr "تمت إزالة المستخدم بنجاح."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:112
+msgid "Mingle Forum >> Manage User Groups"
+msgstr "منتدى Mingle >> إدارة مجموعات المستخدمين"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:112
+#: fs-admin/fs-admin.php:757
+#: fs-admin/fs-admin.php:957
+msgid "add new"
+msgstr "إضافة جديد"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:119
+#: fs-admin/fs-admin.php:811
+msgid "Delete"
+msgstr "إلغاء"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:159
+#: fs-admin/fs-admin.php:165
+msgid "Add members"
+msgstr "إضافة أعضاء"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:164
+msgid "No members in this group"
+msgstr "لا يوجد أعضاء في هذه المجموعة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:222
+msgid "Skin successfully activated."
+msgstr "تم تفعيل الجلد بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:228
+msgid "Mingle Forum >> Skin options"
+msgstr "منتدى Mingle >> إختيارات الجلود"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:229
+msgid "Get More Skins"
+msgstr "جلب مزيد من الجلود"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:230
+msgid "IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/"
+msgstr "مهم: في الإصدارة 1.0.03، تم تحريك مجلد الجلود إلى /wp-content/mingle-forum-skins"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:230
+msgid "Why did you change it?"
+msgstr "لم قمت بتغييره؟"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:233
+msgid "Screenshot"
+msgstr "صورة من الصفحة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:234
+#: fs-admin/wpf-add-group.php:10
+msgid "Name"
+msgstr "الاسم"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:235
+msgid "Version"
+msgstr "الإصدارة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:236
+#: fs-admin/wpf-add-group.php:11
+msgid "Description"
+msgstr "الوصـف"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:237
+msgid "Action"
+msgstr "الإجراء"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:251
+#: fs-admin/fs-admin.php:266
+msgid "In Use"
+msgstr "قيد الاستخدام"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:253
+#: fs-admin/fs-admin.php:268
+msgid "Activate"
+msgstr "تفعيل"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:296
+msgid "About Mingle Forum"
+msgstr "عن منتدى Mingle"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:299
+msgid "Current Version: "
+msgstr "الإصدارة الحالية: "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:303
+msgid "Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script."
+msgstr "منتدى Mingle يتبنى مهمة واحدة بسيطة، \\\" أبقها بسيطة\\\"، وهو مستقى من منتدى ووردبرس، وتم تحسينه بدرجة كبيرة. وهو الآن يعمل بدون إضافة Mingle (برمجة بلير ويليامز). كما أود توجيه الشكر إلى (ايريك هامبي) لعمله السابق في برمجة المنتدى."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:305
+msgid "Author: "
+msgstr "المؤلف: "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:306
+msgid "Plugin Page:"
+msgstr "صفحة الإضافات:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:307
+msgid "Support Forum:"
+msgstr "دعم المنتدى:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:308
+msgid "Mingle Forum Skins:"
+msgstr "جلود منتدى Mingle:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:355
+msgid "Options successfully saved."
+msgstr "تم حفظ الإختيارات بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:360
+msgid "Mingle Forum"
+msgstr "منتدى Mingle"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:364
+msgid "Statistic"
+msgstr "إحصاء"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:365
+msgid "Value"
+msgstr "قيمة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:369
+msgid "Number of posts:"
+msgstr "عدد المواضيع:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:373
+msgid "Number of threads:"
+msgstr "عدد الاقتباسات:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:377
+msgid "Number of users:"
+msgstr "عدد المستخدمين:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:381
+msgid "Total database size:"
+msgstr "الحجم الكلي لقاعدة البيانات:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:385
+msgid "Database server:"
+msgstr "خادم قاعدة البيانات:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:389
+msgid "Mingle Forum version:"
+msgstr "إصدارة منتدى Mingle:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:394
+msgid "Mingle Forum >> General Options"
+msgstr "منتدى Mingle >> خيارات عامة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:399
+msgid "default "
+msgstr "الافتراضي "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:403
+msgid "Option Name"
+msgstr "إسم الخيار"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:404
+msgid "Option Input"
+msgstr "مُدخل الخيارات"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:409
+msgid "Posts per page:"
+msgstr "مواضيع لكل صفحة:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:413
+msgid "Threads per page:"
+msgstr "الاقتباسات لكل صفحة:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:419
+msgid "Number of posts for Hot Topic:"
+msgstr "عدد المواضيع الخاصة بـ \\\"مواضيع ساخنة\\\":"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:423
+msgid "Number of posts for Very Hot Topic:"
+msgstr "عدد المواضيع الخاصة بـ \\\"مواضيع ساخنة جداً\\\":"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:427
+msgid "Username Display:"
+msgstr "عرض اسم المستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:440
+msgid "New User's Title:"
+msgstr "عنوان جديد للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:444
+msgid "User Level 1 Title:"
+msgstr "موضوع المستوى ١ للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:448
+msgid "User Level 1 Count:"
+msgstr "إحصاء المستوى ١ للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:449
+msgid "25"
+msgstr "٢٥"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:452
+msgid "User Level 2 Title:"
+msgstr "عنوان المستوى ٢ للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:456
+msgid "User Level 2 Count:"
+msgstr "إحصاء المستوى ٢ للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:457
+msgid "50"
+msgstr "٥٠"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:460
+msgid "User Level 3 Title:"
+msgstr "عنوان المستوى ٣ للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:464
+msgid "User Level 3 Count:"
+msgstr "إحصاء المستوى ٣ للمستخدم:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:465
+msgid "100"
+msgstr "١٠٠"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:468
+msgid "Notify Admin on new posts:"
+msgstr "إعلام الإدارة في حالة وجود مقالات جديدة:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:472
+#: fs-admin/fs-admin.php:495
+#: fs-admin/fs-admin.php:519
+msgid "Off"
+msgstr "مطفأ"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:475
+msgid "Show Forum Login Form:"
+msgstr "إظهار نموذج الدخول للمنتدى:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:479
+#: fs-admin/fs-admin.php:487
+#: fs-admin/fs-admin.php:503
+#: fs-admin/fs-admin.php:511
+#: fs-admin/fs-admin.php:527
+msgid "On"
+msgstr "مضاء"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:483
+msgid "Show Avatars in the forum:"
+msgstr "إظهار الصورة الرمزية:"
+
+#: fs-admin/fs-admin.php:491
+msgid "Allow Images to be uploaded:"
+msgstr ""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:499
+msgid "Show users Bio at the bottom of posts:"
+msgstr "إظهار السيرة الذاتية للمستخدمين في أسفل المواضيع:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:507
+msgid "Use Forum RSS:"
+msgstr "استخدام مغذي RSS الخاص بالمنتدى:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:515
+msgid "Use SEO friendly URLs:"
+msgstr "استخدام الروابط الصديقة لـ SEO"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:515
+msgid "IMPORTANT: Leave this option off if your permalinks are set to 'default'"
+msgstr "مهم: لا تختر هذا الإختيار إذا كانت الروابط الدائمة (permalink) على وضعية \\\"الافتراضي\\\"."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:523
+msgid "Registration required to post:"
+msgstr "التسجيل مطلوب لكتابة مقالات."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:532
+msgid "Installed version:"
+msgstr "النسخة المثبنة:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:536
+msgid "GD Library is not installed"
+msgstr "مكتبة GD غير منصبة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:539
+msgid "Use Captcha for unregistered users:"
+msgstr "استخدام شفرة \\\"كابتشا\\\" للمستخدمين الغير مسجلين مسبقا:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:543
+msgid "Requires "
+msgstr "يتطلب "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:543
+msgid "If you have 'Registration required to post' above enabled, leave this off"
+msgstr "لا تختر هذا الإختيار إذا كانت وضعية \\\"التسجيل مطلوب لكتابة مقالات\\\" أعلاه مفعلة"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:547
+msgid "Date format:"
+msgstr "نسق التاريخ:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:547
+msgid "Default date:"
+msgstr "التاريخ الإفتراضي:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:547
+msgid "Check "
+msgstr "تحقق من "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:547
+msgid "for date formatting."
+msgstr "لنسق التاريخ."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:663
+msgid "Groups deleted:"
+msgstr "المجموعات الملغية:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:664
+msgid "Forums deleted:"
+msgstr "المنتديات الملغية:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:665
+msgid "Threads deleted:"
+msgstr "الاقتباسات الملغية:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:666
+msgid "Posts deleted:"
+msgstr "المقالات الملغية:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:690
+#: fs-admin/fs-admin.php:714
+msgid "You must enter a name"
+msgstr "يجب عليك إدخال اسم"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:699
+msgid "Category added successfully"
+msgstr "تم إضافة التصنيف بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:711
+msgid "You must select a category"
+msgstr "يجب عليك إختيار تصنيف"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:717
+msgid "You have choosen a forum name that already exists in this group, please specify another"
+msgstr "لقد قمت باختيار اسم لمنتدى موجود مسبقا في هذه المجموعة، يجب اختيار اسم آخر"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:724
+msgid "Forum added successfully"
+msgstr "تم إضافة المنتدى بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:751
+msgid "Mingle Forum >> Categories and Forums "
+msgstr "منتدى Mingle >> تصنيفات ومنتديات "
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:773
+#: fs-admin/fs-admin.php:803
+msgid "Modify"
+msgstr "تعديل"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:812
+msgid "Add forum"
+msgstr "إضافة منتدى"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:837
+msgid "Group Moved Down"
+msgstr "تم تحريك المجموعة للأسفل"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:847
+msgid "Forum Moved Down"
+msgstr "تم تحريك المنتدى للأسفل"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:857
+msgid "Group Moved Up"
+msgstr "تم تحريك المجموعة للأعلى"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:867
+msgid "Forum Moved Up"
+msgstr "تم تحريك المنتدى للأعلى"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:904
+#: fs-admin/fs-admin.php:911
+msgid "Moderator successfully removed."
+msgstr "تم إلغاء \\\"الملطف\\\" بنجاح."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:906
+msgid "Moderator successfully saved."
+msgstr "تم حفظ \\\"الملطف\\\" بنجاح."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:913
+msgid "Moderator NOT removed."
+msgstr "لم يتم حذف \\\"الملطف\\\"."
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:927
+msgid "You must select a user"
+msgstr "يجب عليك اختيار مستخدم"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:931
+msgid "Global Moderator added successfully"
+msgstr "تم إضافة \\\"الملطف العام\\\" بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:935
+msgid "Moderator added successfully"
+msgstr "تم إضافة \\\"الملطف\\\" بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:957
+msgid "Mingle Forum >> Manage Moderators"
+msgstr "منتدى Mingle >> إدارة \\\"الملطفين\\\""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:966
+msgid "Currently moderating"
+msgstr "جاري \\\"التلطيف\\\" الآن"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:970
+msgid "Update"
+msgstr "تحديث"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:980
+msgid "Global moderator: (User can moderate all forums)"
+msgstr "\\\"ملطف عام\\\" (باستطاعة هذا المستخدم تلطيف كافة المنتديات)"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:999
+msgid "No moderators yet"
+msgstr "لا يوجد \\\"ملطفين\\\" بعد"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1024
+msgid "Ads saved successfully"
+msgstr "تم حفظ الإعلانات بنجاح"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1029
+msgid "Mingle Forum Ads >> options"
+msgstr "إعلانات منتدى Mingle >> الخيارات"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1031
+msgid "HTML is allowed in all ad areas below"
+msgstr "صيغة HTML مسموح بها في جميع مساحات الإعلانات أدناه"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1035
+msgid "Ads Option"
+msgstr "خيار الإعلانات"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1042
+msgid "Enable Area Above Forum"
+msgstr "تفعيل المساحة فوق المنتدى"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1044
+#: fs-admin/fs-admin.php:1052
+#: fs-admin/fs-admin.php:1060
+#: fs-admin/fs-admin.php:1068
+#: fs-admin/fs-admin.php:1076
+#: fs-admin/fs-admin.php:1084
+#: fs-admin/fs-admin.php:1092
+msgid "css-value:"
+msgstr "قيمة CSS:"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1050
+msgid "Enable Area Below Forum"
+msgstr "تفعيل المساحة تحت المنتدى"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1058
+msgid "Enable Area Above Branding"
+msgstr "تفعيل المساحة فوق المنتج المعرف"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1066
+msgid "Enable Area Above Info Center"
+msgstr "تفعيل المساحة فوق مركز المعلومات"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1074
+msgid "Enable Area Above Breadcrumbs"
+msgstr "تفعيل المساحة فوق التفصيلات"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1082
+msgid "Enable Area Above Quick Reply Form"
+msgstr "تفعيل المساحة فوق نموذج \\\"الرد السريع\\\""
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1090
+msgid "Enable Area Below First Post"
+msgstr "تفعيل المساحة تحت المقالة الأولى"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1097
+msgid "Below you can modify/add your own CSS"
+msgstr "يمكنك إضافة/تعديل منسق CSS الخاص بك أدناه"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1098
+msgid "NOTE: If you do not know what this is for, leave it blank"
+msgstr "تنويه: إذا لم تعرف المغزى من هذا، أتركه خاليا"
+
+# @ mingleforum
+#: fs-admin/fs-admin.php:1105
+msgid "Save Options"
+msgstr "خيارات الحفظ"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:3
+msgid "Add forum to"
+msgstr "إضافة المنتدى إلى"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:12
+msgid "Description:"
+msgstr "الوصف:"
+
+# @ mingleforum
+#: fs-admin/wpf-add-forum.php:28
+msgid "Save forum"
+msgstr "حفظ المنتدى"
+
+# @ mingleforum
+#: fs-admin/wpf-add-group.php:5
+msgid "Add category"
+msgstr "إضافة التصنيف"
+
+# @ mingleforum
+#: fs-admin/wpf-add-group.php:19
+msgid "Save category"
+msgstr "حفظ التصنيف"
+
+# @ mingleforum
+#: fs-admin/wpf-add-usergroup.php:21
+#: .\fs-admin/wpf-add-usergroup.php:21
+msgid "Save user group"
+msgstr "حفظ مجموعة المستخدم"
+
+# @ mingleforum
+#: fs-admin/wpf-addusers.php:19
+#: .\fs-admin/wpf-addusers.php:19
+msgid "Select User group"
+msgstr "إختر مجموعة المستخدم"
+
+# @ mingleforum
+#: fs-admin/wpf-addusers.php:29
+#: .\fs-admin/wpf-addusers.php:29
+msgid "Add users"
+msgstr "إضافة مستخدمين"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:10
+#: .\fs-admin/wpf-edit-forum-group.php:10
+msgid "You must specify a group name"
+msgstr "يجب عليك تحديد مجموعة مستخدمين"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:22
+#: .\fs-admin/wpf-edit-forum-group.php:22
+msgid "Group updated successfully"
+msgstr "تم تحديث المجموعة بنجاح"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:32
+#: .\fs-admin/wpf-edit-forum-group.php:32
+msgid "You must specify a forum name"
+msgstr "يجب عليك تحديد اسم للمنتدى"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:35
+#: .\fs-admin/wpf-edit-forum-group.php:35
+msgid "Forum updated successfully"
+msgstr "تم تحديث المنتدى بنجاح"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:47
+#: .\fs-admin/wpf-edit-forum-group.php:47
+msgid "Edit category"
+msgstr "تحرير التصنيف"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:61
+#: .\fs-admin/wpf-edit-forum-group.php:61
+msgid "User Groups:"
+msgstr "مجموعات المستخدمين:"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:64
+#: .\fs-admin/wpf-edit-forum-group.php:64
+msgid "Members of the checked User Groups have access to the forums in this category:"
+msgstr "الأعضاء في مجموعات المستخدمين المنتقاه لهم أحقية الدخول إلى المنتديات في هذا التصنيف:"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:96
+#: .\fs-admin/wpf-edit-forum-group.php:96
+msgid "There are no User Groups"
+msgstr "لا توجد مجموعات للمستخدمين"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:103
+#: .\fs-admin/wpf-edit-forum-group.php:103
+msgid "Save group"
+msgstr "حفظ المجموعة"
+
+# @ mingleforum
+#: fs-admin/wpf-edit-forum-group.php:117
+#: .\fs-admin/wpf-edit-forum-group.php:117
+msgid "Edit forum"
+msgstr "تحرير المنتدى"
+
+# @ mingleforum
+#: fs-admin/wpf-moderator.php:18
+#: .\fs-admin/wpf-moderator.php:18
+msgid "Select user"
+msgstr "اختر مستخدم"
+
+# @ mingleforum
+#: fs-admin/wpf-moderator.php:35
+#: .\fs-admin/wpf-moderator.php:35
+msgid "Add moderator"
+msgstr "أضف \\\"ملطف\\\""
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:9
+#: .\fs-admin/wpf-usergroup-edit.php:9
+msgid "You must specify a name for the User Group"
+msgstr "يجب عليك تحديد اسم لمجموعة المستخدم"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:16
+#: .\fs-admin/wpf-usergroup-edit.php:16
+msgid "User Group updated successfully"
+msgstr "تم تحديث مجموعة المستخدم بنجاح"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:23
+#: .\fs-admin/wpf-usergroup-edit.php:23
+msgid "Edit User Group"
+msgstr "تحرير مجموعة المستخدم"
+
+# @ mingleforum
+#: fs-admin/wpf-usergroup-edit.php:37
+#: .\fs-admin/wpf-usergroup-edit.php:37
+msgid "Save User Group"
+msgstr "حفظ مجموعة المستخدم"
+

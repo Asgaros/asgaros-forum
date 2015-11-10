@@ -1,0 +1,1207 @@
+/*
+Skin name: Default
+Description: A sleek Royal Blue theme
+Author: ddart
+Author url: http://ddart-bg.com/
+Mingle Forum url: http://cartpauj.com/projects/mingle-forum-plugin/
+Version: 1.34
+*/
+
+/*Font body ---------------------------------------*/
+#wpf-wrapper {
+  font: 11pt Calibri,Arial,Helvetica,sans-serif;
+}
+#wpf-wrapper td.topic_text {
+  font-size: 14px;
+}
+#wpf-wrapper table {
+  color: #757575;  
+}
+/*End Font body ----------------------------------*/
+
+#wpf-wrapper table#wp-mainmenu {
+  width: auto !important;
+}
+#wpf-wrapper tr td {
+  border: medium none;
+}
+#wpf-wrapper table {
+  border: medium none;
+  width: 100%;
+}
+#wpf-wrapper td.forumIcon {
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+#wpf-wrapper .forumstats {
+  padding-right: 15px;
+  text-align: right;
+}
+#wpf-wrapper {
+  line-height: normal;
+  color: #000;
+}
+
+/*Menu Header ---------------------------------------*/
+#wpf-wrapper #wp-mainmenu {
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+#wpf-wrapper #wp-mainmenu .menu_sub {
+  padding: 0px 8px 0px 0px;
+}
+/*Login v 1.34---------------------------------------*/
+#profileHeader input.mf_search{
+  box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  background-color: rgba(170,170,170,0.3);	
+  color: #EEEEEE !important;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5) !important;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #2e92f4;
+  background-color:none !important;
+  margin: 2px 0px !important;
+  vertical-align:middle;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-family: inherit;	
+}
+#profileHeader input.mf_search:focus{
+  box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;	
+}
+#profileHeader .wpf-input.mf_search{
+  background-image: url("images/icons/search_btn.png");
+  background-position: 4px 5px;
+  background-repeat: no-repeat; 
+  padding-left:25px !important;
+  width:120px;
+}
+#profileHeader .wpf-input:focus {
+  width:190px;
+}
+.login-form .icon-my-profile,.login-form .icon-password{
+  margin: 0px -1px 0 6px;
+}
+#wpf-wrapper form.login-form  {  
+  background: none repeat scroll 0 0 whitesmoke;
+  border-bottom: 1px solid #CACACA;
+  border-left: 1px solid #CACACA;
+  border-right: 1px solid #CACACA;
+  border-top: none !important;
+  border-radius: 0 0 15px 15px;
+  margin-left: 0;
+  margin-top: -11px;
+  padding: 5px 7px 7px 5px;
+  text-align: inherit !important;
+}
+#wpf-wrapper .login-Input {
+  clear: none;
+  float: left;
+  margin-bottom: 4px;
+  width: 160px;
+}
+.wpfInput input {
+  height: 17px;
+  line-height: 17px;
+  padding: 7px 5px 6px;
+  vertical-align: middle;
+  width: 135px;
+}
+#wpf-wrapper .button-view-login {
+  top: 13px;
+}
+#wpf-wrapper #upshrinkHeader p {
+  margin: 0 0 0.514rem !important;
+}
+
+#wp-mainmenu a span {
+  background: none repeat scroll 0 0 #D95B44;
+  border-radius: 2px 2px 2px 2px;
+  color: #FDFDFD;
+  font-size: 11px;
+  margin: 0 0 0 3px;
+  padding: 1px 4px;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+/*END Menu Header -----------------------------------*/
+
+/*Minlge Forum All buttons -----------------------------------*/
+#wpf-wrapper input.wpf-edit-button,
+#wpf-post-submit,
+#wpf-search-submit,
+#quick-reply-submit,
+#wpf-edit-button{
+  color: #555;
+  letter-spacing: normal !important;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #EFEFEF;
+  font-size:14px!important;
+}
+a#or_register {
+  background-color: #ba4134;
+  color:#FDFDFD !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  font-size: 11px !important;
+  font-weight: bold;
+  outline: 0 none;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  padding: 1px 6px !important
+}
+#wpf-login-button{
+  font-weight: bold;
+  font-size: 11px !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  background-color: #63ac5e;
+  color:#FDFDFD !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+a.message-button {
+  background-color: #8ABA42;
+  color:#FDFDFD !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font-size: 11px !important;
+  font-weight: bold;
+  outline: 0 none;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  padding: 1px 6px !important
+}
+#wpf-wrapper input#wpf-login-button,
+#wpf-wrapper a#or_register{
+  margin: 4px !important;
+}
+#wp-mainmenu .menu_sub a {
+  word-wrap: normal;
+  background-color: #E7EBED;
+  color: #084D8F;
+  text-shadow: 0 1px 0 #FFFFFF;
+  padding: 2px 6px !important
+}
+#wp-mainmenu .menu_current a,
+#wp-mainmenu .menu_current a:hover,
+#wp-mainmenu .menu_current a:active {
+  color: #555;
+  border-color: #888 #aaa #ccc !important;
+  -webkit-box-shadow: inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff!important;
+  box-shadow: inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff!important;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffc8c8c8,EndColorStr=#ffe6e6e6)!important;
+  background-image: -webkit-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%)!important;
+  background-image: -moz-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%)!important;
+  background-image: -o-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%)!important;
+  background-image: -ms-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%)!important;
+  background-image: linear-gradient(top,#c8c8c8 0,#e6e6e6 100%)!important;
+}
+#wpf-wrapper .maintab_back a:link,
+#wpf-wrapper .maintab_back a:visited,
+#wpf-wrapper .maintab_active_back a:link,
+#wpf-wrapper .maintab_active_back a:visited,
+#wpf-wrapper .mirrortab_back a:link,
+#wpf-wrapper .mirrortab_back a:visited,
+#wpf-wrapper .mirrortab_active_back a:link,
+#wpf-wrapper .mirrortab_active_back a:visited{
+  color: #fff;
+  background-color: #2480db;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+a.message-button,
+#wpf-wrapper input.wpf-edit-button,
+a#or_register,
+#wpf-login-button,
+#wp-mainmenu .menu_sub a,
+#wpf-wrapper .maintab_back a:link,
+#wpf-wrapper .maintab_back a:visited,
+#wpf-wrapper .maintab_active_back a:link,
+#wpf-wrapper .maintab_active_back a:visited,
+#wpf-wrapper .mirrortab_back a:link,
+#wpf-wrapper .mirrortab_back a:visited,
+#wpf-wrapper .mirrortab_active_back a:link,
+#wpf-wrapper .mirrortab_active_back a:visited{
+  white-space: nowrap;
+  border: 1px solid #777;
+  border-color: rgba(0,0,0,0.2);
+  border-bottom-color: #333;
+  border-bottom-color: rgba(0,0,0,0.4);
+  padding: 0 .95em 0 0;
+  -moz-box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
+  -webkit-box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
+  box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  z-index: 100;
+  -moz-border-radius: .3em;
+  -webkit-border-radius: .3em;
+  border-radius: .3em;
+}
+a.message-button,
+#wpf-wrapper input.wpf-edit-button,
+#wpf-post-submit,
+#wpf-search-submit,
+#quick-reply-submit,
+#wpf-edit-button,
+a#or_register,
+#wpf-login-button,
+#wp-mainmenu .menu_sub a,
+#wpf-wrapper .maintab_back a:link,
+#wpf-wrapper .maintab_back a:visited,
+#wpf-wrapper .maintab_active_back a:link,
+#wpf-wrapper .maintab_active_back a:visited,
+#wpf-wrapper .mirrortab_back a:link,
+#wpf-wrapper .mirrortab_back a:visited,
+#wpf-wrapper .mirrortab_active_back a:link,
+#wpf-wrapper .mirrortab_active_back a:visited {
+	background-image: -moz-linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
+	background-image: -ms-linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
+	background-image: -o-linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.1)), color-stop(49%, rgba(255,255,255,.05)), color-stop(51%, rgba(0,0,0,.05)), to(rgba(0,0,0,.1)));
+	background-image: -webkit-linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
+	background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
+}
+a.message-button:hover,
+#wpf-wrapper input.wpf-edit-button:hover,
+#wpf-post-submit:hover,
+#wpf-search-submit:hover,
+#quick-reply-submit:hover,
+#wpf-edit-button:hover,
+a#or_register:hover,
+#wpf-login-button:hover,
+#wp-mainmenu .menu_sub a:hover, 
+#wpf-wrapper .maintab_back a:hover,
+#wpf-wrapper .maintab_active_back a:hover,
+#wpf-wrapper .mirrortab_back a:hover,
+#wpf-wrapper .mirrortab_active_back a:hover,
+#wpf-wrapper .mirrortab_back a:focus {
+	background-image: -moz-linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
+	background-image: -ms-linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
+	background-image: -o-linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.15)), color-stop(49%, rgba(255,255,255,.15)), color-stop(51%, rgba(0,0,0,.1)), to(rgba(0,0,0,.15)));
+	background-image: -webkit-linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
+	background-image: linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
+	text-decoration: none !important;
+}
+a.message-button:active,
+#wpf-wrapper input.wpf-edit-button:active,
+#wpf-post-submit:active,
+#wpf-search-submit:active,
+#quick-reply-submit:active,
+#wpf-edit-button:active,
+a#or_register:active,
+#wpf-login-button:active,
+#wpf-wrapper .maintab_back a:active,
+#wpf-wrapper .mirrortab_back a:active {
+	background-image: -moz-linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
+	background-image: -ms-linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
+	background-image: -o-linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.1)), color-stop(30%, rgba(255,255,255,0)), color-stop(50%, transparent), to(rgba(0,0,0,.1)));
+	background-image: -webkit-linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
+	background-image: linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
+}
+/*End Minlge Forum buttons -------------------------------*/
+/*Breadcrumb -------------------------------------------*/
+#wpf-wrapper #trail.breadcrumbs a {
+  color: #636363;
+}
+#wpf-wrapper #trail.breadcrumbs a:hover {
+  color: #B85B5A;
+  text-decoration: none;
+}
+#wpf-wrapper #trail .wpf_nav_sep {
+  margin: 0px 3px 0px 3px;
+  color: #757575;
+}
+#wpf-wrapper #trail.breadcrumbs {
+  font-size: 12px;
+}
+#wpf-wrapper p#trail {
+  margin: 0 0.5rem 0.8rem !important;
+}
+/*End Breadcrumb ---------------------------------------*/
+
+/*End wpf profile fields ------------------------------*/
+#wpf-wrapper .wpf-profile{}
+#wpf-wrapper th.wpf-profile-bright{
+  background: url('images/catbg.jpg') !important;
+  border: 1px solid #1c73c9;
+  -moz-box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
+  -webkit-box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
+  box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
+  color: #FDFDFD;
+  text-transform: none;
+  font-size:100%;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+table.wpf-profile-fields{ background: none ;}
+table.wpf-profile-fields tr.alt td {
+  background: none repeat scroll 0 0 #F5F5F5;
+}
+table.wpf-profile-fields tr td.label {
+  border-right: 1px solid #EAEAEA !important;
+  font-weight: bold;
+}
+table.wpf-profile-fields tr td, table tr th {
+  padding: 6px;
+  vertical-align: middle;
+}
+.wpf-profile-fields td.autor-profile-box {
+  text-align: center;
+  padding: 9px;
+  border: none !important;
+  background: none ;
+}
+/*End wpf profile fields -------------------------------*/
+
+/*Wpf itemv 1.1.0---------------------------------------*/
+#wpf-wrapper .wpf-item {
+  margin: 0px 0px 0px 0;
+  line-height: 16px;
+}
+#wpf-wrapper .wpf-item-avatar {
+  vertical-align: middle;
+}
+#wpf-wrapper .wpf-item-title {
+  margin: 0px 0px 0px 45px;
+}
+#wpf-wrapper .wpf-category-title strong a {
+  font-size: 14px;
+}
+#wpf-wrapper .wpf-item-poster {
+  margin: 0px 0px 0px 0;
+  line-height: 16px;
+}
+#wpf-wrapper .wpf-item-poster-li {
+  margin: 0px 0px 0px 35px;
+}
+#wpf-wrapper .img-avatar-forumstats img.avatar {
+  margin: 0px 4px -3px 3px;
+}
+#wpf-wrapper #forum-category-img {
+  margin: 0 -2px -8px 0; /*This will serve for future versions*/
+}
+/*End wpf item v 1.1.0----------------------------------*/
+
+/*input txt---------------------------------------------*/
+#wpf-wrapper input {
+  margin: 2px 0px !important;
+  vertical-align: middle;
+  padding: 3px 6px;
+  border: 1px solid #a9a9a9;
+  border-radius: 3px;
+  font-family: inherit;
+}
+#wpf-wrapper input#log.wpf-input,
+#wpf-wrapper input#pwd.wpf-input,
+#wpf-wrapper input.wpf-input{
+  box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  background-color: rgba(170,170,170,0.5);	
+  color: #555555;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #a9a9a9;
+  background-color:none !important;
+  margin: 2px 0px !important;
+  vertical-align:middle;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-family: inherit;
+}
+#wpf-wrapper  input#log.wpf-input:focus,
+#wpf-wrapper  input#pwd.wpf-input:focus,
+#wpf-wrapper input.wpf-input:focus{
+  box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  background-color: rgba(193,193,193,0.4);
+  color: #181818;
+}
+
+/*end input txt--------------------------------------------*/
+
+/*wpf textarea -----------------------------------------*/
+.wpf-textarea,
+#sig-box,
+#wpf-wrapper textarea{
+  box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  background-color: rgba(193,193,193,0.4);	
+  color: #7b7a7a;
+  text-shadow: 1px 1px 5px rgba(255,255,255,0.8);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color:none !important;
+  border: 1px solid #E3E3E3!important;
+  padding:4px;
+}	  
+.wpf-textarea:focus,
+#sig-box:focus,
+#wpf-wrapper  textarea:focus{ 
+  box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
+  background-color: rgba(193,193,193,0.5);	
+  color: #444444;
+ }
+/*end wpf textarea --------------------------------------*/ 
+
+/*poster_in_forum v1.34 ---------------------------------*/
+#wpf-wrapper .poster_in_forum span img {
+  float: left;
+  vertical-align: middle;
+  margin: 8px 9px 6px 0px;
+}
+#wpf-wrapper .poster_img_avatar img {
+  float: left;
+  vertical-align: middle;
+  margin: 4px 9px 0px 0px;
+}
+#wpf-wrapper .wpf-img-mark-all-read {
+  background: url("images/markallread.png");
+  margin: 0 0px -7px 0;
+}
+#wpf-wrapper img.avatar,
+#wpf-wrapper .topic_text a img {
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+#wpf-wrapper td.poster_in_forum {
+  line-height: 15px;
+}
+/*end poster_in_forum ---------------------------------*/
+
+#wpf-wrapper th h4 {
+  font-weight: bold;
+  color: #FFF;
+  text-transform: none;
+  text-shadow: none;
+}
+#wpf-wrapper table,
+#wpf-wrapper div,
+#wpf-wrapper h2,
+#wpf-wrapper h3,
+#wpf-wrapper h4,
+#wpf-wrapper form {
+  margin: 0;
+  padding: 0;
+}
+#wpf-wrapper #profileHeader h4{
+  font-size:22px;
+  line-height: 16px;
+  font-weight:bold;
+  padding-left:5px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  text-transform: capitalize; 
+}
+#wpf-wrapper form {
+  text-align: inherit !important;
+}
+#wpf-wrapper small {
+  color: #333;
+}
+.wpf-table a,
+.wpf-post-table a,
+#wpf-wrapper p a,
+#wpf-wrapper span a,
+#wpf-wrapper a {
+  color: #084d8f;
+  text-decoration: none;
+}
+#wpf-wrapper .odd td,
+#wpf-wrapper .even td,
+#wpf-wrapper .sticky td {
+  vertical-align: middle;
+}
+.wpf-table a:hover,
+.wpf-post-table a:hover,
+#wpf-wrapper a:hover {
+  text-decoration: underline;
+}
+#wpf-wrapper th a {
+  color: #fff;
+  text-transform: none;
+}
+#wpf-wrapper th {
+  color: #fff;
+  text-transform: none;
+}
+#wpf-wrapper th.wpf-bright {
+  color: #777;
+  text-transform: none;
+}
+table.search td {
+  border: none;
+}
+table.search {
+  background: #ecedf3;
+}
+img.avatar {
+  float: none;
+  margin: 0px;
+}
+#wpf-wrapper .author small {
+  color: #4D4D4D;
+  text-shadow: 1px 1px 0 #FDFDFD;
+}
+#wpf-wrapper .post-data-format{
+  color: #979797;
+  text-shadow: 1px 1px 0 #FDFDFD;
+  font-size:12px;
+}
+.author .wpf-meta img {
+  margin: 2px 2px 0 !important;
+}
+#wpf-wrapper .wpf-meta-button{
+}
+#wpf-wrapper .wpf-meta-button a{
+  font-size: 12px;
+  font-weight: bold;
+}
+#wpf-wrapper .wpf-meta-button a:hover{
+  color:#B85B5A;
+  text-decoration:none !important;
+}
+#wpf-wrapper .wpf-meta-button img{
+  margin: 0px 4px 0px 0px !important;
+}
+#wpf-wrapper .wpf-meta-topic-img img {
+    width: 25px;
+	height:25px;
+}
+#wpf-wrapper .post-calendar-img{
+  padding-right:5px;
+  margin:-1px 0 0 0;
+  padding-right:5px;
+}
+#wpf-wrapper .wpf-meta-topic {
+  color: #777;
+  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
+  background-position: bottom !important;
+  padding: 2px;
+  margin: 0;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #FDFDFD;
+}
+#wpf-wrapper .wpf-meta-topic img {
+  padding-right: 5px;
+  margin: 0px 0px -5px;
+}
+.author .wpf-meta {
+  margin: -7px 0px -7px 0 !important;
+  width: auto;
+  float: right;
+}
+.wpf-post-table .permalink {
+  float: right;
+  height: 18px;
+  margin: 0 -10px 10px 0;
+}
+ul#wpf-menu,ul.wpf-postmeta {
+  margin: 0;
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+ul#wpf-menu li,.wpf-postmeta li {
+  list-style: none;
+  padding-right: 10px;
+  display: inline;
+}
+.wpf-table {
+  border-collapse: collapse;
+  padding: 5px;
+  border: 1px solid #696969;
+  background: #f6f6f6;
+  font-size: 95%; /*If your fonts are too small try increasing this number*/
+}
+.wpf-post-table {
+  border-collapse: collapse;
+  padding: 15px;
+  border-left: 1px solid #adadad !important;
+  border-right: 1px solid #adadad !important;
+  border-bottom: 1px solid #adadad !important;
+  border-top: 1px solid #eaeaea !important;
+  background: #f6f6f6;
+  
+}
+.wpf-table th,
+.wpf-post-table th,
+.wpf-table td.forumtitle {
+  text-align: left;
+  overflow: hidden;
+  background: url('images/catbg.jpg') !important;
+  padding: 5px;
+  color: #fff;
+  border-width: 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+#wpf-wrapper .forumtitle a,
+#wpf-wrapper .InfoCenter th{
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 2px 7px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5)!important;
+  text-transform: none;
+}
+.wpf-post-table td {
+  padding: 5px 10px 5px 10px !important;
+}
+.wpf-table td {
+  border: 1px solid;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding: 5px;
+  border-left: 1px solid #d9d7d7 !important;
+  border-right: 1px solid #CECECE !important;
+  border-bottom: 1px solid #CECECE !important;
+  border-top: 1px solid #d9d7d7 !important;
+}
+.wpf-table textarea {
+  width: 98%;
+}
+#wpf-wrapper table.edit-post th {
+  font-size: 16px;
+  border: 1px solid rgba(155, 155, 155, 0.4);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);  /* box shadow */
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3); 
+  box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);  
+}
+#wpf-wrapper #wpf-quick-reply br,
+#wpf-wrapper table.edit-post br {
+   display: none!important;
+}
+#wpf-wrapper table.edit-post td{
+ border: none !important;
+  font-size: 16px;
+}
+#wpf-wrapper table.edit-post{
+ background: none !important;
+}
+.wpf-table textarea {
+  width: 98%;
+}
+#wpf-wrapper .wpf {
+  padding: 1px;
+  border: 1px solid #CACACA;
+}
+.wpf-alt {
+  background: #ecedf3;
+}
+#wpf-wrapper .sticky {
+  background: #e0e1e8;
+}
+#wpf-wrapper .sticky a {
+  font-weight: bold;
+}
+td.wpf-meta {
+  border-bottom: 1px solid #adadad !important;
+  padding: 0;
+  margin: 0;
+}
+#wpf-wrapper .wpf-post-table .user_desc {
+  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
+  background-position: top !important;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+td.wpf-meta a {
+  font-weight: bold;
+}
+.wpf-small {
+  margin-bottom: 10px;
+}
+#wpf-wrapper th.author a {
+  color: #757575 !important;
+  text-shadow: 1px 1px 0 #E3E3E3;
+  text-transform: none !important;
+}
+#wpf-wrapper th.author {
+  border: none !important;
+  border-bottom: 1px solid #CACACA !important;
+}
+#wpf-wrapper th.author a:hover {
+  color: #084D8F  !important;
+  text-shadow: 1px 1px 0 #E3E3E3;
+}
+.wpf-table h2 {
+  margin: 0;
+  padding: 0;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  color: #fff;
+}
+th.wpf-bright,
+.wpf-table tr.forumstatus th,
+td.statistik {
+  background: url('images/titlebg.jpg') !important;
+  color: #000;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+.wpf-table tr.forumstatus th,
+td.statistik {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  color: #777 !important;
+  font-weight: bold;
+  overflow: auto;
+  border: none !important;
+  text-shadow: 0 1px 0 white;
+  font-size: 12px !important;
+  text-transform: none !important;
+}
+
+/* Fixing avatars pose a problem for some sites */
+
+td.autorpostbox img.avatar{height: 60px;width: 60px;}
+
+td.autorpostbox .message-button{margin-top:5px;}
+
+td.autor-profile-box img.avatar{height: 95px; width: 95px;}
+
+#wpf-wrapper .img-avatar-forumstats .avatar{ height: 15px;width: 15px;}
+
+td.autorpostbox {
+  text-align: center;
+  background-image: url("images/post/hr-a.png");
+  background-position: right;
+  background-repeat: repeat-y;
+  padding: 9px;
+}
+th.wpf-bright h3 {
+  margin: 0;
+  padding: 0;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.wpf-avatar {
+  padding: 5px;
+}
+#wpf-wrapper a img,
+#wpf-wrapper img {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  display: inline !important;
+  height: inherit !important;
+}
+.wpf #wpf-wrapper a img,
+#wpf-wrapper img {
+  border: none;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+}
+#wpf-wrapper .info-poster_in_forum{
+  font-size:16px;
+}
+#wpf-wrapper .info-poster_in_forum img{
+  margin: 0 4px -11px;
+}
+.wpf-info{
+  border: 1px solid #cecb8e;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin: 0px 0px 10px !important;
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
+}
+.updated {
+  color: #ada771;
+  background: #f9f9dc;
+  border: 1px solid #fbfbef;
+  -moz-box-shadow: inset 0 0 45px #efefc0;
+  -webkit-box-shadow: inset 0 0 45px #efefc0;
+  box-shadow: inset 0 0 45px #efefc0;
+  font-weight: normal;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px #FFFFFF; 
+  background: #F9F9DC;
+  box-shadow: 0 0 45px #EFEFC0 inset;
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 10px !important;
+}
+#wpf-wrapper blockquote {
+  padding: 1.71429rem;
+  margin: 10px 0;
+}
+
+/* add quote title */
+#wpf-wrapper blockquote .quotetitle {
+  background: #d7daec;
+  border: 1px solid #6081a0;
+  padding-left: 5px;
+  margin: 0;
+  padding: 1.71429rem;
+}
+#wpf-wrapper .hr {
+  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
+  clear: both;
+  height: 5px;
+  margin: 5px 0 1px;
+  padding: 0;
+}
+#wpf-wrapper blockquote .quotetitle {
+  border: 1px solid #848383;
+  background: #E0E1E1;
+  border-radius: 4px 4px 4px 4px;
+  color: #181818 !important;
+  text-shadow: 1px 1px 0 #FFFFFF;
+  font-weight: bolder;
+  margin: -35px -4px 0 0px !important;
+  min-width: 100px;
+  padding: 2px 10px;
+  position: absolute;
+  -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
+  box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
+}
+.topic_text blockquote {
+  background: #E1E0E0 !important;
+  border: 1px solid #ADADAD;
+  border-left: 4px solid #ADADAD !important;
+  color: #181818;
+  font-style: italic;
+  text-shadow: 0 1px 0 #FFFFFF;
+  border-radius: 0 7px 7px 0 !important;
+  -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
+  box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
+}
+
+/* definitions for the main tab, active means the tab reflects which page is displayed */
+
+/* definitions for the mirror tab */
+
+#wpf-wrapper .mirrortab_back,
+#wpf-wrapper .mirrortab_active_first,
+#wpf-wrapper .mirrortab_active_back,
+#wpf-wrapper .mirrortab_active_last {
+  vertical-align: top;
+  white-space: nowrap;
+}
+#wpf-wrapper .mirrortab_back,
+#wpf-wrapper .mirrortab_active_back {
+  text-decoration: none;
+  vertical-align: bottom;
+  padding: 6px 6px 2px 6px;
+  font-family: tahoma, sans-serif;
+}
+
+#wpf-wrapper #forummenu td, #wpf-wrapper #forummenu th{
+  line-height: normal !important;
+}
+pre.code {
+  width: 90%;
+  background: #eee;
+  border: solid 1px #ccc;
+  padding: 5px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font-size: 95%; /*If font is too small try increasing this*/
+}
+#wpf-info {
+  text-align: center;
+  padding: 5px !important;
+  border: 1px solid #CACACA;
+  margin-top: 15px !important;
+  background: #f6f6f6;
+}
+#wpf-wrapper {
+  font-size: 100%; /*If fonts are too small try increasing this*/
+}
+#wpf-wrapper td,
+#wpf-wrapper th {
+  vertical-align: top;
+  line-height: 20px;
+}
+#wpf-wrapper th {
+  vertical-align: middle;
+}
+
+/*Attempt to make the forum look better with more themes*/
+#forummenu td,
+#topicmenu td {
+  padding: 5px 0 5px 5px !important;
+  padding-left: 3px !important;
+  margin: 0 !important;
+  width: 1px !important;
+  vertical-align: middle !important;
+}
+#topicmenu a {
+  padding: 0 2px;
+}
+#topicmenu a:hover {
+  text-decoration: underline !important;
+}
+
+.pop_menus td {
+  border: medium none;
+  margin: 0 !important;
+  padding: 0 7px 0 0 !important;
+}
+#upshrinkHeader strong {
+  background-color: #d66240;
+  border-radius: 3px;
+  color: #FFFFFF;
+  display: inline;
+  font-size: 95%;
+  text-shadow: none;
+  padding: 0px 5px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.wpf-pages strong {
+  background-color: #737373;
+  border-radius: 3px;
+  color: #FFFFFF;
+  display: inline;
+  font-size: 95%;
+  text-shadow: none;
+  padding: 0px 5px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.wpf-pages a {
+  background: none repeat scroll 0 0 #1FB3DD;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  display: inline;
+  font-size: 95%;
+  text-decoration: none !important;
+  padding: 0px 5px;
+  text-shadow: none !important;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.wpf-pages a:hover {
+  background-color: #737373;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  display: inline;
+  font-size: 95%;
+  padding: 0px 5px;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Buttons fix */
+div.forum_smilies,div.forum_buttons {
+  padding: 0;
+  margin: 0;
+}
+.forum_smilies a,
+.forum_buttons a {
+  margin-right: 3px;
+}
+
+/* Header shrink/hide */
+img.show_hide_icon {
+  float: right;
+  vertical-align: middle;
+}
+a.show-hide-hidden {
+  display: none;
+}
+#profileHeader img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.topic_text img {
+  max-width: 475px;
+}
+/*------------------------------------------------*/
+/*-------------------[icomoon]--------------------*/
+/*------------(http://icomoon.io)-----------------*/
+/*------------------------------------------------*/
+@font-face {
+  font-family: 'wpf-icomoon';
+  src: url('fonts/wpf-icomoon.eot');
+  src: url('fonts/wpf-icomoon.eot?#iefix') format('embedded-opentype'), url('fonts/wpf-icomoon.woff') format('woff'), url('fonts/wpf-icomoon.ttf') format('truetype'), url('fonts/wpf-icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+#wpf-wrapper * a:before {
+  font-family: "wpf-icomoon";
+}
+#wpf-wrapper .wpf-icomoon {
+  float: left;
+  color: inherit;
+  font-family: "wpf-icomoon";
+  font-size: 123%;
+  font-weight: normal;
+  padding-right: 2px;
+  position: relative;
+  vertical-align: middle;
+  top: 0px;
+}
+[data-icon]:before {
+  font-family: 'wpf-icomoon';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  padding-right: 3px;
+  font-size: 1.37em;
+  vertical-align: text-top;
+}
+.unread-topics:before,
+.icon-profile:before,
+.icon-settings:before,
+.icon-my-profile:before,
+.icon-logout:before,
+.icon-move-topic:before,
+.icon-forum-home:before,
+.icon-replies:before,
+.icon-views:before,
+.icon-inbox:before,
+.icon-rss-feed:before,
+.icon-unsubscribe:before,
+.icon-subscribe:before,
+.icon-reply:before,
+.icon-close:before,
+.icon-re-open:before,
+.icon-sticky:before,
+.icon-undo-sticky:before,
+.icon-checkmark:before,
+.icon-topic:before,
+.icon-password:before,
+.icon-search-forums:before,
+.icon-warning:before,
+.icon-message:before {
+  font-family: 'wpf-icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  padding-right: 3px;
+  font-size: 1.4em;
+  vertical-align: text-top;
+}
+.unread-topics:before {
+  content: "\e01c";
+}
+.icon-profile:before {
+  content: "\e005";
+}
+.icon-settings:before {
+  content: "\e011";
+}
+.icon-my-profile:before{ 
+  content: "\e00a";
+}
+.icon-logout:before {
+  content: "\e05a";
+}
+.icon-move-topic:before {
+  content: "\e076";
+}
+.icon-forum-home:before {
+  content: "\e000";
+}
+.icon-replies:before {
+  content: "\e01e";
+}
+.icon-views:before {
+  content: "\e053";
+}
+.icon-inbox:before {
+  content: "\e08b";
+}
+.icon-subscribe:before {
+  content: "\e028";
+  color: #1d7b1f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.icon-unsubscribe:before{
+  content: "\e02e";
+  color: #E6162D;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.icon-rss-feed:before {
+  content: "\e08b";
+}
+.icon-reply:before{
+  content: "\e01a";
+}
+.icon-close:before{
+  content: "\e056";
+  color: #E6162D;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.icon-re-open:before{
+  content: "\e057";
+  color: #1d7b1f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.icon-sticky:before{
+  content: "\e07a";
+}
+.icon-undo-sticky:before{
+  content: "\e079";
+}
+.icon-checkmark:before{
+  content: "\e031";
+}
+.icon-topic:before{
+  content: "\e01f";
+}
+.icon-password:before{
+  content: "\e058";
+}
+.icon-search-forums:before{
+  content: "\e05b";
+}
+.icon-warning:before{
+  content: "\e035";
+}
+.icon-message:before{
+  content: "\e052";
+
+}
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0); height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+/*-------------------[end icomoon]--------------------*/

@@ -1,0 +1,159 @@
+/* MAIN OPTIONS PAGE */
+.mf_admin_submit {
+  margin-top:25px !important;
+}
+
+#mf_options_form input {
+  vertical-align:middle;
+}
+
+.mf_tb_label {
+  display:inline-block;
+  width:350px;
+}
+
+/* ADS OPTIONS PAGE */
+.parent_ad_box {
+  margin-top:25px;
+}
+
+.mf_ad_hidden_area {
+  color:white;
+  margin-top:5px;
+  padding:15px;
+  border:1px solid #AAA;
+  border-radius:10px;
+  background:#0078AE;
+}
+
+.ad_area_text {
+  width:75%;
+  height:200px;
+  border-radius:5px;
+}
+
+/* SHARED */
+.mf_fset {
+  border:2px solid #999;
+  margin-top:25px;
+  border-radius:10px;
+  padding:15px;
+  background:#EFF8FF;
+}
+
+.mf_fset legend {
+  font-size:14px;
+  font-weight:bold;
+  background:lightgray;
+  padding:5px;
+  border:1px solid #999;
+  border-radius:5px;
+}
+
+.mf_fset label {
+  cursor:pointer;
+}
+
+.mf_fset a.button {
+  color:#666 !important;
+}
+
+.mf_fset a.button:hover {
+  color:black !important;
+}
+
+.mf_ordered_list {
+  margin:0;
+  padding:0;
+}
+
+li.ui-state-default,
+li.ui-state-active {
+  list-style-type:none;
+  margin:10px;
+  padding:10px;
+  cursor:move;
+}
+
+li.ui-state-highlight {
+  list-style-type:none;
+  margin:10px;
+  padding:22px;
+}
+
+/* STRUCTURE PAGE */
+a#mf_add_new_category,
+a.mf_add_new_forum {
+  padding-left:8px;
+}
+
+a.mf_remove_category,
+a.mf_remove_forum {
+  float:right;
+}
+
+div.user-groups-area {
+  margin:10px 0 0 9px;
+  display:none;
+}
+
+/* USER GROUPS PAGE */
+div#mf_add_new_user_group_area {
+  padding:15px;
+  display:none;
+  border:1px solid #CCC;
+  border-radius:10px;
+  background:#EFF8FF;
+}
+
+.mf_user_group_li_item {
+  cursor:default !important;
+}
+
+.mf_user_group_li_item label {
+  cursor:pointer !important;
+}
+
+a.mf_remove_user_group {
+  float:right;
+}
+
+a#mf_add_new_user_group {
+  padding-left:8px;
+}
+
+div.usergroup_users_row {
+  padding:5px;
+  width:250px;
+  border:1px solid #DEDEDE;
+}
+
+div.usergroup_users_row_alt {
+  background:#ECECEC;
+}
+
+/* MODERATORS PAGE */
+div#mf_hidden_moderator_instructions {
+  padding:15px;
+  display:none;
+  border:1px solid #CCC;
+  border-radius:10px;
+  background:#EFF8FF;
+}
+
+span.mf_moderators_forums {
+  margin-left:10px;
+}
+
+/* MODERATORS PROFILE FORM */
+div#mf_moderator_wrapper {
+  padding:0 0 0 10px;
+}
+
+div#mf_moderator_not_global {
+  padding-left:10px;
+}
+
+div.mf_moderator_forums input {
+  margin-left:10px;
+}
