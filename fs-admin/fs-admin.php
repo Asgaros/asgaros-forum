@@ -226,13 +226,6 @@ class mingleforumadmin
           'hot_topic' => $op['hot_topic'],
           'veryhot_topic' => $op['veryhot_topic'],
           'forum_display_name' => $op['forum_display_name'],
-          'level_one' => $op['level_one'],
-          'level_two' => $op['level_two'],
-          'level_three' => $op['level_three'],
-          'level_newb_name' => $op['level_newb_name'],
-          'level_one_name' => $op['level_one_name'],
-          'level_two_name' => $op['level_two_name'],
-          'level_three_name' => $op['level_three_name'],
           'forum_db_version' => $op['forum_db_version'],
           'forum_disabled_cats' => $op['forum_disabled_cats'],
           'allow_user_replies_locked_cats' => $op['allow_user_replies_locked_cats'],
@@ -502,34 +495,6 @@ class mingleforumadmin
       </td>
     </tr>
     <tr class='alternate'>
-      <td>" . __("New User's Title:", "mingleforum") . "</td>
-      <td><input type='text' name='level_newb_name' value='" . $op['level_newb_name'] . "' /> ($defStr = " . __('Newbie', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("User Level 1 Title:", "mingleforum") . "</td>
-      <td><input type='text' name='level_one_name' value='" . $op['level_one_name'] . "' /> ($defStr = " . __('Beginner', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("User Level 1 Count:", "mingleforum") . "</td>
-      <td><input type='text' name='level_one' value='" . $op['level_one'] . "' /> ($defStr = " . __('25', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("User Level 2 Title:", "mingleforum") . "</td>
-      <td><input type='text' name='level_two_name' value='" . $op['level_two_name'] . "' /> ($defStr = " . __('Advanced', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("User Level 2 Count:", "mingleforum") . "</td>
-      <td><input type='text' name='level_two' value='" . $op['level_two'] . "' /> ($defStr = " . __('50', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("User Level 3 Title:", "mingleforum") . "</td>
-      <td><input type='text' name='level_three_name' value='" . $op['level_three_name'] . "' /> ($defStr = " . __('Pro', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("User Level 3 Count:", "mingleforum") . "</td>
-      <td><input type='text' name='level_three' value='" . $op['level_three'] . "' /> ($defStr = " . __('100', 'mingleforum') . ")</td>
-    </tr>
-    <tr class='alternate'>
       <td>" . __("Notify Admin on new posts:", "mingleforum") . "</td>
         <td><input type='checkbox' name='notify_admin_on_new_posts' value='true'";
     if ($op['notify_admin_on_new_posts'] == 'true')
@@ -685,13 +650,6 @@ class mingleforumadmin
           'hot_topic' => $wpdb->escape($_POST['hot_topic']),
           'veryhot_topic' => $wpdb->escape($_POST['veryhot_topic']),
           'forum_display_name' => $_POST['forum_display_name'],
-          'level_one' => $wpdb->escape($_POST['level_one']),
-          'level_two' => $wpdb->escape($_POST['level_two']),
-          'level_three' => $wpdb->escape($_POST['level_three']),
-          'level_newb_name' => $wpdb->escape($_POST['level_newb_name']),
-          'level_one_name' => $wpdb->escape($_POST['level_one_name']),
-          'level_two_name' => $wpdb->escape($_POST['level_two_name']),
-          'level_three_name' => $wpdb->escape($_POST['level_three_name']),
           'forum_db_version' => $op['forum_db_version'],
           'forum_disabled_cats' => explode(",", $wpdb->escape($_POST['forum_disabled_cats'])),
           'allow_user_replies_locked_cats' => $_POST['allow_user_replies_locked_cats'],

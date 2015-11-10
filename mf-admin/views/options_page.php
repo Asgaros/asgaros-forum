@@ -86,48 +86,6 @@
             <option value="last_name" <?php selected($mingleforum->options['forum_display_name'], 'last_name'); ?>><?php _e('last_name', 'mingle-forum'); ?></option>
           </select>
         </p>
-        <p>
-          <label for="level_newb_name" class="mf_tb_label">
-            <?php _e('New Users Title', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_newb_name" id="level_newb_name" value="<?php echo stripslashes($mingleforum->options['level_newb_name']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="level_one_name" class="mf_tb_label">
-            <?php _e('User Level 1 Title', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_one_name" id="level_one_name" value="<?php echo stripslashes($mingleforum->options['level_one_name']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="level_one" class="mf_tb_label">
-            <?php _e('User Level 1 Replies Count', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_one" id="level_one" value="<?php echo stripslashes($mingleforum->options['level_one']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="level_two_name" class="mf_tb_label">
-            <?php _e('User Level 2 Title', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_two_name" id="level_two_name" value="<?php echo stripslashes($mingleforum->options['level_two_name']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="level_two" class="mf_tb_label">
-            <?php _e('User Level 2 Replies Count', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_two" id="level_two" value="<?php echo stripslashes($mingleforum->options['level_two']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="level_three_name" class="mf_tb_label">
-            <?php _e('User Level 3 Title', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_three_name" id="level_three_name" value="<?php echo stripslashes($mingleforum->options['level_three_name']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="level_three" class="mf_tb_label">
-            <?php _e('User Level 3 Replies Count', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="level_three" id="level_three" value="<?php echo stripslashes($mingleforum->options['level_three']); ?>" class="mf_tb" />
-        </p>
       </div>
 
       <h3><?php _e('Formatting', 'mingle-forum'); ?></h3>

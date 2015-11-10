@@ -88,13 +88,6 @@ if (!class_exists('mingleforum'))
                               'hot_topic' => 15,
                               'veryhot_topic' => 25,
                               'forum_display_name' => 'user_login',
-                              'level_one' => 25,
-                              'level_two' => 50,
-                              'level_three' => 100,
-                              'level_newb_name' => "Newbie",
-                              'level_one_name' => "Beginner",
-                              'level_two_name' => "Advanced",
-                              'level_three_name' => "Pro",
                               'forum_db_version' => 0,
                               'forum_disabled_cats' => array(),
                               'allow_user_replies_locked_cats' => false,
@@ -1914,15 +1907,7 @@ if (!class_exists('mingleforum'))
         return __("Moderator", "mingleforum");
       else
       {
-        $mePosts = $this->get_userposts_num($user_id);
-        if ($mePosts < $this->options['level_one'])
-          return __($this->options['level_newb_name'], "mingleforum");
-        if ($mePosts < $this->options['level_two'])
-          return __($this->options['level_one_name'], "mingleforum");
-        if ($mePosts < $this->options['level_three'])
-          return __($this->options['level_two_name'], "mingleforum");
-        else
-          return __($this->options['level_three_name'], "mingleforum");
+        return "";
       }
     }
 
