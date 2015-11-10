@@ -222,8 +222,6 @@ class mingleforumadmin
           'forum_allow_image_uploads' => $op['forum_allow_image_uploads'],
           'notify_admin_on_new_posts' => $op['notify_admin_on_new_posts'],
           'forum_captcha' => $op['forum_captcha'],
-          'hot_topic' => $op['hot_topic'],
-          'veryhot_topic' => $op['veryhot_topic'],
           'forum_display_name' => $op['forum_display_name'],
           'forum_db_version' => $op['forum_db_version'],
           'forum_disabled_cats' => $op['forum_disabled_cats'],
@@ -465,14 +463,6 @@ class mingleforumadmin
     </tr>
 
     <tr class='alternate'>
-      <td>" . __("Number of posts for Hot Topic:", "mingleforum") . "</td>
-      <td><input type='text' name='hot_topic' value='" . $op['hot_topic'] . "' /> ($defStr = 15)</td>
-    </tr>
-    <tr class='alternate'>
-      <td>" . __("Number of posts for Very Hot Topic:", "mingleforum") . "</td>
-      <td><input type='text' name='veryhot_topic' value='" . $op['veryhot_topic'] . "' /> ($defStr = 25)</td>
-    </tr>
-    <tr class='alternate'>
       <td>" . __("Username Display:", "mingleforum") . "</td>
       <td>
         <select name='forum_display_name'>";
@@ -637,8 +627,6 @@ class mingleforumadmin
           'forum_allow_image_uploads' => $_POST['forum_allow_image_uploads'],
           'notify_admin_on_new_posts' => $_POST['notify_admin_on_new_posts'],
           'forum_captcha' => $_POST['forum_captcha'],
-          'hot_topic' => $wpdb->escape($_POST['hot_topic']),
-          'veryhot_topic' => $wpdb->escape($_POST['veryhot_topic']),
           'forum_display_name' => $_POST['forum_display_name'],
           'forum_db_version' => $op['forum_db_version'],
           'forum_disabled_cats' => explode(",", $wpdb->escape($_POST['forum_disabled_cats'])),

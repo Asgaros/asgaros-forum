@@ -79,8 +79,6 @@ if (!class_exists('mingleforum'))
                               'forum_allow_image_uploads' => false,
                               'notify_admin_on_new_posts' => false,
                               'forum_captcha' => true,
-                              'hot_topic' => 15,
-                              'veryhot_topic' => 25,
                               'forum_display_name' => 'user_login',
                               'forum_db_version' => 0,
                               'forum_disabled_cats' => array(),
@@ -2703,19 +2701,10 @@ if (!class_exists('mingleforum'))
 
     public function get_topic_image($thread)
     {
-      $post_count = $this->num_posts($thread);
-
       if ($this->is_closed($thread))
         return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "mingleforum") . "' title='" . __("Closed topic", "mingleforum") . "'>";
 
-      if ($post_count < $this->options['hot_topic'])
-        return "<img src='{$this->skin_url}/images/topic/normal_post.png' alt='" . __("Normal topic", "mingleforum") . "' title='" . __("Normal topic", "mingleforum") . "'>";
-
-      if ($post_count >= $this->options['hot_topic'] && $post_count < $this->options['veryhot_topic'])
-        return "<img src='{$this->skin_url}/images/topic/hot_post.png' alt='" . __("Hot topic", "mingleforum") . "' title='" . __("Hot topic", "mingleforum") . "'>";
-
-      if ($post_count >= $this->options['veryhot_topic'])
-        return "<img src='{$this->skin_url}/images/topic/my_hot_post.png' alt='" . __("Very Hot topic", "mingleforum") . "' title='" . __("Very Hot topic", "mingleforum") . "'>";
+      return "<img src='{$this->skin_url}/images/topic/normal_post.png' alt='" . __("Normal topic", "mingleforum") . "' title='" . __("Normal topic", "mingleforum") . "'>";
     }
 
     public function get_captcha()

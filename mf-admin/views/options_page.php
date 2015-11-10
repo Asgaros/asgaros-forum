@@ -103,18 +103,6 @@
           <input type="text" name="forum_threads_per_page" id="forum_threads_per_page" value="<?php echo stripslashes($mingleforum->options['forum_threads_per_page']); ?>" class="mf_tb" />
         </p>
         <p>
-          <label for="hot_topic" class="mf_tb_label">
-            <?php _e('Number of Replies for Hot Topic', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="hot_topic" id="hot_topic" value="<?php echo stripslashes($mingleforum->options['hot_topic']); ?>" class="mf_tb" />
-        </p>
-        <p>
-          <label for="veryhot_topic" class="mf_tb_label">
-            <?php _e('Number of Replies for Very Hot Topic', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="veryhot_topic" id="veryhot_topic" value="<?php echo stripslashes($mingleforum->options['veryhot_topic']); ?>" class="mf_tb" />
-        </p>
-        <p>
           <label for="forum_date_format" class="mf_tb_label">
             <?php _e('Date format, see', 'mingle-forum'); ?> <a href="http://php.net/manual/en/function.date.php" target="_blank">php.net</a>
           </label>
