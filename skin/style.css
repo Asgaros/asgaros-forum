@@ -925,13 +925,6 @@ pre.code {
   white-space: pre-wrap;
   font-size: 95%; /*If font is too small try increasing this*/
 }
-#wpf-info {
-  text-align: center;
-  padding: 5px !important;
-  border: 1px solid #CACACA;
-  margin-top: 15px !important;
-  background: #f6f6f6;
-}
 #wpf-wrapper {
   font-size: 100%; /*If fonts are too small try increasing this*/
 }

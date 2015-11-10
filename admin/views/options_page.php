@@ -147,16 +147,6 @@
           <input type="text" name="forum_posting_time_limit" id="forum_posting_time_limit" value="<?php echo stripslashes($mingleforum->options['forum_posting_time_limit']); ?>" class="mf_tb" />
         </p>
       </div>
-
-      <h3><?php _e('Miscellaneous', 'mingle-forum'); ?></h3>
-      <div>
-        <p>
-          <input type="checkbox" name="forum_hide_branding" id="forum_hide_branding" <?php checked(!empty($mingleforum->options['forum_hide_branding'])); ?> />
-          <label for="forum_hide_branding" class="mf_cb_label">
-            <?php _e('Hide attribution', 'mingle-forum'); ?>
-          </label>
-        </p>
-      </div>
     </div>
 
     <input type="submit" name="mf_options_submit" class="mf_admin_submit button" value="<?php _e('Save Options', 'mingle-forum'); ?>" />

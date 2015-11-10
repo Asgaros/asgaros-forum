@@ -83,7 +83,6 @@ if (!class_exists('mingleforum'))
                               'forum_disabled_cats' => array(),
                               'allow_user_replies_locked_cats' => false,
                               'forum_posting_time_limit' => 300,
-                              'forum_hide_branding' => false,
                               'forum_login_url' => '',
                               'forum_signup_url' => '',
                               'forum_logout_redirect_url' => '' );
@@ -563,7 +562,6 @@ if (!class_exists('mingleforum'))
       global $wpdb, $user_ID;
 
       $q = "";
-      $start_time = microtime(true);
       get_currentuserinfo();
       ob_start();
 
@@ -655,28 +653,9 @@ if (!class_exists('mingleforum'))
         $this->mydefault();
       }
 
-      $end_time = microtime(true);
-      $load = __("Page loaded in:", "mingleforum") . " " . round($end_time - $start_time, 3) . " " . __("seconds.", "mingleforum") . "";
-
-      if (!$this->options['forum_hide_branding'])
-      {
-        $this->o .= '<div id="wpf-info"><small><img style="margin: 0 3px -3px 0;" alt="" align="top" src="' . WPFURL . '/images/logo.png" />' . __('Mingle Forum by', 'mingleforum') . ' <a href="http://cartpauj.com">Cartpauj</a> | ' . __('Version:', 'mingleforum') . $this->get_version() . ' | ' . $load . '</small></div>';
-      }
-
       echo '<div id="wpf-wrapper">' . $this->trail() . $this->o . '</div>';
 
       return ob_get_clean();
-    }
-
-    public function get_version()
-    {
-      $plugin_data = implode('', file(WPFPATH . "wpf-main.php"));
-
-      $version = '';
-      if (preg_match("|Version:(.*)|i", $plugin_data, $version))
-        $version = $version[1];
-
-      return $version;
     }
 
     public function get_userdata($user_id, $data)
@@ -2836,12 +2815,9 @@ if (!class_exists('mingleforum'))
       {
         global $cartpaujPMS;
 
-        if ($this->convert_version_to_int($cartpaujPMS->get_version()) >= 1009)
-        {
-          $URL = get_permalink($cartpaujPMS->getPageID());
-          $numNew = $cartpaujPMS->getNewMsgs();
-          return "<td class='menu_sub' valign='top' ><a class='icon-message' href='" . $URL . "'>" . __("Inbox", "mingleforum") . " <span>" . $numNew . "</span> </a></td>";
-        }
+        $URL = get_permalink($cartpaujPMS->getPageID());
+        $numNew = $cartpaujPMS->getNewMsgs();
+        return "<td class='menu_sub' valign='top' ><a class='icon-message' href='" . $URL . "'>" . __("Inbox", "mingleforum") . " <span>" . $numNew . "</span> </a></td>";
       }
 
       if (is_plugin_active('mingle/mingle.php'))
@@ -2868,12 +2844,9 @@ if (!class_exists('mingleforum'))
       {
         global $cartpaujPMS;
 
-        if ($this->convert_version_to_int($cartpaujPMS->get_version()) >= 1009)
-        {
-          $cartpaujPMS->setPageURLs();
-          $URL = $cartpaujPMS->actionURL . "newmessage&to=" . $id;
-          return "</div><a aria-hidden='true' class='icon-message message-button' href='" . $URL . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
-        }
+        $cartpaujPMS->setPageURLs();
+        $URL = $cartpaujPMS->actionURL . "newmessage&to=" . $id;
+        return "</div><a aria-hidden='true' class='icon-message message-button' href='" . $URL . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
       }
 
       if (is_plugin_active('mingle/mingle.php'))
