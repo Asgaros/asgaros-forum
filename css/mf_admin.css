@@ -12,26 +12,6 @@
   width:350px;
 }
 
-/* ADS OPTIONS PAGE */
-.parent_ad_box {
-  margin-top:25px;
-}
-
-.mf_ad_hidden_area {
-  color:white;
-  margin-top:5px;
-  padding:15px;
-  border:1px solid #AAA;
-  border-radius:10px;
-  background:#0078AE;
-}
-
-.ad_area_text {
-  width:75%;
-  height:200px;
-  border-radius:5px;
-}
-
 /* SHARED */
 .mf_fset {
   border:2px solid #999;

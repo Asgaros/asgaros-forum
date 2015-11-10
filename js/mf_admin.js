@@ -1,23 +1,5 @@
 (function($) {
   $(document).ready(function() {
-/******************************** ADS STUFF ********************************/
-    //Show/Hide ads areas
-    $('.mf_ad_enable').each(function() {
-      if($(this).is(":checked")) {
-        var who = $(this).attr('data-value');
-        $('div#' + who).show();
-      } else {
-        var who = $(this).attr('data-value');
-        $('div#' + who).hide();
-      }
-    });
-
-    //Show/Hide ad aread when checkbox clicked
-    $('.mf_ad_enable').click(function() {
-      var who = $(this).attr('data-value');
-      $('div#' + who).slideToggle('fast');
-    });
-
 /******************************** SORTABLE CATEGORIES ********************************/
     //Make Categories Sortable
     $('#sortable-categories').sortable({

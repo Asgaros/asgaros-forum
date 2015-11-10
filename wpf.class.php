@@ -12,7 +12,6 @@ if (!class_exists('mingleforum'))
     {
       //Init options
       $this->load_forum_options();
-      $this->get_set_ads_options();
       $this->init();
 
       //Action hooks
@@ -37,13 +36,6 @@ if (!class_exists('mingleforum'))
 
       //Filter hooks
       add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
-      add_filter('mf_ad_above_forum', array($this, 'mf_ad_above_forum'));
-      add_filter('mf_ad_below_forum', array($this, 'mf_ad_below_forum'));
-      add_filter('mf_ad_above_branding', array($this, 'mf_ad_above_branding'));
-      add_filter('mf_ad_above_info_center', array($this, 'mf_ad_above_info_center'));
-      add_filter('mf_ad_above_quick_reply', array($this, 'mf_ad_above_quick_reply'));
-      add_filter('mf_ad_below_menu', array($this, 'mf_ad_below_menu'));
-      add_filter('mf_ad_below_first_post', array($this, 'mf_ad_below_first_post'));
       add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
       add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
       //Shortcode hooks
@@ -79,7 +71,6 @@ if (!class_exists('mingleforum'))
     //Options
     var $user_options = array();
     var $options = array();
-    var $ads_options = array();
 
     var $default_ops = array( 'wp_posts_to_forum' => false,
                               'forum_posts_per_page' => 10,
@@ -151,33 +142,6 @@ if (!class_exists('mingleforum'))
         remove_filter('template_redirect', 'redirect_canonical');
     }
 
-    public function get_set_ads_options()
-    {
-      $this->ads_options = array('mf_ad_above_forum_on' => false,
-          'mf_ad_above_forum' => '',
-          'mf_ad_below_forum_on' => false,
-          'mf_ad_below_forum' => '',
-          'mf_ad_above_branding_on' => false,
-          'mf_ad_above_branding' => '',
-          'mf_ad_above_info_center_on' => false,
-          'mf_ad_above_info_center' => '',
-          'mf_ad_above_quick_reply_on' => false,
-          'mf_ad_above_quick_reply' => '',
-          'mf_ad_below_menu_on' => false,
-          'mf_ad_below_menu' => '',
-          'mf_ad_below_first_post_on' => false,
-          'mf_ad_below_first_post' => '',
-          'mf_ad_custom_css' => '');
-
-      $initOps = get_option('mingleforum_ads_options');
-
-      if (!empty($initOps))
-        foreach ($initOps as $key => $option)
-          $this->ads_options[$key] = $option;
-
-      update_option('mingleforum_ads_options', $this->ads_options);
-    }
-
     public function load_forum_options()
     {
       $stored_ops = get_option('mingleforum_options', array());
@@ -196,7 +160,6 @@ if (!class_exists('mingleforum'))
 
       add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
       add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
-      add_submenu_page('mingle-forum', __('Monetize', 'mingleforum'), __('Monetize', 'mingleforum'), "administrator", 'mingle-forum-ads', 'MFAdmin::ads_options_page');
       add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
@@ -227,10 +190,6 @@ if (!class_exists('mingleforum'))
       <?php endif; ?>
 
       <?php if (is_page($this->page_id)): ?>
-        <?php if ($this->ads_options['mf_ad_custom_css'] != ""): ?>
-          <style type="text/css"><?php echo stripslashes($this->ads_options['mf_ad_custom_css']); ?></style>
-        <?php endif; ?>
-
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
         <?php
       endif;
@@ -730,14 +689,10 @@ if (!class_exists('mingleforum'))
 
       if (!$this->options['forum_hide_branding'])
       {
-        $this->o .= apply_filters('mf_ad_above_branding', ''); //Adsense Area -- Above Branding
         $this->o .= '<div id="wpf-info"><small><img style="margin: 0 3px -3px 0;" alt="" align="top" src="' . WPFURL . '/images/logo.png" />' . __('Mingle Forum by', 'mingleforum') . ' <a href="http://cartpauj.com">Cartpauj</a> | ' . __('Version:', 'mingleforum') . $this->get_version() . ' | ' . $load . '</small></div>';
       }
 
-      $above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
-      $below_forum_ad = apply_filters('mf_ad_below_forum', ''); //Adsense Area -- Below Forum
-
-      echo $above_forum_ad . '<div id="wpf-wrapper">' . $this->trail() . $this->o . '</div>' . $below_forum_ad;
+      echo '<div id="wpf-wrapper">' . $this->trail() . $this->o . '</div>';
 
       return ob_get_clean();
     }
@@ -940,9 +895,9 @@ if (!class_exists('mingleforum'))
 
           if ($this->options["forum_use_gravatar"])
             $out .= $this->get_avatar($post->author_id);
-			
+
           $out .= $this->get_send_message_link($post->author_id);
-		  
+
           $out .= "<div class='hr'></div>";
 
           $out .= $this->get_userrole($post->author_id) . "<br/>";
@@ -986,9 +941,6 @@ if (!class_exists('mingleforum'))
               </td>
             </tr>";
 
-          if (!$c)
-            $out .= apply_filters('mf_ad_below_first_post', ''); //Adsense Area -- Below First Post
-
           $out .= "</table>";
           $c += 1;
         }
@@ -1005,7 +957,6 @@ if (!class_exists('mingleforum'))
             <table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
               <tr>
                 <td>";
-            $out .= apply_filters('mf_ad_above_quick_reply', ''); //Adsense Area -- Above Quick Reply Form
             $out .= "<strong>" . __("Quick Reply", "mingleforum") . ": </strong><br/>" .
                     $this->form_buttons() . $this->form_smilies() . "<br/>
                     <input type='hidden' name='add_post_subject' value='" . $this->get_subject(floor($quick_thread)) . "'/>
@@ -1904,8 +1855,6 @@ if (!class_exists('mingleforum'))
 
       $menu .= "</tr></table>";
 
-      $menu .= apply_filters('mf_ad_below_menu', ''); //Adsense Area -- Below menu
-
       return $menu;
     }
 
@@ -2598,8 +2547,7 @@ if (!class_exists('mingleforum'))
       switch ($this->current_view)
       {
         case MAIN:
-          $o = apply_filters('mf_ad_above_info_center', ''); //Adsense Area -- Above Info Center
-          $o .= "<div class='wpf'>";
+          $o = "<div class='wpf'>";
           $o .= "<table class='wpf-table InfoCenter' width='100%' cellspacing='0' cellpadding='0'>";
           $o .= "<tr>
                     <th align='center' colspan='2'>" . __("Info Center", "mingleforum") . "</th>
@@ -2705,7 +2653,7 @@ if (!class_exists('mingleforum'))
                 <tr>
                   <td class='label'><strong>" . __("Posts:", "mingleforum") . "</strong></td>
                   <td>" . $this->num_post_user($user_id) . "</td>
-                </tr>   
+                </tr>
                 <tr class='alt'>
                   <td class='label'><strong>" . __("Website:", "mingleforum") . "</strong></td>
                   <td><a href='{$user->user_url}'>{$user->user_url}</a></td>
@@ -3127,78 +3075,6 @@ if (!class_exists('mingleforum'))
       $l = str_replace('&', '&amp;', $l);
 
       return $l;
-    }
-
-    //Filter functions for ads
-    //We could probably condense all of these down into a single function with a few arguments
-    public function mf_ad_above_forum()
-    {
-      if ($this->ads_options['mf_ad_above_forum_on'])
-        $str = "<div class='mf-ad-above-forum'>" . stripslashes($this->ads_options['mf_ad_above_forum']) . "</div><br/>";
-      else
-        $str = '';
-
-      return $str;
-    }
-
-    public function mf_ad_below_forum()
-    {
-      if ($this->ads_options['mf_ad_below_forum_on'])
-        $str = "<br/><div class='mf-ad-below-forum'>" . stripslashes($this->ads_options['mf_ad_below_forum']) . "</div>";
-      else
-        $str = '';
-
-      return $str;
-    }
-
-    public function mf_ad_above_branding()
-    {
-      if ($this->ads_options['mf_ad_above_branding_on'])
-        $str = "<br/><div class='mf-ad-above-branding'>" . stripslashes($this->ads_options['mf_ad_above_branding']) . "</div><br/>";
-      else
-        $str = '';
-
-      return $str;
-    }
-
-    public function mf_ad_above_info_center()
-    {
-      if ($this->ads_options['mf_ad_above_info_center_on'])
-        $str = "<div class='mf-ad-above-info-center'>" . stripslashes($this->ads_options['mf_ad_above_info_center']) . "</div><br/>";
-      else
-        $str = '';
-
-      return $str;
-    }
-
-    public function mf_ad_above_quick_reply()
-    {
-      if ($this->ads_options['mf_ad_above_quick_reply_on'])
-        $str = "<div class='mf-ad-above-quick-reply'>" . stripslashes($this->ads_options['mf_ad_above_quick_reply']) . "</div>";
-      else
-        $str = '';
-
-      return $str;
-    }
-
-    public function mf_ad_below_menu()
-    {
-      if ($this->ads_options['mf_ad_below_menu_on'])
-        $str = "<br/><div class='mf-ad-below-menu'>" . stripslashes($this->ads_options['mf_ad_below_menu']) . "</div>";
-      else
-        $str = '';
-
-      return $str;
-    }
-
-    public function mf_ad_below_first_post()
-    {
-      if ($this->ads_options['mf_ad_below_first_post_on'])
-        $str = "<tr><td colspan='2'><div class='mf-ad-below-first-post'>" . stripslashes($this->ads_options['mf_ad_below_first_post']) . "</div></td></tr>";
-      else
-        $str = '';
-
-      return $str;
     }
 
     //Integrate WP Posts with the Forum

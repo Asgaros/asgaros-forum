@@ -103,6 +103,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: monetize/advertising functionality
 * Removed: accordion-behavior from administration options
 * Initial commit
 
