@@ -73,7 +73,6 @@ if (!class_exists('mingleforum'))
                               'forum_show_login_form' => true,
                               'forum_date_format' => 'F j, Y, H:i',
                               'forum_use_gravatar' => true,
-                              'forum_use_rss' => true,
                               'forum_use_seo_friendly_urls' => false,
                               'forum_allow_image_uploads' => false,
                               'notify_admin_on_new_posts' => false,
@@ -155,12 +154,7 @@ if (!class_exists('mingleforum'))
     {
       $this->setup_links();
 
-      if ($this->options['forum_use_rss']):
-        ?>
-        <link rel='alternate' type='application/rss+xml' title="<?php echo __("Forums RSS", "mingleforum"); ?>" href="<?php echo $this->global_feed_url; ?>" />
-      <?php endif; ?>
-
-      <?php if (is_page($this->page_id)): ?>
+      if (is_page($this->page_id)): ?>
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
         <?php
       endif;
@@ -282,8 +276,6 @@ if (!class_exists('mingleforum'))
       $this->post_reply_link = $perm . $delim . "mingleforumaction=postreply&thread={$this->current_thread}";
       $this->base_url = $perm . $delim . "mingleforumaction=";
 
-      $this->topic_feed_url = WPFURL . "feed.php?topic=";
-      $this->global_feed_url = WPFURL . "feed.php?topic=all";
       $this->home_url = $perm;
     }
 
@@ -1694,9 +1686,6 @@ if (!class_exists('mingleforum'))
           else
             $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'><span class='icon-subscribe aria-hidden='true'>" . __("Subscribe", "mingleforum") . "</span></a></td>";
         }
-
-        if ($this->options['forum_use_rss'])
-          $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a href='{$this->topic_feed_url}" . "{$this->current_thread}'><span class='icon-rss-feed' aria-hidden='true'>" . __("RSS feed", "mingleforum") . "</span></a></td>";
 
         $menu .= $stick . $closed . "</tr></table>";
       }

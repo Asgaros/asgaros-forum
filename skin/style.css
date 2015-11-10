@@ -1074,7 +1074,6 @@ a.show-hide-hidden {
 .icon-replies:before,
 .icon-views:before,
 .icon-inbox:before,
-.icon-rss-feed:before,
 .icon-unsubscribe:before,
 .icon-subscribe:before,
 .icon-reply:before,
@@ -1137,9 +1136,6 @@ a.show-hide-hidden {
   content: "\e02e";
   color: #E6162D;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-.icon-rss-feed:before {
-  content: "\e08b";
 }
 .icon-reply:before{
   content: "\e01a";

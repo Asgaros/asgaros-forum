@@ -19,7 +19,6 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * Areas for Adsense or Affiliate Links
 * Automatic Media embedding into Forum Topics and Replies (like Youtube, Flickr, Photobucket...)
 * Automatic Private Messages Integration (Message Mania, Cartpauj PM, or Mingle)
-* RSS Feeds
 * Quick Reply
 * User Groups
 * User Levels (EX: Newbie, Beginner, Advanced, Pro)
@@ -98,6 +97,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: rss feeds functionality
 * Removed: attribution area
 * Changed: renamed folder containing administration files
 * Removed: files of old administration area

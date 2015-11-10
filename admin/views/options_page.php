@@ -110,14 +110,8 @@
         </p>
       </div>
 
-      <h3><?php _e('Feeds and SEO', 'mingle-forum'); ?></h3>
+      <h3><?php _e('SEO', 'mingle-forum'); ?></h3>
       <div>
-        <p>
-          <input type="checkbox" name="forum_use_rss" id="forum_use_rss" <?php checked(!empty($mingleforum->options['forum_use_rss'])); ?> />
-          <label for="forum_use_rss" class="mf_cb_label">
-            <?php _e('Enable Forum RSS Feeds', 'mingle-forum'); ?>
-          </label>
-        </p>
         <p>
           <input type="checkbox" name="forum_use_seo_friendly_urls" id="forum_use_seo_friendly_urls" <?php checked(!empty($mingleforum->options['forum_use_seo_friendly_urls'])); ?> />
           <label for="forum_use_seo_friendly_urls" class="mf_cb_label">
