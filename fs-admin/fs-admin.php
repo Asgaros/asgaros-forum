@@ -210,8 +210,7 @@ class mingleforumadmin
     {
       $op = get_option('mingleforum_options');
 
-      $options = array('wp_posts_to_forum' => $op['wp_posts_to_forum'],
-          'forum_posts_per_page' => $op['forum_posts_per_page'],
+      $options = array('forum_posts_per_page' => $op['forum_posts_per_page'],
           'forum_threads_per_page' => $op['forum_threads_per_page'],
           'forum_require_registration' => $op['forum_require_registration'],
           'forum_show_login_form' => $op['forum_show_login_form'],
@@ -456,14 +455,6 @@ class mingleforumadmin
     </thead>
 
     <tr class='alternate'>
-      <td>" . __("Integrate WordPress Posts with Forum:", "mingleforum") . "</td>
-        <td><input type='checkbox' name='wp_posts_to_forum' value='true'";
-    if ($op['wp_posts_to_forum'] == 'true')
-      echo "checked='checked'";
-    echo "/> ($defStr = " . __('Off', 'mingleforum') . ")</td>
-    </tr>
-
-    <tr class='alternate'>
       <td>" . __("Posts per page:", "mingleforum") . "</td>
       <td><input type='text' name='forum_posts_per_page' value='" . $op['forum_posts_per_page'] . "' /> ($defStr = 10)</td>
     </tr>
@@ -634,8 +625,7 @@ class mingleforumadmin
     {
       global $wpdb, $table_prefix, $mingleforum;
       $op = get_option('mingleforum_options');
-      $options = array('wp_posts_to_forum' => $_POST['wp_posts_to_forum'],
-          'forum_posts_per_page' => $wpdb->escape($_POST['forum_posts_per_page']),
+      $options = array('forum_posts_per_page' => $wpdb->escape($_POST['forum_posts_per_page']),
           'forum_threads_per_page' => $wpdb->escape($_POST['forum_threads_per_page']),
           'forum_require_registration' => $_POST['forum_require_registration'],
           'forum_show_login_form' => $_POST['forum_show_login_form'],

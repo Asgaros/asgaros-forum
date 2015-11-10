@@ -28,11 +28,6 @@ if (!class_exists('mingleforum'))
       add_action('init', array($this, "maybe_do_sitemap"));
       add_action('wp', array($this, "before_go")); //Redirects Old URL's to SEO URL's
       add_filter('wpseo_whitelist_permalink_vars', array($this, 'yoast_seo_whitelist_vars'));
-      if ($this->options['wp_posts_to_forum'])
-      {
-        add_action("add_meta_boxes", array($this, "send_wp_posts_to_forum"));
-        add_action("publish_post", array($this, "saving_posts"));
-      }
 
       //Filter hooks
       add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
@@ -72,8 +67,7 @@ if (!class_exists('mingleforum'))
     var $user_options = array();
     var $options = array();
 
-    var $default_ops = array( 'wp_posts_to_forum' => false,
-                              'forum_posts_per_page' => 10,
+    var $default_ops = array( 'forum_posts_per_page' => 10,
                               'forum_threads_per_page' => 20,
                               'forum_require_registration' => true,
                               'forum_show_login_form' => true,
@@ -3046,71 +3040,6 @@ if (!class_exists('mingleforum'))
 
       return $l;
     }
-
-    //Integrate WP Posts with the Forum
-    public function send_wp_posts_to_forum()
-    {
-      add_meta_box('mf_posts_to_forum', __('Mingle Forum Post Options', 'mingleforum'), array(&$this, 'show_meta_box_options'), 'post');
-    }
-
-    public function show_meta_box_options()
-    {
-      $forums = $this->get_forums();
-
-      echo '<input type="checkbox" name="mf_post_to_forum" value="true" />&nbsp;' . __('Add this post to', 'mingleforum');
-      echo '&nbsp;<select name="mf_post_to_forum_forum">';
-
-      foreach ($forums as $f)
-        echo '<option value="' . $f->id . '">' . $f->name . '</option>';
-
-      echo '</select><br/><small>' . __('Do not check this if this post has already been linked to the forum!', 'mingleforum') . '</small>';
-    }
-
-    //Arrrggg - we really need to redo this feature when we convert
-    //to the wp_editor() WYSIWYG
-    public function saving_posts($post_id)
-    {
-      global $wpdb, $user_ID;
-
-      $this->setup_links();
-
-      if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-        return;
-
-      if ('post' == $_POST['post_type'])
-        if (!current_user_can('edit_post', $post_id))
-          return;
-        else
-          return;
-
-      $mydata = ($_POST['mf_post_to_forum'] == 'true') ? true : false;
-
-      if ($mydata)
-      {
-        $date = $this->wpf_current_time_fixed('mysql', 0);
-        $fid = (int) $_POST['mf_post_to_forum_forum'];
-        $_POST['mf_post_to_forum'] = 'false'; //Eternal loop if this isn't set to false
-        $post = get_post($post_id);
-        $sql_thread = "INSERT INTO {$this->t_threads} (last_post, subject, parent_id, `date`, status, starter) VALUES ('{$date}', '" . $this->strip_single_quote($post->post_title) . "', '{$fid}', '{$date}', 'open', '{$user_ID}')";
-        $wpdb->query($sql_thread);
-        $tid = $wpdb->insert_id;
-        $sql_post = "INSERT INTO {$this->t_posts} (text, parent_id, `date`, author_id, subject) VALUES ('" . $this->input_filter($wpdb->escape($post->post_content)) . "', '{$tid}', '{$date}', '{$user_ID}', '" . $this->strip_single_quote($post->post_title) . "')";
-        $wpdb->query($sql_post);
-        $new = $post->post_content . "\n" . '<p><a href="' . $this->get_threadlink($tid) . '">' . __("Join the Forum discussion on this post", "mingleforum") . '</a></p>';
-        $post->post_content = $new;
-        wp_update_post($post);
-      }
-    }
-
-    public function strip_single_quote($string)
-    {
-      $Find = array("'", "\\");
-      $Replace = array("", "");
-      $newStr = str_replace($Find, $Replace, $string);
-
-      return $newStr;
-    }
-
   }
 
   // End class

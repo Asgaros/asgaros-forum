@@ -12,12 +12,6 @@
       <h3><?php _e('General', 'mingle-forum'); ?></h3>
       <div>
         <p>
-          <input type="checkbox" name="wp_posts_to_forum" id="wp_posts_to_forum" <?php checked(!empty($mingleforum->options['wp_posts_to_forum'])); ?> />
-          <label for="wp_posts_to_forum" class="mf_cb_label">
-            <?php _e('Create Forum Topic when publishing WordPress Posts', 'mingle-forum'); ?>
-          </label>
-        </p>
-        <p>
           <input type="checkbox" name="notify_admin_on_new_posts" id="notify_admin_on_new_posts" <?php checked(!empty($mingleforum->options['notify_admin_on_new_posts'])); ?> />
           <label for="notify_admin_on_new_posts" class="mf_cb_label">
             <?php _e('Email Site Administrator on all new Replies', 'mingle-forum'); ?>
