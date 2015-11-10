@@ -148,7 +148,6 @@ if (!class_exists('mingleforum'))
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
-      add_submenu_page("mingle-forum", __("About", "mingleforum"), __("About", "mingleforum"), "administrator", 'mfabout', array($admin_class, "about"));
     }
 
     public function enqueue_front_scripts()

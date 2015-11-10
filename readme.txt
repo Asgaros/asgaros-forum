@@ -100,6 +100,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: about section from the administration area
 * Removed: hot/very hot topics functionality
 * Removed: creation of forum topic on new WordPress post functionality
 * Removed: user title functionality

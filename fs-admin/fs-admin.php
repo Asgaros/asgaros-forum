@@ -327,29 +327,6 @@ class mingleforumadmin
     return $match;
   }
 
-  function about()
-  {
-    $image = WPFURL . "images/logomain.png";
-    echo " <div class='wrap'>
-        <h2><img src='$image'>" . __("About Mingle Forum", "mingleforum") . "</h2>
-               <table class='widefat'> <thead>
-              <tr>
-        <th>" . __("Current Version: ", "mingleforum") . "<strong>" . $this->get_version() . "</strong></th>
-
-              </tr>
-            </thead><tr class='alternate'><td style='padding: 20px'>
-        <p><strong>" . __("Mingle Forum has one simple mission; to 'KEEP IT SIMPLE!' It was taken over from WP Forum and has been improved upon GREATLY. It now fully supports integration with or without the Mingle plugin (by Blair Williams). Also I want to give a big thanks to Eric Hamby for his previous work on the forum script.", "mingleforum") . "</strong></p>
-        <ul>
-<li><h3>" . __("Author: ", "mingleforum") . "<a href='http://cartpauj.com'>Cartpauj</a></h3></li>
-<strong>" . __("Plugin Page:", "mingleforum") . "</strong> <a class='button' href='http://cartpauj.com/projects/mingle-forum-plugin'>Mingle Forum</a><br /><br />
-<strong>" . __("Support Forum:", "mingleforum") . "</strong>  <a class='button' href='http://cartpauj.icomnow.com/forum'>Support Forum</a><br /><br />
-<strong>" . __("Mingle Forum Skins:", "mingleforum") . "</strong>  <a class='button' href='http://cartpauj.icomnow.com/forum/?mingleforumaction=viewforum&f=5.0'>Get More Skins</a>
-        </ul>
-                </td></tr>
-       </table>
-      </div>";
-  }
-
   function get_usercount()
   {
     global $wpdb, $table_prefix;
