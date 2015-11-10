@@ -204,129 +204,6 @@ class mingleforumadmin
     echo "</div>";
   }
 
-  function activate_skin()
-  {
-    if (isset($_GET['action']) && $_GET['action'] == "activateskin")
-    {
-      $op = get_option('mingleforum_options');
-
-      $options = array('forum_posts_per_page' => $op['forum_posts_per_page'],
-          'forum_threads_per_page' => $op['forum_threads_per_page'],
-          'forum_require_registration' => $op['forum_require_registration'],
-          'forum_show_login_form' => $op['forum_show_login_form'],
-          'forum_date_format' => $op['forum_date_format'],
-          'forum_use_gravatar' => $op['forum_use_gravatar'],
-          'forum_skin' => $_GET['skin'],
-          'forum_use_rss' => $op['forum_use_rss'],
-          'forum_use_seo_friendly_urls' => $op['forum_use_seo_friendly_urls'],
-          'forum_allow_image_uploads' => $op['forum_allow_image_uploads'],
-          'notify_admin_on_new_posts' => $op['notify_admin_on_new_posts'],
-          'forum_captcha' => $op['forum_captcha'],
-          'forum_display_name' => $op['forum_display_name'],
-          'forum_db_version' => $op['forum_db_version'],
-          'forum_disabled_cats' => $op['forum_disabled_cats'],
-          'allow_user_replies_locked_cats' => $op['allow_user_replies_locked_cats'],
-          'forum_posting_time_limit' => $op['forum_posting_time_limit'],
-          'forum_hide_branding' => $op['forum_hide_branding'],
-          'forum_login_url' => $op['forum_login_url'],
-          'forum_signup_url' => $op['forum_signup_url'],
-          'forum_logout_redirect_url' => $op['forum_logout_redirect_url'],
-      );
-
-      update_option('mingleforum_options', $options);
-
-      return true;
-    }
-    return false;
-  }
-
-  function skins()
-  {
-    $class = "";
-    // Find all skins within directory
-    // Open a known directory, and proceed to read its contents
-    if ($this->activate_skin())
-      echo '<div id="message" class="updated fade"><p>' . __('Skin successfully activated.', 'mingleforum') . '</p></div>';
-
-    $op = get_option('mingleforum_options');
-    if (is_dir(SKINDIR))
-    {
-      if ($dh = opendir(SKINDIR))
-      {
-        $image = WPFURL . "images/logomain.png";
-        echo "<div class='wrap'><h2><img src='$image' />" . __("Mingle Forum >> Skin options", "mingleforum") . "</h2><br class='clear' /><table class='widefat'>
-          <h3><a style='color:blue;' href='http://cartpauj.icomnow.com/forum/?mingleforumaction=viewforum&f=5.0'>" . __("Get More Skins", "mingleforum") . "</a></h3>
-            <thead>
-              <tr>
-                <th>" . __("Screenshot", "mingleforum") . "</th>
-                <th >" . __("Name", "mingleforum") . "</th>
-                <th >" . __("Version", "mingleforum") . "</th>
-                <th >" . __("Description", "mingleforum") . "</th>
-                <th >" . __("Action", "mingleforum") . "</th>
-
-              </tr>
-            </thead>";
-        //SHOW DEFAULT THEME
-        $filed = "Default";
-        $p = file_get_contents(OLDSKINDIR . "Default/style.css");
-        $class = ($class == "alternate") ? "" : "alternate";
-        echo "<tr class='{$class}'>
-                <td><a href='" . OLDSKINURL . "Default/screenshot.jpg'><img src='" . OLDSKINURL . "Default/screenshot.jpg' width='100' height='100'></a></td>
-                <td>" . $this->get_skinmeta('Name', $p) . "</td>
-                <td>" . $this->get_skinmeta('Version', $p) . "</td>
-                <td>" . $this->get_skinmeta('Description', $p) . "</td>";
-        if ($op['forum_skin'] == "Default")
-          echo "<td>" . __("In Use", "mingleforum") . "</td></tr>";
-        else
-          echo "<td><a href='admin.php?page=mfskins&mingleforum_action=skins&action=activateskin&skin={$filed}'>" . __("Activate", "mingleforum") . "</a></td></tr>";
-        //SHOW THE REST OF THE THEMES
-        while (($file = readdir($dh)) !== false)
-        {
-          if (filetype(SKINDIR . $file) == "dir" && $file != ".." && $file != "." && substr($file, 0, 1) != ".")
-          {
-            $p = file_get_contents(SKINDIR . $file . "/style.css");
-            $class = ($class == "alternate") ? "" : "alternate";
-
-            echo "<tr class='$class'>
-                  <td>" . $this->get_skinscreenshot($file) . "</td>
-                  <td>" . $this->get_skinmeta('Name', $p) . "</td>
-                  <td>" . $this->get_skinmeta('Version', $p) . "</td>
-                  <td>" . $this->get_skinmeta('Description', $p) . "</td>";
-            if ($op['forum_skin'] == $file)
-              echo "<td>" . __("In Use", "mingleforum") . "</td></tr>";
-            else
-              echo "<td><a href='admin.php?page=mfskins&mingleforum_action=skins&action=activateskin&skin={$file}'>" . __("Activate", "mingleforum") . "</a></td></tr>";
-          }
-        }
-      }
-    }
-    echo "</table></div>";
-  }
-
-  // PNG | JPG | GIF | only
-  function get_skinscreenshot($file)
-  {
-    $exts = array("png", "jpg", "gif");
-    foreach ($exts as $ext)
-    {
-      if (file_exists(SKINDIR . "$file/screenshot.$ext"))
-      {
-        $image = SKINURL . "$file/screenshot.$ext";
-        return "<a href='$image'><img src='$image' width='100' height='100'></a>";
-      }
-    }
-    return "<img src='" . NO_SKIN_SCREENSHOT_URL . "' width='100' height='100'>";
-  }
-
-  function get_skinmeta($field, $data)
-  {
-    if (preg_match("|$field:(.*)|i", $data, $match))
-    {
-      $match = $match[1];
-    }
-    return $match;
-  }
-
   function get_usercount()
   {
     global $wpdb, $table_prefix;
@@ -598,7 +475,6 @@ class mingleforumadmin
           'forum_show_login_form' => $_POST['forum_show_login_form'],
           'forum_date_format' => $wpdb->escape($_POST['forum_date_format']),
           'forum_use_gravatar' => $_POST['forum_use_gravatar'],
-          'forum_skin' => $op['forum_skin'],
           'forum_use_rss' => $_POST['forum_use_rss'],
           'forum_use_seo_friendly_urls' => $_POST['forum_use_seo_friendly_urls'],
           'forum_allow_image_uploads' => $_POST['forum_allow_image_uploads'],

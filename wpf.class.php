@@ -73,7 +73,6 @@ if (!class_exists('mingleforum'))
                               'forum_show_login_form' => true,
                               'forum_date_format' => 'F j, Y, H:i',
                               'forum_use_gravatar' => true,
-                              'forum_skin' => "Default",
                               'forum_use_rss' => true,
                               'forum_use_seo_friendly_urls' => false,
                               'forum_allow_image_uploads' => false,
@@ -111,11 +110,7 @@ if (!class_exists('mingleforum'))
       $this->curr_page = 0;
 
       $this->user_options = array('allow_profile' => true);
-
-      if ($this->options['forum_skin'] == "Default")
-        $this->skin_url = OLDSKINURL . $this->options['forum_skin'];
-      else
-        $this->skin_url = SKINURL . $this->options['forum_skin'];
+      $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
     }
 
     public function kill_canonical_urls()
@@ -144,7 +139,6 @@ if (!class_exists('mingleforum'))
 
       add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
       add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
-      add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
@@ -261,7 +255,6 @@ if (!class_exists('mingleforum'))
       {
         ?>
         <script type="text/javascript" >
-        <?php echo "var skinurl = '{$this->skin_url}';"; ?>
           function notify() {
 
             var answer = confirm('<?php echo $this->notify_msg; ?>');
@@ -1598,11 +1591,6 @@ if (!class_exists('mingleforum'))
           dbDelta($sql4);
           dbDelta($sql5);
           dbDelta($sql6);
-
-          //Setup the Skin Folder outside of the plugin
-          $target_path = ABSPATH . 'wp-content/mingle-forum-skins';
-          if (!file_exists($target_path))
-            @mkdir($target_path . "/");
         }
 
         if ($this->options['forum_db_version'] < 2 || $force)

@@ -8,11 +8,6 @@ define('WPFPLUGIN', "mingle-forum-lite");
 define('WPFDIR', dirname(plugin_basename(__FILE__)));
 define('WPFPATH', plugin_dir_path(__FILE__));
 define('WPFURL', plugin_dir_url(__FILE__));
-define('OLDSKINDIR', WPFPATH . 'default-skin/');
-define('OLDSKINURL', WPFURL . 'default-skin/');
-define('SKINDIR', WP_CONTENT_DIR . '/mingle-forum-skins/');
-define('SKINURL', WP_CONTENT_URL . '/mingle-forum-skins/');
-define('NO_SKIN_SCREENSHOT_URL', WPFURL . 'skins/default.png');
 
 define("ADMIN_PROFILE_URL", get_bloginfo("url") . "/wp-admin/user-edit.php?user_id=");
 define("PROFILE_URL", get_bloginfo("url") . "/wp-admin/profile.php");

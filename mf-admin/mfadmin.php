@@ -258,7 +258,6 @@ if(!class_exists("MFAdmin"))
       }
 
       //Set some stuff that isn't on the options page
-      $saved_ops['forum_skin'] = $mingleforum->options['forum_skin'];
       $saved_ops['forum_db_version'] = $mingleforum->options['forum_db_version'];
 
       update_option('mingleforum_options', $saved_ops);

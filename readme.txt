@@ -7,7 +7,7 @@ Stable tag: 1.0.0 Development-Version
 Mingle Forum allows you to easily and quickly put a Forum on your WordPress site/blog.
 
 == Description ==
-**The best free WordPress forum plugin available at wordpress.org!** Mingle Forum is so easy to setup and manage, that you'll be up and running in no time! It integrates seamlessly with WordPress and its user management system, whicn means you don't have to make your users signup twice! Best of all, you don't have to try and manage two separate applications and databases. With our new line of default skins, you can quickly choose one that integrates best with your site design. Mingle Forum comes with many standard forum featues, and also leverages WordPress permalinks for pretty SEO friendly URL's and page titles. So what are you waiting for? Give it a try, you won't regret it!!!
+**The best free WordPress forum plugin available at wordpress.org!** Mingle Forum is so easy to setup and manage, that you'll be up and running in no time! It integrates seamlessly with WordPress and its user management system, whicn means you don't have to make your users signup twice! Best of all, you don't have to try and manage two separate applications and databases. Mingle Forum comes with many standard forum featues, and also leverages WordPress permalinks for pretty SEO friendly URL's and page titles. So what are you waiting for? Give it a try, you won't regret it!!!
 
 = Features (NOT UP2DATE!) =
 * **NEW!** Now Multisite - Network Activate - friendly
@@ -24,7 +24,6 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * User Groups
 * User Levels (EX: Newbie, Beginner, Advanced, Pro)
 * Flexible Moderator options
-* Skins
 * Captcha
 * Search Forums
 * Guests can create Topics/Replies if you allow it
@@ -93,22 +92,19 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * **SEO friedly URL's are not working** - Make sure you have permalinks enabled in WordPress. Any setting but "default" should work. We personally like Day & Name for blogs, or Postname for non-blogs.
 * **Google isn't indexing my forum pages** - Step 1: Set WordPress Permalink settings to anything but default, then enable SEO Friendly URLs in the forum's options. Step 2: Make sure you don't have Canonical URLs enabled on the forum page by another plugin like All In One SEO Pack. Mingle Forum implements some of its own SEO features making this unneccessary.
 * **I can only see the front page of the forum. No matter what I click, it goes back to the front page** - Step 1: Make sure the forum isn't the home page of your site. Mingle Forum does not currently work when set to the home page. Step 2: Try enabling or disabling SEO Friendly URL's in the Forum Options. Step 3: Are you using WP SEO by Yoast? If so, disable the option to rewrite ugly permalinks.
-* **No images are showing up after I installed a new Skin** - Either you got a bad skin, or you didn't upload the file structure correctly. The file structure after uploading the skin should be: /wp-content/mingle-forum-skins/THEMNAME/style.css...
 
 == Upgrade Notice ==
 * Mingle Forum Lite contains some significant changes. Please do NOT upgrade from the original Mingle Forum plugin!
 
 == Changelog ==
 = 1.0.0 Development-Version =
-* Removed: about section from the administration area
+* Removed: skin management functionality
+* Removed: about section in administration area
 * Removed: hot/very hot topics functionality
 * Removed: creation of forum topic on new WordPress post functionality
 * Removed: user title functionality
 * Removed: signature functionality
 * Changed: plugin directory name to mingle-forum-lite
 * Removed: monetize/advertising functionality
-* Removed: accordion-behavior from administration options
+* Removed: accordion-behavior in administration options
 * Initial commit
-
-== Screenshots ==
-n/a
