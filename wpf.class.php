@@ -838,8 +838,6 @@ if (!class_exists('mingleforum'))
           if ($this->options["forum_use_gravatar"])
             $out .= $this->get_avatar($post->author_id);
 
-          $out .= $this->get_send_message_link($post->author_id);
-
           $out .= "<div class='hr'></div>";
 
           $out .= $this->get_userrole($post->author_id) . "<br/>";
@@ -1524,7 +1522,6 @@ if (!class_exists('mingleforum'))
           `date` datetime NOT NULL default '0000-00-00 00:00:00',
           `status` varchar(20) NOT NULL default 'open',
           closed int(11) NOT NULL default '0',
-          mngl_id int(11) NOT NULL default '-1',
           starter int(11) NOT NULL,
           `last_post` datetime NOT NULL default '0000-00-00 00:00:00',
           PRIMARY KEY  (id)
@@ -1700,34 +1697,8 @@ if (!class_exists('mingleforum'))
 
       if (isset($_GET['closed']))
         $this->closed_post();
-      //START MINGLE MY PROFILE LINK
-      if (!function_exists('is_plugin_active'))
-        require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-      if (is_plugin_active('mingle/mingle.php'))
-      {
-        $MnglUser = get_userdata($user_ID);
-        global $mngl_options;
-        $myProfURL2 = '';
-        if (isset($mngl_options->profile_page_id) and $mngl_options->profile_page_id != 0)
-        {
-          if (MnglUtils::rewriting_on() and $mngl_options->pretty_profile_urls)
-          {
-            global $mngl_blogurl;
-            $struct = MnglUtils::get_permalink_pre_slug_uri();
-            $myProfURL2 = "{$mngl_blogurl}{$struct}{$MnglUser->user_login}";
-          }
-          else
-          {
-            $permalink = get_permalink($mngl_options->profile_page_id);
-            $param_char = ((preg_match("#\?#", $permalink)) ? '&' : '?');
-            $myProfURL2 = "{$permalink}{$param_char}u={$MnglUser->user_login}";
-          }
-        }
-        $link = "<a aria-hidden='true'  class='icon-my-profile'   id='user_button' href='" . $myProfURL2 . "' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
-      }
-      else
-        $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='" . $this->base_url . "profile&id={$user_ID}' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
-      //END MINGLE MY PROFILE LINK
+
+      $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='" . $this->base_url . "profile&id={$user_ID}' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
 
       $menuitems = array("login" => '<a href="' . stripslashes($this->options['forum_login_url']) . '">' . __('Login', 'mingleforum') . '</a>',
           "signup" => '<a href="' . stripslashes($this->options['forum_signup_url']) . '">' . __('Register', 'mingleforum') . '</a>',
@@ -1743,7 +1714,6 @@ if (!class_exists('mingleforum'))
       {
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'shownew') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['new_topics']}</td>";
-		$menu .= $this->get_inbox_link();
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
         $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
@@ -2110,19 +2080,6 @@ if (!class_exists('mingleforum'))
 
       if ($this->is_moderator($user_ID, $forum_id))
       {
-        //DELETE MINGLE ENTRY AS WELL
-        if (!function_exists('is_plugin_active'))
-          require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-
-        if (is_plugin_active('mingle/mingle.php') and is_user_logged_in())
-        {
-          $board_post = & MnglBoardPost::get_stored_object();
-          $myDelID = $wpdb->get_var($wpdb->prepare("SELECT `mngl_id` FROM {$this->t_threads} WHERE id = %d", $topic));
-          if ($myDelID > 0)
-            $board_post->delete($myDelID);
-        }
-
-        //END DELETE MINGLE ENTRY
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE `parent_id` = %d", $topic));
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE `id` = %d", $topic));
       }
@@ -2394,36 +2351,7 @@ if (!class_exists('mingleforum'))
       else
         $user = $this->get_userdata($user_id, $this->options['forum_display_name']);
 
-      //START MINGLE PROFILE LINKS
-      if (!function_exists('is_plugin_active'))
-        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-
-      if (is_plugin_active('mingle/mingle.php'))
-      {
-        global $mngl_options;
-
-        $MnglUser = get_userdata($user_id);
-        $myProfURL3 = '';
-
-        if (isset($mngl_options->profile_page_id) and $mngl_options->profile_page_id != 0)
-          if (MnglUtils::rewriting_on() and $mngl_options->pretty_profile_urls)
-          {
-            global $mngl_blogurl;
-            $struct = MnglUtils::get_permalink_pre_slug_uri();
-            $myProfURL3 = "{$mngl_blogurl}{$struct}{$MnglUser->user_login}";
-          }
-          else
-          {
-            $permalink = get_permalink($mngl_options->profile_page_id);
-            $param_char = ((preg_match("#\?#", $permalink)) ? '&' : '?');
-            $myProfURL3 = "{$permalink}{$param_char}u={$MnglUser->user_login}";
-          }
-
-        $link = "<a href='" . $myProfURL3 . "' title='" . __("View profile", "mingleforum") . "'>{$user}</a>";
-      }
-      else
-        $link = "<a href='" . $this->base_url . "profile&id={$user_id}' title='" . __("View profile", "mingleforum") . "'>{$user}</a>";
-      //END MINGLE PROFILE LINKS
+      $link = "<a href='" . $this->base_url . "profile&id={$user_id}' title='" . __("View profile", "mingleforum") . "'>{$user}</a>";
 
       if ($user == __("Guest", "mingleforum"))
         return $user;
@@ -2446,8 +2374,7 @@ if (!class_exists('mingleforum'))
 
     public function form_smilies()
     {
-      $button = '<div class="forum_smilies"><a title="' . __("Smile", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/smile.gif" /></a><a title="' . __("Big Grin", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :D ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/biggrin.gif" /></a><a title="' . __("Sad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :( ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/sad.gif" /></a><a title="' . __("Neutral", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :| ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/neutral.gif" /></a><a title="' . __("Razz", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :P ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/razz.gif" /></a><a title="' . __("Mad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :x ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mad.gif" /></a><a title="' . __("Confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Eek!", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8O ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/eek.gif" /></a><a title="' . __("Wink", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" ;) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/wink.gif" /></a><a title="' . __("Surprised", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :o ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/surprised.gif" /></a><a title="' . __("Cool", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8-) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cool.gif" /></a><a title="' . __("confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Lol", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :lol: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/lol.gif" /></a><a title="' . __("Cry", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :cry: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cry.gif" /></a><a title="' . __("redface", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :oops: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/redface.gif" /></a><a title="' . __("rolleyes", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :roll: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/rolleyes.gif" /></a><a title="' . __("exclaim", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :!: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/exclaim.gif" /></a><a title="' . __("question", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :?: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/question.gif" /></a><a title="' . __("idea", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :idea: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/idea.gif" /></a><a title="' . __("arrow", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :arrow: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/arrow.gif" /></a><a title="' . __("mrgreen", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :mrgreen: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mrgreen.gif" /></a>
-      </div>';
+      $button = '<div class="forum_smilies"><a title="' . __("Smile", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/smile.gif" /></a><a title="' . __("Big Grin", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :D ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/biggrin.gif" /></a><a title="' . __("Sad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :( ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/sad.gif" /></a><a title="' . __("Neutral", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :| ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/neutral.gif" /></a><a title="' . __("Razz", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :P ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/razz.gif" /></a><a title="' . __("Mad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :x ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mad.gif" /></a><a title="' . __("Confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Eek!", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8O ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/eek.gif" /></a><a title="' . __("Wink", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" ;) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/wink.gif" /></a><a title="' . __("Surprised", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :o ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/surprised.gif" /></a><a title="' . __("Cool", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8-) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cool.gif" /></a><a title="' . __("confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Lol", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :lol: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/lol.gif" /></a><a title="' . __("Cry", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :cry: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cry.gif" /></a><a title="' . __("redface", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :oops: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/redface.gif" /></a><a title="' . __("rolleyes", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :roll: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/rolleyes.gif" /></a><a title="' . __("exclaim", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :!: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/exclaim.gif" /></a><a title="' . __("question", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :?: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/question.gif" /></a><a title="' . __("idea", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :idea: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/idea.gif" /></a><a title="' . __("arrow", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :arrow: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/arrow.gif" /></a><a title="' . __("mrgreen", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :mrgreen: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mrgreen.gif" /></a></div>';
 
       return $button;
     }
@@ -2556,7 +2483,7 @@ if (!class_exists('mingleforum'))
                 <tr>
                   <td class='label' width='20%'><strong>" . __("Name:", "mingleforum") . "</strong></td>
                   <td>{$user->first_name} {$user->last_name}</td>
-                  <td class='autor-profile-box' rowspan='9' valign='top' width='1%'>" .  $this->get_userrole($user_id) . "<br/>" . $this->get_avatar($user_id, 95) . "<br/>" . $this->get_send_message_link($user_id) . "</td>
+                  <td class='autor-profile-box' rowspan='9' valign='top' width='1%'>" .  $this->get_userrole($user_id) . "<br/>" . $this->get_avatar($user_id, 95) . "</td>
                 </tr>
                 <tr class='alt'>
                   <td class='label'><strong>" . __("Registered:", "mingleforum") . "</strong></td>
@@ -2792,90 +2719,6 @@ if (!class_exists('mingleforum'))
       $permalink_structure = get_option('permalink_structure');
 
       return ($permalink_structure and !empty($permalink_structure));
-    }
-
-    //Integrate forum with Cartpauj PM OR Mingle -- Following two functions
-    public function get_inbox_link()
-    {
-      if (!function_exists('is_plugin_active'))
-        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-
-      if (is_plugin_active('cartpauj-pm/pm-main.php'))
-      {
-        global $cartpaujPMS;
-
-        $URL = get_permalink($cartpaujPMS->getPageID());
-        $numNew = $cartpaujPMS->getNewMsgs();
-        return "<td class='menu_sub' valign='top' ><a class='icon-message' href='" . $URL . "'>" . __("Inbox", "mingleforum") . " <span>" . $numNew . "</span> </a></td>";
-      }
-
-      if (is_plugin_active('mingle/mingle.php'))
-      {
-        if ($this->convert_version_to_int($this->get_mingle_version()) >= 32)
-        {
-          global $mngl_options, $mngl_message, $mngl_user;
-
-          $numNew = $mngl_message->get_unread_count();
-          if (MnglUtils::is_user_logged_in() and MnglUser::user_exists_and_visible($mngl_user->id))
-            return "<td class='menu_sub' valign='top' ><a href='" . get_permalink($mngl_options->inbox_page_id) . "'>" . __("Inbox", "mingleforum") . "<span>" . $numNew . "</span> </a></td>";
-        }
-      }
-
-      return "";
-    }
-
-    public function get_send_message_link($id)
-    {
-      if (!function_exists('is_plugin_active'))
-        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-
-      if (is_plugin_active('cartpauj-pm/pm-main.php'))
-      {
-        global $cartpaujPMS;
-
-        $cartpaujPMS->setPageURLs();
-        $URL = $cartpaujPMS->actionURL . "newmessage&to=" . $id;
-        return "</div><a aria-hidden='true' class='icon-message message-button' href='" . $URL . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
-      }
-
-      if (is_plugin_active('mingle/mingle.php'))
-      {
-        if ($this->convert_version_to_int($this->get_mingle_version()) >= 32)
-        {
-          global $mngl_options, $mngl_friend, $mngl_user, $user_ID;
-
-          if ((MnglUtils::is_user_logged_in() and
-                  MnglUser::user_exists_and_visible($mngl_user->id) and
-                  $mngl_friend->is_friend($mngl_user->id, $id)) or current_user_can('administrator') or is_super_admin($user_ID))
-          {
-            $permalink = get_permalink($mngl_options->inbox_page_id);
-            $param_char = MnglAppController::get_param_delimiter_char($permalink);
-
-            return '<a  aria-hidden="true" class="icon-message message-button" href="' . $permalink . $param_char . 'u=' . $id . '">' . __("Send Message", "mingleforum") . '</a><br/>';
-          }
-        }
-      }
-
-      return '';
-    }
-
-    //Eventually we're going to drop support for Mingle and rename the Forum
-    public function get_mingle_version()
-    {
-      $plugin_data = implode('', file(ABSPATH . "wp-content/plugins/mingle/mingle.php"));
-
-      $version = '';
-      if (preg_match("|Version:(.*)|i", $plugin_data, $version))
-        $version = $version[1];
-
-      return (string) $version;
-    }
-
-    public function convert_version_to_int($version)
-    {
-      $result = str_replace(".", "", $version);
-
-      return (int) $result;
     }
 
     //SEO Friendly URL stuff

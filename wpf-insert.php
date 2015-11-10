@@ -183,16 +183,7 @@ if (isset($_POST['add_topic_submit']))
     $wpdb->query($wpdb->prepare($sql_thread, $date, $subject, $forum_id, $date, $cur_user_ID));
 
     $id = $wpdb->insert_id;
-    //Add to mingle board
-    $myMingID = -1;
-    if (!function_exists('is_plugin_active'))
-      require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-    if (is_plugin_active('mingle/mingle.php') and is_user_logged_in())
-    {
-      $board_post = & MnglBoardPost::get_stored_object();
-      $myMingID = $board_post->create($cur_user_ID, $cur_user_ID, "[b]" . __("created the forum topic:", "mingleforum") . "[/b] <a href='" . $this->get_threadlink($id) . "'>" . $this->output_filter($subject) . "</a>");
-    }
-    //End add to mingle board
+
     //MAYBE ATTACH IMAGES
     $images = mf_check_uploaded_images();
     if ($images['im1'] || $images['im2'] || $images['im3'])
@@ -211,13 +202,6 @@ if (isset($_POST['add_topic_submit']))
                     (%s, %d, %s, %d, %s)";
     $wpdb->query($wpdb->prepare($sql_post, $content, $id, $date, $cur_user_ID, $subject));
     $new_post_id = $wpdb->insert_id;
-
-    //UPDATE PROPER Mngl ID
-    $sql_thread = "UPDATE {$this->t_threads}
-                      SET mngl_id = %d
-                      WHERE id = %d";
-    $wpdb->query($wpdb->prepare($sql_thread, $myMingID, $id));
-    //END UPDATE PROPER Mngl ID
   }
   if (!$error)
   {
@@ -240,10 +224,6 @@ if (isset($_POST['add_post_submit']))
   $thread = $this->check_parms($_POST['add_post_forumid']);
   $msg = '';
 
-  //GET PROPER Mngl ID
-  $MngBID = $wpdb->get_var($wpdb->prepare("SELECT mngl_id FROM {$this->t_threads} WHERE id = %d", $thread));
-  //END GET PROPER Mngl ID
-
   if ($subject == "")
   {
     $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
@@ -259,16 +239,6 @@ if (isset($_POST['add_post_submit']))
   else
   {
     $date = $this->wpf_current_time_fixed('mysql', 0);
-    //Add to mingle board
-    if (!function_exists('is_plugin_active'))
-      require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-    if (is_plugin_active('mingle/mingle.php') and is_user_logged_in() and $MngBID > 0)
-    {
-      $board_post = & MnglBoardPost::get_stored_object();
-      global $mngl_board_comment;
-      $mngl_board_comment->create($MngBID, $cur_user_ID, "[b]" . __("replied to the forum topic:", "mingleforum") . "[/b] <a href='" . $this->get_threadlink($thread) . "'>" . $this->output_filter($subject) . "</a>");
-    }
-    //End add to mingle board
     //MAYBE ATTACH IMAGES
     $images = mf_check_uploaded_images();
     if ($images['im1'] || $images['im2'] || $images['im3'])

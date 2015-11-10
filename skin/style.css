@@ -168,19 +168,6 @@ a#or_register {
   color:#FDFDFD !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
-a.message-button {
-  background-color: #8ABA42;
-  color:#FDFDFD !important;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  font-size: 11px !important;
-  font-weight: bold;
-  outline: 0 none;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: normal;
-  padding: 1px 6px !important
-}
 #wpf-wrapper input#wpf-login-button,
 #wpf-wrapper a#or_register{
   margin: 4px !important;
@@ -218,7 +205,6 @@ a.message-button {
   background-color: #2480db;
   text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
-a.message-button,
 #wpf-wrapper input.wpf-edit-button,
 a#or_register,
 #wpf-login-button,
@@ -254,7 +240,6 @@ a#or_register,
   -webkit-border-radius: .3em;
   border-radius: .3em;
 }
-a.message-button,
 #wpf-wrapper input.wpf-edit-button,
 #wpf-post-submit,
 #wpf-search-submit,
@@ -278,7 +263,6 @@ a#or_register,
 	background-image: -webkit-linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
 	background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
 }
-a.message-button:hover,
 #wpf-wrapper input.wpf-edit-button:hover,
 #wpf-post-submit:hover,
 #wpf-search-submit:hover,
@@ -300,7 +284,6 @@ a#or_register:hover,
 	background-image: linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
 	text-decoration: none !important;
 }
-a.message-button:active,
 #wpf-wrapper input.wpf-edit-button:active,
 #wpf-post-submit:active,
 #wpf-search-submit:active,
@@ -775,8 +758,6 @@ td.statistik {
 
 td.autorpostbox img.avatar{height: 60px;width: 60px;}
 
-td.autorpostbox .message-button{margin-top:5px;}
-
 td.autor-profile-box img.avatar{height: 95px; width: 95px;}
 
 #wpf-wrapper .img-avatar-forumstats .avatar{ height: 15px;width: 15px;}
@@ -1085,8 +1066,7 @@ a.show-hide-hidden {
 .icon-topic:before,
 .icon-password:before,
 .icon-search-forums:before,
-.icon-warning:before,
-.icon-message:before {
+.icon-warning:before {
   font-family: 'wpf-icomoon';
   speak: none;
   font-style: normal;
@@ -1170,10 +1150,6 @@ a.show-hide-hidden {
 }
 .icon-warning:before{
   content: "\e035";
-}
-.icon-message:before{
-  content: "\e052";
-
 }
 .visuallyhidden {
 	border: 0;
