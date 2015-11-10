@@ -79,7 +79,6 @@ if (!class_exists('mingleforum'))
                               'forum_show_login_form' => true,
                               'forum_date_format' => 'F j, Y, H:i',
                               'forum_use_gravatar' => true,
-                              'forum_show_bio' => true,
                               'forum_skin' => "Default",
                               'forum_use_rss' => true,
                               'forum_use_seo_friendly_urls' => false,
@@ -126,7 +125,7 @@ if (!class_exists('mingleforum'))
 
       $this->curr_page = 0;
 
-      $this->user_options = array('allow_profile' => true, 'signature' => "");
+      $this->user_options = array('allow_profile' => true);
 
       if ($this->options['forum_skin'] == "Default")
         $this->skin_url = OLDSKINURL . $this->options['forum_skin'];
@@ -932,11 +931,6 @@ if (!class_exists('mingleforum'))
                   "</td>
                 </tr>";
 
-          $userinfo = get_user_meta($post->author_id, "wpf_useroptions", true);
-
-          if (isset($userinfo['signature']) && $userinfo['signature'] && $this->options['forum_show_bio'])
-            $out .= "<tr><td class='user_desc'><small>" . $this->output_filter(make_clickable(wpautop($userinfo['signature'], true))) . "</small></td></tr>";
-
           $out .= "</table>
               </td>
             </tr>";
@@ -1222,15 +1216,6 @@ if (!class_exists('mingleforum'))
     }
 
     public function input_filter($string)
-    {
-      $Find = array("<", "%", "$");
-      $Replace = array("&#60;", "&#37;", "&#36;");
-      $newStr = str_replace($Find, $Replace, $string);
-
-      return $newStr;
-    }
-
-    public function sig_input_filter($string)
     {
       $Find = array("<", "%", "$");
       $Replace = array("&#60;", "&#37;", "&#36;");

@@ -15,7 +15,7 @@ Version: 1.34
   font-size: 14px;
 }
 #wpf-wrapper table {
-  color: #757575;  
+  color: #757575;
 }
 /*End Font body ----------------------------------*/
 
@@ -56,7 +56,7 @@ Version: 1.34
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-  background-color: rgba(170,170,170,0.3);	
+  background-color: rgba(170,170,170,0.3);
   color: #EEEEEE !important;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5) !important;
   -moz-border-radius: 3px;
@@ -68,19 +68,19 @@ Version: 1.34
   vertical-align:middle;
   padding: 3px 6px;
   border-radius: 3px;
-  font-family: inherit;	
+  font-family: inherit;
 }
 #profileHeader input.mf_search:focus{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
-  color: #FFFFFF;	
+  color: #FFFFFF;
 }
 #profileHeader .wpf-input.mf_search{
   background-image: url("images/icons/search_btn.png");
   background-position: 4px 5px;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   padding-left:25px !important;
   width:120px;
 }
@@ -90,7 +90,7 @@ Version: 1.34
 .login-form .icon-my-profile,.login-form .icon-password{
   margin: 0px -1px 0 6px;
 }
-#wpf-wrapper form.login-form  {  
+#wpf-wrapper form.login-form  {
   background: none repeat scroll 0 0 whitesmoke;
   border-bottom: 1px solid #CACACA;
   border-left: 1px solid #CACACA;
@@ -286,7 +286,7 @@ a.message-button:hover,
 #wpf-edit-button:hover,
 a#or_register:hover,
 #wpf-login-button:hover,
-#wp-mainmenu .menu_sub a:hover, 
+#wp-mainmenu .menu_sub a:hover,
 #wpf-wrapper .maintab_back a:hover,
 #wpf-wrapper .maintab_active_back a:hover,
 #wpf-wrapper .mirrortab_back a:hover,
@@ -415,7 +415,7 @@ table.wpf-profile-fields tr td, table tr th {
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-  background-color: rgba(170,170,170,0.5);	
+  background-color: rgba(170,170,170,0.5);
   color: #555555;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
   -moz-border-radius: 3px;
@@ -443,12 +443,11 @@ table.wpf-profile-fields tr td, table tr th {
 
 /*wpf textarea -----------------------------------------*/
 .wpf-textarea,
-#sig-box,
 #wpf-wrapper textarea{
   box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-  background-color: rgba(193,193,193,0.4);	
+  background-color: rgba(193,193,193,0.4);
   color: #7b7a7a;
   text-shadow: 1px 1px 5px rgba(255,255,255,0.8);
   -moz-border-radius: 3px;
@@ -457,17 +456,16 @@ table.wpf-profile-fields tr td, table tr th {
   background-color:none !important;
   border: 1px solid #E3E3E3!important;
   padding:4px;
-}	  
+}
 .wpf-textarea:focus,
-#sig-box:focus,
-#wpf-wrapper  textarea:focus{ 
+#wpf-wrapper  textarea:focus{
   box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-  background-color: rgba(193,193,193,0.5);	
+  background-color: rgba(193,193,193,0.5);
   color: #444444;
  }
-/*end wpf textarea --------------------------------------*/ 
+/*end wpf textarea --------------------------------------*/
 
 /*poster_in_forum v1.34 ---------------------------------*/
 #wpf-wrapper .poster_in_forum span img {
@@ -516,7 +514,7 @@ table.wpf-profile-fields tr td, table tr th {
   font-weight:bold;
   padding-left:5px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-  text-transform: capitalize; 
+  text-transform: capitalize;
 }
 #wpf-wrapper form {
   text-align: inherit !important;
@@ -649,7 +647,7 @@ ul#wpf-menu li,.wpf-postmeta li {
   border-bottom: 1px solid #adadad !important;
   border-top: 1px solid #eaeaea !important;
   background: #f6f6f6;
-  
+
 }
 .wpf-table th,
 .wpf-post-table th,
@@ -692,8 +690,8 @@ ul#wpf-menu li,.wpf-postmeta li {
   font-size: 16px;
   border: 1px solid rgba(155, 155, 155, 0.4);
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);  /* box shadow */
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3); 
-  box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);  
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);
 }
 #wpf-wrapper #wpf-quick-reply br,
 #wpf-wrapper table.edit-post br {
@@ -726,13 +724,6 @@ td.wpf-meta {
   border-bottom: 1px solid #adadad !important;
   padding: 0;
   margin: 0;
-}
-#wpf-wrapper .wpf-post-table .user_desc {
-  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
-  background-position: top !important;
-  padding: 0;
-  margin: 0;
-  vertical-align: middle;
 }
 td.wpf-meta a {
   font-weight: bold;
@@ -837,7 +828,7 @@ th.wpf-bright h3 {
   margin: 0px 0px 10px !important;
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 .updated {
   color: #ada771;
@@ -848,7 +839,7 @@ th.wpf-bright h3 {
   box-shadow: inset 0 0 45px #efefc0;
   font-weight: normal;
   text-decoration: none;
-  text-shadow: 1px 1px 1px #FFFFFF; 
+  text-shadow: 1px 1px 1px #FFFFFF;
   background: #F9F9DC;
   box-shadow: 0 0 45px #EFEFC0 inset;
   width: 100%;
@@ -1123,7 +1114,7 @@ a.show-hide-hidden {
 .icon-settings:before {
   content: "\e011";
 }
-.icon-my-profile:before{ 
+.icon-my-profile:before{
   content: "\e00a";
 }
 .icon-logout:before {

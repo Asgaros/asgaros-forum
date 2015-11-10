@@ -3,8 +3,7 @@
 global $user_ID, $user_level;
 if (isset($_POST['edit_user_submit']))
 {
-  $ops = array("allow_profile" => $_POST['allow_profile'],
-      "signature" => $this->sig_input_filter(stripslashes($_POST['message'])));
+  $ops = array("allow_profile" => $_POST['allow_profile']);
   update_user_meta($user_ID, "wpf_useroptions", $ops);
 }
 $user_id = $_GET['user_id'];
@@ -49,9 +48,6 @@ if ($user_ID == $user_id or $user_level > 8)
 					 	<p>
 					 		<input type='checkbox' name='allow_profile' value='true' $allow_profile_v /> " . __("Allow others to view my profile?", "mingleforum") . "<br />
 					 	</p>";
-  if ($this->options['forum_show_bio'])
-    $out .= __('Edit Signature:', 'mingleforum') . "<br/>" . $this->form_buttons() . $this->form_smilies() . "<br/>
-						<textarea rows='4' id='sig-box' name='message'>" . $options['signature'] . "</textarea>";
   $out .= "</td>
 					 </tr>
 					 <tr>

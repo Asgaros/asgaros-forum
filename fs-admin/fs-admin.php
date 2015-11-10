@@ -217,7 +217,6 @@ class mingleforumadmin
           'forum_show_login_form' => $op['forum_show_login_form'],
           'forum_date_format' => $op['forum_date_format'],
           'forum_use_gravatar' => $op['forum_use_gravatar'],
-          'forum_show_bio' => $op['forum_show_bio'],
           'forum_skin' => $_GET['skin'],
           'forum_use_rss' => $op['forum_use_rss'],
           'forum_use_seo_friendly_urls' => $op['forum_use_seo_friendly_urls'],
@@ -583,14 +582,6 @@ class mingleforumadmin
     </tr>
 
     <tr class='alternate'>
-      <td>" . __("Show users Signature at the bottom of posts:", "mingleforum") . "</td>
-        <td><input type='checkbox' name='forum_show_bio' value='true'";
-    if ($op['forum_show_bio'] == 'true')
-      echo "checked='checked'";
-    echo "/> ($defStr = " . __('On', 'mingleforum') . ")</td>
-    </tr>
-
-    <tr class='alternate'>
       <td>" . __("Use Forum RSS:", "mingleforum") . "</td>
         <td><input type='checkbox' name='forum_use_rss' value='true'";
     if ($op['forum_use_rss'] == 'true')
@@ -685,7 +676,6 @@ class mingleforumadmin
           'forum_show_login_form' => $_POST['forum_show_login_form'],
           'forum_date_format' => $wpdb->escape($_POST['forum_date_format']),
           'forum_use_gravatar' => $_POST['forum_use_gravatar'],
-          'forum_show_bio' => $_POST['forum_show_bio'],
           'forum_skin' => $op['forum_skin'],
           'forum_use_rss' => $_POST['forum_use_rss'],
           'forum_use_seo_friendly_urls' => $_POST['forum_use_seo_friendly_urls'],

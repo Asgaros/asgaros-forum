@@ -69,12 +69,6 @@
       <h3><?php _e('Users', 'mingle-forum'); ?></h3>
       <div>
         <p>
-          <input type="checkbox" name="forum_show_bio" id="forum_show_bio" <?php checked(!empty($mingleforum->options['forum_show_bio'])); ?> />
-          <label for="forum_show_bio" class="mf_cb_label">
-            <?php _e("Show User's Signature below their Replies", 'mingle-forum'); ?>
-          </label>
-        </p>
-        <p>
           <input type="checkbox" name="forum_require_registration" id="forum_require_registration" <?php checked(!empty($mingleforum->options['forum_require_registration'])); ?> />
           <label for="forum_require_registration" class="mf_cb_label">
             <?php _e('Only Logged in Users can post Replies', 'mingle-forum'); ?>
