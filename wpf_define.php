@@ -3,7 +3,7 @@
 if (!defined('WP_CONTENT_DIR'))
   define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
 
-define('WPFPLUGIN', "mingle-forum");
+define('WPFPLUGIN', "mingle-forum-lite");
 
 define('WPFDIR', dirname(plugin_basename(__FILE__)));
 define('WPFPATH', plugin_dir_path(__FILE__));
