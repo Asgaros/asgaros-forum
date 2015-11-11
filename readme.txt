@@ -28,7 +28,6 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * Move, Edit, Remove and Close Topics
 * Email notifications on Replies to Topic(s)
 * Email notifications on new Topics in Forum(s)
-* Recent Replies Widget
 * Works out of the box with most themes (See FAQ)
 * Supports multiple languages
 
@@ -95,6 +94,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: recent replies widget
 * Removed: integration with Cartpauj PM and Mingle
 * Removed: rss feeds functionality
 * Removed: attribution area

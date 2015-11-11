@@ -20,7 +20,6 @@ if (!class_exists('mingleforum'))
       add_action("admin_init", array($this, "maybe_run_db_cleanup"));
       add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
       add_action("wp_head", array($this, "setup_header"));
-      add_action("plugins_loaded", array($this, "wpf_load_widget"));
       add_action("wp_footer", array($this, "wpf_footer"));
       add_action("init", array($this, "kill_canonical_urls"));
       add_action('init', array($this, "set_cookie"));
@@ -158,75 +157,6 @@ if (!class_exists('mingleforum'))
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
         <?php
       endif;
-    }
-
-    public function wpf_load_widget()
-    {
-      wp_register_sidebar_widget("MFWidget", __("Forums Latest Activity", "mingleforum"), array($this, "widget"));
-      wp_register_widget_control("MFWidget", __("Forums Latest Activity", "mingleforum"), array($this, "widget_wpf_control"));
-    }
-
-    public function widget($args)
-    {
-      global $wpdb;
-
-      $toShow = 0;
-      $unique = array();
-      $this->setup_links();
-      $widget_option = get_option("wpf_widget");
-      //Uhhh yeah, this is a horrible way to do this
-      //We need to re-write this query to just get the Distinct values
-      $posts = $wpdb->get_results("SELECT * FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 50");
-
-      echo $args['before_widget'];
-      echo $args['before_title'] . $widget_option["wpf_title"] . $args['after_title'];
-      echo "<ul>";
-      foreach ($posts as $post)
-      {
-        if (!in_array($post->parent_id, $unique) && $toShow < $widget_option["wpf_num"])
-        {
-          if ($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-            require('views/widget.php');
-
-          $unique[] = $post->parent_id;
-          $toShow += 1;
-        }
-      }
-
-      echo "</ul>";
-      echo $args['after_widget'];
-    }
-
-    //Needs HTML put into its own view
-    public function widget_wpf_control()
-    {
-      if (isset($_POST["wpf_submit"]))
-      {
-        $name = strip_tags(stripslashes($_POST["wpf_title"]));
-        $num = strip_tags(stripslashes($_POST["wpf_num"]));
-        $widget_option["wpf_title"] = $name;
-        $widget_option["wpf_num"] = $num;
-
-        update_option("wpf_widget", $widget_option);
-      }
-      $widget_option = get_option("wpf_widget");
-
-      echo '<label for="wpf_title">' . __('Title to display in the sidebar:', 'mingleforum') . '</label>
-            <input style="width: 250px;" id="wpf_title" name="wpf_title" type="text" class="wpf-input" value="' . $widget_option['wpf_title'] . '" />';
-      echo '<label for="wpf_num">' . __('How many items would you like to display?', 'mingleforum') . '</label>';
-      echo '<select name="wpf_num">';
-
-      for ($i = 1; $i < 21; ++$i)
-      {
-        if ($widget_option["wpf_num"] == $i)
-          $selected = 'selected="selected"';
-        else
-          $selected = '';
-      echo '<option value="' . $i . '" ' . $selected . '>' . $i . '</option>';
-      }
-
-      echo '</select>';
-      echo '<input type="hidden" id="wpf_submit" name="wpf_submit" value="1" />';
     }
 
     //Fix SEO by Yoast conflict
