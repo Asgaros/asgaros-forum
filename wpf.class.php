@@ -66,7 +66,6 @@ if (!class_exists('mingleforum'))
     var $default_ops = array( 'forum_posts_per_page' => 10,
                               'forum_threads_per_page' => 20,
                               'forum_require_registration' => true,
-                              'forum_show_login_form' => true,
                               'forum_date_format' => 'F j, Y, H:i',
                               'forum_use_gravatar' => true,
                               'forum_use_seo_friendly_urls' => false,
@@ -77,10 +76,7 @@ if (!class_exists('mingleforum'))
                               'forum_db_version' => 0,
                               'forum_disabled_cats' => array(),
                               'allow_user_replies_locked_cats' => false,
-                              'forum_posting_time_limit' => 300,
-                              'forum_login_url' => '',
-                              'forum_signup_url' => '',
-                              'forum_logout_redirect_url' => '' );
+                              'forum_posting_time_limit' => 300 );
 
     // Initialize varables
     public function init()
@@ -1444,12 +1440,9 @@ if (!class_exists('mingleforum'))
 
       $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='" . $this->base_url . "profile&id={$user_ID}' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
 
-      $menuitems = array("login" => '<a href="' . stripslashes($this->options['forum_login_url']) . '">' . __('Login', 'mingleforum') . '</a>',
-          "signup" => '<a href="' . stripslashes($this->options['forum_signup_url']) . '">' . __('Register', 'mingleforum') . '</a>',
-          "view_profile" => $link,
+      $menuitems = array("view_profile" => $link,
           "edit_profile" => "<a aria-hidden='true' class='icon-profile' href='" . site_url("wp-admin/profile.php") . "'>" . __("Edit Profile", "mingleforum") . "</a>",
           "edit_settings" => "<a aria-hidden='true' class='icon-settings'  href='" . $this->base_url . "editprofile&user_id={$user_ID}'>" . __("Settings", "mingleforum") . "</a>",
-          "logout" => '<a  aria-hidden="true" class="icon-logout" href="' . wp_logout_url($this->options['forum_logout_redirect_url']) . '" >' . __('Logout', 'mingleforum') . '</a>',
           "move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
 
       $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
@@ -1460,7 +1453,6 @@ if (!class_exists('mingleforum'))
         $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'editprofile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['edit_settings']}</td>";
-        $menu .= "<td valign='top' class='menu_sub'>{$menuitems['logout']}</td>";
 
         switch ($this->current_view)
         {
@@ -1468,19 +1460,6 @@ if (!class_exists('mingleforum'))
             if ($this->is_moderator($user_ID, $this->current_forum))
               $menu .= "<td valign='top' class='menu_sub'>{$menuitems['move']}</td>";
             break;
-        }
-      }
-      else
-      {
-        if ($this->options['forum_show_login_form'])
-          $menu .= "<td valign='top' class='manu_sub'>" . $this->login_form() . "</td>";
-        else
-        {
-          $menu .= "<td valign='top' class='menu_sub'>";
-          $menu .= __('Please', 'mingleforum') . " {$menuitems['login']} " . __('or', 'mingleforum') . " {$menuitems['signup']} ";
-          if (!$this->allow_unreg())
-            $menu .= __("to participate in this forum.", 'mingleforum');
-          $menu .= "</td>";
         }
       }
 
@@ -1508,24 +1487,6 @@ if (!class_exists('mingleforum'))
 
         update_option('wpf_mod_option_vers', '2');
       }
-    }
-
-    //This should be moved to a separate view too
-    public function login_form()
-    {
-      return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
-                <span aria-hidden='true' class='icon-my-profile'></span>
-                <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='log' id='log' value='" . __("Username: ", "mingleforum") . "' size='15' class='wpf-input mf_uname' />
-
-                <span aria-hidden='true' class='icon-password'></span>
-                <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='password' name='pwd' id='pwd' size='15' value='*******' class='wpf-input mf_pwd' />
-
-                <input name='rememberme' id='rememberme' type='hidden' value='forever' />
-                <input type='hidden' name='redirect_to' value='" . $_SERVER['REQUEST_URI'] . "' />
-
-                <input type='submit' name='submit' value='" . __('Login', 'mingleforum') . "' id='wpf-login-button' class='button' />
-                " . __('or', 'mingleforum') . " <a href='{$this->options['forum_signup_url']}' id='or_register'>" . __('Register', 'mingleforum') . "</a>
-              </form>";
     }
 
     public function get_parent_id($type, $id)

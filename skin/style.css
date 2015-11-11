@@ -87,36 +87,12 @@ Version: 1.34
 #profileHeader .wpf-input:focus {
   width:190px;
 }
-.login-form .icon-my-profile,.login-form .icon-password{
-  margin: 0px -1px 0 6px;
-}
-#wpf-wrapper form.login-form  {
-  background: none repeat scroll 0 0 whitesmoke;
-  border-bottom: 1px solid #CACACA;
-  border-left: 1px solid #CACACA;
-  border-right: 1px solid #CACACA;
-  border-top: none !important;
-  border-radius: 0 0 15px 15px;
-  margin-left: 0;
-  margin-top: -11px;
-  padding: 5px 7px 7px 5px;
-  text-align: inherit !important;
-}
-#wpf-wrapper .login-Input {
-  clear: none;
-  float: left;
-  margin-bottom: 4px;
-  width: 160px;
-}
 .wpfInput input {
   height: 17px;
   line-height: 17px;
   padding: 7px 5px 6px;
   vertical-align: middle;
   width: 135px;
-}
-#wpf-wrapper .button-view-login {
-  top: 13px;
 }
 #wpf-wrapper #upshrinkHeader p {
   margin: 0 0 0.514rem !important;
@@ -144,33 +120,6 @@ Version: 1.34
   text-shadow: 0 1px 0 #fff;
   background-color: #EFEFEF;
   font-size:14px!important;
-}
-a#or_register {
-  background-color: #ba4134;
-  color:#FDFDFD !important;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
-  cursor: pointer;
-  font-size: 11px !important;
-  font-weight: bold;
-  outline: 0 none;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: normal;
-  padding: 1px 6px !important
-}
-#wpf-login-button{
-  font-weight: bold;
-  font-size: 11px !important;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: normal;
-  background-color: #63ac5e;
-  color:#FDFDFD !important;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
-}
-#wpf-wrapper input#wpf-login-button,
-#wpf-wrapper a#or_register{
-  margin: 4px !important;
 }
 #wp-mainmenu .menu_sub a {
   word-wrap: normal;
@@ -206,8 +155,6 @@ a#or_register {
   text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
 #wpf-wrapper input.wpf-edit-button,
-a#or_register,
-#wpf-login-button,
 #wp-mainmenu .menu_sub a,
 #wpf-wrapper .maintab_back a:link,
 #wpf-wrapper .maintab_back a:visited,
@@ -245,8 +192,6 @@ a#or_register,
 #wpf-search-submit,
 #quick-reply-submit,
 #wpf-edit-button,
-a#or_register,
-#wpf-login-button,
 #wp-mainmenu .menu_sub a,
 #wpf-wrapper .maintab_back a:link,
 #wpf-wrapper .maintab_back a:visited,
@@ -268,8 +213,6 @@ a#or_register,
 #wpf-search-submit:hover,
 #quick-reply-submit:hover,
 #wpf-edit-button:hover,
-a#or_register:hover,
-#wpf-login-button:hover,
 #wp-mainmenu .menu_sub a:hover,
 #wpf-wrapper .maintab_back a:hover,
 #wpf-wrapper .maintab_active_back a:hover,
@@ -289,8 +232,6 @@ a#or_register:hover,
 #wpf-search-submit:active,
 #quick-reply-submit:active,
 #wpf-edit-button:active,
-a#or_register:active,
-#wpf-login-button:active,
 #wpf-wrapper .maintab_back a:active,
 #wpf-wrapper .mirrortab_back a:active {
 	background-image: -moz-linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
@@ -389,8 +330,6 @@ table.wpf-profile-fields tr td, table tr th {
   border-radius: 3px;
   font-family: inherit;
 }
-#wpf-wrapper input#log.wpf-input,
-#wpf-wrapper input#pwd.wpf-input,
 #wpf-wrapper input.wpf-input{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
@@ -409,8 +348,6 @@ table.wpf-profile-fields tr td, table tr th {
   border-radius: 3px;
   font-family: inherit;
 }
-#wpf-wrapper  input#log.wpf-input:focus,
-#wpf-wrapper  input#pwd.wpf-input:focus,
 #wpf-wrapper input.wpf-input:focus{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
@@ -1031,7 +968,6 @@ div.forum_smilies,div.forum_buttons {
 .icon-profile:before,
 .icon-settings:before,
 .icon-my-profile:before,
-.icon-logout:before,
 .icon-move-topic:before,
 .icon-forum-home:before,
 .icon-replies:before,
@@ -1044,7 +980,6 @@ div.forum_smilies,div.forum_buttons {
 .icon-undo-sticky:before,
 .icon-checkmark:before,
 .icon-topic:before,
-.icon-password:before,
 .icon-search-forums:before,
 .icon-warning:before {
   font-family: 'wpf-icomoon';
@@ -1065,9 +1000,6 @@ div.forum_smilies,div.forum_buttons {
 }
 .icon-my-profile:before{
   content: "\e00a";
-}
-.icon-logout:before {
-  content: "\e05a";
 }
 .icon-move-topic:before {
   content: "\e076";
@@ -1108,9 +1040,6 @@ div.forum_smilies,div.forum_buttons {
 }
 .icon-topic:before{
   content: "\e01f";
-}
-.icon-password:before{
-  content: "\e058";
 }
 .icon-search-forums:before{
   content: "\e05b";
