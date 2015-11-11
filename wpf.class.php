@@ -1035,7 +1035,7 @@ if (!class_exists('mingleforum'))
 
       $d = date_i18n($this->options['forum_date_format'], strtotime($date->date));
 
-      return "<div class='wpf-item-avatar'><span>" . $this->get_avatar($date->author_id, 35) . "</span></div><div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
+      return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
       <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}" . "<a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.png' /></a></small></div></div>";
     }
 

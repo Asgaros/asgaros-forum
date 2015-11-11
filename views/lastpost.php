@@ -1,7 +1,3 @@
-<div class="poster_img_avatar">
-  <?php echo $this->get_avatar($post->author_id, 25); ?>
-</div>
-
 <div class="wpf-item-poster">
   <div class="wpf-item-poster-li">
     <?php echo __("by", "mingleforum") . ' ' . $this->profile_link($post->author_id); ?>

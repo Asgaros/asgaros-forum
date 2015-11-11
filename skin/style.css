@@ -359,11 +359,8 @@ table.wpf-profile-fields tr td, table tr th {
   margin: 0px 0px 0px 0;
   line-height: 16px;
 }
-#wpf-wrapper .wpf-item-avatar {
-  vertical-align: middle;
-}
 #wpf-wrapper .wpf-item-title {
-  margin: 0px 0px 0px 45px;
+  margin: 0px 0px 0px 5px;
 }
 #wpf-wrapper .wpf-category-title strong a {
   font-size: 14px;
@@ -373,7 +370,7 @@ table.wpf-profile-fields tr td, table tr th {
   line-height: 16px;
 }
 #wpf-wrapper .wpf-item-poster-li {
-  margin: 0px 0px 0px 35px;
+  margin: 0px 0px 0px 5px;
 }
 #wpf-wrapper .img-avatar-forumstats img.avatar {
   margin: 0px 4px -3px 3px;
@@ -455,11 +452,6 @@ table.wpf-profile-fields tr td, table tr th {
   float: left;
   vertical-align: middle;
   margin: 8px 9px 6px 0px;
-}
-#wpf-wrapper .poster_img_avatar img {
-  float: left;
-  vertical-align: middle;
-  margin: 4px 9px 0px 0px;
 }
 #wpf-wrapper .wpf-img-mark-all-read {
   background: url("images/markallread.png");
