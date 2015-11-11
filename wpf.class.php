@@ -636,7 +636,6 @@ if (!class_exists('mingleforum'))
         }
 
         $this->o .= $out;
-        $this->footer();
       }
     }
 
@@ -823,7 +822,6 @@ if (!class_exists('mingleforum'))
               </tr>
             </table>";
         $this->o .= $out;
-        $this->footer();
       }
     }
 
@@ -974,8 +972,6 @@ if (!class_exists('mingleforum'))
               <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
             </tr>
           </table><br class='clear'/>");
-
-      $this->footer();
     }
 
     public function output_filter($string)
@@ -1022,25 +1018,11 @@ if (!class_exists('mingleforum'))
       return $wpdb->get_var($wpdb->prepare("SELECT COUNT({$this->t_posts}.id) FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id={$this->t_threads}.id WHERE {$this->t_threads}.parent_id = %d ORDER BY {$this->t_posts}.date DESC", $forum));
     }
 
-    public function num_posts_total()
-    {
-      global $wpdb;
-
-      return $wpdb->get_var("SELECT COUNT(id) FROM {$this->t_posts}");
-    }
-
     public function num_posts($thread_id)
     {
       global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$this->t_posts} WHERE parent_id = %d", $thread_id));
-    }
-
-    public function num_threads_total()
-    {
-      global $wpdb;
-
-      return $wpdb->get_var("SELECT COUNT(id) FROM {$this->t_threads}");
     }
 
     public function last_poster_in_forum($forum, $post_date = false)
@@ -1219,13 +1201,6 @@ if (!class_exists('mingleforum'))
       global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_usergroups} WHERE id = %d", $usergroup_id));
-    }
-
-    public function get_users()
-    {
-      global $wpdb;
-
-      return $wpdb->get_results("SELECT user_login, ID FROM {$wpdb->users} ORDER BY user_login ASC");
     }
 
     public function get_moderators()
@@ -2192,40 +2167,6 @@ if (!class_exists('mingleforum'))
       return $button;
     }
 
-    public function footer()
-    {
-      $o = "";
-
-      switch ($this->current_view)
-      {
-        case MAIN:
-          $o = "<div class='wpf'>";
-          $o .= "<table class='wpf-table InfoCenter' width='100%' cellspacing='0' cellpadding='0'>";
-          $o .= "<tr>
-                    <th align='center' colspan='2'>" . __("Info Center", "mingleforum") . "</th>
-                  </tr>
-                  <tr>
-                    <td width='7%' class='forumIcon' align='center'><img alt='' src='{$this->skin_url}/images/icons/info.png' /></td>
-                    <td>
-                      " . $this->num_posts_total() . " " . __("Posts in", "mingleforum") . " " . $this->num_threads_total() . " " . __("Topics Made by", "mingleforum") . " " . count($this->get_users()) . " " . __("Members", "mingleforum") . ". " . __("Latest Member:", "mingleforum") . "<span class='img-avatar-forumstats' >" . $this->get_avatar($this->latest_member(), 15) . "</span>" . $this->profile_link($this->latest_member()) . "
-                      <br />" . $this->get_lastpost_all() . "
-                    </td>
-                  </tr>
-              </table>";
-          $o .= "</div>";
-          break;
-      }
-
-      $this->o .= $o;
-    }
-
-    public function latest_member()
-    {
-      global $wpdb;
-
-      return $wpdb->get_var("SELECT ID FROM {$wpdb->users} ORDER BY user_registered DESC LIMIT 1");
-    }
-
     public function show_new()
     {
       global $wpdb;
@@ -2263,7 +2204,6 @@ if (!class_exists('mingleforum'))
 
       $o .= "</table></div>";
       $this->o .= $o;
-      $this->footer();
     }
 
     public function num_post_user($user)
@@ -2332,7 +2272,6 @@ if (!class_exists('mingleforum'))
       </div>";
 
       $this->o .= $o;
-      $this->footer();
     }
 
     public function search_results()
@@ -2386,7 +2325,6 @@ if (!class_exists('mingleforum'))
 
       $o .= "</table>";
       $this->o .= $o;
-      $this->footer();
     }
 
     public function get_topic_image($thread)
