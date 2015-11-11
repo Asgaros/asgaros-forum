@@ -501,9 +501,6 @@ if (!class_exists('mingleforum'))
           case 'editpost':
             include('views/wpf-post.php');
             break;
-          case 'profile':
-            $this->view_profile();
-            break;
           case 'search':
             $this->search_results();
             break;
@@ -1120,9 +1117,6 @@ if (!class_exists('mingleforum'))
           $terms = htmlentities($_POST['search_words'], ENT_QUOTES);
           $title = $default_title . " &raquo; " . __("Search Results", "mingleforum") . " &raquo; {$terms} | ";
           break;
-        case "profile":
-          $title = $default_title . " &raquo; " . __("Profile", "mingleforum");
-          break;
         case "editpost":
           $title = $default_title . " &raquo; " . __("Edit Post", "mingleforum");
           break;
@@ -1431,17 +1425,11 @@ if (!class_exists('mingleforum'))
       if (isset($_GET['closed']))
         $this->closed_post();
 
-      $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='" . $this->base_url . "profile&id={$user_ID}' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
-
-      $menuitems = array("view_profile" => $link,
-          "move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
+      $menuitems = array("move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
 
       $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
       if ($user_ID)
       {
-        $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile') ? 'menu_current' : '';
-        $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
-
         switch ($this->current_view)
         {
           case THREAD:
@@ -1586,9 +1574,6 @@ if (!class_exists('mingleforum'))
 
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "mingleforum") . " &raquo; $terms";
       }
-
-      if ($this->current_view == PROFILE)
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Profile Info", "mingleforum");
 
       if ($this->current_view == POSTREPLY)
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Post Reply", "mingleforum");
@@ -1917,7 +1902,7 @@ if (!class_exists('mingleforum'))
       else
         $user = $this->get_userdata($user_id, $this->options['forum_display_name']);
 
-      $link = "<a href='" . $this->base_url . "profile&id={$user_id}' title='" . __("View profile", "mingleforum") . "'>{$user}</a>";
+      $link = "{$user}";
 
       if ($user == __("Guest", "mingleforum"))
         return $user;
@@ -1944,67 +1929,6 @@ if (!class_exists('mingleforum'))
       global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT COUNT(author_id) FROM {$this->t_posts} WHERE author_id = %d", $user));
-    }
-
-    public function view_profile()
-    {
-      $this->current_view = PROFILE;
-
-      $user_id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int) $_GET['id'] : false;
-
-      if (!$user_id)
-        wp_die(__('This user does not exist.', 'mingleforum'));
-
-      $user = get_userdata($user_id);
-      $this->header();
-      //Need to move this to its own view
-      $o = "<div class='wpf-profile'>
-        <table class='wpf-profile-fields' cellpadding='0' cellspacing='0' width='100%'>
-          <tr>
-            <th class='wpf-profile-bright'>" . __("Summary", "mingleforum") . " - " . $this->get_userdata($user_id, $this->options['forum_display_name']) . "</th>
-          </tr>
-          <tr>
-            <td>
-              <table class='wpf-profile-fields' cellpadding='0' cellspacing='0' width='100%'>
-                <tr>
-                  <td class='label' width='20%'><strong>" . __("Name:", "mingleforum") . "</strong></td>
-                  <td>{$user->first_name} {$user->last_name}</td>
-                  <td class='autor-profile-box' rowspan='9' valign='top' width='1%'>" .  $this->get_userrole($user_id) . "<br/>" . $this->get_avatar($user_id, 95) . "</td>
-                </tr>
-                <tr class='alt'>
-                  <td class='label'><strong>" . __("Registered:", "mingleforum") . "</strong></td>
-                  <td>" . $this->format_date($user->user_registered) . "</td>
-                </tr>
-                <tr>
-                  <td class='label'><strong>" . __("Posts:", "mingleforum") . "</strong></td>
-                  <td>" . $this->num_post_user($user_id) . "</td>
-                </tr>
-                <tr class='alt'>
-                  <td class='label'><strong>" . __("Website:", "mingleforum") . "</strong></td>
-                  <td><a href='{$user->user_url}'>{$user->user_url}</a></td>
-                </tr>
-                <tr>
-                  <td class='label'><strong>" . __("AIM:", "mingleforum") . "</strong></td>
-                  <td>{$user->aim}</td>
-                </tr>
-                <tr class='alt'>
-                  <td class='label'><strong>" . __("Yahoo:", "mingleforum") . "</strong></td>
-                  <td>{$user->yim}</td></tr>
-                <tr>
-                  <td class='label'><strong>" . __("Jabber/google Talk:", "mingleforum") . "</strong></td>
-                  <td>{$user->jabber}</td>
-                </tr>
-                <tr class='alt' >
-                  <td class='label' valign='top'><strong>" . __("Biographical Info:", "mingleforum") . "</strong></td>
-                  <td valign='top'>" . $this->output_filter(make_clickable(wpautop($user->description))) . "</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </div>";
-
-      $this->o .= $o;
     }
 
     public function search_results()
