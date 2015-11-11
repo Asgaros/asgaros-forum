@@ -920,17 +920,9 @@ if (!class_exists('mingleforum'))
         if ($this->have_access($g->id))
         {
           $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
-          $this->o .= "<tr><td class='forumtitle' colspan='4'>
+          $this->o .= "<tr><td class='forumtitle' colspan='4'><span>" . $this->output_filter($g->name) . "</span></td></tr>";
 
-          <span>" . $this->output_filter($g->name) . "</span>
-
-          <a href='#' id='shown-{$g->id}' class='wpf_click_me' data-value='{$g->id}' title='" . __('Shrink this group', 'mingleforum') . "'><img src='{$this->skin_url}/images/icons/icon_shown.png' class='show_hide_icon' /></a>
-
-          <a href='#' id='hidden-{$g->id}' class='wpf_click_me show-hide-hidden' data-value='{$g->id}' title='" . __('Expand this group', 'mingleforum') . "'><img src='{$this->skin_url}/images/icons/icon_hidden.png' class='show_hide_icon' /></a>
-
-          </td></tr>";
-
-          $this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center; width: 7%;'>" . __("Status", "mingleforum") . "</th><th>" . __("Forum", "mingleforum") . "</th>
+          $this->o .= "<tr class='forumstatus'><th style='text-align:center; width: 7%;'>" . __("Status", "mingleforum") . "</th><th>" . __("Forum", "mingleforum") . "</th>
           <th style='text-align:center;'></th><th>" . __("Last post", "mingleforum") . "</th></tr>";
 
           $frs = $this->get_forums($g->id);
@@ -938,7 +930,7 @@ if (!class_exists('mingleforum'))
           foreach ($frs as $f)
           {
             $alt = ($alt == "alt even") ? "odd" : "alt even";
-            $this->o .= "<tr class='{$alt} group-shrink-{$g->id}'>";
+            $this->o .= "<tr class='{$alt}'>";
             $image = "off.png";
 
             if ($user_ID)

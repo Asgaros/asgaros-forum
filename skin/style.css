@@ -994,14 +994,6 @@ div.forum_smilies,div.forum_buttons {
   margin-right: 3px;
 }
 
-/* Header shrink/hide */
-img.show_hide_icon {
-  float: right;
-  vertical-align: middle;
-}
-a.show-hide-hidden {
-  display: none;
-}
 #profileHeader img {
   vertical-align: middle;
   margin-right: 5px;

@@ -94,6 +94,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: category shrink/expand functionality
 * Removed: category view
 * Removed: recent replies widget
 * Removed: integration with Cartpauj PM and Mingle

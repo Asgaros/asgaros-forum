@@ -58,7 +58,7 @@ Array.prototype.mf_unique = function() {
       arr.push(this[i]);
   }
 
-  return arr; 
+  return arr;
 }
 
 // Cookies management =3
@@ -94,39 +94,3 @@ function placeHolder(ele) {
   else if (ele.value === '')
     ele.value = ele.defaultValue;
 }
-
-(function($) {
-  $(document).ready(function() {
-    //Get the value of the mf_groups cookie
-    var closed_groups = getCookie('mf_groups');
-
-    //Loop through the cookie and hide categories that have been hidden before
-    var i = 0;
-    for (i = 0; i < (closed_groups.length); i++) {
-      $('tr.group-shrink-' + closed_groups[i]).hide();
-      $('a#shown-' + closed_groups[i]).hide();
-      $('a#hidden-' + closed_groups[i]).show();
-    }
-
-    $('a.wpf_click_me').click(function() {
-      var id = $(this).attr('data-value');
-
-      if ($(this).hasClass('show-hide-hidden')) {
-        closed_groups.splice(closed_groups.indexOf(id), 1);
-        setCookie('mf_groups', closed_groups, 365);
-        $('tr.group-shrink-' + id).fadeIn(800);
-        $('a#shown-' + id).show();
-        $('a#hidden-' + id).hide();
-      } else {
-        closed_groups.push(id);
-        closed_groups = closed_groups.mf_unique(); //Make sure the values are unique in the array
-        setCookie('mf_groups', closed_groups, 365);
-        $('tr.group-shrink-' + id).fadeOut(200);
-        $('a#shown-' + id).hide();
-        $('a#hidden-' + id).show();
-      }
-
-      return false;
-    });
-  });
-})(jQuery);
