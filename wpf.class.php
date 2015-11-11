@@ -528,9 +528,6 @@ if (!class_exists('mingleforum'))
               include('views/wpf-post.php');
             }
             break;
-          case 'shownew':
-            $this->show_new();
-            break;
           case 'editpost':
             include('views/wpf-post.php');
             break;
@@ -1499,7 +1496,6 @@ if (!class_exists('mingleforum'))
 
       $menuitems = array("login" => '<a href="' . stripslashes($this->options['forum_login_url']) . '">' . __('Login', 'mingleforum') . '</a>',
           "signup" => '<a href="' . stripslashes($this->options['forum_signup_url']) . '">' . __('Register', 'mingleforum') . '</a>',
-          "new_topics" => "<a class='unread-topics' href='" . $this->base_url . "shownew'>" . __("Unread Topics", "mingleforum") . "</a>",
           "view_profile" => $link,
           "edit_profile" => "<a aria-hidden='true' class='icon-profile' href='" . site_url("wp-admin/profile.php") . "'>" . __("Edit Profile", "mingleforum") . "</a>",
           "edit_settings" => "<a aria-hidden='true' class='icon-settings'  href='" . $this->base_url . "editprofile&user_id={$user_ID}'>" . __("Settings", "mingleforum") . "</a>",
@@ -1509,8 +1505,6 @@ if (!class_exists('mingleforum'))
       $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
       if ($user_ID)
       {
-        $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'shownew') ? 'menu_current' : '';
-        $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['new_topics']}</td>";
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
         $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
@@ -2165,45 +2159,6 @@ if (!class_exists('mingleforum'))
       $button = '<div class="forum_smilies"><a title="' . __("Smile", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/smile.gif" /></a><a title="' . __("Big Grin", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :D ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/biggrin.gif" /></a><a title="' . __("Sad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :( ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/sad.gif" /></a><a title="' . __("Neutral", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :| ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/neutral.gif" /></a><a title="' . __("Razz", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :P ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/razz.gif" /></a><a title="' . __("Mad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :x ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mad.gif" /></a><a title="' . __("Confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Eek!", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8O ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/eek.gif" /></a><a title="' . __("Wink", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" ;) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/wink.gif" /></a><a title="' . __("Surprised", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :o ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/surprised.gif" /></a><a title="' . __("Cool", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8-) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cool.gif" /></a><a title="' . __("confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Lol", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :lol: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/lol.gif" /></a><a title="' . __("Cry", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :cry: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cry.gif" /></a><a title="' . __("redface", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :oops: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/redface.gif" /></a><a title="' . __("rolleyes", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :roll: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/rolleyes.gif" /></a><a title="' . __("exclaim", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :!: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/exclaim.gif" /></a><a title="' . __("question", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :?: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/question.gif" /></a><a title="' . __("idea", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :idea: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/idea.gif" /></a><a title="' . __("arrow", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :arrow: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/arrow.gif" /></a><a title="' . __("mrgreen", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :mrgreen: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mrgreen.gif" /></a></div>';
 
       return $button;
-    }
-
-    public function show_new()
-    {
-      global $wpdb;
-
-      $this->current_view = NEWTOPICS;
-      $this->header();
-      $lastvisit = $this->last_visit();
-      $threads = $wpdb->get_results($wpdb->prepare("SELECT DISTINCT({$this->t_threads}.id) FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id WHERE {$this->t_posts}.date > %s ORDER BY {$this->t_posts}.date DESC", $lastvisit));
-      $o = "<div class='wpf'><table class='wpf-table' cellpadding='0' cellspacing='0'>
-                <tr>
-                <th colspan='5' class='wpf-bright'>" . __("New topics since your last visit", "mingleforum") . "</th>
-              </tr>
-              <tr>
-                <th width='7%'>" . __("Status", "mingleforum") . "</th>
-                <th>" . __("Topic Title", "mingleforum") . "</th>
-                <th width='11%' nowrap='nowrap'>" . __("Started by", "mingleforum") . "</th>
-                <th width='10%'>" . __("Replies", "mingleforum") . "</th>
-                <th width='22%'>" . __("Last post", "mingleforum") . "</th>
-              </tr>";
-
-      foreach ($threads as $thread)
-        if ($this->have_access($this->forum_get_group_from_post($thread->id)))
-        {
-          $starter_id = $wpdb->get_var($wpdb->prepare("SELECT starter FROM {$this->t_threads} WHERE id = %d", $thread->id));
-          $o .= "<tr>
-          <td align='center' class='forumIcon'>" . $this->get_topic_image($thread->id) . "</td>
-          <td style='vertical-align: middle;' class='wpf-alt wpf-topic-title' align='top'><a href='"
-                  . $this->get_paged_threadlink($thread->id) . "'>"
-                  . $this->output_filter($this->get_threadname($thread->id)) . "</a>
-          </td>
-          <td class='img-avatar-forumstats' style='vertical-align: middle;'>" . $this->get_avatar($starter_id, 15) . "" . $this->profile_link($starter_id) . "</td>
-          <td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'><span aria-hidden='true' class='icon-replies'>" . ( $this->num_posts($thread->id) - 1 ) . "</span></td>
-          <td style='vertical-align: middle;'><small>" . $this->get_lastpost($thread->id) . "</small></td></tr>";
-        }
-
-      $o .= "</table></div>";
-      $this->o .= $o;
     }
 
     public function num_post_user($user)

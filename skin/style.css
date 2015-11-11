@@ -1036,7 +1036,6 @@ div.forum_smilies,div.forum_buttons {
   font-size: 1.37em;
   vertical-align: text-top;
 }
-.unread-topics:before,
 .icon-profile:before,
 .icon-settings:before,
 .icon-my-profile:before,
@@ -1067,9 +1066,6 @@ div.forum_smilies,div.forum_buttons {
   padding-right: 3px;
   font-size: 1.4em;
   vertical-align: text-top;
-}
-.unread-topics:before {
-  content: "\e01c";
 }
 .icon-profile:before {
   content: "\e005";
