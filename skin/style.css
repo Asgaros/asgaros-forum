@@ -110,11 +110,9 @@ Version: 1.34
 /*END Menu Header -----------------------------------*/
 
 /*Minlge Forum All buttons -----------------------------------*/
-#wpf-wrapper input.wpf-edit-button,
 #wpf-post-submit,
 #wpf-search-submit,
-#quick-reply-submit,
-#wpf-edit-button{
+#quick-reply-submit {
   color: #555;
   letter-spacing: normal !important;
   text-shadow: 0 1px 0 #fff;
@@ -154,7 +152,6 @@ Version: 1.34
   background-color: #2480db;
   text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
-#wpf-wrapper input.wpf-edit-button,
 #wp-mainmenu .menu_sub a,
 #wpf-wrapper .maintab_back a:link,
 #wpf-wrapper .maintab_back a:visited,
@@ -187,11 +184,9 @@ Version: 1.34
   -webkit-border-radius: .3em;
   border-radius: .3em;
 }
-#wpf-wrapper input.wpf-edit-button,
 #wpf-post-submit,
 #wpf-search-submit,
 #quick-reply-submit,
-#wpf-edit-button,
 #wp-mainmenu .menu_sub a,
 #wpf-wrapper .maintab_back a:link,
 #wpf-wrapper .maintab_back a:visited,
@@ -208,11 +203,9 @@ Version: 1.34
 	background-image: -webkit-linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
 	background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.05) 49%, rgba(0,0,0,.05) 51%, rgba(0,0,0,.1));
 }
-#wpf-wrapper input.wpf-edit-button:hover,
 #wpf-post-submit:hover,
 #wpf-search-submit:hover,
 #quick-reply-submit:hover,
-#wpf-edit-button:hover,
 #wp-mainmenu .menu_sub a:hover,
 #wpf-wrapper .maintab_back a:hover,
 #wpf-wrapper .maintab_active_back a:hover,
@@ -227,11 +220,9 @@ Version: 1.34
 	background-image: linear-gradient(rgba(255,255,255,.15) 49%, rgba(0,0,0,.1) 51%, rgba(0,0,0,.15));
 	text-decoration: none !important;
 }
-#wpf-wrapper input.wpf-edit-button:active,
 #wpf-post-submit:active,
 #wpf-search-submit:active,
 #quick-reply-submit:active,
-#wpf-edit-button:active,
 #wpf-wrapper .maintab_back a:active,
 #wpf-wrapper .mirrortab_back a:active {
 	background-image: -moz-linear-gradient(bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 30%, transparent 50%, rgba(0,0,0,.1));
@@ -965,7 +956,6 @@ div.forum_smilies,div.forum_buttons {
   font-size: 1.37em;
   vertical-align: text-top;
 }
-.icon-settings:before,
 .icon-my-profile:before,
 .icon-move-topic:before,
 .icon-forum-home:before,
@@ -990,9 +980,6 @@ div.forum_smilies,div.forum_buttons {
   padding-right: 3px;
   font-size: 1.4em;
   vertical-align: text-top;
-}
-.icon-settings:before {
-  content: "\e011";
 }
 .icon-my-profile:before{
   content: "\e00a";

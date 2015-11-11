@@ -60,7 +60,6 @@ if (!class_exists('mingleforum'))
     var $skin_url = "";
     var $curr_page = "";
     //Options
-    var $user_options = array();
     var $options = array();
 
     var $default_ops = array( 'forum_posts_per_page' => 10,
@@ -100,7 +99,6 @@ if (!class_exists('mingleforum'))
 
       $this->curr_page = 0;
 
-      $this->user_options = array('allow_profile' => true);
       $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
       $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
     }
@@ -448,10 +446,6 @@ if (!class_exists('mingleforum'))
 
       $this->o = "";
 
-      if ($user_ID)
-        if (get_user_meta($user_ID, 'wpf_useroptions', true) == '')
-          update_user_meta($user_ID, 'wpf_useroptions', $this->user_options);
-
       if (isset($_GET['mingleforumaction']))
         $action = $_GET['mingleforumaction'];
       else
@@ -512,9 +506,6 @@ if (!class_exists('mingleforum'))
             break;
           case 'search':
             $this->search_results();
-            break;
-          case 'editprofile':
-            include('views/wpf-edit-profile.php');
             break;
         }
       }
@@ -1443,7 +1434,6 @@ if (!class_exists('mingleforum'))
       $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='" . $this->base_url . "profile&id={$user_ID}' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
 
       $menuitems = array("view_profile" => $link,
-          "edit_settings" => "<a aria-hidden='true' class='icon-settings'  href='" . $this->base_url . "editprofile&user_id={$user_ID}'>" . __("Settings", "mingleforum") . "</a>",
           "move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
 
       $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
@@ -1451,8 +1441,6 @@ if (!class_exists('mingleforum'))
       {
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
-        $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'editprofile') ? 'menu_current' : '';
-        $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['edit_settings']}</td>";
 
         switch ($this->current_view)
         {
@@ -1933,12 +1921,6 @@ if (!class_exists('mingleforum'))
 
       if ($user == __("Guest", "mingleforum"))
         return $user;
-
-      $user_op = get_user_meta($user_id, "wpf_useroptions", true);
-
-      if ($user_op)
-        if ($user_op['allow_profile'] == false)
-          return $user;
 
       return $link;
     }
