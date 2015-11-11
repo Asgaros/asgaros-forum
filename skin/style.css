@@ -1037,8 +1037,6 @@ div.forum_smilies,div.forum_buttons {
 .icon-replies:before,
 .icon-views:before,
 .icon-inbox:before,
-.icon-unsubscribe:before,
-.icon-subscribe:before,
 .icon-reply:before,
 .icon-close:before,
 .icon-re-open:before,
@@ -1085,16 +1083,6 @@ div.forum_smilies,div.forum_buttons {
 }
 .icon-inbox:before {
   content: "\e08b";
-}
-.icon-subscribe:before {
-  content: "\e028";
-  color: #1d7b1f;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-.icon-unsubscribe:before{
-  content: "\e02e";
-  color: #E6162D;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .icon-reply:before{
   content: "\e01a";

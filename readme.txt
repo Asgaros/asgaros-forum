@@ -26,8 +26,6 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * Guests can create Topics/Replies if you allow it
 * Sticky (Pinned) Topics
 * Move, Edit, Remove and Close Topics
-* Email notifications on Replies to Topic(s)
-* Email notifications on new Topics in Forum(s)
 * Works out of the box with most themes (See FAQ)
 * Supports multiple languages
 
@@ -94,6 +92,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: forum/topic subscription functionality
 * Changed: hide avatars outside of topics
 * Removed: show unread topics functionality
 * Removed: info center

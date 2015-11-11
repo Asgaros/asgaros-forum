@@ -20,7 +20,6 @@ if (!class_exists('mingleforum'))
       add_action("admin_init", array($this, "maybe_run_db_cleanup"));
       add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
       add_action("wp_head", array($this, "setup_header"));
-      add_action("wp_footer", array($this, "wpf_footer"));
       add_action("init", array($this, "kill_canonical_urls"));
       add_action('init', array($this, "set_cookie"));
       add_action('init', array($this, "run_wpf_insert"));
@@ -56,7 +55,6 @@ if (!class_exists('mingleforum'))
     var $current_group = "";
     var $current_forum = "";
     var $current_thread = "";
-    var $notify_msg = "";
     var $current_view = "";
     var $base_url = "";
     var $skin_url = "";
@@ -161,28 +159,9 @@ if (!class_exists('mingleforum'))
     //Fix SEO by Yoast conflict
     public function yoast_seo_whitelist_vars($vars)
     {
-      $my_vars = array('viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'forumsubs', 'threadsubs', 'sticky', 'closed', 'move_topic');
+      $my_vars = array('viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'sticky', 'closed', 'move_topic');
 
       return array_merge($vars, $my_vars);
-    }
-
-    public function wpf_footer()
-    {
-      if (is_page($this->page_id))
-      {
-        ?>
-        <script type="text/javascript" >
-          function notify() {
-
-            var answer = confirm('<?php echo $this->notify_msg; ?>');
-            if (!answer)
-              return false;
-            else
-              return true;
-          }
-        </script>
-        <?php
-      }
     }
 
     public function setup_links()
@@ -431,8 +410,7 @@ if (!class_exists('mingleforum'))
         $action = false;
 
       if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) &&
-              !isset($_GET['remove_post']) && !isset($_GET['forumsubs']) &&
-              !isset($_GET['threadsubs']) && !isset($_GET['sticky']) &&
+              !isset($_GET['remove_post']) && !isset($_GET['sticky']) &&
               !isset($_GET['closed']))
       {
         if ($action != false)
@@ -610,12 +588,6 @@ if (!class_exists('mingleforum'))
         $this->current_group = $this->get_parent_id(FORUM, $forum_id);
         $this->current_forum = $forum_id;
 
-        $this->forum_subscribe();
-        if ($this->is_forum_subscribed())
-          $this->notify_msg = __("Remove this Forum from your email notifications?", "mingleforum");
-        else
-          $this->notify_msg = __("This will notify you of all new Topics created in this Forum. Are you sure that is what you want to do?", "mingleforum");
-
         $this->header();
 
         if (isset($_GET['getNewForumID']))
@@ -679,16 +651,10 @@ if (!class_exists('mingleforum'))
       if (isset($_GET['sticky']))
         $this->sticky_post();
 
-      $this->thread_subscribe();
       $posts = $this->get_posts($thread_id);
 
       if ($posts)
       {
-        if ($this->is_thread_subscribed())
-          $this->notify_msg = __("Remove this Topic from your email notifications?", "mingleforum");
-        else
-          $this->notify_msg = __("This will notify you of all responses to this Topic. Are you sure that is what you want to do?", "mingleforum");
-
         if (!current_user_can('administrator') && !is_super_admin($user_ID) && !$this->is_moderator($user_ID, $this->current_forum))
           $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
@@ -1401,14 +1367,6 @@ if (!class_exists('mingleforum'))
         $menu .= "<tr>
                 <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "mingleforum") . "</span></a></td>";
 
-        if ($user_ID)
-        {
-          if ($this->is_forum_subscribed()) //Check if user has already subscribed to topic
-            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'><span aria-hidden='true' class=' icon-unsubscribe'>" . __("Unsubscribe", "mingleforum") . "</span></a></td>";
-          else
-            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'><span  aria-hidden='true' class='icon-subscribe'>" . __("Subscribe", "mingleforum") . "</a></td>";
-        }
-
         $menu .= "
           </tr>
           </table>";
@@ -1468,14 +1426,6 @@ if (!class_exists('mingleforum'))
         {
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
             $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "mingleforum") . "</span></a></td>";
-        }
-
-        if ($user_ID)
-        {
-          if ($this->is_thread_subscribed()) //Check if user has already subscribed to topic
-            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'><span class='icon-unsubscribe' aria-hidden='true'>" . __("Unsubscribe", "mingleforum") . "</span></a></td>";
-          else
-            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'><span class='icon-subscribe aria-hidden='true'>" . __("Subscribe", "mingleforum") . "</span></a></td>";
         }
 
         $menu .= $stick . $closed . "</tr></table>";
@@ -1956,121 +1906,6 @@ if (!class_exists('mingleforum'))
       }
     }
 
-    public function forum_subscribe()
-    {
-      global $user_ID;
-
-      if (isset($_GET['forumsubs']) && $user_ID)
-      {
-        $useremail = $this->get_userdata($user_ID, 'user_email');
-
-        if (!empty($useremail))
-        {
-          $list = get_option("mf_forum_subscribers_" . $this->current_forum, array());
-
-          if ($this->is_forum_subscribed()) //remove user if already exists (user clicked unsubscribe)
-          {
-            $key = array_search($useremail, $list);
-            unset($list[$key]);
-          }
-          else
-            $list[] = $useremail;
-
-          update_option("mf_forum_subscribers_" . $this->current_forum, $list);
-        }
-      }
-    }
-
-    public function is_forum_subscribed()
-    {
-      global $user_ID;
-
-      if ($user_ID)
-      {
-        $useremail = $this->get_userdata($user_ID, 'user_email');
-        $list = get_option("mf_forum_subscribers_" . $this->current_forum, array());
-
-        if (in_array($useremail, $list))
-          return true;
-      }
-      return false;
-    }
-
-    public function get_subscribed_forums()
-    {
-      global $user_ID, $wpdb;
-
-      $results = array();
-      $email = $this->get_userdata($user_ID, 'user_email');
-      $forums = $wpdb->get_results("SELECT id FROM {$this->t_forums}");
-
-      if (!empty($forums))
-        foreach ($forums as $f)
-        {
-          $list = get_option("mf_forum_subscribers_" . $f->id, array());
-
-          if (in_array($email, $list))
-            $results[] = $f->id;
-        }
-      return $results;
-    }
-
-    public function thread_subscribe()
-    {
-      global $user_ID;
-
-      if (isset($_GET['threadsubs']) && $user_ID)
-      {
-        $useremail = $this->get_userdata($user_ID, 'user_email');
-
-        if (!empty($useremail))
-        {
-          $list = get_option("mf_thread_subscribers_" . $this->current_thread, array());
-          if ($this->is_thread_subscribed()) //remove user if already exists (user clicked unsubscribe)
-          {
-            $key = array_search($useremail, $list);
-            unset($list[$key]);
-          }
-          else
-            $list[] = $useremail;
-          update_option("mf_thread_subscribers_" . $this->current_thread, $list);
-        }
-      }
-    }
-
-    public function is_thread_subscribed()
-    {
-      global $user_ID;
-
-      if ($user_ID)
-      {
-        $useremail = $this->get_userdata($user_ID, 'user_email');
-        $list = get_option("mf_thread_subscribers_" . $this->current_thread, array());
-
-        if (in_array($useremail, $list))
-          return true;
-      }
-      return false;
-    }
-
-    public function get_subscribed_threads()
-    {
-      global $user_ID, $wpdb;
-
-      $results = array();
-      $email = $this->get_userdata($user_ID, 'user_email');
-      $threads = $wpdb->get_results("SELECT id FROM {$this->t_threads}");
-
-      if (!empty($threads))
-        foreach ($threads as $t)
-        {
-          $list = get_option("mf_thread_subscribers_" . $t->id, array());
-          if (in_array($email, $list))
-            $results[] = $t->id;
-        }
-      return $results;
-    }
-
     public function is_sticky($thread_id = '')
     {
       global $wpdb;
@@ -2336,54 +2171,6 @@ if (!class_exists('mingleforum'))
       }
 
       return $out;
-    }
-
-    public function notify_thread_subscribers($thread_id, $subject, $content, $date)
-    {
-      global $user_ID;
-
-      $submitter_name = (!$user_ID) ? "Guest" : $this->get_userdata($user_ID, $this->options['forum_display_name']);
-      $submitter_email = (!$user_ID) ? "guest@nosite.com" : $this->get_userdata($user_ID, 'user_email');
-      $sender = get_bloginfo("name");
-      $to = get_option("mf_thread_subscribers_" . $thread_id, array());
-      $subject = __("Forum post - ", "mingleforum") . $subject;
-      $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
-              __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
-              __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
-              __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
-              __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
-      $headers = "MIME-Version: 1.0\r\n" .
-              "From: " . $sender . " " . "<" . get_bloginfo("admin_email") . ">\r\n" .
-              "Content-Type: text/HTML; charset=\"" . get_option('blog_charset') . "\"\r\n" .
-              "BCC: " . implode(",", $to) . "\r\n";
-
-      if (!empty($to))
-        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(wpautop($this->output_filter(stripslashes($message)))), $headers);
-    }
-
-    public function notify_forum_subscribers($thread_id, $subject, $content, $date, $forum_id)
-    {
-      global $user_ID;
-
-      $submitter_name = (!$user_ID) ? "Guest" : $this->get_userdata($user_ID, $this->options['forum_display_name']);
-      $submitter_email = (!$user_ID) ? "guest@nosite.com" : $this->get_userdata($user_ID, 'user_email');
-      $sender = get_bloginfo("name");
-      $to = get_option("mf_forum_subscribers_" . $forum_id, array());
-      $subject = __("Forum post - ", "mingleforum") . $subject;
-      $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
-              __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
-              __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
-              __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
-              __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
-      $headers = "MIME-Version: 1.0\r\n" .
-              "From: " . $sender . " " . "<" . get_bloginfo("admin_email") . ">\r\n" .
-              "Content-Type: text/HTML; charset=\"" . get_option('blog_charset') . "\"\r\n" .
-              "BCC: " . implode(",", $to) . "\r\n";
-
-      if (!empty($to))
-        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(wpautop($this->output_filter(stripslashes($message)))), $headers);
     }
 
     public function notify_admins($thread_id, $subject, $content, $date)

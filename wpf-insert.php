@@ -205,7 +205,6 @@ if (isset($_POST['add_topic_submit']))
   }
   if (!$error)
   {
-    $this->notify_forum_subscribers($id, $subject, $content, $date, $forum_id);
     $this->notify_admins($id, $subject, $content, $date);
     $unused = apply_filters('wpwf_add_guest_sub', $id); //--weaver-- Maybe add a subscription
     wp_redirect(html_entity_decode($this->get_threadlink($id) . "#postid-" . $new_post_id));
@@ -261,7 +260,6 @@ if (isset($_POST['add_post_submit']))
 
   if (!$error)
   {
-    $this->notify_thread_subscribers($thread, $subject, $content, $date);
     $this->notify_admins($thread, $subject, $content, $date);
     $unused = apply_filters('wpwf_add_guest_sub', $thread); //--weaver-- Maybe add a subscription
     wp_redirect(html_entity_decode($this->get_paged_threadlink($thread) . "#postid-" . $new_id));
