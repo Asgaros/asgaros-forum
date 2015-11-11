@@ -643,7 +643,7 @@ ul#wpf-menu li,.wpf-postmeta li {
   border-width: 0;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
-#wpf-wrapper .forumtitle a,
+#wpf-wrapper .forumtitle span,
 #wpf-wrapper .InfoCenter th{
   color: #FFFFFF;
   font-size: 14px;

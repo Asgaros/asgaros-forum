@@ -42,7 +42,6 @@ if (!class_exists('mingleforum'))
     var $page_id = "";
     var $home_url = "";
     var $forum_link = "";
-    var $group_link = "";
     var $thread_link = "";
     var $add_topic_link = "";
     // DB tables
@@ -162,7 +161,7 @@ if (!class_exists('mingleforum'))
     //Fix SEO by Yoast conflict
     public function yoast_seo_whitelist_vars($vars)
     {
-      $my_vars = array('vforum', 'g', 'viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'forumsubs', 'threadsubs', 'sticky', 'closed', 'move_topic');
+      $my_vars = array('viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'forumsubs', 'threadsubs', 'sticky', 'closed', 'move_topic');
 
       return array_merge($vars, $my_vars);
     }
@@ -200,7 +199,6 @@ if (!class_exists('mingleforum'))
 
       $perm = get_permalink($this->page_id);
       $this->forum_link = $perm . $delim . "mingleforumaction=viewforum&f=";
-      $this->group_link = $perm . $delim . "mingleforumaction=vforum&g=";
       $this->thread_link = $perm . $delim . "mingleforumaction=viewtopic&t=";
       $this->add_topic_link = $perm . $delim . "mingleforumaction=addtopic&forum={$this->current_forum}";
       $this->post_reply_link = $perm . $delim . "mingleforumaction=postreply&thread={$this->current_thread}";
@@ -246,18 +244,6 @@ if (!class_exists('mingleforum'))
         return $this->forum_link . $id . ".{$this->curr_page}";
       else
         return $this->forum_link . $id . $page;
-    }
-
-    public function get_grouplink($id)
-    {
-      if ($this->options['forum_use_seo_friendly_urls'])
-      {
-        $group = $this->get_seo_friendly_title($this->get_groupname($id) . "-group" . $id);
-
-        return rtrim($this->home_url, '/') . '/' . $group;
-      }
-      else
-        return $this->group_link . $id . ".{$this->curr_page}";
     }
 
     public function get_threadlink($id, $page = '')
@@ -455,9 +441,6 @@ if (!class_exists('mingleforum'))
           {
             switch ($action)
             {
-              case 'vforum':
-                $whereto = $this->get_grouplink($this->check_parms($_GET['g']));
-                break;
               case 'viewforum':
                 $whereto = $this->get_forumlink($this->check_parms($_GET['f']));
                 break;
@@ -508,10 +491,6 @@ if (!class_exists('mingleforum'))
           {
             switch ($uri['action'])
             {
-              case 'group':
-                $action = 'vforum';
-                $_GET['g'] = $uri['id'];
-                break;
               case 'forum':
                 $action = 'viewforum';
                 $_GET['f'] = $uri['id'];
@@ -563,9 +542,6 @@ if (!class_exists('mingleforum'))
             break;
           case 'editprofile':
             include('views/wpf-edit-profile.php');
-            break;
-          case 'vforum':
-            $this->vforum($this->check_parms($_GET['g']));
             break;
         }
       }
@@ -946,7 +922,7 @@ if (!class_exists('mingleforum'))
           $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
           $this->o .= "<tr><td class='forumtitle' colspan='4'>
 
-          <a href='" . $this->get_grouplink($g->id) . "'>" . $this->output_filter($g->name) . "</a>
+          <span>" . $this->output_filter($g->name) . "</span>
 
           <a href='#' id='shown-{$g->id}' class='wpf_click_me' data-value='{$g->id}' title='" . __('Shrink this group', 'mingleforum') . "'><img src='{$this->skin_url}/images/icons/icon_shown.png' class='show_hide_icon' /></a>
 
@@ -1007,75 +983,6 @@ if (!class_exists('mingleforum'))
             </tr>
           </table><br class='clear'/>");
 
-      $this->footer();
-    }
-
-    public function vforum($groupid)
-    {
-      global $user_ID;
-
-      $alt = "";
-      $grs = $this->get_groups($groupid);
-      $this->current_group = $groupid;
-      $this->header();
-
-      foreach ($grs as $g)
-      {
-        if ($this->have_access($g->id))
-        {
-          $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
-          $this->o .= "<tr><td class='forumtitle' colspan='4'><a href='" . $this->get_grouplink($g->id) . "'>" . $this->output_filter($g->name) . "</a></td></tr>";
-          $this->o .= "<tr class='forumstatus'><th style='text-align:center; width: 7%;'>" . __("Status", "mingleforum") . "</th><th>" . __("Forum", "mingleforum") . "</th>
-          <th style='text-align:center;'></th><th>" . __("Last post", "mingleforum") . "</th></tr>";
-          $frs = $this->get_forums($g->id);
-
-          foreach ($frs as $f)
-          {
-            $alt = ($alt == "alt even") ? "odd" : "alt even";
-            $this->o .= "<tr class='{$alt}'>";
-            $image = "off.png";
-
-            if ($user_ID)
-            {
-              $lpif = $this->last_poster_in_forum($f->id, true);
-              $last_posterid = $this->last_posterid($f->id);
-
-              if ($last_posterid != $user_ID)
-              {
-                $lp = strtotime($lpif); // date
-                $lv = strtotime($this->last_visit());
-
-                if ($lv < $lp)
-                  $image = "on.png";
-                else
-                  $image = "off.png";
-              }
-            }
-
-            $this->o .= "<td class='wpf-alt forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
-                         <td valign='top' class='wpf-category-title'><strong><a href='" . $this->get_forumlink($f->id) . "'>"
-                    . $this->output_filter($f->name) . "</a></strong><br />"
-                    . $this->output_filter($f->description);
-
-            if ($f->description != "")
-              $this->o .= "<br />";
-
-            $this->o .= $this->get_forum_moderators($f->id) . "</td>";
-            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "mingleforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "mingleforum") . $this->num_posts_forum($f->id) . "</small></td>";
-            $this->o .= "<td  width='28%' style='vertical-align:middle;' class='poster_in_forum' >" . $this->last_poster_in_forum($f->id) . "</td>";
-            $this->o .= "</tr>";
-          }
-
-          $this->o .= "</table>
-          </div><br class='clear'/>";
-        }
-      }
-
-      $this->o .= apply_filters('wpwf_new_posts', "<table>
-            <tr>
-              <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span></td>
-            </tr>
-          </table><br class='clear'/>");
       $this->footer();
     }
 
@@ -1262,10 +1169,6 @@ if (!class_exists('mingleforum'))
         {
           switch ($uri['action'])
           {
-            case 'group':
-              $action = 'vforum';
-              $_GET['g'] = $uri['id'];
-              break;
             case 'forum':
               $action = 'viewforum';
               $_GET['f'] = $uri['id'];
@@ -1280,9 +1183,6 @@ if (!class_exists('mingleforum'))
 
       switch ($action)
       {
-        case "vforum":
-          $title = $default_title . " &raquo; " . $this->get_groupname($this->check_parms($_GET['g']));
-          break;
         case "viewforum":
           $title = $default_title . " &raquo; " . $this->get_groupname($this->get_parent_id(FORUM, $this->check_parms($_GET['f']))) . " &raquo; " . $this->get_forumname($this->check_parms($_GET['f']));
           break;
@@ -1792,15 +1692,6 @@ if (!class_exists('mingleforum'))
       $this->setup_links();
 
       $trail = "<a aria-hidden='true' class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "mingleforum") . "</a>";
-
-      if ($this->current_group)
-        if ($this->options['forum_use_seo_friendly_urls'])
-        {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->current_group)) . "-group" . $this->current_group;
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . ".0'>" . $this->get_groupname($this->current_group) . "</a>";
-        }
-        else
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "vforum&g={$this->current_group}.0'>" . $this->get_groupname($this->current_group) . "</a>";
 
       if ($this->current_forum)
         if ($this->options['forum_use_seo_friendly_urls'])
