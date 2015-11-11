@@ -92,6 +92,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: edit profile button
 * Changed: using date/time format from WordPress settings
 * Removed: login/logout/register functionality
 * Removed: forum/topic subscription functionality

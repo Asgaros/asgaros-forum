@@ -1443,7 +1443,6 @@ if (!class_exists('mingleforum'))
       $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='" . $this->base_url . "profile&id={$user_ID}' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
 
       $menuitems = array("view_profile" => $link,
-          "edit_profile" => "<a aria-hidden='true' class='icon-profile' href='" . site_url("wp-admin/profile.php") . "'>" . __("Edit Profile", "mingleforum") . "</a>",
           "edit_settings" => "<a aria-hidden='true' class='icon-settings'  href='" . $this->base_url . "editprofile&user_id={$user_ID}'>" . __("Settings", "mingleforum") . "</a>",
           "move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
 
@@ -1452,7 +1451,6 @@ if (!class_exists('mingleforum'))
       {
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
-        $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'editprofile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['edit_settings']}</td>";
 

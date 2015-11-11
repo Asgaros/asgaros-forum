@@ -965,7 +965,6 @@ div.forum_smilies,div.forum_buttons {
   font-size: 1.37em;
   vertical-align: text-top;
 }
-.icon-profile:before,
 .icon-settings:before,
 .icon-my-profile:before,
 .icon-move-topic:before,
@@ -991,9 +990,6 @@ div.forum_smilies,div.forum_buttons {
   padding-right: 3px;
   font-size: 1.4em;
   vertical-align: text-top;
-}
-.icon-profile:before {
-  content: "\e005";
 }
 .icon-settings:before {
   content: "\e011";
