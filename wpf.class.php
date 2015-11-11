@@ -66,7 +66,6 @@ if (!class_exists('mingleforum'))
     var $default_ops = array( 'forum_posts_per_page' => 10,
                               'forum_threads_per_page' => 20,
                               'forum_require_registration' => true,
-                              'forum_date_format' => 'F j, Y, H:i',
                               'forum_use_gravatar' => true,
                               'forum_use_seo_friendly_urls' => false,
                               'forum_allow_image_uploads' => false,
@@ -77,6 +76,8 @@ if (!class_exists('mingleforum'))
                               'forum_disabled_cats' => array(),
                               'allow_user_replies_locked_cats' => false,
                               'forum_posting_time_limit' => 300 );
+
+    var $dateFormat = "";
 
     // Initialize varables
     public function init()
@@ -101,6 +102,7 @@ if (!class_exists('mingleforum'))
 
       $this->user_options = array('allow_profile' => true);
       $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
+      $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
     }
 
     public function kill_canonical_urls()
@@ -563,7 +565,7 @@ if (!class_exists('mingleforum'))
 
       $post = $wpdb->get_row("SELECT `date`, author_id, id FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 1");
 
-      return ($post) ? __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "mingleforum") . " " . date_i18n($this->options['forum_date_format'], strtotime($post->date)) : '';
+      return ($post) ? __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "mingleforum") . " " . date_i18n($this->dateFormat, strtotime($post->date)) : '';
     }
 
     public function showforum($forum_id)
@@ -695,7 +697,7 @@ if (!class_exists('mingleforum'))
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
           $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "mingleforum") . "' class='post-calendar-img'/>";
 
-          $out .= "<span class='post-data-format'>" . date_i18n($this->options['forum_date_format'], strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
+          $out .= "<span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
 
           $out .= "<div class='wpf-small'>";
 
@@ -824,7 +826,7 @@ if (!class_exists('mingleforum'))
     public function format_date($date)
     {
       if ($date)
-        return date_i18n($this->options['forum_date_format'], strtotime($date));
+        return date_i18n($this->dateFormat, strtotime($date));
       else
         return false;
     }
@@ -995,7 +997,7 @@ if (!class_exists('mingleforum'))
       if (!$date)
         return "<small>" . __("No topics yet", "mingleforum") . "</small>";
 
-      $d = date_i18n($this->options['forum_date_format'], strtotime($date->date));
+      $d = date_i18n($this->dateFormat, strtotime($date->date));
 
       return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
       <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}" . "<a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.png' /></a></small></div></div>";

@@ -74,12 +74,6 @@
           </label>
           <input type="text" name="forum_threads_per_page" id="forum_threads_per_page" value="<?php echo stripslashes($mingleforum->options['forum_threads_per_page']); ?>" class="mf_tb" />
         </p>
-        <p>
-          <label for="forum_date_format" class="mf_tb_label">
-            <?php _e('Date format, see', 'mingle-forum'); ?> <a href="http://php.net/manual/en/function.date.php" target="_blank">php.net</a>
-          </label>
-          <input type="text" name="forum_date_format" id="forum_date_format" value="<?php echo stripslashes($mingleforum->options['forum_date_format']); ?>" class="mf_tb" />
-        </p>
       </div>
 
       <h3><?php _e('SEO', 'mingle-forum'); ?></h3>
