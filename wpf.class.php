@@ -73,8 +73,7 @@ if (!class_exists('mingleforum'))
                               'forum_display_name' => 'user_login',
                               'forum_db_version' => 0,
                               'forum_disabled_cats' => array(),
-                              'allow_user_replies_locked_cats' => false,
-                              'forum_posting_time_limit' => 300 );
+                              'allow_user_replies_locked_cats' => false );
 
     var $dateFormat = "";
 

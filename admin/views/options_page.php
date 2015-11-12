@@ -100,12 +100,6 @@
             <?php _e('Allow image uploads', 'mingle-forum'); ?>
           </label>
         </p>
-        <p>
-          <label for="forum_posting_time_limit" class="mf_tb_label">
-            <?php _e('Seconds users must wait between Replies', 'mingle-forum'); ?>
-          </label>
-          <input type="text" name="forum_posting_time_limit" id="forum_posting_time_limit" value="<?php echo stripslashes($mingleforum->options['forum_posting_time_limit']); ?>" class="mf_tb" />
-        </p>
       </div>
     </div>
 

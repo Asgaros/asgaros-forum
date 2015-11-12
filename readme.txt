@@ -11,7 +11,6 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 = Features (NOT UP2DATE!) =
 * **NEW!** Now Multisite - Network Activate - friendly
-* **NEW!** Limit SPAM by setting a time interval users must wait between posts
 * Lock all Forums in a Category
 * Image uploads
 * SEO Friendly URLs
@@ -91,6 +90,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: spam time interval check
 * Changed: css code cleanup and fixes
 * Removed: forum header
 * Changed: position of 'move topic' button
