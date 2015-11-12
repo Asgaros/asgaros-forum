@@ -177,7 +177,6 @@ if (isset($_POST['add_topic_submit']))
   }
   if (!$error)
   {
-    $this->notify_admins($id, $subject, $content, $date);
     $unused = apply_filters('wpwf_add_guest_sub', $id); //--weaver-- Maybe add a subscription
     wp_redirect(html_entity_decode($this->get_threadlink($id) . "#postid-" . $new_post_id));
     exit;
@@ -232,7 +231,6 @@ if (isset($_POST['add_post_submit']))
 
   if (!$error)
   {
-    $this->notify_admins($thread, $subject, $content, $date);
     $unused = apply_filters('wpwf_add_guest_sub', $thread); //--weaver-- Maybe add a subscription
     wp_redirect(html_entity_decode($this->get_paged_threadlink($thread) . "#postid-" . $new_id));
     exit;

@@ -14,7 +14,6 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * Image uploads
 * SEO Friendly URLs
 * Forum Sitemap
-* Areas for Adsense or Affiliate Links
 * Automatic Media embedding into Forum Topics and Replies (like Youtube, Flickr, Photobucket...)
 * Quick Reply
 * User Groups
@@ -89,6 +88,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Removed: admin notifications functionality
 * Removed: locked categories functionality
 * Changed: guests must always fill out captcha
 * Removed: spam time interval check

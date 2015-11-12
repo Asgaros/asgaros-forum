@@ -9,16 +9,6 @@
 
   <form action="" method="post" id="mf_options_form">
     <div id="mf-options-accordion">
-      <h3><?php _e('General', 'mingle-forum'); ?></h3>
-      <div>
-        <p>
-          <input type="checkbox" name="notify_admin_on_new_posts" id="notify_admin_on_new_posts" <?php checked(!empty($mingleforum->options['notify_admin_on_new_posts'])); ?> />
-          <label for="notify_admin_on_new_posts" class="mf_cb_label">
-            <?php _e('Email Site Administrator on all new Replies', 'mingle-forum'); ?>
-          </label>
-        </p>
-      </div>
-
       <h3><?php _e('Users', 'mingle-forum'); ?></h3>
       <div>
         <p>

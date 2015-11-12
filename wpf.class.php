@@ -68,7 +68,6 @@ if (!class_exists('mingleforum'))
                               'forum_use_gravatar' => true,
                               'forum_use_seo_friendly_urls' => false,
                               'forum_allow_image_uploads' => false,
-                              'notify_admin_on_new_posts' => false,
                               'forum_display_name' => 'user_login',
                               'forum_db_version' => 0);
 
@@ -1910,30 +1909,6 @@ if (!class_exists('mingleforum'))
       }
 
       return $out;
-    }
-
-    public function notify_admins($thread_id, $subject, $content, $date)
-    {
-      global $user_ID;
-
-      $submitter_name = (!$user_ID) ? "Guest" : $this->get_userdata($user_ID, $this->options['forum_display_name']);
-      $submitter_email = (!$user_ID) ? "guest@nosite.com" : $this->get_userdata($user_ID, 'user_email');
-      $sender = get_bloginfo("name");
-      $to = get_bloginfo("admin_email");
-      $subject = __("New Forum content - ", "mingleforum") . $subject;
-      $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
-              __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
-              __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
-              __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
-              __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
-      $headers = "MIME-Version: 1.0\r\n" .
-              "From: " . $sender . " " . "<" . $to . ">\n" .
-              "Content-Type: text/HTML; charset=\"" . get_option('blog_charset') . "\"\r\n";
-
-      if ($this->options['notify_admin_on_new_posts'])
-        if (!empty($to))
-          wp_mail($to, $subject, make_clickable($this->output_filter(stripslashes($message))), $headers);
     }
 
     public function autoembed($string)
