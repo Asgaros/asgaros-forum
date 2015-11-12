@@ -1287,7 +1287,7 @@ if (!class_exists('mingleforum'))
         else
           $class = "maintab";
 
-        $menu = "<table cellpadding='0' cellspacing='0' style='margin-right:10px;' id='forummenu'>";
+        $menu = "<table cellpadding='0' cellspacing='0' id='forummenu'>";
         $menu .= "<tr>
                 <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "mingleforum") . "</span></a></td>";
 
@@ -1341,7 +1341,7 @@ if (!class_exists('mingleforum'))
           }
         }
 
-        $menu .= "<table cellpadding='0' cellspacing='0' style='margin-right:10px;' id='topicmenu'>";
+        $menu .= "<table cellpadding='0' cellspacing='0' id='topicmenu'>";
         $menu .= "<tr>";
 
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
