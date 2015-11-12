@@ -113,7 +113,7 @@ if (!isset($_POST['edit_post_submit']))
 }
 //--weaver-- end guest form check
 
-if (isset($this->options['forum_captcha']) && $this->options['forum_captcha'] == true && !$user_ID)
+if (!$user_ID)
 {
   include_once("captcha/shared.php");
   $wpf_code = wpf_str_decrypt($_POST['wpf_security_check']);

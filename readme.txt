@@ -90,6 +90,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Changed: guests must always fill out captcha
 * Removed: spam time interval check
 * Changed: css code cleanup and fixes
 * Removed: forum header

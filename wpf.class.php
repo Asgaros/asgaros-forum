@@ -69,7 +69,6 @@ if (!class_exists('mingleforum'))
                               'forum_use_seo_friendly_urls' => false,
                               'forum_allow_image_uploads' => false,
                               'notify_admin_on_new_posts' => false,
-                              'forum_captcha' => true,
                               'forum_display_name' => 'user_login',
                               'forum_db_version' => 0,
                               'forum_disabled_cats' => array(),
@@ -1883,7 +1882,7 @@ if (!class_exists('mingleforum'))
 
       $out = "";
 
-      if (!$user_ID && $this->options['forum_captcha'])
+      if (!$user_ID)
       {
         include_once("captcha/shared.php");
         include_once("captcha/captcha_code.php");
@@ -1907,7 +1906,7 @@ if (!class_exists('mingleforum'))
       $out = "";
       $out .= apply_filters('wpwf_quick_form_guestinfo', ""); //--weaver-- show the guest info form
 
-      if (!$user_ID && $this->options['forum_captcha'])
+      if (!$user_ID)
       {
         include_once("captcha/shared.php");
         include_once("captcha/captcha_code.php");

@@ -89,12 +89,6 @@
       <h3><?php _e('SPAM and Security', 'mingle-forum'); ?></h3>
       <div>
         <p>
-          <input type="checkbox" name="forum_captcha" id="forum_captcha" <?php checked(!empty($mingleforum->options['forum_captcha'])); ?> />
-          <label for="forum_captcha" class="mf_cb_label">
-            <?php _e('Guets must fill out Captcha when posting Replies', 'mingle-forum'); ?>
-          </label>
-        </p>
-        <p>
           <input type="checkbox" name="forum_allow_image_uploads" id="forum_allow_image_uploads" <?php checked(!empty($mingleforum->options['forum_allow_image_uploads'])); ?> />
           <label for="forum_allow_image_uploads" class="mf_cb_label">
             <?php _e('Allow image uploads', 'mingle-forum'); ?>
