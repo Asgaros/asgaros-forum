@@ -2,7 +2,7 @@
   <h2>Mingle Forum - <?php _e('User Groups', 'mingle-forum'); ?></h2>
 
   <?php if (isset($_GET['saved']) && $_GET['saved'] == 'true'): ?>
-    <div id="message" class="updated below-h2">
+    <div class="updated">
       <p><?php _e('Your User Groups have been saved.', 'mingle-forum'); ?></p>
     </div>
   <?php endif; ?>

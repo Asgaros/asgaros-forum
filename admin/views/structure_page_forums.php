@@ -2,7 +2,7 @@
   <h2>Mingle Forum - <?php _e('Structure', 'mingle-forum'); ?></h2>
 
   <?php if (isset($_GET['saved']) && $_GET['saved'] == 'true'): ?>
-    <div id="message" class="updated below-h2">
+    <div class="updated">
       <p><?php _e('Your Forums have been saved.', 'mingle-forum'); ?></p>
     </div>
   <?php endif; ?>
@@ -64,7 +64,7 @@
       <div style="margin-top:15px;">
         <input type="submit" name="mf_forums_save" value="<?php _e('Save Changes', 'mingle-forum'); ?>" class="button" />
       </div>
-    
+
     <?php else: //else !empty($categories) if ?>
       <h3><?php _e('You must add some Categories first.', 'mingle-forum'); ?></h3>
     <?php endif; //end !empty($categories) if ?>
