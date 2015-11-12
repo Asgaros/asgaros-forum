@@ -670,11 +670,6 @@ if (!class_exists('mingleforum'))
           $class = ($class == "wpf-alt") ? "" : "wpf-alt";
           $user = get_userdata($post->author_id);
 
-          if (!$post->author_id) //Check for guests author_id = 0
-            $registered = __('Never', 'mingleforum');
-          else
-            $registered = $this->format_date($user->user_registered);
-
           $out .= "<table class='wpf-post-table' width='100%' id='postid-{$post->id}'>
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
           $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "mingleforum") . "' class='post-calendar-img'/>";
@@ -693,12 +688,6 @@ if (!class_exists('mingleforum'))
           $out .= "<div class='hr'></div>";
 
           $out .=__("Posts:", "mingleforum") . " " . $this->get_userposts_num($post->author_id) . "<br/>";
-
-          $out .= "<div class='hr'></div>";
-
-          $out .=__("Registered:", "mingleforum") . "<br/><span style='font-size:10px;'>" . $registered . "</span><br/>";
-
-          $out .= "<div class='hr'></div>";
 
           $out .= "</div>" . apply_filters('mf_below_post_avatar', '', $post->author_id, $post->id) . "</td>
               <td valign='top'>
