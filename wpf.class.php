@@ -70,9 +70,7 @@ if (!class_exists('mingleforum'))
                               'forum_allow_image_uploads' => false,
                               'notify_admin_on_new_posts' => false,
                               'forum_display_name' => 'user_login',
-                              'forum_db_version' => 0,
-                              'forum_disabled_cats' => array(),
-                              'allow_user_replies_locked_cats' => false );
+                              'forum_db_version' => 0);
 
     var $dateFormat = "";
 
@@ -734,8 +732,6 @@ if (!class_exists('mingleforum'))
         $quick_thread = $this->check_parms($_GET['t']);
 
         //QUICK REPLY AREA
-        if (!in_array($this->current_group, $this->options['forum_disabled_cats']) || is_super_admin() || $this->is_moderator($user_ID, $this->current_forum) || $this->options['allow_user_replies_locked_cats'])
-        {
           if ((!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)) &&
                   ($user_ID || $this->allow_unreg()))
           {
@@ -759,7 +755,6 @@ if (!class_exists('mingleforum'))
               </table>
             </form>";
           }
-        }
         $out .= "<table cellpadding='0' cellspacing='0'>
               <tr class='pop_menus'>
                 <td width='100%'>" . $this->post_pageing($thread_id) . "</td>
@@ -1350,10 +1345,6 @@ if (!class_exists('mingleforum'))
         $menu .= "<table cellpadding='0' cellspacing='0' style='margin-right:10px;' id='topicmenu'>";
         $menu .= "<tr>";
 
-        if (!in_array($this->current_group, $this->options['forum_disabled_cats']) ||
-                is_super_admin() || $this->is_moderator($user_ID, $this->current_forum) ||
-                $this->options['allow_user_replies_locked_cats'])
-        {
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
             $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "mingleforum") . "</span></a></td>";
 
@@ -1362,9 +1353,6 @@ if (!class_exists('mingleforum'))
           if ($this->is_moderator($user_ID, $this->current_forum)) {
               $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "mingleforum") . "</span></a></td>";
           }
-
-
-        }
 
         $menu .= $stick . $closed . "</tr></table>";
       }

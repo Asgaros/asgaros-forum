@@ -17,19 +17,6 @@
             <?php _e('Email Site Administrator on all new Replies', 'mingle-forum'); ?>
           </label>
         </p>
-        <p>
-          <input type="checkbox" name="allow_user_replies_locked_cats" id="allow_user_replies_locked_cats" <?php checked(!empty($mingleforum->options['allow_user_replies_locked_cats'])); ?> />
-          <label for="allow_user_replies_locked_cats" class="mf_cb_label">
-            <?php _e('Users can reply in Locked Categories', 'mingle-forum'); ?>
-          </label>
-        </p>
-        <p>
-          <label for="forum_disabled_cats" class="mf_tb_label">
-            <?php _e('Locked Categories (Admins only)', 'mingle-forum'); ?>
-          </label>
-          <!-- NEED to change this into a multi-select sometime soon -->
-          <input type="text" name="forum_disabled_cats" id="forum_disabled_cats" value="<?php echo implode(',', $mingleforum->options['forum_disabled_cats']); ?>" class="mf_tb" />
-        </p>
       </div>
 
       <h3><?php _e('Users', 'mingle-forum'); ?></h3>

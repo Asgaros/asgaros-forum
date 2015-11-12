@@ -16,13 +16,6 @@ if (isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['e
   $the_thread_id = $this->check_parms($_POST['thread_id']);
   $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT `parent_id` FROM {$this->t_threads} WHERE `id` = %d", $the_thread_id));
 }
-if (is_numeric($the_forum_id))
-{
-  $the_cat_id = $wpdb->get_var("SELECT `parent_id` FROM {$this->t_forums} WHERE `id` = {$the_forum_id}");
-
-  if (isset($this->options['forum_disabled_cats']) && in_array($the_cat_id, $this->options['forum_disabled_cats']) && !is_super_admin($user_ID) && !$this->is_moderator($user_ID, $the_forum_id) && !$this->options['allow_user_replies_locked_cats'])
-    wp_die(__("Oops only Administrators can post in this Forum!", "mingleforum"));
-}
 //End Check
 
 function mf_u_key()
