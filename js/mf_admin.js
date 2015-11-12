@@ -100,21 +100,6 @@
       return false;
     });
 
-/******************************** MODERATORS STUFF ********************************/
-    $('a#mf_add_new_moderator').click(function() {
-      $('div#mf_hidden_moderator_instructions').slideToggle();
-
-      return false;
-    });
-
-    if($('#mf_global_moderator').is(':checked')) {
-      $('div#mf_moderator_not_global').hide();
-    }
-
-    $('#mf_global_moderator').click(function() {
-      $('div#mf_moderator_not_global').slideToggle();
-    });
-
 /******************************** USER GROUPS STUFF *******************************/
     $('a#mf_add_new_user_group').click(function() {
       var new_user_group_row = get_new_user_group_row();

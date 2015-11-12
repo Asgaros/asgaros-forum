@@ -29,10 +29,6 @@ function invertAll(headerfield, checkform, mask) {
   }
 }
 
-function uncheckglobal(headerfield, checkform) {
-  checkform.mod_global.checked = false;
-}
-
 function wpf_confirm() {
   var answer = confirm('Are you sure you want to remove this?');
   if (!answer)

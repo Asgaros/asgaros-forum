@@ -125,7 +125,6 @@ if (!class_exists('mingleforum'))
       add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
       add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
-      add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
     }
 
@@ -902,7 +901,7 @@ if (!class_exists('mingleforum'))
             if ($f->description != "")
               $this->o .= "<br/>";
 
-            $this->o .= $this->get_forum_moderators($f->id) . "</td>";
+            $this->o .= "</td>";
 
             $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "mingleforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "mingleforum") . $this->num_posts_forum($f->id) . "</small></td>";
             $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
@@ -1146,46 +1145,6 @@ if (!class_exists('mingleforum'))
       return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_usergroups} WHERE id = %d", $usergroup_id));
     }
 
-    public function get_moderators()
-    {
-      global $wpdb;
-
-      return $wpdb->get_results("
-        SELECT {$wpdb->usermeta}.user_id, {$wpdb->usermeta}.meta_value, {$wpdb->users}.user_login
-          FROM
-          {$wpdb->usermeta}
-          INNER JOIN
-          {$wpdb->users} on {$wpdb->usermeta}.user_id = {$wpdb->users}.ID
-          WHERE
-          {$wpdb->usermeta}.meta_key = 'wpf_moderator' ORDER BY {$wpdb->users}.user_login ASC");
-    }
-
-    public function get_moderator_forums($user_id)
-    {
-      $forums = get_user_meta($user_id, 'wpf_moderator', true);
-
-      if(empty($forums))
-        return array();
-      else
-        return $forums;
-    }
-
-    public function get_forum_moderators($forum_id)
-    {
-      global $wpdb;
-
-      $out = "";
-      $mods = $wpdb->get_results("SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key = 'wpf_moderator'");
-
-      foreach ($mods as $mod)
-        if ($this->is_moderator($mod->user_id, $forum_id))
-          $out .= "<span class='img-avatar-forumstats' >" . $this->get_avatar($mod->user_id, 15) . "</span>" . $this->profile_link($mod->user_id) . ", ";
-
-      $out = substr($out, 0, strlen($out) - 2);
-
-      return "<small><i>" . __("Moderators:", "mingleforum") . " {$out}</i></small>";
-    }
-
     public function is_moderator($user_id, $forum_id = '')
     {
       if (!$user_id || !$forum_id) //If guest or no forum ID
@@ -1194,12 +1153,7 @@ if (!class_exists('mingleforum'))
       if (is_super_admin($user_id))
         return true;
 
-      $forums = get_user_meta($user_id, 'wpf_moderator', true);
-
-      if ($forums == "mod_global")
-        return true;
-
-      return in_array($forum_id, (array) $forums);
+      return false;
     }
 
     public function wp_forum_install()
@@ -1309,8 +1263,6 @@ if (!class_exists('mingleforum'))
         $this->options['forum_db_version'] = $this->db_version;
         update_option('mingleforum_options', $this->options);
       }
-
-      $this->convert_moderators();
     }
 
     //This runs once a month to cleanup any zombie posts or topics
@@ -1441,27 +1393,6 @@ if (!class_exists('mingleforum'))
       return $menu;
     }
 
-    //We need to see if this is even needed anymore
-    //May be legacy code we can rip out
-    public function convert_moderators()
-    {
-      global $wpdb;
-
-      if (!get_option('wpf_mod_option_vers'))
-      {
-        $mods = $wpdb->get_results("SELECT user_id, user_login, meta_value FROM {$wpdb->usermeta} INNER JOIN {$wpdb->users} ON {$wpdb->usermeta}.user_id={$wpdb->users}.ID WHERE meta_key = 'moderator' AND meta_value <> ''");
-
-        foreach ($mods as $mod)
-        {
-          $string = explode(",", substr_replace($mod->meta_value, "", 0, 1));
-
-          update_user_meta($mod->user_id, 'wpf_moderator', maybe_serialize($string));
-        }
-
-        update_option('wpf_mod_option_vers', '2');
-      }
-    }
-
     public function get_parent_id($type, $id)
     {
       global $wpdb;
@@ -1486,12 +1417,6 @@ if (!class_exists('mingleforum'))
 
       if ($user->user_level >= 9)
         return __("Administrator", "mingleforum");
-
-      if (!$user_id)
-        return ""; //User is a guest
-
-      if ($this->is_moderator($user_id, $this->current_forum))
-        return __("Moderator", "mingleforum");
       else
       {
         return "";
