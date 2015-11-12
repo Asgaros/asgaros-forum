@@ -138,13 +138,5 @@
               </li>';
     }
 
-    //Fire off the inputaSoreAss :D
-    $('#usergroup_users_add_new').inputosaurus({
-      width: '350px',
-      parseOnBlur: true,
-      autoCompleteSource: $.parseJSON(MFAdmin.users_list),
-      limitSuggestions: 15
-    });
-
   });
 })(jQuery);
