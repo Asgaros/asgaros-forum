@@ -1358,37 +1358,18 @@ if (!class_exists('mingleforum'))
         {
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
             $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "mingleforum") . "</span></a></td>";
+
+
+
+          if ($this->is_moderator($user_ID, $this->current_forum)) {
+              $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "mingleforum") . "</span></a></td>";
+          }
+
+
         }
 
         $menu .= $stick . $closed . "</tr></table>";
       }
-
-      return $menu;
-    }
-
-    public function setup_menu()
-    {
-      global $user_ID;
-      $this->setup_links();
-
-      if (isset($_GET['closed']))
-        $this->closed_post();
-
-      $menuitems = array("move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
-
-      $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
-      if ($user_ID)
-      {
-        switch ($this->current_view)
-        {
-          case THREAD:
-            if ($this->is_moderator($user_ID, $this->current_forum))
-              $menu .= "<td valign='top' class='menu_sub'>{$menuitems['move']}</td>";
-            break;
-        }
-      }
-
-      $menu .= "</tr></table>";
 
       return $menu;
     }
@@ -1580,7 +1561,6 @@ if (!class_exists('mingleforum'))
                 </tr>
               </table>
             </div>";
-      $o .= $this->setup_menu();
       $this->o .= $o;
     }
 
