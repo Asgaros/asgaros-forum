@@ -40,7 +40,7 @@ Version: 1.34
 }
 
 /*Login v 1.34---------------------------------------*/
-#profileHeader input.mf_search{
+.wpf_search input.mf_search{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
@@ -58,21 +58,21 @@ Version: 1.34
   border-radius: 3px;
   font-family: inherit;
 }
-#profileHeader input.mf_search:focus{
+.wpf_search input.mf_search:focus{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
   color: #FFFFFF;
 }
-#profileHeader .wpf-input.mf_search{
+.wpf_search .wpf-input.mf_search{
   background-image: url("images/icons/search_btn.png");
   background-position: 4px 5px;
   background-repeat: no-repeat;
   padding-left:25px !important;
   width:120px;
 }
-#profileHeader .wpf-input:focus {
+.wpf_search .wpf-input:focus {
   width:190px;
 }
 .wpfInput input {
@@ -84,6 +84,10 @@ Version: 1.34
 }
 #wpf-wrapper #upshrinkHeader p {
   margin: 0 0 0.514rem !important;
+}
+.wpf_search {
+    width: 100%;
+    height: 40px;
 }
 
 /*END Menu Header -----------------------------------*/
@@ -332,14 +336,6 @@ Version: 1.34
 #wpf-wrapper form {
   margin: 0;
   padding: 0;
-}
-#wpf-wrapper #profileHeader h4{
-  font-size:22px;
-  line-height: 16px;
-  font-weight:bold;
-  padding-left:5px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-  text-transform: capitalize;
 }
 #wpf-wrapper form {
   text-align: inherit !important;
@@ -829,11 +825,6 @@ div.forum_smilies,div.forum_buttons {
 .forum_smilies a,
 .forum_buttons a {
   margin-right: 3px;
-}
-
-#profileHeader img {
-  vertical-align: middle;
-  margin-right: 5px;
 }
 .topic_text img {
   max-width: 475px;

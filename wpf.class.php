@@ -1538,28 +1538,12 @@ if (!class_exists('mingleforum'))
 
     public function header()
     {
-      global $user_ID;
-
       $this->setup_links();
-      $avatar = $this->get_avatar((int) $user_ID, 30);
 
-      if ($user_ID)
-        $welcome = __("Welcome", "mingleforum") . " " . $this->get_userdata($user_ID, $this->options['forum_display_name']);
-      else
-        $welcome = __("Welcome Guest", "mingleforum");
-
-      $o = "<div class='wpf'>
-              <table width='100%' class='wpf-table' id='profileHeader'>
-                <tr>
-                  <th>
-                    {$avatar}
-                    <h4 style='display:inline;vertical-align:middle;'>{$welcome}</h4>
-                    <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
+      $o = "<div class='wpf_search'>
+              <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
                      <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "mingleforum") . "' />
                     </form>
-                  </th>
-                </tr>
-              </table>
             </div>";
       $this->o .= $o;
     }
