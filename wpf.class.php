@@ -869,9 +869,6 @@ if (!class_exists('mingleforum'))
           $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
           $this->o .= "<tr><td class='forumtitle' colspan='4'><span>" . $this->output_filter($g->name) . "</span></td></tr>";
 
-          $this->o .= "<tr class='forumstatus'><th style='text-align:center; width: 7%;'>" . __("Status", "mingleforum") . "</th><th>" . __("Forum", "mingleforum") . "</th>
-          <th style='text-align:center;'></th><th>" . __("Last post", "mingleforum") . "</th></tr>";
-
           $frs = $this->get_forums($g->id);
 
           foreach ($frs as $f)
@@ -988,7 +985,7 @@ if (!class_exists('mingleforum'))
       $d = date_i18n($this->dateFormat, strtotime($date->date));
 
       return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}" . "<a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.png' /></a></small></div></div>";
+      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}</small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)

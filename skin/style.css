@@ -621,13 +621,11 @@ td.wpf-meta a {
   color: #fff;
 }
 th.wpf-bright,
-.wpf-table tr.forumstatus th,
 td.statistik {
   background: url('images/titlebg.jpg') !important;
   color: #000;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
-.wpf-table tr.forumstatus th,
 td.statistik {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
