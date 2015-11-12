@@ -748,7 +748,7 @@ if (!class_exists('mingleforum'))
             $out .= "<strong>" . __("Quick Reply", "mingleforum") . ": </strong><br/>" .
                     $this->form_buttons() . $this->form_smilies() . "<br/>
                     <input type='hidden' name='add_post_subject' value='" . $this->get_subject(floor($quick_thread)) . "'/>
-                    <textarea rows='6' style='width:99% !important;' name='message' class='wpf-textarea' ></textarea>
+                    <textarea rows='6' style='width:99% !important;' name='message'></textarea>
                 </td>
               </tr>";
             $out .= $this->get_quick_reply_captcha();
