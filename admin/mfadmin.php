@@ -85,43 +85,53 @@ if(!class_exists("MFAdmin"))
         {
             global $mingleforum, $wpdb;
             $listed_user_groups = array();
-            if (!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save']) || !isset($_POST['user_group_name']) || empty($_POST['user_group_name']))
+            $user_group_ids = array();
+
+            if (!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save'])) {
                 return;
-            foreach ($_POST['user_group_name'] as $i => $v) {
-                $id = $_POST['mf_user_group_id'][$i];
-                $name = stripslashes($v);
-                $description = (!empty($_POST['user_group_description'][$i])) ? stripslashes($_POST['user_group_description'][$i]) : '';
-                if (empty($name)) { //If no name, don't save this User Group
-                    if ($id != 'new') {
+            }
+
+            if (isset($_POST['user_group_name']) && !empty($_POST['user_group_name'])) {
+                foreach ($_POST['user_group_name'] as $i => $v) {
+                    $id = $_POST['mf_user_group_id'][$i];
+                    $name = stripslashes($v);
+                    $description = (!empty($_POST['user_group_description'][$i])) ? stripslashes($_POST['user_group_description'][$i]) : '';
+
+                    if (empty($name)) { //If no name, don't save this User Group
+                        if ($id != 'new') {
+                            $listed_user_groups[] = $id;
+                        }
+                        continue;
+                    }
+
+                    if ($id == 'new') { //Create a new User Group
+                        $wpdb->insert($mingleforum->t_usergroups, array('name' => $name, 'description' => $description), array('%s', '%s'));
+                        $listed_user_groups[] = $wpdb->insert_id;
+                    } else { //Update an existing User Group
+                        $q = "UPDATE {$mingleforum->t_usergroups} SET 'name' = %s, 'description' = %s WHERE 'id' = %d";
+                        $wpdb->query($wpdb->prepare($q, $name, $description, $id));
                         $listed_user_groups[] = $id;
                     }
-                    continue;
                 }
-                if ($id == 'new') { //Create a new User Group
-                    $wpdb->insert($mingleforum->t_usergroups, array('name' => $name, 'description' => $description),
-                            array('%s', '%s'));
-              $listed_user_groups[] = $wpdb->insert_id;
             }
-            else //Update an existing User Group
-            {
-              $q = "UPDATE {$mingleforum->t_usergroups}
-                      SET `name` = %s, `description` = %s
-                      WHERE `id` = %d";
-              $wpdb->query($wpdb->prepare($q, $name, $description, $id));
-              $listed_user_groups[] = $id;
-            }
-          }
-          //Delete user groups that the user removed from the list
-          if(!empty($listed_user_groups))
-          {
+
+            //Delete user groups that the user removed from the list
             $listed_user_groups = implode(',', $listed_user_groups);
-            $user_group_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_usergroups} WHERE `id` NOT IN ({$listed_user_groups})");
-            if(!empty($user_group_ids))
-              foreach($user_group_ids as $ugid)
-                self::delete_usergroup($ugid);
-          }
-          wp_redirect(admin_url('admin.php?page=mingle-forum-user-groups&saved=true'));
-          exit();
+
+            if (empty($listed_user_groups)) {
+                $user_group_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_usergroups}");
+            } else {
+                $user_group_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_usergroups} WHERE id NOT IN ({$listed_user_groups})");
+            }
+
+            if (!empty($user_group_ids)) {
+                foreach ($user_group_ids as $ugid) {
+                    self::delete_usergroup($ugid);
+                }
+            }
+
+            wp_redirect(admin_url('admin.php?page=mingle-forum-user-groups&saved=true'));
+            exit();
         }
 
         public static function delete_usergroup($ugid)

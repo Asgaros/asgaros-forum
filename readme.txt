@@ -88,8 +88,9 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Fixed: could not delete all or the last usergroup
 * Changed: ordering of usergroups in administration area
-* Fixed: bug where usergroup name deletion could delete usergroup
+* Fixed: usergroup name deletion could delete usergroup
 * Removed: unused field in database
 * Fixed: possible bug with generated IDs in usergroup administration
 * Changed: shortening of long topic titles
