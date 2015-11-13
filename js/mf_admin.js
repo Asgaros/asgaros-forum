@@ -102,8 +102,7 @@
 
     /******************************** USER GROUPS STUFF *******************************/
     $('a#mf_add_new_user_group').click(function() {
-        var new_user_group_row = get_new_user_group_row();
-        $(new_user_group_row).appendTo('ol#user-groups');
+        $('#hidden-element-container li').clone().appendTo('ol#user-groups');
         return false;
     });
     $('body').on('click', '.mf_remove_user_group', function() {
@@ -113,15 +112,5 @@
         }
         return false;
     });
-    function get_new_user_group_row() {
-        return '<li class="ui-state-default mf_user_group_li_item">\
-            <input type="hidden" name="mf_user_group_id[]" value="new" />\
-            <label>' + MFAdmin.user_group_name_label + '&nbsp;<input type="text" name="user_group_name[]" value="" /></label>&nbsp;&nbsp;\
-            <label>' + MFAdmin.user_group_description_label + '&nbsp;<input type="text" name="user_group_description[]" value="" size="40" /></label>&nbsp;&nbsp;\
-            <a href="#" class="mf_remove_user_group" title="' + MFAdmin.remove_user_group_a_title + '">\
-            <img src="' + MFAdmin.images_url + 'remove.png" width="24" />\
-            </a>\
-            </li>';
-        }
-    });
+});
 })(jQuery);

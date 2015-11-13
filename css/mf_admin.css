@@ -1,18 +1,13 @@
 /* SHARED */
 .mf_fset {
-    border: 2px solid #999;
+    border: 1px solid #999;
     margin-top: 25px;
-    border-radius: 10px;
-    padding: 15px;
-    background: #eff8ff;
+    padding: 10px;
 }
-.mf_fset legend {
-    font-size: 14px;
+legend {
     font-weight: bold;
-    background: lightgray;
     padding: 5px;
     border: 1px solid #999;
-    border-radius: 5px;
 }
 .mf_fset a.button {
     color: #666 !important;
@@ -27,9 +22,9 @@
 li.ui-state-default,
 li.ui-state-active {
     list-style-type: none;
-    margin: 10px;
     padding: 10px;
-    cursor: move;
+    background: #bbb;
+    border-color: #aaa;
 }
 li.ui-state-highlight {
     list-style-type: none;
@@ -38,6 +33,9 @@ li.ui-state-highlight {
 }
 .mf_admin_submit {
     margin-top: 25px !important;
+}
+#hidden-element-container {
+    display: none;
 }
 /* MAIN OPTIONS PAGE */
 #mf_options_form input {

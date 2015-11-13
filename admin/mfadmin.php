@@ -25,9 +25,6 @@ if(!class_exists("MFAdmin"))
                                   'forum_description_label' => __('Description:', 'mingle-forum'),
                                   'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum'),
                                   'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
-                                  'user_group_name_label' => __('Name:', 'mingle-forum'),
-                                  'user_group_description_label' => __('Description:', 'mingle-forum'),
-                                  'remove_user_group_a_title' => __('Remove this User Group', 'mingle-forum'),
                                   'users_list' => json_encode($mingleforum->get_all_users_list()) );
 
               //Let's only load our shiz on mingle-forum admin pages

@@ -40,3 +40,13 @@
         <input type="submit" name="mf_user_groups_save" value="<?php _e('Save Changes', 'mingle-forum'); ?>" class="mf_admin_submit button" />
     </form>
 </div>
+<div id="hidden-element-container">
+    <li class="ui-state-default mf_user_group_li_item">
+        <input type="hidden" name="mf_user_group_id[]" value="new" />
+        <label><?php _e('Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="user_group_name[]" value="" /></label>&nbsp;&nbsp;
+        <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="user_group_description[]" value="" size="40" /></label>&nbsp;&nbsp;
+        <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'mingle-forum'); ?>">
+            <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+        </a>
+    </li>
+</div>
