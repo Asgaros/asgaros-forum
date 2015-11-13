@@ -1223,7 +1223,6 @@ if (!class_exists('mingleforum'))
           `id` int(11) NOT NULL auto_increment,
           `name` varchar(255) NOT NULL,
           `description` varchar(255) default NULL,
-          `leaders` varchar(255) default NULL,
           PRIMARY KEY  (`id`)
         ){$charset_collate};";
 
