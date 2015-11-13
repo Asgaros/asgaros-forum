@@ -14,9 +14,6 @@
     border: 1px solid #999;
     border-radius: 5px;
 }
-.mf_fset label {
-    cursor: pointer;
-}
 .mf_fset a.button {
     color: #666 !important;
 }
@@ -39,10 +36,10 @@ li.ui-state-highlight {
     margin: 10px;
     padding: 22px;
 }
-/* MAIN OPTIONS PAGE */
 .mf_admin_submit {
     margin-top: 25px !important;
 }
+/* MAIN OPTIONS PAGE */
 #mf_options_form input {
     vertical-align: middle;
 }
@@ -66,9 +63,6 @@ div.user-groups-area {
 /* USER GROUPS PAGE */
 .mf_user_group_li_item {
     cursor: default !important;
-}
-.mf_user_group_li_item label {
-    cursor: pointer !important;
 }
 a.mf_remove_user_group {
     float: right;

@@ -92,7 +92,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * Removed: user registration date from topics
 * Changed: forum style
 * Removed: inputosaurus.js library from administration area
-* Changed: cleaned up administration options
+* Changed: revised administration area
 * Removed: admin notifications functionality
 * Removed: locked categories functionality
 * Changed: guests must always fill out captcha
