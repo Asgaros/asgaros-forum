@@ -50,76 +50,55 @@ if(!class_exists("MFAdmin"))
           require('views/options_page.php');
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
         public static function user_groups_page()
         {
-          global $mingleforum;
+            global $mingleforum;
 
-          $user_groups = $mingleforum->get_usergroups();
-          $action = (isset($_GET['action']))?$_GET['action']:false;
+            $user_groups = $mingleforum->get_usergroups();
 
-          switch($action)
-          {
-            case 'users':
-              $id = isset($_GET['id'])?$_GET['id']:false;
-
-              if($id)
-              {
-                $usergroup = $mingleforum->get_usergroup($id);
-                $usergroup_users = $mingleforum->get_members($id);
-                require('views/user_groups_users_page.php');
-              }
-              else
+            if (isset($_GET['action']) && $_GET['action'] == 'users') {
+                if (isset($_GET['id'])) {
+                    $usergroup = $mingleforum->get_usergroup($_GET['id']);
+                    $usergroup_users = $mingleforum->get_members($_GET['id']);
+                    require('views/user_groups_users_page.php');
+                } else {
+                    require('views/user_groups_page.php');
+                }
+            } else {
                 require('views/user_groups_page.php');
-              break;
-
-            default:
-              require('views/user_groups_page.php');
-              break;
-          }
-        }
-
-        public static function structure_page()
-        {
-          global $mingleforum;
-
-          $action = (isset($_GET['action']) && !empty($_GET['action']))?$_GET['action']:false;
-          $categories = $mingleforum->get_groups();
-
-          switch($action)
-          {
-            case 'forums':
-              require('views/structure_page_forums.php');
-              break;
-            default:
-              require('views/structure_page_categories.php');
-              break;
-          }
+            }
         }
 
         public static function maybe_save_user_groups()
         {
-          global $mingleforum, $wpdb;
-          $listed_user_groups = array();
+            global $mingleforum, $wpdb;
+            $listed_user_groups = array();
 
-          if(!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save']))
-            return;
+            if (!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save']) || !isset($_POST['user_group_name']) || empty($_POST['user_group_name']))
+                return;
 
-          if(!isset($_POST['user_group_name']) || empty($_POST['user_group_name']))
-            return;
+            foreach ($_POST['user_group_name'] as $i => $v) {
+                $id = $_POST['mf_user_group_id'][$i];
+                $name = stripslashes($v);
+                $description = (!empty($_POST['user_group_description'][$i])) ? stripslashes($_POST['user_group_description'][$i]) : '';
 
-          foreach($_POST['user_group_name'] as $i => $v)
-          {
-            $id = $_POST['mf_user_group_id'][$i];
-            $name = stripslashes($v);
-            $description = (!empty($_POST['user_group_description'][$i]))?stripslashes($_POST['user_group_description'][$i]):'';
+                if (empty($name)) //If no name, don't save this User Group
+                    continue;
 
-            if(empty($name)) //If no name, don't save this User Group
-              continue;
-
-            if($id == 'new') //Create a new User Group
-            {
-              $wpdb->insert($mingleforum->t_usergroups,
-                            array('name' => $name, 'description' => $description),
+                if ($id == 'new') { //Create a new User Group
+                    $wpdb->insert($mingleforum->t_usergroups, array('name' => $name, 'description' => $description),
                             array('%s', '%s'));
 
               $listed_user_groups[] = $wpdb->insert_id;
@@ -174,6 +153,49 @@ if(!class_exists("MFAdmin"))
               }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static function structure_page()
+        {
+          global $mingleforum;
+
+          $action = (isset($_GET['action']) && !empty($_GET['action']))?$_GET['action']:false;
+          $categories = $mingleforum->get_groups();
+
+          switch($action)
+          {
+            case 'forums':
+              require('views/structure_page_forums.php');
+              break;
+            default:
+              require('views/structure_page_categories.php');
+              break;
+          }
+        }
+
+
 
         public static function maybe_save_options()
         {
