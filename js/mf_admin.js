@@ -114,14 +114,10 @@
         return false;
     });
     function get_new_user_group_row() {
-        var random_id = Math.floor(Math.random() * (1000000 - 100000)) + 100000;
         return '<li class="ui-state-default mf_user_group_li_item">\
             <input type="hidden" name="mf_user_group_id[]" value="new" />\
-            <label for="user-group-name-' + random_id + '">' + MFAdmin.user_group_name_label + '</label>\
-            <input type="text" name="user_group_name[]" id="user-group-name-' + random_id + '" value="" />\
-            &nbsp;&nbsp;\
-            <label for="user-group-description-' + random_id + '">' + MFAdmin.user_group_description_label + '</label>\
-            <input type="text" name="user_group_description[]" id="user-group-description-' + random_id + '" value="" size="40" />\
+            <label>' + MFAdmin.user_group_name_label + '&nbsp;<input type="text" name="user_group_name[]" value="" /></label>&nbsp;&nbsp;\
+            <label>' + MFAdmin.user_group_description_label + '&nbsp;<input type="text" name="user_group_description[]" value="" size="40" /></label>&nbsp;&nbsp;\
             <a href="#" class="mf_remove_user_group" title="' + MFAdmin.remove_user_group_a_title + '">\
             <img src="' + MFAdmin.images_url + 'remove.png" width="24" />\
             </a>\
