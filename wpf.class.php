@@ -1005,7 +1005,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      return $wpdb->get_results("SELECT * FROM {$this->t_usergroups}");
+      return $wpdb->get_results("SELECT * FROM {$this->t_usergroups} ORDER BY id ASC");
     }
 
     public function get_usergroup($id)
