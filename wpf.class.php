@@ -356,6 +356,14 @@ if (!class_exists('mingleforum'))
       return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_posts} WHERE id = %d", $id)));
     }
 
+    public function cut_string($string, $length = 35) {
+        if (strlen($string) > $length) {
+            return substr($string, 0, $length) . ' ...';
+        }
+
+        return $string;
+    }
+
     public function get_group_description($id)
     {
       global $wpdb;
@@ -658,7 +666,7 @@ if (!class_exists('mingleforum'))
                   <table class='wpf-table' width='100%'>
                     <tr>
                       <th width='125' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
-                      <th><span aria-hidden='true' class='icon-topic'></span>" . $this->get_subject($thread_id) . $meClosed . "</th>
+                      <th><span aria-hidden='true' class='icon-topic'></span>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</th>
                     </tr>
                   </table>";
         $out .= "</div>";
@@ -694,7 +702,7 @@ if (!class_exists('mingleforum'))
                 <table width='100%' cellspacing='0' cellpadding='0' class='wpf-meta-table'>
 
                 <tr width='70%'>
-                  <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->get_postname($post->id) . "
+                  <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_postname($post->id), 70) . "
                     <span class='permalink'>
                     <a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "' title='" . __("Permalink", "mingleforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
                   </td>
@@ -965,7 +973,7 @@ if (!class_exists('mingleforum'))
       $d = date_i18n($this->dateFormat, strtotime($date->date));
 
       return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}</small></div></div>";
+      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->cut_string($this->get_postname($date->id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}</small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)
@@ -1434,10 +1442,10 @@ if (!class_exists('mingleforum'))
           $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread)));
           $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $this->current_thread)) . "-forum" . $this->get_parent_id(THREAD, $this->current_thread));
           $thread = $this->get_seo_friendly_title($this->get_threadname($this->current_thread) . "-thread" . $this->current_thread);
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . ".0'>" . $this->get_threadname($this->current_thread) . "</a>";
+          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . ".0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
         }
         else
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewtopic&t={$this->current_thread}.0'>" . $this->get_threadname($this->current_thread) . "</a>";
+          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewtopic&t={$this->current_thread}.0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
 
       if ($this->current_view == NEWTOPICS)
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topics since last visit", "mingleforum");

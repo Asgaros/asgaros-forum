@@ -31,7 +31,7 @@
           <td class="wpf-alt sticky wpf-topic-title">
             <span class="topicTitle">
               <a href="<?php echo $this->get_threadlink($thread->id); ?>">
-                <?php echo $this->output_filter($thread->subject); ?>
+                <?php echo $this->cut_string($this->output_filter($thread->subject)); ?>
               </a>
               <?php echo $this->maybe_get_unread_image($thread->id); ?>
             </span>
@@ -79,7 +79,7 @@
         <td class="wpf-alt">
           <span class="topicTitle">
             <a href="<?php echo $this->get_threadlink($thread->id); ?>">
-              <?php echo $this->output_filter($thread->subject); ?>
+              <?php echo $this->cut_string($this->output_filter($thread->subject), 50); ?>
             </a>
             <?php echo $this->maybe_get_unread_image($thread->id); ?>
           </span>
