@@ -88,6 +88,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 
 == Changelog ==
 = 1.0.0 Development-Version =
+* Fixed: possible bug because of special database column name
 * Added: missing code to add/delete users from group
 * Removed: auto add option from usergroups
 * Changed: database table name for categories

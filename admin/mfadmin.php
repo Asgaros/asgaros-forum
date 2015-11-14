@@ -173,7 +173,7 @@ if (!class_exists("MFAdmin"))
         {
             global $mingleforum, $wpdb;
 
-            $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE group = {$ugid}");
+            $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE group_id = {$ugid}");
             $wpdb->query("DELETE FROM {$mingleforum->t_usergroups} WHERE id = {$ugid}");
 
             //Remove this group from categories too
@@ -202,14 +202,14 @@ if (!class_exists("MFAdmin"))
 
                 if ($userID) {
                     if (!$mingleforum->is_user_ingroup($userID, $groupID)) {
-                        $wpdb->insert($mingleforum->t_usergroup2user, array('user_id' => $userID, 'group' => $groupID), array('%d', '%d'));
+                        $wpdb->insert($mingleforum->t_usergroup2user, array('user_id' => $userID, 'group_id' => $groupID), array('%d', '%d'));
                     }
                 }
             }
 
             if (isset($_GET['action']) && $_GET['action'] == 'deluser') {
                 $userID = $_GET['user_id'];
-                $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE user_id = {$userID} AND group = {$groupID}");
+                $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE user_id = {$userID} AND group_id = {$groupID}");
             }
 
             wp_redirect(admin_url('admin.php?page=mingle-forum-user-groups&action=users&groupid='.$groupID.'&saved=true'));

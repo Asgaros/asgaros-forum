@@ -1026,7 +1026,7 @@ if (!class_exists('mingleforum'))
       $q = "SELECT ug2u.user_id, u.user_login
               FROM {$this->t_usergroup2user} AS ug2u JOIN {$wpdb->users} AS u
                 ON ug2u.user_id = u.ID
-              WHERE ug2u.group = %d
+              WHERE ug2u.group_id = %d
             ORDER BY u.user_login";
 
       return $wpdb->get_results($wpdb->prepare($q, $usergroup));
@@ -1050,7 +1050,7 @@ if (!class_exists('mingleforum'))
       if (!$user_id)
         return false;
 
-      $id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$this->t_usergroup2user} WHERE user_id = %d AND `group` = %d", $user_id, $user_group_id));
+      $id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$this->t_usergroup2user} WHERE user_id = %d AND `group_id` = %d", $user_id, $user_group_id));
 
       if ($id)
         return true;
@@ -1214,7 +1214,7 @@ if (!class_exists('mingleforum'))
           CREATE TABLE " . $this->t_usergroup2user . " (
           `id` int(11) NOT NULL auto_increment,
           `user_id` int(11) NOT NULL,
-          `group` varchar(255) NOT NULL,
+          `group_id` varchar(255) NOT NULL,
           PRIMARY KEY  (`id`)
         ){$charset_collate};";
 
