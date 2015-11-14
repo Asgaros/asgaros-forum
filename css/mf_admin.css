@@ -59,14 +59,8 @@ div.user-groups-area {
     display: none;
 }
 /* USER GROUPS PAGE */
-.mf_user_group_li_item {
-    cursor: default !important;
-}
 a.mf_remove_user_group {
     float: right;
-}
-a#mf_add_new_user_group {
-    padding-left: 8px;
 }
 div.usergroup_users_row {
     padding: 5px;

@@ -1245,9 +1245,6 @@ if (!class_exists('mingleforum'))
           $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (`text`)");
         }
 
-        if ($this->options['forum_db_version'] < 3 || $force)
-          $wpdb->query("ALTER TABLE {$this->t_usergroups} ADD auto_add INT(1) NOT NULL DEFAULT '0'");
-
         $this->options['forum_db_version'] = $this->db_version;
         update_option('mingleforum_options', $this->options);
       }

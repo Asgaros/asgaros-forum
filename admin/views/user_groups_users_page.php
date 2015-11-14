@@ -1,17 +1,17 @@
 <div class="wrap">
-  <h2>Mingle Forum - <?php _e('Manage User Group Users', 'mingle-forum'); ?></h2>
-
-  <form action="" method="post">
-    <br/>
-    <input type="checkbox" name="usergroup_users_auto_add" id="auto_add" <?php checked($usergroup->auto_add); ?> />
-    <label for="auto_add"><?php _e('Add new Users to this Group automatically'); ?></label>
-    <br/><br/>
+    <h2>Mingle Forum - <?php _e('Manage User Group Users', 'mingle-forum'); ?></h2>
+    <?php if ($saved): ?>
+        <div class="updated">
+            <p><?php _e('Users have been saved.', 'mingle-forum'); ?></p>
+        </div>
+    <?php endif; ?>
+    <form action="" method="post">
     <label><?php _e('Add Users to this Group', 'mingle-forum'); ?></label>:<br/>
     <input type="text" name="usergroup_users_add_new" id="usergroup_users_add_new" />
     <br/><br/>
     <input type="submit" name="usergroup_users_save" value="<?php _e('Update', 'mingle-forum'); ?>" class="button" />
   </form>
-  
+
   <h4><?php _e('Users in this Group', 'mingle-forum'); ?>:</h4>
   <?php if(!empty($usergroup_users)): ?>
     <?php foreach($usergroup_users as $u): ?>
