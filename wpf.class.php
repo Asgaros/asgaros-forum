@@ -44,7 +44,7 @@ if (!class_exists('mingleforum'))
     var $thread_link = "";
     var $add_topic_link = "";
     // DB tables
-    var $t_groups = "";
+    var $t_categories = "";
     var $t_forums = "";
     var $t_threads = "";
     var $t_posts = "";
@@ -81,7 +81,7 @@ if (!class_exists('mingleforum'))
 
       $this->page_id = $this->get_pageid();
 
-      $this->t_groups = $table_prefix . "forum_groups";
+      $this->t_categories = $table_prefix . "forum_categories";
       $this->t_forums = $table_prefix . "forum_forums";
       $this->t_threads = $table_prefix . "forum_threads";
       $this->t_posts = $table_prefix . "forum_posts";
@@ -267,7 +267,7 @@ if (!class_exists('mingleforum'))
       if ($id)
         $cond = $wpdb->prepare("WHERE id = %d", $id);
 
-      return $wpdb->get_results("SELECT * FROM {$this->t_groups} {$cond} ORDER BY sort " . SORT_ORDER);
+      return $wpdb->get_results("SELECT * FROM {$this->t_categories} {$cond} ORDER BY sort " . SORT_ORDER);
     }
 
     public function get_forums($id = '')
@@ -332,7 +332,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_groups} WHERE id = %d", $id)));
+      return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id)));
     }
 
     public function get_forumname($id)
@@ -368,7 +368,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_groups} WHERE id = %d", $id));
+      return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_categories} WHERE id = %d", $id));
     }
 
     public function get_forum_description($id)
@@ -990,7 +990,7 @@ if (!class_exists('mingleforum'))
       if (is_super_admin())
         return true;
 
-      $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->t_groups} WHERE id = {$groupid}"));
+      $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->t_categories} WHERE id = {$groupid}"));
       if (!$user_groups)
         return true;
 
@@ -1175,7 +1175,7 @@ if (!class_exists('mingleforum'))
         ){$charset_collate};";
 
         $sql2 = "
-        CREATE TABLE " . $this->t_groups . " (
+        CREATE TABLE " . $this->t_categories . " (
           id int(11) NOT NULL auto_increment,
           `name` varchar(255) NOT NULL default '',
           `description` varchar(255) default '',
@@ -1391,7 +1391,7 @@ if (!class_exists('mingleforum'))
 
       $group = ($group) ? $group : 0;
 
-      return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->t_groups} WHERE id = %d", $group));
+      return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->t_categories} WHERE id = %d", $group));
     }
 
     public function forum_get_parent($forum)

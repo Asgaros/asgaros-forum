@@ -145,7 +145,7 @@ if(!class_exists("MFAdmin"))
             $wpdb->query("DELETE FROM {$mingleforum->t_usergroups} WHERE id = {$ugid}");
 
             //Remove this group from categories too
-            $cats = $wpdb->get_results("SELECT * FROM {$mingleforum->t_groups}");
+            $cats = $wpdb->get_results("SELECT * FROM {$mingleforum->t_categories}");
 
             if (!empty($cats)) {
                 foreach ($cats as $cat) {
@@ -153,7 +153,7 @@ if(!class_exists("MFAdmin"))
 
                     if (in_array($ugid, $usergroups)) {
                         $usergroups = serialize(array_diff($usergroups, array($ugid)));
-                        $wpdb->query("UPDATE {$mingleforum->t_groups} SET usergroups = '{$usergroups}' WHERE id = {$cat->id}");
+                        $wpdb->query("UPDATE {$mingleforum->t_categories} SET usergroups = '{$usergroups}' WHERE id = {$cat->id}");
                     }
                 }
             }
@@ -273,7 +273,7 @@ if(!class_exists("MFAdmin"))
               if($id == 'new')
               {
                 //Save new category
-                $wpdb->insert($mingleforum->t_groups,
+                $wpdb->insert($mingleforum->t_categories,
                               array('name' => $name, 'description' => $description, 'sort' => $order),
                               array('%s', '%s', '%d'));
 
@@ -283,7 +283,7 @@ if(!class_exists("MFAdmin"))
               {
                 //Update existing category
                 $usergroups = (isset($_POST['category_usergroups_'.$id]))?serialize((array)$_POST['category_usergroups_'.$id]):'';
-                $q = "UPDATE {$mingleforum->t_groups}
+                $q = "UPDATE {$mingleforum->t_categories}
                         SET `name` = %s, `description` = %s, `sort` = %d, `usergroups` = %s
                         WHERE `id` = %d";
 
@@ -300,7 +300,7 @@ if(!class_exists("MFAdmin"))
           if(!empty($listed_categories))
           {
             $listed_categories = implode(',', $listed_categories);
-            $category_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_groups} WHERE `id` NOT IN ({$listed_categories})");
+            $category_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_categories} WHERE `id` NOT IN ({$listed_categories})");
 
             if(!empty($category_ids))
               foreach($category_ids as $cid)
@@ -384,7 +384,7 @@ if(!class_exists("MFAdmin"))
             foreach($forum_ids as $fid)
               self::delete_forum($fid);
 
-          $wpdb->query("DELETE FROM {$mingleforum->t_groups} WHERE `id` = {$cid}");
+          $wpdb->query("DELETE FROM {$mingleforum->t_categories} WHERE `id` = {$cid}");
         }
 
         public static function delete_forum($fid)
