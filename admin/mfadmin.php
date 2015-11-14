@@ -1,35 +1,35 @@
 <?php
-if(!class_exists("MFAdmin"))
+if (!class_exists("MFAdmin"))
 {
     class MFAdmin
     {
         public static function load_hooks()
         {
-            add_action('admin_init', 'MFAdmin::maybe_save_options');
+            add_action('admin_init', 'MFAdmin::save_options');
             add_action('admin_init', 'MFAdmin::maybe_save_structure');
-            add_action('admin_init', 'MFAdmin::maybe_save_user_groups');
+            add_action('admin_init', 'MFAdmin::save_usergroups');
             add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
         }
 
         public static function enqueue_admin_scripts($hook)
         {
             global $mingleforum;
-            $plug_url = plugin_dir_url(__FILE__) . '../';
-            $l10n_vars = array( 'remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'mingle-forum'),
-                                  'category_name_label' => __('Category Name:', 'mingle-forum'),
-                                  'category_description_label' => __('Description:', 'mingle-forum'),
-                                  'remove_category_a_title' => __('Remove this Category', 'mingle-forum'),
-                                  'images_url' => WPFURL . 'images/',
-                                  'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
-                                  'forum_name_label' => __('Forum Name:', 'mingle-forum'),
-                                  'forum_description_label' => __('Description:', 'mingle-forum'),
-                                  'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum'),
-                                  'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
-                                  'users_list' => json_encode($mingleforum->get_all_users_list()) );
 
-              //Let's only load our shiz on mingle-forum admin pages
-              if(strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php')
-              {
+            $plug_url = plugin_dir_url(__FILE__) . '../';
+            $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'mingle-forum'),
+                'category_name_label' => __('Category Name:', 'mingle-forum'),
+                'category_description_label' => __('Description:', 'mingle-forum'),
+                'remove_category_a_title' => __('Remove this Category', 'mingle-forum'),
+                'images_url' => WPFURL . 'images/',
+                'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
+                'forum_name_label' => __('Forum Name:', 'mingle-forum'),
+                'forum_description_label' => __('Description:', 'mingle-forum'),
+                'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum'),
+                'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
+                'users_list' => json_encode($mingleforum->get_all_users_list()));
+
+            //Let's only load our shiz on mingle-forum admin pages
+            if (strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php') {
                 $wp_scripts = new WP_Scripts();
                 $ui = $wp_scripts->query('jquery-ui-core');
                 $url = "//ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/start/jquery-ui.css";
@@ -38,42 +38,63 @@ if(!class_exists("MFAdmin"))
                 wp_enqueue_style('mingle-forum-admin-css', $plug_url . "css/mf_admin.css");
                 wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion', 'jquery-ui-sortable'));
                 wp_localize_script('mingle-forum-admin-js', 'MFAdmin', $l10n_vars);
-              }
+            }
         }
 
         public static function options_page()
         {
-          global $mingleforum;
-
-          $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-
-          require('views/options_page.php');
+            global $mingleforum;
+            $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
+            require('views/options_page.php');
         }
 
+        public static function save_options()
+        {
+            if (!isset($_POST['mf_options_submit']) || empty($_POST['mf_options_submit'])) {
+                return;
+            }
 
+            global $wpdb, $mingleforum;
+            $saved_ops = array();
 
+            foreach ($mingleforum->default_ops as $k => $v) {
+                if (isset($_POST[$k]) && !empty($_POST[$k])) {
+                    if (is_numeric($v)) {
+                        $saved_ops[$k] = (int)$_POST[$k];
+                    } else if (is_bool($v)) {
+                        $saved_ops[$k] = true;
+                    } else {
+                        $saved_ops[$k] = $wpdb->escape(stripslashes($_POST[$k]));
+                    }
+                } else {
+                    if (is_numeric($v)) {
+                        $saved_ops[$k] = $v;
+                    } else if (is_bool($v)) {
+                        $saved_ops[$k] = false;
+                    } else {
+                        $saved_ops[$k] = '';
+                    }
+                }
+            }
 
+            //Set some stuff that isn't on the options page
+            $saved_ops['forum_db_version'] = $mingleforum->options['forum_db_version'];
 
-
-
-
-
-
-
-
+            update_option('mingleforum_options', $saved_ops);
+            wp_redirect(admin_url('admin.php?page=mingle-forum&saved=true'));
+            exit();
+        }
 
         public static function user_groups_page()
         {
             global $mingleforum;
-
             $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-
             $user_groups = $mingleforum->get_usergroups();
 
             if (isset($_GET['action']) && $_GET['action'] == 'users') {
-                if (isset($_GET['id'])) {
-                    $usergroup = $mingleforum->get_usergroup($_GET['id']);
-                    $usergroup_users = $mingleforum->get_members($_GET['id']);
+                if (isset($_GET['groupid'])) {
+                    $usergroup = $mingleforum->get_usergroup($_GET['groupid']);
+                    $usergroup_users = $mingleforum->get_members($_GET['groupid']);
                     require('views/user_groups_users_page.php');
                 } else {
                     require('views/user_groups_page.php');
@@ -83,12 +104,23 @@ if(!class_exists("MFAdmin"))
             }
         }
 
-        public static function maybe_save_user_groups()
+        public static function save_usergroups()
         {
-            if (!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save'])) {
-                return;
+            if (isset($_POST['mf_user_groups_save']) && !empty($_POST['mf_user_groups_save'])) {
+                self::save_user_groups();
             }
 
+            if (isset($_POST['usergroup_users_save']) && !empty($_POST['usergroup_users_save'])) {
+                self::save_user_in_user_group();
+            }
+
+            if (isset($_GET['action']) && $_GET['action'] == 'deluser') {
+                self::save_user_in_user_group();
+            }
+        }
+
+        public static function save_user_groups()
+        {
             global $mingleforum, $wpdb;
             $listed_user_groups = array();
             $user_group_ids = array();
@@ -159,6 +191,31 @@ if(!class_exists("MFAdmin"))
             }
         }
 
+        function save_user_in_user_group()
+        {
+            global $mingleforum, $wpdb, $usergroup;
+            $groupID = $_GET['groupid'];
+
+            if (isset($_POST['usergroup_user_add_new']) && !empty($_POST['usergroup_user_add_new'])) {
+                $user = trim(stripslashes($_POST['usergroup_user_add_new']));
+                $userID = username_exists($user);
+
+                if ($userID) {
+                    if (!$mingleforum->is_user_ingroup($userID, $groupID)) {
+                        $wpdb->insert($mingleforum->t_usergroup2user, array('user_id' => $userID, 'group' => $groupID), array('%d', '%d'));
+                    }
+                }
+            }
+
+            if (isset($_GET['action']) && $_GET['action'] == 'deluser') {
+                $userID = $_GET['user_id'];
+                $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE user_id = {$userID} AND group = {$groupID}");
+            }
+
+            wp_redirect(admin_url('admin.php?page=mingle-forum-user-groups&action=users&groupid='.$groupID.'&saved=true'));
+            exit();
+        }
+
 
 
 
@@ -202,48 +259,7 @@ if(!class_exists("MFAdmin"))
 
 
 
-        public static function maybe_save_options()
-        {
-          global $wpdb, $mingleforum;
 
-          $saved_ops = array();
-
-          if(!isset($_POST['mf_options_submit']) || empty($_POST['mf_options_submit']))
-            return;
-
-          foreach($mingleforum->default_ops as $k => $v)
-          {
-            if(isset($_POST[$k]) && !empty($_POST[$k]))
-            {
-              if(is_array($v))
-                $saved_ops[$k] = explode(',', $_POST[$k]);
-              elseif(is_numeric($v))
-                $saved_ops[$k] = (int)$_POST[$k];
-              elseif(is_bool($v))
-                $saved_ops[$k] = true;
-              else
-                $saved_ops[$k] = $wpdb->escape(stripslashes($_POST[$k]));
-            }
-            else
-            {
-              if(is_array($v))
-                $saved_ops[$k] = array();
-              elseif(is_numeric($v))
-                $saved_ops[$k] = $v;
-              elseif(is_bool($v))
-                $saved_ops[$k] = false;
-              else
-                $saved_ops[$k] = '';
-            }
-          }
-
-          //Set some stuff that isn't on the options page
-          $saved_ops['forum_db_version'] = $mingleforum->options['forum_db_version'];
-
-          update_option('mingleforum_options', $saved_ops);
-          wp_redirect(admin_url('admin.php?page=mingle-forum&saved=true'));
-          exit();
-        }
 
         public static function maybe_save_structure()
         {

@@ -10,13 +10,13 @@
         <fieldset class="mf_fset">
             <legend><?php _e('Manage User Groups', 'mingle-forum'); ?></legend>
             <ol id="user-groups" class="mf_ordered_list">
-                <?php if(!empty($user_groups)): ?>
-                    <?php foreach($user_groups as $group): ?>
+                <?php if (!empty($user_groups)): ?>
+                    <?php foreach ($user_groups as $group): ?>
                         <li class="ui-state-default mf_user_group_li_item">
                             <input type="hidden" name="mf_user_group_id[]" value="<?php echo $group->id; ?>" />
                             <label><?php _e('Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="user_group_name[]" value="<?php echo htmlentities(stripslashes($group->name), ENT_QUOTES); ?>" /></label>&nbsp;&nbsp;
                             <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="user_group_description[]" value="<?php echo htmlentities(stripslashes($group->description), ENT_QUOTES); ?>" size="40" /></label>&nbsp;&nbsp;
-                            <a href="<?php echo admin_url('admin.php?page=mingle-forum-user-groups&action=users&id='.$group->id); ?>" class="button"><?php _e('Manage Users', 'mingle-forum'); ?></a>
+                            <a href="<?php echo admin_url('admin.php?page=mingle-forum-user-groups&action=users&groupid='.$group->id); ?>" class="button"><?php _e('Manage Users', 'mingle-forum'); ?></a>
                             <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'mingle-forum'); ?>">
                                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
                             </a>

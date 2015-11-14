@@ -6,23 +6,26 @@
         </div>
     <?php endif; ?>
     <form action="" method="post">
-    <label><?php _e('Add Users to this Group', 'mingle-forum'); ?></label>:<br/>
-    <input type="text" name="usergroup_users_add_new" id="usergroup_users_add_new" />
-    <br/><br/>
-    <input type="submit" name="usergroup_users_save" value="<?php _e('Update', 'mingle-forum'); ?>" class="button" />
-  </form>
-
-  <h4><?php _e('Users in this Group', 'mingle-forum'); ?>:</h4>
-  <?php if(!empty($usergroup_users)): ?>
-    <?php foreach($usergroup_users as $u): ?>
-      <?php $alt = (isset($alt) && empty($alt))?'usergroup_users_row_alt':''; ?>
-      <div class="usergroup_users_row <?php echo $alt; ?>">
-        <a href="<?php echo admin_url('admin.php?page=mingle-forum-user-groups&action=deluser&group_id='.$usergroup->id.'&user_id='.$u->user_id); ?>" title="<?php _e('Remove User from this Group', 'mingle-forum'); ?>" onclick="return confirm('<?php _e('Are you sure you want to remove the User from this Group?', 'mingle-forum'); ?>');"><?php _e('X', 'mingle-forum'); ?></a>
-        &nbsp;&nbsp;
-        <a href="<?php echo admin_url('user-edit.php?user_id='.$u->user_id); ?>" title="<?php _e('View/Edit Profile', 'mingle-forum'); ?>" target="_blank"><?php echo $u->user_login; ?></a>
-      </div>
-    <?php endforeach; ?>
-  <?php else: //!empty $usergroup_users?>
-    <h4><?php _e('There are no users in this Group', 'mingle-forum'); ?></h4>
-  <?php endif; //!empty $usergroup_users ?>
+        <fieldset class="mf_fset">
+            <legend><?php echo htmlentities(stripslashes($usergroup->name), ENT_QUOTES); ?></legend>
+            <ol id="user-groups" class="mf_ordered_list">
+                <?php if (!empty($usergroup_users)): ?>
+                    <?php foreach ($usergroup_users as $u): ?>
+                        <li class="ui-state-default mf_user_group_li_item">
+                            <label><?php echo $u->user_login; ?></label>
+                            <a href="<?php echo admin_url('admin.php?page=mingle-forum-user-groups&action=deluser&groupid='.$usergroup->id.'&user_id='.$u->user_id); ?>" class="mf_remove_user_group_user" title="<?php _e('Remove this User', 'mingle-forum'); ?>">
+                                <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p><?php _e('There are no users in this Group.', 'mingle-forum'); ?></p>
+                <?php endif; ?>
+            </ol>
+            <p>
+                <label><?php _e('Add User to this Group', 'mingle-forum'); ?>:&nbsp;<input type="text" name="usergroup_user_add_new" /></label>&nbsp;
+                <input type="submit" name="usergroup_users_save" value="<?php _e('Add', 'mingle-forum'); ?>" class="button" />
+            </p>
+        </fieldset>
+    </form>
 </div>

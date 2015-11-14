@@ -25,6 +25,7 @@ li.ui-state-active {
     padding: 10px;
     background: #bbb;
     border-color: #aaa;
+    height: 30px;
 }
 li.ui-state-highlight {
     list-style-type: none;
@@ -59,14 +60,7 @@ div.user-groups-area {
     display: none;
 }
 /* USER GROUPS PAGE */
-a.mf_remove_user_group {
+a.mf_remove_user_group,
+a.mf_remove_user_group_user {
     float: right;
-}
-div.usergroup_users_row {
-    padding: 5px;
-    width: 250px;
-    border: 1px solid #dedede;
-}
-div.usergroup_users_row_alt {
-    background: #ececec;
 }
