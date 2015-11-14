@@ -79,6 +79,14 @@
 #wpf-wrapper .mirrortab_back a:focus {
 	text-decoration: none !important;
 }
+#wpf_notice {
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+    color: #444;
+}
 /*Breadcrumb -------------------------------------------*/
 #wpf-wrapper #trail.breadcrumbs a {
     color: #636363;

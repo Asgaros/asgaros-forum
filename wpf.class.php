@@ -850,6 +850,7 @@ if (!class_exists('mingleforum'))
       $grs = $this->get_groups();
       $this->header();
 
+      if (count($grs) > 0) {
       foreach ($grs as $g)
       {
         if ($this->have_access($g->id))
@@ -900,6 +901,9 @@ if (!class_exists('mingleforum'))
           $this->o .= "</table></div><br class='clear'/>";
         }
       }
+  } else {
+      $this->o .= "<div id='wpf_notice'>".__("There are no categories yet!", "mingleforum")."</div>";
+  }
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
