@@ -66,6 +66,8 @@ if(!class_exists("MFAdmin"))
         {
             global $mingleforum;
 
+            $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
+
             $user_groups = $mingleforum->get_usergroups();
 
             if (isset($_GET['action']) && $_GET['action'] == 'users') {
@@ -83,24 +85,25 @@ if(!class_exists("MFAdmin"))
 
         public static function maybe_save_user_groups()
         {
-            global $mingleforum, $wpdb;
-            $listed_user_groups = array();
-            $user_group_ids = array();
-
             if (!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save'])) {
                 return;
             }
 
+            global $mingleforum, $wpdb;
+            $listed_user_groups = array();
+            $user_group_ids = array();
+
             if (isset($_POST['user_group_name']) && !empty($_POST['user_group_name'])) {
                 foreach ($_POST['user_group_name'] as $i => $v) {
                     $id = $_POST['mf_user_group_id'][$i];
-                    $name = stripslashes($v);
-                    $description = (!empty($_POST['user_group_description'][$i])) ? stripslashes($_POST['user_group_description'][$i]) : '';
+                    $name = stripslashes($_POST['user_group_name'][$i]);
+                    $description = stripslashes($_POST['user_group_description'][$i]);
 
                     if (empty($name)) { //If no name, don't save this User Group
                         if ($id != 'new') {
                             $listed_user_groups[] = $id;
                         }
+
                         continue;
                     }
 
@@ -108,7 +111,7 @@ if(!class_exists("MFAdmin"))
                         $wpdb->insert($mingleforum->t_usergroups, array('name' => $name, 'description' => $description), array('%s', '%s'));
                         $listed_user_groups[] = $wpdb->insert_id;
                     } else { //Update an existing User Group
-                        $q = "UPDATE {$mingleforum->t_usergroups} SET 'name' = %s, 'description' = %s WHERE 'id' = %d";
+                        $q = "UPDATE {$mingleforum->t_usergroups} SET name = %s, description = %s WHERE id = %d";
                         $wpdb->query($wpdb->prepare($q, $name, $description, $id));
                         $listed_user_groups[] = $id;
                     }
@@ -136,25 +139,23 @@ if(!class_exists("MFAdmin"))
 
         public static function delete_usergroup($ugid)
         {
-          global $mingleforum, $wpdb;
+            global $mingleforum, $wpdb;
 
-          $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE `group` = {$ugid}");
-          $wpdb->query("DELETE FROM {$mingleforum->t_usergroups} WHERE `id` = {$ugid}");
+            $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE group = {$ugid}");
+            $wpdb->query("DELETE FROM {$mingleforum->t_usergroups} WHERE id = {$ugid}");
 
-          //Remove this group from categories too
-          $cats = $wpdb->get_results("SELECT * FROM {$mingleforum->t_groups}");
+            //Remove this group from categories too
+            $cats = $wpdb->get_results("SELECT * FROM {$mingleforum->t_groups}");
 
-          if(!empty($cats))
-            foreach($cats as $cat)
-            {
-              $usergroups = (array)unserialize($cat->usergroups);
+            if (!empty($cats)) {
+                foreach ($cats as $cat) {
+                    $usergroups = (array)unserialize($cat->usergroups);
 
-              if(in_array($ugid, $usergroups))
-              {
-                $usergroups = serialize(array_diff($usergroups, array($ugid)));
-
-                $wpdb->query("UPDATE {$mingleforum->t_groups} SET `usergroups` = '{$usergroups}' WHERE `id` = {$cat->id}");
-              }
+                    if (in_array($ugid, $usergroups)) {
+                        $usergroups = serialize(array_diff($usergroups, array($ugid)));
+                        $wpdb->query("UPDATE {$mingleforum->t_groups} SET usergroups = '{$usergroups}' WHERE id = {$cat->id}");
+                    }
+                }
             }
         }
 
