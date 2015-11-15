@@ -17,13 +17,8 @@ if (!class_exists("MFAdmin"))
 
             $plug_url = plugin_dir_url(__FILE__) . '../';
             $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'mingle-forum'),
-                'images_url' => WPFURL . 'images/',
                 'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
-                'forum_name_label' => __('Forum Name:', 'mingle-forum'),
-                'forum_description_label' => __('Description:', 'mingle-forum'),
-                'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum'),
-                'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
-                'users_list' => json_encode($mingleforum->get_all_users_list()));
+                'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'));
 
             //Let's only load our shiz on mingle-forum admin pages
             if (strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php') {

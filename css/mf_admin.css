@@ -12,15 +12,10 @@ legend {
 .mf_fset a.button {
     color: #666 !important;
 }
-.mf_fset a.button:hover {
-    color: black !important;
-}
 .mf_ordered_list {
     margin: 0;
-    padding: 0;
 }
-li.ui-state-default,
-li.ui-state-active {
+li.ui-state-default {
     list-style-type: none;
     padding: 10px;
     background: #bbb;
