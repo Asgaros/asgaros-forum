@@ -1,7 +1,7 @@
 === Mingle Forum Lite ===
 Contributors: Thomas Belser, cartpauj
-Requires at least: 3.5
-Tested up to: 3.5.1
+Requires at least: 4.3.1
+Tested up to: 4.3.1
 Stable tag: 1.0.0 Development-Version
 
 Mingle Forum allows you to easily and quickly put a Forum on your WordPress site/blog.
@@ -10,7 +10,7 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 **The best free WordPress forum plugin available at wordpress.org!** Mingle Forum is so easy to setup and manage, that you'll be up and running in no time! It integrates seamlessly with WordPress and its user management system, whicn means you don't have to make your users signup twice! Best of all, you don't have to try and manage two separate applications and databases. Mingle Forum comes with many standard forum featues, and also leverages WordPress permalinks for pretty SEO friendly URL's and page titles. So what are you waiting for? Give it a try, you won't regret it!!!
 
 = Features (NOT UP2DATE!) =
-* **NEW!** Now Multisite - Network Activate - friendly
+* Now Multisite - Network Activate - friendly
 * Image uploads
 * SEO Friendly URLs
 * Forum Sitemap
@@ -87,56 +87,5 @@ Mingle Forum allows you to easily and quickly put a Forum on your WordPress site
 * Mingle Forum Lite contains some significant changes. Please do NOT upgrade from the original Mingle Forum plugin!
 
 == Changelog ==
-= 1.0.0 Development-Version =
-* Changed: icons
-* Added: frontend message when there are no categories
-* Fixed: possible bug because of special database column name
-* Added: missing code to add/delete users from group
-* Removed: auto add option from usergroups
-* Changed: database table name for categories
-* Fixed: could not delete all or the last usergroup
-* Changed: ordering of usergroups in administration area
-* Fixed: usergroup name deletion could delete usergroup
-* Removed: unused field in database
-* Fixed: possible bug with generated IDs in usergroup administration
-* Changed: shortening of long topic titles
-* Removed: user registration date from topics
-* Changed: forum style
-* Removed: inputosaurus.js library from administration area
-* Changed: revised administration area
-* Removed: admin notifications functionality
-* Removed: locked categories functionality
-* Changed: guests must always fill out captcha
-* Removed: spam time interval check
-* Changed: css code cleanup and fixes
-* Removed: forum header
-* Changed: position of 'move topic' button
-* Removed: moderator functionality
-* Changed: cleaned up forum overview
-* Removed: profile functionality
-* Removed: settings area in frontend
-* Removed: edit profile button
-* Changed: using date/time format from WordPress settings
-* Removed: login/logout/register functionality
-* Removed: forum/topic subscription functionality
-* Changed: hide avatars outside of topics
-* Removed: show unread topics functionality
-* Removed: info center
-* Removed: category shrink/expand functionality
-* Removed: category view
-* Removed: recent replies widget
-* Removed: integration with Cartpauj PM and Mingle
-* Removed: rss feeds functionality
-* Removed: attribution area
-* Changed: renamed folder containing administration files
-* Removed: files of old administration area
-* Removed: skin management functionality
-* Removed: about section in administration area
-* Removed: hot/very hot topics functionality
-* Removed: creation of forum topic on new WordPress post functionality
-* Removed: user title functionality
-* Removed: signature functionality
-* Changed: plugin directory name to mingle-forum-lite
-* Removed: monetize/advertising functionality
-* Removed: accordion-behavior in administration options
-* Initial commit
+= 1.0.0 Alpha-0 =
+* Status: In development
