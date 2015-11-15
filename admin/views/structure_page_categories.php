@@ -20,7 +20,7 @@
                             <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
                             <label><?php _e('Category Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo htmlentities(stripslashes($cat->name), ENT_QUOTES); ?>" /></label>&nbsp;&nbsp;
                             <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="category_description[]" value="<?php echo htmlentities(stripslashes($cat->description), ENT_QUOTES); ?>" size="50" /></label>&nbsp;&nbsp;
-                            <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>" title="<?php echo __('Category ID', 'mingle-forum') . ' = ' . $cat->id; ?>"><?php _e('Limit Access', 'mingle-forum'); ?></a>
+                            <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>"><?php _e('Limit Access', 'mingle-forum'); ?></a>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'mingle-forum'); ?>">
                                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
                             </a>
@@ -29,7 +29,7 @@
                                 <?php $allusergroups = $mingleforum->get_usergroups(); ?>
                                 <?php $my_usergroups = (array)maybe_unserialize($cat->usergroups); ?>
                                 <?php if (!empty($allusergroups)): ?>
-                                    <label><?php _e('Usergroups with access', 'mingle-forum'); ?>:</label>
+                                    <label><?php _e('Limit access to the following usergroups', 'mingle-forum'); ?>:</label>&nbsp;
                                     <?php foreach ($allusergroups as $usergroup): ?>
                                         <label><input type="checkbox" name="category_usergroups_<?php echo $cat->id; ?>[]" value="<?php echo $usergroup->id; ?>" <?php checked((in_array($usergroup->id, $my_usergroups))); ?> />&nbsp;<?php echo stripslashes($usergroup->name); ?></label>&nbsp;&nbsp;
                                     <?php endforeach; ?>
