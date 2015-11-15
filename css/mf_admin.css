@@ -38,6 +38,12 @@ li.ui-state-highlight {
 #hidden-element-container {
     display: none;
 }
+a.mf_remove_category,
+a.mf_remove_forum,
+a.mf_remove_user_group,
+a.mf_remove_user_group_user {
+    float: right;
+}
 /* MAIN OPTIONS PAGE */
 #mf_options_form input {
     vertical-align: middle;
@@ -47,16 +53,7 @@ li.ui-state-highlight {
     width: 350px;
 }
 /* STRUCTURE PAGE */
-a.mf_remove_category,
-a.mf_remove_forum {
-    float: right;
-}
 div.user-groups-area {
     display: none;
     margin-top: 10px;
-}
-/* USER GROUPS PAGE */
-a.mf_remove_user_group,
-a.mf_remove_user_group_user {
-    float: right;
 }

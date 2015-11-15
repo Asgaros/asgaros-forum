@@ -126,7 +126,7 @@ if (!class_exists("MFAdmin"))
                     $name = stripslashes($_POST['user_group_name'][$i]);
                     $description = stripslashes($_POST['user_group_description'][$i]);
 
-                    if (empty($name)) { //If no name, don't save this User Group
+                    if (empty($name)) { // If no name, don't save this User Group
                         if ($id != 'new') {
                             $listed_user_groups[] = $id;
                         }
@@ -134,10 +134,10 @@ if (!class_exists("MFAdmin"))
                         continue;
                     }
 
-                    if ($id == 'new') { //Create a new User Group
+                    if ($id == 'new') { // Create a new User Group
                         $wpdb->insert($mingleforum->t_usergroups, array('name' => $name, 'description' => $description), array('%s', '%s'));
                         $listed_user_groups[] = $wpdb->insert_id;
-                    } else { //Update an existing User Group
+                    } else { // Update an existing User Group
                         $q = "UPDATE {$mingleforum->t_usergroups} SET name = %s, description = %s WHERE id = %d";
                         $wpdb->query($wpdb->prepare($q, $name, $description, $id));
                         $listed_user_groups[] = $id;
@@ -145,7 +145,7 @@ if (!class_exists("MFAdmin"))
                 }
             }
 
-            //Delete user groups that the user removed from the list
+            // Delete user groups that the user removed from the list
             $listed_user_groups = implode(',', $listed_user_groups);
 
             if (empty($listed_user_groups)) {
@@ -234,77 +234,66 @@ if (!class_exists("MFAdmin"))
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public static function process_save_categories()
         {
-          global $wpdb, $mingleforum;
+            global $mingleforum, $wpdb;
+            $order = 10000; //Order is DESC for some reason
+            $listed_categories = array();
+            $category_ids = array();
 
-          $order = 10000; //Order is DESC for some reason
-          $listed_categories = array();
-          $name = $description = $id = null;
+            if (isset($_POST['mf_category_id']) && !empty($_POST['mf_category_id'])) {
+                foreach ($_POST['mf_category_id'] as $key => $value) {
+                    $id = $_POST['mf_category_id'][$key];
+                    $name = stripslashes($_POST['category_name'][$key]);
+                    $description = stripslashes($_POST['category_description'][$key]);
 
-          foreach($_POST['mf_category_id'] as $key => $value)
-          {
-            $name = (!empty($_POST['category_name'][$key]))?stripslashes($_POST['category_name'][$key]):false;
-            $description = (!empty($_POST['category_description'][$key]))?stripslashes($_POST['category_description'][$key]):'';
-            $id = (isset($value) && is_numeric($value))?$value:'new';
+                    if (empty($name)) {
+                        if ($id != 'new') {
+                            $listed_categories[] = $id;
+                        }
 
-            if($name !== false) //$name is required before we do any saving
-            {
-              if($id == 'new')
-              {
-                //Save new category
-                $wpdb->insert($mingleforum->t_categories,
-                              array('name' => $name, 'description' => $description, 'sort' => $order),
-                              array('%s', '%s', '%d'));
+                        continue;
+                    }
 
-                $listed_categories[] = $wpdb->insert_id;
-              }
-              else
-              {
-                //Update existing category
-                $usergroups = (isset($_POST['category_usergroups_'.$id]))?serialize((array)$_POST['category_usergroups_'.$id]):'';
-                $q = "UPDATE {$mingleforum->t_categories}
-                        SET `name` = %s, `description` = %s, `sort` = %d, `usergroups` = %s
-                        WHERE `id` = %d";
+                    if ($id == 'new') { // Save new category
+                        $wpdb->insert($mingleforum->t_categories, array('name' => $name, 'description' => $description, 'sort' => $order), array('%s', '%s', '%d'));
+                        $listed_categories[] = $wpdb->insert_id;
+                    } else { // Update existing category
+                        $usergroups = serialize((array)$_POST['category_usergroups_'.$id]);
+                        $q = "UPDATE {$mingleforum->t_categories} SET name = %s, description = %s, sort = %d, usergroups = %s WHERE id = %d";
+                        $wpdb->query($wpdb->prepare($q, $name, $description, $order, $usergroups, $id));
+                        $listed_categories[] = $id;
+                    }
 
-                $wpdb->query($wpdb->prepare($q, $name, $description, $order, $usergroups, $id));
-
-                $listed_categories[] = $id;
-              }
+                    $order--;
+                }
             }
 
-            $order -= 5;
-          }
-
-          //Delete categories that the user removed from the list
-          if(!empty($listed_categories))
-          {
+            // Delete categories that the user removed from the list
             $listed_categories = implode(',', $listed_categories);
-            $category_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_categories} WHERE `id` NOT IN ({$listed_categories})");
 
-            if(!empty($category_ids))
-              foreach($category_ids as $cid)
-                self::delete_category($cid);
-          }
+            if (empty($listed_categories)) {
+                $category_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_categories}");
+            } else {
+                $category_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_categories} WHERE id NOT IN ({$listed_categories})");
+            }
 
-          wp_redirect(admin_url('admin.php?page=mingle-forum-structure&saved=true'));
-          exit();
+            if (!empty($category_ids)) {
+                foreach ($category_ids as $cid) {
+                    self::delete_category($cid);
+                }
+            }
+
+            wp_redirect(admin_url('admin.php?page=mingle-forum-structure&saved=true'));
+            exit();
         }
+
+
+
+
+
+
+
 
 
 
