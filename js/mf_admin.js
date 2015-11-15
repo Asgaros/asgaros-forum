@@ -1,57 +1,31 @@
 (function($) {
-  $(document).ready(function() {
-/******************************** SORTABLE CATEGORIES ********************************/
-    //Make Categories Sortable
-    $('#sortable-categories').sortable({
-      placeholder: "ui-state-highlight",
-      start: function() {
-        $('div.user-groups-area').hide();
-      }
-    });
+    $(document).ready(function() {
+        /******************************** SORTABLE CATEGORIES ********************************/
 
-    $('a.access_control').click(function() {
-      id = $(this).attr('data-value');
-      $('div#user-groups-' + id).slideToggle();
-      return false;
-    });
-
-    $('a#mf_add_new_category').click(function() {
-      var new_category_row = get_new_category_row();
-
-      $(new_category_row).hide().appendTo('ol#sortable-categories').fadeIn(500);
-
-      return false;
-    });
-
-    $('body').on('click', '.mf_remove_category', function() {
-      var answer = confirm(MFAdmin.remove_category_warning);
-
-      if(answer) {
-        $(this).parent().fadeOut(500, function() {
-          $(this).remove();
+        //Make Categories Sortable
+        $('#sortable-categories').sortable({
+            placeholder: "ui-state-highlight",
+            start: function() {
+                $('div.user-groups-area').hide();
+            }
         });
-      }
+        $('a.access_control').click(function() {
+            id = $(this).attr('data-value');
+            $('div#user-groups-' + id).toggle();
+            return false;
+        });
 
-      return false;
-    });
-
-    function get_new_category_row() {
-      var random_id = Math.floor(Math.random() * (1000000 - 100000)) + 100000;
-
-      return '<li class="ui-state-default">\
-                <input type="hidden" name="mf_category_id[]" value="new" />\
-                &nbsp;&nbsp;\
-                <label for="category-name-' + random_id + '">' + MFAdmin.category_name_label + '</label>\
-                <input type="text" name="category_name[]" id="category-name-' + random_id + '" value="" />\
-                &nbsp;&nbsp;\
-                <label for="category-description-' + random_id + '">' + MFAdmin.category_description_label + '</label>\
-                <input type="text" name="category_description[]" id="category-description-' + random_id + '" value="" size="50" />\
-                <a href="#" class="mf_remove_category" title="' + MFAdmin.remove_category_a_title + '">\
-                  <img src="' + MFAdmin.images_url + 'remove.png" width="24" />\
-                </a>\
-              </li>';
-    }
-
+        $('a#mf_add_new_category').click(function() {
+            $('#hidden-element-container li').clone().appendTo('ol#sortable-categories');
+            return false;
+        });
+        $('body').on('click', '.mf_remove_category', function() {
+            var answer = confirm(MFAdmin.remove_category_warning);
+            if(answer) {
+                $(this).parent().remove();
+            }
+            return false;
+        });
 /******************************** SORTABLE FORUMS ********************************/
     //Make Forums Sortable
     $('.sortable_forums').each(function() {

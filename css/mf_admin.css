@@ -29,8 +29,8 @@ li.ui-state-active {
 }
 li.ui-state-highlight {
     list-style-type: none;
-    margin: 10px;
-    padding: 22px;
+    padding: 10px;
+    height: 30px;
 }
 .mf_admin_submit {
     margin-top: 25px !important;
@@ -47,10 +47,6 @@ li.ui-state-highlight {
     width: 350px;
 }
 /* STRUCTURE PAGE */
-a#mf_add_new_category,
-a.mf_add_new_forum {
-    padding-left: 8px;
-}
 a.mf_remove_category,
 a.mf_remove_forum {
     float: right;
