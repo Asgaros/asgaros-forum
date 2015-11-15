@@ -25,12 +25,12 @@ li.ui-state-active {
     padding: 10px;
     background: #bbb;
     border-color: #aaa;
-    height: 30px;
+    min-height: 30px;
 }
 li.ui-state-highlight {
     list-style-type: none;
     padding: 10px;
-    height: 30px;
+    min-height: 30px;
 }
 .mf_admin_submit {
     margin-top: 25px !important;
@@ -52,8 +52,8 @@ a.mf_remove_forum {
     float: right;
 }
 div.user-groups-area {
-    margin:10px 0 0 9px;
     display: none;
+    margin-top: 10px;
 }
 /* USER GROUPS PAGE */
 a.mf_remove_user_group,

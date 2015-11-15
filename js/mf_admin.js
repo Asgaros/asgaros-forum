@@ -1,8 +1,7 @@
 (function($) {
     $(document).ready(function() {
-        /******************************** SORTABLE CATEGORIES ********************************/
+        /******************************** CATEGORIES ********************************/
 
-        //Make Categories Sortable
         $('#sortable-categories').sortable({
             placeholder: "ui-state-highlight",
             start: function() {
@@ -74,7 +73,7 @@
       return false;
     });
 
-    /******************************** USER GROUPS STUFF *******************************/
+    /******************************** USER GROUPS *******************************/
     $('a#mf_add_new_user_group').click(function() {
         $('#hidden-element-container li').clone().appendTo('ol#user-groups');
         return false;
