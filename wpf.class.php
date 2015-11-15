@@ -838,78 +838,78 @@ if (!class_exists('mingleforum'))
 
     public function mydefault()
     {
-      global $user_ID, $wp_rewrite;
+        global $user_ID, $wp_rewrite;
+        $alt = "";
 
-      $alt = "";
-
-      if ($wp_rewrite->using_permalinks())
-        $delim = "?";
-      else
-        $delim = "&";
-
-      $grs = $this->get_groups();
-      $this->header();
-
-      if (count($grs) > 0) {
-      foreach ($grs as $g)
-      {
-        if ($this->have_access($g->id))
-        {
-          $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
-          $this->o .= "<tr><td class='forumtitle' colspan='4'><span>" . $this->output_filter($g->name) . "</span></td></tr>";
-
-          $frs = $this->get_forums($g->id);
-
-          foreach ($frs as $f)
-          {
-            $alt = ($alt == "alt even") ? "odd" : "alt even";
-            $this->o .= "<tr class='{$alt}'>";
-            $image = "off.png";
-
-            if ($user_ID)
-            {
-              $lpif = $this->last_poster_in_forum($f->id, true);
-              $last_posterid = $this->last_posterid($f->id);
-
-              if ($last_posterid != $user_ID)
-              {
-                $lp = strtotime($lpif); // date
-                $lv = strtotime($this->last_visit());
-
-                if ($lv < $lp)
-                  $image = "on.png";
-                else
-                  $image = "off.png";
-              }
-            }
-
-            $this->o .= "<td class='wpf-alt forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
-                  <td valign='top' class='wpf-category-title' ><strong><a href='" . $this->get_forumlink($f->id) . "'>"
-                    . $this->output_filter($f->name) . "</a></strong><br />"
-                    . $this->output_filter($f->description);
-
-            if ($f->description != "")
-              $this->o .= "<br/>";
-
-            $this->o .= "</td>";
-
-            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "mingleforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "mingleforum") . $this->num_posts_forum($f->id) . "</small></td>";
-            $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
-            $this->o .= "</tr>";
-          }
-
-          $this->o .= "</table></div><br class='clear'/>";
+        if ($wp_rewrite->using_permalinks()) {
+            $delim = "?";
+        } else {
+            $delim = "&";
         }
-      }
-  } else {
-      $this->o .= "<div id='wpf_notice'>".__("There are no categories yet!", "mingleforum")."</div>";
-  }
 
-      $this->o .= apply_filters('wpwf_new_posts', "<table>
-            <tr>
-              <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
-            </tr>
-          </table><br class='clear'/>");
+        $grs = $this->get_groups();
+        $this->header();
+
+        if (count($grs) > 0) {
+            foreach ($grs as $g) {
+                if ($this->have_access($g->id)) {
+                    $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
+                    $this->o .= "<tr><td class='forumtitle' colspan='4'><span>" . $this->output_filter($g->name) . "</span></td></tr>";
+
+                    $frs = $this->get_forums($g->id);
+
+                    if (count($frs) > 0) {
+                        foreach ($frs as $f) {
+                            $alt = ($alt == "alt even") ? "odd" : "alt even";
+                            $this->o .= "<tr class='{$alt}'>";
+                            $image = "off.png";
+
+                            if ($user_ID) {
+                                $lpif = $this->last_poster_in_forum($f->id, true);
+                                $last_posterid = $this->last_posterid($f->id);
+
+                                if ($last_posterid != $user_ID) {
+                                    $lp = strtotime($lpif); // date
+                                    $lv = strtotime($this->last_visit());
+
+                                    if ($lv < $lp) {
+                                        $image = "on.png";
+                                    } else {
+                                        $image = "off.png";
+                                    }
+                                }
+                            }
+
+                            $this->o .= "<td class='wpf-alt forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
+                            <td valign='top' class='wpf-category-title' ><strong><a href='" . $this->get_forumlink($f->id) . "'>"
+                            . $this->output_filter($f->name) . "</a></strong><br />"
+                            . $this->output_filter($f->description);
+
+                            if ($f->description != "") {
+                                $this->o .= "<br/>";
+                            }
+
+                            $this->o .= "</td>";
+                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "mingleforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "mingleforum") . $this->num_posts_forum($f->id) . "</small></td>";
+                            $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
+                            $this->o .= "</tr>";
+                        }
+                    } else {
+                        $this->o .= "<tr><td id='wpf_notice' colspan='4'>".__("There are no forums yet!", "mingleforum")."</td></tr>";
+                    }
+
+                    $this->o .= "</table></div><br class='clear'/>";
+                }
+            }
+        } else {
+            $this->o .= "<div id='wpf_notice'>".__("There are no categories yet!", "mingleforum")."</div>";
+        }
+
+        $this->o .= apply_filters('wpwf_new_posts', "<table>
+        <tr>
+        <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
+        </tr>
+        </table><br class='clear'/>");
     }
 
     public function output_filter($string)
