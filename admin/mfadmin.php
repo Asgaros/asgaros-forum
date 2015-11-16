@@ -20,7 +20,7 @@ if (!class_exists("MFAdmin"))
                 'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
                 'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'));
 
-            //Let's only load our shiz on mingle-forum admin pages
+            // Let's only load our shiz on mingle-forum admin pages
             if (strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php') {
                 $wp_scripts = new WP_Scripts();
                 $ui = $wp_scripts->query('jquery-ui-core');
@@ -70,7 +70,7 @@ if (!class_exists("MFAdmin"))
                 }
             }
 
-            //Set some stuff that isn't on the options page
+            // Set some stuff that isn't on the options page
             $saved_ops['forum_db_version'] = $mingleforum->options['forum_db_version'];
 
             update_option('mingleforum_options', $saved_ops);
@@ -166,7 +166,7 @@ if (!class_exists("MFAdmin"))
             $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE group_id = {$ugid}");
             $wpdb->query("DELETE FROM {$mingleforum->t_usergroups} WHERE id = {$ugid}");
 
-            //Remove this group from categories too
+            // Remove this group from categories too
             $cats = $wpdb->get_results("SELECT * FROM {$mingleforum->t_categories}");
 
             if (!empty($cats)) {
@@ -232,7 +232,7 @@ if (!class_exists("MFAdmin"))
         public static function process_save_categories()
         {
             global $mingleforum, $wpdb;
-            $order = 10000; //Order is DESC for some reason
+            $order = 10000; // Order is DESC for some reason
             $listed_categories = array();
             $category_ids = array();
 
@@ -283,121 +283,105 @@ if (!class_exists("MFAdmin"))
             exit();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public static function process_save_forums()
         {
-          global $wpdb, $mingleforum;
+            global $mingleforum, $wpdb;
+            $order = 100000; // Order is DESC for some reason
+            $listed_forums = array();
+            $forum_ids = array();
+            $categories = $mingleforum->get_groups();
 
-          $order = 100000; //Order is DESC for some reason
-          $listed_forums = array();
-          $name = $description = $id = null;
-          $categories = $mingleforum->get_groups();
-
-          if(empty($categories)) //This should never happen, but just in case
-            return;
-
-          foreach($categories as $category)
-          {
-            foreach($_POST['mf_forum_id'][$category->id] as $key => $value)
-            {
-              $name = (!empty($_POST['forum_name'][$category->id][$key]))?stripslashes($_POST['forum_name'][$category->id][$key]):false;
-              $description = (!empty($_POST['forum_description'][$category->id][$key]))?stripslashes($_POST['forum_description'][$category->id][$key]):'';
-              $id = (isset($value) && is_numeric($value))?$value:'new';
-
-              if($name !== false) //$name is required before we do any saving
-              {
-                if($id == 'new')
-                {
-                  //Save new forum
-                  $wpdb->insert($mingleforum->t_forums,
-                                array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->id),
-                                array('%s', '%s', '%d', '%d'));
-
-                  $listed_forums[] = $wpdb->insert_id;
-                }
-                else
-                {
-                  //Update existing forum
-                  $q = "UPDATE {$mingleforum->t_forums}
-                          SET `name` = %s, `description` = %s, `sort` = %d, `parent_id` = %d
-                          WHERE `id` = %d";
-
-                  $wpdb->query($wpdb->prepare($q, $name, $description, $order, $category->id, $id));
-
-                  $listed_forums[] = $id;
-                }
-              }
-
-              $order -= 5;
+            if (empty($categories)) { // This should never happen, but just in case
+                return;
             }
-          }
 
-          //Delete forums that the user removed from the list
-          if(!empty($listed_forums))
-          {
+            foreach ($categories as $category) {
+                if (isset($_POST['mf_forum_id'][$category->id]) && !empty($_POST['mf_forum_id'][$category->id])) {
+                    foreach ($_POST['mf_forum_id'][$category->id] as $key => $value) {
+                        $id = $_POST['mf_forum_id'][$category->id][$key];
+                        $name = stripslashes($_POST['forum_name'][$category->id][$key]);
+                        $description = stripslashes($_POST['forum_description'][$category->id][$key]);
+
+                        if (empty($name)) {
+                            if ($id != 'new') {
+                                $listed_forums[] = $id;
+                            }
+
+                            continue;
+                        }
+
+                        if ($id == 'new') { // Save new forum
+                            $wpdb->insert($mingleforum->t_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->id), array('%s', '%s', '%d', '%d'));
+                            $listed_forums[] = $wpdb->insert_id;
+                        } else { // Update existing forum
+                            $q = "UPDATE {$mingleforum->t_forums} SET name = %s, description = %s, sort = %d, parent_id = %d WHERE id = %d";
+                            $wpdb->query($wpdb->prepare($q, $name, $description, $order, $category->id, $id));
+                            $listed_forums[] = $id;
+                        }
+
+                        $order--;
+                    }
+                }
+            }
+
+            // Delete forums that the user removed from the list
             $listed_forums = implode(',', $listed_forums);
-            $forum_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_forums} WHERE `id` NOT IN ({$listed_forums})");
 
-            if(!empty($forum_ids))
-              foreach($forum_ids as $fid)
-                self::delete_forum($fid);
-          }
+            if (empty($listed_forums)) {
+                $forum_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_forums}");
+            } else {
+                $forum_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_forums} WHERE id NOT IN ({$listed_forums})");
+            }
 
-          wp_redirect(admin_url('admin.php?page=mingle-forum-structure&action=forums&saved=true'));
-          exit();
+            if (!empty($forum_ids)) {
+                foreach ($forum_ids as $fid) {
+                    self::delete_forum($fid);
+                }
+            }
+
+            wp_redirect(admin_url('admin.php?page=mingle-forum-structure&action=forums&saved=true'));
+            exit();
         }
 
         public static function delete_category($cid)
         {
-          global $wpdb, $mingleforum;
+            global $wpdb, $mingleforum;
 
-          //First delete all associated forums
-          $forum_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_forums} WHERE `parent_id` = {$cid}");
-          if(!empty($forum_ids))
-            foreach($forum_ids as $fid)
-              self::delete_forum($fid);
+            // First delete all associated forums
+            $forum_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_forums} WHERE parent_id = {$cid}");
 
-          $wpdb->query("DELETE FROM {$mingleforum->t_categories} WHERE `id` = {$cid}");
+            if (!empty($forum_ids)) {
+                foreach ($forum_ids as $fid) {
+                    self::delete_forum($fid);
+                }
+            }
+
+            $wpdb->query("DELETE FROM {$mingleforum->t_categories} WHERE id = {$cid}");
         }
 
         public static function delete_forum($fid)
         {
-          global $wpdb, $mingleforum;
+            global $wpdb, $mingleforum;
 
-          //First delete all associated topics
-          $topic_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_threads} WHERE `parent_id` = {$fid}");
-          if(!empty($topic_ids))
-            foreach($topic_ids as $tid)
-              self::delete_topic($tid);
+            // First delete all associated topics
+            $topic_ids = $wpdb->get_col("SELECT id FROM {$mingleforum->t_threads} WHERE parent_id = {$fid}");
 
-          $wpdb->query("DELETE FROM {$mingleforum->t_forums} WHERE `id` = {$fid}");
+            if (!empty($topic_ids)) {
+                foreach ($topic_ids as $tid) {
+                    self::delete_topic($tid);
+                }
+            }
+
+            $wpdb->query("DELETE FROM {$mingleforum->t_forums} WHERE id = {$fid}");
         }
 
         public static function delete_topic($tid)
         {
-          global $wpdb, $mingleforum;
+            global $wpdb, $mingleforum;
 
-          //First delete all associated replies
-          $wpdb->query("DELETE FROM {$mingleforum->t_posts} WHERE `parent_id` = {$tid}");
-          $wpdb->query("DELETE FROM {$mingleforum->t_threads} WHERE `id` = {$tid}");
+            $wpdb->query("DELETE FROM {$mingleforum->t_posts} WHERE parent_id = {$tid}");
+            $wpdb->query("DELETE FROM {$mingleforum->t_threads} WHERE id = {$tid}");
         }
-      }
+    }
 }
 ?>
