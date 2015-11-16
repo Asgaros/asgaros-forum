@@ -94,7 +94,12 @@ if (!class_exists("MFAdmin"))
                 if (isset($_GET['groupid'])) {
                     $usergroup = $mingleforum->get_usergroup($_GET['groupid']);
                     $usergroup_users = $mingleforum->get_members($_GET['groupid']);
-                    require('views/user_groups_users_page.php');
+
+                    if (!empty($usergroup)) {
+                        require('views/user_groups_users_page.php');
+                    } else {
+                        require('views/user_groups_page.php');
+                    }
                 } else {
                     require('views/user_groups_page.php');
                 }
