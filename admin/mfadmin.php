@@ -62,7 +62,7 @@ if (!class_exists("MFAdmin"))
                     } else if (is_bool($v)) {
                         $saved_ops[$k] = true;
                     } else {
-                        $saved_ops[$k] = $wpdb->escape(stripslashes($_POST[$k]));
+                        $saved_ops[$k] = esc_sql(stripslashes($_POST[$k]));
                     }
                 } else {
                     if (is_numeric($v)) {
@@ -239,7 +239,12 @@ if (!class_exists("MFAdmin"))
                         $wpdb->insert($mingleforum->t_categories, array('name' => $name, 'description' => $description, 'sort' => $order), array('%s', '%s', '%d'));
                         $listed_categories[] = $wpdb->insert_id;
                     } else { // Update existing category
-                        $usergroups = serialize((array)$_POST['category_usergroups_'.$id]);
+                        $usergroups = '';
+
+                        if (isset($_POST['category_usergroups_'.$id]) && !empty($_POST['category_usergroups_'.$id])) {
+                            $usergroups = serialize((array)$_POST['category_usergroups_'.$id]);
+                        }
+
                         $q = "UPDATE {$mingleforum->t_categories} SET name = %s, description = %s, sort = %d, usergroups = %s WHERE id = %d";
                         $wpdb->query($wpdb->prepare($q, $name, $description, $order, $usergroups, $id));
                         $listed_categories[] = $id;

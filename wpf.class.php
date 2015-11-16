@@ -1455,7 +1455,7 @@ if (!class_exists('mingleforum'))
         $terms = "";
 
         if (isset($_POST['search_words']))
-          $terms = htmlentities($wpdb->escape($_POST['search_words']), ENT_QUOTES);
+          $terms = htmlentities(esc_sql($_POST['search_words']), ENT_QUOTES);
 
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "mingleforum") . " &raquo; $terms";
       }
@@ -1806,7 +1806,7 @@ if (!class_exists('mingleforum'))
       $o = "";
       $this->current_view = SEARCH;
       $this->header();
-      $search_string = $wpdb->escape($_POST['search_words']);
+      $search_string = esc_sql($_POST['search_words']);
 
       $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_posts}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, MATCH (`text`) AGAINST (%s) AS score
       FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
