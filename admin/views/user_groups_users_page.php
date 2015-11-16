@@ -7,7 +7,7 @@
     <?php endif; ?>
     <form action="" method="post">
         <fieldset class="mf_fset">
-            <legend><?php echo htmlentities(stripslashes($usergroup->name), ENT_QUOTES); ?></legend>
+            <legend><?php echo esc_html(stripslashes($usergroup->name)); ?></legend>
             <ol id="user-groups" class="mf_ordered_list">
                 <?php if (!empty($usergroup_users)): ?>
                     <?php foreach ($usergroup_users as $u): ?>

@@ -1103,7 +1103,7 @@ if (!class_exists('mingleforum'))
           $title = $default_title . " &raquo; " . $group . " &raquo; " . $this->get_forumname($this->get_parent_id(THREAD, $this->check_parms($_GET['t']))) . " &raquo; " . $this->get_threadname($this->check_parms($_GET['t']));
           break;
         case "search":
-          $terms = htmlentities($_POST['search_words'], ENT_QUOTES);
+          $terms = esc_html($_POST['search_words']);
           $title = $default_title . " &raquo; " . __("Search Results", "mingleforum") . " &raquo; {$terms} | ";
           break;
         case "editpost":
@@ -1455,7 +1455,7 @@ if (!class_exists('mingleforum'))
         $terms = "";
 
         if (isset($_POST['search_words']))
-          $terms = htmlentities(esc_sql($_POST['search_words']), ENT_QUOTES);
+          $terms = esc_html(esc_sql($_POST['search_words']));
 
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "mingleforum") . " &raquo; $terms";
       }

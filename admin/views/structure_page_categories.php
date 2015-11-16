@@ -18,8 +18,8 @@
                     <?php foreach ($categories as $cat): ?>
                         <li class="ui-state-default">
                             <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
-                            <label><?php _e('Category Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo htmlentities(stripslashes($cat->name), ENT_QUOTES); ?>" /></label>&nbsp;&nbsp;
-                            <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="category_description[]" value="<?php echo htmlentities(stripslashes($cat->description), ENT_QUOTES); ?>" size="50" /></label>&nbsp;&nbsp;
+                            <label><?php _e('Category Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($cat->name)); ?>" /></label>&nbsp;&nbsp;
+                            <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="category_description[]" value="<?php echo esc_html(stripslashes($cat->description)); ?>" size="50" /></label>&nbsp;&nbsp;
                             <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>"><?php _e('Limit Access', 'mingle-forum'); ?></a>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'mingle-forum'); ?>">
                                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />

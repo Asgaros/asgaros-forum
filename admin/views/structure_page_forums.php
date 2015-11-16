@@ -20,8 +20,8 @@
                             <?php foreach ($forums as $forum): ?>
                                 <li class="ui-state-default">
                                     <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="<?php echo $forum->id; ?>" />
-                                    <label><?php _e('Forum Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="<?php echo htmlentities(stripslashes($forum->name), ENT_QUOTES); ?>" /></label>&nbsp;&nbsp;
-                                    <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="<?php echo htmlentities(stripslashes($forum->description), ENT_QUOTES); ?>" size="50" /></label>
+                                    <label><?php _e('Forum Name:', 'mingle-forum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
+                                    <label><?php _e('Description:', 'mingle-forum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" size="50" /></label>
                                     <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'mingle-forum'); ?>">
                                         <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
                                     </a>
