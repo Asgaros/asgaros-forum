@@ -19,13 +19,15 @@ li.ui-state-default {
     list-style-type: none;
     padding: 10px;
     background: #bbb;
-    border-color: #aaa;
+    border: 1px solid #aaa;
     min-height: 30px;
 }
 li.ui-state-highlight {
     list-style-type: none;
     padding: 10px;
     min-height: 30px;
+    background: #a5c5e2;
+    border: 1px solid #aaa;
 }
 .mf_admin_submit {
     margin-top: 25px !important;

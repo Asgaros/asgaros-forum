@@ -5,31 +5,41 @@ if (!class_exists("MFAdmin"))
     {
         public static function load_hooks()
         {
-            add_action('admin_init', 'MFAdmin::save_options');
-            add_action('admin_init', 'MFAdmin::save_structure');
-            add_action('admin_init', 'MFAdmin::save_usergroups');
+            add_action('admin_init', 'MFAdmin::save_settings');
             add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
         }
 
         public static function enqueue_admin_scripts($hook)
         {
-            global $mingleforum;
-
             $plug_url = plugin_dir_url(__FILE__) . '../';
             $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'mingle-forum'),
                 'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
                 'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'));
 
             // Let's only load our shiz on mingle-forum admin pages
-            if (strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php') {
-                $wp_scripts = new WP_Scripts();
-                $ui = $wp_scripts->query('jquery-ui-core');
-                $url = "//ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/start/jquery-ui.css";
-
-                wp_enqueue_style('mingle-forum-ui-css', $url);
-                wp_enqueue_style('mingle-forum-admin-css', $plug_url . "css/mf_admin.css");
-                wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion', 'jquery-ui-sortable'));
+            if (strstr($hook, 'mingle-forum') !== false) {
+                wp_enqueue_style('mingle-forum-admin-css', $plug_url . "admin/admin.css");
+                wp_enqueue_script('mingle-forum-admin-js', $plug_url . "admin/admin.js", array('jquery-ui-sortable'));
                 wp_localize_script('mingle-forum-admin-js', 'MFAdmin', $l10n_vars);
+            }
+        }
+
+        public static function save_settings()
+        {
+            if (isset($_POST['mf_options_submit']) && !empty($_POST['mf_options_submit'])) {
+                self::save_options();
+            } else if (isset($_POST['mf_user_groups_save']) && !empty($_POST['mf_user_groups_save'])) {
+                self::save_user_groups();
+            } else if (isset($_POST['usergroup_users_save']) && !empty($_POST['usergroup_users_save'])) {
+                self::save_user_in_user_group();
+            } else if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'deluser') {
+                self::save_user_in_user_group();
+            } else if (isset($_POST['mf_categories_save']) && !empty($_POST['mf_categories_save'])) {
+                self::process_save_categories();
+            } else if (isset($_POST['mf_forums_save']) && !empty($_POST['mf_forums_save'])) {
+                self::process_save_forums();
+            } else {
+                return;
             }
         }
 
@@ -41,12 +51,7 @@ if (!class_exists("MFAdmin"))
             require('views/options_page.php');
         }
 
-        public static function save_options()
-        {
-            if (!isset($_POST['mf_options_submit']) || empty($_POST['mf_options_submit'])) {
-                return;
-            }
-
+        public static function save_options() {
             global $wpdb, $mingleforum;
             $saved_ops = array();
 
@@ -95,17 +100,6 @@ if (!class_exists("MFAdmin"))
                 }
             } else {
                 require('views/user_groups_page.php');
-            }
-        }
-
-        public static function save_usergroups()
-        {
-            if (isset($_POST['mf_user_groups_save']) && !empty($_POST['mf_user_groups_save'])) {
-                self::save_user_groups();
-            } else if (isset($_POST['usergroup_users_save']) && !empty($_POST['usergroup_users_save'])) {
-                self::save_user_in_user_group();
-            } else if (isset($_GET['action']) && $_GET['action'] == 'deluser') {
-                self::save_user_in_user_group();
             }
         }
 
@@ -183,7 +177,7 @@ if (!class_exists("MFAdmin"))
 
         function save_user_in_user_group()
         {
-            global $mingleforum, $wpdb, $usergroup;
+            global $mingleforum, $wpdb;
             $groupID = $_GET['groupid'];
 
             if (isset($_POST['usergroup_user_add_new']) && !empty($_POST['usergroup_user_add_new'])) {
@@ -217,15 +211,6 @@ if (!class_exists("MFAdmin"))
                 require('views/structure_page_forums.php');
             } else {
                 require('views/structure_page_categories.php');
-            }
-        }
-
-        public static function save_structure()
-        {
-            if (isset($_POST['mf_categories_save']) && !empty($_POST['mf_categories_save'])) {
-                self::process_save_categories();
-            } else if (isset($_POST['mf_forums_save']) && !empty($_POST['mf_forums_save'])) {
-                self::process_save_forums();
             }
         }
 
