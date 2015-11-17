@@ -280,7 +280,7 @@ if (!class_exists('asgarosforum'))
         return $wpdb->get_results("SELECT * FROM {$this->t_forums} ORDER BY sort DESC");
     }
 
-    public function get_threads($id = '')
+    public function get_threads($id)
     {
       global $wpdb;
 
@@ -292,8 +292,6 @@ if (!class_exists('asgarosforum'))
 
         return $threads;
       }
-      else
-        return $wpdb->get_results("SELECT * FROM {$this->t_threads} ORDER BY `date` DESC");
     }
 
     public function get_sticky_threads($id)
@@ -1179,7 +1177,6 @@ if (!class_exists('asgarosforum'))
             parent_id int(11) NOT NULL default '0',
             views int(11) NOT NULL default '0',
             subject varchar(255) NOT NULL default '',
-            date datetime NOT NULL default '0000-00-00 00:00:00',
             status varchar(20) NOT NULL default 'open',
             closed int(11) NOT NULL default '0',
             starter int(11) NOT NULL,

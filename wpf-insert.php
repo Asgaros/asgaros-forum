@@ -149,10 +149,10 @@ if (isset($_POST['add_topic_submit']))
     $date = $this->wpf_current_time_fixed('mysql', 0);
 
     $sql_thread = "INSERT INTO {$this->t_threads}
-                      (subject, parent_id, `date`, status, starter)
+                      (subject, parent_id, status, starter)
                     VALUES
-                      (%s, %d, %s, 'open', %d)";
-    $wpdb->query($wpdb->prepare($sql_thread, $subject, $forum_id, $date, $cur_user_ID));
+                      (%s, %d, 'open', %d)";
+    $wpdb->query($wpdb->prepare($sql_thread, $subject, $forum_id, $cur_user_ID));
 
     $id = $wpdb->insert_id;
 
