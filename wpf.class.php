@@ -4,7 +4,7 @@ if (!class_exists('asgarosforum'))
 {
     class asgarosforum
     {
-        var $db_version = 3; //MANAGES DB VERSION
+        var $db_version = 1; // MANAGES DB VERSION
 
     public function __construct()
     {
@@ -1148,106 +1148,91 @@ if (!class_exists('asgarosforum'))
 
     public function wp_forum_install()
     {
-      global $wpdb;
+        global $wpdb;
 
-      //Only run if we need to
-      if ($this->options['forum_db_version'] < $this->db_version)
-      {
-        $charset_collate = '';
-        if ($wpdb->has_cap('collation'))
-        {
-          if (!empty($wpdb->charset))
-            $charset_collate = "DEFAULT CHARACTER SET {$wpdb->charset}";
+        // Only run if we need to
+        if ($this->options['forum_db_version'] < $this->db_version) {
+            $charset_collate = $wpdb->get_charset_collate();
 
-          if (!empty($wpdb->collate))
-            $charset_collate .= " COLLATE {$wpdb->collate}";
+            $sql1 = "
+            CREATE TABLE $this->t_categories (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255) NOT NULL default '',
+            description varchar(255) default '',
+            usergroups varchar(255) default '',
+            sort int(11) NOT NULL default '0',
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql2 = "
+            CREATE TABLE $this->t_forums (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255) NOT NULL default '',
+            parent_id int(11) NOT NULL default '0',
+            description varchar(255) NOT NULL default '',
+            sort int(11) NOT NULL default '0',
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql3 = "
+            CREATE TABLE $this->t_threads (
+            id int(11) NOT NULL auto_increment,
+            parent_id int(11) NOT NULL default '0',
+            views int(11) NOT NULL default '0',
+            subject varchar(255) NOT NULL default '',
+            date datetime NOT NULL default '0000-00-00 00:00:00',
+            status varchar(20) NOT NULL default 'open',
+            closed int(11) NOT NULL default '0',
+            starter int(11) NOT NULL,
+            last_post datetime NOT NULL default '0000-00-00 00:00:00',
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql4 = "
+            CREATE TABLE $this->t_posts (
+            id int(11) NOT NULL auto_increment,
+            text longtext,
+            parent_id int(11) NOT NULL default '0',
+            date datetime NOT NULL default '0000-00-00 00:00:00',
+            author_id int(11) NOT NULL default '0',
+            subject varchar(255) NOT NULL default '',
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql5 = "
+            CREATE TABLE $this->t_usergroups (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255) NOT NULL,
+            description varchar(255) default NULL,
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql6 = "
+            CREATE TABLE $this->t_usergroup2user (
+            id int(11) NOT NULL auto_increment,
+            user_id int(11) NOT NULL,
+            group_id varchar(255) NOT NULL,
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+            if ($this->options['forum_db_version'] < 1) {
+                dbDelta($sql1);
+                dbDelta($sql2);
+                dbDelta($sql3);
+                dbDelta($sql4);
+                dbDelta($sql5);
+                dbDelta($sql6);
+
+                //We need to kill this one after we fix how the forum search works
+                $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
+                $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (text)");
+            }
+
+            $this->options['forum_db_version'] = $this->db_version;
+            update_option('asgarosforum_options', $this->options);
         }
-
-        $sql1 = "
-        CREATE TABLE " . $this->t_forums . " (
-          id int(11) NOT NULL auto_increment,
-          `name` varchar(255) NOT NULL default '',
-          parent_id int(11) NOT NULL default '0',
-          `description` varchar(255) NOT NULL default '',
-          views int(11) NOT NULL default '0',
-          `sort` int( 11 ) NOT NULL default '0',
-          PRIMARY KEY  (id)
-        ){$charset_collate};";
-
-        $sql2 = "
-        CREATE TABLE " . $this->t_categories . " (
-          id int(11) NOT NULL auto_increment,
-          `name` varchar(255) NOT NULL default '',
-          `description` varchar(255) default '',
-          `usergroups` varchar(255) default '',
-          `sort` int( 11 ) NOT NULL default '0',
-          PRIMARY KEY  (id)
-        ){$charset_collate};";
-
-        $sql3 = "
-        CREATE TABLE " . $this->t_posts . " (
-          id int(11) NOT NULL auto_increment,
-          `text` longtext,
-          parent_id int(11) NOT NULL default '0',
-          `date` datetime NOT NULL default '0000-00-00 00:00:00',
-          author_id int(11) NOT NULL default '0',
-          `subject` varchar(255) NOT NULL default '',
-          views int(11) NOT NULL default '0',
-          PRIMARY KEY  (id)
-        ){$charset_collate};";
-
-        $sql4 = "
-        CREATE TABLE " . $this->t_threads . " (
-          id int(11) NOT NULL auto_increment,
-          parent_id int(11) NOT NULL default '0',
-          views int(11) NOT NULL default '0',
-          `subject` varchar(255) NOT NULL default '',
-          `date` datetime NOT NULL default '0000-00-00 00:00:00',
-          `status` varchar(20) NOT NULL default 'open',
-          closed int(11) NOT NULL default '0',
-          starter int(11) NOT NULL,
-          `last_post` datetime NOT NULL default '0000-00-00 00:00:00',
-          PRIMARY KEY  (id)
-        ){$charset_collate};";
-
-        $sql5 = "
-          CREATE TABLE " . $this->t_usergroup2user . " (
-          `id` int(11) NOT NULL auto_increment,
-          `user_id` int(11) NOT NULL,
-          `group_id` varchar(255) NOT NULL,
-          PRIMARY KEY  (`id`)
-        ){$charset_collate};";
-
-        $sql6 = "
-          CREATE TABLE " . $this->t_usergroups . " (
-          `id` int(11) NOT NULL auto_increment,
-          `name` varchar(255) NOT NULL,
-          `description` varchar(255) default NULL,
-          PRIMARY KEY  (`id`)
-        ){$charset_collate};";
-
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-        if ($this->options['forum_db_version'] < 1)
-        {
-          dbDelta($sql1);
-          dbDelta($sql2);
-          dbDelta($sql3);
-          dbDelta($sql4);
-          dbDelta($sql5);
-          dbDelta($sql6);
-        }
-
-        if ($this->options['forum_db_version'] < 2)
-        {
-          //We need to kill this one after we fix how the forum search works
-          $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
-          $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (`text`)");
-        }
-
-        $this->options['forum_db_version'] = $this->db_version;
-        update_option('asgarosforum_options', $this->options);
-      }
     }
 
     public function forum_menu($group, $pos = "top")
