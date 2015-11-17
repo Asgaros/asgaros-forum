@@ -20,7 +20,6 @@ if (!class_exists('asgarosforum'))
       add_action("init", array($this, "kill_canonical_urls"));
       add_action('init', array($this, "set_cookie"));
       add_action('init', array($this, "run_wpf_insert"));
-      add_action('init', array($this, "maybe_do_sitemap"));
       add_action('wp', array($this, "before_go")); //Redirects Old URL's to SEO URL's
       add_filter('wpseo_whitelist_permalink_vars', array($this, 'yoast_seo_whitelist_vars'));
 
@@ -1933,54 +1932,6 @@ if (!class_exists('asgarosforum'))
       $new['(' . $link . ')(/[-/0-9a-zA-Z]+)?/(.*)$'] = 'index.php?pagename=$matches[1]&page=$matches[2]';
 
       return $new + $args;
-    }
-
-    //Add a dynamic sitemap for the forum posts
-    public function maybe_do_sitemap()
-    {
-      //If we don't want the sitemap, then don't execute this
-      if(!isset($_GET['forumaction']) || $_GET['forumaction'] != 'sitemap')
-        return;
-
-      $this->setup_links();
-      header('Content-type: application/xml; charset="utf-8"', true);
-
-      $out = "";
-      $priority = "0.8";
-      $freq = "daily";
-      $threads = $this->get_threads(false);
-      $ind = "	";
-      $nl = "\n";
-
-      if (!empty($threads))
-      {
-        $out = '<?xml version="1.0" encoding="UTF-8"?>' . $nl;
-        $out .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $nl;
-
-        foreach ($threads as $t)
-        {
-          $time = explode(' ', $t->last_post, 2);
-          $time = explode('-', $time[0], 3);
-          $out .= $ind . "<url>" . $nl;
-          $out .= $ind . $ind . "<loc>" . $this->clean_link($this->get_threadlink($t->id)) . "</loc>" . $nl;
-          $out .= $ind . $ind . "<lastmod>" . date('Y-m-d', mktime(0, 0, 0, $time[1], $time[2], $time[0])) . "</lastmod>" . $nl;
-          // $out .= $ind . $ind . "<changefreq>" . $freq . "</changefreq>" . $nl;
-          // $out .= $ind . $ind . "<priority>" . $priority . "</priority>" . $nl;
-          $out .= $ind . "</url>" . $nl;
-        }
-
-        $out .= "</urlset>";
-      }
-
-      echo $out;
-      die();
-    }
-
-    public function clean_link($l)
-    {
-      $l = str_replace('&', '&amp;', $l);
-
-      return $l;
     }
   }
 
