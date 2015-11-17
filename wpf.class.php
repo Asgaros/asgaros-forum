@@ -1,12 +1,10 @@
 <?php
+
 if (!class_exists('asgarosforum'))
 {
-
-  class asgarosforum
-  {
-
-    var $db_version = 3; //MANAGES DB VERSION
-    var $db_cleanup_name = 'mf_cleanup_db_last_run';
+    class asgarosforum
+    {
+        var $db_version = 3; //MANAGES DB VERSION
 
     public function __construct()
     {
@@ -17,7 +15,6 @@ if (!class_exists('asgarosforum'))
       //Action hooks
       add_action("admin_menu", array($this, "add_admin_pages"));
       add_action("admin_init", array($this, "wp_forum_install")); //Easy Multisite-friendly way of setting up the DB
-      add_action("admin_init", array($this, "maybe_run_db_cleanup"));
       add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
       add_action("wp_head", array($this, "setup_header"));
       add_action("init", array($this, "kill_canonical_urls"));
@@ -1251,24 +1248,6 @@ if (!class_exists('asgarosforum'))
 
         $this->options['forum_db_version'] = $this->db_version;
         update_option('asgarosforum_options', $this->options);
-      }
-    }
-
-    //This runs once a month to cleanup any zombie posts or topics
-    public function maybe_run_db_cleanup()
-    {
-      global $wpdb;
-
-      $last_run = get_option($this->db_cleanup_name, 0);
-
-      if ((time() - $last_run) > 2419200)
-      {
-        //Cleanup Posts
-        $wpdb->query("DELETE FROM {$this->t_posts} WHERE parent_id NOT IN (SELECT id FROM {$this->t_threads})");
-        //Cleanup Threads
-        $wpdb->query("DELETE FROM {$this->t_threads} WHERE parent_id NOT IN (SELECT id FROM {$this->t_forums})");
-
-        update_option($this->db_cleanup_name, time());
       }
     }
 
