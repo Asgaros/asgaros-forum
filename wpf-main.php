@@ -27,7 +27,7 @@
 
 //Textdomain Hook
 $plugin_dir = basename(dirname(__FILE__));
-load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/i18n/');
+load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 
 //Setup defines
 define('WPFURL', plugin_dir_url(__FILE__));
@@ -45,7 +45,7 @@ require('bbcode.php');
 require('admin/mfadmin.php');
 require("wpf.class.php");
 
-//Set $asgarosforum global
 global $asgarosforum;
 $asgarosforum = new asgarosforum();
+
 ?>
