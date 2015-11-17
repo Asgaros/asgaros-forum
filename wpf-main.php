@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Asgaros Forum
-  Plugin URI: https://github.com/Asgaros/mingle-forum-lite
+  Plugin URI: https://github.com/Asgaros/asgaros-forum
   Description: A lightweight and simple forum plugin for WordPress which is based on the Mingle Forum plugin (v1.1.0-dev) from Cartpauj (https://github.com/cartpauj/mingle-forum).
   Version: 1.0.0 Development-Version
   Author: Thomas Belser
@@ -27,7 +27,7 @@
 
 //Textdomain Hook
 $plugin_dir = basename(dirname(__FILE__));
-load_plugin_textdomain('mingleforum', false, $plugin_dir . '/i18n/');
+load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/i18n/');
 
 //Setup defines
 require("wpf_define.php");
@@ -37,7 +37,7 @@ require('bbcode.php');
 require('admin/mfadmin.php');
 require("wpf.class.php");
 
-//Set $mingleforum global
-global $mingleforum;
-$mingleforum = new mingleforum();
+//Set $asgarosforum global
+global $asgarosforum;
+$asgarosforum = new asgarosforum();
 ?>

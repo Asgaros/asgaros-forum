@@ -3,7 +3,7 @@
 if (!defined('WP_CONTENT_DIR'))
   define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
 
-define('WPFPLUGIN', "mingle-forum-lite");
+define('WPFPLUGIN', "asgarosforum");
 
 define('WPFDIR', dirname(plugin_basename(__FILE__)));
 define('WPFPATH', plugin_dir_path(__FILE__));
@@ -26,10 +26,10 @@ define('EDITPOST', "editpost");
 define("NEWTOPICS", "newtopics");
 define("NEWTOPIC", "newtopic");
 
-define("CAT", __("Category", "mingleforum"));
-define("FORUM", __("Forum", "mingleforum"));
-define("TOPIC", __("Topic", "mingleforum"));
-define("POST", __("Post", "mingleforum"));
+define("CAT", __("Category", "asgarosforum"));
+define("FORUM", __("Forum", "asgarosforum"));
+define("TOPIC", __("Topic", "asgarosforum"));
+define("POST", __("Post", "asgarosforum"));
 
 // Maybe change
 define("SORT_ORDER", "DESC");

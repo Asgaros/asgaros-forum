@@ -117,7 +117,7 @@ if (!$user_ID)
   else
   {
     $error = true;
-    $msg = __("Security code does not match", "mingleforum");
+    $msg = __("Security code does not match", "asgarosforum");
     wp_die($msg);
   }
 }
@@ -134,14 +134,14 @@ if (isset($_POST['add_topic_submit']))
 
   if ($subject == "")
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "asgarosforum") . "</p></div>");
     $error = true;
   }
   elseif ($content == "")
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a message", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You must enter a message", "asgarosforum") . "</p></div>");
     $error = true;
   }
   else
@@ -196,14 +196,14 @@ if (isset($_POST['add_post_submit']))
 
   if ($subject == "")
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "asgarosforum") . "</p></div>");
     $error = true;
   }
   elseif ($content == "")
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a message", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You must enter a message", "asgarosforum") . "</p></div>");
     $error = true;
   }
   else
@@ -251,21 +251,21 @@ if (isset($_POST['edit_post_submit']))
 
   if ($subject == "")
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "asgarosforum") . "</p></div>");
     $error = true;
   }
   if ($content == "")
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a message", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You must enter a message", "asgarosforum") . "</p></div>");
     $error = true;
   }
   //Major security check here, prevents hackers from editing the entire forums posts
   if (!is_super_admin($user_ID) && $user_ID != $this->get_post_owner($edit_post_id) && !$this->is_moderator($user_ID, $the_forum_id))
   {
-    $msg .= "<h2>" . __("An error occured", "mingleforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You do not have permission to edit this post!", "mingleforum") . "</p></div>");
+    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
+    $msg .= ("<div id='error'><p>" . __("You do not have permission to edit this post!", "asgarosforum") . "</p></div>");
     $error = true;
   }
 

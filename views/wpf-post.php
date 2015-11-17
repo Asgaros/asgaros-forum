@@ -8,11 +8,11 @@ if ($user_ID || $this->allow_unreg())
     $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, `date` FROM {$this->t_posts} WHERE id = %d", $quote_id));
     $user = get_userdata($text->author_id);
     $display_type = $this->options['forum_display_name'];
-    $display_name = (!empty($user)) ? $user->$display_type : __('Guest', 'mingleforum');
-    $q = "[quote][quotetitle]" . __("Quote from", "mingleforum") . " " . $display_name . " " . __("on", "mingleforum") . " " . $this->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
+    $display_name = (!empty($user)) ? $user->$display_type : __('Guest', 'asgarosforum');
+    $q = "[quote][quotetitle]" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
   }
 
-  if (($_GET['mingleforumaction'] == "postreply"))
+  if (($_GET['forumaction'] == "postreply"))
   {
     $this->current_view = POSTREPLY;
     $thread = $this->check_parms($_GET['thread']);
@@ -20,11 +20,11 @@ if ($user_ID || $this->allow_unreg())
     $out .= "<form action='' name='addform' method='post' enctype='multipart/form-data'>";
     $out .= "<table class='wpf-table' width='100%'>
       <tr>
-        <th colspan='2'>" . __("Post Reply:", "mingleforum") . ' ' . $this->get_subject($thread) . "</th>
+        <th colspan='2'>" . __("Post Reply:", "asgarosforum") . ' ' . $this->get_subject($thread) . "</th>
       </tr>";
 
     $out .= "<tr>
-            <td valign='top'>" . __("Message:", "mingleforum") . "</td>
+            <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
             <td>";
               $out .= $this->form_buttons() . $this->form_smilies();
               $out .= "<br /><textarea " . ROW_COL . " name='message'>" . stripslashes($q) . "</textarea>";
@@ -39,7 +39,7 @@ if ($user_ID || $this->allow_unreg())
     {
       $out .= "
           <tr>
-            <td valign='top'>" . __("Images:", "mingleforum") . "</td>
+            <td valign='top'>" . __("Images:", "asgarosforum") . "</td>
             <td colspan='2'>
               <input type='file' name='mfimage1' id='mfimage' /><br/>
               <input type='file' name='mfimage2' id='mfimage' /><br/>
@@ -49,14 +49,14 @@ if ($user_ID || $this->allow_unreg())
     }
     $out .= "
       <tr>
-        <td colspan='2'><input type='submit' id='wpf-post-submit' name='add_post_submit' value='" . __("Submit", "mingleforum") . "' /></td>
+        <td colspan='2'><input type='submit' id='wpf-post-submit' name='add_post_submit' value='" . __("Submit", "asgarosforum") . "' /></td>
         <input type='hidden' name='add_post_forumid' value='" . $this->check_parms($thread) . "'/>
       </tr>
       </table></form>";
     $this->o .= $out;
   }
 
-  if (($_GET['mingleforumaction'] == "editpost"))
+  if (($_GET['forumaction'] == "editpost"))
   {
     $this->current_view = EDITPOST;
     $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
@@ -69,26 +69,26 @@ if ($user_ID || $this->allow_unreg())
       $out .= "<form action='' name='addform' method='post'>";
       $out .= "<table class='wpf-table' width='100%'>
         <tr>
-          <th colspan='2'>" . __("Edit Post:", "mingleforum") . " " . stripslashes($post->subject) . "
+          <th colspan='2'>" . __("Edit Post:", "asgarosforum") . " " . stripslashes($post->subject) . "
             <input type='hidden' name='edit_post_subject' value='" . stripslashes($post->subject) . "' />
           </th>
         </tr>";
 
       if(false) //Need to enable this eventually if we're editing the first post in the thread
         $out .= "<tr>
-              <td>" . __("Subject:", "mingleforum") . "</td>
+              <td>" . __("Subject:", "asgarosforum") . "</td>
               <td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='" . stripslashes($post->subject) . "'/></td>
             </tr>";
 
       $out .= "<tr>
-              <td valign='top'>" . __("Message:", "mingleforum") . "</td>
+              <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
               <td>";
                 $out .= $this->form_buttons() . "<br/>" . $this->form_smilies();
                 $out .= "<br /><textarea " . ROW_COL . " name='message'>" . stripslashes($post->text) . "</textarea>";
                 $out .= "</td>
             </tr>
             <tr>
-              <td colspan='2'><input type='submit' id='wpf-post-submit' name='edit_post_submit' value='" . __("Save Post", "mingleforum") . "' /></td>
+              <td colspan='2'><input type='submit' id='wpf-post-submit' name='edit_post_submit' value='" . __("Save Post", "asgarosforum") . "' /></td>
               <input type='hidden' name='edit_post_id' value='" . $post->id . "'/>
               <input type='hidden' name='thread_id' value='" . $thread . "'/>
             </tr>

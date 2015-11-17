@@ -1,8 +1,8 @@
 <?php
-if (!class_exists('mingleforum'))
+if (!class_exists('asgarosforum'))
 {
 
-  class mingleforum
+  class asgarosforum
   {
 
     var $db_version = 3; //MANAGES DB VERSION
@@ -32,7 +32,7 @@ if (!class_exists('mingleforum'))
       add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
       add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
       //Shortcode hooks
-      add_shortcode('mingleforum', array($this, "go"));
+      add_shortcode('asgarosforum', array($this, "go"));
 
       MFAdmin::load_hooks();
     }
@@ -108,7 +108,7 @@ if (!class_exists('mingleforum'))
 
     public function load_forum_options()
     {
-      $stored_ops = get_option('mingleforum_options', array());
+      $stored_ops = get_option('asgarosforum_options', array());
 
       //Merge defaults with user's settings
       $this->options = array_merge($this->default_ops, $stored_ops);
@@ -117,10 +117,10 @@ if (!class_exists('mingleforum'))
     // Add admin pages
     public function add_admin_pages()
     {
-      add_menu_page(__("Forum - Options", "mingleforum"), "Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
-      add_submenu_page("mingle-forum", __("Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
-      add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
-      add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
+      add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
+      add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'MFAdmin::options_page');
+      add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'MFAdmin::structure_page');
+      add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'MFAdmin::user_groups_page');
     }
 
     public function enqueue_front_scripts()
@@ -131,8 +131,8 @@ if (!class_exists('mingleforum'))
       if (is_page($this->page_id))
       {
         //Not using the stylesheet yet as it causes some problems if loaded before the theme's stylesheets
-        //wp_enqueue_style('mingle-forum-skin-css', $this->skin_url.'/style.css');
-        wp_enqueue_script('mingle-forum-js', WPFURL . "js/script.js", array('jquery'));
+        //wp_enqueue_style('asgarosforum-skin-css', $this->skin_url.'/style.css');
+        wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js", array('jquery'));
       }
     }
 
@@ -149,7 +149,7 @@ if (!class_exists('mingleforum'))
     //Fix SEO by Yoast conflict
     public function yoast_seo_whitelist_vars($vars)
     {
-      $my_vars = array('viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'sticky', 'closed', 'move_topic');
+      $my_vars = array('viewforum', 'f', 'viewtopic', 't', 'forumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'sticky', 'closed', 'move_topic');
 
       return array_merge($vars, $my_vars);
     }
@@ -167,11 +167,11 @@ if (!class_exists('mingleforum'))
         $delim = "&";
 
       $perm = get_permalink($this->page_id);
-      $this->forum_link = $perm . $delim . "mingleforumaction=viewforum&f=";
-      $this->thread_link = $perm . $delim . "mingleforumaction=viewtopic&t=";
-      $this->add_topic_link = $perm . $delim . "mingleforumaction=addtopic&forum={$this->current_forum}";
-      $this->post_reply_link = $perm . $delim . "mingleforumaction=postreply&thread={$this->current_thread}";
-      $this->base_url = $perm . $delim . "mingleforumaction=";
+      $this->forum_link = $perm . $delim . "forumaction=viewforum&f=";
+      $this->thread_link = $perm . $delim . "forumaction=viewtopic&t=";
+      $this->add_topic_link = $perm . $delim . "forumaction=addtopic&forum={$this->current_forum}";
+      $this->post_reply_link = $perm . $delim . "forumaction=postreply&thread={$this->current_thread}";
+      $this->base_url = $perm . $delim . "forumaction=";
 
       $this->home_url = $perm;
     }
@@ -255,7 +255,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      return $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[mingleforum]%' AND post_status = 'publish' AND post_type = 'page'");
+      return $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
     }
 
     public function get_groups($id = '')
@@ -402,8 +402,8 @@ if (!class_exists('mingleforum'))
       if (isset($_GET['markallread']) && $_GET['markallread'] == "true")
         $this->markallread();
 
-      if (isset($_GET['mingleforumaction']))
-        $action = $_GET['mingleforumaction'];
+      if (isset($_GET['forumaction']))
+        $action = $_GET['forumaction'];
       else
         $action = false;
 
@@ -448,8 +448,8 @@ if (!class_exists('mingleforum'))
 
       $this->o = "";
 
-      if (isset($_GET['mingleforumaction']))
-        $action = $_GET['mingleforumaction'];
+      if (isset($_GET['forumaction']))
+        $action = $_GET['forumaction'];
       else
         $action = false;
 
@@ -493,7 +493,7 @@ if (!class_exists('mingleforum'))
             break;
           case 'postreply':
             if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread'])))
-              wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+              wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
             else
             {
               $this->current_thread = $this->check_parms($_GET['thread']);
@@ -524,7 +524,7 @@ if (!class_exists('mingleforum'))
       $user = get_userdata($user_id);
 
       if (!$user)
-        return __("Guest", "mingleforum");
+        return __("Guest", "asgarosforum");
 
       return $user->$data;
     }
@@ -555,7 +555,7 @@ if (!class_exists('mingleforum'))
 
       $post = $wpdb->get_row("SELECT `date`, author_id, id FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 1");
 
-      return ($post) ? __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "mingleforum") . " " . date_i18n($this->dateFormat, strtotime($post->date)) : '';
+      return ($post) ? __("Latest Post by", "asgarosforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "asgarosforum") . " " . date_i18n($this->dateFormat, strtotime($post->date)) : '';
     }
 
     public function showforum($forum_id)
@@ -585,7 +585,7 @@ if (!class_exists('mingleforum'))
           ob_start();
 
           if (!$this->have_access($this->current_group))
-            wp_die(__("Sorry, but you don't have access to this forum", "mingleforum"));
+            wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
 
           require('views/showforum.php');
 
@@ -612,7 +612,7 @@ if (!class_exists('mingleforum'))
           $lv = strtotime($this->last_visit());
 
           if ($lp > $lv)
-            $image = '<img src="' . $this->skin_url . '/images/new.png" alt="' . __("New posts since your last visit", "mingleforum") . '">';
+            $image = '<img src="' . $this->skin_url . '/images/new.png" alt="' . __("New posts since your last visit", "asgarosforum") . '">';
         }
       }
 
@@ -647,7 +647,7 @@ if (!class_exists('mingleforum'))
           $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
         if (!$this->have_access($this->current_group))
-          wp_die(__("Sorry, but you don't have access to this forum", "mingleforum"));
+          wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
 
         $this->header();
 
@@ -658,14 +658,14 @@ if (!class_exists('mingleforum'))
                   </tr>
                 </table>";
         if ($this->is_closed())
-          $meClosed = " <span aria-hidden='true' class='icon-close'>" . __("TOPIC CLOSED", "mingleforum") . "</span> ";
+          $meClosed = " <span aria-hidden='true' class='icon-close'>" . __("TOPIC CLOSED", "asgarosforum") . "</span> ";
         else
           $meClosed = "";
 
         $out .= "<div class='wpf'>
                   <table class='wpf-table' width='100%'>
                     <tr>
-                      <th width='125' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
+                      <th width='125' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "asgarosforum") . "</span></th>
                       <th><span aria-hidden='true' class='icon-topic'></span>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</th>
                     </tr>
                   </table>";
@@ -680,7 +680,7 @@ if (!class_exists('mingleforum'))
 
           $out .= "<table class='wpf-post-table' width='100%' id='postid-{$post->id}'>
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
-          $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "mingleforum") . "' class='post-calendar-img'/>";
+          $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "asgarosforum") . "' class='post-calendar-img'/>";
 
           $out .= "<span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
 
@@ -695,7 +695,7 @@ if (!class_exists('mingleforum'))
 
           $out .= "<div class='hr'></div>";
 
-          $out .=__("Posts:", "mingleforum") . " " . $this->get_userposts_num($post->author_id) . "<br/>";
+          $out .=__("Posts:", "asgarosforum") . " " . $this->get_userposts_num($post->author_id) . "<br/>";
 
           $out .= "</div>" . apply_filters('mf_below_post_avatar', '', $post->author_id, $post->id) . "</td>
               <td valign='top'>
@@ -704,7 +704,7 @@ if (!class_exists('mingleforum'))
                 <tr width='70%'>
                   <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_postname($post->id), 70) . "
                     <span class='permalink'>
-                    <a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "' title='" . __("Permalink", "mingleforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
+                    <a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
                   </td>
                 </tr>
                 <tr>
@@ -735,7 +735,7 @@ if (!class_exists('mingleforum'))
             <table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
               <tr>
                 <td>";
-            $out .= "<strong>" . __("Quick Reply", "mingleforum") . ": </strong><br/>" .
+            $out .= "<strong>" . __("Quick Reply", "asgarosforum") . ": </strong><br/>" .
                     $this->form_buttons() . $this->form_smilies() . "<br/>
                     <input type='hidden' name='add_post_subject' value='" . $this->get_subject(floor($quick_thread)) . "'/>
                     <textarea rows='6' style='width:99% !important;' name='message'></textarea>
@@ -744,7 +744,7 @@ if (!class_exists('mingleforum'))
             $out .= $this->get_quick_reply_captcha();
             $out .= "<tr>
                 <td>
-                  <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "mingleforum") . "' />
+                  <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "asgarosforum") . "' />
                   <input type='hidden' name='add_post_forumid' value='" . floor($quick_thread) . "'/>
                 </td>
               </tr>
@@ -771,20 +771,20 @@ if (!class_exists('mingleforum'))
       if ($this->options['forum_use_seo_friendly_urls'])
       {
         if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "asgarosforum") . "</a></td>";
         if ($this->is_moderator($user_ID, $this->current_forum))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "asgarosforum") . "</a></td>";
       }
       else
       {
         if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "asgarosforum") . "</a></td>";
         if ($this->is_moderator($user_ID, $this->current_forum))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "asgarosforum") . "</a></td>";
       }
 
       $o .= "</tr></table>";
@@ -890,24 +890,24 @@ if (!class_exists('mingleforum'))
                             }
 
                             $this->o .= "</td>";
-                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "mingleforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "mingleforum") . $this->num_posts_forum($f->id) . "</small></td>";
+                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</small></td>";
                             $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
                             $this->o .= "</tr>";
                         }
                     } else {
-                        $this->o .= "<tr><td id='wpf_notice' colspan='4'>".__("There are no forums yet!", "mingleforum")."</td></tr>";
+                        $this->o .= "<tr><td id='wpf_notice' colspan='4'>".__("There are no forums yet!", "asgarosforum")."</td></tr>";
                     }
 
                     $this->o .= "</table></div><br class='clear'/>";
                 }
             }
         } else {
-            $this->o .= "<div id='wpf_notice'>".__("There are no categories yet!", "mingleforum")."</div>";
+            $this->o .= "<div id='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
         }
 
         $this->o .= apply_filters('wpwf_new_posts', "<table>
         <tr>
-        <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
+        <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "asgarosforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "asgarosforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></td>
         </tr>
         </table><br class='clear'/>");
     }
@@ -972,12 +972,12 @@ if (!class_exists('mingleforum'))
       if ($post_date && is_object($date))
         return $date->date;
       if (!$date)
-        return "<small>" . __("No topics yet", "mingleforum") . "</small>";
+        return "<small>" . __("No topics yet", "asgarosforum") . "</small>";
 
       $d = date_i18n($this->dateFormat, strtotime($date->date));
 
-      return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->cut_string($this->get_postname($date->id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}</small></div></div>";
+      return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "</small></div>
+      <div class='wpf-item-title'><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->cut_string($this->get_postname($date->id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)
@@ -1071,8 +1071,8 @@ if (!class_exists('mingleforum'))
       $action = "";
       $title = "";
 
-      if (isset($_GET['mingleforumaction']) && !empty($_GET['mingleforumaction']))
-        $action = $_GET['mingleforumaction'];
+      if (isset($_GET['forumaction']) && !empty($_GET['forumaction']))
+        $action = $_GET['forumaction'];
       elseif ($this->options['forum_use_seo_friendly_urls'])
       {
         $uri = $this->get_seo_friendly_query();
@@ -1104,16 +1104,16 @@ if (!class_exists('mingleforum'))
           break;
         case "search":
           $terms = esc_html($_POST['search_words']);
-          $title = $default_title . " &raquo; " . __("Search Results", "mingleforum") . " &raquo; {$terms} | ";
+          $title = $default_title . " &raquo; " . __("Search Results", "asgarosforum") . " &raquo; {$terms} | ";
           break;
         case "editpost":
-          $title = $default_title . " &raquo; " . __("Edit Post", "mingleforum");
+          $title = $default_title . " &raquo; " . __("Edit Post", "asgarosforum");
           break;
         case "postreply":
-          $title = $default_title . " &raquo; " . __("Post Reply", "mingleforum");
+          $title = $default_title . " &raquo; " . __("Post Reply", "asgarosforum");
           break;
         case "addtopic":
-          $title = $default_title . " &raquo; " . __("New Topic", "mingleforum");
+          $title = $default_title . " &raquo; " . __("New Topic", "asgarosforum");
           break;
         default:
           $title = $default_title;
@@ -1250,7 +1250,7 @@ if (!class_exists('mingleforum'))
         }
 
         $this->options['forum_db_version'] = $this->db_version;
-        update_option('mingleforum_options', $this->options);
+        update_option('asgarosforum_options', $this->options);
       }
     }
 
@@ -1286,7 +1286,7 @@ if (!class_exists('mingleforum'))
 
         $menu = "<table cellpadding='0' cellspacing='0' id='forummenu'>";
         $menu .= "<tr>
-                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "mingleforum") . "</span></a></td>";
+                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
 
         $menu .= "
           </tr>
@@ -1315,26 +1315,26 @@ if (!class_exists('mingleforum'))
           if ($this->options['forum_use_seo_friendly_urls'])
           {
             if ($this->is_sticky())
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "mingleforum") . "</span></a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
             else
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "mingleforum") . "</span></a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "mingleforum") . "</span></a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "mingleforum") . "</span></a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
           }
           else
           {
             if ($this->is_sticky())
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "mingleforum") . "</span></a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
             else
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "mingleforum") . "</span></a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open' aria-hidden='true'>" . __("Re-open", "mingleforum") . "</span></a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "mingleforum") . "</span></a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
           }
         }
 
@@ -1342,12 +1342,12 @@ if (!class_exists('mingleforum'))
         $menu .= "<tr>";
 
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
-            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "mingleforum") . "</span></a></td>";
+            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
 
 
 
           if ($this->is_moderator($user_ID, $this->current_forum)) {
-              $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "mingleforum") . "</span></a></td>";
+              $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "asgarosforum") . "</span></a></td>";
           }
 
         $menu .= $stick . $closed . "</tr></table>";
@@ -1374,12 +1374,12 @@ if (!class_exists('mingleforum'))
     public function get_userrole($user_id)
     {
       if (!$user_id)
-        return __('Guest', 'mingleforum');
+        return __('Guest', 'asgarosforum');
 
       $user = get_userdata($user_id);
 
       if ($user->user_level >= 9)
-        return __("Administrator", "mingleforum");
+        return __("Administrator", "asgarosforum");
       else
       {
         return "";
@@ -1424,7 +1424,7 @@ if (!class_exists('mingleforum'))
 
       $this->setup_links();
 
-      $trail = "<a aria-hidden='true' class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "mingleforum") . "</a>";
+      $trail = "<a aria-hidden='true' class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "asgarosforum") . "</a>";
 
       if ($this->current_forum)
         if ($this->options['forum_use_seo_friendly_urls'])
@@ -1448,7 +1448,7 @@ if (!class_exists('mingleforum'))
           $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewtopic&t={$this->current_thread}.0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
 
       if ($this->current_view == NEWTOPICS)
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topics since last visit", "mingleforum");
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topics since last visit", "asgarosforum");
 
       if ($this->current_view == SEARCH)
       {
@@ -1457,17 +1457,17 @@ if (!class_exists('mingleforum'))
         if (isset($_POST['search_words']))
           $terms = esc_html(esc_sql($_POST['search_words']));
 
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "mingleforum") . " &raquo; $terms";
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "asgarosforum") . " &raquo; $terms";
       }
 
       if ($this->current_view == POSTREPLY)
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Post Reply", "mingleforum");
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Post Reply", "asgarosforum");
 
       if ($this->current_view == EDITPOST)
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Edit Post", "mingleforum");
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Edit Post", "asgarosforum");
 
       if ($this->current_view == NEWTOPIC)
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topic", "mingleforum");
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topic", "asgarosforum");
 
       return "<p id='trail' class='breadcrumbs'>{$trail}</p>";
     }
@@ -1524,7 +1524,7 @@ if (!class_exists('mingleforum'))
 
       $o = "<div class='wpf_search'>
               <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
-                     <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "mingleforum") . "' />
+                     <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
                     </form>
             </div>";
       $this->o .= $o;
@@ -1534,7 +1534,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      $out = __("Pages:", "mingleforum");
+      $out = __("Pages:", "asgarosforum");
       $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_posts} WHERE parent_id = %d", $thread_id));
       $num_pages = ceil($count / $this->options['forum_posts_per_page']);
 
@@ -1549,7 +1549,7 @@ if (!class_exists('mingleforum'))
       else
       {
         if ($this->curr_page >= 4)
-          $out .= " <a href='" . $this->get_threadlink($this->current_thread) . "'>" . __("First", "mingleforum") . "</a> << ";
+          $out .= " <a href='" . $this->get_threadlink($this->current_thread) . "'>" . __("First", "asgarosforum") . "</a> << ";
 
         for ($i = 3; $i > 0; $i--)
           if ((($this->curr_page + 1) - $i) > 0)
@@ -1562,7 +1562,7 @@ if (!class_exists('mingleforum'))
             $out .= " <a href='" . $this->get_threadlink($this->current_thread, "." . ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
 
         if ($num_pages - $this->curr_page >= 5)
-          $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, "." . ($num_pages - 1)) . "'>" . __("Last", "mingleforum") . "</a>";
+          $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, "." . ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
       }
 
       return "<span class='wpf-pages'>" . $out . "</span>";
@@ -1572,7 +1572,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      $out = __("Pages:", "mingleforum");
+      $out = __("Pages:", "asgarosforum");
       $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_threads} WHERE parent_id = %d AND `status` <> 'sticky'", $forum_id));
       $num_pages = ceil($count / $this->options['forum_threads_per_page']);
 
@@ -1587,7 +1587,7 @@ if (!class_exists('mingleforum'))
       else
       {
         if ($this->curr_page >= 4)
-          $out .= " <a href='" . $this->get_forumlink($this->current_forum, ".0") . "'>" . __("First", "mingleforum") . "</a> << ";
+          $out .= " <a href='" . $this->get_forumlink($this->current_forum, ".0") . "'>" . __("First", "asgarosforum") . "</a> << ";
 
         for ($i = 3; $i > 0; $i--)
           if ((($this->curr_page + 1) - $i) > 0)
@@ -1600,7 +1600,7 @@ if (!class_exists('mingleforum'))
             $out .= " <a href='" . $this->get_forumlink($this->current_forum, "." . ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
 
         if ($num_pages - $this->curr_page >= 5)
-          $out .= " >> <a href='" . $this->get_forumlink($this->current_forum, "." . ($num_pages - 1)) . "'>" . __("Last", "mingleforum") . "</a>";
+          $out .= " >> <a href='" . $this->get_forumlink($this->current_forum, "." . ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
       }
 
       return "<span class='wpf-pages'>" . $out . "</span>";
@@ -1618,7 +1618,7 @@ if (!class_exists('mingleforum'))
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE `id` = %d", $topic));
       }
       else
-        wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+        wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
     }
 
     public function getNewForumID()
@@ -1644,7 +1644,7 @@ if (!class_exists('mingleforum'))
         return $strOUT;
       }
       else
-        wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+        wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
     }
 
     public function move_topic($forum_id)
@@ -1663,7 +1663,7 @@ if (!class_exists('mingleforum'))
         exit;
       }
       else
-        wp_die(__("You do not have permission to move this topic.", "mingleforum"));
+        wp_die(__("You do not have permission to move this topic.", "asgarosforum"));
     }
 
     public function remove_post()
@@ -1681,10 +1681,10 @@ if (!class_exists('mingleforum'))
         if (!$nbmsg)
           $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $post->parent_id));
 
-        $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "mingleforum") . "</div></div>";
+        $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "asgarosforum") . "</div></div>";
       }
       else
-        wp_die(__("You do not have permission to delete this post.", "mingleforum"));
+        wp_die(__("You do not have permission to delete this post.", "asgarosforum"));
     }
 
     public function sticky_post()
@@ -1692,7 +1692,7 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       if (!$this->is_moderator($user_ID, $this->current_forum))
-        wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+        wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
 
       $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
       $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->t_threads} WHERE id = %d", $id));
@@ -1730,7 +1730,7 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       if (!$this->is_moderator($user_ID, $this->current_forum))
-        wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+        wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
 
       $strSQL = "UPDATE {$this->t_threads} SET closed = %d WHERE id = %d";
 
@@ -1772,7 +1772,7 @@ if (!class_exists('mingleforum'))
 
       $link = "{$user}";
 
-      if ($user == __("Guest", "mingleforum"))
+      if ($user == __("Guest", "asgarosforum"))
         return $user;
 
       return $link;
@@ -1780,14 +1780,14 @@ if (!class_exists('mingleforum'))
 
     public function form_buttons()
     {
-      $button = '<div class="forum_buttons"><a title="' . __("Bold", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[b]", "[/b]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/b.png" /></a><a title="' . __("Italic", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[i]", "[/i]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/i.png" /></a><a title="' . __("Underline", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[u]", "[/u]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/u.png" /></a><a title="' . __("Strikethrough", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[s]", "[/s]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/s.png" /></a><a title="' . __("Font size in pixels") . '" href="javascript:void(0);" onclick=\'surroundText("[font size=]", "[/font]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/size.png" /></a><a title="Image or text to center" href="javascript:void(0);" onclick=\'surroundText("[center]", "[/center]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/center.png" /></a><a title="Align image or text left" href="javascript:void(0);" onclick=\'surroundText("[left]", "[/left]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/left.png" /></a><a title="Right align image or text " href="javascript:void(0);" onclick=\'surroundText("[right]", "[/right]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/right.png" /></a><a title="' . __("Code", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[code]", "[/code]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/code.png" /></a><a title="' . __("Quote", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[quote]", "[/quote]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/quote.png" /></a><a title="' . __("Quote Title", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[quotetitle]", "[/quotetitle]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/quotetitle.png" /></a><a title="' . __("List", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[list]", "[/list]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/list.png" /></a><a title="' . __("List item", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[*]", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/li.png" /></a><a title="' . __("Link", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[url]", "[/url]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/url.png" /></a><a title="' . __("Image", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[img]", "[/img]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/img.png" /></a><a title="' . __("Email", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[email]", "[/email]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/email.png" /></a><a title="' . __("Add Hex Color", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[color=#]", "[/color]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/color.png" /></a><a title="' . __("Embed YouTube Video", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[embed]", "[/embed]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/yt.png" /></a><a title="' . __("Embed Google Map", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText("[map]", "[/map]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/gm.png" /></a></div>';
+      $button = '<div class="forum_buttons"><a title="' . __("Bold", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[b]", "[/b]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/b.png" /></a><a title="' . __("Italic", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[i]", "[/i]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/i.png" /></a><a title="' . __("Underline", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[u]", "[/u]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/u.png" /></a><a title="' . __("Strikethrough", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[s]", "[/s]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/s.png" /></a><a title="' . __("Font size in pixels") . '" href="javascript:void(0);" onclick=\'surroundText("[font size=]", "[/font]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/size.png" /></a><a title="Image or text to center" href="javascript:void(0);" onclick=\'surroundText("[center]", "[/center]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/center.png" /></a><a title="Align image or text left" href="javascript:void(0);" onclick=\'surroundText("[left]", "[/left]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/left.png" /></a><a title="Right align image or text " href="javascript:void(0);" onclick=\'surroundText("[right]", "[/right]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/right.png" /></a><a title="' . __("Code", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[code]", "[/code]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/code.png" /></a><a title="' . __("Quote", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[quote]", "[/quote]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/quote.png" /></a><a title="' . __("Quote Title", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[quotetitle]", "[/quotetitle]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/quotetitle.png" /></a><a title="' . __("List", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[list]", "[/list]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/list.png" /></a><a title="' . __("List item", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[*]", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/li.png" /></a><a title="' . __("Link", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[url]", "[/url]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/url.png" /></a><a title="' . __("Image", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[img]", "[/img]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/img.png" /></a><a title="' . __("Email", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[email]", "[/email]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/email.png" /></a><a title="' . __("Add Hex Color", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[color=#]", "[/color]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/color.png" /></a><a title="' . __("Embed YouTube Video", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[embed]", "[/embed]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/yt.png" /></a><a title="' . __("Embed Google Map", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[map]", "[/map]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/gm.png" /></a></div>';
 
       return $button;
     }
 
     public function form_smilies()
     {
-      $button = '<div class="forum_smilies"><a title="' . __("Smile", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/smile.gif" /></a><a title="' . __("Big Grin", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :D ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/biggrin.gif" /></a><a title="' . __("Sad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :( ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/sad.gif" /></a><a title="' . __("Neutral", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :| ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/neutral.gif" /></a><a title="' . __("Razz", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :P ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/razz.gif" /></a><a title="' . __("Mad", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :x ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mad.gif" /></a><a title="' . __("Confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Eek!", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8O ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/eek.gif" /></a><a title="' . __("Wink", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" ;) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/wink.gif" /></a><a title="' . __("Surprised", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :o ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/surprised.gif" /></a><a title="' . __("Cool", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8-) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cool.gif" /></a><a title="' . __("confused", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Lol", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :lol: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/lol.gif" /></a><a title="' . __("Cry", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :cry: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cry.gif" /></a><a title="' . __("redface", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :oops: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/redface.gif" /></a><a title="' . __("rolleyes", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :roll: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/rolleyes.gif" /></a><a title="' . __("exclaim", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :!: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/exclaim.gif" /></a><a title="' . __("question", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :?: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/question.gif" /></a><a title="' . __("idea", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :idea: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/idea.gif" /></a><a title="' . __("arrow", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :arrow: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/arrow.gif" /></a><a title="' . __("mrgreen", "mingleforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :mrgreen: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mrgreen.gif" /></a></div>';
+      $button = '<div class="forum_smilies"><a title="' . __("Smile", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/smile.gif" /></a><a title="' . __("Big Grin", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :D ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/biggrin.gif" /></a><a title="' . __("Sad", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :( ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/sad.gif" /></a><a title="' . __("Neutral", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :| ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/neutral.gif" /></a><a title="' . __("Razz", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :P ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/razz.gif" /></a><a title="' . __("Mad", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :x ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mad.gif" /></a><a title="' . __("Confused", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Eek!", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8O ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/eek.gif" /></a><a title="' . __("Wink", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" ;) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/wink.gif" /></a><a title="' . __("Surprised", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :o ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/surprised.gif" /></a><a title="' . __("Cool", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" 8-) ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cool.gif" /></a><a title="' . __("confused", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :? ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/confused.gif" /></a><a title="' . __("Lol", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :lol: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/lol.gif" /></a><a title="' . __("Cry", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :cry: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/cry.gif" /></a><a title="' . __("redface", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :oops: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/redface.gif" /></a><a title="' . __("rolleyes", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :roll: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/rolleyes.gif" /></a><a title="' . __("exclaim", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :!: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/exclaim.gif" /></a><a title="' . __("question", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :?: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/question.gif" /></a><a title="' . __("idea", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :idea: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/idea.gif" /></a><a title="' . __("arrow", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :arrow: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/arrow.gif" /></a><a title="' . __("mrgreen", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText(" :mrgreen: ", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/smilies/mrgreen.gif" /></a></div>';
 
       return $button;
     }
@@ -1826,10 +1826,10 @@ if (!class_exists('mingleforum'))
       $o .= "<table class='wpf-table' cellspacing='0' cellpadding='0' width='100%'>
           <tr>
             <th width='7%'>Status</th>
-            <th width='54%'>" . __("Subject", "mingleforum") . "</th>
-            <th>" . __("Relevance", "mingleforum") . "</th>
-            <th>" . __("Started by", "mingleforum") . "</th>
-            <th>" . __("Posted", "mingleforum") . "</th>
+            <th width='54%'>" . __("Subject", "asgarosforum") . "</th>
+            <th>" . __("Relevance", "asgarosforum") . "</th>
+            <th>" . __("Started by", "asgarosforum") . "</th>
+            <th>" . __("Posted", "asgarosforum") . "</th>
           </tr>";
 
       foreach ($results as $result)
@@ -1855,9 +1855,9 @@ if (!class_exists('mingleforum'))
     public function get_topic_image($thread)
     {
       if ($this->is_closed($thread))
-        return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "mingleforum") . "' title='" . __("Closed topic", "mingleforum") . "'>";
+        return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
 
-      return "<img src='{$this->skin_url}/images/topic/normal_post.png' alt='" . __("Normal topic", "mingleforum") . "' title='" . __("Normal topic", "mingleforum") . "'>";
+      return "<img src='{$this->skin_url}/images/topic/normal_post.png' alt='" . __("Normal topic", "asgarosforum") . "' title='" . __("Normal topic", "asgarosforum") . "'>";
     }
 
     public function get_captcha()
@@ -1876,7 +1876,7 @@ if (!class_exists('mingleforum'))
         $out .= "<tr>
               <td><img alt='' src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
               <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'></td>
-              <td>" . __("Security Code:", "mingleforum") . "<input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/></td>
+              <td>" . __("Security Code:", "asgarosforum") . "<input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/></td>
               </tr>";
       }
 
@@ -1900,7 +1900,7 @@ if (!class_exists('mingleforum'))
                 <td>
                   <img src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
                   <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'><br/>
-                  <input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/>" . __("Enter Security Code: (required)", "mingleforum")
+                  <input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/>" . __("Enter Security Code: (required)", "asgarosforum")
                 . "</td>
               </tr>";
       }
@@ -1977,7 +1977,7 @@ if (!class_exists('mingleforum'))
     public function maybe_do_sitemap()
     {
       //If we don't want the sitemap, then don't execute this
-      if(!isset($_GET['mingleforumaction']) || $_GET['mingleforumaction'] != 'sitemap')
+      if(!isset($_GET['forumaction']) || $_GET['forumaction'] != 'sitemap')
         return;
 
       $this->setup_links();

@@ -8,18 +8,18 @@
 <div class="wpf">
   <table class="wpf-table" id="topicTable">
     <tr>
-      <th width="7%" class="forumIcon"><?php _e("Status", "mingleforum"); ?></th>
-      <th><?php _e("Topic Title", "mingleforum"); ?></th>
-      <th width="16%" nowrap="nowrap"><?php _e("Started by", "mingleforum"); ?></th>
-      <th width="7%"><?php _e("Replies", "mingleforum"); ?></th>
-      <th width="7%"><?php _e("Views", "mingleforum"); ?></th>
-      <th width="24%"><?php _e("Last post", "mingleforum"); ?></th>
+      <th width="7%" class="forumIcon"><?php _e("Status", "asgarosforum"); ?></th>
+      <th><?php _e("Topic Title", "asgarosforum"); ?></th>
+      <th width="16%" nowrap="nowrap"><?php _e("Started by", "asgarosforum"); ?></th>
+      <th width="7%"><?php _e("Replies", "asgarosforum"); ?></th>
+      <th width="7%"><?php _e("Views", "asgarosforum"); ?></th>
+      <th width="24%"><?php _e("Last post", "asgarosforum"); ?></th>
     </tr>
 
     <?php if ($sticky_threads && !$this->curr_page): //Prevent stickies from showing up on page 2...n ?>
       <tr>
         <th class="wpf-bright" colspan="6">
-          <?php _e("Sticky Topics", "mingleforum"); ?>
+          <?php _e("Sticky Topics", "asgarosforum"); ?>
         </th>
       </tr>
 
@@ -39,10 +39,10 @@
               <div class="mf_sticky_post_actions">
                 <small>
                   <a href="<?php echo $this->forum_link . $this->current_forum . "&getNewForumID&topic={$thread->id}"; ?>">
-                    <?php _e("Move Topic", "mingleforum"); ?>
+                    <?php _e("Move Topic", "asgarosforum"); ?>
                   </a> |
                   <a href="<?php echo $this->forum_link . $this->current_forum . "&delete_topic&topic={$thread->id}"; ?>" onclick="return wpf_confirm();">
-                    <?php _e("Delete Topic", "mingleforum"); ?>
+                    <?php _e("Delete Topic", "asgarosforum"); ?>
                   </a>
                 </small>
               </div>
@@ -65,7 +65,7 @@
 
       <tr>
         <th class="wpf-bright forumTopics" colspan="6">
-          <?php _e("Forum Topics", "mingleforum"); ?>
+          <?php _e("Forum Topics", "asgarosforum"); ?>
         </th>
       </tr>
     <?php endif; //END STICKIES ?>
@@ -87,10 +87,10 @@
             <div class="mf_post_actions">
               <small>
                 <a href="<?php echo $this->forum_link . $this->current_forum . "&getNewForumID&topic={$thread->id}"; ?>">
-                  <?php _e("Move Topic", "mingleforum"); ?>
+                  <?php _e("Move Topic", "asgarosforum"); ?>
                 </a> |
                 <a href="<?php echo $this->forum_link . $this->current_forum . "&delete_topic&topic={$thread->id}"; ?>" onclick="return wpf_confirm();">
-                  <?php _e("Delete Topic", "mingleforum"); ?>
+                  <?php _e("Delete Topic", "asgarosforum"); ?>
                 </a>
               </small>
             </div>
