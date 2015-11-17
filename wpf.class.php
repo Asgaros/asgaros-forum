@@ -1150,9 +1150,8 @@ if (!class_exists('asgarosforum'))
     {
       global $wpdb;
 
-      $force = false; //I'd like to create a way for users to force this if they have problems installing
       //Only run if we need to
-      if ($this->options['forum_db_version'] < $this->db_version || $force)
+      if ($this->options['forum_db_version'] < $this->db_version)
       {
         $charset_collate = '';
         if ($wpdb->has_cap('collation'))
@@ -1229,7 +1228,7 @@ if (!class_exists('asgarosforum'))
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        if ($this->options['forum_db_version'] < 1 || $force)
+        if ($this->options['forum_db_version'] < 1)
         {
           dbDelta($sql1);
           dbDelta($sql2);
@@ -1239,7 +1238,7 @@ if (!class_exists('asgarosforum'))
           dbDelta($sql6);
         }
 
-        if ($this->options['forum_db_version'] < 2 || $force)
+        if ($this->options['forum_db_version'] < 2)
         {
           //We need to kill this one after we fix how the forum search works
           $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
