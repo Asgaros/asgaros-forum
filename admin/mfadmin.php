@@ -1,12 +1,12 @@
 <?php
-if (!class_exists("MFAdmin"))
+if (!class_exists("AFAdmin"))
 {
-    class MFAdmin
+    class AFAdmin
     {
         public static function load_hooks()
         {
-            add_action('admin_init', 'MFAdmin::save_settings');
-            add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
+            add_action('admin_init', 'AFAdmin::save_settings');
+            add_action('admin_enqueue_scripts', 'AFAdmin::enqueue_admin_scripts');
         }
 
         public static function enqueue_admin_scripts($hook)
@@ -20,7 +20,7 @@ if (!class_exists("MFAdmin"))
             if (strstr($hook, 'asgarosforum') !== false) {
                 wp_enqueue_style('asgarosforum-admin-css', $plug_url . "admin/admin.css");
                 wp_enqueue_script('asgarosforum-admin-js', $plug_url . "admin/admin.js", array('jquery-ui-sortable'));
-                wp_localize_script('asgarosforum-admin-js', 'MFAdmin', $l10n_vars);
+                wp_localize_script('asgarosforum-admin-js', 'AFAdmin', $l10n_vars);
             }
         }
 

@@ -18,7 +18,7 @@
             return false;
         });
         $('body').on('click', '.mf_remove_category', function() {
-            var answer = confirm(MFAdmin.remove_category_warning);
+            var answer = confirm(AFAdmin.remove_category_warning);
             if(answer) {
                 $(this).parent().remove();
             }
@@ -36,7 +36,7 @@
             return false;
         });
         $('body').on('click', '.mf_remove_forum', function() {
-            var answer = confirm(MFAdmin.remove_forum_warning);
+            var answer = confirm(AFAdmin.remove_forum_warning);
             if(answer) {
                 $(this).parent().remove();
             }
@@ -48,7 +48,7 @@
             return false;
         });
         $('body').on('click', '.mf_remove_user_group', function() {
-            var answer = confirm(MFAdmin.remove_user_group_warning);
+            var answer = confirm(AFAdmin.remove_user_group_warning);
             if(answer) {
                 $(this).parent().remove();
             }

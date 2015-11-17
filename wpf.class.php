@@ -6,22 +6,21 @@ if (!class_exists('asgarosforum'))
     {
         var $db_version = 1; // MANAGES DB VERSION
 
-    public function __construct()
-    {
-      //Init options
-      $this->load_forum_options();
-      $this->init();
+        public function __construct()
+        {
+            // Init options
+            $this->options = array_merge($this->default_ops, get_option('asgarosforum_options', array())); // Merge defaults with user's settings
+            $this->init();
 
-      //Action hooks
-      add_action("admin_menu", array($this, "add_admin_pages"));
-      add_action("admin_init", array($this, "wp_forum_install")); //Easy Multisite-friendly way of setting up the DB
-      add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
-      add_action("wp_head", array($this, "setup_header"));
-      add_action("init", array($this, "kill_canonical_urls"));
+            // Action hooks
+            add_action("admin_menu", array($this, "add_admin_pages"));
+            add_action("admin_init", array($this, "wp_forum_install"));
+            add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
+            add_action("wp_head", array($this, "setup_header"));
+            add_action("init", array($this, "kill_canonical_urls"));
       add_action('init', array($this, "set_cookie"));
       add_action('init', array($this, "run_wpf_insert"));
       add_action('wp', array($this, "before_go")); //Redirects Old URL's to SEO URL's
-      add_filter('wpseo_whitelist_permalink_vars', array($this, 'yoast_seo_whitelist_vars'));
 
       //Filter hooks
       add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
@@ -30,10 +29,11 @@ if (!class_exists('asgarosforum'))
       //Shortcode hooks
       add_shortcode('asgarosforum', array($this, "go"));
 
-      MFAdmin::load_hooks();
+      AFAdmin::load_hooks();
     }
 
     // !Member variables
+    var $delim = "";
     var $page_id = "";
     var $home_url = "";
     var $forum_link = "";
@@ -51,10 +51,13 @@ if (!class_exists('asgarosforum'))
     var $current_group = "";
     var $current_forum = "";
     var $current_thread = "";
+    var $curr_page = "";
+    var $skin_url = "";
+    var $dateFormat = "";
     var $current_view = "";
     var $base_url = "";
-    var $skin_url = "";
-    var $curr_page = "";
+
+
     //Options
     var $options = array();
 
@@ -67,110 +70,82 @@ if (!class_exists('asgarosforum'))
                               'forum_display_name' => 'user_login',
                               'forum_db_version' => 0);
 
-    var $dateFormat = "";
 
-    // Initialize varables
-    public function init()
-    {
-      global $wpdb;
-      $table_prefix = $wpdb->prefix;
 
-      $this->page_id = $this->get_pageid();
+// Initialize varables
+public function init()
+{
+    global $wpdb;
+    $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
+    $this->t_categories = $wpdb->prefix . "forum_categories";
+    $this->t_forums = $wpdb->prefix . "forum_forums";
+    $this->t_threads = $wpdb->prefix . "forum_threads";
+    $this->t_posts = $wpdb->prefix . "forum_posts";
+    $this->t_usergroups = $wpdb->prefix . "forum_usergroups";
+    $this->t_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
+    $this->current_group = false;
+    $this->current_forum = false;
+    $this->current_thread = false;
+    $this->curr_page = 0;
+    $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
+    $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
+}
 
-      $this->t_categories = $table_prefix . "forum_categories";
-      $this->t_forums = $table_prefix . "forum_forums";
-      $this->t_threads = $table_prefix . "forum_threads";
-      $this->t_posts = $table_prefix . "forum_posts";
-      $this->t_usergroups = $table_prefix . "forum_usergroups";
-      $this->t_usergroup2user = $table_prefix . "forum_usergroup2user";
+public function kill_canonical_urls()
+{
+    global $post;
 
-      $this->current_forum = false;
-      $this->current_group = false;
-      $this->current_thread = false;
-
-      $this->curr_page = 0;
-
-      $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
-      $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
-    }
-
-    public function kill_canonical_urls()
-    {
-      global $post;
-
-      if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id)
+    if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id) {
         remove_filter('template_redirect', 'redirect_canonical');
     }
+}
 
-    public function load_forum_options()
-    {
-      $stored_ops = get_option('asgarosforum_options', array());
 
-      //Merge defaults with user's settings
-      $this->options = array_merge($this->default_ops, $stored_ops);
+// Add admin pages
+public function add_admin_pages()
+{
+    add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "images/logo.png");
+    add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
+    add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
+    add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
+}
+
+public function enqueue_front_scripts()
+{
+    if (is_page($this->page_id)) {
+        wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js");
+    }
+}
+
+
+public function setup_header()
+{
+    if (is_page($this->page_id)): ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
+    <?php endif;
+}
+
+
+
+public function setup_links()
+{
+    global $wp_rewrite;
+
+    // We need to change all of these $this->delim to use a regex on the request URI instead. This is preventing the forum from working as the home page.
+    if ($wp_rewrite->using_permalinks()) {
+        $this->delim = "?";
+    } else {
+        $this->delim = "&";
     }
 
-    // Add admin pages
-    public function add_admin_pages()
-    {
-      add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
-      add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'MFAdmin::options_page');
-      add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'MFAdmin::structure_page');
-      add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'MFAdmin::user_groups_page');
-    }
-
-    public function enqueue_front_scripts()
-    {
-      $this->setup_links();
-
-      //Let's be responsible and only load our shiz where it's needed
-      if (is_page($this->page_id))
-      {
-        //Not using the stylesheet yet as it causes some problems if loaded before the theme's stylesheets
-        //wp_enqueue_style('asgarosforum-skin-css', $this->skin_url.'/style.css');
-        wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js", array('jquery'));
-      }
-    }
-
-    public function setup_header()
-    {
-      $this->setup_links();
-
-      if (is_page($this->page_id)): ?>
-        <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-        <?php
-      endif;
-    }
-
-    //Fix SEO by Yoast conflict
-    public function yoast_seo_whitelist_vars($vars)
-    {
-      $my_vars = array('viewforum', 'f', 'viewtopic', 't', 'forumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'sticky', 'closed', 'move_topic');
-
-      return array_merge($vars, $my_vars);
-    }
-
-    public function setup_links()
-    {
-      global $wp_rewrite;
-
-      //We need to change all of these $delims to use a regex on the
-      //request URI instead. This is preventing the form from
-      //working as the home page
-      if ($wp_rewrite->using_permalinks())
-        $delim = "?";
-      else
-        $delim = "&";
-
-      $perm = get_permalink($this->page_id);
-      $this->forum_link = $perm . $delim . "forumaction=viewforum&f=";
-      $this->thread_link = $perm . $delim . "forumaction=viewtopic&t=";
-      $this->add_topic_link = $perm . $delim . "forumaction=addtopic&forum={$this->current_forum}";
-      $this->post_reply_link = $perm . $delim . "forumaction=postreply&thread={$this->current_thread}";
-      $this->base_url = $perm . $delim . "forumaction=";
-
-      $this->home_url = $perm;
-    }
+    $perm = get_permalink($this->page_id);
+    $this->forum_link = $perm . $this->delim . "forumaction=viewforum&f=";
+    $this->thread_link = $perm . $this->delim . "forumaction=viewtopic&t=";
+    $this->add_topic_link = $perm . $this->delim . "forumaction=addtopic&forum={$this->current_forum}";
+    $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&thread={$this->current_thread}";
+    $this->base_url = $perm . $this->delim . "forumaction=";
+    $this->home_url = $perm;
+}
 
     public function run_wpf_insert()
     {
@@ -245,13 +220,6 @@ if (!class_exists('asgarosforum'))
       }
       else
         return $this->thread_link . $id . "." . $num . $postid;
-    }
-
-    public function get_pageid()
-    {
-      global $wpdb;
-
-      return $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
     }
 
     public function get_groups($id = '')
@@ -1142,90 +1110,90 @@ if (!class_exists('asgarosforum'))
       return false;
     }
 
-    public function wp_forum_install()
-    {
-        global $wpdb;
+public function wp_forum_install()
+{
+    global $wpdb;
 
-        // Only run if we need to
-        if ($this->options['forum_db_version'] < $this->db_version) {
-            $charset_collate = $wpdb->get_charset_collate();
+    // Only run if we need to
+    if ($this->options['forum_db_version'] < $this->db_version) {
+        $charset_collate = $wpdb->get_charset_collate();
 
-            $sql1 = "
-            CREATE TABLE $this->t_categories (
-            id int(11) NOT NULL auto_increment,
-            name varchar(255) NOT NULL default '',
-            description varchar(255) default '',
-            usergroups varchar(255) default '',
-            sort int(11) NOT NULL default '0',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
+        $sql1 = "
+        CREATE TABLE $this->t_categories (
+        id int(11) NOT NULL auto_increment,
+        name varchar(255) NOT NULL default '',
+        description varchar(255) default '',
+        usergroups varchar(255) default '',
+        sort int(11) NOT NULL default '0',
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
 
-            $sql2 = "
-            CREATE TABLE $this->t_forums (
-            id int(11) NOT NULL auto_increment,
-            name varchar(255) NOT NULL default '',
-            parent_id int(11) NOT NULL default '0',
-            description varchar(255) NOT NULL default '',
-            sort int(11) NOT NULL default '0',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
+        $sql2 = "
+        CREATE TABLE $this->t_forums (
+        id int(11) NOT NULL auto_increment,
+        name varchar(255) NOT NULL default '',
+        parent_id int(11) NOT NULL default '0',
+        description varchar(255) NOT NULL default '',
+        sort int(11) NOT NULL default '0',
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
 
-            $sql3 = "
-            CREATE TABLE $this->t_threads (
-            id int(11) NOT NULL auto_increment,
-            parent_id int(11) NOT NULL default '0',
-            views int(11) NOT NULL default '0',
-            subject varchar(255) NOT NULL default '',
-            status varchar(20) NOT NULL default 'open',
-            closed int(11) NOT NULL default '0',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
+        $sql3 = "
+        CREATE TABLE $this->t_threads (
+        id int(11) NOT NULL auto_increment,
+        parent_id int(11) NOT NULL default '0',
+        views int(11) NOT NULL default '0',
+        subject varchar(255) NOT NULL default '',
+        status varchar(20) NOT NULL default 'open',
+        closed int(11) NOT NULL default '0',
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
 
-            $sql4 = "
-            CREATE TABLE $this->t_posts (
-            id int(11) NOT NULL auto_increment,
-            text longtext,
-            parent_id int(11) NOT NULL default '0',
-            date datetime NOT NULL default '0000-00-00 00:00:00',
-            author_id int(11) NOT NULL default '0',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
+        $sql4 = "
+        CREATE TABLE $this->t_posts (
+        id int(11) NOT NULL auto_increment,
+        text longtext,
+        parent_id int(11) NOT NULL default '0',
+        date datetime NOT NULL default '0000-00-00 00:00:00',
+        author_id int(11) NOT NULL default '0',
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
 
-            $sql5 = "
-            CREATE TABLE $this->t_usergroups (
-            id int(11) NOT NULL auto_increment,
-            name varchar(255) NOT NULL,
-            description varchar(255) default NULL,
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
+        $sql5 = "
+        CREATE TABLE $this->t_usergroups (
+        id int(11) NOT NULL auto_increment,
+        name varchar(255) NOT NULL,
+        description varchar(255) default NULL,
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
 
-            $sql6 = "
-            CREATE TABLE $this->t_usergroup2user (
-            id int(11) NOT NULL auto_increment,
-            user_id int(11) NOT NULL,
-            group_id varchar(255) NOT NULL,
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
+        $sql6 = "
+        CREATE TABLE $this->t_usergroup2user (
+        id int(11) NOT NULL auto_increment,
+        user_id int(11) NOT NULL,
+        group_id varchar(255) NOT NULL,
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
 
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-            if ($this->options['forum_db_version'] < 1) {
-                dbDelta($sql1);
-                dbDelta($sql2);
-                dbDelta($sql3);
-                dbDelta($sql4);
-                dbDelta($sql5);
-                dbDelta($sql6);
+        if ($this->options['forum_db_version'] < 1) {
+            dbDelta($sql1);
+            dbDelta($sql2);
+            dbDelta($sql3);
+            dbDelta($sql4);
+            dbDelta($sql5);
+            dbDelta($sql6);
 
-                //We need to kill this one after we fix how the forum search works
-                $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
-                $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (text)");
-            }
-
-            $this->options['forum_db_version'] = $this->db_version;
-            update_option('asgarosforum_options', $this->options);
+            //We need to kill this one after we fix how the forum search works
+            $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
+            $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (text)");
         }
+
+        $this->options['forum_db_version'] = $this->db_version;
+        update_option('asgarosforum_options', $this->options);
     }
+}
 
     public function forum_menu($group, $pos = "top")
     {
