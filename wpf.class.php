@@ -267,7 +267,7 @@ if (!class_exists('asgarosforum'))
       if ($id)
         $cond = $wpdb->prepare("WHERE id = %d", $id);
 
-      return $wpdb->get_results("SELECT * FROM {$this->t_categories} {$cond} ORDER BY sort " . SORT_ORDER);
+      return $wpdb->get_results("SELECT * FROM {$this->t_categories} {$cond} ORDER BY sort DESC");
     }
 
     public function get_forums($id = '')
@@ -276,12 +276,12 @@ if (!class_exists('asgarosforum'))
 
       if ($id)
       {
-        $forums = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE parent_id = %d ORDER BY SORT " . SORT_ORDER, $id));
+        $forums = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE parent_id = %d ORDER BY SORT DESC", $id));
 
         return $forums;
       }
       else
-        return $wpdb->get_results("SELECT * FROM {$this->t_forums} ORDER BY sort " . SORT_ORDER);
+        return $wpdb->get_results("SELECT * FROM {$this->t_forums} ORDER BY sort DESC");
     }
 
     public function get_threads($id = '')
@@ -292,12 +292,12 @@ if (!class_exists('asgarosforum'))
       $end = $this->options['forum_threads_per_page'];
       if ($id)
       {
-        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='open' ORDER BY last_post " . SORT_ORDER . " LIMIT %d, %d", $id, $start, $end));
+        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='open' ORDER BY last_post DESC LIMIT %d, %d", $id, $start, $end));
 
         return $threads;
       }
       else
-        return $wpdb->get_results("SELECT * FROM {$this->t_threads} ORDER BY `date` " . SORT_ORDER);
+        return $wpdb->get_results("SELECT * FROM {$this->t_threads} ORDER BY `date` DESC");
     }
 
     public function get_sticky_threads($id)
@@ -306,7 +306,7 @@ if (!class_exists('asgarosforum'))
 
       if ($id)
       {
-        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='sticky' ORDER BY last_post " . SORT_ORDER, $id));
+        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='sticky' ORDER BY last_post DESC", $id));
         return $threads;
       }
     }

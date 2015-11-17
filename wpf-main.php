@@ -30,7 +30,15 @@ $plugin_dir = basename(dirname(__FILE__));
 load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/i18n/');
 
 //Setup defines
-require("wpf_define.php");
+define('WPFURL', plugin_dir_url(__FILE__));
+define('MAIN', "main");
+define('THREAD', "thread");
+define('SEARCH', "search");
+define('POSTREPLY', "postreply");
+define('EDITPOST', "editpost");
+define("NEWTOPICS", "newtopics");
+define("NEWTOPIC", "newtopic");
+define("FORUM", __("Forum", "asgarosforum"));
 
 //Load class files
 require('bbcode.php');

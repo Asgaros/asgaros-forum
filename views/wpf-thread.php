@@ -18,7 +18,7 @@ if ($user_ID || $this->allow_unreg())
 				<td>
 					" . $this->form_buttons() . $this->form_smilies() . "
 
-					<br/><textarea " . ROW_COL . " name='message'></textarea>
+					<br/><textarea rows='20' cols='80' name='message'></textarea>
 				</td>
 			</tr>";
   $out .= apply_filters('wpwf_form_guestinfo', ''); //--weaver--
