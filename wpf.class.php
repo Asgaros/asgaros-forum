@@ -590,6 +590,12 @@ if (!class_exists('asgarosforum'))
       }
     }
 
+    public function get_starter($thread_id) {
+        global $wpdb;
+
+        return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE parent_id = %d", $thread_id));
+    }
+
     public function maybe_get_unread_image($thread_id)
     {
       global $user_ID;
@@ -1179,7 +1185,6 @@ if (!class_exists('asgarosforum'))
             subject varchar(255) NOT NULL default '',
             status varchar(20) NOT NULL default 'open',
             closed int(11) NOT NULL default '0',
-            starter int(11) NOT NULL,
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
@@ -1766,7 +1771,7 @@ if (!class_exists('asgarosforum'))
       $this->header();
       $search_string = esc_sql($_POST['search_words']);
 
-      $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_posts}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, MATCH (`text`) AGAINST (%s) AS score
+      $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_posts}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, {$this->t_posts}.author_id, MATCH (`text`) AGAINST (%s) AS score
       FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
       AND MATCH (`text`) AGAINST (%s)
       ORDER BY score DESC LIMIT 50", $search_string, $search_string);
@@ -1794,13 +1799,12 @@ if (!class_exists('asgarosforum'))
       {
         if ($this->have_access($this->forum_get_group_from_post($result->parent_id)))
         {
-          $starter = $wpdb->get_var("SELECT starter FROM {$this->t_threads} WHERE id = {$result->parent_id}");
           $o .= "<tr>
                 <td valign='top' align='center'>" . $this->get_topic_image($result->parent_id) . "</td>
                 <td valign='top' class='wpf-alt'><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a>
                 </td>
                 <td valign='top'><small>" . round($result->score * $const, 1) . "%</small></td>
-                <td valign='top' nowrap='nowrap' class='wpf-alt'><span class='img-avatar-forumstats' >" . $this->get_avatar($starter, 15) . "</span>" . $this->profile_link($starter) . "</td>
+                <td valign='top' nowrap='nowrap' class='wpf-alt'><span class='img-avatar-forumstats' >" . $this->get_avatar($result->author_id, 15) . "</span>" . $this->profile_link($result->author_id) . "</td>
                 <td valign='top' class='wpf-alt' nowrap='nowrap'>" . $this->format_date($result->date) . "</td>
               </tr>";
         }

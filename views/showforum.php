@@ -49,7 +49,7 @@
             <?php endif; ?>
           </td>
           <td class="img-avatar-forumstats" align="center">
-            <?php echo $this->profile_link($thread->starter); ?>
+            <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
           </td>
           <td class="wpf-alt forumstats" align="center">
             <span class="icon-replies"><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span>
@@ -97,7 +97,7 @@
           <?php endif; ?>
         </td>
         <td class="img-avatar-forumstats" align="center">
-          <?php echo $this->profile_link($thread->starter); ?>
+          <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
         </td>
         <td class="wpf-alt forumstats" align="center">
           <span class="icon-replies">
