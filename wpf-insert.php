@@ -169,10 +169,10 @@ if (isset($_POST['add_topic_submit']))
     }
 
     $sql_post = "INSERT INTO {$this->t_posts}
-                    (text, parent_id, `date`, author_id, subject)
+                    (text, parent_id, `date`, author_id)
                   VALUES
-                    (%s, %d, %s, %d, %s)";
-    $wpdb->query($wpdb->prepare($sql_post, $content, $id, $date, $cur_user_ID, $subject));
+                    (%s, %d, %s, %d)";
+    $wpdb->query($wpdb->prepare($sql_post, $content, $id, $date, $cur_user_ID));
     $new_post_id = $wpdb->insert_id;
   }
   if (!$error)
@@ -222,9 +222,9 @@ if (isset($_POST['add_post_submit']))
     }
 
     $sql_post = "INSERT INTO {$this->t_posts}
-            (text, parent_id, `date`, author_id, subject)
-         VALUES(%s, %d, %s, %d, %s)";
-    $wpdb->query($wpdb->prepare($sql_post, $content, $thread, $date, $cur_user_ID, $subject));
+            (text, parent_id, `date`, author_id)
+         VALUES(%s, %d, %s, %d)";
+    $wpdb->query($wpdb->prepare($sql_post, $content, $thread, $date, $cur_user_ID));
     $new_id = $wpdb->insert_id;
   }
 
@@ -271,8 +271,8 @@ if (isset($_POST['edit_post_submit']))
   if ($error)
     wp_die($msg);
 
-  $sql = ("UPDATE {$this->t_posts} SET text = %s, subject = %s WHERE id = %d");
-  $wpdb->query($wpdb->prepare($sql, $content, $subject, $edit_post_id));
+  $sql = ("UPDATE {$this->t_posts} SET text = %s WHERE id = %d");
+  $wpdb->query($wpdb->prepare($sql, $content, $edit_post_id));
 
   $ret = $wpdb->get_results($wpdb->prepare("select id from {$this->t_posts} where parent_id = %d order by date asc limit 1", $thread));
   if ($ret[0]->id == $edit_post_id)

@@ -343,13 +343,6 @@ if (!class_exists('asgarosforum'))
       return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
     }
 
-    public function get_postname($id)
-    {
-      global $wpdb;
-
-      return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_posts} WHERE id = %d", $id)));
-    }
-
     public function cut_string($string, $length = 35) {
         if (strlen($string) > $length) {
             return substr($string, 0, $length) . ' ...';
@@ -702,7 +695,7 @@ if (!class_exists('asgarosforum'))
                 <table width='100%' cellspacing='0' cellpadding='0' class='wpf-meta-table'>
 
                 <tr width='70%'>
-                  <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_postname($post->id), 70) . "
+                  <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_threadname($post->parent_id), 70) . "
                     <span class='permalink'>
                     <a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
                   </td>
@@ -977,7 +970,7 @@ if (!class_exists('asgarosforum'))
       $d = date_i18n($this->dateFormat, strtotime($date->date));
 
       return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->cut_string($this->get_postname($date->id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
+      <div class='wpf-item-title'><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)
@@ -1195,7 +1188,6 @@ if (!class_exists('asgarosforum'))
             parent_id int(11) NOT NULL default '0',
             date datetime NOT NULL default '0000-00-00 00:00:00',
             author_id int(11) NOT NULL default '0',
-            subject varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
@@ -1771,7 +1763,7 @@ if (!class_exists('asgarosforum'))
       $this->header();
       $search_string = esc_sql($_POST['search_words']);
 
-      $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_posts}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, {$this->t_posts}.author_id, MATCH (`text`) AGAINST (%s) AS score
+      $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_threads}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, {$this->t_posts}.author_id, MATCH (`text`) AGAINST (%s) AS score
       FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
       AND MATCH (`text`) AGAINST (%s)
       ORDER BY score DESC LIMIT 50", $search_string, $search_string);

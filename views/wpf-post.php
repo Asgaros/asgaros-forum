@@ -61,6 +61,7 @@ if ($user_ID || $this->allow_unreg())
     $this->current_view = EDITPOST;
     $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
     $thread = $this->check_parms($_GET['t']);
+    $t = $wpdb->get_row($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $thread));
     $out = $this->header();
     $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE id = %d", $id));
 
@@ -69,15 +70,13 @@ if ($user_ID || $this->allow_unreg())
       $out .= "<form action='' name='addform' method='post'>";
       $out .= "<table class='wpf-table' width='100%'>
         <tr>
-          <th colspan='2'>" . __("Edit Post:", "asgarosforum") . " " . stripslashes($post->subject) . "
-            <input type='hidden' name='edit_post_subject' value='" . stripslashes($post->subject) . "' />
-          </th>
+          <th colspan='2'>" . __("Edit Post:", "asgarosforum") . " " . stripslashes($t->subject) . "</th>
         </tr>";
 
       if(false) //Need to enable this eventually if we're editing the first post in the thread
         $out .= "<tr>
               <td>" . __("Subject:", "asgarosforum") . "</td>
-              <td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='" . stripslashes($post->subject) . "'/></td>
+              <td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='" . stripslashes($t->subject) . "'/></td>
             </tr>";
 
       $out .= "<tr>
