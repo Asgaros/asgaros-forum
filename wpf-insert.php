@@ -149,10 +149,10 @@ if (isset($_POST['add_topic_submit']))
     $date = $this->wpf_current_time_fixed('mysql', 0);
 
     $sql_thread = "INSERT INTO {$this->t_threads}
-                      (last_post, subject, parent_id, `date`, status, starter)
+                      (subject, parent_id, `date`, status, starter)
                     VALUES
-                      (%s, %s, %d, %s, 'open', %d)";
-    $wpdb->query($wpdb->prepare($sql_thread, $date, $subject, $forum_id, $date, $cur_user_ID));
+                      (%s, %d, %s, 'open', %d)";
+    $wpdb->query($wpdb->prepare($sql_thread, $subject, $forum_id, $date, $cur_user_ID));
 
     $id = $wpdb->insert_id;
 
@@ -226,7 +226,6 @@ if (isset($_POST['add_post_submit']))
          VALUES(%s, %d, %s, %d, %s)";
     $wpdb->query($wpdb->prepare($sql_post, $content, $thread, $date, $cur_user_ID, $subject));
     $new_id = $wpdb->insert_id;
-    $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET last_post = %s WHERE id = %d", $date, $thread));
   }
 
   if (!$error)

@@ -289,7 +289,7 @@ if (!class_exists('asgarosforum'))
       $end = $this->options['forum_threads_per_page'];
       if ($id)
       {
-        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='open' ORDER BY last_post DESC LIMIT %d, %d", $id, $start, $end));
+        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status='open' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC LIMIT %d, %d", $id, $start, $end));
 
         return $threads;
       }
@@ -303,7 +303,7 @@ if (!class_exists('asgarosforum'))
 
       if ($id)
       {
-        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='sticky' ORDER BY last_post DESC", $id));
+        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE parent_id = %d AND status='sticky' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC", $id));
         return $threads;
       }
     }
@@ -1184,7 +1184,6 @@ if (!class_exists('asgarosforum'))
             status varchar(20) NOT NULL default 'open',
             closed int(11) NOT NULL default '0',
             starter int(11) NOT NULL,
-            last_post datetime NOT NULL default '0000-00-00 00:00:00',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
