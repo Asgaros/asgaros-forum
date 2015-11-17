@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2>Mingle Forum - <?php _e('Structure', 'mingle-forum'); ?></h2>
+    <h2>Forum - <?php _e('Structure', 'mingle-forum'); ?></h2>
     <?php if ($saved): ?>
         <div class="updated">
             <p><?php _e('Your Categories have been saved.', 'mingle-forum'); ?></p>

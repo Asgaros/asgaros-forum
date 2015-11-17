@@ -117,8 +117,8 @@ if (!class_exists('mingleforum'))
     // Add admin pages
     public function add_admin_pages()
     {
-      add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
-      add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
+      add_menu_page(__("Forum - Options", "mingleforum"), "Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
+      add_submenu_page("mingle-forum", __("Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
     }

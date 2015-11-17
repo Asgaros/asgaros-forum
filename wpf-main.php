@@ -1,13 +1,13 @@
 <?php
 
 /*
-  Plugin Name: Mingle Forum Lite
+  Plugin Name: Asgaros Forum
   Plugin URI: https://github.com/Asgaros/mingle-forum-lite
-  Description: Mingle Forum Lite is growing rapidly in popularity because it is simple, reliable, lightweight and does just enough to keep things interesting.
+  Description: A lightweight and simple forum plugin for WordPress which is based on the Mingle Forum plugin (v1.1.0-dev) from Cartpauj (https://github.com/cartpauj/mingle-forum).
   Version: 1.0.0 Development-Version
-  Author: Thomas Belser, Cartpauj
-  Author URI: https://github.com/Asgaros/mingle-forum-lite
-  Text Domain: mingleforum
+  Author: Thomas Belser
+  Author URI: https://github.com/Asgaros/asgaros-forum
+  Text Domain: asgarosforum
 
   GNU General Public License, Free Software Foundation <http://creativecommons.org/licenses/GPL/2.0/>
   This program is free software; you can redistribute it and/or modify
