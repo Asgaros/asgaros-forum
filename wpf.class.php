@@ -18,13 +18,13 @@ if (!class_exists('asgarosforum'))
             add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
             add_action("wp_head", array($this, "setup_header"));
             add_action("init", array($this, "kill_canonical_urls"));
-      add_action('init', array($this, "set_cookie"));
-      add_action('init', array($this, "run_wpf_insert"));
-      add_action('wp', array($this, "before_go")); //Redirects Old URL's to SEO URL's
+            add_action('init', array($this, "set_cookie"));
+            add_action('init', array($this, "run_wpf_insert"));
+            add_action('wp', array($this, "before_go")); // Redirects Old URL's to SEO URL's
 
-      //Filter hooks
-      add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
-      add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
+            //Filter hooks
+            add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
+            add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
       add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
       //Shortcode hooks
       add_shortcode('asgarosforum', array($this, "go"));
@@ -100,7 +100,6 @@ public function kill_canonical_urls()
     }
 }
 
-
 // Add admin pages
 public function add_admin_pages()
 {
@@ -117,15 +116,12 @@ public function enqueue_front_scripts()
     }
 }
 
-
 public function setup_header()
 {
     if (is_page($this->page_id)): ?>
         <link rel="stylesheet" type="text/css" href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
     <?php endif;
 }
-
-
 
 public function setup_links()
 {
@@ -147,18 +143,17 @@ public function setup_links()
     $this->home_url = $perm;
 }
 
-    public function run_wpf_insert()
-    {
-      global $wpdb, $user_ID;
-      $this->setup_links();
+public function run_wpf_insert()
+{
+    $this->setup_links();
 
-      $error = false;
+    global $wpdb, $user_ID;
+    $error = false;
 
-      if(isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit']))
+    if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
         require('wpf-insert.php');
-
-      return;
     }
+}
 
     public function get_addtopic_link()
     {
@@ -350,48 +345,45 @@ public function setup_links()
       return $p[0];
     }
 
-    public function before_go()
-    {
-      $this->setup_links();
+public function before_go()
+{
+    $this->setup_links();
+    $action = "";
+    $whereto = "";
 
-      if (isset($_GET['markallread']) && $_GET['markallread'] == "true")
+    if (isset($_GET['markallread']) && $_GET['markallread'] == "true") {
         $this->markallread();
-
-      if (isset($_GET['forumaction']))
-        $action = $_GET['forumaction'];
-      else
-        $action = false;
-
-      if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) &&
-              !isset($_GET['remove_post']) && !isset($_GET['sticky']) &&
-              !isset($_GET['closed']))
-      {
-        if ($action != false)
-        {
-          if ($this->options['forum_use_seo_friendly_urls'])
-          {
-            switch ($action)
-            {
-              case 'viewforum':
-                $whereto = $this->get_forumlink($this->check_parms($_GET['f']));
-                break;
-              case 'viewtopic':
-                $whereto = $this->get_threadlink($this->check_parms($_GET['t']));
-                break;
-            }
-            if (!empty($whereto))
-            {
-              header("HTTP/1.1 301 Moved Permanently");
-
-              if ($this->curr_page > 0)
-                header("Location: " . $whereto . "." . $this->curr_page);
-              else
-                header("Location: " . $whereto);
-            }
-          }
-        }
-      }
     }
+
+    if (isset($_GET['forumaction'])) {
+        $action = $_GET['forumaction'];
+    } else {
+        $action = false;
+    }
+
+    if ($action != false && $this->options['forum_use_seo_friendly_urls']) {
+        if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) && !isset($_GET['remove_post']) && !isset($_GET['sticky']) && !isset($_GET['closed'])) {
+            switch ($action) {
+                case 'viewforum':
+                    $whereto = $this->get_forumlink($this->check_parms($_GET['f']));
+                    break;
+                case 'viewtopic':
+                    $whereto = $this->get_threadlink($this->check_parms($_GET['t']));
+                    break;
+            }
+
+            if (!empty($whereto)) {
+                header("HTTP/1.1 301 Moved Permanently");
+
+                if ($this->curr_page > 0) {
+                    header("Location: " . $whereto . "." . $this->curr_page);
+                } else {
+                    header("Location: " . $whereto);
+                }
+            }
+        }
+    }
+}
 
     public function go()
     {
@@ -1023,67 +1015,60 @@ public function setup_links()
       return false;
     }
 
-    // Some SEO friendly stuff
-    public function get_pagetitle($bef_title, $sep)
-    {
-      global $wpdb, $post;
+// Some SEO friendly stuff
+public function get_pagetitle($bef_title, $sep)
+{
+    global $post;
+    $default_title = $post->post_title;
+    $action = "";
+    $title = "";
 
-      $default_title = $post->post_title;
-      $action = "";
-      $title = "";
-
-      if (isset($_GET['forumaction']) && !empty($_GET['forumaction']))
+    if (isset($_GET['forumaction']) && !empty($_GET['forumaction'])) {
         $action = $_GET['forumaction'];
-      elseif ($this->options['forum_use_seo_friendly_urls'])
-      {
+    } else if ($this->options['forum_use_seo_friendly_urls']) {
         $uri = $this->get_seo_friendly_query();
 
-        if (!empty($uri) && $uri['action'] && $uri['id'])
-        {
-          switch ($uri['action'])
-          {
-            case 'forum':
-              $action = 'viewforum';
-              $_GET['f'] = $uri['id'];
-              break;
-            case 'thread':
-              $action = 'viewtopic';
-              $_GET['t'] = $uri['id'];
-              break;
-          }
+        if (!empty($uri) && $uri['action'] && $uri['id']) {
+            switch ($uri['action']) {
+                case 'forum':
+                    $action = 'viewforum';
+                    $_GET['f'] = $uri['id'];
+                    break;
+                case 'thread':
+                    $action = 'viewtopic';
+                    $_GET['t'] = $uri['id'];
+                    break;
+            }
         }
-      }
-
-      switch ($action)
-      {
-        case "viewforum":
-          $title = $default_title . " &raquo; " . $this->get_groupname($this->get_parent_id(FORUM, $this->check_parms($_GET['f']))) . " &raquo; " . $this->get_forumname($this->check_parms($_GET['f']));
-          break;
-        case "viewtopic":
-          $group = $this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->check_parms($_GET['t']))));
-          $title = $default_title . " &raquo; " . $group . " &raquo; " . $this->get_forumname($this->get_parent_id(THREAD, $this->check_parms($_GET['t']))) . " &raquo; " . $this->get_threadname($this->check_parms($_GET['t']));
-          break;
-        case "search":
-          $terms = esc_html($_POST['search_words']);
-          $title = $default_title . " &raquo; " . __("Search Results", "asgarosforum") . " &raquo; {$terms} | ";
-          break;
-        case "editpost":
-          $title = $default_title . " &raquo; " . __("Edit Post", "asgarosforum");
-          break;
-        case "postreply":
-          $title = $default_title . " &raquo; " . __("Post Reply", "asgarosforum");
-          break;
-        case "addtopic":
-          $title = $default_title . " &raquo; " . __("New Topic", "asgarosforum");
-          break;
-        default:
-          $title = $default_title;
-          break;
-      }
-
-      //May want to look at this in the future if we get complains, but this seems great for now!
-      return $title . ' ';
     }
+
+    switch ($action) {
+        case "viewforum":
+            $title = $default_title . " - " . $this->get_forumname($this->check_parms($_GET['f']));
+            break;
+        case "viewtopic":
+            $title = $default_title . " - " . $this->get_forumname($this->get_parent_id(THREAD, $this->check_parms($_GET['t']))) . " - " . $this->get_threadname($this->check_parms($_GET['t']));
+            break;
+        case "search":
+            $terms = esc_html($_POST['search_words']);
+            $title = $default_title . " - " . __("Search Results", "asgarosforum");
+            break;
+        case "editpost":
+            $title = $default_title . " - " . __("Edit Post", "asgarosforum");
+            break;
+        case "postreply":
+            $title = $default_title . " - " . __("Post Reply", "asgarosforum");
+            break;
+        case "addtopic":
+            $title = $default_title . " - " . __("New Topic", "asgarosforum");
+            break;
+        default:
+            $title = $default_title;
+            break;
+      }
+
+      return $title . ' | ';
+  }
 
     public function get_usergroup_name($usergroup_id)
     {
@@ -1400,24 +1385,21 @@ public function wp_forum_install()
       global $user_ID;
 
       if ($user_ID)
-        return $_COOKIE['wpmfcookie'];
+        return $_COOKIE['wpafcookie'];
       else
         return "0000-00-00 00:00:00";
     }
 
-    public function set_cookie()
-    {
-      global $user_ID;
+public function set_cookie()
+{
+    global $user_ID;
 
-      if ($user_ID && !isset($_COOKIE['wpmfcookie']))
-      {
+    if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
         $last = get_user_meta($user_ID, 'lastvisit', true);
-
-        setcookie("wpmfcookie", $last, 0, "/");
-
+        setcookie("wpafcookie", $last, 0, "/");
         update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed('mysql', 0));
-      }
     }
+}
 
     public function markallread()
     {
@@ -1429,7 +1411,7 @@ public function wp_forum_install()
 
         $last = get_user_meta($user_ID, 'lastvisit', true);
 
-        setcookie("wpmfcookie", $last, 0, "/");
+        setcookie("wpafcookie", $last, 0, "/");
       }
     }
 
@@ -1886,15 +1868,17 @@ public function wp_forum_install()
       $wp_rewrite->flush_rules();
     }
 
-    public function set_seo_friendly_rules($args)
-    {
-      $new = array();
-      $link = trim(str_replace(array(site_url(), 'index.php/'), '', get_permalink($this->page_id)), '/');
-      $new['(' . $link . ')(/[-/0-9a-zA-Z]+)?/(.*)$'] = 'index.php?pagename=$matches[1]&page=$matches[2]';
+public function set_seo_friendly_rules($args)
+{
+    $new = array();
+    $link = trim(str_replace(array(site_url(), 'index.php/'), '', get_permalink($this->page_id)), '/');
+    $new['(' . $link . ')(/[-/0-9a-zA-Z]+)?/(.*)$'] = 'index.php?pagename=$matches[1]&page=$matches[2]';
 
-      return $new + $args;
-    }
-  }
+    return $new + $args;
+}
+
+
+}
 
   // End class
 } // End
