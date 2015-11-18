@@ -242,13 +242,16 @@ if (isset($_POST['add_post_submit']))
 if (isset($_POST['edit_post_submit']))
 {
   $myReplaceSub = array("\\");
+  $subject = "";
+  if (isset($_POST['edit_post_subject'])) {
   $subject = str_replace($myReplaceSub, "", $this->input_filter($_POST['edit_post_subject']));
+  }
   $content = $this->input_filter($_POST['message']);
   $thread = $this->check_parms($_POST['thread_id']);
   $edit_post_id = $_POST['edit_post_id'];
   $msg = '';
 
-  if ($subject == "")
+  if (isset($_POST['edit_post_subject']) && $subject == "")
   {
     $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
     $msg .= ("<div id='error'><p>" . __("You must enter a subject", "asgarosforum") . "</p></div>");
@@ -273,12 +276,13 @@ if (isset($_POST['edit_post_submit']))
 
   $sql = ("UPDATE {$this->t_posts} SET text = %s WHERE id = %d");
   $wpdb->query($wpdb->prepare($sql, $content, $edit_post_id));
-
+  if (isset($_POST['edit_post_subject'])) {
   $ret = $wpdb->get_results($wpdb->prepare("select id from {$this->t_posts} where parent_id = %d order by date asc limit 1", $thread));
   if ($ret[0]->id == $edit_post_id)
   {
     $sql = ("UPDATE {$this->t_threads} set subject = %s where id = %d");
     $wpdb->query($wpdb->prepare($sql, $subject, $thread));
+  }
   }
 
   wp_redirect(html_entity_decode($this->get_paged_threadlink($thread) . "#postid-" . $edit_post_id));
