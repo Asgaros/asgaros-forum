@@ -153,31 +153,15 @@ if (!class_exists('asgarosforum'))
             }
         }
 
+        public function forum_exists($id) {
+            global $wpdb;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public function forum_exists($id) {
-    global $wpdb;
-
-    if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE id = %d", $id))) {
-        return true;
-    } else {
-        return false;
-    }
-}
+            if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE id = %d", $id))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
 
 
@@ -191,7 +175,7 @@ public function forum_exists($id) {
     {
       if ($this->options['forum_use_seo_friendly_urls'])
       {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)) . "-group" . $this->get_parent_id(FORUM, $id));
+        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)));
         $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id) . $page;
 
         return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum;
@@ -207,7 +191,7 @@ public function forum_exists($id) {
     {
       if ($this->options['forum_use_seo_friendly_urls'])
       {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id)));
+        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
         $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
         $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
 
@@ -229,7 +213,7 @@ public function forum_exists($id) {
 
       if ($this->options['forum_use_seo_friendly_urls'])
       {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id)));
+        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
         $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
         $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
 
@@ -1359,7 +1343,7 @@ public function wp_forum_install()
       if ($this->current_forum)
         if ($this->options['forum_use_seo_friendly_urls'])
         {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->current_forum)) . "-group" . $this->get_parent_id(FORUM, $this->current_forum));
+          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->current_forum)));
           $forum = $this->get_seo_friendly_title($this->get_forumname($this->current_forum) . "-forum" . $this->current_forum);
           $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . ".0'>" . $this->get_forumname($this->current_forum) . "</a>";
         }
@@ -1369,7 +1353,7 @@ public function wp_forum_install()
       if ($this->current_thread)
         if ($this->options['forum_use_seo_friendly_urls'])
         {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread)));
+          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread))));
           $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $this->current_thread)) . "-forum" . $this->get_parent_id(THREAD, $this->current_thread));
           $thread = $this->get_seo_friendly_title($this->get_threadname($this->current_thread) . "-thread" . $this->current_thread);
           $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . ".0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
@@ -1863,7 +1847,7 @@ public function set_cookie()
       {
         $m = end($uri);
         $found = '';
-        preg_match("/.*-(group|forum|thread)(\d*(\.?\d+)?)$/", $m, $found);
+        preg_match("/.*-(forum|thread)(\d*(\.?\d+)?)$/", $m, $found);
       }
 
       if (!empty($found))
