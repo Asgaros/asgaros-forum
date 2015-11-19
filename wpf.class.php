@@ -153,6 +153,15 @@ if (!class_exists('asgarosforum'))
             }
         }
 
+        public function forum_exists($id) {
+            global $wpdb;
+
+            if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE id = %d", $id))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
 
 
@@ -162,56 +171,29 @@ if (!class_exists('asgarosforum'))
 
 
 
-
-
-
-
-
-
-
-public function forum_exists($id) {
-    global $wpdb;
-
-    if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE id = %d", $id))) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
-
-
-    public function get_post_reply_link()
-    {
-      return $this->post_reply_link . ".{$this->curr_page}";
-    }
-
-    public function get_forumlink($id, $page = '')
-    {
-      if ($this->options['forum_use_seo_friendly_urls'])
-      {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)) . "-group" . $this->get_parent_id(FORUM, $id));
+public function get_forumlink($id, $page = '')
+{
+    if ($this->options['forum_use_seo_friendly_urls']) {
         $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id) . $page;
 
-        return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum;
-      }
-      else
-      if ($page == '')
-        return $this->forum_link . $id . ".{$this->curr_page}";
-      else
-        return $this->forum_link . $id . $page;
+        return rtrim($this->home_url, '/') . '/' . $forum;
+    } else {
+        if ($page == '') {
+            return $this->forum_link . $id . ".{$this->curr_page}";
+        } else {
+            return $this->forum_link . $id . $page;
+        }
     }
+}
 
     public function get_threadlink($id, $page = '')
     {
       if ($this->options['forum_use_seo_friendly_urls'])
       {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id)));
         $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
         $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
 
-        return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . $page;
+        return rtrim($this->home_url, '/') . '/' . $forum . '/' . $thread . $page;
       }
       else
         return $this->thread_link . $id . $page;
@@ -229,11 +211,10 @@ public function forum_exists($id) {
 
       if ($this->options['forum_use_seo_friendly_urls'])
       {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id)));
         $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
         $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
 
-        return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . "." . $num . $postid;
+        return rtrim($this->home_url, '/') . '/' . $forum . '/' . $thread . "." . $num . $postid;
       }
       else
         return $this->thread_link . $id . "." . $num . $postid;
@@ -1272,7 +1253,7 @@ public function wp_forum_install()
         $menu .= "<tr>";
 
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
-            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
+            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
 
 
 
@@ -1359,9 +1340,8 @@ public function wp_forum_install()
       if ($this->current_forum)
         if ($this->options['forum_use_seo_friendly_urls'])
         {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->current_forum)) . "-group" . $this->get_parent_id(FORUM, $this->current_forum));
           $forum = $this->get_seo_friendly_title($this->get_forumname($this->current_forum) . "-forum" . $this->current_forum);
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . ".0'>" . $this->get_forumname($this->current_forum) . "</a>";
+          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $forum . ".0'>" . $this->get_forumname($this->current_forum) . "</a>";
         }
         else
           $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewforum&f={$this->current_forum}.0'>" . $this->get_forumname($this->current_forum) . "</a>";
@@ -1369,10 +1349,9 @@ public function wp_forum_install()
       if ($this->current_thread)
         if ($this->options['forum_use_seo_friendly_urls'])
         {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread))) . "-group" . $this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread)));
           $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $this->current_thread)) . "-forum" . $this->get_parent_id(THREAD, $this->current_thread));
           $thread = $this->get_seo_friendly_title($this->get_threadname($this->current_thread) . "-thread" . $this->current_thread);
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . ".0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
+          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $forum . '/' . $thread . ".0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
         }
         else
           $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewtopic&t={$this->current_thread}.0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
