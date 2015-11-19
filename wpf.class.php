@@ -5,6 +5,44 @@ if (!class_exists('asgarosforum'))
     class asgarosforum
     {
         var $db_version = 1; // MANAGES DB VERSION
+        var $delim = "";
+        var $page_id = "";
+        var $home_url = "";
+        var $forum_link = "";
+        var $thread_link = "";
+        var $add_topic_link = "";
+
+        // DB tables
+        var $t_categories = "";
+        var $t_forums = "";
+        var $t_threads = "";
+        var $t_posts = "";
+        var $t_usergroups = "";
+        var $t_usergroup2user = "";
+
+        // Misc
+        var $o = "";
+        var $current_group = "";
+        var $current_forum = "";
+        var $current_thread = "";
+        var $curr_page = "";
+        var $skin_url = "";
+        var $dateFormat = "";
+        var $current_view = "";
+        var $base_url = "";
+
+        // Options
+        var $options = array();
+        var $default_ops = array(
+            'forum_posts_per_page' => 10,
+            'forum_threads_per_page' => 20,
+            'forum_require_registration' => true,
+            'forum_use_gravatar' => true,
+            'forum_use_seo_friendly_urls' => false,
+            'forum_allow_image_uploads' => false,
+            'forum_display_name' => 'user_login',
+            'forum_db_version' => 0
+        );
 
         public function __construct()
         {
@@ -25,140 +63,116 @@ if (!class_exists('asgarosforum'))
             //Filter hooks
             add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
             add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
-      add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
-      //Shortcode hooks
-      add_shortcode('asgarosforum', array($this, "go"));
 
-      AFAdmin::load_hooks();
-    }
+            // Shortcode hooks
+            add_shortcode('asgarosforum', array($this, "go"));
 
-    // !Member variables
-    var $delim = "";
-    var $page_id = "";
-    var $home_url = "";
-    var $forum_link = "";
-    var $thread_link = "";
-    var $add_topic_link = "";
-    // DB tables
-    var $t_categories = "";
-    var $t_forums = "";
-    var $t_threads = "";
-    var $t_posts = "";
-    var $t_usergroups = "";
-    var $t_usergroup2user = "";
-    //Misc
-    var $o = "";
-    var $current_group = "";
-    var $current_forum = "";
-    var $current_thread = "";
-    var $curr_page = "";
-    var $skin_url = "";
-    var $dateFormat = "";
-    var $current_view = "";
-    var $base_url = "";
+            AFAdmin::load_hooks();
+        }
+
+        // Initialize varables
+        public function init()
+        {
+            global $wpdb;
+            $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
+            $this->t_categories = $wpdb->prefix . "forum_categories";
+            $this->t_forums = $wpdb->prefix . "forum_forums";
+            $this->t_threads = $wpdb->prefix . "forum_threads";
+            $this->t_posts = $wpdb->prefix . "forum_posts";
+            $this->t_usergroups = $wpdb->prefix . "forum_usergroups";
+            $this->t_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
+            $this->current_group = false;
+            $this->current_forum = false;
+            $this->current_thread = false;
+            $this->curr_page = 0;
+            $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
+            $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
+        }
+
+        public function kill_canonical_urls()
+        {
+            global $post;
+
+            if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id) {
+                remove_filter('template_redirect', 'redirect_canonical');
+            }
+        }
+
+        // Add admin pages
+        public function add_admin_pages()
+        {
+            add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "images/logo.png");
+            add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
+            add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
+            add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
+        }
+
+        public function enqueue_front_scripts()
+        {
+            if (is_page($this->page_id)) {
+                wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js");
+            }
+        }
+
+        public function setup_header()
+        {
+            if (is_page($this->page_id)): ?>
+                <link rel="stylesheet" type="text/css" href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
+            <?php endif;
+        }
+
+        public function setup_links()
+        {
+            global $wp_rewrite;
+
+            // We need to change all of these $this->delim to use a regex on the request URI instead. This is preventing the forum from working as the home page.
+            if ($wp_rewrite->using_permalinks()) {
+                $this->delim = "?";
+            } else {
+                $this->delim = "&";
+            }
+
+            $perm = get_permalink($this->page_id);
+            $this->forum_link = $perm . $this->delim . "forumaction=viewforum&f=";
+            $this->thread_link = $perm . $this->delim . "forumaction=viewtopic&t=";
+            $this->add_topic_link = $perm . $this->delim . "forumaction=addtopic&forum={$this->current_forum}";
+            $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&thread={$this->current_thread}";
+            $this->base_url = $perm . $this->delim . "forumaction=";
+            $this->home_url = $perm;
+        }
+
+        public function run_wpf_insert()
+        {
+            $this->setup_links();
+
+            global $wpdb, $user_ID;
+            $error = false;
+
+            if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
+                require('wpf-insert.php');
+            }
+        }
 
 
-    //Options
-    var $options = array();
-
-    var $default_ops = array( 'forum_posts_per_page' => 10,
-                              'forum_threads_per_page' => 20,
-                              'forum_require_registration' => true,
-                              'forum_use_gravatar' => true,
-                              'forum_use_seo_friendly_urls' => false,
-                              'forum_allow_image_uploads' => false,
-                              'forum_display_name' => 'user_login',
-                              'forum_db_version' => 0);
 
 
 
-// Initialize varables
-public function init()
-{
-    global $wpdb;
-    $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
-    $this->t_categories = $wpdb->prefix . "forum_categories";
-    $this->t_forums = $wpdb->prefix . "forum_forums";
-    $this->t_threads = $wpdb->prefix . "forum_threads";
-    $this->t_posts = $wpdb->prefix . "forum_posts";
-    $this->t_usergroups = $wpdb->prefix . "forum_usergroups";
-    $this->t_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
-    $this->current_group = false;
-    $this->current_forum = false;
-    $this->current_thread = false;
-    $this->curr_page = 0;
-    $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
-    $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
-}
 
-public function kill_canonical_urls()
-{
-    global $post;
 
-    if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id) {
-        remove_filter('template_redirect', 'redirect_canonical');
-    }
-}
 
-// Add admin pages
-public function add_admin_pages()
-{
-    add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "images/logo.png");
-    add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
-    add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
-    add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
-}
 
-public function enqueue_front_scripts()
-{
-    if (is_page($this->page_id)) {
-        wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js");
-    }
-}
 
-public function setup_header()
-{
-    if (is_page($this->page_id)): ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-    <?php endif;
-}
 
-public function setup_links()
-{
-    global $wp_rewrite;
 
-    // We need to change all of these $this->delim to use a regex on the request URI instead. This is preventing the forum from working as the home page.
-    if ($wp_rewrite->using_permalinks()) {
-        $this->delim = "?";
-    } else {
-        $this->delim = "&";
-    }
 
-    $perm = get_permalink($this->page_id);
-    $this->forum_link = $perm . $this->delim . "forumaction=viewforum&f=";
-    $this->thread_link = $perm . $this->delim . "forumaction=viewtopic&t=";
-    $this->add_topic_link = $perm . $this->delim . "forumaction=addtopic&forum={$this->current_forum}";
-    $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&thread={$this->current_thread}";
-    $this->base_url = $perm . $this->delim . "forumaction=";
-    $this->home_url = $perm;
-}
 
-public function run_wpf_insert()
-{
-    $this->setup_links();
 
-    global $wpdb, $user_ID;
-    $error = false;
 
-    if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
-        require('wpf-insert.php');
-    }
-}
 
-    public function get_addtopic_link()
-    {
-      return $this->add_topic_link . ".{$this->curr_page}";
-    }
+
+
+
+
 
     public function get_post_reply_link()
     {
@@ -1194,7 +1208,7 @@ public function wp_forum_install()
 
         $menu = "<table cellpadding='0' cellspacing='0' id='forummenu'>";
         $menu .= "<tr>
-                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
+                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->add_topic_link . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
 
         $menu .= "
           </tr>
