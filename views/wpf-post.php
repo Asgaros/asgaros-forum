@@ -90,6 +90,7 @@ if ($user_ID || $this->allow_unreg())
               <td colspan='2'><input type='submit' id='wpf-post-submit' name='edit_post_submit' value='" . __("Save Post", "asgarosforum") . "' /></td>
               <input type='hidden' name='edit_post_id' value='" . $post->id . "'/>
               <input type='hidden' name='thread_id' value='" . $thread . "'/>
+              <input type='hidden' name='page_id' value='" . $this->curr_page . "'/>
             </tr>
           </table></form>";
       $this->o .= $out;

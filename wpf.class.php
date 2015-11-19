@@ -163,65 +163,58 @@ if (!class_exists('asgarosforum'))
             }
         }
 
+        public function get_forumlink($id, $page = '')
+        {
+            if ($this->options['forum_use_seo_friendly_urls']) {
+                $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)));
+                $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id) . $page;
+
+                return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum;
+            } else {
+                if ($page == '') {
+                    return $this->forum_link . $id . ".{$this->curr_page}";
+                } else {
+                    return $this->forum_link . $id . $page;
+                }
+            }
+        }
+
+        public function get_threadlink($id, $page = '0')
+        {
+            if ($this->options['forum_use_seo_friendly_urls']) {
+                $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
+                $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
+                $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
+
+                return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . '.' . $page;
+            } else {
+                return $this->thread_link . $id . '.' . $page;
+            }
+        }
+
+        public function get_postlink($id, $postid, $page = 'N/A')
+        {
+            $num = 0;
+
+            if ($page == 'N/A') {
+                global $wpdb;
+                $wpdb->query($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d", $id));
+                $num = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']) - 1;
+
+                if ($num < 0) {
+                    $num = 0;
+                }
+            } else {
+                $num = $page;
+            }
+
+            return $this->get_threadlink($id, $num) . '#postid-' . $postid;
+        }
 
 
 
-    public function get_post_reply_link()
-    {
-      return $this->post_reply_link . ".{$this->curr_page}";
-    }
 
-    public function get_forumlink($id, $page = '')
-    {
-      if ($this->options['forum_use_seo_friendly_urls'])
-      {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)));
-        $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id) . $page;
 
-        return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum;
-      }
-      else
-      if ($page == '')
-        return $this->forum_link . $id . ".{$this->curr_page}";
-      else
-        return $this->forum_link . $id . $page;
-    }
-
-    public function get_threadlink($id, $page = '')
-    {
-      if ($this->options['forum_use_seo_friendly_urls'])
-      {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
-        $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
-        $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
-
-        return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . $page;
-      }
-      else
-        return $this->thread_link . $id . $page;
-    }
-
-    public function get_paged_threadlink($id, $postid = '')
-    {
-      global $wpdb;
-
-      $wpdb->query($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d", $id));
-      $num = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']) - 1;
-
-      if ($num < 0)
-        $num = 0;
-
-      if ($this->options['forum_use_seo_friendly_urls'])
-      {
-        $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
-        $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
-        $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
-
-        return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . "." . $num . $postid;
-      }
-      else
-        return $this->thread_link . $id . "." . $num . $postid;
-    }
 
     public function get_groups($id = '')
     {
@@ -492,7 +485,7 @@ public function before_go()
       {
         ob_start();
 
-        $link = $this->get_paged_threadlink($thread_id);
+        $link = $this->get_postlink($thread_id, $post->id);
 
         require('views/lastpost.php');
 
@@ -663,7 +656,7 @@ public function before_go()
                 <tr width='70%'>
                   <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_threadname($post->parent_id), 70) . "
                     <span class='permalink'>
-                    <a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
+                    <a href='" . $this->get_postlink($post->parent_id, $post->id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
                   </td>
                 </tr>
                 <tr>
@@ -734,7 +727,7 @@ public function before_go()
         if ($this->is_moderator($user_ID, $this->current_forum))
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "asgarosforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
       }
       else
       {
@@ -743,7 +736,7 @@ public function before_go()
         if ($this->is_moderator($user_ID, $this->current_forum))
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "asgarosforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
       }
 
       $o .= "</tr></table>";
@@ -936,7 +929,7 @@ public function before_go()
       $d = date_i18n($this->dateFormat, strtotime($date->date));
 
       return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
+      <div class='wpf-item-title'><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)
@@ -1256,7 +1249,7 @@ public function wp_forum_install()
         $menu .= "<tr>";
 
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
-            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
+            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
 
 
 
@@ -1455,7 +1448,7 @@ public function set_cookie()
           if ($i == $this->curr_page)
             $out .= " <strong>" . ($i + 1) . "</strong>";
           else
-            $out .= " <a href='" . $this->get_threadlink($this->current_thread, "." . $i) . "'>" . ($i + 1) . "</a>";
+            $out .= " <a href='" . $this->get_threadlink($this->current_thread, $i) . "'>" . ($i + 1) . "</a>";
       }
       else
       {
@@ -1464,16 +1457,16 @@ public function set_cookie()
 
         for ($i = 3; $i > 0; $i--)
           if ((($this->curr_page + 1) - $i) > 0)
-            $out .= " <a href='" . $this->get_threadlink($this->current_thread, "." . ($this->curr_page - $i)) . "'>" . (($this->curr_page + 1) - $i) . "</a>";
+            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->curr_page - $i)) . "'>" . (($this->curr_page + 1) - $i) . "</a>";
 
         $out .= " <strong>" . ($this->curr_page + 1) . "</strong>";
 
         for ($i = 1; $i <= 3; $i++)
           if ((($this->curr_page + 1) + $i) <= $num_pages)
-            $out .= " <a href='" . $this->get_threadlink($this->current_thread, "." . ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
+            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
 
         if ($num_pages - $this->curr_page >= 5)
-          $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, "." . ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
+          $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
       }
 
       return "<span class='wpf-pages'>" . $out . "</span>";

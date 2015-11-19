@@ -231,7 +231,7 @@ if (isset($_POST['add_post_submit']))
   if (!$error)
   {
     $unused = apply_filters('wpwf_add_guest_sub', $thread); //--weaver-- Maybe add a subscription
-    wp_redirect(html_entity_decode($this->get_paged_threadlink($thread) . "#postid-" . $new_id));
+    wp_redirect(html_entity_decode($this->get_postlink($thread, $new_id)));
     exit;
   }
   else
@@ -284,8 +284,7 @@ if (isset($_POST['edit_post_submit']))
     $wpdb->query($wpdb->prepare($sql, $subject, $thread));
   }
   }
-
-  wp_redirect(html_entity_decode($this->get_paged_threadlink($thread) . "#postid-" . $edit_post_id));
+  wp_redirect(html_entity_decode($this->get_postlink($thread, $edit_post_id, $this->check_parms($_POST['page_id']))));
   exit;
 }
 ?>
