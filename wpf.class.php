@@ -169,7 +169,15 @@ if (!class_exists('asgarosforum'))
 
 
 
+public function forum_exists($id) {
+    global $wpdb;
 
+    if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE id = %d", $id))) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 
