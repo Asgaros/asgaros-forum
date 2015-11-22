@@ -32,6 +32,9 @@
         });
         $('.mf_add_new_forum').click(function() {
             var category_id = $(this).attr('data-value');
+            $('#hidden-element-container input:eq(0)').attr("name", "mf_forum_id[" + category_id + "][]");
+            $('#hidden-element-container input:eq(1)').attr("name", "forum_name[" + category_id + "][]");
+            $('#hidden-element-container input:eq(2)').attr("name", "forum_description[" + category_id + "][]");
             $('#hidden-element-container li').clone().appendTo('ol#sortable-forums-' + category_id);
             return false;
         });

@@ -51,9 +51,9 @@
 </div>
 <div id="hidden-element-container">
     <li class="ui-state-default">
-        <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="new" />
-        <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="" /></label>&nbsp;&nbsp;
-        <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="" size="50" /></label>
+        <input type="hidden" name="mf_forum_id[][]" value="new" />
+        <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
+        <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" size="50" /></label>
         <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
             <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
         </a>
