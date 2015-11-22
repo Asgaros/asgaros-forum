@@ -493,8 +493,7 @@ public function showthread($thread_id) {
     $posts = $this->get_posts($thread_id);
 
     if ($posts) {
-        if (!current_user_can('administrator') && !is_super_admin($user_ID) && !$this->is_moderator($user_ID, $this->current_forum))
-          $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
+        $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
         if (!$this->have_access($this->current_group))
           wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
