@@ -518,6 +518,10 @@ if (!class_exists('asgarosforum'))
       if (isset($_GET['sticky']))
         $this->sticky_post();
 
+    if (isset($_GET['closed'])) {
+      $this->closed_post();
+  }
+
       $posts = $this->get_posts($thread_id);
 
       if ($posts)
