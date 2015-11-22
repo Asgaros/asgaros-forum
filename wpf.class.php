@@ -500,39 +500,43 @@ public function before_go()
 
     public function showforum($forum_id)
     {
-      global $user_ID, $wpdb;
+        if ($this->forum_exists($forum_id)) {
+          global $user_ID, $wpdb;
 
-      if (isset($_GET['delete_topic']))
-        $this->remove_topic($forum_id);
+          if (isset($_GET['delete_topic']))
+            $this->remove_topic($forum_id);
 
-      if (isset($_GET['move_topic']))
-        $this->move_topic($forum_id);
+          if (isset($_GET['move_topic']))
+            $this->move_topic($forum_id);
 
-      if (!empty($forum_id))
-      {
-        $out = "";
-        $threads = $this->get_threads($forum_id);
-        $sticky_threads = $this->get_sticky_threads($forum_id);
-        $this->current_group = $this->get_parent_id(FORUM, $forum_id);
-        $this->current_forum = $forum_id;
+          if (!empty($forum_id))
+          {
+            $out = "";
+            $threads = $this->get_threads($forum_id);
+            $sticky_threads = $this->get_sticky_threads($forum_id);
+            $this->current_group = $this->get_parent_id(FORUM, $forum_id);
+            $this->current_forum = $forum_id;
 
-        $this->header();
+            $this->header();
 
-        if (isset($_GET['getNewForumID']))
-          $out .= $this->getNewForumID();
-        else
-        {
-          ob_start();
+            if (isset($_GET['getNewForumID']))
+              $out .= $this->getNewForumID();
+            else
+            {
+              ob_start();
 
-          if (!$this->have_access($this->current_group))
-            wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
+              if (!$this->have_access($this->current_group))
+                wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
 
-          require('views/showforum.php');
+              require('views/showforum.php');
 
-          $out .= ob_get_clean();
-        }
+              $out .= ob_get_clean();
+            }
 
-        $this->o .= $out;
+            $this->o .= $out;
+          }
+      } else {
+          wp_die(__("Sorry, but this forum does not exist.", "asgarosforum"));
       }
     }
 
