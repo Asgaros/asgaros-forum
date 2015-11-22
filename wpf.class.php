@@ -366,15 +366,6 @@ if (!class_exists('asgarosforum'))
                 }
             }
 
-            echo '<div id="wpf-wrapper">';
-            echo '<div id="top-elements">';
-            echo $this->trail();
-            echo "<div class='wpf_search'>
-            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
-            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
-            </form>
-            </div></div>";
-
             if ($action) {
                 switch ($action) {
                     case 'viewforum':
@@ -404,6 +395,15 @@ if (!class_exists('asgarosforum'))
             } else {
                 $this->overview();
             }
+
+            echo '<div id="wpf-wrapper">';
+            echo '<div id="top-elements">';
+            echo $this->trail();
+            echo "<div class='wpf_search'>
+            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
+            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
+            </form>
+            </div></div>";
 
             echo $this->o . '</div>';
         }
@@ -449,11 +449,13 @@ if (!class_exists('asgarosforum'))
                 if (isset($_GET['getNewForumID'])) {
                     $out .= $this->getNewForumID();
                 } else {
+                    ob_start();
                     if (!$this->have_access($this->current_group)) {
                         wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
                     }
 
                     require('views/showforum.php');
+                    $out .= ob_get_clean();
                 }
 
                 $this->o .= $out;
