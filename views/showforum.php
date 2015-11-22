@@ -26,14 +26,13 @@
       <?php foreach ($sticky_threads as $thread): ?>
         <tr>
           <td class="forumIcon" align="center">
-            <img src="<?php echo $this->skin_url; ?>/images/topic/normal_post_sticky.png" /> <!-- hard coded img needs to be moved to css -->
+             <?php echo $this->get_topic_image($thread->id); ?></td>
           </td>
           <td class="sticky wpf-topic-title">
             <span class="topicTitle">
               <a href="<?php echo $this->get_threadlink($thread->id); ?>">
                 <?php echo $this->cut_string($this->output_filter($thread->subject)); ?>
               </a>
-              <?php echo $this->maybe_get_unread_image($thread->id); ?>
             </span>
             <?php if ($this->is_moderator($user_ID, $this->current_forum)): ?>
               <div class="mf_sticky_post_actions">
@@ -75,13 +74,13 @@
       $alt = 'alt even';
       echo ($alt == 'alt even') ? 'odd' : 'alt even';
       ?>">
-        <td class="forumIcon" align="center"><?php echo $this->get_topic_image($thread->id); ?></td>
+        <td class="forumIcon" align="center">
+            <?php echo $this->get_topic_image($thread->id); ?></td>
         <td>
           <span class="topicTitle">
             <a href="<?php echo $this->get_threadlink($thread->id); ?>">
               <?php echo $this->cut_string($this->output_filter($thread->subject), 50); ?>
             </a>
-            <?php echo $this->maybe_get_unread_image($thread->id); ?>
           </span>
           <?php if ($this->is_moderator($user_ID, $this->current_forum)): ?>
             <div class="mf_post_actions">

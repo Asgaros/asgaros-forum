@@ -1,9 +1,7 @@
 <?php
 
-if (!class_exists('asgarosforum'))
-{
-    class asgarosforum
-    {
+if (!class_exists('asgarosforum')) {
+    class asgarosforum {
         var $db_version = 1; // MANAGES DB VERSION
         var $delim = "";
         var $page_id = "";
@@ -44,8 +42,7 @@ if (!class_exists('asgarosforum'))
             'forum_db_version' => 0
         );
 
-        public function __construct()
-        {
+        public function __construct() {
             // Init options
             $this->options = array_merge($this->default_ops, get_option('asgarosforum_options', array())); // Merge defaults with user's settings
             $this->init();
@@ -71,8 +68,7 @@ if (!class_exists('asgarosforum'))
         }
 
         // Initialize varables
-        public function init()
-        {
+        public function init() {
             global $wpdb;
             $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
             $this->t_categories = $wpdb->prefix . "forum_categories";
@@ -89,8 +85,7 @@ if (!class_exists('asgarosforum'))
             $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
         }
 
-        public function kill_canonical_urls()
-        {
+        public function kill_canonical_urls() {
             global $post;
 
             if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id) {
@@ -99,30 +94,26 @@ if (!class_exists('asgarosforum'))
         }
 
         // Add admin pages
-        public function add_admin_pages()
-        {
+        public function add_admin_pages() {
             add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "images/logo.png");
             add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
             add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
             add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
         }
 
-        public function enqueue_front_scripts()
-        {
+        public function enqueue_front_scripts() {
             if (is_page($this->page_id)) {
                 wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js");
             }
         }
 
-        public function setup_header()
-        {
+        public function setup_header() {
             if (is_page($this->page_id)): ?>
                 <link rel="stylesheet" type="text/css" href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
             <?php endif;
         }
 
-        public function setup_links()
-        {
+        public function setup_links() {
             global $wp_rewrite;
 
             // We need to change all of these $this->delim to use a regex on the request URI instead. This is preventing the forum from working as the home page.
@@ -141,8 +132,7 @@ if (!class_exists('asgarosforum'))
             $this->home_url = $perm;
         }
 
-        public function run_wpf_insert()
-        {
+        public function run_wpf_insert() {
             $this->setup_links();
 
             global $wpdb, $user_ID;
@@ -163,8 +153,7 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function get_forumlink($id, $page = '0')
-        {
+        public function get_forumlink($id, $page = '0') {
             if ($this->options['forum_use_seo_friendly_urls']) {
                 $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)));
                 $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id);
@@ -175,8 +164,7 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function get_threadlink($id, $page = '0')
-        {
+        public function get_threadlink($id, $page = '0') {
             if ($this->options['forum_use_seo_friendly_urls']) {
                 $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
                 $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
@@ -188,8 +176,7 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function get_postlink($id, $postid, $page = 'N/A')
-        {
+        public function get_postlink($id, $postid, $page = 'N/A') {
             $num = 0;
 
             if ($page == 'N/A') {
@@ -207,15 +194,13 @@ if (!class_exists('asgarosforum'))
             return $this->get_threadlink($id, $num) . '#postid-' . $postid;
         }
 
-        public function get_groups()
-        {
+        public function get_groups() {
             global $wpdb;
 
             return $wpdb->get_results("SELECT * FROM {$this->t_categories} ORDER BY sort DESC");
         }
 
-        public function get_forums($id = '')
-        {
+        public function get_forums($id = '') {
             global $wpdb;
 
             if ($id) {
@@ -225,8 +210,7 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function get_threads($id, $type = 'open')
-        {
+        public function get_threads($id, $type = 'open') {
             global $wpdb;
             $limit = "";
 
@@ -239,8 +223,7 @@ if (!class_exists('asgarosforum'))
             return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status = '{$type}' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC {$limit}", $id));
         }
 
-        public function get_posts($thread_id)
-        {
+        public function get_posts($thread_id) {
             global $wpdb;
             $start = $this->curr_page * $this->options['forum_posts_per_page'];
             $end = $this->options['forum_posts_per_page'];
@@ -248,24 +231,18 @@ if (!class_exists('asgarosforum'))
             return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d ORDER BY date ASC LIMIT %d, %d", $thread_id, $start, $end));
         }
 
-        public function get_groupname($id)
-        {
+        public function get_groupname($id) {
             global $wpdb;
-
             return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id)));
         }
 
-        public function get_forumname($id)
-        {
+        public function get_forumname($id) {
             global $wpdb;
-
             return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_forums} WHERE id = %d", $id)));
         }
 
-        public function get_threadname($id)
-        {
+        public function get_threadname($id) {
             global $wpdb;
-
             return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
         }
 
@@ -277,8 +254,7 @@ if (!class_exists('asgarosforum'))
             return $string;
         }
 
-        public function check_parms($parm)
-        {
+        public function check_parms($parm) {
             $regexp = "/^([+-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/";
 
             if (!preg_match($regexp, $parm)) {
@@ -296,8 +272,7 @@ if (!class_exists('asgarosforum'))
             return $p[0];
         }
 
-        public function before_go()
-        {
+        public function before_go() {
             $this->setup_links();
             $action = "";
             $whereto = "";
@@ -336,8 +311,7 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function go()
-        {
+        public function go() {
             global $wpdb, $user_ID;
             $this->o = "";
 
@@ -408,8 +382,7 @@ if (!class_exists('asgarosforum'))
             echo $this->o . '</div>';
         }
 
-        public function get_userdata($user_id, $data)
-        {
+        public function get_userdata($user_id, $data) {
             $user = get_userdata($user_id);
 
             if (!$user) {
@@ -419,16 +392,14 @@ if (!class_exists('asgarosforum'))
             return $user->$data;
         }
 
-        public function get_lastpost($thread_id)
-        {
+        public function get_lastpost($thread_id) {
             global $wpdb;
             $post = $wpdb->get_row($wpdb->prepare("SELECT date, author_id, id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY date DESC LIMIT 1", $thread_id));
             $link = $this->get_postlink($thread_id, $post->id);
             require('views/lastpost.php');
         }
 
-        public function showforum($forum_id)
-        {
+        public function showforum($forum_id) {
             if ($this->forum_exists($forum_id)) {
                 global $user_ID, $wpdb;
 
@@ -464,68 +435,64 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-
-
-
-
-
-    public function get_starter($thread_id) {
-        global $wpdb;
-
-        return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE parent_id = %d", $thread_id));
-    }
-
-    public function maybe_get_unread_image($thread_id)
-    {
-      global $user_ID;
-
-      $image = "";
-
-      if ($user_ID)
-      {
-        $poster_id = $this->last_posterid_thread($thread_id); // date and author_id
-
-        if ($user_ID != $poster_id)
-        {
-          $lp = strtotime($this->last_poster_in_thread($thread_id)); // date
-          $lv = strtotime($this->last_visit());
-
-          if ($lp > $lv)
-            $image = '<img src="' . $this->skin_url . '/images/new.png" alt="' . __("New posts since your last visit", "asgarosforum") . '">';
+        public function get_starter($thread_id) {
+            global $wpdb;
+            return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1", $thread_id));
         }
-      }
 
-      return $image;
-    }
+        public function check_unread($thread_id) {
+            global $user_ID;
+            $image = "";
 
-    public function get_subject($id)
-    {
-      global $wpdb;
+            if ($user_ID) {
+                $poster_id = $this->last_posterid_thread($thread_id);
 
-      return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
-    }
+                if ($user_ID != $poster_id) {
+                    $lp = strtotime($this->last_poster_in_thread($thread_id));
+                    $lv = strtotime($this->last_visit());
 
-    public function showthread($thread_id)
-    {
-      global $wpdb, $user_ID;
+                    if ($lp > $lv) {
+                        return true;
+                    }
+                }
+            }
 
-      $this->current_group = $this->forum_get_group_from_post($thread_id);
-      $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-      $this->current_thread = $thread_id;
+            return false;
 
-      if (isset($_GET['remove_post']))
+        }
+
+        public function get_subject($id) {
+            global $wpdb;
+            return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
+        }
+
+
+
+
+
+
+
+public function showthread($thread_id) {
+    global $wpdb, $user_ID;
+    $this->current_group = $this->forum_get_group_from_post($thread_id);
+    $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+    $this->current_thread = $thread_id;
+
+    if (isset($_GET['remove_post'])) {
         $this->remove_post();
-      if (isset($_GET['sticky']))
+    }
+
+    if (isset($_GET['sticky'])) {
         $this->sticky_post();
+    }
 
     if (isset($_GET['closed'])) {
-      $this->closed_post();
-  }
+        $this->closed_post();
+    }
 
-      $posts = $this->get_posts($thread_id);
+    $posts = $this->get_posts($thread_id);
 
-      if ($posts)
-      {
+    if ($posts) {
         if (!current_user_can('administrator') && !is_super_admin($user_ID) && !$this->is_moderator($user_ID, $this->current_forum))
           $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
@@ -639,6 +606,13 @@ if (!class_exists('asgarosforum'))
       }
     }
 
+
+
+
+
+
+
+
     public function get_postmeta($post_id, $author_id)
     {
       global $user_ID;
@@ -738,7 +712,7 @@ if (!class_exists('asgarosforum'))
                         foreach ($frs as $f) {
                             $alt = ($alt == "alt even") ? "odd" : "alt even";
                             $this->o .= "<tr class='{$alt}'>";
-                            $image = "off.png";
+                            $image = "new_none.png";
 
                             if ($user_ID) {
                                 $lpif = $this->last_poster_in_forum($f->id, true);
@@ -749,9 +723,9 @@ if (!class_exists('asgarosforum'))
                                     $lv = strtotime($this->last_visit());
 
                                     if ($lv < $lp) {
-                                        $image = "on.png";
+                                        $image = "new_some.png";
                                     } else {
-                                        $image = "off.png";
+                                        $image = "new_none.png";
                                     }
                                 }
                             }
@@ -1658,7 +1632,11 @@ public function set_cookie()
       if ($this->is_closed($thread))
         return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
 
-      return "<img src='{$this->skin_url}/images/topic/normal_post.png' alt='" . __("Normal topic", "asgarosforum") . "' title='" . __("Normal topic", "asgarosforum") . "'>";
+        if ($this->check_unread($thread)) {
+            return "<img src='{$this->skin_url}/images/new_some.png' alt='" . __("Normal unread topic", "asgarosforum") . "' title='" . __("Normal unread topic", "asgarosforum") . "'>";
+        } else {
+            return "<img src='{$this->skin_url}/images/new_none.png' alt='" . __("Normal topic", "asgarosforum") . "' title='" . __("Normal topic", "asgarosforum") . "'>";
+        }
     }
 
     public function get_captcha()
