@@ -28,7 +28,7 @@
           <td class="forumIcon" align="center">
             <img src="<?php echo $this->skin_url; ?>/images/topic/normal_post_sticky.png" /> <!-- hard coded img needs to be moved to css -->
           </td>
-          <td class="wpf-alt sticky wpf-topic-title">
+          <td class="sticky wpf-topic-title">
             <span class="topicTitle">
               <a href="<?php echo $this->get_threadlink($thread->id); ?>">
                 <?php echo $this->cut_string($this->output_filter($thread->subject)); ?>
@@ -51,10 +51,10 @@
           <td class="img-avatar-forumstats" align="center">
             <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
           </td>
-          <td class="wpf-alt forumstats" align="center">
+          <td class="forumstats" align="center">
             <span class="icon-replies"><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span>
           </td>
-          <td class="wpf-alt forumstats" align="center">
+          <td class="forumstats" align="center">
             <span class="icon-views">
               <?php echo (int) $thread->views; ?>
             </span>
@@ -76,7 +76,7 @@
       echo ($alt == 'alt even') ? 'odd' : 'alt even';
       ?>">
         <td class="forumIcon" align="center"><?php echo $this->get_topic_image($thread->id); ?></td>
-        <td class="wpf-alt">
+        <td>
           <span class="topicTitle">
             <a href="<?php echo $this->get_threadlink($thread->id); ?>">
               <?php echo $this->cut_string($this->output_filter($thread->subject), 50); ?>
@@ -99,12 +99,12 @@
         <td class="img-avatar-forumstats" align="center">
           <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
         </td>
-        <td class="wpf-alt forumstats" align="center">
+        <td class="forumstats" align="center">
           <span class="icon-replies">
             <?php echo (int) ($this->num_posts($thread->id) - 1); ?>
           </span>
         </td>
-        <td class="wpf-alt forumstats" align="center">
+        <td class="forumstats" align="center">
           <span class="icon-views">
             <?php echo (int) $thread->views; ?>
           </span>

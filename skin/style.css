@@ -23,8 +23,7 @@
     font-size: 100%;
 }
 .wpf_search {
-    width: 100%;
-    height: 40px;
+    float: right;
 }
 .wpf_search input {
     background-image: url("images/icons/search_btn.png");
@@ -83,6 +82,10 @@
     color: #999;
     padding: 25px !important;
 }
+#top-elements {
+    width: 100%;
+    height: 40px;
+}
 /*Breadcrumb -------------------------------------------*/
 #wpf-wrapper #trail.breadcrumbs a {
     color: #636363;
@@ -98,8 +101,9 @@
 #wpf-wrapper #trail.breadcrumbs {
     font-size: 12px;
 }
-#wpf-wrapper p#trail {
+#wpf-wrapper div#trail {
     margin: 10px 3px 0px !important;
+    float: left;
 }
 /*Wpf itemv ---------------------------------------*/
 #wpf-wrapper .wpf-item,
@@ -328,9 +332,6 @@ img.avatar {
 }
 #wpf-wrapper #wpf-quick-reply br {
     display: none!important;
-}
-.wpf-alt {
-    background: #ecedf3;
 }
 #wpf-wrapper .sticky {
     background: #e0e1e8;

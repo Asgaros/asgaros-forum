@@ -343,86 +343,83 @@ if (!class_exists('asgarosforum'))
 
 
 
-    public function go()
-    {
-      global $wpdb, $user_ID;
+public function go()
+{
+    global $wpdb, $user_ID;
+    $q = "";
+    //get_currentuserinfo();
 
-      $q = "";
-      get_currentuserinfo();
-      ob_start();
+    $this->o = "";
 
-      $this->o = "";
-
-      if (isset($_GET['forumaction']))
+    if (isset($_GET['forumaction'])) {
         $action = $_GET['forumaction'];
-      else
+    } else {
         $action = false;
+    }
 
-      if ($action == false)
-      {
-        if ($this->options['forum_use_seo_friendly_urls'])
-        {
-          $uri = $this->get_seo_friendly_query();
+    if ($action == false) {
+        if ($this->options['forum_use_seo_friendly_urls']) {
+            $uri = $this->get_seo_friendly_query();
 
-          if (!empty($uri) && $uri['action'] && $uri['id'])
-          {
-            switch ($uri['action'])
-            {
-              case 'forum':
-                $action = 'viewforum';
-                $_GET['f'] = $uri['id'];
-                break;
-              case 'thread':
-                $action = 'viewtopic';
-                $_GET['t'] = $uri['id'];
-                break;
+            if (!empty($uri) && $uri['action'] && $uri['id']) {
+                switch ($uri['action']) {
+                    case 'forum':
+                        $action = 'viewforum';
+                        $_GET['f'] = $uri['id'];
+                        break;
+                    case 'thread':
+                    $action = 'viewtopic';
+                    $_GET['t'] = $uri['id'];
+                    break;
+                }
             }
-          }
         }
-      }
+    }
 
-      if ($action)
-      {
-        switch ($action)
-        {
-          case 'viewforum':
-            $this->current_view = FORUM;
-            $this->showforum($this->check_parms($_GET['f']));
-            break;
-          case 'viewtopic':
-            $this->current_view = THREAD;
-            $this->showthread($this->check_parms($_GET['t']));
-            break;
-          case 'addtopic':
-            include('views/wpf-thread.php');
-            break;
-          case 'postreply':
-            if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread'])))
-              wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
-            else
-            {
-              $this->current_thread = $this->check_parms($_GET['thread']);
-              include('views/wpf-post.php');
-            }
-            break;
-          case 'editpost':
-            include('views/wpf-post.php');
-            break;
-          case 'search':
-            $this->search_results();
-            break;
+    if ($action) {
+        switch ($action) {
+            case 'viewforum':
+                $this->current_view = FORUM;
+                $this->showforum($this->check_parms($_GET['f']));
+                break;
+            case 'viewtopic':
+                $this->current_view = THREAD;
+                $this->showthread($this->check_parms($_GET['t']));
+                break;
+            case 'addtopic':
+                include('views/wpf-thread.php');
+                break;
+            case 'postreply':
+                if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread']))) {
+                    wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
+                } else {
+                    $this->current_thread = $this->check_parms($_GET['thread']);
+                    include('views/wpf-post.php');
+                }
+                break;
+            case 'editpost':
+                include('views/wpf-post.php');
+                break;
+            case 'search':
+                $this->search_results();
+                break;
         }
-      }
-      else
-      {
+    } else {
         $this->current_view = MAIN;
         $this->mydefault();
-      }
-
-      echo '<div id="wpf-wrapper">' . $this->trail() . $this->o . '</div>';
-
-      return ob_get_clean();
     }
+
+    echo '<div id="wpf-wrapper">';
+    echo '<div id="top-elements">';
+    echo $this->trail();
+    echo "<div class='wpf_search'>
+            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
+                   <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
+                  </form>
+          </div>";
+
+    echo '</div>' . $this->o . '</div>';
+}
 
 
 
@@ -487,8 +484,6 @@ if (!class_exists('asgarosforum'))
             $sticky_threads = $this->get_threads($forum_id, 'sticky');
             $this->current_group = $this->get_parent_id(FORUM, $forum_id);
             $this->current_forum = $forum_id;
-
-            $this->header();
 
             if (isset($_GET['getNewForumID']))
               $out .= $this->getNewForumID();
@@ -570,8 +565,6 @@ if (!class_exists('asgarosforum'))
         if (!$this->have_access($this->current_group))
           wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
 
-        $this->header();
-
         $out = "<table cellpadding='0' cellspacing='0'>
                   <tr class='pop_menus'>
                     <td width='100%'>" . $this->post_pageing($thread_id) . "</td>
@@ -591,19 +584,17 @@ if (!class_exists('asgarosforum'))
                     </tr>
                   </table>";
         $out .= "</div>";
-        $class = "";
         $c = 0;
 
         foreach ($posts as $post)
         {
-          $class = ($class == "wpf-alt") ? "" : "wpf-alt";
           $user = get_userdata($post->author_id);
 
           $out .= "<table class='wpf-post-table' width='100%' id='postid-{$post->id}'>
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
           $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "asgarosforum") . "' class='post-calendar-img'/>";
 
-          $out .= "<span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
+          $out .= "<span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr><td class='autorpostbox' valign='top' width='125'>";
 
           $out .= "<div class='wpf-small'>";
 
@@ -769,7 +760,6 @@ if (!class_exists('asgarosforum'))
         }
 
         $grs = $this->get_groups();
-        $this->header();
 
         if (count($grs) > 0) {
             foreach ($grs as $g) {
@@ -801,7 +791,7 @@ if (!class_exists('asgarosforum'))
                                 }
                             }
 
-                            $this->o .= "<td class='wpf-alt forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
+                            $this->o .= "<td class='forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
                             <td valign='top' class='wpf-category-title' ><strong><a href='" . $this->get_forumlink($f->id) . "'>"
                             . $this->output_filter($f->name) . "</a></strong><br />"
                             . $this->output_filter($f->description);
@@ -811,7 +801,7 @@ if (!class_exists('asgarosforum'))
                             }
 
                             $this->o .= "</td>";
-                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>";
+                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>";
                             $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
                             $this->o .= "</tr>";
                         }
@@ -1322,7 +1312,7 @@ public function wp_forum_install()
         if (isset($_POST['search_words']))
           $terms = esc_html(esc_sql($_POST['search_words']));
 
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "asgarosforum") . " &raquo; $terms";
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("Search Results", "asgarosforum") . " &rarr; $terms";
       }
 
       if ($this->current_view == POSTREPLY)
@@ -1334,7 +1324,7 @@ public function wp_forum_install()
       if ($this->current_view == NEWTOPIC)
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topic", "asgarosforum");
 
-      return "<p id='trail' class='breadcrumbs'>{$trail}</p>";
+      return "<div id='trail' class='breadcrumbs'>{$trail}</div>";
     }
 
     public function last_visit()
@@ -1378,18 +1368,6 @@ public function set_cookie()
         return get_avatar($user_id, $size);
       else
         return "";
-    }
-
-    public function header()
-    {
-      $this->setup_links();
-
-      $o = "<div class='wpf_search'>
-              <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
-                     <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
-                    </form>
-            </div>";
-      $this->o .= $o;
     }
 
     public function post_pageing($thread_id)
@@ -1667,7 +1645,6 @@ public function set_cookie()
 
       $o = "";
       $this->current_view = SEARCH;
-      $this->header();
       $search_string = esc_sql($_POST['search_words']);
 
       $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_threads}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, {$this->t_posts}.author_id, MATCH (`text`) AGAINST (%s) AS score
@@ -1700,11 +1677,11 @@ public function set_cookie()
         {
           $o .= "<tr>
                 <td valign='top' align='center'>" . $this->get_topic_image($result->parent_id) . "</td>
-                <td valign='top' class='wpf-alt'><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a>
+                <td valign='top'><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a>
                 </td>
                 <td valign='top'><small>" . round($result->score * $const, 1) . "%</small></td>
-                <td valign='top' nowrap='nowrap' class='wpf-alt'><span class='img-avatar-forumstats' >" . $this->get_avatar($result->author_id, 15) . "</span>" . $this->profile_link($result->author_id) . "</td>
-                <td valign='top' class='wpf-alt' nowrap='nowrap'>" . $this->format_date($result->date) . "</td>
+                <td valign='top' nowrap='nowrap'><span class='img-avatar-forumstats' >" . $this->get_avatar($result->author_id, 15) . "</span>" . $this->profile_link($result->author_id) . "</td>
+                <td valign='top' nowrap='nowrap'>" . $this->format_date($result->date) . "</td>
               </tr>";
         }
       }
