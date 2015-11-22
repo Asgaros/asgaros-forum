@@ -31,12 +31,10 @@ load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 
 //Setup defines
 define('WPFURL', plugin_dir_url(__FILE__));
-define('MAIN', "main");
 define('THREAD', "thread");
 define('SEARCH', "search");
 define('POSTREPLY', "postreply");
 define('EDITPOST', "editpost");
-define("NEWTOPICS", "newtopics");
 define("NEWTOPIC", "newtopic");
 define("FORUM", __("Forum", "asgarosforum"));
 

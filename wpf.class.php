@@ -336,175 +336,136 @@ if (!class_exists('asgarosforum'))
             }
         }
 
+        public function go()
+        {
+            global $wpdb, $user_ID;
+            $this->o = "";
 
+            if (isset($_GET['forumaction'])) {
+                $action = $_GET['forumaction'];
+            } else {
+                $action = false;
+            }
 
+            if ($action == false) {
+                if ($this->options['forum_use_seo_friendly_urls']) {
+                    $uri = $this->get_seo_friendly_query();
 
+                    if (!empty($uri) && $uri['action'] && $uri['id']) {
+                        switch ($uri['action']) {
+                            case 'forum':
+                                $action = 'viewforum';
+                                $_GET['f'] = $uri['id'];
+                                break;
+                            case 'thread':
+                                $action = 'viewtopic';
+                                $_GET['t'] = $uri['id'];
+                                break;
+                        }
+                    }
+                }
+            }
 
+            echo '<div id="wpf-wrapper">';
+            echo '<div id="top-elements">';
+            echo $this->trail();
+            echo "<div class='wpf_search'>
+            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
+            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
+            </form>
+            </div></div>";
 
-
-
-public function go()
-{
-    global $wpdb, $user_ID;
-    $q = "";
-    //get_currentuserinfo();
-
-    $this->o = "";
-
-    if (isset($_GET['forumaction'])) {
-        $action = $_GET['forumaction'];
-    } else {
-        $action = false;
-    }
-
-    if ($action == false) {
-        if ($this->options['forum_use_seo_friendly_urls']) {
-            $uri = $this->get_seo_friendly_query();
-
-            if (!empty($uri) && $uri['action'] && $uri['id']) {
-                switch ($uri['action']) {
-                    case 'forum':
-                        $action = 'viewforum';
-                        $_GET['f'] = $uri['id'];
+            if ($action) {
+                switch ($action) {
+                    case 'viewforum':
+                        $this->showforum($this->check_parms($_GET['f']));
                         break;
-                    case 'thread':
-                    $action = 'viewtopic';
-                    $_GET['t'] = $uri['id'];
-                    break;
+                    case 'viewtopic':
+                        $this->showthread($this->check_parms($_GET['t']));
+                        break;
+                    case 'addtopic':
+                        include('views/wpf-thread.php');
+                        break;
+                    case 'postreply':
+                        if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread']))) {
+                            wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
+                        } else {
+                            $this->current_thread = $this->check_parms($_GET['thread']);
+                            include('views/wpf-post.php');
+                        }
+                        break;
+                    case 'editpost':
+                        include('views/wpf-post.php');
+                        break;
+                    case 'search':
+                        $this->search_results();
+                        break;
                 }
+            } else {
+                $this->overview();
             }
-        }
-    }
 
-    if ($action) {
-        switch ($action) {
-            case 'viewforum':
-                $this->current_view = FORUM;
-                $this->showforum($this->check_parms($_GET['f']));
-                break;
-            case 'viewtopic':
-                $this->current_view = THREAD;
-                $this->showthread($this->check_parms($_GET['t']));
-                break;
-            case 'addtopic':
-                include('views/wpf-thread.php');
-                break;
-            case 'postreply':
-                if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread']))) {
-                    wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
+            echo $this->o . '</div>';
+        }
+
+        public function get_userdata($user_id, $data)
+        {
+            $user = get_userdata($user_id);
+
+            if (!$user) {
+                return __("Guest", "asgarosforum");
+            }
+
+            return $user->$data;
+        }
+
+        public function get_lastpost($thread_id)
+        {
+            global $wpdb;
+            $post = $wpdb->get_row($wpdb->prepare("SELECT date, author_id, id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY date DESC LIMIT 1", $thread_id));
+            $link = $this->get_postlink($thread_id, $post->id);
+            require('views/lastpost.php');
+        }
+
+        public function showforum($forum_id)
+        {
+            if ($this->forum_exists($forum_id)) {
+                global $user_ID, $wpdb;
+
+                if (isset($_GET['delete_topic'])) {
+                    $this->remove_topic($forum_id);
+                }
+
+                if (isset($_GET['move_topic'])) {
+                    $this->move_topic($forum_id);
+                }
+
+                $out = "";
+                $threads = $this->get_threads($forum_id);
+                $sticky_threads = $this->get_threads($forum_id, 'sticky');
+                $this->current_group = $this->get_parent_id(FORUM, $forum_id);
+                $this->current_forum = $forum_id;
+
+                if (isset($_GET['getNewForumID'])) {
+                    $out .= $this->getNewForumID();
                 } else {
-                    $this->current_thread = $this->check_parms($_GET['thread']);
-                    include('views/wpf-post.php');
+                    if (!$this->have_access($this->current_group)) {
+                        wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
+                    }
+
+                    require('views/showforum.php');
                 }
-                break;
-            case 'editpost':
-                include('views/wpf-post.php');
-                break;
-            case 'search':
-                $this->search_results();
-                break;
-        }
-    } else {
-        $this->current_view = MAIN;
-        $this->mydefault();
-    }
 
-    echo '<div id="wpf-wrapper">';
-    echo '<div id="top-elements">';
-    echo $this->trail();
-    echo "<div class='wpf_search'>
-            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
-                   <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
-                  </form>
-          </div>";
-
-    echo '</div>' . $this->o . '</div>';
-}
-
-
-
-
-
-
-
-    public function get_userdata($user_id, $data)
-    {
-      $user = get_userdata($user_id);
-
-      if (!$user)
-        return __("Guest", "asgarosforum");
-
-      return $user->$data;
-    }
-
-    public function get_lastpost($thread_id)
-    {
-      global $wpdb;
-
-      $post = $wpdb->get_row($wpdb->prepare("SELECT `date`, author_id, id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY `date` DESC LIMIT 1", $thread_id));
-
-      if (!empty($post))
-      {
-        ob_start();
-
-        $link = $this->get_postlink($thread_id, $post->id);
-
-        require('views/lastpost.php');
-
-        return ob_get_clean();
-      }
-      else
-        return false;
-    }
-
-    public function get_lastpost_all()
-    {
-      global $wpdb;
-
-      $post = $wpdb->get_row("SELECT `date`, author_id, id FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 1");
-
-      return ($post) ? __("Latest Post by", "asgarosforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "asgarosforum") . " " . date_i18n($this->dateFormat, strtotime($post->date)) : '';
-    }
-
-    public function showforum($forum_id)
-    {
-        if ($this->forum_exists($forum_id)) {
-          global $user_ID, $wpdb;
-
-          if (isset($_GET['delete_topic']))
-            $this->remove_topic($forum_id);
-
-          if (isset($_GET['move_topic']))
-            $this->move_topic($forum_id);
-
-          if (!empty($forum_id))
-          {
-            $out = "";
-            $threads = $this->get_threads($forum_id);
-            $sticky_threads = $this->get_threads($forum_id, 'sticky');
-            $this->current_group = $this->get_parent_id(FORUM, $forum_id);
-            $this->current_forum = $forum_id;
-
-            if (isset($_GET['getNewForumID']))
-              $out .= $this->getNewForumID();
-            else
-            {
-              ob_start();
-
-              if (!$this->have_access($this->current_group))
-                wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
-
-              require('views/showforum.php');
-
-              $out .= ob_get_clean();
+                $this->o .= $out;
+            } else {
+                wp_die(__("Sorry, but this forum does not exist.", "asgarosforum"));
             }
+        }
 
-            $this->o .= $out;
-          }
-      } else {
-          wp_die(__("Sorry, but this forum does not exist.", "asgarosforum"));
-      }
-    }
+
+
+
+
 
     public function get_starter($thread_id) {
         global $wpdb;
@@ -588,8 +549,6 @@ public function go()
 
         foreach ($posts as $post)
         {
-          $user = get_userdata($post->author_id);
-
           $out .= "<table class='wpf-post-table' width='100%' id='postid-{$post->id}'>
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
           $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "asgarosforum") . "' class='post-calendar-img'/>";
@@ -748,7 +707,7 @@ public function go()
       return $wpdb->get_var($wpdb->prepare("SELECT `author_id` FROM {$this->t_posts} WHERE `id` = %d", $id));
     }
 
-    public function mydefault()
+    public function overview()
     {
         global $user_ID, $wp_rewrite;
         $alt = "";
@@ -1301,9 +1260,6 @@ public function wp_forum_install()
         $link = $this->get_threadlink($this->current_thread);
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$link}'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
 }
-
-      if ($this->current_view == NEWTOPICS)
-        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topics since last visit", "asgarosforum");
 
       if ($this->current_view == SEARCH)
       {
