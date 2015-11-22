@@ -163,19 +163,15 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function get_forumlink($id, $page = '')
+        public function get_forumlink($id, $page = '0')
         {
             if ($this->options['forum_use_seo_friendly_urls']) {
                 $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)));
-                $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id) . $page;
+                $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id);
 
-                return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum;
+                return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '.' . $page;
             } else {
-                if ($page == '') {
-                    return $this->forum_link . $id . ".{$this->curr_page}";
-                } else {
-                    return $this->forum_link . $id . $page;
-                }
+                return $this->forum_link . $id . '.' . $page;
             }
         }
 
@@ -229,154 +225,123 @@ if (!class_exists('asgarosforum'))
             }
         }
 
-        public function get_threads($id)
+        public function get_threads($id, $type = 'open')
+        {
+            global $wpdb;
+            $limit = "";
+
+            if ($type == 'open') {
+                $start = $this->curr_page * $this->options['forum_threads_per_page'];
+                $end = $this->options['forum_threads_per_page'];
+                $limit = $wpdb->prepare("LIMIT %d, %d", $start, $end);
+            }
+
+            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status = '{$type}' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC {$limit}", $id));
+        }
+
+        public function get_posts($thread_id)
+        {
+            global $wpdb;
+            $start = $this->curr_page * $this->options['forum_posts_per_page'];
+            $end = $this->options['forum_posts_per_page'];
+
+            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d ORDER BY date ASC LIMIT %d, %d", $thread_id, $start, $end));
+        }
+
+        public function get_groupname($id)
         {
             global $wpdb;
 
-            $start = $this->curr_page * $this->options['forum_threads_per_page'];
-            $end = $this->options['forum_threads_per_page'];
-
-            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status = 'open' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC LIMIT %d, %d", $id, $start, $end));
+            return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id)));
         }
 
-        // TODO: warning message when forum doesnt exit
+        public function get_forumname($id)
+        {
+            global $wpdb;
 
-
-
-
-
-
-
-
-
-
-    public function get_sticky_threads($id)
-    {
-      global $wpdb;
-
-      if ($id)
-      {
-        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE parent_id = %d AND status='sticky' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC", $id));
-        return $threads;
-      }
-    }
-
-    public function get_posts($thread_id)
-    {
-      global $wpdb;
-
-      $start = $this->curr_page * $this->options['forum_posts_per_page'];
-      $end = $this->options['forum_posts_per_page'];
-
-      if ($thread_id)
-      {
-        $posts = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d ORDER BY `date` ASC LIMIT %d, %d", $thread_id, $start, $end));
-
-        return $posts;
-      }
-      else
-        return false;
-    }
-
-    public function get_groupname($id)
-    {
-      global $wpdb;
-
-      return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id)));
-    }
-
-    public function get_forumname($id)
-    {
-      global $wpdb;
-
-      return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_forums} WHERE id = %d", $id)));
-    }
-
-    public function get_threadname($id)
-    {
-      global $wpdb;
-
-      return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
-    }
-
-    public function cut_string($string, $length = 35) {
-        if (strlen($string) > $length) {
-            return substr($string, 0, $length) . ' ...';
+            return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_forums} WHERE id = %d", $id)));
         }
 
-        return $string;
-    }
+        public function get_threadname($id)
+        {
+            global $wpdb;
 
-    public function get_group_description($id)
-    {
-      global $wpdb;
+            return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
+        }
 
-      return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_categories} WHERE id = %d", $id));
-    }
-
-    public function get_forum_description($id)
-    {
-      global $wpdb;
-
-      return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_forums} WHERE id = %d", $id));
-    }
-
-    public function check_parms($parm)
-    {
-      $regexp = "/^([+-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/";
-
-      if (!preg_match($regexp, $parm))
-        wp_die("Bad request, please re-enter.");
-
-      $p = explode(".", $parm);
-
-      if (count($p) > 1)
-        $this->curr_page = $p[1];
-      else
-        $this->curr_page = 0;
-
-      return $p[0];
-    }
-
-public function before_go()
-{
-    $this->setup_links();
-    $action = "";
-    $whereto = "";
-
-    if (isset($_GET['markallread']) && $_GET['markallread'] == "true") {
-        $this->markallread();
-    }
-
-    if (isset($_GET['forumaction'])) {
-        $action = $_GET['forumaction'];
-    } else {
-        $action = false;
-    }
-
-    if ($action != false && $this->options['forum_use_seo_friendly_urls']) {
-        if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) && !isset($_GET['remove_post']) && !isset($_GET['sticky']) && !isset($_GET['closed'])) {
-            switch ($action) {
-                case 'viewforum':
-                    $whereto = $this->get_forumlink($this->check_parms($_GET['f']));
-                    break;
-                case 'viewtopic':
-                    $whereto = $this->get_threadlink($this->check_parms($_GET['t']));
-                    break;
+        public function cut_string($string, $length = 35) {
+            if (strlen($string) > $length) {
+                return substr($string, 0, $length) . ' ...';
             }
 
-            if (!empty($whereto)) {
-                header("HTTP/1.1 301 Moved Permanently");
+            return $string;
+        }
 
-                if ($this->curr_page > 0) {
-                    header("Location: " . $whereto . "." . $this->curr_page);
-                } else {
-                    header("Location: " . $whereto);
+        public function check_parms($parm)
+        {
+            $regexp = "/^([+-]?((([0-9]+(\.)?)|([0-9]*\.[0-9]+))([eE][+-]?[0-9]+)?))$/";
+
+            if (!preg_match($regexp, $parm)) {
+                wp_die("Bad request, please re-enter.");
+            }
+
+            $p = explode(".", $parm);
+
+            if (count($p) > 1) {
+                $this->curr_page = $p[1];
+            } else {
+                $this->curr_page = 0;
+            }
+
+            return $p[0];
+        }
+
+        public function before_go()
+        {
+            $this->setup_links();
+            $action = "";
+            $whereto = "";
+
+            if (isset($_GET['markallread']) && $_GET['markallread'] == "true") {
+                $this->markallread();
+            }
+
+            if (isset($_GET['forumaction'])) {
+                $action = $_GET['forumaction'];
+            } else {
+                $action = false;
+            }
+
+            if ($action != false && $this->options['forum_use_seo_friendly_urls']) {
+                if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) && !isset($_GET['remove_post']) && !isset($_GET['sticky']) && !isset($_GET['closed'])) {
+                    switch ($action) {
+                        case 'viewforum':
+                            $whereto = $this->get_forumlink($this->check_parms($_GET['f']));
+                            break;
+                        case 'viewtopic':
+                            $whereto = $this->get_threadlink($this->check_parms($_GET['t']));
+                            break;
+                    }
+
+                    if (!empty($whereto)) {
+                        header("HTTP/1.1 301 Moved Permanently");
+
+                        if ($this->curr_page > 0) {
+                            header("Location: " . $whereto . "." . $this->curr_page);
+                        } else {
+                            header("Location: " . $whereto);
+                        }
+                    }
                 }
             }
         }
-    }
-}
+
+
+
+
+
+
+
 
     public function go()
     {
@@ -459,6 +424,12 @@ public function before_go()
       return ob_get_clean();
     }
 
+
+
+
+
+
+
     public function get_userdata($user_id, $data)
     {
       $user = get_userdata($user_id);
@@ -513,7 +484,7 @@ public function before_go()
           {
             $out = "";
             $threads = $this->get_threads($forum_id);
-            $sticky_threads = $this->get_sticky_threads($forum_id);
+            $sticky_threads = $this->get_threads($forum_id, 'sticky');
             $this->current_group = $this->get_parent_id(FORUM, $forum_id);
             $this->current_forum = $forum_id;
 
@@ -1331,26 +1302,15 @@ public function wp_forum_install()
 
       $trail = "<a aria-hidden='true' class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "asgarosforum") . "</a>";
 
-      if ($this->current_forum)
-        if ($this->options['forum_use_seo_friendly_urls'])
-        {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->current_forum)));
-          $forum = $this->get_seo_friendly_title($this->get_forumname($this->current_forum) . "-forum" . $this->current_forum);
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . ".0'>" . $this->get_forumname($this->current_forum) . "</a>";
-        }
-        else
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewforum&f={$this->current_forum}.0'>" . $this->get_forumname($this->current_forum) . "</a>";
+      if ($this->current_forum) {
+        $link = $this->get_forumlink($this->current_forum);
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$link}'>" . $this->get_forumname($this->current_forum) . "</a>";
+}
 
-      if ($this->current_thread)
-        if ($this->options['forum_use_seo_friendly_urls'])
-        {
-          $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread))));
-          $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $this->current_thread)) . "-forum" . $this->get_parent_id(THREAD, $this->current_thread));
-          $thread = $this->get_seo_friendly_title($this->get_threadname($this->current_thread) . "-thread" . $this->current_thread);
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . ".0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
-        }
-        else
-          $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}" . "viewtopic&t={$this->current_thread}.0'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
+      if ($this->current_thread) {
+        $link = $this->get_threadlink($this->current_thread);
+        $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$link}'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
+}
 
       if ($this->current_view == NEWTOPICS)
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topics since last visit", "asgarosforum");
@@ -1484,25 +1444,25 @@ public function set_cookie()
           if ($i == $this->curr_page)
             $out .= " <strong>" . ($i + 1) . "</strong>";
           else
-            $out .= " <a href='" . $this->get_forumlink($this->current_forum, '.' . $i) . "'>" . ($i + 1) . "</a>";
+            $out .= " <a href='" . $this->get_forumlink($this->current_forum, $i) . "'>" . ($i + 1) . "</a>";
       }
       else
       {
         if ($this->curr_page >= 4)
-          $out .= " <a href='" . $this->get_forumlink($this->current_forum, ".0") . "'>" . __("First", "asgarosforum") . "</a> << ";
+          $out .= " <a href='" . $this->get_forumlink($this->current_forum, "0") . "'>" . __("First", "asgarosforum") . "</a> << ";
 
         for ($i = 3; $i > 0; $i--)
           if ((($this->curr_page + 1) - $i) > 0)
-            $out .= " <a href='" . $this->get_forumlink($this->current_forum, "." . ($this->curr_page - $i)) . "'>" . (($this->curr_page + 1) - $i) . "</a>";
+            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->curr_page - $i)) . "'>" . (($this->curr_page + 1) - $i) . "</a>";
 
         $out .= " <strong>" . ($this->curr_page + 1) . "</strong>";
 
         for ($i = 1; $i <= 3; $i++)
           if ((($this->curr_page + 1) + $i) <= $num_pages)
-            $out .= " <a href='" . $this->get_forumlink($this->current_forum, "." . ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
+            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
 
         if ($num_pages - $this->curr_page >= 5)
-          $out .= " >> <a href='" . $this->get_forumlink($this->current_forum, "." . ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
+          $out .= " >> <a href='" . $this->get_forumlink($this->current_forum, ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
       }
 
       return "<span class='wpf-pages'>" . $out . "</span>";
