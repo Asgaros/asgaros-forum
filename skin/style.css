@@ -1,9 +1,12 @@
-#wpf-wrapper tr td {
-    border: medium none;
-}
 #wpf-wrapper table {
-    color: #757575;
+    border-collapse: collapse;
     width: 100%;
+    border: none;
+}
+#wpf-wrapper th,
+#wpf-wrapper td {
+    padding: 5px;
+    border: none;
 }
 #wpf-wrapper td.forumIcon {
     vertical-align: middle !important;
@@ -16,11 +19,6 @@
     padding-left: 15px;
     color: #333;
     font-size: 13px;
-}
-#wpf-wrapper {
-    font: 11pt Calibri, Arial, Helvetica, sans-serif;
-    line-height: normal;
-    font-size: 100%;
 }
 .wpf_search {
     float: right;
@@ -43,35 +41,18 @@
     background-color: #EFEFEF;
     font-size: 14px !important;
 }
-#wpf-wrapper .maintab_back a:link,
-#wpf-wrapper .maintab_back a:visited,
-#wpf-wrapper .mirrortab_back a:link,
-#wpf-wrapper .mirrortab_back a:visited {
+#wpf-wrapper .tab_back a:link,
+#wpf-wrapper .tab_back a:visited {
     color: #fff;
     background-color: #2d89cc;
-    white-space: nowrap;
-    border: 1px solid #777;
-    border-color: rgba(0,0,0,0.2);
-    border-bottom-color: rgba(0,0,0,0.4);
-    -moz-box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
-    -webkit-box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
-    box-shadow: inset 0 0.08em 0 rgba(255,255,255,0.4), inset 0 0 0.1em rgba(255,255,255,0.9);
-    cursor: pointer;
+    border: 1px solid #007cb2;
     display: inline-block;
     padding: 3px 5px;
-    text-align: center;
-    text-decoration: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    position: relative;
-    z-index: 100;
 }
 #wpf-post-submit:hover,
 #quick-reply-submit:hover,
-#wpf-wrapper .maintab_back a:hover,
-#wpf-wrapper .mirrortab_back a:hover,
-#wpf-wrapper .mirrortab_back a:focus {
+#wpf-wrapper .tab_back a:hover,
+#wpf-wrapper .tab_back a:focus {
 	text-decoration: none !important;
 }
 #wpf_notice {
@@ -183,13 +164,6 @@
 #wpf-wrapper td.poster_in_forum {
     line-height: 15px;
 }
-#wpf-wrapper table,
-#wpf-wrapper div,
-#wpf-wrapper h2,
-#wpf-wrapper form {
-    margin: 0;
-    padding: 0;
-}
 #wpf-wrapper form {
     text-align: inherit !important;
 }
@@ -300,13 +274,11 @@ img.avatar {
     margin: 0 -10px 10px 0;
 }
 .wpf-table {
-    border-spacing: 0px;
     padding: 5px;
     border: 1px solid #2D89CC;
     background: #f6f6f6;
 }
 .wpf-post-table {
-    border-collapse: collapse;
     padding: 15px;
     border-left: 1px solid #adadad !important;
     border-right: 1px solid #adadad !important;
@@ -320,7 +292,6 @@ img.avatar {
     text-align: left;
     overflow: hidden;
     background-color: #2d89cc;
-    padding: 5px;
     color: #fff;
     border-width: 0;
 }
@@ -478,13 +449,6 @@ td.autorpostbox {
     box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
 }
 /* definitions for the mirror tab */
-#wpf-wrapper .mirrortab_back {
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: bottom;
-    padding: 6px 6px 2px 6px;
-    font-family: tahoma, sans-serif;
-}
 #wpf-wrapper #forummenu td, #wpf-wrapper #forummenu th {
     line-height: normal !important;
 }
@@ -497,65 +461,40 @@ pre.code {
     white-space: pre-wrap;
     font-size: 100%;
 }
-#wpf-wrapper td,
-#wpf-wrapper th {
-    vertical-align: top;
-    line-height: 20px;
-}
 #wpf-wrapper th {
     vertical-align: middle;
 }
 /*Attempt to make the forum look better with more themes*/
 #forummenu td,
 #topicmenu td {
-    padding: 5px 0 5px 5px !important;
-    padding-left: 3px !important;
-    margin: 0 !important;
-    width: 1px !important;
-    vertical-align: middle !important;
-}
-#topicmenu a {
-    padding: 0 2px;
-}
-#topicmenu a:hover {
-    text-decoration: underline !important;
+    padding: 5px 0 5px 3px !important;
 }
 .pop_menus td {
-    border: medium none;
-    margin: 0 !important;
-    padding: 0 !important;
+    padding: 0px !important;
+}
+.pop_menus td:first-child {
+    width: 100%;
 }
 .wpf-pages strong {
     background-color: #737373;
     border-radius: 3px;
     color: #FFFFFF;
-    display: inline;
     font-size: 95%;
-    text-shadow: none;
     padding: 0px 5px;
     margin-left: 1px;
     margin-right: 1px;
 }
 .wpf-pages a {
-    background: none repeat scroll 0 0 #2D89CC;
+    background-color: #2D89CC;
     border-radius: 3px;
     color: #FFFFFF !important;
-    display: inline;
     font-size: 95%;
-    text-decoration: none !important;
     padding: 0px 5px;
-    text-shadow: none !important;
     margin-left: 1px;
     margin-right: 1px;
 }
 .wpf-pages a:hover {
     background-color: #737373;
-    border-radius: 3px;
-    color: #FFFFFF !important;
-    display: inline;
-    font-size: 95%;
-    padding: 0px 5px;
-    text-shadow: none !important;
     text-decoration: none !important;
 }
 /* Buttons fix */

@@ -477,6 +477,7 @@ public function showthread($thread_id) {
     $this->current_group = $this->forum_get_group_from_post($thread_id);
     $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
     $this->current_thread = $thread_id;
+    $out = "";
 
     if (isset($_GET['remove_post'])) {
         $this->remove_post();
@@ -495,15 +496,15 @@ public function showthread($thread_id) {
     if ($posts) {
         $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
-        if (!$this->have_access($this->current_group))
-          wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
+        if (!$this->have_access($this->current_group)) {
+            wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
+        }
 
-        $out = "<table cellpadding='0' cellspacing='0'>
-                  <tr class='pop_menus'>
-                    <td width='100%'>" . $this->post_pageing($thread_id) . "</td>
-                    <td>" . $this->topic_menu($thread_id) . "</td>
-                  </tr>
-                </table>";
+        $out .= "<table><tr class='pop_menus'>";
+        $out .= "<td>" . $this->post_pageing($thread_id) . "</td>";
+        $out .= "<td>" . $this->topic_menu($thread_id) . "</td>";
+        $out .= "</tr></table>";
+
         if ($this->is_closed())
           $meClosed = " <span aria-hidden='true' class='icon-close'>" . __("TOPIC CLOSED", "asgarosforum") . "</span> ";
         else
@@ -542,7 +543,7 @@ public function showthread($thread_id) {
 
           $out .= "</div>" . apply_filters('mf_below_post_avatar', '', $post->author_id, $post->id) . "</td>
               <td valign='top'>
-                <table width='100%' cellspacing='0' cellpadding='0' class='wpf-meta-table'>
+                <table width='100%' class='wpf-meta-table'>
 
                 <tr width='70%'>
                   <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_threadname($post->parent_id), 70) . "
@@ -594,10 +595,10 @@ public function showthread($thread_id) {
               </table>
             </form>";
           }
-        $out .= "<table cellpadding='0' cellspacing='0'>
+        $out .= "<table>
               <tr class='pop_menus'>
                 <td width='100%'>" . $this->post_pageing($thread_id) . "</td>
-                <td style='height:30px;'>" . $this->topic_menu($thread_id, "bottom") . "
+                <td style='height:30px;'>" . $this->topic_menu($thread_id) . "
                 </td>
               </tr>
             </table>";
@@ -616,7 +617,7 @@ public function showthread($thread_id) {
     {
       global $user_ID;
       $this->setup_links();
-      $o = "<table class='wpf-meta-button'width='100%' cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
+      $o = "<table class='wpf-meta-button'width='100%' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
 
       if ($this->options['forum_use_seo_friendly_urls'])
       {
@@ -1076,7 +1077,7 @@ public function wp_forum_install()
     }
 }
 
-    public function forum_menu($group, $pos = "top")
+    public function forum_menu($group)
     {
       global $user_ID;
       $this->setup_links();
@@ -1084,14 +1085,11 @@ public function wp_forum_install()
       $menu = "";
       if ($user_ID || $this->allow_unreg())
       {
-        if ($pos == "top")
-          $class = "mirrortab";
-        else
-          $class = "maintab";
 
-        $menu = "<table cellpadding='0' cellspacing='0' id='forummenu'>";
+
+        $menu = "<table id='forummenu'>";
         $menu .= "<tr>
-                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->add_topic_link . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
+                <td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->add_topic_link . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
 
         $menu .= "
           </tr>
@@ -1100,7 +1098,7 @@ public function wp_forum_install()
       return $menu;
     }
 
-    public function topic_menu($thread, $pos = "top")
+    public function topic_menu($thread)
     {
       global $user_ID;
       $this->setup_links();
@@ -1110,49 +1108,46 @@ public function wp_forum_install()
 
       if ($user_ID || $this->allow_unreg())
       {
-        if ($pos == "top")
-          $class = "mirrortab";
-        else
-          $class = "maintab";
+
 
         if ($this->is_moderator($user_ID, $this->current_forum))
         {
           if ($this->options['forum_use_seo_friendly_urls'])
           {
             if ($this->is_sticky())
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
             else
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
           }
           else
           {
             if ($this->is_sticky())
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
             else
-              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
           }
         }
 
-        $menu .= "<table cellpadding='0' cellspacing='0' id='topicmenu'>";
+        $menu .= "<table id='topicmenu'>";
         $menu .= "<tr>";
 
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
-            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
+            $menu .= "<td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
 
 
 
           if ($this->is_moderator($user_ID, $this->current_forum)) {
-              $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "asgarosforum") . "</span></a></td>";
+              $menu .= "<td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "asgarosforum") . "</span></a></td>";
           }
 
         $menu .= $stick . $closed . "</tr></table>";
@@ -1598,7 +1593,7 @@ public function set_cookie()
       if ($results)
         $const = 100 / $max;
 
-      $o .= "<table class='wpf-table' cellspacing='0' cellpadding='0' width='100%'>
+      $o .= "<table class='wpf-table' width='100%'>
           <tr>
             <th width='7%'>Status</th>
             <th width='54%'>" . __("Subject", "asgarosforum") . "</th>
