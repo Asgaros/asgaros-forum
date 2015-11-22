@@ -211,50 +211,44 @@ if (!class_exists('asgarosforum'))
             return $this->get_threadlink($id, $num) . '#postid-' . $postid;
         }
 
+        public function get_groups()
+        {
+            global $wpdb;
+
+            return $wpdb->get_results("SELECT * FROM {$this->t_categories} ORDER BY sort DESC");
+        }
+
+        public function get_forums($id = '')
+        {
+            global $wpdb;
+
+            if ($id) {
+                return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE parent_id = %d ORDER BY SORT DESC", $id));
+            } else {
+                return $wpdb->get_results("SELECT * FROM {$this->t_forums} ORDER BY sort DESC");
+            }
+        }
+
+        public function get_threads($id)
+        {
+            global $wpdb;
+
+            $start = $this->curr_page * $this->options['forum_threads_per_page'];
+            $end = $this->options['forum_threads_per_page'];
+
+            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status = 'open' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC LIMIT %d, %d", $id, $start, $end));
+        }
+
+        // TODO: warning message when forum doesnt exit
 
 
 
 
 
-    public function get_groups($id = '')
-    {
-      global $wpdb;
 
-      $cond = "";
 
-      if ($id)
-        $cond = $wpdb->prepare("WHERE id = %d", $id);
 
-      return $wpdb->get_results("SELECT * FROM {$this->t_categories} {$cond} ORDER BY sort DESC");
-    }
 
-    public function get_forums($id = '')
-    {
-      global $wpdb;
-
-      if ($id)
-      {
-        $forums = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE parent_id = %d ORDER BY SORT DESC", $id));
-
-        return $forums;
-      }
-      else
-        return $wpdb->get_results("SELECT * FROM {$this->t_forums} ORDER BY sort DESC");
-    }
-
-    public function get_threads($id)
-    {
-      global $wpdb;
-
-      $start = $this->curr_page * $this->options['forum_threads_per_page'];
-      $end = $this->options['forum_threads_per_page'];
-      if ($id)
-      {
-        $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status='open' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC LIMIT %d, %d", $id, $start, $end));
-
-        return $threads;
-      }
-    }
 
     public function get_sticky_threads($id)
     {
@@ -842,7 +836,7 @@ public function before_go()
                             }
 
                             $this->o .= "</td>";
-                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</small></td>";
+                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>";
                             $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
                             $this->o .= "</tr>";
                         }

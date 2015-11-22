@@ -3,7 +3,6 @@
 }
 #wpf-wrapper table {
     color: #757575;
-    border: medium none;
     width: 100%;
 }
 #wpf-wrapper td.forumIcon {
@@ -14,13 +13,13 @@
     font-size: 14px;
 }
 #wpf-wrapper .forumstats {
-    padding-right: 15px;
-    text-align: right;
+    padding-left: 15px;
+    color: #333;
+    font-size: 13px;
 }
 #wpf-wrapper {
     font: 11pt Calibri, Arial, Helvetica, sans-serif;
     line-height: normal;
-    color: #000;
     font-size: 100%;
 }
 .wpf_search {
@@ -28,7 +27,6 @@
     height: 40px;
 }
 .wpf_search input {
-    color: #636363 !important;
     background-image: url("images/icons/search_btn.png");
     background-position: 4px 5px;
     background-repeat: no-repeat;
@@ -36,8 +34,6 @@
     width: 120px;
 }
 .wpf_search input:focus {
-    color: #fff;
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
     width: 190px;
 }
 #wpf-post-submit,
@@ -288,11 +284,10 @@ img.avatar {
     margin: 0 -10px 10px 0;
 }
 .wpf-table {
-    border-collapse: collapse;
+    border-spacing: 0px;
     padding: 5px;
-    border: 1px solid #696969;
+    border: 1px solid #cecece;
     background: #f6f6f6;
-    font-size: 100%;
 }
 .wpf-post-table {
     border-collapse: collapse;
@@ -326,23 +321,13 @@ img.avatar {
 }
 .wpf-table td {
     border: 1px solid;
-    padding-left: 5px;
-    padding-right: 5px;
     padding: 5px;
-    border-left: 1px solid #d9d7d7 !important;
-    border-right: 1px solid #CECECE !important;
-    border-bottom: 1px solid #CECECE !important;
-    border-top: 1px solid #d9d7d7 !important;
 }
 .wpf-table textarea {
     width: 98%;
 }
 #wpf-wrapper #wpf-quick-reply br {
     display: none!important;
-}
-#wpf-wrapper .wpf {
-    padding: 1px;
-    border: 1px solid #CACACA;
 }
 .wpf-alt {
     background: #ecedf3;
@@ -377,7 +362,6 @@ td.wpf-meta a {
 }
 th.wpf-bright {
     background-color: #f0f0f0;
-    color: #000;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 /* Fixing avatars pose a problem for some sites */
