@@ -18,7 +18,7 @@
                             <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="user_group_description[]" value="<?php echo esc_html(stripslashes($group->description)); ?>" size="40" /></label>&nbsp;&nbsp;
                             <a href="<?php echo admin_url('admin.php?page=asgarosforum-user-groups&action=users&groupid='.$group->id); ?>" class="button"><?php _e('Manage Users', 'asgarosforum'); ?></a>
                             <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'asgarosforum'); ?>">
-                                <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                                <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
                         </li>
                     <?php endforeach; ?>
@@ -28,13 +28,13 @@
                         <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="user_group_name[]" value="" /></label>&nbsp;&nbsp;
                         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="user_group_description[]" value="" size="40" /></label>&nbsp;&nbsp;
                         <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'asgarosforum'); ?>">
-                            <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                         </a>
                     </li>
                 <?php endif; ?>
             </ol>
             <a href="#" id="mf_add_new_user_group" title="<?php _e('Add new User Group', 'asgarosforum'); ?>">
-                <img src="<?php echo WPFURL.'images/add.png'; ?>" width="32" />
+                <img src="<?php echo WPFURL.'admin/images/add.png'; ?>" width="32" />
             </a>
         </fieldset>
         <input type="submit" name="mf_user_groups_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button" />
@@ -46,7 +46,7 @@
         <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="user_group_name[]" value="" /></label>&nbsp;&nbsp;
         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="user_group_description[]" value="" size="40" /></label>&nbsp;&nbsp;
         <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'asgarosforum'); ?>">
-            <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
         </a>
     </li>
 </div>

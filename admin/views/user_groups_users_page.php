@@ -14,7 +14,7 @@
                         <li class="ui-state-default mf_user_group_li_item">
                             <label><?php echo $u->user_login; ?></label>
                             <a href="<?php echo admin_url('admin.php?page=asgarosforum-user-groups&action=deluser&groupid='.$usergroup->id.'&user_id='.$u->user_id); ?>" class="mf_remove_user_group_user" title="<?php _e('Remove this User', 'asgarosforum'); ?>">
-                                <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                                <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
                         </li>
                     <?php endforeach; ?>

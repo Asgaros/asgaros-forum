@@ -22,7 +22,7 @@
                             <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="<?php echo esc_html(stripslashes($cat->description)); ?>" size="50" /></label>&nbsp;&nbsp;
                             <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>"><?php _e('Limit Access', 'asgarosforum'); ?></a>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-                                <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                                <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
                             <!-- usergroups -->
                             <div id="user-groups-<?php echo $cat->id; ?>" class="user-groups-area">
@@ -43,13 +43,13 @@
                         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>&nbsp;&nbsp;
                         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="" size="50" /></label>
                         <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-                            <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                         </a>
                     </li>
                 <?php endif; ?>
             </ol>
             <a href="#" id="mf_add_new_category" title="<?php _e('Add new Category', 'asgarosforum'); ?>">
-                <img src="<?php echo WPFURL.'images/add.png'; ?>" width="32" />
+                <img src="<?php echo WPFURL.'admin/images/add.png'; ?>" width="32" />
             </a>
         </fieldset>
         <input type="submit" name="mf_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button" />
@@ -61,7 +61,7 @@
         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>&nbsp;&nbsp;
         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="" size="50" /></label>
         <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-            <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
         </a>
     </li>
 </div>
