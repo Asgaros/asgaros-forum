@@ -638,7 +638,7 @@ if (!class_exists('asgarosforum'))
     public function get_postmeta($post_id, $author_id)
     {
       global $user_ID;
-
+      $this->setup_links();
       $o = "<table class='wpf-meta-button'width='100%' cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
 
       if ($this->options['forum_use_seo_friendly_urls'])
@@ -1102,6 +1102,7 @@ public function wp_forum_install()
     public function forum_menu($group, $pos = "top")
     {
       global $user_ID;
+      $this->setup_links();
 
       $menu = "";
       if ($user_ID || $this->allow_unreg())
@@ -1125,7 +1126,7 @@ public function wp_forum_install()
     public function topic_menu($thread, $pos = "top")
     {
       global $user_ID;
-
+      $this->setup_links();
       $menu = "";
       $stick = "";
       $closed = "";
