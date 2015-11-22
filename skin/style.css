@@ -201,14 +201,26 @@
 #wpf-wrapper p a,
 #wpf-wrapper span a,
 #wpf-wrapper a {
-    color: #084d8f;
+    color: #006CBB;
     text-decoration: none;
 }
 #wpf-wrapper .odd td,
 #wpf-wrapper .even td,
 #wpf-wrapper .sticky td {
     vertical-align: middle;
+    border-bottom: 1px solid #cecece;
+    border-right: 1px solid #eaeaea;
 }
+#wpf-wrapper .odd td:last-child,
+#wpf-wrapper .even td:last-child,
+#wpf-wrapper .sticky td:last-child {
+    vertical-align: middle;
+    border-right: none;
+}
+#wpf-wrapper tr:last-child td {
+    border-bottom: none;
+}
+
 .wpf-table a:hover,
 .wpf-post-table a:hover,
 #wpf-wrapper a:hover {
@@ -290,7 +302,7 @@ img.avatar {
 .wpf-table {
     border-spacing: 0px;
     padding: 5px;
-    border: 1px solid #cecece;
+    border: 1px solid #2D89CC;
     background: #f6f6f6;
 }
 .wpf-post-table {
