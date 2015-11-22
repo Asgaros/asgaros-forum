@@ -505,69 +505,44 @@ public function showthread($thread_id) {
         $out .= "<td>" . $this->topic_menu($thread_id) . "</td>";
         $out .= "</tr></table>";
 
-        if ($this->is_closed())
-          $meClosed = " <span aria-hidden='true' class='icon-close'>" . __("TOPIC CLOSED", "asgarosforum") . "</span> ";
-        else
-          $meClosed = "";
+        if ($this->is_closed()) {
+            $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
+        } else {
+            $meClosed = "";
+        }
 
-        $out .= "<div class='wpf'>
-                  <table class='wpf-table' width='100%'>
-                    <tr>
-                      <th width='125' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "asgarosforum") . "</span></th>
-                      <th><span aria-hidden='true' class='icon-topic'></span>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</th>
-                    </tr>
-                  </table>";
-        $out .= "</div>";
-        $c = 0;
+        $out .= "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
+        $out .= "<div id='thread-content'>";
 
-        foreach ($posts as $post)
-        {
-          $out .= "<table class='wpf-post-table' width='100%' id='postid-{$post->id}'>
-                    <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
-          $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "asgarosforum") . "' class='post-calendar-img'/>";
-
-          $out .= "<span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr><td class='autorpostbox' valign='top' width='125'>";
-
-          $out .= "<div class='wpf-small'>";
-
-          if ($this->options["forum_use_gravatar"])
-            $out .= $this->get_avatar($post->author_id);
-
-          $out .= "<div class='hr'></div>";
-
-          $out .= $this->get_userrole($post->author_id) . "<br/>";
-
-          $out .= "<div class='hr'></div>";
-
-          $out .=__("Posts:", "asgarosforum") . " " . $this->get_userposts_num($post->author_id) . "<br/>";
-
-          $out .= "</div>" . apply_filters('mf_below_post_avatar', '', $post->author_id, $post->id) . "</td>
-              <td valign='top'>
-                <table width='100%' class='wpf-meta-table'>
-
-                <tr width='70%'>
-                  <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->cut_string($this->get_threadname($post->parent_id), 70) . "
-                    <span class='permalink'>
-                    <a href='" . $this->get_postlink($post->parent_id, $post->id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
-                  </td>
+        foreach ($posts as $post) {
+            $out .= "
+            <table class='wpf-post-table' id='postid-{$post->id}'>
+                <tr>
+                    <td colspan='2' class='wpf-bright author'>
+                        <span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</span>
+                        <div class='wpf-meta'>" . $this->get_postmeta($post->id, $post->author_id, $post->parent_id) . "</div>
+                    </td>
                 </tr>
                 <tr>
-                  <td valign='top' colspan='2' class='topic_text'>";
-
-          if (!$c)
-            $out .= apply_filters('mf_thread_start', '', $this->current_thread, $this->get_threadlink($post->parent_id));
-
-          $out .= apply_filters('mf_before_reply', '', $post->id) . make_clickable(wpautop($this->autoembed($this->output_filter($post->text)))) . apply_filters('mf_after_reply', '', $post->id) .
-                  "</td>
-                </tr>";
-
-          $out .= "</table>
-              </td>
-            </tr>";
-
-          $out .= "</table>";
-          $c += 1;
+                    <td class='autorpostbox'>
+                        <div class='wpf-small'>";
+                            if ($this->options["forum_use_gravatar"]) {
+                                $out .= $this->get_avatar($post->author_id);
+                            }
+                            $out .= "<br /><strong>" . $this->profile_link($post->author_id, true) ."</strong><br />";
+                            $out .=__("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id);
+                            $out .= "
+                        </div>
+                    </td>
+                    <td valign='top' class='topic_text'>";
+                        $out .= make_clickable(wpautop($this->autoembed($this->output_filter($post->text))));
+                        $out .= "
+                    </td>
+                </tr>
+            </table>";
         }
+
+        $out .= "</div>";
 
         $quick_thread = $this->check_parms($_GET['t']);
 
@@ -613,7 +588,7 @@ public function showthread($thread_id) {
 
 
 
-    public function get_postmeta($post_id, $author_id)
+    public function get_postmeta($post_id, $author_id, $parent_id)
     {
       global $user_ID;
       $this->setup_links();
@@ -627,6 +602,8 @@ public function showthread($thread_id) {
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
+
+
       }
       else
       {
@@ -637,6 +614,8 @@ public function showthread($thread_id) {
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
       }
+
+$o .= "<td nowrap='nowrap'><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></td>";
 
       $o .= "</tr></table>";
 
@@ -703,7 +682,7 @@ public function showthread($thread_id) {
         if (count($grs) > 0) {
             foreach ($grs as $g) {
                 if ($this->have_access($g->id)) {
-                    $this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";
+                    $this->o .= "<div><table width='100%' class='wpf-table forumsList'>";
                     $this->o .= "<tr><td class='forumtitle' colspan='4'><span>" . $this->output_filter($g->name) . "</span></td></tr>";
 
                     $frs = $this->get_forums($g->id);

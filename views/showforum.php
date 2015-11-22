@@ -18,9 +18,9 @@
 
     <?php if ($sticky_threads && !$this->curr_page): //Prevent stickies from showing up on page 2...n ?>
       <tr>
-        <th class="wpf-bright" colspan="6">
+        <td class="wpf-bright" colspan="6">
           <?php _e("Sticky Topics", "asgarosforum"); ?>
-        </th>
+      </td>
       </tr>
 
       <?php foreach ($sticky_threads as $thread): ?>
@@ -63,9 +63,9 @@
       <?php endforeach; ?>
 
       <tr>
-        <th class="wpf-bright forumTopics" colspan="6">
+        <td class="wpf-bright forumTopics" colspan="6">
           <?php _e("Forum Topics", "asgarosforum"); ?>
-        </th>
+      </td>
       </tr>
     <?php endif; //END STICKIES ?>
 

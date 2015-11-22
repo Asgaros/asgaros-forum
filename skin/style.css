@@ -12,9 +12,6 @@
     vertical-align: middle !important;
     text-align: center !important;
 }
-#wpf-wrapper td.topic_text {
-    font-size: 14px;
-}
 #wpf-wrapper .forumstats {
     padding-left: 15px;
     color: #333;
@@ -37,7 +34,6 @@
 #quick-reply-submit {
     color: #555;
     letter-spacing: normal !important;
-    text-shadow: 0 1px 0 #fff;
     background-color: #EFEFEF;
     font-size: 14px !important;
 }
@@ -66,6 +62,18 @@
 #top-elements {
     width: 100%;
     height: 40px;
+}
+#thread-title {
+    background-color: #2d89cc;
+    color: #fff;
+    padding: 5px;
+    display: block;
+    font-weight: bold;
+}
+#thread-content {
+    border: 1px solid #2d89cc;
+    display: block;
+    background-color: #f6f6f6;
 }
 /*Breadcrumb -------------------------------------------*/
 #wpf-wrapper #trail.breadcrumbs a {
@@ -114,7 +122,6 @@
 #wpf-wrapper input.wpf-input {
     background-color: #f0f0f0;
     color: #555555;
-    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -154,12 +161,6 @@
     float: left;
     vertical-align: middle;
     margin: 8px 9px 6px 0px;
-}
-#wpf-wrapper img.avatar,
-#wpf-wrapper .topic_text a img {
-    border-radius: 3px;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 #wpf-wrapper td.poster_in_forum {
     line-height: 15px;
@@ -208,22 +209,15 @@
     color: #fff;
     text-transform: none;
 }
-#wpf-wrapper th.wpf-bright {
-    color: #777;
-    text-transform: none;
-}
 img.avatar {
     float: none;
     margin: 0px;
 }
 #wpf-wrapper .author small {
     color: #4D4D4D;
-    text-shadow: 1px 1px 0 #FDFDFD;
 }
 #wpf-wrapper .post-data-format {
     color: #979797;
-    text-shadow: 1px 1px 0 #FDFDFD;
-    font-size:12px;
 }
 .author .wpf-meta img {
     margin: 2px 2px 0 !important;
@@ -239,51 +233,13 @@ img.avatar {
 #wpf-wrapper .wpf-meta-button img {
     margin: 0px 4px 0px 0px !important;
 }
-#wpf-wrapper .wpf-meta-topic-img img {
-    width: 25px;
-	height:25px;
-}
-#wpf-wrapper .post-calendar-img {
-    padding-right:5px;
-    margin:-1px 0 0 0;
-    padding-right:5px;
-}
-#wpf-wrapper .wpf-meta-topic {
-    color: #777;
-    background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
-    background-position: bottom !important;
-    padding: 2px;
-    margin: 0;
-    vertical-align: middle;
-    font-size: 14px;
-    font-weight: bold;
-    text-shadow: 1px 1px 0 #FDFDFD;
-}
-#wpf-wrapper .wpf-meta-topic img {
-    padding-right: 5px;
-    margin: 0px 0px -5px;
-}
 .author .wpf-meta {
-    margin: -7px 0px -7px 0 !important;
-    width: auto;
+    margin: -5px 0px -8px 0 !important;
     float: right;
-}
-.wpf-post-table .permalink {
-    float: right;
-    height: 18px;
-    margin: 0 -10px 10px 0;
 }
 .wpf-table {
     padding: 5px;
     border: 1px solid #2D89CC;
-    background: #f6f6f6;
-}
-.wpf-post-table {
-    padding: 15px;
-    border-left: 1px solid #adadad !important;
-    border-right: 1px solid #adadad !important;
-    border-bottom: 1px solid #adadad !important;
-    border-top: 1px solid #eaeaea !important;
     background: #f6f6f6;
 }
 .wpf-table th,
@@ -302,9 +258,6 @@ img.avatar {
     letter-spacing: 2px;
     padding: 2px 7px;
     text-transform: none;
-}
-.wpf-post-table td {
-    padding: 5px 10px 5px 10px !important;
 }
 .wpf-table td {
     border: 1px solid;
@@ -333,9 +286,9 @@ td.wpf-meta a {
 .wpf-small {
     margin-bottom: 10px;
 }
-#wpf-wrapper th.author {
-    border: none !important;
+#wpf-wrapper td.author {
     border-bottom: 1px solid #CACACA !important;
+    border-top: 1px solid #CACACA !important;
 }
 .wpf-table h2 {
     margin: 0;
@@ -344,19 +297,16 @@ td.wpf-meta a {
     margin-bottom: 3px;
     color: #fff;
 }
-th.wpf-bright {
+td.wpf-bright {
     background-color: #f0f0f0;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 /* Fixing avatars pose a problem for some sites */
 td.autorpostbox img.avatar{height: 60px;width: 60px;}
 #wpf-wrapper .img-avatar-forumstats .avatar{ height: 15px;width: 15px;}
 td.autorpostbox {
     text-align: center;
-    background-image: url("images/post/hr-a.png");
-    background-position: right;
-    background-repeat: repeat-y;
-    padding: 9px;
+    border-right: 1px solid #CACACA !important;
+    width: 125px;
 }
 #wpf-wrapper a img,
 #wpf-wrapper img {
@@ -367,7 +317,6 @@ td.autorpostbox {
     display: inline !important;
     height: inherit !important;
 }
-.wpf #wpf-wrapper a img,
 #wpf-wrapper img {
     border: none;
     padding: 0;
@@ -400,7 +349,6 @@ td.autorpostbox {
     box-shadow: inset 0 0 45px #efefc0;
     font-weight: normal;
     text-decoration: none;
-    text-shadow: 1px 1px 1px #FFFFFF;
     background: #F9F9DC;
     box-shadow: 0 0 45px #EFEFC0 inset;
     width: 100%;
@@ -421,7 +369,6 @@ td.autorpostbox {
     background: #E0E1E1;
     border-radius: 4px 4px 4px 4px;
     color: #181818 !important;
-    text-shadow: 1px 1px 0 #FFFFFF;
     font-weight: bolder;
     margin: -35px -4px 0 0px !important;
     min-width: 100px;
@@ -430,20 +377,12 @@ td.autorpostbox {
     -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
     box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
 }
-#wpf-wrapper .hr {
-    background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
-    clear: both;
-    height: 5px;
-    margin: 5px 0 1px;
-    padding: 0;
-}
 .topic_text blockquote {
     background: #E1E0E0 !important;
     border: 1px solid #ADADAD;
     border-left: 4px solid #ADADAD !important;
     color: #181818;
     font-style: italic;
-    text-shadow: 0 1px 0 #FFFFFF;
     border-radius: 0 7px 7px 0 !important;
     -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
     box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
@@ -460,9 +399,6 @@ pre.code {
     overflow: auto;
     white-space: pre-wrap;
     font-size: 100%;
-}
-#wpf-wrapper th {
-    vertical-align: middle;
 }
 /*Attempt to make the forum look better with more themes*/
 #forummenu td,
@@ -535,7 +471,6 @@ font-family: 'wpf-icomoon';
     font-size: 1.37em;
     vertical-align: text-top;
 }
-.icon-my-profile:before,
 .icon-move-topic:before,
 .icon-forum-home:before,
 .icon-replies:before,
@@ -549,17 +484,10 @@ font-family: 'wpf-icomoon';
 .icon-topic:before,
 .icon-warning:before {
     font-family: 'wpf-icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
     line-height: 1;
-    -webkit-font-smoothing: antialiased;
     padding-right: 3px;
     font-size: 1.4em;
     vertical-align: text-top;
-}
-.icon-my-profile:before {
-    content: "\e00a";
 }
 .icon-move-topic:before {
     content: "\e076";
@@ -578,13 +506,9 @@ font-family: 'wpf-icomoon';
 }
 .icon-close:before {
     content: "\e056";
-    color: #E6162D;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .icon-re-open:before {
     content: "\e057";
-    color: #1d7b1f;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .icon-sticky:before {
     content: "\e07a";
