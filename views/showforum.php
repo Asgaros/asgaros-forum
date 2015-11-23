@@ -8,7 +8,7 @@
 <div class="wpf">
   <table class="wpf-table" id="topicTable">
     <tr>
-      <th width="7%" class="forumIcon"><?php _e("Status", "asgarosforum"); ?></th>
+      <th width="7%"><?php _e("Status", "asgarosforum"); ?></th>
       <th><?php _e("Topic Title", "asgarosforum"); ?></th>
       <th width="16%" nowrap="nowrap"><?php _e("Started by", "asgarosforum"); ?></th>
       <th width="7%"><?php _e("Replies", "asgarosforum"); ?></th>
@@ -25,7 +25,7 @@
 
       <?php foreach ($sticky_threads as $thread): ?>
         <tr>
-          <td class="forumIcon" align="center">
+          <td align="center">
              <?php echo $this->get_topic_image($thread->id); ?></td>
           </td>
           <td class="sticky wpf-topic-title">
@@ -70,11 +70,8 @@
     <?php endif; //END STICKIES ?>
 
     <?php foreach ($threads as $thread): ?>
-      <tr class="<?php
-      $alt = 'alt even';
-      echo ($alt == 'alt even') ? 'odd' : 'alt even';
-      ?>">
-        <td class="forumIcon" align="center">
+      <tr>
+        <td align="center">
             <?php echo $this->get_topic_image($thread->id); ?></td>
         <td>
           <span class="topicTitle">

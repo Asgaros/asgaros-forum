@@ -610,84 +610,63 @@ if (!class_exists('asgarosforum')) {
             return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE id = %d", $id));
         }
 
+        public function overview() {
+            global $user_ID, $wp_rewrite;
 
+            if ($wp_rewrite->using_permalinks()) {
+                $delim = "?";
+            } else {
+                $delim = "&";
+            }
 
+            $grs = $this->get_groups();
 
+            if (count($grs) > 0) {
+                foreach ($grs as $g) {
+                    if ($this->have_access($g->id)) {
+                        $this->o .= "
+                        <div class='category-title'>".$this->output_filter($g->name)."</div>
+                        <div class='category-content'>
+                        <table>";
+                        $frs = $this->get_forums($g->id);
+                        if (count($frs) > 0) {
+                            foreach ($frs as $f) {
+                                $this->o .= "<tr>";
+                                $image = "new_none.png";
 
-    public function overview()
-    {
-        global $user_ID, $wp_rewrite;
-        $alt = "";
+                                if ($user_ID) {
+                                    $lpif = $this->last_poster_in_forum($f->id, true);
+                                    $last_posterid = $this->last_posterid($f->id);
 
-        if ($wp_rewrite->using_permalinks()) {
-            $delim = "?";
-        } else {
-            $delim = "&";
-        }
+                                    if ($last_posterid != $user_ID) {
+                                        $lp = strtotime($lpif); // date
+                                        $lv = strtotime($this->last_visit());
 
-        $grs = $this->get_groups();
-
-        if (count($grs) > 0) {
-            foreach ($grs as $g) {
-                if ($this->have_access($g->id)) {
-                    $this->o .= "<div><table width='100%' class='wpf-table forumsList'>";
-                    $this->o .= "<tr><td class='forumtitle' colspan='4'><span>" . $this->output_filter($g->name) . "</span></td></tr>";
-
-                    $frs = $this->get_forums($g->id);
-
-                    if (count($frs) > 0) {
-                        foreach ($frs as $f) {
-                            $alt = ($alt == "alt even") ? "odd" : "alt even";
-                            $this->o .= "<tr class='{$alt}'>";
-                            $image = "new_none.png";
-
-                            if ($user_ID) {
-                                $lpif = $this->last_poster_in_forum($f->id, true);
-                                $last_posterid = $this->last_posterid($f->id);
-
-                                if ($last_posterid != $user_ID) {
-                                    $lp = strtotime($lpif); // date
-                                    $lv = strtotime($this->last_visit());
-
-                                    if ($lv < $lp) {
-                                        $image = "new_some.png";
-                                    } else {
-                                        $image = "new_none.png";
+                                        if ($lv < $lp) {
+                                            $image = "new_some.png";
+                                        }
                                     }
                                 }
+
+                                $this->o .= "
+                                <td class='status-icon'><img src='{$this->skin_url}/images/{$image}' /></td>
+                                <td><strong><a href='" . $this->get_forumlink($f->id) . "'>" . $this->output_filter($f->name) . "</a></strong><br />" . $this->output_filter($f->description) . "</td>
+                                <td class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>
+                                <td class='poster_in_forum'>" . $this->last_poster_in_forum($f->id) . "</td>
+                                </tr>";
                             }
-
-                            $this->o .= "<td class='forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
-                            <td valign='top' class='wpf-category-title' ><strong><a href='" . $this->get_forumlink($f->id) . "'>"
-                            . $this->output_filter($f->name) . "</a></strong><br />"
-                            . $this->output_filter($f->description);
-
-                            if ($f->description != "") {
-                                $this->o .= "<br/>";
-                            }
-
-                            $this->o .= "</td>";
-                            $this->o .= "<td nowrap='nowrap' width='11%' align='left' class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>";
-                            $this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >" . $this->last_poster_in_forum($f->id) . "</td>";
-                            $this->o .= "</tr>";
+                        } else {
+                            $this->o .= "<tr><td class='wpf_notice'>".__("There are no forums yet!", "asgarosforum")."</td></tr>";
                         }
-                    } else {
-                        $this->o .= "<tr><td id='wpf_notice' colspan='4'>".__("There are no forums yet!", "asgarosforum")."</td></tr>";
+                        $this->o .= "</table></div>";
                     }
-
-                    $this->o .= "</table></div><br class='clear'/>";
                 }
+            } else {
+                $this->o .= "<div class='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
             }
-        } else {
-            $this->o .= "<div id='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
-        }
 
-        $this->o .= apply_filters('wpwf_new_posts', "<table>
-        <tr>
-        <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "asgarosforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "asgarosforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></td>
-        </tr>
-        </table><br class='clear'/>");
-    }
+            $this->o .= "<div id='category-footer'><span><img src='{$this->skin_url}/images/new_some.png' />" . __("New posts", "asgarosforum") . "&nbsp;<img src='{$this->skin_url}/images/new_none.png' />" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
+        }
 
 
 
@@ -760,8 +739,8 @@ if (!class_exists('asgarosforum')) {
 
       $d = date_i18n($this->dateFormat, strtotime($date->date));
 
-      return "<div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
+      return "<div><div><small><strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "</small></div>
+      <div><small>" . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a></small></div><div><small>" . __("on", "asgarosforum") . " {$d}</small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)
@@ -1023,7 +1002,7 @@ public function wp_forum_install()
 
         $menu = "<table id='forummenu'>";
         $menu .= "<tr>
-                <td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->add_topic_link . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
+                <td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->add_topic_link . "'><span class='icon-topic'>" . __("New Topic", "asgarosforum") . "</span></a></td>";
 
         $menu .= "
           </tr>
@@ -1049,26 +1028,26 @@ public function wp_forum_install()
           if ($this->options['forum_use_seo_friendly_urls'])
           {
             if ($this->is_sticky())
-              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
             else
-              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
             else
-              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close'>" . __("Close", "asgarosforum") . "</span></a></td>";
           }
           else
           {
             if ($this->is_sticky())
-              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky'>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
             else
-              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+              $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky'>" . __("Sticky", "asgarosforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open' aria-hidden='true'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open'>" . __("Re-open", "asgarosforum") . "</span></a></td>";
             else
-              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "asgarosforum") . "</span></a></td>";
+              $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close'>" . __("Close", "asgarosforum") . "</span></a></td>";
           }
         }
 
@@ -1076,12 +1055,12 @@ public function wp_forum_install()
         $menu .= "<tr>";
 
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
-            $menu .= "<td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "asgarosforum") . "</span></a></td>";
+            $menu .= "<td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-reply'>" . __("Reply", "asgarosforum") . "</span></a></td>";
 
 
 
           if ($this->is_moderator($user_ID, $this->current_forum)) {
-              $menu .= "<td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic' aria-hidden='true' >" . __("Move Topic", "asgarosforum") . "</span></a></td>";
+              $menu .= "<td valign='top' class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-move-topic'>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
           }
 
         $menu .= $stick . $closed . "</tr></table>";
@@ -1158,7 +1137,7 @@ public function wp_forum_install()
 
       $this->setup_links();
 
-      $trail = "<a aria-hidden='true' class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "asgarosforum") . "</a>";
+      $trail = "<a class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "asgarosforum") . "</a>";
 
       if ($this->current_forum) {
         $link = $this->get_forumlink($this->current_forum);
@@ -1386,7 +1365,7 @@ public function set_cookie()
         if (!$nbmsg)
           $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $post->parent_id));
 
-        $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "asgarosforum") . "</div></div>";
+        $this->o .= "<div class='wpf-info'><div class='updated'><span class='icon-warning'>" . __("Post deleted", "asgarosforum") . "</div></div>";
       }
       else
         wp_die(__("You do not have permission to delete this post.", "asgarosforum"));

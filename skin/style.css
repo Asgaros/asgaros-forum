@@ -8,14 +8,10 @@
     padding: 5px;
     border: none;
 }
-#wpf-wrapper td.forumIcon {
-    vertical-align: middle !important;
-    text-align: center !important;
-}
 #wpf-wrapper .forumstats {
     padding-left: 15px;
-    color: #333;
-    font-size: 13px;
+    width: 100px;
+    font-size: 11px;
 }
 .wpf_search {
     float: right;
@@ -49,18 +45,18 @@
 #wpf-wrapper .tab_back a:focus {
 	text-decoration: none !important;
 }
-#wpf_notice {
-    width: 100%;
+.wpf_notice {
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     font-style: italic;
     color: #999;
-    padding: 25px !important;
+    padding: 10px !important;
 }
 #top-elements {
     width: 100%;
     height: 40px;
 }
+.category-title,
 #thread-title {
     background-color: #2d89cc;
     color: #fff;
@@ -68,10 +64,14 @@
     display: block;
     font-weight: bold;
 }
+.category-content,
 #thread-content {
     border: 1px solid #2d89cc;
     display: block;
     background-color: #f6f6f6;
+}
+.category-content {
+    margin-bottom: 20px;
 }
 #thread-reply {
     display: block;
@@ -83,6 +83,17 @@
 }
 #thread-reply textarea {
     height: 100px;
+}
+.status-icon {
+    width: 61px;
+    text-align: center;
+}
+#category-footer {
+    width: 100%;
+    display: block;
+}
+#category-footer img {
+    margin: 0 4px -11px;
 }
 /*Breadcrumb -------------------------------------------*/
 #wpf-wrapper #trail.breadcrumbs a {
@@ -104,17 +115,12 @@
     float: left;
 }
 /*Wpf itemv ---------------------------------------*/
-#wpf-wrapper .wpf-item,
 #wpf-wrapper .wpf-item-poster {
     margin: 0px 0px 0px 0;
     line-height: 16px;
 }
-#wpf-wrapper .wpf-item-title,
 #wpf-wrapper .wpf-item-poster-li {
     margin: 0px 0px 0px 5px;
-}
-#wpf-wrapper .wpf-category-title strong a {
-    font-size: 14px;
 }
 #wpf-wrapper .img-avatar-forumstats img.avatar {
     margin: 0px 4px -3px 3px;
@@ -156,13 +162,9 @@
     box-sizing: border-box;
 }
 /*poster_in_forum ---------------------------------*/
-#wpf-wrapper .poster_in_forum span img {
-    float: left;
-    vertical-align: middle;
-    margin: 8px 9px 6px 0px;
-}
-#wpf-wrapper td.poster_in_forum {
-    line-height: 15px;
+#wpf-wrapper .poster_in_forum {
+    width: 200px;
+    line-height: 1.3;
 }
 #wpf-wrapper small {
     color: #333;
@@ -175,21 +177,16 @@
     color: #006CBB;
     text-decoration: none;
 }
-#wpf-wrapper .odd td,
-#wpf-wrapper .even td,
-#wpf-wrapper .sticky td {
-    vertical-align: middle;
-    border-bottom: 1px solid #cecece;
-    border-right: 1px solid #eaeaea;
+.category-content td {
+    vertical-align: middle !important;
+    border-bottom: 1px solid #cecece !important;
+    border-right: 1px solid #eaeaea !important;
 }
-#wpf-wrapper .odd td:last-child,
-#wpf-wrapper .even td:last-child,
-#wpf-wrapper .sticky td:last-child {
-    vertical-align: middle;
-    border-right: none;
+.category-content td:last-child {
+    border-right: none !important;
 }
-#wpf-wrapper tr:last-child td {
-    border-bottom: none;
+.category-content tr:last-child td {
+    border-bottom: none !important;
 }
 
 .wpf-table a:hover,
@@ -232,26 +229,15 @@ img.avatar {
     float: right;
 }
 .wpf-table {
-    padding: 5px;
-    border: 1px solid #2D89CC;
     background: #f6f6f6;
 }
 .wpf-table th,
-.wpf-post-table th,
-.wpf-table td.forumtitle {
+.wpf-post-table th {
     text-align: left;
     overflow: hidden;
     background-color: #2d89cc;
     color: #fff;
     border-width: 0;
-}
-#wpf-wrapper .forumtitle span {
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    padding: 2px 7px;
-    text-transform: none;
 }
 .wpf-table td {
     border: 1px solid;
@@ -298,28 +284,6 @@ td.autorpostbox {
     text-align: center;
     border-right: 1px solid #CACACA !important;
     width: 125px;
-}
-#wpf-wrapper a img,
-#wpf-wrapper img {
-    border: none;
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    display: inline !important;
-    height: inherit !important;
-}
-#wpf-wrapper img {
-    border: none;
-    padding: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background: transparent;
-}
-#wpf-wrapper .info-poster_in_forum {
-    font-size:16px;
-}
-#wpf-wrapper .info-poster_in_forum img {
-    margin: 0 4px -11px;
 }
 .wpf-info {
     border: 1px solid #cecb8e;
