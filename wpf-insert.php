@@ -146,7 +146,7 @@ if (isset($_POST['add_topic_submit']))
   }
   else
   {
-    $date = $this->wpf_current_time_fixed('mysql', 0);
+    $date = $this->wpf_current_time_fixed();
 
     $sql_thread = "INSERT INTO {$this->t_threads}
                       (subject, parent_id, status)
@@ -201,7 +201,7 @@ if (isset($_POST['add_post_submit']))
   }
   else
   {
-    $date = $this->wpf_current_time_fixed('mysql', 0);
+    $date = $this->wpf_current_time_fixed();
     //MAYBE ATTACH IMAGES
     $images = mf_check_uploaded_images();
     if ($images['im1'] || $images['im2'] || $images['im3'])

@@ -220,10 +220,8 @@ img.avatar {
 }
 #wpf-wrapper .wpf-meta-button a {
     font-size: 12px;
-    font-weight: bold;
 }
 #wpf-wrapper .wpf-meta-button a:hover {
-    color:#B85B5A;
     text-decoration:none !important;
 }
 #wpf-wrapper .wpf-meta-button img {

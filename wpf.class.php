@@ -564,90 +564,55 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
+        public function get_postmeta($post_id, $author_id, $parent_id) {
+            global $user_ID;
+            $this->setup_links();
+
+            $o = "<table class='wpf-meta-button'><tr>";
+
+            if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))) {
+                $o .= "<td><img src='{$this->skin_url}/images/buttons/quote.png' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
+            }
+
+            if ($this->is_moderator($user_ID, $this->current_forum)) {
+                if ($this->options['forum_use_seo_friendly_urls']) {
+                    $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                } else {
+                    $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                }
+            }
+
+            if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID)) {
+                $o .= "<td><img src='{$this->skin_url}/images/buttons/modify.png' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
+            }
+
+            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img align='left' src='{$this->skin_url}/images/bbc/url.png' /></a></td>";
+            $o .= "</tr></table>";
+
+            return $o;
+        }
+
+        public function format_date($date) {
+            return date_i18n($this->dateFormat, strtotime($date));
+        }
+
+        public function wpf_current_time_fixed() {
+            return gmdate('Y-m-d H:i:s', (time() + (get_option('gmt_offset') * 3600)));
+        }
+
+        public function get_userposts_num($id) {
+            global $wpdb;
+            return $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_posts} WHERE author_id = %d", $id));
+        }
+
+        public function get_post_owner($id) {
+            global $wpdb;
+            return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE id = %d", $id));
+        }
 
 
 
 
-
-
-
-    public function get_postmeta($post_id, $author_id, $parent_id)
-    {
-      global $user_ID;
-      $this->setup_links();
-      $o = "<table class='wpf-meta-button'width='100%' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
-
-      if ($this->options['forum_use_seo_friendly_urls'])
-      {
-        if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "asgarosforum") . "</a></td>";
-        if ($this->is_moderator($user_ID, $this->current_forum))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
-        if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
-
-
-      }
-      else
-      {
-        if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "asgarosforum") . "</a></td>";
-        if ($this->is_moderator($user_ID, $this->current_forum))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'> " . __("Remove", "asgarosforum") . "</a></td>";
-        if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
-      }
-
-$o .= "<td nowrap='nowrap'><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></td>";
-
-      $o .= "</tr></table>";
-
-      return $o;
-    }
-
-    public function get_postdate($post)
-    {
-      global $wpdb;
-
-      return $this->format_date($wpdb->get_var($wpdb->prepare("SELECT `date` FROM {$this->t_posts} WHERE id = %d", $post)));
-    }
-
-    public function format_date($date)
-    {
-      if ($date)
-        return date_i18n($this->dateFormat, strtotime($date));
-      else
-        return false;
-    }
-
-    public function wpf_current_time_fixed($type, $gmt = 0)
-    {
-      $t = ($gmt) ? gmdate('Y-m-d H:i:s') : gmdate('Y-m-d H:i:s', (time() + (get_option('gmt_offset') * 3600)));
-
-      switch ($type)
-      {
-        case 'mysql':
-          return $t;
-          break;
-        case 'timestamp':
-          return strtotime($t);
-          break;
-      }
-    }
-
-    public function get_userposts_num($id)
-    {
-      global $wpdb;
-
-      return $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_posts} WHERE author_id = %d", $id));
-    }
-
-    public function get_post_owner($id)
-    {
-      global $wpdb;
-
-      return $wpdb->get_var($wpdb->prepare("SELECT `author_id` FROM {$this->t_posts} WHERE `id` = %d", $id));
-    }
 
     public function overview()
     {
@@ -723,6 +688,13 @@ $o .= "<td nowrap='nowrap'><a href='" . $this->get_postlink($parent_id, $post_id
         </tr>
         </table><br class='clear'/>");
     }
+
+
+
+
+
+
+
 
     public function output_filter($string)
     {
@@ -1237,7 +1209,7 @@ public function set_cookie()
     if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
         $last = get_user_meta($user_ID, 'lastvisit', true);
         setcookie("wpafcookie", $last, 0, "/");
-        update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed('mysql', 0));
+        update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
     }
 }
 
@@ -1247,7 +1219,7 @@ public function set_cookie()
 
       if ($user_ID)
       {
-        update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed('mysql', 0));
+        update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
 
         $last = get_user_meta($user_ID, 'lastvisit', true);
 
