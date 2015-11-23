@@ -466,120 +466,103 @@ if (!class_exists('asgarosforum')) {
             return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
         }
 
+        public function showthread($thread_id) {
+            global $wpdb, $user_ID;
+            $this->current_group = $this->forum_get_group_from_post($thread_id);
+            $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+            $this->current_thread = $thread_id;
+            $out = "";
 
+            if (isset($_GET['remove_post'])) {
+                $this->remove_post();
+            }
 
+            if (isset($_GET['sticky'])) {
+                $this->sticky_post();
+            }
 
+            if (isset($_GET['closed'])) {
+                $this->closed_post();
+            }
 
+            $posts = $this->get_posts($thread_id);
 
+            if ($posts) {
+                $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
-public function showthread($thread_id) {
-    global $wpdb, $user_ID;
-    $this->current_group = $this->forum_get_group_from_post($thread_id);
-    $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-    $this->current_thread = $thread_id;
-    $out = "";
+                if (!$this->have_access($this->current_group)) {
+                    wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
+                }
 
-    if (isset($_GET['remove_post'])) {
-        $this->remove_post();
-    }
+                $out .= "<table><tr class='pop_menus'>";
+                $out .= "<td>" . $this->post_pageing($thread_id) . "</td>";
+                $out .= "<td>" . $this->topic_menu($thread_id) . "</td>";
+                $out .= "</tr></table>";
 
-    if (isset($_GET['sticky'])) {
-        $this->sticky_post();
-    }
+                if ($this->is_closed()) {
+                    $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
+                } else {
+                    $meClosed = "";
+                }
 
-    if (isset($_GET['closed'])) {
-        $this->closed_post();
-    }
+                $out .= "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
+                $out .= "<div id='thread-content'>";
 
-    $posts = $this->get_posts($thread_id);
+                foreach ($posts as $post) {
+                    $out .= "
+                    <table class='wpf-post-table' id='postid-{$post->id}'>
+                        <tr>
+                            <td colspan='2' class='wpf-bright author'>
+                                <span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</span>
+                                <div class='wpf-meta'>" . $this->get_postmeta($post->id, $post->author_id, $post->parent_id) . "</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class='autorpostbox'>
+                                <div class='wpf-small'>";
+                                    if ($this->options["forum_use_gravatar"]) {
+                                        $out .= $this->get_avatar($post->author_id);
+                                    }
+                                    $out .= "<br /><strong>" . $this->profile_link($post->author_id, true) ."</strong><br />";
+                                    $out .=__("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id);
+                                    $out .= "
+                                </div>
+                            </td>
+                            <td valign='top' class='topic_text'>";
+                                $out .= make_clickable(wpautop($this->autoembed($this->output_filter($post->text))));
+                                $out .= "
+                            </td>
+                        </tr>
+                    </table>";
+                }
 
-    if ($posts) {
-        $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
+                $out .= "</div>";
 
-        if (!$this->have_access($this->current_group)) {
-            wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
+                $quick_thread = $this->check_parms($_GET['t']);
+
+                // QUICK REPLY AREA
+                if ((!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)) && ($user_ID || $this->allow_unreg())) {
+                    $out .= "
+                    <div id='thread-reply'>
+                    <form action='' name='addform' method='post'>
+                        <strong>" . __("Quick Reply", "asgarosforum") . ": </strong><br/>" .
+                        $this->form_buttons() . $this->form_smilies() . "
+                        <textarea name='message'></textarea>" .
+                        $this->get_quick_reply_captcha() . "
+                        <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "asgarosforum") . "' />
+                        <input type='hidden' name='add_post_forumid' value='" . floor($quick_thread) . "'/>
+                    </form>
+                    </div>";
+                }
+
+                $out .= "<table><tr class='pop_menus'>
+                    <td>" . $this->post_pageing($thread_id) . "</td>
+                    <td>" . $this->topic_menu($thread_id) . "</td>
+                </tr></table>";
+
+                $this->o .= $out;
+            }
         }
-
-        $out .= "<table><tr class='pop_menus'>";
-        $out .= "<td>" . $this->post_pageing($thread_id) . "</td>";
-        $out .= "<td>" . $this->topic_menu($thread_id) . "</td>";
-        $out .= "</tr></table>";
-
-        if ($this->is_closed()) {
-            $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
-        } else {
-            $meClosed = "";
-        }
-
-        $out .= "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
-        $out .= "<div id='thread-content'>";
-
-        foreach ($posts as $post) {
-            $out .= "
-            <table class='wpf-post-table' id='postid-{$post->id}'>
-                <tr>
-                    <td colspan='2' class='wpf-bright author'>
-                        <span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</span>
-                        <div class='wpf-meta'>" . $this->get_postmeta($post->id, $post->author_id, $post->parent_id) . "</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class='autorpostbox'>
-                        <div class='wpf-small'>";
-                            if ($this->options["forum_use_gravatar"]) {
-                                $out .= $this->get_avatar($post->author_id);
-                            }
-                            $out .= "<br /><strong>" . $this->profile_link($post->author_id, true) ."</strong><br />";
-                            $out .=__("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id);
-                            $out .= "
-                        </div>
-                    </td>
-                    <td valign='top' class='topic_text'>";
-                        $out .= make_clickable(wpautop($this->autoembed($this->output_filter($post->text))));
-                        $out .= "
-                    </td>
-                </tr>
-            </table>";
-        }
-
-        $out .= "</div>";
-
-        $quick_thread = $this->check_parms($_GET['t']);
-
-        //QUICK REPLY AREA
-          if ((!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)) &&
-                  ($user_ID || $this->allow_unreg()))
-          {
-            $out .= "<form action='' name='addform' method='post'>
-            <table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
-              <tr>
-                <td>";
-            $out .= "<strong>" . __("Quick Reply", "asgarosforum") . ": </strong><br/>" .
-                    $this->form_buttons() . $this->form_smilies() . "<br/>
-                    <input type='hidden' name='add_post_subject' value='" . $this->get_subject(floor($quick_thread)) . "'/>
-                    <textarea rows='6' style='width:99% !important;' name='message'></textarea>
-                </td>
-              </tr>";
-            $out .= $this->get_quick_reply_captcha();
-            $out .= "<tr>
-                <td>
-                  <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "asgarosforum") . "' />
-                  <input type='hidden' name='add_post_forumid' value='" . floor($quick_thread) . "'/>
-                </td>
-              </tr>
-              </table>
-            </form>";
-          }
-        $out .= "<table>
-              <tr class='pop_menus'>
-                <td width='100%'>" . $this->post_pageing($thread_id) . "</td>
-                <td style='height:30px;'>" . $this->topic_menu($thread_id) . "
-                </td>
-              </tr>
-            </table>";
-        $this->o .= $out;
-      }
-    }
 
 
 
@@ -1648,13 +1631,10 @@ public function set_cookie()
         include_once("captcha/captcha_code.php");
         $wpf_captcha = new CaptchaCode();
         $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
-        $out .= "<tr>
-                <td>
+        $out .= "
                   <img src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
                   <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'><br/>
-                  <input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/>" . __("Enter Security Code: (required)", "asgarosforum")
-                . "</td>
-              </tr>";
+                  <input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/>" . __("Enter Security Code: (required)", "asgarosforum");
       }
 
       return $out;

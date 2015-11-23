@@ -33,9 +33,7 @@
 #wpf-post-submit,
 #quick-reply-submit {
     color: #555;
-    letter-spacing: normal !important;
     background-color: #EFEFEF;
-    font-size: 14px !important;
 }
 #wpf-wrapper .tab_back a:link,
 #wpf-wrapper .tab_back a:visited {
@@ -75,6 +73,17 @@
     display: block;
     background-color: #f6f6f6;
 }
+#thread-reply {
+    display: block;
+    padding: 10px;
+    background-color: #F0F0F0;
+    border-left: 1px solid #CACACA;
+    border-bottom: 1px solid #CACACA;
+    border-right: 1px solid #CACACA;
+}
+#thread-reply textarea {
+    height: 100px;
+}
 /*Breadcrumb -------------------------------------------*/
 #wpf-wrapper #trail.breadcrumbs a {
     color: #636363;
@@ -112,8 +121,6 @@
 }
 /*input txt---------------------------------------------*/
 #wpf-wrapper input {
-    margin: 2px 0px !important;
-    vertical-align: middle;
     padding: 3px 6px;
     border: 1px solid #a9a9a9;
     border-radius: 3px;
@@ -141,20 +148,12 @@
 }
 /*wpf textarea -----------------------------------------*/
 #wpf-wrapper textarea {
-    box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
     background-color: rgba(193,193,193,0.4);
     color: #7b7a7a;
-    border: 1px solid #E3E3E3!important;
-    padding:4px;
-}
-#wpf-wrapper  textarea:focus {
-    box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    background-color: rgba(193,193,193,0.5);
-    color: #444444;
+    border: 1px solid #CACACA;
+    padding: 4px;
+    width: 100%;
+    box-sizing: border-box;
 }
 /*poster_in_forum ---------------------------------*/
 #wpf-wrapper .poster_in_forum span img {
@@ -164,9 +163,6 @@
 }
 #wpf-wrapper td.poster_in_forum {
     line-height: 15px;
-}
-#wpf-wrapper form {
-    text-align: inherit !important;
 }
 #wpf-wrapper small {
     color: #333;
@@ -265,9 +261,6 @@ img.avatar {
 }
 .wpf-table textarea {
     width: 98%;
-}
-#wpf-wrapper #wpf-quick-reply br {
-    display: none!important;
 }
 #wpf-wrapper .sticky {
     background: #e0e1e8;
@@ -434,11 +427,6 @@ pre.code {
     text-decoration: none !important;
 }
 /* Buttons fix */
-div.forum_smilies,
-div.forum_buttons {
-    padding: 0;
-    margin: 0;
-}
 .forum_smilies a,
 .forum_buttons a {
     margin-right: 3px;

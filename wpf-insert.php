@@ -189,18 +189,11 @@ if (isset($_POST['add_topic_submit']))
 if (isset($_POST['add_post_submit']))
 {
   $myReplaceSub = array("\\");
-  $subject = str_replace($myReplaceSub, "", $this->input_filter($_POST['add_post_subject']));
   $content = $this->input_filter($_POST['message']);
   $thread = $this->check_parms($_POST['add_post_forumid']);
   $msg = '';
 
-  if ($subject == "")
-  {
-    $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
-    $msg .= ("<div id='error'><p>" . __("You must enter a subject", "asgarosforum") . "</p></div>");
-    $error = true;
-  }
-  elseif ($content == "")
+  if ($content == "")
   {
     $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
     $msg .= ("<div id='error'><p>" . __("You must enter a message", "asgarosforum") . "</p></div>");
