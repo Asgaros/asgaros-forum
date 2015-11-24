@@ -1,7 +1,7 @@
 <table>
   <tr class="pop_menus">
-    <td width="100%"><?php echo $this->thread_pageing($forum_id); ?></td>
-    <td><?php echo $this->forum_menu($this->current_group); ?></td>
+    <td width="100%"><?php echo $this->pageing($forum_id, 'thread'); ?></td>
+    <td><?php echo $this->forum_menu(); ?></td>
   </tr>
 </table>
 
@@ -34,7 +34,7 @@
                 <?php echo $this->cut_string($this->output_filter($thread->subject)); ?>
               </a>
             </span>
-            <?php if ($this->is_moderator($user_ID, $this->current_forum)): ?>
+            <?php if ($this->is_moderator($user_ID)): ?>
               <div class="mf_sticky_post_actions">
                 <small>
                   <a href="<?php echo $this->forum_link . $this->current_forum . "&getNewForumID&topic={$thread->id}"; ?>">
@@ -79,7 +79,7 @@
               <?php echo $this->cut_string($this->output_filter($thread->subject), 50); ?>
             </a>
           </span>
-          <?php if ($this->is_moderator($user_ID, $this->current_forum)): ?>
+          <?php if ($this->is_moderator($user_ID)): ?>
             <div class="mf_post_actions">
               <small>
                 <a href="<?php echo $this->forum_link . $this->current_forum . "&getNewForumID&topic={$thread->id}"; ?>">
@@ -113,7 +113,7 @@
 
 <table>
   <tr class="pop_menus">
-    <td width="100%"><?php echo $this->thread_pageing($forum_id); ?></td>
-    <td><?php echo $this->forum_menu($this->current_group); ?></td>
+    <td width="100%"><?php echo $this->pageing($forum_id, 'thread'); ?></td>
+    <td><?php echo $this->forum_menu(); ?></td>
   </tr>
 </table>

@@ -92,7 +92,7 @@ if (!class_exists("AFAdmin"))
 
             if (isset($_GET['action']) && $_GET['action'] == 'users') {
                 if (isset($_GET['groupid'])) {
-                    $usergroup = $asgarosforum->get_usergroup($_GET['groupid']);
+                    $usergroup = $asgarosforum->get_usergroups($_GET['groupid']);
                     $usergroup_users = $asgarosforum->get_members($_GET['groupid']);
 
                     if (!empty($usergroup)) {

@@ -64,7 +64,7 @@ if ($user_ID || $this->allow_unreg())
     $out = "";
     $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE id = %d", $id));
 
-    if (($user_ID == $post->author_id && $user_ID) || $this->is_moderator($user_ID, $this->forum_get_forum_from_post($thread))) //Make sure only admins/mods/post authors can edit posts
+    if (($user_ID == $post->author_id && $user_ID) || $this->is_moderator($user_ID)) //Make sure only admins/mods/post authors can edit posts
     {
       $out .= "<form action='' name='addform' method='post'>";
       $out .= "<table class='wpf-table' width='100%'>

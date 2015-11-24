@@ -257,7 +257,7 @@ if (isset($_POST['edit_post_submit']))
     $error = true;
   }
   //Major security check here, prevents hackers from editing the entire forums posts
-  if (!is_super_admin($user_ID) && $user_ID != $this->get_post_owner($edit_post_id) && !$this->is_moderator($user_ID, $the_forum_id))
+  if (!is_super_admin($user_ID) && $user_ID != $this->get_post_owner($edit_post_id) && !$this->is_moderator($user_ID))
   {
     $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
     $msg .= ("<div id='error'><p>" . __("You do not have permission to edit this post!", "asgarosforum") . "</p></div>");
