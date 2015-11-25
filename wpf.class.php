@@ -574,21 +574,21 @@ if (!class_exists('asgarosforum')) {
             $o = "<table class='wpf-meta-button'><tr>";
 
             if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID))) {
-                $o .= "<td><img src='{$this->skin_url}/images/buttons/quote.png' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
+                $o .= "<td><img src='{$this->skin_url}/images/quote.png' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
             if ($counter > 1) {
                 if ($this->is_moderator($user_ID)) {
                     if ($this->options['forum_use_seo_friendly_urls']) {
-                        $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                        $o .= "<td><img src='{$this->skin_url}/images/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
                     } else {
-                        $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                        $o .= "<td><img src='{$this->skin_url}/images/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
                     }
                 }
             }
 
             if (($this->is_moderator($user_ID)) || ($user_ID == $author_id && $user_ID)) {
-                $o .= "<td><img src='{$this->skin_url}/images/buttons/modify.png' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
+                $o .= "<td><img src='{$this->skin_url}/images/modify.png' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
             }
 
             $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img align='left' src='{$this->skin_url}/images/bbc/url.png' /></a></td>";
@@ -1375,7 +1375,7 @@ if (!class_exists('asgarosforum')) {
 
         public function get_topic_image($thread) {
             if ($this->is_closed($thread)) {
-                return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
+                return "<img src='{$this->skin_url}/images/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
             }
 
             if ($this->check_unread($thread)) {

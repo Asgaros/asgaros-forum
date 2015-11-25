@@ -17,7 +17,7 @@
     float: right;
 }
 .wpf_search input {
-    background-image: url("images/icons/search_btn.png");
+    background-image: url("images/search_btn.png");
     background-position: 4px 5px;
     background-repeat: no-repeat;
     padding-left: 25px !important;
