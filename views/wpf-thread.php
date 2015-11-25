@@ -16,7 +16,7 @@ if ($this->forum_exists($_GET['forum'])) {
     			<tr>
     				<td valign='top'>" . __("Message:", "asgarosforum") . "</td>
     				<td>
-    					" . $this->form_buttons() . $this->form_smilies() . "
+    					" . $this->form_buttons() . "
 
     					<br/><textarea rows='20' cols='80' name='message'></textarea>
     				</td>
