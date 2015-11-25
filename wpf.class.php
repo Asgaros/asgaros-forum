@@ -287,6 +287,10 @@ if (!class_exists('asgarosforum')) {
                 $action = false;
             }
 
+            if (isset($_GET['move_topic'])) {
+                $this->move_topic();
+            }
+
             if ($action != false && $this->options['forum_use_seo_friendly_urls']) {
                 if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) && !isset($_GET['remove_post']) && !isset($_GET['sticky']) && !isset($_GET['closed'])) {
                     switch ($action) {
@@ -405,10 +409,6 @@ if (!class_exists('asgarosforum')) {
 
                 if (isset($_GET['delete_topic'])) {
                     $this->remove_topic();
-                }
-
-                if (isset($_GET['move_topic'])) {
-                    $this->move_topic();
                 }
 
                 $out = "";
