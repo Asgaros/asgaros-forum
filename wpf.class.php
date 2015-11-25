@@ -57,7 +57,7 @@ if (!class_exists('asgarosforum')) {
             add_action('init', array($this, "run_wpf_insert"));
             add_action('wp', array($this, "before_go")); // Redirects Old URL's to SEO URL's
 
-            //Filter hooks
+            // Filter hooks
             add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
             add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
 
@@ -509,13 +509,15 @@ if (!class_exists('asgarosforum')) {
                 $out .= "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
                 $out .= "<div id='thread-content'>";
 
+                $counter = 0;
                 foreach ($posts as $post) {
+                    $counter++;
                     $out .= "
                     <table class='wpf-post-table' id='postid-{$post->id}'>
                         <tr>
                             <td colspan='2' class='wpf-bright author'>
                                 <span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</span>
-                                <div class='wpf-meta'>" . $this->get_postmeta($post->id, $post->author_id, $post->parent_id) . "</div>
+                                <div class='wpf-meta'>" . $this->get_postmeta($post->id, $post->author_id, $post->parent_id, $counter) . "</div>
                             </td>
                         </tr>
                         <tr>
@@ -565,7 +567,7 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        public function get_postmeta($post_id, $author_id, $parent_id) {
+        public function get_postmeta($post_id, $author_id, $parent_id, $counter) {
             global $user_ID;
             $this->setup_links();
 
@@ -575,11 +577,13 @@ if (!class_exists('asgarosforum')) {
                 $o .= "<td><img src='{$this->skin_url}/images/buttons/quote.png' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
-            if ($this->is_moderator($user_ID)) {
-                if ($this->options['forum_use_seo_friendly_urls']) {
-                    $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
-                } else {
-                    $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+            if ($counter > 1) {
+                if ($this->is_moderator($user_ID)) {
+                    if ($this->options['forum_use_seo_friendly_urls']) {
+                        $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                    } else {
+                        $o .= "<td><img src='{$this->skin_url}/images/buttons/delete.png' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                    }
                 }
             }
 
@@ -1216,6 +1220,19 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
+        public function move_topic() {
+            global $user_ID, $wpdb;
+            $topic = $_GET['topic'];
+            $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : 0;
+
+            if ($this->is_moderator($user_ID) && $newForumID && $this->forum_exists($newForumID)) {
+                $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET parent_id = {$newForumID} WHERE id = %d", $topic));
+                header("Location: " . $this->base_url . "viewforum&f=" . $newForumID);
+                exit;
+            } else {
+                wp_die(__("You do not have permission to move this topic.", "asgarosforum"));
+            }
+        }
 
 
 
@@ -1223,49 +1240,32 @@ if (!class_exists('asgarosforum')) {
 
 
 
-
-public function move_topic() {
+public function remove_post() {
     global $user_ID, $wpdb;
-    $topic = $_GET['topic'];
-    $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : 0;
+    $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
+    $post = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = %d", $id));
 
-    if ($this->is_moderator($user_ID) && $newForumID && $->forum_exists($newForumID)) {
-        $strSQL = $wpdb->prepare("UPDATE {$this->t_threads} SET `parent_id` = {$newForumID} WHERE id = %d", $topic);
-        $wpdb->query($strSQL);
-        header("Location: " . $this->base_url . "viewforum&f=" . $newForumID);
-        exit;
-      }
-      else
-        wp_die(__("You do not have permission to move this topic.", "asgarosforum"));
-    }
-
-
-
-
-
-
-
-
-    public function remove_post()
-    {
-      global $user_ID, $wpdb;
-
-      $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-      $post = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = %d", $id));
-
-      if ($this->is_moderator($user_ID) || $user_ID == $post->author_id)
-      {
+    if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
         $nbmsg = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $post->parent_id));
 
-        if (!$nbmsg)
-          $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $post->parent_id));
+        if (!$nbmsg) {
+            $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $post->parent_id));
+        }
 
         $this->o .= "<div class='wpf-info'><div class='updated'><span class='icon-warning'>" . __("Post deleted", "asgarosforum") . "</div></div>";
-      }
-      else
+    } else {
         wp_die(__("You do not have permission to delete this post.", "asgarosforum"));
     }
+}
+
+
+
+
+
+
+
+
 
     public function sticky_post()
     {
