@@ -414,17 +414,18 @@ if (!class_exists('asgarosforum')) {
                 $out = "";
                 $threads = $this->get_threads($forum_id);
                 $sticky_threads = $this->get_threads($forum_id, 'sticky');
+                $thread_counter = (count($threads) + count($sticky_threads));
                 $this->current_group = $this->get_parent_id(FORUM, $forum_id);
                 $this->current_forum = $forum_id;
 
                 if (isset($_GET['getNewForumID'])) {
                     $out .= $this->getNewForumID();
                 } else {
-                    ob_start();
                     if (!$this->have_access($this->current_group)) {
                         wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
                     }
 
+                    ob_start();
                     require('views/showforum.php');
                     $out .= ob_get_clean();
                 }
@@ -1191,13 +1192,11 @@ if (!class_exists('asgarosforum')) {
 
 
 
+public function getNewForumID() {
+    global $user_ID;
 
-    public function getNewForumID()
-    {
-      global $user_ID;
-
-      $topic = !empty($_GET['topic']) ? (int) $_GET['topic'] : 0;
-      $topic = !empty($_GET['t']) ? (int) $_GET['t'] : $topic;
+    $topic = !empty($_GET['topic']) ? (int) $_GET['topic'] : 0;
+    $topic = !empty($_GET['t']) ? (int) $_GET['t'] : $topic;
 
       if ($this->is_moderator($user_ID))
       {

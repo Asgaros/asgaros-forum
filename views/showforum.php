@@ -1,10 +1,16 @@
+
 <table>
   <tr class="pop_menus">
-    <td width="100%"><?php echo $this->pageing($forum_id, 'thread'); ?></td>
+          <td width="100%">
+<?php if ($thread_counter > 0): ?>
+              <?php echo $this->pageing($forum_id, 'thread'); ?>
+      <?php endif; ?>
+      </td>
     <td><?php echo $this->forum_menu(); ?></td>
   </tr>
 </table>
 
+<?php if ($thread_counter > 0): ?>
 <div class="wpf">
   <table class="wpf-table" id="topicTable">
     <tr>
@@ -117,3 +123,7 @@
     <td><?php echo $this->forum_menu(); ?></td>
   </tr>
 </table>
+<?php else: ?>
+
+<div class='wpf_notice'><?php _e("There are no threads yet!", "asgarosforum"); ?></div>
+<?php endif; ?>
