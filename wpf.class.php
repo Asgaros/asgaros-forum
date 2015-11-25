@@ -592,7 +592,7 @@ if (!class_exists('asgarosforum')) {
                 $o .= "<td><img src='{$this->skin_url}/images/modify.png' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
             }
 
-            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img align='left' src='{$this->skin_url}/images/bbc/url.png' /></a></td>";
+            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><img align='left' src='{$this->skin_url}/images/url.png' /></a></td>";
             $o .= "</tr></table>";
 
             return $o;
