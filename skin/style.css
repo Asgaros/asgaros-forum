@@ -367,9 +367,6 @@ pre.code {
     text-decoration: none !important;
 }
 /* Buttons fix */
-.forum_buttons a {
-    margin-right: 3px;
-}
 .topic_text img {
     max-width: 475px;
 }

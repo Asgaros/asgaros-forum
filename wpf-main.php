@@ -39,7 +39,6 @@ define("NEWTOPIC", "newtopic");
 define("FORUM", __("Forum", "asgarosforum"));
 
 //Load class files
-require('bbcode.php');
 require('admin/mfadmin.php');
 require("wpf.class.php");
 

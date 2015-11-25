@@ -25,8 +25,7 @@ if ($user_ID || $this->allow_unreg())
     $out .= "<tr>
             <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
             <td>";
-              $out .= $this->form_buttons();
-              $out .= "<br /><textarea rows='20' cols='80' name='message'></textarea>";
+              $out .= "<textarea rows='20' cols='80' name='message'></textarea>";
               $out .= '<input type="hidden" name="add_post_subject" value="'.$this->get_subject($thread).'" />';
               $out .= "
             </td>
@@ -81,8 +80,7 @@ if ($user_ID || $this->allow_unreg())
       $out .= "<tr>
               <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
               <td>";
-                $out .= $this->form_buttons();
-                $out .= "<br /><textarea rows='20' cols='80' name='message'>" . stripslashes($post->text) . "</textarea>";
+                $out .= "<textarea rows='20' cols='80' name='message'>" . stripslashes($post->text) . "</textarea>";
                 $out .= "</td>
             </tr>
             <tr>

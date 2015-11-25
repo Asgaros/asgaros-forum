@@ -37,7 +37,7 @@
           <td class="sticky wpf-topic-title">
             <span class="topicTitle">
               <a href="<?php echo $this->get_threadlink($thread->id); ?>">
-                <?php echo $this->cut_string($this->output_filter($thread->subject)); ?>
+                <?php echo $this->cut_string($thread->subject); ?>
               </a>
             </span>
             <?php if ($this->is_moderator($user_ID)): ?>
@@ -82,7 +82,7 @@
         <td>
           <span class="topicTitle">
             <a href="<?php echo $this->get_threadlink($thread->id); ?>">
-              <?php echo $this->cut_string($this->output_filter($thread->subject), 50); ?>
+              <?php echo $this->cut_string($thread->subject, 50); ?>
             </a>
           </span>
           <?php if ($this->is_moderator($user_ID)): ?>

@@ -233,17 +233,17 @@ if (!class_exists('asgarosforum')) {
 
         public function get_groupname($id) {
             global $wpdb;
-            return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id)));
+            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id));
         }
 
         public function get_forumname($id) {
             global $wpdb;
-            return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_forums} WHERE id = %d", $id)));
+            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_forums} WHERE id = %d", $id));
         }
 
         public function get_threadname($id) {
             global $wpdb;
-            return $this->output_filter($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
+            return $wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id));
         }
 
         public function cut_string($string, $length = 35) {
@@ -532,7 +532,7 @@ if (!class_exists('asgarosforum')) {
                                 </div>
                             </td>
                             <td valign='top' class='topic_text'>";
-                                $out .= make_clickable(wpautop($this->autoembed($this->output_filter($post->text))));
+                                $out .= make_clickable(wpautop($this->autoembed($post->text)));
                                 $out .= "
                             </td>
                         </tr>
@@ -548,8 +548,7 @@ if (!class_exists('asgarosforum')) {
                     $out .= "
                     <div id='thread-reply'>
                     <form action='' name='addform' method='post'>
-                        <strong>" . __("Quick Reply", "asgarosforum") . ": </strong><br/>" .
-                        $this->form_buttons() . "
+                        <strong>" . __("Quick Reply", "asgarosforum") . ": </strong>
                         <textarea name='message'></textarea>" .
                         $this->get_quick_reply_captcha() . "
                         <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "asgarosforum") . "' />
@@ -630,7 +629,7 @@ if (!class_exists('asgarosforum')) {
                 foreach ($grs as $g) {
                     if ($this->have_access($g->id)) {
                         $this->o .= "
-                        <div class='category-title'>".$this->output_filter($g->name)."</div>
+                        <div class='category-title'>".$g->name."</div>
                         <div class='category-content'>
                         <table>";
                         $frs = $this->get_forums($g->id);
@@ -655,7 +654,7 @@ if (!class_exists('asgarosforum')) {
 
                                 $this->o .= "
                                 <td class='status-icon'><img src='{$this->skin_url}/images/{$image}' /></td>
-                                <td><strong><a href='" . $this->get_forumlink($f->id) . "'>" . $this->output_filter($f->name) . "</a></strong><br />" . $this->output_filter($f->description) . "</td>
+                                <td><strong><a href='" . $this->get_forumlink($f->id) . "'>" . $f->name . "</a></strong><br />" . $f->description . "</td>
                                 <td class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>
                                 <td class='poster_in_forum'>" . $this->last_poster_in_forum($f->id) . "</td>
                                 </tr>";
@@ -671,11 +670,6 @@ if (!class_exists('asgarosforum')) {
             }
 
             $this->o .= "<div id='category-footer'><span><img src='{$this->skin_url}/images/new_some.png' />" . __("New posts", "asgarosforum") . "&nbsp;<img src='{$this->skin_url}/images/new_none.png' />" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
-        }
-
-        public function output_filter($string) {
-            $parser = new cartpaujBBCodeParser();
-            return stripslashes($parser->bbc2html($string));
         }
 
         public function input_filter($string) {
@@ -1329,11 +1323,6 @@ if (!class_exists('asgarosforum')) {
             }
 
             return $user;
-        }
-
-        public function form_buttons() {
-            $button = '<div class="forum_buttons"><a title="' . __("Bold", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[b]", "[/b]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/b.png" /></a><a title="' . __("Italic", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[i]", "[/i]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/i.png" /></a><a title="' . __("Underline", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[u]", "[/u]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/u.png" /></a><a title="' . __("Strikethrough", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[s]", "[/s]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/s.png" /></a><a title="' . __("Font size in pixels") . '" href="javascript:void(0);" onclick=\'surroundText("[font size=]", "[/font]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/size.png" /></a><a title="Image or text to center" href="javascript:void(0);" onclick=\'surroundText("[center]", "[/center]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/center.png" /></a><a title="Align image or text left" href="javascript:void(0);" onclick=\'surroundText("[left]", "[/left]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/left.png" /></a><a title="Right align image or text " href="javascript:void(0);" onclick=\'surroundText("[right]", "[/right]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/right.png" /></a><a title="' . __("Code", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[code]", "[/code]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/code.png" /></a><a title="' . __("Quote", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[quote]", "[/quote]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/quote.png" /></a><a title="' . __("Quote Title", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[quotetitle]", "[/quotetitle]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/quotetitle.png" /></a><a title="' . __("List", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[list]", "[/list]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/list.png" /></a><a title="' . __("List item", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[*]", "", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/li.png" /></a><a title="' . __("Link", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[url]", "[/url]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/url.png" /></a><a title="' . __("Image", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[img]", "[/img]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/img.png" /></a><a title="' . __("Email", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[email]", "[/email]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/email.png" /></a><a title="' . __("Add Hex Color", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[color=#]", "[/color]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/color.png" /></a><a title="' . __("Embed YouTube Video", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[embed]", "[/embed]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/yt.png" /></a><a title="' . __("Embed Google Map", "asgarosforum") . '" href="javascript:void(0);" onclick=\'surroundText("[map]", "[/map]", document.forms.addform.message); return false;\'><img src="' . $this->skin_url . '/images/bbc/gm.png" /></a></div>';
-            return $button;
         }
 
         public function search_results() {
