@@ -408,7 +408,7 @@ if (!class_exists('asgarosforum')) {
                 }
 
                 if (isset($_GET['move_topic'])) {
-                    $this->move_topic($forum_id);
+                    $this->move_topic();
                 }
 
                 $out = "";
@@ -1190,50 +1190,46 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
+        public function getNewForumID() {
+            global $user_ID;
 
+            $topic = !empty($_GET['topic']) ? (int) $_GET['topic'] : 0;
 
-public function getNewForumID() {
-    global $user_ID;
+            if ($this->is_moderator($user_ID)) {
+                $currentForumID = $this->check_parms($_GET['f']);
+                $strOUT = '
+                <form method="post" action="' . $this->base_url . 'viewforum&f=' . $currentForumID . '&move_topic&topic=' . $topic . '">
+                Move "<strong>' . $this->get_subject($topic) . '</strong>" to new forum:<br />
+                <select name="newForumID">';
 
-    $topic = !empty($_GET['topic']) ? (int) $_GET['topic'] : 0;
-    $topic = !empty($_GET['t']) ? (int) $_GET['t'] : $topic;
+                $frs = $this->get_forums();
 
-      if ($this->is_moderator($user_ID))
-      {
-        $currentForumID = $this->check_parms($_GET['f']);
-        $strOUT = '
-        <form id="" method="post" action="' . $this->base_url . 'viewforum&f=' . $currentForumID . '&move_topic&topic=' . $topic . '">
-        Move "<strong>' . $this->get_subject($topic) . '</strong>" to new forum: <select id="newForumID" name="newForumID" onchange="location=\'' . $this->base_url . 'viewforum&f=' . $currentForumID . '&move_topic&topic=' . $topic . '&newForumID=\'+this.options[this.selectedIndex].value">';
-        $frs = $this->get_forums();
+                foreach ($frs as $f) {
+                    $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $currentForumID ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
+                }
 
-        foreach ($frs as $f)
-          $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $currentForumID ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
+                $strOUT .= '</select><br /><input type="submit" value="Go!" /></form>';
 
-        $strOUT .= '</select><noscript><input type="submit" value="Go!" /></noscript></form>';
-
-        return $strOUT;
-      }
-      else
-        wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
-    }
-
-
+                return $strOUT;
+            } else {
+                wp_die(__("You are not allowed to move topics.", "asgarosforum"));
+            }
+        }
 
 
 
 
 
 
-    public function move_topic($forum_id)
-    {
-      global $user_ID, $wpdb;
 
-      $topic = $_GET['topic'];
-      $newForumID = !empty($_GET['newForumID']) ? (int) $_GET['newForumID'] : 0;
-      $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : $newForumID;
 
-      if ($this->is_moderator($user_ID))
-      {
+
+public function move_topic() {
+    global $user_ID, $wpdb;
+    $topic = $_GET['topic'];
+    $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : 0;
+
+    if ($this->is_moderator($user_ID) && $newForumID && $->forum_exists($newForumID)) {
         $strSQL = $wpdb->prepare("UPDATE {$this->t_threads} SET `parent_id` = {$newForumID} WHERE id = %d", $topic);
         $wpdb->query($strSQL);
         header("Location: " . $this->base_url . "viewforum&f=" . $newForumID);
@@ -1242,6 +1238,13 @@ public function getNewForumID() {
       else
         wp_die(__("You do not have permission to move this topic.", "asgarosforum"));
     }
+
+
+
+
+
+
+
 
     public function remove_post()
     {
