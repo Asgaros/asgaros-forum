@@ -26,7 +26,7 @@ if ($user_ID || $this->allow_unreg())
             <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
             <td>";
               $out .= $this->form_buttons() . $this->form_smilies();
-              $out .= "<br /><textarea rows='20' cols='80' name='message'>" . stripslashes($q) . "</textarea>";
+              $out .= "<br /><textarea rows='20' cols='80' name='message'></textarea>";
               $out .= '<input type="hidden" name="add_post_subject" value="'.$this->get_subject($thread).'" />';
               $out .= "
             </td>
