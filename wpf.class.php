@@ -52,9 +52,7 @@ if (!class_exists('asgarosforum')) {
             add_action("admin_init", array($this, "wp_forum_install"));
             add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
             add_action("wp_head", array($this, "setup_header"));
-            add_action("init", array($this, "kill_canonical_urls"));
-            add_action('init', array($this, "set_cookie"));
-            add_action('init', array($this, "run_wpf_insert"));
+            add_action("init", array($this, "prepareForum"));
             add_action('wp', array($this, "before_go")); // Redirects Old URL's to SEO URL's
 
             // Filter hooks
@@ -85,11 +83,26 @@ if (!class_exists('asgarosforum')) {
             $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
         }
 
-        public function kill_canonical_urls() {
-            global $post;
+        public function prepareForum() {
+            global $post, $user_ID, $wpdb;
 
+            // Kill canoncial URLs
             if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id) {
                 remove_filter('template_redirect', 'redirect_canonical');
+            }
+
+            // Set cookie
+            if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
+                $last = get_user_meta($user_ID, 'lastvisit', true);
+                setcookie("wpafcookie", $last, 0, "/");
+                update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
+            }
+
+            // Handle inserts
+            $this->setup_links();
+            $error = false;
+            if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
+                require('wpf-insert.php');
             }
         }
 
@@ -130,17 +143,6 @@ if (!class_exists('asgarosforum')) {
             $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&thread={$this->current_thread}";
             $this->base_url = $perm . $this->delim . "forumaction=";
             $this->home_url = $perm;
-        }
-
-        public function run_wpf_insert() {
-            $this->setup_links();
-
-            global $wpdb, $user_ID;
-            $error = false;
-
-            if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
-                require('wpf-insert.php');
-            }
         }
 
         public function forum_exists($id) {
@@ -1076,16 +1078,6 @@ if (!class_exists('asgarosforum')) {
                 return $_COOKIE['wpafcookie'];
             } else {
                 return "0000-00-00 00:00:00";
-            }
-        }
-
-        public function set_cookie() {
-            global $user_ID;
-
-            if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
-                $last = get_user_meta($user_ID, 'lastvisit', true);
-                setcookie("wpafcookie", $last, 0, "/");
-                update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
             }
         }
 
