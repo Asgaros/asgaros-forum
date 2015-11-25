@@ -123,9 +123,6 @@
 #wpf-wrapper .wpf-item-poster-li {
     margin: 0px 0px 0px 5px;
 }
-#wpf-wrapper .img-avatar-forumstats img.avatar {
-    margin: 0px 4px -3px 3px;
-}
 /*input txt---------------------------------------------*/
 #wpf-wrapper input {
     padding: 3px 6px;
@@ -235,13 +232,13 @@ img.avatar {
 .wpf-table {
     background: #f6f6f6;
 }
+.full {
+    border: 1px solid #2D89CC !important;
+}
 .wpf-table th,
 .wpf-post-table th {
     text-align: left;
-    overflow: hidden;
     background-color: #2d89cc;
-    color: #fff;
-    border-width: 0;
 }
 .wpf-table td {
     border: 1px solid;
@@ -283,38 +280,18 @@ td.wpf-bright {
 }
 /* Fixing avatars pose a problem for some sites */
 td.autorpostbox img.avatar{height: 60px;width: 60px;}
-#wpf-wrapper .img-avatar-forumstats .avatar{ height: 15px;width: 15px;}
 td.autorpostbox {
     text-align: center;
     border-right: 1px solid #CACACA !important;
     width: 125px;
 }
-.wpf-info {
-    border: 1px solid #cecb8e;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    margin: 0px 0px 10px !important;
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-}
 .updated {
+    border: 1px solid #cecb8e;
+    margin: 0px 0px 10px !important;
     color: #ada771;
-    background: #f9f9dc;
-    border: 1px solid #fbfbef;
-    -moz-box-shadow: inset 0 0 45px #efefc0;
-    -webkit-box-shadow: inset 0 0 45px #efefc0;
-    box-shadow: inset 0 0 45px #efefc0;
-    font-weight: normal;
-    text-decoration: none;
     background: #F9F9DC;
-    box-shadow: 0 0 45px #EFEFC0 inset;
-    width: 100%;
     text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-    padding: 10px !important;
+    padding: 5px !important;
 }
 #wpf-wrapper blockquote {
     padding: 1.71429rem;
@@ -390,7 +367,6 @@ pre.code {
     text-decoration: none !important;
 }
 /* Buttons fix */
-.forum_smilies a,
 .forum_buttons a {
     margin-right: 3px;
 }

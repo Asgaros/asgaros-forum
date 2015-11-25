@@ -12,7 +12,7 @@
 
 <?php if ($thread_counter > 0): ?>
 <div class="wpf">
-  <table class="wpf-table" id="topicTable">
+  <table class="wpf-table full" id="topicTable">
     <tr>
       <th width="7%"><?php _e("Status", "asgarosforum"); ?></th>
       <th><?php _e("Topic Title", "asgarosforum"); ?></th>
@@ -53,7 +53,7 @@
               </div>
             <?php endif; ?>
           </td>
-          <td class="img-avatar-forumstats" align="center">
+          <td align="center">
             <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
           </td>
           <td class="forumstats" align="center">
@@ -98,7 +98,7 @@
             </div>
           <?php endif; ?>
         </td>
-        <td class="img-avatar-forumstats" align="center">
+        <td align="center">
           <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
         </td>
         <td class="forumstats" align="center">
