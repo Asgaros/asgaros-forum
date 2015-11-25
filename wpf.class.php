@@ -1350,23 +1350,11 @@ if (!class_exists('asgarosforum')) {
             FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
             AND MATCH (text) AGAINST (%s) ORDER BY score DESC LIMIT 50", $search_string, $search_string);
             $results = $wpdb->get_results($sql);
-            $max = 0;
-
-            foreach ($results as $result) {
-                if ($result->score > $max) {
-                    $max = $result->score;
-                }
-            }
-
-            if ($results) {
-                $const = 100 / $max;
-            }
 
             $o .= "<table class='wpf-table full'>
                 <tr>
                 <th width='7%'>Status</th>
                 <th>" . __("Subject", "asgarosforum") . "</th>
-                <th width='100px'>" . __("Relevance", "asgarosforum") . "</th>
                 <th width='150px'>" . __("Started by", "asgarosforum") . "</th>
                 <th width='200px'>" . __("Posted", "asgarosforum") . "</th>
                 </tr>";
@@ -1376,7 +1364,6 @@ if (!class_exists('asgarosforum')) {
                     $o .= "<tr>
                     <td align='center'>" . $this->get_topic_image($result->parent_id) . "</td>
                     <td><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a></td>
-                    <td><small>" . round($result->score * $const, 1) . "%</small></td>
                     <td class='forumstats'>" . $this->profile_link($result->author_id) . "</td>
                     <td class='poster_in_forum'>" . $this->format_date($result->date) . "</td>
                     </tr>";
