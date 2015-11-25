@@ -4,9 +4,8 @@
   </div>
 
   <div class="wpf-item-poster-li">
+      <a href="<?php echo $link; ?>">
     <?php echo date_i18n($this->dateFormat, strtotime($post->date)); ?>&nbsp;Uhr
-    <a href="<?php echo $link; ?>">
-      <img title="<?php echo __("View last post", "asgarosforum"); ?>" style="vertical-align:middle;padding-left:5px;margin:-3px 0 0px 0;" src="<?php echo $this->skin_url; ?>/images/post/lastpost.png" />
     </a>
   </div>
 </div>

@@ -1373,25 +1373,21 @@ if (!class_exists('asgarosforum')) {
             $this->o .= $o;
         }
 
+        public function get_topic_image($thread) {
+            if ($this->is_closed($thread)) {
+                return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
+            }
 
-
-
-
-
-
-
-
-    public function get_topic_image($thread)
-    {
-      if ($this->is_closed($thread))
-        return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
-
-        if ($this->check_unread($thread)) {
-            return "<img src='{$this->skin_url}/images/new_some.png' alt='" . __("Normal unread topic", "asgarosforum") . "' title='" . __("Normal unread topic", "asgarosforum") . "'>";
-        } else {
-            return "<img src='{$this->skin_url}/images/new_none.png' alt='" . __("Normal topic", "asgarosforum") . "' title='" . __("Normal topic", "asgarosforum") . "'>";
+            if ($this->check_unread($thread)) {
+                return "<img src='{$this->skin_url}/images/new_some.png' alt='" . __("Normal unread topic", "asgarosforum") . "' title='" . __("Normal unread topic", "asgarosforum") . "'>";
+            } else {
+                return "<img src='{$this->skin_url}/images/new_none.png' alt='" . __("Normal topic", "asgarosforum") . "' title='" . __("Normal topic", "asgarosforum") . "'>";
+            }
         }
-    }
+
+
+
+
 
     public function get_captcha()
     {
