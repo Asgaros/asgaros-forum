@@ -30,7 +30,6 @@ if ($user_ID || $this->allow_unreg())
               $out .= "
             </td>
           </tr>";
-    $out .= apply_filters('wpwf_form_guestinfo', ''); //--weaver--
     $out .= $this->get_captcha();
 
     if ($this->options['forum_allow_image_uploads'])

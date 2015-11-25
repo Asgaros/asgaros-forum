@@ -1,22 +1,25 @@
 <?php
-//THIS STILL NEEDS LOTS OF CLEANUP
-//BUT AT LEAST IT NO LONGER LOADS ON A SEPARATE INSTANCE
 
-//Checking if current categories have been disabled to admin posting only
 $the_forum_id = false;
-if (isset($_POST['add_topic_forumid']) && !empty($_POST['add_topic_forumid']))
-  $the_forum_id = $this->check_parms($_POST['add_topic_forumid']);
-if (isset($_POST['add_post_forumid']) && !empty($_POST['add_post_forumid']))
-{
-  $the_thread_id = $this->check_parms($_POST['add_post_forumid']);
-  $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT `parent_id` FROM {$this->t_threads} WHERE `id` = %d", $the_thread_id));
+$the_thread_id = false;
+
+if (isset($_POST['add_topic_forumid']) && !empty($_POST['add_topic_forumid'])) {
+    $the_forum_id = $this->check_parms($_POST['add_topic_forumid']);
 }
-if (isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['edit_post_submit']))
-{
-  $the_thread_id = $this->check_parms($_POST['thread_id']);
-  $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT `parent_id` FROM {$this->t_threads} WHERE `id` = %d", $the_thread_id));
+
+if (isset($_POST['add_post_forumid']) && !empty($_POST['add_post_forumid'])) {
+    $the_thread_id = $this->check_parms($_POST['add_post_forumid']);
+    $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $the_thread_id));
 }
-//End Check
+
+if (isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['edit_post_submit'])) {
+    $the_thread_id = $this->check_parms($_POST['thread_id']);
+    $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $the_thread_id));
+}
+
+
+
+
 
 function mf_u_key()
 {
@@ -94,18 +97,6 @@ function mf_check_uploaded_images()
   return $valid;
 }
 
-//--weaver-- check if guest filled in form
-if (!isset($_POST['edit_post_submit']))
-{
-  $errormsg = apply_filters('wpwf_check_guestinfo', "");
-  if ($errormsg != "")
-  {
-    $error = true;
-    wp_die($errormsg); //plugin failed
-  }
-}
-//--weaver-- end guest form check
-
 if (!$user_ID)
 {
   include_once("captcha/shared.php");
@@ -122,7 +113,7 @@ if (!$user_ID)
   }
 }
 
-$cur_user_ID = apply_filters('wpwf_change_userid', $user_ID); // --weaver-- use real id or generated guest ID
+
 //ADDING A NEW TOPIC?
 if (isset($_POST['add_topic_submit']))
 {
@@ -172,12 +163,11 @@ if (isset($_POST['add_topic_submit']))
                     (text, parent_id, `date`, author_id)
                   VALUES
                     (%s, %d, %s, %d)";
-    $wpdb->query($wpdb->prepare($sql_post, $content, $id, $date, $cur_user_ID));
+    $wpdb->query($wpdb->prepare($sql_post, $content, $id, $date, $user_ID));
     $new_post_id = $wpdb->insert_id;
   }
   if (!$error)
   {
-    $unused = apply_filters('wpwf_add_guest_sub', $id); //--weaver-- Maybe add a subscription
     wp_redirect(html_entity_decode($this->get_threadlink($id) . "#postid-" . $new_post_id));
     exit;
   }
@@ -217,13 +207,12 @@ if (isset($_POST['add_post_submit']))
     $sql_post = "INSERT INTO {$this->t_posts}
             (text, parent_id, `date`, author_id)
          VALUES(%s, %d, %s, %d)";
-    $wpdb->query($wpdb->prepare($sql_post, $content, $thread, $date, $cur_user_ID));
+    $wpdb->query($wpdb->prepare($sql_post, $content, $thread, $date, $user_ID));
     $new_id = $wpdb->insert_id;
   }
 
   if (!$error)
   {
-    $unused = apply_filters('wpwf_add_guest_sub', $thread); //--weaver-- Maybe add a subscription
     wp_redirect(html_entity_decode($this->get_postlink($thread, $new_id)));
     exit;
   }

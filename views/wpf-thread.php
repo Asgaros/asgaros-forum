@@ -19,7 +19,6 @@ if ($this->forum_exists($_GET['forum'])) {
     					<textarea rows='20' cols='80' name='message'></textarea>
     				</td>
     			</tr>";
-      $out .= apply_filters('wpwf_form_guestinfo', ''); //--weaver--
       $out .= $this->get_captcha();
       if ($this->options['forum_allow_image_uploads'])
       {

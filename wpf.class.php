@@ -1393,7 +1393,6 @@ if (!class_exists('asgarosforum')) {
       global $user_ID;
 
       $out = "";
-      $out .= apply_filters('wpwf_quick_form_guestinfo', ""); //--weaver-- show the guest info form
 
       if (!$user_ID)
       {
