@@ -32,10 +32,6 @@ load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 //Setup defines
 define('WPFURL', plugin_dir_url(__FILE__));
 define('THREAD', "thread");
-define('SEARCH', "search");
-define('POSTREPLY', "postreply");
-define('EDITPOST', "editpost");
-define("NEWTOPIC", "newtopic");
 define("FORUM", __("Forum", "asgarosforum"));
 
 //Load class files

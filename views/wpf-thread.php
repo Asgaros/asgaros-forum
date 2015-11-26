@@ -3,9 +3,8 @@
 if ($this->forum_exists($_GET['forum'])) {
     if ($user_ID || $this->allow_unreg())
     {
-      $this->current_view = NEWTOPIC;
-      $out = "<form action='' name='addform' method='post' enctype='multipart/form-data'>";
-      $out .= "<table class='wpf-table' width='100%'>
+      echo "<form action='' name='addform' method='post' enctype='multipart/form-data'>";
+      echo "<table class='wpf-table' width='100%'>
     			<tr>
     				<th colspan='2'>" . __("Post new Topic", "asgarosforum") . "</th>
     			</tr>
@@ -19,10 +18,10 @@ if ($this->forum_exists($_GET['forum'])) {
     					<textarea rows='20' cols='80' name='message'></textarea>
     				</td>
     			</tr>";
-      $out .= $this->get_captcha();
+      echo $this->get_captcha();
       if ($this->options['forum_allow_image_uploads'])
       {
-        $out .= "
+        echo "
     					<tr>
     						<td valign='top'>" . __("Images:", "asgarosforum") . "</td>
     						<td colspan='2'>
@@ -32,14 +31,13 @@ if ($this->forum_exists($_GET['forum'])) {
     						</td>
     					</tr>";
       }
-      $out .= "
+      echo "
     			<tr>
     				<td></td>
     				<td><input type='submit' id='wpf-post-submit' name='add_topic_submit' value='" . __("Submit", "asgarosforum") . "' /></td>
     				<input type='hidden' name='add_topic_forumid' value='" . $this->check_parms($_GET['forum']) . "'/>
     			</tr>
     			</table></form>";
-      $this->o .= $out;
     } else {
         wp_die(__("Sorry, you don't have permission to post.", "asgarosforum"));
     }

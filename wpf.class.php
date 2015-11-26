@@ -5,6 +5,7 @@ if (!class_exists('asgarosforum')) {
         var $db_version = 1; // MANAGES DB VERSION
         var $delim = "";
         var $page_id = "";
+
         var $home_url = "";
         var $forum_link = "";
         var $thread_link = "";
@@ -19,7 +20,6 @@ if (!class_exists('asgarosforum')) {
         var $t_usergroup2user = "";
 
         // Misc
-        var $o = "";
         var $current_group = "";
         var $current_forum = "";
         var $current_thread = "";
@@ -319,7 +319,6 @@ if (!class_exists('asgarosforum')) {
 
         public function go() {
             global $wpdb, $user_ID;
-            $this->o = "";
 
             if (isset($_GET['forumaction'])) {
                 $action = $_GET['forumaction'];
@@ -349,6 +348,53 @@ if (!class_exists('asgarosforum')) {
             if ($action) {
                 switch ($action) {
                     case 'viewforum':
+                        $forum_id = $this->check_parms($_GET['f']);
+                        if ($this->forum_exists($forum_id)) {
+                            $this->current_group = $this->get_parent_id(FORUM, $forum_id);
+                            $this->current_forum = $forum_id;
+                        }
+                        break;
+                    case 'viewtopic':
+                        $thread_id = $this->check_parms($_GET['t']);
+                        $this->current_group = $this->forum_get_group_from_post($thread_id);
+                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                        $this->current_thread = $thread_id;
+                        break;
+                    case 'addtopic':
+                        $this->current_view = $action;
+                        $this->current_forum = $this->check_parms($_GET['forum']);
+                        break;
+                    case 'postreply':
+                        $this->current_view = $action;
+                        $thread_id = $this->check_parms($_GET['thread']);
+                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                        $this->current_thread = $thread_id;
+                        break;
+                    case 'editpost':
+                        $this->current_view = $action;
+                        $thread_id = $this->check_parms($_GET['t']);
+                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                        $this->current_thread = $thread_id;
+                        break;
+                    case 'search':
+                        $this->current_view = $action;
+                        break;
+                }
+            }
+
+            echo '<div id="wpf-wrapper">';
+
+            echo '<div id="top-elements">';
+            echo $this->breadcrumbs();
+            echo "<div class='wpf_search'>
+            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
+            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
+            </form>
+            </div></div>";
+
+            if ($action) {
+                switch ($action) {
+                    case 'viewforum':
                         $this->showforum($this->check_parms($_GET['f']));
                         break;
                     case 'viewtopic':
@@ -361,7 +407,6 @@ if (!class_exists('asgarosforum')) {
                         if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID)) {
                             wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
                         } else {
-                            $this->current_thread = $this->check_parms($_GET['thread']);
                             include('views/wpf-post.php');
                         }
                         break;
@@ -376,16 +421,7 @@ if (!class_exists('asgarosforum')) {
                 $this->overview();
             }
 
-            echo '<div id="wpf-wrapper">';
-            echo '<div id="top-elements">';
-            echo $this->breadcrumbs();
-            echo "<div class='wpf_search'>
-            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
-            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
-            </form>
-            </div></div>";
-
-            echo $this->o . '</div>';
+            echo '</div>';
         }
 
         public function get_userdata($user_id, $data) {
@@ -413,26 +449,19 @@ if (!class_exists('asgarosforum')) {
                     $this->remove_topic();
                 }
 
-                $out = "";
                 $threads = $this->get_threads($forum_id);
                 $sticky_threads = $this->get_threads($forum_id, 'sticky');
                 $thread_counter = (count($threads) + count($sticky_threads));
-                $this->current_group = $this->get_parent_id(FORUM, $forum_id);
-                $this->current_forum = $forum_id;
 
                 if (isset($_GET['getNewForumID'])) {
-                    $out .= $this->getNewForumID();
+                    echo $this->getNewForumID();
                 } else {
                     if (!$this->have_access($this->current_group)) {
                         wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
                     }
 
-                    ob_start();
                     require('views/showforum.php');
-                    $out .= ob_get_clean();
                 }
-
-                $this->o .= $out;
             } else {
                 wp_die(__("Sorry, but this forum does not exist.", "asgarosforum"));
             }
@@ -471,10 +500,6 @@ if (!class_exists('asgarosforum')) {
 
         public function showthread($thread_id) {
             global $wpdb, $user_ID;
-            $this->current_group = $this->forum_get_group_from_post($thread_id);
-            $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-            $this->current_thread = $thread_id;
-            $out = "";
 
             if (isset($_GET['remove_post'])) {
                 $this->remove_post();
@@ -497,10 +522,10 @@ if (!class_exists('asgarosforum')) {
                     wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
                 }
 
-                $out .= "<table><tr class='pop_menus'>";
-                $out .= "<td>" . $this->pageing($thread_id, 'post') . "</td>";
-                $out .= "<td>" . $this->topic_menu() . "</td>";
-                $out .= "</tr></table>";
+                echo "<table><tr class='pop_menus'>";
+                echo "<td>" . $this->pageing($thread_id, 'post') . "</td>";
+                echo "<td>" . $this->topic_menu() . "</td>";
+                echo "</tr></table>";
 
                 if ($this->is_closed()) {
                     $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
@@ -508,13 +533,13 @@ if (!class_exists('asgarosforum')) {
                     $meClosed = "";
                 }
 
-                $out .= "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
-                $out .= "<div id='thread-content'>";
+                echo "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
+                echo "<div id='thread-content'>";
 
                 $counter = 0;
                 foreach ($posts as $post) {
                     $counter++;
-                    $out .= "
+                    echo "
                     <table class='wpf-post-table' id='postid-{$post->id}'>
                         <tr>
                             <td colspan='2' class='wpf-bright author'>
@@ -526,28 +551,28 @@ if (!class_exists('asgarosforum')) {
                             <td class='autorpostbox'>
                                 <div class='wpf-small'>";
                                     if ($this->options["forum_use_gravatar"]) {
-                                        $out .= $this->get_avatar($post->author_id);
+                                        echo $this->get_avatar($post->author_id);
                                     }
-                                    $out .= "<br /><strong>" . $this->profile_link($post->author_id, true) ."</strong><br />";
-                                    $out .=__("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id);
-                                    $out .= "
+                                    echo "<br /><strong>" . $this->profile_link($post->author_id, true) ."</strong><br />";
+                                    echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id);
+                                    echo "
                                 </div>
                             </td>
                             <td valign='top' class='topic_text'>";
-                                $out .= make_clickable(wpautop($this->autoembed($post->text)));
-                                $out .= "
+                                echo make_clickable(wpautop($this->autoembed($post->text)));
+                                echo "
                             </td>
                         </tr>
                     </table>";
                 }
 
-                $out .= "</div>";
+                echo "</div>";
 
                 $quick_thread = $this->check_parms($_GET['t']);
 
                 // QUICK REPLY AREA
                 if ((!$this->is_closed() || $this->is_moderator($user_ID)) && ($user_ID || $this->allow_unreg())) {
-                    $out .= "
+                    echo "
                     <div id='thread-reply'>
                     <form action='' name='addform' method='post'>
                         <strong>" . __("Quick Reply", "asgarosforum") . ": </strong>
@@ -559,12 +584,10 @@ if (!class_exists('asgarosforum')) {
                     </div>";
                 }
 
-                $out .= "<table><tr class='pop_menus'>
+                echo "<table><tr class='pop_menus'>
                     <td>" . $this->pageing($thread_id, 'post') . "</td>
                     <td>" . $this->topic_menu() . "</td>
                 </tr></table>";
-
-                $this->o .= $out;
             }
         }
 
@@ -630,14 +653,14 @@ if (!class_exists('asgarosforum')) {
             if (count($grs) > 0) {
                 foreach ($grs as $g) {
                     if ($this->have_access($g->id)) {
-                        $this->o .= "
+                        echo "
                         <div class='category-title'>".$g->name."</div>
                         <div class='category-content'>
                         <table>";
                         $frs = $this->get_forums($g->id);
                         if (count($frs) > 0) {
                             foreach ($frs as $f) {
-                                $this->o .= "<tr>";
+                                echo "<tr>";
                                 $image = "new_none.png";
 
                                 if ($user_ID) {
@@ -654,7 +677,7 @@ if (!class_exists('asgarosforum')) {
                                     }
                                 }
 
-                                $this->o .= "
+                                echo "
                                 <td class='status-icon'><img src='{$this->skin_url}/images/{$image}' /></td>
                                 <td><strong><a href='" . $this->get_forumlink($f->id) . "'>" . $f->name . "</a></strong><br />" . $f->description . "</td>
                                 <td class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>
@@ -662,16 +685,16 @@ if (!class_exists('asgarosforum')) {
                                 </tr>";
                             }
                         } else {
-                            $this->o .= "<tr><td class='wpf_notice'>".__("There are no forums yet!", "asgarosforum")."</td></tr>";
+                            echo "<tr><td class='wpf_notice'>".__("There are no forums yet!", "asgarosforum")."</td></tr>";
                         }
-                        $this->o .= "</table></div>";
+                        echo "</table></div>";
                     }
                 }
             } else {
-                $this->o .= "<div class='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
+                echo "<div class='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
             }
 
-            $this->o .= "<div id='category-footer'><span><img src='{$this->skin_url}/images/new_some.png' />" . __("New posts", "asgarosforum") . "&nbsp;<img src='{$this->skin_url}/images/new_none.png' />" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
+            echo "<div id='category-footer'><span><img src='{$this->skin_url}/images/new_some.png' />" . __("New posts", "asgarosforum") . "&nbsp;<img src='{$this->skin_url}/images/new_none.png' />" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
         }
 
         public function input_filter($string) {
@@ -1046,7 +1069,7 @@ if (!class_exists('asgarosforum')) {
                 $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
             }
 
-            if ($this->current_view == SEARCH) {
+            if ($this->current_view == 'search') {
                 $terms = "";
 
                 if (isset($_POST['search_words'])) {
@@ -1056,15 +1079,15 @@ if (!class_exists('asgarosforum')) {
                 $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("Search Results", "asgarosforum") . " &rarr; $terms";
             }
 
-            if ($this->current_view == POSTREPLY) {
+            if ($this->current_view == 'postreply') {
                 $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("Post Reply", "asgarosforum");
             }
 
-            if ($this->current_view == EDITPOST) {
+            if ($this->current_view == 'editpost') {
                 $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("Edit Post", "asgarosforum");
             }
 
-            if ($this->current_view == NEWTOPIC) {
+            if ($this->current_view == 'addtopic') {
                 $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("New Topic", "asgarosforum");
             }
 
@@ -1228,7 +1251,7 @@ if (!class_exists('asgarosforum')) {
             if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
 
-                $this->o .= "<div class='updated'><span class='icon-warning'>" . __("Post deleted", "asgarosforum") . "</div>";
+                echo "<div class='updated'><span class='icon-warning'>" . __("Post deleted", "asgarosforum") . "</div>";
             } else {
                 wp_die(__("You do not have permission to delete this post.", "asgarosforum"));
             }
@@ -1319,15 +1342,13 @@ if (!class_exists('asgarosforum')) {
 
         public function search_results() {
             global $wpdb;
-            $o = "";
-            $this->current_view = SEARCH;
             $search_string = esc_sql($_POST['search_words']);
             $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, text, {$this->t_threads}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.date, {$this->t_posts}.author_id, MATCH (text) AGAINST (%s) AS score
             FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
             AND MATCH (text) AGAINST (%s) ORDER BY score DESC LIMIT 50", $search_string, $search_string);
             $results = $wpdb->get_results($sql);
 
-            $o .= "<table class='wpf-table full'>
+            echo "<table class='wpf-table full'>
                 <tr>
                 <th width='7%'>Status</th>
                 <th>" . __("Subject", "asgarosforum") . "</th>
@@ -1337,7 +1358,7 @@ if (!class_exists('asgarosforum')) {
 
             foreach ($results as $result) {
                 if ($this->have_access($this->forum_get_group_from_post($result->parent_id))) {
-                    $o .= "<tr>
+                    echo "<tr>
                     <td align='center'>" . $this->get_topic_image($result->parent_id) . "</td>
                     <td><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a></td>
                     <td class='forumstats'>" . $this->profile_link($result->author_id) . "</td>
@@ -1345,8 +1366,7 @@ if (!class_exists('asgarosforum')) {
                     </tr>";
                 }
             }
-            $o .= "</table>";
-            $this->o .= $o;
+            echo "</table>";
         }
 
         public function get_topic_image($thread) {
