@@ -57,10 +57,10 @@
             <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
           </td>
           <td class="forumstats" align="center">
-            <span class="icon-replies"><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span>
+            <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span>
           </td>
           <td class="forumstats" align="center">
-            <span class="icon-views">
+            <span class="icon-eye"></span><span>
               <?php echo (int) $thread->views; ?>
             </span>
           </td>
@@ -102,12 +102,12 @@
           <?php echo $this->profile_link($this->get_starter($thread->id)); ?>
         </td>
         <td class="forumstats" align="center">
-          <span class="icon-replies">
+          <span class="icon-bubbles4"></span><span>
             <?php echo (int) ($this->num_posts($thread->id) - 1); ?>
           </span>
         </td>
         <td class="forumstats" align="center">
-          <span class="icon-views">
+          <span class="icon-eye"></span><span>
             <?php echo (int) $thread->views; ?>
           </span>
         </td>

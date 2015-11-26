@@ -17,10 +17,6 @@
     float: right;
 }
 .wpf_search input {
-    background-image: url("images/search_btn.png");
-    background-position: 4px 5px;
-    background-repeat: no-repeat;
-    padding-left: 25px !important;
     width: 120px;
 }
 .wpf_search input:focus {
@@ -360,77 +356,93 @@ pre.code {
 /*------------(http://icomoon.io)-----------------*/
 /*------------------------------------------------*/
 @font-face {
-    font-family: 'wpf-icomoon';
-    src: url('fonts/wpf-icomoon.eot');
-    src: url('fonts/wpf-icomoon.eot?#iefix') format('embedded-opentype'), url('fonts/wpf-icomoon.woff') format('woff'), url('fonts/wpf-icomoon.ttf') format('truetype'), url('fonts/wpf-icomoon.svg#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?13z6re');
+	src:url('fonts/icomoon.eot?13z6re#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?13z6re') format('truetype'),
+		url('fonts/icomoon.woff?13z6re') format('woff'),
+		url('fonts/icomoon.svg?13z6re#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
-#wpf-wrapper * a:before {
-    font-family: "wpf-icomoon";
-}
-[data-icon]:before {
-font-family: 'wpf-icomoon';
-    content: attr(data-icon);
-    speak: none;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    padding-right: 3px;
-    font-size: 1.37em;
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+    padding-right: 5px;
+    font-size: 1.2em;
     vertical-align: text-top;
 }
-.icon-move-topic:before,
-.icon-forum-home:before,
-.icon-replies:before,
-.icon-views:before,
-.icon-reply:before,
-.icon-close:before,
-.icon-re-open:before,
-.icon-sticky:before,
-.icon-undo-sticky:before,
-.icon-checkmark:before,
-.icon-topic:before,
-.icon-warning:before {
-    font-family: 'wpf-icomoon';
-    line-height: 1;
-    padding-right: 3px;
-    font-size: 1.4em;
-    vertical-align: text-top;
+
+.icon-home:before {
+	content: "\e900";
 }
-.icon-move-topic:before {
-    content: "\e076";
+.icon-file-empty:before {
+	content: "\e901";
 }
-.icon-forum-home:before {
-    content: "\e000";
+.icon-file-empty-small-no:before {
+	content: "\e901";
 }
-.icon-replies:before {
-    content: "\e01e";
+.icon-file-empty-small-yes:before {
+	content: "\e901";
+    color: blue;
 }
-.icon-views:before {
-    content: "\e053";
+.icon-file-empty-big-no:before {
+	content: "\e901";
+    font-size: 2em;
 }
-.icon-reply:before {
-    content: "\e01a";
+.icon-file-empty-big-yes:before {
+	content: "\e901";
+    color: blue;
+    font-size: 2em;
 }
-.icon-close:before {
-    content: "\e056";
+.icon-pushpin:before {
+	content: "\e902";
 }
-.icon-re-open:before {
-    content: "\e057";
+.icon-bubble2:before {
+	content: "\e903";
 }
-.icon-sticky:before {
-    content: "\e07a";
+.icon-bubbles4:before {
+	content: "\e904";
 }
-.icon-undo-sticky:before {
-    content: "\e079";
+.icon-lock:before {
+	content: "\e905";
+}
+.icon-unlocked:before {
+	content: "\e906";
+}
+.icon-eye:before {
+	content: "\e907";
 }
 .icon-checkmark:before {
-    content: "\e031";
+	content: "\e908";
 }
-.icon-topic:before {
-    content: "\e01f";
+.icon-shuffle:before {
+	content: "\e909";
 }
-.icon-warning:before {
-    content: "\e035";
+.icon-search:before {
+    content: "\e90a";
+}
+.icon-pencil2:before {
+    content: "\e90b";
+}
+.icon-quotes-left:before {
+    content: "\e90c";
+}
+.icon-bin:before {
+    content: "\e90d";
+}
+.icon-link:before {
+    content: "\e90e";
 }
