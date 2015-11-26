@@ -685,7 +685,7 @@ if (!class_exists('asgarosforum')) {
                                 }
 
                                 echo "
-                                <td class='status-icon'><span class='icon-file-empty-big-{$image}'></span></td>
+                                <td class='status-icon'><span class='icon-files-empty-big-{$image}'></span></td>
                                 <td><strong><a href='" . $this->get_forumlink($f->id) . "'>" . $f->name . "</a></strong><br />" . $f->description . "</td>
                                 <td class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>
                                 <td class='poster_in_forum'>" . $this->last_poster_in_forum($f->id) . "</td>
@@ -701,7 +701,7 @@ if (!class_exists('asgarosforum')) {
                 echo "<div class='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
             }
 
-            echo "<div id='category-footer'><span><span class='icon-file-empty-small-yes'></span>" . __("New posts", "asgarosforum") . "&nbsp;<span class='icon-file-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
+            echo "<div id='category-footer'><span><span class='icon-files-empty-small-yes'></span>" . __("New posts", "asgarosforum") . " &middot; <span class='icon-files-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
         }
 
         public function input_filter($string) {
@@ -1018,6 +1018,7 @@ if (!class_exists('asgarosforum')) {
 
                 if ($this->is_moderator($user_ID)) {
                     $menu .= "<td class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "&delete_topic&topic={$this->current_thread}' onclick='return wpf_confirm();'><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
                 }
 
                 $menu .= $stick . $closed . "</tr></table>";
@@ -1382,9 +1383,9 @@ if (!class_exists('asgarosforum')) {
             }*/
 
             if ($this->check_unread($thread)) {
-                return "<span class='icon-file-empty-big-yes'></span>";
+                return "<span class='icon-files-empty-big-yes'></span>";
             } else {
-                return "<span class='icon-file-empty-big-no'></span>";
+                return "<span class='icon-files-empty-big-no'></span>";
             }
         }
 

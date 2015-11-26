@@ -5,7 +5,7 @@
 }
 #wpf-wrapper th,
 #wpf-wrapper td {
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     border: none;
 }
 #wpf-wrapper .forumstats {
@@ -56,10 +56,11 @@
 #thread-title {
     background-color: #2d89cc;
     color: #fff;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     display: block;
     font-weight: bold;
 }
+#forum-content,
 .category-content,
 #thread-content {
     border: 1px solid #2d89cc;
@@ -162,6 +163,7 @@
     color: #006CBB;
     text-decoration: none;
 }
+#forum-content td,
 .category-content td {
     vertical-align: middle !important;
     border-bottom: 1px solid #cecece !important;
@@ -213,26 +215,12 @@ img.avatar {
     margin: -5px 0px -8px 0 !important;
     float: right;
 }
-.wpf-table {
-    background: #f6f6f6;
-}
 .full {
     border: 1px solid #2D89CC !important;
 }
 .wpf-table th,
 .wpf-post-table th {
-    text-align: left;
     background-color: #2d89cc;
-}
-.wpf-table td {
-    border: 1px solid;
-    padding: 5px;
-}
-#wpf-wrapper .sticky {
-    background: #e0e1e8;
-}
-#wpf-wrapper .sticky a {
-    font-weight: bold;
 }
 td.wpf-meta {
     border-bottom: 1px solid #adadad !important;
@@ -249,15 +237,8 @@ td.wpf-meta a {
     border-bottom: 1px solid #CACACA !important;
     border-top: 1px solid #CACACA !important;
 }
-.wpf-table h2 {
-    margin: 0;
-    padding: 0;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    color: #fff;
-}
 td.wpf-bright {
-    background-color: #f0f0f0;
+    background-color: #ddd;
 }
 /* Fixing avatars pose a problem for some sites */
 td.autorpostbox img.avatar{height: 60px;width: 60px;}
@@ -391,22 +372,6 @@ pre.code {
 .icon-file-empty:before {
 	content: "\e901";
 }
-.icon-file-empty-small-no:before {
-	content: "\e901";
-}
-.icon-file-empty-small-yes:before {
-	content: "\e901";
-    color: blue;
-}
-.icon-file-empty-big-no:before {
-	content: "\e901";
-    font-size: 2em;
-}
-.icon-file-empty-big-yes:before {
-	content: "\e901";
-    color: blue;
-    font-size: 2em;
-}
 .icon-pushpin:before {
 	content: "\e902";
 }
@@ -445,4 +410,20 @@ pre.code {
 }
 .icon-link:before {
     content: "\e90e";
+}
+.icon-files-empty-small-no:before {
+	content: "\e90f";
+}
+.icon-files-empty-small-yes:before {
+	content: "\e90f";
+    color: #2D89CC;
+}
+.icon-files-empty-big-no:before {
+	content: "\e90f";
+    font-size: 2em;
+}
+.icon-files-empty-big-yes:before {
+	content: "\e90f";
+    color: #2D89CC;
+    font-size: 2em;
 }
