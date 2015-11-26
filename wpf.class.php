@@ -1447,13 +1447,6 @@ if (!class_exists('asgarosforum')) {
         return $string;
     }
 
-    public function rewriting_on()
-    {
-      $permalink_structure = get_option('permalink_structure');
-
-      return ($permalink_structure and !empty($permalink_structure));
-    }
-
     //SEO Friendly URL stuff
     public function get_seo_friendly_query()
     {
@@ -1484,13 +1477,6 @@ if (!class_exists('asgarosforum')) {
         return ctl_sanitize_title($str);
 
       return sanitize_title_with_dashes($str); //Seems to work for most other languages
-    }
-
-    public function flush_wp_rewrite_rules()
-    {
-      global $wp_rewrite;
-
-      $wp_rewrite->flush_rules();
     }
 
 public function set_seo_friendly_rules($args)
