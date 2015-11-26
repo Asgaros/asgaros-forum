@@ -76,13 +76,10 @@
 #thread-reply {
     display: block;
     padding: 10px;
-    background-color: #F0F0F0;
+    background-color: #F5F5F5;
     border-left: 1px solid #CACACA;
     border-bottom: 1px solid #CACACA;
     border-right: 1px solid #CACACA;
-}
-#thread-reply textarea {
-    height: 100px;
 }
 .status-icon {
     width: 61px;
@@ -149,15 +146,6 @@
     -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
     background-color: rgba(193,193,193,0.4);
     color: #181818;
-}
-/*wpf textarea -----------------------------------------*/
-#wpf-wrapper textarea {
-    background-color: rgba(193,193,193,0.4);
-    color: #7b7a7a;
-    border: 1px solid #CACACA;
-    padding: 4px;
-    width: 100%;
-    box-sizing: border-box;
 }
 /*poster_in_forum ---------------------------------*/
 #wpf-wrapper .poster_in_forum {
@@ -243,9 +231,6 @@ img.avatar {
 .wpf-table td {
     border: 1px solid;
     padding: 5px;
-}
-.wpf-table textarea {
-    width: 98%;
 }
 #wpf-wrapper .sticky {
     background: #e0e1e8;

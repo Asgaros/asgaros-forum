@@ -1,5 +1,5 @@
 <?php
-
+$this->editor_settings['textarea_rows'] = 12;
 if ($this->forum_exists($_GET['forum'])) {
     if ($user_ID || $this->allow_unreg())
     {
@@ -14,9 +14,9 @@ if ($this->forum_exists($_GET['forum'])) {
     			</tr>
     			<tr>
     				<td valign='top'>" . __("Message:", "asgarosforum") . "</td>
-    				<td>
-    					<textarea rows='20' cols='80' name='message'></textarea>
-    				</td>
+    				<td>";
+    					wp_editor('', 'message', $this->editor_settings);
+    				echo "</td>
     			</tr>";
       echo $this->get_captcha();
       if ($this->options['forum_allow_image_uploads'])

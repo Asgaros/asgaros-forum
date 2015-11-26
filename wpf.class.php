@@ -41,6 +41,12 @@ if (!class_exists('asgarosforum')) {
             'forum_display_name' => 'user_login',
             'forum_db_version' => 0
         );
+        var $editor_settings = array(
+            'media_buttons' => false,
+            'textarea_rows' => 5,
+            'teeny' => true,
+            'quicktags' => false
+        );
 
         public function __construct() {
             // Init options
@@ -575,9 +581,9 @@ if (!class_exists('asgarosforum')) {
                     echo "
                     <div id='thread-reply'>
                     <form action='' name='addform' method='post'>
-                        <strong>" . __("Quick Reply", "asgarosforum") . ": </strong>
-                        <textarea name='message'></textarea>" .
-                        $this->get_quick_reply_captcha() . "
+                        <strong>" . __("Quick Reply", "asgarosforum") . ": </strong><br />";
+                        wp_editor('', 'message', $this->editor_settings);
+                        echo "<br />" . $this->get_quick_reply_captcha() . "
                         <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "asgarosforum") . "' />
                         <input type='hidden' name='add_post_forumid' value='" . floor($quick_thread) . "'/>
                     </form>

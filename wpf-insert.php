@@ -119,7 +119,7 @@ if (isset($_POST['add_topic_submit']))
 {
   $myReplaceSub = array("\\");
   $subject = str_replace($myReplaceSub, "", $this->input_filter($_POST['add_topic_subject']));
-  $content = $this->input_filter($_POST['message']);
+  $content = $_POST['message'];
   $forum_id = $this->check_parms($_POST['add_topic_forumid']);
   $msg = '';
 
@@ -179,7 +179,7 @@ if (isset($_POST['add_topic_submit']))
 if (isset($_POST['add_post_submit']))
 {
   $myReplaceSub = array("\\");
-  $content = $this->input_filter($_POST['message']);
+  $content = $_POST['message'];
   $thread = $this->check_parms($_POST['add_post_forumid']);
   $msg = '';
 
@@ -228,7 +228,7 @@ if (isset($_POST['edit_post_submit']))
   if (isset($_POST['edit_post_subject'])) {
   $subject = str_replace($myReplaceSub, "", $this->input_filter($_POST['edit_post_subject']));
   }
-  $content = $this->input_filter($_POST['message']);
+  $content = $_POST['message'];
   $thread = $this->check_parms($_POST['thread_id']);
   $edit_post_id = $_POST['edit_post_id'];
   $msg = '';

@@ -10,12 +10,11 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress which is ba
 * Asgaros Forum is easy to setup and manage. It integrates seamlessly with WordPress and comes with many forum features.
 
 = Features =
-* Now Multisite - Network Activate - friendly
 * Image uploads
 * SEO Friendly URLs
-* Automatic Media embedding into Forum Topics and Replies (like Youtube, Flickr, Photobucket...)
 * Quick Reply
 * User Groups
+* Powerful editor
 * Captcha
 * Search Forums
 * Guests can create Topics/Replies if you allow it

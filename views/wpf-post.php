@@ -1,5 +1,5 @@
 <?php
-
+$this->editor_settings['textarea_rows'] = 12;
 if ($user_ID || $this->allow_unreg())
 {
   if (isset($_GET['quote']))
@@ -24,7 +24,7 @@ if ($user_ID || $this->allow_unreg())
     echo "<tr>
             <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
             <td>";
-              echo "<textarea rows='20' cols='80' name='message'></textarea>";
+              wp_editor('', 'message', $this->editor_settings);
               echo '<input type="hidden" name="add_post_subject" value="'.$this->get_subject($thread).'" />';
               echo "
             </td>
@@ -75,7 +75,7 @@ if ($user_ID || $this->allow_unreg())
       echo "<tr>
               <td valign='top'>" . __("Message:", "asgarosforum") . "</td>
               <td>";
-                echo "<textarea rows='20' cols='80' name='message'>" . stripslashes($post->text) . "</textarea>";
+                wp_editor(stripslashes($post->text), 'message', $this->editor_settings);
                 echo "</td>
             </tr>
             <tr>
