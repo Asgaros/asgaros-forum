@@ -1,4 +1,4 @@
-<table class="wpf-table full">
+<table class="full">
     <tr>
         <th width="7%">Status</th>
         <th><?php _e("Subject", "asgarosforum"); ?></th>

@@ -1,11 +1,11 @@
 <table>
     <tr class="pop_menus">
-        <td><?php echo $this->pageing($thread_id, 'post'); ?></td>
+        <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
         <td><?php echo $this->topic_menu();?></td>
     </tr>
 </table>
 
-<div id='thread-title'><?php echo $this->cut_string($this->get_subject($thread_id), 70) . $meClosed; ?></div>
+<div class='title-element'><?php echo $this->cut_string($this->get_subject($thread_id), 70) . $meClosed; ?></div>
 <div id='thread-content'>
     <?php
     $counter = 0;
@@ -43,7 +43,7 @@
             <strong><?php echo __("Quick Reply", "asgarosforum"); ?>:</strong><br />
             <?php wp_editor('', 'message', $this->editor_settings); ?>
             <br /><?php echo $this->get_captcha(); ?><br />
-            <input type='submit' id='quick-reply-submit' name='add_post_submit' value='<?php _e("Submit Quick Reply", "asgarosforum"); ?>' />
+            <input type='submit' name='add_post_submit' value='<?php _e("Submit Quick Reply", "asgarosforum"); ?>' />
             <input type='hidden' name='add_post_forumid' value='<?php echo floor($quick_thread); ?>'/>
         </form>
     </div>
@@ -51,7 +51,7 @@
 
 <table>
     <tr class="pop_menus">
-        <td><?php echo $this->pageing($thread_id, 'post'); ?></td>
+        <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
         <td><?php echo $this->topic_menu();?></td>
     </tr>
 </table>

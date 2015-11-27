@@ -107,13 +107,13 @@ if ($_GET['forumaction'] == "editpost") {
             <tr>
                 <td></td>
                 <?php if ($_GET['forumaction'] == "addtopic") { ?>
-                    <td><input type='submit' id='wpf-post-submit' name='add_topic_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
+                    <td><input type='submit' name='add_topic_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
                     <input type='hidden' name='add_topic_forumid' value='<?php echo $this->check_parms($_GET['forum']); ?>' />
                 <?php } else if ($_GET['forumaction'] == "postreply") { ?>
-                    <td><input type='submit' id='wpf-post-submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
+                    <td><input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
                     <input type='hidden' name='add_post_forumid' value='<?php echo $thread; ?>' />
                 <?php } else if ($_GET['forumaction'] == "editpost") { ?>
-                    <td><input type='submit' id='wpf-post-submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
+                    <td><input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
                     <input type='hidden' name='edit_post_id' value='<?php echo $post->id; ?>' />
                     <input type='hidden' name='thread_id' value='<?php echo $thread; ?>' />
                     <input type='hidden' name='page_id' value='<?php echo $this->curr_page; ?>' />

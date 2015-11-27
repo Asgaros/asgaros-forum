@@ -139,14 +139,14 @@ if (!class_exists('asgarosforum')) {
             if ($wp_rewrite->using_permalinks()) {
                 $this->delim = "?";
             } else {
-                $this->delim = "&";
+                $this->delim = "&amp;";
             }
 
             $perm = get_permalink($this->page_id);
-            $this->forum_link = $perm . $this->delim . "forumaction=viewforum&f=";
-            $this->thread_link = $perm . $this->delim . "forumaction=viewtopic&t=";
-            $this->add_topic_link = $perm . $this->delim . "forumaction=addtopic&forum={$this->current_forum}";
-            $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&thread={$this->current_thread}";
+            $this->forum_link = $perm . $this->delim . "forumaction=viewforum&amp;f=";
+            $this->thread_link = $perm . $this->delim . "forumaction=viewtopic&amp;t=";
+            $this->add_topic_link = $perm . $this->delim . "forumaction=addtopic&amp;forum={$this->current_forum}";
+            $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&amp;thread={$this->current_thread}";
             $this->base_url = $perm . $this->delim . "forumaction=";
             $this->home_url = $perm;
         }
@@ -392,7 +392,7 @@ if (!class_exists('asgarosforum')) {
 
             echo '<div id="top-elements">';
             echo $this->breadcrumbs();
-            echo "<div class='wpf_search'>
+            echo "<div class='search'>
             <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
             <span class='icon-search'></span>
             <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
@@ -608,10 +608,10 @@ if (!class_exists('asgarosforum')) {
                     }
                 }
             } else {
-                echo "<div class='wpf_notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
+                echo "<div class='notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
             }
 
-            echo "<div id='category-footer'><span><span class='icon-files-empty-small-yes'></span>" . __("New posts", "asgarosforum") . " &middot; <span class='icon-files-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
+            echo "<div class='footer'><span><span class='icon-files-empty-small-yes'></span>" . __("New posts", "asgarosforum") . " &middot; <span class='icon-files-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
         }
 
         public function input_filter($string) {
@@ -879,7 +879,7 @@ if (!class_exists('asgarosforum')) {
             $this->setup_links();
 
             if ($user_ID || $this->allow_unreg()) {
-                $menu = "<table id='forummenu'><tr><td class='tab_back' nowrap='nowrap'><a href='" . $this->add_topic_link . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
+                $menu = "<table class='menu'><tr><td><a href='" . $this->add_topic_link . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
                 return $menu;
             }
         }
@@ -895,40 +895,40 @@ if (!class_exists('asgarosforum')) {
                 if ($this->is_moderator($user_ID)) {
                     if ($this->options['forum_use_seo_friendly_urls']) {
                         if ($this->is_sticky()) {
-                            $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+                            $stick = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
                         } else {
-                            $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+                            $stick = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
                         }
 
                         if ($this->is_closed()) {
-                            $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+                            $closed = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
                         } else {
-                            $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
+                            $closed = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
                         }
                     } else {
                         if ($this->is_sticky()) {
-                            $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+                            $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
                         } else {
-                            $stick = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+                            $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
                         }
 
                         if ($this->is_closed()) {
-                            $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+                            $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
                         } else {
-                            $closed = "<td class='tab_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
+                            $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
                         }
                     }
                 }
 
-                $menu .= "<table id='topicmenu'><tr>";
+                $menu .= "<table class='menu'><tr>";
 
                 if (!$this->is_closed() || $this->is_moderator($user_ID)) {
-                    $menu .= "<td class='tab_back' nowrap='nowrap'><a href='" . $this->post_reply_link . "'><span class='icon-bubble2'></span><span>" . __("Reply", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->post_reply_link . "'><span class='icon-bubble2'></span><span>" . __("Reply", "asgarosforum") . "</span></a></td>";
                 }
 
                 if ($this->is_moderator($user_ID)) {
-                    $menu .= "<td class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
-                    $menu .= "<td class='tab_back' nowrap='nowrap'><a href='" . $this->forum_link . $this->current_forum . "&delete_topic&topic={$this->current_thread}' onclick='return wpf_confirm();'><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->forum_link . $this->current_forum . "&delete_topic&topic={$this->current_thread}' onclick='return wpf_confirm();'><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
                 }
 
                 $menu .= $stick . $closed . "</tr></table>";
@@ -1106,7 +1106,7 @@ if (!class_exists('asgarosforum')) {
                 }
             }
 
-            return "<span class='wpf-pages'>" . $out . "</span>";
+            return $out;
         }
 
         public function remove_topic() {

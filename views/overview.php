@@ -1,4 +1,4 @@
-<div class='category-title'><?php echo $g->name; ?></div>
+<div class='title-element'><?php echo $g->name; ?></div>
 <div class='category-content'>
     <table>
         <?php
@@ -32,7 +32,7 @@
             <?php
             }
         } else { ?>
-            <tr><td class="wpf_notice"><?php _e("There are no forums yet!", "asgarosforum"); ?></td></tr>
+            <tr><td class="notice"><?php _e("There are no forums yet!", "asgarosforum"); ?></td></tr>
         <?php } ?>
     </table>
 </div>
