@@ -467,7 +467,7 @@ if (!class_exists('asgarosforum')) {
                         wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
                     }
 
-                    require('views/showforum.php');
+                    require('views/forum.php');
                 }
             } else {
                 wp_die(__("Sorry, but this forum does not exist.", "asgarosforum"));
@@ -529,10 +529,8 @@ if (!class_exists('asgarosforum')) {
                     wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
                 }
 
-                echo "<table><tr class='pop_menus'>";
-                echo "<td>" . $this->pageing($thread_id, 'post') . "</td>";
-                echo "<td>" . $this->topic_menu() . "</td>";
-                echo "</tr></table>";
+                $quick_thread = $this->check_parms($_GET['t']);
+                $meClosed = "";
 
                 if ($this->is_closed()) {
                     $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
@@ -540,61 +538,7 @@ if (!class_exists('asgarosforum')) {
                     $meClosed = "";
                 }
 
-                echo "<div id='thread-title'>" . $this->cut_string($this->get_subject($thread_id), 70) . $meClosed . "</div>";
-                echo "<div id='thread-content'>";
-
-                $counter = 0;
-                foreach ($posts as $post) {
-                    $counter++;
-                    echo "
-                    <table class='wpf-post-table' id='postid-{$post->id}'>
-                        <tr>
-                            <td colspan='2' class='wpf-bright author'>
-                                <span class='post-data-format'>" . date_i18n($this->dateFormat, strtotime($post->date)) . "</span>
-                                <div class='wpf-meta'>" . $this->get_postmeta($post->id, $post->author_id, $post->parent_id, $counter) . "</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class='autorpostbox'>
-                                <div class='wpf-small'>";
-                                    if ($this->options["forum_use_gravatar"]) {
-                                        echo $this->get_avatar($post->author_id);
-                                    }
-                                    echo "<br /><strong>" . $this->profile_link($post->author_id, true) ."</strong><br />";
-                                    echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id);
-                                    echo "
-                                </div>
-                            </td>
-                            <td valign='top' class='topic_text'>";
-                                echo make_clickable(wpautop($this->autoembed($post->text)));
-                                echo "
-                            </td>
-                        </tr>
-                    </table>";
-                }
-
-                echo "</div>";
-
-                $quick_thread = $this->check_parms($_GET['t']);
-
-                // QUICK REPLY AREA
-                if ((!$this->is_closed() || $this->is_moderator($user_ID)) && ($user_ID || $this->allow_unreg())) {
-                    echo "
-                    <div id='thread-reply'>
-                    <form action='' name='addform' method='post'>
-                        <strong>" . __("Quick Reply", "asgarosforum") . ": </strong><br />";
-                        wp_editor('', 'message', $this->editor_settings);
-                        echo "<br />" . $this->get_quick_reply_captcha() . "
-                        <input type='submit' id='quick-reply-submit' name='add_post_submit' value='" . __("Submit Quick Reply", "asgarosforum") . "' />
-                        <input type='hidden' name='add_post_forumid' value='" . floor($quick_thread) . "'/>
-                    </form>
-                    </div>";
-                }
-
-                echo "<table><tr class='pop_menus'>
-                    <td>" . $this->pageing($thread_id, 'post') . "</td>
-                    <td>" . $this->topic_menu() . "</td>
-                </tr></table>";
+                require('views/thread.php');
             }
         }
 
@@ -660,41 +604,7 @@ if (!class_exists('asgarosforum')) {
             if (count($grs) > 0) {
                 foreach ($grs as $g) {
                     if ($this->have_access($g->id)) {
-                        echo "
-                        <div class='category-title'>".$g->name."</div>
-                        <div class='category-content'>
-                        <table>";
-                        $frs = $this->get_forums($g->id);
-                        if (count($frs) > 0) {
-                            foreach ($frs as $f) {
-                                echo "<tr>";
-                                $image = "no";
-
-                                if ($user_ID) {
-                                    $lpif = $this->last_poster_in_forum($f->id, true);
-                                    $last_posterid = $this->last_posterid($f->id);
-
-                                    if ($last_posterid != $user_ID) {
-                                        $lp = strtotime($lpif); // date
-                                        $lv = strtotime($this->last_visit());
-
-                                        if ($lv < $lp) {
-                                            $image = "yes";
-                                        }
-                                    }
-                                }
-
-                                echo "
-                                <td class='status-icon'><span class='icon-files-empty-big-{$image}'></span></td>
-                                <td><strong><a href='" . $this->get_forumlink($f->id) . "'>" . $f->name . "</a></strong><br />" . $f->description . "</td>
-                                <td class='forumstats'>" . __("Topics: ", "asgarosforum") . "" . $this->num_threads($f->id) . "<br />" . __("Posts: ", "asgarosforum") . $this->num_posts_forum($f->id) . "</td>
-                                <td class='poster_in_forum'>" . $this->last_poster_in_forum($f->id) . "</td>
-                                </tr>";
-                            }
-                        } else {
-                            echo "<tr><td class='wpf_notice'>".__("There are no forums yet!", "asgarosforum")."</td></tr>";
-                        }
-                        echo "</table></div>";
+                        require('views/overview.php');
                     }
                 }
             } else {
@@ -1356,25 +1266,7 @@ if (!class_exists('asgarosforum')) {
             AND MATCH (text) AGAINST (%s) ORDER BY score DESC LIMIT 50", $search_string, $search_string);
             $results = $wpdb->get_results($sql);
 
-            echo "<table class='wpf-table full'>
-                <tr>
-                <th width='7%'>Status</th>
-                <th>" . __("Subject", "asgarosforum") . "</th>
-                <th width='150px'>" . __("Started by", "asgarosforum") . "</th>
-                <th width='200px'>" . __("Posted", "asgarosforum") . "</th>
-                </tr>";
-
-            foreach ($results as $result) {
-                if ($this->have_access($this->forum_get_group_from_post($result->parent_id))) {
-                    echo "<tr>
-                    <td align='center'>" . $this->get_topic_image($result->parent_id) . "</td>
-                    <td><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a></td>
-                    <td class='forumstats'>" . $this->profile_link($result->author_id) . "</td>
-                    <td class='poster_in_forum'>" . $this->format_date($result->date) . "</td>
-                    </tr>";
-                }
-            }
-            echo "</table>";
+            require('views/searchresults.php');
         }
 
         public function get_topic_image($thread) {
@@ -1389,53 +1281,26 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
+        public function get_captcha() {
+            global $user_ID;
+            $out = "";
+
+            if (!$user_ID) {
+                include_once("captcha/shared.php");
+                include_once("captcha/captcha_code.php");
+                $wpf_captcha = new CaptchaCode();
+                $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
+
+                $out .= "
+                <img alt='' src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
+                <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'>
+                <input name='wpf_security_code' class='captcha' type='text' />&nbsp;" . __("Enter Security Code (required)", "asgarosforum");
+            }
+
+            return $out;
+        }
 
 
-
-
-    public function get_captcha()
-    {
-      global $user_ID;
-
-      $out = "";
-
-      if (!$user_ID)
-      {
-        include_once("captcha/shared.php");
-        include_once("captcha/captcha_code.php");
-        $wpf_captcha = new CaptchaCode();
-        $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
-
-        $out .= "<tr>
-              <td><img alt='' src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
-              <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'></td>
-              <td>" . __("Security Code:", "asgarosforum") . "<input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/></td>
-              </tr>";
-      }
-
-      return $out;
-    }
-
-    public function get_quick_reply_captcha()
-    {
-      global $user_ID;
-
-      $out = "";
-
-      if (!$user_ID)
-      {
-        include_once("captcha/shared.php");
-        include_once("captcha/captcha_code.php");
-        $wpf_captcha = new CaptchaCode();
-        $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
-        $out .= "
-                  <img src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
-                  <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'><br/>
-                  <input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/>" . __("Enter Security Code: (required)", "asgarosforum");
-      }
-
-      return $out;
-    }
 
     public function autoembed($string)
     {

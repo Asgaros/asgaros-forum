@@ -1,3 +1,12 @@
+.editor input {
+    width: 400px;
+}
+.editor td {
+    vertical-align: top;
+}
+.editor .captcha {
+    width: 200px;
+}
 #wpf-wrapper table {
     border-collapse: collapse;
     width: 100%;
@@ -24,8 +33,9 @@
 }
 #wpf-post-submit,
 #quick-reply-submit {
-    color: #555;
-    background-color: #EFEFEF;
+    color: #fff;
+    background-color: #2D89CC;
+    border: 1px solid #005B91 !important;
 }
 #wpf-wrapper .tab_back a:link,
 #wpf-wrapper .tab_back a:visited {
@@ -53,6 +63,7 @@
     height: 40px;
 }
 .category-title,
+.title-element,
 #thread-title {
     background-color: #2d89cc;
     color: #fff;
@@ -62,6 +73,7 @@
 }
 #forum-content,
 .category-content,
+.content-element,
 #thread-content {
     border: 1px solid #2d89cc;
     display: block;
@@ -155,7 +167,6 @@
 #wpf-wrapper small {
     color: #333;
 }
-.wpf-table a,
 .wpf-post-table a,
 #wpf-wrapper p a,
 #wpf-wrapper span a,
@@ -175,8 +186,6 @@
 .category-content tr:last-child td {
     border-bottom: none !important;
 }
-
-.wpf-table a:hover,
 .wpf-post-table a:hover,
 #wpf-wrapper a:hover {
     text-decoration: underline;
@@ -218,7 +227,6 @@ img.avatar {
 .full {
     border: 1px solid #2D89CC !important;
 }
-.wpf-table th,
 .wpf-post-table th {
     background-color: #2d89cc;
 }
