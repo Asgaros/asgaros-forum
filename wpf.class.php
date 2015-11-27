@@ -408,17 +408,17 @@ if (!class_exists('asgarosforum')) {
                         $this->showthread($this->check_parms($_GET['t']));
                         break;
                     case 'addtopic':
-                        include('views/wpf-thread.php');
+                        include('views/editor.php');
                         break;
                     case 'postreply':
                         if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID)) {
                             wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
                         } else {
-                            include('views/wpf-post.php');
+                            include('views/editor.php');
                         }
                         break;
                     case 'editpost':
-                        include('views/wpf-post.php');
+                        include('views/editor.php');
                         break;
                     case 'search':
                         $this->search_results();
