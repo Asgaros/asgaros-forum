@@ -1,5 +1,5 @@
-<div class='title-element'><?php echo $g->name; ?></div>
-<div class='category-content'>
+<div class="title-element"><?php echo $g->name; ?></div>
+<div class="content-element space">
     <table>
         <?php
         $frs = $this->get_forums($g->id);

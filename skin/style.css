@@ -33,6 +33,21 @@
 }
 #wpf-wrapper th {
     background-color: #2d89cc;
+    color: #fff;
+}
+#wpf-wrapper td {
+    vertical-align: middle !important;
+    border-bottom: 1px solid #cecece !important;
+    border-right: 1px solid #cecece !important;
+}
+#wpf-wrapper td:last-child {
+    border-right: none !important;
+}
+#wpf-wrapper tr:last-child td {
+    border-bottom: none !important;
+}
+#wpf-wrapper .space {
+    margin-bottom: 20px !important;
 }
 
 /* TABLE CELL CONTENT */
@@ -41,8 +56,30 @@
     width: 100px;
     font-size: 11px;
 }
+#wpf-wrapper .status-icon {
+    width: 61px;
+    height: 50px;
+    text-align: center;
+}
+#wpf-wrapper .poster_in_forum {
+    width: 225px;
+    line-height: 1.4;
+    font-size: 11px;
+}
 
 /* INPUT ELEMENTS */
+#wpf-wrapper input {
+    padding: 3px 6px;
+    border: 1px solid #a9a9a9;
+    background-color: #f0f0f0;
+    color: #555555;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin: 2px 0px !important;
+    vertical-align: middle;
+    font-family: inherit;
+}
 #wpf-wrapper input[type="submit"] {
     color: #fff;
     background-color: #2D89CC;
@@ -59,6 +96,16 @@
 }
 #wpf-wrapper .menu a:hover {
 	text-decoration: none !important;
+}
+#wpf-wrapper .menu td {
+    white-space: nowrap;
+}
+#wpf-wrapper .top_menus {
+    margin-bottom: 5px;
+}
+#wpf-wrapper .top_menus td {
+    padding: 0px 0px 0px 2px !important;
+    border-style: none !important;
 }
 
 /* NOTICE */
@@ -90,9 +137,14 @@
     border-left: 1px solid #CACACA;
     border-bottom: 1px solid #CACACA;
     border-right: 1px solid #CACACA;
+    margin-top: -10px;
+    margin-bottom: 5px;
 }
 
 /* PAGEING */
+#wpf-wrapper .pages {
+    width: 100%;
+}
 #wpf-wrapper .pages strong {
     background-color: #737373;
     color: #FFFFFF;
@@ -110,20 +162,8 @@
     text-decoration: none !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-.title-element {
+/* TITLE */
+#wpf-wrapper .title-element {
     background-color: #2d89cc;
     color: #fff;
     padding: 5px 5px 5px 10px;
@@ -131,190 +171,61 @@
     font-weight: bold;
 }
 
-
-
-
-.forum-content,
-.category-content,
-.content-element,
-#thread-content {
-    border: 1px solid #2d89cc;
-    display: block;
-    background-color: #f6f6f6;
-}
-
-.status-icon {
-    width: 61px;
-    height: 50px;
-    text-align: center;
-}
-
-/*Breadcrumb -------------------------------------------*/
-#wpf-wrapper #trail.breadcrumbs a {
+/* BREADCRUMBS */
+#wpf-wrapper .breadcrumbs a {
     color: #636363;
 }
-#wpf-wrapper #trail.breadcrumbs a:hover {
+#wpf-wrapper .breadcrumbs a:hover {
     color: #B85B5A;
     text-decoration: none;
 }
-#wpf-wrapper #trail .wpf_nav_sep {
+#wpf-wrapper .breadcrumbs .sep {
     margin: 0px 3px 0px 3px;
-    color: #757575;
 }
-#wpf-wrapper #trail.breadcrumbs {
+#wpf-wrapper .breadcrumbs {
     font-size: 12px;
-}
-#wpf-wrapper div#trail {
-    margin: 5px 3px 0px !important;
+    margin: 5px 0px 0px !important;
     float: left;
+    color: #636363;
 }
-/*Wpf itemv ---------------------------------------*/
-#wpf-wrapper .wpf-item-poster {
-    margin: 0px 0px 0px 0;
-    line-height: 16px;
-}
-#wpf-wrapper .wpf-item-poster-li {
-    margin: 0px 0px 0px 5px;
-}
-/*input txt---------------------------------------------*/
-#wpf-wrapper input {
-    padding: 3px 6px;
-    border: 1px solid #a9a9a9;
-}
-#wpf-wrapper input.wpf-input {
-    background-color: #f0f0f0;
-    color: #555555;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: 1px solid #a9a9a9;
-    margin: 2px 0px !important;
-    vertical-align: middle;
-    padding: 3px 6px;
-    border-radius: 3px;
-    font-family: inherit;
-}
-#wpf-wrapper input.wpf-input:focus {
-    box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
-    background-color: rgba(193,193,193,0.4);
-    color: #181818;
-}
-/*poster_in_forum ---------------------------------*/
-#wpf-wrapper .poster_in_forum {
-    width: 200px;
-    line-height: 1.4;
-}
-#wpf-wrapper .poster_in_forum small {
-    display: block;
-}
-#wpf-wrapper small {
-    color: #333;
-}
-.wpf-post-table a,
-#wpf-wrapper p a,
-#wpf-wrapper span a,
+
+/* LINKS */
 #wpf-wrapper a {
-    color: #006CBB;
-    text-decoration: none;
+    text-decoration: none;;
 }
-.forum-content td,
-.category-content td {
-    vertical-align: middle !important;
-    border-bottom: 1px solid #cecece !important;
-    border-right: 1px solid #eaeaea !important;
-}
-.forum-content td:last-child,
-.category-content td:last-child {
-    border-right: none !important;
-}
-.forum-content tr:last-child td,
-.category-content tr:last-child td {
-    border-bottom: none !important;
-}
-.wpf-post-table a:hover,
-#wpf-wrapper a:hover {
-    text-decoration: underline;
-}
-#wpf-wrapper th a {
-    color: #fff;
-    text-transform: none;
-}
-#wpf-wrapper th {
-    color: #fff;
-    text-transform: none;
-}
-img.avatar {
-    float: none;
-    margin: 0px;
-}
-#wpf-wrapper .author small {
-    color: #4D4D4D;
-}
-#wpf-wrapper .post-data-format {
-    color: #979797;
-}
-.author .wpf-meta img {
-    margin: 2px 2px 0 !important;
-}
-#wpf-wrapper .wpf-meta-button a {
-    font-size: 12px;
-}
-#wpf-wrapper .wpf-meta-button a:hover {
-    text-decoration:none !important;
-}
-#wpf-wrapper .wpf-meta-button img {
-    margin: 0px 4px 0px 0px !important;
-}
-.author .wpf-meta {
-    margin: -5px 0px -8px 0 !important;
-    float: right;
-}
-.full {
-    border: 1px solid #2D89CC !important;
-}
-.wpf-post-table th {
-    background-color: #2d89cc;
-}
-td.wpf-meta {
-    border-bottom: 1px solid #adadad !important;
-    padding: 0;
-    margin: 0;
-}
-td.wpf-meta a {
-    font-weight: bold;
-}
-.wpf-small {
+
+/* CONTENT WRAPPERS*/
+#wpf-wrapper .content-element {
+    border: 1px solid #2d89cc;
+    background-color: #f6f6f6;
     margin-bottom: 10px;
 }
-#wpf-wrapper td.author {
-    border-bottom: 1px solid #CACACA !important;
-    border-top: 1px solid #CACACA !important;
-}
-td.wpf-bright {
-    background-color: #ddd;
-}
-/* Fixing avatars pose a problem for some sites */
-td.autorpostbox img.avatar{height: 60px;width: 60px;}
-td.autorpostbox {
+
+/* THREAD */
+#wpf-wrapper .autorpostbox {
     text-align: center;
     border-right: 1px solid #CACACA !important;
     width: 125px;
+    padding-bottom: 10px;
 }
-.updated {
-    border: 1px solid #cecb8e;
-    margin: 0px 0px 10px !important;
-    color: #ada771;
-    background: #F9F9DC;
-    text-align: center;
-    padding: 5px !important;
+#wpf-wrapper img.avatar {
+    float: none;
+    margin: 0px;
 }
+#wpf-wrapper .wpf-meta {
+    margin: -5px 0px -8px 0 !important;
+    float: right;
+}
+#wpf-wrapper .bright {
+    background-color: #eee;
+    border-top: 1px solid #cecece;
+}
+
+/* QUOTES */
 #wpf-wrapper blockquote {
     padding: 1.71429rem;
     margin: 10px 0;
 }
-/* add quote title */
 #wpf-wrapper blockquote .quotetitle {
     padding-left: 5px;
     padding: 1.71429rem;
@@ -330,7 +241,7 @@ td.autorpostbox {
     -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
     box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
 }
-.topic_text blockquote {
+#wpf-wrapper .topic_text blockquote {
     background: #E1E0E0 !important;
     border: 1px solid #ADADAD;
     border-left: 4px solid #ADADAD !important;
@@ -340,29 +251,6 @@ td.autorpostbox {
     -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
     box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
 }
-/* definitions for the mirror tab */
-pre.code {
-    width: 90%;
-    background: #eee;
-    border: solid 1px #ccc;
-    padding: 5px;
-    overflow: auto;
-    white-space: pre-wrap;
-    font-size: 100%;
-}
-/*Attempt to make the forum look better with more themes*/
-.menu td {
-    padding: 5px 0 5px 3px !important;
-    white-space: nowrap;
-}
-.pop_menus td {
-    padding: 0px !important;
-}
-.pop_menus td:first-child {
-    width: 100%;
-}
-
-
 
 /*------------------------------------------------*/
 /*-------------------[icomoon]--------------------*/
@@ -378,7 +266,6 @@ pre.code {
 	font-weight: normal;
 	font-style: normal;
 }
-
 [class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
 	font-family: 'icomoon' !important;
@@ -388,16 +275,13 @@ pre.code {
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
-
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
     padding-right: 5px;
     font-size: 1.2em;
     vertical-align: text-top;
 }
-
 .icon-home:before {
 	content: "\e900";
 }

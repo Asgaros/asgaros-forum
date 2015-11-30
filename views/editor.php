@@ -73,7 +73,7 @@ if ($_GET['forumaction'] == "editpost") {
             /*if(false) //Need to enable this eventually if we're editing the first post in the thread
             echo "<tr>
             <td>" . __("Subject:", "asgarosforum") . "</td>
-            <td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='" . stripslashes($t->subject) . "'/></td>
+            <td><input size='50%' type='text' name='edit_post_subject' value='" . stripslashes($t->subject) . "'/></td>
             </tr>";*/
             ?>
             <tr>

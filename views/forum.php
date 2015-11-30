@@ -1,5 +1,5 @@
-<table>
-    <tr class="pop_menus">
+<table class="top_menus">
+    <tr>
         <td class='pages'>
             <?php if ($thread_counter > 0): ?>
                 <?php echo $this->pageing($forum_id, 'thread'); ?>
@@ -10,7 +10,7 @@
 </table>
 
 <?php if ($thread_counter > 0): ?>
-    <div class="forum-content">
+    <div class="content-element">
         <table>
             <tr>
                 <th><?php _e("Status", "asgarosforum"); ?></th>
@@ -22,7 +22,7 @@
 
             <?php if ($sticky_threads && !$this->curr_page): // Prevent stickies from showing up on page 2...n ?>
                 <tr>
-                    <td class="wpf-bright" colspan="5"><?php _e("Sticky Topics", "asgarosforum"); ?></td>
+                    <td class="bright" colspan="5"><?php _e("Sticky Topics", "asgarosforum"); ?></td>
                 </tr>
 
                 <?php foreach ($sticky_threads as $thread): ?>
@@ -34,12 +34,12 @@
                             <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
                             <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
                         </td>
-                        <td class="poster_in_forum"><small><?php echo $this->get_lastpost($thread->id); ?></small></td>
+                        <td class="poster_in_forum"><?php echo $this->get_lastpost($thread->id); ?></td>
                     </tr>
                 <?php endforeach; ?>
 
                 <tr>
-                    <td class="wpf-bright" colspan="5"><?php _e("Forum Topics", "asgarosforum"); ?></td>
+                    <td class="bright" colspan="5"><?php _e("Forum Topics", "asgarosforum"); ?></td>
                 </tr>
             <?php endif; // END STICKIES ?>
 
@@ -52,14 +52,14 @@
                         <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
                         <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
                     </td>
-                    <td class="poster_in_forum"><small><?php echo $this->get_lastpost($thread->id); ?></small></td>
+                    <td class="poster_in_forum"><?php echo $this->get_lastpost($thread->id); ?></td>
                 </tr>
             <?php endforeach; // END NORMAL THREADS ?>
         </table>
     </div>
 
-    <table>
-        <tr class="pop_menus">
+    <table class="top_menus">
+        <tr>
             <td class='pages'><?php echo $this->pageing($forum_id, 'thread'); ?></td>
             <td><?php echo $this->forum_menu(); ?></td>
         </tr>

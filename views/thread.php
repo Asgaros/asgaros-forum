@@ -1,33 +1,31 @@
-<table>
-    <tr class="pop_menus">
+<table class="top_menus">
+    <tr>
         <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
         <td><?php echo $this->topic_menu();?></td>
     </tr>
 </table>
 
 <div class='title-element'><?php echo $this->cut_string($this->get_subject($thread_id), 70) . $meClosed; ?></div>
-<div id='thread-content'>
+<div class='content-element'>
     <?php
     $counter = 0;
     foreach ($posts as $post) {
         $counter++;
         ?>
-        <table class='wpf-post-table' id='postid-<?php echo $post->id; ?>'>
+        <table id='postid-<?php echo $post->id; ?>'>
             <tr>
-                <td colspan='2' class='wpf-bright author'>
+                <td colspan='2' class='bright'>
                     <span class='post-data-format'><?php echo date_i18n($this->dateFormat, strtotime($post->date)); ?></span>
                     <div class='wpf-meta'><?php echo $this->get_postmeta($post->id, $post->author_id, $post->parent_id, $counter); ?></div>
                 </td>
             </tr>
             <tr>
                 <td class='autorpostbox'>
-                    <div class='wpf-small'>
-                        <?php if ($this->options["forum_use_gravatar"]) {
-                            echo $this->get_avatar($post->author_id);
-                        } ?>
-                        <br /><strong><?php echo $this->profile_link($post->author_id, true); ?></strong><br />
-                        <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id); ?>
-                    </div>
+                    <?php if ($this->options["forum_use_gravatar"]) {
+                        echo $this->get_avatar($post->author_id);
+                    } ?>
+                    <br /><strong><?php echo $this->profile_link($post->author_id, true); ?></strong><br />
+                    <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id); ?>
                 </td>
                 <td valign='top' class='topic_text'>
                     <?php echo make_clickable(wpautop($this->autoembed($post->text))); ?>
@@ -49,8 +47,8 @@
     </div>
 <?php } ?>
 
-<table>
-    <tr class="pop_menus">
+<table class="top_menus">
+    <tr>
         <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
         <td><?php echo $this->topic_menu();?></td>
     </tr>

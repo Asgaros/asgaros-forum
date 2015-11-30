@@ -395,7 +395,7 @@ if (!class_exists('asgarosforum')) {
             echo "<div class='search'>
             <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
             <span class='icon-search'></span>
-            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "asgarosforum") . "' />
+            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='mf_search' value='" . __("Search forums", "asgarosforum") . "' />
             </form>
             </div></div>";
 
@@ -546,7 +546,7 @@ if (!class_exists('asgarosforum')) {
             global $user_ID;
             $this->setup_links();
 
-            $o = "<table class='wpf-meta-button'><tr>";
+            $o = "<table><tr>";
 
             if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID))) {
                 $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
@@ -657,15 +657,15 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (!$date) {
-                return "<small>" . __("No topics yet", "asgarosforum") . "</small>";
+                return __("No topics yet", "asgarosforum");
             }
 
             $d = date_i18n($this->dateFormat, strtotime($date->date));
 
             return "
-            <small><strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "</small>
-            <small>" . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a></small>
-            <small>" . __("on", "asgarosforum") . " {$d} Uhr</small>";
+            <strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "<br />
+            " . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a><br />
+            " . __("on", "asgarosforum") . " {$d} Uhr";
         }
 
         public function last_poster_in_thread($thread_id) {
@@ -975,16 +975,16 @@ if (!class_exists('asgarosforum')) {
         public function breadcrumbs() {
             $this->setup_links();
 
-            $trail = "<span class='icon-home'></span><a href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "asgarosforum") . "</a>";
+            $trail = "<span class='icon-home'></span><a href='" . get_permalink($this->page_id) . "'>" . __("Forum", "asgarosforum") . "</a>";
 
             if ($this->current_forum) {
                 $link = $this->get_forumlink($this->current_forum);
-                $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->get_forumname($this->current_forum) . "</a>";
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->get_forumname($this->current_forum) . "</a>";
             }
 
             if ($this->current_thread) {
                 $link = $this->get_threadlink($this->current_thread);
-                $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
             }
 
             if ($this->current_view == 'search') {
@@ -994,22 +994,22 @@ if (!class_exists('asgarosforum')) {
                     $terms = esc_html(esc_sql($_POST['search_words']));
                 }
 
-                $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("Search Results", "asgarosforum") . " &rarr; $terms";
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("Search Results", "asgarosforum") . " &rarr; $terms";
             }
 
             if ($this->current_view == 'postreply') {
-                $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("Post Reply", "asgarosforum");
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("Post Reply", "asgarosforum");
             }
 
             if ($this->current_view == 'editpost') {
-                $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("Edit Post", "asgarosforum");
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("Edit Post", "asgarosforum");
             }
 
             if ($this->current_view == 'addtopic') {
-                $trail .= "&nbsp;<span class='wpf_nav_sep'>&rarr;</span>&nbsp;" . __("New Topic", "asgarosforum");
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("New Topic", "asgarosforum");
             }
 
-            return "<div id='trail' class='breadcrumbs'>{$trail}</div>";
+            return "<div class='breadcrumbs'>{$trail}</div>";
         }
 
         public function last_visit() {
@@ -1168,8 +1168,6 @@ if (!class_exists('asgarosforum')) {
 
             if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
-
-                echo "<div class='updated'>" . __("Post deleted", "asgarosforum") . "</div>";
             } else {
                 wp_die(__("You do not have permission to delete this post.", "asgarosforum"));
             }
