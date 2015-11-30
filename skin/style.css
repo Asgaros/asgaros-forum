@@ -223,33 +223,14 @@
 
 /* QUOTES */
 #wpf-wrapper blockquote {
-    padding: 1.71429rem;
+    padding: 10px;
     margin: 10px 0;
+    background: #eee;
+    border: 1px solid #adadad;
+    border-left: 4px solid #adadad;
 }
-#wpf-wrapper blockquote .quotetitle {
-    padding-left: 5px;
-    padding: 1.71429rem;
-    border: 1px solid #848383;
-    background: #E0E1E1;
-    border-radius: 4px 4px 4px 4px;
-    color: #181818 !important;
-    font-weight: bolder;
-    margin: -35px -4px 0 0px !important;
-    min-width: 100px;
-    padding: 2px 10px;
-    position: absolute;
-    -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
-    box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
-}
-#wpf-wrapper .topic_text blockquote {
-    background: #E1E0E0 !important;
-    border: 1px solid #ADADAD;
-    border-left: 4px solid #ADADAD !important;
-    color: #181818;
-    font-style: italic;
-    border-radius: 0 7px 7px 0 !important;
-    -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
-    box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
+#wpf-wrapper .quotetitle {
+    font-weight: bold;
 }
 
 /*------------------------------------------------*/

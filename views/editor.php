@@ -3,6 +3,7 @@ $this->editor_settings['textarea_rows'] = 12;
 $thread = "";
 $post = "";
 $t = "";
+$q = "";
 
 if ($_GET['forumaction'] == "addtopic") {
     if (!$this->forum_exists($_GET['forum'])) {
@@ -21,14 +22,13 @@ if ($_GET['forumaction'] == "postreply") {
 
     $thread = $this->check_parms($_GET['thread']);
 
-    // TODO: Überprüfen
     if (isset($_GET['quote'])) {
         $quote_id = $this->check_parms($_GET['quote']);
-        $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, `date` FROM {$this->t_posts} WHERE id = %d", $quote_id));
+        $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->t_posts} WHERE id = %d", $quote_id));
         $user = get_userdata($text->author_id);
         $display_type = $this->options['forum_display_name'];
         $display_name = (!empty($user)) ? $user->$display_type : __('Guest', 'asgarosforum');
-        $q = "[quote][quotetitle]" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
+        $q = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
     }
 }
 
@@ -83,7 +83,7 @@ if ($_GET['forumaction'] == "editpost") {
                     if ($_GET['forumaction'] == "editpost") {
                         wp_editor(stripslashes($post->text), 'message', $this->editor_settings);
                     } else {
-                        wp_editor('', 'message', $this->editor_settings);
+                        wp_editor($q, 'message', $this->editor_settings);
                     }
                     ?>
                 </td>

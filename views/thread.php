@@ -27,8 +27,8 @@
                     <br /><strong><?php echo $this->profile_link($post->author_id, true); ?></strong><br />
                     <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id); ?>
                 </td>
-                <td valign='top' class='topic_text'>
-                    <?php echo make_clickable(wpautop($this->autoembed($post->text))); ?>
+                <td>
+                    <?php echo stripslashes(make_clickable(wpautop($this->autoembed($post->text)))); ?>
                 </td>
             </tr>
         </table>
