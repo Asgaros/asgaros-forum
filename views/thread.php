@@ -37,7 +37,7 @@
 
 <?php if ((!$this->is_closed() || $this->is_moderator($user_ID)) && ($user_ID || $this->allow_unreg())) { ?>
     <div id='thread-reply'>
-        <form action='' name='addform' method='post'>
+        <form name='addform' method='post'>
             <strong><?php echo __("Quick Reply", "asgarosforum"); ?>:</strong><br />
             <?php wp_editor('', 'message', $this->editor_settings); ?>
             <br /><?php echo $this->get_captcha(); ?><br />

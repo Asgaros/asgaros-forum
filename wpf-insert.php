@@ -17,37 +17,34 @@ if (isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['e
     $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $the_thread_id));
 }
 
+function mf_u_key() {
+    $pref = "";
 
+    for ($i = 0; $i < 5; $i++) {
+        $d = rand(0, 1);
+        $pref .= $d ? chr(rand(97, 122)) : chr(rand(48, 57));
+    }
 
-
-
-function mf_u_key()
-{
-  $pref = "";
-  for ($i = 0; $i < 5; $i++)
-  {
-    $d = rand(0, 1);
-    $pref .= $d ? chr(rand(97, 122)) : chr(rand(48, 57));
-  }
-  return $pref . "-";
+    return $pref . "-";
 }
 
-function MFAttachImage($temp, $name)
-{
-  //GET USERS UPLOAD PATH
-  $upload_dir = wp_upload_dir();
-  $path = $upload_dir['path'] . "/";
-  $url = $upload_dir['url'] . "/";
-  $u = mf_u_key();
-  $name = sanitize_file_name($name);
-  if (!empty($name))
-    move_uploaded_file($temp, $path . $u . $name);
-  return "\n[img]" . $url . $u . $name . "[/img]";
+function MFAttachImage($temp, $name) {
+    $upload_dir = wp_upload_dir();
+    $path = $upload_dir['path'] . "/";
+    $url = $upload_dir['url'] . "/";
+    $u = mf_u_key();
+    $name = sanitize_file_name($name);
+
+    if (!empty($name)) {
+        move_uploaded_file($temp, $path . $u . $name);
+    }
+
+    return "\n[img]" . $url . $u . $name . "[/img]";
 }
 
 function MFGetExt($str)
 {
-  //GETS THE FILE EXTENSION BELONGING TO THE UPLOADED FILE
+  // GETS THE FILE EXTENSION BELONGING TO THE UPLOADED FILE
   $i = strrpos($str, ".");
   if (!$i)
   {

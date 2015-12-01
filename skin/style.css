@@ -76,7 +76,7 @@
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    margin: 2px 0px !important;
+    margin: 2px 0 !important;
     vertical-align: middle;
     font-family: inherit;
 }
@@ -104,7 +104,7 @@
     margin-bottom: 5px;
 }
 #wpf-wrapper .top_menus td {
-    padding: 0px 0px 0px 2px !important;
+    padding: 0 0 0 2px !important;
     border-style: none !important;
 }
 
@@ -149,13 +149,13 @@
     background-color: #737373;
     color: #FFFFFF;
     font-size: 95%;
-    padding: 0px 5px;
+    padding: 0 5px;
 }
 #wpf-wrapper .pages a {
     background-color: #2D89CC;
     color: #FFFFFF !important;
     font-size: 95%;
-    padding: 0px 5px;
+    padding: 0 5px;
 }
 #wpf-wrapper .pages a:hover {
     background-color: #005C92;
@@ -180,11 +180,11 @@
     text-decoration: none;
 }
 #wpf-wrapper .breadcrumbs .sep {
-    margin: 0px 3px 0px 3px;
+    margin: 0 3px 0 3px;
 }
 #wpf-wrapper .breadcrumbs {
     font-size: 12px;
-    margin: 5px 0px 0px !important;
+    margin: 5px 0 0 !important;
     float: left;
     color: #636363;
 }
@@ -210,10 +210,10 @@
 }
 #wpf-wrapper img.avatar {
     float: none;
-    margin: 0px;
+    margin: 0;
 }
 #wpf-wrapper .wpf-meta {
-    margin: -5px 0px -8px 0 !important;
+    margin: -5px 0 -8px 0 !important;
     float: right;
 }
 #wpf-wrapper .bright {

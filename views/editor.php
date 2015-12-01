@@ -49,7 +49,7 @@ if ($_GET['forumaction'] == "editpost") {
 
 ?>
 
-<form action='' name='addform' method='post' enctype='multipart/form-data'>
+<form name='addform' method='post' enctype='multipart/form-data'>
     <div class='title-element'>
         <?php
         if ($_GET['forumaction'] == "addtopic") {
@@ -77,7 +77,7 @@ if ($_GET['forumaction'] == "editpost") {
             </tr>";*/
             ?>
             <tr>
-                <td width="125px"><?php _e("Message:", "asgarosforum"); ?></td>
+                <td><?php _e("Message:", "asgarosforum"); ?></td>
                 <td>
                     <?php
                     if ($_GET['forumaction'] == "editpost") {
@@ -107,16 +107,22 @@ if ($_GET['forumaction'] == "editpost") {
             <tr>
                 <td></td>
                 <?php if ($_GET['forumaction'] == "addtopic") { ?>
-                    <td><input type='submit' name='add_topic_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
-                    <input type='hidden' name='add_topic_forumid' value='<?php echo $this->check_parms($_GET['forum']); ?>' />
+                    <td>
+                        <input type='submit' name='add_topic_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
+                        <input type='hidden' name='add_topic_forumid' value='<?php echo $this->check_parms($_GET['forum']); ?>' />
+                    </td>
                 <?php } else if ($_GET['forumaction'] == "postreply") { ?>
-                    <td><input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
-                    <input type='hidden' name='add_post_forumid' value='<?php echo $thread; ?>' />
+                    <td>
+                        <input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
+                        <input type='hidden' name='add_post_forumid' value='<?php echo $thread; ?>' />
+                    </td>
                 <?php } else if ($_GET['forumaction'] == "editpost") { ?>
-                    <td><input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' /></td>
-                    <input type='hidden' name='edit_post_id' value='<?php echo $post->id; ?>' />
-                    <input type='hidden' name='thread_id' value='<?php echo $thread; ?>' />
-                    <input type='hidden' name='page_id' value='<?php echo $this->curr_page; ?>' />
+                    <td>
+                        <input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
+                        <input type='hidden' name='edit_post_id' value='<?php echo $post->id; ?>' />
+                        <input type='hidden' name='thread_id' value='<?php echo $thread; ?>' />
+                        <input type='hidden' name='page_id' value='<?php echo $this->curr_page; ?>' />
+                    </td>
                 <?php } ?>
             </tr>
         </table>

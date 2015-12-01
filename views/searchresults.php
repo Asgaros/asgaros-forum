@@ -4,7 +4,7 @@
             <th>Status</th>
             <th><?php _e("Subject", "asgarosforum"); ?></th>
             <th><?php _e("Started by", "asgarosforum"); ?></th>
-            <th width="200px"><?php _e("Posted", "asgarosforum"); ?></th>
+            <th><?php _e("Posted", "asgarosforum"); ?></th>
         </tr>
         <?php
         foreach ($results as $result) {

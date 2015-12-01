@@ -15,7 +15,7 @@
             <tr>
                 <th><?php _e("Status", "asgarosforum"); ?></th>
                 <th><?php _e("Topic Title", "asgarosforum"); ?></th>
-                <th width="125px"><?php _e("Started by", "asgarosforum"); ?></th>
+                <th><?php _e("Started by", "asgarosforum"); ?></th>
                 <th><?php _e("Statistics", "asgarosforum"); ?></th>
                 <th><?php _e("Last post", "asgarosforum"); ?></th>
             </tr>
@@ -29,7 +29,7 @@
                     <tr>
                         <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
                         <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->subject); ?></a></td>
-                        <td align="center"><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
+                        <td><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
                         <td class="forumstats">
                             <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
                             <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
@@ -47,7 +47,7 @@
                 <tr>
                     <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
                     <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->subject, 50); ?></a></td>
-                    <td align="center"><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
+                    <td><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
                     <td class="forumstats">
                         <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
                         <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
