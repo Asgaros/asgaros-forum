@@ -9,12 +9,12 @@ if (isset($_POST['add_topic_forumid']) && !empty($_POST['add_topic_forumid'])) {
 
 if (isset($_POST['add_post_forumid']) && !empty($_POST['add_post_forumid'])) {
     $the_thread_id = $this->check_parms($_POST['add_post_forumid']);
-    $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $the_thread_id));
+    $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $the_thread_id));
 }
 
 if (isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['edit_post_submit'])) {
     $the_thread_id = $this->check_parms($_POST['thread_id']);
-    $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $the_thread_id));
+    $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $the_thread_id));
 }
 
 function mf_u_key() {
@@ -136,7 +136,7 @@ if (isset($_POST['add_topic_submit']))
   {
     $date = $this->wpf_current_time_fixed();
 
-    $sql_thread = "INSERT INTO {$this->t_threads}
+    $sql_thread = "INSERT INTO {$this->table_threads}
                       (subject, parent_id, status)
                     VALUES
                       (%s, %d, 'open')";
@@ -156,7 +156,7 @@ if (isset($_POST['add_topic_submit']))
         $content .= MFAttachImage($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
     }
 
-    $sql_post = "INSERT INTO {$this->t_posts}
+    $sql_post = "INSERT INTO {$this->table_posts}
                     (text, parent_id, `date`, author_id)
                   VALUES
                     (%s, %d, %s, %d)";
@@ -201,7 +201,7 @@ if (isset($_POST['add_post_submit']))
         $content .= MFAttachImage($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
     }
 
-    $sql_post = "INSERT INTO {$this->t_posts}
+    $sql_post = "INSERT INTO {$this->table_posts}
             (text, parent_id, `date`, author_id)
          VALUES(%s, %d, %s, %d)";
     $wpdb->query($wpdb->prepare($sql_post, $content, $thread, $date, $user_ID));
@@ -253,13 +253,13 @@ if (isset($_POST['edit_post_submit']))
   if ($error)
     wp_die($msg);
 
-  $sql = ("UPDATE {$this->t_posts} SET text = %s WHERE id = %d");
+  $sql = ("UPDATE {$this->table_posts} SET text = %s WHERE id = %d");
   $wpdb->query($wpdb->prepare($sql, $content, $edit_post_id));
   if (isset($_POST['edit_post_subject'])) {
-  $ret = $wpdb->get_results($wpdb->prepare("select id from {$this->t_posts} where parent_id = %d order by date asc limit 1", $thread));
+  $ret = $wpdb->get_results($wpdb->prepare("select id from {$this->table_posts} where parent_id = %d order by date asc limit 1", $thread));
   if ($ret[0]->id == $edit_post_id)
   {
-    $sql = ("UPDATE {$this->t_threads} set subject = %s where id = %d");
+    $sql = ("UPDATE {$this->table_threads} set subject = %s where id = %d");
     $wpdb->query($wpdb->prepare($sql, $subject, $thread));
   }
   }

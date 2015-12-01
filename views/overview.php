@@ -2,7 +2,7 @@
 <div class="content-element space">
     <table>
         <?php
-        $frs = $this->get_forums($g->id);
+        $frs = $this->getable_forums($g->id);
         if (count($frs) > 0) {
             foreach ($frs as $f) {
                 ?>

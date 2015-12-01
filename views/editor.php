@@ -24,7 +24,7 @@ if ($_GET['forumaction'] == "postreply") {
 
     if (isset($_GET['quote'])) {
         $quote_id = $this->check_parms($_GET['quote']);
-        $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->t_posts} WHERE id = %d", $quote_id));
+        $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
         $user = get_userdata($text->author_id);
         $display_type = $this->options['forum_display_name'];
         $display_name = (!empty($user)) ? $user->$display_type : __('Guest', 'asgarosforum');
@@ -39,8 +39,8 @@ if ($_GET['forumaction'] == "editpost") {
 
     $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
     $thread = $this->check_parms($_GET['t']);
-    $t = $wpdb->get_row($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $thread));
-    $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE id = %d", $id));
+    $t = $wpdb->get_row($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $thread));
+    $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id));
 
     if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator($user_ID)) {
         wp_die("Sorry, you are not allowed to edit this post.", "asgarosforum");

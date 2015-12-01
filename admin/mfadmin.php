@@ -75,9 +75,6 @@ if (!class_exists("AFAdmin"))
                 }
             }
 
-            // Set some stuff that isn't on the options page
-            $saved_ops['forum_db_version'] = $asgarosforum->options['forum_db_version'];
-
             update_option('asgarosforum_options', $saved_ops);
             wp_redirect(admin_url('admin.php?page=asgarosforum&saved=true'));
             exit();
@@ -88,11 +85,11 @@ if (!class_exists("AFAdmin"))
         {
             global $asgarosforum;
             $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-            $user_groups = $asgarosforum->get_usergroups();
+            $user_groups = $asgarosforum->getable_usergroups();
 
             if (isset($_GET['action']) && $_GET['action'] == 'users') {
                 if (isset($_GET['groupid'])) {
-                    $usergroup = $asgarosforum->get_usergroups($_GET['groupid']);
+                    $usergroup = $asgarosforum->getable_usergroups($_GET['groupid']);
                     $usergroup_users = $asgarosforum->get_members($_GET['groupid']);
 
                     if (!empty($usergroup)) {
@@ -129,10 +126,10 @@ if (!class_exists("AFAdmin"))
                     }
 
                     if ($id == 'new') { // Create a new User Group
-                        $wpdb->insert($asgarosforum->t_usergroups, array('name' => $name, 'description' => $description), array('%s', '%s'));
+                        $wpdb->insert($asgarosforum->table_usergroups, array('name' => $name, 'description' => $description), array('%s', '%s'));
                         $listed_user_groups[] = $wpdb->insert_id;
                     } else { // Update an existing User Group
-                        $q = "UPDATE {$asgarosforum->t_usergroups} SET name = %s, description = %s WHERE id = %d";
+                        $q = "UPDATE {$asgarosforum->table_usergroups} SET name = %s, description = %s WHERE id = %d";
                         $wpdb->query($wpdb->prepare($q, $name, $description, $id));
                         $listed_user_groups[] = $id;
                     }
@@ -143,9 +140,9 @@ if (!class_exists("AFAdmin"))
             $listed_user_groups = implode(',', $listed_user_groups);
 
             if (empty($listed_user_groups)) {
-                $user_group_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_usergroups}");
+                $user_group_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_usergroups}");
             } else {
-                $user_group_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_usergroups} WHERE id NOT IN ({$listed_user_groups})");
+                $user_group_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_usergroups} WHERE id NOT IN ({$listed_user_groups})");
             }
 
             if (!empty($user_group_ids)) {
@@ -162,11 +159,11 @@ if (!class_exists("AFAdmin"))
         {
             global $asgarosforum, $wpdb;
 
-            $wpdb->query("DELETE FROM {$asgarosforum->t_usergroup2user} WHERE group_id = {$ugid}");
-            $wpdb->query("DELETE FROM {$asgarosforum->t_usergroups} WHERE id = {$ugid}");
+            $wpdb->query("DELETE FROM {$asgarosforum->table_usergroup2user} WHERE group_id = {$ugid}");
+            $wpdb->query("DELETE FROM {$asgarosforum->table_usergroups} WHERE id = {$ugid}");
 
             // Remove this group from categories too
-            $cats = $wpdb->get_results("SELECT * FROM {$asgarosforum->t_categories}");
+            $cats = $wpdb->get_results("SELECT * FROM {$asgarosforum->table_categories}");
 
             if (!empty($cats)) {
                 foreach ($cats as $cat) {
@@ -174,7 +171,7 @@ if (!class_exists("AFAdmin"))
 
                     if (in_array($ugid, $usergroups)) {
                         $usergroups = serialize(array_diff($usergroups, array($ugid)));
-                        $wpdb->query("UPDATE {$asgarosforum->t_categories} SET usergroups = '{$usergroups}' WHERE id = {$cat->id}");
+                        $wpdb->query("UPDATE {$asgarosforum->table_categories} SET usergroups = '{$usergroups}' WHERE id = {$cat->id}");
                     }
                 }
             }
@@ -191,14 +188,14 @@ if (!class_exists("AFAdmin"))
 
                 if ($userID) {
                     if (!$asgarosforum->is_user_ingroup($userID, $groupID)) {
-                        $wpdb->insert($asgarosforum->t_usergroup2user, array('user_id' => $userID, 'group_id' => $groupID), array('%d', '%d'));
+                        $wpdb->insert($asgarosforum->table_usergroup2user, array('user_id' => $userID, 'group_id' => $groupID), array('%d', '%d'));
                     }
                 }
             }
 
             if (isset($_GET['action']) && $_GET['action'] == 'deluser') {
                 $userID = $_GET['user_id'];
-                $wpdb->query("DELETE FROM {$asgarosforum->t_usergroup2user} WHERE user_id = {$userID} AND group_id = {$groupID}");
+                $wpdb->query("DELETE FROM {$asgarosforum->table_usergroup2user} WHERE user_id = {$userID} AND group_id = {$groupID}");
             }
 
             wp_redirect(admin_url('admin.php?page=asgarosforum-user-groups&action=users&groupid='.$groupID.'&saved=true'));
@@ -241,7 +238,7 @@ if (!class_exists("AFAdmin"))
                     }
 
                     if ($id == 'new') { // Save new category
-                        $wpdb->insert($asgarosforum->t_categories, array('name' => $name, 'description' => $description, 'sort' => $order), array('%s', '%s', '%d'));
+                        $wpdb->insert($asgarosforum->table_categories, array('name' => $name, 'description' => $description, 'sort' => $order), array('%s', '%s', '%d'));
                         $listed_categories[] = $wpdb->insert_id;
                     } else { // Update existing category
                         $usergroups = '';
@@ -250,7 +247,7 @@ if (!class_exists("AFAdmin"))
                             $usergroups = serialize((array)$_POST['category_usergroups_'.$id]);
                         }
 
-                        $q = "UPDATE {$asgarosforum->t_categories} SET name = %s, description = %s, sort = %d, usergroups = %s WHERE id = %d";
+                        $q = "UPDATE {$asgarosforum->table_categories} SET name = %s, description = %s, sort = %d, usergroups = %s WHERE id = %d";
                         $wpdb->query($wpdb->prepare($q, $name, $description, $order, $usergroups, $id));
                         $listed_categories[] = $id;
                     }
@@ -263,9 +260,9 @@ if (!class_exists("AFAdmin"))
             $listed_categories = implode(',', $listed_categories);
 
             if (empty($listed_categories)) {
-                $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_categories}");
+                $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories}");
             } else {
-                $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_categories} WHERE id NOT IN ({$listed_categories})");
+                $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories} WHERE id NOT IN ({$listed_categories})");
             }
 
             if (!empty($category_ids)) {
@@ -306,10 +303,10 @@ if (!class_exists("AFAdmin"))
                         }
 
                         if ($id == 'new') { // Save new forum
-                            $wpdb->insert($asgarosforum->t_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->id), array('%s', '%s', '%d', '%d'));
+                            $wpdb->insert($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->id), array('%s', '%s', '%d', '%d'));
                             $listed_forums[] = $wpdb->insert_id;
                         } else { // Update existing forum
-                            $q = "UPDATE {$asgarosforum->t_forums} SET name = %s, description = %s, sort = %d, parent_id = %d WHERE id = %d";
+                            $q = "UPDATE {$asgarosforum->table_forums} SET name = %s, description = %s, sort = %d, parent_id = %d WHERE id = %d";
                             $wpdb->query($wpdb->prepare($q, $name, $description, $order, $category->id, $id));
                             $listed_forums[] = $id;
                         }
@@ -323,9 +320,9 @@ if (!class_exists("AFAdmin"))
             $listed_forums = implode(',', $listed_forums);
 
             if (empty($listed_forums)) {
-                $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_forums}");
+                $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums}");
             } else {
-                $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_forums} WHERE id NOT IN ({$listed_forums})");
+                $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE id NOT IN ({$listed_forums})");
             }
 
             if (!empty($forum_ids)) {
@@ -343,7 +340,7 @@ if (!class_exists("AFAdmin"))
             global $wpdb, $asgarosforum;
 
             // First delete all associated forums
-            $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_forums} WHERE parent_id = {$cid}");
+            $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$cid}");
 
             if (!empty($forum_ids)) {
                 foreach ($forum_ids as $fid) {
@@ -351,7 +348,7 @@ if (!class_exists("AFAdmin"))
                 }
             }
 
-            $wpdb->query("DELETE FROM {$asgarosforum->t_categories} WHERE id = {$cid}");
+            $wpdb->query("DELETE FROM {$asgarosforum->table_categories} WHERE id = {$cid}");
         }
 
         public static function delete_forum($fid)
@@ -359,7 +356,7 @@ if (!class_exists("AFAdmin"))
             global $wpdb, $asgarosforum;
 
             // First delete all associated topics
-            $topic_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->t_threads} WHERE parent_id = {$fid}");
+            $topic_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$fid}");
 
             if (!empty($topic_ids)) {
                 foreach ($topic_ids as $tid) {
@@ -367,15 +364,15 @@ if (!class_exists("AFAdmin"))
                 }
             }
 
-            $wpdb->query("DELETE FROM {$asgarosforum->t_forums} WHERE id = {$fid}");
+            $wpdb->query("DELETE FROM {$asgarosforum->table_forums} WHERE id = {$fid}");
         }
 
         public static function delete_topic($tid)
         {
             global $wpdb, $asgarosforum;
 
-            $wpdb->query("DELETE FROM {$asgarosforum->t_posts} WHERE parent_id = {$tid}");
-            $wpdb->query("DELETE FROM {$asgarosforum->t_threads} WHERE id = {$tid}");
+            $wpdb->query("DELETE FROM {$asgarosforum->table_posts} WHERE parent_id = {$tid}");
+            $wpdb->query("DELETE FROM {$asgarosforum->table_threads} WHERE id = {$tid}");
         }
     }
 }

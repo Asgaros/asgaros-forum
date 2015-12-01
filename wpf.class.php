@@ -12,12 +12,12 @@ if (!class_exists('asgarosforum')) {
         var $add_topic_link = "";
 
         // DB tables
-        var $t_categories = "";
-        var $t_forums = "";
-        var $t_threads = "";
-        var $t_posts = "";
-        var $t_usergroups = "";
-        var $t_usergroup2user = "";
+        var $table_categories = "";
+        var $table_forums = "";
+        var $table_threads = "";
+        var $table_posts = "";
+        var $table_usergroups = "";
+        var $table_usergroup2user = "";
 
         // Misc
         var $current_group = "";
@@ -38,8 +38,7 @@ if (!class_exists('asgarosforum')) {
             'forum_use_gravatar' => true,
             'forum_use_seo_friendly_urls' => false,
             'forum_allow_image_uploads' => false,
-            'forum_display_name' => 'user_login',
-            'forum_db_version' => 0
+            'forum_display_name' => 'user_login'
         );
         var $editor_settings = array(
             'media_buttons' => false,
@@ -51,15 +50,33 @@ if (!class_exists('asgarosforum')) {
         public function __construct() {
             // Init options
             $this->options = array_merge($this->default_ops, get_option('asgarosforum_options', array())); // Merge defaults with user's settings
-            $this->init();
+
+            // Initialize variables
+            global $wpdb;
+            $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
+
+            $this->table_categories = $wpdb->prefix . "forum_categories";
+            $this->table_forums = $wpdb->prefix . "forum_forums";
+            $this->table_threads = $wpdb->prefix . "forum_threads";
+            $this->table_posts = $wpdb->prefix . "forum_posts";
+            $this->table_usergroups = $wpdb->prefix . "forum_usergroups";
+            $this->table_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
+
+            $this->current_group = false;
+            $this->current_forum = false;
+            $this->current_thread = false;
+            $this->curr_page = 0;
+            $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
+            $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
 
             // Action hooks
-            add_action("admin_menu", array($this, "add_admin_pages"));
-            add_action("admin_init", array($this, "wp_forum_install"));
+            register_activation_hook(__FILE__, array($this, 'install'));
+            add_action('plugins_loaded', array($this, 'install'));
+            add_action("admin_menu", array($this, 'add_admin_pages'));
             add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
-            add_action("wp_head", array($this, "setup_header"));
-            add_action("init", array($this, "prepareForum"));
-            add_action('wp', array($this, "before_go")); // Redirects Old URL's to SEO URL's
+            add_action("wp_head", array($this, 'setup_header'));
+            add_action("init", array($this, 'prepareForum'));
+            add_action('wp', array($this, 'before_go')); // Redirects Old URL's to SEO URL's
 
             // Filter hooks
             add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
@@ -71,22 +88,88 @@ if (!class_exists('asgarosforum')) {
             AFAdmin::load_hooks();
         }
 
-        // Initialize varables
-        public function init() {
+        public function install() {
             global $wpdb;
-            $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
-            $this->t_categories = $wpdb->prefix . "forum_categories";
-            $this->t_forums = $wpdb->prefix . "forum_forums";
-            $this->t_threads = $wpdb->prefix . "forum_threads";
-            $this->t_posts = $wpdb->prefix . "forum_posts";
-            $this->t_usergroups = $wpdb->prefix . "forum_usergroups";
-            $this->t_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
-            $this->current_group = false;
-            $this->current_forum = false;
-            $this->current_thread = false;
-            $this->curr_page = 0;
-            $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
-            $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
+            $installed_ver = get_option("asgarosforum_db_version");
+
+            // Only run if we need to
+            if ($installed_ver != $this->db_version) {
+                $charset_collate = $wpdb->get_charset_collate();
+
+                $sql1 = "
+                CREATE TABLE $this->table_categories (
+                id int(11) NOT NULL auto_increment,
+                name varchar(255) NOT NULL default '',
+                description varchar(255) default '',
+                usergroups varchar(255) default '',
+                sort int(11) NOT NULL default '0',
+                PRIMARY KEY  (id)
+                ) $charset_collate;";
+
+                $sql2 = "
+                CREATE TABLE $this->table_forums (
+                id int(11) NOT NULL auto_increment,
+                name varchar(255) NOT NULL default '',
+                parent_id int(11) NOT NULL default '0',
+                description varchar(255) NOT NULL default '',
+                sort int(11) NOT NULL default '0',
+                PRIMARY KEY  (id)
+                ) $charset_collate;";
+
+                $sql3 = "
+                CREATE TABLE $this->table_threads (
+                id int(11) NOT NULL auto_increment,
+                parent_id int(11) NOT NULL default '0',
+                views int(11) NOT NULL default '0',
+                subject varchar(255) NOT NULL default '',
+                status varchar(20) NOT NULL default 'open',
+                closed int(11) NOT NULL default '0',
+                PRIMARY KEY  (id)
+                ) $charset_collate;";
+
+                $sql4 = "
+                CREATE TABLE $this->table_posts (
+                id int(11) NOT NULL auto_increment,
+                text longtext,
+                parent_id int(11) NOT NULL default '0',
+                date datetime NOT NULL default '0000-00-00 00:00:00',
+                author_id int(11) NOT NULL default '0',
+                PRIMARY KEY  (id)
+                ) $charset_collate ENGINE = MyISAM;";
+
+                $sql5 = "
+                CREATE TABLE $this->table_usergroups (
+                id int(11) NOT NULL auto_increment,
+                name varchar(255) NOT NULL,
+                description varchar(255) default NULL,
+                PRIMARY KEY  (id)
+                ) $charset_collate;";
+
+                $sql6 = "
+                CREATE TABLE $this->table_usergroup2user (
+                id int(11) NOT NULL auto_increment,
+                user_id int(11) NOT NULL,
+                group_id varchar(255) NOT NULL,
+                PRIMARY KEY  (id)
+                ) $charset_collate;";
+
+                require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+                dbDelta($sql1);
+                dbDelta($sql2);
+                dbDelta($sql3);
+                dbDelta($sql4);
+                dbDelta($sql5);
+                dbDelta($sql6);
+
+                if ($installed_ver < 1) {
+                    // We need to kill this one after we fix how the forum search works
+                    $wpdb->query("ALTER TABLE $this->table_posts ENGINE = MyISAM;"); // InnoDB doesn't support FULLTEXT
+                    $wpdb->query("ALTER TABLE $this->table_posts ADD FULLTEXT (text);");
+                }
+
+                update_option("asgarosforum_db_version", $this->db_version);
+            }
         }
 
         public function prepareForum() {
@@ -154,7 +237,7 @@ if (!class_exists('asgarosforum')) {
         public function forum_exists($id) {
             global $wpdb;
 
-            if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE id = %d", $id))) {
+            if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_forums} WHERE id = %d", $id))) {
                 return true;
             } else {
                 return false;
@@ -189,7 +272,7 @@ if (!class_exists('asgarosforum')) {
 
             if ($page == 'N/A') {
                 global $wpdb;
-                $wpdb->query($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d", $id));
+                $wpdb->query($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE parent_id = %d", $id));
                 $num = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']) - 1;
 
                 if ($num < 0) {
@@ -205,20 +288,20 @@ if (!class_exists('asgarosforum')) {
         public function get_groups() {
             global $wpdb;
 
-            return $wpdb->get_results("SELECT * FROM {$this->t_categories} ORDER BY sort DESC");
+            return $wpdb->get_results("SELECT * FROM {$this->table_categories} ORDER BY sort DESC");
         }
 
-        public function get_forums($id = '') {
+        public function getable_forums($id = '') {
             global $wpdb;
 
             if ($id) {
-                return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_forums} WHERE parent_id = %d ORDER BY SORT DESC", $id));
+                return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_forums} WHERE parent_id = %d ORDER BY SORT DESC", $id));
             } else {
-                return $wpdb->get_results("SELECT * FROM {$this->t_forums} ORDER BY sort DESC");
+                return $wpdb->get_results("SELECT * FROM {$this->table_forums} ORDER BY sort DESC");
             }
         }
 
-        public function get_threads($id, $type = 'open') {
+        public function getable_threads($id, $type = 'open') {
             global $wpdb;
             $limit = "";
 
@@ -228,30 +311,30 @@ if (!class_exists('asgarosforum')) {
                 $limit = $wpdb->prepare("LIMIT %d, %d", $start, $end);
             }
 
-            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} AS t WHERE t.parent_id = %d AND t.status = '{$type}' ORDER BY (SELECT MAX(date) FROM {$this->t_posts} AS p WHERE p.parent_id = t.id) DESC {$limit}", $id));
+            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status = '{$type}' ORDER BY (SELECT MAX(date) FROM {$this->table_posts} AS p WHERE p.parent_id = t.id) DESC {$limit}", $id));
         }
 
-        public function get_posts($thread_id) {
+        public function getable_posts($thread_id) {
             global $wpdb;
             $start = $this->curr_page * $this->options['forum_posts_per_page'];
             $end = $this->options['forum_posts_per_page'];
 
-            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d ORDER BY date ASC LIMIT %d, %d", $thread_id, $start, $end));
+            return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE parent_id = %d ORDER BY date ASC LIMIT %d, %d", $thread_id, $start, $end));
         }
 
         public function get_groupname($id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_categories} WHERE id = %d", $id));
+            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_categories} WHERE id = %d", $id));
         }
 
         public function get_forumname($id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_forums} WHERE id = %d", $id));
+            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_forums} WHERE id = %d", $id));
         }
 
         public function get_threadname($id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id));
+            return $wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id));
         }
 
         public function cut_string($string, $length = 35) {
@@ -443,7 +526,7 @@ if (!class_exists('asgarosforum')) {
 
         public function get_lastpost($thread_id) {
             global $wpdb;
-            $post = $wpdb->get_row($wpdb->prepare("SELECT date, author_id, id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY date DESC LIMIT 1", $thread_id));
+            $post = $wpdb->get_row($wpdb->prepare("SELECT date, author_id, id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY date DESC LIMIT 1", $thread_id));
             $link = $this->get_postlink($thread_id, $post->id);
             echo __("by", "asgarosforum") . ' ' . $this->profile_link($post->author_id) . '<br /><a href="'.$link.'">'.date_i18n($this->dateFormat, strtotime($post->date)).'&nbsp;Uhr</a>';
         }
@@ -456,8 +539,8 @@ if (!class_exists('asgarosforum')) {
                     $this->remove_topic();
                 }
 
-                $threads = $this->get_threads($forum_id);
-                $sticky_threads = $this->get_threads($forum_id, 'sticky');
+                $threads = $this->getable_threads($forum_id);
+                $sticky_threads = $this->getable_threads($forum_id, 'sticky');
                 $thread_counter = (count($threads) + count($sticky_threads));
 
                 if (isset($_GET['getNewForumID'])) {
@@ -476,7 +559,7 @@ if (!class_exists('asgarosforum')) {
 
         public function get_starter($thread_id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1", $thread_id));
+            return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1", $thread_id));
         }
 
         public function check_unread($thread_id) {
@@ -502,7 +585,7 @@ if (!class_exists('asgarosforum')) {
 
         public function get_subject($id) {
             global $wpdb;
-            return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->t_threads} WHERE id = %d", $id)));
+            return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id)));
         }
 
         public function showthread($thread_id) {
@@ -520,10 +603,10 @@ if (!class_exists('asgarosforum')) {
                 $this->closed_post();
             }
 
-            $posts = $this->get_posts($thread_id);
+            $posts = $this->getable_posts($thread_id);
 
             if ($posts) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $thread_id));
 
                 if (!$this->have_access($this->current_group)) {
                     wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
@@ -582,12 +665,12 @@ if (!class_exists('asgarosforum')) {
 
         public function get_userposts_num($id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_posts} WHERE author_id = %d", $id));
+            return $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_posts} WHERE author_id = %d", $id));
         }
 
         public function get_post_owner($id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->t_posts} WHERE id = %d", $id));
+            return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d", $id));
         }
 
         public function overview() {
@@ -624,33 +707,33 @@ if (!class_exists('asgarosforum')) {
 
         public function last_posterid($forum) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT {$this->t_posts}.author_id FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id={$this->t_threads}.id WHERE {$this->t_threads}.parent_id = %d ORDER BY {$this->t_posts}.date DESC", $forum));
+            return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.author_id FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_threads}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $forum));
         }
 
         public function last_posterid_thread($thread_id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT {$this->t_posts}.author_id FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id={$this->t_threads}.id WHERE {$this->t_posts}.parent_id = %d ORDER BY {$this->t_posts}.date DESC", $thread_id));
+            return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.author_id FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_posts}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $thread_id));
         }
 
         public function num_threads($forum) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$this->t_threads} WHERE parent_id = %d", $forum));
+            return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$this->table_threads} WHERE parent_id = %d", $forum));
         }
 
         public function num_posts_forum($forum) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT COUNT({$this->t_posts}.id) FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id={$this->t_threads}.id WHERE {$this->t_threads}.parent_id = %d ORDER BY {$this->t_posts}.date DESC", $forum));
+            return $wpdb->get_var($wpdb->prepare("SELECT COUNT({$this->table_posts}.id) FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_threads}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $forum));
         }
 
         public function num_posts($thread_id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$this->t_posts} WHERE parent_id = %d", $thread_id));
+            return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$this->table_posts} WHERE parent_id = %d", $thread_id));
         }
 
         public function last_poster_in_forum($forum, $post_date = false) {
             global $wpdb;
 
-            $date = $wpdb->get_row($wpdb->prepare("SELECT {$this->t_posts}.date, {$this->t_posts}.id, {$this->t_posts}.parent_id, {$this->t_posts}.author_id FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id={$this->t_threads}.id WHERE {$this->t_threads}.parent_id = %d ORDER BY {$this->t_posts}.date DESC", $forum));
+            $date = $wpdb->get_row($wpdb->prepare("SELECT {$this->table_posts}.date, {$this->table_posts}.id, {$this->table_posts}.parent_id, {$this->table_posts}.author_id FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_threads}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $forum));
 
             if ($post_date && is_object($date)) {
                 return $date->date;
@@ -670,7 +753,7 @@ if (!class_exists('asgarosforum')) {
 
         public function last_poster_in_thread($thread_id) {
             global $wpdb;
-            return $wpdb->get_var("SELECT date FROM {$this->t_posts} WHERE parent_id = {$thread_id} ORDER BY date DESC");
+            return $wpdb->get_var("SELECT date FROM {$this->table_posts} WHERE parent_id = {$thread_id} ORDER BY date DESC");
         }
 
         public function have_access($groupid) {
@@ -680,7 +763,7 @@ if (!class_exists('asgarosforum')) {
                 return true;
             }
 
-            $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->t_categories} WHERE id = {$groupid}"));
+            $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->table_categories} WHERE id = {$groupid}"));
 
             if (!$user_groups) {
                 return true;
@@ -695,20 +778,20 @@ if (!class_exists('asgarosforum')) {
             return false;
         }
 
-        public function get_usergroups($id = false) {
+        public function getable_usergroups($id = false) {
             global $wpdb;
 
             if ($id) {
-                return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->t_usergroups} WHERE id = %d", $id));
+                return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_usergroups} WHERE id = %d", $id));
             } else {
-                return $wpdb->get_results("SELECT * FROM {$this->t_usergroups} ORDER BY id ASC");
+                return $wpdb->get_results("SELECT * FROM {$this->table_usergroups} ORDER BY id ASC");
             }
         }
 
         public function get_members($usergroup) {
             global $wpdb;
 
-            $q = "SELECT ug2u.user_id, u.user_login FROM {$this->t_usergroup2user} AS ug2u JOIN {$wpdb->users} AS u ON ug2u.user_id = u.ID WHERE ug2u.group_id = %d ORDER BY u.user_login";
+            $q = "SELECT ug2u.user_id, u.user_login FROM {$this->table_usergroup2user} AS ug2u JOIN {$wpdb->users} AS u ON ug2u.user_id = u.ID WHERE ug2u.group_id = %d ORDER BY u.user_login";
             return $wpdb->get_results($wpdb->prepare($q, $usergroup));
         }
 
@@ -719,7 +802,7 @@ if (!class_exists('asgarosforum')) {
                 return false;
             }
 
-            $id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$this->t_usergroup2user} WHERE user_id = %d AND group_id = %d", $user_id, $user_group_id));
+            $id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$this->table_usergroup2user} WHERE user_id = %d AND group_id = %d", $user_id, $user_group_id));
 
             if ($id) {
                 return true;
@@ -790,90 +873,6 @@ if (!class_exists('asgarosforum')) {
             return false;
         }
 
-        public function wp_forum_install() {
-            global $wpdb;
-
-            // Only run if we need to
-            if ($this->options['forum_db_version'] < $this->db_version) {
-                $charset_collate = $wpdb->get_charset_collate();
-
-                $sql1 = "
-                CREATE TABLE $this->t_categories (
-                id int(11) NOT NULL auto_increment,
-                name varchar(255) NOT NULL default '',
-                description varchar(255) default '',
-                usergroups varchar(255) default '',
-                sort int(11) NOT NULL default '0',
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                $sql2 = "
-                CREATE TABLE $this->t_forums (
-                id int(11) NOT NULL auto_increment,
-                name varchar(255) NOT NULL default '',
-                parent_id int(11) NOT NULL default '0',
-                description varchar(255) NOT NULL default '',
-                sort int(11) NOT NULL default '0',
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                $sql3 = "
-                CREATE TABLE $this->t_threads (
-                id int(11) NOT NULL auto_increment,
-                parent_id int(11) NOT NULL default '0',
-                views int(11) NOT NULL default '0',
-                subject varchar(255) NOT NULL default '',
-                status varchar(20) NOT NULL default 'open',
-                closed int(11) NOT NULL default '0',
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                $sql4 = "
-                CREATE TABLE $this->t_posts (
-                id int(11) NOT NULL auto_increment,
-                text longtext,
-                parent_id int(11) NOT NULL default '0',
-                date datetime NOT NULL default '0000-00-00 00:00:00',
-                author_id int(11) NOT NULL default '0',
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                $sql5 = "
-                CREATE TABLE $this->t_usergroups (
-                id int(11) NOT NULL auto_increment,
-                name varchar(255) NOT NULL,
-                description varchar(255) default NULL,
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                $sql6 = "
-                CREATE TABLE $this->t_usergroup2user (
-                id int(11) NOT NULL auto_increment,
-                user_id int(11) NOT NULL,
-                group_id varchar(255) NOT NULL,
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-                if ($this->options['forum_db_version'] < 1) {
-                    dbDelta($sql1);
-                    dbDelta($sql2);
-                    dbDelta($sql3);
-                    dbDelta($sql4);
-                    dbDelta($sql5);
-                    dbDelta($sql6);
-
-                    // We need to kill this one after we fix how the forum search works
-                    $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); // InnoDB doesn't support FULLTEXT
-                    $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (text)");
-                }
-
-                $this->options['forum_db_version'] = $this->db_version;
-                update_option('asgarosforum_options', $this->options);
-            }
-        }
-
         public function forum_menu() {
             global $user_ID;
             $this->setup_links();
@@ -942,10 +941,10 @@ if (!class_exists('asgarosforum')) {
 
             switch ($type) {
                 case FORUM:
-                    return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_forums} WHERE id = %d", $id));
+                    return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_forums} WHERE id = %d", $id));
                     break;
                 case THREAD:
-                    return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $id));
+                    return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $id));
                     break;
             }
         }
@@ -954,20 +953,20 @@ if (!class_exists('asgarosforum')) {
             global $wpdb;
             $group = ($group) ? $group : 0;
 
-            return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->t_categories} WHERE id = %d", $group));
+            return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->table_categories} WHERE id = %d", $group));
         }
 
         public function forum_get_parent($forum) {
             global $wpdb;
             $forum = ($forum) ? $forum : 0;
 
-            return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_forums} WHERE id = %d", $forum));
+            return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_forums} WHERE id = %d", $forum));
         }
 
         public function forum_get_group_from_post($thread_id) {
             global $wpdb;
             $thread_id = ($thread_id) ? $thread_id : 0;
-            $parent = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $thread_id));
+            $parent = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $thread_id));
 
             return $this->forum_get_group_id($this->forum_get_parent($parent));
         }
@@ -1047,10 +1046,10 @@ if (!class_exists('asgarosforum')) {
             $num_pages = 0;
 
             if ($source == 'post') {
-                $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_posts} WHERE parent_id = %d", $id));
+                $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_posts} WHERE parent_id = %d", $id));
                 $num_pages = ceil($count / $this->options['forum_posts_per_page']);
             } else if ($source == 'thread') {
-                $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_threads} WHERE parent_id = %d AND status <> 'sticky'", $id));
+                $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_threads} WHERE parent_id = %d AND status <> 'sticky'", $id));
                 $num_pages = ceil($count / $this->options['forum_threads_per_page']);
             }
 
@@ -1114,8 +1113,8 @@ if (!class_exists('asgarosforum')) {
             $topic = $_GET['topic'];
 
             if ($this->is_moderator($user_ID)) {
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE parent_id = %d", $topic));
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $topic));
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $topic));
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $topic));
             } else {
                 wp_die(__("You are not allowed to delete topics.", "asgarosforum"));
             }
@@ -1133,7 +1132,7 @@ if (!class_exists('asgarosforum')) {
                 Move "<strong>' . $this->get_subject($topic) . '</strong>" to new forum:<br />
                 <select name="newForumID">';
 
-                $frs = $this->get_forums();
+                $frs = $this->getable_forums();
 
                 foreach ($frs as $f) {
                     $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $currentForumID ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
@@ -1153,7 +1152,7 @@ if (!class_exists('asgarosforum')) {
             $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : 0;
 
             if ($this->is_moderator($user_ID) && $newForumID && $this->forum_exists($newForumID)) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET parent_id = {$newForumID} WHERE id = %d", $topic));
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d", $topic));
                 header("Location: " . $this->base_url . "viewforum&f=" . $newForumID);
                 exit;
             } else {
@@ -1164,10 +1163,10 @@ if (!class_exists('asgarosforum')) {
         public function remove_post() {
             global $user_ID, $wpdb;
             $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-            $post = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = %d", $id));
+            $post = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->table_posts} WHERE id = %d", $id));
 
             if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d", $id));
             } else {
                 wp_die(__("You do not have permission to delete this post.", "asgarosforum"));
             }
@@ -1184,9 +1183,9 @@ if (!class_exists('asgarosforum')) {
             $status = $this->is_sticky($id);
 
             if ($status) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET status = 'open' WHERE id = %d", $id));
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'open' WHERE id = %d", $id));
             } else {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET status = 'sticky' WHERE id = %d", $id));
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'sticky' WHERE id = %d", $id));
             }
         }
 
@@ -1200,7 +1199,7 @@ if (!class_exists('asgarosforum')) {
                 $id = $this->current_thread;
             }
 
-            $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->t_threads} WHERE id = %d", $id));
+            $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d", $id));
 
             if ($status == "sticky") {
                 return true;
@@ -1216,7 +1215,7 @@ if (!class_exists('asgarosforum')) {
                 wp_die(__("You are not allowed to do this.", "asgarosforum"));
             }
 
-            $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], (int) $_GET['id']));
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], (int) $_GET['id']));
         }
 
         public function is_closed($thread_id = '') {
@@ -1229,7 +1228,7 @@ if (!class_exists('asgarosforum')) {
                 $id = $this->current_thread;
             }
 
-            $closed = $wpdb->get_var($wpdb->prepare("SELECT closed FROM {$this->t_threads} WHERE id = %d", $id));
+            $closed = $wpdb->get_var($wpdb->prepare("SELECT closed FROM {$this->table_threads} WHERE id = %d", $id));
 
             if ($closed) {
                 return true;
@@ -1259,8 +1258,8 @@ if (!class_exists('asgarosforum')) {
         public function search_results() {
             global $wpdb;
             $search_string = esc_sql($_POST['search_words']);
-            $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, text, {$this->t_threads}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.date, {$this->t_posts}.author_id, MATCH (text) AGAINST (%s) AS score
-            FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
+            $sql = $wpdb->prepare("SELECT {$this->table_posts}.id, text, {$this->table_threads}.subject, {$this->table_posts}.parent_id, {$this->table_posts}.date, {$this->table_posts}.author_id, MATCH (text) AGAINST (%s) AS score
+            FROM {$this->table_posts} JOIN {$this->table_threads} ON {$this->table_posts}.parent_id = {$this->table_threads}.id
             AND MATCH (text) AGAINST (%s) ORDER BY score DESC LIMIT 50", $search_string, $search_string);
             $results = $wpdb->get_results($sql);
 
