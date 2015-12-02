@@ -5,8 +5,17 @@ if (!class_exists("AFAdmin"))
     {
         public static function load_hooks()
         {
+            add_action("admin_menu", 'AFAdmin::add_admin_pages');
             add_action('admin_init', 'AFAdmin::save_settings');
             add_action('admin_enqueue_scripts', 'AFAdmin::enqueue_admin_scripts');
+        }
+
+        // Add admin pages
+        public static function add_admin_pages() {
+            add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "admin/images/logo.png");
+            add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
+            add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
+            add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
         }
 
         public static function enqueue_admin_scripts($hook)
@@ -85,11 +94,11 @@ if (!class_exists("AFAdmin"))
         {
             global $asgarosforum;
             $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-            $user_groups = $asgarosforum->getable_usergroups();
+            $user_groups = self::getable_usergroups();
 
             if (isset($_GET['action']) && $_GET['action'] == 'users') {
                 if (isset($_GET['groupid'])) {
-                    $usergroup = $asgarosforum->getable_usergroups($_GET['groupid']);
+                    $usergroup = self::getable_usergroups($_GET['groupid']);
                     $usergroup_users = $asgarosforum->get_members($_GET['groupid']);
 
                     if (!empty($usergroup)) {
@@ -373,6 +382,16 @@ if (!class_exists("AFAdmin"))
 
             $wpdb->query("DELETE FROM {$asgarosforum->table_posts} WHERE parent_id = {$tid}");
             $wpdb->query("DELETE FROM {$asgarosforum->table_threads} WHERE id = {$tid}");
+        }
+
+        public static function getable_usergroups($id = false) {
+            global $wpdb, $asgarosforum;
+
+            if ($id) {
+                return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$asgarosforum->table_usergroups} WHERE id = %d", $id));
+            } else {
+                return $wpdb->get_results("SELECT * FROM {$asgarosforum->table_usergroups} ORDER BY id ASC");
+            }
         }
     }
 }

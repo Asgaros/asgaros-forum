@@ -25,9 +25,7 @@ if ($_GET['forumaction'] == "postreply") {
     if (isset($_GET['quote'])) {
         $quote_id = $this->check_parms($_GET['quote']);
         $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
-        $user = get_userdata($text->author_id);
-        $display_type = $this->options['forum_display_name'];
-        $display_name = (!empty($user)) ? $user->$display_type : __('Guest', 'asgarosforum');
+        $display_name = $this->get_userdata($text->author_id, $this->options['forum_display_name']);
         $q = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
     }
 }
@@ -121,7 +119,7 @@ if ($_GET['forumaction'] == "editpost") {
                         <input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
                         <input type='hidden' name='edit_post_id' value='<?php echo $post->id; ?>' />
                         <input type='hidden' name='thread_id' value='<?php echo $thread; ?>' />
-                        <input type='hidden' name='page_id' value='<?php echo $this->curr_page; ?>' />
+                        <input type='hidden' name='page_id' value='<?php echo $this->current_page; ?>' />
                     </td>
                 <?php } ?>
             </tr>

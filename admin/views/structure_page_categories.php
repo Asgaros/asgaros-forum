@@ -26,7 +26,7 @@
                             </a>
                             <!-- usergroups -->
                             <div id="user-groups-<?php echo $cat->id; ?>" class="user-groups-area">
-                                <?php $allusergroups = $asgarosforum->getable_usergroups(); ?>
+                                <?php $allusergroups = self::getable_usergroups(); ?>
                                 <?php $my_usergroups = (array)maybe_unserialize($cat->usergroups); ?>
                                 <?php if (!empty($allusergroups)): ?>
                                     <label><?php _e('Limit access to the following usergroups', 'asgarosforum'); ?>:</label>&nbsp;

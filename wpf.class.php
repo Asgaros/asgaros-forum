@@ -6,28 +6,24 @@ if (!class_exists('asgarosforum')) {
         var $delim = "";
         var $page_id = "";
 
-        var $home_url = "";
-        var $forum_link = "";
-        var $thread_link = "";
-        var $add_topic_link = "";
-
-        // DB tables
+        var $url_home = "";
+        var $url_forum = "";
+        var $url_thread = "";
+        var $url_add_topic = "";
         var $table_categories = "";
         var $table_forums = "";
         var $table_threads = "";
         var $table_posts = "";
         var $table_usergroups = "";
         var $table_usergroup2user = "";
-
-        // Misc
         var $current_group = "";
         var $current_forum = "";
         var $current_thread = "";
-        var $curr_page = "";
-        var $skin_url = "";
-        var $dateFormat = "";
+        var $current_page = "";
         var $current_view = "";
-        var $base_url = "";
+        var $url_skin = "";
+        var $url_base = "";
+        var $dateFormat = "";
 
         // Options
         var $options = array();
@@ -65,18 +61,17 @@ if (!class_exists('asgarosforum')) {
             $this->current_group = false;
             $this->current_forum = false;
             $this->current_thread = false;
-            $this->curr_page = 0;
-            $this->skin_url = plugin_dir_url(__FILE__) . 'skin';
+            $this->current_page = 0;
+            $this->url_skin = plugin_dir_url(__FILE__) . 'skin';
             $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
 
             // Action hooks
             register_activation_hook(__FILE__, array($this, 'install'));
             add_action('plugins_loaded', array($this, 'install'));
-            add_action("admin_menu", array($this, 'add_admin_pages'));
-            add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
-            add_action("wp_head", array($this, 'setup_header'));
             add_action("init", array($this, 'prepareForum'));
             add_action('wp', array($this, 'before_go')); // Redirects Old URL's to SEO URL's
+            add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
+            add_action("wp_head", array($this, 'setup_header'));
 
             // Filter hooks
             add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
@@ -195,14 +190,6 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        // Add admin pages
-        public function add_admin_pages() {
-            add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "admin/images/logo.png");
-            add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
-            add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
-            add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
-        }
-
         public function enqueue_front_scripts() {
             if (is_page($this->page_id)) {
                 wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js");
@@ -210,9 +197,9 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function setup_header() {
-            if (is_page($this->page_id)): ?>
-                <link rel="stylesheet" type="text/css" href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-            <?php endif;
+            if (is_page($this->page_id)) {
+                echo '<link rel="stylesheet" type="text/css" href="'.$this->url_skin.'/style.css" />';
+            }
         }
 
         public function setup_links() {
@@ -226,12 +213,12 @@ if (!class_exists('asgarosforum')) {
             }
 
             $perm = get_permalink($this->page_id);
-            $this->forum_link = $perm . $this->delim . "forumaction=viewforum&amp;f=";
-            $this->thread_link = $perm . $this->delim . "forumaction=viewtopic&amp;t=";
-            $this->add_topic_link = $perm . $this->delim . "forumaction=addtopic&amp;forum={$this->current_forum}";
+            $this->url_forum = $perm . $this->delim . "forumaction=viewforum&amp;f=";
+            $this->url_thread = $perm . $this->delim . "forumaction=viewtopic&amp;t=";
+            $this->url_add_topic = $perm . $this->delim . "forumaction=addtopic&amp;forum={$this->current_forum}";
             $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&amp;thread={$this->current_thread}";
-            $this->base_url = $perm . $this->delim . "forumaction=";
-            $this->home_url = $perm;
+            $this->url_base = $perm . $this->delim . "forumaction=";
+            $this->url_home = $perm;
         }
 
         public function forum_exists($id) {
@@ -246,24 +233,24 @@ if (!class_exists('asgarosforum')) {
 
         public function get_forumlink($id, $page = '0') {
             if ($this->options['forum_use_seo_friendly_urls']) {
-                $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $id)));
+                $group = $this->get_seo_friendly_title($this->get_categoryname($this->get_parent_id(FORUM, $id)));
                 $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id);
 
-                return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '.' . $page;
+                return rtrim($this->url_home, '/') . '/' . $group . '/' . $forum . '.' . $page;
             } else {
-                return $this->forum_link . $id . '.' . $page;
+                return $this->url_forum . $id . '.' . $page;
             }
         }
 
         public function get_threadlink($id, $page = '0') {
             if ($this->options['forum_use_seo_friendly_urls']) {
-                $group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
+                $group = $this->get_seo_friendly_title($this->get_categoryname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
                 $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
                 $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
 
-                return rtrim($this->home_url, '/') . '/' . $group . '/' . $forum . '/' . $thread . '.' . $page;
+                return rtrim($this->url_home, '/') . '/' . $group . '/' . $forum . '/' . $thread . '.' . $page;
             } else {
-                return $this->thread_link . $id . '.' . $page;
+                return $this->url_thread . $id . '.' . $page;
             }
         }
 
@@ -306,7 +293,7 @@ if (!class_exists('asgarosforum')) {
             $limit = "";
 
             if ($type == 'open') {
-                $start = $this->curr_page * $this->options['forum_threads_per_page'];
+                $start = $this->current_page * $this->options['forum_threads_per_page'];
                 $end = $this->options['forum_threads_per_page'];
                 $limit = $wpdb->prepare("LIMIT %d, %d", $start, $end);
             }
@@ -316,13 +303,13 @@ if (!class_exists('asgarosforum')) {
 
         public function getable_posts($thread_id) {
             global $wpdb;
-            $start = $this->curr_page * $this->options['forum_posts_per_page'];
+            $start = $this->current_page * $this->options['forum_posts_per_page'];
             $end = $this->options['forum_posts_per_page'];
 
             return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE parent_id = %d ORDER BY date ASC LIMIT %d, %d", $thread_id, $start, $end));
         }
 
-        public function get_groupname($id) {
+        public function get_categoryname($id) {
             global $wpdb;
             return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_categories} WHERE id = %d", $id));
         }
@@ -335,6 +322,11 @@ if (!class_exists('asgarosforum')) {
         public function get_threadname($id) {
             global $wpdb;
             return $wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id));
+        }
+
+        public function get_subject($id) {
+            global $wpdb;
+            return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id)));
         }
 
         public function cut_string($string, $length = 35) {
@@ -355,9 +347,9 @@ if (!class_exists('asgarosforum')) {
             $p = explode(".", $parm);
 
             if (count($p) > 1) {
-                $this->curr_page = $p[1];
+                $this->current_page = $p[1];
             } else {
-                $this->curr_page = 0;
+                $this->current_page = 0;
             }
 
             return $p[0];
@@ -396,8 +388,8 @@ if (!class_exists('asgarosforum')) {
                     if (!empty($whereto)) {
                         header("HTTP/1.1 301 Moved Permanently");
 
-                        if ($this->curr_page > 0) {
-                            header("Location: " . $whereto . "." . $this->curr_page);
+                        if ($this->current_page > 0) {
+                            header("Location: " . $whereto . "." . $this->current_page);
                         } else {
                             header("Location: " . $whereto);
                         }
@@ -435,6 +427,7 @@ if (!class_exists('asgarosforum')) {
             }
 
             if ($action) {
+                $this->current_view = $action;
                 switch ($action) {
                     case 'viewforum':
                         $forum_id = $this->check_parms($_GET['f']);
@@ -450,23 +443,17 @@ if (!class_exists('asgarosforum')) {
                         $this->current_thread = $thread_id;
                         break;
                     case 'addtopic':
-                        $this->current_view = $action;
                         $this->current_forum = $this->check_parms($_GET['forum']);
                         break;
                     case 'postreply':
-                        $this->current_view = $action;
                         $thread_id = $this->check_parms($_GET['thread']);
                         $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
                         $this->current_thread = $thread_id;
                         break;
                     case 'editpost':
-                        $this->current_view = $action;
                         $thread_id = $this->check_parms($_GET['t']);
                         $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
                         $this->current_thread = $thread_id;
-                        break;
-                    case 'search':
-                        $this->current_view = $action;
                         break;
                 }
             }
@@ -476,7 +463,7 @@ if (!class_exists('asgarosforum')) {
             echo '<div id="top-elements">';
             echo $this->breadcrumbs();
             echo "<div class='search'>
-            <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search'>
+            <form name='wpf_search_form' method='post' action='{$this->url_base}" . "search'>
             <span class='icon-search'></span>
             <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='mf_search' value='" . __("Search forums", "asgarosforum") . "' />
             </form>
@@ -567,7 +554,7 @@ if (!class_exists('asgarosforum')) {
             $image = "";
 
             if ($user_ID) {
-                $poster_id = $this->last_posterid_thread($thread_id);
+                $poster_id = $this->last_posterid($thread_id, $this->table_posts);
 
                 if ($user_ID != $poster_id) {
                     $lp = strtotime($this->last_poster_in_thread($thread_id));
@@ -581,11 +568,6 @@ if (!class_exists('asgarosforum')) {
 
             return false;
 
-        }
-
-        public function get_subject($id) {
-            global $wpdb;
-            return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id)));
         }
 
         public function showthread($thread_id) {
@@ -632,13 +614,13 @@ if (!class_exists('asgarosforum')) {
             $o = "<table><tr>";
 
             if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID))) {
-                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->post_reply_link}&amp;quote={$post_id}.{$this->curr_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->post_reply_link}&amp;quote={$post_id}.{$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
             if ($counter > 1) {
                 if ($this->is_moderator($user_ID)) {
                     if ($this->options['forum_use_seo_friendly_urls']) {
-                        $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                        $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->url_thread . $this->current_thread . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
                     } else {
                         $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
                     }
@@ -646,10 +628,10 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (($this->is_moderator($user_ID)) || ($user_ID == $author_id && $user_ID)) {
-                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->base_url . "editpost&amp;id={$post_id}&amp;t={$this->current_thread}.{$this->curr_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;t={$this->current_thread}.{$this->current_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
             }
 
-            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->curr_page) . "' title='" . __("Permalink", "asgarosforum") . "'><span class='icon-link'></span></a></td>";
+            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->current_page) . "' title='" . __("Permalink", "asgarosforum") . "'><span class='icon-link'></span></a></td>";
             $o .= "</tr></table>";
 
             return $o;
@@ -705,14 +687,9 @@ if (!class_exists('asgarosforum')) {
             return $newStr;
         }
 
-        public function last_posterid($forum) {
+        public function last_posterid($id, $location) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.author_id FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_threads}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $forum));
-        }
-
-        public function last_posterid_thread($thread_id) {
-            global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.author_id FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_posts}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $thread_id));
+            return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.author_id FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$location}.parent_id = %d ORDER BY {$this->table_posts}.date DESC", $id));
         }
 
         public function num_threads($forum) {
@@ -776,16 +753,6 @@ if (!class_exists('asgarosforum')) {
             }
 
             return false;
-        }
-
-        public function getable_usergroups($id = false) {
-            global $wpdb;
-
-            if ($id) {
-                return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_usergroups} WHERE id = %d", $id));
-            } else {
-                return $wpdb->get_results("SELECT * FROM {$this->table_usergroups} ORDER BY id ASC");
-            }
         }
 
         public function get_members($usergroup) {
@@ -878,7 +845,7 @@ if (!class_exists('asgarosforum')) {
             $this->setup_links();
 
             if ($user_ID || $this->allow_unreg()) {
-                $menu = "<table class='menu'><tr><td><a href='" . $this->add_topic_link . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
+                $menu = "<table class='menu'><tr><td><a href='" . $this->url_add_topic . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
                 return $menu;
             }
         }
@@ -894,15 +861,15 @@ if (!class_exists('asgarosforum')) {
                 if ($this->is_moderator($user_ID)) {
                     if ($this->options['forum_use_seo_friendly_urls']) {
                         if ($this->is_sticky()) {
-                            $stick = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+                            $stick = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
                         } else {
-                            $stick = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+                            $stick = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
                         }
 
                         if ($this->is_closed()) {
-                            $closed = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&amp;closed=0&amp;id={$this->current_thread}'><span class='icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+                            $closed = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;closed=0&amp;id={$this->current_thread}'><span class='icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
                         } else {
-                            $closed = "<td><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&amp;closed=1&amp;id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
+                            $closed = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;closed=1&amp;id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
                         }
                     } else {
                         if ($this->is_sticky()) {
@@ -926,8 +893,8 @@ if (!class_exists('asgarosforum')) {
                 }
 
                 if ($this->is_moderator($user_ID)) {
-                    $menu .= "<td><a href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&amp;getNewForumID&amp;topic={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
-                    $menu .= "<td><a href='" . $this->forum_link . $this->current_forum . "&amp;delete_topic&amp;topic={$this->current_thread}' onclick='return wpf_confirm();'><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "." . $this->current_page . "&amp;getNewForumID&amp;topic={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_topic&amp;topic={$this->current_thread}' onclick='return wpf_confirm();'><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
                 }
 
                 $menu .= $stick . $closed . "</tr></table>";
@@ -1055,7 +1022,7 @@ if (!class_exists('asgarosforum')) {
 
             if ($num_pages <= 6) {
                 for ($i = 0; $i < $num_pages; ++$i) {
-                    if ($i == $this->curr_page) {
+                    if ($i == $this->current_page) {
                         $out .= " <strong>" . ($i + 1) . "</strong>";
                     } else {
                         if ($source == 'post') {
@@ -1066,7 +1033,7 @@ if (!class_exists('asgarosforum')) {
                     }
                 }
             } else {
-                if ($this->curr_page >= 4) {
+                if ($this->current_page >= 4) {
                     if ($source == 'post') {
                         $out .= " <a href='" . $this->get_threadlink($this->current_thread) . "'>" . __("First", "asgarosforum") . "</a> << ";
                     } else if ($source == 'thread') {
@@ -1075,28 +1042,28 @@ if (!class_exists('asgarosforum')) {
                 }
 
                 for ($i = 3; $i > 0; $i--) {
-                    if ((($this->curr_page + 1) - $i) > 0) {
+                    if ((($this->current_page + 1) - $i) > 0) {
                         if ($source == 'post') {
-                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->curr_page - $i)) . "'>" . (($this->curr_page + 1) - $i) . "</a>";
+                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->current_page - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
                         } else if ($source == 'thread') {
-                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->curr_page - $i)) . "'>" . (($this->curr_page + 1) - $i) . "</a>";
+                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->current_page - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
                         }
                     }
                 }
 
-                $out .= " <strong>" . ($this->curr_page + 1) . "</strong>";
+                $out .= " <strong>" . ($this->current_page + 1) . "</strong>";
 
                 for ($i = 1; $i <= 3; $i++) {
-                    if ((($this->curr_page + 1) + $i) <= $num_pages) {
+                    if ((($this->current_page + 1) + $i) <= $num_pages) {
                         if ($source == 'post') {
-                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
+                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->current_page + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
                         } else if ($source == 'thread') {
-                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->curr_page + $i)) . "'>" . (($this->curr_page + 1) + $i) . "</a>";
+                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->current_page + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
                         }
                     }
                 }
 
-                if ($num_pages - $this->curr_page >= 5) {
+                if ($num_pages - $this->current_page >= 5) {
                     if ($source == 'post') {
                         $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
                     } else if ($source == 'thread') {
@@ -1128,7 +1095,7 @@ if (!class_exists('asgarosforum')) {
             if ($this->is_moderator($user_ID)) {
                 $currentForumID = $this->check_parms($_GET['f']);
                 $strOUT = '
-                <form method="post" action="' . $this->base_url . 'viewforum&amp;f=' . $currentForumID . '&amp;move_topic&amp;topic=' . $topic . '">
+                <form method="post" action="' . $this->url_base . 'viewforum&amp;f=' . $currentForumID . '&amp;move_topic&amp;topic=' . $topic . '">
                 Move "<strong>' . $this->get_subject($topic) . '</strong>" to new forum:<br />
                 <select name="newForumID">';
 
@@ -1153,7 +1120,7 @@ if (!class_exists('asgarosforum')) {
 
             if ($this->is_moderator($user_ID) && $newForumID && $this->forum_exists($newForumID)) {
                 $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d", $topic));
-                header("Location: " . $this->base_url . "viewforum&f=" . $newForumID);
+                header("Location: " . $this->url_base . "viewforum&f=" . $newForumID);
                 exit;
             } else {
                 wp_die(__("You do not have permission to move this topic.", "asgarosforum"));
@@ -1268,7 +1235,7 @@ if (!class_exists('asgarosforum')) {
 
         public function get_topic_image($thread) {
             /*if ($this->is_closed($thread)) {
-                return "<img src='{$this->skin_url}/images/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
+                return "<img src='{$this->url_skin}/images/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
             }*/
 
             if ($this->check_unread($thread)) {

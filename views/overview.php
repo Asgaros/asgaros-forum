@@ -12,7 +12,7 @@
 
                 if ($user_ID) {
                     $lpif = $this->last_poster_in_forum($f->id, true);
-                    $last_posterid = $this->last_posterid($f->id);
+                    $last_posterid = $this->last_posterid($f->id, $this->table_threads);
 
                     if ($last_posterid != $user_ID) {
                         $lp = strtotime($lpif); // date

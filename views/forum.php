@@ -20,7 +20,7 @@
                 <th><?php _e("Last post", "asgarosforum"); ?></th>
             </tr>
 
-            <?php if ($sticky_threads && !$this->curr_page): // Prevent stickies from showing up on page 2...n ?>
+            <?php if ($sticky_threads && !$this->current_page): // Prevent stickies from showing up on page 2...n ?>
                 <tr>
                     <td class="bright" colspan="5"><?php _e("Sticky Topics", "asgarosforum"); ?></td>
                 </tr>
