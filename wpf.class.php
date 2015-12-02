@@ -30,7 +30,6 @@ if (!class_exists('asgarosforum')) {
         var $default_ops = array(
             'forum_posts_per_page' => 10,
             'forum_threads_per_page' => 20,
-            'forum_require_registration' => true,
             'forum_use_gravatar' => true,
             'forum_use_seo_friendly_urls' => false,
             'forum_allow_image_uploads' => false,
@@ -504,10 +503,6 @@ if (!class_exists('asgarosforum')) {
         public function get_userdata($user_id, $data) {
             $user = get_userdata($user_id);
 
-            if (!$user) {
-                return __("Guest", "asgarosforum");
-            }
-
             return $user->$data;
         }
 
@@ -613,7 +608,7 @@ if (!class_exists('asgarosforum')) {
 
             $o = "<table><tr>";
 
-            if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID))) {
+            if ($user_ID && (!$this->is_closed() || $this->is_moderator($user_ID))) {
                 $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->post_reply_link}&amp;quote={$post_id}.{$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
@@ -844,7 +839,7 @@ if (!class_exists('asgarosforum')) {
             global $user_ID;
             $this->setup_links();
 
-            if ($user_ID || $this->allow_unreg()) {
+            if ($user_ID) {
                 $menu = "<table class='menu'><tr><td><a href='" . $this->url_add_topic . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
                 return $menu;
             }
@@ -857,7 +852,7 @@ if (!class_exists('asgarosforum')) {
             $stick = "";
             $closed = "";
 
-            if ($user_ID || $this->allow_unreg()) {
+            if ($user_ID) {
                 if ($this->is_moderator($user_ID)) {
                     if ($this->options['forum_use_seo_friendly_urls']) {
                         if ($this->is_sticky()) {
@@ -1204,14 +1199,6 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        public function allow_unreg() {
-            if ($this->options['forum_require_registration'] == false) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
         public function profile_link($user_id, $toWrap = false) {
             if ($toWrap) {
                 $user = wordwrap($this->get_userdata($user_id, $this->options['forum_display_name']), 22, "-<br/>", 1);
@@ -1243,25 +1230,6 @@ if (!class_exists('asgarosforum')) {
             } else {
                 return "<span class='icon-files-empty-big-no'></span>";
             }
-        }
-
-        public function get_captcha() {
-            global $user_ID;
-            $out = "";
-
-            if (!$user_ID) {
-                include_once("captcha/shared.php");
-                include_once("captcha/captcha_code.php");
-                $wpf_captcha = new CaptchaCode();
-                $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
-
-                $out .= "
-                <img alt='' src='" . WPFURL . "captcha/captcha_images.php?width=120&amp;height=40&amp;code=" . $wpf_code . "' />
-                <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'>
-                <input name='wpf_security_code' class='captcha' type='text' />&nbsp;" . __("Enter Security Code (required)", "asgarosforum");
-            }
-
-            return $out;
         }
 
         public function autoembed($string) {

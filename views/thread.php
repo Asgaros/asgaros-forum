@@ -35,12 +35,11 @@
     <?php } ?>
 </div>
 
-<?php if ((!$this->is_closed() || $this->is_moderator($user_ID)) && ($user_ID || $this->allow_unreg())) { ?>
+<?php if ((!$this->is_closed() || $this->is_moderator($user_ID)) && $user_ID) { ?>
     <div id='thread-reply'>
         <form name='addform' method='post'>
             <strong><?php echo __("Quick Reply", "asgarosforum"); ?>:</strong><br />
-            <?php wp_editor('', 'message', $this->editor_settings); ?>
-            <br /><?php echo $this->get_captcha(); ?><br />
+            <?php wp_editor('', 'message', $this->editor_settings); ?><br />
             <input type='submit' name='add_post_submit' value='<?php _e("Submit Quick Reply", "asgarosforum"); ?>' />
             <input type='hidden' name='add_post_forumid' value='<?php echo floor($quick_thread); ?>'/>
         </form>

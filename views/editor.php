@@ -10,13 +10,13 @@ if ($_GET['forumaction'] == "addtopic") {
         wp_die(__("Sorry, this forum does not exist.", "asgarosforum"));
     }
 
-    if (!$user_ID && !$this->allow_unreg()) {
+    if (!$user_ID) {
         wp_die(__("Sorry, you don't have permission to post.", "asgarosforum"));
     }
 }
 
 if ($_GET['forumaction'] == "postreply") {
-    if (!$user_ID && !$this->allow_unreg()) {
+    if (!$user_ID) {
         wp_die(__("Sorry, you don't have permission to post.", "asgarosforum"));
     }
 
@@ -31,7 +31,7 @@ if ($_GET['forumaction'] == "postreply") {
 }
 
 if ($_GET['forumaction'] == "editpost") {
-    if (!$user_ID && !$this->allow_unreg()) {
+    if (!$user_ID) {
         wp_die(__("Sorry, you don't have permission to post.", "asgarosforum"));
     }
 
@@ -86,12 +86,7 @@ if ($_GET['forumaction'] == "editpost") {
                     ?>
                 </td>
             </tr>
-            <?php if ($_GET['forumaction'] != "editpost") { ?>
-                <tr>
-                    <td></td>
-                    <td><?php echo $this->get_captcha(); ?></td>
-                </tr>
-            <?php }
+            <?php
             if ($_GET['forumaction'] != "editpost" && $this->options['forum_allow_image_uploads']) { ?>
     		<tr>
     			<td><?php _e("Images:", "asgarosforum"); ?></td>

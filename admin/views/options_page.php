@@ -25,10 +25,6 @@
             </select>
         </p>
         <p>
-            <input type="checkbox" name="forum_require_registration" id="forum_require_registration" <?php checked(!empty($asgarosforum->options['forum_require_registration'])); ?> />
-            <label for="forum_require_registration" class="mf_cb_label"><?php _e('Only Logged in Users can post Replies', 'asgarosforum'); ?></label>
-        </p>
-        <p>
             <input type="checkbox" name="forum_use_gravatar" id="forum_use_gravatar" <?php checked(!empty($asgarosforum->options['forum_use_gravatar'])); ?> />
             <label for="forum_use_gravatar" class="mf_cb_label"><?php _e('Show Avatars in the Forum', 'asgarosforum'); ?></label>
         </p>

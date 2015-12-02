@@ -94,23 +94,6 @@ function mf_check_uploaded_images()
   return $valid;
 }
 
-if (!$user_ID)
-{
-  include_once("captcha/shared.php");
-  $wpf_code = wpf_str_decrypt($_POST['wpf_security_check']);
-  if (($wpf_code == $_POST['wpf_security_code']) && (!empty($wpf_code)))
-  {
-    //It passed
-  }
-  else
-  {
-    $error = true;
-    $msg = __("Security code does not match", "asgarosforum");
-    wp_die($msg);
-  }
-}
-
-
 //ADDING A NEW TOPIC?
 if (isset($_POST['add_topic_submit']))
 {
