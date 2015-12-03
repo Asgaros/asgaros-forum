@@ -30,7 +30,6 @@ if (!class_exists('asgarosforum')) {
         var $default_ops = array(
             'forum_posts_per_page' => 10,
             'forum_threads_per_page' => 20,
-            'forum_use_seo_friendly_urls' => false,
             'forum_allow_image_uploads' => false,
             'forum_display_name' => 'user_login'
         );
@@ -67,12 +66,11 @@ if (!class_exists('asgarosforum')) {
             register_activation_hook(__FILE__, array($this, 'install'));
             add_action('plugins_loaded', array($this, 'install'));
             add_action("init", array($this, 'prepareForum'));
-            add_action('wp', array($this, 'before_go')); // Redirects Old URL's to SEO URL's
+            add_action('wp', array($this, 'before_go'));
             add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
             add_action("wp_head", array($this, 'setup_header'));
 
             // Filter hooks
-            add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
             add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
 
             // Shortcode hooks
@@ -230,26 +228,11 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function get_forumlink($id, $page = '0') {
-            if ($this->options['forum_use_seo_friendly_urls']) {
-                $group = $this->get_seo_friendly_title($this->get_categoryname($this->get_parent_id(FORUM, $id)));
-                $forum = $this->get_seo_friendly_title($this->get_forumname($id) . "-forum" . $id);
-
-                return rtrim($this->url_home, '/') . '/' . $group . '/' . $forum . '.' . $page;
-            } else {
-                return $this->url_forum . $id . '.' . $page;
-            }
+            return $this->url_forum . $id . '.' . $page;
         }
 
         public function get_threadlink($id, $page = '0') {
-            if ($this->options['forum_use_seo_friendly_urls']) {
-                $group = $this->get_seo_friendly_title($this->get_categoryname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $id))));
-                $forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $id)) . "-forum" . $this->get_parent_id(THREAD, $id));
-                $thread = $this->get_seo_friendly_title($this->get_subject($id) . "-thread" . $id);
-
-                return rtrim($this->url_home, '/') . '/' . $group . '/' . $forum . '/' . $thread . '.' . $page;
-            } else {
-                return $this->url_thread . $id . '.' . $page;
-            }
+            return $this->url_thread . $id . '.' . $page;
         }
 
         public function get_postlink($id, $postid, $page = 'N/A') {
@@ -371,29 +354,6 @@ if (!class_exists('asgarosforum')) {
             if (isset($_GET['move_topic'])) {
                 $this->move_topic();
             }
-
-            if ($action != false && $this->options['forum_use_seo_friendly_urls']) {
-                if (!isset($_GET['getNewForumID']) && !isset($_GET['delete_topic']) && !isset($_GET['remove_post']) && !isset($_GET['sticky']) && !isset($_GET['closed'])) {
-                    switch ($action) {
-                        case 'viewforum':
-                            $whereto = $this->get_forumlink($this->check_parms($_GET['f']));
-                            break;
-                        case 'viewtopic':
-                            $whereto = $this->get_threadlink($this->check_parms($_GET['t']));
-                            break;
-                    }
-
-                    if (!empty($whereto)) {
-                        header("HTTP/1.1 301 Moved Permanently");
-
-                        if ($this->current_page > 0) {
-                            header("Location: " . $whereto . "." . $this->current_page);
-                        } else {
-                            header("Location: " . $whereto);
-                        }
-                    }
-                }
-            }
         }
 
         public function go() {
@@ -403,25 +363,6 @@ if (!class_exists('asgarosforum')) {
                 $action = $_GET['forumaction'];
             } else {
                 $action = false;
-            }
-
-            if ($action == false) {
-                if ($this->options['forum_use_seo_friendly_urls']) {
-                    $uri = $this->get_seo_friendly_query();
-
-                    if (!empty($uri) && $uri['action'] && $uri['id']) {
-                        switch ($uri['action']) {
-                            case 'forum':
-                                $action = 'viewforum';
-                                $_GET['f'] = $uri['id'];
-                                break;
-                            case 'thread':
-                                $action = 'viewtopic';
-                                $_GET['t'] = $uri['id'];
-                                break;
-                        }
-                    }
-                }
             }
 
             if ($action) {
@@ -613,11 +554,7 @@ if (!class_exists('asgarosforum')) {
 
             if ($counter > 1) {
                 if ($this->is_moderator($user_ID)) {
-                    if ($this->options['forum_use_seo_friendly_urls']) {
-                        $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->url_thread . $this->current_thread . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
-                    } else {
-                        $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
-                    }
+                    $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
                 }
             }
 
@@ -772,7 +709,6 @@ if (!class_exists('asgarosforum')) {
             return false;
         }
 
-        // Some SEO friendly stuff
         public function get_pagetitle($bef_title, $sep) {
             global $post;
             $default_title = $post->post_title;
@@ -781,21 +717,6 @@ if (!class_exists('asgarosforum')) {
 
             if (isset($_GET['forumaction']) && !empty($_GET['forumaction'])) {
                 $action = $_GET['forumaction'];
-            } else if ($this->options['forum_use_seo_friendly_urls']) {
-                $uri = $this->get_seo_friendly_query();
-
-                if (!empty($uri) && $uri['action'] && $uri['id']) {
-                    switch ($uri['action']) {
-                        case 'forum':
-                            $action = 'viewforum';
-                            $_GET['f'] = $uri['id'];
-                            break;
-                        case 'thread':
-                            $action = 'viewtopic';
-                            $_GET['t'] = $uri['id'];
-                            break;
-                    }
-                }
             }
 
             switch ($action) {
@@ -853,30 +774,16 @@ if (!class_exists('asgarosforum')) {
 
             if ($user_ID) {
                 if ($this->is_moderator($user_ID)) {
-                    if ($this->options['forum_use_seo_friendly_urls']) {
-                        if ($this->is_sticky()) {
-                            $stick = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
-                        } else {
-                            $stick = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
-                        }
-
-                        if ($this->is_closed()) {
-                            $closed = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;closed=0&amp;id={$this->current_thread}'><span class='icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
-                        } else {
-                            $closed = "<td><a href='" . $this->url_thread . $this->current_thread . "." . $this->current_page . "&amp;closed=1&amp;id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
-                        }
+                    if ($this->is_sticky()) {
+                        $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
                     } else {
-                        if ($this->is_sticky()) {
-                            $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
-                        } else {
-                            $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
-                        }
+                        $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+                    }
 
-                        if ($this->is_closed()) {
-                            $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=0&amp;id={$this->current_thread}'><span class=' icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
-                        } else {
-                            $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=1&amp;id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
-                        }
+                    if ($this->is_closed()) {
+                        $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=0&amp;id={$this->current_thread}'><span class=' icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+                    } else {
+                        $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=1&amp;id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
                     }
                 }
 
@@ -1231,37 +1138,6 @@ if (!class_exists('asgarosforum')) {
             } else {
                 return $string;
             }
-        }
-
-        public function get_seo_friendly_query() {
-            $end = array();
-            $request_uri = $_SERVER['REQUEST_URI'];
-            $link = str_replace(site_url(), '', get_permalink($this->page_id));
-            $uri = explode('/', trim(str_replace($link, '', $request_uri), '/'));
-
-            if (array_count_values($uri)) {
-                $m = end($uri);
-                $found = '';
-                preg_match("/.*-(forum|thread)(\d*(\.?\d+)?)$/", $m, $found);
-            }
-
-            if (!empty($found)) {
-                $end = array('action' => $found[1], 'id' => $found[2]);
-            }
-
-            return $end;
-        }
-
-        public function get_seo_friendly_title($str) {
-            return sanitize_title_with_dashes($str);
-        }
-
-        public function set_seo_friendly_rules($args) {
-            $new = array();
-            $link = trim(str_replace(array(site_url(), 'index.php/'), '', get_permalink($this->page_id)), '/');
-            $new['(' . $link . ')(/[-/0-9a-zA-Z]+)?/(.*)$'] = 'index.php?pagename=$matches[1]&page=$matches[2]';
-
-            return $new + $args;
         }
     }
 }

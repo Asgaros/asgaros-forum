@@ -25,10 +25,6 @@
             </select>
         </p>
         <p>
-            <input type="checkbox" name="forum_use_seo_friendly_urls" id="forum_use_seo_friendly_urls" <?php checked(!empty($asgarosforum->options['forum_use_seo_friendly_urls'])); ?> />
-            <label for="forum_use_seo_friendly_urls" class="mf_cb_label"><?php _e('Use SEO-friendly Permalinks', 'asgarosforum'); ?></label>
-        </p>
-        <p>
             <input type="checkbox" name="forum_allow_image_uploads" id="forum_allow_image_uploads" <?php checked(!empty($asgarosforum->options['forum_allow_image_uploads'])); ?> />
             <label for="forum_allow_image_uploads" class="mf_cb_label"><?php _e('Allow image uploads', 'asgarosforum'); ?></label>
         </p>
