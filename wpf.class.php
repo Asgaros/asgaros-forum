@@ -6,7 +6,6 @@ if (!class_exists('asgarosforum')) {
         var $delim = "";
         var $page_id = "";
         var $date_format = "";
-        var $url_skin = "";
         var $url_base = "";
         var $url_home = "";
         var $url_forum = "";
@@ -42,20 +41,17 @@ if (!class_exists('asgarosforum')) {
             global $wpdb;
             $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array())); // Merge defaults with user's settings
             $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
-
+            $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
             $this->table_categories = $wpdb->prefix . "forum_categories";
             $this->table_forums = $wpdb->prefix . "forum_forums";
             $this->table_threads = $wpdb->prefix . "forum_threads";
             $this->table_posts = $wpdb->prefix . "forum_posts";
             $this->table_usergroups = $wpdb->prefix . "forum_usergroups";
             $this->table_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
-
             $this->current_group = false;
             $this->current_forum = false;
             $this->current_thread = false;
             $this->current_page = 0;
-            $this->url_skin = plugin_dir_url(__FILE__) . 'skin';
-            $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
 
             // Action hooks
             register_activation_hook(__FILE__, array($this, 'install'));
@@ -177,7 +173,7 @@ if (!class_exists('asgarosforum')) {
 
         public function setup_header() {
             if (is_page($this->page_id)) {
-                echo '<link rel="stylesheet" type="text/css" href="'.$this->url_skin.'/style.css" />';
+                echo '<link rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'skin/style.css" />';
             }
         }
 
@@ -1102,14 +1098,18 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function get_topic_image($thread) {
-            /*if ($this->is_closed($thread)) {
-                return "<img src='{$this->url_skin}/images/closed.png' alt='" . __("Closed topic", "asgarosforum") . "' title='" . __("Closed topic", "asgarosforum") . "'>";
-            }*/
-
             if ($this->check_unread($thread)) {
-                return "<span class='icon-files-empty-big-yes'></span>";
+                if ($this->is_closed($thread)) {
+                    return "<span class='icon-lock-big-yes'></span>";
+                } else {
+                    return "<span class='icon-files-empty-big-yes'></span>";
+                }
             } else {
-                return "<span class='icon-files-empty-big-no'></span>";
+                if ($this->is_closed($thread)) {
+                    return "<span class='icon-lock-big-no'></span>";
+                } else {
+                    return "<span class='icon-files-empty-big-no'></span>";
+                }
             }
         }
 
