@@ -15,7 +15,7 @@
         <table id='postid-<?php echo $post->id; ?>'>
             <tr>
                 <td colspan='2' class='bright'>
-                    <span class='post-data-format'><?php echo date_i18n($this->dateFormat, strtotime($post->date)); ?></span>
+                    <span class='post-data-format'><?php echo date_i18n($this->date_format, strtotime($post->date)); ?></span>
                     <div class='wpf-meta'><?php echo $this->get_postmeta($post->id, $post->author_id, $post->parent_id, $counter); ?></div>
                 </td>
             </tr>
@@ -37,7 +37,7 @@
     <div id='thread-reply'>
         <form name='addform' method='post'>
             <strong><?php echo __("Quick Reply", "asgarosforum"); ?>:</strong><br />
-            <?php wp_editor('', 'message', $this->editor_settings); ?><br />
+            <?php wp_editor('', 'message', $this->options_editor); ?><br />
             <input type='submit' name='add_post_submit' value='<?php _e("Submit Quick Reply", "asgarosforum"); ?>' />
             <input type='hidden' name='add_post_forumid' value='<?php echo floor($quick_thread); ?>'/>
         </form>

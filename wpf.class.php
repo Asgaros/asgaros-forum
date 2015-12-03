@@ -5,11 +5,14 @@ if (!class_exists('asgarosforum')) {
         var $db_version = 1; // MANAGES DB VERSION
         var $delim = "";
         var $page_id = "";
-
+        var $date_format = "";
+        var $url_skin = "";
+        var $url_base = "";
         var $url_home = "";
         var $url_forum = "";
         var $url_thread = "";
         var $url_add_topic = "";
+        var $url_post_reply = "";
         var $table_categories = "";
         var $table_forums = "";
         var $table_threads = "";
@@ -21,19 +24,14 @@ if (!class_exists('asgarosforum')) {
         var $current_thread = "";
         var $current_page = "";
         var $current_view = "";
-        var $url_skin = "";
-        var $url_base = "";
-        var $dateFormat = "";
-
-        // Options
         var $options = array();
-        var $default_ops = array(
+        var $options_default = array(
             'forum_posts_per_page' => 10,
             'forum_threads_per_page' => 20,
             'forum_allow_image_uploads' => false,
             'forum_display_name' => 'user_login'
         );
-        var $editor_settings = array(
+        var $options_editor = array(
             'media_buttons' => false,
             'textarea_rows' => 5,
             'teeny' => true,
@@ -41,11 +39,8 @@ if (!class_exists('asgarosforum')) {
         );
 
         public function __construct() {
-            // Init options
-            $this->options = array_merge($this->default_ops, get_option('asgarosforum_options', array())); // Merge defaults with user's settings
-
-            // Initialize variables
             global $wpdb;
+            $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array())); // Merge defaults with user's settings
             $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
 
             $this->table_categories = $wpdb->prefix . "forum_categories";
@@ -60,14 +55,13 @@ if (!class_exists('asgarosforum')) {
             $this->current_thread = false;
             $this->current_page = 0;
             $this->url_skin = plugin_dir_url(__FILE__) . 'skin';
-            $this->dateFormat = get_option('date_format') . ', ' . get_option('time_format');
+            $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
 
             // Action hooks
             register_activation_hook(__FILE__, array($this, 'install'));
             add_action('plugins_loaded', array($this, 'install'));
             add_action("init", array($this, 'prepareForum'));
             add_action('wp', array($this, 'before_go'));
-            add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
             add_action("wp_head", array($this, 'setup_header'));
 
             // Filter hooks
@@ -166,11 +160,6 @@ if (!class_exists('asgarosforum')) {
         public function prepareForum() {
             global $post, $user_ID, $wpdb;
 
-            // Kill canoncial URLs
-            if (isset($post) && $post instanceof WP_Post && $post->ID == $this->page_id) {
-                remove_filter('template_redirect', 'redirect_canonical');
-            }
-
             // Set cookie
             if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
                 $last = get_user_meta($user_ID, 'lastvisit', true);
@@ -183,12 +172,6 @@ if (!class_exists('asgarosforum')) {
             $error = false;
             if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
                 require('wpf-insert.php');
-            }
-        }
-
-        public function enqueue_front_scripts() {
-            if (is_page($this->page_id)) {
-                wp_enqueue_script('asgarosforum-js', WPFURL . "js/script.js");
             }
         }
 
@@ -212,7 +195,7 @@ if (!class_exists('asgarosforum')) {
             $this->url_forum = $perm . $this->delim . "forumaction=viewforum&amp;f=";
             $this->url_thread = $perm . $this->delim . "forumaction=viewtopic&amp;t=";
             $this->url_add_topic = $perm . $this->delim . "forumaction=addtopic&amp;forum={$this->current_forum}";
-            $this->post_reply_link = $perm . $this->delim . "forumaction=postreply&amp;thread={$this->current_thread}";
+            $this->url_post_reply = $perm . $this->delim . "forumaction=postreply&amp;thread={$this->current_thread}";
             $this->url_base = $perm . $this->delim . "forumaction=";
             $this->url_home = $perm;
         }
@@ -404,7 +387,7 @@ if (!class_exists('asgarosforum')) {
             echo "<div class='search'>
             <form name='wpf_search_form' method='post' action='{$this->url_base}" . "search'>
             <span class='icon-search'></span>
-            <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='mf_search' value='" . __("Search forums", "asgarosforum") . "' />
+            <input type='text' name='search_words' class='mf_search' placeholder='" . __("Search forums", "asgarosforum") . "' />
             </form>
             </div></div>";
 
@@ -450,7 +433,7 @@ if (!class_exists('asgarosforum')) {
             global $wpdb;
             $post = $wpdb->get_row($wpdb->prepare("SELECT date, author_id, id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY date DESC LIMIT 1", $thread_id));
             $link = $this->get_postlink($thread_id, $post->id);
-            echo __("by", "asgarosforum") . ' ' . $this->profile_link($post->author_id) . '<br /><a href="'.$link.'">'.date_i18n($this->dateFormat, strtotime($post->date)).'&nbsp;Uhr</a>';
+            echo __("by", "asgarosforum") . ' ' . $this->profile_link($post->author_id) . '<br /><a href="'.$link.'">'.date_i18n($this->date_format, strtotime($post->date)).'&nbsp;Uhr</a>';
         }
 
         public function showforum($forum_id) {
@@ -549,12 +532,12 @@ if (!class_exists('asgarosforum')) {
             $o = "<table><tr>";
 
             if ($user_ID && (!$this->is_closed() || $this->is_moderator($user_ID))) {
-                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->post_reply_link}&amp;quote={$post_id}.{$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->url_post_reply}&amp;quote={$post_id}.{$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
             if ($counter > 1) {
                 if ($this->is_moderator($user_ID)) {
-                    $o .= "<td><span class='icon-bin'></span><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
+                    $o .= "<td><span class='icon-bin'></span><a onclick=\"return confirm('Are you sure you want to remove this?');\" href='" . $this->get_threadlink($this->current_thread) . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
                 }
             }
 
@@ -569,7 +552,7 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function format_date($date) {
-            return date_i18n($this->dateFormat, strtotime($date));
+            return date_i18n($this->date_format, strtotime($date));
         }
 
         public function wpf_current_time_fixed() {
@@ -607,7 +590,7 @@ if (!class_exists('asgarosforum')) {
                 echo "<div class='notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
             }
 
-            echo "<div class='footer'><span><span class='icon-files-empty-small-yes'></span>" . __("New posts", "asgarosforum") . " &middot; <span class='icon-files-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
+            echo "<div class='footer'><span><span class='icon-files-empty-small-yes'></span>" . __("New posts", "asgarosforum") . " &middot; <span class='icon-files-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . $this->url_home . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
         }
 
         public function input_filter($string) {
@@ -651,7 +634,7 @@ if (!class_exists('asgarosforum')) {
                 return __("No topics yet", "asgarosforum");
             }
 
-            $d = date_i18n($this->dateFormat, strtotime($date->date));
+            $d = date_i18n($this->date_format, strtotime($date->date));
 
             return "
             <strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "<br />
@@ -790,12 +773,12 @@ if (!class_exists('asgarosforum')) {
                 $menu .= "<table class='menu'><tr>";
 
                 if (!$this->is_closed() || $this->is_moderator($user_ID)) {
-                    $menu .= "<td><a href='" . $this->post_reply_link . "'><span class='icon-bubble2'></span><span>" . __("Reply", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_post_reply . "'><span class='icon-bubble2'></span><span>" . __("Reply", "asgarosforum") . "</span></a></td>";
                 }
 
                 if ($this->is_moderator($user_ID)) {
                     $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "." . $this->current_page . "&amp;getNewForumID&amp;topic={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
-                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_topic&amp;topic={$this->current_thread}' onclick='return wpf_confirm();'><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_topic&amp;topic={$this->current_thread}' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
                 }
 
                 $menu .= $stick . $closed . "</tr></table>";
@@ -842,7 +825,7 @@ if (!class_exists('asgarosforum')) {
         public function breadcrumbs() {
             $this->setup_links();
 
-            $trail = "<span class='icon-home'></span><a href='" . get_permalink($this->page_id) . "'>" . __("Forum", "asgarosforum") . "</a>";
+            $trail = "<span class='icon-home'></span><a href='" . $this->url_home . "'>" . __("Forum", "asgarosforum") . "</a>";
 
             if ($this->current_forum) {
                 $link = $this->get_forumlink($this->current_forum);

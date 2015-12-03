@@ -64,7 +64,7 @@ if (!class_exists("AFAdmin"))
             global $wpdb, $asgarosforum;
             $saved_ops = array();
 
-            foreach ($asgarosforum->default_ops as $k => $v) {
+            foreach ($asgarosforum->options_default as $k => $v) {
                 if (isset($_POST[$k]) && !empty($_POST[$k])) {
                     if (is_numeric($v)) {
                         $saved_ops[$k] = (int)$_POST[$k];

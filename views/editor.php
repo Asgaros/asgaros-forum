@@ -1,5 +1,5 @@
 <?php
-$this->editor_settings['textarea_rows'] = 12;
+$this->options_editor['textarea_rows'] = 12;
 $thread = "";
 $post = "";
 $t = "";
@@ -79,9 +79,9 @@ if ($_GET['forumaction'] == "editpost") {
                 <td>
                     <?php
                     if ($_GET['forumaction'] == "editpost") {
-                        wp_editor(stripslashes($post->text), 'message', $this->editor_settings);
+                        wp_editor(stripslashes($post->text), 'message', $this->options_editor);
                     } else {
-                        wp_editor($q, 'message', $this->editor_settings);
+                        wp_editor($q, 'message', $this->options_editor);
                     }
                     ?>
                 </td>
