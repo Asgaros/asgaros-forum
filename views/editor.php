@@ -37,7 +37,7 @@ if ($_GET['forumaction'] == "editpost") {
 
     $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
     $thread = $this->check_parms($_GET['t']);
-    $t = $wpdb->get_row($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $thread));
+    $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $thread));
     $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id));
 
     if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator($user_ID)) {
@@ -53,9 +53,9 @@ if ($_GET['forumaction'] == "editpost") {
         if ($_GET['forumaction'] == "addtopic") {
             _e("Post new Topic", "asgarosforum");
         } else if ($_GET['forumaction'] == "postreply") {
-            echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_subject($thread);
+            echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_threadname($thread);
         } else if ($_GET['forumaction'] == "editpost") {
-            echo __("Edit Post:", "asgarosforum") . ' ' . stripslashes($t->subject);
+            echo __("Edit Post:", "asgarosforum") . ' ' . stripslashes($t->name);
         }
         ?>
     </div>
@@ -71,7 +71,7 @@ if ($_GET['forumaction'] == "editpost") {
             /*if(false) //Need to enable this eventually if we're editing the first post in the thread
             echo "<tr>
             <td>" . __("Subject:", "asgarosforum") . "</td>
-            <td><input size='50%' type='text' name='edit_post_subject' value='" . stripslashes($t->subject) . "'/></td>
+            <td><input size='50%' type='text' name='edit_post_subject' value='" . stripslashes($t->name) . "'/></td>
             </tr>";*/
             ?>
             <tr>

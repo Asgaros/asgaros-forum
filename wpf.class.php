@@ -53,17 +53,12 @@ if (!class_exists('asgarosforum')) {
             $this->current_thread = false;
             $this->current_page = 0;
 
-            // Action hooks
             register_activation_hook(__FILE__, array($this, 'install'));
             add_action('plugins_loaded', array($this, 'install'));
             add_action("init", array($this, 'prepareForum'));
             add_action('wp', array($this, 'before_go'));
             add_action("wp_head", array($this, 'setup_header'));
-
-            // Filter hooks
             add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
-
-            // Shortcode hooks
             add_shortcode('asgarosforum', array($this, "go"));
 
             AFAdmin::load_hooks();
@@ -102,7 +97,7 @@ if (!class_exists('asgarosforum')) {
                 id int(11) NOT NULL auto_increment,
                 parent_id int(11) NOT NULL default '0',
                 views int(11) NOT NULL default '0',
-                subject varchar(255) NOT NULL default '',
+                name varchar(255) NOT NULL default '',
                 status varchar(20) NOT NULL default 'open',
                 closed int(11) NOT NULL default '0',
                 PRIMARY KEY  (id)
@@ -154,7 +149,7 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function prepareForum() {
-            global $post, $user_ID, $wpdb;
+            global $user_ID;
 
             // Set cookie
             if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
@@ -281,12 +276,7 @@ if (!class_exists('asgarosforum')) {
 
         public function get_threadname($id) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id));
-        }
-
-        public function get_subject($id) {
-            global $wpdb;
-            return stripslashes($wpdb->get_var($wpdb->prepare("SELECT subject FROM {$this->table_threads} WHERE id = %d", $id)));
+            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $id));
         }
 
         public function cut_string($string, $length = 35) {
@@ -968,7 +958,7 @@ if (!class_exists('asgarosforum')) {
                 $currentForumID = $this->check_parms($_GET['f']);
                 $strOUT = '
                 <form method="post" action="' . $this->url_base . 'viewforum&amp;f=' . $currentForumID . '&amp;move_topic&amp;topic=' . $topic . '">
-                Move "<strong>' . $this->get_subject($topic) . '</strong>" to new forum:<br />
+                Move "<strong>' . $this->get_threadname($topic) . '</strong>" to new forum:<br />
                 <select name="newForumID">';
 
                 $frs = $this->getable_forums();
@@ -1089,7 +1079,7 @@ if (!class_exists('asgarosforum')) {
         public function search_results() {
             global $wpdb;
             $search_string = esc_sql($_POST['search_words']);
-            $sql = $wpdb->prepare("SELECT {$this->table_posts}.id, text, {$this->table_threads}.subject, {$this->table_posts}.parent_id, {$this->table_posts}.date, {$this->table_posts}.author_id, MATCH (text) AGAINST (%s) AS score
+            $sql = $wpdb->prepare("SELECT {$this->table_posts}.id, text, {$this->table_threads}.name, {$this->table_posts}.parent_id, {$this->table_posts}.date, {$this->table_posts}.author_id, MATCH (text) AGAINST (%s) AS score
             FROM {$this->table_posts} JOIN {$this->table_threads} ON {$this->table_posts}.parent_id = {$this->table_threads}.id
             AND MATCH (text) AGAINST (%s) ORDER BY score DESC LIMIT 50", $search_string, $search_string);
             $results = $wpdb->get_results($sql);

@@ -120,7 +120,7 @@ if (isset($_POST['add_topic_submit']))
     $date = $this->wpf_current_time_fixed();
 
     $sql_thread = "INSERT INTO {$this->table_threads}
-                      (subject, parent_id, status)
+                      (name, parent_id, status)
                     VALUES
                       (%s, %d, 'open')";
     $wpdb->query($wpdb->prepare($sql_thread, $subject, $forum_id));
@@ -242,7 +242,7 @@ if (isset($_POST['edit_post_submit']))
   $ret = $wpdb->get_results($wpdb->prepare("select id from {$this->table_posts} where parent_id = %d order by date asc limit 1", $thread));
   if ($ret[0]->id == $edit_post_id)
   {
-    $sql = ("UPDATE {$this->table_threads} set subject = %s where id = %d");
+    $sql = ("UPDATE {$this->table_threads} set name = %s where id = %d");
     $wpdb->query($wpdb->prepare($sql, $subject, $thread));
   }
   }

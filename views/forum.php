@@ -28,7 +28,7 @@
                 <?php foreach ($sticky_threads as $thread): ?>
                     <tr>
                         <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
-                        <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->subject); ?></a></td>
+                        <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></td>
                         <td><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
                         <td class="forumstats">
                             <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
@@ -46,7 +46,7 @@
             <?php foreach ($threads as $thread): ?>
                 <tr>
                     <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
-                    <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->subject, 50); ?></a></td>
+                    <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name, 50); ?></a></td>
                     <td><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
                     <td class="forumstats">
                         <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
