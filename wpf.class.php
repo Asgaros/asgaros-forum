@@ -30,7 +30,6 @@ if (!class_exists('asgarosforum')) {
         var $default_ops = array(
             'forum_posts_per_page' => 10,
             'forum_threads_per_page' => 20,
-            'forum_use_gravatar' => true,
             'forum_use_seo_friendly_urls' => false,
             'forum_allow_image_uploads' => false,
             'forum_display_name' => 'user_login'
@@ -990,14 +989,6 @@ if (!class_exists('asgarosforum')) {
                 update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
                 $last = get_user_meta($user_ID, 'lastvisit', true);
                 setcookie("wpafcookie", $last, 0, "/");
-            }
-        }
-
-        public function get_avatar($user_id, $size = 60) {
-            if ($this->options['forum_use_gravatar'] == 'true') {
-                return get_avatar($user_id, $size);
-            } else {
-                return "";
             }
         }
 

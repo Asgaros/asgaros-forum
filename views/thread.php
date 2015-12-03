@@ -21,9 +21,7 @@
             </tr>
             <tr>
                 <td class='autorpostbox'>
-                    <?php if ($this->options["forum_use_gravatar"]) {
-                        echo $this->get_avatar($post->author_id);
-                    } ?>
+                    <?php echo get_avatar($post->author_id, 60); ?>
                     <br /><strong><?php echo $this->profile_link($post->author_id, true); ?></strong><br />
                     <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id); ?>
                 </td>
