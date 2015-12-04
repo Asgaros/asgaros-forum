@@ -382,7 +382,11 @@ if (!class_exists('asgarosforum')) {
         public function get_userdata($user_id, $data) {
             $user = get_userdata($user_id);
 
-            return $user->$data;
+            if ($user) {
+                return $user->$data;
+            } else {
+                return 'Deleted user';
+            }
         }
 
         public function get_lastpost($thread_id) {
