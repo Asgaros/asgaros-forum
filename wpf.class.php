@@ -393,7 +393,7 @@ if (!class_exists('asgarosforum')) {
             global $wpdb;
             $post = $wpdb->get_row($wpdb->prepare("SELECT date, author_id, id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY date DESC LIMIT 1", $thread_id));
             $link = $this->get_postlink($thread_id, $post->id);
-            echo __("by", "asgarosforum") . ' ' . $this->profile_link($post->author_id) . '<br /><a href="'.$link.'">'.date_i18n($this->date_format, strtotime($post->date)).'&nbsp;Uhr</a>';
+            echo __("Last post by", "asgarosforum") . ' <strong>' . $this->profile_link($post->author_id) . '</strong><br />on <a href="'.$link.'">'.date_i18n($this->date_format, strtotime($post->date)).'&nbsp;Uhr</a>';
         }
 
         public function showforum($forum_id) {

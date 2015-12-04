@@ -3,9 +3,6 @@
     float: right;
 }
 #wpf-wrapper .search input {
-    width: 120px;
-}
-#wpf-wrapper .search input:focus {
     width: 190px;
 }
 
@@ -49,7 +46,6 @@
 
 /* TABLE CELL CONTENT */
 #wpf-wrapper .forumstats {
-    text-align: center;
     width: 100px;
     font-size: 11px;
 }
@@ -70,9 +66,6 @@
     border: 1px solid #a9a9a9;
     background-color: #f0f0f0;
     color: #555555;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
     margin: 2px 0 !important;
     vertical-align: middle;
     font-family: inherit;
@@ -131,9 +124,9 @@
     display: block;
     padding: 10px;
     background-color: #F5F5F5;
-    border-left: 1px solid #CACACA;
-    border-bottom: 1px solid #CACACA;
-    border-right: 1px solid #CACACA;
+    border-left: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    border-right: 1px solid #bbb;
     margin-top: -10px;
     margin-bottom: 5px;
 }
@@ -173,7 +166,7 @@
     color: #636363;
 }
 #wpf-wrapper .breadcrumbs a:hover {
-    color: #B85B5A;
+    color: #2D89CC;
     text-decoration: none;
 }
 #wpf-wrapper .breadcrumbs .sep {
@@ -194,11 +187,21 @@
 /* CONTENT WRAPPERS*/
 #wpf-wrapper .content-element {
     border: 1px solid #2d89cc;
-    background-color: #f6f6f6;
+    background-color: #fafafa;
     margin-bottom: 10px;
+}
+#wpf-wrapper .content-element a:hover {
+    text-decoration: underline;
 }
 
 /* THREAD */
+#wpf-wrapper .thread td {
+    vertical-align: top !important;
+}
+#wpf-wrapper .post-data-format {
+    color: #777;
+    font-size: 12px;
+}
 #wpf-wrapper .autorpostbox {
     text-align: center;
     border-right: 1px solid #CACACA !important;

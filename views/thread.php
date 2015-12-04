@@ -6,7 +6,7 @@
 </table>
 
 <div class='title-element'><?php echo $this->cut_string($this->get_name($thread_id, $this->table_threads), 70) . $meClosed; ?></div>
-<div class='content-element'>
+<div class='content-element thread'>
     <?php
     $counter = 0;
     foreach ($posts as $post) {

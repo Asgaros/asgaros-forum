@@ -10,26 +10,21 @@
 </table>
 
 <?php if ($thread_counter > 0): ?>
+    <div class="title-element"><?php echo $this->get_name($this->current_forum, $this->table_forums); ?></div>
     <div class="content-element">
         <table>
-            <tr>
-                <th><?php _e("Status", "asgarosforum"); ?></th>
-                <th><?php _e("Topic Title", "asgarosforum"); ?></th>
-                <th><?php _e("Started by", "asgarosforum"); ?></th>
-                <th><?php _e("Statistics", "asgarosforum"); ?></th>
-                <th><?php _e("Last post", "asgarosforum"); ?></th>
-            </tr>
-
             <?php if ($sticky_threads && !$this->current_page): // Prevent stickies from showing up on page 2...n ?>
                 <tr>
-                    <td class="bright" colspan="5"><?php _e("Sticky Topics", "asgarosforum"); ?></td>
+                    <td class="bright" colspan="4"><?php _e("Sticky Topics", "asgarosforum"); ?></td>
                 </tr>
 
                 <?php foreach ($sticky_threads as $thread): ?>
                     <tr>
                         <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
-                        <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></td>
-                        <td><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
+                        <td>
+                            <strong><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
+                            <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_starter($thread->id)); ?></i></small>
+                        </td>
                         <td class="forumstats">
                             <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
                             <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
@@ -39,15 +34,17 @@
                 <?php endforeach; ?>
 
                 <tr>
-                    <td class="bright" colspan="5"><?php _e("Forum Topics", "asgarosforum"); ?></td>
+                    <td class="bright" colspan="4"></td>
                 </tr>
             <?php endif; // END STICKIES ?>
 
             <?php foreach ($threads as $thread): ?>
                 <tr>
                     <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
-                    <td><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name, 50); ?></a></td>
-                    <td><?php echo $this->profile_link($this->get_starter($thread->id)); ?></td>
+                    <td>
+                        <strong><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
+                        <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_starter($thread->id)); ?></i></small>
+                    </td>
                     <td class="forumstats">
                         <span class="icon-bubbles4"></span><span><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span><br />
                         <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
