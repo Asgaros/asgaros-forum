@@ -4,17 +4,17 @@ $error = false;
 $the_forum_id = false;
 $the_thread_id = false;
 
-if (isset($_POST['add_topic_forumid']) && !empty($_POST['add_topic_forumid'])) {
-    $the_forum_id = $this->check_parms($_POST['add_topic_forumid']);
+if (isset($_POST['add_thread_forumid']) && !empty($_POST['add_thread_forumid'])) {
+    $the_forum_id = $_POST['add_thread_forumid'];
 }
 
 if (isset($_POST['add_post_forumid']) && !empty($_POST['add_post_forumid'])) {
-    $the_thread_id = $this->check_parms($_POST['add_post_forumid']);
+    $the_thread_id = $_POST['add_post_forumid'];
     $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $the_thread_id));
 }
 
 if (isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['edit_post_submit'])) {
-    $the_thread_id = $this->check_parms($_POST['thread_id']);
+    $the_thread_id = $_POST['thread_id'];
     $the_forum_id = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $the_thread_id));
 }
 
@@ -96,12 +96,11 @@ function mf_check_uploaded_images()
 }
 
 //ADDING A NEW TOPIC?
-if (isset($_POST['add_topic_submit']))
+if (isset($_POST['add_thread_submit']))
 {
-  $myReplaceSub = array("\\");
-  $subject = str_replace($myReplaceSub, "", $this->input_filter($_POST['add_topic_subject']));
+  $subject = $_POST['add_thread_subject'];
   $content = $_POST['message'];
-  $forum_id = $this->check_parms($_POST['add_topic_forumid']);
+  $forum_id = $_POST['add_thread_forumid'];
   $msg = '';
 
   if ($subject == "")
@@ -161,7 +160,7 @@ if (isset($_POST['add_post_submit']))
 {
   $myReplaceSub = array("\\");
   $content = $_POST['message'];
-  $thread = $this->check_parms($_POST['add_post_forumid']);
+  $thread = $_POST['add_post_forumid'];
   $msg = '';
 
   if ($content == "")
@@ -204,13 +203,12 @@ if (isset($_POST['add_post_submit']))
 //EDITING A POST?
 if (isset($_POST['edit_post_submit']))
 {
-  $myReplaceSub = array("\\");
   $subject = "";
   if (isset($_POST['edit_post_subject'])) {
-  $subject = str_replace($myReplaceSub, "", $this->input_filter($_POST['edit_post_subject']));
+  $subject = $_POST['edit_post_subject'];
   }
   $content = $_POST['message'];
-  $thread = $this->check_parms($_POST['thread_id']);
+  $thread = $_POST['thread_id'];
   $edit_post_id = $_POST['edit_post_id'];
   $msg = '';
 
@@ -247,7 +245,7 @@ if (isset($_POST['edit_post_submit']))
     $wpdb->query($wpdb->prepare($sql, $subject, $thread));
   }
   }
-  wp_redirect(html_entity_decode($this->get_postlink($thread, $edit_post_id, $this->check_parms($_POST['page_id']))));
+  wp_redirect(html_entity_decode($this->get_postlink($thread, $edit_post_id, $_POST['page_id'])));
   exit;
 }
 ?>

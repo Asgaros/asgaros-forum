@@ -20,7 +20,7 @@
 
                 <?php foreach ($sticky_threads as $thread): ?>
                     <tr>
-                        <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
+                        <td class="status-icon"><?php echo $this->get_thread_image($thread->id); ?></td>
                         <td>
                             <strong><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
                             <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_starter($thread->id)); ?></i></small>
@@ -40,7 +40,7 @@
 
             <?php foreach ($threads as $thread): ?>
                 <tr>
-                    <td class="status-icon"><?php echo $this->get_topic_image($thread->id); ?></td>
+                    <td class="status-icon"><?php echo $this->get_thread_image($thread->id); ?></td>
                     <td>
                         <strong><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
                         <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_starter($thread->id)); ?></i></small>

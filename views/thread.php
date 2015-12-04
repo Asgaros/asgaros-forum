@@ -1,7 +1,7 @@
 <table class="top_menus">
     <tr>
         <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
-        <td><?php echo $this->topic_menu();?></td>
+        <td><?php echo $this->thread_menu();?></td>
     </tr>
 </table>
 
@@ -36,6 +36,6 @@
 <table class="top_menus">
     <tr>
         <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
-        <td><?php echo $this->topic_menu();?></td>
+        <td><?php echo $this->thread_menu();?></td>
     </tr>
 </table>

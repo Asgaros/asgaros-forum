@@ -41,7 +41,7 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress which is ba
 * DONE! It is that easy
 
 == Frequently Asked Questions ==
-* **Help! I can't create new topics** - Make sure you have created both categories AND forums.
+* **Help! I can't create new threads** - Make sure you have created both categories AND forums.
 * **How can I hide the sidebar on the forum page?** - When editing the forum page, if your theme supports it, you should be able to change your Template to a full-width one. If you don't see this option, either hire a developer to make one for you, or bug your theme author to add it.
 * **I made customizations to the forum, but they get overwritten on every update** - If you customize anything inside of the /asgaros-forum/ folder it will be overwritten, there's no way around that. If all you're changing is CSS, then put it somewhere else, like at the bottom of your theme's styles.css file (which gets overwritten when you upgrade your theme FYI).
 * **My skin looks bad/funny** - Your theme is most likely causing a conflict with the forum's table styles. We do our best, but can't possibly make the forum work for every conceivable WordPress theme. Find a friend who knows a thing or two about CSS and see if they'll help you get some custom styles set to fix the issue.

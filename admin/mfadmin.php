@@ -227,19 +227,19 @@ if (!class_exists("AFAdmin"))
         {
             global $wpdb, $asgarosforum;
 
-            // First delete all associated topics
-            $topic_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$fid}");
+            // First delete all associated threads
+            $thread_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$fid}");
 
-            if (!empty($topic_ids)) {
-                foreach ($topic_ids as $tid) {
-                    self::delete_topic($tid);
+            if (!empty($thread_ids)) {
+                foreach ($thread_ids as $tid) {
+                    self::delete_thread($tid);
                 }
             }
 
             $wpdb->query("DELETE FROM {$asgarosforum->table_forums} WHERE id = {$fid}");
         }
 
-        public static function delete_topic($tid)
+        public static function delete_thread($tid)
         {
             global $wpdb, $asgarosforum;
 
