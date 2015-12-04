@@ -1,18 +1,6 @@
 (function($) {
     $(document).ready(function() {
         /******************************** CATEGORIES ********************************/
-        $('#sortable-categories').sortable({
-            placeholder: "ui-state-highlight",
-            start: function() {
-                $('div.user-groups-area').hide();
-            }
-        });
-        $('a.access_control').click(function() {
-            id = $(this).attr('data-value');
-            $('div#user-groups-' + id).toggle();
-            return false;
-        });
-
         $('a#mf_add_new_category').click(function() {
             $('#hidden-element-container li').clone().appendTo('ol#sortable-categories');
             return false;
@@ -40,18 +28,6 @@
         });
         $('body').on('click', '.mf_remove_forum', function() {
             var answer = confirm(AFAdmin.remove_forum_warning);
-            if(answer) {
-                $(this).parent().remove();
-            }
-            return false;
-        });
-        /******************************** USER GROUPS *******************************/
-        $('a#mf_add_new_user_group').click(function() {
-            $('#hidden-element-container li').clone().appendTo('ol#user-groups');
-            return false;
-        });
-        $('body').on('click', '.mf_remove_user_group', function() {
-            var answer = confirm(AFAdmin.remove_user_group_warning);
             if(answer) {
                 $(this).parent().remove();
             }

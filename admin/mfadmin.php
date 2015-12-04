@@ -15,15 +15,13 @@ if (!class_exists("AFAdmin"))
             add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'AFAdmin::options_page', WPFURL . "admin/images/logo.png");
             add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'AFAdmin::options_page');
             add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'AFAdmin::structure_page');
-            add_submenu_page("asgarosforum", __("User Groups", "asgarosforum"), __("User Groups", "asgarosforum"), "administrator", 'asgarosforum-user-groups', 'AFAdmin::user_groups_page');
         }
 
         public static function enqueue_admin_scripts($hook)
         {
             $plug_url = plugin_dir_url(__FILE__) . '../';
             $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'asgarosforum'),
-                'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'),
-                'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'asgarosforum'));
+                'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'));
 
             // Let's only load our shiz on asgarosforum admin pages
             if (strstr($hook, 'asgarosforum') !== false) {
@@ -37,12 +35,6 @@ if (!class_exists("AFAdmin"))
         {
             if (isset($_POST['mf_options_submit']) && !empty($_POST['mf_options_submit'])) {
                 self::save_options();
-            } else if (isset($_POST['mf_user_groups_save']) && !empty($_POST['mf_user_groups_save'])) {
-                self::save_user_groups();
-            } else if (isset($_POST['usergroup_users_save']) && !empty($_POST['usergroup_users_save'])) {
-                self::save_user_in_user_group();
-            } else if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'deluser') {
-                self::save_user_in_user_group();
             } else if (isset($_POST['mf_categories_save']) && !empty($_POST['mf_categories_save'])) {
                 self::process_save_categories();
             } else if (isset($_POST['mf_forums_save']) && !empty($_POST['mf_forums_save'])) {
@@ -89,128 +81,6 @@ if (!class_exists("AFAdmin"))
             exit();
         }
 
-        /* USERGROUPS */
-        public static function user_groups_page()
-        {
-            global $asgarosforum;
-            $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-            $user_groups = self::getable_usergroups();
-
-            if (isset($_GET['action']) && $_GET['action'] == 'users') {
-                if (isset($_GET['groupid'])) {
-                    $usergroup = self::getable_usergroups($_GET['groupid']);
-                    $usergroup_users = $asgarosforum->get_members($_GET['groupid']);
-
-                    if (!empty($usergroup)) {
-                        require('views/user_groups_users_page.php');
-                    } else {
-                        require('views/user_groups_page.php');
-                    }
-                } else {
-                    require('views/user_groups_page.php');
-                }
-            } else {
-                require('views/user_groups_page.php');
-            }
-        }
-
-        public static function save_user_groups()
-        {
-            global $asgarosforum, $wpdb;
-            $listed_user_groups = array();
-            $user_group_ids = array();
-
-            if (isset($_POST['user_group_name']) && !empty($_POST['user_group_name'])) {
-                foreach ($_POST['user_group_name'] as $i => $v) {
-                    $id = $_POST['mf_user_group_id'][$i];
-                    $name = stripslashes($_POST['user_group_name'][$i]);
-                    $description = stripslashes($_POST['user_group_description'][$i]);
-
-                    if (empty($name)) { // If no name, don't save this User Group
-                        if ($id != 'new') {
-                            $listed_user_groups[] = $id;
-                        }
-
-                        continue;
-                    }
-
-                    if ($id == 'new') { // Create a new User Group
-                        $wpdb->insert($asgarosforum->table_usergroups, array('name' => $name, 'description' => $description), array('%s', '%s'));
-                        $listed_user_groups[] = $wpdb->insert_id;
-                    } else { // Update an existing User Group
-                        $q = "UPDATE {$asgarosforum->table_usergroups} SET name = %s, description = %s WHERE id = %d";
-                        $wpdb->query($wpdb->prepare($q, $name, $description, $id));
-                        $listed_user_groups[] = $id;
-                    }
-                }
-            }
-
-            // Delete user groups that the user removed from the list
-            $listed_user_groups = implode(',', $listed_user_groups);
-
-            if (empty($listed_user_groups)) {
-                $user_group_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_usergroups}");
-            } else {
-                $user_group_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_usergroups} WHERE id NOT IN ({$listed_user_groups})");
-            }
-
-            if (!empty($user_group_ids)) {
-                foreach ($user_group_ids as $ugid) {
-                    self::delete_usergroup($ugid);
-                }
-            }
-
-            wp_redirect(admin_url('admin.php?page=asgarosforum-user-groups&saved=true'));
-            exit();
-        }
-
-        public static function delete_usergroup($ugid)
-        {
-            global $asgarosforum, $wpdb;
-
-            $wpdb->query("DELETE FROM {$asgarosforum->table_usergroup2user} WHERE group_id = {$ugid}");
-            $wpdb->query("DELETE FROM {$asgarosforum->table_usergroups} WHERE id = {$ugid}");
-
-            // Remove this group from categories too
-            $cats = $wpdb->get_results("SELECT * FROM {$asgarosforum->table_categories}");
-
-            if (!empty($cats)) {
-                foreach ($cats as $cat) {
-                    $usergroups = (array)unserialize($cat->usergroups);
-
-                    if (in_array($ugid, $usergroups)) {
-                        $usergroups = serialize(array_diff($usergroups, array($ugid)));
-                        $wpdb->query("UPDATE {$asgarosforum->table_categories} SET usergroups = '{$usergroups}' WHERE id = {$cat->id}");
-                    }
-                }
-            }
-        }
-
-        function save_user_in_user_group()
-        {
-            global $asgarosforum, $wpdb;
-            $groupID = $_GET['groupid'];
-
-            if (isset($_POST['usergroup_user_add_new']) && !empty($_POST['usergroup_user_add_new'])) {
-                $user = trim(stripslashes($_POST['usergroup_user_add_new']));
-                $userID = username_exists($user);
-
-                if ($userID) {
-                    if (!$asgarosforum->is_user_ingroup($userID, $groupID)) {
-                        $wpdb->insert($asgarosforum->table_usergroup2user, array('user_id' => $userID, 'group_id' => $groupID), array('%d', '%d'));
-                    }
-                }
-            }
-
-            if (isset($_GET['action']) && $_GET['action'] == 'deluser') {
-                $userID = $_GET['user_id'];
-                $wpdb->query("DELETE FROM {$asgarosforum->table_usergroup2user} WHERE user_id = {$userID} AND group_id = {$groupID}");
-            }
-
-            wp_redirect(admin_url('admin.php?page=asgarosforum-user-groups&action=users&groupid='.$groupID.'&saved=true'));
-            exit();
-        }
-
         /* STRUCTURE */
         public static function structure_page()
         {
@@ -250,14 +120,8 @@ if (!class_exists("AFAdmin"))
                         $wpdb->insert($asgarosforum->table_categories, array('name' => $name, 'description' => $description, 'sort' => $order), array('%s', '%s', '%d'));
                         $listed_categories[] = $wpdb->insert_id;
                     } else { // Update existing category
-                        $usergroups = '';
-
-                        if (isset($_POST['category_usergroups_'.$id]) && !empty($_POST['category_usergroups_'.$id])) {
-                            $usergroups = serialize((array)$_POST['category_usergroups_'.$id]);
-                        }
-
-                        $q = "UPDATE {$asgarosforum->table_categories} SET name = %s, description = %s, sort = %d, usergroups = %s WHERE id = %d";
-                        $wpdb->query($wpdb->prepare($q, $name, $description, $order, $usergroups, $id));
+                        $q = "UPDATE {$asgarosforum->table_categories} SET name = %s, description = %s, sort = %d WHERE id = %d";
+                        $wpdb->query($wpdb->prepare($q, $name, $description, $order, $id));
                         $listed_categories[] = $id;
                     }
 
@@ -382,16 +246,6 @@ if (!class_exists("AFAdmin"))
 
             $wpdb->query("DELETE FROM {$asgarosforum->table_posts} WHERE parent_id = {$tid}");
             $wpdb->query("DELETE FROM {$asgarosforum->table_threads} WHERE id = {$tid}");
-        }
-
-        public static function getable_usergroups($id = false) {
-            global $wpdb, $asgarosforum;
-
-            if ($id) {
-                return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$asgarosforum->table_usergroups} WHERE id = %d", $id));
-            } else {
-                return $wpdb->get_results("SELECT * FROM {$asgarosforum->table_usergroups} ORDER BY id ASC");
-            }
         }
     }
 }

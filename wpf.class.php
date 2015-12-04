@@ -16,8 +16,6 @@ if (!class_exists('asgarosforum')) {
         var $table_forums = "";
         var $table_threads = "";
         var $table_posts = "";
-        var $table_usergroups = "";
-        var $table_usergroup2user = "";
         var $current_group = "";
         var $current_forum = "";
         var $current_thread = "";
@@ -46,8 +44,6 @@ if (!class_exists('asgarosforum')) {
             $this->table_forums = $wpdb->prefix . "forum_forums";
             $this->table_threads = $wpdb->prefix . "forum_threads";
             $this->table_posts = $wpdb->prefix . "forum_posts";
-            $this->table_usergroups = $wpdb->prefix . "forum_usergroups";
-            $this->table_usergroup2user = $wpdb->prefix . "forum_usergroup2user";
             $this->current_group = false;
             $this->current_forum = false;
             $this->current_thread = false;
@@ -77,7 +73,6 @@ if (!class_exists('asgarosforum')) {
                 id int(11) NOT NULL auto_increment,
                 name varchar(255) NOT NULL default '',
                 description varchar(255) default '',
-                usergroups varchar(255) default '',
                 sort int(11) NOT NULL default '0',
                 PRIMARY KEY  (id)
                 ) $charset_collate;";
@@ -113,30 +108,12 @@ if (!class_exists('asgarosforum')) {
                 PRIMARY KEY  (id)
                 ) $charset_collate ENGINE = MyISAM;";
 
-                $sql5 = "
-                CREATE TABLE $this->table_usergroups (
-                id int(11) NOT NULL auto_increment,
-                name varchar(255) NOT NULL,
-                description varchar(255) default NULL,
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
-                $sql6 = "
-                CREATE TABLE $this->table_usergroup2user (
-                id int(11) NOT NULL auto_increment,
-                user_id int(11) NOT NULL,
-                group_id varchar(255) NOT NULL,
-                PRIMARY KEY  (id)
-                ) $charset_collate;";
-
                 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
                 dbDelta($sql1);
                 dbDelta($sql2);
                 dbDelta($sql3);
                 dbDelta($sql4);
-                dbDelta($sql5);
-                dbDelta($sql6);
 
                 update_option("asgarosforum_db_version", $this->db_version);
             }
@@ -395,10 +372,6 @@ if (!class_exists('asgarosforum')) {
                 if (isset($_GET['getNewForumID'])) {
                     echo $this->getNewForumID();
                 } else {
-                    if (!$this->have_access($this->current_group)) {
-                        wp_die(__("Sorry, but you don't have access to this forum", "asgarosforum"));
-                    }
-
                     require('views/forum.php');
                 }
             } else {
@@ -451,10 +424,6 @@ if (!class_exists('asgarosforum')) {
 
             if ($posts) {
                 $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $thread_id));
-
-                if (!$this->have_access($this->current_group)) {
-                    wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
-                }
 
                 $meClosed = "";
 
@@ -524,9 +493,7 @@ if (!class_exists('asgarosforum')) {
 
             if (count($grs) > 0) {
                 foreach ($grs as $g) {
-                    if ($this->have_access($g->id)) {
-                        require('views/overview.php');
-                    }
+                    require('views/overview.php');
                 }
             } else {
                 echo "<div class='notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
@@ -587,51 +554,6 @@ if (!class_exists('asgarosforum')) {
         public function last_poster_in_thread($thread_id) {
             global $wpdb;
             return $wpdb->get_var("SELECT date FROM {$this->table_posts} WHERE parent_id = {$thread_id} ORDER BY date DESC");
-        }
-
-        public function have_access($groupid) {
-            global $wpdb, $user_ID;
-
-            if (is_super_admin()) {
-                return true;
-            }
-
-            $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->table_categories} WHERE id = {$groupid}"));
-
-            if (!$user_groups) {
-                return true;
-            }
-
-            foreach ($user_groups as $user_group) {
-                if ($this->is_user_ingroup($user_ID, $user_group)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public function get_members($usergroup) {
-            global $wpdb;
-
-            $q = "SELECT ug2u.user_id, u.user_login FROM {$this->table_usergroup2user} AS ug2u JOIN {$wpdb->users} AS u ON ug2u.user_id = u.ID WHERE ug2u.group_id = %d ORDER BY u.user_login";
-            return $wpdb->get_results($wpdb->prepare($q, $usergroup));
-        }
-
-        public function is_user_ingroup($user_id = "0", $user_group_id) {
-            global $wpdb;
-
-            if (!$user_id) {
-                return false;
-            }
-
-            $id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$this->table_usergroup2user} WHERE user_id = %d AND group_id = %d", $user_id, $user_group_id));
-
-            if ($id) {
-                return true;
-            }
-
-            return false;
         }
 
         public function get_pagetitle($bef_title, $sep) {

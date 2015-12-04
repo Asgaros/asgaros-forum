@@ -20,21 +20,9 @@
                             <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
                             <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($cat->name)); ?>" /></label>&nbsp;&nbsp;
                             <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="<?php echo esc_html(stripslashes($cat->description)); ?>" size="50" /></label>&nbsp;&nbsp;
-                            <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>"><?php _e('Limit Access', 'asgarosforum'); ?></a>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
                                 <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
-                            <!-- usergroups -->
-                            <div id="user-groups-<?php echo $cat->id; ?>" class="user-groups-area">
-                                <?php $allusergroups = self::getable_usergroups(); ?>
-                                <?php $my_usergroups = (array)maybe_unserialize($cat->usergroups); ?>
-                                <?php if (!empty($allusergroups)): ?>
-                                    <label><?php _e('Limit access to the following usergroups', 'asgarosforum'); ?>:</label>&nbsp;
-                                    <?php foreach ($allusergroups as $usergroup): ?>
-                                        <label><input type="checkbox" name="category_usergroups_<?php echo $cat->id; ?>[]" value="<?php echo $usergroup->id; ?>" <?php checked((in_array($usergroup->id, $my_usergroups))); ?> />&nbsp;<?php echo stripslashes($usergroup->name); ?></label>&nbsp;&nbsp;
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </div>
                         </li>
                     <?php endforeach; ?>
                 <?php else: ?>
