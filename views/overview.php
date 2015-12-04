@@ -1,4 +1,5 @@
 <?php if (count($grs) > 0) { ?>
+    <?php $forum_counter = 0; ?>
     <?php foreach ($grs as $g) { ?>
         <div class="title-element"><?php echo $g->name; ?></div>
         <div class="content-element space">
@@ -7,6 +8,7 @@
                 $frs = $this->getable_forums($g->id);
                 if (count($frs) > 0) {
                     foreach ($frs as $f) {
+                        $forum_counter++;
                         ?>
                         <tr>
                         <?php
@@ -39,11 +41,13 @@
             </table>
         </div>
     <?php } ?>
+    <?php if ($forum_counter > 0) { ?>
     <div class="footer">
         <span class="icon-files-empty-small-yes"></span><?php _e("New posts", "asgarosforum"); ?> &middot;
         <span class="icon-files-empty-small-no"></span><?php _e("No new posts", "asgarosforum"); ?></span> &middot;
         <span class="icon-checkmark"></span><a href="<?php echo $this->url_base; ?>markallread"><?php _e("Mark All Read", "asgarosforum"); ?></a>
     </div>
+    <?php } ?>
 <?php } else { ?>
     <div class='notice'><?php _e("There are no categories yet!", "asgarosforum"); ?></div>
 <?php } ?>

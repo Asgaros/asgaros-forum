@@ -16,7 +16,6 @@ if (!class_exists('asgarosforum')) {
         var $table_forums = "";
         var $table_threads = "";
         var $table_posts = "";
-        var $current_category = "";
         var $current_forum = "";
         var $current_thread = "";
         var $current_page = "";
@@ -44,7 +43,6 @@ if (!class_exists('asgarosforum')) {
             $this->table_forums = $wpdb->prefix . "forum_forums";
             $this->table_threads = $wpdb->prefix . "forum_threads";
             $this->table_posts = $wpdb->prefix . "forum_posts";
-            $this->current_category = false;
             $this->current_forum = false;
             $this->current_thread = false;
             $this->current_page = 0;
@@ -126,25 +124,30 @@ if (!class_exists('asgarosforum')) {
                 $this->current_view = $_GET['forumaction'];
             }
 
+            if (isset($_GET['page'])) {
+                $this->current_page = $_GET['page'];
+            }
+
             if ($this->current_view) {
                 switch ($this->current_view) {
                     case 'viewforum':
                         $forum_id = $_GET['forum'];
                         if ($this->forum_exists($forum_id)) {
-                            $this->current_category = $this->get_parent_id(FORUM, $forum_id);
                             $this->current_forum = $forum_id;
-                            $this->current_page = $_GET['page'];
                         }
                         break;
                     case 'viewthread':
                         $thread_id = $_GET['thread'];
-                        $this->current_category = $this->get_category_from_thread($thread_id);
-                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-                        $this->current_thread = $thread_id;
-                        $this->current_page = $_GET['page'];
+                        if ($this->thread_exists($thread_id)) {
+                            $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                            $this->current_thread = $thread_id;
+                        }
                         break;
                     case 'addthread':
-                        $this->current_forum = $_GET['forum'];
+                        $forum_id = $_GET['forum'];
+                        if ($this->forum_exists($forum_id)) {
+                            $this->current_forum = $forum_id;
+                        }
                         break;
                     case 'postreply':
                         $thread_id = $_GET['thread'];
@@ -210,12 +213,34 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        public function get_forumlink($id, $page = '0') {
-            return $this->url_forum . $id . '&amp;page=' . $page;
+        public function thread_exists($id) {
+            global $wpdb;
+
+            if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_threads} WHERE id = %d", $id))) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        public function get_threadlink($id, $page = '0') {
-            return $this->url_thread . $id . '&amp;page=' . $page;
+        public function get_forumlink($id, $page = 0) {
+            $page_appendix = "";
+
+            if ($page) {
+                $page_appendix = '&amp;page=' . $page;
+            }
+
+            return $this->url_forum . $id . $page_appendix;
+        }
+
+        public function get_threadlink($id, $page = 0) {
+            $page_appendix = "";
+
+            if ($page) {
+                $page_appendix = '&amp;page=' . $page;
+            }
+
+            return $this->url_thread . $id . $page_appendix;
         }
 
         public function get_postlink($id, $postid, $page = 'N/A') {
@@ -357,7 +382,7 @@ if (!class_exists('asgarosforum')) {
                     require('views/forum.php');
                 }
             } else {
-                wp_die(__("Sorry, but this forum does not exist.", "asgarosforum"));
+                echo '<div class="notice">'.__("Sorry, but this forum does not exist.", "asgarosforum").'</div>';
             }
         }
 
@@ -388,34 +413,38 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function showthread($thread_id) {
-            global $wpdb, $user_ID;
+            if ($this->thread_exists($thread_id)) {
+                global $wpdb, $user_ID;
 
-            if (isset($_GET['remove_post'])) {
-                $this->remove_post();
-            }
-
-            if (isset($_GET['sticky'])) {
-                $this->sticky_post();
-            }
-
-            if (isset($_GET['closed'])) {
-                $this->closed_post();
-            }
-
-            $posts = $this->getable_posts($thread_id);
-
-            if ($posts) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $thread_id));
-
-                $meClosed = "";
-
-                if ($this->is_closed()) {
-                    $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
-                } else {
-                    $meClosed = "";
+                if (isset($_GET['remove_post'])) {
+                    $this->remove_post();
                 }
 
-                require('views/thread.php');
+                if (isset($_GET['sticky'])) {
+                    $this->sticky_post();
+                }
+
+                if (isset($_GET['closed'])) {
+                    $this->closed_post();
+                }
+
+                $posts = $this->getable_posts($thread_id);
+
+                if ($posts) {
+                    $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $thread_id));
+
+                    $meClosed = "";
+
+                    if ($this->is_closed()) {
+                        $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
+                    } else {
+                        $meClosed = "";
+                    }
+
+                    require('views/thread.php');
+                }
+            } else {
+                echo '<div class="notice">'.__("Sorry, but this thread does not exist.", "asgarosforum").'</div>';
             }
         }
 
@@ -498,7 +527,7 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (!$date) {
-                return __("No threads yet", "asgarosforum");
+                return __("No threads yet!", "asgarosforum");
             }
 
             $d = date_i18n($this->date_format, strtotime($date->date));
@@ -703,7 +732,7 @@ if (!class_exists('asgarosforum')) {
                     if ($source == 'post') {
                         $out .= " <a href='" . $this->get_threadlink($this->current_thread) . "'>" . __("First", "asgarosforum") . "</a> << ";
                     } else if ($source == 'thread') {
-                        $out .= " <a href='" . $this->get_forumlink($this->current_forum, "0") . "'>" . __("First", "asgarosforum") . "</a> << ";
+                        $out .= " <a href='" . $this->get_forumlink($this->current_forum) . "'>" . __("First", "asgarosforum") . "</a> << ";
                     }
                 }
 
