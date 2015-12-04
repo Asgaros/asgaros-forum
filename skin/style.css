@@ -119,18 +119,6 @@
     display: block;
 }
 
-/* QUICK REPLY */
-#wpf-wrapper #thread-reply {
-    display: block;
-    padding: 10px;
-    background-color: #F5F5F5;
-    border-left: 1px solid #bbb;
-    border-bottom: 1px solid #bbb;
-    border-right: 1px solid #bbb;
-    margin-top: -10px;
-    margin-bottom: 5px;
-}
-
 /* PAGEING */
 #wpf-wrapper .pages {
     width: 100%;

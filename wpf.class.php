@@ -472,7 +472,6 @@ if (!class_exists('asgarosforum')) {
                     wp_die(__("Sorry, but you don't have access to this thread.", "asgarosforum"));
                 }
 
-                $quick_thread = $this->check_parms($_GET['t']);
                 $meClosed = "";
 
                 if ($this->is_closed()) {
