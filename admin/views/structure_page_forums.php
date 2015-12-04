@@ -21,7 +21,7 @@
                                 <li class="ui-state-default">
                                     <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="<?php echo $forum->id; ?>" />
                                     <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
-                                    <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" size="50" /></label>
+                                    <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" /></label>
                                     <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
                                         <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                                     </a>
@@ -31,7 +31,7 @@
                             <li class="ui-state-default">
                                 <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="new" />
                                 <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="" /></label>&nbsp;&nbsp;
-                                <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="" size="50" /></label>
+                                <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="" /></label>
                                 <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
                                     <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                                 </a>
@@ -53,7 +53,7 @@
     <li class="ui-state-default">
         <input type="hidden" name="mf_forum_id[][]" value="new" />
         <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
-        <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" size="50" /></label>
+        <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" /></label>
         <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
             <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
         </a>

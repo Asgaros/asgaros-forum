@@ -39,6 +39,9 @@ a.mf_remove_category,
 a.mf_remove_forum {
     float: right;
 }
+input {
+    width: 300px;
+}
 /* MAIN OPTIONS PAGE */
 #mf_options_form input {
     vertical-align: middle;

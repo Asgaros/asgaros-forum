@@ -12,14 +12,12 @@
     </h2>
     <form action="" method="post">
         <fieldset class="mf_fset">
-            <legend><?php _e('Manage Categories', 'asgarosforum'); ?></legend>
             <ol id="sortable-categories" class="mf_ordered_list">
                 <?php if (!empty($categories)): ?>
                     <?php foreach ($categories as $cat): ?>
                         <li class="ui-state-default">
                             <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
-                            <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($cat->name)); ?>" /></label>&nbsp;&nbsp;
-                            <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="<?php echo esc_html(stripslashes($cat->description)); ?>" size="50" /></label>&nbsp;&nbsp;
+                            <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($cat->name)); ?>" /></label>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
                                 <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
@@ -28,8 +26,7 @@
                 <?php else: ?>
                     <li class="ui-state-default">
                         <input type="hidden" name="mf_category_id[]" value="new" />
-                        <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>&nbsp;&nbsp;
-                        <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="" size="50" /></label>
+                        <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
                         <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
                             <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
                         </a>
@@ -46,8 +43,7 @@
 <div id="hidden-element-container">
     <li class="ui-state-default">
         <input type="hidden" name="mf_category_id[]" value="new" />
-        <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>&nbsp;&nbsp;
-        <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_description[]" value="" size="50" /></label>
+        <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
         <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
             <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
         </a>

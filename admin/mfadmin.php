@@ -86,7 +86,7 @@ if (!class_exists("AFAdmin"))
         {
             global $asgarosforum;
             $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-            $categories = $asgarosforum->get_groups();
+            $categories = $asgarosforum->get_categories();
 
             if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
                 require('views/structure_page_forums.php');
@@ -106,7 +106,6 @@ if (!class_exists("AFAdmin"))
                 foreach ($_POST['mf_category_id'] as $key => $value) {
                     $id = $_POST['mf_category_id'][$key];
                     $name = stripslashes($_POST['category_name'][$key]);
-                    $description = stripslashes($_POST['category_description'][$key]);
 
                     if (empty($name)) {
                         if ($id != 'new') {
@@ -117,11 +116,11 @@ if (!class_exists("AFAdmin"))
                     }
 
                     if ($id == 'new') { // Save new category
-                        $wpdb->insert($asgarosforum->table_categories, array('name' => $name, 'description' => $description, 'sort' => $order), array('%s', '%s', '%d'));
+                        $wpdb->insert($asgarosforum->table_categories, array('name' => $name, 'sort' => $order), array('%s', '%d'));
                         $listed_categories[] = $wpdb->insert_id;
                     } else { // Update existing category
-                        $q = "UPDATE {$asgarosforum->table_categories} SET name = %s, description = %s, sort = %d WHERE id = %d";
-                        $wpdb->query($wpdb->prepare($q, $name, $description, $order, $id));
+                        $q = "UPDATE {$asgarosforum->table_categories} SET name = %s, sort = %d WHERE id = %d";
+                        $wpdb->query($wpdb->prepare($q, $name, $order, $id));
                         $listed_categories[] = $id;
                     }
 
@@ -154,7 +153,7 @@ if (!class_exists("AFAdmin"))
             $order = 100000; // Order is DESC for some reason
             $listed_forums = array();
             $forum_ids = array();
-            $categories = $asgarosforum->get_groups();
+            $categories = $asgarosforum->get_categories();
 
             if (empty($categories)) { // This should never happen, but just in case
                 return;

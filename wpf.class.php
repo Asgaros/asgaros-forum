@@ -16,7 +16,7 @@ if (!class_exists('asgarosforum')) {
         var $table_forums = "";
         var $table_threads = "";
         var $table_posts = "";
-        var $current_group = "";
+        var $current_category = "";
         var $current_forum = "";
         var $current_thread = "";
         var $current_page = "";
@@ -44,7 +44,7 @@ if (!class_exists('asgarosforum')) {
             $this->table_forums = $wpdb->prefix . "forum_forums";
             $this->table_threads = $wpdb->prefix . "forum_threads";
             $this->table_posts = $wpdb->prefix . "forum_posts";
-            $this->current_group = false;
+            $this->current_category = false;
             $this->current_forum = false;
             $this->current_thread = false;
             $this->current_page = 0;
@@ -72,7 +72,6 @@ if (!class_exists('asgarosforum')) {
                 CREATE TABLE $this->table_categories (
                 id int(11) NOT NULL auto_increment,
                 name varchar(255) NOT NULL default '',
-                description varchar(255) default '',
                 sort int(11) NOT NULL default '0',
                 PRIMARY KEY  (id)
                 ) $charset_collate;";
@@ -132,13 +131,13 @@ if (!class_exists('asgarosforum')) {
                     case 'viewforum':
                         $forum_id = $this->check_parms($_GET['f']);
                         if ($this->forum_exists($forum_id)) {
-                            $this->current_group = $this->get_parent_id(FORUM, $forum_id);
+                            $this->current_category = $this->get_parent_id(FORUM, $forum_id);
                             $this->current_forum = $forum_id;
                         }
                         break;
                     case 'viewtopic':
                         $thread_id = $this->check_parms($_GET['t']);
-                        $this->current_group = $this->forum_get_group_from_post($thread_id);
+                        $this->current_category = $this->get_category_from_thread($thread_id);
                         $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
                         $this->current_thread = $thread_id;
                         break;
@@ -236,7 +235,7 @@ if (!class_exists('asgarosforum')) {
             return $this->get_threadlink($id, $num) . '#postid-' . $postid;
         }
 
-        public function get_groups() {
+        public function get_categories() {
             global $wpdb;
 
             return $wpdb->get_results("SELECT * FROM {$this->table_categories} ORDER BY sort DESC");
@@ -482,7 +481,7 @@ if (!class_exists('asgarosforum')) {
 
         public function overview() {
             global $user_ID;
-            $grs = $this->get_groups();
+            $grs = $this->get_categories();
             require('views/overview.php');
         }
 
@@ -642,26 +641,10 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        public function forum_get_group_id($group) {
+        public function get_category_from_thread($thread_id) {
             global $wpdb;
-            $group = ($group) ? $group : 0;
-
-            return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->table_categories} WHERE id = %d", $group));
-        }
-
-        public function forum_get_parent($forum) {
-            global $wpdb;
-            $forum = ($forum) ? $forum : 0;
-
-            return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_forums} WHERE id = %d", $forum));
-        }
-
-        public function forum_get_group_from_post($thread_id) {
-            global $wpdb;
-            $thread_id = ($thread_id) ? $thread_id : 0;
             $parent = $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $thread_id));
-
-            return $this->forum_get_group_id($this->forum_get_parent($parent));
+            return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_forums} WHERE id = %d", $parent));
         }
 
         public function breadcrumbs() {
