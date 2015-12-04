@@ -138,12 +138,6 @@ if (!class_exists('asgarosforum')) {
                 dbDelta($sql5);
                 dbDelta($sql6);
 
-                if ($installed_ver < 1) {
-                    // We need to kill this one after we fix how the forum search works
-                    $wpdb->query("ALTER TABLE $this->table_posts ENGINE = MyISAM;"); // InnoDB doesn't support FULLTEXT
-                    $wpdb->query("ALTER TABLE $this->table_posts ADD FULLTEXT (text);");
-                }
-
                 update_option("asgarosforum_db_version", $this->db_version);
             }
         }
@@ -338,14 +332,7 @@ if (!class_exists('asgarosforum')) {
 
             echo '<div id="wpf-wrapper">';
 
-            echo '<div id="top-elements">';
-            echo $this->breadcrumbs();
-            echo "<div class='search'>
-            <form name='wpf_search_form' method='post' action='{$this->url_base}" . "search'>
-            <span class='icon-search'></span>
-            <input type='text' name='search_words' class='mf_search' placeholder='" . __("Search forums", "asgarosforum") . "' />
-            </form>
-            </div></div>";
+            echo '<div id="top-elements">'.$this->breadcrumbs().'</div>';
 
             if ($this->current_view) {
                 switch ($this->current_view) {
@@ -367,9 +354,6 @@ if (!class_exists('asgarosforum')) {
                         break;
                     case 'editpost':
                         include('views/editor.php');
-                        break;
-                    case 'search':
-                        $this->search_results();
                         break;
                 }
             } else {
@@ -667,10 +651,6 @@ if (!class_exists('asgarosforum')) {
                 case "viewtopic":
                     $title = $default_title . " - " . $this->get_name($this->get_parent_id(THREAD, $this->check_parms($_GET['t'])), $this->table_forums) . " - " . $this->get_name($this->check_parms($_GET['t']), $this->table_threads);
                     break;
-                case "search":
-                    $terms = esc_html($_POST['search_words']);
-                    $title = $default_title . " - " . __("Search Results", "asgarosforum");
-                    break;
                 case "editpost":
                     $title = $default_title . " - " . __("Edit Post", "asgarosforum");
                     break;
@@ -789,16 +769,6 @@ if (!class_exists('asgarosforum')) {
             if ($this->current_thread) {
                 $link = $this->get_threadlink($this->current_thread);
                 $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . "</a>";
-            }
-
-            if ($this->current_view == 'search') {
-                $terms = "";
-
-                if (isset($_POST['search_words'])) {
-                    $terms = esc_html(esc_sql($_POST['search_words']));
-                }
-
-                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("Search Results", "asgarosforum") . " &rarr; $terms";
             }
 
             if ($this->current_view == 'postreply') {
@@ -1044,17 +1014,6 @@ if (!class_exists('asgarosforum')) {
             }
 
             return $user;
-        }
-
-        public function search_results() {
-            global $wpdb;
-            $search_string = esc_sql($_POST['search_words']);
-            $sql = $wpdb->prepare("SELECT {$this->table_posts}.id, text, {$this->table_threads}.name, {$this->table_posts}.parent_id, {$this->table_posts}.date, {$this->table_posts}.author_id, MATCH (text) AGAINST (%s) AS score
-            FROM {$this->table_posts} JOIN {$this->table_threads} ON {$this->table_posts}.parent_id = {$this->table_threads}.id
-            AND MATCH (text) AGAINST (%s) ORDER BY score DESC LIMIT 50", $search_string, $search_string);
-            $results = $wpdb->get_results($sql);
-
-            require('views/searchresults.php');
         }
 
         public function get_topic_image($thread) {
