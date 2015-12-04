@@ -36,9 +36,7 @@ li.ui-state-highlight {
     display: none;
 }
 a.mf_remove_category,
-a.mf_remove_forum,
-a.mf_remove_user_group,
-a.mf_remove_user_group_user {
+a.mf_remove_forum {
     float: right;
 }
 /* MAIN OPTIONS PAGE */
@@ -48,9 +46,4 @@ a.mf_remove_user_group_user {
 .mf_tb_label {
     display: inline-block;
     width: 350px;
-}
-/* STRUCTURE PAGE */
-div.user-groups-area {
-    display: none;
-    margin-top: 10px;
 }

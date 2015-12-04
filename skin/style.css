@@ -93,9 +93,9 @@
 /* NOTICE */
 #wpf-wrapper .notice {
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-style: italic;
-    color: #999;
+    color: #666;
     padding: 10px !important;
 }
 

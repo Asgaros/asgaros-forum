@@ -185,7 +185,7 @@ if (!class_exists('asgarosforum')) {
                 require('wpf-insert.php');
             }
 
-            if (isset($_GET['markallread']) && $_GET['markallread'] == "true") {
+            if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread") {
                 $this->markallread();
             }
 
@@ -481,25 +481,9 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function overview() {
-            global $user_ID, $wp_rewrite;
-
-            if ($wp_rewrite->using_permalinks()) {
-                $delim = "?";
-            } else {
-                $delim = "&";
-            }
-
+            global $user_ID;
             $grs = $this->get_groups();
-
-            if (count($grs) > 0) {
-                foreach ($grs as $g) {
-                    require('views/overview.php');
-                }
-            } else {
-                echo "<div class='notice'>".__("There are no categories yet!", "asgarosforum")."</div>";
-            }
-
-            echo "<div class='footer'><span><span class='icon-files-empty-small-yes'></span>" . __("New posts", "asgarosforum") . " &middot; <span class='icon-files-empty-small-no'></span>" . __("No new posts", "asgarosforum") . "</span> &middot; <span class='icon-checkmark'></span><span><a href='" . $this->url_home . $delim . "markallread=true'>" . __("Mark All Read", "asgarosforum") . "</a></span></div>";
+            require('views/overview.php');
         }
 
         public function input_filter($string) {
