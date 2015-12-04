@@ -6,8 +6,8 @@ if (!class_exists('asgarosforum')) {
         var $delim = "";
         var $page_id = "";
         var $date_format = "";
-        var $url_base = "";
         var $url_home = "";
+        var $url_base = "";
         var $url_forum = "";
         var $url_thread = "";
         var $url_add_topic = "";
@@ -52,14 +52,14 @@ if (!class_exists('asgarosforum')) {
             $this->current_forum = false;
             $this->current_thread = false;
             $this->current_page = 0;
+            $this->current_view = false;
 
             register_activation_hook(__FILE__, array($this, 'install'));
             add_action('plugins_loaded', array($this, 'install'));
-            add_action("init", array($this, 'prepareForum'));
-            add_action('wp', array($this, 'before_go'));
+            add_action("init", array($this, 'prepare'));
             add_action("wp_head", array($this, 'setup_header'));
             add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
-            add_shortcode('asgarosforum', array($this, "go"));
+            add_shortcode('asgarosforum', array($this, "forum"));
 
             AFAdmin::load_hooks();
         }
@@ -148,32 +148,44 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        public function prepareForum() {
+        public function prepare() {
             global $user_ID;
-
-            // Set cookie
-            if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
-                $last = get_user_meta($user_ID, 'lastvisit', true);
-                setcookie("wpafcookie", $last, 0, "/");
-                update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
-            }
-
-            // Handle inserts
-            $this->setup_links();
-            $error = false;
-            if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
-                require('wpf-insert.php');
-            }
-        }
-
-        public function setup_header() {
-            if (is_page($this->page_id)) {
-                echo '<link rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'skin/style.css" />';
-            }
-        }
-
-        public function setup_links() {
             global $wp_rewrite;
+
+            if (isset($_GET['forumaction'])) {
+                $this->current_view = $_GET['forumaction'];
+            }
+
+            if ($this->current_view) {
+                switch ($this->current_view) {
+                    case 'viewforum':
+                        $forum_id = $this->check_parms($_GET['f']);
+                        if ($this->forum_exists($forum_id)) {
+                            $this->current_group = $this->get_parent_id(FORUM, $forum_id);
+                            $this->current_forum = $forum_id;
+                        }
+                        break;
+                    case 'viewtopic':
+                        $thread_id = $this->check_parms($_GET['t']);
+                        $this->current_group = $this->forum_get_group_from_post($thread_id);
+                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                        $this->current_thread = $thread_id;
+                        break;
+                    case 'addtopic':
+                        $this->current_forum = $this->check_parms($_GET['forum']);
+                        break;
+                    case 'postreply':
+                        $thread_id = $this->check_parms($_GET['thread']);
+                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                        $this->current_thread = $thread_id;
+                        break;
+                    case 'editpost':
+                        $thread_id = $this->check_parms($_GET['t']);
+                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
+                        $this->current_thread = $thread_id;
+                        break;
+                }
+            }
 
             // We need to change all of these $this->delim to use a regex on the request URI instead. This is preventing the forum from working as the home page.
             if ($wp_rewrite->using_permalinks()) {
@@ -183,12 +195,38 @@ if (!class_exists('asgarosforum')) {
             }
 
             $perm = get_permalink($this->page_id);
-            $this->url_forum = $perm . $this->delim . "forumaction=viewforum&amp;f=";
-            $this->url_thread = $perm . $this->delim . "forumaction=viewtopic&amp;t=";
-            $this->url_add_topic = $perm . $this->delim . "forumaction=addtopic&amp;forum={$this->current_forum}";
-            $this->url_post_reply = $perm . $this->delim . "forumaction=postreply&amp;thread={$this->current_thread}";
-            $this->url_base = $perm . $this->delim . "forumaction=";
             $this->url_home = $perm;
+            $this->url_base = $perm . $this->delim . "forumaction=";
+            $this->url_forum = $this->url_base . "viewforum&amp;f=";
+            $this->url_thread = $this->url_base . "viewtopic&amp;t=";
+            $this->url_add_topic = $this->url_base . "addtopic&amp;forum={$this->current_forum}";
+            $this->url_post_reply = $this->url_base . "postreply&amp;thread={$this->current_thread}";
+
+            // Set cookie
+            if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
+                $last = get_user_meta($user_ID, 'lastvisit', true);
+                setcookie("wpafcookie", $last, 0, "/");
+                update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
+            }
+
+            // Handle inserts
+            if (isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
+                require('wpf-insert.php');
+            }
+
+            if (isset($_GET['markallread']) && $_GET['markallread'] == "true") {
+                $this->markallread();
+            }
+
+            if (isset($_GET['move_topic'])) {
+                $this->move_topic();
+            }
+        }
+
+        public function setup_header() {
+            if (is_page($this->page_id)) {
+                echo '<link rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'skin/style.css" />';
+            }
         }
 
         public function forum_exists($id) {
@@ -264,19 +302,9 @@ if (!class_exists('asgarosforum')) {
             return $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE parent_id = %d ORDER BY date ASC LIMIT %d, %d", $thread_id, $start, $end));
         }
 
-        public function get_categoryname($id) {
+        public function get_name($id, $location) {
             global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_categories} WHERE id = %d", $id));
-        }
-
-        public function get_forumname($id) {
-            global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_forums} WHERE id = %d", $id));
-        }
-
-        public function get_threadname($id) {
-            global $wpdb;
-            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $id));
+            return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$location} WHERE id = %d", $id));
         }
 
         public function cut_string($string, $length = 35) {
@@ -305,66 +333,8 @@ if (!class_exists('asgarosforum')) {
             return $p[0];
         }
 
-        public function before_go() {
-            $this->setup_links();
-            $action = "";
-            $whereto = "";
-
-            if (isset($_GET['markallread']) && $_GET['markallread'] == "true") {
-                $this->markallread();
-            }
-
-            if (isset($_GET['forumaction'])) {
-                $action = $_GET['forumaction'];
-            } else {
-                $action = false;
-            }
-
-            if (isset($_GET['move_topic'])) {
-                $this->move_topic();
-            }
-        }
-
-        public function go() {
+        public function forum() {
             global $wpdb, $user_ID;
-
-            if (isset($_GET['forumaction'])) {
-                $action = $_GET['forumaction'];
-            } else {
-                $action = false;
-            }
-
-            if ($action) {
-                $this->current_view = $action;
-                switch ($action) {
-                    case 'viewforum':
-                        $forum_id = $this->check_parms($_GET['f']);
-                        if ($this->forum_exists($forum_id)) {
-                            $this->current_group = $this->get_parent_id(FORUM, $forum_id);
-                            $this->current_forum = $forum_id;
-                        }
-                        break;
-                    case 'viewtopic':
-                        $thread_id = $this->check_parms($_GET['t']);
-                        $this->current_group = $this->forum_get_group_from_post($thread_id);
-                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-                        $this->current_thread = $thread_id;
-                        break;
-                    case 'addtopic':
-                        $this->current_forum = $this->check_parms($_GET['forum']);
-                        break;
-                    case 'postreply':
-                        $thread_id = $this->check_parms($_GET['thread']);
-                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-                        $this->current_thread = $thread_id;
-                        break;
-                    case 'editpost':
-                        $thread_id = $this->check_parms($_GET['t']);
-                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
-                        $this->current_thread = $thread_id;
-                        break;
-                }
-            }
 
             echo '<div id="wpf-wrapper">';
 
@@ -377,8 +347,8 @@ if (!class_exists('asgarosforum')) {
             </form>
             </div></div>";
 
-            if ($action) {
-                switch ($action) {
+            if ($this->current_view) {
+                switch ($this->current_view) {
                     case 'viewforum':
                         $this->showforum($this->check_parms($_GET['f']));
                         break;
@@ -513,7 +483,6 @@ if (!class_exists('asgarosforum')) {
 
         public function get_postmeta($post_id, $author_id, $parent_id, $counter) {
             global $user_ID;
-            $this->setup_links();
 
             $o = "<table><tr>";
 
@@ -624,7 +593,7 @@ if (!class_exists('asgarosforum')) {
 
             return "
             <strong>" . __("Last post", "asgarosforum") . "</strong> " . __("by", "asgarosforum") . " " . $this->profile_link($date->author_id) . "<br />
-            " . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_threadname($date->parent_id)) . "</a><br />
+            " . __("in", "asgarosforum") . " <a href='" . $this->get_postlink($date->parent_id, $date->id) . "'>" . $this->cut_string($this->get_name($date->parent_id, $this->table_threads)) . "</a><br />
             " . __("on", "asgarosforum") . " {$d} Uhr";
         }
 
@@ -690,10 +659,10 @@ if (!class_exists('asgarosforum')) {
 
             switch ($action) {
                 case "viewforum":
-                    $title = $default_title . " - " . $this->get_forumname($this->check_parms($_GET['f']));
+                    $title = $default_title . " - " . $this->get_name($this->check_parms($_GET['f']), $this->table_forums);
                     break;
                 case "viewtopic":
-                    $title = $default_title . " - " . $this->get_forumname($this->get_parent_id(THREAD, $this->check_parms($_GET['t']))) . " - " . $this->get_threadname($this->check_parms($_GET['t']));
+                    $title = $default_title . " - " . $this->get_name($this->get_parent_id(THREAD, $this->check_parms($_GET['t'])), $this->table_forums) . " - " . $this->get_name($this->check_parms($_GET['t']), $this->table_threads);
                     break;
                 case "search":
                     $terms = esc_html($_POST['search_words']);
@@ -726,7 +695,6 @@ if (!class_exists('asgarosforum')) {
 
         public function forum_menu() {
             global $user_ID;
-            $this->setup_links();
 
             if ($user_ID) {
                 $menu = "<table class='menu'><tr><td><a href='" . $this->url_add_topic . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
@@ -736,7 +704,6 @@ if (!class_exists('asgarosforum')) {
 
         public function topic_menu() {
             global $user_ID;
-            $this->setup_links();
             $menu = "";
             $stick = "";
             $closed = "";
@@ -809,18 +776,16 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function breadcrumbs() {
-            $this->setup_links();
-
             $trail = "<span class='icon-home'></span><a href='" . $this->url_home . "'>" . __("Forum", "asgarosforum") . "</a>";
 
             if ($this->current_forum) {
                 $link = $this->get_forumlink($this->current_forum);
-                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->get_forumname($this->current_forum) . "</a>";
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->get_name($this->current_forum, $this->table_forums) . "</a>";
             }
 
             if ($this->current_thread) {
                 $link = $this->get_threadlink($this->current_thread);
-                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_threadname($this->current_thread), 70) . "</a>";
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . "</a>";
             }
 
             if ($this->current_view == 'search') {
@@ -865,6 +830,8 @@ if (!class_exists('asgarosforum')) {
                 update_user_meta($user_ID, 'lastvisit', $this->wpf_current_time_fixed());
                 $last = get_user_meta($user_ID, 'lastvisit', true);
                 setcookie("wpafcookie", $last, 0, "/");
+                header("Location: " . $this->url_home);
+                exit;
             }
         }
 
@@ -958,7 +925,7 @@ if (!class_exists('asgarosforum')) {
                 $currentForumID = $this->check_parms($_GET['f']);
                 $strOUT = '
                 <form method="post" action="' . $this->url_base . 'viewforum&amp;f=' . $currentForumID . '&amp;move_topic&amp;topic=' . $topic . '">
-                Move "<strong>' . $this->get_threadname($topic) . '</strong>" to new forum:<br />
+                Move "<strong>' . $this->get_name($topic, $this->table_threads) . '</strong>" to new forum:<br />
                 <select name="newForumID">';
 
                 $frs = $this->getable_forums();

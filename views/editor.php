@@ -53,7 +53,7 @@ if ($_GET['forumaction'] == "editpost") {
         if ($_GET['forumaction'] == "addtopic") {
             _e("Post new Topic", "asgarosforum");
         } else if ($_GET['forumaction'] == "postreply") {
-            echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_threadname($thread);
+            echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_name($thread, $this->table_threads);
         } else if ($_GET['forumaction'] == "editpost") {
             echo __("Edit Post:", "asgarosforum") . ' ' . stripslashes($t->name);
         }

@@ -1,5 +1,6 @@
 <?php
-
+global $wpdb;
+$error = false;
 $the_forum_id = false;
 $the_thread_id = false;
 
