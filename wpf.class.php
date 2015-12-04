@@ -124,8 +124,8 @@ if (!class_exists('asgarosforum')) {
                 $this->current_view = $_GET['forumaction'];
             }
 
-            if (isset($_GET['page'])) {
-                $this->current_page = $_GET['page'];
+            if (isset($_GET['part'])) {
+                $this->current_page = $_GET['part'];
             }
 
             if ($this->current_view) {
@@ -227,7 +227,7 @@ if (!class_exists('asgarosforum')) {
             $page_appendix = "";
 
             if ($page) {
-                $page_appendix = '&amp;page=' . $page;
+                $page_appendix = '&amp;part=' . $page;
             }
 
             return $this->url_forum . $id . $page_appendix;
@@ -237,7 +237,7 @@ if (!class_exists('asgarosforum')) {
             $page_appendix = "";
 
             if ($page) {
-                $page_appendix = '&amp;page=' . $page;
+                $page_appendix = '&amp;part=' . $page;
             }
 
             return $this->url_thread . $id . $page_appendix;
@@ -454,7 +454,7 @@ if (!class_exists('asgarosforum')) {
             $o = "<table><tr>";
 
             if ($user_ID && (!$this->is_closed() || $this->is_moderator($user_ID))) {
-                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->url_post_reply}&amp;quote={$post_id}&amp;page={$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->url_post_reply}&amp;quote={$post_id}&amp;part={$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
             if ($counter > 1) {
@@ -464,7 +464,7 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (($this->is_moderator($user_ID)) || ($user_ID == $author_id && $user_ID)) {
-                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;thread={$this->current_thread}&amp;page={$this->current_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;thread={$this->current_thread}&amp;part={$this->current_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
             }
 
             $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->current_page) . "' title='" . __("Permalink", "asgarosforum") . "'><span class='icon-link'></span></a></td>";
@@ -622,7 +622,7 @@ if (!class_exists('asgarosforum')) {
                 }
 
                 if ($this->is_moderator($user_ID)) {
-                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;page=" . $this->current_page . "&amp;getNewForumID&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;part=" . $this->current_page . "&amp;getNewForumID&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
                     $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_thread&amp;thread={$this->current_thread}' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
                 }
 
