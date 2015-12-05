@@ -130,7 +130,6 @@ if (!class_exists('asgarosforum')) {
 
             if ($this->current_view) {
                 switch ($this->current_view) {
-                    case 'movethread':
                     case 'viewforum':
                     case 'addthread':
                         $forum_id = $_GET['forum'];
@@ -138,6 +137,7 @@ if (!class_exists('asgarosforum')) {
                             $this->current_forum = $forum_id;
                         }
                         break;
+                    case 'movethread':
                     case 'viewthread':
                     case 'postreply':
                         $thread_id = $_GET['thread'];
@@ -623,7 +623,7 @@ if (!class_exists('asgarosforum')) {
                 }
 
                 if ($this->is_moderator($user_ID)) {
-                    $menu .= "<td><a href='" . $this->url_base . "movethread&amp;forum=" . $this->current_forum . "&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Thread", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_base . "movethread&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Thread", "asgarosforum") . "</span></a></td>";
                     $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_thread&amp;thread={$this->current_thread}' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Thread", "asgarosforum") . "</span></a></td>";
                 }
 
@@ -793,24 +793,22 @@ if (!class_exists('asgarosforum')) {
 
         public function movethread() {
             global $user_ID;
-            $thread = !empty($_GET['thread']) ? (int) $_GET['thread'] : 0;
 
             if ($this->is_moderator($user_ID)) {
-                $currentForumID = $_GET['forum'];
                 $strOUT = '
-                <form method="post" action="' . $this->url_base . 'viewforum&amp;forum=' . $currentForumID . '&amp;move_thread&amp;thread=' . $thread . '">
-                Move "<strong>' . $this->get_name($thread, $this->table_threads) . '</strong>" to new forum:<br />
+                <form method="post" action="' . $this->url_base . 'movethread&amp;thread=' . $this->current_thread . '&amp;move_thread">
+                Move "<strong>' . $this->get_name($this->current_thread, $this->table_threads) . '</strong>" to new forum:<br />
                 <select name="newForumID">';
 
                 $frs = $this->getable_forums();
 
                 foreach ($frs as $f) {
-                    $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $currentForumID ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
+                    $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $this->current_forum ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
                 }
 
                 $strOUT .= '</select><br /><input type="submit" value="Go!" /></form>';
 
-                return $strOUT;
+                echo $strOUT;
             } else {
                 echo '<div class="notice">'.__("You are not allowed to move threads.", "asgarosforum").'</div>';
             }
@@ -818,12 +816,11 @@ if (!class_exists('asgarosforum')) {
 
         public function move_thread() {
             global $user_ID, $wpdb;
-            $thread = $_GET['thread'];
             $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : 0;
 
             if ($this->is_moderator($user_ID) && $newForumID && $this->forum_exists($newForumID)) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d", $thread));
-                header("Location: " . $this->url_base . "viewforum&amp;forum=" . $newForumID);
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d", $this->current_thread));
+                header("Location: " . $this->url_base . "viewthread&thread=" . $this->current_thread);
                 exit;
             } else {
                 echo '<div class="notice">'.__("You do not have permission to move this thread.", "asgarosforum").'</div>';
