@@ -318,7 +318,7 @@ if (!class_exists('asgarosforum')) {
                         break;
                     case 'postreply':
                         if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID)) {
-                            wp_die(__("An unknown error has occured. Please try again.", "asgarosforum"));
+                            echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgarosforum").'</div>';
                         } else {
                             include('views/editor.php');
                         }
@@ -763,7 +763,7 @@ if (!class_exists('asgarosforum')) {
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $thread));
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $thread));
             } else {
-                wp_die(__("You are not allowed to delete threads.", "asgarosforum"));
+                echo '<div class="notice">'.__("You are not allowed to delete threads.", "asgarosforum").'</div>';
             }
         }
 
@@ -788,7 +788,7 @@ if (!class_exists('asgarosforum')) {
 
                 return $strOUT;
             } else {
-                wp_die(__("You are not allowed to move threads.", "asgarosforum"));
+                echo '<div class="notice">'.__("You are not allowed to move threads.", "asgarosforum").'</div>';
             }
         }
 
@@ -802,7 +802,7 @@ if (!class_exists('asgarosforum')) {
                 header("Location: " . $this->url_base . "viewforum&amp;forum=" . $newForumID);
                 exit;
             } else {
-                wp_die(__("You do not have permission to move this thread.", "asgarosforum"));
+                echo '<div class="notice">'.__("You do not have permission to move this thread.", "asgarosforum").'</div>';
             }
         }
 
@@ -814,7 +814,7 @@ if (!class_exists('asgarosforum')) {
             if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d", $id));
             } else {
-                wp_die(__("You do not have permission to delete this post.", "asgarosforum"));
+                echo '<div class="notice">'.__("You do not have permission to delete this post.", "asgarosforum").'</div>';
             }
         }
 
@@ -822,7 +822,7 @@ if (!class_exists('asgarosforum')) {
             global $user_ID, $wpdb;
 
             if (!$this->is_moderator($user_ID)) {
-                wp_die(__("You are not allowed to do this.", "asgarosforum"));
+                echo '<div class="notice">'.__("You are not allowed to do this.", "asgarosforum").'</div>';
             }
 
             $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
@@ -858,7 +858,7 @@ if (!class_exists('asgarosforum')) {
             global $user_ID, $wpdb;
 
             if (!$this->is_moderator($user_ID)) {
-                wp_die(__("You are not allowed to do this.", "asgarosforum"));
+                echo '<div class="notice">'.__("You are not allowed to do this.", "asgarosforum").'</div>';
             }
 
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], (int) $_GET['id']));
