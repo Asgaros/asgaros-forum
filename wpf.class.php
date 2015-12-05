@@ -588,15 +588,15 @@ if (!class_exists('asgarosforum')) {
             if ($user_ID) {
                 if ($this->is_moderator($user_ID)) {
                     if ($this->is_sticky()) {
-                        $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
+                        $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky'><span class='icon-pushpin'></span><span>" . __("Undo Sticky", "asgarosforum") . "</span></a></td>";
                     } else {
-                        $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky&amp;id={$this->current_thread}'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
+                        $stick = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;sticky'><span class='icon-pushpin'></span><span>" . __("Sticky", "asgarosforum") . "</span></a></td>";
                     }
 
                     if ($this->is_closed()) {
-                        $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=0&amp;id={$this->current_thread}'><span class=' icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
+                        $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=0'><span class=' icon-unlocked'></span><span>" . __("Re-open", "asgarosforum") . "</span></a></td>";
                     } else {
-                        $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=1&amp;id={$this->current_thread}'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
+                        $closed = "<td><a href='" . $this->get_threadlink($this->current_thread) . "&amp;closed=1'><span class='icon-lock'></span><span>" . __("Close", "asgarosforum") . "</span></a></td>";
                     }
                 }
 
@@ -757,11 +757,16 @@ if (!class_exists('asgarosforum')) {
 
         public function remove_thread() {
             global $user_ID, $wpdb;
-            $thread = $_GET['thread'];
 
             if ($this->is_moderator($user_ID)) {
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $thread));
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $thread));
+                $thread = $_GET['thread'];
+
+                if ($this->thread_exists($thread)) {
+                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $thread));
+                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $thread));
+                } else {
+                    echo '<div class="notice">'.__("This thread does not exist.", "asgarosforum").'</div>';
+                }
             } else {
                 echo '<div class="notice">'.__("You are not allowed to delete threads.", "asgarosforum").'</div>';
             }
@@ -823,15 +828,14 @@ if (!class_exists('asgarosforum')) {
 
             if (!$this->is_moderator($user_ID)) {
                 echo '<div class="notice">'.__("You are not allowed to do this.", "asgarosforum").'</div>';
-            }
-
-            $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-            $status = $this->is_sticky($id);
-
-            if ($status) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'open' WHERE id = %d", $id));
             } else {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'sticky' WHERE id = %d", $id));
+                $status = $this->is_sticky($this->current_thread);
+
+                if ($status) {
+                    $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'open' WHERE id = %d", $this->current_thread));
+                } else {
+                    $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'sticky' WHERE id = %d", $this->current_thread));
+                }
             }
         }
 
@@ -859,9 +863,9 @@ if (!class_exists('asgarosforum')) {
 
             if (!$this->is_moderator($user_ID)) {
                 echo '<div class="notice">'.__("You are not allowed to do this.", "asgarosforum").'</div>';
+            } else {
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], $this->current_thread));
             }
-
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], (int) $_GET['id']));
         }
 
         public function is_closed($thread_id = '') {
