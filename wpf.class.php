@@ -125,7 +125,7 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (isset($_GET['part'])) {
-                $this->current_page = $_GET['part'];
+                $this->current_page = ($_GET['part'] - 1);
             }
 
             if ($this->current_view) {
@@ -223,20 +223,20 @@ if (!class_exists('asgarosforum')) {
             }
         }
 
-        public function get_forumlink($id, $page = 0) {
+        public function get_forumlink($id, $page = 1) {
             $page_appendix = "";
 
-            if ($page) {
+            if ($page > 1) {
                 $page_appendix = '&amp;part=' . $page;
             }
 
             return $this->url_forum . $id . $page_appendix;
         }
 
-        public function get_threadlink($id, $page = 0) {
+        public function get_threadlink($id, $page = 1) {
             $page_appendix = "";
 
-            if ($page) {
+            if ($page > 1) {
                 $page_appendix = '&amp;part=' . $page;
             }
 
@@ -454,7 +454,7 @@ if (!class_exists('asgarosforum')) {
             $o = "<table><tr>";
 
             if ($user_ID && (!$this->is_closed() || $this->is_moderator($user_ID))) {
-                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->url_post_reply}&amp;quote={$post_id}&amp;part={$this->current_page}'>" . __("Quote", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->url_post_reply}&amp;quote={$post_id}'>" . __("Quote", "asgarosforum") . "</a></td>";
             }
 
             if ($counter > 1) {
@@ -721,9 +721,9 @@ if (!class_exists('asgarosforum')) {
                         $out .= " <strong>" . ($i + 1) . "</strong>";
                     } else {
                         if ($source == 'post') {
-                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, $i) . "'>" . ($i + 1) . "</a>";
+                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($i + 1)) . "'>" . ($i + 1) . "</a>";
                         } else if ($source == 'thread') {
-                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, $i) . "'>" . ($i + 1) . "</a>";
+                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($i + 1)) . "'>" . ($i + 1) . "</a>";
                         }
                     }
                 }
@@ -739,9 +739,9 @@ if (!class_exists('asgarosforum')) {
                 for ($i = 3; $i > 0; $i--) {
                     if ((($this->current_page + 1) - $i) > 0) {
                         if ($source == 'post') {
-                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->current_page - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
+                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, (($this->current_page + 1) - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
                         } else if ($source == 'thread') {
-                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->current_page - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
+                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, (($this->current_page + 1) - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
                         }
                     }
                 }
@@ -751,18 +751,18 @@ if (!class_exists('asgarosforum')) {
                 for ($i = 1; $i <= 3; $i++) {
                     if ((($this->current_page + 1) + $i) <= $num_pages) {
                         if ($source == 'post') {
-                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, ($this->current_page + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
+                            $out .= " <a href='" . $this->get_threadlink($this->current_thread, (($this->current_page + 1) + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
                         } else if ($source == 'thread') {
-                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, ($this->current_page + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
+                            $out .= " <a href='" . $this->get_forumlink($this->current_forum, (($this->current_page + 1) + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
                         }
                     }
                 }
 
                 if ($num_pages - $this->current_page >= 5) {
                     if ($source == 'post') {
-                        $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
+                        $out .= " >> <a href='" . $this->get_threadlink($this->current_thread, $num_pages) . "'>" . __("Last", "asgarosforum") . "</a>";
                     } else if ($source == 'thread') {
-                        $out .= " >> <a href='" . $this->get_forumlink($this->current_forum, ($num_pages - 1)) . "'>" . __("Last", "asgarosforum") . "</a>";
+                        $out .= " >> <a href='" . $this->get_forumlink($this->current_forum, $num_pages) . "'>" . __("Last", "asgarosforum") . "</a>";
                     }
                 }
             }
