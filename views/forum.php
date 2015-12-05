@@ -15,7 +15,7 @@
         <table>
             <?php if ($sticky_threads && !$this->current_page): // Prevent stickies from showing up on page 2...n ?>
                 <tr>
-                    <td class="bright" colspan="4"><?php _e("Sticky Topics", "asgarosforum"); ?></td>
+                    <td class="bright" colspan="4"><?php _e("Sticky Threads", "asgarosforum"); ?></td>
                 </tr>
 
                 <?php foreach ($sticky_threads as $thread): ?>

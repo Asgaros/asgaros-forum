@@ -57,7 +57,7 @@ if (!$error) { ?>
     <div class='title-element'>
         <?php
         if ($_GET['forumaction'] == "addthread") {
-            _e("Post new Topic", "asgarosforum");
+            _e("Post new Thread", "asgarosforum");
         } else if ($_GET['forumaction'] == "postreply") {
             echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_name($thread, $this->table_threads);
         } else if ($_GET['forumaction'] == "editpost") {

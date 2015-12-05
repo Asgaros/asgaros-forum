@@ -95,7 +95,7 @@ function mf_check_uploaded_images()
   return $valid;
 }
 
-//ADDING A NEW TOPIC?
+//ADDING A NEW THREAD?
 if (isset($_POST['add_thread_submit']))
 {
   $subject = $_POST['add_thread_subject'];

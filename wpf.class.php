@@ -435,7 +435,7 @@ if (!class_exists('asgarosforum')) {
                     $meClosed = "";
 
                     if ($this->is_closed()) {
-                        $meClosed = "&nbsp;(" . __("Topic closed", "asgarosforum") . ") ";
+                        $meClosed = "&nbsp;(" . __("Thread closed", "asgarosforum") . ") ";
                     } else {
                         $meClosed = "";
                     }
@@ -568,7 +568,7 @@ if (!class_exists('asgarosforum')) {
                     $title = $default_title . " - " . __("Post Reply", "asgarosforum");
                     break;
                 case "addthread":
-                    $title = $default_title . " - " . __("New Topic", "asgarosforum");
+                    $title = $default_title . " - " . __("New Thread", "asgarosforum");
                     break;
                 default:
                     $title = $default_title;
@@ -590,7 +590,7 @@ if (!class_exists('asgarosforum')) {
             global $user_ID;
 
             if ($user_ID) {
-                $menu = "<table class='menu'><tr><td><a href='" . $this->url_add_thread . "'><span class='icon-file-empty'></span><span>" . __("New Topic", "asgarosforum") . "</span></a></td></tr></table>";
+                $menu = "<table class='menu'><tr><td><a href='" . $this->url_add_thread . "'><span class='icon-file-empty'></span><span>" . __("New Thread", "asgarosforum") . "</span></a></td></tr></table>";
                 return $menu;
             }
         }
@@ -623,8 +623,8 @@ if (!class_exists('asgarosforum')) {
                 }
 
                 if ($this->is_moderator($user_ID)) {
-                    $menu .= "<td><a href='" . $this->url_base . "movethread&amp;forum=" . $this->current_forum . "&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Topic", "asgarosforum") . "</span></a></td>";
-                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_thread&amp;thread={$this->current_thread}' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Topic", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_base . "movethread&amp;forum=" . $this->current_forum . "&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Thread", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_thread&amp;thread={$this->current_thread}' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Thread", "asgarosforum") . "</span></a></td>";
                 }
 
                 $menu .= $stick . $closed . "</tr></table>";
@@ -677,7 +677,7 @@ if (!class_exists('asgarosforum')) {
             }
 
             if ($this->current_view == 'addthread') {
-                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("New Topic", "asgarosforum");
+                $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("New Thread", "asgarosforum");
             }
 
             return "<div class='breadcrumbs'>{$trail}</div>";

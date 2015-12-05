@@ -11,7 +11,7 @@
             <input type="text" name="forum_posts_per_page" id="forum_posts_per_page" value="<?php echo stripslashes($asgarosforum->options['forum_posts_per_page']); ?>" class="mf_tb" />
         </p>
         <p>
-            <label for="forum_threads_per_page" class="mf_tb_label"><?php _e('Topics to show per page:', 'asgarosforum'); ?></label>
+            <label for="forum_threads_per_page" class="mf_tb_label"><?php _e('Threads to show per page:', 'asgarosforum'); ?></label>
             <input type="text" name="forum_threads_per_page" id="forum_threads_per_page" value="<?php echo stripslashes($asgarosforum->options['forum_threads_per_page']); ?>" class="mf_tb" />
         </p>
         <p>

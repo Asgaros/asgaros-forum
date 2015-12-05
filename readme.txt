@@ -11,12 +11,9 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress which is ba
 
 = Features =
 * Image uploads
-* Quick Reply
-* User Groups
 * Powerful editor
-* Search Forums
-* Sticky (Pinned) Topics
-* Move, Edit, Remove and Close Topics
+* Sticky (Pinned) Threads
+* Move, Edit, Remove and Close Threads
 * Works out of the box with most themes (See FAQ)
 * Supports multiple languages
 
