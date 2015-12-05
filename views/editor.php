@@ -17,7 +17,7 @@ if (!$error) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgarosforum").'</div>';
         }
-    } else if ($_GET['forumaction'] == "postreply") {
+    } else if ($_GET['forumaction'] == "addpost") {
         if (!$this->thread_exists($_GET['thread'])) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
@@ -58,7 +58,7 @@ if (!$error) { ?>
         <?php
         if ($_GET['forumaction'] == "addthread") {
             _e("Post new Thread", "asgarosforum");
-        } else if ($_GET['forumaction'] == "postreply") {
+        } else if ($_GET['forumaction'] == "addpost") {
             echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_name($thread, $this->table_threads);
         } else if ($_GET['forumaction'] == "editpost") {
             echo __("Edit Post:", "asgarosforum") . ' ' . stripslashes($t->name);
@@ -110,7 +110,7 @@ if (!$error) { ?>
                         <input type='submit' name='add_thread_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
                         <input type='hidden' name='add_thread_forumid' value='<?php echo $_GET['forum']; ?>' />
                     </td>
-                <?php } else if ($_GET['forumaction'] == "postreply") { ?>
+                <?php } else if ($_GET['forumaction'] == "addpost") { ?>
                     <td>
                         <input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
                         <input type='hidden' name='add_post_forumid' value='<?php echo $thread; ?>' />

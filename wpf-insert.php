@@ -122,7 +122,7 @@ if (isset($_POST['add_thread_submit']))
     $sql_thread = "INSERT INTO {$this->table_threads}
                       (name, parent_id, status)
                     VALUES
-                      (%s, %d, 'open')";
+                      (%s, %d, 'normal_open')";
     $wpdb->query($wpdb->prepare($sql_thread, $subject, $forum_id));
 
     $id = $wpdb->insert_id;
