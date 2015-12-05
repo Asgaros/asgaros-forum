@@ -18,23 +18,35 @@ if (!$error) {
             echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgarosforum").'</div>';
         }
     } else if ($_GET['forumaction'] == "postreply") {
-        $thread = $_GET['thread'];
+        if (!$this->thread_exists($_GET['thread'])) {
+            $error = true;
+            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
+        }
+        if (!$error) {
+            $thread = $_GET['thread'];
 
-        if (isset($_GET['quote'])) {
-            $quote_id = $_GET['quote'];
-            $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
-            $display_name = $this->get_userdata($text->author_id, $this->options['forum_display_name']);
-            $q = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
+            if (isset($_GET['quote'])) {
+                $quote_id = $_GET['quote'];
+                $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
+                $display_name = $this->get_userdata($text->author_id, $this->options['forum_display_name']);
+                $q = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
+            }
         }
     } else if ($_GET['forumaction'] == "editpost") {
-        $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
-        $thread = $_GET['thread'];
-        $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $thread));
-        $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id));
-
-        if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator($user_ID)) {
+        if (!$this->thread_exists($_GET['thread'])) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, you are not allowed to edit this post.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
+        }
+        if (!$error) {
+            $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
+            $thread = $_GET['thread'];
+            $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $thread));
+            $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id));
+
+            if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator($user_ID)) {
+                $error = true;
+                echo '<div class="notice">'.__("Sorry, you are not allowed to edit this post.", "asgarosforum").'</div>';
+            }
         }
     }
 }
