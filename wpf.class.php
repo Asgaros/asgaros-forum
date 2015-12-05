@@ -119,7 +119,7 @@ class asgarosforum {
             $this->current_view = $_GET['forumaction'];
         }
 
-        if (isset($_GET['part'])) {
+        if (isset($_GET['part']) && $_GET['part'] > 0) {
             $this->current_page = ($_GET['part'] - 1);
         }
 
