@@ -24,24 +24,24 @@ if (!$error) {
         }
         if (!$error) {
             $thread = $_GET['thread'];
+            $quote_id = $_GET['quote'];
 
-            if (isset($_GET['quote'])) {
-                $quote_id = $_GET['quote'];
+            if (isset($_GET['quote']) && $this->post_exists($quote_id)) {
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
                 $display_name = $this->get_userdata($text->author_id, $this->options['forum_display_name']);
                 $q = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
             }
         }
     } else if ($_GET['forumaction'] == "editpost") {
-        if (!$this->thread_exists($_GET['thread'])) {
+        if (!$this->post_exists($_GET['id'])) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, this post does not exist.", "asgarosforum").'</div>';
         }
         if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
-            $thread = $_GET['thread'];
-            $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $thread));
             $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id));
+            $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $post->parent_id));
+            $thread = $post->parent_id;
 
             if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator($user_ID)) {
                 $error = true;

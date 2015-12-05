@@ -140,11 +140,17 @@ if (!class_exists('asgarosforum')) {
                         break;
                     case 'viewthread':
                     case 'postreply':
-                    case 'editpost':
                         $thread_id = $_GET['thread'];
                         if ($this->thread_exists($thread_id)) {
                             $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
                             $this->current_thread = $thread_id;
+                        }
+                        break;
+                    case 'editpost':
+                        $post_id = $_GET['id'];
+                        if ($this->post_exists($post_id)) {
+                            $this->current_thread = $this->get_parent_id(POST, $post_id);
+                            $this->current_forum = $this->get_parent_id(THREAD, $this->current_thread);
                         }
                         break;
                 }
@@ -205,6 +211,16 @@ if (!class_exists('asgarosforum')) {
             global $wpdb;
 
             if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_threads} WHERE id = %d", $id))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function post_exists($id) {
+            global $wpdb;
+
+            if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id))) {
                 return true;
             } else {
                 return false;
@@ -449,7 +465,7 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (($this->is_moderator($user_ID)) || ($user_ID == $author_id && $user_ID)) {
-                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;thread={$this->current_thread}&amp;part=".($this->current_page + 1)."'>" . __("Edit", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;part=".($this->current_page + 1)."'>" . __("Edit", "asgarosforum") . "</a></td>";
             }
 
             $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, ($this->current_page + 1)) . "' title='" . __("Permalink", "asgarosforum") . "'><span class='icon-link'></span></a></td>";
@@ -626,6 +642,9 @@ if (!class_exists('asgarosforum')) {
                     break;
                 case THREAD:
                     return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $id));
+                    break;
+                case POST:
+                    return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_posts} WHERE id = %d", $id));
                     break;
             }
         }

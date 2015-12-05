@@ -31,6 +31,7 @@ load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 
 //Setup defines
 define('WPFURL', plugin_dir_url(__FILE__));
+define('POST', "post");
 define('THREAD', "thread");
 define("FORUM", __("Forum", "asgarosforum"));
 
