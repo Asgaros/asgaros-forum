@@ -449,10 +449,10 @@ if (!class_exists('asgarosforum')) {
             }
 
             if (($this->is_moderator($user_ID)) || ($user_ID == $author_id && $user_ID)) {
-                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;thread={$this->current_thread}&amp;part={$this->current_page}'>" . __("Edit", "asgarosforum") . "</a></td>";
+                $o .= "<td><span class='icon-pencil2'></span><a href='" . $this->url_base . "editpost&amp;id={$post_id}&amp;thread={$this->current_thread}&amp;part=".($this->current_page + 1)."'>" . __("Edit", "asgarosforum") . "</a></td>";
             }
 
-            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, $this->current_page) . "' title='" . __("Permalink", "asgarosforum") . "'><span class='icon-link'></span></a></td>";
+            $o .= "<td><a href='" . $this->get_postlink($parent_id, $post_id, ($this->current_page + 1)) . "' title='" . __("Permalink", "asgarosforum") . "'><span class='icon-link'></span></a></td>";
             $o .= "</tr></table>";
 
             return $o;

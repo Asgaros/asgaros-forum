@@ -120,7 +120,7 @@ if (!$error) { ?>
                         <input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
                         <input type='hidden' name='edit_post_id' value='<?php echo $post->id; ?>' />
                         <input type='hidden' name='thread_id' value='<?php echo $thread; ?>' />
-                        <input type='hidden' name='page_id' value='<?php echo $this->current_page; ?>' />
+                        <input type='hidden' name='page_id' value='<?php echo $_GET['part']; ?>' />
                     </td>
                 <?php } ?>
             </tr>
