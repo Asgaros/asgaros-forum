@@ -189,6 +189,10 @@ if (!class_exists('asgarosforum')) {
             if (isset($_GET['move_thread'])) {
                 $this->move_thread();
             }
+
+            if (isset($_GET['delete_thread'])) {
+                $this->remove_thread();
+            }
         }
 
         public function setup_header() {
@@ -370,10 +374,6 @@ if (!class_exists('asgarosforum')) {
         public function showforum($forum_id) {
             if ($this->forum_exists($forum_id)) {
                 global $user_ID, $wpdb;
-
-                if (isset($_GET['delete_thread'])) {
-                    $this->remove_thread();
-                }
 
                 $threads = $this->getable_threads($forum_id);
                 $sticky_threads = $this->getable_threads($forum_id, 'sticky');
@@ -624,7 +624,7 @@ if (!class_exists('asgarosforum')) {
 
                 if ($this->is_moderator($user_ID)) {
                     $menu .= "<td><a href='" . $this->url_base . "movethread&amp;thread={$this->current_thread}'><span class='icon-shuffle'></span><span>" . __("Move Thread", "asgarosforum") . "</span></a></td>";
-                    $menu .= "<td><a href='" . $this->url_forum . $this->current_forum . "&amp;delete_thread&amp;thread={$this->current_thread}' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Thread", "asgarosforum") . "</span></a></td>";
+                    $menu .= "<td><a href='" . $this->url_thread . $this->current_thread . "&amp;delete_thread' onclick=\"return confirm('Are you sure you want to remove this?');\"><span class='icon-bin'></span><span>" . __("Delete Thread", "asgarosforum") . "</span></a></td>";
                 }
 
                 $menu .= $stick . $closed . "</tr></table>";
@@ -778,11 +778,11 @@ if (!class_exists('asgarosforum')) {
             global $user_ID, $wpdb;
 
             if ($this->is_moderator($user_ID)) {
-                $thread = $_GET['thread'];
-
-                if ($this->thread_exists($thread)) {
-                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $thread));
-                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $thread));
+                if ($this->thread_exists($this->current_thread)) {
+                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $this->current_thread));
+                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $this->current_thread));
+                    header("Location: " . $this->url_base . "viewforum&forum=" . $this->current_forum);
+                    exit;
                 } else {
                     echo '<div class="notice">'.__("This thread does not exist.", "asgarosforum").'</div>';
                 }
@@ -830,12 +830,14 @@ if (!class_exists('asgarosforum')) {
         public function remove_post() {
             global $user_ID, $wpdb;
             $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-            $post = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->table_posts} WHERE id = %d", $id));
+            if ($this->post_exists($id)) {
+                $post = $wpdb->get_row($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d", $id));
 
-            if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d", $id));
-            } else {
-                echo '<div class="notice">'.__("You do not have permission to delete this post.", "asgarosforum").'</div>';
+                if ($this->is_moderator($user_ID) || $user_ID == $post->author_id) {
+                    $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d", $id));
+                } else {
+                    echo '<div class="notice">'.__("You do not have permission to delete this post.", "asgarosforum").'</div>';
+                }
             }
         }
 
@@ -845,12 +847,14 @@ if (!class_exists('asgarosforum')) {
             if (!$this->is_moderator($user_ID)) {
                 echo '<div class="notice">'.__("You are not allowed to do this.", "asgarosforum").'</div>';
             } else {
-                $status = $this->is_sticky($this->current_thread);
+                if ($this->thread_exists($this->current_thread)) {
+                    $status = $this->is_sticky($this->current_thread);
 
-                if ($status) {
-                    $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'open' WHERE id = %d", $this->current_thread));
-                } else {
-                    $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'sticky' WHERE id = %d", $this->current_thread));
+                    if ($status) {
+                        $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'open' WHERE id = %d", $this->current_thread));
+                    } else {
+                        $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = 'sticky' WHERE id = %d", $this->current_thread));
+                    }
                 }
             }
         }
@@ -880,7 +884,9 @@ if (!class_exists('asgarosforum')) {
             if (!$this->is_moderator($user_ID)) {
                 echo '<div class="notice">'.__("You are not allowed to do this.", "asgarosforum").'</div>';
             } else {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], $this->current_thread));
+                if ($this->thread_exists($this->current_thread)) {
+                    $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET closed = %d WHERE id = %d", (int) $_GET['closed'], $this->current_thread));
+                }
             }
         }
 
