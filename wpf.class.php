@@ -35,7 +35,7 @@ class asgarosforum {
     public function __construct() {
         global $wpdb;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
-        $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[asgarosforum]%' AND post_status = 'publish' AND post_type = 'page'");
+        $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[forum]%' AND post_status = 'publish' AND post_type = 'page'");
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
         $this->table_categories = $wpdb->prefix . "forum_categories";
         $this->table_forums = $wpdb->prefix . "forum_forums";
@@ -51,7 +51,7 @@ class asgarosforum {
         add_action("init", array($this, 'prepare'));
         add_action("wp_head", array($this, 'setup_header'));
         add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
-        add_shortcode('asgarosforum', array($this, "forum"));
+        add_shortcode('forum', array($this, "forum"));
 
         AFAdmin::load_hooks();
     }
