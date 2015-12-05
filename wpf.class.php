@@ -113,14 +113,13 @@ class asgarosforum {
     }
 
     public function prepare() {
-        global $user_ID;
-        global $wp_rewrite;
+        global $user_ID, $wp_rewrite;
 
         if (isset($_GET['forumaction'])) {
             $this->current_view = $_GET['forumaction'];
         }
 
-        if (isset($_GET['part']) && $_GET['part'] > 0) {
+        if (isset($_GET['part'])) {
             $this->current_page = ($_GET['part'] - 1);
         }
 
@@ -713,7 +712,7 @@ class asgarosforum {
             $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_posts} WHERE parent_id = %d", $id));
             $num_pages = ceil($count / $this->options['forum_posts_per_page']);
         } else if ($source == 'thread') {
-            $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_threads} WHERE parent_id = %d AND status LIKE 'normal%'", $id));
+            $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_threads} WHERE parent_id = %d AND status LIKE %s", $id, "normal%"));
             $num_pages = ceil($count / $this->options['forum_threads_per_page']);
         }
 
