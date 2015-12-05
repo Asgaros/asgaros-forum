@@ -244,16 +244,12 @@ if (!class_exists('asgarosforum')) {
         }
 
         public function get_postlink($id, $postid, $page = 'N/A') {
-            $num = 0;
+            $num = 1;
 
             if ($page == 'N/A') {
                 global $wpdb;
                 $wpdb->query($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE parent_id = %d", $id));
-                $num = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']) - 1;
-
-                if ($num < 0) {
-                    $num = 0;
-                }
+                $num = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']);
             } else {
                 $num = $page;
             }
