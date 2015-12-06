@@ -50,7 +50,7 @@ class asgarosforum {
         add_action('plugins_loaded', array($this, 'install'));
         add_action("init", array($this, 'prepare'));
         add_action("wp_head", array($this, 'setup_header'));
-        add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
+        add_filter("wp_title", array($this, "get_pagetitle"));
         add_shortcode('forum', array($this, "forum"));
 
         AFAdmin::load_hooks();
@@ -157,9 +157,8 @@ class asgarosforum {
             $this->delim = "&amp;";
         }
 
-        $perm = get_permalink($this->page_id);
-        $this->url_home = $perm;
-        $this->url_base = $perm . $this->delim . "forumaction=";
+        $this->url_home = get_permalink($this->page_id);;
+        $this->url_base = $this->url_home . $this->delim . "forumaction=";
         $this->url_forum = $this->url_base . "viewforum&amp;forum=";
         $this->url_thread = $this->url_base . "viewthread&amp;thread=";
         $this->url_editor_thread = $this->url_base . "addthread&amp;forum={$this->current_forum}";
@@ -175,7 +174,13 @@ class asgarosforum {
         if (isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
             require('wpf-insert.php');
         } else if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread") {
-            $this->markallread();
+            if ($user_ID) {
+                $time = $this->wpf_current_time_fixed();
+                setcookie("wpafcookie", $time, 0, "/");
+                update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
+                header("Location: " . $this->url_home);
+                exit;
+            }
         } else if (isset($_GET['move_thread'])) {
             $this->move_thread();
         } else if (isset($_GET['delete_thread'])) {
@@ -195,38 +200,33 @@ class asgarosforum {
         }
     }
 
-    public function get_pagetitle($bef_title, $sep) {
+    public function get_pagetitle() {
         global $post;
         $default_title = $post->post_title;
-        $action = "";
         $title = "";
 
-        if (isset($_GET['forumaction']) && !empty($_GET['forumaction'])) {
-            $action = $_GET['forumaction'];
-        }
-
-        switch ($action) {
+        switch ($this->current_view) {
             case "viewforum":
-                $title = $default_title . " - " . $this->get_name($_GET['forum'], $this->table_forums);
+                $title = $this->get_name($this->current_forum, $this->table_forums) . " - ";
                 break;
             case "viewthread":
-                $title = $default_title . " - " . $this->get_name($this->get_parent_id('thread', $_GET['thread']), $this->table_forums) . " - " . $this->get_name($_GET['thread'], $this->table_threads);
+                $title = $this->get_name($this->current_thread, $this->table_threads) . " - ";
                 break;
             case "editpost":
-                $title = $default_title . " - " . __("Edit Post", "asgarosforum");
+                $title = __("Edit Post", "asgarosforum") . " - ";
                 break;
             case "addpost":
-                $title = $default_title . " - " . __("Post Reply", "asgarosforum");
+                $title = __("Post Reply", "asgarosforum") . " - ";
                 break;
             case "addthread":
-                $title = $default_title . " - " . __("New Thread", "asgarosforum");
+                $title = __("New Thread", "asgarosforum") . " - ";
                 break;
-            default:
-                $title = $default_title;
+            case "movethread":
+                $title = __("Move Thread", "asgarosforum") . " - ";
                 break;
         }
 
-        return $title . ' | ';
+        return $title . $default_title . ' | ';
     }
 
     public function forum() {
@@ -671,18 +671,6 @@ class asgarosforum {
             return $_COOKIE['wpafcookie'];
         } else {
             return "0000-00-00 00:00:00";
-        }
-    }
-
-    public function markallread() {
-        global $user_ID;
-
-        if ($user_ID) {
-            $time = $this->wpf_current_time_fixed();
-            update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
-            setcookie("wpafcookie", $time, 0, "/");
-            header("Location: " . $this->url_home);
-            exit;
         }
     }
 

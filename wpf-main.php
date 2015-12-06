@@ -26,7 +26,7 @@
  */
 
 //Textdomain Hook
-$plugin_dir = basename(dirname(__FILE__));
+$plugin_dir = plugin_basename(dirname(__FILE__));
 load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 
 //Setup defines
