@@ -12,7 +12,7 @@
     </h2>
     <form action="" method="post">
         <fieldset class="mf_fset">
-            <ol id="sortable-categories" class="mf_ordered_list">
+            <ol id="sortable-categories" class="sortable_elements mf_ordered_list">
                 <?php if (!empty($categories)): ?>
                     <?php foreach ($categories as $cat): ?>
                         <li class="ui-state-default">

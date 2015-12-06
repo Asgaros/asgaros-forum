@@ -13,7 +13,7 @@
             return false;
         });
         /******************************** SORTABLE FORUMS ********************************/
-        $('.sortable_forums').each(function() {
+        $('.sortable_elements').each(function() {
             $(this).sortable({
                 placeholder: "ui-state-highlight"
             });

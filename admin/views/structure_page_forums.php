@@ -15,7 +15,7 @@
                 <?php $forums = $asgarosforum->getable_forums($cat->id); ?>
                 <fieldset class="mf_fset">
                     <legend><?php echo stripslashes($cat->name); ?></legend>
-                    <ol class="sortable_forums mf_ordered_list" id="sortable-forums-<?php echo $cat->id; ?>">
+                    <ol class="sortable_elements mf_ordered_list" id="sortable-forums-<?php echo $cat->id; ?>">
                         <?php if (!empty($forums)): ?>
                             <?php foreach ($forums as $forum): ?>
                                 <li class="ui-state-default">

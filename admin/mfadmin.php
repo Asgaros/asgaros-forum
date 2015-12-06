@@ -98,7 +98,7 @@ if (!class_exists("AFAdmin"))
         public static function process_save_categories()
         {
             global $asgarosforum, $wpdb;
-            $order = 10000; // Order is DESC for some reason
+            $order = 1;
             $listed_categories = array();
             $category_ids = array();
 
@@ -124,7 +124,7 @@ if (!class_exists("AFAdmin"))
                         $listed_categories[] = $id;
                     }
 
-                    $order--;
+                    $order++;
                 }
             }
 
@@ -150,7 +150,7 @@ if (!class_exists("AFAdmin"))
         public static function process_save_forums()
         {
             global $asgarosforum, $wpdb;
-            $order = 100000; // Order is DESC for some reason
+            $order = 1; // Order is DESC for some reason
             $listed_forums = array();
             $forum_ids = array();
             $categories = $asgarosforum->get_categories();
@@ -183,7 +183,7 @@ if (!class_exists("AFAdmin"))
                             $listed_forums[] = $id;
                         }
 
-                        $order--;
+                        $order++;
                     }
                 }
             }
