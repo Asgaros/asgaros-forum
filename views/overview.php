@@ -5,7 +5,7 @@
         <div class="content-element space">
             <table>
                 <?php
-                $frs = $this->getable_forums($g->id);
+                $frs = $this->get_forums($g->id);
                 if (count($frs) > 0) {
                     foreach ($frs as $f) {
                         $forum_counter++;
@@ -28,8 +28,8 @@
                             }
                         }
                         ?>
-                            <td class="status-icon"><span class="icon-files-empty-big-<?php echo $image; ?>"></span></td>
-                            <td><strong><a href="<?php echo $this->get_forumlink($f->id); ?>"><?php echo $f->name; ?></a></strong><br /><?php echo $f->description; ?></td>
+                            <td class="status-icon"><span class="icon-normal_open-<?php echo $image; ?>"></span></td>
+                            <td><strong><a href="<?php echo $this->get_link($f->id, $this->url_forum); ?>"><?php echo $f->name; ?></a></strong><br /><?php echo $f->description; ?></td>
                             <td class="forumstats"><?php _e("Threads: ", "asgarosforum"); ?>&nbsp;<?php echo $this->num_threads($f->id); ?><br /><?php _e("Posts: ", "asgarosforum"); ?>&nbsp;<?php echo $this->num_posts_forum($f->id); ?></td>
                             <td class="poster_in_forum"><?php echo $this->last_poster_in_forum($f->id); ?></td>
                         </tr>

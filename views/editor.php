@@ -31,7 +31,7 @@ if (!$error) {
         if (!$error) {
             $thread = $_GET['thread'];
 
-            if (isset($_GET['quote']) && $this->post_exists($_GET['quote'])) {
+            if (isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->table_posts)) {
                 $quote_id = $_GET['quote'];
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
                 $display_name = $this->get_userdata($text->author_id, $this->options['forum_display_name']);
@@ -39,7 +39,7 @@ if (!$error) {
             }
         }
     } else if ($_GET['forumaction'] == "editpost") {
-        if (!$this->post_exists($_GET['id'])) {
+        if (!$this->element_exists($_GET['id'], $this->table_posts)) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this post does not exist.", "asgarosforum").'</div>';
         }

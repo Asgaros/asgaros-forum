@@ -1,7 +1,7 @@
 <table class="top_menus">
     <tr>
-        <td class='pages'>
-            <?php if ($thread_counter > 0): ?>
+        <td class="pages">
+            <?php if (count($threads) > 0): ?>
                 <?php echo $this->pageing('thread'); ?>
             <?php endif; ?>
         </td>
@@ -20,9 +20,9 @@
 
                 <?php foreach ($sticky_threads as $thread): ?>
                     <tr>
-                        <td class="status-icon"><?php echo $this->get_thread_image($thread->id); ?></td>
+                        <td class="status-icon"><?php $this->get_thread_image($thread->id, $thread->status); ?></td>
                         <td>
-                            <strong><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
+                            <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
                             <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_starter($thread->id)); ?></i></small>
                         </td>
                         <td class="forumstats">
@@ -32,17 +32,18 @@
                         <td class="poster_in_forum"><?php echo $this->get_lastpost($thread->id); ?></td>
                     </tr>
                 <?php endforeach; ?>
-
+                <?php if (count($threads) > 0): ?>
                 <tr>
                     <td class="bright" colspan="4"></td>
                 </tr>
+            <?php endif; ?>
             <?php endif; // END STICKIES ?>
 
             <?php foreach ($threads as $thread): ?>
                 <tr>
-                    <td class="status-icon"><?php echo $this->get_thread_image($thread->id); ?></td>
+                    <td class="status-icon"><?php $this->get_thread_image($thread->id, $thread->status); ?></td>
                     <td>
-                        <strong><a href="<?php echo $this->get_threadlink($thread->id); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
+                        <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
                         <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_starter($thread->id)); ?></i></small>
                     </td>
                     <td class="forumstats">
@@ -57,7 +58,11 @@
 
     <table class="top_menus">
         <tr>
-            <td class='pages'><?php echo $this->pageing('thread'); ?></td>
+            <td class="pages">
+                <?php if (count($threads) > 0): ?>
+                    <?php echo $this->pageing('thread'); ?>
+                <?php endif; ?>
+            </td>
             <td><?php echo $this->forum_menu(); ?></td>
         </tr>
     </table>

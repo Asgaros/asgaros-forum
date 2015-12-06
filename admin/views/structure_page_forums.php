@@ -12,7 +12,7 @@
     <form action="" method="post">
         <?php if (!empty($categories)): ?>
             <?php foreach ($categories as $cat): ?>
-                <?php $forums = $asgarosforum->getable_forums($cat->id); ?>
+                <?php $forums = $asgarosforum->get_forums($cat->id); ?>
                 <fieldset class="mf_fset">
                     <legend><?php echo stripslashes($cat->name); ?></legend>
                     <ol class="sortable_elements mf_ordered_list" id="sortable-forums-<?php echo $cat->id; ?>">

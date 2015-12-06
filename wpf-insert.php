@@ -148,7 +148,7 @@ if (isset($_POST['add_thread_submit']))
   }
   if (!$error)
   {
-    wp_redirect(html_entity_decode($this->get_threadlink($id) . "#postid-" . $new_post_id));
+    wp_redirect(html_entity_decode($this->get_link($id, $this->url_thread) . "#postid-" . $new_post_id));
     exit;
   }
   else
