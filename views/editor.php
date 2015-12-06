@@ -34,7 +34,7 @@ if (!$error) {
             if (isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->table_posts)) {
                 $quote_id = $_GET['quote'];
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d", $quote_id));
-                $display_name = $this->get_userdata($text->author_id, $this->options['forum_display_name']);
+                $display_name = $this->get_username($text->author_id);
                 $q = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
             }
         }

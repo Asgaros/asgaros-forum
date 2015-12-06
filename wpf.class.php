@@ -22,8 +22,7 @@ class asgarosforum {
     var $options_default = array(
         'forum_posts_per_page' => 10,
         'forum_threads_per_page' => 20,
-        'forum_allow_image_uploads' => false,
-        'forum_display_name' => 'user_login'
+        'forum_allow_image_uploads' => false
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -346,12 +345,12 @@ class asgarosforum {
 
         return $string;
     }
-
-    public function get_userdata($user_id, $data) {
+/*****************************************************/
+    public function get_username($user_id) {
         $user = get_userdata($user_id);
 
         if ($user) {
-            return $user->$data;
+            return $user->display_name;
         } else {
             return 'Deleted user';
         }
@@ -773,9 +772,9 @@ class asgarosforum {
 
     public function profile_link($user_id, $toWrap = false) {
         if ($toWrap) {
-            $user = wordwrap($this->get_userdata($user_id, $this->options['forum_display_name']), 22, "-<br/>", 1);
+            $user = wordwrap($this->get_username($user_id), 22, "-<br/>", 1);
         } else {
-            $user = $this->get_userdata($user_id, $this->options['forum_display_name']);
+            $user = $this->get_username($user_id);
         }
 
         return $user;
