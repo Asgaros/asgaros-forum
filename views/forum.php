@@ -2,7 +2,7 @@
     <tr>
         <td class='pages'>
             <?php if ($thread_counter > 0): ?>
-                <?php echo $this->pageing($forum_id, 'thread'); ?>
+                <?php echo $this->pageing('thread'); ?>
             <?php endif; ?>
         </td>
         <td><?php echo $this->forum_menu(); ?></td>
@@ -57,7 +57,7 @@
 
     <table class="top_menus">
         <tr>
-            <td class='pages'><?php echo $this->pageing($forum_id, 'thread'); ?></td>
+            <td class='pages'><?php echo $this->pageing('thread'); ?></td>
             <td><?php echo $this->forum_menu(); ?></td>
         </tr>
     </table>

@@ -1,11 +1,11 @@
 <table class="top_menus">
     <tr>
-        <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
+        <td class='pages'><?php echo $this->pageing('post'); ?></td>
         <td><?php echo $this->thread_menu();?></td>
     </tr>
 </table>
 
-<div class='title-element'><?php echo $this->cut_string($this->get_name($thread_id, $this->table_threads), 70) . $meClosed; ?></div>
+<div class='title-element'><?php echo $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . $meClosed; ?></div>
 <div class='content-element thread'>
     <?php
     $counter = 0;
@@ -35,7 +35,7 @@
 
 <table class="top_menus">
     <tr>
-        <td class='pages'><?php echo $this->pageing($thread_id, 'post'); ?></td>
+        <td class='pages'><?php echo $this->pageing('post'); ?></td>
         <td><?php echo $this->thread_menu();?></td>
     </tr>
 </table>

@@ -13,15 +13,21 @@ if (!$user_ID) {
 
 if (!$error) {
     if ($_GET['forumaction'] == "addthread") {
-        if (!$this->forum_exists($_GET['forum'])) {
+        if (!$this->current_forum) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgarosforum").'</div>';
         }
     } else if ($_GET['forumaction'] == "addpost") {
-        if (!$this->thread_exists($_GET['thread'])) {
+        if (!$this->current_thread) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
         }
+
+        if ($this->get_status($this->current_thread, 'closed') && !$this->is_moderator($user_ID)) {
+            $error = true;
+            echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgarosforum").'</div>';
+        }
+
         if (!$error) {
             $thread = $_GET['thread'];
 
