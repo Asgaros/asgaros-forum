@@ -137,15 +137,15 @@ class asgarosforum {
                 case 'addpost':
                     $thread_id = $_GET['thread'];
                     if ($this->thread_exists($thread_id)) {
-                        $this->current_forum = $this->get_parent_id(THREAD, $thread_id);
                         $this->current_thread = $thread_id;
+                        $this->current_forum = $this->get_parent_id('thread', $thread_id);
                     }
                     break;
                 case 'editpost':
                     $post_id = $_GET['id'];
                     if ($this->post_exists($post_id)) {
-                        $this->current_thread = $this->get_parent_id(POST, $post_id);
-                        $this->current_forum = $this->get_parent_id(THREAD, $this->current_thread);
+                        $this->current_thread = $this->get_parent_id('post', $post_id);
+                        $this->current_forum = $this->get_parent_id('thread', $this->current_thread);
                     }
                     break;
             }
@@ -172,21 +172,20 @@ class asgarosforum {
             update_user_meta($user_ID, 'asgarosforum_lastvisit', $this->wpf_current_time_fixed());
         }
 
-        // Handle inserts
         if (isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
             require('wpf-insert.php');
-        }
-
-        if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread") {
+        } else if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread") {
             $this->markallread();
-        }
-
-        if (isset($_GET['move_thread'])) {
+        } else if (isset($_GET['move_thread'])) {
             $this->move_thread();
-        }
-
-        if (isset($_GET['delete_thread'])) {
+        } else if (isset($_GET['delete_thread'])) {
             $this->remove_thread();
+        } else if (isset($_GET['remove_post'])) {
+            $this->remove_post();
+        } else if (isset($_GET['sticky'])) {
+            $this->change_status($this->current_thread, 'sticky');
+        } else if (isset($_GET['closed'])) {
+            $this->change_status($this->current_thread, 'closed');
         }
     }
 
@@ -211,7 +210,7 @@ class asgarosforum {
                 $title = $default_title . " - " . $this->get_name($_GET['forum'], $this->table_forums);
                 break;
             case "viewthread":
-                $title = $default_title . " - " . $this->get_name($this->get_parent_id(THREAD, $_GET['thread']), $this->table_forums) . " - " . $this->get_name($_GET['thread'], $this->table_threads);
+                $title = $default_title . " - " . $this->get_name($this->get_parent_id('thread', $_GET['thread']), $this->table_forums) . " - " . $this->get_name($_GET['thread'], $this->table_threads);
                 break;
             case "editpost":
                 $title = $default_title . " - " . __("Edit Post", "asgarosforum");
@@ -446,18 +445,6 @@ class asgarosforum {
         if ($this->thread_exists($thread_id)) {
             global $wpdb, $user_ID;
 
-            if (isset($_GET['remove_post'])) {
-                $this->remove_post();
-            }
-
-            if (isset($_GET['sticky'])) {
-                $this->change_status($this->current_thread, 'sticky');
-            }
-
-            if (isset($_GET['closed'])) {
-                $this->change_status($this->current_thread, 'closed');
-            }
-
             $posts = $this->getable_posts($thread_id);
 
             if ($posts) {
@@ -489,7 +476,7 @@ class asgarosforum {
             $o .= "<td><span class='icon-quotes-left'></span><a href='{$this->url_editor_post}&amp;quote={$post_id}'>" . __("Quote", "asgarosforum") . "</a></td>";
         }
 
-        if ($counter > 1) {
+        if ($counter > 1 || $this->current_page >= 1) {
             if ($this->is_moderator($user_ID)) {
                 $o .= "<td><span class='icon-bin'></span><a onclick=\"return confirm('Are you sure you want to remove this?');\" href='" . $this->get_threadlink($this->current_thread) . "&amp;remove_post&amp;id={$post_id}'>" . __("Remove", "asgarosforum") . "</a></td>";
             }
@@ -634,13 +621,10 @@ class asgarosforum {
         global $wpdb;
 
         switch ($type) {
-            case FORUM:
-                return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_forums} WHERE id = %d", $id));
-                break;
-            case THREAD:
+            case 'thread':
                 return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_threads} WHERE id = %d", $id));
                 break;
-            case POST:
+            case 'post':
                 return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->table_posts} WHERE id = %d", $id));
                 break;
         }
@@ -694,9 +678,9 @@ class asgarosforum {
         global $user_ID;
 
         if ($user_ID) {
-            update_user_meta($user_ID, 'asgarosforum_lastvisit', $this->wpf_current_time_fixed());
-            $last = get_user_meta($user_ID, 'asgarosforum_lastvisit', true);
-            setcookie("wpafcookie", $last, 0, "/");
+            $time = $this->wpf_current_time_fixed();
+            update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
+            setcookie("wpafcookie", $time, 0, "/");
             header("Location: " . $this->url_home);
             exit;
         }
