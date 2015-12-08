@@ -40,7 +40,7 @@ function MFAttachFile($temp, $name) {
         move_uploaded_file($temp, $path . $u . $name);
     }
 
-    return "\n[img]" . $url . $u . $name . "[/img]";
+    return '<li><a href="'.$url.$u.$name.'" target="_blank">'.$name.'</a></li>';
 }
 
 function mf_check_uploaded_files()
@@ -106,12 +106,17 @@ if (isset($_POST['add_thread_submit']))
     $images = mf_check_uploaded_files();
     if ($images['im1'] || $images['im2'] || $images['im3'])
     {
+        $content .= '<p><strong>'.__("Uploaded files:", "asgarosforum").'</strong></p>';
+        $content .= '<ul>';
+
       if ($images['im1'])
         $content .= MFAttachFile($_FILES["mfimage1"]["tmp_name"], stripslashes($_FILES["mfimage1"]["name"]));
       if ($images['im2'])
         $content .= MFAttachFile($_FILES["mfimage2"]["tmp_name"], stripslashes($_FILES["mfimage2"]["name"]));
       if ($images['im3'])
         $content .= MFAttachFile($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
+
+        $content .= '</ul>';
     }
 
     $sql_post = "INSERT INTO {$this->table_posts}
@@ -151,12 +156,17 @@ if (isset($_POST['add_post_submit']))
     $images = mf_check_uploaded_files();
     if ($images['im1'] || $images['im2'] || $images['im3'])
     {
+        $content .= '<p><strong>'.__("Uploaded files:", "asgarosforum").'</strong></p>';
+        $content .= '<ul>';
+
       if ($images['im1'])
         $content .= MFAttachFile($_FILES["mfimage1"]["tmp_name"], stripslashes($_FILES["mfimage1"]["name"]));
       if ($images['im2'])
         $content .= MFAttachFile($_FILES["mfimage2"]["tmp_name"], stripslashes($_FILES["mfimage2"]["name"]));
       if ($images['im3'])
         $content .= MFAttachFile($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
+
+        $content .= '</ul>';
     }
 
     $sql_post = "INSERT INTO {$this->table_posts}
