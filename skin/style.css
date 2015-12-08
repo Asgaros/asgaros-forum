@@ -285,34 +285,35 @@
 .icon-link:before {
     content: "\e90e";
 }
-.icon-files-empty-small-no:before {
-	content: "\e90f";
-}
+.icon-files-empty-small-no:before,
 .icon-files-empty-small-yes:before {
 	content: "\e90f";
-    color: #2D89CC;
+}
+.icon-overview-no:before,
+.icon-overview-yes:before {
+    content: "\e90f";
+    font-size: 2em;
 }
 .icon-normal_open-no:before,
-.icon-sticky_open-no:before {
-    content: "\e90f";
-    font-size: 2em;
-}
+.icon-sticky_open-no:before,
 .icon-normal_open-yes:before,
 .icon-sticky_open-yes:before {
-    content: "\e90f";
+    content: "\e901";
     font-size: 2em;
-    color: #2D89CC;
 }
 .icon-normal_closed-no:before,
-.icon-sticky_closed-no:before {
-    content: "\e905";
-    font-size: 2em;
-    padding-left: 15px;
-}
+.icon-sticky_closed-no:before,
 .icon-normal_closed-yes:before,
 .icon-sticky_closed-yes:before {
     content: "\e905";
     font-size: 2em;
     padding-left: 15px;
+}
+.icon-files-empty-small-yes:before,
+.icon-normal_closed-yes:before,
+.icon-sticky_closed-yes:before,
+.icon-normal_open-yes:before,
+.icon-sticky_open-yes:before,
+.icon-overview-yes:before {
     color: #2D89CC;
 }
