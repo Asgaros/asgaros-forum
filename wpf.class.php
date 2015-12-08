@@ -613,7 +613,7 @@ class asgarosforum {
     public function last_visit() {
         global $user_ID;
 
-        if ($user_ID) {
+        if ($user_ID && isset($_COOKIE['wpafcookie'])) {
             return $_COOKIE['wpafcookie'];
         } else {
             return "0000-00-00 00:00:00";
