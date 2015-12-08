@@ -117,7 +117,7 @@ if (isset($_POST['add_thread_submit']))
   }
   else
   {
-    $date = $this->wpf_current_time_fixed();
+    $date = $this->current_time();
 
     $sql_thread = "INSERT INTO {$this->table_threads}
                       (name, parent_id, status)
@@ -171,7 +171,7 @@ if (isset($_POST['add_post_submit']))
   }
   else
   {
-    $date = $this->wpf_current_time_fixed();
+    $date = $this->current_time();
     //MAYBE ATTACH IMAGES
     $images = mf_check_uploaded_images();
     if ($images['im1'] || $images['im2'] || $images['im3'])
@@ -225,7 +225,7 @@ if (isset($_POST['edit_post_submit']))
     $error = true;
   }
   //Major security check here, prevents hackers from editing the entire forums posts
-  if (!is_super_admin($user_ID) && $user_ID != $this->get_post_owner($edit_post_id) && !$this->is_moderator($user_ID))
+  if (!is_super_admin($user_ID) && $user_ID != $this->get_post_author($edit_post_id) && !$this->is_moderator())
   {
     $msg .= "<h2>" . __("An error occured", "asgarosforum") . "</h2>";
     $msg .= ("<div id='error'><p>" . __("You do not have permission to edit this post!", "asgarosforum") . "</p></div>");

@@ -23,7 +23,7 @@ if (!$error) {
             echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
         }
 
-        if ($this->get_status($this->current_thread, 'closed') && !$this->is_moderator($user_ID)) {
+        if (!$error && $this->get_status($this->current_thread, 'closed') && !$this->is_moderator()) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgarosforum").'</div>';
         }
@@ -49,7 +49,7 @@ if (!$error) {
             $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $post->parent_id));
             $thread = $post->parent_id;
 
-            if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator($user_ID)) {
+            if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator()) {
                 $error = true;
                 echo '<div class="notice">'.__("Sorry, you are not allowed to edit this post.", "asgarosforum").'</div>';
             }
@@ -65,7 +65,7 @@ if (!$error) { ?>
         if ($_GET['forumaction'] == "addthread") {
             _e("Post new Thread", "asgarosforum");
         } else if ($_GET['forumaction'] == "addpost") {
-            echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_name($thread, $this->table_threads);
+            echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_name($this->current_thread, $this->table_threads);
         } else if ($_GET['forumaction'] == "editpost") {
             echo __("Edit Post:", "asgarosforum") . ' ' . stripslashes($t->name);
         }

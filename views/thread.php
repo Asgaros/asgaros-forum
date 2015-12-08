@@ -15,15 +15,15 @@
         <table id='postid-<?php echo $post->id; ?>'>
             <tr>
                 <td colspan='2' class='bright'>
-                    <span class='post-data-format'><?php echo date_i18n($this->date_format, strtotime($post->date)); ?></span>
-                    <div class='wpf-meta'><?php echo $this->get_postmeta($post->id, $post->author_id, $post->parent_id, $counter); ?></div>
+                    <span class='post-data-format'><?php echo $this->format_date($post->date); ?></span>
+                    <div class='wpf-meta'><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
                 </td>
             </tr>
             <tr>
                 <td class='autorpostbox'>
                     <?php echo get_avatar($post->author_id, 60); ?>
                     <br /><strong><?php echo $this->profile_link($post->author_id, true); ?></strong><br />
-                    <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->get_userposts_num($post->author_id); ?>
+                    <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->count_userposts($post->author_id); ?>
                 </td>
                 <td>
                     <?php echo stripslashes(make_clickable(wpautop($this->autoembed($post->text)))); ?>
