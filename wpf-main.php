@@ -30,7 +30,7 @@ $plugin_dir = plugin_basename(dirname(__FILE__));
 load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 
 //Setup defines
-define('WPFURL', plugin_dir_url(__FILE__));
+define('WPAFURL', plugin_dir_url(__FILE__));
 
 //Load class files
 require('admin/mfadmin.php');

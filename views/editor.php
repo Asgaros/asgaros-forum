@@ -23,7 +23,7 @@ if (!$error) {
             echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
         }
 
-        if (!$error && $this->get_status($this->current_thread, 'closed') && !$this->is_moderator()) {
+        if (!$error && $this->get_status('closed') && !$this->is_moderator()) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgarosforum").'</div>';
         }

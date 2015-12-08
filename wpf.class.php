@@ -122,7 +122,6 @@ class asgarosforum {
             $this->current_page = ($_GET['part'] - 1);
         }
 
-        // TODO: Bietet Potential für Optimierung
         switch ($this->current_view) {
             case 'viewforum':
             case 'addthread':
@@ -186,9 +185,9 @@ class asgarosforum {
         } else if (isset($_GET['remove_post'])) {
             $this->remove_post();
         } else if (isset($_GET['sticky'])) {
-            $this->change_status($this->current_thread, 'sticky');
+            $this->change_status('sticky');
         } else if (isset($_GET['closed'])) {
-            $this->change_status($this->current_thread, 'closed');
+            $this->change_status('closed');
         }
     }
 
@@ -284,7 +283,6 @@ class asgarosforum {
         return $location . $id . $page_appendix;
     }
 
-    // TODO: Eventuell Optimierungspotential
     public function get_postlink($thread_id, $post_id, $page = 0) {
         global $wpdb;
 
@@ -345,11 +343,15 @@ class asgarosforum {
         return $string;
     }
 
-    public function get_username($user_id) {
+    public function get_username($user_id, $wrap = false) {
         $user = get_userdata($user_id);
 
         if ($user) {
-            return $user->display_name;
+            if ($wrap) {
+                return wordwrap($user->display_name, 22, "-<br/>", true);
+            } else {
+                return $user->display_name;
+            }
         } else {
             return 'Deleted user';
         }
@@ -363,7 +365,7 @@ class asgarosforum {
             return $post->date;
         } else {
             $link = $this->get_postlink($thread_id, $post->id);
-            return __("Last post by", "asgarosforum").'&nbsp;<strong>'.$this->profile_link($post->author_id).'</strong><br />'.__("on", "asgarosforum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'&nbsp;'.__("Uhr", "asgarosforum").'</a>';
+            return __("Last post by", "asgarosforum").'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />'.__("on", "asgarosforum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'&nbsp;'.__("Uhr", "asgarosforum").'</a>';
         }
     }
 
@@ -377,7 +379,7 @@ class asgarosforum {
 
         $date = $this->format_date($post->date);
 
-        return __("Last post by", "asgarosforum")."&nbsp;<strong>".$this->profile_link($post->author_id)."</strong><br />
+        return __("Last post by", "asgarosforum")."&nbsp;<strong>".$this->get_username($post->author_id)."</strong><br />
         ".__("in", "asgarosforum")."&nbsp;<strong>".$this->cut_string($this->get_name($post->parent_id, $this->table_threads))."</strong><br />
         ".__("on", "asgarosforum")."&nbsp;<a href='".$this->get_postlink($post->parent_id, $post->id)."'>".$date."&nbsp;".__("Uhr", "asgarosforum")."</a>";
     }
@@ -420,7 +422,7 @@ class asgarosforum {
 
                 $meClosed = "";
 
-                if ($this->get_status($this->current_thread, 'closed')) {
+                if ($this->get_status('closed')) {
                     $meClosed = '&nbsp;('.__("Thread closed", "asgarosforum").')';
                 }
 
@@ -462,18 +464,18 @@ class asgarosforum {
     public function check_unread($thread_id) {
         global $user_ID;
         $lastpost_time = $this->get_lastpost_in_thread($thread_id, true);
-        $lastpost_author = $this->get_lastpost_data($thread_id, 'author_id', $this->table_posts);
+        $lastpost_author_id = $this->get_lastpost_data($thread_id, 'author_id', $this->table_posts);
 
-        if ($user_ID != $lastpost_author) {
+        if ($user_ID != $lastpost_author_id) {
             $lp = strtotime($lastpost_time);
             $lv = strtotime($this->last_visit());
 
             if ($lp > $lv) {
-                return true;
+                return 'yes';
             }
         }
 
-        return false;
+        return 'no';
     }
 
     public function post_menu($post_id, $author_id, $counter) {
@@ -481,7 +483,7 @@ class asgarosforum {
 
         $o = '<table><tr>';
 
-        if ($user_ID && (!$this->get_status($this->current_thread, 'closed') || $this->is_moderator())) {
+        if ($user_ID && (!$this->get_status('closed') || $this->is_moderator())) {
             $o .= '<td><span class="icon-quotes-left"></span><a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'">'.__("Quote", "asgarosforum").'</a></td>';
         }
 
@@ -552,7 +554,7 @@ class asgarosforum {
         if ($user_ID) {
             $menu .= '<table class="menu"><tr>';
 
-            if (!$this->get_status($this->current_thread, 'closed') || $this->is_moderator()) {
+            if (!$this->get_status('closed') || $this->is_moderator()) {
                 $menu .= '<td><a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgarosforum").'</span></a></td>';
             }
 
@@ -561,14 +563,14 @@ class asgarosforum {
                 $menu .= '<td><a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgarosforum").'</span></a></td>';
 
                 $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
-                if ($this->get_status($this->current_thread, 'sticky')) {
+                if ($this->get_status('sticky')) {
                     $menu .= __("Undo Sticky", "asgarosforum");
                 } else {
                     $menu .= __("Sticky", "asgarosforum");
                 }
                 $menu .= '</span></a></td>';
 
-                if ($this->get_status($this->current_thread, 'closed')) {
+                if ($this->get_status('closed')) {
                     $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgarosforum").'</span></a></td>';
                 } else {
                     $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgarosforum").'</span></a></td>';
@@ -585,29 +587,29 @@ class asgarosforum {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$location} WHERE id = %d;", $id));
     }
-/*****************************************************/
+
     public function breadcrumbs() {
-        $trail = "<span class='icon-home'></span><a href='" . $this->url_home . "'>" . __("Forum", "asgarosforum") . "</a>";
+        $trail = '<span class="icon-home"></span><a href="' . $this->url_home . '">' . __("Forum", "asgarosforum") . '</a>';
 
         if ($this->current_forum) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
-            $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->get_name($this->current_forum, $this->table_forums) . "</a>";
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">' . $this->get_name($this->current_forum, $this->table_forums) . '</a>';
         }
 
         if ($this->current_thread) {
             $link = $this->get_link($this->current_thread, $this->url_thread);
-            $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;<a href='{$link}'>" . $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . "</a>";
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">' . $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . '</a>';
         }
 
         if ($this->current_view == 'addpost') {
-            $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("Post Reply", "asgarosforum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Post Reply", "asgarosforum");
         } else if ($this->current_view == 'editpost') {
-            $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("Edit Post", "asgarosforum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Edit Post", "asgarosforum");
         } else if ($this->current_view == 'addthread') {
-            $trail .= "&nbsp;<span class='sep'>&rarr;</span>&nbsp;" . __("New Thread", "asgarosforum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("New Thread", "asgarosforum");
         }
 
-        return "<div class='breadcrumbs'>{$trail}</div>";
+        return '<div class="breadcrumbs">'.$trail.'</div>';
     }
 
     public function last_visit() {
@@ -620,18 +622,23 @@ class asgarosforum {
         }
     }
 
-    public function pageing($source) {
+    public function pageing($location) {
         global $wpdb;
         $out = __("Pages:", "asgarosforum");
-        $count = 0;
         $num_pages = 0;
+        $select_source = '';
+        $select_url = '';
 
-        if ($source == 'post') {
-            $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_posts} WHERE parent_id = %d", $this->current_thread));
+        if ($location == $this->table_posts) {
+            $count = $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d;", $this->current_thread));
             $num_pages = ceil($count / $this->options['forum_posts_per_page']);
-        } else if ($source == 'thread') {
-            $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->table_threads} WHERE parent_id = %d AND status LIKE %s", $this->current_forum, "normal%"));
+            $select_source = $this->current_thread;
+            $select_url = $this->url_thread;
+        } else if ($location == $this->table_threads) {
+            $count = $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->current_forum, "normal%"));
             $num_pages = ceil($count / $this->options['forum_threads_per_page']);
+            $select_source = $this->current_forum;
+            $select_url = $this->url_forum;
         }
 
         if ($num_pages <= 6) {
@@ -639,29 +646,17 @@ class asgarosforum {
                 if ($i == $this->current_page) {
                     $out .= " <strong>" . ($i + 1) . "</strong>";
                 } else {
-                    if ($source == 'post') {
-                        $out .= " <a href='" . $this->get_link($this->current_thread, $this->url_thread, ($i + 1)) . "'>" . ($i + 1) . "</a>";
-                    } else if ($source == 'thread') {
-                        $out .= " <a href='" . $this->get_link($this->current_forum, $this->url_forum, ($i + 1)) . "'>" . ($i + 1) . "</a>";
-                    }
+                    $out .= " <a href='" . $this->get_link($select_source, $select_url, ($i + 1)) . "'>" . ($i + 1) . "</a>";
                 }
             }
         } else {
             if ($this->current_page >= 4) {
-                if ($source == 'post') {
-                    $out .= " <a href='" . $this->get_link($this->current_thread, $this->url_thread) . "'>" . __("First", "asgarosforum") . "</a> << ";
-                } else if ($source == 'thread') {
-                    $out .= " <a href='" . $this->get_link($this->current_forum, $this->url_forum) . "'>" . __("First", "asgarosforum") . "</a> << ";
-                }
+                $out .= " <a href='" . $this->get_link($select_source, $select_url) . "'>" . __("First", "asgarosforum") . "</a> <<";
             }
 
             for ($i = 3; $i > 0; $i--) {
                 if ((($this->current_page + 1) - $i) > 0) {
-                    if ($source == 'post') {
-                        $out .= " <a href='" . $this->get_link($this->current_thread, $this->url_thread, (($this->current_page + 1) - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
-                    } else if ($source == 'thread') {
-                        $out .= " <a href='" . $this->get_link($this->current_forum, $this->url_forum, (($this->current_page + 1) - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
-                    }
+                    $out .= " <a href='" . $this->get_link($select_source, $select_url, (($this->current_page + 1) - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
                 }
             }
 
@@ -669,20 +664,12 @@ class asgarosforum {
 
             for ($i = 1; $i <= 3; $i++) {
                 if ((($this->current_page + 1) + $i) <= $num_pages) {
-                    if ($source == 'post') {
-                        $out .= " <a href='" . $this->get_link($this->current_thread, $this->url_thread, (($this->current_page + 1) + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
-                    } else if ($source == 'thread') {
-                        $out .= " <a href='" . $this->get_link($this->current_forum, $this->url_forum, (($this->current_page + 1) + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
-                    }
+                    $out .= " <a href='" . $this->get_link($select_source, $select_url, (($this->current_page + 1) + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
                 }
             }
 
             if ($num_pages - $this->current_page >= 5) {
-                if ($source == 'post') {
-                    $out .= " >> <a href='" . $this->get_link($this->current_thread, $this->url_thread, $num_pages) . "'>" . __("Last", "asgarosforum") . "</a>";
-                } else if ($source == 'thread') {
-                    $out .= " >> <a href='" . $this->get_link($this->current_forum, $this->url_forum, $num_pages) . "'>" . __("Last", "asgarosforum") . "</a>";
-                }
+                $out .= " >> <a href='" . $this->get_link($select_source, $select_url, $num_pages) . "'>" . __("Last", "asgarosforum") . "</a>";
             }
         }
 
@@ -690,30 +677,26 @@ class asgarosforum {
     }
 
     public function remove_thread() {
-        global $user_ID, $wpdb;
+        global $wpdb;
 
         if ($this->is_moderator()) {
             if ($this->current_thread) {
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d", $this->current_thread));
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d", $this->current_thread));
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d;", $this->current_thread));
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
                 header("Location: " . $this->url_base . "viewforum&forum=" . $this->current_forum);
                 exit;
             }
-        } else {
-            echo '<div class="notice">'.__("You are not allowed to delete threads.", "asgarosforum").'</div>';
         }
     }
 
     public function move_thread() {
-        global $user_ID, $wpdb;
+        global $wpdb;
         $newForumID = $_POST['newForumID'];
 
         if ($this->is_moderator() && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d", $this->current_thread));
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d;", $this->current_thread));
             header("Location: " . $this->url_base . "viewthread&thread=" . $this->current_thread);
             exit;
-        } else {
-            echo '<div class="notice">'.__("You do not have permission to move this thread.", "asgarosforum").'</div>';
         }
     }
 
@@ -726,74 +709,55 @@ class asgarosforum {
         }
     }
 
-    public function profile_link($user_id, $toWrap = false) {
-        if ($toWrap) {
-            $user = wordwrap($this->get_username($user_id), 22, "-<br/>", 1);
-        } else {
-            $user = $this->get_username($user_id);
-        }
-
-        return $user;
-    }
-
     public function get_thread_image($thread_id, $status) {
-        $unread_status = 'no';
-
-        if ($this->check_unread($thread_id)) {
-            $unread_status = 'yes';
-        }
+        $unread_status = $this->check_unread($thread_id);
 
         echo '<span class="icon-' . $status . '-' . $unread_status . '"></span>';
     }
 
     public function autoembed($string) {
         global $wp_embed;
-
-        if (is_object($wp_embed)) {
-            return $wp_embed->autoembed($string);
-        } else {
-            return $string;
-        }
+        return $wp_embed->autoembed($string);
     }
 
-    public function change_status($id, $property) {
-        global $wpdb, $user_ID;
+    public function change_status($property) {
+        global $wpdb;
         $new_status = '';
 
         if ($this->is_moderator()) {
             if ($property == 'sticky') {
-                if ($this->get_status($id, 'sticky')) {
+                if ($this->get_status('sticky')) {
                     $new_status .= 'normal_';
                 } else {
                     $new_status .= 'sticky_';
                 }
 
-                if ($this->get_status($id, 'closed')) {
+                if ($this->get_status('closed')) {
                     $new_status .= 'closed';
                 } else {
                     $new_status .= 'open';
                 }
             } else if ($property == 'closed') {
-                if ($this->get_status($id, 'sticky')) {
+                if ($this->get_status('sticky')) {
                     $new_status .= 'sticky_';
                 } else {
                     $new_status .= 'normal_';
                 }
 
-                if ($this->get_status($id, 'closed')) {
+                if ($this->get_status('closed')) {
                     $new_status .= 'open';
                 } else {
                     $new_status .= 'closed';
                 }
             }
 
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = %s WHERE id = %d", $new_status, $id));
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = %s WHERE id = %d;", $new_status, $this->current_thread));
         }
     }
 
-    public function get_status($id, $property) {
+    public function get_status($property) {
         global $wpdb;
-        $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d", $id));
+        $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
 
         if ($property == 'sticky') {
             if ($status == 'sticky_open' || $status == 'sticky_closed') {

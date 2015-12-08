@@ -2,7 +2,7 @@
     <tr>
         <td class="pages">
             <?php if ($counter_normal > 0): ?>
-                <?php echo $this->pageing('thread'); ?>
+                <?php echo $this->pageing($this->table_threads); ?>
             <?php endif; ?>
         </td>
         <td><?php $this->forum_menu(); ?></td>
@@ -23,7 +23,7 @@
                         <td class="status-icon"><?php $this->get_thread_image($thread->id, $thread->status); ?></td>
                         <td>
                             <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
-                            <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_thread_starter($thread->id)); ?></i></small>
+                            <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                         </td>
                         <td class="forumstats">
                             <span class="icon-bubbles4"></span><span><?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span><br />
@@ -44,7 +44,7 @@
                     <td class="status-icon"><?php $this->get_thread_image($thread->id, $thread->status); ?></td>
                     <td>
                         <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
-                        <small><?php _e('Created by:'); ?> <i><?php echo $this->profile_link($this->get_thread_starter($thread->id)); ?></i></small>
+                        <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                     </td>
                     <td class="forumstats">
                         <span class="icon-bubbles4"></span><span><?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span><br />
@@ -60,7 +60,7 @@
         <tr>
             <td class="pages">
                 <?php if ($counter_normal > 0): ?>
-                    <?php echo $this->pageing('thread'); ?>
+                    <?php echo $this->pageing($this->table_threads); ?>
                 <?php endif; ?>
             </td>
             <td><?php $this->forum_menu(); ?></td>

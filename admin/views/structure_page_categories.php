@@ -19,7 +19,7 @@
                             <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
                             <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($cat->name)); ?>" /></label>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-                                <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
+                                <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
                         </li>
                     <?php endforeach; ?>
@@ -28,13 +28,13 @@
                         <input type="hidden" name="mf_category_id[]" value="new" />
                         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
                         <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-                            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
+                            <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
                         </a>
                     </li>
                 <?php endif; ?>
             </ol>
             <a href="#" id="mf_add_new_category" title="<?php _e('Add new Category', 'asgarosforum'); ?>">
-                <img src="<?php echo WPFURL.'admin/images/add.png'; ?>" width="32" />
+                <img src="<?php echo WPAFURL.'admin/images/add.png'; ?>" width="32" />
             </a>
         </fieldset>
         <input type="submit" name="mf_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button" />
@@ -45,7 +45,7 @@
         <input type="hidden" name="mf_category_id[]" value="new" />
         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
         <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
+            <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
         </a>
     </li>
 </div>

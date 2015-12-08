@@ -23,7 +23,7 @@
                                     <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
                                     <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" /></label>
                                     <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
-                                        <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
+                                        <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
                                     </a>
                                 </li>
                             <?php endforeach; ?>
@@ -33,13 +33,13 @@
                                 <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="" /></label>&nbsp;&nbsp;
                                 <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="" /></label>
                                 <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
-                                    <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
+                                    <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
                                 </a>
                             </li>
                         <?php endif; ?>
                     </ol>
                     <a href="#" class="mf_add_new_forum" title="<?php _e('Add new Forum', 'asgarosforum'); ?>" data-value="<?php echo $cat->id; ?>">
-                        <img src="<?php echo WPFURL.'admin/images/add.png'; ?>" width="32" />
+                        <img src="<?php echo WPAFURL.'admin/images/add.png'; ?>" width="32" />
                     </a>
                 </fieldset>
             <?php endforeach; ?>
@@ -55,7 +55,7 @@
         <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" /></label>
         <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
-            <img src="<?php echo WPFURL.'admin/images/remove.png'; ?>" width="24" />
+            <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
         </a>
     </li>
 </div>

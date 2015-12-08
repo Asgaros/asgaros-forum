@@ -1,6 +1,6 @@
 <table class="top_menus">
     <tr>
-        <td class='pages'><?php echo $this->pageing('post'); ?></td>
+        <td class='pages'><?php echo $this->pageing($this->table_posts); ?></td>
         <td><?php echo $this->thread_menu();?></td>
     </tr>
 </table>
@@ -22,7 +22,7 @@
             <tr>
                 <td class='autorpostbox'>
                     <?php echo get_avatar($post->author_id, 60); ?>
-                    <br /><strong><?php echo $this->profile_link($post->author_id, true); ?></strong><br />
+                    <br /><strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
                     <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->count_userposts($post->author_id); ?>
                 </td>
                 <td>
@@ -35,7 +35,7 @@
 
 <table class="top_menus">
     <tr>
-        <td class='pages'><?php echo $this->pageing('post'); ?></td>
+        <td class='pages'><?php echo $this->pageing($this->table_posts); ?></td>
         <td><?php echo $this->thread_menu();?></td>
     </tr>
 </table>
