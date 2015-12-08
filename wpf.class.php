@@ -718,16 +718,11 @@ class asgarosforum {
     }
 
     public function remove_post() {
-        global $user_ID, $wpdb;
-        $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-        if ($this->element_exists($id, $this->table_posts)) {
-            $post = $wpdb->get_row($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d", $id));
+        global $wpdb;
+        $post_id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
 
-            if ($this->is_moderator() || $user_ID == $post->author_id) {
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d", $id));
-            } else {
-                echo '<div class="notice">'.__("You do not have permission to delete this post.", "asgarosforum").'</div>';
-            }
+        if ($this->is_moderator() && $this->element_exists($post_id, $this->table_posts)) {
+            $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d;", $post_id));
         }
     }
 
