@@ -22,7 +22,7 @@ class asgarosforum {
     var $options_default = array(
         'forum_posts_per_page' => 10,
         'forum_threads_per_page' => 20,
-        'forum_allow_image_uploads' => false
+        'forum_allow_file_uploads' => false
     );
     var $options_editor = array(
         'media_buttons' => false,

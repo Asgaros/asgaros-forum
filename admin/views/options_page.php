@@ -15,8 +15,8 @@
             <input type="text" name="forum_threads_per_page" id="forum_threads_per_page" value="<?php echo stripslashes($asgarosforum->options['forum_threads_per_page']); ?>" class="mf_tb" />
         </p>
         <p>
-            <input type="checkbox" name="forum_allow_image_uploads" id="forum_allow_image_uploads" <?php checked(!empty($asgarosforum->options['forum_allow_image_uploads'])); ?> />
-            <label for="forum_allow_image_uploads" class="mf_cb_label"><?php _e('Allow image uploads', 'asgarosforum'); ?></label>
+            <input type="checkbox" name="forum_allow_file_uploads" id="forum_allow_file_uploads" <?php checked(!empty($asgarosforum->options['forum_allow_file_uploads'])); ?> />
+            <label for="forum_allow_file_uploads" class="mf_cb_label"><?php _e('Allow file uploads', 'asgarosforum'); ?></label>
         </p>
         <input type="submit" name="mf_options_submit" class="mf_admin_submit button" value="<?php _e('Save Options', 'asgarosforum'); ?>" />
     </form>

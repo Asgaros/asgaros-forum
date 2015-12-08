@@ -99,9 +99,9 @@ if (!$error) { ?>
                 </td>
             </tr>
             <?php
-            if ($_GET['forumaction'] != "editpost" && $this->options['forum_allow_image_uploads']) { ?>
+            if ($_GET['forumaction'] != "editpost" && $this->options['forum_allow_file_uploads']) { ?>
     		<tr>
-    			<td><?php _e("Images:", "asgarosforum"); ?></td>
+    			<td><?php _e("Files:", "asgarosforum"); ?></td>
     			<td>
     				<input type='file' name='mfimage1' /><br/>
     				<input type='file' name='mfimage2' /><br/>

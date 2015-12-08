@@ -29,7 +29,7 @@ function mf_u_key() {
     return $pref . "-";
 }
 
-function MFAttachImage($temp, $name) {
+function MFAttachFile($temp, $name) {
     $upload_dir = wp_upload_dir();
     $path = $upload_dir['path'] . "/";
     $url = $upload_dir['url'] . "/";
@@ -43,20 +43,7 @@ function MFAttachImage($temp, $name) {
     return "\n[img]" . $url . $u . $name . "[/img]";
 }
 
-function MFGetExt($str)
-{
-  // GETS THE FILE EXTENSION BELONGING TO THE UPLOADED FILE
-  $i = strrpos($str, ".");
-  if (!$i)
-  {
-    return "";
-  }
-  $l = strlen($str) - $i;
-  $ext = substr($str, $i + 1, $l);
-  return $ext;
-}
-
-function mf_check_uploaded_images()
+function mf_check_uploaded_files()
 {
   $valid = array('im1' => true, 'im2' => true, 'im3' => true);
   if (!empty($_FILES))
@@ -68,30 +55,18 @@ function mf_check_uploaded_images()
     if ($_FILES["mfimage3"]["error"] > 0 && !empty($_FILES["mfimage3"]["name"]))
       $valid['im3'] = false;
   }
-  if (!empty($_FILES["mfimage1"]["name"]))
+  if (empty($_FILES["mfimage1"]["name"]))
   {
-    $ext = strtolower(MFGetExt(stripslashes($_FILES["mfimage1"]["name"])));
-    if ($ext != "jpg" && $ext != "jpeg" && $ext != "bmp" && $ext != "png" && $ext != "gif")
       $valid['im1'] = false;
   }
-  else
-    $valid['im1'] = false;
-  if (!empty($_FILES["mfimage2"]["name"]))
+  if (empty($_FILES["mfimage2"]["name"]))
   {
-    $ext = strtolower(MFGetExt(stripslashes($_FILES["mfimage2"]["name"])));
-    if ($ext != "jpg" && $ext != "jpeg" && $ext != "bmp" && $ext != "png" && $ext != "gif")
       $valid['im2'] = false;
   }
-  else
-    $valid['im2'] = false;
-  if (!empty($_FILES["mfimage3"]["name"]))
+  if (empty($_FILES["mfimage3"]["name"]))
   {
-    $ext = strtolower(MFGetExt(stripslashes($_FILES["mfimage3"]["name"])));
-    if ($ext != "jpg" && $ext != "jpeg" && $ext != "bmp" && $ext != "png" && $ext != "gif")
-      $valid['im2'] = false;
+      $valid['im3'] = false;
   }
-  else
-    $valid['im3'] = false;
   return $valid;
 }
 
@@ -128,15 +103,15 @@ if (isset($_POST['add_thread_submit']))
     $id = $wpdb->insert_id;
 
     //MAYBE ATTACH IMAGES
-    $images = mf_check_uploaded_images();
+    $images = mf_check_uploaded_files();
     if ($images['im1'] || $images['im2'] || $images['im3'])
     {
       if ($images['im1'])
-        $content .= MFAttachImage($_FILES["mfimage1"]["tmp_name"], stripslashes($_FILES["mfimage1"]["name"]));
+        $content .= MFAttachFile($_FILES["mfimage1"]["tmp_name"], stripslashes($_FILES["mfimage1"]["name"]));
       if ($images['im2'])
-        $content .= MFAttachImage($_FILES["mfimage2"]["tmp_name"], stripslashes($_FILES["mfimage2"]["name"]));
+        $content .= MFAttachFile($_FILES["mfimage2"]["tmp_name"], stripslashes($_FILES["mfimage2"]["name"]));
       if ($images['im3'])
-        $content .= MFAttachImage($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
+        $content .= MFAttachFile($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
     }
 
     $sql_post = "INSERT INTO {$this->table_posts}
@@ -173,15 +148,15 @@ if (isset($_POST['add_post_submit']))
   {
     $date = $this->current_time();
     //MAYBE ATTACH IMAGES
-    $images = mf_check_uploaded_images();
+    $images = mf_check_uploaded_files();
     if ($images['im1'] || $images['im2'] || $images['im3'])
     {
       if ($images['im1'])
-        $content .= MFAttachImage($_FILES["mfimage1"]["tmp_name"], stripslashes($_FILES["mfimage1"]["name"]));
+        $content .= MFAttachFile($_FILES["mfimage1"]["tmp_name"], stripslashes($_FILES["mfimage1"]["name"]));
       if ($images['im2'])
-        $content .= MFAttachImage($_FILES["mfimage2"]["tmp_name"], stripslashes($_FILES["mfimage2"]["name"]));
+        $content .= MFAttachFile($_FILES["mfimage2"]["tmp_name"], stripslashes($_FILES["mfimage2"]["name"]));
       if ($images['im3'])
-        $content .= MFAttachImage($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
+        $content .= MFAttachFile($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
     }
 
     $sql_post = "INSERT INTO {$this->table_posts}
