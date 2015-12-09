@@ -3,7 +3,13 @@
     width: 400px;
 }
 #wpf-wrapper .editor td {
-    vertical-align: top;
+    vertical-align: top !important;
+}
+#wpf-wrapper div.mce-toolbar-grp {
+    background-color: #fafafa;
+}
+#wpf-wrapper .message-editor {
+    padding: 0;
 }
 
 /* TABLES */
@@ -11,6 +17,7 @@
     border-collapse: collapse;
     width: 100%;
     border: none;
+    margin: 0;
 }
 #wpf-wrapper th,
 #wpf-wrapper td {

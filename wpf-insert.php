@@ -2,51 +2,6 @@
 global $wpdb;
 $error = false;
 
-function attach_files($post_id) {
-    // Check for files first
-    $files = array();
-    $list = '';
-    $links = '';
-
-    if (isset($_FILES)) {
-        foreach ($_FILES['forumfile']['name'] as $index =>$tmpName) {
-            if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
-                $files[$index] = true;
-            }
-        }
-    }
-
-    // Upload them
-    if (count($files) > 0) {
-        $upload_dir = wp_upload_dir();
-        $path = $upload_dir['basedir'].'/asgarosforum/'.$post_id.'/';
-        $url = $upload_dir['baseurl'].'/asgarosforum/'.$post_id.'/';
-
-        if (!is_dir($path)) {
-            mkdir($path);
-        }
-
-        foreach($files as $index => $name) {
-            $temp = $_FILES['forumfile']['tmp_name'][$index];
-            $name = sanitize_file_name(stripslashes($_FILES['forumfile']['name'][$index]));
-
-            if (!empty($name)) {
-                move_uploaded_file($temp, $path.$name);
-                $links .= '<li><a href="'.$url.$name.'" target="_blank">'.$name.'</a></li>';
-            }
-        }
-
-        if (!empty($links)) {
-            $list .= '<p><strong>'.__("Uploaded files:", "asgarosforum").'</strong></p>';
-            $list .= '<ul>';
-            $list .= $links;
-            $list .= '</ul>';
-        }
-    }
-
-    return $list;
-}
-
 if (isset($_POST['add_thread_submit'])) { // Adding a new thread
     $subject = $_POST['subject'];
     $content = $_POST['message'];
@@ -65,7 +20,7 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
 
         $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (parent_id, date, author_id) VALUES (%d, %s, %d);", $thread_id, $date, $user_ID));
         $post_id = $wpdb->insert_id;
-        $content .= attach_files($post_id);
+        $content .= $this->attach_files($post_id);
 
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
     }
@@ -90,7 +45,7 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
 
         $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (parent_id, date, author_id) VALUES (%d, %s, %d);", $this->current_thread, $date, $user_ID));
         $post_id = $wpdb->insert_id;
-        $content .= attach_files($post_id);
+        $content .= $this->attach_files($post_id);
 
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
     }
@@ -117,6 +72,7 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
             $msg .= '<div id="error"><p>'.__("You do not have permission to edit this post!", "asgarosforum").'</p></div>';
             $error = true;
         } else {
+            $content .= $this->attach_files($post_id);
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
         }
     } else {

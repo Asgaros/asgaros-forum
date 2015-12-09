@@ -10,6 +10,8 @@ class asgarosforum {
     var $url_thread = "";
     var $url_editor_thread = "";
     var $url_editor_post = "";
+    var $upload_path = "";
+    var $upload_url = "";
     var $table_categories = "";
     var $table_forums = "";
     var $table_threads = "";
@@ -161,6 +163,10 @@ class asgarosforum {
         $this->url_thread = $this->url_base . "viewthread&amp;thread=";
         $this->url_editor_thread = $this->url_base . "addthread&amp;forum={$this->current_forum}";
         $this->url_editor_post = $this->url_base . "addpost&amp;thread={$this->current_thread}";
+
+        $upload_dir = wp_upload_dir();
+        $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
+        $this->upload_url = $upload_dir['baseurl'].'/asgarosforum/';
 
         // Set cookie
         if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
@@ -776,6 +782,84 @@ class asgarosforum {
             } else {
                 return false;
             }
+        }
+    }
+
+    public function attach_files($post_id) {
+        $files = array();
+        $path = $this->upload_path.$post_id.'/';
+        $url = $this->upload_url.$post_id.'/';
+        $list = '';
+        $links = '';
+
+        // Remove deleted files
+        if (isset($_POST['deletefile']) && !empty($_POST['deletefile'])) {
+            foreach ($_POST['deletefile'] as $file) {
+                if (is_dir($path) && file_exists($path.basename($file))) {
+                    unlink($path.basename($file));
+                }
+            }
+        }
+
+        // Check for files to upload
+        if (isset($_FILES['forumfile'])) {
+            foreach ($_FILES['forumfile']['name'] as $index =>$tmpName) {
+                if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
+                    $files[$index] = true;
+                }
+            }
+        }
+
+        // Upload them
+        if (count($files) > 0) {
+            if (!is_dir($path)) {
+                mkdir($path);
+            }
+
+            foreach($files as $index => $name) {
+                $temp = $_FILES['forumfile']['tmp_name'][$index];
+                $name = sanitize_file_name(stripslashes($_FILES['forumfile']['name'][$index]));
+
+                if (!empty($name)) {
+                    move_uploaded_file($temp, $path.$name);
+                    $links .= '<li><a href="'.$url.$name.'" target="_blank">'.$name.'</a></li>';
+                }
+            }
+
+            if (!empty($links)) {
+                $list .= '<p><strong>'.__("Uploaded files:", "asgarosforum").'</strong></p>';
+                $list .= '<ul>';
+                $list .= $links;
+                $list .= '</ul>';
+            }
+        }
+
+        // Remove folder if it is empty
+        if (is_dir($path) && count(array_diff(scandir($path), array('..', '.'))) == 0) {
+            rmdir($path);
+        }
+
+        return $list;
+    }
+
+    public function files_list($post_id) {
+        $path = $this->upload_path.$post_id.'/';
+        $url = $this->upload_url.$post_id.'/';
+
+        if (is_dir($path) && count(glob($path.'*')) != 0) {
+            $files = array_diff(scandir($path), array('..', '.'));
+
+            echo '<tr>';
+            echo '<td>'.__("Uploaded files:", "asgarosforum").'</td>';
+            echo '<td>';
+            echo '<div class="files-to-delete"></div>';
+            foreach ($files as $file) {
+                echo '<div class="uploaded-file">';
+                echo '<a href="'.$url.$file.'" target="_blank">'.$file.'</a> &middot; <a filename="'.$file.'" class="delete">['.__("Delete", "asgarosforum").']</a>';
+                echo '</div>';
+            }
+            echo '</td>';
+            echo '</tr>';
         }
     }
 }
