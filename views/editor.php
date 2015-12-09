@@ -93,14 +93,14 @@ if (!$error) { ?>
             </tr>
 
             <?php if ($_GET['forumaction'] == "editpost" && $this->options['forum_allow_file_uploads']) { ?>
-                <?php $this->files_list($post->id); ?>
+                <?php $this->file_list($post->id); ?>
             </tr>
             <?php } ?>
 
 
-            <?php if ($_GET['forumaction'] != "editpost" && $this->options['forum_allow_file_uploads']) { ?>
+            <?php if ($this->options['forum_allow_file_uploads']) { ?>
     		<tr>
-    			<td><?php _e("Files:", "asgarosforum"); ?></td>
+    			<td><?php _e("Upload Files:", "asgarosforum"); ?></td>
     			<td>
     				<input type="file" name="forumfile[]" /><br />
                     <a id="add_file_link" href="#"><?php _e("Add another file ...", "asgarosforum"); ?></a>

@@ -842,7 +842,7 @@ class asgarosforum {
         return $list;
     }
 
-    public function files_list($post_id) {
+    public function file_list($post_id) {
         $path = $this->upload_path.$post_id.'/';
         $url = $this->upload_url.$post_id.'/';
 
