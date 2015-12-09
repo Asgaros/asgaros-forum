@@ -48,6 +48,7 @@ class asgarosforum {
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
         add_action("init", array($this, 'prepare'));
+        add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
         add_action("wp_head", array($this, 'setup_header'));
         add_filter("wp_title", array($this, "get_pagetitle"));
         add_shortcode('forum', array($this, "forum"));
@@ -168,16 +169,14 @@ class asgarosforum {
             update_user_meta($user_ID, 'asgarosforum_lastvisit', $this->current_time());
         }
 
-        if (isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) {
+        if ((isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) && $user_ID) {
             require('wpf-insert.php');
-        } else if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread") {
-            if ($user_ID) {
-                $time = $this->current_time();
-                setcookie("wpafcookie", $time, 0, "/");
-                update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
-                header("Location: " . $this->url_home);
-                exit;
-            }
+        } else if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread" && $user_ID) {
+            $time = $this->current_time();
+            setcookie("wpafcookie", $time, 0, "/");
+            update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
+            wp_redirect(html_entity_decode($this->url_home));
+            exit;
         } else if (isset($_GET['move_thread'])) {
             $this->move_thread();
         } else if (isset($_GET['delete_thread'])) {
@@ -188,6 +187,12 @@ class asgarosforum {
             $this->change_status('sticky');
         } else if (isset($_GET['closed'])) {
             $this->change_status('closed');
+        }
+    }
+
+    public function enqueue_front_scripts() {
+        if (is_page($this->page_id)) {
+            wp_enqueue_script('asgarosforum-js', plugin_dir_url(__FILE__).'js/script.js', array('jquery'));
         }
     }
 
@@ -683,7 +688,7 @@ class asgarosforum {
             if ($this->current_thread) {
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d;", $this->current_thread));
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
-                header("Location: " . $this->url_base . "viewforum&forum=" . $this->current_forum);
+                wp_redirect(html_entity_decode($this->url_forum . $this->current_forum));
                 exit;
             }
         }
@@ -695,7 +700,7 @@ class asgarosforum {
 
         if ($this->is_moderator() && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d;", $this->current_thread));
-            header("Location: " . $this->url_base . "viewthread&thread=" . $this->current_thread);
+            wp_redirect(html_entity_decode($this->url_thread . $this->current_thread));
             exit;
         }
     }

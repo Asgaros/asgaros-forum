@@ -76,16 +76,9 @@ if (!$error) { ?>
             <?php if ($_GET['forumaction'] == "addthread") { ?>
             <tr>
                 <td><?php _e("Subject:", "asgarosforum"); ?></td>
-                <td><input type='text' name='add_thread_subject' /></td>
+                <td><input type='text' name='subject' /></td>
             </tr>
             <?php } ?>
-            <?php
-            /*if(false) //Need to enable this eventually if we're editing the first post in the thread
-            echo "<tr>
-            <td>" . __("Subject:", "asgarosforum") . "</td>
-            <td><input size='50%' type='text' name='edit_post_subject' value='" . stripslashes($t->name) . "'/></td>
-            </tr>";*/
-            ?>
             <tr>
                 <td><?php _e("Message:", "asgarosforum"); ?></td>
                 <td>
@@ -103,9 +96,8 @@ if (!$error) { ?>
     		<tr>
     			<td><?php _e("Files:", "asgarosforum"); ?></td>
     			<td>
-    				<input type='file' name='mfimage1' /><br/>
-    				<input type='file' name='mfimage2' /><br/>
-    				<input type='file' name='mfimage3' />
+    				<input type="file" name="forumfile[]" /><br />
+                    <a id="add_file_link" href="#"><?php _e("Add another file ...", "asgarosforum"); ?></a>
     			</td>
     		</tr>
             <?php } ?>
@@ -114,18 +106,14 @@ if (!$error) { ?>
                 <?php if ($_GET['forumaction'] == "addthread") { ?>
                     <td>
                         <input type='submit' name='add_thread_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
-                        <input type='hidden' name='add_thread_forumid' value='<?php echo $_GET['forum']; ?>' />
                     </td>
                 <?php } else if ($_GET['forumaction'] == "addpost") { ?>
                     <td>
                         <input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
-                        <input type='hidden' name='add_post_forumid' value='<?php echo $thread; ?>' />
                     </td>
                 <?php } else if ($_GET['forumaction'] == "editpost") { ?>
                     <td>
                         <input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
-                        <input type='hidden' name='edit_post_id' value='<?php echo $post->id; ?>' />
-                        <input type='hidden' name='thread_id' value='<?php echo $thread; ?>' />
                         <input type='hidden' name='page_id' value='<?php echo $_GET['part']; ?>' />
                     </td>
                 <?php } ?>
