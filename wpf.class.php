@@ -372,11 +372,15 @@ class asgarosforum {
         global $wpdb;
         $post = $wpdb->get_row($wpdb->prepare("SELECT id, date, author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id DESC LIMIT 1;", $thread_id));
 
-        if ($date_only) {
-            return $post->date;
+        if ($post) {
+            if ($date_only) {
+                return $post->date;
+            } else {
+                $link = $this->get_postlink($thread_id, $post->id);
+                return __("Last post by", "asgarosforum").'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />'.__("on", "asgarosforum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'&nbsp;'.__("Uhr", "asgarosforum").'</a>';
+            }
         } else {
-            $link = $this->get_postlink($thread_id, $post->id);
-            return __("Last post by", "asgarosforum").'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />'.__("on", "asgarosforum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'&nbsp;'.__("Uhr", "asgarosforum").'</a>';
+            return false;
         }
     }
 
@@ -477,7 +481,7 @@ class asgarosforum {
         $lastpost_time = $this->get_lastpost_in_thread($thread_id, true);
         $lastpost_author_id = $this->get_lastpost_data($thread_id, 'author_id', $this->table_posts);
 
-        if ($user_ID != $lastpost_author_id) {
+        if ($lastpost_time && $user_ID != $lastpost_author_id) {
             $lp = strtotime($lastpost_time);
             $lv = strtotime($this->last_visit());
 
