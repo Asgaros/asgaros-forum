@@ -341,6 +341,17 @@ class asgarosforum {
         return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
     }
 
+    public function is_first_post($post_id) {
+        global $wpdb;
+        $first_post = $wpdb->get_row("SELECT id FROM {$this->table_posts} WHERE parent_id = {$this->current_thread} ORDER BY id ASC LIMIT 1;");
+
+        if ($first_post->id == $post_id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function get_name($id, $location) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));

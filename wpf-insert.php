@@ -63,9 +63,9 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
         $content = $_POST['message'];
         $msg = '';
 
-        if (empty($content)) {
+        if (empty($content) || (isset($_POST['subject']) && empty($_POST['subject']))) {
             $msg .= '<h2>'.__("An error occured", "asgarosforum").'</h2>';
-            $msg .= '<div id="error"><p>'.__("You must enter a message.", "asgarosforum").'</p></div>';
+            $msg .= '<div id="error"><p>'.__("You must enter a subject/message.", "asgarosforum").'</p></div>';
             $error = true;
         } else if ($user_ID != $this->get_post_author($post_id) && !$this->is_moderator()) {
             $msg .= '<h2>'.__("An error occured", "asgarosforum").'</h2>';
@@ -74,6 +74,10 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
         } else {
             $content .= $this->attach_files($post_id);
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
+
+            if (isset($_POST['subject']) && !empty($_POST['subject'])) {
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));
+            }
         }
     } else {
         $msg .= '<h2>'.__("An error occured", "asgarosforum").'</h2>';

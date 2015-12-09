@@ -1,5 +1,6 @@
 <?php
 $this->options_editor['textarea_rows'] = 12;
+$threadname = "";
 $thread = "";
 $post = "";
 $t = "";
@@ -47,6 +48,7 @@ if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
             $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_posts} WHERE id = %d", $id));
             $t = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d", $post->parent_id));
+            $threadname = $t->name;
             $thread = $post->parent_id;
 
             if (!($user_ID == $post->author_id && $user_ID) && !$this->is_moderator()) {
@@ -73,10 +75,10 @@ if (!$error) { ?>
     </div>
     <div class='content-element editor'>
         <table>
-            <?php if ($_GET['forumaction'] == "addthread") { ?>
+            <?php if ($_GET['forumaction'] == "addthread" || ($_GET['forumaction'] == "editpost" && $this->is_first_post($post->id))) { ?>
             <tr>
                 <td><?php _e("Subject:", "asgarosforum"); ?></td>
-                <td><input type='text' name='subject' /></td>
+                <td><input type="text" name="subject" value="<?php echo $threadname; ?>" /></td>
             </tr>
             <?php } ?>
             <tr>
