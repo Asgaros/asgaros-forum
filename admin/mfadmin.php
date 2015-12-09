@@ -243,6 +243,12 @@ if (!class_exists("AFAdmin"))
         {
             global $wpdb, $asgarosforum;
 
+            // Delete uploads
+            $posts = $wpdb->get_results($wpdb->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $tid));
+            foreach ($posts as $post) {
+                $asgarosforum->remove_post_files($post->id);
+            }
+
             $wpdb->query("DELETE FROM {$asgarosforum->table_posts} WHERE parent_id = {$tid}");
             $wpdb->query("DELETE FROM {$asgarosforum->table_threads} WHERE id = {$tid}");
         }

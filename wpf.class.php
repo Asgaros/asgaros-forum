@@ -692,6 +692,12 @@ class asgarosforum {
 
         if ($this->is_moderator()) {
             if ($this->current_thread) {
+                // Delete uploads
+                $posts = $wpdb->get_results($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $this->current_thread));
+                foreach ($posts as $post) {
+                    $this->remove_post_files($post->id);
+                }
+
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d;", $this->current_thread));
                 $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
                 wp_redirect(html_entity_decode($this->url_forum . $this->current_forum));
@@ -717,6 +723,21 @@ class asgarosforum {
 
         if ($this->is_moderator() && $this->element_exists($post_id, $this->table_posts)) {
             $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d;", $post_id));
+            $this->remove_post_files($post_id);
+        }
+    }
+
+    public function remove_post_files($post_id) {
+        $path = $this->upload_path.$post_id.'/';
+
+        if (is_dir($path)) {
+            $files = array_diff(scandir($path), array('..', '.'));
+
+            foreach ($files as $file) {
+                unlink($path.basename($file));
+            }
+
+            rmdir($path);
         }
     }
 
