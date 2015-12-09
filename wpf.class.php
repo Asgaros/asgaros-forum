@@ -569,7 +569,7 @@ class asgarosforum {
         global $user_ID;
 
         if ($user_ID) {
-            echo '<table class="menu"><tr><td><a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__("New Thread", "asgarosforum").'</span></a></td></tr></table>';
+            echo '<table><tr><td><a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__("New Thread", "asgarosforum").'</span></a></td></tr></table>';
         }
     }
 
@@ -578,7 +578,7 @@ class asgarosforum {
         $menu = '';
 
         if ($user_ID) {
-            $menu .= '<table class="menu"><tr>';
+            $menu .= '<table><tr>';
 
             if (!$this->get_status('closed') || $this->is_moderator()) {
                 $menu .= '<td><a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgarosforum").'</span></a></td>';

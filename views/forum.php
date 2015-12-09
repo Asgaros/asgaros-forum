@@ -1,13 +1,11 @@
-<table class="top_menus">
-    <tr>
-        <td class="pages">
-            <?php if ($counter_normal > 0): ?>
-                <?php echo $this->pageing($this->table_threads); ?>
-            <?php endif; ?>
-        </td>
-        <td><?php $this->forum_menu(); ?></td>
-    </tr>
-</table>
+<div class="top_menus">
+    <div class="pages">
+        <?php if ($counter_normal > 0): ?>
+            <?php echo $this->pageing($this->table_threads); ?>
+        <?php endif; ?>
+    </div>
+    <div class="forummenu"><?php $this->forum_menu(); ?></div>
+</div>
 
 <?php if ($counter_total > 0): ?>
     <div class="title-element"><?php echo $this->get_name($this->current_forum, $this->table_forums); ?></div>
@@ -56,16 +54,14 @@
         </table>
     </div>
 
-    <table class="top_menus">
-        <tr>
-            <td class="pages">
-                <?php if ($counter_normal > 0): ?>
-                    <?php echo $this->pageing($this->table_threads); ?>
-                <?php endif; ?>
-            </td>
-            <td><?php $this->forum_menu(); ?></td>
-        </tr>
-    </table>
+    <div class="top_menus">
+        <div class="pages">
+            <?php if ($counter_normal > 0): ?>
+                <?php echo $this->pageing($this->table_threads); ?>
+            <?php endif; ?>
+        </div>
+        <div class="forummenu"><?php $this->forum_menu(); ?></div>
+    </div>
 <?php else: ?>
     <div class='notice'><?php _e("There are no threads yet!", "asgarosforum"); ?></div>
 <?php endif; ?>

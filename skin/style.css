@@ -1,3 +1,9 @@
+/* GENERAL */
+#wpf-wrapper a {
+    color: #2d89cc;
+    border: none;
+}
+
 /* EDITOR */
 #wpf-wrapper .editor input {
     width: 400px;
@@ -18,6 +24,7 @@
     width: 100%;
     border: none;
     margin: 0;
+    table-layout: auto;
 }
 #wpf-wrapper th,
 #wpf-wrapper td {
@@ -71,30 +78,33 @@
 }
 #wpf-wrapper input[type="submit"] {
     color: #fff;
+    background: none;
     background-color: #2D89CC;
     border: 1px solid #005B91 !important;
 }
 
 /* MENU */
-#wpf-wrapper .menu a {
+#wpf-wrapper .forummenu {
+    float: right;
+}
+#wpf-wrapper .forummenu a {
     color: #fff;
     background-color: #2d89cc;
     border: 1px solid #005C92;
     display: inline-block;
     padding: 3px 5px;
 }
-#wpf-wrapper .menu a:hover {
+#wpf-wrapper .forummenu a:hover {
 	text-decoration: none !important;
 }
-#wpf-wrapper .menu td {
+#wpf-wrapper .forummenu td {
     white-space: nowrap;
-}
-#wpf-wrapper .top_menus {
-    margin-bottom: 5px;
-}
-#wpf-wrapper .top_menus td {
     padding: 0 0 0 2px !important;
     border-style: none !important;
+}
+#wpf-wrapper .top_menus {
+    height: 35px;
+    margin-bottom: 5px;
 }
 
 /* NOTICE */
@@ -120,7 +130,7 @@
 
 /* PAGEING */
 #wpf-wrapper .pages {
-    width: 100%;
+    float: left;
 }
 #wpf-wrapper .pages strong {
     background-color: #737373;

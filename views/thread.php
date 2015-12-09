@@ -1,9 +1,7 @@
-<table class="top_menus">
-    <tr>
-        <td class='pages'><?php echo $this->pageing($this->table_posts); ?></td>
-        <td><?php echo $this->thread_menu();?></td>
-    </tr>
-</table>
+<div class="top_menus">
+    <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
+    <div class="forummenu"><?php echo $this->thread_menu();?></div>
+</div>
 
 <div class='title-element'><?php echo $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . $meClosed; ?></div>
 <div class='content-element thread'>
@@ -33,9 +31,7 @@
     <?php } ?>
 </div>
 
-<table class="top_menus">
-    <tr>
-        <td class='pages'><?php echo $this->pageing($this->table_posts); ?></td>
-        <td><?php echo $this->thread_menu();?></td>
-    </tr>
-</table>
+<div class="top_menus">
+    <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
+    <div class="forummenu"><?php echo $this->thread_menu();?></div>
+</div>
