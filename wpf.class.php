@@ -4,6 +4,7 @@ class asgarosforum {
     var $delim = "";
     var $page_id = "";
     var $date_format = "";
+    var $access = true;
     var $url_home = "";
     var $url_base = "";
     var $url_forum = "";
@@ -16,10 +17,11 @@ class asgarosforum {
     var $table_forums = "";
     var $table_threads = "";
     var $table_posts = "";
-    var $current_forum = "";
-    var $current_thread = "";
-    var $current_page = "";
-    var $current_view = "";
+    var $current_category = false;
+    var $current_forum = false;
+    var $current_thread = false;
+    var $current_view = false;
+    var $current_page = 0;
     var $options = array();
     var $options_default = array(
         'forum_posts_per_page' => 10,
@@ -42,14 +44,11 @@ class asgarosforum {
         $this->table_forums = $wpdb->prefix . "forum_forums";
         $this->table_threads = $wpdb->prefix . "forum_threads";
         $this->table_posts = $wpdb->prefix . "forum_posts";
-        $this->current_forum = false;
-        $this->current_thread = false;
-        $this->current_page = 0;
-        $this->current_view = false;
 
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
         add_action("init", array($this, 'prepare'));
+        add_action("wp", array($this, 'check_access'));
         add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
         add_action("wp_head", array($this, 'setup_header'));
         add_filter("wp_title", array($this, "get_pagetitle"));
@@ -131,6 +130,7 @@ class asgarosforum {
                 $forum_id = $_GET['forum'];
                 if ($this->element_exists($forum_id, $this->table_forums)) {
                     $this->current_forum = $forum_id;
+                    $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
             case 'movethread':
@@ -140,6 +140,7 @@ class asgarosforum {
                 if ($this->element_exists($thread_id, $this->table_threads)) {
                     $this->current_thread = $thread_id;
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
+                    $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
             case 'editpost':
@@ -147,6 +148,7 @@ class asgarosforum {
                 if ($this->element_exists($post_id, $this->table_posts)) {
                     $this->current_thread = $this->get_parent_id($post_id, $this->table_posts);
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
+                    $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
         }
@@ -196,6 +198,10 @@ class asgarosforum {
         }
     }
 
+    public function check_access() {
+        $this->access = apply_filters('asgarosforum_filter_check_access', true, $this->current_category);;
+    }
+
     public function enqueue_front_scripts() {
         if (is_page($this->page_id)) {
             wp_enqueue_script('asgarosforum-js', plugin_dir_url(__FILE__).'js/script.js', array('jquery'));
@@ -215,26 +221,34 @@ class asgarosforum {
 
         switch ($this->current_view) {
             case "viewforum":
-                if ($this->current_forum) {
+                if ($this->current_forum && $this->access) {
                     $title = $this->get_name($this->current_forum, $this->table_forums) . " - ";
                 }
                 break;
             case "viewthread":
-                if ($this->current_thread) {
+                if ($this->current_thread && $this->access) {
                     $title = $this->get_name($this->current_thread, $this->table_threads) . " - ";
                 }
                 break;
             case "editpost":
-                $title = __("Edit Post", "asgarosforum") . " - ";
+                if ($this->access) {
+                    $title = __("Edit Post", "asgarosforum") . " - ";
+                }
                 break;
             case "addpost":
-                $title = __("Post Reply", "asgarosforum") . " - ";
+                if ($this->access) {
+                    $title = __("Post Reply", "asgarosforum") . " - ";
+                }
                 break;
             case "addthread":
-                $title = __("New Thread", "asgarosforum") . " - ";
+                if ($this->access) {
+                    $title = __("New Thread", "asgarosforum") . " - ";
+                }
                 break;
             case "movethread":
-                $title = __("Move Thread", "asgarosforum") . " - ";
+                if ($this->access) {
+                    $title = __("Move Thread", "asgarosforum") . " - ";
+                }
                 break;
         }
 
@@ -285,7 +299,7 @@ class asgarosforum {
     }
 
     public function showforum() {
-        if ($this->current_forum) {
+        if ($this->current_forum && $this->access) {
             $threads = $this->get_threads($this->current_forum);
             $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
             $counter_normal = count($threads);
@@ -298,7 +312,7 @@ class asgarosforum {
     }
 
     public function showthread() {
-        if ($this->current_thread) {
+        if ($this->current_thread && $this->access) {
             global $wpdb;
             $posts = $this->get_posts();
 
@@ -321,7 +335,7 @@ class asgarosforum {
     }
 
     public function movethread() {
-        if ($this->is_moderator()) {
+        if ($this->is_moderator() && $this->access) {
             $strOUT = '
             <form method="post" action="' . $this->url_base . 'movethread&amp;thread=' . $this->current_thread . '&amp;move_thread">
             Move "<strong>' . $this->get_name($this->current_thread, $this->table_threads) . '</strong>" to new forum:<br />
@@ -344,7 +358,7 @@ class asgarosforum {
     public function element_exists($id, $location) {
         global $wpdb;
 
-        if (!empty($id) && $wpdb->get_results($wpdb->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
+        if (!empty($id) && $wpdb->get_row($wpdb->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
             return true;
         } else {
             return false;
@@ -374,13 +388,13 @@ class asgarosforum {
 
     public function get_categories($disable_hooks = false) {
         global $wpdb;
-        $categories = $wpdb->get_results("SELECT name, id FROM {$this->table_categories} ORDER BY sort ASC;");
+        $filter = '';
 
         if (!$disable_hooks) {
-            do_action('asgarosforum_after_get_categories', $categories);
+            $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
         }
 
-        return $categories;
+        return $wpdb->get_results("SELECT name, id FROM {$this->table_categories} {$filter} ORDER BY sort ASC;");
     }
 
     public function get_forums($id = false) {
@@ -623,21 +637,21 @@ class asgarosforum {
     public function breadcrumbs() {
         $trail = '<span class="icon-home"></span><a href="' . $this->url_home . '">' . __("Forum", "asgarosforum") . '</a>';
 
-        if ($this->current_forum) {
+        if ($this->current_forum && $this->access) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">' . $this->get_name($this->current_forum, $this->table_forums) . '</a>';
         }
 
-        if ($this->current_thread) {
+        if ($this->current_thread && $this->access) {
             $link = $this->get_link($this->current_thread, $this->url_thread);
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">' . $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . '</a>';
         }
 
-        if ($this->current_view == 'addpost') {
+        if ($this->current_view == 'addpost' && $this->access) {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Post Reply", "asgarosforum");
-        } else if ($this->current_view == 'editpost') {
+        } else if ($this->current_view == 'editpost' && $this->access) {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Edit Post", "asgarosforum");
-        } else if ($this->current_view == 'addthread') {
+        } else if ($this->current_view == 'addthread' && $this->access) {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("New Thread", "asgarosforum");
         }
 

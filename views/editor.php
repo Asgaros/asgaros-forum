@@ -14,12 +14,12 @@ if (!$user_ID) {
 
 if (!$error) {
     if ($_GET['forumaction'] == "addthread") {
-        if (!$this->current_forum) {
+        if (!$this->current_forum || !$this->access) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgarosforum").'</div>';
         }
     } else if ($_GET['forumaction'] == "addpost") {
-        if (!$this->current_thread) {
+        if (!$this->current_thread || !$this->access) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
         }
@@ -40,7 +40,7 @@ if (!$error) {
             }
         }
     } else if ($_GET['forumaction'] == "editpost") {
-        if (!$this->element_exists($_GET['id'], $this->table_posts)) {
+        if (!$this->element_exists($_GET['id'], $this->table_posts) || !$this->access) {
             $error = true;
             echo '<div class="notice">'.__("Sorry, this post does not exist.", "asgarosforum").'</div>';
         }
