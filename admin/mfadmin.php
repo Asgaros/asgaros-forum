@@ -129,12 +129,12 @@ if (!class_exists("AFAdmin"))
             }
 
             // Delete categories that the user removed from the list
-            $listed_categories = implode(',', $listed_categories);
+            $remove_categories = implode(',', $listed_categories);
 
-            if (empty($listed_categories)) {
+            if (empty($remove_categories)) {
                 $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories}");
             } else {
-                $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories} WHERE id NOT IN ({$listed_categories})");
+                $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories} WHERE id NOT IN ({$remove_categories})");
             }
 
             if (!empty($category_ids)) {
@@ -142,6 +142,8 @@ if (!class_exists("AFAdmin"))
                     self::delete_category($cid);
                 }
             }
+
+            do_action('asgarosforum_admin_after_save_categories', $listed_categories);
 
             wp_redirect(admin_url('admin.php?page=asgarosforum-structure&saved=true'));
             exit();

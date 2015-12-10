@@ -14,14 +14,15 @@
         <fieldset class="mf_fset">
             <ol id="sortable-categories" class="sortable_elements mf_ordered_list">
                 <?php if (!empty($categories)): ?>
-                    <?php foreach ($categories as $cat): ?>
+                    <?php do_action('asgarosforum_admin_before_categories_options'); ?>
+                    <?php foreach ($categories as $category): ?>
                         <li class="ui-state-default">
-                            <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
-                            <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($cat->name)); ?>" /></label>
+                            <input type="hidden" name="mf_category_id[]" value="<?php echo $category->id; ?>" />
+                            <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($category->name)); ?>" /></label>
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
                                 <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
-                            <?php do_action('asgarosforum_admin_after_category_options'); ?>
+                            <?php do_action('asgarosforum_admin_after_category_options', $category); ?>
                         </li>
                     <?php endforeach; ?>
                 <?php else: ?>
