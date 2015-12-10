@@ -33,8 +33,11 @@ load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 define('WPAFURL', plugin_dir_url(__FILE__));
 
 //Load class files
-require('admin/admin.php');
 require("forum.php");
+
+if (is_admin()) {
+    require_once(dirname(__FILE__).'/admin/admin.php');
+}
 
 global $asgarosforum;
 $asgarosforum = new asgarosforum();

@@ -54,7 +54,9 @@ class asgarosforum {
         add_filter("wp_title", array($this, "get_pagetitle"));
         add_shortcode('forum', array($this, "forum"));
 
-        AFAdmin::load_hooks();
+        if (is_admin()) {
+            asgarosforum_admin::load_hooks();
+        }
     }
 
     public function install() {

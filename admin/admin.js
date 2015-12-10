@@ -6,7 +6,7 @@
             return false;
         });
         $('body').on('click', '.mf_remove_category', function() {
-            var answer = confirm(AFAdmin.remove_category_warning);
+            var answer = confirm(asgarosforum_admin.remove_category_warning);
             if(answer) {
                 $(this).parent().remove();
             }
@@ -27,7 +27,7 @@
             return false;
         });
         $('body').on('click', '.mf_remove_forum', function() {
-            var answer = confirm(AFAdmin.remove_forum_warning);
+            var answer = confirm(asgarosforum_admin.remove_forum_warning);
             if(answer) {
                 $(this).parent().remove();
             }
