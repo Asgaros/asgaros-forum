@@ -21,6 +21,7 @@
                             <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
                                 <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
                             </a>
+                            <?php do_action('asgarosforum_admin_after_category_options'); ?>
                         </li>
                     <?php endforeach; ?>
                 <?php else: ?>

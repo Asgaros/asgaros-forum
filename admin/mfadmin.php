@@ -86,7 +86,7 @@ if (!class_exists("AFAdmin"))
         {
             global $asgarosforum;
             $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-            $categories = $asgarosforum->get_categories();
+            $categories = $asgarosforum->get_categories(true);
 
             if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
                 require('views/structure_page_forums.php');
@@ -153,7 +153,7 @@ if (!class_exists("AFAdmin"))
             $order = 1; // Order is DESC for some reason
             $listed_forums = array();
             $forum_ids = array();
-            $categories = $asgarosforum->get_categories();
+            $categories = $asgarosforum->get_categories(true);
 
             if (empty($categories)) { // This should never happen, but just in case
                 return;

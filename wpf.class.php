@@ -274,6 +274,73 @@ class asgarosforum {
         echo '</div>';
     }
 
+    public function overview() {
+        $categories = $this->get_categories();
+
+        if ($categories) {
+            require('views/overview.php');
+        } else {
+            echo '<div class="notice">'.__("There are no categories yet!", "asgarosforum").'</div>';
+        }
+    }
+
+    public function showforum() {
+        if ($this->current_forum) {
+            $threads = $this->get_threads($this->current_forum);
+            $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
+            $counter_normal = count($threads);
+            $counter_total = $counter_normal + count($sticky_threads);
+
+            require('views/forum.php');
+        } else {
+            echo '<div class="notice">'.__("Sorry, but this forum does not exist.", "asgarosforum").'</div>';
+        }
+    }
+
+    public function showthread() {
+        if ($this->current_thread) {
+            global $wpdb;
+            $posts = $this->get_posts();
+
+            if ($posts) {
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $this->current_thread));
+
+                $meClosed = "";
+
+                if ($this->get_status('closed')) {
+                    $meClosed = '&nbsp;('.__("Thread closed", "asgarosforum").')';
+                }
+
+                require('views/thread.php');
+            } else {
+                echo '<div class="notice">'.__("Sorry, but there are no posts.", "asgarosforum").'</div>';
+            }
+        } else {
+            echo '<div class="notice">'.__("Sorry, but this thread does not exist.", "asgarosforum").'</div>';
+        }
+    }
+
+    public function movethread() {
+        if ($this->is_moderator()) {
+            $strOUT = '
+            <form method="post" action="' . $this->url_base . 'movethread&amp;thread=' . $this->current_thread . '&amp;move_thread">
+            Move "<strong>' . $this->get_name($this->current_thread, $this->table_threads) . '</strong>" to new forum:<br />
+            <select name="newForumID">';
+
+            $frs = $this->get_forums();
+
+            foreach ($frs as $f) {
+                $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $this->current_forum ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
+            }
+
+            $strOUT .= '</select><br /><input type="submit" value="Go!" /></form>';
+
+            echo $strOUT;
+        } else {
+            echo '<div class="notice">'.__("You are not allowed to move threads.", "asgarosforum").'</div>';
+        }
+    }
+
     public function element_exists($id, $location) {
         global $wpdb;
 
@@ -305,9 +372,15 @@ class asgarosforum {
         return $this->get_link($thread_id, $this->url_thread, $page) . '#postid-' . $post_id;
     }
 
-    public function get_categories() {
+    public function get_categories($disable_hooks = false) {
         global $wpdb;
-        return $wpdb->get_results("SELECT * FROM {$this->table_categories} ORDER BY sort ASC;");
+        $categories = $wpdb->get_results("SELECT name, id FROM {$this->table_categories} ORDER BY sort ASC;");
+
+        if (!$disable_hooks) {
+            do_action('asgarosforum_after_get_categories', $categories);
+        }
+
+        return $categories;
     }
 
     public function get_forums($id = false) {
@@ -413,73 +486,6 @@ class asgarosforum {
     public function get_lastpost_data($id, $data, $location) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.{$data} FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$location}.parent_id = %d ORDER BY {$this->table_posts}.date DESC LIMIT 1;", $id));
-    }
-
-    public function overview() {
-        $categories = $this->get_categories();
-
-        if ($categories) {
-            require('views/overview.php');
-        } else {
-            echo '<div class="notice">'.__("There are no categories yet!", "asgarosforum").'</div>';
-        }
-    }
-
-    public function showforum() {
-        if ($this->current_forum) {
-            $threads = $this->get_threads($this->current_forum);
-            $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
-            $counter_normal = count($threads);
-            $counter_total = $counter_normal + count($sticky_threads);
-
-            require('views/forum.php');
-        } else {
-            echo '<div class="notice">'.__("Sorry, but this forum does not exist.", "asgarosforum").'</div>';
-        }
-    }
-
-    public function showthread() {
-        if ($this->current_thread) {
-            global $wpdb;
-            $posts = $this->get_posts();
-
-            if ($posts) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $this->current_thread));
-
-                $meClosed = "";
-
-                if ($this->get_status('closed')) {
-                    $meClosed = '&nbsp;('.__("Thread closed", "asgarosforum").')';
-                }
-
-                require('views/thread.php');
-            } else {
-                echo '<div class="notice">'.__("Sorry, but there are no posts.", "asgarosforum").'</div>';
-            }
-        } else {
-            echo '<div class="notice">'.__("Sorry, but this thread does not exist.", "asgarosforum").'</div>';
-        }
-    }
-
-    public function movethread() {
-        if ($this->is_moderator()) {
-            $strOUT = '
-            <form method="post" action="' . $this->url_base . 'movethread&amp;thread=' . $this->current_thread . '&amp;move_thread">
-            Move "<strong>' . $this->get_name($this->current_thread, $this->table_threads) . '</strong>" to new forum:<br />
-            <select name="newForumID">';
-
-            $frs = $this->get_forums();
-
-            foreach ($frs as $f) {
-                $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $this->current_forum ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
-            }
-
-            $strOUT .= '</select><br /><input type="submit" value="Go!" /></form>';
-
-            echo $strOUT;
-        } else {
-            echo '<div class="notice">'.__("You are not allowed to move threads.", "asgarosforum").'</div>';
-        }
     }
 
     public function get_thread_starter($thread_id) {
