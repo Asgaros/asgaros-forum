@@ -3,7 +3,7 @@
 /*
   Plugin Name: Asgaros Forum
   Plugin URI: https://github.com/Asgaros/asgaros-forum
-  Description: A lightweight and simple forum plugin for WordPress which is based on the Mingle Forum plugin (v1.1.0-dev) from Cartpauj (https://github.com/cartpauj/mingle-forum).
+  Description: A lightweight and simple forum plugin for WordPress.
   Version: 1.0.0 Development-Version
   Author: Thomas Belser
   Author URI: https://github.com/Asgaros/asgaros-forum
@@ -33,8 +33,8 @@ load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
 define('WPAFURL', plugin_dir_url(__FILE__));
 
 //Load class files
-require('admin/mfadmin.php');
-require("wpf.class.php");
+require('admin/admin.php');
+require("forum.php");
 
 global $asgarosforum;
 $asgarosforum = new asgarosforum();

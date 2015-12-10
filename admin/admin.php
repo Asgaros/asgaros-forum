@@ -49,7 +49,7 @@ if (!class_exists("AFAdmin"))
         {
             global $asgarosforum;
             $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
-            require('views/options_page.php');
+            require('views/options.php');
         }
 
         public static function save_options() {
@@ -89,9 +89,9 @@ if (!class_exists("AFAdmin"))
             $categories = $asgarosforum->get_categories(true);
 
             if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
-                require('views/structure_page_forums.php');
+                require('views/structure_forums.php');
             } else {
-                require('views/structure_page_categories.php');
+                require('views/structure_categories.php');
             }
         }
 

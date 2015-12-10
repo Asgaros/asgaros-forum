@@ -4,23 +4,24 @@ Requires at least: 4.3.1
 Tested up to: 4.3.1
 Stable tag: 1.0.0 Development-Version
 
-Asgaros Forum is a lightweight and simple forum plugin for WordPress which is based on the Mingle Forum plugin (v1.1.0-dev) from Cartpauj (https://github.com/cartpauj/mingle-forum).
+Asgaros Forum is a lightweight and simple forum plugin for WordPress.
 
 == Description ==
-* Asgaros Forum is easy to setup and manage. It integrates seamlessly with WordPress and comes with many forum features.
+* Asgaros Forum is easy to setup and manage. It integrates seamlessly with WordPress and comes with a small amout of features which makes it fast and simple.
 
 = Features =
-* Image uploads
+* File uploads
 * Powerful editor
-* Sticky (Pinned) Threads
+* Sticky Threads
 * Move, Edit, Remove and Close Threads
+* Edit and Remove Posts
 * Works out of the box with most themes (See FAQ)
 * Supports multiple languages
 
 = Notes =
 * N/A
 
-= Translations (NOT UP2DATE!) =
+= Translations =
 * English
 * German
 * Simplified Chinese
@@ -41,13 +42,9 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress which is ba
 * **Help! I can't create new threads** - Make sure you have created both categories AND forums.
 * **How can I hide the sidebar on the forum page?** - When editing the forum page, if your theme supports it, you should be able to change your Template to a full-width one. If you don't see this option, either hire a developer to make one for you, or bug your theme author to add it.
 * **I made customizations to the forum, but they get overwritten on every update** - If you customize anything inside of the /asgaros-forum/ folder it will be overwritten, there's no way around that. If all you're changing is CSS, then put it somewhere else, like at the bottom of your theme's styles.css file (which gets overwritten when you upgrade your theme FYI).
-* **My skin looks bad/funny** - Your theme is most likely causing a conflict with the forum's table styles. We do our best, but can't possibly make the forum work for every conceivable WordPress theme. Find a friend who knows a thing or two about CSS and see if they'll help you get some custom styles set to fix the issue.
+* **My skin looks bad/funny** - Your theme is most likely causing a conflict with the forum's table styles. I do my best, but can't possibly make the forum work for every conceivable WordPress theme. Find a friend who knows a thing or two about CSS and see if they'll help you get some custom styles set to fix the issue.
 * **Can I put different forums on different pages?** - No. Not right now.
-* **I can only see the front page of the forum. No matter what I click, it goes back to the front page** - Make sure the forum isn't the home page of your site. Asgaros Forum does not currently work when set to the home page.
-
-== Upgrade Notice ==
-* Asgaros Forum contains significant changes. Please do NOT upgrade from the original Mingle Forum plugin!
 
 == Changelog ==
-= 1.0.0 Alpha-0 =
+= 1.0.0 Development-Version =
 * Status: In development

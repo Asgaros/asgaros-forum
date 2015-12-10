@@ -178,7 +178,7 @@ class asgarosforum {
         }
 
         if ((isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) && $user_ID) {
-            require('wpf-insert.php');
+            require('insert.php');
         } else if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread" && $user_ID) {
             $time = $this->current_time();
             setcookie("wpafcookie", $time, 0, "/");
