@@ -40,23 +40,19 @@ class asgarosforum {
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[forum]%' AND post_status = 'publish' AND post_type = 'page';");
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
-        $this->table_categories = $wpdb->prefix . "forum_categories";
-        $this->table_forums = $wpdb->prefix . "forum_forums";
-        $this->table_threads = $wpdb->prefix . "forum_threads";
-        $this->table_posts = $wpdb->prefix . "forum_posts";
+        $this->table_categories = $wpdb->prefix . 'forum_categories';
+        $this->table_forums = $wpdb->prefix . 'forum_forums';
+        $this->table_threads = $wpdb->prefix . 'forum_threads';
+        $this->table_posts = $wpdb->prefix . 'forum_posts';
 
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
-        add_action("init", array($this, 'prepare'));
-        add_action("wp", array($this, 'check_access'));
-        add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
-        add_action("wp_head", array($this, 'setup_header'));
-        add_filter("wp_title", array($this, "get_pagetitle"));
-        add_shortcode('forum', array($this, "forum"));
-
-        if (is_admin()) {
-            asgarosforum_admin::load_hooks();
-        }
+        add_action('init', array($this, 'prepare'));
+        add_action('wp', array($this, 'check_access'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
+        add_action('wp_head', array($this, 'setup_header'));
+        add_filter('wp_title', array($this, 'get_pagetitle'));
+        add_shortcode('forum', array($this, 'forum'));
     }
 
     public function install() {

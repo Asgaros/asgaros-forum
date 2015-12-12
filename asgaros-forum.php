@@ -40,6 +40,11 @@ if (is_admin()) {
 }
 
 global $asgarosforum;
+global $asgarisforum_admin;
 $asgarosforum = new asgarosforum();
+
+if (is_admin()) {
+    $asgarosforum_admin = new asgarosforum_admin();
+}
 
 ?>

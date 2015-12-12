@@ -1,22 +1,22 @@
 <?php
 class asgarosforum_admin
 {
-    public static function load_hooks()
-    {
-        add_action("admin_menu", 'asgarosforum_admin::add_admin_pages');
-        add_action('admin_init', 'asgarosforum_admin::save_settings');
-        add_action('admin_enqueue_scripts', 'asgarosforum_admin::enqueue_admin_scripts');
+    var $saved = false;
+
+    public function __construct() {
+        add_action('admin_menu', array($this, 'add_admin_pages'));
+        add_action('admin_init', array($this, 'save_settings'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
     }
 
     // Add admin pages
-    public static function add_admin_pages() {
-        add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", 'asgarosforum_admin::options_page', WPAFURL . "admin/images/logo.png");
-        add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', 'asgarosforum_admin::options_page');
-        add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', 'asgarosforum_admin::structure_page');
+    public function add_admin_pages() {
+        add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", array($this, 'options_page'), WPAFURL . "admin/images/logo.png");
+        add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', array($this, 'options_page'));
+        add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', array($this, 'structure_page'));
     }
 
-    public static function enqueue_admin_scripts($hook)
-    {
+    public function enqueue_admin_scripts($hook) {
         $plug_url = plugin_dir_url(__FILE__) . '../';
         $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Threads, and Replies associated with it!!! Are you sure you want to delete this Category???', 'asgarosforum'),
             'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'));
@@ -29,29 +29,26 @@ class asgarosforum_admin
         }
     }
 
-    public static function save_settings()
-    {
+    public function save_settings() {
         if (isset($_POST['mf_options_submit']) && !empty($_POST['mf_options_submit'])) {
-            self::save_options();
+            $this->save_options();
         } else if (isset($_POST['mf_categories_save']) && !empty($_POST['mf_categories_save'])) {
-            self::process_save_categories();
+            $this->process_save_categories();
         } else if (isset($_POST['mf_forums_save']) && !empty($_POST['mf_forums_save'])) {
-            self::process_save_forums();
+            $this->process_save_forums();
         } else {
             return;
         }
     }
 
     /* OPTIONS */
-    public static function options_page()
-    {
+    public function options_page() {
         global $asgarosforum;
-        $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
         require('views/options.php');
     }
 
-    public static function save_options() {
-        global $wpdb, $asgarosforum;
+    public function save_options() {
+        global $asgarosforum;
         $saved_ops = array();
 
         foreach ($asgarosforum->options_default as $k => $v) {
@@ -75,15 +72,13 @@ class asgarosforum_admin
         }
 
         update_option('asgarosforum_options', $saved_ops);
-        wp_redirect(admin_url('admin.php?page=asgarosforum&saved=true'));
-        exit();
+        $asgarosforum->options = array_merge($asgarosforum->options_default, get_option('asgarosforum_options', array()));
+        $this->saved = true;
     }
 
     /* STRUCTURE */
-    public static function structure_page()
-    {
+    public function structure_page() {
         global $asgarosforum;
-        $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
         $categories = $asgarosforum->get_categories(true);
 
         if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
@@ -93,8 +88,7 @@ class asgarosforum_admin
         }
     }
 
-    public static function process_save_categories()
-    {
+    public function process_save_categories() {
         global $asgarosforum, $wpdb;
         $order = 1;
         $listed_categories = array();
@@ -137,18 +131,16 @@ class asgarosforum_admin
 
         if (!empty($category_ids)) {
             foreach ($category_ids as $cid) {
-                self::delete_category($cid);
+                $this->delete_category($cid);
             }
         }
 
         do_action('asgarosforum_admin_after_save_categories', $listed_categories);
 
-        wp_redirect(admin_url('admin.php?page=asgarosforum-structure&saved=true'));
-        exit();
+        $this->saved = true;
     }
 
-    public static function process_save_forums()
-    {
+    public function process_save_forums() {
         global $asgarosforum, $wpdb;
         $order = 1; // Order is DESC for some reason
         $listed_forums = array();
@@ -199,16 +191,14 @@ class asgarosforum_admin
 
         if (!empty($forum_ids)) {
             foreach ($forum_ids as $fid) {
-                self::delete_forum($fid);
+                $this->delete_forum($fid);
             }
         }
 
-        wp_redirect(admin_url('admin.php?page=asgarosforum-structure&action=forums&saved=true'));
-        exit();
+        $this->saved = true;
     }
 
-    public static function delete_category($cid)
-    {
+    public function delete_category($cid) {
         global $wpdb, $asgarosforum;
 
         // First delete all associated forums
@@ -216,15 +206,14 @@ class asgarosforum_admin
 
         if (!empty($forum_ids)) {
             foreach ($forum_ids as $fid) {
-                self::delete_forum($fid);
+                $this->delete_forum($fid);
             }
         }
 
         $wpdb->query("DELETE FROM {$asgarosforum->table_categories} WHERE id = {$cid}");
     }
 
-    public static function delete_forum($fid)
-    {
+    public function delete_forum($fid) {
         global $wpdb, $asgarosforum;
 
         // First delete all associated threads
@@ -232,15 +221,14 @@ class asgarosforum_admin
 
         if (!empty($thread_ids)) {
             foreach ($thread_ids as $tid) {
-                self::delete_thread($tid);
+                $this->delete_thread($tid);
             }
         }
 
         $wpdb->query("DELETE FROM {$asgarosforum->table_forums} WHERE id = {$fid}");
     }
 
-    public static function delete_thread($tid)
-    {
+    public function delete_thread($tid) {
         global $wpdb, $asgarosforum;
 
         // Delete uploads
