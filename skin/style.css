@@ -1,12 +1,21 @@
 /* GENERAL */
+#wpf-wrapper {
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.65;
+}
 #wpf-wrapper a {
     color: #2d89cc;
     border: none;
+    text-decoration: none;
+    box-shadow: none;
 }
 
 /* EDITOR */
 #wpf-wrapper .editor input {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
 }
 #wpf-wrapper .editor td {
     vertical-align: top !important;
@@ -15,7 +24,7 @@
     background-color: #fafafa;
 }
 #wpf-wrapper .message-editor {
-    padding: 0;
+    padding: 0 !important;
 }
 
 /* TABLES */
@@ -25,10 +34,12 @@
     border: none;
     margin: 0;
     table-layout: auto;
+    font-size: 13px;
+    line-height: 1.65;
 }
 #wpf-wrapper th,
 #wpf-wrapper td {
-    padding: 5px 5px 5px 10px;
+    padding: 5px 5px 5px 10px !important;
     border: none;
 }
 #wpf-wrapper th {
@@ -81,6 +92,7 @@
     background: none;
     background-color: #2D89CC;
     border: 1px solid #005B91 !important;
+    text-transform: none;
 }
 
 /* MENU */
@@ -174,11 +186,6 @@
     margin: 5px 0 0 !important;
     float: left;
     color: #636363;
-}
-
-/* LINKS */
-#wpf-wrapper a {
-    text-decoration: none;;
 }
 
 /* CONTENT WRAPPERS*/
