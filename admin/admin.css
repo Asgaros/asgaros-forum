@@ -1,5 +1,5 @@
 /* SHARED */
-.mf_fset {
+.af_fset {
     border: 1px solid #999;
     margin-top: 25px;
     padding: 10px;
@@ -9,10 +9,10 @@ legend {
     padding: 5px;
     border: 1px solid #999;
 }
-.mf_fset a.button {
+.af_fset a.button {
     color: #666 !important;
 }
-.mf_ordered_list {
+.af_ordered_list {
     margin: 0 0 10px;
 }
 li.ui-state-default {
@@ -29,32 +29,32 @@ li.ui-state-highlight {
     background: #a5c5e2;
     border: 1px solid #aaa;
 }
-.mf_admin_submit {
+.af_admin_submit {
     margin-top: 25px !important;
 }
 #hidden-element-container {
     display: none;
 }
-a.mf_remove_category,
-a.mf_remove_forum {
+a.af_remove_category,
+a.af_remove_forum {
     float: right;
 }
 input {
     width: 300px;
 }
-.mf_add_new_forum,
-.mf_remove_category,
-#mf_add_new_category,
-.mf_remove_forum {
+.af_add_new_forum,
+.af_remove_category,
+#af_add_new_category,
+.af_remove_forum {
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
 }
 /* MAIN OPTIONS PAGE */
-#mf_options_form input {
+#af_options_form input {
     vertical-align: middle;
 }
-.mf_tb_label {
+.af_tb_label {
     display: inline-block;
     width: 350px;
 }

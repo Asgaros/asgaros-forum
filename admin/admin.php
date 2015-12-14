@@ -30,11 +30,11 @@ class asgarosforum_admin
     }
 
     public function save_settings() {
-        if (isset($_POST['mf_options_submit']) && !empty($_POST['mf_options_submit'])) {
+        if (isset($_POST['af_options_submit']) && !empty($_POST['af_options_submit'])) {
             $this->save_options();
-        } else if (isset($_POST['mf_categories_save']) && !empty($_POST['mf_categories_save'])) {
+        } else if (isset($_POST['af_categories_save']) && !empty($_POST['af_categories_save'])) {
             $this->process_save_categories();
-        } else if (isset($_POST['mf_forums_save']) && !empty($_POST['mf_forums_save'])) {
+        } else if (isset($_POST['af_forums_save']) && !empty($_POST['af_forums_save'])) {
             $this->process_save_forums();
         } else {
             return;
@@ -94,9 +94,9 @@ class asgarosforum_admin
         $listed_categories = array();
         $category_ids = array();
 
-        if (isset($_POST['mf_category_id']) && !empty($_POST['mf_category_id'])) {
-            foreach ($_POST['mf_category_id'] as $key => $value) {
-                $id = $_POST['mf_category_id'][$key];
+        if (isset($_POST['af_category_id']) && !empty($_POST['af_category_id'])) {
+            foreach ($_POST['af_category_id'] as $key => $value) {
+                $id = $_POST['af_category_id'][$key];
                 $name = stripslashes($_POST['category_name'][$key]);
 
                 if (empty($name)) {
@@ -152,9 +152,9 @@ class asgarosforum_admin
         }
 
         foreach ($categories as $category) {
-            if (isset($_POST['mf_forum_id'][$category->id]) && !empty($_POST['mf_forum_id'][$category->id])) {
-                foreach ($_POST['mf_forum_id'][$category->id] as $key => $value) {
-                    $id = $_POST['mf_forum_id'][$category->id][$key];
+            if (isset($_POST['af_forum_id'][$category->id]) && !empty($_POST['af_forum_id'][$category->id])) {
+                foreach ($_POST['af_forum_id'][$category->id] as $key => $value) {
+                    $id = $_POST['af_forum_id'][$category->id][$key];
                     $name = stripslashes($_POST['forum_name'][$category->id][$key]);
                     $description = stripslashes($_POST['forum_description'][$category->id][$key]);
 

@@ -11,35 +11,35 @@
         <a href="<?php echo admin_url('admin.php?page=asgarosforum-structure&action=forums'); ?>" class="nav-tab main-nav"><?php _e('Forums', 'asgarosforum'); ?></a>
     </h2>
     <form action="" method="post">
-        <fieldset class="mf_fset">
-            <ol id="sortable-categories" class="sortable_elements mf_ordered_list">
+        <fieldset class="af_fset">
+            <ol id="sortable-categories" class="sortable_elements af_ordered_list">
                 <?php if (!empty($categories)): ?>
                     <?php do_action('asgarosforum_admin_before_categories_options'); ?>
                     <?php foreach ($categories as $category): ?>
                         <li class="ui-state-default">
-                            <input type="hidden" name="mf_category_id[]" value="<?php echo $category->id; ?>" />
+                            <input type="hidden" name="af_category_id[]" value="<?php echo $category->id; ?>" />
                             <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($category->name)); ?>" /></label>
-                            <a href="#" class="mf_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
+                            <a href="#" class="af_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
                             <?php do_action('asgarosforum_admin_after_category_options', $category); ?>
                         </li>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <li class="ui-state-default">
-                        <input type="hidden" name="mf_category_id[]" value="new" />
+                        <input type="hidden" name="af_category_id[]" value="new" />
                         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
-                        <a href="#" class="mf_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
+                        <a href="#" class="af_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
                     </li>
                 <?php endif; ?>
             </ol>
-            <a href="#" id="mf_add_new_category" class="dashicons-before dashicons-plus" title="<?php _e('Add new Category', 'asgarosforum'); ?>"><?php _e('Add new Category', 'asgarosforum'); ?></a>
+            <a href="#" id="af_add_new_category" class="dashicons-before dashicons-plus" title="<?php _e('Add new Category', 'asgarosforum'); ?>"><?php _e('Add new Category', 'asgarosforum'); ?></a>
         </fieldset>
-        <input type="submit" name="mf_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button button-primary" />
+        <input type="submit" name="af_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="af_admin_submit button button-primary" />
     </form>
 </div>
 <div id="hidden-element-container">
     <li class="ui-state-default">
-        <input type="hidden" name="mf_category_id[]" value="new" />
+        <input type="hidden" name="af_category_id[]" value="new" />
         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
-        <a href="#" class="mf_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
+        <a href="#" class="af_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
     </li>
 </div>
