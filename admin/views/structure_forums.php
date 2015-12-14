@@ -22,9 +22,7 @@
                                     <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="<?php echo $forum->id; ?>" />
                                     <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
                                     <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" /></label>
-                                    <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
-                                        <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
-                                    </a>
+                                    <a href="#" class="mf_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
                                 </li>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -32,15 +30,11 @@
                                 <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="new" />
                                 <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $cat->id; ?>][]" value="" /></label>&nbsp;&nbsp;
                                 <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $cat->id; ?>][]" value="" /></label>
-                                <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
-                                    <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
-                                </a>
+                                <a href="#" class="mf_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
                             </li>
                         <?php endif; ?>
                     </ol>
-                    <a href="#" class="mf_add_new_forum" title="<?php _e('Add new Forum', 'asgarosforum'); ?>" data-value="<?php echo $cat->id; ?>">
-                        <img src="<?php echo WPAFURL.'admin/images/add.png'; ?>" width="32" />
-                    </a>
+                    <a href="#" class="mf_add_new_forum dashicons-before dashicons-plus" title="<?php _e('Add new Forum', 'asgarosforum'); ?>" data-value="<?php echo $cat->id; ?>"><?php _e('Add new Forum', 'asgarosforum'); ?></a>
                 </fieldset>
             <?php endforeach; ?>
             <input type="submit" name="mf_forums_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button button-primary" />
@@ -54,8 +48,6 @@
         <input type="hidden" name="mf_forum_id[][]" value="new" />
         <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" /></label>
-        <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>">
-            <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
-        </a>
+        <a href="#" class="mf_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
     </li>
 </div>

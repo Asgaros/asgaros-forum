@@ -19,9 +19,7 @@
                         <li class="ui-state-default">
                             <input type="hidden" name="mf_category_id[]" value="<?php echo $category->id; ?>" />
                             <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="<?php echo esc_html(stripslashes($category->name)); ?>" /></label>
-                            <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-                                <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
-                            </a>
+                            <a href="#" class="mf_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
                             <?php do_action('asgarosforum_admin_after_category_options', $category); ?>
                         </li>
                     <?php endforeach; ?>
@@ -29,15 +27,11 @@
                     <li class="ui-state-default">
                         <input type="hidden" name="mf_category_id[]" value="new" />
                         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
-                        <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-                            <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
-                        </a>
+                        <a href="#" class="mf_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
                     </li>
                 <?php endif; ?>
             </ol>
-            <a href="#" id="mf_add_new_category" title="<?php _e('Add new Category', 'asgarosforum'); ?>">
-                <img src="<?php echo WPAFURL.'admin/images/add.png'; ?>" width="32" />
-            </a>
+            <a href="#" id="mf_add_new_category" class="dashicons-before dashicons-plus" title="<?php _e('Add new Category', 'asgarosforum'); ?>"><?php _e('Add new Category', 'asgarosforum'); ?></a>
         </fieldset>
         <input type="submit" name="mf_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button button-primary" />
     </form>
@@ -46,8 +40,6 @@
     <li class="ui-state-default">
         <input type="hidden" name="mf_category_id[]" value="new" />
         <label><?php _e('Category Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="category_name[]" value="" /></label>
-        <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'asgarosforum'); ?>">
-            <img src="<?php echo WPAFURL.'admin/images/remove.png'; ?>" width="24" />
-        </a>
+        <a href="#" class="mf_remove_category dashicons-before dashicons-trash" title="<?php _e('Remove this Category', 'asgarosforum'); ?>"></a>
     </li>
 </div>
