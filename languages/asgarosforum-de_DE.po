@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Mon Dec 14 2015 17:23:22 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Mon Dec 14 2015 18:23:53 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Mon Dec 14 2015 18:39:00 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <root@localhost.de>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -22,10 +22,6 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: de_DE"
-
-#: ../views/overview.php:18
-msgid "Threads:"
-msgstr "Themen:"
 
 #. Name of the plugin
 msgid "Asgaros Forum"
@@ -387,6 +383,10 @@ msgstr "Erstellt von:"
 #: ../views/forum.php:66
 msgid "There are no threads yet!"
 msgstr "Es existieren noch keine Themen!"
+
+#: ../views/overview.php:18
+msgid "Threads:"
+msgstr "Themen:"
 
 #: ../views/overview.php:18 ../views/thread.php:24
 msgid "Posts:"
