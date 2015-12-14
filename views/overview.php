@@ -29,7 +29,7 @@
 <?php if ($forum_counter > 0) { ?>
 <div class="footer">
     <span class="icon-files-empty-small-yes"></span><?php _e("New posts", "asgarosforum"); ?> &middot;
-    <span class="icon-files-empty-small-no"></span><?php _e("No new posts", "asgarosforum"); ?></span> &middot;
+    <span class="icon-files-empty-small-no"></span><?php _e("No new posts", "asgarosforum"); ?> &middot;
     <span class="icon-checkmark"></span><a href="<?php echo $this->url_base; ?>markallread"><?php _e("Mark All Read", "asgarosforum"); ?></a>
 </div>
 <?php } ?>
