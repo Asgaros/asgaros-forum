@@ -10,6 +10,7 @@
   License: GPL2
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
   Text Domain: asgarosforum
+  Domain Path: /languages
 
   Asgaros Forum is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
