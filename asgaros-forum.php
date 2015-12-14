@@ -27,7 +27,7 @@
 
 //Textdomain Hook
 $plugin_dir = plugin_basename(dirname(__FILE__));
-load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/translations/');
+load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/languages/');
 
 //Setup defines
 define('WPAFURL', plugin_dir_url(__FILE__));
