@@ -1,7 +1,7 @@
 === Asgaros Forum ===
 Contributors: Thomas Belser
 Requires at least: 4.3.1
-Tested up to: 4.3.1
+Tested up to: 4.4
 Stable tag: 1.0.0 Development-Version
 
 Asgaros Forum is a lightweight and simple forum plugin for WordPress.
@@ -24,7 +24,6 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress.
 = Translations =
 * English
 * German
-* Simplified Chinese
 
 == Installation ==
 * Download Asgaros Forum
