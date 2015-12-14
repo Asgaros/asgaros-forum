@@ -18,6 +18,6 @@
             <input type="checkbox" name="forum_allow_file_uploads" id="forum_allow_file_uploads" <?php checked(!empty($asgarosforum->options['forum_allow_file_uploads'])); ?> />
             <label for="forum_allow_file_uploads" class="mf_cb_label"><?php _e('Allow file uploads', 'asgarosforum'); ?></label>
         </p>
-        <input type="submit" name="mf_options_submit" class="mf_admin_submit button" value="<?php _e('Save Options', 'asgarosforum'); ?>" />
+        <input type="submit" name="mf_options_submit" class="mf_admin_submit button button-primary" value="<?php _e('Save Options', 'asgarosforum'); ?>" />
     </form>
 </div>

@@ -30,7 +30,7 @@ class asgarosforum {
     );
     var $options_editor = array(
         'media_buttons' => false,
-        'textarea_rows' => 5,
+        'textarea_rows' => 12,
         'teeny' => true,
         'quicktags' => false
     );

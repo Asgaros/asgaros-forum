@@ -43,7 +43,7 @@
                     </a>
                 </fieldset>
             <?php endforeach; ?>
-            <input type="submit" name="mf_forums_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button" />
+            <input type="submit" name="mf_forums_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button button-primary" />
         <?php else: ?>
             <p><?php _e('You must add some categories first.', 'asgarosforum'); ?></p>
         <?php endif; ?>

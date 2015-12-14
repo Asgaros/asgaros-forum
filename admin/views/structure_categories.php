@@ -39,7 +39,7 @@
                 <img src="<?php echo WPAFURL.'admin/images/add.png'; ?>" width="32" />
             </a>
         </fieldset>
-        <input type="submit" name="mf_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button" />
+        <input type="submit" name="mf_categories_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="mf_admin_submit button button-primary" />
     </form>
 </div>
 <div id="hidden-element-container">
