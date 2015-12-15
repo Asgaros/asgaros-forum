@@ -866,6 +866,10 @@ class asgarosforum {
 
         // Upload them
         if (count($files) > 0) {
+            if (!is_dir($this->upload_path)) {
+                mkdir($this->upload_path);
+            }
+
             if (!is_dir($path)) {
                 mkdir($path);
             }
