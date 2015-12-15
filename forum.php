@@ -157,7 +157,7 @@ class asgarosforum {
             $this->delim = "&amp;";
         }
 
-        $this->url_home = get_permalink($this->page_id);;
+        $this->url_home = get_permalink($this->page_id);
         $this->url_base = $this->url_home . $this->delim . "forumaction=";
         $this->url_forum = $this->url_base . "viewforum&amp;forum=";
         $this->url_thread = $this->url_base . "viewthread&amp;thread=";
@@ -197,7 +197,7 @@ class asgarosforum {
     }
 
     public function check_access() {
-        $this->access = apply_filters('asgarosforum_filter_check_access', true, $this->current_category);;
+        $this->access = apply_filters('asgarosforum_filter_check_access', true, $this->current_category);
     }
 
     public function enqueue_front_scripts() {

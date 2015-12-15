@@ -4,7 +4,7 @@
   Plugin Name: Asgaros Forum
   Plugin URI: https://github.com/Asgaros/asgaros-forum
   Description: A lightweight and simple forum plugin for WordPress.
-  Version: 1.0.0
+  Version: 1.0.0-Dev
   Author: Thomas Belser
   Author URI: https://thomasbelser.net
   License: GPL2
