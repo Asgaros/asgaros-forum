@@ -6,7 +6,7 @@
   Description: A lightweight and simple forum plugin for WordPress.
   Version: 1.0.0-Dev
   Author: Thomas Belser
-  Author URI: https://thomasbelser.net
+  Author URI: http://thomasbelser.net
   License: GPL2
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
   Text Domain: asgarosforum
