@@ -13,6 +13,9 @@ delete_option('asgarosforum_db_version');
 delete_site_option('asgarosforum_options');
 delete_site_option('asgarosforum_db_version');
 
+// Delete user meta data
+delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
+
 // Drop a custom db table
 global $wpdb;
 $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_categories;");

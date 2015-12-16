@@ -27,14 +27,13 @@
 */
 
 //Textdomain Hook
-$plugin_dir = plugin_basename(dirname(__FILE__));
-load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/languages/');
+load_plugin_textdomain('asgarosforum', false, plugin_basename(dirname(__FILE__)).'/languages/');
 
 //Load class files
 require('includes/forum.php');
 
 if (is_admin()) {
-    require_once(dirname(__FILE__).'/admin/admin.php');
+    require_once('admin/admin.php');
 }
 
 global $asgarosforum_directory;

@@ -33,9 +33,9 @@ class asgarosforum_admin
         if (isset($_POST['af_options_submit']) && !empty($_POST['af_options_submit'])) {
             $this->save_options();
         } else if (isset($_POST['af_categories_save']) && !empty($_POST['af_categories_save'])) {
-            $this->process_save_categories();
+            $this->save_categories();
         } else if (isset($_POST['af_forums_save']) && !empty($_POST['af_forums_save'])) {
-            $this->process_save_forums();
+            $this->save_forums();
         } else {
             return;
         }
@@ -88,7 +88,7 @@ class asgarosforum_admin
         }
     }
 
-    public function process_save_categories() {
+    public function save_categories() {
         global $asgarosforum, $wpdb;
         $order = 1;
         $listed_categories = array();
@@ -140,9 +140,9 @@ class asgarosforum_admin
         $this->saved = true;
     }
 
-    public function process_save_forums() {
+    public function save_forums() {
         global $asgarosforum, $wpdb;
-        $order = 1; // Order is DESC for some reason
+        $order = 1;
         $listed_forums = array();
         $forum_ids = array();
         $categories = $asgarosforum->get_categories(true);
