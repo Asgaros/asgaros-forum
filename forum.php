@@ -2,7 +2,6 @@
 class asgarosforum {
     var $db_version = 1;
     var $delim = "";
-    var $page_id = "";
     var $date_format = "";
     var $access = true;
     var $url_home = "";
@@ -38,7 +37,6 @@ class asgarosforum {
     public function __construct() {
         global $wpdb;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
-        $this->page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%[forum]%' AND post_status = 'publish' AND post_type = 'page';");
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
         $this->table_categories = $wpdb->prefix . 'forum_categories';
         $this->table_forums = $wpdb->prefix . 'forum_forums';
@@ -47,8 +45,7 @@ class asgarosforum {
 
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
-        add_action('init', array($this, 'prepare'));
-        add_action('wp', array($this, 'check_access'));
+        add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('wp_head', array($this, 'setup_header'));
         add_filter('wp_title', array($this, 'get_pagetitle'));
@@ -157,7 +154,7 @@ class asgarosforum {
             $this->delim = "&amp;";
         }
 
-        $this->url_home = get_permalink($this->page_id);
+        $this->url_home = get_permalink();
         $this->url_base = $this->url_home . $this->delim . "forumaction=";
         $this->url_forum = $this->url_base . "viewforum&amp;forum=";
         $this->url_thread = $this->url_base . "viewthread&amp;thread=";
@@ -194,6 +191,8 @@ class asgarosforum {
         } else if (isset($_GET['closed'])) {
             $this->change_status('closed');
         }
+
+        $this->check_access();
     }
 
     public function check_access() {
@@ -201,15 +200,11 @@ class asgarosforum {
     }
 
     public function enqueue_front_scripts() {
-        if (is_page($this->page_id)) {
-            wp_enqueue_script('asgarosforum-js', plugin_dir_url(__FILE__).'js/script.js', array('jquery'));
-        }
+        wp_enqueue_script('asgarosforum-js', plugin_dir_url(__FILE__).'js/script.js', array('jquery'));
     }
 
     public function setup_header() {
-        if (is_page($this->page_id)) {
-            echo '<link rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'skin/style.css" />';
-        }
+        echo '<link rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'skin/style.css" />';
     }
 
     public function get_pagetitle() {
