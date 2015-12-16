@@ -17,14 +17,14 @@ class asgarosforum_admin
     }
 
     public function enqueue_admin_scripts($hook) {
-        $plug_url = plugin_dir_url(__FILE__) . '../';
+        global $asgarosforum_directory;
         $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Threads, and Replies associated with it!!! Are you sure you want to delete this Category???', 'asgarosforum'),
             'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'));
 
         // Let's only load our shiz on asgarosforum admin pages
         if (strstr($hook, 'asgarosforum') !== false) {
-            wp_enqueue_style('asgarosforum-admin-css', $plug_url . "admin/admin.css");
-            wp_enqueue_script('asgarosforum-admin-js', $plug_url . "admin/admin.js", array('jquery-ui-sortable'));
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum_directory . "admin/admin.css");
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum_directory . "admin/admin.js", array('jquery-ui-sortable'));
             wp_localize_script('asgarosforum-admin-js', 'asgarosforum_admin', $l10n_vars);
         }
     }

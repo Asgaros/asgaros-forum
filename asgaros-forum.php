@@ -30,18 +30,17 @@
 $plugin_dir = plugin_basename(dirname(__FILE__));
 load_plugin_textdomain('asgarosforum', false, $plugin_dir . '/languages/');
 
-//Setup defines
-define('WPAFURL', plugin_dir_url(__FILE__));
-
 //Load class files
-require('forum.php');
+require('includes/forum.php');
 
 if (is_admin()) {
     require_once(dirname(__FILE__).'/admin/admin.php');
 }
 
+global $asgarosforum_directory;
 global $asgarosforum;
 global $asgarisforum_admin;
+$asgarosforum_directory = plugin_dir_url(__FILE__);
 $asgarosforum = new asgarosforum();
 
 if (is_admin()) {
