@@ -66,6 +66,9 @@
     width: 100px;
     font-size: 11px;
 }
+#wpf-wrapper .forumstats span {
+    display: block;
+}
 #wpf-wrapper .status-icon {
     width: 61px;
     height: 50px;
@@ -279,17 +282,11 @@
 .icon-bubble2:before {
 	content: "\e903";
 }
-.icon-bubbles4:before {
-	content: "\e904";
-}
 .icon-lock:before {
 	content: "\e905";
 }
 .icon-unlocked:before {
 	content: "\e906";
-}
-.icon-eye:before {
-	content: "\e907";
 }
 .icon-checkmark:before {
 	content: "\e908";

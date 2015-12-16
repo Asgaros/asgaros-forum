@@ -24,8 +24,8 @@
                             <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                         </td>
                         <td class="forumstats">
-                            <span class="icon-bubbles4"></span><span><?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span><br />
-                            <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
+                            <span><?php _e('Answers', 'asgarosforum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
+                            <span><?php _e('Views', 'asgarosforum'); ?>: <?php echo (int) $thread->views; ?></span>
                         </td>
                         <td class="poster_in_forum"><?php echo $this->get_lastpost_in_thread($thread->id); ?></td>
                     </tr>
@@ -45,8 +45,8 @@
                         <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                     </td>
                     <td class="forumstats">
-                        <span class="icon-bubbles4"></span><span><?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span><br />
-                        <span class="icon-eye"></span><span><?php echo (int) $thread->views; ?></span>
+                        <span><?php _e('Answers', 'asgarosforum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
+                        <span><?php _e('Views', 'asgarosforum'); ?>: <?php echo (int) $thread->views; ?></span>
                     </td>
                     <td class="poster_in_forum"><?php echo $this->get_lastpost_in_thread($thread->id); ?></td>
                 </tr>

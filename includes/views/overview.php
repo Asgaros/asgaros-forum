@@ -15,7 +15,10 @@
                     ?>
                         <td class="status-icon"><?php $this->get_thread_image($thread_id, 'overview'); ?></td>
                         <td><strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo $forum->name; ?></a></strong><br /><?php echo $forum->description; ?></td>
-                        <td class="forumstats"><?php _e("Threads:", "asgarosforum"); ?>&nbsp;<?php echo $this->count_elements($forum->id, $this->table_threads); ?><br /><?php _e("Posts:", "asgarosforum"); ?>&nbsp;<?php echo $this->count_posts_in_forum($forum->id); ?></td>
+                        <td class="forumstats">
+                            <span><?php _e("Threads", "asgarosforum"); ?>: <?php echo $this->count_elements($forum->id, $this->table_threads); ?></span>
+                            <span><?php _e("Posts", "asgarosforum"); ?>: <?php echo $this->count_posts_in_forum($forum->id); ?></span>
+                        </td>
                         <td class="poster_in_forum"><?php echo $this->get_lastpost_in_forum($forum->id); ?></td>
                     </tr>
                 <?php
