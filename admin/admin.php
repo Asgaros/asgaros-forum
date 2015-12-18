@@ -28,7 +28,7 @@ class asgarosforum_admin {
     }
 
     function manage_columns($columns) {
-        unset($columns['slug'], $columns['posts']);
+        unset($columns['description'], $columns['slug'], $columns['posts']);
 
         $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
 
@@ -43,7 +43,7 @@ class asgarosforum_admin {
         global $submenu_file;
 
         if ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
-            echo '<style type="text/css">.term-slug-wrap { display: none; }</style>';
+            echo '<style type="text/css">.term-name-wrap p, .term-slug-wrap, .term-description-wrap { display: none; }</style>';
             echo '<script type="text/javascript">jQuery(document).ready(function($) { $(".inline-edit-col input[name=slug]").parents("label").hide(); });</script>';
         }
     }
