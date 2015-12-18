@@ -12,7 +12,6 @@ class asgarosforum {
     var $url_editor_post = "";
     var $upload_path = "";
     var $upload_url = "";
-    var $table_categories = "";
     var $table_forums = "";
     var $table_threads = "";
     var $table_posts = "";
@@ -38,18 +37,56 @@ class asgarosforum {
         global $wpdb;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
-        $this->table_categories = $wpdb->prefix . 'forum_categories';
         $this->table_forums = $wpdb->prefix . 'forum_forums';
         $this->table_threads = $wpdb->prefix . 'forum_threads';
         $this->table_posts = $wpdb->prefix . 'forum_posts';
 
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
+        add_action('init', array($this, 'register_category_taxonomy'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('wp_head', array($this, 'setup_header'));
         add_filter('wp_title', array($this, 'get_pagetitle'));
         add_shortcode('forum', array($this, 'forum'));
+    }
+
+    public static function register_category_taxonomy() {
+        register_taxonomy(
+            'asgarosforum-category',
+            null,
+            array(
+                'label' => 'XXX',
+                'labels' => array(
+                    'name'                          => __('Categories', 'asgarosforum'),
+                    'singular_name'                 => 'XXXB',
+                    'menu_name'                     => 'XXXC',
+                    'all_items'                     => 'XXXD',
+                    'edit_item'                     => __('Edit Category', 'asgarosforum'),
+                    'view_item'                     => 'XXXF',
+                    'update_item'                   => __('Update Category', 'asgarosforum'),
+                    'add_new_item'                  => __('Add new category', 'asgarosforum'),
+                    'new_item_name'                 => 'XXXH',
+                    'parent_item'                   => 'XXXI',
+                    'parent_item_colon'             => 'XXXJ',
+                    'search_items'                  => __('Search categories', 'asgarosforum'),
+                    'popular_items'                 => 'XXXK',
+                    'separate_items_with_commas'    => 'XXXL',
+                    'add_or_remove_items'           => 'XXXM',
+                    'choose_from_most_used'         => 'XXXN',
+                    'not_found'                     => __('No categories found.', 'asgarosforum')
+                ),
+                'public' => false,
+                'show_ui' => true,
+                'rewrite' => false,
+                'capabilities' => array(
+                    'manage_terms'  => 'edit_users',
+					'edit_terms'    => 'edit_users',
+					'delete_terms'  => 'edit_users',
+					'assign_terms'  => 'edit_users'
+				)
+            )
+        );
     }
 
     public function install() {
@@ -60,14 +97,6 @@ class asgarosforum {
             $charset_collate = $wpdb->get_charset_collate();
 
             $sql1 = "
-            CREATE TABLE $this->table_categories (
-            id int(11) NOT NULL auto_increment,
-            name varchar(255) NOT NULL default '',
-            sort int(11) NOT NULL default '0',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
-
-            $sql2 = "
             CREATE TABLE $this->table_forums (
             id int(11) NOT NULL auto_increment,
             name varchar(255) NOT NULL default '',
@@ -77,7 +106,7 @@ class asgarosforum {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql3 = "
+            $sql2 = "
             CREATE TABLE $this->table_threads (
             id int(11) NOT NULL auto_increment,
             parent_id int(11) NOT NULL default '0',
@@ -87,7 +116,7 @@ class asgarosforum {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql4 = "
+            $sql3 = "
             CREATE TABLE $this->table_posts (
             id int(11) NOT NULL auto_increment,
             text longtext,
@@ -102,7 +131,6 @@ class asgarosforum {
             dbDelta($sql1);
             dbDelta($sql2);
             dbDelta($sql3);
-            dbDelta($sql4);
 
             update_option("asgarosforum_db_version", $this->db_version);
         }
@@ -389,7 +417,10 @@ class asgarosforum {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
         }
 
-        return $wpdb->get_results("SELECT name, id FROM {$this->table_categories} {$filter} ORDER BY sort ASC;");
+        return get_terms('asgarosforum-category', array('hide_empty' => false));
+
+        // TODO: check filters again
+        // TODO: add sort
     }
 
     public function get_forums($id = false) {

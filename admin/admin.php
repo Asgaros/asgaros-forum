@@ -1,19 +1,61 @@
 <?php
-class asgarosforum_admin
-{
+class asgarosforum_admin {
     var $saved = false;
 
     public function __construct() {
+        // Taxonomy stuff ...
+        add_action('init', 'asgarosforum::register_category_taxonomy');
+        add_filter('parent_file', array($this, 'set_current_menu'));
+        add_filter('manage_edit-asgarosforum-category_columns', array($this, 'manage_columns'));
+        add_action('admin_head', array($this, 'remove_slug'));
+        add_action('delete_term', array($this, 'delete_category'), 10, 4);
+        add_action('asgarosforum-category_add_form_fields', array($this, 'add_form_fields'));
+		add_action('asgarosforum-category_edit_form', array($this, 'add_form_fields'));
+
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_init', array($this, 'save_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
     }
 
+    function set_current_menu($parent_file) {
+        global $submenu_file;
+
+        if ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
+            $parent_file = 'asgarosforum';
+        }
+
+        return $parent_file;
+    }
+
+    function manage_columns($columns) {
+        unset($columns['slug'], $columns['posts']);
+
+        $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
+
+        return $columns;
+    }
+
+    function add_form_fields() {
+        do_action('asgarosforum_action_add_form_fields');
+    }
+
+    function remove_slug() {
+        global $submenu_file;
+
+        if ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
+            echo '<style type="text/css">.term-slug-wrap { display: none; }</style>';
+            echo '<script type="text/javascript">jQuery(document).ready(function($) { $(".inline-edit-col input[name=slug]").parents("label").hide(); });</script>';
+        }
+    }
+
     // Add admin pages
     public function add_admin_pages() {
-        add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", "asgarosforum", array($this, 'options_page'), 'dashicons-clipboard');
+        $category_taxonomy = get_taxonomy('asgarosforum-category');
+
+        add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
         add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', array($this, 'options_page'));
-        add_submenu_page("asgarosforum", __("Structure - Categories & Forums", "asgarosforum"), __("Structure", "asgarosforum"), "administrator", 'asgarosforum-structure', array($this, 'structure_page'));
+        add_submenu_page('asgarosforum', __('Categories', 'asgarosforum'), __('Categories', 'asgarosforum'), 'administrator', 'edit-tags.php?taxonomy='.$category_taxonomy->name, null);
+        add_submenu_page("asgarosforum", __('Forums', 'asgarosforum'), __('Forums', 'asgarosforum'), 'administrator', 'asgarosforum-structure', array($this, 'structure_page'));
     }
 
     public function enqueue_admin_scripts($hook) {
@@ -81,11 +123,11 @@ class asgarosforum_admin
         global $asgarosforum;
         $categories = $asgarosforum->get_categories(true);
 
-        if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
+        //if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
             require('views/structure_forums.php');
-        } else {
+        /*} else {
             require('views/structure_categories.php');
-        }
+        }*/
     }
 
     public function save_categories() {
@@ -152,11 +194,11 @@ class asgarosforum_admin
         }
 
         foreach ($categories as $category) {
-            if (isset($_POST['af_forum_id'][$category->id]) && !empty($_POST['af_forum_id'][$category->id])) {
-                foreach ($_POST['af_forum_id'][$category->id] as $key => $value) {
-                    $id = $_POST['af_forum_id'][$category->id][$key];
-                    $name = stripslashes($_POST['forum_name'][$category->id][$key]);
-                    $description = stripslashes($_POST['forum_description'][$category->id][$key]);
+            if (isset($_POST['af_forum_id'][$category->term_id]) && !empty($_POST['af_forum_id'][$category->term_id])) {
+                foreach ($_POST['af_forum_id'][$category->term_id] as $key => $value) {
+                    $id = $_POST['af_forum_id'][$category->term_id][$key];
+                    $name = stripslashes($_POST['forum_name'][$category->term_id][$key]);
+                    $description = stripslashes($_POST['forum_description'][$category->term_id][$key]);
 
                     if (empty($name)) {
                         if ($id != 'new') {
@@ -167,11 +209,11 @@ class asgarosforum_admin
                     }
 
                     if ($id == 'new') { // Save new forum
-                        $wpdb->insert($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->id), array('%s', '%s', '%d', '%d'));
+                        $wpdb->insert($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id), array('%s', '%s', '%d', '%d'));
                         $listed_forums[] = $wpdb->insert_id;
                     } else { // Update existing forum
                         $q = "UPDATE {$asgarosforum->table_forums} SET name = %s, description = %s, sort = %d, parent_id = %d WHERE id = %d";
-                        $wpdb->query($wpdb->prepare($q, $name, $description, $order, $category->id, $id));
+                        $wpdb->query($wpdb->prepare($q, $name, $description, $order, $category->term_id, $id));
                         $listed_forums[] = $id;
                     }
 
@@ -198,19 +240,17 @@ class asgarosforum_admin
         $this->saved = true;
     }
 
-    public function delete_category($cid) {
+    public function delete_category($term, $tt_id, $taxonomy, $deleted_term) {
         global $wpdb, $asgarosforum;
 
-        // First delete all associated forums
-        $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$cid}");
+        // Delete all associated forums
+        $forum_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$term}");
 
         if (!empty($forum_ids)) {
             foreach ($forum_ids as $fid) {
                 $this->delete_forum($fid);
             }
         }
-
-        $wpdb->query("DELETE FROM {$asgarosforum->table_categories} WHERE id = {$cid}");
     }
 
     public function delete_forum($fid) {

@@ -4,7 +4,7 @@
     <div class="content-element space">
         <table>
             <?php
-            $frs = $this->get_forums($category->id);
+            $frs = $this->get_forums($category->term_id);
             if (count($frs) > 0) {
                 foreach ($frs as $forum) {
                     $forum_counter++;
