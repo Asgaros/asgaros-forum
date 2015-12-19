@@ -7,14 +7,17 @@ class asgarosforum_admin {
         add_action('init', 'asgarosforum::register_category_taxonomy');
         add_filter('parent_file', array($this, 'set_current_menu'));
         add_filter('manage_edit-asgarosforum-category_columns', array($this, 'manage_columns'));
+        add_action('manage_asgarosforum-category_custom_column', array($this, 'manage_custom_columns'), 10, 3);
+
         add_action('admin_head', array($this, 'remove_slug'));
-        add_action('delete_term', array($this, 'delete_category'), 10, 4);
+
 
         add_action('asgarosforum-category_add_form_fields', array($this, 'add_category_form_fields'));
 		add_action('asgarosforum-category_edit_form_fields', array($this, 'edit_category_form_fields'));
         add_action('create_asgarosforum-category', array($this, 'save_category_form_fields'));
         add_action('edit_asgarosforum-category', array($this, 'save_category_form_fields'));
-        add_action('manage_asgarosforum-category_custom_column', array($this, 'manage_custom_columns'), 10, 3);
+        add_action('delete_term', array($this, 'delete_category'), 10, 4);
+
 
 
 
@@ -38,10 +41,20 @@ class asgarosforum_admin {
         unset($columns['description'], $columns['slug'], $columns['posts']);
 
         $columns['order'] = __('Order', 'asgarosforum');
-
         $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
 
         return $columns;
+    }
+
+    function manage_custom_columns($out, $column, $term_id) {
+        if ($column == 'order') {
+            $order = get_term_meta($term_id, 'order', true);
+            $out = sprintf('<p>%s</p>', esc_attr($order));
+        } else {
+            $out = apply_filters('asgarosforum_filter_manage_custom_columns', $out, $column, $term_id);
+        }
+
+        return $out;
     }
 
     function add_category_form_fields() {
@@ -73,17 +86,6 @@ class asgarosforum_admin {
         }
 
         do_action('asgarosforum_action_save_category_form_fields', $term_id);
-    }
-
-    function manage_custom_columns($out, $column, $term_id) {
-        if ($column == 'order') {
-            $order = get_term_meta($term_id, 'order', true);
-            $out = sprintf('<p>%s</p>', esc_attr($order));
-        } else {
-            $out = apply_filters('asgarosforum_filter_manage_custom_columns', $out, $column, $term_id);
-        }
-
-        return $out;
     }
 
     function remove_slug() {
