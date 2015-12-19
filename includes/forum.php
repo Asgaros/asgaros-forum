@@ -406,7 +406,16 @@ class asgarosforum {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
         }
 
-        return get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
+        $categories_ordered = array();
+        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
+
+        foreach ($categories as $category) {
+            $categories_ordered[get_term_meta($category->term_id, 'order', true)] = $category;
+        }
+
+        ksort($categories_ordered, SORT_NUMERIC);
+
+        return $categories_ordered;
     }
 
     public function get_forums($id = false) {

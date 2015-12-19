@@ -14,6 +14,7 @@ class asgarosforum_admin {
 		add_action('asgarosforum-category_edit_form_fields', array($this, 'edit_category_form_fields'));
         add_action('create_asgarosforum-category', array($this, 'save_category_form_fields'));
         add_action('edit_asgarosforum-category', array($this, 'save_category_form_fields'));
+        add_action('manage_asgarosforum-category_custom_column', array($this, 'manage_custom_columns'), 10, 3);
 
 
 
@@ -36,21 +37,51 @@ class asgarosforum_admin {
     function manage_columns($columns) {
         unset($columns['description'], $columns['slug'], $columns['posts']);
 
+        $columns['order'] = __('Order', 'asgarosforum');
+
         $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
 
         return $columns;
     }
 
     function add_category_form_fields() {
+        echo '<div class="form-field form-required term-order-wrap">';
+            echo '<label>'.__('Order', 'asgarosforum').'</label>';
+            echo '<input type="text" name="category_order" value="1" />';
+        echo '</div>';
+
         do_action('asgarosforum_action_add_category_form_fields');
     }
 
     function edit_category_form_fields($term) {
+        echo '<tr class="form-field form-required term-order-wrap">';
+            echo '<th scope="row">'.__('Order', 'asgarosforum').'</th>';
+            echo '<td>';
+                $order = get_term_meta($term->term_id, 'order', true);
+                echo '<input type="text" name="category_order" value="'.$order.'" />';
+            echo '</td>';
+        echo '</tr>';
+
         do_action('asgarosforum_action_edit_category_form_fields', $term);
     }
 
     function save_category_form_fields($term_id) {
+        $new_order = isset($_POST['category_order']) ? $_POST['category_order'] : '';
+
+        if (!empty($new_order)) {
+            update_term_meta($term_id, 'order', $new_order);
+        }
+
         do_action('asgarosforum_action_save_category_form_fields', $term_id);
+    }
+
+    function manage_custom_columns($out, $column, $term_id) {
+        if ($column == 'order') {
+            $order = get_term_meta($term_id, 'order', true);
+            $out = sprintf('<p>%s</p>', esc_attr($order));
+        }
+
+        return $out;
     }
 
     function remove_slug() {
