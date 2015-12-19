@@ -56,24 +56,13 @@ class asgarosforum {
             'asgarosforum-category',
             null,
             array(
-                'label' => 'XXX',
                 'labels' => array(
                     'name'                          => __('Categories', 'asgarosforum'),
-                    'singular_name'                 => 'XXXB',
-                    'menu_name'                     => 'XXXC',
-                    'all_items'                     => 'XXXD',
+                    'singular_name'                 => __('Category', 'asgarosforum'),
                     'edit_item'                     => __('Edit Category', 'asgarosforum'),
-                    'view_item'                     => 'XXXF',
                     'update_item'                   => __('Update Category', 'asgarosforum'),
                     'add_new_item'                  => __('Add new category', 'asgarosforum'),
-                    'new_item_name'                 => 'XXXH',
-                    'parent_item'                   => 'XXXI',
-                    'parent_item_colon'             => 'XXXJ',
                     'search_items'                  => __('Search categories', 'asgarosforum'),
-                    'popular_items'                 => 'XXXK',
-                    'separate_items_with_commas'    => 'XXXL',
-                    'add_or_remove_items'           => 'XXXM',
-                    'choose_from_most_used'         => 'XXXN',
                     'not_found'                     => __('No categories found.', 'asgarosforum')
                 ),
                 'public' => false,
@@ -411,16 +400,13 @@ class asgarosforum {
 
     public function get_categories($disable_hooks = false) {
         global $wpdb;
-        $filter = '';
+        $filter = array();
 
         if (!$disable_hooks) {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
         }
 
-        return get_terms('asgarosforum-category', array('hide_empty' => false));
-
-        // TODO: check filters again
-        // TODO: add sort
+        return get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
     }
 
     public function get_forums($id = false) {
