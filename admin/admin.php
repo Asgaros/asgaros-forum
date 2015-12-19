@@ -79,6 +79,8 @@ class asgarosforum_admin {
         if ($column == 'order') {
             $order = get_term_meta($term_id, 'order', true);
             $out = sprintf('<p>%s</p>', esc_attr($order));
+        } else {
+            $out = apply_filters('asgarosforum_filter_manage_custom_columns', $out, $column, $term_id);
         }
 
         return $out;
