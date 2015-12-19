@@ -9,8 +9,14 @@ class asgarosforum_admin {
         add_filter('manage_edit-asgarosforum-category_columns', array($this, 'manage_columns'));
         add_action('admin_head', array($this, 'remove_slug'));
         add_action('delete_term', array($this, 'delete_category'), 10, 4);
-        add_action('asgarosforum-category_add_form_fields', array($this, 'add_form_fields'));
-		add_action('asgarosforum-category_edit_form', array($this, 'add_form_fields'));
+
+        add_action('asgarosforum-category_add_form_fields', array($this, 'add_category_form_fields'));
+		add_action('asgarosforum-category_edit_form_fields', array($this, 'edit_category_form_fields'));
+        add_action('create_asgarosforum-category', array($this, 'save_category_form_fields'));
+        add_action('edit_asgarosforum-category', array($this, 'save_category_form_fields'));
+
+
+
 
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_init', array($this, 'save_settings'));
@@ -35,8 +41,16 @@ class asgarosforum_admin {
         return $columns;
     }
 
-    function add_form_fields() {
-        do_action('asgarosforum_action_add_form_fields');
+    function add_category_form_fields() {
+        do_action('asgarosforum_action_add_category_form_fields');
+    }
+
+    function edit_category_form_fields($term) {
+        do_action('asgarosforum_action_edit_category_form_fields', $term);
+    }
+
+    function save_category_form_fields($term_id) {
+        do_action('asgarosforum_action_save_category_form_fields', $term_id);
     }
 
     function remove_slug() {
@@ -53,7 +67,7 @@ class asgarosforum_admin {
         $category_taxonomy = get_taxonomy('asgarosforum-category');
 
         add_menu_page(__("Forum - Options", "asgarosforum"), "Forum", "administrator", 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
-        add_submenu_page("asgarosforum", __("Forum - Options", "asgarosforum"), __("Options", "asgarosforum"), "administrator", 'asgarosforum', array($this, 'options_page'));
+        add_submenu_page("asgarosforum", __('Options', 'asgarosforum'), __('Options', 'asgarosforum'), "administrator", 'asgarosforum', array($this, 'options_page'));
         add_submenu_page('asgarosforum', __('Categories', 'asgarosforum'), __('Categories', 'asgarosforum'), 'administrator', 'edit-tags.php?taxonomy='.$category_taxonomy->name, null);
         add_submenu_page("asgarosforum", __('Forums', 'asgarosforum'), __('Forums', 'asgarosforum'), 'administrator', 'asgarosforum-structure', array($this, 'structure_page'));
     }
@@ -123,63 +137,7 @@ class asgarosforum_admin {
         global $asgarosforum;
         $categories = $asgarosforum->get_categories(true);
 
-        //if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == 'forums') {
-            require('views/structure_forums.php');
-        /*} else {
-            require('views/structure_categories.php');
-        }*/
-    }
-
-    public function save_categories() {
-        global $asgarosforum, $wpdb;
-        $order = 1;
-        $listed_categories = array();
-        $category_ids = array();
-
-        if (isset($_POST['af_category_id']) && !empty($_POST['af_category_id'])) {
-            foreach ($_POST['af_category_id'] as $key => $value) {
-                $id = $_POST['af_category_id'][$key];
-                $name = stripslashes($_POST['category_name'][$key]);
-
-                if (empty($name)) {
-                    if ($id != 'new') {
-                        $listed_categories[] = $id;
-                    }
-
-                    continue;
-                }
-
-                if ($id == 'new') { // Save new category
-                    $wpdb->insert($asgarosforum->table_categories, array('name' => $name, 'sort' => $order), array('%s', '%d'));
-                    $listed_categories[] = $wpdb->insert_id;
-                } else { // Update existing category
-                    $q = "UPDATE {$asgarosforum->table_categories} SET name = %s, sort = %d WHERE id = %d";
-                    $wpdb->query($wpdb->prepare($q, $name, $order, $id));
-                    $listed_categories[] = $id;
-                }
-
-                $order++;
-            }
-        }
-
-        // Delete categories that the user removed from the list
-        $remove_categories = implode(',', $listed_categories);
-
-        if (empty($remove_categories)) {
-            $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories}");
-        } else {
-            $category_ids = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_categories} WHERE id NOT IN ({$remove_categories})");
-        }
-
-        if (!empty($category_ids)) {
-            foreach ($category_ids as $cid) {
-                $this->delete_category($cid);
-            }
-        }
-
-        do_action('asgarosforum_admin_after_save_categories', $listed_categories);
-
-        $this->saved = true;
+        require('views/structure_forums.php');
     }
 
     public function save_forums() {
