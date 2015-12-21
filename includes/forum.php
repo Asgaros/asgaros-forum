@@ -406,16 +406,20 @@ class asgarosforum {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
         }
 
-        $categories_ordered = array();
         $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
 
         foreach ($categories as $category) {
-            $categories_ordered[get_term_meta($category->term_id, 'order', true)] = $category;
+            $order = get_term_meta($category->term_id, 'order', true);
+            $category->order = $order;
         }
 
-        ksort($categories_ordered, SORT_NUMERIC);
+        usort($categories, 'self::categories_compare');
 
-        return $categories_ordered;
+        return $categories;
+    }
+
+    public function categories_compare($a, $b) {
+        return strcmp($a->order, $b->order);
     }
 
     public function get_forums($id = false) {
