@@ -109,8 +109,7 @@ class asgarosforum_admin {
 
     public function enqueue_admin_scripts($hook) {
         global $asgarosforum_directory;
-        $l10n_vars = array('remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Threads, and Replies associated with it!!! Are you sure you want to delete this Category???', 'asgarosforum'),
-            'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'));
+        $l10n_vars = array('remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'));
 
         // Let's only load our shiz on asgarosforum admin pages
         if (strstr($hook, 'asgarosforum') !== false) {
@@ -123,8 +122,6 @@ class asgarosforum_admin {
     public function save_settings() {
         if (isset($_POST['af_options_submit']) && !empty($_POST['af_options_submit'])) {
             $this->save_options();
-        } else if (isset($_POST['af_categories_save']) && !empty($_POST['af_categories_save'])) {
-            $this->save_categories();
         } else if (isset($_POST['af_forums_save']) && !empty($_POST['af_forums_save'])) {
             $this->save_forums();
         } else {

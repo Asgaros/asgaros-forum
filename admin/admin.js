@@ -1,17 +1,5 @@
 (function($) {
     $(document).ready(function() {
-        /******************************** CATEGORIES ********************************/
-        $('a#af_add_new_category').click(function() {
-            $('#hidden-element-container li').clone().appendTo('ol#sortable-categories');
-            return false;
-        });
-        $('body').on('click', '.af_remove_category', function() {
-            var answer = confirm(asgarosforum_admin.remove_category_warning);
-            if(answer) {
-                $(this).parent().remove();
-            }
-            return false;
-        });
         /******************************** SORTABLE FORUMS ********************************/
         $('.sortable_elements').each(function() {
             $(this).sortable({

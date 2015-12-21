@@ -35,7 +35,6 @@ li.ui-state-highlight {
 #hidden-element-container {
     display: none;
 }
-a.af_remove_category,
 a.af_remove_forum {
     float: right;
 }
@@ -43,8 +42,6 @@ input {
     width: 300px;
 }
 .af_add_new_forum,
-.af_remove_category,
-#af_add_new_category,
 .af_remove_forum {
     text-decoration: none;
     font-weight: bold;
