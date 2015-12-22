@@ -128,8 +128,8 @@ class asgarosforum {
     public function prepare() {
         global $user_ID, $wp_rewrite;
 
-        if (isset($_GET['forumaction'])) {
-            $this->current_view = $_GET['forumaction'];
+        if (isset($_GET['view'])) {
+            $this->current_view = $_GET['view'];
         }
 
         if (isset($_GET['part']) && $_GET['part'] > 0) {
@@ -137,18 +137,18 @@ class asgarosforum {
         }
 
         switch ($this->current_view) {
-            case 'viewforum':
+            case 'forum':
             case 'addthread':
-                $forum_id = $_GET['forum'];
+                $forum_id = $_GET['id'];
                 if ($this->element_exists($forum_id, $this->table_forums)) {
                     $this->current_forum = $forum_id;
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
             case 'movethread':
-            case 'viewthread':
+            case 'thread':
             case 'addpost':
-                $thread_id = $_GET['thread'];
+                $thread_id = $_GET['id'];
                 if ($this->element_exists($thread_id, $this->table_threads)) {
                     $this->current_thread = $thread_id;
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
@@ -172,11 +172,11 @@ class asgarosforum {
         }
 
         $this->url_home = get_permalink();
-        $this->url_base = $this->url_home . $this->delim . "forumaction=";
-        $this->url_forum = $this->url_base . "viewforum&amp;forum=";
-        $this->url_thread = $this->url_base . "viewthread&amp;thread=";
-        $this->url_editor_thread = $this->url_base . "addthread&amp;forum={$this->current_forum}";
-        $this->url_editor_post = $this->url_base . "addpost&amp;thread={$this->current_thread}";
+        $this->url_base = $this->url_home . $this->delim . "view=";
+        $this->url_forum = $this->url_base . "forum&amp;id=";
+        $this->url_thread = $this->url_base . "thread&amp;id=";
+        $this->url_editor_thread = $this->url_base . "addthread&amp;id={$this->current_forum}";
+        $this->url_editor_post = $this->url_base . "addpost&amp;id={$this->current_thread}";
 
         $upload_dir = wp_upload_dir();
         $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
@@ -191,7 +191,7 @@ class asgarosforum {
 
         if ((isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) && $user_ID) {
             require('insert.php');
-        } else if (isset($_GET['forumaction']) && $_GET['forumaction'] == "markallread" && $user_ID) {
+        } else if (isset($_GET['view']) && $_GET['view'] == "markallread" && $user_ID) {
             $time = $this->current_time();
             setcookie("wpafcookie", $time, 0, "/");
             update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
@@ -232,12 +232,12 @@ class asgarosforum {
         $title = "";
 
         switch ($this->current_view) {
-            case "viewforum":
+            case "forum":
                 if ($this->current_forum && $this->access) {
                     $title = $this->get_name($this->current_forum, $this->table_forums) . " - ";
                 }
                 break;
-            case "viewthread":
+            case "thread":
                 if ($this->current_thread && $this->access) {
                     $title = $this->get_name($this->current_thread, $this->table_threads) . " - ";
                 }
@@ -277,10 +277,10 @@ class asgarosforum {
             case 'movethread':
                 $this->movethread();
                 break;
-            case 'viewforum':
+            case 'forum':
                 $this->showforum($this->current_forum);
                 break;
-            case 'viewthread':
+            case 'thread':
                 $this->showthread($this->current_thread);
                 break;
             case 'addthread':
@@ -349,7 +349,7 @@ class asgarosforum {
     public function movethread() {
         if ($this->is_moderator() && $this->access) {
             $strOUT = '
-            <form method="post" action="' . $this->url_base . 'movethread&amp;thread=' . $this->current_thread . '&amp;move_thread">
+            <form method="post" action="' . $this->url_base . 'movethread&amp;id=' . $this->current_thread . '&amp;move_thread">
             Move "<strong>' . $this->get_name($this->current_thread, $this->table_threads) . '</strong>" to new forum:<br />
             <select name="newForumID">';
 
@@ -628,7 +628,7 @@ class asgarosforum {
             }
 
             if ($this->is_moderator()) {
-                $menu .= '<td><a href="'.$this->url_base.'movethread&amp;thread='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgarosforum").'</span></a></td>';
+                $menu .= '<td><a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgarosforum").'</span></a></td>';
                 $menu .= '<td><a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgarosforum").'</span></a></td>';
 
                 $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
