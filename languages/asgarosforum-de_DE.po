@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Mon Dec 14 2015 17:23:22 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Wed Dec 16 2015 16:02:16 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Tue Dec 22 2015 03:00:06 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <root@localhost.de>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -23,26 +23,6 @@ msgstr ""
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: de_DE"
 
-#. Author URI of the plugin
-msgid "http://thomasbelser.net"
-msgstr "http://thomasbelser.net"
-
-#: ../includes/views/forum.php:27 ../includes/views/forum.php:48
-msgid "Answers"
-msgstr "Antworten"
-
-#: ../includes/views/forum.php:28 ../includes/views/forum.php:49
-msgid "Views"
-msgstr "Aufrufe"
-
-#: ../includes/views/overview.php:19
-msgid "Threads"
-msgstr "Themen"
-
-#: ../includes/views/overview.php:20
-msgid "Posts"
-msgstr "Beiträge"
-
 #. Name of the plugin
 msgid "Asgaros Forum"
 msgstr "Asgaros Forum"
@@ -59,34 +39,32 @@ msgstr "Ein schlankes und einfaches Foren-PlugIn für WordPress."
 msgid "Thomas Belser"
 msgstr "Thomas Belser"
 
-#: ../admin/admin.php:14 ../admin/admin.php:15
-msgid "Forum - Options"
-msgstr "Forum - Einstellungen"
+#. Author URI of the plugin
+msgid "http://thomasbelser.net"
+msgstr "http://thomasbelser.net"
 
-#: ../admin/admin.php:15 ../admin/views/options.php:2
+#: ../admin/admin.php:36 ../admin/admin.php:55 ../admin/admin.php:64
+msgid "Order"
+msgstr "Reihenfolge"
+
+#: ../admin/admin.php:97 ../admin/admin.php:97 ../includes/forum.php:661
+msgid "Forum"
+msgstr "Forum"
+
+#: ../admin/admin.php:98 ../admin/admin.php:98 ../admin/views/options.php:2
 msgid "Options"
 msgstr "Einstellungen"
 
-#: ../admin/admin.php:16
-msgid "Structure - Categories & Forums"
-msgstr "Struktur - Kategorien & Foren"
+#: ../admin/admin.php:99 ../admin/admin.php:99 ../includes/forum.php:60
+msgid "Categories"
+msgstr "Kategorien"
 
-#: ../admin/admin.php:16 ../admin/views/structure_categories.php:2 ..
-#: admin/views/structure_forums.php:2
-msgid "Structure"
-msgstr "Struktur"
+#: ../admin/admin.php:100 ../admin/admin.php:100 ../admin/views/structure_forums.
+#: php:2
+msgid "Forums"
+msgstr "Foren"
 
-#: ../admin/admin.php:21
-msgid ""
-"WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, "
-"Threads, and Replies associated with it!!! Are you sure you want to delete "
-"this Category???"
-msgstr ""
-"ACHTUNG: Wenn du diese Kategorie löschst, werden ALLE Foren, Themen und "
-"Beiträgen innerhalb dieser Kategorie DAUERHAFT GELÖSCHT!!! Bist du dir "
-"sicher, dass du diese Kategorie löschen willst???"
-
-#: ../admin/admin.php:22
+#: ../admin/admin.php:105
 msgid ""
 "WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and "
 "Replies associated with it!!! Are you sure you want to delete this Forum???"
@@ -115,199 +93,180 @@ msgstr "Datei-Upload erlauben"
 msgid "Save Options"
 msgstr "Einstellungen speichern"
 
-#: ../admin/views/structure_categories.php:5
-msgid "Your Categories have been saved."
-msgstr "Deine Kategorien wurden gespeichert."
-
-#: ../admin/views/structure_categories.php:8
-msgid ""
-"Categories can be thought of as empty boxes. Great for organizing stuff, but "
-"no good without something in them. Use categories to organize your various "
-"Forums."
-msgstr ""
-"Kategorien kann man sich wie leere Kisten vorstellen. Sie sind gut, um Dinge "
-"zu organisieren, allerdings nutzlos ohne Inhalt. Benutze Kategorien, um "
-"deine unterschiedlichen Foren zu orgranisieren."
-
-#: ../admin/views/structure_categories.php:10 ../admin/views/structure_forums.php:9
-msgid "Categories"
-msgstr "Kategorien"
-
-#: ../admin/views/structure_categories.php:11 ../admin/views/structure_forums.php:
-#: 10
-msgid "Forums"
-msgstr "Foren"
-
-#: ../admin/views/structure_categories.php:21 ../admin/views/structure_categories.
-#: php:29 ../admin/views/structure_categories.php:42
-msgid "Category Name:"
-msgstr "Kategorie-Name:"
-
-#: ../admin/views/structure_categories.php:22 ../admin/views/structure_categories.
-#: php:30 ../admin/views/structure_categories.php:43
-msgid "Remove this Category"
-msgstr "Entferne diese Kategorie"
-
-#: ../admin/views/structure_categories.php:34 ../admin/views/structure_categories.
-#: php:34
-msgid "Add new Category"
-msgstr "Neue Kategorie hinzufügen"
-
-#: ../admin/views/structure_categories.php:36 ../admin/views/structure_forums.php:
-#: 40
-msgid "Save Changes"
-msgstr "Änderungen speichern"
-
 #: ../admin/views/structure_forums.php:5
 msgid "Your Forums have been saved."
 msgstr "Deine Foren wurden gespeichert."
 
-#: ../admin/views/structure_forums.php:23 ../admin/views/structure_forums.php:31 .
-#: ./admin/views/structure_forums.php:49
+#: ../admin/views/structure_forums.php:19 ../admin/views/structure_forums.php:27 .
+#: ./admin/views/structure_forums.php:45
 msgid "Forum Name:"
 msgstr "Forum-Name:"
 
-#: ../admin/views/structure_forums.php:24 ../admin/views/structure_forums.php:32 .
-#: ./admin/views/structure_forums.php:50
+#: ../admin/views/structure_forums.php:20 ../admin/views/structure_forums.php:28 .
+#: ./admin/views/structure_forums.php:46
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: ../admin/views/structure_forums.php:25 ../admin/views/structure_forums.php:33 .
-#: ./admin/views/structure_forums.php:51
+#: ../admin/views/structure_forums.php:21 ../admin/views/structure_forums.php:29 .
+#: ./admin/views/structure_forums.php:47
 msgid "Remove this Forum"
 msgstr "Entferne dieses Forum"
 
-#: ../admin/views/structure_forums.php:37 ../admin/views/structure_forums.php:37
+#: ../admin/views/structure_forums.php:33 ../admin/views/structure_forums.php:33
 msgid "Add new Forum"
 msgstr "Neues Forum hinzufügen"
 
-#: ../admin/views/structure_forums.php:42
+#: ../admin/views/structure_forums.php:36
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: ../admin/views/structure_forums.php:38
 msgid "You must add some categories first."
 msgstr "Du musst zuerst Kategorien erstellen."
 
-#: ../includes/forum.php:230 ../includes/forum.php:648 ../includes/views/editor.
+#: ../includes/forum.php:61
+msgid "Category"
+msgstr "Kategorie"
+
+#: ../includes/forum.php:62
+msgid "Edit Category"
+msgstr "Kategorie bearbeiten"
+
+#: ../includes/forum.php:63
+msgid "Update Category"
+msgstr "Kategorie aktualisieren"
+
+#: ../includes/forum.php:64
+msgid "Add new category"
+msgstr "Neue Kategorie hinzufügen"
+
+#: ../includes/forum.php:65
+msgid "Search categories"
+msgstr "Kategorien suchen"
+
+#: ../includes/forum.php:66
+msgid "No categories found."
+msgstr "Keine Kategorien gefunden."
+
+#: ../includes/forum.php:247 ../includes/forum.php:676 ../includes/views/editor.
 #: php:72
 msgid "Edit Post"
 msgstr "Post bearbeiten"
 
-#: ../includes/forum.php:235 ../includes/forum.php:646
+#: ../includes/forum.php:252 ../includes/forum.php:674
 msgid "Post Reply"
 msgstr "Antworten"
 
-#: ../includes/forum.php:240 ../includes/forum.php:587 ../includes/forum.php:650
+#: ../includes/forum.php:257 ../includes/forum.php:615 ../includes/forum.php:678
 msgid "New Thread"
 msgstr "Neues Thema"
 
-#: ../includes/forum.php:245 ../includes/forum.php:603
+#: ../includes/forum.php:262 ../includes/forum.php:631
 msgid "Move Thread"
 msgstr "Thema verschieben"
 
-#: ../includes/forum.php:292
+#: ../includes/forum.php:309
 msgid "There are no categories yet!"
 msgstr "Es existieren noch keine Kategorien!"
 
-#: ../includes/forum.php:305
+#: ../includes/forum.php:322
 msgid "Sorry, but this forum does not exist."
 msgstr "Entschuldigung, aber dieses Forum existiert nicht."
 
-#: ../includes/forum.php:320
+#: ../includes/forum.php:337
 msgid "Thread closed"
 msgstr "Thema geschlossen"
 
-#: ../includes/forum.php:325
+#: ../includes/forum.php:342
 msgid "Sorry, but there are no posts."
 msgstr "Entschuldigung, aber es existieren noch keine Beiträge."
 
-#: ../includes/forum.php:328
+#: ../includes/forum.php:345
 msgid "Sorry, but this thread does not exist."
 msgstr "Entschuldigung, aber dieses Thema existiert nicht."
 
-#: ../includes/forum.php:349
+#: ../includes/forum.php:366
 msgid "You are not allowed to move threads."
 msgstr "Du bist nicht dazu berechtigt Themen zu verschieben."
 
-#: ../includes/forum.php:473 ../includes/forum.php:490
+#: ../includes/forum.php:501 ../includes/forum.php:518
 msgid "Last post by"
 msgstr "Letzter Beitrag von"
 
-#: ../includes/forum.php:473 ../includes/forum.php:492 ../includes/views/editor.
+#: ../includes/forum.php:501 ../includes/forum.php:520 ../includes/views/editor.
 #: php:35
 msgid "on"
 msgstr "am"
 
-#: ../includes/forum.php:473 ../includes/forum.php:492
+#: ../includes/forum.php:501 ../includes/forum.php:520
 msgid "Uhr"
 msgstr "Uhr"
 
-#: ../includes/forum.php:485
+#: ../includes/forum.php:513
 msgid "No threads yet!"
 msgstr "Keine Threads vorhanden!"
 
-#: ../includes/forum.php:491
+#: ../includes/forum.php:519
 msgid "in"
 msgstr "in"
 
-#: ../includes/forum.php:528
+#: ../includes/forum.php:556
 msgid "Quote"
 msgstr "Zitat"
 
-#: ../includes/forum.php:532
+#: ../includes/forum.php:560
 msgid "Remove"
 msgstr "Entfernen"
 
-#: ../includes/forum.php:536
+#: ../includes/forum.php:564
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ../includes/forum.php:539
+#: ../includes/forum.php:567
 msgid "Permalink"
 msgstr "Direktlink"
 
-#: ../includes/forum.php:599
+#: ../includes/forum.php:627
 msgid "Reply"
 msgstr "Antworten"
 
-#: ../includes/forum.php:604
+#: ../includes/forum.php:632
 msgid "Delete Thread"
 msgstr "Thema löschen"
 
-#: ../includes/forum.php:608
+#: ../includes/forum.php:636
 msgid "Undo Sticky"
 msgstr "Abpinnen"
 
-#: ../includes/forum.php:610
+#: ../includes/forum.php:638
 msgid "Sticky"
 msgstr "Anpinnen"
 
-#: ../includes/forum.php:615
+#: ../includes/forum.php:643
 msgid "Re-open"
 msgstr "Öffnen"
 
-#: ../includes/forum.php:617
+#: ../includes/forum.php:645
 msgid "Close"
 msgstr "Schließen"
 
-#: ../includes/forum.php:633
-msgid "Forum"
-msgstr "Forum"
-
-#: ../includes/forum.php:668
+#: ../includes/forum.php:696
 msgid "Pages:"
 msgstr "Seiten:"
 
-#: ../includes/forum.php:695
+#: ../includes/forum.php:723
 msgid "First"
 msgstr "Erste"
 
-#: ../includes/forum.php:713
+#: ../includes/forum.php:741
 msgid "Last"
 msgstr "Letzte"
 
-#: ../includes/forum.php:885 ../includes/forum.php:908
+#: ../includes/forum.php:913 ../includes/forum.php:936
 msgid "Uploaded files:"
 msgstr "Hochgeladene Dateien:"
 
-#: ../includes/forum.php:913
+#: ../includes/forum.php:941
 msgid "Delete"
 msgstr "Löschen"
 
@@ -403,9 +362,25 @@ msgstr "Angepinnte Themen"
 msgid "Created by:"
 msgstr "Erstellt von:"
 
+#: ../includes/views/forum.php:27 ../includes/views/forum.php:48
+msgid "Answers"
+msgstr "Antworten"
+
+#: ../includes/views/forum.php:28 ../includes/views/forum.php:49
+msgid "Views"
+msgstr "Aufrufe"
+
 #: ../includes/views/forum.php:66
 msgid "There are no threads yet!"
 msgstr "Es existieren noch keine Themen!"
+
+#: ../includes/views/overview.php:19
+msgid "Threads"
+msgstr "Themen"
+
+#: ../includes/views/overview.php:20
+msgid "Posts"
+msgstr "Beiträge"
 
 #: ../includes/views/overview.php:27
 msgid "There are no forums yet!"

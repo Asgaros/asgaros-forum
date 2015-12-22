@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2>Forum - <?php _e('Structure', 'asgarosforum'); ?></h2>
+    <h2><?php _e('Forums', 'asgarosforum'); ?></h2>
     <?php if ($this->saved): ?>
         <div class="updated">
             <p><?php _e('Your Forums have been saved.', 'asgarosforum'); ?></p>
