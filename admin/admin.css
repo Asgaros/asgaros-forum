@@ -1,33 +1,29 @@
-/* SHARED */
+/* FORUMS */
 .af_fset {
     border: 1px solid #999;
     margin-top: 25px;
-    padding: 10px;
+    padding: 8px;
 }
 legend {
     font-weight: bold;
-    padding: 5px;
+    padding: 4px;
     border: 1px solid #999;
-}
-.af_fset a.button {
-    color: #666 !important;
 }
 .af_ordered_list {
     margin: 0 0 10px;
 }
 li.ui-state-default {
     list-style-type: none;
-    padding: 10px;
-    background: #bbb;
-    border: 1px solid #aaa;
-    min-height: 30px;
+    padding: 8px;
+    background: #ccc;
+    border: 1px solid #bbb;
 }
 li.ui-state-highlight {
     list-style-type: none;
-    padding: 10px;
-    min-height: 30px;
+    padding: 8px;
     background: #a5c5e2;
-    border: 1px solid #aaa;
+    border: 1px solid #bbb;
+    min-height: 29px;
 }
 .af_admin_submit {
     margin-top: 25px !important;
@@ -44,14 +40,13 @@ input {
 .af_add_new_forum,
 .af_remove_forum {
     text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 }
-/* MAIN OPTIONS PAGE */
+/* OPTIONS PAGE */
 #af_options_form input {
     vertical-align: middle;
 }
 .af_tb_label {
     display: inline-block;
-    width: 350px;
+    width: 250px;
 }

@@ -16,7 +16,7 @@
                             <?php foreach ($forums as $forum): ?>
                                 <li class="ui-state-default">
                                     <input type="hidden" name="af_forum_id[<?php echo $category->term_id; ?>][]" value="<?php echo $forum->id; ?>" />
-                                    <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
+                                    <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
                                     <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" /></label>
                                     <a href="#" class="af_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
                                 </li>
@@ -24,7 +24,7 @@
                         <?php else: ?>
                             <li class="ui-state-default">
                                 <input type="hidden" name="af_forum_id[<?php echo $category->term_id; ?>][]" value="new" />
-                                <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="" /></label>&nbsp;&nbsp;
+                                <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="" /></label>&nbsp;&nbsp;
                                 <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $category->term_id; ?>][]" value="" /></label>
                                 <a href="#" class="af_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
                             </li>
@@ -42,7 +42,7 @@
 <div id="hidden-element-container">
     <li class="ui-state-default">
         <input type="hidden" name="af_forum_id[][]" value="new" />
-        <label><?php _e('Forum Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
+        <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" /></label>
         <a href="#" class="af_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
     </li>

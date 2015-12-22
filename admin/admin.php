@@ -162,7 +162,7 @@ class asgarosforum_admin {
         global $asgarosforum;
         $categories = $asgarosforum->get_categories(true);
 
-        require('views/structure_forums.php');
+        require('views/forums.php');
     }
 
     public function save_forums() {
