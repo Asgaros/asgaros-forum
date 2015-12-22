@@ -1,11 +1,6 @@
 (function($) {
     $(document).ready(function() {
-        /******************************** SORTABLE FORUMS ********************************/
-        $('.sortable_elements').each(function() {
-            $(this).sortable({
-                placeholder: "ui-state-highlight"
-            });
-        });
+        /******************************** FORUMS ********************************/
         $('.af_add_new_forum').click(function() {
             var category_id = $(this).attr('data-value');
             $('#hidden-element-container input:eq(0)').attr("name", "af_forum_id[" + category_id + "][]");
@@ -20,6 +15,14 @@
                 $(this).parent().remove();
             }
             return false;
+        });
+        $('.af-sort-up').click(function() {
+            $before = $(this).parent().parent().prev();
+            $(this).parent().parent().insertBefore($before);
+        });
+        $('.af-sort-down').click(function() {
+            $after = $(this).parent().parent().next();
+            $(this).parent().parent().insertAfter($after);
         });
     });
 })(jQuery);

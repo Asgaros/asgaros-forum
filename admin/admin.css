@@ -18,13 +18,6 @@ li.ui-state-default {
     background: #ccc;
     border: 1px solid #bbb;
 }
-li.ui-state-highlight {
-    list-style-type: none;
-    padding: 8px;
-    background: #a5c5e2;
-    border: 1px solid #bbb;
-    min-height: 29px;
-}
 .af_admin_submit {
     margin-top: 25px !important;
 }
@@ -38,9 +31,12 @@ input {
     width: 300px;
 }
 .af_add_new_forum,
-.af_remove_forum {
+.af_remove_forum,
+.af-sort-up,
+.af-sort-down {
     text-decoration: none;
     font-size: 14px;
+    display: inline-block;
 }
 /* OPTIONS PAGE */
 #af_options_form input {

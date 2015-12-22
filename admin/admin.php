@@ -106,8 +106,8 @@ class asgarosforum_admin {
 
         // Let's only load our shiz on asgarosforum admin pages
         if (strstr($hook, 'asgarosforum') !== false) {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum_directory . "admin/admin.css");
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum_directory . "admin/admin.js", array('jquery-ui-sortable'));
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum_directory.'admin/admin.css');
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum_directory.'admin/admin.js');
             wp_localize_script('asgarosforum-admin-js', 'asgarosforum_admin', $l10n_vars);
         }
     }

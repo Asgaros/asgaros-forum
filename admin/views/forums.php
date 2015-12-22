@@ -11,13 +11,17 @@
                 <?php $forums = $asgarosforum->get_forums($category->term_id); ?>
                 <fieldset class="af_fset">
                     <legend><?php echo stripslashes($category->name); ?></legend>
-                    <ol class="sortable_elements af_ordered_list" id="sortable-forums-<?php echo $category->term_id; ?>">
+                    <ol class="af_ordered_list" id="sortable-forums-<?php echo $category->term_id; ?>">
                         <?php if (!empty($forums)): ?>
                             <?php foreach ($forums as $forum): ?>
                                 <li class="ui-state-default">
                                     <input type="hidden" name="af_forum_id[<?php echo $category->term_id; ?>][]" value="<?php echo $forum->id; ?>" />
                                     <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>&nbsp;&nbsp;
                                     <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" /></label>
+                                    <label>
+                                        <a href="#" class="af-sort-up dashicons-before dashicons-arrow-up"></a>
+                                        <a href="#" class="af-sort-down dashicons-before dashicons-arrow-down"></a>
+                                    </label>
                                     <a href="#" class="af_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
                                 </li>
                             <?php endforeach; ?>
@@ -26,6 +30,10 @@
                                 <input type="hidden" name="af_forum_id[<?php echo $category->term_id; ?>][]" value="new" />
                                 <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="" /></label>&nbsp;&nbsp;
                                 <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[<?php echo $category->term_id; ?>][]" value="" /></label>
+                                <label>
+                                    <a href="#" class="af-sort-up dashicons-before dashicons-arrow-up"></a>
+                                    <a href="#" class="af-sort-down dashicons-before dashicons-arrow-down"></a>
+                                </label>
                                 <a href="#" class="af_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
                             </li>
                         <?php endif; ?>
@@ -44,6 +52,10 @@
         <input type="hidden" name="af_forum_id[][]" value="new" />
         <label><?php _e('Name:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_name[][]" value="" /></label>&nbsp;&nbsp;
         <label><?php _e('Description:', 'asgarosforum'); ?>&nbsp;<input type="text" name="forum_description[][]" value="" /></label>
+        <label>
+            <a href="#" class="af-sort-up dashicons-before dashicons-arrow-up"></a>
+            <a href="#" class="af-sort-down dashicons-before dashicons-arrow-down"></a>
+        </label>
         <a href="#" class="af_remove_forum dashicons-before dashicons-trash" title="<?php _e('Remove this Forum', 'asgarosforum'); ?>"></a>
     </li>
 </div>
