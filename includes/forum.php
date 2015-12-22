@@ -399,7 +399,6 @@ class asgarosforum {
     }
 
     public function get_categories($disable_hooks = false) {
-        global $wpdb;
         $filter = array();
 
         if (!$disable_hooks) {
@@ -409,8 +408,7 @@ class asgarosforum {
         $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
 
         foreach ($categories as $category) {
-            $order = get_term_meta($category->term_id, 'order', true);
-            $category->order = $order;
+            $category->order = get_term_meta($category->term_id, 'order', true);
         }
 
         usort($categories, 'self::categories_compare');
