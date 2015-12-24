@@ -558,7 +558,7 @@ class asgarosforum {
         }
 
         if (($counter > 1 || $this->current_page >= 1) && $this->is_moderator()) {
-            $o .= '<td><span class="icon-bin"></span><a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;id='.$post_id.'">'.__("Remove", "asgarosforum").'</a></td>';
+            $o .= '<td><span class="icon-bin"></span><a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'">'.__("Remove", "asgarosforum").'</a></td>';
         }
 
         if (($this->is_moderator()) || $user_ID == $author_id) {
@@ -778,7 +778,7 @@ class asgarosforum {
 
     public function remove_post() {
         global $wpdb;
-        $post_id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
+        $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? $_GET['post'] : 0;
 
         if ($this->is_moderator() && $this->element_exists($post_id, $this->table_posts)) {
             $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d;", $post_id));
