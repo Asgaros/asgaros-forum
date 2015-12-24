@@ -250,6 +250,11 @@ class asgarosforum_admin {
     public function delete_thread($tid) {
         global $wpdb, $asgarosforum;
 
+        // Set upload paths in admin area.
+        $upload_dir = wp_upload_dir();
+        $asgarosforum->upload_path = $upload_dir['basedir'].'/asgarosforum/';
+        $asgarosforum->upload_url = $upload_dir['baseurl'].'/asgarosforum/';
+
         // Delete uploads
         $posts = $wpdb->get_results($wpdb->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $tid));
         foreach ($posts as $post) {
