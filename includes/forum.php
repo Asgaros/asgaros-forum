@@ -1,6 +1,6 @@
 <?php
 class asgarosforum {
-    var $db_version = 1;
+    var $db_version = 6;
     var $delim = "";
     var $date_format = "";
     var $access = true;
@@ -112,6 +112,7 @@ class asgarosforum {
             parent_id int(11) NOT NULL default '0',
             date datetime NOT NULL default '0000-00-00 00:00:00',
             author_id int(11) NOT NULL default '0',
+            uploads longtext,
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
@@ -448,7 +449,7 @@ class asgarosforum {
         $start = $this->current_page * $this->options['forum_posts_per_page'];
         $end = $this->options['forum_posts_per_page'];
 
-        return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
+        return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, author_id, uploads FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
     }
 
     public function is_first_post($post_id) {
@@ -866,10 +867,17 @@ class asgarosforum {
 
     public function attach_files($post_id) {
         $files = array();
+        $links = array();
         $path = $this->upload_path.$post_id.'/';
-        $url = $this->upload_url.$post_id.'/';
-        $list = '';
-        $links = '';
+
+        // Register existing files
+        if (isset($_POST['existingfile']) && !empty($_POST['existingfile'])) {
+            foreach ($_POST['existingfile'] as $file) {
+                if (is_dir($path) && file_exists($path.basename($file))) {
+                    $links[] = $file;
+                }
+            }
+        }
 
         // Remove deleted files
         if (isset($_POST['deletefile']) && !empty($_POST['deletefile'])) {
@@ -905,15 +913,8 @@ class asgarosforum {
 
                 if (!empty($name)) {
                     move_uploaded_file($temp, $path.$name);
-                    $links .= '<li><a href="'.$url.$name.'" target="_blank">'.$name.'</a></li>';
+                    $links[] = $name;
                 }
-            }
-
-            if (!empty($links)) {
-                $list .= '<p><strong>'.__("Uploaded files:", "asgarosforum").'</strong></p>';
-                $list .= '<ul>';
-                $list .= $links;
-                $list .= '</ul>';
             }
         }
 
@@ -922,28 +923,48 @@ class asgarosforum {
             rmdir($path);
         }
 
-        return $list;
+        return $links;
     }
 
-    public function file_list($post_id) {
+    public function file_list($post_id, $uploads, $frontend = false) {
         $path = $this->upload_path.$post_id.'/';
         $url = $this->upload_url.$post_id.'/';
+        $uploads = maybe_unserialize($uploads);
+        $upload_list = '';
+        $upload_list_elements = '';
 
-        if (is_dir($path) && count(glob($path.'*')) != 0) {
-            $files = array_diff(scandir($path), array('..', '.'));
-
-            echo '<tr>';
-            echo '<td>'.__("Uploaded files:", "asgarosforum").'</td>';
-            echo '<td>';
-            echo '<div class="files-to-delete"></div>';
-            foreach ($files as $file) {
-                echo '<div class="uploaded-file">';
-                echo '<a href="'.$url.$file.'" target="_blank">'.$file.'</a> &middot; <a filename="'.$file.'" class="delete">['.__("Delete", "asgarosforum").']</a>';
-                echo '</div>';
+        if (!empty($uploads) && is_dir($path)) {
+            foreach ($uploads as $upload) {
+                if (file_exists($path.basename($upload))) {
+                    if ($frontend) {
+                        $upload_list_elements .= '<li><a href="'.$url.$upload.'" target="_blank">'.$upload.'</a></li>';
+                    } else {
+                        $upload_list_elements .= '<div class="uploaded-file">';
+                        $upload_list_elements .= '<a href="'.$url.$upload.'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgarosforum').']</a>';
+                        $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'" />';
+                        $upload_list_elements .= '</div>';
+                    }
+                }
             }
-            echo '</td>';
-            echo '</tr>';
+
+            if (!empty($upload_list_elements)) {
+                if ($frontend) {
+                    $upload_list .= '<p><strong>'.__('Uploaded files:', 'asgarosforum').'</strong><br /><ul>';
+                    $upload_list .= $upload_list_elements;
+                    $upload_list .= '</ul></p>';
+                } else {
+                    $upload_list .= '<tr>';
+                    $upload_list .= '<td>'.__('Uploaded files:', 'asgarosforum').'</td>';
+                    $upload_list .= '<td>';
+                    $upload_list .= '<div class="files-to-delete"></div>';
+                    $upload_list .= $upload_list_elements;
+                    $upload_list .= '</td>';
+                    $upload_list .= '</tr>';
+                }
+            }
         }
+
+        echo $upload_list;
     }
 }
 ?>

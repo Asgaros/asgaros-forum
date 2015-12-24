@@ -18,11 +18,11 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
         $thread_id = $wpdb->insert_id;
         $date = $this->current_time();
 
-        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (parent_id, date, author_id) VALUES (%d, %s, %d);", $thread_id, $date, $user_ID));
+        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $thread_id, $date, $user_ID));
         $post_id = $wpdb->insert_id;
-        $content .= $this->attach_files($post_id);
 
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
+        $uploads = maybe_serialize($this->attach_files($post_id));
+        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
     }
 
     if (!$error) {
@@ -43,11 +43,11 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
     } else {
         $date = $this->current_time();
 
-        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (parent_id, date, author_id) VALUES (%d, %s, %d);", $this->current_thread, $date, $user_ID));
+        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $this->current_thread, $date, $user_ID));
         $post_id = $wpdb->insert_id;
-        $content .= $this->attach_files($post_id);
 
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
+        $uploads = maybe_serialize($this->attach_files($post_id));
+        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
     }
 
     if (!$error) {
@@ -72,8 +72,8 @@ if (isset($_POST['add_thread_submit'])) { // Adding a new thread
             $msg .= '<div id="error"><p>'.__("You do not have permission to edit this post!", "asgarosforum").'</p></div>';
             $error = true;
         } else {
-            $content .= $this->attach_files($post_id);
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s WHERE id = %d;", $content, $post_id));
+            $uploads = maybe_serialize($this->attach_files($post_id));
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s WHERE id = %d;", $content, $uploads, $post_id));
 
             if (isset($_POST['subject']) && !empty($_POST['subject'])) {
                 $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));

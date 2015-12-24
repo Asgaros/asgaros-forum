@@ -25,6 +25,7 @@
                 </td>
                 <td>
                     <?php echo stripslashes(make_clickable(wpautop($this->autoembed($post->text)))); ?>
+                    <?php $this->file_list($post->id, $post->uploads, true); ?>
                 </td>
             </tr>
         </table>

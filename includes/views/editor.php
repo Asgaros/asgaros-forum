@@ -43,7 +43,7 @@ if (!$error) {
 
         if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
-            $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id FROM {$this->table_posts} WHERE id = %d;", $id));
+            $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));
 
             if ($user_ID != $post->author_id && !$this->is_moderator()) {
                 $error = true;
@@ -95,7 +95,7 @@ if (!$error) { ?>
                 </tr>
 
                 <?php if ($_GET['view'] == "editpost") { ?>
-                    <?php $this->file_list($post->id); ?>
+                    <?php $this->file_list($post->id, $post->uploads); ?>
                 <?php } ?>
 
 
