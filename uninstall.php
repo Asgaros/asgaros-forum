@@ -27,4 +27,25 @@ foreach ($terms as $term) {
 $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_forums;");
 $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_threads;");
 $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_posts;");
+
+// Delete uploaded files
+function recursiveDelete($str) {
+    if (is_file($str)) {
+        return @unlink($str);
+    } else if (is_dir($str)) {
+        $scan = glob(rtrim($str, '/').'/*');
+
+        foreach($scan as $index => $path) {
+            recursiveDelete($path);
+        }
+
+        return @rmdir($str);
+    }
+}
+
+$upload_dir = wp_upload_dir();
+$upload_path = $upload_dir['basedir'].'/asgarosforum/';
+
+recursiveDelete($upload_path);
+
 ?>
