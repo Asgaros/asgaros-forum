@@ -16,11 +16,11 @@
             }
             return false;
         });
-        $('.af-sort-up').click(function() {
+        $('body').on('click', '.af-sort-up', function() {
             $before = $(this).parent().parent().prev();
             $(this).parent().parent().insertBefore($before);
         });
-        $('.af-sort-down').click(function() {
+        $('body').on('click', '.af-sort-down', function() {
             $after = $(this).parent().parent().next();
             $(this).parent().parent().insertAfter($after);
         });
