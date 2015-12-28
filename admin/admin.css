@@ -41,3 +41,8 @@
 #af-forums input[type="text"] {
     width: 300px;
 }
+.term-name-wrap p,
+.term-slug-wrap,
+.term-description-wrap {
+    display: none;
+}

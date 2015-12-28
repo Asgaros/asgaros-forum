@@ -28,7 +28,7 @@
                 </div>
                 <a href="#" class="af-add-new-forum dashicons-before dashicons-plus" title="<?php _e('Add new Forum', 'asgarosforum'); ?>" data-value="<?php echo $category->term_id; ?>"><?php _e('Add new Forum', 'asgarosforum'); ?></a><br />
             <?php } ?>
-            <input type="submit" name="af_forums_save" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="button button-primary" />
+            <input type="submit" name="af_forums_submit" value="<?php _e('Save Changes', 'asgarosforum'); ?>" class="button button-primary" />
         <?php } else { ?>
             <p><?php _e('You must add some categories first.', 'asgarosforum'); ?></p>
         <?php } ?>

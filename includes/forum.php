@@ -41,6 +41,10 @@ class asgarosforum {
         $this->table_threads = $wpdb->prefix . 'forum_threads';
         $this->table_posts = $wpdb->prefix . 'forum_posts';
 
+        $upload_dir = wp_upload_dir();
+        $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
+        $this->upload_url = $upload_dir['baseurl'].'/asgarosforum/';
+
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
         add_action('init', array($this, 'register_category_taxonomy'));
@@ -179,10 +183,6 @@ class asgarosforum {
         $this->url_editor_thread = $this->url_base . "addthread&amp;id={$this->current_forum}";
         $this->url_editor_post = $this->url_base . "addpost&amp;id={$this->current_thread}";
 
-        $upload_dir = wp_upload_dir();
-        $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
-        $this->upload_url = $upload_dir['baseurl'].'/asgarosforum/';
-
         // Set cookie
         if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
             $last = get_user_meta($user_ID, 'asgarosforum_lastvisit', true);
@@ -201,7 +201,7 @@ class asgarosforum {
         } else if (isset($_GET['move_thread'])) {
             $this->move_thread();
         } else if (isset($_GET['delete_thread'])) {
-            $this->remove_thread();
+            $this->delete_thread($this->current_thread);
         } else if (isset($_GET['remove_post'])) {
             $this->remove_post();
         } else if (isset($_GET['sticky'])) {
@@ -746,21 +746,24 @@ class asgarosforum {
         return $out;
     }
 
-    public function remove_thread() {
+    public function delete_thread($thread_id, $admin_action = false) {
         global $wpdb;
 
         if ($this->is_moderator()) {
-            if ($this->current_thread) {
+            if ($thread_id) {
                 // Delete uploads
-                $posts = $wpdb->get_results($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $this->current_thread));
+                $posts = $wpdb->get_results($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
                 foreach ($posts as $post) {
                     $this->remove_post_files($post->id);
                 }
 
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d;", $this->current_thread));
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
-                wp_redirect(html_entity_decode($this->url_forum . $this->current_forum));
-                exit;
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d;", $thread_id));
+
+                if (!$admin_action) {
+                    wp_redirect(html_entity_decode($this->url_forum . $this->current_forum));
+                    exit;
+                }
             }
         }
     }

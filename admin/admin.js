@@ -1,6 +1,5 @@
 (function($) {
     $(document).ready(function() {
-        /******************************** FORUMS ********************************/
         $('.af-add-new-forum').click(function() {
             var category_id = $(this).attr('data-value');
             $('#new-element input:eq(0)').attr('name', 'forum_id[' + category_id + '][]');
@@ -24,5 +23,6 @@
             $after = $(this).parent().parent().next();
             $(this).parent().parent().insertAfter($after);
         });
+        $('.inline-edit-col input[name=slug]').parents('label').hide();
     });
 })(jQuery);
