@@ -99,7 +99,7 @@ if (!$error) { ?>
                 <?php } ?>
 
 
-                <?php if ($this->options['forum_allow_file_uploads']) { ?>
+                <?php if ($this->options['allow_file_uploads']) { ?>
         		<tr>
         			<td><?php _e("Upload Files:", "asgarosforum"); ?></td>
         			<td>

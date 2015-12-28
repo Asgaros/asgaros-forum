@@ -1,6 +1,6 @@
 <?php
 class asgarosforum {
-    var $db_version = 6;
+    var $db_version = 1;
     var $delim = "";
     var $date_format = "";
     var $access = true;
@@ -22,9 +22,9 @@ class asgarosforum {
     var $current_page = 0;
     var $options = array();
     var $options_default = array(
-        'forum_posts_per_page' => 10,
-        'forum_threads_per_page' => 20,
-        'forum_allow_file_uploads' => false
+        'posts_per_page' => 10,
+        'threads_per_page' => 20,
+        'allow_file_uploads' => false
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -393,7 +393,7 @@ class asgarosforum {
 
         if (!$page) {
             $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
-            $page = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']);
+            $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
         }
 
         return $this->get_link($thread_id, $this->url_thread, $page) . '#postid-' . $post_id;
@@ -436,8 +436,8 @@ class asgarosforum {
         $limit = "";
 
         if ($type == 'normal') {
-            $start = $this->current_page * $this->options['forum_threads_per_page'];
-            $end = $this->options['forum_threads_per_page'];
+            $start = $this->current_page * $this->options['threads_per_page'];
+            $end = $this->options['threads_per_page'];
             $limit = $wpdb->prepare("LIMIT %d, %d", $start, $end);
         }
 
@@ -446,8 +446,8 @@ class asgarosforum {
 
     public function get_posts() {
         global $wpdb;
-        $start = $this->current_page * $this->options['forum_posts_per_page'];
-        $end = $this->options['forum_posts_per_page'];
+        $start = $this->current_page * $this->options['posts_per_page'];
+        $end = $this->options['posts_per_page'];
 
         return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, author_id, uploads FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
     }
@@ -701,12 +701,12 @@ class asgarosforum {
 
         if ($location == $this->table_posts) {
             $count = $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d;", $this->current_thread));
-            $num_pages = ceil($count / $this->options['forum_posts_per_page']);
+            $num_pages = ceil($count / $this->options['posts_per_page']);
             $select_source = $this->current_thread;
             $select_url = $this->url_thread;
         } else if ($location == $this->table_threads) {
             $count = $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->current_forum, "normal%"));
-            $num_pages = ceil($count / $this->options['forum_threads_per_page']);
+            $num_pages = ceil($count / $this->options['threads_per_page']);
             $select_source = $this->current_forum;
             $select_url = $this->url_forum;
         }

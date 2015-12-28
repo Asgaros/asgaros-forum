@@ -173,9 +173,9 @@ class asgarosforum_admin {
         $categories = $asgarosforum->get_categories(true);
 
         foreach ($categories as $category) {
-            if (isset($_POST['af_forum_id'][$category->term_id]) && !empty($_POST['af_forum_id'][$category->term_id])) {
-                foreach ($_POST['af_forum_id'][$category->term_id] as $key => $value) {
-                    $id = $_POST['af_forum_id'][$category->term_id][$key];
+            if (isset($_POST['forum_id'][$category->term_id]) && !empty($_POST['forum_id'][$category->term_id])) {
+                foreach ($_POST['forum_id'][$category->term_id] as $key => $value) {
+                    $id = $_POST['forum_id'][$category->term_id][$key];
                     $name = trim(stripslashes($_POST['forum_name'][$category->term_id][$key]));
                     $description = trim(stripslashes($_POST['forum_description'][$category->term_id][$key]));
 

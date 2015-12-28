@@ -1,17 +1,17 @@
 (function($) {
     $(document).ready(function() {
         /******************************** FORUMS ********************************/
-        $('.af_add_new_forum').click(function() {
+        $('.af-add-new-forum').click(function() {
             var category_id = $(this).attr('data-value');
-            $('#hidden-element-container input:eq(0)').attr("name", "af_forum_id[" + category_id + "][]");
-            $('#hidden-element-container input:eq(1)').attr("name", "forum_name[" + category_id + "][]");
-            $('#hidden-element-container input:eq(2)').attr("name", "forum_description[" + category_id + "][]");
-            $('#hidden-element-container li').clone().appendTo('ol#sortable-forums-' + category_id);
+            $('#new-element input:eq(0)').attr('name', 'forum_id[' + category_id + '][]');
+            $('#new-element input:eq(1)').attr('name', 'forum_name[' + category_id + '][]');
+            $('#new-element input:eq(2)').attr('name', 'forum_description[' + category_id + '][]');
+            $('#new-element div').clone().appendTo('div#category-' + category_id);
             return false;
         });
-        $('body').on('click', '.af_remove_forum', function() {
+        $('body').on('click', '.af-remove-forum', function() {
             var answer = confirm(asgarosforum_admin.remove_forum_warning);
-            if(answer) {
+            if (answer) {
                 $(this).parent().remove();
             }
             return false;

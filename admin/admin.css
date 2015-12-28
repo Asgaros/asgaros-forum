@@ -1,48 +1,43 @@
-/* FORUMS */
-.af_fset {
-    border: 1px solid #999;
-    margin-top: 25px;
-    padding: 8px;
+#af-options input {
+    vertical-align: middle;
 }
-legend {
-    font-weight: bold;
-    padding: 4px;
-    border: 1px solid #999;
+#af-options label {
+    display: inline-block;
+    width: 250px;
 }
-.af_ordered_list {
+#af-forums h3 {
+    font-weight: normal;
+    padding-top: 10px;
+}
+#af-forums ol {
     margin: 0 0 10px;
 }
-li.ui-state-default {
-    list-style-type: none;
+#af-forums .forum {
     padding: 8px;
-    background: #ccc;
-    border: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
 }
-.af_admin_submit {
-    margin-top: 25px !important;
-}
-#hidden-element-container {
+#af-forums #new-element {
     display: none;
 }
-a.af_remove_forum {
+#af-forums .af-remove-forum {
     float: right;
 }
-input {
-    width: 300px;
+#af-forums input[type="text"] {
+    margin: 0 15px 0 5px;
 }
-.af_add_new_forum,
-.af_remove_forum,
-.af-sort-up,
-.af-sort-down {
+#af-forums .af-add-new-forum {
+    padding: 8px;
+}
+#af-forums .dashicons-before {
     text-decoration: none;
     font-size: 14px;
     display: inline-block;
 }
-/* OPTIONS PAGE */
-#af_options_form input {
-    vertical-align: middle;
+#af-options input[type="submit"],
+#af-forums input[type="submit"] {
+    margin-top: 25px;
 }
-.af_tb_label {
-    display: inline-block;
-    width: 250px;
+#af-options input[type="text"],
+#af-forums input[type="text"] {
+    width: 300px;
 }
