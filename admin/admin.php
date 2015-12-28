@@ -135,7 +135,7 @@ class asgarosforum_admin {
         foreach ($asgarosforum->options_default as $k => $v) {
             if (isset($_POST[$k]) && !empty($_POST[$k])) {
                 if (is_numeric($v)) {
-                    $saved_ops[$k] = (int)$_POST[$k];
+                    $saved_ops[$k] = ((int)$_POST[$k] > 0) ? (int)$_POST[$k] : $v;
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = true;
                 } else {
