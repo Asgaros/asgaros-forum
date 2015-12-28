@@ -271,7 +271,7 @@ class asgarosforum {
     public function forum() {
         global $wpdb, $user_ID;
 
-        echo '<div id="wpf-wrapper">';
+        echo '<div id="af-wrapper">';
         echo '<div id="top-elements">'.$this->breadcrumbs().'</div>';
 
         switch ($this->current_view) {

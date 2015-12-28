@@ -1,11 +1,11 @@
 /* GENERAL */
-#wpf-wrapper {
+#af-wrapper {
     font-family: Verdana, Tahoma, sans-serif;
     font-size: 13px;
     color: #444;
     line-height: 1.65;
 }
-#wpf-wrapper a {
+#af-wrapper a {
     color: #2d89cc;
     border: none;
     text-decoration: none;
@@ -13,22 +13,22 @@
 }
 
 /* EDITOR */
-#wpf-wrapper .editor input {
+#af-wrapper .editor input {
     width: 100%;
     max-width: 400px;
 }
-#wpf-wrapper .editor td {
+#af-wrapper .editor td {
     vertical-align: top !important;
 }
-#wpf-wrapper div.mce-toolbar-grp {
+#af-wrapper div.mce-toolbar-grp {
     background-color: #fafafa;
 }
-#wpf-wrapper .message-editor {
+#af-wrapper .message-editor {
     padding: 0 !important;
 }
 
 /* TABLES */
-#wpf-wrapper table {
+#af-wrapper table {
     border-collapse: collapse;
     width: 100%;
     border: none;
@@ -37,51 +37,51 @@
     font-size: 13px;
     line-height: 1.65;
 }
-#wpf-wrapper th,
-#wpf-wrapper td {
+#af-wrapper th,
+#af-wrapper td {
     padding: 5px 5px 5px 10px !important;
     border: none;
 }
-#wpf-wrapper th {
+#af-wrapper th {
     background-color: #2d89cc;
     color: #fff;
 }
-#wpf-wrapper td {
+#af-wrapper td {
     vertical-align: middle !important;
     border-bottom: 1px solid #cecece !important;
     border-right: 1px solid #cecece !important;
 }
-#wpf-wrapper td:last-child {
+#af-wrapper td:last-child {
     border-right: none !important;
 }
-#wpf-wrapper tr:last-child td {
+#af-wrapper tr:last-child td {
     border-bottom: none !important;
 }
-#wpf-wrapper .space {
+#af-wrapper .space {
     margin-bottom: 20px !important;
 }
 
 /* TABLE CELL CONTENT */
-#wpf-wrapper .forumstats {
+#af-wrapper .forumstats {
     width: 100px;
     font-size: 11px;
 }
-#wpf-wrapper .forumstats span {
+#af-wrapper .forumstats span {
     display: block;
 }
-#wpf-wrapper .status-icon {
+#af-wrapper .status-icon {
     width: 61px;
     height: 50px;
     text-align: center;
 }
-#wpf-wrapper .poster_in_forum {
+#af-wrapper .poster_in_forum {
     width: 225px;
     line-height: 1.4;
     font-size: 11px;
 }
 
 /* INPUT ELEMENTS */
-#wpf-wrapper input {
+#af-wrapper input {
     padding: 3px 6px;
     border: 1px solid #a9a9a9;
     background-color: #f0f0f0;
@@ -90,7 +90,7 @@
     vertical-align: middle;
     font-family: inherit;
 }
-#wpf-wrapper input[type="submit"] {
+#af-wrapper input[type="submit"] {
     color: #fff;
     background: none;
     background-color: #2D89CC;
@@ -99,31 +99,31 @@
 }
 
 /* MENU */
-#wpf-wrapper .forummenu {
+#af-wrapper .forummenu {
     float: right;
 }
-#wpf-wrapper .forummenu a {
+#af-wrapper .forummenu a {
     color: #fff;
     background-color: #2d89cc;
     border: 1px solid #005C92;
     display: inline-block;
     padding: 3px 5px;
 }
-#wpf-wrapper .forummenu a:hover {
+#af-wrapper .forummenu a:hover {
 	text-decoration: none !important;
 }
-#wpf-wrapper .forummenu td {
+#af-wrapper .forummenu td {
     white-space: nowrap;
     padding: 0 0 0 2px !important;
     border-style: none !important;
 }
-#wpf-wrapper .top_menus {
+#af-wrapper .top_menus {
     height: 35px;
     margin-bottom: 5px;
 }
 
 /* NOTICE */
-#wpf-wrapper .notice {
+#af-wrapper .notice {
     text-align: center;
     font-size: 14px;
     font-style: italic;
@@ -132,40 +132,40 @@
 }
 
 /* TOP ELEMENTS */
-#wpf-wrapper #top-elements {
+#af-wrapper #top-elements {
     width: 100%;
     height: 35px;
 }
 
 /* FOOTER */
-#wpf-wrapper .footer {
+#af-wrapper .footer {
     width: 100%;
     display: block;
 }
 
 /* PAGEING */
-#wpf-wrapper .pages {
+#af-wrapper .pages {
     float: left;
 }
-#wpf-wrapper .pages strong {
+#af-wrapper .pages strong {
     background-color: #737373;
     color: #FFFFFF;
     font-size: 95%;
     padding: 0 5px;
 }
-#wpf-wrapper .pages a {
+#af-wrapper .pages a {
     background-color: #2D89CC;
     color: #FFFFFF !important;
     font-size: 95%;
     padding: 0 5px;
 }
-#wpf-wrapper .pages a:hover {
+#af-wrapper .pages a:hover {
     background-color: #005C92;
     text-decoration: none !important;
 }
 
 /* TITLE */
-#wpf-wrapper .title-element {
+#af-wrapper .title-element {
     background-color: #2d89cc;
     color: #fff;
     padding: 5px 5px 5px 10px;
@@ -174,17 +174,17 @@
 }
 
 /* BREADCRUMBS */
-#wpf-wrapper .breadcrumbs a {
+#af-wrapper .breadcrumbs a {
     color: #636363;
 }
-#wpf-wrapper .breadcrumbs a:hover {
+#af-wrapper .breadcrumbs a:hover {
     color: #2D89CC;
     text-decoration: none;
 }
-#wpf-wrapper .breadcrumbs .sep {
+#af-wrapper .breadcrumbs .sep {
     margin: 0 3px 0 3px;
 }
-#wpf-wrapper .breadcrumbs {
+#af-wrapper .breadcrumbs {
     font-size: 12px;
     margin: 5px 0 0 !important;
     float: left;
@@ -192,51 +192,51 @@
 }
 
 /* CONTENT WRAPPERS*/
-#wpf-wrapper .content-element {
+#af-wrapper .content-element {
     border: 1px solid #2d89cc;
     background-color: #fafafa;
     margin-bottom: 10px;
 }
-#wpf-wrapper .content-element a:hover {
+#af-wrapper .content-element a:hover {
     text-decoration: underline;
 }
 
 /* THREAD */
-#wpf-wrapper .thread td {
+#af-wrapper .thread td {
     vertical-align: top !important;
 }
-#wpf-wrapper .post-data-format {
+#af-wrapper .post-data-format {
     color: #777;
     font-size: 12px;
 }
-#wpf-wrapper .autorpostbox {
+#af-wrapper .autorpostbox {
     text-align: center;
     border-right: 1px solid #CACACA !important;
     width: 125px;
     padding-bottom: 10px;
 }
-#wpf-wrapper img.avatar {
+#af-wrapper img.avatar {
     float: none;
     margin: 0;
 }
-#wpf-wrapper .wpf-meta {
+#af-wrapper .af-meta {
     margin: -5px 0 -8px 0 !important;
     float: right;
 }
-#wpf-wrapper .bright {
+#af-wrapper .bright {
     background-color: #eee;
     border-top: 1px solid #cecece;
 }
 
 /* QUOTES */
-#wpf-wrapper blockquote {
+#af-wrapper blockquote {
     padding: 10px;
     margin: 10px 0;
     background: #eee;
     border: 1px solid #adadad;
     border-left: 4px solid #adadad;
 }
-#wpf-wrapper .quotetitle {
+#af-wrapper .quotetitle {
     font-weight: bold;
 }
 

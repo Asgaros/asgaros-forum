@@ -14,7 +14,7 @@
             <tr>
                 <td colspan='2' class='bright'>
                     <span class='post-data-format'><?php echo $this->format_date($post->date); ?></span>
-                    <div class='wpf-meta'><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
+                    <div class='af-meta'><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
                 </td>
             </tr>
             <tr>
