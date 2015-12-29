@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
 Tested up to: 4.4
-Stable tag: 1.0.0-Dev
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,5 +34,5 @@ Asgaros Forum is easy to setup and manage. It integrates perfectly with WordPres
 * Done!
 
 == Changelog ==
-= 1.0.0-Dev =
+= 1.0.0 =
 * First initial release
