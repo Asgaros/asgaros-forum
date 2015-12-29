@@ -33,6 +33,13 @@ Asgaros Forum is easy to setup and manage. It integrates perfectly with WordPres
 * Configure your Asgaros Forum options, create your Categories and Forums.
 * Done!
 
+== Screenshots ==
+1. The forum overview.
+2. The thread overview.
+3. The thread view.
+4. Creating a new thread.
+5. Manage forums in the administration area.
+
 == Changelog ==
 = 1.0.0 =
 * First initial release
