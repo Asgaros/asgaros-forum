@@ -11,7 +11,7 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress.
 
 == Description ==
 
-Asgaros Forum is easy to setup and manage. It integrates perfectly with WordPress and comes with a small amout of features which makes it fast and simple. It is based on the Mingle Forum-PlugIn from Cartpauj.
+Asgaros Forum is easy to setup and manage. It integrates perfectly with WordPress and comes with a small amout of features which makes it fast and simple.
 
 = Features =
 * File uploads
