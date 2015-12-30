@@ -27,7 +27,10 @@
 */
 
 //Textdomain Hook
-load_plugin_textdomain('asgaros-forum', false, plugin_basename(dirname(__FILE__)).'/languages/');
+function asgarosforum_load_plugin_textdomain() {
+    load_plugin_textdomain('asgaros-forum', FALSE, basename(dirname(__FILE__)).'/languages/');
+}
+add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
 //Load class files
 require('includes/forum.php');
