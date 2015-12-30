@@ -9,7 +9,7 @@
   Author URI: http://thomasbelser.net
   License: GPL2
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
-  Text Domain: asgarosforum
+  Text Domain: asgaros-forum
   Domain Path: /languages
 
   Asgaros Forum is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@
 */
 
 //Textdomain Hook
-load_plugin_textdomain('asgarosforum', false, plugin_basename(dirname(__FILE__)).'/languages/');
+load_plugin_textdomain('asgaros-forum', false, plugin_basename(dirname(__FILE__)).'/languages/');
 
 //Load class files
 require('includes/forum.php');

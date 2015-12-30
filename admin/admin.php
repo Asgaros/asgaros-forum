@@ -32,7 +32,7 @@ class asgarosforum_admin {
     function manage_columns($columns) {
         unset($columns['description'], $columns['slug'], $columns['posts']);
 
-        $columns['order'] = __('Order', 'asgarosforum');
+        $columns['order'] = __('Order', 'asgaros-forum');
         $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
 
         return $columns;
@@ -51,7 +51,7 @@ class asgarosforum_admin {
 
     function add_category_form_fields() {
         echo '<div class="form-field form-required term-order-wrap">';
-            echo '<label>'.__('Order', 'asgarosforum').'</label>';
+            echo '<label>'.__('Order', 'asgaros-forum').'</label>';
             echo '<input type="text" name="category_order" value="1" />';
         echo '</div>';
 
@@ -60,7 +60,7 @@ class asgarosforum_admin {
 
     function edit_category_form_fields($term) {
         echo '<tr class="form-field form-required term-order-wrap">';
-            echo '<th scope="row">'.__('Order', 'asgarosforum').'</th>';
+            echo '<th scope="row">'.__('Order', 'asgaros-forum').'</th>';
             echo '<td>';
                 $order = get_term_meta($term->term_id, 'order', true);
                 echo '<input type="text" name="category_order" value="'.$order.'" />';
@@ -83,15 +83,15 @@ class asgarosforum_admin {
     public function add_admin_pages() {
         $category_taxonomy = get_taxonomy('asgarosforum-category');
 
-        add_menu_page(__('Forum', 'asgarosforum'), __('Forum', 'asgarosforum'), 'administrator', 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
-        add_submenu_page('asgarosforum', __('Options', 'asgarosforum'), __('Options', 'asgarosforum'), 'administrator', 'asgarosforum', array($this, 'options_page'));
-        add_submenu_page('asgarosforum', __('Categories', 'asgarosforum'), __('Categories', 'asgarosforum'), 'administrator', 'edit-tags.php?taxonomy='.$category_taxonomy->name, null);
-        add_submenu_page('asgarosforum', __('Forums', 'asgarosforum'), __('Forums', 'asgarosforum'), 'administrator', 'asgarosforum-structure', array($this, 'forums_page'));
+        add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
+        add_submenu_page('asgarosforum', __('Options', 'asgaros-forum'), __('Options', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'));
+        add_submenu_page('asgarosforum', __('Categories', 'asgaros-forum'), __('Categories', 'asgaros-forum'), 'administrator', 'edit-tags.php?taxonomy='.$category_taxonomy->name, null);
+        add_submenu_page('asgarosforum', __('Forums', 'asgaros-forum'), __('Forums', 'asgaros-forum'), 'administrator', 'asgarosforum-structure', array($this, 'forums_page'));
     }
 
     public function enqueue_admin_scripts($hook) {
         global $submenu_file, $asgarosforum_directory;
-        $l10n_vars = array('remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgarosforum'));
+        $l10n_vars = array('remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgaros-forum'));
 
         if (strstr($hook, 'asgarosforum') !== false || $submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
             wp_enqueue_style('asgarosforum-admin-css', $asgarosforum_directory.'admin/admin.css');

@@ -61,13 +61,13 @@ class asgarosforum {
             null,
             array(
                 'labels' => array(
-                    'name'                          => __('Categories', 'asgarosforum'),
-                    'singular_name'                 => __('Category', 'asgarosforum'),
-                    'edit_item'                     => __('Edit Category', 'asgarosforum'),
-                    'update_item'                   => __('Update Category', 'asgarosforum'),
-                    'add_new_item'                  => __('Add new category', 'asgarosforum'),
-                    'search_items'                  => __('Search categories', 'asgarosforum'),
-                    'not_found'                     => __('No categories found.', 'asgarosforum')
+                    'name'                          => __('Categories', 'asgaros-forum'),
+                    'singular_name'                 => __('Category', 'asgaros-forum'),
+                    'edit_item'                     => __('Edit Category', 'asgaros-forum'),
+                    'update_item'                   => __('Update Category', 'asgaros-forum'),
+                    'add_new_item'                  => __('Add new category', 'asgaros-forum'),
+                    'search_items'                  => __('Search categories', 'asgaros-forum'),
+                    'not_found'                     => __('No categories found.', 'asgaros-forum')
                 ),
                 'public' => false,
                 'show_ui' => true,
@@ -230,7 +230,7 @@ class asgarosforum {
     public function get_pagetitle() {
         global $post;
         $default_title = $post->post_title;
-        $title = "";
+        $title = '';
 
         switch ($this->current_view) {
             case "forum":
@@ -245,22 +245,22 @@ class asgarosforum {
                 break;
             case "editpost":
                 if ($this->access) {
-                    $title = __("Edit Post", "asgarosforum") . " - ";
+                    $title = __('Edit Post', 'asgaros-forum') . ' - ';
                 }
                 break;
             case "addpost":
                 if ($this->access) {
-                    $title = __("Post Reply", "asgarosforum") . " - ";
+                    $title = __('Post Reply', 'asgaros-forum') . ' - ';
                 }
                 break;
             case "addthread":
                 if ($this->access) {
-                    $title = __("New Thread", "asgarosforum") . " - ";
+                    $title = __('New Thread', 'asgaros-forum') . ' - ';
                 }
                 break;
             case "movethread":
                 if ($this->access) {
-                    $title = __("Move Thread", "asgarosforum") . " - ";
+                    $title = __('Move Thread', 'asgaros-forum') . ' - ';
                 }
                 break;
         }
@@ -307,7 +307,7 @@ class asgarosforum {
         if ($categories) {
             require('views/overview.php');
         } else {
-            echo '<div class="notice">'.__("There are no categories yet!", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__('There are no categories yet!', 'asgaros-forum').'</div>';
         }
     }
 
@@ -320,7 +320,7 @@ class asgarosforum {
 
             require('views/forum.php');
         } else {
-            echo '<div class="notice">'.__("Sorry, but this forum does not exist.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__('Sorry, but this forum does not exist.', 'asgaros-forum').'</div>';
         }
     }
 
@@ -335,15 +335,15 @@ class asgarosforum {
                 $meClosed = "";
 
                 if ($this->get_status('closed')) {
-                    $meClosed = '&nbsp;('.__("Thread closed", "asgarosforum").')';
+                    $meClosed = '&nbsp;('.__('Thread closed', 'asgaros-forum').')';
                 }
 
                 require('views/thread.php');
             } else {
-                echo '<div class="notice">'.__("Sorry, but there are no posts.", "asgarosforum").'</div>';
+                echo '<div class="notice">'.__("Sorry, but there are no posts.", "asgaros-forum").'</div>';
             }
         } else {
-            echo '<div class="notice">'.__("Sorry, but this thread does not exist.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, but this thread does not exist.", "asgaros-forum").'</div>';
         }
     }
 
@@ -364,7 +364,7 @@ class asgarosforum {
 
             echo $strOUT;
         } else {
-            echo '<div class="notice">'.__("You are not allowed to move threads.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("You are not allowed to move threads.", "asgaros-forum").'</div>';
         }
     }
 
@@ -499,7 +499,7 @@ class asgarosforum {
                 return $post->date;
             } else {
                 $link = $this->get_postlink($thread_id, $post->id);
-                return __("Last post by", "asgarosforum").'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />'.__("on", "asgarosforum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'</a>';
+                return __("Last post by", "asgaros-forum").'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />'.__("on", "asgaros-forum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'</a>';
             }
         } else {
             return false;
@@ -511,14 +511,14 @@ class asgarosforum {
         $post = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE t.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $forum_id));
 
         if (!$post) {
-            return __("No threads yet!", "asgarosforum");
+            return __("No threads yet!", "asgaros-forum");
         }
 
         $date = $this->format_date($post->date);
 
-        return __('Last post by', 'asgarosforum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />
-        '.__('in', 'asgarosforum').'&nbsp;<strong>'.$this->cut_string($this->get_name($post->parent_id, $this->table_threads)).'</strong><br />
-        '.__('on', 'asgarosforum').'&nbsp;<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a>';
+        return __('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />
+        '.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($this->get_name($post->parent_id, $this->table_threads)).'</strong><br />
+        '.__('on', 'asgaros-forum').'&nbsp;<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a>';
     }
 
     public function get_lastpost_data($id, $data, $location) {
@@ -554,18 +554,18 @@ class asgarosforum {
         $o = '<table><tr>';
 
         if ($user_ID && (!$this->get_status('closed') || $this->is_moderator())) {
-            $o .= '<td><span class="icon-quotes-left"></span><a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'">'.__("Quote", "asgarosforum").'</a></td>';
+            $o .= '<td><span class="icon-quotes-left"></span><a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'">'.__("Quote", "asgaros-forum").'</a></td>';
         }
 
         if (($counter > 1 || $this->current_page >= 1) && $this->is_moderator()) {
-            $o .= '<td><span class="icon-bin"></span><a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'">'.__("Remove", "asgarosforum").'</a></td>';
+            $o .= '<td><span class="icon-bin"></span><a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'">'.__("Remove", "asgaros-forum").'</a></td>';
         }
 
         if (($this->is_moderator()) || $user_ID == $author_id) {
-            $o .= '<td><span class="icon-pencil2"></span><a href="'.$this->url_base.'editpost&amp;id='.$post_id.'&amp;part='.($this->current_page + 1).'">'.__("Edit", "asgarosforum").'</a></td>';
+            $o .= '<td><span class="icon-pencil2"></span><a href="'.$this->url_base.'editpost&amp;id='.$post_id.'&amp;part='.($this->current_page + 1).'">'.__("Edit", "asgaros-forum").'</a></td>';
         }
 
-        $o .= '<td><a href="'.$this->get_postlink($this->current_thread, $post_id, ($this->current_page + 1)).'" title="'.__("Permalink", "asgarosforum").'"><span class="icon-link"></span></a></td>';
+        $o .= '<td><a href="'.$this->get_postlink($this->current_thread, $post_id, ($this->current_page + 1)).'" title="'.__("Permalink", "asgaros-forum").'"><span class="icon-link"></span></a></td>';
         $o .= '</tr></table>';
 
         return $o;
@@ -613,7 +613,7 @@ class asgarosforum {
         global $user_ID;
 
         if ($user_ID) {
-            echo '<table><tr><td><a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__("New Thread", "asgarosforum").'</span></a></td></tr></table>';
+            echo '<table><tr><td><a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__("New Thread", "asgaros-forum").'</span></a></td></tr></table>';
         }
     }
 
@@ -625,25 +625,25 @@ class asgarosforum {
             $menu .= '<table><tr>';
 
             if (!$this->get_status('closed') || $this->is_moderator()) {
-                $menu .= '<td><a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgarosforum").'</span></a></td>';
+                $menu .= '<td><a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgaros-forum").'</span></a></td>';
             }
 
             if ($this->is_moderator()) {
-                $menu .= '<td><a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgarosforum").'</span></a></td>';
-                $menu .= '<td><a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgarosforum").'</span></a></td>';
+                $menu .= '<td><a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgaros-forum").'</span></a></td>';
+                $menu .= '<td><a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a></td>';
 
                 $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
                 if ($this->get_status('sticky')) {
-                    $menu .= __("Undo Sticky", "asgarosforum");
+                    $menu .= __("Undo Sticky", "asgaros-forum");
                 } else {
-                    $menu .= __("Sticky", "asgarosforum");
+                    $menu .= __("Sticky", "asgaros-forum");
                 }
                 $menu .= '</span></a></td>';
 
                 if ($this->get_status('closed')) {
-                    $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgarosforum").'</span></a></td>';
+                    $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgaros-forum").'</span></a></td>';
                 } else {
-                    $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgarosforum").'</span></a></td>';
+                    $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgaros-forum").'</span></a></td>';
                 }
             }
 
@@ -659,7 +659,7 @@ class asgarosforum {
     }
 
     public function breadcrumbs() {
-        $trail = '<span class="icon-home"></span><a href="' . $this->url_home . '">' . __("Forum", "asgarosforum") . '</a>';
+        $trail = '<span class="icon-home"></span><a href="' . $this->url_home . '">' . __("Forum", "asgaros-forum") . '</a>';
 
         if ($this->current_forum && $this->access) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
@@ -672,11 +672,11 @@ class asgarosforum {
         }
 
         if ($this->current_view == 'addpost' && $this->access) {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Post Reply", "asgarosforum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Post Reply", "asgaros-forum");
         } else if ($this->current_view == 'editpost' && $this->access) {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Edit Post", "asgarosforum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Edit Post", "asgaros-forum");
         } else if ($this->current_view == 'addthread' && $this->access) {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("New Thread", "asgarosforum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("New Thread", "asgaros-forum");
         }
 
         return '<div class="breadcrumbs">'.$trail.'</div>';
@@ -694,7 +694,7 @@ class asgarosforum {
 
     public function pageing($location) {
         global $wpdb;
-        $out = __("Pages:", "asgarosforum");
+        $out = __("Pages:", "asgaros-forum");
         $num_pages = 0;
         $select_source = '';
         $select_url = '';
@@ -721,7 +721,7 @@ class asgarosforum {
             }
         } else {
             if ($this->current_page >= 4) {
-                $out .= " <a href='" . $this->get_link($select_source, $select_url) . "'>" . __("First", "asgarosforum") . "</a> <<";
+                $out .= " <a href='" . $this->get_link($select_source, $select_url) . "'>" . __("First", "asgaros-forum") . "</a> <<";
             }
 
             for ($i = 3; $i > 0; $i--) {
@@ -739,7 +739,7 @@ class asgarosforum {
             }
 
             if ($num_pages - $this->current_page >= 5) {
-                $out .= " >> <a href='" . $this->get_link($select_source, $select_url, $num_pages) . "'>" . __("Last", "asgarosforum") . "</a>";
+                $out .= " >> <a href='" . $this->get_link($select_source, $select_url, $num_pages) . "'>" . __("Last", "asgaros-forum") . "</a>";
             }
         }
 
@@ -943,7 +943,7 @@ class asgarosforum {
                         $upload_list_elements .= '<li><a href="'.$url.$upload.'" target="_blank">'.$upload.'</a></li>';
                     } else {
                         $upload_list_elements .= '<div class="uploaded-file">';
-                        $upload_list_elements .= '<a href="'.$url.$upload.'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgarosforum').']</a>';
+                        $upload_list_elements .= '<a href="'.$url.$upload.'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
                         $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'" />';
                         $upload_list_elements .= '</div>';
                     }
@@ -952,12 +952,12 @@ class asgarosforum {
 
             if (!empty($upload_list_elements)) {
                 if ($frontend) {
-                    $upload_list .= '<p><strong>'.__('Uploaded files:', 'asgarosforum').'</strong><br /><ul>';
+                    $upload_list .= '<p><strong>'.__('Uploaded files:', 'asgaros-forum').'</strong><br /><ul>';
                     $upload_list .= $upload_list_elements;
                     $upload_list .= '</ul></p>';
                 } else {
                     $upload_list .= '<tr>';
-                    $upload_list .= '<td>'.__('Uploaded files:', 'asgarosforum').'</td>';
+                    $upload_list .= '<td>'.__('Uploaded files:', 'asgaros-forum').'</td>';
                     $upload_list .= '<td>';
                     $upload_list .= '<div class="files-to-delete"></div>';
                     $upload_list .= $upload_list_elements;

@@ -7,24 +7,24 @@ $error = false;
 
 if (!$user_ID) {
     $error = true;
-    echo '<div class="notice">'.__("Sorry, you don't have permission to post.", "asgarosforum").'</div>';
+    echo '<div class="notice">'.__("Sorry, you don't have permission to post.", "asgaros-forum").'</div>';
 }
 
 if (!$error) {
     if ($_GET['view'] == "addthread") {
         if (!$this->current_forum || !$this->access) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgaros-forum").'</div>';
         }
     } else if ($_GET['view'] == "addpost") {
         if (!$this->current_thread || !$this->access) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgaros-forum").'</div>';
         }
 
         if (!$error && $this->get_status('closed') && !$this->is_moderator()) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgaros-forum").'</div>';
         }
 
         if (!$error) {
@@ -32,13 +32,13 @@ if (!$error) {
                 $quote_id = $_GET['quote'];
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d;", $quote_id));
                 $display_name = $this->get_username($text->author_id);
-                $quote = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgarosforum") . " " . $display_name . " " . __("on", "asgarosforum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
+                $quote = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgaros-forum") . " " . $display_name . " " . __("on", "asgaros-forum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
             }
         }
     } else if ($_GET['view'] == "editpost") {
         if (!$this->element_exists($_GET['id'], $this->table_posts) || !$this->access) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this post does not exist.", "asgarosforum").'</div>';
+            echo '<div class="notice">'.__("Sorry, this post does not exist.", "asgaros-forum").'</div>';
         }
 
         if (!$error) {
@@ -47,7 +47,7 @@ if (!$error) {
 
             if ($user_ID != $post->author_id && !$this->is_moderator()) {
                 $error = true;
-                echo '<div class="notice">'.__("Sorry, you are not allowed to edit this post.", "asgarosforum").'</div>';
+                echo '<div class="notice">'.__("Sorry, you are not allowed to edit this post.", "asgaros-forum").'</div>';
             }
         }
 
@@ -65,11 +65,11 @@ if (!$error) { ?>
         <div class='title-element'>
             <?php
             if ($_GET['view'] == "addthread") {
-                _e("Post new Thread", "asgarosforum");
+                _e("Post new Thread", "asgaros-forum");
             } else if ($_GET['view'] == "addpost") {
-                echo __("Post Reply:", "asgarosforum") . ' ' . $this->get_name($this->current_thread, $this->table_threads);
+                echo __("Post Reply:", "asgaros-forum") . ' ' . $this->get_name($this->current_thread, $this->table_threads);
             } else if ($_GET['view'] == "editpost") {
-                _e("Edit Post", "asgarosforum");
+                _e("Edit Post", "asgaros-forum");
             }
             ?>
         </div>
@@ -77,12 +77,12 @@ if (!$error) { ?>
             <table>
                 <?php if ($_GET['view'] == "addthread" || ($_GET['view'] == "editpost" && $this->is_first_post($post->id))) { ?>
                     <tr>
-                        <td><?php _e("Subject:", "asgarosforum"); ?></td>
+                        <td><?php _e("Subject:", "asgaros-forum"); ?></td>
                         <td><input type="text" name="subject" value="<?php echo $threadname; ?>" /></td>
                     </tr>
                 <?php } ?>
                 <tr>
-                    <td><?php _e("Message:", "asgarosforum"); ?></td>
+                    <td><?php _e("Message:", "asgaros-forum"); ?></td>
                     <td class="message-editor">
                         <?php
                         if ($_GET['view'] == "editpost") {
@@ -101,10 +101,10 @@ if (!$error) { ?>
 
                 <?php if ($this->options['allow_file_uploads']) { ?>
         		<tr>
-        			<td><?php _e("Upload Files:", "asgarosforum"); ?></td>
+        			<td><?php _e("Upload Files:", "asgaros-forum"); ?></td>
         			<td>
         				<input type="file" name="forumfile[]" /><br />
-                        <a id="add_file_link" href="#"><?php _e("Add another file ...", "asgarosforum"); ?></a>
+                        <a id="add_file_link" href="#"><?php _e("Add another file ...", "asgaros-forum"); ?></a>
         			</td>
         		</tr>
                 <?php } ?>
@@ -112,15 +112,15 @@ if (!$error) { ?>
                     <td></td>
                     <?php if ($_GET['view'] == "addthread") { ?>
                         <td>
-                            <input type='submit' name='add_thread_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
+                            <input type='submit' name='add_thread_submit' value='<?php _e("Submit", "asgaros-forum"); ?>' />
                         </td>
                     <?php } else if ($_GET['view'] == "addpost") { ?>
                         <td>
-                            <input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
+                            <input type='submit' name='add_post_submit' value='<?php _e("Submit", "asgaros-forum"); ?>' />
                         </td>
                     <?php } else if ($_GET['view'] == "editpost") { ?>
                         <td>
-                            <input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgarosforum"); ?>' />
+                            <input type='submit' name='edit_post_submit' value='<?php _e("Submit", "asgaros-forum"); ?>' />
                             <input type='hidden' name='page_id' value='<?php echo $_GET['part']; ?>' />
                         </td>
                     <?php } ?>

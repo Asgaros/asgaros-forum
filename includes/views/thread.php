@@ -21,7 +21,7 @@
                 <td class='autorpostbox'>
                     <?php echo get_avatar($post->author_id, 60); ?>
                     <br /><strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
-                    <?php echo __("Posts:", "asgarosforum") . "&nbsp;" . $this->count_userposts($post->author_id); ?>
+                    <?php echo __("Posts:", "asgaros-forum") . "&nbsp;" . $this->count_userposts($post->author_id); ?>
                 </td>
                 <td>
                     <?php echo stripslashes(make_clickable(wpautop($this->autoembed($post->text)))); ?>

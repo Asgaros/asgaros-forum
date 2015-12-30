@@ -13,7 +13,7 @@
         <table>
             <?php if ($sticky_threads && !$this->current_page): // Prevent stickies from showing up on page 2...n ?>
                 <tr>
-                    <td class="bright" colspan="4"><?php _e("Sticky Threads", "asgarosforum"); ?></td>
+                    <td class="bright" colspan="4"><?php _e("Sticky Threads", "asgaros-forum"); ?></td>
                 </tr>
 
                 <?php foreach ($sticky_threads as $thread): ?>
@@ -24,8 +24,8 @@
                             <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                         </td>
                         <td class="forumstats">
-                            <span><?php _e('Answers', 'asgarosforum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
-                            <span><?php _e('Views', 'asgarosforum'); ?>: <?php echo (int) $thread->views; ?></span>
+                            <span><?php _e('Answers', 'asgaros-forum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
+                            <span><?php _e('Views', 'asgaros-forum'); ?>: <?php echo (int) $thread->views; ?></span>
                         </td>
                         <td class="poster_in_forum"><?php echo $this->get_lastpost_in_thread($thread->id); ?></td>
                     </tr>
@@ -45,8 +45,8 @@
                         <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                     </td>
                     <td class="forumstats">
-                        <span><?php _e('Answers', 'asgarosforum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
-                        <span><?php _e('Views', 'asgarosforum'); ?>: <?php echo (int) $thread->views; ?></span>
+                        <span><?php _e('Answers', 'asgaros-forum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
+                        <span><?php _e('Views', 'asgaros-forum'); ?>: <?php echo (int) $thread->views; ?></span>
                     </td>
                     <td class="poster_in_forum"><?php echo $this->get_lastpost_in_thread($thread->id); ?></td>
                 </tr>
@@ -63,5 +63,5 @@
         <div class="forummenu"><?php $this->forum_menu(); ?></div>
     </div>
 <?php else: ?>
-    <div class='notice'><?php _e("There are no threads yet!", "asgarosforum"); ?></div>
+    <div class='notice'><?php _e("There are no threads yet!", "asgaros-forum"); ?></div>
 <?php endif; ?>
