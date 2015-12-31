@@ -612,7 +612,7 @@ class asgarosforum {
         global $user_ID;
 
         if ($user_ID) {
-            echo '<table><tr><td><a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__("New Thread", "asgaros-forum").'</span></a></td></tr></table>';
+            echo '<a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
         }
     }
 
@@ -621,32 +621,28 @@ class asgarosforum {
         $menu = '';
 
         if ($user_ID) {
-            $menu .= '<table><tr>';
-
             if (!$this->get_status('closed') || $this->is_moderator()) {
-                $menu .= '<td><a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgaros-forum").'</span></a></td>';
+                $menu .= '<a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgaros-forum").'</span></a>';
             }
 
             if ($this->is_moderator()) {
-                $menu .= '<td><a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgaros-forum").'</span></a></td>';
-                $menu .= '<td><a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a></td>';
+                $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgaros-forum").'</span></a>';
+                $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a>';
 
-                $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
                 if ($this->get_status('sticky')) {
                     $menu .= __("Undo Sticky", "asgaros-forum");
                 } else {
                     $menu .= __("Sticky", "asgaros-forum");
                 }
-                $menu .= '</span></a></td>';
+                $menu .= '</span></a>';
 
                 if ($this->get_status('closed')) {
-                    $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgaros-forum").'</span></a></td>';
+                    $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgaros-forum").'</span></a>';
                 } else {
-                    $menu .= '<td><a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgaros-forum").'</span></a></td>';
+                    $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgaros-forum").'</span></a>';
                 }
             }
-
-            $menu .= '</tr></table>';
         }
 
         return $menu;
@@ -955,13 +951,13 @@ class asgarosforum {
                     $upload_list .= $upload_list_elements;
                     $upload_list .= '</ul></p>';
                 } else {
-                    $upload_list .= '<tr>';
-                    $upload_list .= '<td>'.__('Uploaded files:', 'asgaros-forum').'</td>';
-                    $upload_list .= '<td>';
+                    $upload_list .= '<div class="editor-row">';
+                    $upload_list .= '<div class="editor-cell">'.__('Uploaded files:', 'asgaros-forum').'</div>';
+                    $upload_list .= '<div class="editor-cell">';
                     $upload_list .= '<div class="files-to-delete"></div>';
                     $upload_list .= $upload_list_elements;
-                    $upload_list .= '</td>';
-                    $upload_list .= '</tr>';
+                    $upload_list .= '</div>';
+                    $upload_list .= '</div>';
                 }
             }
         }

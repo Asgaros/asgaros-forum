@@ -7,9 +7,6 @@
         if (count($frs) > 0) {
             foreach ($frs as $forum) {
                 $forum_counter++;
-                ?>
-                <tr>
-                <?php
                 $thread_id = $this->get_lastpost_data($forum->id, 'parent_id', $this->table_threads);
                 ?>
                 <div class="forum">

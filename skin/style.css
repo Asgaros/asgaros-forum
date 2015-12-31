@@ -11,48 +11,38 @@
     text-decoration: none;
     box-shadow: none;
 }
+#af-wrapper .space {
+    margin-bottom: 20px !important;
+}
 
 /* EDITOR */
+#af-wrapper .editor {
+    display: table;
+    width: 100%;
+    line-height: normal;
+}
+#af-wrapper .editor-row {
+    display: table-row;
+}
+#af-wrapper .editor-cell {
+    display: table-cell;
+    width: auto;
+    padding: 5px 10px;
+    border-bottom: 1px solid #cecece;
+}
+#af-wrapper .editor-row:last-child .editor-cell {
+    border-bottom: none;
+}
+#af-wrapper .editor-cell:first-child {
+    width: 180px;
+    border-right: 1px solid #cecece;
+}
 #af-wrapper .editor input {
     width: 100%;
     max-width: 400px;
 }
 #af-wrapper .message-editor {
-    padding: 0 !important;
-}
-
-/* TABLES */
-#af-wrapper table {
-    border-collapse: collapse;
-    width: 100%;
-    border: none;
-    margin: 0;
-    table-layout: auto;
-    font-size: 13px;
-    line-height: 1.65;
-}
-#af-wrapper th,
-#af-wrapper td {
-    padding: 5px 5px 5px 10px !important;
-    border: none;
-}
-#af-wrapper th {
-    background-color: #2d89cc;
-    color: #fff;
-}
-#af-wrapper td {
-    vertical-align: middle !important;
-    border-bottom: 1px solid #cecece !important;
-    border-right: 1px solid #cecece !important;
-}
-#af-wrapper td:last-child {
-    border-right: none !important;
-}
-#af-wrapper tr:last-child td {
-    border-bottom: none !important;
-}
-#af-wrapper .space {
-    margin-bottom: 20px !important;
+    padding: 0;
 }
 
 /* OVERVIEW/FORUM */
@@ -131,23 +121,16 @@
 }
 
 /* MENU */
-#af-wrapper .forummenu {
+#af-wrapper .forum-menu {
     float: right;
 }
-#af-wrapper .forummenu a {
-    color: #fff;
+#af-wrapper .forum-menu a {
+    display: inline-block;
     background-color: #2d89cc;
     border: 1px solid #3378A0;
-    display: inline-block;
     padding: 3px 5px;
-}
-#af-wrapper .forummenu a:hover {
-	text-decoration: none !important;
-}
-#af-wrapper .forummenu td {
-    white-space: nowrap;
-    padding: 0 0 0 2px !important;
-    border-style: none !important;
+    margin-left: 3px;
+    color: #fff !important;
 }
 #af-wrapper .top_menus {
     height: 35px;
