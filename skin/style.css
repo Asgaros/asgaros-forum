@@ -17,12 +17,6 @@
     width: 100%;
     max-width: 400px;
 }
-#af-wrapper .editor td {
-    vertical-align: top !important;
-}
-#af-wrapper div.mce-toolbar-grp {
-    background-color: #fafafa;
-}
 #af-wrapper .message-editor {
     padding: 0 !important;
 }
@@ -61,23 +55,61 @@
     margin-bottom: 20px !important;
 }
 
-/* TABLE CELL CONTENT */
-#af-wrapper .forumstats {
-    width: 100px;
-    font-size: 11px;
+/* OVERVIEW/FORUM */
+#af-wrapper .forum [class^="icon-"], [class*=" icon-"],
+#af-wrapper .thread [class^="icon-"], [class*=" icon-"] {
+    padding-right: 0;
 }
-#af-wrapper .forumstats span {
-    display: block;
+#af-wrapper .forum,
+#af-wrapper .thread {
+    display: table;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid #cecece;
 }
-#af-wrapper .status-icon {
-    width: 61px;
-    height: 50px;
+#af-wrapper .content-element .forum:last-child,
+#af-wrapper .content-element .thread:last-child {
+    border-bottom: none;
+}
+#af-wrapper .forum div,
+#af-wrapper .thread div {
+    display: table-cell;
+    border-right: 1px solid #cecece;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+#af-wrapper .forum div:last-child,
+#af-wrapper .thread div:last-child {
+    border-right: none;
+}
+#af-wrapper .forum-status,
+#af-wrapper .thread-status {
+    width: 50px;
     text-align: center;
 }
-#af-wrapper .poster_in_forum {
-    width: 225px;
-    line-height: 1.4;
-    font-size: 11px;
+#af-wrapper .forum-name,
+#af-wrapper .thread-name {
+    width: auto;
+}
+#af-wrapper .forum-stats,
+#af-wrapper .thread-stats {
+    width: 100px;
+}
+#af-wrapper .forum-poster,
+#af-wrapper .thread-poster {
+    width: 220px;
+    line-height: 1.6;
+}
+#af-wrapper .forum-name strong,
+#af-wrapper .thread-name strong,
+#af-wrapper .forum small,
+#af-wrapper .thread small {
+    display: block;
+}
+#af-wrapper .bright {
+    background-color: #eee;
+    padding: 3px 10px;
+    border-bottom: 1px solid #cecece;
 }
 
 /* INPUT ELEMENTS */
@@ -201,16 +233,9 @@
 }
 
 /* THREAD */
-#af-wrapper .thread td {
-    vertical-align: top !important;
-}
 #af-wrapper img.avatar {
     float: none;
     margin: 0;
-}
-#af-wrapper .bright {
-    background-color: #eee;
-    border-top: 1px solid #cecece;
 }
 
 /* POST */
@@ -229,11 +254,13 @@
 }
 #af-wrapper .post-menu {
     float: right;
+    display: table;
+    height: 100%;
 }
 #af-wrapper .post-menu a {
+    display: table-cell;
     border-left: 1px solid #ddd;
-    display: inline-block;
-    padding: 4px 6px 3px;
+    padding: 4px 6px 0;
 }
 #af-wrapper .post-menu a:hover {
     color: #005C92;

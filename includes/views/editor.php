@@ -7,24 +7,24 @@ $error = false;
 
 if (!$user_ID) {
     $error = true;
-    echo '<div class="notice">'.__("Sorry, you don't have permission to post.", "asgaros-forum").'</div>';
+    echo '<div class="notice">'.__('Sorry, you don\'t have permission to post.', 'asgaros-forum').'</div>';
 }
 
 if (!$error) {
     if ($_GET['view'] == "addthread") {
         if (!$this->current_forum || !$this->access) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this forum does not exist.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__('Sorry, this forum does not exist.', 'asgaros-forum').'</div>';
         }
     } else if ($_GET['view'] == "addpost") {
         if (!$this->current_thread || !$this->access) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__('Sorry, this thread does not exist.', 'asgaros-forum').'</div>';
         }
 
         if (!$error && $this->get_status('closed') && !$this->is_moderator()) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, but you are not allowed to do this.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__('Sorry, but you are not allowed to do this.', 'asgaros-forum').'</div>';
         }
 
         if (!$error) {
@@ -32,13 +32,13 @@ if (!$error) {
                 $quote_id = $_GET['quote'];
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d;", $quote_id));
                 $display_name = $this->get_username($text->author_id);
-                $quote = "<blockquote><div class='quotetitle'>" . __("Quote from", "asgaros-forum") . " " . $display_name . " " . __("on", "asgaros-forum") . " " . $this->format_date($text->date) . "</div>" . $text->text . "</blockquote><br />";
+                $quote = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.__('on', 'asgaros-forum').' '.$this->format_date($text->date).'</div>'.$text->text.'</blockquote><br />';
             }
         }
     } else if ($_GET['view'] == "editpost") {
         if (!$this->element_exists($_GET['id'], $this->table_posts) || !$this->access) {
             $error = true;
-            echo '<div class="notice">'.__("Sorry, this post does not exist.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__('Sorry, this post does not exist.', 'asgaros-forum').'</div>';
         }
 
         if (!$error) {
@@ -47,7 +47,7 @@ if (!$error) {
 
             if ($user_ID != $post->author_id && !$this->is_moderator()) {
                 $error = true;
-                echo '<div class="notice">'.__("Sorry, you are not allowed to edit this post.", "asgaros-forum").'</div>';
+                echo '<div class="notice">'.__('Sorry, you are not allowed to edit this post.', 'asgaros-forum').'</div>';
             }
         }
 
@@ -61,7 +61,7 @@ if (!$error) {
 }
 
 if (!$error) { ?>
-    <form name='addform' method='post' enctype='multipart/form-data'>
+    <form name="addform" method="post" enctype="multipart/form-data">
         <div class='title-element'>
             <?php
             if ($_GET['view'] == "addthread") {

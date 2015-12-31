@@ -3,8 +3,8 @@
     <div class="forummenu"><?php echo $this->thread_menu();?></div>
 </div>
 
-<div class='title-element'><?php echo $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . $meClosed; ?></div>
-<div class='content-element thread'>
+<div class="title-element"><?php echo $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . $meClosed; ?></div>
+<div class="content-element">
     <?php
     $counter = 0;
     foreach ($posts as $post) {

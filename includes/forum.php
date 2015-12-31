@@ -499,7 +499,7 @@ class asgarosforum {
                 return $post->date;
             } else {
                 $link = $this->get_postlink($thread_id, $post->id);
-                return __("Last post by", "asgaros-forum").'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />'.__("on", "asgaros-forum").'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'</a>';
+                return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small><small>'.__('on', 'asgaros-forum').'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'</a></small>';
             }
         } else {
             return false;
@@ -511,14 +511,14 @@ class asgarosforum {
         $post = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE t.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $forum_id));
 
         if (!$post) {
-            return __("No threads yet!", "asgaros-forum");
+            return '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
         }
 
         $date = $this->format_date($post->date);
 
-        return __('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong><br />
-        '.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($this->get_name($post->parent_id, $this->table_threads)).'</strong><br />
-        '.__('on', 'asgaros-forum').'&nbsp;<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a>';
+        return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
+        <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($this->get_name($post->parent_id, $this->table_threads)).'</strong></small>
+        <small>'.__('on', 'asgaros-forum').'&nbsp;<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a></small>';
     }
 
     public function get_lastpost_data($id, $data, $location) {
