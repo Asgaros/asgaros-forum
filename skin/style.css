@@ -39,7 +39,7 @@
 }
 #af-wrapper .editor input {
     width: 100%;
-    max-width: 400px;
+    box-sizing: border-box;
 }
 #af-wrapper .message-editor {
     padding: 0;
