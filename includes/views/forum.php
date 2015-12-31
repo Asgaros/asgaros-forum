@@ -4,7 +4,7 @@
             echo $this->pageing($this->table_threads);
         } ?>
     </div>
-    <div class="forum-menu"><?php $this->forum_menu(); ?></div>
+    <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
 </div>
 
 <?php if ($counter_total > 0) { ?>
@@ -53,7 +53,7 @@
                 echo $this->pageing($this->table_threads);
             } ?>
         </div>
-        <div class="forum-menu"><?php $this->forum_menu(); ?></div>
+        <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
     </div>
 <?php } else { ?>
     <div class="notice"><?php _e('There are no threads yet!', 'asgaros-forum'); ?></div>

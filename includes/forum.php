@@ -608,39 +608,35 @@ class asgarosforum {
         return false;
     }
 
-    public function forum_menu() {
-        global $user_ID;
-
-        if ($user_ID) {
-            echo '<a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
-        }
-    }
-
-    public function thread_menu() {
+    public function forum_menu($location) {
         global $user_ID;
         $menu = '';
 
         if ($user_ID) {
-            if (!$this->get_status('closed') || $this->is_moderator()) {
-                $menu .= '<a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgaros-forum").'</span></a>';
-            }
-
-            if ($this->is_moderator()) {
-                $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgaros-forum").'</span></a>';
-                $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a>';
-
-                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
-                if ($this->get_status('sticky')) {
-                    $menu .= __("Undo Sticky", "asgaros-forum");
-                } else {
-                    $menu .= __("Sticky", "asgaros-forum");
+            if ($location == 'forum') {
+                $menu .= '<a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
+            } else if ($location == 'thread') {
+                if (!$this->get_status('closed') || $this->is_moderator()) {
+                    $menu .= '<a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgaros-forum").'</span></a>';
                 }
-                $menu .= '</span></a>';
 
-                if ($this->get_status('closed')) {
-                    $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgaros-forum").'</span></a>';
-                } else {
-                    $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgaros-forum").'</span></a>';
+                if ($this->is_moderator()) {
+                    $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgaros-forum").'</span></a>';
+                    $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a>';
+
+                    $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
+                    if ($this->get_status('sticky')) {
+                        $menu .= __("Undo Sticky", "asgaros-forum");
+                    } else {
+                        $menu .= __("Sticky", "asgaros-forum");
+                    }
+                    $menu .= '</span></a>';
+
+                    if ($this->get_status('closed')) {
+                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgaros-forum").'</span></a>';
+                    } else {
+                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgaros-forum").'</span></a>';
+                    }
                 }
             }
         }
