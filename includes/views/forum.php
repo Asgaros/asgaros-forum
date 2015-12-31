@@ -21,7 +21,7 @@
                         <td class="status-icon"><?php $this->get_thread_image($thread->id, $thread->status); ?></td>
                         <td>
                             <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
-                            <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
+                            <small><?php _e('Created by:', 'asgaros-forum'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                         </td>
                         <td class="forumstats">
                             <span><?php _e('Answers', 'asgaros-forum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
@@ -42,7 +42,7 @@
                     <td class="status-icon"><?php $this->get_thread_image($thread->id, $thread->status); ?></td>
                     <td>
                         <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong><br />
-                        <small><?php _e('Created by:'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
+                        <small><?php _e('Created by:', 'asgaros-forum'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
                     </td>
                     <td class="forumstats">
                         <span><?php _e('Answers', 'asgaros-forum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></span>
