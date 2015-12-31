@@ -551,22 +551,21 @@ class asgarosforum {
     public function post_menu($post_id, $author_id, $counter) {
         global $user_ID;
 
-        $o = '<table><tr>';
+        $o = '';
 
         if ($user_ID && (!$this->get_status('closed') || $this->is_moderator())) {
-            $o .= '<td><span class="icon-quotes-left"></span><a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'">'.__("Quote", "asgaros-forum").'</a></td>';
+            $o .= '<a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'"><span class="icon-quotes-left"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
 
         if (($counter > 1 || $this->current_page >= 1) && $this->is_moderator()) {
-            $o .= '<td><span class="icon-bin"></span><a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'">'.__("Remove", "asgaros-forum").'</a></td>';
+            $o .= '<a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="icon-bin"></span>'.__('Remove', 'asgaros-forum').'</a>';
         }
 
         if (($this->is_moderator()) || $user_ID == $author_id) {
-            $o .= '<td><span class="icon-pencil2"></span><a href="'.$this->url_base.'editpost&amp;id='.$post_id.'&amp;part='.($this->current_page + 1).'">'.__("Edit", "asgaros-forum").'</a></td>';
+            $o .= '<a href="'.$this->url_base.'editpost&amp;id='.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="icon-pencil2"></span>'.__('Edit', 'asgaros-forum').'</a>';
         }
 
-        $o .= '<td><a href="'.$this->get_postlink($this->current_thread, $post_id, ($this->current_page + 1)).'" title="'.__("Permalink", "asgaros-forum").'"><span class="icon-link"></span></a></td>';
-        $o .= '</tr></table>';
+        $o .= '<a href="'.$this->get_postlink($this->current_thread, $post_id, ($this->current_page + 1)).'" title="'.__('Permalink', 'asgaros-forum').'"><span class="icon-link"></span></a>';
 
         return $o;
     }

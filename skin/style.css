@@ -105,7 +105,7 @@
 #af-wrapper .forummenu a {
     color: #fff;
     background-color: #2d89cc;
-    border: 1px solid #005C92;
+    border: 1px solid #3378A0;
     display: inline-block;
     padding: 3px 5px;
 }
@@ -194,7 +194,6 @@
 /* CONTENT WRAPPERS*/
 #af-wrapper .content-element {
     border: 1px solid #2d89cc;
-    background-color: #fafafa;
     margin-bottom: 10px;
 }
 #af-wrapper .content-element a:hover {
@@ -205,27 +204,59 @@
 #af-wrapper .thread td {
     vertical-align: top !important;
 }
-#af-wrapper .post-data-format {
-    color: #777;
-    font-size: 12px;
-}
-#af-wrapper .autorpostbox {
-    text-align: center;
-    border-right: 1px solid #CACACA !important;
-    width: 125px;
-    padding-bottom: 10px;
-}
 #af-wrapper img.avatar {
     float: none;
     margin: 0;
 }
-#af-wrapper .af-meta {
-    margin: -5px 0 -8px 0 !important;
-    float: right;
-}
 #af-wrapper .bright {
     background-color: #eee;
     border-top: 1px solid #cecece;
+}
+
+/* POST */
+#af-wrapper .post-header {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+    border-top: 2px solid #ccc;
+    height: 28px;
+}
+#af-wrapper .post-date {
+    float: left;
+    color: #777;
+    font-size: 11px;
+    font-style: italic;
+    padding: 5px 10px 0;
+}
+#af-wrapper .post-menu {
+    float: right;
+}
+#af-wrapper .post-menu a {
+    border-left: 1px solid #ddd;
+    display: inline-block;
+    padding: 4px 6px 3px;
+}
+#af-wrapper .post-menu a:hover {
+    color: #005C92;
+    text-decoration: none;
+}
+#af-wrapper .post-content {
+    display: table;
+    width: 100%;
+}
+#af-wrapper .post-author {
+    display: table-cell;
+    text-align: center;
+    vertical-align: top;
+    border-right: 1px solid #dedede;
+    width: 125px;
+    padding: 7px;
+    background-color: #f3f3f3;
+}
+#af-wrapper .post-message {
+    display: table-cell;
+    width: auto;
+    vertical-align: top;
+    padding: 0 15px;
 }
 
 /* QUOTES */
@@ -237,7 +268,7 @@
     border-left: 4px solid #adadad;
 }
 #af-wrapper .quotetitle {
-    font-weight: bold;
+    font-style: italic;
 }
 
 /*------------------------------------------------*/

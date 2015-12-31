@@ -10,25 +10,23 @@
     foreach ($posts as $post) {
         $counter++;
         ?>
-        <table id='postid-<?php echo $post->id; ?>'>
-            <tr>
-                <td colspan='2' class='bright'>
-                    <span class='post-data-format'><?php echo $this->format_date($post->date); ?></span>
-                    <div class='af-meta'><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td class='autorpostbox'>
+        <div class="post" id="postid-<?php echo $post->id; ?>">
+            <div class="post-header">
+                <div class="post-date"><?php echo $this->format_date($post->date); ?></div>
+                <div class="post-menu"><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
+            </div>
+            <div class="post-content">
+                <div class="post-author">
                     <?php echo get_avatar($post->author_id, 60); ?>
                     <br /><strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
-                    <?php echo __("Posts:", "asgaros-forum") . "&nbsp;" . $this->count_userposts($post->author_id); ?>
-                </td>
-                <td>
+                    <small><?php echo __("Posts:", "asgaros-forum") . "&nbsp;" . $this->count_userposts($post->author_id); ?></small>
+                </div>
+                <div class="post-message">
                     <?php echo stripslashes(make_clickable(wpautop($this->autoembed($post->text)))); ?>
                     <?php $this->file_list($post->id, $post->uploads, true); ?>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
     <?php } ?>
 </div>
 
