@@ -8,7 +8,7 @@ $msg = '<h2>'.__('An error occured!', 'asgarosforum').'</h2>';
 $error = false;
 
 if (isset($_POST['edit_post_submit']) && !$this->element_exists($post_id, $this->table_posts)) {
-    $msg .= '<div id="error"><p>'.__('This post does not exist.', 'asgarosforum').'</p></div>';
+    $msg .= '<div id="error"><p>'.__('Sorry, this post does not exist.', 'asgarosforum').'</p></div>';
     $error = true;
 }
 

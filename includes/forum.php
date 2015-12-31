@@ -320,7 +320,7 @@ class asgarosforum {
 
             require('views/forum.php');
         } else {
-            echo '<div class="notice">'.__('Sorry, but this forum does not exist.', 'asgaros-forum').'</div>';
+            echo '<div class="notice">'.__('Sorry, this forum does not exist.', 'asgaros-forum').'</div>';
         }
     }
 
@@ -343,7 +343,7 @@ class asgarosforum {
                 echo '<div class="notice">'.__("Sorry, but there are no posts.", "asgaros-forum").'</div>';
             }
         } else {
-            echo '<div class="notice">'.__("Sorry, but this thread does not exist.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgaros-forum").'</div>';
         }
     }
 
