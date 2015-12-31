@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Wed Dec 30 2015 22:23:25 GMT+0100 (Mitteleuropäische "
+"POT-Revision-Date: Thu Dec 31 2015 20:54:03 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: ../admin/admin.php:86 ../admin/admin.php:86 ../includes/forum.php:662
+#: ../admin/admin.php:86 ../admin/admin.php:86 ../includes/forum.php:653
 msgid "Forum"
 msgstr ""
 
@@ -144,20 +144,20 @@ msgstr ""
 msgid "No categories found."
 msgstr ""
 
-#: ../includes/forum.php:248 ../includes/forum.php:677 ../includes/views/editor.
+#: ../includes/forum.php:248 ../includes/forum.php:668 ../includes/views/editor.
 #: php:72
 msgid "Edit Post"
 msgstr ""
 
-#: ../includes/forum.php:253 ../includes/forum.php:675
+#: ../includes/forum.php:253 ../includes/forum.php:666
 msgid "Post Reply"
 msgstr ""
 
-#: ../includes/forum.php:258 ../includes/forum.php:616 ../includes/forum.php:679
+#: ../includes/forum.php:258 ../includes/forum.php:617 ../includes/forum.php:670
 msgid "New Thread"
 msgstr ""
 
-#: ../includes/forum.php:263 ../includes/forum.php:632
+#: ../includes/forum.php:263 ../includes/forum.php:624
 msgid "Move Thread"
 msgstr ""
 
@@ -165,8 +165,8 @@ msgstr ""
 msgid "There are no categories yet!"
 msgstr ""
 
-#: ../includes/forum.php:323
-msgid "Sorry, but this forum does not exist."
+#: ../includes/forum.php:323 ../includes/views/editor.php:17
+msgid "Sorry, this forum does not exist."
 msgstr ""
 
 #: ../includes/forum.php:338
@@ -177,8 +177,8 @@ msgstr ""
 msgid "Sorry, but there are no posts."
 msgstr ""
 
-#: ../includes/forum.php:346
-msgid "Sorry, but this thread does not exist."
+#: ../includes/forum.php:346 ../includes/views/editor.php:22
+msgid "Sorry, this thread does not exist."
 msgstr ""
 
 #: ../includes/forum.php:367
@@ -218,47 +218,47 @@ msgstr ""
 msgid "Permalink"
 msgstr ""
 
-#: ../includes/forum.php:628
+#: ../includes/forum.php:620
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:633
+#: ../includes/forum.php:625
 msgid "Delete Thread"
 msgstr ""
 
-#: ../includes/forum.php:637
+#: ../includes/forum.php:629
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:639
+#: ../includes/forum.php:631
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:644
+#: ../includes/forum.php:636
 msgid "Re-open"
 msgstr ""
 
-#: ../includes/forum.php:646
+#: ../includes/forum.php:638
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:697
+#: ../includes/forum.php:688
 msgid "Pages:"
 msgstr ""
 
-#: ../includes/forum.php:724
+#: ../includes/forum.php:715
 msgid "First"
 msgstr ""
 
-#: ../includes/forum.php:742
+#: ../includes/forum.php:733
 msgid "Last"
 msgstr ""
 
-#: ../includes/forum.php:946
+#: ../includes/forum.php:937
 msgid "Delete"
 msgstr ""
 
-#: ../includes/forum.php:955 ../includes/forum.php:960
+#: ../includes/forum.php:946 ../includes/forum.php:951
 msgid "Uploaded files:"
 msgstr ""
 
@@ -266,8 +266,8 @@ msgstr ""
 msgid "An error occured!"
 msgstr ""
 
-#: ../includes/insert.php:11
-msgid "This post does not exist."
+#: ../includes/insert.php:11 ../includes/views/editor.php:41
+msgid "Sorry, this post does not exist."
 msgstr ""
 
 #: ../includes/insert.php:16
@@ -286,24 +286,12 @@ msgstr ""
 msgid "Sorry, you don't have permission to post."
 msgstr ""
 
-#: ../includes/views/editor.php:17
-msgid "Sorry, this forum does not exist."
-msgstr ""
-
-#: ../includes/views/editor.php:22
-msgid "Sorry, this thread does not exist."
-msgstr ""
-
 #: ../includes/views/editor.php:27
 msgid "Sorry, but you are not allowed to do this."
 msgstr ""
 
 #: ../includes/views/editor.php:35
 msgid "Quote from"
-msgstr ""
-
-#: ../includes/views/editor.php:41
-msgid "Sorry, this post does not exist."
 msgstr ""
 
 #: ../includes/views/editor.php:50
@@ -326,36 +314,36 @@ msgstr ""
 msgid "Message:"
 msgstr ""
 
-#: ../includes/views/editor.php:104
+#: ../includes/views/editor.php:101
 msgid "Upload Files:"
 msgstr ""
 
-#: ../includes/views/editor.php:107
+#: ../includes/views/editor.php:104
 msgid "Add another file ..."
 msgstr ""
 
-#: ../includes/views/editor.php:115 ../includes/views/editor.php:119 ..
-#: /includes/views/editor.php:123
+#: ../includes/views/editor.php:112 ../includes/views/editor.php:114 ..
+#: /includes/views/editor.php:116
 msgid "Submit"
 msgstr ""
 
-#: ../includes/views/forum.php:16
+#: ../includes/views/forum.php:14
 msgid "Sticky Threads"
 msgstr ""
 
-#: ../includes/views/forum.php:24 ../includes/views/forum.php:45
+#: ../includes/views/forum.php:20 ../includes/views/forum.php:39
 msgid "Created by:"
 msgstr ""
 
-#: ../includes/views/forum.php:27 ../includes/views/forum.php:48
+#: ../includes/views/forum.php:23 ../includes/views/forum.php:42
 msgid "Answers"
 msgstr ""
 
-#: ../includes/views/forum.php:28 ../includes/views/forum.php:49
+#: ../includes/views/forum.php:24 ../includes/views/forum.php:43
 msgid "Views"
 msgstr ""
 
-#: ../includes/views/forum.php:66
+#: ../includes/views/forum.php:59
 msgid "There are no threads yet!"
 msgstr ""
 
@@ -371,18 +359,18 @@ msgstr ""
 msgid "There are no forums yet!"
 msgstr ""
 
-#: ../includes/views/overview.php:34
+#: ../includes/views/overview.php:33
 msgid "New posts"
 msgstr ""
 
-#: ../includes/views/overview.php:35
+#: ../includes/views/overview.php:34
 msgid "No new posts"
 msgstr ""
 
-#: ../includes/views/overview.php:36
+#: ../includes/views/overview.php:35
 msgid "Mark All Read"
 msgstr ""
 
-#: ../includes/views/thread.php:24
+#: ../includes/views/thread.php:22
 msgid "Posts:"
 msgstr ""
