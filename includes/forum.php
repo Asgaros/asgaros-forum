@@ -485,7 +485,7 @@ class asgarosforum {
                 return $post->date;
             } else {
                 $link = $this->get_postlink($thread_id, $post->id);
-                return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small><small>'.__('on', 'asgaros-forum').'&nbsp;<a href="'.$link.'">'.$this->format_date($post->date).'</a></small>';
+                return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small><small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$link.'">'.$this->format_date($post->date).'</a>').'</small>';
             }
         } else {
             return false;
@@ -504,7 +504,7 @@ class asgarosforum {
 
         return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
         <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($this->get_name($post->parent_id, $this->table_threads)).'</strong></small>
-        <small>'.__('on', 'asgaros-forum').'&nbsp;<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a></small>';
+        <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a>').'</small>';
     }
 
     public function get_lastpost_data($id, $data, $location) {

@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Fri Jan 01 2016 19:52:17 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Fri Jan 01 2016 20:49:33 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <developer@thomasbelser.net>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -22,15 +22,6 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: de_DE"
-
-#: ../includes/forum.php:340
-#, php-format
-msgid "Move \"<strong>%s</strong>\" to new forum:"
-msgstr "Verschiebe \"<strong>%s</strong>\" in neues Forum:"
-
-#: ../includes/forum.php:349
-msgid "Move"
-msgstr "Verschieben"
 
 #. Name of the plugin
 msgid "Asgaros Forum"
@@ -190,6 +181,15 @@ msgstr "Entschuldigung, aber es existieren keine Beiträge."
 msgid "Sorry, this thread does not exist."
 msgstr "Entschuldigung, dieses Thema existiert nicht."
 
+#: ../includes/forum.php:340
+#, php-format
+msgid "Move \"<strong>%s</strong>\" to new forum:"
+msgstr "Verschiebe \"<strong>%s</strong>\" in neues Forum:"
+
+#: ../includes/forum.php:349
+msgid "Move"
+msgstr "Verschieben"
+
 #: ../includes/forum.php:353
 msgid "You are not allowed to move threads."
 msgstr "Du hast nicht die Berechtigung Themen zu verschieben."
@@ -200,8 +200,9 @@ msgstr "Letzter Beitrag von"
 
 #: ../includes/forum.php:488 ../includes/forum.php:507 ../includes/views/editor.
 #: php:35
-msgid "on"
-msgstr "um"
+#, php-format
+msgid "on %s"
+msgstr "um %s Uhr"
 
 #: ../includes/forum.php:500
 msgid "No threads yet!"
@@ -263,11 +264,11 @@ msgstr "Erste"
 msgid "Last"
 msgstr "Letzte"
 
-#: ../includes/forum.php:923
+#: ../includes/forum.php:912
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../includes/forum.php:932 ../includes/forum.php:937
+#: ../includes/forum.php:921 ../includes/forum.php:926
 msgid "Uploaded files:"
 msgstr "Hochgeladene Dateien:"
 
