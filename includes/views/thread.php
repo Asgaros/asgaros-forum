@@ -1,6 +1,7 @@
-<div class="top_menus">
+<div>
     <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
     <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>
+    <div class="clear"></div>
 </div>
 
 <div class="title-element"><?php echo $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . $meClosed; ?></div>
@@ -19,7 +20,7 @@
                 <div class="post-author">
                     <?php echo get_avatar($post->author_id, 60); ?>
                     <br /><strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
-                    <small><?php echo __("Posts:", "asgaros-forum") . "&nbsp;" . $this->count_userposts($post->author_id); ?></small>
+                    <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_userposts($post->author_id); ?></small>
                 </div>
                 <div class="post-message">
                     <?php echo stripslashes(make_clickable(wpautop($this->autoembed($post->text)))); ?>
@@ -30,7 +31,8 @@
     <?php } ?>
 </div>
 
-<div class="top_menus">
+<div>
     <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
     <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>
+    <div class="clear"></div>
 </div>
