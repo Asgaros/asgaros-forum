@@ -40,5 +40,11 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 5. Manage forums in the administration area.
 
 == Changelog ==
+= 1.0.1 =
+* Fixed display issues with some default themes
+* Minor design changes
+* Code optimizations and cleanup
+* Added missing translation strings
+* Updated german translation
 = 1.0.0 =
 * First initial release
