@@ -349,10 +349,9 @@ class asgarosforum {
 
     public function movethread() {
         if ($this->is_moderator() && $this->access) {
-            $strOUT = '
-            <form method="post" action="' . $this->url_base . 'movethread&amp;id=' . $this->current_thread . '&amp;move_thread">
-            Move "<strong>' . $this->get_name($this->current_thread, $this->table_threads) . '</strong>" to new forum:<br />
-            <select name="newForumID">';
+            $strOUT = '<form method="post" action="' . $this->url_base . 'movethread&amp;id=' . $this->current_thread . '&amp;move_thread">';
+            $strOUT .= sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), $this->get_name($this->current_thread, $this->table_threads)).'<br />';
+            $strOUT .= '<select name="newForumID">';
 
             $frs = $this->get_forums();
 
@@ -360,11 +359,11 @@ class asgarosforum {
                 $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $this->current_forum ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
             }
 
-            $strOUT .= '</select><br /><input type="submit" value="Go!" /></form>';
+            $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'" /></form>';
 
             echo $strOUT;
         } else {
-            echo '<div class="notice">'.__("You are not allowed to move threads.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__('You are not allowed to move threads.', 'asgaros-forum').'</div>';
         }
     }
 
