@@ -16,8 +16,8 @@
                         <small><?php echo $forum->description; ?></small>
                     </div>
                     <div class="forum-stats">
-                        <small><?php _e('Threads', 'asgaros-forum'); ?>: <?php echo $this->count_elements($forum->id, $this->table_threads); ?></small>
-                        <small><?php _e('Posts', 'asgaros-forum'); ?>: <?php echo $this->count_posts_in_forum($forum->id); ?></small>
+                        <small><?php _e('Threads:', 'asgaros-forum'); ?> <?php echo $this->count_elements($forum->id, $this->table_threads); ?></small>
+                        <small><?php _e('Posts:', 'asgaros-forum'); ?> <?php echo $this->count_posts_in_forum($forum->id); ?></small>
                     </div>
                     <div class="forum-poster"><?php echo $this->get_lastpost_in_forum($forum->id); ?></div>
                 </div>

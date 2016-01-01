@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Thu Dec 31 2015 20:54:09 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Fri Jan 01 2016 17:14:00 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <developer@thomasbelser.net>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -22,6 +22,10 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: de_DE"
+
+#: ../includes/views/overview.php:19
+msgid "Threads:"
+msgstr "Themen:"
 
 #. Name of the plugin
 msgid "Asgaros Forum"
@@ -327,33 +331,29 @@ msgstr "Weitere Datei hinzufügen ..."
 msgid "Submit"
 msgstr "Senden"
 
-#: ../includes/views/forum.php:14
+#: ../includes/views/forum.php:15
 msgid "Sticky Threads"
 msgstr "Angepinnte Themen"
 
-#: ../includes/views/forum.php:20 ../includes/views/forum.php:39
+#: ../includes/views/forum.php:21 ../includes/views/forum.php:40
 msgid "Created by:"
 msgstr "Erstellt von:"
 
-#: ../includes/views/forum.php:23 ../includes/views/forum.php:42
+#: ../includes/views/forum.php:24 ../includes/views/forum.php:43
 msgid "Answers"
 msgstr "Antworten"
 
-#: ../includes/views/forum.php:24 ../includes/views/forum.php:43
+#: ../includes/views/forum.php:25 ../includes/views/forum.php:44
 msgid "Views"
 msgstr "Aufrufe"
 
-#: ../includes/views/forum.php:59
+#: ../includes/views/forum.php:61
 msgid "There are no threads yet!"
 msgstr "Es existieren noch keine Themen!"
 
-#: ../includes/views/overview.php:19
-msgid "Threads"
-msgstr "Themen"
-
-#: ../includes/views/overview.php:20
-msgid "Posts"
-msgstr "Beiträge"
+#: ../includes/views/overview.php:20 ../includes/views/thread.php:23
+msgid "Posts:"
+msgstr "Beiträge:"
 
 #: ../includes/views/overview.php:27
 msgid "There are no forums yet!"
@@ -370,7 +370,3 @@ msgstr "Keine neuen Beiträge"
 #: ../includes/views/overview.php:35
 msgid "Mark All Read"
 msgstr "Alle als Gelesen markieren"
-
-#: ../includes/views/thread.php:22
-msgid "Posts:"
-msgstr "Beiträge:"

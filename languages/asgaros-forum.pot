@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Thu Dec 31 2015 20:54:03 GMT+0100 (Mitteleuropäische "
+"POT-Revision-Date: Fri Jan 01 2016 17:13:45 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -327,32 +327,32 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: ../includes/views/forum.php:14
+#: ../includes/views/forum.php:15
 msgid "Sticky Threads"
 msgstr ""
 
-#: ../includes/views/forum.php:20 ../includes/views/forum.php:39
+#: ../includes/views/forum.php:21 ../includes/views/forum.php:40
 msgid "Created by:"
 msgstr ""
 
-#: ../includes/views/forum.php:23 ../includes/views/forum.php:42
+#: ../includes/views/forum.php:24 ../includes/views/forum.php:43
 msgid "Answers"
 msgstr ""
 
-#: ../includes/views/forum.php:24 ../includes/views/forum.php:43
+#: ../includes/views/forum.php:25 ../includes/views/forum.php:44
 msgid "Views"
 msgstr ""
 
-#: ../includes/views/forum.php:59
+#: ../includes/views/forum.php:61
 msgid "There are no threads yet!"
 msgstr ""
 
 #: ../includes/views/overview.php:19
-msgid "Threads"
+msgid "Threads:"
 msgstr ""
 
-#: ../includes/views/overview.php:20
-msgid "Posts"
+#: ../includes/views/overview.php:20 ../includes/views/thread.php:23
+msgid "Posts:"
 msgstr ""
 
 #: ../includes/views/overview.php:27
@@ -369,8 +369,4 @@ msgstr ""
 
 #: ../includes/views/overview.php:35
 msgid "Mark All Read"
-msgstr ""
-
-#: ../includes/views/thread.php:22
-msgid "Posts:"
 msgstr ""
