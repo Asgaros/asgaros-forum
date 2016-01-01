@@ -232,37 +232,24 @@ class asgarosforum {
         $default_title = $post->post_title;
         $title = '';
 
-        switch ($this->current_view) {
-            case "forum":
-                if ($this->current_forum && $this->access) {
+        if ($this->access) {
+            if ($this->current_view == "forum") {
+                if ($this->current_forum) {
                     $title = $this->get_name($this->current_forum, $this->table_forums) . " - ";
                 }
-                break;
-            case "thread":
-                if ($this->current_thread && $this->access) {
+            } else if ($this->current_view == "thread") {
+                if ($this->current_thread) {
                     $title = $this->get_name($this->current_thread, $this->table_threads) . " - ";
                 }
-                break;
-            case "editpost":
-                if ($this->access) {
-                    $title = __('Edit Post', 'asgaros-forum') . ' - ';
-                }
-                break;
-            case "addpost":
-                if ($this->access) {
-                    $title = __('Post Reply', 'asgaros-forum') . ' - ';
-                }
-                break;
-            case "addthread":
-                if ($this->access) {
-                    $title = __('New Thread', 'asgaros-forum') . ' - ';
-                }
-                break;
-            case "movethread":
-                if ($this->access) {
-                    $title = __('Move Thread', 'asgaros-forum') . ' - ';
-                }
-                break;
+            } else if ($this->current_view == "editpost") {
+                $title = __('Edit Post', 'asgaros-forum') . ' - ';
+            } else if ($this->current_view == "addpost") {
+                $title = __('Post Reply', 'asgaros-forum') . ' - ';
+            } else if ($this->current_view == "addthread") {
+                $title = __('New Thread', 'asgaros-forum') . ' - ';
+            } else if ($this->current_view == "movethread") {
+                $title = __('Move Thread', 'asgaros-forum') . ' - ';
+            }
         }
 
         return $title . $default_title . ' | ';
@@ -272,7 +259,7 @@ class asgarosforum {
         global $wpdb, $user_ID;
 
         echo '<div id="af-wrapper">';
-        echo '<div id="top-elements">'.$this->breadcrumbs().'</div>';
+        echo $this->breadcrumbs();
 
         switch ($this->current_view) {
             case 'movethread':
@@ -326,7 +313,7 @@ class asgarosforum {
 
     public function showthread() {
         if ($this->current_thread && $this->access) {
-            global $wpdb;
+            global $wpdb, $wp_embed;
             $posts = $this->get_posts();
 
             if ($posts) {
@@ -340,10 +327,10 @@ class asgarosforum {
 
                 require('views/thread.php');
             } else {
-                echo '<div class="notice">'.__("Sorry, but there are no posts.", "asgaros-forum").'</div>';
+                echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
             }
         } else {
-            echo '<div class="notice">'.__("Sorry, this thread does not exist.", "asgaros-forum").'</div>';
+            echo '<div class="notice">'.__('Sorry, this thread does not exist.', 'asgaros-forum').'</div>';
         }
     }
 
@@ -649,7 +636,7 @@ class asgarosforum {
     }
 
     public function breadcrumbs() {
-        $trail = '<span class="icon-home"></span><a href="' . $this->url_home . '">' . __("Forum", "asgaros-forum") . '</a>';
+        $trail = '<span class="icon-home"></span><a href="'.$this->url_home.'">'.__('Forum', 'asgaros-forum').'</a>';
 
         if ($this->current_forum && $this->access) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
@@ -796,12 +783,7 @@ class asgarosforum {
     public function get_thread_image($thread_id, $status) {
         $unread_status = $this->check_unread($thread_id);
 
-        echo '<span class="icon-' . $status . '-' . $unread_status . '"></span>';
-    }
-
-    public function autoembed($string) {
-        global $wp_embed;
-        return $wp_embed->autoembed($string);
+        echo '<span class="icon-'.$status.'-'.$unread_status.'"></span>';
     }
 
     public function change_status($property) {
@@ -843,18 +825,12 @@ class asgarosforum {
         global $wpdb;
         $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
 
-        if ($property == 'sticky') {
-            if ($status == 'sticky_open' || $status == 'sticky_closed') {
-                return true;
-            } else {
-                return false;
-            }
-        } else if ($property == 'closed') {
-            if ($status == 'normal_closed' || $status == 'sticky_closed') {
-                return true;
-            } else {
-                return false;
-            }
+        if ($property == 'sticky' && ($status == 'sticky_open' || $status == 'sticky_closed')) {
+            return true;
+        } else if ($property == 'closed' && ($status == 'normal_closed' || $status == 'sticky_closed')) {
+            return true;
+        } else {
+            return false;
         }
     }
 
