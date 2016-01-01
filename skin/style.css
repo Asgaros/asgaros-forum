@@ -224,7 +224,6 @@
     background-color: #f7f7f7;
     border-bottom: 1px solid #ddd;
     border-top: 2px solid #ccc;
-    height: 28px;
     box-sizing: content-box;
 }
 #af-wrapper .post-date {
@@ -232,7 +231,7 @@
     color: #777;
     font-size: 11px;
     font-style: italic;
-    padding: 5px 10px 0;
+    padding: 5px 10px;
 }
 #af-wrapper .post-menu {
     float: right;
@@ -242,7 +241,7 @@
 #af-wrapper .post-menu a {
     display: table-cell;
     border-left: 1px solid #ddd;
-    padding: 4px 6px 0;
+    padding: 4px 6px;
 }
 #af-wrapper .post-menu a:hover {
     color: #005C92;
@@ -265,7 +264,10 @@
     display: table-cell;
     width: auto;
     vertical-align: top;
-    padding: 0 15px;
+    padding: 15px;
+}
+#af-wrapper .post-message p {
+    margin: 0 0 20px;
 }
 #af-wrapper .post-message ul {
     padding: inherit;
@@ -273,6 +275,7 @@
 
 /* QUOTES */
 #af-wrapper blockquote {
+    font-size: inherit;
     padding: 10px;
     margin: 10px 0;
     background: #eee;
@@ -281,6 +284,7 @@
 }
 #af-wrapper .quotetitle {
     font-style: italic;
+    font-weight: bold;
 }
 
 /*------------------------------------------------*/

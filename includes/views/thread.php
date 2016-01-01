@@ -15,6 +15,7 @@
             <div class="post-header">
                 <div class="post-date"><?php echo $this->format_date($post->date); ?></div>
                 <div class="post-menu"><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
+                <div class="clear"></div>
             </div>
             <div class="post-content">
                 <div class="post-author">

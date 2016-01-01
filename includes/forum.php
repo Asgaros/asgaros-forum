@@ -918,9 +918,8 @@ class asgarosforum {
 
             if (!empty($upload_list_elements)) {
                 if ($frontend) {
-                    $upload_list .= '<p><strong>'.__('Uploaded files:', 'asgaros-forum').'</strong><br /><ul>';
-                    $upload_list .= $upload_list_elements;
-                    $upload_list .= '</ul></p>';
+                    $upload_list .= '<strong>'.__('Uploaded files:', 'asgaros-forum').'</strong>';
+                    $upload_list .= '<ul>'.$upload_list_elements.'</ul>';
                 } else {
                     $upload_list .= '<div class="editor-row">';
                     $upload_list .= '<div class="editor-cell">'.__('Uploaded files:', 'asgaros-forum').'</div>';
