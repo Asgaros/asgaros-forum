@@ -14,7 +14,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 
 = Features =
 * File uploads
-* Powerful editor
+* Integration of the WordPress editor
 * Stick, move, edit, remove and close threads
 * Edit and remove posts
 * Supports multiple languages
@@ -32,6 +32,32 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Configure your Asgaros Forum options, create your Categories and Forums.
 * Done!
 
+== Frequently Asked Questions ==
+= I want to use a different color =
+Add this style rules to your theme CSS file and change #49617D to a color of your choice.
+`
+#af-wrapper a,
+#af-wrapper .breadcrumbs a:hover,
+.icon-files-empty-small-yes:before,
+.icon-normal_closed-yes:before,
+.icon-sticky_closed-yes:before,
+.icon-normal_open-yes:before,
+.icon-sticky_open-yes:before,
+.icon-overview-yes:before,
+.icon-link:before {
+	color: #49617D !important;
+}
+#af-wrapper input[type="submit"],
+#af-wrapper .forum-menu a,
+#af-wrapper .pages a,
+#af-wrapper .title-element {
+    background-color: #49617D !important;
+}
+#af-wrapper .content-element {
+    border: 1px solid #49617D !important;
+}
+`
+
 == Screenshots ==
 1. The forum overview.
 2. The thread overview.
@@ -41,6 +67,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 
 == Changelog ==
 = 1.0.1 =
+* Removed some untranslated strings
 * Fixed display issues with some default themes
 * Minor design changes
 * Code optimizations and cleanup
