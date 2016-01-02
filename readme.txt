@@ -34,29 +34,9 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 
 == Frequently Asked Questions ==
 = I want to use a different color =
-Add this style rules to your theme CSS file and change #49617D to a color of your choice.
-`
-#af-wrapper a,
-#af-wrapper .breadcrumbs a:hover,
-.icon-files-empty-small-yes:before,
-.icon-normal_closed-yes:before,
-.icon-sticky_closed-yes:before,
-.icon-normal_open-yes:before,
-.icon-sticky_open-yes:before,
-.icon-overview-yes:before,
-.icon-link:before {
-	color: #49617D !important;
-}
-#af-wrapper input[type="submit"],
-#af-wrapper .forum-menu a,
-#af-wrapper .pages a,
-#af-wrapper .title-element {
-    background-color: #49617D !important;
-}
-#af-wrapper .content-element {
-    border: 1px solid #49617D !important;
-}
-`
+Add this style rules to your theme CSS file and change #49617D to a color of your choice:
+[https://gist.github.com/Asgaros/5d0cef9f4df09b36fd08](https://gist.github.com/Asgaros/5d0cef9f4df09b36fd08)
+
 
 == Screenshots ==
 1. The forum overview.
