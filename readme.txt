@@ -73,5 +73,6 @@ Add this style rules to your theme CSS file and change #49617D to a color of you
 * Code optimizations and cleanup
 * Added missing translation strings
 * Updated german translation
+* Changed translation slug from asgarosforum to asgaros-forum
 = 1.0.0 =
 * First initial release
