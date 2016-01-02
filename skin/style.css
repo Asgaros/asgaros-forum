@@ -22,30 +22,28 @@
 }
 
 /* EDITOR */
-#af-wrapper .editor {
+#af-wrapper .editor-row {
     display: table;
     width: 100%;
     line-height: normal;
+    border-bottom: 1px solid #cecece;
 }
-#af-wrapper .editor-row {
-    display: table-row;
+#af-wrapper .editor-row input {
+    width: 100%;
+    box-sizing: border-box;
+}
+#af-wrapper .editor-row:last-child {
+    border-bottom: none;
 }
 #af-wrapper .editor-cell {
     display: table-cell;
     width: auto;
     padding: 5px 10px;
-    border-bottom: 1px solid #cecece;
-}
-#af-wrapper .editor-row:last-child .editor-cell {
-    border-bottom: none;
 }
 #af-wrapper .editor-cell:first-child {
+    min-width: 180px;
     width: 180px;
     border-right: 1px solid #cecece;
-}
-#af-wrapper .editor input {
-    width: 100%;
-    box-sizing: border-box;
 }
 #af-wrapper .message-editor {
     padding: 0;
@@ -265,12 +263,14 @@
     width: auto;
     vertical-align: top;
     padding: 15px;
+    word-break: break-all;
 }
 #af-wrapper .post-message p {
     margin: 0 0 20px;
 }
 #af-wrapper .post-message ul {
     padding: inherit;
+    margin: 0;
 }
 
 /* QUOTES */
