@@ -544,7 +544,7 @@ class asgarosforum {
         }
 
         if (($counter > 1 || $this->current_page >= 1) && $this->is_moderator()) {
-            $o .= '<a onclick="return confirm(\'Are you sure you want to remove this?\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="icon-bin"></span>'.__('Remove', 'asgaros-forum').'</a>';
+            $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="icon-bin"></span>'.__('Remove', 'asgaros-forum').'</a>';
         }
 
         if (($this->is_moderator()) || $user_ID == $author_id) {
@@ -607,8 +607,8 @@ class asgarosforum {
                 }
 
                 if ($this->is_moderator()) {
-                    $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__("Move Thread", "asgaros-forum").'</span></a>';
-                    $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\'Are you sure you want to remove this?\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a>';
+                    $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
+                    $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a>';
 
                     $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
                     if ($this->get_status('sticky')) {
