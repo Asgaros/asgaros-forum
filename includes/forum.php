@@ -170,12 +170,7 @@ class asgarosforum {
                 break;
         }
 
-        if ($wp_rewrite->using_permalinks()) {
-            $this->delim = "?";
-        } else {
-            $this->delim = "&amp;";
-        }
-
+        $this->delim = ($wp_rewrite->using_permalinks()) ? "?" : "&amp;";
         $this->url_home = get_permalink();
         $this->url_base = $this->url_home . $this->delim . "view=";
         $this->url_forum = $this->url_base . "forum&amp;id=";
@@ -272,11 +267,7 @@ class asgarosforum {
                 $this->showthread($this->current_thread);
                 break;
             case 'addthread':
-                include('views/editor.php');
-                break;
             case 'addpost':
-                include('views/editor.php');
-                break;
             case 'editpost':
                 include('views/editor.php');
                 break;
@@ -319,11 +310,7 @@ class asgarosforum {
             if ($posts) {
                 $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $this->current_thread));
 
-                $meClosed = "";
-
-                if ($this->get_status('closed')) {
-                    $meClosed = '&nbsp;('.__('Thread closed', 'asgaros-forum').')';
-                }
+                $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
 
                 require('views/thread.php');
             } else {
@@ -365,12 +352,7 @@ class asgarosforum {
     }
 
     public function get_link($id, $location, $page = 1) {
-        $page_appendix = "";
-
-        if ($page > 1) {
-            $page_appendix = '&amp;part=' . $page;
-        }
-
+        $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
         return $location . $id . $page_appendix;
     }
 
@@ -603,25 +585,21 @@ class asgarosforum {
                 $menu .= '<a href="'.$this->url_editor_thread.'"><span class="icon-file-empty"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
             } else if ($location == 'thread') {
                 if (!$this->get_status('closed') || $this->is_moderator()) {
-                    $menu .= '<a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__("Reply", "asgaros-forum").'</span></a>';
+                    $menu .= '<a href="'.$this->url_editor_post.'"><span class="icon-bubble2"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
                 }
 
                 if ($this->is_moderator()) {
                     $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
-                    $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="icon-bin"></span><span>'.__("Delete Thread", "asgaros-forum").'</span></a>';
+                    $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="icon-bin"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
                     $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
-                    if ($this->get_status('sticky')) {
-                        $menu .= __("Undo Sticky", "asgaros-forum");
-                    } else {
-                        $menu .= __("Sticky", "asgaros-forum");
-                    }
+                    $menu .= ($this->get_status('sticky')) ? __('Undo Sticky', 'asgaros-forum') : __('Sticky', 'asgaros-forum');
                     $menu .= '</span></a>';
 
                     if ($this->get_status('closed')) {
-                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__("Re-open", "asgaros-forum").'</span></a>';
+                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-unlocked"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
                     } else {
-                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__("Close", "asgaros-forum").'</span></a>';
+                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="icon-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
                     }
                 }
             }
@@ -649,11 +627,11 @@ class asgarosforum {
         }
 
         if ($this->current_view == 'addpost' && $this->access) {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Post Reply", "asgaros-forum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Post Reply', 'asgaros-forum');
         } else if ($this->current_view == 'editpost' && $this->access) {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("Edit Post", "asgaros-forum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Edit Post', 'asgaros-forum');
         } else if ($this->current_view == 'addthread' && $this->access) {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __("New Thread", "asgaros-forum");
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('New Thread', 'asgaros-forum');
         }
 
         return '<div class="breadcrumbs">'.$trail.'</div>';
@@ -671,7 +649,7 @@ class asgarosforum {
 
     public function pageing($location) {
         global $wpdb;
-        $out = __("Pages:", "asgaros-forum");
+        $out = __('Pages:', 'asgaros-forum');
         $num_pages = 0;
         $select_source = '';
         $select_url = '';
@@ -691,32 +669,32 @@ class asgarosforum {
         if ($num_pages <= 6) {
             for ($i = 0; $i < $num_pages; ++$i) {
                 if ($i == $this->current_page) {
-                    $out .= " <strong>" . ($i + 1) . "</strong>";
+                    $out .= ' <strong>'.($i + 1).'</strong>';
                 } else {
-                    $out .= " <a href='" . $this->get_link($select_source, $select_url, ($i + 1)) . "'>" . ($i + 1) . "</a>";
+                    $out .= ' <a href="'.$this->get_link($select_source, $select_url, ($i + 1)).'">'.($i + 1).'</a>';
                 }
             }
         } else {
             if ($this->current_page >= 4) {
-                $out .= " <a href='" . $this->get_link($select_source, $select_url) . "'>" . __("First", "asgaros-forum") . "</a> <<";
+                $out .= ' <a href="'.$this->get_link($select_source, $select_url).'">'.__('First', 'asgaros-forum').'</a> <<';
             }
 
             for ($i = 3; $i > 0; $i--) {
                 if ((($this->current_page + 1) - $i) > 0) {
-                    $out .= " <a href='" . $this->get_link($select_source, $select_url, (($this->current_page + 1) - $i)) . "'>" . (($this->current_page + 1) - $i) . "</a>";
+                    $out .= ' <a href="'.$this->get_link($select_source, $select_url, (($this->current_page + 1) - $i)).'">'.(($this->current_page + 1) - $i).'</a>';
                 }
             }
 
-            $out .= " <strong>" . ($this->current_page + 1) . "</strong>";
+            $out .= ' <strong>'.($this->current_page + 1).'</strong>';
 
             for ($i = 1; $i <= 3; $i++) {
                 if ((($this->current_page + 1) + $i) <= $num_pages) {
-                    $out .= " <a href='" . $this->get_link($select_source, $select_url, (($this->current_page + 1) + $i)) . "'>" . (($this->current_page + 1) + $i) . "</a>";
+                    $out .= ' <a href="'.$this->get_link($select_source, $select_url, (($this->current_page + 1) + $i)).'">'.(($this->current_page + 1) + $i).'</a>';
                 }
             }
 
             if ($num_pages - $this->current_page >= 5) {
-                $out .= " >> <a href='" . $this->get_link($select_source, $select_url, $num_pages) . "'>" . __("Last", "asgaros-forum") . "</a>";
+                $out .= ' >> <a href="'.$this->get_link($select_source, $select_url, $num_pages).'">'.__('Last', 'asgaros-forum').'</a>';
             }
         }
 
@@ -792,29 +770,11 @@ class asgarosforum {
 
         if ($this->is_moderator()) {
             if ($property == 'sticky') {
-                if ($this->get_status('sticky')) {
-                    $new_status .= 'normal_';
-                } else {
-                    $new_status .= 'sticky_';
-                }
-
-                if ($this->get_status('closed')) {
-                    $new_status .= 'closed';
-                } else {
-                    $new_status .= 'open';
-                }
+                $new_status .= ($this->get_status('sticky')) ? 'normal_' : 'sticky_';
+                $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
             } else if ($property == 'closed') {
-                if ($this->get_status('sticky')) {
-                    $new_status .= 'sticky_';
-                } else {
-                    $new_status .= 'normal_';
-                }
-
-                if ($this->get_status('closed')) {
-                    $new_status .= 'open';
-                } else {
-                    $new_status .= 'closed';
-                }
+                $new_status .= ($this->get_status('sticky')) ? 'sticky_' : 'normal_';
+                $new_status .= ($this->get_status('closed')) ? 'open' : 'closed';
             }
 
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = %s WHERE id = %d;", $new_status, $this->current_thread));
