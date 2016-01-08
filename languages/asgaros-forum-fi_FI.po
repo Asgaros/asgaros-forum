@@ -1,0 +1,384 @@
+# Loco Gettext template
+msgid ""
+msgstr ""
+"Project-Id-Version: Asgaros Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-08 16:35+0200\n"
+"POT-Revision-Date: Fri Jan 01 2016 20:49:28 GMT+0100 (Mitteleuropäische "
+"Zeit)\n"
+"PO-Revision-Date: 2016-01-08 23:23+0200\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;"
+"__ngettext_noop:1,2;_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;"
+"_nx_js:1,2,3c;esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;"
+"esc_attr_x:1,2c;esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;"
+"transChoice:1,2\n"
+"X-Generator: Poedit 1.8.6\n"
+"Last-Translator: \n"
+"Language: fi_FI\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#. Name of the plugin
+msgid "Asgaros Forum"
+msgstr "Asgaros Foorumi"
+
+#. URI of the plugin
+msgid "https://github.com/Asgaros/asgaros-forum"
+msgstr "https://github.com/Asgaros/asgaros-forum"
+
+#. Description of the plugin
+msgid "A lightweight and simple forum plugin for WordPress."
+msgstr "Kevyt ja yksinkertainen keskustelufoorumi lisäosa Wordpressiin."
+
+#. Author of the plugin
+msgid "Thomas Belser"
+msgstr "Thomas Belser"
+
+#. Author URI of the plugin
+msgid "http://thomasbelser.net"
+msgstr "http://thomasbelser.net"
+
+#: ../admin/admin.php:35 ../admin/admin.php:54 ../admin/admin.php:63
+msgid "Order"
+msgstr "Järjestys"
+
+#: ../admin/admin.php:86 ../includes/forum.php:639
+msgid "Forum"
+msgstr "Foorumi"
+
+#: ../admin/admin.php:87 ../admin/views/options.php:2
+msgid "Options"
+msgstr "Vaihtoehdot"
+
+#: ../admin/admin.php:88 ../includes/forum.php:64
+msgid "Categories"
+msgstr "Kategoriat"
+
+#: ../admin/admin.php:89 ../admin/views/forums.php:2
+msgid "Forums"
+msgstr "Foorumit"
+
+#: ../admin/admin.php:94
+msgid ""
+"WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and "
+"Replies associated with it!!! Are you sure you want to delete this Forum???"
+msgstr ""
+"VAROITUS: Postamalla tämän foorumin poistat PYSYVÄSTI kaikki viestit yms. "
+"Haluatko varmasti poistaa foorumin??"
+
+#: ../admin/views/forums.php:5
+msgid "Your Forums have been saved."
+msgstr "Foorumisi on tallennettu"
+
+#: ../admin/views/forums.php:18 ../admin/views/forums.php:39
+msgid "Name:"
+msgstr "Nimi:"
+
+#: ../admin/views/forums.php:19 ../admin/views/forums.php:40
+msgid "Description:"
+msgstr "Kuvaus:"
+
+#: ../admin/views/forums.php:24 ../admin/views/forums.php:45
+msgid "Remove this Forum"
+msgstr "Poista tämä Foorumi"
+
+#: ../admin/views/forums.php:29
+msgid "Add new Forum"
+msgstr "Lisää uusi Foorumi"
+
+#: ../admin/views/forums.php:31
+msgid "Save Changes"
+msgstr "Tallenna muutokset"
+
+#: ../admin/views/forums.php:33
+msgid "You must add some categories first."
+msgstr "Sinun pitää lisätä joku kategoria ensin."
+
+#: ../admin/views/options.php:5
+msgid "Your options have been saved."
+msgstr "Valintasi on tallenettu"
+
+#: ../admin/views/options.php:10
+msgid "Replies to show per page:"
+msgstr "Montako vastausta näytetään sivulla:"
+
+#: ../admin/views/options.php:14
+msgid "Threads to show per page:"
+msgstr "Montako aihetta näytetään sivulla:"
+
+#: ../admin/views/options.php:19
+msgid "Allow file uploads"
+msgstr "Salli tiedoston lisääminen"
+
+#: ../admin/views/options.php:21
+msgid "Save Options"
+msgstr "Tallenna valinnat"
+
+#: ../includes/forum.php:65
+msgid "Category"
+msgstr "Kategoria"
+
+#: ../includes/forum.php:66
+msgid "Edit Category"
+msgstr "Muokkaa kategoriaa"
+
+#: ../includes/forum.php:67
+msgid "Update Category"
+msgstr "Päivitä kategoria"
+
+#: ../includes/forum.php:68
+msgid "Add new category"
+msgstr "Lisää uusi kategoria"
+
+#: ../includes/forum.php:69
+msgid "Search categories"
+msgstr "Etsi kategorioista"
+
+#: ../includes/forum.php:70
+msgid "No categories found."
+msgstr "Kategorioita ei löytynyt."
+
+#: ../includes/forum.php:245 ../includes/forum.php:654
+#: ../includes/views/editor. php:72
+msgid "Edit Post"
+msgstr "Muokkaa viestiä"
+
+#: ../includes/forum.php:247 ../includes/forum.php:652
+msgid "Post Reply"
+msgstr "Lähetä vastaus"
+
+#: ../includes/forum.php:249 ../includes/forum.php:603
+#: ../includes/forum.php:656
+msgid "New Thread"
+msgstr "Uusi aihe"
+
+#: ../includes/forum.php:251 ../includes/forum.php:610
+msgid "Move Thread"
+msgstr "Siirrä aihe"
+
+#: ../includes/forum.php:297
+msgid "There are no categories yet!"
+msgstr "Kategorioita ei ole vielä!"
+
+#: ../includes/forum.php:310 ../includes/views/editor.php:17
+msgid "Sorry, this forum does not exist."
+msgstr "Pahoittelut, tätä foorumia ei ole olemassa."
+
+#: ../includes/forum.php:325
+msgid "Thread closed"
+msgstr "Aihe suljettu"
+
+#: ../includes/forum.php:330
+msgid "Sorry, but there are no posts."
+msgstr "Pahoittelut, täällä ei ole viestejä."
+
+#: ../includes/forum.php:333 ../includes/views/editor.php:22
+msgid "Sorry, this thread does not exist."
+msgstr "Pahoittelut, aihetta ei ole olemassa."
+
+#: ../includes/forum.php:340
+#, php-format
+msgid "Move \"<strong>%s</strong>\" to new forum:"
+msgstr "Siirrä \"<strong>%s</strong>\" uuteen foorumiin:"
+
+#: ../includes/forum.php:349
+msgid "Move"
+msgstr "Siirrä"
+
+#: ../includes/forum.php:353
+msgid "You are not allowed to move threads."
+msgstr "Sinulla ei ole oikeuksia siirtää aihetta."
+
+#: ../includes/forum.php:488 ../includes/forum.php:505
+msgid "Last post by"
+msgstr "Uusimman viestin kirjoitti:"
+
+#: ../includes/forum.php:488 ../includes/forum.php:507
+#: ../includes/views/editor. php:35
+#, php-format
+msgid "on %s"
+msgstr " %s"
+
+#: ../includes/forum.php:500
+msgid "No threads yet!"
+msgstr "Ei aiheita vielä!"
+
+#: ../includes/forum.php:506
+msgid "in"
+msgstr " "
+
+#: ../includes/forum.php:543
+msgid "Quote"
+msgstr "Lainaa"
+
+#: ../includes/forum.php:547
+msgid "Remove"
+msgstr "Poista"
+
+#: ../includes/forum.php:551
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: ../includes/forum.php:554
+msgid "Permalink"
+msgstr "Pysyvä linkki"
+
+#: ../includes/forum.php:606
+msgid "Reply"
+msgstr "Tee uudelleen"
+
+#: ../includes/forum.php:611
+msgid "Delete Thread"
+msgstr "Poista aihe"
+
+#: ../includes/forum.php:615
+msgid "Undo Sticky"
+msgstr "Peruuta liimaus"
+
+#: ../includes/forum.php:617
+msgid "Sticky"
+msgstr "Liimaa"
+
+#: ../includes/forum.php:622
+msgid "Re-open"
+msgstr "Avaa uudelleen"
+
+#: ../includes/forum.php:624
+msgid "Close"
+msgstr "Sulje"
+
+#: ../includes/forum.php:674
+msgid "Pages:"
+msgstr "Sivut:"
+
+#: ../includes/forum.php:701
+msgid "First"
+msgstr "Ensimmäinen"
+
+#: ../includes/forum.php:719
+msgid "Last"
+msgstr "Viimeinen"
+
+#: ../includes/forum.php:912
+msgid "Delete"
+msgstr "Poista"
+
+#: ../includes/forum.php:921 ../includes/forum.php:926
+msgid "Uploaded files:"
+msgstr "Ladatut tiedostot:"
+
+#: ../includes/insert.php:7
+msgid "An error occured!"
+msgstr "Tapahtui virhe!"
+
+#: ../includes/insert.php:11 ../includes/views/editor.php:41
+msgid "Sorry, this post does not exist."
+msgstr "Pahoittelut, tätä viestiä ei ole olemassa-"
+
+#: ../includes/insert.php:16
+msgid "You are not allowed to do this."
+msgstr "Et voi tehdä tätä."
+
+#: ../includes/insert.php:21
+msgid "You must enter a subject."
+msgstr "Sinun on annetteva aihe."
+
+#: ../includes/insert.php:26
+msgid "You must enter a message."
+msgstr "Sinun on annettava viesti."
+
+#: ../includes/views/editor.php:10
+msgid "Sorry, you don't have permission to post."
+msgstr "Pahoittelut, sinulla ei ole oikeutta lähettää viestiä."
+
+#: ../includes/views/editor.php:27
+msgid "Sorry, but you are not allowed to do this."
+msgstr "Pahoittelut, tämä toiminto ei ole sallittu"
+
+#: ../includes/views/editor.php:35
+msgid "Quote from"
+msgstr "Lainaa"
+
+#: ../includes/views/editor.php:50
+msgid "Sorry, you are not allowed to edit this post."
+msgstr "Pahoittelut, sinulla ei ole oikeutta muokata tätä viestiä."
+
+#: ../includes/views/editor.php:68
+msgid "Post new Thread"
+msgstr "Lähetä uusi aihe"
+
+#: ../includes/views/editor.php:70
+msgid "Post Reply:"
+msgstr "Lähetä vastaus:"
+
+#: ../includes/views/editor.php:80
+msgid "Subject:"
+msgstr "Otsikko:"
+
+#: ../includes/views/editor.php:85
+msgid "Message:"
+msgstr "Viesti:"
+
+#: ../includes/views/editor.php:101
+msgid "Upload Files:"
+msgstr "Lisää tiedostot:"
+
+#: ../includes/views/editor.php:104
+msgid "Add another file ..."
+msgstr "Lisää uusi tiedosto..."
+
+#: ../includes/views/editor.php:112 ../includes/views/editor.php:114 ..
+#: /includes/views/editor.php:116
+msgid "Submit"
+msgstr "Lähetä"
+
+#: ../includes/views/forum.php:15
+msgid "Sticky Threads"
+msgstr "Tarralaput"
+
+#: ../includes/views/forum.php:21 ../includes/views/forum.php:40
+msgid "Created by:"
+msgstr "Kirjoittanut:"
+
+#: ../includes/views/forum.php:24 ../includes/views/forum.php:43
+msgid "Answers"
+msgstr "Vastaukset"
+
+#: ../includes/views/forum.php:25 ../includes/views/forum.php:44
+msgid "Views"
+msgstr "Katsottu"
+
+#: ../includes/views/forum.php:61
+msgid "There are no threads yet!"
+msgstr "Aiheita ei ole vielä:"
+
+#: ../includes/views/overview.php:19
+msgid "Threads:"
+msgstr "Aiheet:"
+
+#: ../includes/views/overview.php:20 ../includes/views/thread.php:23
+msgid "Posts:"
+msgstr "Viestit:"
+
+#: ../includes/views/overview.php:27
+msgid "There are no forums yet!"
+msgstr "Foorumeita ei ole vielä!"
+
+#: ../includes/views/overview.php:33
+msgid "New posts"
+msgstr "Uusia viestejä"
+
+#: ../includes/views/overview.php:34
+msgid "No new posts"
+msgstr "Ei uusia viestejä"
+
+#: ../includes/views/overview.php:35
+msgid "Mark All Read"
+msgstr "Merkitse kaikki luetuiksi"
