@@ -51,7 +51,7 @@ class asgarosforum {
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('wp_head', array($this, 'setup_header'));
-        add_filter('wp_title', array($this, 'get_pagetitle'));
+        add_filter('wp_title', array($this, 'get_pagetitle'), 10, 3);
         add_shortcode('forum', array($this, 'forum'));
     }
 
@@ -222,32 +222,30 @@ class asgarosforum {
         echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/style.css" />';
     }
 
-    public function get_pagetitle() {
-        global $post;
-        $default_title = $post->post_title;
-        $title = '';
+    public function get_pagetitle($title, $sep, $seplocation) {
+        $pre = '';
 
-        if ($this->access) {
+        if ($this->access && $this->current_view) {
             if ($this->current_view == "forum") {
                 if ($this->current_forum) {
-                    $title = $this->get_name($this->current_forum, $this->table_forums) . " - ";
+                    $pre = $this->get_name($this->current_forum, $this->table_forums) . " - ";
                 }
             } else if ($this->current_view == "thread") {
                 if ($this->current_thread) {
-                    $title = $this->get_name($this->current_thread, $this->table_threads) . " - ";
+                    $pre = $this->get_name($this->current_thread, $this->table_threads) . " - ";
                 }
             } else if ($this->current_view == "editpost") {
-                $title = __('Edit Post', 'asgaros-forum') . ' - ';
+                $pre = __('Edit Post', 'asgaros-forum') . ' - ';
             } else if ($this->current_view == "addpost") {
-                $title = __('Post Reply', 'asgaros-forum') . ' - ';
+                $pre = __('Post Reply', 'asgaros-forum') . ' - ';
             } else if ($this->current_view == "addthread") {
-                $title = __('New Thread', 'asgaros-forum') . ' - ';
+                $pre = __('New Thread', 'asgaros-forum') . ' - ';
             } else if ($this->current_view == "movethread") {
-                $title = __('Move Thread', 'asgaros-forum') . ' - ';
+                $pre = __('Move Thread', 'asgaros-forum') . ' - ';
             }
         }
 
-        return $title . $default_title . ' | ';
+        return $pre . $title;
     }
 
     public function forum() {

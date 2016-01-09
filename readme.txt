@@ -2,7 +2,7 @@
 Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
-Tested up to: 4.4
+Tested up to: 4.4.1
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,8 @@ Add this style rules to your theme CSS file and change #49617D to a color of you
 5. Manage forums in the administration area.
 
 == Changelog ==
-* Added finnish translation (thanks to juhani.honkanen)
+* Fixed: Dont modify page titles outside of the forum
+* Added: Finnish translation (thanks to juhani.honkanen)
 = 1.0.1 =
 * Removed some untranslated strings
 * Fixed display issues with some default themes
