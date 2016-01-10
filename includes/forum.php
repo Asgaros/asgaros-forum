@@ -55,6 +55,16 @@ class asgarosforum {
         add_shortcode('forum', array($this, 'forum'));
     }
 
+    public function execute_plugin() {
+        global $post;
+
+        if (!(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum'))) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static function register_category_taxonomy() {
         register_taxonomy(
             'asgarosforum-category',
@@ -131,6 +141,10 @@ class asgarosforum {
     }
 
     public function prepare() {
+        if (!$this->execute_plugin()) {
+            return;
+        }
+
         global $user_ID, $wp_rewrite;
 
         if (isset($_GET['view'])) {
@@ -213,11 +227,20 @@ class asgarosforum {
     }
 
     public function enqueue_front_scripts() {
+        if (!$this->execute_plugin()) {
+            return;
+        }
+
         global $asgarosforum_directory;
+
         wp_enqueue_script('asgarosforum-js', $asgarosforum_directory.'js/script.js', array('jquery'));
     }
 
     public function setup_header() {
+        if (!$this->execute_plugin()) {
+            return;
+        }
+
         global $asgarosforum_directory;
         echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/style.css" />';
 
@@ -227,6 +250,10 @@ class asgarosforum {
     }
 
     public function get_pagetitle($title, $sep, $seplocation) {
+        if (!$this->execute_plugin()) {
+            return $title;
+        }
+
         $pre = '';
 
         if ($this->access && $this->current_view) {
