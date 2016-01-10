@@ -24,7 +24,7 @@ if (!$error) {
 
         if (!$error && $this->get_status('closed') && !$this->is_moderator()) {
             $error = true;
-            echo '<div class="notice">'.__('Sorry, but you are not allowed to do this.', 'asgaros-forum').'</div>';
+            echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
         }
 
         if (!$error) {
