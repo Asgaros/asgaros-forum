@@ -220,6 +220,10 @@ class asgarosforum {
     public function setup_header() {
         global $asgarosforum_directory;
         echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/style.css" />';
+
+        if (wp_is_mobile()) {
+            echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/mobile.css" />';
+        }
     }
 
     public function get_pagetitle($title, $sep, $seplocation) {
