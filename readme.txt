@@ -22,6 +22,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 = Translations =
 * English
 * Finnish
+* French
 * German
 
 == Installation ==
@@ -49,6 +50,7 @@ Add this style rules to your theme CSS file and change #49617D to a color of you
 == Changelog ==
 * Fixed: Dont modify page titles outside of the forum
 * Added: Finnish translation (thanks to juhani.honkanen)
+* Added: French translation (thanks to thomasroy)
 = 1.0.1 =
 * Removed some untranslated strings
 * Fixed display issues with some default themes
