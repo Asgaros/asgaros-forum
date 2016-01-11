@@ -11,7 +11,8 @@
     font-size: 1.4em;
 }
 #af-wrapper .forum div,
-#af-wrapper .thread div {
+#af-wrapper .thread div,
+#af-wrapper .post-author {
     border-right: none;
 }
 #af-wrapper .forum-status,
@@ -39,9 +40,11 @@
 }
 #af-wrapper .editor-cell,
 #af-wrapper .post-author,
-#af-wrapper .post-message {
+#af-wrapper .post-message,
+#af-wrapper .post-date {
     display: block;
     width: 100%;
+    box-sizing: border-box;
 }
 #af-wrapper .pages,
 #af-wrapper .forum-menu {
@@ -49,4 +52,8 @@
 }
 #af-wrapper .post-menu {
     float: left;
+    width: 100%;
+}
+#af-wrapper .post-header {
+    text-align: center;
 }

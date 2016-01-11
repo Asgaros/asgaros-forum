@@ -43,7 +43,6 @@ Add this style rules to your theme CSS file and change #49617D to a color of you
 You can translate the forum plugin on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum)
 
-
 == Screenshots ==
 1. The forum overview.
 2. The thread overview.
@@ -56,6 +55,7 @@ You can translate the forum plugin on this site:
 * Added: Editor button for adding images to posts
 * Added: Finnish translation (thanks to juhani.honkanen)
 * Added: French translation (thanks to thomasroy)
+* Added: Russian translation (thanks to ironboys)
 = 1.0.1 =
 * Removed some untranslated strings
 * Fixed display issues with some default themes

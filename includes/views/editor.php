@@ -76,12 +76,12 @@ if (!$error) { ?>
         <div class="content-element">
             <?php if ($_GET['view'] == "addthread" || ($_GET['view'] == "editpost" && $this->is_first_post($post->id))) { ?>
                 <div class="editor-row">
-                    <div class="editor-cell"><?php _e('Subject:', 'asgaros-forum'); ?></div>
+                    <div class="editor-cell"><span><?php _e('Subject:', 'asgaros-forum'); ?></span></div>
                     <div class="editor-cell"><input type="text" name="subject" value="<?php echo $threadname; ?>" /></div>
                 </div>
             <?php } ?>
             <div class="editor-row">
-                <div class="editor-cell"><?php _e('Message:', 'asgaros-forum'); ?></div>
+                <div class="editor-cell"><span><?php _e('Message:', 'asgaros-forum'); ?></span></div>
                 <div class="editor-cell message-editor">
                     <?php
                     if ($_GET['view'] == "editpost") {
@@ -97,7 +97,7 @@ if (!$error) { ?>
             <?php } ?>
             <?php if ($this->options['allow_file_uploads']) { ?>
     		<div class="editor-row">
-    			<div class="editor-cell"><?php _e('Upload Files:', 'asgaros-forum'); ?></div>
+    			<div class="editor-cell"><span><?php _e('Upload Files:', 'asgaros-forum'); ?></span></div>
     			<div class="editor-cell">
     				<input type="file" name="forumfile[]" /><br />
                     <a id="add_file_link" href="#"><?php _e('Add another file ...', 'asgaros-forum'); ?></a>
