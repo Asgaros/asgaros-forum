@@ -49,6 +49,7 @@ Add this style rules to your theme CSS file and change #49617D to a color of you
 
 == Changelog ==
 * Fixed: Dont modify page titles outside of the forum
+* Added: Editor button for adding images to posts
 * Added: Finnish translation (thanks to juhani.honkanen)
 * Added: French translation (thanks to thomasroy)
 = 1.0.1 =

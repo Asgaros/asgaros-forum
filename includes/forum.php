@@ -52,6 +52,7 @@ class asgarosforum {
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('wp_head', array($this, 'setup_header'));
         add_filter('wp_title', array($this, 'get_pagetitle'), 10, 3);
+        add_filter('teeny_mce_buttons', array($this, 'teeny_mce_buttons'), 10, 2);
         add_shortcode('forum', array($this, 'forum'));
     }
 
@@ -277,6 +278,14 @@ class asgarosforum {
         }
 
         return $pre . $title;
+    }
+
+    function teeny_mce_buttons($buttons, $editor_id) {
+        if (!$this->execute_plugin() || $editor_id !== 'message') {
+            return $buttons;
+        } else {
+            return array('bold', 'italic', 'underline', 'blockquote', 'strikethrough', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'undo', 'redo', 'image', 'link', 'unlink', 'fullscreen' );
+        }
     }
 
     public function forum() {
