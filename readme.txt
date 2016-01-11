@@ -24,6 +24,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Finnish
 * French
 * German
+* Russian
 
 == Installation ==
 * Download Asgaros Forum.
@@ -38,6 +39,9 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 = I want to use a different color =
 Add this style rules to your theme CSS file and change #49617D to a color of your choice:
 [https://gist.github.com/Asgaros/5d0cef9f4df09b36fd08](https://gist.github.com/Asgaros/5d0cef9f4df09b36fd08)
+= I want help to translate Asgaros Forum =
+You can translate the forum plugin on this site:
+[https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum)
 
 
 == Screenshots ==
