@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Mon Jan 11 2016 14:19:10 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Mon Jan 11 2016 15:27:58 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <developer@thomasbelser.net>\n"
 "Language-Team: \n"
 "Language: Russian\n"
@@ -23,6 +23,10 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: ru_RU"
+
+#: ../includes/forum.php:567 ../includes/forum.php:631
+msgid "Are you sure you want to remove this?"
+msgstr ""
 
 #. Name of the plugin
 msgid "Asgaros Forum"
@@ -48,7 +52,7 @@ msgstr "http://thomasbelser.net"
 msgid "Order"
 msgstr "Сортировка"
 
-#: ../admin/admin.php:86 ../admin/admin.php:86 ../includes/forum.php:639
+#: ../admin/admin.php:86 ../admin/admin.php:86 ../includes/forum.php:655
 msgid "Forum"
 msgstr "Форум"
 
@@ -56,7 +60,7 @@ msgstr "Форум"
 msgid "Options"
 msgstr "Настройки"
 
-#: ../admin/admin.php:88 ../admin/admin.php:88 ../includes/forum.php:64
+#: ../admin/admin.php:88 ../admin/admin.php:88 ../includes/forum.php:75
 msgid "Categories"
 msgstr "Категории"
 
@@ -120,155 +124,155 @@ msgstr "Разрешить загрузку файлов"
 msgid "Save Options"
 msgstr "Параметры сохранения"
 
-#: ../includes/forum.php:65
+#: ../includes/forum.php:76
 msgid "Category"
 msgstr "Категории"
 
-#: ../includes/forum.php:66
+#: ../includes/forum.php:77
 msgid "Edit Category"
 msgstr "Изменить категорию"
 
-#: ../includes/forum.php:67
+#: ../includes/forum.php:78
 msgid "Update Category"
 msgstr "Обновить категорию"
 
-#: ../includes/forum.php:68
+#: ../includes/forum.php:79
 msgid "Add new category"
 msgstr "Добавить новую категорию"
 
-#: ../includes/forum.php:69
+#: ../includes/forum.php:80
 msgid "Search categories"
 msgstr "Поиск рубрик"
 
-#: ../includes/forum.php:70
+#: ../includes/forum.php:81
 msgid "No categories found."
 msgstr "Рубрик не найдено."
 
-#: ../includes/forum.php:245 ../includes/forum.php:654 ../includes/views/editor.
+#: ../includes/forum.php:270 ../includes/forum.php:670 ../includes/views/editor.
 #: php:72
 msgid "Edit Post"
 msgstr "Редактировать публикацию"
 
-#: ../includes/forum.php:247 ../includes/forum.php:652
+#: ../includes/forum.php:272 ../includes/forum.php:668
 msgid "Post Reply"
 msgstr "Ответить"
 
-#: ../includes/forum.php:249 ../includes/forum.php:603 ../includes/forum.php:656
+#: ../includes/forum.php:274 ../includes/forum.php:623 ../includes/forum.php:672
 msgid "New Thread"
 msgstr "Создать тему"
 
-#: ../includes/forum.php:251 ../includes/forum.php:610
+#: ../includes/forum.php:276 ../includes/forum.php:630
 msgid "Move Thread"
 msgstr "Переместить Тему"
 
-#: ../includes/forum.php:297
+#: ../includes/forum.php:326
 msgid "There are no categories yet!"
 msgstr "Категорий нет"
 
-#: ../includes/forum.php:310 ../includes/views/editor.php:17
+#: ../includes/forum.php:339 ../includes/views/editor.php:17
 msgid "Sorry, this forum does not exist."
 msgstr "К сожалению, этого форума не существует."
 
-#: ../includes/forum.php:325
+#: ../includes/forum.php:351
 msgid "Thread closed"
 msgstr "Тема закрыта"
 
-#: ../includes/forum.php:330
+#: ../includes/forum.php:355
 msgid "Sorry, but there are no posts."
 msgstr "Извините, но сообщений нет"
 
-#: ../includes/forum.php:333 ../includes/views/editor.php:22
+#: ../includes/forum.php:358 ../includes/views/editor.php:22
 msgid "Sorry, this thread does not exist."
 msgstr "К сожалению, этой темы не существует."
 
-#: ../includes/forum.php:340
+#: ../includes/forum.php:365
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr "Перейти \"<strong>%s</strong>\" к новой теме"
 
-#: ../includes/forum.php:349
+#: ../includes/forum.php:374
 msgid "Move"
 msgstr "Передвинуть"
 
-#: ../includes/forum.php:353
+#: ../includes/forum.php:378
 msgid "You are not allowed to move threads."
 msgstr "Вы не можете перемещать темы."
 
-#: ../includes/forum.php:488 ../includes/forum.php:505
+#: ../includes/forum.php:508 ../includes/forum.php:525
 msgid "Last post by"
 msgstr "Последний"
 
-#: ../includes/forum.php:488 ../includes/forum.php:507 ../includes/views/editor.
+#: ../includes/forum.php:508 ../includes/forum.php:527 ../includes/views/editor.
 #: php:35
 #, php-format
 msgid "on %s"
 msgstr "На %s"
 
-#: ../includes/forum.php:500
+#: ../includes/forum.php:520
 msgid "No threads yet!"
 msgstr "Нет тем"
 
-#: ../includes/forum.php:506
+#: ../includes/forum.php:526
 msgid "in"
 msgstr "В"
 
-#: ../includes/forum.php:543
+#: ../includes/forum.php:563
 msgid "Quote"
 msgstr "Цитаровать"
 
-#: ../includes/forum.php:547
+#: ../includes/forum.php:567
 msgid "Remove"
 msgstr "Удален"
 
-#: ../includes/forum.php:551
+#: ../includes/forum.php:571
 msgid "Edit"
 msgstr "Правка"
 
-#: ../includes/forum.php:554
+#: ../includes/forum.php:574
 msgid "Permalink"
 msgstr "Пермалинки"
 
-#: ../includes/forum.php:606
+#: ../includes/forum.php:626
 msgid "Reply"
 msgstr "Ответ"
 
-#: ../includes/forum.php:611
+#: ../includes/forum.php:631
 msgid "Delete Thread"
 msgstr "Удалить тему"
 
-#: ../includes/forum.php:615
+#: ../includes/forum.php:634
 msgid "Undo Sticky"
 msgstr "Открепить"
 
-#: ../includes/forum.php:617
+#: ../includes/forum.php:634
 msgid "Sticky"
 msgstr "Закрепить"
 
-#: ../includes/forum.php:622
+#: ../includes/forum.php:638
 msgid "Re-open"
 msgstr "Открыт"
 
-#: ../includes/forum.php:624
+#: ../includes/forum.php:640
 msgid "Close"
 msgstr "Время закрытия"
 
-#: ../includes/forum.php:674
+#: ../includes/forum.php:690
 msgid "Pages:"
 msgstr "Страница:"
 
-#: ../includes/forum.php:701
+#: ../includes/forum.php:717
 msgid "First"
 msgstr "Первые"
 
-#: ../includes/forum.php:719
+#: ../includes/forum.php:735
 msgid "Last"
 msgstr "Последняя"
 
-#: ../includes/forum.php:912
+#: ../includes/forum.php:910
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../includes/forum.php:921 ../includes/forum.php:926
+#: ../includes/forum.php:919 ../includes/forum.php:923
 msgid "Uploaded files:"
 msgstr "Загруженные файлы:"
 
@@ -280,7 +284,7 @@ msgstr "Произошла ошибка!"
 msgid "Sorry, this post does not exist."
 msgstr "К сожалению, этого поста не существует."
 
-#: ../includes/insert.php:16
+#: ../includes/insert.php:16 ../includes/views/editor.php:27
 msgid "You are not allowed to do this."
 msgstr "У вас нет прав на это действие"
 
@@ -295,10 +299,6 @@ msgstr "Вы должны ввести сообщение"
 #: ../includes/views/editor.php:10
 msgid "Sorry, you don't have permission to post."
 msgstr "К сожалению, вы не можете написать"
-
-#: ../includes/views/editor.php:27
-msgid "Sorry, but you are not allowed to do this."
-msgstr "Извините, но вы не можете сделать это"
 
 #: ../includes/views/editor.php:35
 msgid "Quote from"
@@ -316,24 +316,24 @@ msgstr "Создать тему"
 msgid "Post Reply:"
 msgstr "Ответить"
 
-#: ../includes/views/editor.php:80
+#: ../includes/views/editor.php:79
 msgid "Subject:"
 msgstr "Тема:"
 
-#: ../includes/views/editor.php:85
+#: ../includes/views/editor.php:84
 msgid "Message:"
 msgstr "Сообщение:"
 
-#: ../includes/views/editor.php:101
+#: ../includes/views/editor.php:100
 msgid "Upload Files:"
 msgstr "Загрузить файлы:"
 
-#: ../includes/views/editor.php:104
+#: ../includes/views/editor.php:103
 msgid "Add another file ..."
 msgstr "Добавить ещё один файл"
 
-#: ../includes/views/editor.php:112 ../includes/views/editor.php:114 ..
-#: includes/views/editor.php:116
+#: ../includes/views/editor.php:111 ../includes/views/editor.php:113 ..
+#: includes/views/editor.php:115
 msgid "Submit"
 msgstr "Удалить сообщение"
 
@@ -361,7 +361,7 @@ msgstr "Нет ни одной темы еще!"
 msgid "Threads:"
 msgstr "Темы:"
 
-#: ../includes/views/overview.php:20 ../includes/views/thread.php:23
+#: ../includes/views/overview.php:20 ../includes/views/thread.php:24
 msgid "Posts:"
 msgstr "Посты:"
 
