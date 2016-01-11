@@ -60,7 +60,7 @@ if (isset($_POST['add_thread_submit'])) {
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));
     }
 
-    $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id, $_POST['page_id']));
+    $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id, $_POST['part_id']));
 }
 
 wp_redirect($redirect);

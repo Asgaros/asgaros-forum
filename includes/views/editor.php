@@ -113,7 +113,7 @@ if (!$error) { ?>
                     <input type="submit" name="add_post_submit" value="<?php _e('Submit', 'asgaros-forum'); ?>" />
                 <?php } else if ($_GET['view'] == "editpost") { ?>
                     <input type="submit" name="edit_post_submit" value="<?php _e('Submit', 'asgaros-forum'); ?>" />
-                    <input type="hidden" name="page_id" value="<?php echo $_GET['part']; ?>" />
+                    <input type="hidden" name="part_id" value="<?php echo $_GET['part']; ?>" />
                 <?php } ?>
                 </div>
             </div>
