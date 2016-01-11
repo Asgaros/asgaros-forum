@@ -60,6 +60,7 @@ You can translate the forum plugin on this site:
 * Added: Finnish translation (thanks to juhani.honkanen)
 * Added: French translation (thanks to thomasroy)
 * Added: Russian translation (thanks to ironboys)
+* Changed: Minor design changes
 * Updated: English and german translations
 * Performance improvements and code optimizations
 = 1.0.1 =
