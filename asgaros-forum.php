@@ -34,6 +34,7 @@ add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
 //Load class files
 require('includes/forum.php');
+require('includes/forum-widgets.php');
 
 if (is_admin()) {
     require_once('admin/admin.php');

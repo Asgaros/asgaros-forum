@@ -238,11 +238,13 @@ class asgarosforum {
     }
 
     public function setup_header() {
+        global $asgarosforum_directory;
+        echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/widgets.css" />';
+
         if (!$this->execute_plugin()) {
             return;
         }
 
-        global $asgarosforum_directory;
         echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/style.css" />';
 
         if (wp_is_mobile()) {
@@ -495,6 +497,13 @@ class asgarosforum {
             return 'Deleted user';
         }
     }
+
+    public function get_last_posts($items = 1) {
+        global $wpdb;
+        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, (SELECT t.name FROM {$this->table_threads} AS t WHERE t.id = p1.parent_id) AS name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) WHERE p2.id IS NULL ORDER BY p1.id DESC LIMIT %d;", $items));
+    }
+
+    // TODO: optimize last post thins. you can get results of parent things without get_functions in get_lastpost_in_forum() for example ...
 
     public function get_lastpost_in_thread($thread_id, $date_only = false) {
         global $wpdb;

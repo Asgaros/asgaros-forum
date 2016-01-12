@@ -19,6 +19,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Edit and remove posts
 * Mobile device compatibility
 * Supports multiple languages
+* Recent Forum Posts Widget
 
 = Translations =
 * English
@@ -52,6 +53,7 @@ You can translate the forum plugin on this site:
 5. Manage forums in the administration area.
 
 == Changelog ==
+* Added: Recent Forum Posts Widget
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
 * Fixed: Removed untranslatable strings
