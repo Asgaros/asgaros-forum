@@ -1,13 +1,3 @@
 .asgarosforum-widget span {
     display: block;
 }
-.asgarosforum-widget a {
-    font-weight: bold;
-    text-decoration: none;
-}
-.asgarosforum-widget a:hover {
-    text-decoration: underline;
-}
-.asgarosforum-widget .post-date {
-    font-style: italic;
-}
