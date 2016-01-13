@@ -394,6 +394,7 @@ class asgarosforum {
         }
     }
 
+    // TODO: optimize. maybe it could be one function ...
     public function get_link($id, $location, $page = 1) {
         $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
         return $location . $id . $page_appendix;
@@ -408,6 +409,15 @@ class asgarosforum {
         }
 
         return $this->get_link($thread_id, $this->url_thread, $page) . '#postid-' . $post_id;
+    }
+
+    public function get_widget_link($thread_id, $post_id, $target) {
+        global $wpdb, $wp_rewrite;
+        $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+        $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
+        $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
+        $delim = ($wp_rewrite->using_permalinks()) ? '?' : '&amp;';
+        return $target.$delim.'view=thread&amp;id='.$thread_id.$page_appendix.'#postid-'.$post_id;
     }
 
     public function get_categories($disable_hooks = false) {

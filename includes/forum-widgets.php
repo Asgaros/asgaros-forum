@@ -24,6 +24,8 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 			$number = 5;
         }
 
+        $target = (!empty($instance['target'])) ? $instance['target'] : '';
+
 		$posts = $asgarosforum->get_last_posts($number);
 
 		if (!empty($posts)) {
@@ -36,7 +38,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
             echo '<ul>';
             foreach ($posts as $post) {
                 echo '<li>';
-                echo '<a href="'.$asgarosforum->get_postlink($post->parent_id, $post->id).'">'.$post->name.'</a>';
+                echo '<a href="'.$asgarosforum->get_widget_link($post->parent_id, $post->id, get_the_permalink($target)).'">'.$post->name.'</a>';
 				echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($post->date), current_time('timestamp'))).'</span>';
 			    echo '</li>';
             }
@@ -48,6 +50,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
     public function form($instance) {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum posts', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 5;
+        $target = isset($instance['target']) ? esc_attr($instance['target']) : '';
 
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
@@ -58,12 +61,22 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 		echo '<label for="'.$this->get_field_id('number').'">'.__('Number of topics to show:', 'asgaros-forum').'</label>&nbsp;';
 		echo '<input class="tiny-text" id="'.$this->get_field_id('number').'" name="'.$this->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
 		echo '</p>';
+
+        echo '<p>';
+        echo '<label for="'.$this->get_field_id('target').'">'.__('The forum page:', 'asgaros-forum').'</label>&nbsp;';
+        wp_dropdown_pages(array(
+            'id'        => $this->get_field_id('target'),
+            'name'      => $this->get_field_name('target'),
+            'selected'  => $target
+        ));
+        echo '</p>';
 	}
 
     public function update($new_instance, $old_instance) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['number'] = (int)$new_instance['number'];
+        $instance['target'] = sanitize_text_field($new_instance['target']);
 		return $instance;
 	}
 }
