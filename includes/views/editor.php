@@ -87,7 +87,7 @@ if (!$error) { ?>
                     if ($_GET['view'] == "editpost") {
                         wp_editor(stripslashes($post->text), 'message', $this->options_editor);
                     } else {
-                        wp_editor($quote, 'message', $this->options_editor);
+                        wp_editor(stripslashes($quote), 'message', $this->options_editor);
                     }
                     ?>
                 </div>

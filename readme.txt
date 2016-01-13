@@ -53,6 +53,7 @@ You can translate the forum plugin on this site:
 5. Manage forums in the administration area.
 
 == Changelog ==
+* Fixed: Broken images inside quoted posts
 * Added: Recent Forum Posts Widget
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
