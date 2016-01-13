@@ -54,9 +54,9 @@ You can translate the forum plugin on this site:
 
 == Changelog ==
 * Fixed: Broken images inside quoted posts
-* Fixed: Broken image captions
 * Fixed: Prevent accessing PHP-files directly
 * Added: Recent Forum Posts Widget
+* Removed: Image captions
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
 * Fixed: Removed untranslatable strings
