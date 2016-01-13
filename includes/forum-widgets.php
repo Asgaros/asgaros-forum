@@ -35,7 +35,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
                 echo $args['before_title'].$title.$args['after_title'];
             }
 
-            echo '<ul>';
+            echo '<ul class="asgarosforum-widget">';
             foreach ($posts as $post) {
                 echo '<li>';
                 echo '<a href="'.$asgarosforum->get_widget_link($post->parent_id, $post->id, get_the_permalink($target)).'">'.$post->name.'</a>';
