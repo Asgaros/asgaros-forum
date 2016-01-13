@@ -22,6 +22,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Recent Forum Posts Widget
 
 = Translations =
+* Bosnian
 * English
 * Finnish
 * French
@@ -56,6 +57,7 @@ You can translate the forum plugin on this site:
 * Fixed: Broken images inside quoted posts
 * Fixed: Prevent accessing PHP-files directly
 * Added: Recent Forum Posts Widget
+* Added: Bosnian translation (thanks to AntiDayton)
 * Removed: Image captions
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
