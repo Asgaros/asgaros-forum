@@ -18,10 +18,10 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 		$title = (!empty($instance['title'])) ? $instance['title'] : __('Recent forum posts', 'asgaros-forum');
         $title = apply_filters('widget_title', $title, $instance, $this->id_base);
 
-		$number = (!empty($instance['number'])) ? absint($instance['number']) : 5;
+		$number = (!empty($instance['number'])) ? absint($instance['number']) : 3;
 
         if (!$number) {
-			$number = 5;
+			$number = 3;
         }
 
         $target = (!empty($instance['target'])) ? $instance['target'] : '';
@@ -49,7 +49,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 
     public function form($instance) {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum posts', 'asgaros-forum');
-        $number = isset($instance['number']) ? absint($instance['number']) : 5;
+        $number = isset($instance['number']) ? absint($instance['number']) : 3;
         $target = isset($instance['target']) ? esc_attr($instance['target']) : '';
 
 		echo '<p>';
