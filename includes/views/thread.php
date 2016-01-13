@@ -24,7 +24,7 @@
                     <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_userposts($post->author_id); ?></small>
                 </div>
                 <div class="post-message">
-                    <?php echo stripslashes(make_clickable(wpautop($wp_embed->autoembed($post->text)))); ?>
+                    <?php echo apply_filters('the_content', stripslashes(make_clickable(wpautop($wp_embed->autoembed($post->text))))); ?>
                     <?php $this->file_list($post->id, $post->uploads, true); ?>
                 </div>
             </div>

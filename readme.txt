@@ -54,6 +54,7 @@ You can translate the forum plugin on this site:
 
 == Changelog ==
 * Fixed: Broken images inside quoted posts
+* Fixed: Broken image captions
 * Added: Recent Forum Posts Widget
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
