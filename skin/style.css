@@ -275,6 +275,10 @@
     padding: inherit;
     margin: 0;
 }
+#af-wrapper .post-message img {
+    max-width: 100% !important;
+    height: auto !important;
+}
 
 /* QUOTES */
 #af-wrapper blockquote {
