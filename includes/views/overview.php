@@ -1,4 +1,10 @@
-<?php $forum_counter = 0; ?>
+<?php
+
+if (!defined('ABSPATH')) exit;
+
+$forum_counter = 0;
+
+?>
 <?php foreach ($categories as $category) { ?>
     <div class="title-element"><?php echo $category->name; ?></div>
     <div class="content-element space">

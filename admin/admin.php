@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
+
 class asgarosforum_admin {
     var $saved = false;
 

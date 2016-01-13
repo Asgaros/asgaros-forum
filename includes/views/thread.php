@@ -1,3 +1,8 @@
+<?php
+
+if (!defined('ABSPATH')) exit;
+
+?>
 <div>
     <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
     <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>

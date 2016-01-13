@@ -26,6 +26,8 @@
   along with Asgaros Forum. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
+if (!defined('ABSPATH')) exit;
+
 //Textdomain Hook
 function asgarosforum_load_plugin_textdomain() {
     load_plugin_textdomain('asgaros-forum', FALSE, basename(dirname(__FILE__)).'/languages/');

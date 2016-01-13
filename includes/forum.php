@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
+
 class asgarosforum {
     var $db_version = 1;
     var $delim = "";

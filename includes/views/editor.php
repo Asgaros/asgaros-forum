@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
+
 $post = "";
 $thread = "";
 $threadname = "";

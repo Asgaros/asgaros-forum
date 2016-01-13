@@ -1,3 +1,8 @@
+<?php
+
+if (!defined('ABSPATH')) exit;
+
+?>
 <div class="wrap" id="af-options">
     <h2><?php _e('Options', 'asgaros-forum'); ?></h2>
     <?php if ($this->saved) { ?>

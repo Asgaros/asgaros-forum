@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
+
 global $wpdb;
 $post_id = $_GET['id'];
 $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';

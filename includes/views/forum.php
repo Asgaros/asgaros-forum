@@ -1,3 +1,9 @@
+<?php
+
+if (!defined('ABSPATH')) exit;
+
+?>
+
 <div>
     <div class="pages">
         <?php if ($counter_normal > 0) {
