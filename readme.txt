@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
 Tested up to: 4.4.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,13 +13,13 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress.
 Asgaros Forum is the perfect WordPress plugin for you if you want to extend your website with a lightweight discussion board. It is easy to set up and manage, integrates perfectly with WordPress and comes with a small amount of features which makes it fast and simple.
 
 = Features =
+* Stick/move/edit/remove/close threads
+* Edit/remove posts
 * File uploads
 * Integration of the WordPress editor
-* Stick, move, edit, remove and close threads
-* Edit and remove posts
+* Recent Forum Posts Widget
 * Mobile device compatibility
 * Supports multiple languages
-* Recent Forum Posts Widget
 
 = Translations =
 * Bosnian
@@ -54,11 +54,14 @@ You can translate the forum plugin on this site:
 5. Manage forums in the administration area.
 
 == Changelog ==
+= 1.0.3 =
 * Fixed: Broken images inside quoted posts
+* Fixed: Display issues with big images in posts
 * Fixed: Prevent accessing PHP-files directly
 * Added: Recent Forum Posts Widget
 * Added: Bosnian translation (thanks to AntiDayton)
 * Removed: Image captions
+* Updated: English, german and russian translations
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
 * Fixed: Removed untranslatable strings
