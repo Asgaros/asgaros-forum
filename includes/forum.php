@@ -27,7 +27,8 @@ class asgarosforum {
     var $options_default = array(
         'posts_per_page' => 10,
         'threads_per_page' => 20,
-        'allow_file_uploads' => false
+        'allow_file_uploads' => false,
+        'highlight_admin' => true
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -506,15 +507,14 @@ class asgarosforum {
         return $string;
     }
 
-    public function get_username($user_id, $wrap = false) {
+    public function get_username($user_id, $wrap = false, $widget = false) {
         $user = get_userdata($user_id);
 
         if ($user) {
-            if ($wrap) {
-                return wordwrap($user->display_name, 22, "-<br/>", true);
-            } else {
-                return $user->display_name;
-            }
+            $username = ($wrap) ? wordwrap($user->display_name, 22, "-<br/>", true) : $user->display_name;
+            $username = ($this->options['highlight_admin'] && user_can($user_id, 'manage_options') && !$widget) ? '<span class="highlight-admin">'.$username.'</span>' : $username;
+
+            return $username;
         } else {
             return 'Deleted user';
         }

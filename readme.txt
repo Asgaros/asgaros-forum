@@ -54,6 +54,7 @@ You can translate the forum plugin on this site:
 5. Manage forums in the administration area.
 
 == Changelog ==
+* Added: Option to highlight administrator names
 = 1.0.3 =
 * Fixed: Icons not visible in some WordPress themes
 * Fixed: Broken images inside quoted posts

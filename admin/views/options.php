@@ -23,6 +23,10 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php checked(!empty($asgarosforum->options['allow_file_uploads'])); ?> />
             <label for="allow_file_uploads"><?php _e('Allow file uploads', 'asgaros-forum'); ?></label>
         </p>
+        <p>
+            <input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?> />
+            <label for="highlight_admin"><?php _e('Highlight administrator names', 'asgaros-forum'); ?></label>
+        </p>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>" />
     </form>
 </div>

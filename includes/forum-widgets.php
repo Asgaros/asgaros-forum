@@ -39,7 +39,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
             foreach ($posts as $post) {
                 echo '<li>';
                 echo '<span class="post-link"><a href="'.$asgarosforum->get_widget_link($post->parent_id, $post->id, get_the_permalink($target)).'">'.$asgarosforum->cut_string($post->name).'</a></span>';
-                echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($post->author_id).'</b></span>';
+                echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($post->author_id, false, true).'</b></span>';
 				echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($post->date), current_time('timestamp'))).'</span>';
 			    echo '</li>';
             }

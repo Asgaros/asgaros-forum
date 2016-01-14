@@ -20,6 +20,9 @@
 #af-wrapper .clear {
     clear: both;
 }
+#af-wrapper .highlight-admin {
+    color: #e00000;
+}
 
 /* EDITOR */
 #af-wrapper .editor-row {
