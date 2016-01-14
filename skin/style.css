@@ -226,6 +226,9 @@
 }
 
 /* POST */
+#af-wrapper .post {
+    margin: 0;
+}
 #af-wrapper .post-header {
     background-color: #f7f7f7;
     border-bottom: 1px solid #ddd;
