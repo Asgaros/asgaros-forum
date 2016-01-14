@@ -55,6 +55,7 @@ You can translate the forum plugin on this site:
 
 == Changelog ==
 = 1.0.3 =
+* Fixed: Icons not visible in some WordPress themes
 * Fixed: Broken images inside quoted posts
 * Fixed: Display issues with big images in posts
 * Fixed: Prevent accessing PHP-files directly

@@ -53,8 +53,10 @@
 }
 
 /* OVERVIEW/FORUM */
-#af-wrapper .forum [class^="icon-"], [class*=" icon-"],
-#af-wrapper .thread [class^="icon-"], [class*=" icon-"] {
+#af-wrapper .forum [class^="icon-"],
+#af-wrapper .forum [class*=" icon-"],
+#af-wrapper .thread [class^="icon-"],
+#af-wrapper .thread [class*=" icon-"] {
     padding-right: 0;
 }
 #af-wrapper .forum,
@@ -308,7 +310,8 @@
 	font-weight: normal;
 	font-style: normal;
 }
-[class^="icon-"], [class*=" icon-"] {
+#af-wrapper [class^="icon-"],
+#af-wrapper [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
 	font-family: 'icomoon' !important;
 	speak: none;
@@ -324,71 +327,75 @@
     font-size: 1.2em;
     vertical-align: text-top;
 }
-.icon-home:before {
+#af-wrapper [class^="icon-"]:before,
+#af-wrapper [class*=" icon-"]:before {
+    font-family: inherit !important;
+}
+#af-wrapper .icon-home:before {
 	content: "\e900";
 }
-.icon-file-empty:before {
+#af-wrapper .icon-file-empty:before {
 	content: "\e901";
 }
-.icon-pushpin:before {
+#af-wrapper .icon-pushpin:before {
 	content: "\e902";
 }
-.icon-bubble2:before {
+#af-wrapper .icon-bubble2:before {
 	content: "\e903";
 }
-.icon-lock:before {
+#af-wrapper .icon-lock:before {
 	content: "\e905";
 }
-.icon-unlocked:before {
+#af-wrapper .icon-unlocked:before {
 	content: "\e906";
 }
-.icon-checkmark:before {
+#af-wrapper .icon-checkmark:before {
 	content: "\e908";
 }
-.icon-shuffle:before {
+#af-wrapper .icon-shuffle:before {
 	content: "\e909";
 }
-.icon-pencil2:before {
+#af-wrapper .icon-pencil2:before {
     content: "\e90b";
 }
-.icon-quotes-left:before {
+#af-wrapper .icon-quotes-left:before {
     content: "\e90c";
 }
-.icon-bin:before {
+#af-wrapper .icon-bin:before {
     content: "\e90d";
 }
-.icon-link:before {
+#af-wrapper .icon-link:before {
     content: "\e90e";
 }
-.icon-files-empty-small-no:before,
-.icon-files-empty-small-yes:before {
+#af-wrapper .icon-files-empty-small-no:before,
+#af-wrapper .icon-files-empty-small-yes:before {
 	content: "\e90f";
 }
-.icon-overview-no:before,
-.icon-overview-yes:before {
+#af-wrapper .icon-overview-no:before,
+#af-wrapper .icon-overview-yes:before {
     content: "\e90f";
     font-size: 2em;
 }
-.icon-normal_open-no:before,
-.icon-sticky_open-no:before,
-.icon-normal_open-yes:before,
-.icon-sticky_open-yes:before {
+#af-wrapper .icon-normal_open-no:before,
+#af-wrapper .icon-sticky_open-no:before,
+#af-wrapper .icon-normal_open-yes:before,
+#af-wrapper .icon-sticky_open-yes:before {
     content: "\e901";
     font-size: 2em;
 }
-.icon-normal_closed-no:before,
-.icon-sticky_closed-no:before,
-.icon-normal_closed-yes:before,
-.icon-sticky_closed-yes:before {
+#af-wrapper .icon-normal_closed-no:before,
+#af-wrapper .icon-sticky_closed-no:before,
+#af-wrapper .icon-normal_closed-yes:before,
+#af-wrapper .icon-sticky_closed-yes:before {
     content: "\e905";
     font-size: 2em;
     padding-left: 15px;
 }
-.icon-files-empty-small-yes:before,
-.icon-normal_closed-yes:before,
-.icon-sticky_closed-yes:before,
-.icon-normal_open-yes:before,
-.icon-sticky_open-yes:before,
-.icon-overview-yes:before {
+#af-wrapper .icon-files-empty-small-yes:before,
+#af-wrapper .icon-normal_closed-yes:before,
+#af-wrapper .icon-sticky_closed-yes:before,
+#af-wrapper .icon-normal_open-yes:before,
+#af-wrapper .icon-sticky_open-yes:before,
+#af-wrapper .icon-overview-yes:before {
     color: #2D89CC;
 }
