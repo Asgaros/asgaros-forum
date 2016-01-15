@@ -56,6 +56,7 @@ You can translate the forum plugin on this site:
 == Changelog ==
 * Fixed: Display issues with some themes
 * Added: Option to highlight administrator names
+* Performance improvements and code optimizations
 = 1.0.3 =
 * Fixed: Icons not visible in some WordPress themes
 * Fixed: Broken images inside quoted posts

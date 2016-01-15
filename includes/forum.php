@@ -404,7 +404,7 @@ class asgarosforum {
         }
     }
 
-    // TODO: optimize. maybe it could be one function ...
+    // TODO: optimize.
     public function get_link($id, $location, $page = 1) {
         $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
         return $location . $id . $page_appendix;
@@ -425,9 +425,8 @@ class asgarosforum {
         global $wpdb, $wp_rewrite;
         $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
         $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
-        $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
         $delim = ($wp_rewrite->using_permalinks()) ? '?' : '&amp;';
-        return $target.$delim.'view=thread&amp;id='.$thread_id.$page_appendix.'#postid-'.$post_id;
+        return $this->get_link($thread_id, $target.$delim.'view=thread&amp;id=', $page).'#postid-'.$post_id;
     }
 
     public function get_categories($disable_hooks = false) {
@@ -520,24 +519,19 @@ class asgarosforum {
         }
     }
 
+    // TODO: optimize
     public function get_last_posts($items = 1) {
         global $wpdb;
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, (SELECT t.name FROM {$this->table_threads} AS t WHERE t.id = p1.parent_id) AS name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) WHERE p2.id IS NULL ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
-    // TODO: optimize last post thins. you can get results of parent things without get_functions in get_lastpost_in_forum() for example ...
-
-    public function get_lastpost_in_thread($thread_id, $date_only = false) {
+    public function get_lastpost_in_thread($thread_id) {
         global $wpdb;
         $post = $wpdb->get_row($wpdb->prepare("SELECT id, date, author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id DESC LIMIT 1;", $thread_id));
 
         if ($post) {
-            if ($date_only) {
-                return $post->date;
-            } else {
-                $link = $this->get_postlink($thread_id, $post->id);
-                return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small><small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$link.'">'.$this->format_date($post->date).'</a>').'</small>';
-            }
+            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
+            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($thread_id, $post->id).'">'.$this->format_date($post->date).'</a>').'</small>';
         } else {
             return false;
         }
@@ -545,22 +539,20 @@ class asgarosforum {
 
     public function get_lastpost_in_forum($forum_id) {
         global $wpdb;
-        $post = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE t.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $forum_id));
+        $post = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE t.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $forum_id));
 
-        if (!$post) {
+        if ($post) {
+            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
+            <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($post->name).'</strong></small>
+            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$this->format_date($post->date).'</a>').'</small>';
+        } else {
             return '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
         }
-
-        $date = $this->format_date($post->date);
-
-        return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
-        <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($this->get_name($post->parent_id, $this->table_threads)).'</strong></small>
-        <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$date.'</a>').'</small>';
     }
 
     public function get_lastpost_data($id, $data, $location) {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.{$data} FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$location}.parent_id = %d ORDER BY {$this->table_posts}.date DESC LIMIT 1;", $id));
+        return $wpdb->get_var($wpdb->prepare("SELECT {$this->table_posts}.{$data} FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$location}.parent_id = %d ORDER BY {$this->table_posts}.id DESC LIMIT 1;", $id));
     }
 
     public function get_thread_starter($thread_id) {
@@ -570,7 +562,7 @@ class asgarosforum {
 
     public function check_unread($thread_id) {
         global $user_ID;
-        $lastpost_time = $this->get_lastpost_in_thread($thread_id, true);
+        $lastpost_time = $this->get_lastpost_data($thread_id, 'date', $this->table_posts);
         $lastpost_author_id = $this->get_lastpost_data($thread_id, 'author_id', $this->table_posts);
 
         if ($lastpost_time && $user_ID != $lastpost_author_id) {
