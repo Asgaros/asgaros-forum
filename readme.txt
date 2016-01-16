@@ -61,6 +61,7 @@ You can translate the forum plugin on this site:
 * Added: Notice when user is not logged in
 * Added: "Go back" link on error pages
 * Added: Hungarian translation (thanks to zsebtyson)
+* Changed: Permalink accessible via date instead of icon
 * Performance improvements and code optimizations
 = 1.0.3 =
 * Fixed: Icons not visible in some WordPress themes

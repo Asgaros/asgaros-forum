@@ -594,7 +594,7 @@ class asgarosforum {
             $o .= '<a href="'.$this->url_base.'editpost&amp;id='.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="icon-pencil2"></span>'.__('Edit', 'asgaros-forum').'</a>';
         }
 
-        $o .= '<a href="'.$this->get_postlink($this->current_thread, $post_id, ($this->current_page + 1)).'" title="'.__('Permalink', 'asgaros-forum').'"><span class="icon-link"></span></a>';
+        $o = (!empty($o)) ? $o = '<div class="post-menu">'.$o.'</div>' : $o;
 
         return $o;
     }

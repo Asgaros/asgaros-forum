@@ -22,8 +22,8 @@ if (!is_user_logged_in()) {
         ?>
         <div class="post" id="postid-<?php echo $post->id; ?>">
             <div class="post-header">
-                <div class="post-date"><?php echo $this->format_date($post->date); ?></div>
-                <div class="post-menu"><?php echo $this->post_menu($post->id, $post->author_id, $counter); ?></div>
+                <div class="post-date"><a href="<?php echo $this->get_postlink($this->current_thread, $post->id, ($this->current_page + 1)); ?>"><?php echo $this->format_date($post->date); ?></a></div>
+                <?php echo $this->post_menu($post->id, $post->author_id, $counter); ?>
                 <div class="clear"></div>
             </div>
             <div class="post-content">

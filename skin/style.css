@@ -243,10 +243,12 @@
 }
 #af-wrapper .post-date {
     float: left;
-    color: #777;
     font-size: 11px;
     font-style: italic;
     padding: 5px 10px;
+}
+#af-wrapper .post-date a {
+    color: #777;
 }
 #af-wrapper .post-menu {
     float: right;
@@ -375,9 +377,6 @@
 }
 #af-wrapper .icon-bin:before {
     content: "\e90d";
-}
-#af-wrapper .icon-link:before {
-    content: "\e90e";
 }
 #af-wrapper .icon-files-empty-small-no:before,
 #af-wrapper .icon-files-empty-small-yes:before {
