@@ -31,7 +31,7 @@ if (empty($content)) {
 }
 
 if ($error) {
-    $msg .= '<div id="error"><p><a href="#" onclick="history.back(); return false;">&laquo; '.__('Go back', 'asgaros-forum').'</a></p></div>';
+    $msg .= '<div id="error"><p><a href="#" onclick="history.back();">&laquo; '.__('Go back', 'asgaros-forum').'</a></p></div>';
     wp_die($msg);
 }
 
