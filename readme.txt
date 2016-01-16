@@ -57,6 +57,7 @@ You can translate the forum plugin on this site:
 * Fixed: Display issues with some themes
 * Fixed: Error messages were not translated
 * Added: Option to highlight administrator names
+* Added: "Go back" link on error pages
 * Performance improvements and code optimizations
 = 1.0.3 =
 * Fixed: Icons not visible in some WordPress themes
