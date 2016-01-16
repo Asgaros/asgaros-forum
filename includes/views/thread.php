@@ -2,6 +2,10 @@
 
 if (!defined('ABSPATH')) exit;
 
+if (!is_user_logged_in()) {
+    echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'</div>';
+}
+
 ?>
 <div>
     <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>

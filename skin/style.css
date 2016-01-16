@@ -148,12 +148,18 @@
 }
 
 /* NOTICE */
+#af-wrapper .info,
 #af-wrapper .notice {
     text-align: center;
     font-size: 14px;
     font-style: italic;
     color: #666;
     padding: 10px !important;
+}
+#af-wrapper .info {
+    border: 1px solid #ccc;
+    background-color: #ffffbb;
+    margin-bottom: 10px;
 }
 
 /* FOOTER */

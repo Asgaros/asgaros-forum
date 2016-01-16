@@ -58,6 +58,7 @@ You can translate the forum plugin on this site:
 * Fixed: Display issues with some themes
 * Fixed: Error messages were not translated
 * Added: Option to highlight administrator names
+* Added: Notice when user is not logged in
 * Added: "Go back" link on error pages
 * Added: Hungarian translation (thanks to zsebtyson)
 * Performance improvements and code optimizations
