@@ -55,6 +55,7 @@ You can translate the forum plugin on this site:
 
 == Changelog ==
 * Fixed: Display issues with some themes
+* Fixed: Error messages were not translated
 * Added: Option to highlight administrator names
 * Performance improvements and code optimizations
 = 1.0.3 =

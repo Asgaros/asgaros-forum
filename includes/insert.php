@@ -7,26 +7,26 @@ $post_id = $_GET['id'];
 $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
 $content = $_POST['message'];
 $redirect = '';
-$msg = '<h2>'.__('An error occured!', 'asgarosforum').'</h2>';
+$msg = '<h2>'.__('An error occured!', 'asgaros-forum').'</h2>';
 $error = false;
 
 if (isset($_POST['edit_post_submit']) && !$this->element_exists($post_id, $this->table_posts)) {
-    $msg .= '<div id="error"><p>'.__('Sorry, this post does not exist.', 'asgarosforum').'</p></div>';
+    $msg .= '<div id="error"><p>'.__('Sorry, this post does not exist.', 'asgaros-forum').'</p></div>';
     $error = true;
 }
 
 if (isset($_POST['edit_post_submit']) && $user_ID != $this->get_post_author($post_id) && !$this->is_moderator()) {
-    $msg .= '<div id="error"><p>'.__('You are not allowed to do this.', 'asgarosforum').'</p></div>';
+    $msg .= '<div id="error"><p>'.__('You are not allowed to do this.', 'asgaros-forum').'</p></div>';
     $error = true;
 }
 
 if ((isset($_POST['add_thread_submit']) && empty($subject)) || (isset($_POST['edit_post_submit']) && isset($_POST['subject']) && empty($_POST['subject']))) {
-    $msg .= '<div id="error"><p>'.__('You must enter a subject.', 'asgarosforum').'</p></div>';
+    $msg .= '<div id="error"><p>'.__('You must enter a subject.', 'asgaros-forum').'</p></div>';
     $error = true;
 }
 
 if (empty($content)) {
-    $msg .= '<div id="error"><p>'.__('You must enter a message.', 'asgarosforum').'</p></div>';
+    $msg .= '<div id="error"><p>'.__('You must enter a message.', 'asgaros-forum').'</p></div>';
     $error = true;
 }
 
