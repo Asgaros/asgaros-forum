@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 if (!is_user_logged_in()) {
-    echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">'.__('&raquo; Login', 'asgaros-forum').'</a></div>';
+    echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
 }
 
 ?>
