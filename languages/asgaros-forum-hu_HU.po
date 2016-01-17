@@ -1,422 +1,433 @@
-msgid ""
-msgstr ""
-"Project-Id-Version: Asgaros Forum\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
-"Zeit)\n"
-"PO-Revision-Date: Sat Jan 16 2016 06:15:15 GMT+0100 (Közép-európai téli idő "
-")\n"
-"Last-Translator:  <admin@fedora-hungary.org>\n"
-"Language-Team: \n"
-"Language: Hungarian\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ..\n"
-"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
-"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
-"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
-"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
-"X-Generator: Loco - https://localise.biz/\n"
-"X-Loco-Target-Locale: hu_HU"
-
-#. Name of the plugin
-msgid "Asgaros Forum"
-msgstr "Asgaros Fórum plugin"
-
-#. URI of the plugin
-msgid "https://github.com/Asgaros/asgaros-forum"
-msgstr "https://github.com/Asgaros/asgaros-forum"
-
-#. Description of the plugin
-msgid "A lightweight and simple forum plugin for WordPress."
-msgstr "Egyszerű és nagyszerű fórum bővitmény a WordPresshez."
-
-#. Author of the plugin
-msgid "Thomas Belser"
-msgstr "Thomas Belser"
-
-#. Author URI of the plugin
-msgid "http://thomasbelser.net"
-msgstr "http://thomasbelser.net"
-
-#: ../admin/admin.php:38 ../admin/admin.php:57 ../admin/admin.php:66
-msgid "Order"
-msgstr "Rendez"
-
-#: ../admin/admin.php:89 ../admin/admin.php:89 ../includes/forum.php:686
-msgid "Forum"
-msgstr "Fórum"
-
-#: ../admin/admin.php:90 ../admin/admin.php:90 ../admin/views/options.php:7
-msgid "Options"
-msgstr "Beálítások"
-
-#: ../admin/admin.php:91 ../admin/admin.php:91 ../includes/forum.php:79
-msgid "Categories"
-msgstr "Kategóriák"
-
-#: ../admin/admin.php:92 ../admin/admin.php:92 ../admin/views/forums.php:7
-msgid "Forums"
-msgstr "Fórumok"
-
-#: ../admin/admin.php:97
-msgid ""
-"WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and "
-"Replies associated with it!!! Are you sure you want to delete this Forum???"
-msgstr ""
-"FIGYELMEZTETÉS: Ha törlöd a fórumot, AKKOR A BENNE TALÁLHATÓ ÖSSZES téma és "
-"bejegyzés törlésre kerül!!!!!! BIZTOS VAGY BENNE HOGY TÖRÖLNI AKAROD A "
-"FÓRUMOT ÉS AZ ÖSSZES TÉMÁT, BEJEGYZÉST???? Gondold át mégegyszer!"
-
-#: ../admin/views/forums.php:10
-msgid "Your Forums have been saved."
-msgstr "Az új fórum mentésre került."
-
-#: ../admin/views/forums.php:23 ../admin/views/forums.php:44
-msgid "Name:"
-msgstr "Név:"
-
-#: ../admin/views/forums.php:24 ../admin/views/forums.php:45
-msgid "Description:"
-msgstr "Leírás:"
-
-#: ../admin/views/forums.php:29 ../admin/views/forums.php:50
-msgid "Remove this Forum"
-msgstr "Fórum törlése"
-
-#: ../admin/views/forums.php:34 ../admin/views/forums.php:34
-msgid "Add new Forum"
-msgstr "Fórum létrehozása"
-
-#: ../admin/views/forums.php:36
-msgid "Save Changes"
-msgstr "Vátoztatások mentése"
-
-#: ../admin/views/forums.php:38
-msgid "You must add some categories first."
-msgstr "Előbb egy fórumkategóriát kell létrehozni."
-
-#: ../admin/views/options.php:10
-msgid "Your options have been saved."
-msgstr "Az új beálítások elmentve."
-
-#: ../admin/views/options.php:15
-msgid "Replies to show per page:"
-msgstr "Ennyi bejegyzés látható egy oldalon:"
-
-#: ../admin/views/options.php:19
-msgid "Threads to show per page:"
-msgstr "Ennyi fórumtéma látható egy oldalon:"
-
-#: ../admin/views/options.php:24
-msgid "Allow file uploads"
-msgstr "Bárki tölthet fel fájlt(kattintsd be ha negedélyezed)"
-
-#: ../admin/views/options.php:26
-msgid "Save Options"
-msgstr "Beállítások mentése"
-
-#: ../includes/forum-widgets.php:7
-msgid "Shows recent posts in Asgaros Forum."
-msgstr "A legújabb bejegyzések megjelenítése."
-
-#: ../includes/forum-widgets.php:8
-msgid "Asgaros Forum: Recent Posts"
-msgstr "Asgaros Forum: Legújabb bejegyzések"
-
-#: ../includes/forum-widgets.php:18 ../includes/forum-widgets.php:52
-msgid "Recent forum posts"
-msgstr "Legújabb fórum bejegyzések"
-
-#: ../includes/forum-widgets.php:42
-msgid "by"
-msgstr "tőle:"
-
-#: ../includes/forum-widgets.php:43
-#, php-format
-msgid "%s ago"
-msgstr "%s"
-
-#: ../includes/forum-widgets.php:57
-msgid "Title:"
-msgstr "Cím:"
-
-#: ../includes/forum-widgets.php:62
-msgid "Number of topics to show:"
-msgstr "A látható témák száma:"
-
-#: ../includes/forum-widgets.php:67
-msgid "The forum page:"
-msgstr "A fórum oldala:"
-
-#: ../includes/forum.php:80
-msgid "Category"
-msgstr "Kategória"
-
-#: ../includes/forum.php:81
-msgid "Edit Category"
-msgstr "Kategória szerkesztése"
-
-#: ../includes/forum.php:82
-msgid "Update Category"
-msgstr "Kategória frissítése"
-
-#: ../includes/forum.php:83
-msgid "Add new category"
-msgstr "Fórumkategória létrehozása"
-
-#: ../includes/forum.php:84
-msgid "Search categories"
-msgstr "Kategóriák keresése"
-
-#: ../includes/forum.php:85
-msgid "No categories found."
-msgstr "Nem találtunk kategóriát."
-
-#: ../includes/forum.php:276 ../includes/forum.php:701 ../includes/views/editor.
-#: php:75
-msgid "Edit Post"
-msgstr "Bejegyzés szerkesztése"
-
-#: ../includes/forum.php:278 ../includes/forum.php:699
-msgid "Post Reply"
-msgstr "Válasz erre:"
-
-#: ../includes/forum.php:280 ../includes/forum.php:654 ../includes/forum.php:703
-msgid "New Thread"
-msgstr "Új téma indítása"
-
-#: ../includes/forum.php:282 ../includes/forum.php:661
-msgid "Move Thread"
-msgstr "Téma áthelyezése"
-
-#: ../includes/forum.php:340
-msgid "There are no categories yet!"
-msgstr "Nem hoztak még létre kategóriákat!"
-
-#: ../includes/forum.php:353 ../includes/views/editor.php:20
-msgid "Sorry, this forum does not exist."
-msgstr "Sajnáljuk! Ez a fórum nem létezik."
-
-#: ../includes/forum.php:365
-msgid "Thread closed"
-msgstr "Téma lezárva"
-
-#: ../includes/forum.php:369
-msgid "Sorry, but there are no posts."
-msgstr "Sajnáljuk! A bejegyzés nem létezik."
-
-#: ../includes/forum.php:372 ../includes/views/editor.php:25
-msgid "Sorry, this thread does not exist."
-msgstr "Sajnáljuk! A téma nem létezik."
-
-#: ../includes/forum.php:379
-#, php-format
-msgid "Move \"<strong>%s</strong>\" to new forum:"
-msgstr "\"<strong>%s</strong>\" téma áthelyezése, válassz a lenyíló listából:"
-
-#: ../includes/forum.php:388
-msgid "Move"
-msgstr "Áthelyezés"
-
-#: ../includes/forum.php:392
-msgid "You are not allowed to move threads."
-msgstr "Nincs jogosultságod a téma megtekintéséhez."
-
-#: ../includes/forum.php:539 ../includes/forum.php:556
-msgid "Last post by"
-msgstr "Legújabb bejegyzést írta:"
-
-#: ../includes/forum.php:539 ../includes/forum.php:558 ../includes/views/editor.
-#: php:38
-#, php-format
-msgid "on %s"
-msgstr "ekkor: %s"
-
-#: ../includes/forum.php:551
-msgid "No threads yet!"
-msgstr "Még nem indítottak témát!"
-
-#: ../includes/forum.php:557
-msgid "in"
-msgstr "címe:"
-
-#: ../includes/forum.php:594
-msgid "Quote"
-msgstr "Idézés"
-
-#: ../includes/forum.php:598 ../includes/forum.php:662
-msgid "Are you sure you want to remove this?"
-msgstr "Biztos vagy benne hogy töröljük ezt?"
-
-#: ../includes/forum.php:598
-msgid "Remove"
-msgstr "Eltávolít"
-
-#: ../includes/forum.php:602
-msgid "Edit"
-msgstr "Szerkesztés"
-
-#: ../includes/forum.php:605
-msgid "Permalink"
-msgstr "Közvetlen link"
-
-#: ../includes/forum.php:657
-msgid "Reply"
-msgstr "Válasz a bejegyzésre"
-
-#: ../includes/forum.php:662
-msgid "Delete Thread"
-msgstr "Téma törlése"
-
-#: ../includes/forum.php:665
-msgid "Undo Sticky"
-msgstr "Újra kiemelés"
-
-#: ../includes/forum.php:665
-msgid "Sticky"
-msgstr "Kiemelt"
-
-#: ../includes/forum.php:669
-msgid "Re-open"
-msgstr "Újranyitás"
-
-#: ../includes/forum.php:671
-msgid "Close"
-msgstr "Lezárás"
-
-#: ../includes/forum.php:721
-msgid "Pages:"
-msgstr "Oldalak:"
-
-#: ../includes/forum.php:748
-msgid "First"
-msgstr "Első"
-
-#: ../includes/forum.php:766
-msgid "Last"
-msgstr "Utolsó"
-
-#: ../includes/forum.php:941
-msgid "Delete"
-msgstr "Törlés"
-
-#: ../includes/forum.php:950 ../includes/forum.php:954
-msgid "Uploaded files:"
-msgstr "Feltöltött/Csatolt fájl:"
-
-#: ../includes/insert.php:10
-msgid "An error occured!"
-msgstr "Hiba történt! Bocs!"
-
-#: ../includes/insert.php:14 ../includes/views/editor.php:44
-msgid "Sorry, this post does not exist."
-msgstr "Sajnáljuk! A bejegyzés nem létezik."
-
-#: ../includes/insert.php:19 ../includes/views/editor.php:30
-msgid "You are not allowed to do this."
-msgstr "Nincs jogosultságod a művelethez."
-
-#: ../includes/insert.php:24
-msgid "You must enter a subject."
-msgstr "Kérjük adj meg téma címet!"
-
-#: ../includes/insert.php:29
-msgid "You must enter a message."
-msgstr "Kérjük írj be üzenetet!"
-
-#: ../includes/views/editor.php:13
-msgid "Sorry, you don't have permission to post."
-msgstr "Sajnáljuk! Nincs engedélyed a művelethez."
-
-#: ../includes/views/editor.php:38
-msgid "Quote from"
-msgstr "Idézet tőle:"
-
-#: ../includes/views/editor.php:53
-msgid "Sorry, you are not allowed to edit this post."
-msgstr "Elnézést, nincs jogosultságod a bejegyzés módosításához."
-
-#: ../includes/views/editor.php:71
-msgid "Post new Thread"
-msgstr "Új bejegyzés írása"
-
-#: ../includes/views/editor.php:73
-msgid "Post Reply:"
-msgstr "Válasz erre:"
-
-#: ../includes/views/editor.php:82
-msgid "Subject:"
-msgstr "Téma címe: "
-
-#: ../includes/views/editor.php:87
-msgid "Message:"
-msgstr ""
-"Üzenet: \n"
-"<br>\n"
-"<br>\n"
-"<br>\n"
-"<br>\n"
-"Video beillesztéséhez, a video internet címét kell idemásolni és megjelenik."
-
-#: ../includes/views/editor.php:103
-msgid "Upload Files:"
-msgstr "Fájl feltöltése:"
-
-#: ../includes/views/editor.php:106
-msgid "Add another file ..."
-msgstr "További fájl hozzáadása...."
-
-#: ../includes/views/editor.php:114 ../includes/views/editor.php:116 ..
-#: includes/views/editor.php:118
-msgid "Submit"
-msgstr "Beküldés"
-
-#: ../includes/views/forum.php:21
-msgid "Sticky Threads"
-msgstr "Kiemelt témák"
-
-#: ../includes/views/forum.php:27 ../includes/views/forum.php:46
-msgid "Created by:"
-msgstr "A témát indította:"
-
-#: ../includes/views/forum.php:30 ../includes/views/forum.php:49
-msgid "Answers"
-msgstr "Bejegyzések"
-
-#: ../includes/views/forum.php:31 ../includes/views/forum.php:50
-msgid "Views"
-msgstr "Megtekintések"
-
-#: ../includes/views/forum.php:67
-msgid "There are no threads yet!"
-msgstr "Még nem indítottak témát ebben a fórumban!"
-
-#: ../includes/views/overview.php:25
-msgid "Threads:"
-msgstr "Témák:"
-
-#: ../includes/views/overview.php:26 ../includes/views/thread.php:29
-msgid "Posts:"
-msgstr "Bejegyzések:"
-
-#: ../includes/views/overview.php:33
-msgid "There are no forums yet!"
-msgstr "Még nem hoztak létre fórumot!"
-
-#: ../includes/views/overview.php:39
-msgid "New posts"
-msgstr "Új bejegyzés"
-
-#: ../includes/views/overview.php:40
-msgid "No new posts"
-msgstr "Nincs új bejegyzés"
-
-#: ../includes/views/overview.php:41
-msgid "Mark All Read"
-msgstr "Olvasottként jelölve"
+msgid ""
+msgstr ""
+"Project-Id-Version: Asgaros Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
+"Zeit)\n"
+"PO-Revision-Date: Sun Jan 17 2016 20:44:43 GMT+0100 (Mitteleuropäische Zeit)\n"
+"Last-Translator: root <developer@thomasbelser.net>\n"
+"Language-Team: \n"
+"Language: Hungarian\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: hu_HU"
+
+#: ../admin/views/options.php:28
+msgid "Highlight administrator names"
+msgstr ""
+
+#: ../includes/insert.php:34
+msgid "Go back"
+msgstr ""
+
+#: ../includes/views/forum.php:6 ../includes/views/thread.php:6
+msgid "You need to login in order to create posts and topics."
+msgstr ""
+
+#: ../includes/views/forum.php:6 ../includes/views/thread.php:6
+msgid "Login"
+msgstr ""
+
+#. Name of the plugin
+msgid "Asgaros Forum"
+msgstr "Asgaros Fórum plugin"
+
+#. URI of the plugin
+msgid "https://github.com/Asgaros/asgaros-forum"
+msgstr "https://github.com/Asgaros/asgaros-forum"
+
+#. Description of the plugin
+msgid "A lightweight and simple forum plugin for WordPress."
+msgstr "Egyszerű és nagyszerű fórum bővitmény a WordPresshez."
+
+#. Author of the plugin
+msgid "Thomas Belser"
+msgstr "Thomas Belser"
+
+#. Author URI of the plugin
+msgid "http://thomasbelser.net"
+msgstr "http://thomasbelser.net"
+
+#: ../admin/admin.php:38 ../admin/admin.php:57 ../admin/admin.php:66
+msgid "Order"
+msgstr "Rendez"
+
+#: ../admin/admin.php:89 ../admin/admin.php:89 ../includes/forum.php:678
+msgid "Forum"
+msgstr "Fórum"
+
+#: ../admin/admin.php:90 ../admin/admin.php:90 ../admin/views/options.php:7
+msgid "Options"
+msgstr "Beálítások"
+
+#: ../admin/admin.php:91 ../admin/admin.php:91 ../includes/forum.php:80
+msgid "Categories"
+msgstr "Kategóriák"
+
+#: ../admin/admin.php:92 ../admin/admin.php:92 ../admin/views/forums.php:7
+msgid "Forums"
+msgstr "Fórumok"
+
+#: ../admin/admin.php:97
+msgid ""
+"WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and "
+"Replies associated with it!!! Are you sure you want to delete this Forum???"
+msgstr ""
+"FIGYELMEZTETÉS: Ha törlöd a fórumot, AKKOR A BENNE TALÁLHATÓ ÖSSZES téma és "
+"bejegyzés törlésre kerül!!!!!! BIZTOS VAGY BENNE HOGY TÖRÖLNI AKAROD A "
+"FÓRUMOT ÉS AZ ÖSSZES TÉMÁT, BEJEGYZÉST???? Gondold át mégegyszer!"
+
+#: ../admin/views/forums.php:10
+msgid "Your Forums have been saved."
+msgstr "Az új fórum mentésre került."
+
+#: ../admin/views/forums.php:23 ../admin/views/forums.php:44
+msgid "Name:"
+msgstr "Név:"
+
+#: ../admin/views/forums.php:24 ../admin/views/forums.php:45
+msgid "Description:"
+msgstr "Leírás:"
+
+#: ../admin/views/forums.php:29 ../admin/views/forums.php:50
+msgid "Remove this Forum"
+msgstr "Fórum törlése"
+
+#: ../admin/views/forums.php:34 ../admin/views/forums.php:34
+msgid "Add new Forum"
+msgstr "Fórum létrehozása"
+
+#: ../admin/views/forums.php:36
+msgid "Save Changes"
+msgstr "Vátoztatások mentése"
+
+#: ../admin/views/forums.php:38
+msgid "You must add some categories first."
+msgstr "Előbb egy fórumkategóriát kell létrehozni."
+
+#: ../admin/views/options.php:10
+msgid "Your options have been saved."
+msgstr "Az új beálítások elmentve."
+
+#: ../admin/views/options.php:15
+msgid "Replies to show per page:"
+msgstr "Ennyi bejegyzés látható egy oldalon:"
+
+#: ../admin/views/options.php:19
+msgid "Threads to show per page:"
+msgstr "Ennyi fórumtéma látható egy oldalon:"
+
+#: ../admin/views/options.php:24
+msgid "Allow file uploads"
+msgstr "Bárki tölthet fel fájlt(kattintsd be ha negedélyezed)"
+
+#: ../admin/views/options.php:30
+msgid "Save Options"
+msgstr "Beállítások mentése"
+
+#: ../includes/forum-widgets.php:7
+msgid "Shows recent posts in Asgaros Forum."
+msgstr "A legújabb bejegyzések megjelenítése."
+
+#: ../includes/forum-widgets.php:8
+msgid "Asgaros Forum: Recent Posts"
+msgstr "Asgaros Forum: Legújabb bejegyzések"
+
+#: ../includes/forum-widgets.php:18 ../includes/forum-widgets.php:52
+msgid "Recent forum posts"
+msgstr "Legújabb fórum bejegyzések"
+
+#: ../includes/forum-widgets.php:42
+msgid "by"
+msgstr "tőle:"
+
+#: ../includes/forum-widgets.php:43
+#, php-format
+msgid "%s ago"
+msgstr "%s"
+
+#: ../includes/forum-widgets.php:57
+msgid "Title:"
+msgstr "Cím:"
+
+#: ../includes/forum-widgets.php:62
+msgid "Number of topics to show:"
+msgstr "A látható témák száma:"
+
+#: ../includes/forum-widgets.php:67
+msgid "The forum page:"
+msgstr "A fórum oldala:"
+
+#: ../includes/forum.php:81
+msgid "Category"
+msgstr "Kategória"
+
+#: ../includes/forum.php:82
+msgid "Edit Category"
+msgstr "Kategória szerkesztése"
+
+#: ../includes/forum.php:83
+msgid "Update Category"
+msgstr "Kategória frissítése"
+
+#: ../includes/forum.php:84
+msgid "Add new category"
+msgstr "Fórumkategória létrehozása"
+
+#: ../includes/forum.php:85
+msgid "Search categories"
+msgstr "Kategóriák keresése"
+
+#: ../includes/forum.php:86
+msgid "No categories found."
+msgstr "Nem találtunk kategóriát."
+
+#: ../includes/forum.php:277 ../includes/forum.php:693 ../includes/views/editor.
+#: php:75
+msgid "Edit Post"
+msgstr "Bejegyzés szerkesztése"
+
+#: ../includes/forum.php:279 ../includes/forum.php:691
+msgid "Post Reply"
+msgstr "Válasz erre:"
+
+#: ../includes/forum.php:281 ../includes/forum.php:646 ../includes/forum.php:695
+msgid "New Thread"
+msgstr "Új téma indítása"
+
+#: ../includes/forum.php:283 ../includes/forum.php:653
+msgid "Move Thread"
+msgstr "Téma áthelyezése"
+
+#: ../includes/forum.php:341
+msgid "There are no categories yet!"
+msgstr "Nem hoztak még létre kategóriákat!"
+
+#: ../includes/forum.php:354 ../includes/views/editor.php:20
+msgid "Sorry, this forum does not exist."
+msgstr "Sajnáljuk! Ez a fórum nem létezik."
+
+#: ../includes/forum.php:366
+msgid "Thread closed"
+msgstr "Téma lezárva"
+
+#: ../includes/forum.php:370
+msgid "Sorry, but there are no posts."
+msgstr "Sajnáljuk! A bejegyzés nem létezik."
+
+#: ../includes/forum.php:373 ../includes/views/editor.php:25
+msgid "Sorry, this thread does not exist."
+msgstr "Sajnáljuk! A téma nem létezik."
+
+#: ../includes/forum.php:380
+#, php-format
+msgid "Move \"<strong>%s</strong>\" to new forum:"
+msgstr "\"<strong>%s</strong>\" téma áthelyezése, válassz a lenyíló listából:"
+
+#: ../includes/forum.php:389
+msgid "Move"
+msgstr "Áthelyezés"
+
+#: ../includes/forum.php:393
+msgid "You are not allowed to move threads."
+msgstr "Nincs jogosultságod a téma megtekintéséhez."
+
+#: ../includes/forum.php:533 ../includes/forum.php:545
+msgid "Last post by"
+msgstr "Legújabb bejegyzést írta:"
+
+#: ../includes/forum.php:534 ../includes/forum.php:547 ../includes/views/editor.
+#: php:38
+#, php-format
+msgid "on %s"
+msgstr "ekkor: %s"
+
+#: ../includes/forum.php:546
+msgid "in"
+msgstr "címe:"
+
+#: ../includes/forum.php:549
+msgid "No threads yet!"
+msgstr "Még nem indítottak témát!"
+
+#: ../includes/forum.php:586
+msgid "Quote"
+msgstr "Idézés"
+
+#: ../includes/forum.php:590 ../includes/forum.php:654
+msgid "Are you sure you want to remove this?"
+msgstr "Biztos vagy benne hogy töröljük ezt?"
+
+#: ../includes/forum.php:590
+msgid "Remove"
+msgstr "Eltávolít"
+
+#: ../includes/forum.php:594
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: ../includes/forum.php:649
+msgid "Reply"
+msgstr "Válasz a bejegyzésre"
+
+#: ../includes/forum.php:654
+msgid "Delete Thread"
+msgstr "Téma törlése"
+
+#: ../includes/forum.php:657
+msgid "Undo Sticky"
+msgstr "Újra kiemelés"
+
+#: ../includes/forum.php:657
+msgid "Sticky"
+msgstr "Kiemelt"
+
+#: ../includes/forum.php:661
+msgid "Re-open"
+msgstr "Újranyitás"
+
+#: ../includes/forum.php:663
+msgid "Close"
+msgstr "Lezárás"
+
+#: ../includes/forum.php:713
+msgid "Pages:"
+msgstr "Oldalak:"
+
+#: ../includes/forum.php:740
+msgid "First"
+msgstr "Első"
+
+#: ../includes/forum.php:758
+msgid "Last"
+msgstr "Utolsó"
+
+#: ../includes/forum.php:933
+msgid "Delete"
+msgstr "Törlés"
+
+#: ../includes/forum.php:942 ../includes/forum.php:946
+msgid "Uploaded files:"
+msgstr "Feltöltött/Csatolt fájl:"
+
+#: ../includes/insert.php:10
+msgid "An error occured!"
+msgstr "Hiba történt! Bocs!"
+
+#: ../includes/insert.php:14 ../includes/views/editor.php:44
+msgid "Sorry, this post does not exist."
+msgstr "Sajnáljuk! A bejegyzés nem létezik."
+
+#: ../includes/insert.php:19 ../includes/views/editor.php:30
+msgid "You are not allowed to do this."
+msgstr "Nincs jogosultságod a művelethez."
+
+#: ../includes/insert.php:24
+msgid "You must enter a subject."
+msgstr "Kérjük adj meg téma címet!"
+
+#: ../includes/insert.php:29
+msgid "You must enter a message."
+msgstr "Kérjük írj be üzenetet!"
+
+#: ../includes/views/editor.php:13
+msgid "Sorry, you don't have permission to post."
+msgstr "Sajnáljuk! Nincs engedélyed a művelethez."
+
+#: ../includes/views/editor.php:38
+msgid "Quote from"
+msgstr "Idézet tőle:"
+
+#: ../includes/views/editor.php:53
+msgid "Sorry, you are not allowed to edit this post."
+msgstr "Elnézést, nincs jogosultságod a bejegyzés módosításához."
+
+#: ../includes/views/editor.php:71
+msgid "Post new Thread"
+msgstr "Új bejegyzés írása"
+
+#: ../includes/views/editor.php:73
+msgid "Post Reply:"
+msgstr "Válasz erre:"
+
+#: ../includes/views/editor.php:82
+msgid "Subject:"
+msgstr "Téma címe: "
+
+#: ../includes/views/editor.php:87
+msgid "Message:"
+msgstr ""
+"Üzenet: \n"
+"<br>\n"
+"<br>\n"
+"<br>\n"
+"<br>\n"
+"Video beillesztéséhez, a video internet címét kell idemásolni és megjelenik."
+
+#: ../includes/views/editor.php:103
+msgid "Upload Files:"
+msgstr "Fájl feltöltése:"
+
+#: ../includes/views/editor.php:106
+msgid "Add another file ..."
+msgstr "További fájl hozzáadása...."
+
+#: ../includes/views/editor.php:114 ../includes/views/editor.php:116 ..
+#: includes/views/editor.php:118
+msgid "Submit"
+msgstr "Beküldés"
+
+#: ../includes/views/forum.php:25
+msgid "Sticky Threads"
+msgstr "Kiemelt témák"
+
+#: ../includes/views/forum.php:31 ../includes/views/forum.php:50
+msgid "Created by:"
+msgstr "A témát indította:"
+
+#: ../includes/views/forum.php:34 ../includes/views/forum.php:53
+msgid "Answers"
+msgstr "Bejegyzések"
+
+#: ../includes/views/forum.php:35 ../includes/views/forum.php:54
+msgid "Views"
+msgstr "Megtekintések"
+
+#: ../includes/views/forum.php:71
+msgid "There are no threads yet!"
+msgstr "Még nem indítottak témát ebben a fórumban!"
+
+#: ../includes/views/overview.php:25
+msgid "Threads:"
+msgstr "Témák:"
+
+#: ../includes/views/overview.php:26 ../includes/views/thread.php:33
+msgid "Posts:"
+msgstr "Bejegyzések:"
+
+#: ../includes/views/overview.php:33
+msgid "There are no forums yet!"
+msgstr "Még nem hoztak létre fórumot!"
+
+#: ../includes/views/overview.php:39
+msgid "New posts"
+msgstr "Új bejegyzés"
+
+#: ../includes/views/overview.php:40
+msgid "No new posts"
+msgstr "Nincs új bejegyzés"
+
+#: ../includes/views/overview.php:41
+msgid "Mark All Read"
+msgstr "Olvasottként jelölve"

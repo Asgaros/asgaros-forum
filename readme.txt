@@ -62,6 +62,7 @@ You can translate the forum plugin on this site:
 * Added: "Go back" link on error pages
 * Added: Hungarian translation (thanks to zsebtyson)
 * Changed: Permalink accessible via date instead of icon
+* Updated: English and german translations
 * Performance improvements and code optimizations
 = 1.0.3 =
 * Fixed: Icons not visible in some WordPress themes
