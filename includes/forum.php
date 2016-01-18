@@ -27,6 +27,7 @@ class asgarosforum {
     var $options_default = array(
         'posts_per_page' => 10,
         'threads_per_page' => 20,
+        'custom_color' => '#2d89cc',
         'allow_file_uploads' => false,
         'highlight_admin' => true
     );
@@ -251,6 +252,10 @@ class asgarosforum {
         }
 
         echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/style.css" />';
+
+        if ($this->options['custom_color'] !== $this->options_default['custom_color']) {
+            echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/custom-color.php?color='.substr($this->options['custom_color'], 1).'" />';
+        }
 
         if (wp_is_mobile()) {
             echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/mobile.css" />';

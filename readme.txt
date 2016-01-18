@@ -40,11 +40,8 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Done!
 
 == Frequently Asked Questions ==
-= I want to use a different color =
-Add this style rules to your theme CSS file and change #49617D to a color of your choice:
-[https://gist.github.com/Asgaros/5d0cef9f4df09b36fd08](https://gist.github.com/Asgaros/5d0cef9f4df09b36fd08)
 = I want help to translate Asgaros Forum =
-You can translate the forum plugin on this site:
+You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum)
 
 == Screenshots ==
@@ -55,6 +52,8 @@ You can translate the forum plugin on this site:
 5. Manage forums in the administration area.
 
 == Changelog ==
+* Added: Option to easily change the forum color
+* Changed: Minor design changes
 = 1.0.4 =
 * Fixed: Display issues with some themes
 * Fixed: Error messages were not translated

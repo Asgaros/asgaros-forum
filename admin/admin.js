@@ -24,5 +24,8 @@
             $(this).parent().parent().insertAfter($after);
         });
         $('.inline-edit-col input[name=slug]').parents('label').hide();
+
+        // Adding color picker
+        $('.custom-color').wpColorPicker();
     });
 })(jQuery);
