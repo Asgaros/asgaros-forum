@@ -296,7 +296,7 @@ class asgarosforum {
         if (!$this->execute_plugin() || $editor_id !== 'message') {
             return $buttons;
         } else {
-            return array('bold', 'italic', 'underline', 'blockquote', 'strikethrough', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'undo', 'redo', 'image', 'link', 'unlink', 'fullscreen' );
+            return array('bold', 'italic', 'underline', 'blockquote', 'strikethrough', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'undo', 'redo', 'image', 'link', 'unlink', 'fullscreen');
         }
     }
 
