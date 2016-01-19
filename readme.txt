@@ -54,6 +54,7 @@ You can help to translate Asgaros Forum on this site:
 == Changelog ==
 * Added: Option to easily change the forum color
 * Changed: Minor design changes
+* Changed: Provide german translation updates via WordPress Updater
 = 1.0.4 =
 * Fixed: Display issues with some themes
 * Fixed: Error messages were not translated
