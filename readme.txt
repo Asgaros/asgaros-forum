@@ -50,6 +50,7 @@ You can help to translate Asgaros Forum on this site:
 3. The thread view.
 4. Creating a new thread.
 5. Manage forums in the administration area.
+6. Manage general options.
 
 == Changelog ==
 = 1.0.5 =
