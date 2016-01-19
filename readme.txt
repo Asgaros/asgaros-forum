@@ -53,6 +53,7 @@ You can help to translate Asgaros Forum on this site:
 
 == Changelog ==
 * Added: Option to easily change the forum color
+* Added: Option to limit access to logged in users
 * Changed: Minor design changes
 * Changed: Provide german translation updates via WordPress Updater
 = 1.0.4 =

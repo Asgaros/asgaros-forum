@@ -25,17 +25,18 @@ class asgarosforum {
     var $current_page = 0;
     var $options = array();
     var $options_default = array(
-        'posts_per_page' => 10,
-        'threads_per_page' => 20,
-        'custom_color' => '#2d89cc',
-        'allow_file_uploads' => false,
-        'highlight_admin' => true
+        'posts_per_page'        => 10,
+        'threads_per_page'      => 20,
+        'allow_file_uploads'    => false,
+        'highlight_admin'       => true,
+        'require_login'         => false,
+        'custom_color'          => '#2d89cc'
     );
     var $options_editor = array(
         'media_buttons' => false,
         'textarea_rows' => 12,
-        'teeny' => true,
-        'quicktags' => false
+        'teeny'         => true,
+        'quicktags'     => false
     );
 
     public function __construct() {
@@ -230,7 +231,8 @@ class asgarosforum {
     }
 
     public function check_access() {
-        $this->access = apply_filters('asgarosforum_filter_check_access', true, $this->current_category);
+        $access = (!$this->options['require_login'] || ($this->options['require_login'] && is_user_logged_in())) ? true : false;
+        $this->access = apply_filters('asgarosforum_filter_check_access', $access, $this->current_category);
     }
 
     public function enqueue_front_scripts() {
@@ -312,26 +314,31 @@ class asgarosforum {
         global $wpdb, $user_ID;
 
         echo '<div id="af-wrapper">';
-        echo $this->breadcrumbs();
 
-        switch ($this->current_view) {
-            case 'movethread':
-                $this->movethread();
-                break;
-            case 'forum':
-                $this->showforum($this->current_forum);
-                break;
-            case 'thread':
-                $this->showthread($this->current_thread);
-                break;
-            case 'addthread':
-            case 'addpost':
-            case 'editpost':
-                include('views/editor.php');
-                break;
-            default:
-                $this->overview();
-                break;
+        if ($this->access) {
+            echo $this->breadcrumbs();
+
+            switch ($this->current_view) {
+                case 'movethread':
+                    $this->movethread();
+                    break;
+                case 'forum':
+                    $this->showforum($this->current_forum);
+                    break;
+                case 'thread':
+                    $this->showthread($this->current_thread);
+                    break;
+                case 'addthread':
+                case 'addpost':
+                case 'editpost':
+                    include('views/editor.php');
+                    break;
+                default:
+                    $this->overview();
+                    break;
+            }
+        } else {
+            echo '<div class="info">'.__('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
         }
 
         echo '</div>';

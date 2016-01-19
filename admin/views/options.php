@@ -28,6 +28,10 @@ if (!defined('ABSPATH')) exit;
             <label for="highlight_admin"><?php _e('Highlight administrator names', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?> />
+            <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
         </p>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>" />
