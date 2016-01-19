@@ -13,11 +13,11 @@ if (!defined('ABSPATH')) exit;
     <form method="post">
         <p>
             <label for="posts_per_page"><?php _e('Replies to show per page:', 'asgaros-forum'); ?></label>
-            <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" />
+            <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3" />
         </p>
         <p>
             <label for="threads_per_page"><?php _e('Threads to show per page:', 'asgaros-forum'); ?></label>
-            <input type="text" name="threads_per_page" id="threads_per_page" value="<?php echo stripslashes($asgarosforum->options['threads_per_page']); ?>" />
+            <input type="text" name="threads_per_page" id="threads_per_page" value="<?php echo stripslashes($asgarosforum->options['threads_per_page']); ?>" size="3" />
         </p>
         <p>
             <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php checked(!empty($asgarosforum->options['allow_file_uploads'])); ?> />

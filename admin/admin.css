@@ -3,7 +3,7 @@
 }
 #af-options label {
     display: inline-block;
-    width: 250px;
+    min-width: 250px;
 }
 #af-forums h3 {
     font-weight: normal;
