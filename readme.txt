@@ -23,6 +23,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 
 = Translations =
 * Bosnian
+* Danish
 * English
 * Finnish
 * French
@@ -57,6 +58,7 @@ You can help to translate Asgaros Forum on this site:
 * Added: Option to easily change the forum color
 * Added: Option to limit access to logged in users
 * Added: Action hook asgarosforum_action_after_post_author
+* Added: Danish translation (thanks to crusie)
 * Changed: Minor design changes
 * Changed: Provide german translation updates via WordPress Updater
 = 1.0.4 =
