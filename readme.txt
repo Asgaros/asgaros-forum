@@ -56,6 +56,7 @@ You can help to translate Asgaros Forum on this site:
 = 1.0.5 =
 * Added: Option to easily change the forum color
 * Added: Option to limit access to logged in users
+* Added: Action hook asgarosforum_action_after_post_author
 * Changed: Minor design changes
 * Changed: Provide german translation updates via WordPress Updater
 = 1.0.4 =
