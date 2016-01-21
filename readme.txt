@@ -54,6 +54,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.0.5 =
 * Added: Option to easily change the forum color
 * Added: Option to limit access to logged in users
