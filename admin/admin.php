@@ -74,10 +74,8 @@ class asgarosforum_admin {
     }
 
     function save_category_form_fields($term_id) {
-        $new_order = isset($_POST['category_order']) ? $_POST['category_order'] : '';
-
-        if (!empty($new_order)) {
-            update_term_meta($term_id, 'order', $new_order);
+        if (isset($_POST['category_order'])) {
+            update_term_meta($term_id, 'order', $_POST['category_order']);
         }
 
         do_action('asgarosforum_action_save_category_form_fields', $term_id);

@@ -81,22 +81,22 @@ class asgarosforum {
             null,
             array(
                 'labels' => array(
-                    'name'                          => __('Categories', 'asgaros-forum'),
-                    'singular_name'                 => __('Category', 'asgaros-forum'),
-                    'edit_item'                     => __('Edit Category', 'asgaros-forum'),
-                    'update_item'                   => __('Update Category', 'asgaros-forum'),
-                    'add_new_item'                  => __('Add new category', 'asgaros-forum'),
-                    'search_items'                  => __('Search categories', 'asgaros-forum'),
-                    'not_found'                     => __('No categories found.', 'asgaros-forum')
+                    'name'          => __('Categories', 'asgaros-forum'),
+                    'singular_name' => __('Category', 'asgaros-forum'),
+                    'edit_item'     => __('Edit Category', 'asgaros-forum'),
+                    'update_item'   => __('Update Category', 'asgaros-forum'),
+                    'add_new_item'  => __('Add new Category', 'asgaros-forum'),
+                    'search_items'  => __('Search Categories', 'asgaros-forum'),
+                    'not_found'     => __('No Categories found.', 'asgaros-forum')
                 ),
                 'public' => false,
                 'show_ui' => true,
                 'rewrite' => false,
                 'capabilities' => array(
-                    'manage_terms'  => 'edit_users',
-					'edit_terms'    => 'edit_users',
-					'delete_terms'  => 'edit_users',
-					'assign_terms'  => 'edit_users'
+                    'manage_terms' => 'edit_users',
+					'edit_terms'   => 'edit_users',
+					'delete_terms' => 'edit_users',
+					'assign_terms' => 'edit_users'
 				)
             )
         );
@@ -196,9 +196,9 @@ class asgarosforum {
 
         $this->delim = ($wp_rewrite->using_permalinks()) ? "?" : "&amp;";
         $this->url_home = get_permalink();
-        $this->url_base = $this->url_home . $this->delim . "view=";
-        $this->url_forum = $this->url_base . "forum&amp;id=";
-        $this->url_thread = $this->url_base . "thread&amp;id=";
+        $this->url_base = $this->url_home.$this->delim.'view=';
+        $this->url_forum = $this->url_base.'forum&amp;id=';
+        $this->url_thread = $this->url_base.'thread&amp;id=';
         $this->url_editor_thread = $this->url_base . "addthread&amp;id={$this->current_forum}";
         $this->url_editor_post = $this->url_base . "addpost&amp;id={$this->current_thread}";
 
