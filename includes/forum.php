@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class asgarosforum {
+    var $directory;
     var $db_version = 1;
     var $delim = "";
     var $date_format = "";
@@ -39,8 +40,9 @@ class asgarosforum {
         'quicktags'     => false
     );
 
-    public function __construct() {
+    public function __construct($directory) {
         global $wpdb;
+        $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
         $this->table_forums = $wpdb->prefix . 'forum_forums';
@@ -240,27 +242,24 @@ class asgarosforum {
             return;
         }
 
-        global $asgarosforum_directory;
-
-        wp_enqueue_script('asgarosforum-js', $asgarosforum_directory.'js/script.js', array('jquery'));
+        wp_enqueue_script('asgarosforum-js', $this->directory.'js/script.js', array('jquery'));
     }
 
     public function setup_header() {
-        global $asgarosforum_directory;
-        echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/widgets.css" />';
+        echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/widgets.css" />';
 
         if (!$this->execute_plugin()) {
             return;
         }
 
-        echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/style.css" />';
+        echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/style.css" />';
 
         if ($this->options['custom_color'] !== $this->options_default['custom_color']) {
-            echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/custom-color.php?color='.substr($this->options['custom_color'], 1).'" />';
+            echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/custom-color.php?color='.substr($this->options['custom_color'], 1).'" />';
         }
 
         if (wp_is_mobile()) {
-            echo '<link rel="stylesheet" type="text/css" href="'.$asgarosforum_directory.'skin/mobile.css" />';
+            echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/mobile.css" />';
         }
     }
 

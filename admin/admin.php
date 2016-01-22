@@ -93,13 +93,13 @@ class asgarosforum_admin {
     }
 
     public function enqueue_admin_scripts($hook) {
-        global $submenu_file, $asgarosforum_directory;
+        global $submenu_file, $asgarosforum;
         $l10n_vars = array('remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgaros-forum'));
 
         if (strstr($hook, 'asgarosforum') !== false || $submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum_directory.'admin/admin.css');
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css');
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum_directory.'admin/admin.js', array('wp-color-picker'), false, true);
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), false, true);
             wp_localize_script('asgarosforum-admin-js', 'asgarosforum_admin', $l10n_vars);
         }
     }

@@ -34,19 +34,14 @@ function asgarosforum_load_plugin_textdomain() {
 }
 add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
-//Load class files
 require('includes/forum.php');
 require('includes/forum-widgets.php');
+require('admin/admin.php');
 
-if (is_admin()) {
-    require_once('admin/admin.php');
-}
-
-global $asgarosforum_directory;
 global $asgarosforum;
 global $asgarisforum_admin;
-$asgarosforum_directory = plugin_dir_url(__FILE__);
-$asgarosforum = new asgarosforum();
+$directory = plugin_dir_url(__FILE__);
+$asgarosforum = new asgarosforum($directory);
 
 if (is_admin()) {
     $asgarosforum_admin = new asgarosforum_admin();
