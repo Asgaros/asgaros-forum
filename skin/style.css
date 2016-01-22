@@ -239,7 +239,7 @@
     border-bottom: 1px solid #ddd;
     border-top: 2px solid #ccc;
     box-sizing: content-box;
-    height: 29px;
+    height: 29px; /* comp */
 }
 #af-wrapper .post-date {
     float: left;
@@ -267,6 +267,7 @@
 #af-wrapper .post-content {
     display: table;
     width: 100%;
+    margin: 0; /* comp */
 }
 #af-wrapper .post-author {
     display: table-cell;
@@ -306,7 +307,7 @@
     border-left: 4px solid #adadad;
 }
 #af-wrapper blockquote:before {
-    content: none;
+    content: none; /* comp */
 }
 #af-wrapper .quotetitle {
     font-style: italic;
