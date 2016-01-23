@@ -54,6 +54,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: "Last edited" info to posts
 * Fixed: Wrong word wrap
 * Fixed: Display issues with some themes
 * Changed: Provide hungarian translation updates via WordPress Updater

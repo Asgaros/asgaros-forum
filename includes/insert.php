@@ -57,7 +57,8 @@ if ($error) {
         $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
     } else if (isset($_POST['edit_post_submit'])) {
         $uploads = maybe_serialize($this->attach_files($post_id));
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s WHERE id = %d;", $content, $uploads, $post_id));
+        $date = $this->current_time();
+        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s, date_edit = %s WHERE id = %d;", $content, $uploads, $date, $post_id));
 
         if (isset($_POST['subject']) && !empty($_POST['subject'])) {
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));

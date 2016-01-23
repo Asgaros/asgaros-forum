@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class asgarosforum {
     var $directory;
-    var $db_version = 1;
+    var $db_version = 2;
     var $delim = "";
     var $date_format = "";
     var $access = true;
@@ -135,6 +135,7 @@ class asgarosforum {
             text longtext,
             parent_id int(11) NOT NULL default '0',
             date datetime NOT NULL default '0000-00-00 00:00:00',
+            date_edit datetime NOT NULL default '0000-00-00 00:00:00',
             author_id int(11) NOT NULL default '0',
             uploads longtext,
             PRIMARY KEY  (id)
@@ -490,7 +491,7 @@ class asgarosforum {
         $start = $this->current_page * $this->options['posts_per_page'];
         $end = $this->options['posts_per_page'];
 
-        return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, author_id, uploads FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
+        return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, date_edit, author_id, uploads FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
     }
 
     public function is_first_post($post_id) {

@@ -296,6 +296,13 @@
     max-width: 100% !important;
     height: auto !important;
 }
+#af-wrapper .post-edit {
+    display: block;
+    font-style: italic;
+    font-size: 11px;
+    color: #999;
+    text-align: right;
+}
 
 /* QUOTES */
 #af-wrapper blockquote {

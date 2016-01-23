@@ -34,8 +34,13 @@ if (!is_user_logged_in()) {
                     <?php do_action('asgarosforum_action_after_post_author', $post->author_id); ?>
                 </div>
                 <div class="post-message">
-                    <?php echo make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text)))); ?>
-                    <?php $this->file_list($post->id, $post->uploads, true); ?>
+                    <?php
+                    echo make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
+                    $this->file_list($post->id, $post->uploads, true);
+                    if (strtotime($post->date_edit) > strtotime($post->date)) {
+                        echo '<div class="post-edit">'.sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'</div>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
