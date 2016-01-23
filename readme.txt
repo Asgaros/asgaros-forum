@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
 Tested up to: 4.4.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,15 +54,17 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.0.6 =
 * Added: "Last edited" info to posts
 * Fixed: Wrong word wrap
 * Fixed: Display issues with some themes
 * Changed: Provide hungarian translation updates via WordPress Updater
+* Changed: Added author_id to asgarosforum_after_post_author action hook
 * Performance improvements and code optimizations
 = 1.0.5 =
 * Added: Option to easily change the forum color
 * Added: Option to limit access to logged in users
-* Added: Action hook asgarosforum_action_after_post_author
+* Added: Action hook asgarosforum_after_post_author
 * Added: Danish translation (thanks to crusie)
 * Changed: Minor design changes
 * Changed: Provide german translation updates via WordPress Updater
