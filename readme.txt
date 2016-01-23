@@ -55,7 +55,7 @@ You can help to translate Asgaros Forum on this site:
 
 == Changelog ==
 * Fixed: Display issues with some themes
-* Updated: Hungarian translations
+* Updated: Hungarian translation
 = 1.0.5 =
 * Added: Option to easily change the forum color
 * Added: Option to limit access to logged in users
@@ -71,7 +71,7 @@ You can help to translate Asgaros Forum on this site:
 * Added: "Go back" link on error pages
 * Added: Hungarian translation (thanks to zsebtyson)
 * Changed: Permalink accessible via date instead of icon
-* Updated: English and german translations
+* Updated: English and german translation
 * Performance improvements and code optimizations
 = 1.0.3 =
 * Fixed: Icons not visible in some WordPress themes
@@ -81,7 +81,7 @@ You can help to translate Asgaros Forum on this site:
 * Added: Recent Forum Posts Widget
 * Added: Bosnian translation (thanks to AntiDayton)
 * Removed: Image captions
-* Updated: English, german and russian translations
+* Updated: English, german and russian translation
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
 * Fixed: Removed untranslatable strings
@@ -91,7 +91,7 @@ You can help to translate Asgaros Forum on this site:
 * Added: French translation (thanks to thomasroy)
 * Added: Russian translation (thanks to ironboys)
 * Changed: Minor design changes
-* Updated: English and german translations
+* Updated: English and german translation
 * Performance improvements and code optimizations
 = 1.0.1 =
 * Fixed: Removed untranslatable strings
