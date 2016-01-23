@@ -54,6 +54,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Wrong word wrap
 * Fixed: Display issues with some themes
 * Updated: Hungarian translation
 * Performance improvements and code optimizations

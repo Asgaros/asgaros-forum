@@ -283,7 +283,7 @@
     width: auto;
     vertical-align: top;
     padding: 15px;
-    word-break: break-all;
+    word-break: break-word;
 }
 #af-wrapper .post-message p {
     margin: 0 0 20px;
