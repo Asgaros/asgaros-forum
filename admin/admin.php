@@ -24,11 +24,7 @@ class asgarosforum_admin {
 
     function set_current_menu($parent_file) {
         global $submenu_file;
-
-        if ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
-            $parent_file = 'asgarosforum';
-        }
-
+        $parent_file = ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') ? 'asgarosforum' : $parent_file;
         return $parent_file;
     }
 

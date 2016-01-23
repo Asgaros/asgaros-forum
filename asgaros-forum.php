@@ -39,7 +39,7 @@ require('includes/forum-widgets.php');
 require('admin/admin.php');
 
 global $asgarosforum;
-global $asgarisforum_admin;
+global $asgarosforum_admin;
 $directory = plugin_dir_url(__FILE__);
 $asgarosforum = new asgarosforum($directory);
 
