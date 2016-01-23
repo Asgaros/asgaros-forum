@@ -56,7 +56,7 @@ You can help to translate Asgaros Forum on this site:
 == Changelog ==
 * Fixed: Wrong word wrap
 * Fixed: Display issues with some themes
-* Updated: Hungarian translation
+* Changed: Provide hungarian translation updates via WordPress Updater
 * Performance improvements and code optimizations
 = 1.0.5 =
 * Added: Option to easily change the forum color
