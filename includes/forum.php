@@ -563,7 +563,7 @@ class asgarosforum {
 
     public function get_lastpost_data($id, $data, $location) {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT p.{$data} FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE {$location}.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
+        return $wpdb->get_row($wpdb->prepare("SELECT {$data} FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE {$location}.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
     }
 
     public function get_thread_starter($thread_id) {
@@ -816,8 +816,9 @@ class asgarosforum {
     public function get_thread_image($thread_id, $status) {
         global $user_ID;
         $unread_status = '';
-        $lastpost_time = $this->get_lastpost_data($thread_id, 'date', 'p');
-        $lastpost_author_id = $this->get_lastpost_data($thread_id, 'author_id', 'p');
+        $lastpost_data = $this->get_lastpost_data($thread_id, 'p.date, p.author_id', 'p');
+        $lastpost_time = $lastpost_data->date;
+        $lastpost_author_id = $lastpost_data->author_id;
 
         if ($lastpost_time && $user_ID != $lastpost_author_id) {
             $lp = strtotime($lastpost_time);

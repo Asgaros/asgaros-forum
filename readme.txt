@@ -56,6 +56,7 @@ You can help to translate Asgaros Forum on this site:
 == Changelog ==
 * Fixed: Display issues with some themes
 * Updated: Hungarian translation
+* Performance improvements and code optimizations
 = 1.0.5 =
 * Added: Option to easily change the forum color
 * Added: Option to limit access to logged in users
