@@ -36,8 +36,8 @@ $forum_counter = 0;
 <?php } ?>
 <?php if ($forum_counter > 0) { ?>
 <div class="footer">
-    <span class="icon-files-empty-small-yes"></span><?php _e('New posts', 'asgaros-forum'); ?> &middot;
-    <span class="icon-files-empty-small-no"></span><?php _e('No new posts', 'asgaros-forum'); ?> &middot;
+    <span class="icon-files-empty-small unread"></span><?php _e('New posts', 'asgaros-forum'); ?> &middot;
+    <span class="icon-files-empty-small"></span><?php _e('No new posts', 'asgaros-forum'); ?> &middot;
     <span class="icon-checkmark"></span><a href="<?php echo $this->url_base; ?>markallread"><?php _e('Mark All Read', 'asgaros-forum'); ?></a>
 </div>
 <?php } ?>

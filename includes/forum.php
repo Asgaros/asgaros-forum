@@ -571,23 +571,6 @@ class asgarosforum {
         return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
     }
 
-    public function check_unread($thread_id) {
-        global $user_ID;
-        $lastpost_time = $this->get_lastpost_data($thread_id, 'date', 'p');
-        $lastpost_author_id = $this->get_lastpost_data($thread_id, 'author_id', 'p');
-
-        if ($lastpost_time && $user_ID != $lastpost_author_id) {
-            $lp = strtotime($lastpost_time);
-            $lv = strtotime($this->last_visit());
-
-            if ($lp > $lv) {
-                return 'yes';
-            }
-        }
-
-        return 'no';
-    }
-
     public function post_menu($post_id, $author_id, $counter) {
         global $user_ID;
 
@@ -831,9 +814,21 @@ class asgarosforum {
     }
 
     public function get_thread_image($thread_id, $status) {
-        $unread_status = $this->check_unread($thread_id);
+        global $user_ID;
+        $unread_status = '';
+        $lastpost_time = $this->get_lastpost_data($thread_id, 'date', 'p');
+        $lastpost_author_id = $this->get_lastpost_data($thread_id, 'author_id', 'p');
 
-        echo '<span class="icon-'.$status.'-'.$unread_status.'"></span>';
+        if ($lastpost_time && $user_ID != $lastpost_author_id) {
+            $lp = strtotime($lastpost_time);
+            $lv = strtotime($this->last_visit());
+
+            if ($lp > $lv) {
+                $unread_status = ' unread';
+            }
+        }
+
+        echo '<span class="icon-'.$status.$unread_status.'"></span>';
     }
 
     public function change_status($property) {

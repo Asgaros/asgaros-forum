@@ -1,13 +1,8 @@
-#af-wrapper .icon-overview-no:before,
-#af-wrapper .icon-overview-yes:before,
-#af-wrapper .icon-normal_open-no:before,
-#af-wrapper .icon-sticky_open-no:before,
-#af-wrapper .icon-normal_open-yes:before,
-#af-wrapper .icon-sticky_open-yes:before,
-#af-wrapper .icon-normal_closed-no:before,
-#af-wrapper .icon-sticky_closed-no:before,
-#af-wrapper .icon-normal_closed-yes:before,
-#af-wrapper .icon-sticky_closed-yes:before {
+#af-wrapper .icon-overview:before,
+#af-wrapper .icon-normal_open:before,
+#af-wrapper .icon-sticky_open:before,
+#af-wrapper .icon-normal_closed:before,
+#af-wrapper .icon-sticky_closed:before {
     font-size: 1.4em;
 }
 #af-wrapper .forum div,

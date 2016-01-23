@@ -5,12 +5,7 @@ $color = '#'.$_GET['color'];
 ?>
 #af-wrapper a,
 #af-wrapper .breadcrumbs a:hover,
-#af-wrapper .icon-files-empty-small-yes:before,
-#af-wrapper .icon-normal_closed-yes:before,
-#af-wrapper .icon-sticky_closed-yes:before,
-#af-wrapper .icon-normal_open-yes:before,
-#af-wrapper .icon-sticky_open-yes:before,
-#af-wrapper .icon-overview-yes:before {
+#af-wrapper .unread:before {
 	color: <?php echo $color; ?> !important;
 }
 #af-wrapper input[type="submit"],
