@@ -13,7 +13,7 @@ $forum_counter = 0;
         if (count($frs) > 0) {
             foreach ($frs as $forum) {
                 $forum_counter++;
-                $thread_id = $this->get_lastpost_data($forum->id, 'parent_id', $this->table_threads);
+                $thread_id = $this->get_lastpost_data($forum->id, 'parent_id', 't');
                 ?>
                 <div class="forum">
                     <div class="forum-status"><?php $this->get_thread_image($thread_id, 'overview'); ?></div>

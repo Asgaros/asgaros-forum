@@ -33,41 +33,41 @@ if (empty($content)) {
 if ($error) {
     $msg .= '<div id="error"><p><a href="#" onclick="history.back();">&laquo; '.__('Go back', 'asgaros-forum').'</a></p></div>';
     wp_die($msg);
-}
+} else {
+    if (isset($_POST['add_thread_submit'])) {
+        $date = $this->current_time();
+        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_threads} (name, parent_id) VALUES (%s, %d);", $subject, $this->current_forum));
+        $thread_id = $wpdb->insert_id;
 
-if (isset($_POST['add_thread_submit'])) {
-    $date = $this->current_time();
-    $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_threads} (name, parent_id) VALUES (%s, %d);", $subject, $this->current_forum));
-    $thread_id = $wpdb->insert_id;
+        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $thread_id, $date, $user_ID));
+        $post_id = $wpdb->insert_id;
 
-    $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $thread_id, $date, $user_ID));
-    $post_id = $wpdb->insert_id;
+        $uploads = maybe_serialize($this->attach_files($post_id));
+        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
 
-    $uploads = maybe_serialize($this->attach_files($post_id));
-    $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
+        $redirect = html_entity_decode($this->get_link($thread_id, $this->url_thread)."#postid-".$post_id);
+    } else if (isset($_POST['add_post_submit'])) {
+        $date = $this->current_time();
+        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $this->current_thread, $date, $user_ID));
+        $post_id = $wpdb->insert_id;
 
-    $redirect = html_entity_decode($this->get_link($thread_id, $this->url_thread)."#postid-".$post_id);
-} else if (isset($_POST['add_post_submit'])) {
-    $date = $this->current_time();
-    $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $this->current_thread, $date, $user_ID));
-    $post_id = $wpdb->insert_id;
+        $uploads = maybe_serialize($this->attach_files($post_id));
+        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
 
-    $uploads = maybe_serialize($this->attach_files($post_id));
-    $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
+        $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
+    } else if (isset($_POST['edit_post_submit'])) {
+        $uploads = maybe_serialize($this->attach_files($post_id));
+        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s WHERE id = %d;", $content, $uploads, $post_id));
 
-    $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
-} else if (isset($_POST['edit_post_submit'])) {
-    $uploads = maybe_serialize($this->attach_files($post_id));
-    $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s WHERE id = %d;", $content, $uploads, $post_id));
+        if (isset($_POST['subject']) && !empty($_POST['subject'])) {
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));
+        }
 
-    if (isset($_POST['subject']) && !empty($_POST['subject'])) {
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));
+        $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id, $_POST['part_id']));
     }
 
-    $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id, $_POST['part_id']));
+    wp_redirect($redirect);
+    exit;
 }
-
-wp_redirect($redirect);
-exit;
 
 ?>
