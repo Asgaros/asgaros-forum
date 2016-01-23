@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class asgarosforum {
-    var $directory;
+    var $directory = '';
     var $db_version = 2;
     var $delim = "";
     var $date_format = "";
@@ -40,7 +40,7 @@ class asgarosforum {
         'quicktags'     => false
     );
 
-    public function __construct($directory) {
+    function __construct($directory) {
         global $wpdb;
         $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
@@ -65,7 +65,7 @@ class asgarosforum {
         add_shortcode('forum', array($this, 'forum'));
     }
 
-    public function execute_plugin() {
+    function execute_plugin() {
         global $post;
 
         if (!(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum'))) {
@@ -75,7 +75,7 @@ class asgarosforum {
         }
     }
 
-    public static function register_category_taxonomy() {
+    function register_category_taxonomy() {
         register_taxonomy(
             'asgarosforum-category',
             null,
@@ -102,7 +102,7 @@ class asgarosforum {
         );
     }
 
-    public function install() {
+    function install() {
         global $wpdb;
         $installed_ver = get_option("asgarosforum_db_version");
 
@@ -151,7 +151,7 @@ class asgarosforum {
         }
     }
 
-    public function prepare() {
+    function prepare() {
         if (!$this->execute_plugin()) {
             return;
         }
@@ -233,12 +233,12 @@ class asgarosforum {
         $this->check_access();
     }
 
-    public function check_access() {
+    function check_access() {
         $access = (!$this->options['require_login'] || ($this->options['require_login'] && is_user_logged_in())) ? true : false;
         $this->access = apply_filters('asgarosforum_filter_check_access', $access, $this->current_category);
     }
 
-    public function enqueue_front_scripts() {
+    function enqueue_front_scripts() {
         if (!$this->execute_plugin()) {
             return;
         }
@@ -246,7 +246,7 @@ class asgarosforum {
         wp_enqueue_script('asgarosforum-js', $this->directory.'js/script.js', array('jquery'));
     }
 
-    public function setup_header() {
+    function setup_header() {
         echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/widgets.css" />';
 
         if (!$this->execute_plugin()) {
@@ -264,7 +264,7 @@ class asgarosforum {
         }
     }
 
-    public function get_pagetitle($title, $sep, $seplocation) {
+    function get_pagetitle($title, $sep, $seplocation) {
         if (!$this->execute_plugin()) {
             return $title;
         }
@@ -310,7 +310,7 @@ class asgarosforum {
         }
     }
 
-    public function forum() {
+    function forum() {
         global $wpdb, $user_ID;
 
         echo '<div id="af-wrapper">';
@@ -344,7 +344,7 @@ class asgarosforum {
         echo '</div>';
     }
 
-    public function overview() {
+    function overview() {
         $categories = $this->get_categories();
 
         if ($categories) {
@@ -354,7 +354,7 @@ class asgarosforum {
         }
     }
 
-    public function showforum() {
+    function showforum() {
         if ($this->current_forum && $this->access) {
             $threads = $this->get_threads($this->current_forum);
             $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
@@ -367,7 +367,7 @@ class asgarosforum {
         }
     }
 
-    public function showthread() {
+    function showthread() {
         if ($this->current_thread && $this->access) {
             global $wpdb, $wp_embed;
             $posts = $this->get_posts();
@@ -386,7 +386,7 @@ class asgarosforum {
         }
     }
 
-    public function movethread() {
+    function movethread() {
         if ($this->is_moderator() && $this->access) {
             $strOUT = '<form method="post" action="' . $this->url_base . 'movethread&amp;id=' . $this->current_thread . '&amp;move_thread">';
             $strOUT .= sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), $this->get_name($this->current_thread, $this->table_threads)).'<br />';
@@ -406,7 +406,7 @@ class asgarosforum {
         }
     }
 
-    public function element_exists($id, $location) {
+    function element_exists($id, $location) {
         global $wpdb;
 
         if (!empty($id) && $wpdb->get_row($wpdb->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
@@ -417,12 +417,12 @@ class asgarosforum {
     }
 
     // TODO: optimize.
-    public function get_link($id, $location, $page = 1) {
+    function get_link($id, $location, $page = 1) {
         $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
         return $location . $id . $page_appendix;
     }
 
-    public function get_postlink($thread_id, $post_id, $page = 0) {
+    function get_postlink($thread_id, $post_id, $page = 0) {
         global $wpdb;
 
         if (!$page) {
@@ -433,7 +433,7 @@ class asgarosforum {
         return $this->get_link($thread_id, $this->url_thread, $page) . '#postid-' . $post_id;
     }
 
-    public function get_widget_link($thread_id, $post_id, $target) {
+    function get_widget_link($thread_id, $post_id, $target) {
         global $wpdb, $wp_rewrite;
         $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
         $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
@@ -441,7 +441,7 @@ class asgarosforum {
         return $this->get_link($thread_id, $target.$delim.'view=thread&amp;id=', $page).'#postid-'.$post_id;
     }
 
-    public function get_categories($disable_hooks = false) {
+    function get_categories($disable_hooks = false) {
         $filter = array();
 
         if (!$disable_hooks) {
@@ -459,11 +459,11 @@ class asgarosforum {
         return $categories;
     }
 
-    public function categories_compare($a, $b) {
+    function categories_compare($a, $b) {
         return strcmp($a->order, $b->order);
     }
 
-    public function get_forums($id = false) {
+    function get_forums($id = false) {
         global $wpdb;
 
         if ($id) {
@@ -473,7 +473,7 @@ class asgarosforum {
         }
     }
 
-    public function get_threads($id, $type = 'normal') {
+    function get_threads($id, $type = 'normal') {
         global $wpdb;
         $limit = "";
 
@@ -486,7 +486,7 @@ class asgarosforum {
         return $wpdb->get_results($wpdb->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY (SELECT MAX(id) FROM {$this->table_posts} AS p WHERE p.parent_id = t.id) DESC {$limit};", $id, $type . '%'));
     }
 
-    public function get_posts() {
+    function get_posts() {
         global $wpdb;
         $start = $this->current_page * $this->options['posts_per_page'];
         $end = $this->options['posts_per_page'];
@@ -494,7 +494,7 @@ class asgarosforum {
         return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, date_edit, author_id, uploads FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
     }
 
-    public function is_first_post($post_id) {
+    function is_first_post($post_id) {
         global $wpdb;
         $first_post = $wpdb->get_row("SELECT id FROM {$this->table_posts} WHERE parent_id = {$this->current_thread} ORDER BY id ASC LIMIT 1;");
 
@@ -505,12 +505,12 @@ class asgarosforum {
         }
     }
 
-    public function get_name($id, $location) {
+    function get_name($id, $location) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));
     }
 
-    public function cut_string($string, $length = 35) {
+    function cut_string($string, $length = 35) {
         if (strlen($string) > $length) {
             return substr($string, 0, $length) . ' ...';
         }
@@ -518,7 +518,7 @@ class asgarosforum {
         return $string;
     }
 
-    public function get_username($user_id, $wrap = false, $widget = false) {
+    function get_username($user_id, $wrap = false, $widget = false) {
         $user = get_userdata($user_id);
 
         if ($user) {
@@ -532,12 +532,12 @@ class asgarosforum {
     }
 
     // TODO: optimize
-    public function get_last_posts($items = 1) {
+    function get_last_posts($items = 1) {
         global $wpdb;
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, (SELECT t.name FROM {$this->table_threads} AS t WHERE t.id = p1.parent_id) AS name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) WHERE p2.id IS NULL ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
-    public function get_lastpost_in_thread($thread_id) {
+    function get_lastpost_in_thread($thread_id) {
         global $wpdb;
         $post = $wpdb->get_row($wpdb->prepare("SELECT id, date, author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id DESC LIMIT 1;", $thread_id));
 
@@ -549,7 +549,7 @@ class asgarosforum {
         }
     }
 
-    public function get_lastpost_in_forum($forum_id) {
+    function get_lastpost_in_forum($forum_id) {
         global $wpdb;
         $post = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE t.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $forum_id));
 
@@ -562,17 +562,17 @@ class asgarosforum {
         }
     }
 
-    public function get_lastpost_data($id, $data, $location) {
+    function get_lastpost_data($id, $data, $location) {
         global $wpdb;
         return $wpdb->get_row($wpdb->prepare("SELECT {$data} FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE {$location}.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
     }
 
-    public function get_thread_starter($thread_id) {
+    function get_thread_starter($thread_id) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
     }
 
-    public function post_menu($post_id, $author_id, $counter) {
+    function post_menu($post_id, $author_id, $counter) {
         global $user_ID;
 
         $o = '';
@@ -594,35 +594,35 @@ class asgarosforum {
         return $o;
     }
 
-    public function format_date($date) {
+    function format_date($date) {
         return date_i18n($this->date_format, strtotime($date));
     }
 
-    public function current_time() {
+    function current_time() {
         return current_time('Y-m-d H:i:s');
     }
 
-    public function count_userposts($author_id) {
+    function count_userposts($author_id) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$this->table_posts} WHERE author_id = %d;", $author_id));
     }
 
-    public function get_post_author($post_id) {
+    function get_post_author($post_id) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d;", $post_id));
     }
 
-    public function count_elements($id, $location) {
+    function count_elements($id, $location) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d;", $id));
     }
 
-    public function count_posts_in_forum($forum_id) {
+    function count_posts_in_forum($forum_id) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT COUNT({$this->table_posts}.id) FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_threads}.parent_id = %d;", $forum_id));
     }
 
-    public function is_moderator() {
+    function is_moderator() {
         global $user_ID;
 
         if ($user_ID && is_super_admin($user_ID)) {
@@ -632,7 +632,7 @@ class asgarosforum {
         return false;
     }
 
-    public function forum_menu($location) {
+    function forum_menu($location) {
         global $user_ID;
         $menu = '';
 
@@ -664,12 +664,12 @@ class asgarosforum {
         return $menu;
     }
 
-    public function get_parent_id($id, $location) {
+    function get_parent_id($id, $location) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$location} WHERE id = %d;", $id));
     }
 
-    public function breadcrumbs() {
+    function breadcrumbs() {
         $trail = '<span class="icon-home"></span><a href="'.$this->url_home.'">'.__('Forum', 'asgaros-forum').'</a>';
 
         if ($this->current_forum && $this->access) {
@@ -693,7 +693,7 @@ class asgarosforum {
         return '<div class="breadcrumbs">'.$trail.'</div>';
     }
 
-    public function last_visit() {
+    function last_visit() {
         global $user_ID;
 
         if ($user_ID && isset($_COOKIE['wpafcookie'])) {
@@ -703,7 +703,7 @@ class asgarosforum {
         }
     }
 
-    public function pageing($location) {
+    function pageing($location) {
         global $wpdb;
         $out = __('Pages:', 'asgaros-forum');
         $num_pages = 0;
@@ -757,7 +757,7 @@ class asgarosforum {
         return $out;
     }
 
-    public function delete_thread($thread_id, $admin_action = false) {
+    function delete_thread($thread_id, $admin_action = false) {
         global $wpdb;
 
         if ($this->is_moderator()) {
@@ -779,7 +779,7 @@ class asgarosforum {
         }
     }
 
-    public function move_thread() {
+    function move_thread() {
         global $wpdb;
         $newForumID = $_POST['newForumID'];
 
@@ -790,7 +790,7 @@ class asgarosforum {
         }
     }
 
-    public function remove_post() {
+    function remove_post() {
         global $wpdb;
         $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? $_GET['post'] : 0;
 
@@ -800,7 +800,7 @@ class asgarosforum {
         }
     }
 
-    public function remove_post_files($post_id) {
+    function remove_post_files($post_id) {
         $path = $this->upload_path.$post_id.'/';
 
         if (is_dir($path)) {
@@ -814,7 +814,7 @@ class asgarosforum {
         }
     }
 
-    public function get_thread_image($thread_id, $status) {
+    function get_thread_image($thread_id, $status) {
         global $user_ID;
         $unread_status = '';
         $lastpost_data = $this->get_lastpost_data($thread_id, 'p.date, p.author_id', 'p');
@@ -833,7 +833,7 @@ class asgarosforum {
         echo '<span class="icon-'.$status.$unread_status.'"></span>';
     }
 
-    public function change_status($property) {
+    function change_status($property) {
         global $wpdb;
         $new_status = '';
 
@@ -850,7 +850,7 @@ class asgarosforum {
         }
     }
 
-    public function get_status($property) {
+    function get_status($property) {
         global $wpdb;
         $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
 
@@ -863,7 +863,7 @@ class asgarosforum {
         }
     }
 
-    public function attach_files($post_id) {
+    function attach_files($post_id) {
         $files = array();
         $links = array();
         $path = $this->upload_path.$post_id.'/';
@@ -924,7 +924,7 @@ class asgarosforum {
         return $links;
     }
 
-    public function file_list($post_id, $uploads, $frontend = false) {
+    function file_list($post_id, $uploads, $frontend = false) {
         $path = $this->upload_path.$post_id.'/';
         $url = $this->upload_url.$post_id.'/';
         $uploads = maybe_unserialize($uploads);

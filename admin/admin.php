@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 class asgarosforum_admin {
     var $saved = false;
 
-    public function __construct() {
+    function __construct() {
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_init', array($this, 'save_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
@@ -77,7 +77,7 @@ class asgarosforum_admin {
         do_action('asgarosforum_action_save_category_form_fields', $term_id);
     }
 
-    public function add_admin_pages() {
+    function add_admin_pages() {
         $category_taxonomy = get_taxonomy('asgarosforum-category');
 
         add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
@@ -86,7 +86,7 @@ class asgarosforum_admin {
         add_submenu_page('asgarosforum', __('Forums', 'asgaros-forum'), __('Forums', 'asgaros-forum'), 'administrator', 'asgarosforum-structure', array($this, 'forums_page'));
     }
 
-    public function enqueue_admin_scripts($hook) {
+    function enqueue_admin_scripts($hook) {
         global $submenu_file, $asgarosforum;
         $l10n_vars = array('remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'asgaros-forum'));
 
@@ -98,7 +98,7 @@ class asgarosforum_admin {
         }
     }
 
-    public function save_settings() {
+    function save_settings() {
         if (isset($_POST['af_options_submit'])) {
             $this->save_options();
         } else if (isset($_POST['af_forums_submit'])) {
@@ -107,12 +107,12 @@ class asgarosforum_admin {
     }
 
     /* OPTIONS */
-    public function options_page() {
+    function options_page() {
         global $asgarosforum;
         require('views/options.php');
     }
 
-    public function save_options() {
+    function save_options() {
         global $asgarosforum;
         $saved_ops = array();
 
@@ -142,14 +142,14 @@ class asgarosforum_admin {
     }
 
     /* STRUCTURE */
-    public function forums_page() {
+    function forums_page() {
         global $asgarosforum;
         $categories = $asgarosforum->get_categories(true);
 
         require('views/forums.php');
     }
 
-    public function save_forums() {
+    function save_forums() {
         global $asgarosforum, $wpdb;
         $order = 1;
         $listed_forums = array();
@@ -201,7 +201,7 @@ class asgarosforum_admin {
         $this->saved = true;
     }
 
-    public function delete_category($term_id, $term_taxonomy_id, $deleted_term) {
+    function delete_category($term_id, $term_taxonomy_id, $deleted_term) {
         global $wpdb, $asgarosforum;
 
         $forums = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$term_id};");
@@ -213,7 +213,7 @@ class asgarosforum_admin {
         }
     }
 
-    public function delete_forum($forum_id) {
+    function delete_forum($forum_id) {
         global $wpdb, $asgarosforum;
 
         $threads = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$forum_id};");
