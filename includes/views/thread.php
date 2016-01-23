@@ -31,7 +31,7 @@ if (!is_user_logged_in()) {
                     <?php echo get_avatar($post->author_id, 60); ?>
                     <br /><strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
                     <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_userposts($post->author_id); ?></small>
-                    <?php do_action('asgarosforum_action_after_post_author'); ?>
+                    <?php do_action('asgarosforum_action_after_post_author', $post->author_id); ?>
                 </div>
                 <div class="post-message">
                     <?php echo make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text)))); ?>
