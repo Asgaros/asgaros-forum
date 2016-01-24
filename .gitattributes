@@ -17,5 +17,6 @@
 *.RTF	 diff=astextplain
 
 .gitattributes export-ignore
+.gitignore export-ignore
 README.md export-ignore
 .git/* export-ignore
