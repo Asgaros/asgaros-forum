@@ -35,7 +35,9 @@ if (!is_user_logged_in()) {
                 </div>
                 <div class="post-message">
                     <?php
-                    echo make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
+                    $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
+                    $post_content = apply_filters('asgarosforum_filter_post_content', $post_content);
+                    echo $post_content;
                     $this->file_list($post->id, $post->uploads, true);
                     if (strtotime($post->date_edit) > strtotime($post->date)) {
                         echo '<div class="post-edit">'.sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'</div>';
