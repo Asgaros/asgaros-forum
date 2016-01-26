@@ -54,6 +54,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Filter hook asgarosforum_filter_post_content
 = 1.0.6 =
 * Added: "Last edited" info to posts
 * Fixed: Wrong word wrap
