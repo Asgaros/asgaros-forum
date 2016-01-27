@@ -30,6 +30,7 @@ class asgarosforum {
         'threads_per_page'      => 20,
         'allow_file_uploads'    => false,
         'highlight_admin'       => true,
+        'show_edit_date'        => true,
         'require_login'         => false,
         'custom_color'          => '#2d89cc'
     );

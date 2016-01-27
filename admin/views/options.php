@@ -28,6 +28,10 @@ if (!defined('ABSPATH')) exit;
             <label for="highlight_admin"><?php _e('Highlight administrator names', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?> />
+            <label for="show_edit_date"><?php _e('Show edit date', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?> />
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>
