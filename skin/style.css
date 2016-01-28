@@ -150,10 +150,10 @@
 #af-wrapper .info,
 #af-wrapper .notice {
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     font-style: italic;
     color: #666;
-    padding: 10px !important;
+    padding: 8px !important;
 }
 #af-wrapper .info {
     border: 1px solid #ccc;
