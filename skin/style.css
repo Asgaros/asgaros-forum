@@ -160,6 +160,9 @@
     background-color: #ffffbb;
     margin-bottom: 10px;
 }
+#af-wrapper .info span {
+    display: block;
+}
 
 /* FOOTER */
 #af-wrapper .footer {

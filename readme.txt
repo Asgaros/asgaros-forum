@@ -56,6 +56,7 @@ You can help to translate Asgaros Forum on this site:
 == Changelog ==
 * Added: Option to hide edit date
 * Added: Filter hook asgarosforum_filter_post_content
+* Changed: Editor error messages are now shown on the editor page
 * Changed: Minor design changes
 = 1.0.6 =
 * Added: "Last edited" info to posts

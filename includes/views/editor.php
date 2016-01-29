@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) exit;
 
 $post = "";
 $thread = "";
-$threadname = "";
-$quote = "";
+$threadname = (isset($_POST['subject'])) ? $_POST['subject'] : '';
+$threadcontent = (isset($_POST['message'])) ? $_POST['message'] : '';
 $error = false;
 
 if (!$user_ID) {
@@ -31,11 +31,11 @@ if (!$error) {
         }
 
         if (!$error) {
-            if (isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->table_posts)) {
+            if (!isset($_POST['message']) && isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->table_posts)) {
                 $quote_id = $_GET['quote'];
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d;", $quote_id));
                 $display_name = $this->get_username($text->author_id);
-                $quote = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($text->date)).'</div>'.$text->text.'</blockquote><br />';
+                $threadcontent = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($text->date)).'</div>'.$text->text.'</blockquote><br />';
             }
         }
     } else if ($_GET['view'] == "editpost") {
@@ -55,7 +55,11 @@ if (!$error) {
         }
 
         if (!$error) {
-            if ($this->is_first_post($post->id)) {
+            if (!isset($_POST['message'])) {
+                $threadcontent = $post->text;
+            }
+
+            if (!isset($_POST['subject']) && $this->is_first_post($post->id)) {
                 $thread = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d;", $post->parent_id));
                 $threadname = $thread->name;
             }
@@ -63,7 +67,12 @@ if (!$error) {
     }
 }
 
-if (!$error) { ?>
+if (!$error) {
+    if (!empty($this->error)) {
+        echo '<div class="info">'.$this->error.'</div>';
+    }
+
+     ?>
     <form name="addform" method="post" enctype="multipart/form-data">
         <div class="title-element">
             <?php
@@ -86,13 +95,7 @@ if (!$error) { ?>
             <div class="editor-row">
                 <div class="editor-cell"><span><?php _e('Message:', 'asgaros-forum'); ?></span></div>
                 <div class="editor-cell message-editor">
-                    <?php
-                    if ($_GET['view'] == "editpost") {
-                        wp_editor(stripslashes($post->text), 'message', $this->options_editor);
-                    } else {
-                        wp_editor(stripslashes($quote), 'message', $this->options_editor);
-                    }
-                    ?>
+                    <?php wp_editor(stripslashes($threadcontent), 'message', $this->options_editor); ?>
                 </div>
             </div>
             <?php if ($_GET['view'] == "editpost") { ?>
@@ -102,7 +105,7 @@ if (!$error) { ?>
     		<div class="editor-row">
     			<div class="editor-cell"><span><?php _e('Upload Files:', 'asgaros-forum'); ?></span></div>
     			<div class="editor-cell">
-    				<input type="file" name="forumfile[]" /><br />
+                    <input type="file" name="forumfile[]" /><br />
                     <a id="add_file_link" href="#"><?php _e('Add another file ...', 'asgaros-forum'); ?></a>
     			</div>
     		</div>

@@ -8,6 +8,7 @@ class asgarosforum {
     var $delim = "";
     var $date_format = "";
     var $access = true;
+    var $error = '';
     var $url_home = "";
     var $url_base = "";
     var $url_forum = "";

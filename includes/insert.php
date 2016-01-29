@@ -7,33 +7,26 @@ $post_id = $_GET['id'];
 $subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
 $content = $_POST['message'];
 $redirect = '';
-$msg = '<h2>'.__('An error occured!', 'asgaros-forum').'</h2>';
-$error = false;
 
-if (isset($_POST['edit_post_submit']) && !$this->element_exists($post_id, $this->table_posts)) {
-    $msg .= '<div id="error"><p>'.__('Sorry, this post does not exist.', 'asgaros-forum').'</p></div>';
-    $error = true;
+if (isset($_POST['edit_post_submit'])) {
+    if (!$this->element_exists($post_id, $this->table_posts)) {
+        $this->error .= '<span>'.__('Sorry, this post does not exist.', 'asgaros-forum').'</span>';
+    }
+
+    if (empty($this->error) && $user_ID != $this->get_post_author($post_id) && !$this->is_moderator()) {
+        $this->error .= '<span>'.__('You are not allowed to do this.', 'asgaros-forum').'</span>';
+    }
 }
 
-if (isset($_POST['edit_post_submit']) && $user_ID != $this->get_post_author($post_id) && !$this->is_moderator()) {
-    $msg .= '<div id="error"><p>'.__('You are not allowed to do this.', 'asgaros-forum').'</p></div>';
-    $error = true;
-}
-
-if ((isset($_POST['add_thread_submit']) && empty($subject)) || (isset($_POST['edit_post_submit']) && isset($_POST['subject']) && empty($_POST['subject']))) {
-    $msg .= '<div id="error"><p>'.__('You must enter a subject.', 'asgaros-forum').'</p></div>';
-    $error = true;
+if (empty($this->error) && (isset($_POST['add_thread_submit']) && empty($subject)) || (isset($_POST['edit_post_submit']) && isset($_POST['subject']) && empty($_POST['subject']))) {
+    $this->error .= '<span>'.__('You must enter a subject.', 'asgaros-forum').'</span>';
 }
 
 if (empty($content)) {
-    $msg .= '<div id="error"><p>'.__('You must enter a message.', 'asgaros-forum').'</p></div>';
-    $error = true;
+    $this->error .= '<span>'.__('You must enter a message.', 'asgaros-forum').'</span>';
 }
 
-if ($error) {
-    $msg .= '<div id="error"><p><a href="#" onclick="history.back();">&laquo; '.__('Go back', 'asgaros-forum').'</a></p></div>';
-    wp_die($msg);
-} else {
+if (empty($this->error)) {
     if (isset($_POST['add_thread_submit'])) {
         $date = $this->current_time();
         $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_threads} (name, parent_id) VALUES (%s, %d);", $subject, $this->current_forum));
@@ -51,6 +44,7 @@ if ($error) {
         $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $this->current_thread, $date, $user_ID));
         $post_id = $wpdb->insert_id;
 
+        // TODO: Dont add upload stuff when upload is deactivated
         $uploads = maybe_serialize($this->attach_files($post_id));
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
 
