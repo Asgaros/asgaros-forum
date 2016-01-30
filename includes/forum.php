@@ -77,7 +77,7 @@ class asgarosforum {
         }
     }
 
-    function register_category_taxonomy() {
+    static function register_category_taxonomy() {
         register_taxonomy(
             'asgarosforum-category',
             null,
