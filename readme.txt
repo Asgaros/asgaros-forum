@@ -29,6 +29,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * French
 * German
 * Hungarian
+* Italian
 * Russian
 
 == Installation ==
