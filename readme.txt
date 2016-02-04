@@ -2,7 +2,7 @@
 Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
-Tested up to: 4.4.1
+Tested up to: 4.4.2
 Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
