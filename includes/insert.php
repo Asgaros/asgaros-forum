@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) exit;
 
 global $wpdb;
 $post_id = $_GET['id'];
-$subject = (isset($_POST['subject'])) ? $_POST['subject'] : '';
-$content = $_POST['message'];
+$subject = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
+$content = trim($_POST['message']);
 $redirect = '';
 
 if (isset($_POST['edit_post_submit'])) {
@@ -18,7 +18,7 @@ if (isset($_POST['edit_post_submit'])) {
     }
 }
 
-if (empty($this->error) && (isset($_POST['add_thread_submit']) && empty($subject)) || (isset($_POST['edit_post_submit']) && isset($_POST['subject']) && empty($_POST['subject']))) {
+if (empty($this->error) && ((isset($_POST['add_thread_submit']) && empty($subject)) || (isset($_POST['edit_post_submit']) && isset($_POST['subject']) && empty($subject)))) {
     $this->error .= '<span>'.__('You must enter a subject.', 'asgaros-forum').'</span>';
 }
 

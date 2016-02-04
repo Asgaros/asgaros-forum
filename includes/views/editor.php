@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) exit;
 
 $post = "";
 $thread = "";
-$threadname = (isset($_POST['subject'])) ? $_POST['subject'] : '';
-$threadcontent = (isset($_POST['message'])) ? $_POST['message'] : '';
+$threadname = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
+$threadcontent = (isset($_POST['message'])) ? trim($_POST['message']) : '';
 $error = false;
 
 if (!$user_ID) {

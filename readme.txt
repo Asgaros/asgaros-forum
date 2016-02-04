@@ -55,8 +55,9 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Prevent the creation of empty content
 * Fixed: Display issues with some themes
-* Added: Option to hide edit date
+* Added: Option to hide the edit date
 * Added: Filter hook asgarosforum_filter_post_content
 * Changed: Editor error messages are now shown on the editor page
 * Changed: Minor design changes
