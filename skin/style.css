@@ -315,6 +315,8 @@
     background: #eee;
     border: 1px solid #adadad;
     border-left: 4px solid #adadad;
+    outline: none; /* comp */
+    color: inherit; /* comp */
 }
 #af-wrapper blockquote:before {
     content: none; /* comp */
