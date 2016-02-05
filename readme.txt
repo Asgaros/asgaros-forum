@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
 Tested up to: 4.4.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.0.7 =
 * Fixed: Prevent the creation of empty content
 * Fixed: Hide widget for guests when access is limited to logged in users
 * Fixed: Some PHP notices
