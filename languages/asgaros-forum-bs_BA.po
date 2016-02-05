@@ -4,8 +4,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Tue Jan 19 2016 18:53:32 GMT+0100 (Mitteleuropäische Zeit)\n"
-"Last-Translator: root <developer@thomasbelser.net>\n"
+"PO-Revision-Date: Fri Feb 05 2016 13:17:47 GMT+0100 (Mitteleuropäische Zeit)\n"
+"Last-Translator: root <root@root.root>\n"
 "Language-Team: \n"
 "Language: Bosnian\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
@@ -29,6 +29,10 @@ msgid "Highlight administrator names"
 msgstr ""
 
 #: ../admin/views/options.php:32
+msgid "Show edit date"
+msgstr ""
+
+#: ../admin/views/options.php:36
 msgid "Forum visible to logged in users only"
 msgstr ""
 
@@ -65,25 +69,38 @@ msgstr ""
 msgid "The forum page:"
 msgstr ""
 
-#: ../includes/forum.php:341
+#: ../includes/forum.php:90
+msgid "Add new Category"
+msgstr ""
+
+#: ../includes/forum.php:91
+msgid "Search Categories"
+msgstr ""
+
+#: ../includes/forum.php:92
+msgid "No Categories found."
+msgstr ""
+
+#: ../includes/forum.php:343
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:341 ../includes/views/forum.php:6 ..
+#: ../includes/forum.php:343 ../includes/views/forum.php:6 ..
 #: includes/views/thread.php:6
 msgid "Login"
 msgstr ""
 
-#: ../includes/forum.php:602 ../includes/forum.php:666
+#: ../includes/forum.php:587 ../includes/forum.php:651
 msgid "Are you sure you want to remove this?"
-msgstr ""
-
-#: ../includes/insert.php:34
-msgid "Go back"
 msgstr ""
 
 #: ../includes/views/forum.php:6 ../includes/views/thread.php:6
 msgid "You need to login in order to create posts and topics."
+msgstr ""
+
+#: ../includes/views/thread.php:43
+#, php-format
+msgid "Last edited on %s"
 msgstr ""
 
 #. Name of the plugin
@@ -106,27 +123,27 @@ msgstr "Thomas Belser"
 msgid "http://thomasbelser.net"
 msgstr "http://thomasbelser.net"
 
-#: ../admin/admin.php:38 ../admin/admin.php:57 ../admin/admin.php:66
+#: ../admin/admin.php:34 ../admin/admin.php:53 ../admin/admin.php:62
 msgid "Order"
 msgstr "Poredak"
 
-#: ../admin/admin.php:89 ../admin/admin.php:89 ../includes/forum.php:690
+#: ../admin/admin.php:83 ../admin/admin.php:83 ../includes/forum.php:675
 msgid "Forum"
 msgstr "Forum"
 
-#: ../admin/admin.php:90 ../admin/admin.php:90 ../admin/views/options.php:7
+#: ../admin/admin.php:84 ../admin/admin.php:84 ../admin/views/options.php:7
 msgid "Options"
 msgstr "Opcije"
 
-#: ../admin/admin.php:91 ../admin/admin.php:91 ../includes/forum.php:82
+#: ../admin/admin.php:85 ../admin/admin.php:85 ../includes/forum.php:86
 msgid "Categories"
 msgstr "Kategorije"
 
-#: ../admin/admin.php:92 ../admin/admin.php:92 ../admin/views/forums.php:7
+#: ../admin/admin.php:86 ../admin/admin.php:86 ../admin/views/forums.php:7
 msgid "Forums"
 msgstr "Forumi"
 
-#: ../admin/admin.php:97
+#: ../admin/admin.php:91
 msgid ""
 "WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and "
 "Replies associated with it!!! Are you sure you want to delete this Forum???"
@@ -179,175 +196,159 @@ msgstr "Pokazati ovoliko tema po stranici:"
 msgid "Allow file uploads"
 msgstr "Dozvoliti postavljanje datoteka"
 
-#: ../admin/views/options.php:37
+#: ../admin/views/options.php:41
 msgid "Save Options"
 msgstr "Spremiti opcije"
 
-#: ../includes/forum.php:83
+#: ../includes/forum.php:87
 msgid "Category"
 msgstr "Kategorija"
 
-#: ../includes/forum.php:84
+#: ../includes/forum.php:88
 msgid "Edit Category"
 msgstr "Urediti kategoriju"
 
-#: ../includes/forum.php:85
+#: ../includes/forum.php:89
 msgid "Update Category"
 msgstr "Ažurirati kategoriju"
 
-#: ../includes/forum.php:86
-msgid "Add new category"
-msgstr "Dodati novu kategoriju"
-
-#: ../includes/forum.php:87
-msgid "Search categories"
-msgstr "Pretražiti kategorije"
-
-#: ../includes/forum.php:88
-msgid "No categories found."
-msgstr "Nema pronađenih kategorija."
-
-#: ../includes/forum.php:284 ../includes/forum.php:705 ../includes/views/editor.
-#: php:75
+#: ../includes/forum.php:286 ../includes/forum.php:690 ../includes/views/editor.
+#: php:84
 msgid "Edit Post"
 msgstr "Urediti objavu"
 
-#: ../includes/forum.php:286 ../includes/forum.php:703
+#: ../includes/forum.php:288 ../includes/forum.php:688
 msgid "Post Reply"
 msgstr "Odgovoriti"
 
-#: ../includes/forum.php:288 ../includes/forum.php:658 ../includes/forum.php:707
+#: ../includes/forum.php:290 ../includes/forum.php:643 ../includes/forum.php:692
 msgid "New Thread"
 msgstr "Nova tema"
 
-#: ../includes/forum.php:290 ../includes/forum.php:665
+#: ../includes/forum.php:292 ../includes/forum.php:650
 msgid "Move Thread"
 msgstr "Pomjeriti temu"
 
-#: ../includes/forum.php:353
+#: ../includes/forum.php:355
 msgid "There are no categories yet!"
 msgstr "Još uvijek nema kategorija!"
 
-#: ../includes/forum.php:366 ../includes/views/editor.php:20
+#: ../includes/forum.php:368 ../includes/views/editor.php:20
 msgid "Sorry, this forum does not exist."
 msgstr "Žao nam je, ovaj forum ne postoji."
 
-#: ../includes/forum.php:378
+#: ../includes/forum.php:380
 msgid "Thread closed"
 msgstr "Tema je zatvorena."
 
-#: ../includes/forum.php:382
+#: ../includes/forum.php:384
 msgid "Sorry, but there are no posts."
 msgstr "Žao nam je, ali nema objava."
 
-#: ../includes/forum.php:385 ../includes/views/editor.php:25
+#: ../includes/forum.php:387 ../includes/views/editor.php:25
 msgid "Sorry, this thread does not exist."
 msgstr "Žao nam je, ova tema ne postoji."
 
-#: ../includes/forum.php:392
+#: ../includes/forum.php:394
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr "Pomjeriti \"<strong>%s</strong>\" u novi forum:"
 
-#: ../includes/forum.php:401
+#: ../includes/forum.php:403
 msgid "Move"
 msgstr "Pomjeriti"
 
-#: ../includes/forum.php:405
+#: ../includes/forum.php:407
 msgid "You are not allowed to move threads."
 msgstr "Nije Vam dozvoljeno da pomjerate teme."
 
-#: ../includes/forum.php:545 ../includes/forum.php:557
+#: ../includes/forum.php:547 ../includes/forum.php:559
 msgid "Last post by"
 msgstr "Posljednja objava od strane:"
 
-#: ../includes/forum.php:546 ../includes/forum.php:559 ../includes/views/editor.
+#: ../includes/forum.php:548 ../includes/forum.php:561 ../includes/views/editor.
 #: php:38
 #, php-format
 msgid "on %s"
 msgstr "vrijeme: %s"
 
-#: ../includes/forum.php:558
+#: ../includes/forum.php:560
 msgid "in"
 msgstr "u"
 
-#: ../includes/forum.php:561
+#: ../includes/forum.php:563
 msgid "No threads yet!"
 msgstr "Još uvijek nema tema!"
 
-#: ../includes/forum.php:598
+#: ../includes/forum.php:583
 msgid "Quote"
 msgstr "Citirati"
 
-#: ../includes/forum.php:602
+#: ../includes/forum.php:587
 msgid "Remove"
 msgstr "Ukloniti"
 
-#: ../includes/forum.php:606
+#: ../includes/forum.php:591
 msgid "Edit"
 msgstr "Urediti"
 
-#: ../includes/forum.php:661
+#: ../includes/forum.php:646
 msgid "Reply"
 msgstr "Odgovoriti"
 
-#: ../includes/forum.php:666
+#: ../includes/forum.php:651
 msgid "Delete Thread"
 msgstr "Obrisati temu"
 
-#: ../includes/forum.php:669
+#: ../includes/forum.php:654
 msgid "Undo Sticky"
 msgstr "Ponovo vratiti važno"
 
-#: ../includes/forum.php:669
+#: ../includes/forum.php:654
 msgid "Sticky"
 msgstr "Važno"
 
-#: ../includes/forum.php:673
+#: ../includes/forum.php:658
 msgid "Re-open"
 msgstr "Ponovo otvoriti"
 
-#: ../includes/forum.php:675
+#: ../includes/forum.php:660
 msgid "Close"
 msgstr "Zatvoriti"
 
-#: ../includes/forum.php:725
+#: ../includes/forum.php:710
 msgid "Pages:"
 msgstr "Stranice:"
 
-#: ../includes/forum.php:752
+#: ../includes/forum.php:737
 msgid "First"
 msgstr "Prva"
 
-#: ../includes/forum.php:770
+#: ../includes/forum.php:755
 msgid "Last"
 msgstr "Posljednja"
 
-#: ../includes/forum.php:945
+#: ../includes/forum.php:946
 msgid "Delete"
 msgstr "Obrisati"
 
-#: ../includes/forum.php:954 ../includes/forum.php:958
+#: ../includes/forum.php:955 ../includes/forum.php:959
 msgid "Uploaded files:"
 msgstr "Postavljene datoteke:"
 
-#: ../includes/insert.php:10
-msgid "An error occured!"
-msgstr "Desila se greška!"
-
-#: ../includes/insert.php:14 ../includes/views/editor.php:44
+#: ../includes/insert.php:13 ../includes/views/editor.php:44
 msgid "Sorry, this post does not exist."
 msgstr "Žao nam je, ova objava ne postoji."
 
-#: ../includes/insert.php:19 ../includes/views/editor.php:30
+#: ../includes/insert.php:17 ../includes/views/editor.php:30
 msgid "You are not allowed to do this."
 msgstr "Nije Vam dozvoljeno da ovo radite."
 
-#: ../includes/insert.php:24
+#: ../includes/insert.php:22
 msgid "You must enter a subject."
 msgstr "Morate unijeti predmet."
 
-#: ../includes/insert.php:29
+#: ../includes/insert.php:26
 msgid "You must enter a message."
 msgstr "Morate unijeti poruku."
 
@@ -363,32 +364,32 @@ msgstr "Citirati od"
 msgid "Sorry, you are not allowed to edit this post."
 msgstr "Žao nam je, nije Vam dozvoljeno da uređujete ovu objavu."
 
-#: ../includes/views/editor.php:71
+#: ../includes/views/editor.php:80
 msgid "Post new Thread"
 msgstr "Objaviti novu temu."
 
-#: ../includes/views/editor.php:73
+#: ../includes/views/editor.php:82
 msgid "Post Reply:"
 msgstr "Odgovor:"
 
-#: ../includes/views/editor.php:82
+#: ../includes/views/editor.php:91
 msgid "Subject:"
 msgstr "Predmet:"
 
-#: ../includes/views/editor.php:87
+#: ../includes/views/editor.php:96
 msgid "Message:"
 msgstr "Poruka:"
 
-#: ../includes/views/editor.php:103
+#: ../includes/views/editor.php:106
 msgid "Upload Files:"
 msgstr "Postaviti datoteke:"
 
-#: ../includes/views/editor.php:106
+#: ../includes/views/editor.php:109
 msgid "Add another file ..."
 msgstr "Dodati drugu datoteku ..."
 
-#: ../includes/views/editor.php:114 ../includes/views/editor.php:116 ..
-#: includes/views/editor.php:118
+#: ../includes/views/editor.php:117 ../includes/views/editor.php:119 ..
+#: includes/views/editor.php:121
 msgid "Submit"
 msgstr "Otpremiti"
 
@@ -412,26 +413,26 @@ msgstr "Pregledi"
 msgid "There are no threads yet!"
 msgstr "Još uvijek nema nikakvih tema!"
 
-#: ../includes/views/overview.php:25
+#: ../includes/views/overview.php:26
 msgid "Threads:"
 msgstr "Teme:"
 
-#: ../includes/views/overview.php:26 ../includes/views/thread.php:33
+#: ../includes/views/overview.php:27 ../includes/views/thread.php:33
 msgid "Posts:"
 msgstr "Objave:"
 
-#: ../includes/views/overview.php:33
+#: ../includes/views/overview.php:34
 msgid "There are no forums yet!"
 msgstr "Još uvijek nema nikakvih rasprava!"
 
-#: ../includes/views/overview.php:39
+#: ../includes/views/overview.php:40
 msgid "New posts"
 msgstr "Nove objave"
 
-#: ../includes/views/overview.php:40
+#: ../includes/views/overview.php:41
 msgid "No new posts"
 msgstr "Nema novih objava"
 
-#: ../includes/views/overview.php:41
+#: ../includes/views/overview.php:42
 msgid "Mark All Read"
 msgstr "Označiti sve kao pročitano"
