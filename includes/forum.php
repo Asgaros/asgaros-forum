@@ -819,16 +819,19 @@ class asgarosforum {
     function get_thread_image($thread_id, $status) {
         global $user_ID;
         $unread_status = '';
-        $lastpost_data = $this->get_lastpost_data($thread_id, 'p.date, p.author_id', 'p');
-        $lastpost_time = $lastpost_data->date;
-        $lastpost_author_id = $lastpost_data->author_id;
 
-        if ($lastpost_time && $user_ID != $lastpost_author_id) {
-            $lp = strtotime($lastpost_time);
-            $lv = strtotime($this->last_visit());
+        if ($thread_id) {
+            $lastpost_data = $this->get_lastpost_data($thread_id, 'p.date, p.author_id', 'p');
+            $lastpost_time = $lastpost_data->date;
+            $lastpost_author_id = $lastpost_data->author_id;
 
-            if ($lp > $lv) {
-                $unread_status = ' unread';
+            if ($lastpost_time && $user_ID != $lastpost_author_id) {
+                $lp = strtotime($lastpost_time);
+                $lv = strtotime($this->last_visit());
+
+                if ($lp > $lv) {
+                    $unread_status = ' unread';
+                }
             }
         }
 

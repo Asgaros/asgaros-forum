@@ -57,6 +57,7 @@ You can help to translate Asgaros Forum on this site:
 == Changelog ==
 * Fixed: Prevent the creation of empty content
 * Fixed: Hide widget for guests when access is limited to logged in users
+* Fixed: Some PHP notices
 * Fixed: Display issues with some themes
 * Added: Option to hide the edit date
 * Added: Filter hook asgarosforum_filter_post_content

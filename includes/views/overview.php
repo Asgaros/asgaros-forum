@@ -14,9 +14,10 @@ $forum_counter = 0;
             foreach ($frs as $forum) {
                 $forum_counter++;
                 $lastpost_data = $this->get_lastpost_data($forum->id, 'p.parent_id', 't');
+                $lastpost_parent_id = ($lastpost_data) ? $lastpost_data->parent_id : false;
                 ?>
                 <div class="forum">
-                    <div class="forum-status"><?php $this->get_thread_image($lastpost_data->parent_id, 'overview'); ?></div>
+                    <div class="forum-status"><?php $this->get_thread_image($lastpost_parent_id, 'overview'); ?></div>
                     <div class="forum-name">
                         <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo $forum->name; ?></a></strong>
                         <small><?php echo $forum->description; ?></small>
