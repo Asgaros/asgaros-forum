@@ -15,6 +15,7 @@ delete_site_option('asgarosforum_db_version');
 
 // Delete user meta data
 delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
+delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
 
 // Delete terms
 $terms = $wpdb->get_results('SELECT t.term_id FROM '.$wpdb->terms.' AS t INNER JOIN '.$wpdb->term_taxonomy.' AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy = "asgarosforum-category";');

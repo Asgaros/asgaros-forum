@@ -525,7 +525,14 @@ class asgarosforum {
 
         if ($user) {
             $username = ($wrap) ? wordwrap($user->display_name, 22, "-<br/>", true) : $user->display_name;
-            $username = ($this->options['highlight_admin'] && user_can($user_id, 'manage_options') && !$widget) ? '<span class="highlight-admin">'.$username.'</span>' : $username;
+
+            if ($this->options['highlight_admin'] && !$widget) {
+                if (user_can($user_id, 'manage_options')) {
+                    $username = '<span class="highlight-admin">'.$username.'</span>';
+                } else if (get_user_meta($user_id, 'asgarosforum_moderator', true) == 1) {
+                    $username = '<span class="highlight-moderator">'.$username.'</span>';
+                }
+            }
 
             return $username;
         } else {
@@ -627,7 +634,7 @@ class asgarosforum {
     function is_moderator() {
         global $user_ID;
 
-        if ($user_ID && is_super_admin($user_ID)) {
+        if ($user_ID && (is_super_admin($user_ID) || get_user_meta($user_ID, 'asgarosforum_moderator', true) == 1)) {
             return true;
         }
 

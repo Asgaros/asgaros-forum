@@ -14,6 +14,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 
 = Features =
 * Topic/post management (Remove/Edit/Close/Sticky/Move)
+* Moderators
 * Powerful editor
 * File uploads
 * Recent Forum Posts Widget
@@ -31,6 +32,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Hungarian
 * Italian
 * Russian
+* Spanish
 
 == Installation ==
 * Download Asgaros Forum.
@@ -42,6 +44,8 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Done!
 
 == Frequently Asked Questions ==
+= Where can I add moderators? =
+Moderators can be added via the user edit screen in the WordPress administration interface.
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum)
@@ -55,6 +59,8 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Moderator functionality
+* Added: Spanish translation (thanks to QuqurUxcho)
 = 1.0.7 =
 * Fixed: Prevent the creation of empty content
 * Fixed: Hide widget for guests when access is limited to logged in users

@@ -23,6 +23,9 @@
 #af-wrapper .highlight-admin {
     color: #e00000;
 }
+#af-wrapper .highlight-moderator {
+    color: #099922;
+}
 
 /* EDITOR */
 #af-wrapper .editor-row {

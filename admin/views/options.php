@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) exit;
         </p>
         <p>
             <input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?> />
-            <label for="highlight_admin"><?php _e('Highlight administrator names', 'asgaros-forum'); ?></label>
+            <label for="highlight_admin"><?php _e('Highlight administrator/moderator names', 'asgaros-forum'); ?></label>
         </p>
         <p>
             <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?> />
