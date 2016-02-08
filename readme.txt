@@ -59,6 +59,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 * Added: Moderator functionality
 * Added: Spanish translation (thanks to QuqurUxcho)
 = 1.0.7 =
