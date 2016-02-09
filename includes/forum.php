@@ -315,6 +315,7 @@ class asgarosforum {
     function forum() {
         global $wpdb, $user_ID;
 
+        ob_start();
         echo '<div id="af-wrapper">';
 
         if ($this->access) {
@@ -344,6 +345,9 @@ class asgarosforum {
         }
 
         echo '</div>';
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
     }
 
     function overview() {
