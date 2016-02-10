@@ -59,7 +59,8 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
-* Fixed: Display forum at the correct shortcode position
+* Fixed: Insert forum at the correct shortcode position
+* Fixed: Broken URLs with some third-party plugins
 * Fixed: Display issues with some themes
 * Added: Moderator functionality
 * Added: Filter asgarosforum_filter_get_threads

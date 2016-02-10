@@ -5,16 +5,17 @@ if (!defined('ABSPATH')) exit;
 class asgarosforum {
     var $directory = '';
     var $db_version = 2;
-    var $delim = "";
     var $date_format = "";
     var $access = true;
     var $error = '';
-    var $url_home = "";
-    var $url_base = "";
-    var $url_forum = "";
-    var $url_thread = "";
-    var $url_editor_thread = "";
-    var $url_editor_post = "";
+    var $url_home = '';
+    var $url_forum = '';
+    var $url_thread = '';
+    var $url_editor_thread = '';
+    var $url_editor_post = '';
+    var $url_editor_edit = '';
+    var $url_markallread = '';
+    var $url_movethread = '';
     var $upload_path = "";
     var $upload_url = "";
     var $table_forums = "";
@@ -158,7 +159,7 @@ class asgarosforum {
             return;
         }
 
-        global $user_ID, $wp_rewrite;
+        global $user_ID;
 
         if (isset($_GET['view'])) {
             $this->current_view = $_GET['view'];
@@ -197,13 +198,14 @@ class asgarosforum {
                 break;
         }
 
-        $this->delim = ($wp_rewrite->using_permalinks()) ? "?" : "&amp;";
         $this->url_home = get_permalink();
-        $this->url_base = $this->url_home.$this->delim.'view=';
-        $this->url_forum = $this->url_base.'forum&amp;id=';
-        $this->url_thread = $this->url_base.'thread&amp;id=';
-        $this->url_editor_thread = $this->url_base . "addthread&amp;id={$this->current_forum}";
-        $this->url_editor_post = $this->url_base . "addpost&amp;id={$this->current_thread}";
+        $this->url_forum = add_query_arg(array('view' => 'forum'), $this->url_home).'&amp;id=';
+        $this->url_thread = add_query_arg(array('view' => 'thread'), $this->url_home).'&amp;id=';
+        $this->url_editor_thread = add_query_arg(array('view' => 'addthread', 'id' => $this->current_forum), $this->url_home);
+        $this->url_editor_post = add_query_arg(array('view' => 'addpost', 'id' => $this->current_thread), $this->url_home);
+        $this->url_editor_edit = add_query_arg(array('view' => 'editpost'), $this->url_home).'&amp;id=';
+        $this->url_markallread = add_query_arg(array('view' => 'markallread'), $this->url_home);
+        $this->url_movethread = add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home);
 
         // Set cookie
         if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
@@ -394,7 +396,7 @@ class asgarosforum {
 
     function movethread() {
         if ($this->is_moderator() && $this->access) {
-            $strOUT = '<form method="post" action="' . $this->url_base . 'movethread&amp;id=' . $this->current_thread . '&amp;move_thread">';
+            $strOUT = '<form method="post" action="'.$this->url_movethread.'&amp;move_thread">';
             $strOUT .= sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), $this->get_name($this->current_thread, $this->table_threads)).'<br />';
             $strOUT .= '<select name="newForumID">';
 
@@ -440,11 +442,11 @@ class asgarosforum {
     }
 
     function get_widget_link($thread_id, $post_id, $target) {
-        global $wpdb, $wp_rewrite;
+        global $wpdb;
         $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
         $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
-        $delim = ($wp_rewrite->using_permalinks()) ? '?' : '&amp;';
-        return $this->get_link($thread_id, $target.$delim.'view=thread&amp;id=', $page).'#postid-'.$post_id;
+
+        return $this->get_link($thread_id, add_query_arg(array('view' => 'thread'), $target).'&amp;id=', $page).'#postid-'.$post_id;
     }
 
     function get_categories($disable_hooks = false) {
@@ -602,7 +604,7 @@ class asgarosforum {
         }
 
         if (($this->is_moderator()) || $user_ID == $author_id) {
-            $o .= '<a href="'.$this->url_base.'editpost&amp;id='.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="icon-pencil2"></span>'.__('Edit', 'asgaros-forum').'</a>';
+            $o .= '<a href="'.$this->url_editor_edit.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="icon-pencil2"></span>'.__('Edit', 'asgaros-forum').'</a>';
         }
 
         $o = (!empty($o)) ? $o = '<div class="post-menu">'.$o.'</div>' : $o;
@@ -661,7 +663,7 @@ class asgarosforum {
                 }
 
                 if ($this->is_moderator()) {
-                    $menu .= '<a href="'.$this->url_base.'movethread&amp;id='.$this->current_thread.'"><span class="icon-shuffle"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
+                    $menu .= '<a href="'.$this->url_movethread.'"><span class="icon-shuffle"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
                     $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="icon-bin"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
                     $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="icon-pushpin"></span><span>';
