@@ -489,7 +489,9 @@ class asgarosforum {
             $limit = $wpdb->prepare("LIMIT %d, %d", $start, $end);
         }
 
-        return $wpdb->get_results($wpdb->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY (SELECT MAX(id) FROM {$this->table_posts} AS p WHERE p.parent_id = t.id) DESC {$limit};", $id, $type . '%'));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY (SELECT MAX(id) FROM {$this->table_posts} AS p WHERE p.parent_id = t.id) DESC {$limit};", $id, $type . '%'));
+        $results = apply_filters('asgarosforum_filter_get_threads', $results);
+        return $results;
     }
 
     function get_posts() {
