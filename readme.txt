@@ -63,6 +63,7 @@ You can help to translate Asgaros Forum on this site:
 * Fixed: Display issues with some themes
 * Added: Moderator functionality
 * Added: Filter asgarosforum_filter_get_threads
+* Added: Filter asgarosforum_filter_get_threads_order
 * Added: Spanish translation (thanks to QuqurUxcho)
 = 1.0.7 =
 * Fixed: Prevent the creation of empty content
