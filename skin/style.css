@@ -368,6 +368,9 @@
     padding-right: 5px;
     font-size: 1.2em;
     vertical-align: text-top;
+    border-radius: inherit; /* comp */
+    background: none; /* comp */
+    color: inherit; /* comp */
 }
 #af-wrapper [class^="icon-"]:before,
 #af-wrapper [class*=" icon-"]:before {
