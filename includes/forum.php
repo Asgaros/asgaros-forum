@@ -34,6 +34,7 @@ class asgarosforum {
         'highlight_admin'       => true,
         'show_edit_date'        => true,
         'require_login'         => false,
+        'minimalistic_editor'   => true,
         'custom_color'          => '#2d89cc'
     );
     var $options_editor = array(
@@ -47,6 +48,7 @@ class asgarosforum {
         global $wpdb;
         $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
+        $this->options_editor['teeny'] = $this->options['minimalistic_editor'];  // Override editor settings
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
         $this->table_forums = $wpdb->prefix . 'forum_forums';
         $this->table_threads = $wpdb->prefix . 'forum_threads';
@@ -63,7 +65,8 @@ class asgarosforum {
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('wp_head', array($this, 'setup_header'));
         add_filter('wp_title', array($this, 'get_pagetitle'), 10, 3);
-        add_filter('teeny_mce_buttons', array($this, 'teeny_mce_buttons'), 10, 2);
+        add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
+        add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
         add_shortcode('forum', array($this, 'forum'));
     }
@@ -298,11 +301,12 @@ class asgarosforum {
         return $pre . $title;
     }
 
-    function teeny_mce_buttons($buttons, $editor_id) {
+    function add_mce_buttons($buttons, $editor_id) {
         if (!$this->execute_plugin() || $editor_id !== 'message') {
             return $buttons;
         } else {
-            return array('bold', 'italic', 'underline', 'blockquote', 'strikethrough', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'undo', 'redo', 'image', 'link', 'unlink', 'fullscreen');
+            $buttons[] = 'image';
+            return $buttons;
         }
     }
 

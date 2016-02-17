@@ -60,6 +60,7 @@ You can help to translate Asgaros Forum on this site:
 
 == Changelog ==
 * Fixed: Display issues with some themes
+* Added: Option to use complex editor instead of minimalistic one
 = 1.0.8 =
 * Fixed: Insert forum at the correct shortcode position
 * Fixed: Broken URLs with some third-party plugins
