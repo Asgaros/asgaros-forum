@@ -527,7 +527,7 @@ class asgarosforum {
 
     function cut_string($string, $length = 35) {
         if (strlen($string) > $length) {
-            return substr($string, 0, $length) . ' ...';
+            return mb_substr($string, 0, $length, 'UTF-8') . ' ...';
         }
 
         return $string;

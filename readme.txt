@@ -59,6 +59,7 @@ You can help to translate Asgaros Forum on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken thread titles when using multi-byte characters
 * Fixed: Display issues with some themes
 * Added: Option to use complex editor instead of minimalistic one
 * Changed: Better support with some third-party plugins
