@@ -58,6 +58,7 @@ class asgarosforum_admin {
         unset($columns['description'], $columns['slug'], $columns['posts']);
 
         $columns['order'] = __('Order', 'asgaros-forum');
+        $columns['category_access'] = __('Access', 'asgaros-forum');
         $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
 
         return $columns;
@@ -67,6 +68,17 @@ class asgarosforum_admin {
         if ($column == 'order') {
             $order = get_term_meta($term_id, 'order', true);
             $out = sprintf('<p>%s</p>', esc_attr($order));
+        } else if ($column == 'category_access') {
+            $access = get_term_meta($term_id, 'category_access', true);
+            $access_name = __('Everyone', 'asgaros-forum');
+
+            if ($access === 'loggedin') {
+                $access_name = __('Logged in users only', 'asgaros-forum');
+            } else if ($access === 'moderator') {
+                $access_name = __('Moderators only', 'asgaros-forum');
+            }
+
+            $out = sprintf('<p>%s</p>', esc_attr($access_name));
         } else {
             $out = apply_filters('asgarosforum_filter_manage_custom_columns', $out, $column, $term_id);
         }
@@ -77,18 +89,43 @@ class asgarosforum_admin {
     function add_category_form_fields() {
         echo '<div class="form-field form-required term-order-wrap">';
             echo '<label>'.__('Order', 'asgaros-forum').'</label>';
-            echo '<input type="text" name="category_order" value="1" />';
+            echo '<input type="number" name="category_order" value="1" size="3" />';
+        echo '</div>';
+
+        echo '<div class="form-field form-required term-category_access-wrap">';
+            echo '<label>'.__('Access', 'asgaros-forum').'</label>';
+            echo '<select name="category_access">';
+                echo '<option value="everyone">'.__('Everyone', 'asgaros-forum').'</option>';
+                echo '<option value="loggedin">'.__('Logged in users only', 'asgaros-forum').'</option>';
+                echo '<option value="moderator">'.__('Moderators only', 'asgaros-forum').'</option>';
+            echo '</select>';
+            echo '<p>'.__('Select which user role has access to this category.', 'asgaros-forum').'</p>';
         echo '</div>';
 
         do_action('asgarosforum_action_add_category_form_fields');
     }
 
     function edit_category_form_fields($term) {
+        $term_meta = get_term_meta($term->term_id);
+        $order = (!empty($term_meta['order'][0])) ? $term_meta['order'][0] : 1;
+        $access = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
+
         echo '<tr class="form-field form-required term-order-wrap">';
             echo '<th scope="row">'.__('Order', 'asgaros-forum').'</th>';
             echo '<td>';
-                $order = get_term_meta($term->term_id, 'order', true);
                 echo '<input type="text" name="category_order" value="'.$order.'" />';
+            echo '</td>';
+        echo '</tr>';
+
+        echo '<tr class="form-field form-required term-category_access-wrap">';
+            echo '<th scope="row">'.__('Access', 'asgaros-forum').'</th>';
+            echo '<td>';
+                echo '<select name="category_access">';
+                    echo '<option value="everyone" '.selected($access, 'everyone', false).'>'.__('Everyone', 'asgaros-forum').'</option>';
+                    echo '<option value="loggedin" '.selected($access, 'loggedin', false).'>'.__('Logged in users only', 'asgaros-forum').'</option>';
+                    echo '<option value="moderator" '.selected($access, 'moderator', false).'>'.__('Moderators only', 'asgaros-forum').'</option>';
+                echo '</select>';
+                echo '<p class="description">'.__('Select which user role has access to this category.', 'asgaros-forum').'</p>';
             echo '</td>';
         echo '</tr>';
 
@@ -98,6 +135,10 @@ class asgarosforum_admin {
     function save_category_form_fields($term_id) {
         if (isset($_POST['category_order'])) {
             update_term_meta($term_id, 'order', $_POST['category_order']);
+        }
+
+        if (isset($_POST['category_access'])) {
+            update_term_meta($term_id, 'category_access', $_POST['category_access']);
         }
 
         do_action('asgarosforum_action_save_category_form_fields', $term_id);

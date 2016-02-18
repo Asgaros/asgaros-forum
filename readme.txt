@@ -15,6 +15,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 = Features =
 * Topic/post management (Remove/Edit/Close/Sticky/Move)
 * Moderators
+* Permissions
 * Powerful editor
 * File uploads
 * Recent Forum Posts Widget
@@ -61,8 +62,10 @@ You can help to translate Asgaros Forum on this site:
 == Changelog ==
 * Fixed: Broken thread titles when using multi-byte characters
 * Fixed: Display issues with some themes
+* Added: Category access permissions
 * Added: Option to use complex editor instead of minimalistic one
 * Changed: Better support with some third-party plugins
+* Performance improvements and code optimizations
 = 1.0.8 =
 * Fixed: Insert forum at the correct shortcode position
 * Fixed: Broken URLs with some third-party plugins

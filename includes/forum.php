@@ -241,7 +241,20 @@ class asgarosforum {
     }
 
     function check_access() {
-        $access = (!$this->options['require_login'] || ($this->options['require_login'] && is_user_logged_in())) ? true : false;
+        $access = ($this->options['require_login'] && !is_user_logged_in()) ? false : true;
+
+        if ($access) {
+            $category_access = get_term_meta($this->current_category, 'category_access', true);
+
+            if (!empty($category_access)) {
+                if ($category_access === 'loggedin' && !is_user_logged_in()) {
+                    $access = false;
+                } else if ($category_access === 'moderator' && !$this->is_moderator()) {
+                    $access = false;
+                }
+            }
+        }
+
         $this->access = apply_filters('asgarosforum_filter_check_access', $access, $this->current_category);
     }
 
@@ -453,6 +466,22 @@ class asgarosforum {
         return $this->get_link($thread_id, add_query_arg(array('view' => 'thread'), $target).'&amp;id=', $page).'#postid-'.$post_id;
     }
 
+    function get_all_categories_by_meta($key, $value, $compare = 'LIKE') {
+        $categories = get_terms('asgarosforum-category', array(
+            'fields' => 'ids',
+            'hide_empty' => false,
+            'meta_query' => array(
+                array(
+                    'key' => $key,
+                    'value' => $value,
+                    'compare' => $compare
+                )
+            )
+        ));
+
+        return $categories;
+    }
+
     function get_categories($disable_hooks = false) {
         $filter = array();
 
@@ -462,8 +491,15 @@ class asgarosforum {
 
         $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
 
-        foreach ($categories as $category) {
-            $category->order = get_term_meta($category->term_id, 'order', true);
+        foreach ($categories as $key => $category) {
+            $term_meta = get_term_meta($category->term_id);
+            $category->order = $term_meta['order'][0];
+            $category->category_access = $term_meta['category_access'][0];
+
+            // Remove categories from array where the user has no access.
+            if (($category->category_access === 'loggedin' && !is_user_logged_in()) || ($category->category_access === 'moderator' && !$this->is_moderator())) {
+                unset($categories[$key]);
+            }
         }
 
         usort($categories, 'self::categories_compare');
@@ -554,9 +590,10 @@ class asgarosforum {
     }
 
     // TODO: optimize
-    function get_last_posts($items = 1) {
+    // For Widgets
+    function get_last_posts($items = 1, $where = "") {
         global $wpdb;
-        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, (SELECT t.name FROM {$this->table_threads} AS t WHERE t.id = p1.parent_id) AS name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) WHERE p2.id IS NULL ORDER BY p1.id DESC LIMIT %d;", $items));
+        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$this->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$this->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
     function get_lastpost_in_thread($thread_id) {
