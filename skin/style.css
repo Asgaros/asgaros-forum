@@ -57,6 +57,9 @@
 #af-wrapper .message-editor {
     padding: 0;
 }
+#af-wrapper .quicktags-toolbar input {
+    width: auto;
+}
 
 /* OVERVIEW/FORUM */
 #af-wrapper .forum [class^="icon-"],
