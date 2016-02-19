@@ -34,7 +34,6 @@ class asgarosforum {
         'highlight_admin'       => true,
         'show_edit_date'        => true,
         'require_login'         => false,
-        'minimalistic_editor'   => true,
         'custom_color'          => '#2d89cc'
     );
     var $options_editor = array(
@@ -48,7 +47,6 @@ class asgarosforum {
         global $wpdb;
         $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
-        $this->options_editor['teeny'] = $this->options['minimalistic_editor'];  // Override editor settings
         $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
         $this->table_forums = $wpdb->prefix . 'forum_forums';
         $this->table_threads = $wpdb->prefix . 'forum_threads';
@@ -209,6 +207,9 @@ class asgarosforum {
         $this->url_editor_edit = add_query_arg(array('view' => 'editpost'), $this->url_home).'&amp;id=';
         $this->url_markallread = add_query_arg(array('view' => 'markallread'), $this->url_home);
         $this->url_movethread = add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home);
+
+        // Override editor settings
+        $this->options_editor = apply_filters('asgarosforum_filter_editor_settings', $this->options_editor);
 
         // Set cookie
         if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
