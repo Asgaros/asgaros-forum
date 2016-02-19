@@ -49,7 +49,8 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 Moderators can be added via the user edit screen in the WordPress administration interface.
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
-[https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum)
+[https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
+Please contact me in the forums if you want to be a Project Translation Editor (PTE) for a language.
 
 == Screenshots ==
 1. The forum overview.
@@ -65,7 +66,7 @@ You can help to translate Asgaros Forum on this site:
 * Fixed: Display issues with some themes
 * Added: Category access permissions
 * Added: Option to use complex editor instead of minimalistic one
-* Changed: Better support with some third-party plugins
+* Changed: Better support of some third-party plugins
 * Performance improvements and code optimizations
 = 1.0.8 =
 * Fixed: Insert forum at the correct shortcode position
