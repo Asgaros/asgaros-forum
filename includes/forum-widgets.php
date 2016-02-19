@@ -30,22 +30,19 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $categories_list = array();
         $where = '';
 
-        if ($asgarosforum->is_moderator()) {
+        if (!$asgarosforum->is_moderator()) {
             $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'moderator');
             $categories_list = array_merge($categories_list, $categories);
         }
 
-        if (is_user_logged_in()) {
+        if (!is_user_logged_in()) {
             $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'loggedin');
             $categories_list = array_merge($categories_list, $categories);
         }
 
-        $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'everyone');
-        $categories_list = array_merge($categories_list, $categories);
-
         if (!empty($categories_list)) {
             $categories_list = implode(',', $categories_list);
-            $where = 'AND f.parent_id IN ('.$categories_list.')';
+            $where = 'AND f.parent_id NOT IN ('.$categories_list.')';
         }
 
 		$posts = $asgarosforum->get_last_posts($number, $where);

@@ -247,9 +247,7 @@ class asgarosforum {
             $category_access = get_term_meta($this->current_category, 'category_access', true);
 
             if (!empty($category_access)) {
-                if ($category_access === 'loggedin' && !is_user_logged_in()) {
-                    $access = false;
-                } else if ($category_access === 'moderator' && !$this->is_moderator()) {
+                if (!empty($category_access) && (($category_access === 'loggedin' && !is_user_logged_in()) || ($category_access === 'moderator' && !$this->is_moderator()))) {
                     $access = false;
                 }
             }
@@ -494,7 +492,7 @@ class asgarosforum {
         foreach ($categories as $key => $category) {
             $term_meta = get_term_meta($category->term_id);
             $category->order = $term_meta['order'][0];
-            $category->category_access = $term_meta['category_access'][0];
+            $category->category_access = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
 
             // Remove categories from array where the user has no access.
             if (($category->category_access === 'loggedin' && !is_user_logged_in()) || ($category->category_access === 'moderator' && !$this->is_moderator())) {
