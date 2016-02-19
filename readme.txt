@@ -65,7 +65,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 * Fixed: Broken thread titles when using multi-byte characters
 * Fixed: Display issues with some themes
 * Added: Category access permissions
-* Added: Option to use complex editor instead of minimalistic one
+* Added: Filter asgarosforum_filter_editor_settings
 * Changed: Better support of some third-party plugins
 * Performance improvements and code optimizations
 = 1.0.8 =

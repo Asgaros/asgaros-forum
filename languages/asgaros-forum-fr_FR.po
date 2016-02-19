@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Fri Feb 19 2016 21:55:09 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Sat Feb 20 2016 00:07:36 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <root@root.root>\n"
 "Language-Team: \n"
 "Language: French (France)\n"
@@ -59,10 +59,6 @@ msgstr ""
 msgid "Forum visible to logged in users only"
 msgstr ""
 
-#: ../admin/views/options.php:40
-msgid "Use minimalistic editor"
-msgstr ""
-
 #: ../includes/forum-widgets.php:7
 msgid "Shows recent posts in Asgaros Forum."
 msgstr ""
@@ -96,28 +92,28 @@ msgstr ""
 msgid "The forum page:"
 msgstr ""
 
-#: ../includes/forum.php:94
+#: ../includes/forum.php:92
 msgid "Add new Category"
 msgstr ""
 
-#: ../includes/forum.php:95
+#: ../includes/forum.php:93
 msgid "Search Categories"
 msgstr ""
 
-#: ../includes/forum.php:96
+#: ../includes/forum.php:94
 msgid "No Categories found."
 msgstr ""
 
-#: ../includes/forum.php:361
+#: ../includes/forum.php:362
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:361 ../includes/views/forum.php:6 ..
+#: ../includes/forum.php:362 ../includes/views/forum.php:6 ..
 #: includes/views/thread.php:6
 msgid "Login"
 msgstr ""
 
-#: ../includes/forum.php:642 ../includes/forum.php:706
+#: ../includes/forum.php:643 ../includes/forum.php:707
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
@@ -151,7 +147,7 @@ msgid "http://thomasbelser.net"
 msgstr "http://thomasbelser.net"
 
 #: ../admin/admin.php:34 ../admin/admin.php:150 ../admin/admin.php:150 ..
-#: includes/forum.php:730
+#: includes/forum.php:731
 msgid "Forum"
 msgstr "Forum"
 
@@ -163,7 +159,7 @@ msgstr "Tri"
 msgid "Options"
 msgstr "Options"
 
-#: ../admin/admin.php:152 ../admin/admin.php:152 ../includes/forum.php:90
+#: ../admin/admin.php:152 ../admin/admin.php:152 ../includes/forum.php:88
 msgid "Categories"
 msgstr "Catégories"
 
@@ -224,143 +220,143 @@ msgstr "Nombre de discussions à afficher par page :"
 msgid "Allow file uploads"
 msgstr "Autoriser le téléchargement de fichiers"
 
-#: ../admin/views/options.php:45
+#: ../admin/views/options.php:41
 msgid "Save Options"
 msgstr "Sauvegarder les options"
 
-#: ../includes/forum.php:91
+#: ../includes/forum.php:89
 msgid "Category"
 msgstr "Catégorie"
 
-#: ../includes/forum.php:92
+#: ../includes/forum.php:90
 msgid "Edit Category"
 msgstr "Editer la catégorie"
 
-#: ../includes/forum.php:93
+#: ../includes/forum.php:91
 msgid "Update Category"
 msgstr "Mettre à jour la catégorie"
 
-#: ../includes/forum.php:302 ../includes/forum.php:745 ../includes/views/editor.
+#: ../includes/forum.php:303 ../includes/forum.php:746 ../includes/views/editor.
 #: php:84
 msgid "Edit Post"
 msgstr "Editer le message"
 
-#: ../includes/forum.php:304 ../includes/forum.php:743
+#: ../includes/forum.php:305 ../includes/forum.php:744
 msgid "Post Reply"
 msgstr "Répondre"
 
-#: ../includes/forum.php:306 ../includes/forum.php:698 ../includes/forum.php:747
+#: ../includes/forum.php:307 ../includes/forum.php:699 ../includes/forum.php:748
 msgid "New Thread"
 msgstr "Nouvelle discussion"
 
-#: ../includes/forum.php:308 ../includes/forum.php:705
+#: ../includes/forum.php:309 ../includes/forum.php:706
 msgid "Move Thread"
 msgstr "Déplacer la discussion"
 
-#: ../includes/forum.php:376
+#: ../includes/forum.php:377
 msgid "There are no categories yet!"
 msgstr "Il n'y a pas encore de catégorie !"
 
-#: ../includes/forum.php:389 ../includes/views/editor.php:20
+#: ../includes/forum.php:390 ../includes/views/editor.php:20
 msgid "Sorry, this forum does not exist."
 msgstr "Désolé, ce forum n'existe pas."
 
-#: ../includes/forum.php:401
+#: ../includes/forum.php:402
 msgid "Thread closed"
 msgstr "Discussion fermée."
 
-#: ../includes/forum.php:405
+#: ../includes/forum.php:406
 msgid "Sorry, but there are no posts."
 msgstr "Désolé, il n'y a pas de messages."
 
-#: ../includes/forum.php:408 ../includes/views/editor.php:25
+#: ../includes/forum.php:409 ../includes/views/editor.php:25
 msgid "Sorry, this thread does not exist."
 msgstr "Désolé, cette discussion n'existe pas."
 
-#: ../includes/forum.php:415
+#: ../includes/forum.php:416
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr "Déplacer \"<strong>%s</strong>\"  vers un nouveau forum :"
 
-#: ../includes/forum.php:424
+#: ../includes/forum.php:425
 msgid "Move"
 msgstr "Déplacer"
 
-#: ../includes/forum.php:428
+#: ../includes/forum.php:429
 msgid "You are not allowed to move threads."
 msgstr "Vous n'êtes pas autorisé à déplacer des discussions."
 
-#: ../includes/forum.php:602 ../includes/forum.php:614
+#: ../includes/forum.php:603 ../includes/forum.php:615
 msgid "Last post by"
 msgstr "Dernier message par"
 
-#: ../includes/forum.php:603 ../includes/forum.php:616 ../includes/views/editor.
+#: ../includes/forum.php:604 ../includes/forum.php:617 ../includes/views/editor.
 #: php:38
 #, php-format
 msgid "on %s"
 msgstr "sur %s"
 
-#: ../includes/forum.php:615
+#: ../includes/forum.php:616
 msgid "in"
 msgstr "dans"
 
-#: ../includes/forum.php:618
+#: ../includes/forum.php:619
 msgid "No threads yet!"
 msgstr "Aucune discussion ouverte pour l'instant."
 
-#: ../includes/forum.php:638
+#: ../includes/forum.php:639
 msgid "Quote"
 msgstr "Citer"
 
-#: ../includes/forum.php:642
+#: ../includes/forum.php:643
 msgid "Remove"
 msgstr "Supprimer"
 
-#: ../includes/forum.php:646
+#: ../includes/forum.php:647
 msgid "Edit"
 msgstr "Editer"
 
-#: ../includes/forum.php:701
+#: ../includes/forum.php:702
 msgid "Reply"
 msgstr "Répondre"
 
-#: ../includes/forum.php:706
+#: ../includes/forum.php:707
 msgid "Delete Thread"
 msgstr "Supprimer la discussion"
 
-#: ../includes/forum.php:709
+#: ../includes/forum.php:710
 msgid "Undo Sticky"
 msgstr "Annuler l'épinglage"
 
-#: ../includes/forum.php:709
+#: ../includes/forum.php:710
 msgid "Sticky"
 msgstr "Epingler"
 
-#: ../includes/forum.php:713
+#: ../includes/forum.php:714
 msgid "Re-open"
 msgstr "Ré-ouvrir"
 
-#: ../includes/forum.php:715
+#: ../includes/forum.php:716
 msgid "Close"
 msgstr "Fermer"
 
-#: ../includes/forum.php:765
+#: ../includes/forum.php:766
 msgid "Pages:"
 msgstr "Pages :"
 
-#: ../includes/forum.php:792
+#: ../includes/forum.php:793
 msgid "First"
 msgstr "Premier"
 
-#: ../includes/forum.php:810
+#: ../includes/forum.php:811
 msgid "Last"
 msgstr "Dernier"
 
-#: ../includes/forum.php:1001
+#: ../includes/forum.php:1002
 msgid "Delete"
 msgstr "Supprimer"
 
-#: ../includes/forum.php:1010 ../includes/forum.php:1014
+#: ../includes/forum.php:1011 ../includes/forum.php:1015
 msgid "Uploaded files:"
 msgstr "Fichiers attachés :"
 
