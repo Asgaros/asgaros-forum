@@ -61,6 +61,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+* Changed: Minor design changes
 = 1.0.9 =
 * Fixed: Broken thread titles when using multi-byte characters
 * Fixed: Display issues with some themes

@@ -17,6 +17,7 @@ if (!is_user_logged_in()) {
 <div class="content-element">
     <?php
     $counter = 0;
+    $avatars_available = get_option('show_avatars');
     foreach ($posts as $post) {
         $counter++;
         ?>
@@ -28,8 +29,13 @@ if (!is_user_logged_in()) {
             </div>
             <div class="post-content">
                 <div class="post-author">
-                    <?php echo get_avatar($post->author_id, 60); ?>
-                    <br /><strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
+                    <?php
+                    if ($avatars_available) {
+                        echo get_avatar($post->author_id, 60);
+                        echo '<br />';
+                    }
+                    ?>
+                    <strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
                     <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_userposts($post->author_id); ?></small>
                     <?php do_action('asgarosforum_after_post_author', $post->author_id); ?>
                 </div>
