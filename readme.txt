@@ -51,6 +51,14 @@ Moderators can be added via the user edit screen in the WordPress administration
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
 Please contact me in the forums if you want to be a Project Translation Editor (PTE) for a language.
+= Which hooks are available =
+* asgarosforum_after_post_author
+* asgarosforum_after_thread_submit
+* asgarosforum_after_post_submit
+* asgarosforum_after_edit_submit
+* asgarosforum_action_add_category_form_fields
+* asgarosforum_action_edit_category_form_fields
+* asgarosforum_action_save_category_form_fields
 
 == Screenshots ==
 1. The forum overview.
@@ -61,6 +69,9 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_after_thread_submit hook
+* Added: asgarosforum_after_post_submit hook
+* Added: asgarosforum_after_edit_submit hook
 * Changed: Minor design changes
 * Changed: Provide russian translation updates via WordPress Updater
 = 1.0.9 =

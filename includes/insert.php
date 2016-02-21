@@ -38,6 +38,8 @@ if (empty($this->error)) {
         $uploads = maybe_serialize($this->attach_files($post_id));
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
 
+        do_action('asgarosforum_after_thread_submit', $post_id);
+
         $redirect = html_entity_decode($this->get_link($thread_id, $this->url_thread).'#postid-'.$post_id);
     } else if (isset($_POST['add_post_submit'])) {
         $date = $this->current_time();
@@ -48,6 +50,8 @@ if (empty($this->error)) {
         $uploads = maybe_serialize($this->attach_files($post_id));
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
 
+        do_action('asgarosforum_after_post_submit', $post_id);
+
         $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
     } else if (isset($_POST['edit_post_submit'])) {
         $uploads = maybe_serialize($this->attach_files($post_id));
@@ -57,6 +61,8 @@ if (empty($this->error)) {
         if (isset($_POST['subject']) && !empty($_POST['subject'])) {
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));
         }
+
+        do_action('asgarosforum_after_edit_submit', $post_id);
 
         $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id, $_POST['part_id']));
     }
