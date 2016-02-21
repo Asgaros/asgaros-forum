@@ -75,6 +75,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 * Added: asgarosforum_after_edit_submit hook
 * Changed: Minor design changes
 * Changed: Provide russian translation updates via WordPress Updater
+* Performance improvements and code optimizations
 = 1.0.9 =
 * Fixed: Broken thread titles when using multi-byte characters
 * Fixed: Display issues with some themes

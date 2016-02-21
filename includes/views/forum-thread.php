@@ -1,5 +1,6 @@
 <div class="thread">
-    <div class="thread-status"><?php $this->get_thread_image($thread->id, $thread->status); ?></div>
+    <?php $lastpost_data = $this->get_lastpost_data($thread->id, 'p.date, p.author_id', 'p'); ?>
+    <div class="thread-status"><?php $this->get_thread_image($lastpost_data, $thread->status); ?></div>
     <div class="thread-name">
         <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>"><?php echo $this->cut_string($thread->name); ?></a></strong>
         <small><?php _e('Created by:', 'asgaros-forum'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>

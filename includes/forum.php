@@ -872,12 +872,11 @@ class asgarosforum {
         }
     }
 
-    function get_thread_image($thread_id, $status) {
+    function get_thread_image($lastpost_data, $status) {
         global $user_ID;
         $unread_status = '';
 
-        if ($thread_id) {
-            $lastpost_data = $this->get_lastpost_data($thread_id, 'p.date, p.author_id', 'p');
+        if ($lastpost_data) {
             $lastpost_time = $lastpost_data->date;
             $lastpost_author_id = $lastpost_data->author_id;
 
