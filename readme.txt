@@ -69,6 +69,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with big post images in Internet Explorer
 * Added: asgarosforum_after_thread_submit hook
 * Added: asgarosforum_after_post_submit hook
 * Added: asgarosforum_after_edit_submit hook
