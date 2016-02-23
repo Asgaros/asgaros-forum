@@ -22,8 +22,8 @@ $forum_counter = 0;
                         <small><?php echo $forum->description; ?></small>
                     </div>
                     <div class="forum-stats">
-                        <small><?php _e('Threads:', 'asgaros-forum'); ?> <?php echo $forum->count_threads; ?></small>
-                        <small><?php _e('Posts:', 'asgaros-forum'); ?> <?php echo $forum->count_posts; ?></small>
+                        <small><?php echo sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads); ?></small>
+                        <small><?php echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts); ?></small>
                     </div>
                     <div class="forum-poster"><?php echo $this->get_lastpost_in_forum($forum->id); ?></div>
                 </div>

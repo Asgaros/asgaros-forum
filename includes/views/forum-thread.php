@@ -6,8 +6,9 @@
         <small><?php _e('Created by:', 'asgaros-forum'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
     </div>
     <div class="thread-stats">
-        <small><?php _e('Answers', 'asgaros-forum'); ?>: <?php echo (int) ($this->count_elements($thread->id, $this->table_posts) - 1); ?></small>
-        <small><?php _e('Views', 'asgaros-forum'); ?>: <?php echo (int) $thread->views; ?></small>
+        <?php $count_answers = (int)($this->count_elements($thread->id, $this->table_posts) - 1); ?>
+        <small><?php echo sprintf(_n('%s Answer', '%s Answers', $count_answers, 'asgaros-forum'), $count_answers); ?></small>
+        <small><?php echo sprintf(_n('%s View', '%s Views', (int)$thread->views, 'asgaros-forum'), (int)$thread->views); ?></small>
     </div>
     <div class="thread-poster"><?php echo $this->get_lastpost_in_thread($thread->id); ?></div>
 </div>

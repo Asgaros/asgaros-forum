@@ -103,6 +103,7 @@
 #af-wrapper .forum-stats,
 #af-wrapper .thread-stats {
     width: 100px;
+    text-align: center;
 }
 #af-wrapper .forum-poster,
 #af-wrapper .thread-poster {
