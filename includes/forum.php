@@ -514,7 +514,7 @@ class asgarosforum {
         global $wpdb;
 
         if ($id) {
-            return $wpdb->get_results($wpdb->prepare("SELECT id, name, description FROM {$this->table_forums} WHERE parent_id = %d ORDER BY sort ASC;", $id));
+            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, (SELECT COUNT(t.id) FROM {$this->table_threads} AS t WHERE t.parent_id = f.id) AS count_threads FROM {$this->table_forums} AS f WHERE f.parent_id = %d ORDER BY f.sort ASC;", $id));
         } else {
             return $wpdb->get_results("SELECT id, name, description FROM {$this->table_forums} ORDER BY sort ASC;");
         }
