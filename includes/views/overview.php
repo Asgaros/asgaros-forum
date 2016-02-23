@@ -13,7 +13,7 @@ $forum_counter = 0;
         if (count($frs) > 0) {
             foreach ($frs as $forum) {
                 $forum_counter++;
-                $lastpost_data = $this->get_lastpost_data($forum->id, 'p.date, p.author_id', 't');
+                $lastpost_data = $this->get_lastpost_data($forum->id, 'p.id, p.date, p.parent_id, p.author_id, t.name', 't');
                 ?>
                 <div class="forum">
                     <div class="forum-status"><?php $this->get_thread_image($lastpost_data, 'overview'); ?></div>
@@ -25,7 +25,7 @@ $forum_counter = 0;
                         <small><?php echo sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads); ?></small>
                         <small><?php echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts); ?></small>
                     </div>
-                    <div class="forum-poster"><?php echo $this->get_lastpost_in_forum($forum->id); ?></div>
+                    <div class="forum-poster"><?php echo $this->get_lastpost_in_forum($lastpost_data); ?></div>
                 </div>
             <?php
             }

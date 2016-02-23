@@ -607,14 +607,11 @@ class asgarosforum {
         }
     }
 
-    function get_lastpost_in_forum($forum_id) {
-        global $wpdb;
-        $post = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE t.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $forum_id));
-
-        if ($post) {
-            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
-            <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($post->name).'</strong></small>
-            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($post->parent_id, $post->id).'">'.$this->format_date($post->date).'</a>').'</small>';
+    function get_lastpost_in_forum($lastpost_data) {
+        if ($lastpost_data) {
+            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>
+            <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($lastpost_data->name).'</strong></small>
+            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
         } else {
             return '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
         }
