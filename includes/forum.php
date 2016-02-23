@@ -419,7 +419,7 @@ class asgarosforum {
             $frs = $this->get_forums();
 
             foreach ($frs as $f) {
-                $strOUT .= '<option value="' . $f->id . '"' . ($f->id == $this->current_forum ? ' selected="selected"' : '') . '>' . $f->name . '</option>';
+                $strOUT .= '<option value="'.$f->id.'"'.($f->id == $this->current_forum ? ' selected="selected"' : '').'>'.$f->name.'</option>';
             }
 
             $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'" /></form>';
@@ -514,9 +514,9 @@ class asgarosforum {
         global $wpdb;
 
         if ($id) {
-            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, (SELECT COUNT(t.id) FROM {$this->table_threads} AS t WHERE t.parent_id = f.id) AS count_threads FROM {$this->table_forums} AS f WHERE f.parent_id = %d ORDER BY f.sort ASC;", $id));
+            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, COUNT(t.id) AS count_threads, (SELECT COUNT(p.id) FROM {$this->table_posts} AS p, {$this->table_threads} AS t WHERE p.parent_id = t.id AND t.parent_id = f.id) AS count_posts FROM {$this->table_forums} AS f LEFT JOIN {$this->table_threads} AS t ON t.parent_id = f.id WHERE f.parent_id = %d GROUP BY f.id ORDER BY f.sort ASC;", $id));
         } else {
-            return $wpdb->get_results("SELECT id, name, description FROM {$this->table_forums} ORDER BY sort ASC;");
+            return $wpdb->get_results("SELECT id, name FROM {$this->table_forums} ORDER BY sort ASC;");
         }
     }
 
@@ -673,11 +673,6 @@ class asgarosforum {
     function count_elements($id, $location) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d;", $id));
-    }
-
-    function count_posts_in_forum($forum_id) {
-        global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT COUNT({$this->table_posts}.id) FROM {$this->table_posts} INNER JOIN {$this->table_threads} ON {$this->table_posts}.parent_id={$this->table_threads}.id WHERE {$this->table_threads}.parent_id = %d;", $forum_id));
     }
 
     function is_moderator() {
