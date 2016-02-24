@@ -101,12 +101,14 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 	}
 }
 
-add_action('widgets_init', function() {
+function init_asgarosforum_recentposts_widget() {
     global $asgarosforum;
 
     if (!$asgarosforum->options['require_login'] || is_user_logged_in()) {
         register_widget('AsgarosForumRecentPosts_Widget');
     }
-});
+}
+
+add_action('widgets_init', 'init_asgarosforum_recentposts_widget');
 
 ?>
