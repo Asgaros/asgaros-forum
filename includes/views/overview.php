@@ -25,7 +25,7 @@ $forum_counter = 0;
                         <small><?php echo sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads); ?></small>
                         <small><?php echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts); ?></small>
                     </div>
-                    <div class="forum-poster"><?php echo $this->get_lastpost_in_forum($lastpost_data); ?></div>
+                    <div class="forum-poster"><?php echo $this->get_lastpost($lastpost_data); ?></div>
                 </div>
             <?php
             }

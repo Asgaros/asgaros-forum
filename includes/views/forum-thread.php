@@ -10,5 +10,5 @@
         <small><?php echo sprintf(_n('%s Answer', '%s Answers', $count_answers, 'asgaros-forum'), $count_answers); ?></small>
         <small><?php echo sprintf(_n('%s View', '%s Views', (int)$thread->views, 'asgaros-forum'), (int)$thread->views); ?></small>
     </div>
-    <div class="thread-poster"><?php echo $this->get_lastpost_in_thread($lastpost_data); ?></div>
+    <div class="thread-poster"><?php echo $this->get_lastpost($lastpost_data, 'thread'); ?></div>
 </div>

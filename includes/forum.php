@@ -595,23 +595,18 @@ class asgarosforum {
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$this->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$this->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
-    function get_lastpost_in_thread($lastpost_data) {
-        if ($lastpost_data) {
-            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>
-            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
-        } else {
-            return false;
-        }
-    }
+    function get_lastpost($lastpost_data, $context = 'forum') {
+        $lastpost = false;
 
-    function get_lastpost_in_forum($lastpost_data) {
         if ($lastpost_data) {
-            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>
-            <small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($lastpost_data->name).'</strong></small>
-            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
-        } else {
-            return '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
+            $lastpost = '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>';
+            $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($lastpost_data->name).'</strong></small>' : '';
+            $lastpost .= '<small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
+        } else if ($context === 'forum') {
+            $lastpost = '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
         }
+
+        return $lastpost;
     }
 
     function get_lastpost_data($id, $data, $location) {
