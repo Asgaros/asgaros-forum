@@ -595,13 +595,10 @@ class asgarosforum {
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$this->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$this->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
-    function get_lastpost_in_thread($thread_id) {
-        global $wpdb;
-        $post = $wpdb->get_row($wpdb->prepare("SELECT id, date, author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id DESC LIMIT 1;", $thread_id));
-
-        if ($post) {
-            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($post->author_id).'</strong></small>
-            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($thread_id, $post->id).'">'.$this->format_date($post->date).'</a>').'</small>';
+    function get_lastpost_in_thread($lastpost_data) {
+        if ($lastpost_data) {
+            return '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>
+            <small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
         } else {
             return false;
         }
