@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Sat Feb 20 2016 00:07:32 GMT+0100 (Mitteleuropäische Zeit)\n"
+"PO-Revision-Date: Thu Feb 25 2016 18:08:00 GMT+0100 (Mitteleuropäische Zeit)\n"
 "Last-Translator: root <root@root.root>\n"
 "Language-Team: \n"
 "Language: Finnish (Finland)\n"
@@ -113,15 +113,43 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: ../includes/forum.php:643 ../includes/forum.php:707
+#: ../includes/forum.php:632 ../includes/forum.php:691
 msgid "Are you sure you want to remove this?"
 msgstr ""
+
+#: ../includes/views/forum-thread.php:10
+#, php-format
+msgid "%s Answer"
+msgid_plural "%s Answers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/views/forum-thread.php:11
+#, php-format
+msgid "%s View"
+msgid_plural "%s Views"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../includes/views/forum.php:6 ../includes/views/thread.php:6
 msgid "You need to login in order to create posts and topics."
 msgstr ""
 
-#: ../includes/views/thread.php:43
+#: ../includes/views/overview.php:25
+#, php-format
+msgid "%s Thread"
+msgid_plural "%s Threads"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/views/overview.php:26
+#, php-format
+msgid "%s Post"
+msgid_plural "%s Posts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/views/thread.php:49
 #, php-format
 msgid "Last edited on %s"
 msgstr ""
@@ -147,7 +175,7 @@ msgid "http://thomasbelser.net"
 msgstr "http://thomasbelser.net"
 
 #: ../admin/admin.php:34 ../admin/admin.php:150 ../admin/admin.php:150 ..
-#: includes/forum.php:731
+#: includes/forum.php:715
 msgid "Forum"
 msgstr "Foorumi"
 
@@ -235,20 +263,20 @@ msgstr "Muokkaa kategoriaa"
 msgid "Update Category"
 msgstr "Päivitä kategoria"
 
-#: ../includes/forum.php:303 ../includes/forum.php:746 ../includes/views/editor.
+#: ../includes/forum.php:303 ../includes/forum.php:730 ../includes/views/editor.
 #: php:84
 msgid "Edit Post"
 msgstr "Muokkaa viestiä"
 
-#: ../includes/forum.php:305 ../includes/forum.php:744
+#: ../includes/forum.php:305 ../includes/forum.php:728
 msgid "Post Reply"
 msgstr "Lähetä vastaus"
 
-#: ../includes/forum.php:307 ../includes/forum.php:699 ../includes/forum.php:748
+#: ../includes/forum.php:307 ../includes/forum.php:683 ../includes/forum.php:732
 msgid "New Thread"
 msgstr "Uusi aihe"
 
-#: ../includes/forum.php:309 ../includes/forum.php:706
+#: ../includes/forum.php:309 ../includes/forum.php:690
 msgid "Move Thread"
 msgstr "Siirrä aihe"
 
@@ -285,77 +313,76 @@ msgstr "Siirrä"
 msgid "You are not allowed to move threads."
 msgstr "Sinulla ei ole oikeuksia siirtää aihetta."
 
-#: ../includes/forum.php:603 ../includes/forum.php:615
+#: ../includes/forum.php:602
 msgid "Last post by"
 msgstr "Uusimman viestin kirjoitti:"
 
-#: ../includes/forum.php:604 ../includes/forum.php:617 ../includes/views/editor.
-#: php:38
+#: ../includes/forum.php:603
+msgid "in"
+msgstr " "
+
+#: ../includes/forum.php:604 ../includes/views/editor.php:38
 #, php-format
 msgid "on %s"
 msgstr " %s"
 
-#: ../includes/forum.php:616
-msgid "in"
-msgstr " "
-
-#: ../includes/forum.php:619
+#: ../includes/forum.php:606
 msgid "No threads yet!"
 msgstr "Ei aiheita vielä!"
 
-#: ../includes/forum.php:639
+#: ../includes/forum.php:628
 msgid "Quote"
 msgstr "Lainaa"
 
-#: ../includes/forum.php:643
+#: ../includes/forum.php:632
 msgid "Remove"
 msgstr "Poista"
 
-#: ../includes/forum.php:647
+#: ../includes/forum.php:636
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: ../includes/forum.php:702
+#: ../includes/forum.php:686
 msgid "Reply"
 msgstr "Tee uudelleen"
 
-#: ../includes/forum.php:707
+#: ../includes/forum.php:691
 msgid "Delete Thread"
 msgstr "Poista aihe"
 
-#: ../includes/forum.php:710
+#: ../includes/forum.php:694
 msgid "Undo Sticky"
 msgstr "Peruuta liimaus"
 
-#: ../includes/forum.php:710
+#: ../includes/forum.php:694
 msgid "Sticky"
 msgstr "Liimaa"
 
-#: ../includes/forum.php:714
+#: ../includes/forum.php:698
 msgid "Re-open"
 msgstr "Avaa uudelleen"
 
-#: ../includes/forum.php:716
+#: ../includes/forum.php:700
 msgid "Close"
 msgstr "Sulje"
 
-#: ../includes/forum.php:766
+#: ../includes/forum.php:750
 msgid "Pages:"
 msgstr "Sivut:"
 
-#: ../includes/forum.php:793
+#: ../includes/forum.php:777
 msgid "First"
 msgstr "Ensimmäinen"
 
-#: ../includes/forum.php:811
+#: ../includes/forum.php:795
 msgid "Last"
 msgstr "Viimeinen"
 
-#: ../includes/forum.php:1002
+#: ../includes/forum.php:985
 msgid "Delete"
 msgstr "Poista"
 
-#: ../includes/forum.php:1011 ../includes/forum.php:1015
+#: ../includes/forum.php:994 ../includes/forum.php:998
 msgid "Uploaded files:"
 msgstr "Ladatut tiedostot:"
 
@@ -416,46 +443,34 @@ msgstr "Lisää uusi tiedosto..."
 msgid "Submit"
 msgstr "Lähetä"
 
+#: ../includes/views/forum-thread.php:6
+msgid "Created by:"
+msgstr "Kirjoittanut:"
+
 #: ../includes/views/forum.php:25
 msgid "Sticky Threads"
 msgstr "Tarralaput"
 
-#: ../includes/views/forum.php:31 ../includes/views/forum.php:50
-msgid "Created by:"
-msgstr "Kirjoittanut:"
-
-#: ../includes/views/forum.php:34 ../includes/views/forum.php:53
-msgid "Answers"
-msgstr "Vastaukset"
-
-#: ../includes/views/forum.php:35 ../includes/views/forum.php:54
-msgid "Views"
-msgstr "Katsottu"
-
-#: ../includes/views/forum.php:71
+#: ../includes/views/forum.php:50
 msgid "There are no threads yet!"
 msgstr "Aiheita ei ole vielä:"
 
-#: ../includes/views/overview.php:26
-msgid "Threads:"
-msgstr "Aiheet:"
-
-#: ../includes/views/overview.php:27 ../includes/views/thread.php:33
-msgid "Posts:"
-msgstr "Viestit:"
-
-#: ../includes/views/overview.php:34
+#: ../includes/views/overview.php:33
 msgid "There are no forums yet!"
 msgstr "Foorumeita ei ole vielä!"
 
-#: ../includes/views/overview.php:40
+#: ../includes/views/overview.php:39
 msgid "New posts"
 msgstr "Uusia viestejä"
 
-#: ../includes/views/overview.php:41
+#: ../includes/views/overview.php:40
 msgid "No new posts"
 msgstr "Ei uusia viestejä"
 
-#: ../includes/views/overview.php:42
+#: ../includes/views/overview.php:41
 msgid "Mark All Read"
 msgstr "Merkitse kaikki luetuiksi"
+
+#: ../includes/views/thread.php:39
+msgid "Posts:"
+msgstr "Viestit:"
