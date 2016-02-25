@@ -501,7 +501,7 @@ class asgarosforum {
             }
         }
 
-        usort($categories, 'self::categories_compare');
+        usort($categories, array($this, 'categories_compare'));
 
         return $categories;
     }
