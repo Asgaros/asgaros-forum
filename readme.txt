@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.1
 Tested up to: 4.4.2
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+= 1.0.10 =
 * Fixed: PHP errors when using a PHP version less than 5.3
 * Fixed: Display issues with big post images in Internet Explorer
 * Added: asgarosforum_after_thread_submit hook
