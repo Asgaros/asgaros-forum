@@ -284,6 +284,10 @@
     margin: 0; /* comp */
     table-layout: fixed; /* IE */
 }
+#af-wrapper .post-content:before,
+#af-wrapper .post-content:after {
+    content: none; /* comp */
+}
 #af-wrapper .post-author {
     display: table-cell;
     text-align: center;
