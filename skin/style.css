@@ -282,6 +282,7 @@
     display: table;
     width: 100%;
     margin: 0; /* comp */
+    padding: 0; /* comp */
     table-layout: fixed; /* IE */
 }
 #af-wrapper .post-content:before,
