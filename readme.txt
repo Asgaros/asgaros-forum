@@ -57,7 +57,6 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
-TODO: test titles
 TODO: read icons manchmal falsch gesetzt
 TODO: Image resize doesn't seem to work. It works when you're in the edit message mode but when you publish it, it's not resized.
 * Fixed: Missing page titles with some themes

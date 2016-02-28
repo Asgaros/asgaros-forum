@@ -308,11 +308,11 @@ class asgarosforum {
         if ($this->access && $this->current_view) {
             if ($this->current_view == "forum") {
                 if ($this->current_forum) {
-                    $pre = $this->get_name($this->current_forum, $this->table_forums) . " - ";
+                    $pre = esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).' - ';
                 }
             } else if ($this->current_view == "thread") {
                 if ($this->current_thread) {
-                    $pre = $this->get_name($this->current_thread, $this->table_threads) . " - ";
+                    $pre = esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads))).' - ';
                 }
             } else if ($this->current_view == "editpost") {
                 $pre = __('Edit Post', 'asgaros-forum') . ' - ';
