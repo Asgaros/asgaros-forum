@@ -226,8 +226,8 @@ class asgarosforum_admin {
         foreach ($categories as $category) {
             if (isset($_POST['forum_id'][$category->term_id]) && !empty($_POST['forum_id'][$category->term_id])) {
                 foreach ($_POST['forum_id'][$category->term_id] as $key => $forum_id) {
-                    $name = trim(stripslashes($_POST['forum_name'][$category->term_id][$key]));
-                    $description = trim(stripslashes($_POST['forum_description'][$category->term_id][$key]));
+                    $name = esc_html(trim(stripslashes($_POST['forum_name'][$category->term_id][$key])));
+                    $description = esc_html(trim(stripslashes($_POST['forum_description'][$category->term_id][$key])));
 
                     if (empty($name)) {
                         if ($forum_id != 'new') {

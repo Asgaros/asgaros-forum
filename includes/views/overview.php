@@ -18,8 +18,8 @@ $forum_counter = 0;
                 <div class="forum">
                     <div class="forum-status"><?php $this->get_thread_image($lastpost_data, 'overview'); ?></div>
                     <div class="forum-name">
-                        <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo $forum->name; ?></a></strong>
-                        <small><?php echo $forum->description; ?></small>
+                        <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo esc_html($forum->name); ?></a></strong>
+                        <small><?php echo esc_html($forum->description); ?></small>
                     </div>
                     <div class="forum-stats">
                         <small><?php echo sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads); ?></small>

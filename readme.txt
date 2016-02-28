@@ -32,6 +32,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * German
 * Hungarian
 * Italian
+* Norwegian (Bokmål)
 * Russian
 * Spanish
 
@@ -69,6 +70,8 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues when using apostrophes
+* Fixed: Wrong HTML escaping
 * Fixed: Display issues with some themes
 = 1.0.10 =
 * Fixed: PHP errors when using a PHP version less than 5.3

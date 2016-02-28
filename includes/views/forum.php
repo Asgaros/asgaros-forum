@@ -19,7 +19,7 @@ if (!is_user_logged_in()) {
 </div>
 
 <?php if ($counter_total > 0) { ?>
-    <div class="title-element"><?php echo $this->get_name($this->current_forum, $this->table_forums); ?></div>
+    <div class="title-element"><?php echo esc_html($this->get_name($this->current_forum, $this->table_forums)); ?></div>
     <div class="content-element">
         <?php if ($sticky_threads && !$this->current_page) { ?>
             <div class="bright"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>

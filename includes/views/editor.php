@@ -79,7 +79,7 @@ if (!$error) {
             if ($_GET['view'] == "addthread") {
                 _e('Post new Thread', 'asgaros-forum');
             } else if ($_GET['view'] == "addpost") {
-                echo __('Post Reply:', 'asgaros-forum').' '.$this->get_name($this->current_thread, $this->table_threads);
+                echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)));
             } else if ($_GET['view'] == "editpost") {
                 _e('Edit Post', 'asgaros-forum');
             }
@@ -89,7 +89,7 @@ if (!$error) {
             <?php if ($_GET['view'] == "addthread" || ($_GET['view'] == "editpost" && $this->is_first_post($post->id))) { ?>
                 <div class="editor-row">
                     <div class="editor-cell"><span><?php _e('Subject:', 'asgaros-forum'); ?></span></div>
-                    <div class="editor-cell"><input type="text" name="subject" value="<?php echo $threadname; ?>" /></div>
+                    <div class="editor-cell"><input type="text" name="subject" value="<?php echo esc_html(stripslashes($threadname)); ?>" /></div>
                 </div>
             <?php } ?>
             <div class="editor-row">

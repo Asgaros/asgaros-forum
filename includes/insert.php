@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 global $wpdb;
 $post_id = $_GET['id'];
-$subject = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
+$subject = (isset($_POST['subject'])) ? trim(stripslashes($_POST['subject'])) : '';
 $content = trim($_POST['message']);
 $redirect = '';
 
@@ -58,8 +58,8 @@ if (empty($this->error)) {
         $date = $this->current_time();
         $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s, date_edit = %s WHERE id = %d;", $content, $uploads, $date, $post_id));
 
-        if (isset($_POST['subject']) && !empty($_POST['subject'])) {
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $_POST['subject'], $this->current_thread));
+        if (isset($_POST['subject']) && !empty($subject)) {
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $subject, $this->current_thread));
         }
 
         do_action('asgarosforum_after_edit_submit', $post_id);

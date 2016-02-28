@@ -413,13 +413,13 @@ class asgarosforum {
     function movethread() {
         if ($this->is_moderator() && $this->access) {
             $strOUT = '<form method="post" action="'.$this->url_movethread.'&amp;move_thread">';
-            $strOUT .= sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), $this->get_name($this->current_thread, $this->table_threads)).'<br />';
+            $strOUT .= sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)))).'<br />';
             $strOUT .= '<select name="newForumID">';
 
             $frs = $this->get_forums();
 
             foreach ($frs as $f) {
-                $strOUT .= '<option value="'.$f->id.'"'.($f->id == $this->current_forum ? ' selected="selected"' : '').'>'.$f->name.'</option>';
+                $strOUT .= '<option value="'.$f->id.'"'.($f->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($f->name).'</option>';
             }
 
             $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'" /></form>';
@@ -600,7 +600,7 @@ class asgarosforum {
 
         if ($lastpost_data) {
             $lastpost = '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>';
-            $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.$this->cut_string($lastpost_data->name).'</strong></small>' : '';
+            $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong>'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</strong></small>' : '';
             $lastpost .= '<small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
         } else if ($context === 'forum') {
             $lastpost = '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
@@ -716,12 +716,12 @@ class asgarosforum {
 
         if ($this->current_forum && $this->access) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">' . $this->get_name($this->current_forum, $this->table_forums) . '</a>';
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html($this->get_name($this->current_forum, $this->table_forums)).'</a>';
         }
 
         if ($this->current_thread && $this->access) {
             $link = $this->get_link($this->current_thread, $this->url_thread);
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">' . $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . '</a>';
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html($this->cut_string(stripslashes($this->get_name($this->current_thread, $this->table_threads)), 70)).'</a>';
         }
 
         if ($this->current_view == 'addpost' && $this->access) {

@@ -13,7 +13,7 @@ if (!is_user_logged_in()) {
     <div class="clear"></div>
 </div>
 
-<div class="title-element"><?php echo $this->cut_string($this->get_name($this->current_thread, $this->table_threads), 70) . $meClosed; ?></div>
+<div class="title-element"><?php echo esc_html($this->cut_string(stripslashes($this->get_name($this->current_thread, $this->table_threads)), 70)).$meClosed; ?></div>
 <div class="content-element">
     <?php
     $counter = 0;
