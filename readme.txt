@@ -23,19 +23,6 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Mobile device compatibility
 * Supports multiple languages
 
-= Translations =
-* Bosnian
-* Danish
-* English
-* Finnish
-* French
-* German
-* Hungarian
-* Italian
-* Norwegian (Bokmål)
-* Russian
-* Spanish
-
 == Installation ==
 * Download Asgaros Forum.
 * Create a new page for your forum to display on and add the shortcode [forum] at this page. Save your page.
@@ -70,8 +57,11 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+TODO: test titles
+TODO: read icons manchmal falsch gesetzt
+TODO: Image resize doesn't seem to work. It works when you're in the edit message mode but when you publish it, it's not resized.
 * Fixed: Missing page titles with some themes
-* Fixed: Display issues when using apostrophes
+* Fixed: Display issues when using apostrophes and backslashes
 * Fixed: Wrong HTML escaping
 * Fixed: Display issues with some themes
 = 1.0.10 =

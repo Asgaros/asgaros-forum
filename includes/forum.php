@@ -731,7 +731,7 @@ class asgarosforum {
 
         if ($this->current_forum && $this->access) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html($this->get_name($this->current_forum, $this->table_forums)).'</a>';
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</a>';
         }
 
         if ($this->current_thread && $this->access) {
