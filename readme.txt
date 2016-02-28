@@ -70,6 +70,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Missing page titles with some themes
 * Fixed: Display issues when using apostrophes
 * Fixed: Wrong HTML escaping
 * Fixed: Display issues with some themes

@@ -62,7 +62,8 @@ class asgarosforum {
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('wp_head', array($this, 'setup_header'));
-        add_filter('wp_title', array($this, 'get_pagetitle'), 10, 3);
+        add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
+        add_filter('document_title_parts', array($this, 'change_document_title_parts'));
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
@@ -283,11 +284,25 @@ class asgarosforum {
         }
     }
 
-    function get_pagetitle($title, $sep, $seplocation) {
+    function change_wp_title($title, $sep, $seplocation) {
         if (!$this->execute_plugin()) {
             return $title;
         }
 
+        return $this->get_title($title);
+    }
+
+    function change_document_title_parts($title) {
+        if (!$this->execute_plugin()) {
+            return $title;
+        }
+
+        $title['title'] = $this->get_title($title['title']);
+
+        return $title;
+    }
+
+    function get_title($title) {
         $pre = '';
 
         if ($this->access && $this->current_view) {
