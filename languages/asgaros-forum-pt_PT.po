@@ -1,0 +1,479 @@
+# Loco Gettext template
+msgid ""
+msgstr ""
+"Project-Id-Version: Asgaros Forum\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-01 16:14+0000\n"
+"POT-Revision-Date: Thu Feb 25 2016 18:06:41 GMT+0100 (Mitteleuropäische "
+"Zeit)\n"
+"PO-Revision-Date: 2016-03-01 16:32+0000\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;"
+"__ngettext_noop:1,2;_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;"
+"_nx_js:1,2,3c;esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;"
+"esc_attr_x:1,2c;esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;"
+"transChoice:1,2\n"
+"X-Generator: Poedit 1.8.7\n"
+"Last-Translator: \n"
+"Language: pt\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#. Name of the plugin
+msgid "Asgaros Forum"
+msgstr "Asgaros Forum"
+
+#. URI of the plugin
+msgid "https://github.com/Asgaros/asgaros-forum"
+msgstr "https://github.com/Asgaros/asgaros-forum"
+
+#. Description of the plugin
+msgid "A lightweight and simple forum plugin for WordPress."
+msgstr "Plugin leve e simples para criação de um fórum em WordPress"
+
+#. Author of the plugin
+msgid "Thomas Belser"
+msgstr "Thomas Belser"
+
+#. Author URI of the plugin
+msgid "http://thomasbelser.net"
+msgstr "http://thomasbelser.net"
+
+#: ../admin/admin.php:34 ../admin/admin.php:150 .. /includes/forum.php:715
+msgid "Forum"
+msgstr "Fórum"
+
+#: ../admin/admin.php:37
+msgid "Forum Moderator"
+msgstr "Moderador do fórum"
+
+#: ../admin/admin.php:60 ../admin/admin.php:91 ../admin/admin.php:114
+msgid "Order"
+msgstr "Ordem"
+
+#: ../admin/admin.php:61 ../admin/admin.php:96 ../admin/admin.php:121
+msgid "Access"
+msgstr "Acesso"
+
+#: ../admin/admin.php:73 ../admin/admin.php:98 ../admin/admin.php:124
+msgid "Everyone"
+msgstr "Todos"
+
+#: ../admin/admin.php:76 ../admin/admin.php:99 ../admin/admin.php:125
+msgid "Logged in users only"
+msgstr "Apenas utilizadores autenticados"
+
+#: ../admin/admin.php:78 ../admin/admin.php:100 ../admin/admin.php:126
+msgid "Moderators only"
+msgstr "Apenas moderadores"
+
+#: ../admin/admin.php:102 ../admin/admin.php:128
+msgid "Select which user role has access to this category."
+msgstr "Selecione grupo de utilizadores que tem acesso a esta categoria."
+
+#: ../admin/admin.php:151 ../admin/views/options.php:7
+msgid "Options"
+msgstr "Opções"
+
+#: ../admin/admin.php:152 ../includes/forum.php:88
+msgid "Categories"
+msgstr "Categorias"
+
+#: ../admin/admin.php:153 ../admin/views/forums.php:7
+msgid "Forums"
+msgstr "Fóruns"
+
+#: ../admin/admin.php:158
+msgid ""
+"WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Threads, and "
+"Replies associated with it!!! Are you sure you want to delete this Forum???"
+msgstr ""
+"AVISO: Eliminar este fórum irá também ELIMINAR PERMANENTEMENTE TODOS os "
+"tópicos e respostas associadas ao mesmo. Tem a certeza que quer eliminar "
+"este fórum?"
+
+#: ../admin/views/forums.php:10
+msgid "Your Forums have been saved."
+msgstr "Os seus fóruns foram guardados com sucesso."
+
+#: ../admin/views/forums.php:23 ../admin/views/forums.php:44
+msgid "Name:"
+msgstr "Nome:"
+
+#: ../admin/views/forums.php:24 ../admin/views/forums.php:45
+msgid "Description:"
+msgstr "Descrição: "
+
+#: ../admin/views/forums.php:29 ../admin/views/forums.php:50
+msgid "Remove this Forum"
+msgstr "Remover este fórum"
+
+#: ../admin/views/forums.php:34
+msgid "Add new Forum"
+msgstr "Adicionar novo fórum"
+
+#: ../admin/views/forums.php:36
+msgid "Save Changes"
+msgstr "Guardar alterações"
+
+#: ../admin/views/forums.php:38
+msgid "You must add some categories first."
+msgstr "Deverá inserir algumas categorias primeiro"
+
+#: ../admin/views/options.php:10
+msgid "Your options have been saved."
+msgstr "As suas alterações foram guardadas com sucesso."
+
+#: ../admin/views/options.php:15
+msgid "Replies to show per page:"
+msgstr "Respostas a mostrar por página:"
+
+#: ../admin/views/options.php:19
+msgid "Threads to show per page:"
+msgstr "Tópicos a mostrar por página:"
+
+#: ../admin/views/options.php:24
+msgid "Allow file uploads"
+msgstr "Permitir envio de ficheiros"
+
+#: ../admin/views/options.php:28
+msgid "Highlight administrator/moderator names"
+msgstr "Destacar o nome / username do administrador / moderador"
+
+#: ../admin/views/options.php:32
+msgid "Show edit date"
+msgstr "Mostrar data de edição"
+
+#: ../admin/views/options.php:36
+msgid "Forum visible to logged in users only"
+msgstr "Fórum visível apenas para utilizadores autenticados"
+
+#: ../admin/views/options.php:41
+msgid "Save Options"
+msgstr "Guardar alterações"
+
+#: ../includes/forum-widgets.php:7
+msgid "Shows recent posts in Asgaros Forum."
+msgstr "Mostra posts recentes do plugin Asgaros Forum."
+
+#: ../includes/forum-widgets.php:8
+msgid "Asgaros Forum: Recent Posts"
+msgstr "Asgaros Forum: Posts recentes"
+
+#: ../includes/forum-widgets.php:18 ../includes/forum-widgets.php:71
+msgid "Recent forum posts"
+msgstr "Tópicos recentes do fórum"
+
+#: ../includes/forum-widgets.php:61
+msgid "by"
+msgstr "por"
+
+#: ../includes/forum-widgets.php:62
+#, php-format
+msgid "%s ago"
+msgstr "%s atrás"
+
+#: ../includes/forum-widgets.php:76
+msgid "Title:"
+msgstr "Título"
+
+#: ../includes/forum-widgets.php:81
+msgid "Number of topics to show:"
+msgstr "Número de tópicos a mostrar: "
+
+#: ../includes/forum-widgets.php:86
+msgid "The forum page:"
+msgstr "Página do fórum:"
+
+#: ../includes/forum.php:89
+msgid "Category"
+msgstr "Categoria"
+
+#: ../includes/forum.php:90
+msgid "Edit Category"
+msgstr "Editar categoria"
+
+#: ../includes/forum.php:91
+msgid "Update Category"
+msgstr "Atualizar categoria"
+
+#: ../includes/forum.php:92
+msgid "Add new Category"
+msgstr "Adicionar categoria"
+
+#: ../includes/forum.php:93
+msgid "Search Categories"
+msgstr "Pesquisar categorias."
+
+#: ../includes/forum.php:94
+msgid "No Categories found."
+msgstr "Não foram encontradas categorias."
+
+#: ../includes/forum.php:303 ../includes/forum.php:730
+#: ../includes/views/editor. php:84
+msgid "Edit Post"
+msgstr "Editar"
+
+#: ../includes/forum.php:305 ../includes/forum.php:728
+msgid "Post Reply"
+msgstr "Responder"
+
+#: ../includes/forum.php:307 ../includes/forum.php:683
+#: ../includes/forum.php:732
+msgid "New Thread"
+msgstr "Novo tópico"
+
+#: ../includes/forum.php:309 ../includes/forum.php:690
+msgid "Move Thread"
+msgstr "Mover tópico"
+
+#: ../includes/forum.php:362
+msgid "Sorry, only logged in users have access to the forum."
+msgstr "Desculpe, apenas membros autenticados têm acesso ao fórum."
+
+#: ../includes/forum.php:362 ../includes/views/forum.php:6 ..
+#: /includes/views/thread.php:6
+msgid "Login"
+msgstr "Entrar"
+
+#: ../includes/forum.php:377
+msgid "There are no categories yet!"
+msgstr "Ainda não existem categorias."
+
+#: ../includes/forum.php:390 ../includes/views/editor.php:20
+msgid "Sorry, this forum does not exist."
+msgstr "Desculpe, este fórum não existe."
+
+#: ../includes/forum.php:402
+msgid "Thread closed"
+msgstr "Tópico fechado."
+
+#: ../includes/forum.php:406
+msgid "Sorry, but there are no posts."
+msgstr "Desculpe, não existem posts."
+
+#: ../includes/forum.php:409 ../includes/views/editor.php:25
+msgid "Sorry, this thread does not exist."
+msgstr "Desculpe, este tópico não existe."
+
+#: ../includes/forum.php:416
+#, php-format
+msgid "Move \"<strong>%s</strong>\" to new forum:"
+msgstr "Mover \"<strong>%s</strong>\" para outro fórum:"
+
+#: ../includes/forum.php:425
+msgid "Move"
+msgstr "Mover"
+
+#: ../includes/forum.php:429
+msgid "You are not allowed to move threads."
+msgstr "Não tem permissões para mover tópicos"
+
+#: ../includes/forum.php:602
+msgid "Last post by"
+msgstr "Último post por"
+
+#: ../includes/forum.php:603
+msgid "in"
+msgstr "em"
+
+#: ../includes/forum.php:604 ../includes/views/editor.php:38
+#, php-format
+msgid "on %s"
+msgstr "a %s"
+
+#: ../includes/forum.php:606
+msgid "No threads yet!"
+msgstr "Sem tópicos"
+
+#: ../includes/forum.php:628
+msgid "Quote"
+msgstr "Citar"
+
+#: ../includes/forum.php:632 ../includes/forum.php:691
+msgid "Are you sure you want to remove this?"
+msgstr "Tem a certeza que pretende eliminar?"
+
+#: ../includes/forum.php:632
+msgid "Remove"
+msgstr "Remover"
+
+#: ../includes/forum.php:636
+msgid "Edit"
+msgstr "Editar"
+
+#: ../includes/forum.php:686
+msgid "Reply"
+msgstr "Responder"
+
+#: ../includes/forum.php:691
+msgid "Delete Thread"
+msgstr "Apagar tópico"
+
+#: ../includes/forum.php:694
+msgid "Undo Sticky"
+msgstr "Retirar de fixo"
+
+#: ../includes/forum.php:694
+msgid "Sticky"
+msgstr "Fixo"
+
+#: ../includes/forum.php:698
+msgid "Re-open"
+msgstr "Re-abrir"
+
+#: ../includes/forum.php:700
+msgid "Close"
+msgstr "Fechar"
+
+#: ../includes/forum.php:750
+msgid "Pages:"
+msgstr "Páginas"
+
+#: ../includes/forum.php:777
+msgid "First"
+msgstr "Primeira"
+
+#: ../includes/forum.php:795
+msgid "Last"
+msgstr "Última"
+
+#: ../includes/forum.php:985
+msgid "Delete"
+msgstr "Eliminar"
+
+#: ../includes/forum.php:994 ../includes/forum.php:998
+msgid "Uploaded files:"
+msgstr "Ficheiros anexados:"
+
+#: ../includes/insert.php:13 ../includes/views/editor.php:44
+msgid "Sorry, this post does not exist."
+msgstr "Desculpe, este post não existe."
+
+#: ../includes/insert.php:17 ../includes/views/editor.php:30
+msgid "You are not allowed to do this."
+msgstr "Não tem permissões para efetuar esta ação."
+
+#: ../includes/insert.php:22
+msgid "You must enter a subject."
+msgstr "Deve preencher o campo assunto."
+
+#: ../includes/insert.php:26
+msgid "You must enter a message."
+msgstr "Deve preencher o campo mensagem."
+
+#: ../includes/views/editor.php:13
+msgid "Sorry, you don't have permission to post."
+msgstr "Desculpe, não tem permissões para publicar um post."
+
+#: ../includes/views/editor.php:38
+msgid "Quote from"
+msgstr "Citar de"
+
+#: ../includes/views/editor.php:53
+msgid "Sorry, you are not allowed to edit this post."
+msgstr "Desculpe, não tem permissões para editar este post."
+
+#: ../includes/views/editor.php:80
+msgid "Post new Thread"
+msgstr "Criar tópico"
+
+#: ../includes/views/editor.php:82
+msgid "Post Reply:"
+msgstr "Responder:"
+
+#: ../includes/views/editor.php:91
+msgid "Subject:"
+msgstr "Assunto"
+
+#: ../includes/views/editor.php:96
+msgid "Message:"
+msgstr "Mensagem"
+
+#: ../includes/views/editor.php:106
+msgid "Upload Files:"
+msgstr "Anexar ficheiros:"
+
+#: ../includes/views/editor.php:109
+msgid "Add another file ..."
+msgstr "Anexar outro ficheiro..."
+
+#: ../includes/views/editor.php:117 ../includes/views/editor.php:119 ..
+#: /includes/views/editor.php:121
+msgid "Submit"
+msgstr "Submeter"
+
+#: ../includes/views/forum-thread.php:6
+msgid "Created by:"
+msgstr "Criado por:"
+
+#: ../includes/views/forum-thread.php:10
+#, php-format
+msgid "%s Answer"
+msgid_plural "%s Answers"
+msgstr[0] "%s resposta"
+msgstr[1] "%s respostas"
+
+#: ../includes/views/forum-thread.php:11
+#, php-format
+msgid "%s View"
+msgid_plural "%s Views"
+msgstr[0] "%s visualização"
+msgstr[1] "%s visualizações"
+
+#: ../includes/views/forum.php:6 ../includes/views/thread.php:6
+msgid "You need to login in order to create posts and topics."
+msgstr "Necessita efetuar login para criar novos posts e tópicos."
+
+#: ../includes/views/forum.php:25
+msgid "Sticky Threads"
+msgstr "Tópicos fixos"
+
+#: ../includes/views/forum.php:50
+msgid "There are no threads yet!"
+msgstr "Não existem tópicos ainda!"
+
+#: ../includes/views/overview.php:25
+#, php-format
+msgid "%s Thread"
+msgid_plural "%s Threads"
+msgstr[0] "%s Tópico"
+msgstr[1] "%s Tópicos"
+
+#: ../includes/views/overview.php:26
+#, php-format
+msgid "%s Post"
+msgid_plural "%s Posts"
+msgstr[0] "%s post"
+msgstr[1] "%s posts"
+
+#: ../includes/views/overview.php:33
+msgid "There are no forums yet!"
+msgstr "Sem fóruns"
+
+#: ../includes/views/overview.php:39
+msgid "New posts"
+msgstr "Novos posts"
+
+#: ../includes/views/overview.php:40
+msgid "No new posts"
+msgstr "Sem posts novos"
+
+#: ../includes/views/overview.php:41
+msgid "Mark All Read"
+msgstr "Marcar tudo como lido"
+
+#: ../includes/views/thread.php:39
+msgid "Posts:"
+msgstr "Posts:"
+
+#: ../includes/views/thread.php:49
+#, php-format
+msgid "Last edited on %s"
+msgstr "Última edição a  %s"

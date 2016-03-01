@@ -23,6 +23,20 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 * Mobile device compatibility
 * Supports multiple languages
 
+= Translations =
+* Bosnian
+* Danish
+* English
+* Finnish
+* French
+* German
+* Hungarian
+* Italian
+* Norwegian (Bokmål)
+* Portuguese (Portugal)
+* Russian
+* Spanish
+
 == Installation ==
 * Download Asgaros Forum.
 * Create a new page for your forum to display on and add the shortcode [forum] at this page. Save your page.
@@ -61,6 +75,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 * Fixed: Display issues when using apostrophes and backslashes
 * Fixed: Wrong HTML escaping
 * Fixed: Display issues with some themes
+* Added: Portuguese (Portugal) translation (thanks to Sylvie & Bruno)
 = 1.0.10 =
 * Fixed: PHP errors when using a PHP version less than 5.3
 * Fixed: Display issues with big post images in Internet Explorer
