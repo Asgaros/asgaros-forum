@@ -381,6 +381,7 @@
     border-radius: inherit; /* comp */
     background: none; /* comp */
     color: inherit; /* comp */
+    display: inline; /* comp */
 }
 #af-wrapper [class^="icon-"]:before,
 #af-wrapper [class*=" icon-"]:before {
