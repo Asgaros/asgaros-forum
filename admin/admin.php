@@ -13,13 +13,16 @@ class asgarosforum_admin {
         // Taxonomy stuff
         add_action('init', 'asgarosforum::register_category_taxonomy');
         add_filter('parent_file', array($this, 'set_current_menu'));
+        add_filter('submenu_file', array($this, 'set_current_submenu'));
         add_filter('manage_edit-asgarosforum-category_columns', array($this, 'manage_columns'));
         add_action('manage_asgarosforum-category_custom_column', array($this, 'manage_custom_columns'), 10, 3);
+        add_filter('manage_edit-asgarosforum-category_sortable_columns', array($this, 'manage_sortable_columns'));
         add_action('asgarosforum-category_add_form_fields', array($this, 'add_category_form_fields'));
 		add_action('asgarosforum-category_edit_form_fields', array($this, 'edit_category_form_fields'));
         add_action('create_asgarosforum-category', array($this, 'save_category_form_fields'));
         add_action('edit_asgarosforum-category', array($this, 'save_category_form_fields'));
         add_action('delete_asgarosforum-category', array($this, 'delete_category'), 10, 3);
+        add_action('get_terms', array($this, 'get_ordered_terms'));
 
         // Moderator stuff
         add_action('edit_user_profile', array($this, 'moderator_profile_fields'));
@@ -54,6 +57,11 @@ class asgarosforum_admin {
         return $parent_file;
     }
 
+    function set_current_submenu($submenu_file) {
+        $submenu_file = ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') ? 'edit-tags.php?taxonomy=asgarosforum-category&orderby=order&order=asc' : $submenu_file;
+        return $submenu_file;
+    }
+
     function manage_columns($columns) {
         unset($columns['description'], $columns['slug'], $columns['posts']);
 
@@ -84,6 +92,11 @@ class asgarosforum_admin {
         }
 
         return $out;
+    }
+
+    function manage_sortable_columns($sortable) {
+        $sortable['order'] = 'order';
+        return $sortable;
     }
 
     function add_category_form_fields() {
@@ -144,12 +157,30 @@ class asgarosforum_admin {
         do_action('asgarosforum_action_save_category_form_fields', $term_id);
     }
 
-    function add_admin_pages() {
-        $category_taxonomy = get_taxonomy('asgarosforum-category');
+    function get_ordered_terms($categories) {
+        global $submenu_file, $asgarosforum;
 
+        if ($submenu_file === 'edit-tags.php?taxonomy=asgarosforum-category&orderby=order&order=asc') {
+            if (!empty($_GET['orderby']) && $_GET['orderby'] === 'order') {
+                foreach ($categories as $key => $category) {
+                    $category->order = get_term_meta($category->term_id, 'order', true);
+                }
+
+                usort($categories, array($asgarosforum, 'categories_compare'));
+
+                if (!empty($_GET['order']) && $_GET['order'] === 'desc') {
+                    $categories = array_reverse($categories);
+                }
+            }
+        }
+
+        return $categories;
+    }
+
+    function add_admin_pages() {
         add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
         add_submenu_page('asgarosforum', __('Options', 'asgaros-forum'), __('Options', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'));
-        add_submenu_page('asgarosforum', __('Categories', 'asgaros-forum'), __('Categories', 'asgaros-forum'), 'administrator', 'edit-tags.php?taxonomy='.$category_taxonomy->name, null);
+        add_submenu_page('asgarosforum', __('Categories', 'asgaros-forum'), __('Categories', 'asgaros-forum'), 'administrator', 'edit-tags.php?taxonomy=asgarosforum-category&orderby=order&order=asc', null);
         add_submenu_page('asgarosforum', __('Forums', 'asgaros-forum'), __('Forums', 'asgaros-forum'), 'administrator', 'asgarosforum-structure', array($this, 'forums_page'));
     }
 

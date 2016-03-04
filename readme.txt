@@ -72,6 +72,8 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 
 == Changelog ==
 * Fixed: Display issues with some themes
+* Changed: Categories are now ordered in the administration area
+* Performance improvements and code optimizations
 = 1.0.11 =
 * Fixed: Missing page titles with some themes
 * Fixed: Display issues when using apostrophes and backslashes
