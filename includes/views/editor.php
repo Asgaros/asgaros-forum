@@ -60,8 +60,7 @@ if (!$error) {
             }
 
             if (!isset($_POST['subject']) && $this->is_first_post($post->id)) {
-                $thread = $wpdb->get_row($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d;", $post->parent_id));
-                $threadname = $thread->name;
+                $threadname = $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d;", $post->parent_id));
             }
         }
     }

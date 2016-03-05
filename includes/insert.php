@@ -29,26 +29,26 @@ if (empty($content)) {
 if (empty($this->error)) {
     if (isset($_POST['add_thread_submit'])) {
         $date = $this->current_time();
-        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_threads} (name, parent_id) VALUES (%s, %d);", $subject, $this->current_forum));
+        $wpdb->insert($this->table_threads, array('name' => $subject, 'parent_id' => $this->current_forum), array('%s', '%d'));
         $thread_id = $wpdb->insert_id;
 
-        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $thread_id, $date, $user_ID));
+        $wpdb->insert($this->table_posts, array('text' => $content, 'parent_id' => $thread_id, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
         $post_id = $wpdb->insert_id;
 
         $uploads = maybe_serialize($this->attach_files($post_id));
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
+        $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
 
         do_action('asgarosforum_after_thread_submit', $post_id);
 
         $redirect = html_entity_decode($this->get_link($thread_id, $this->url_thread).'#postid-'.$post_id);
     } else if (isset($_POST['add_post_submit'])) {
         $date = $this->current_time();
-        $wpdb->query($wpdb->prepare("INSERT INTO {$this->table_posts} (text, parent_id, date, author_id) VALUES (%s, %d, %s, %d);", $content, $this->current_thread, $date, $user_ID));
+        $wpdb->insert($this->table_posts, array('text' => $content, 'parent_id' => $this->current_thread, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
         $post_id = $wpdb->insert_id;
 
         // TODO: Dont add upload stuff when upload is deactivated
         $uploads = maybe_serialize($this->attach_files($post_id));
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET uploads = %s WHERE id = %d;", $uploads, $post_id));
+        $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
 
         do_action('asgarosforum_after_post_submit', $post_id);
 
@@ -56,10 +56,10 @@ if (empty($this->error)) {
     } else if (isset($_POST['edit_post_submit'])) {
         $uploads = maybe_serialize($this->attach_files($post_id));
         $date = $this->current_time();
-        $wpdb->query($wpdb->prepare("UPDATE {$this->table_posts} SET text = %s, uploads = %s, date_edit = %s WHERE id = %d;", $content, $uploads, $date, $post_id));
+        $wpdb->update($this->table_posts, array('text' => $content, 'uploads' => $uploads, 'date_edit' => $date), array('id' => $post_id), array('%s', '%s', '%s'), array('%d'));
 
         if (isset($_POST['subject']) && !empty($subject)) {
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET name = %s WHERE id = %d;", $subject, $this->current_thread));
+            $wpdb->update($this->table_threads, array('name' => $subject), array('id' => $this->current_thread), array('%s'), array('%d'));
         }
 
         do_action('asgarosforum_after_edit_submit', $post_id);

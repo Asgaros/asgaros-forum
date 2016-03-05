@@ -272,8 +272,7 @@ class asgarosforum_admin {
                         $wpdb->insert($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id), array('%s', '%s', '%d', '%d'));
                         $listed_forums[] = $wpdb->insert_id;
                     } else {
-                        $query = "UPDATE {$asgarosforum->table_forums} SET name = %s, description = %s, sort = %d, parent_id = %d WHERE id = %d;";
-                        $wpdb->query($wpdb->prepare($query, $name, $description, $order, $category->term_id, $forum_id));
+                        $wpdb->update($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id), array('id' => $forum_id), array('%s', '%s', '%d', '%d'), array('%d'));
                         $listed_forums[] = $forum_id;
                     }
 
@@ -322,7 +321,7 @@ class asgarosforum_admin {
             }
         }
 
-        $wpdb->query("DELETE FROM {$asgarosforum->table_forums} WHERE id = {$forum_id};");
+        $wpdb->delete($asgarosforum->table_forums, array('id' => $forum_id), array('%d'));
     }
 }
 ?>

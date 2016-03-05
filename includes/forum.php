@@ -47,10 +47,10 @@ class asgarosforum {
         global $wpdb;
         $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
-        $this->date_format = get_option('date_format') . ', ' . get_option('time_format');
-        $this->table_forums = $wpdb->prefix . 'forum_forums';
-        $this->table_threads = $wpdb->prefix . 'forum_threads';
-        $this->table_posts = $wpdb->prefix . 'forum_posts';
+        $this->date_format = get_option('date_format').', '.get_option('time_format');
+        $this->table_forums = $wpdb->prefix.'forum_forums';
+        $this->table_threads = $wpdb->prefix.'forum_threads';
+        $this->table_posts = $wpdb->prefix.'forum_posts';
 
         $upload_dir = wp_upload_dir();
         $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
@@ -412,7 +412,7 @@ class asgarosforum {
             $posts = $this->get_posts();
 
             if ($posts) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views+1 WHERE id = %d", $this->current_thread));
+                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views + 1 WHERE id = %d", $this->current_thread));
 
                 $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
 
@@ -465,7 +465,7 @@ class asgarosforum {
         global $wpdb;
 
         if (!$page) {
-            $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+            $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
             $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
         }
 
@@ -474,7 +474,7 @@ class asgarosforum {
 
     function get_widget_link($thread_id, $post_id, $target) {
         global $wpdb;
-        $wpdb->query($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+        $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
         $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
 
         return $this->get_link($thread_id, add_query_arg(array('view' => 'thread'), $target).'&amp;id=', $page).'#postid-'.$post_id;
@@ -546,7 +546,7 @@ class asgarosforum {
         }
 
         $order = apply_filters('asgarosforum_filter_get_threads_order', "(SELECT MAX(id) FROM {$this->table_posts} AS p WHERE p.parent_id = t.id) DESC");
-        $results = $wpdb->get_results($wpdb->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY {$order} {$limit};", $id, $type . '%'));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY {$order} {$limit};", $id, $type.'%'));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
         return $results;
     }
@@ -561,9 +561,9 @@ class asgarosforum {
 
     function is_first_post($post_id) {
         global $wpdb;
-        $first_post = $wpdb->get_row("SELECT id FROM {$this->table_posts} WHERE parent_id = {$this->current_thread} ORDER BY id ASC LIMIT 1;");
+        $first_post_id = $wpdb->get_var("SELECT id FROM {$this->table_posts} WHERE parent_id = {$this->current_thread} ORDER BY id ASC LIMIT 1;");
 
-        if ($first_post->id == $post_id) {
+        if ($first_post_id == $post_id) {
             return true;
         } else {
             return false;
@@ -820,13 +820,13 @@ class asgarosforum {
         if ($this->is_moderator()) {
             if ($thread_id) {
                 // Delete uploads
-                $posts = $wpdb->get_results($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+                $posts = $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
                 foreach ($posts as $post) {
-                    $this->remove_post_files($post->id);
+                    $this->remove_post_files($post);
                 }
 
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
-                $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_threads} WHERE id = %d;", $thread_id));
+                $wpdb->delete($this->table_posts, array('parent_id' => $thread_id), array('%d'));
+                $wpdb->delete($this->table_threads, array('id' => $thread_id), array('%d'));
 
                 if (!$admin_action) {
                     wp_redirect(html_entity_decode($this->url_forum . $this->current_forum));
@@ -841,7 +841,7 @@ class asgarosforum {
         $newForumID = $_POST['newForumID'];
 
         if ($this->is_moderator() && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET parent_id = {$newForumID} WHERE id = %d;", $this->current_thread));
+            $wpdb->update($this->table_threads, array('parent_id' => $newForumID), array('id' => $this->current_thread), array('%d'), array('%d'));
             wp_redirect(html_entity_decode($this->url_thread . $this->current_thread));
             exit;
         }
@@ -852,7 +852,7 @@ class asgarosforum {
         $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? $_GET['post'] : 0;
 
         if ($this->is_moderator() && $this->element_exists($post_id, $this->table_posts)) {
-            $wpdb->query($wpdb->prepare("DELETE FROM {$this->table_posts} WHERE id = %d;", $post_id));
+            $wpdb->delete($this->table_posts, array('id' => $post_id), array('%d'));
             $this->remove_post_files($post_id);
         }
     }
@@ -905,7 +905,7 @@ class asgarosforum {
                 $new_status .= ($this->get_status('closed')) ? 'open' : 'closed';
             }
 
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET status = %s WHERE id = %d;", $new_status, $this->current_thread));
+            $wpdb->update($this->table_threads, array('status' => $new_status), array('id' => $this->current_thread), array('%s'), array('%d'));
         }
     }
 
