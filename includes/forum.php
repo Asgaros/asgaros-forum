@@ -994,10 +994,10 @@ class asgarosforum {
             foreach ($uploads as $upload) {
                 if (file_exists($path.basename($upload))) {
                     if ($frontend) {
-                        $upload_list_elements .= '<li><a href="'.$url.$upload.'" target="_blank">'.$upload.'</a></li>';
+                        $upload_list_elements .= '<li><a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
                     } else {
                         $upload_list_elements .= '<div class="uploaded-file">';
-                        $upload_list_elements .= '<a href="'.$url.$upload.'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
+                        $upload_list_elements .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
                         $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'" />';
                         $upload_list_elements .= '</div>';
                     }

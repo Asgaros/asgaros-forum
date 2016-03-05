@@ -71,6 +71,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken links of uploaded files when filename contains umlaute
 * Fixed: Display issues with some themes
 * Changed: Categories are now ordered in the administration area
 * Performance improvements and code optimizations
