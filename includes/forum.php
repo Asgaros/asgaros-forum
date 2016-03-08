@@ -736,7 +736,8 @@ class asgarosforum {
 
         if ($this->current_thread && $this->access) {
             $link = $this->get_link($this->current_thread, $this->url_thread);
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html($this->cut_string(stripslashes($this->get_name($this->current_thread, $this->table_threads)), 70)).'</a>';
+            $name = stripslashes($this->get_name($this->current_thread, $this->table_threads));
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
         }
 
         if ($this->current_view == 'addpost' && $this->access) {

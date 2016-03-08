@@ -1,7 +1,7 @@
 === Asgaros Forum ===
 Contributors: Asgaros
 Tags: forums, discussion
-Requires at least: 4.3.1
+Requires at least: 4.3.0
 Tested up to: 4.4.2
 Stable tag: 1.0.11
 License: GPLv2 or later
@@ -52,7 +52,8 @@ Moderators can be added via the user edit screen in the WordPress administration
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
-Please contact me in the forums if you want to be a Project Translation Editor (PTE) for a language.
+= Please approve my translations =
+Please contact me in the forums if you added translations for a new language and you want to become a Project Translation Editor (PTE) for a language. I cant approve most of the translations as a non-native speaker.
 = Which hooks are available =
 * asgarosforum_after_post_author
 * asgarosforum_after_thread_submit
@@ -74,6 +75,7 @@ Please contact me in the forums if you want to be a Project Translation Editor (
 * Fixed: Broken links of uploaded files when filename contains umlaute
 * Fixed: Display issues with some themes
 * Changed: Categories are now ordered in the administration area
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.0.11 =
 * Fixed: Missing page titles with some themes
