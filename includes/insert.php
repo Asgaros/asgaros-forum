@@ -35,8 +35,11 @@ if (empty($this->error)) {
         $wpdb->insert($this->table_posts, array('text' => $content, 'parent_id' => $thread_id, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
         $post_id = $wpdb->insert_id;
 
-        $uploads = maybe_serialize($this->attach_files($post_id));
-        $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
+        // Only handle uploads when the option is enabled.
+        if ($this->options['allow_file_uploads']) {
+            $uploads = maybe_serialize($this->attach_files($post_id));
+            $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
+        }
 
         do_action('asgarosforum_after_thread_submit', $post_id);
 
@@ -46,9 +49,11 @@ if (empty($this->error)) {
         $wpdb->insert($this->table_posts, array('text' => $content, 'parent_id' => $this->current_thread, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
         $post_id = $wpdb->insert_id;
 
-        // TODO: Dont add upload stuff when upload is deactivated
-        $uploads = maybe_serialize($this->attach_files($post_id));
-        $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
+        // Only handle uploads when the option is enabled.
+        if ($this->options['allow_file_uploads']) {
+            $uploads = maybe_serialize($this->attach_files($post_id));
+            $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
+        }
 
         do_action('asgarosforum_after_post_submit', $post_id);
 
