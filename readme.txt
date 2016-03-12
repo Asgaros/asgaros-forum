@@ -12,6 +12,9 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress.
 == Description ==
 Asgaros Forum is the perfect WordPress plugin for you if you want to extend your website with a lightweight discussion board. It is easy to set up and manage, integrates perfectly with WordPress and comes with a small amount of features which makes it fast and simple.
 
+= Installation =
+Create a new page for your forum to display on and add the shortcode [forum] to this page. Thats all!
+
 = Features =
 * Topic/post management (Remove/Edit/Close/Sticky/Move)
 * Moderators
@@ -39,7 +42,7 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 
 == Installation ==
 * Download Asgaros Forum.
-* Create a new page for your forum to display on and add the shortcode [forum] at this page. Save your page.
+* Create a new page for your forum to display on and add the shortcode [forum] to this page. Save your page.
 * Upload the plugin files to the `/wp-content/plugins/asgaros-forum` directory, or install the plugin through the WordPress plugins screen directly.
 * Activate the plugin through the 'Plugins' screen in WordPress.
 * On the left side you will see a new admin menu called Forum.
