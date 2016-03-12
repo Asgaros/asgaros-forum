@@ -1,10 +1,3 @@
-#af-wrapper .icon-overview:before,
-#af-wrapper .icon-normal_open:before,
-#af-wrapper .icon-sticky_open:before,
-#af-wrapper .icon-normal_closed:before,
-#af-wrapper .icon-sticky_closed:before {
-    font-size: 1.4em;
-}
 #af-wrapper .forum div,
 #af-wrapper .thread div,
 #af-wrapper .post-author {

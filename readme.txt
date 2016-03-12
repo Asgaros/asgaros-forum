@@ -78,6 +78,7 @@ Please contact me in the forums if you added translations for a new language and
 * Fixed: Broken links of uploaded files when filename contains umlaute
 * Fixed: Display issues with some themes
 * Changed: Categories are now ordered in the administration area
+* Changed: Use default WordPress icons instead of own icon pack
 * Changed: Minor design changes
 * Changed: Provide portuguese (Portugal) translation updates via WordPress Updater
 * Performance improvements and code optimizations

@@ -62,11 +62,11 @@
 }
 
 /* OVERVIEW/FORUM */
-#af-wrapper .forum [class^="icon-"],
-#af-wrapper .forum [class*=" icon-"],
-#af-wrapper .thread [class^="icon-"],
-#af-wrapper .thread [class*=" icon-"] {
-    padding-right: 0;
+#af-wrapper .forum [class^="dashicons-"],
+#af-wrapper .forum [class*=" dashicons-"],
+#af-wrapper .thread [class^="dashicons-"],
+#af-wrapper .thread [class*=" dashicons-"] {
+    padding: 0;
 }
 #af-wrapper .forum,
 #af-wrapper .thread {
@@ -127,7 +127,7 @@
     padding: 3px 6px;
     border: 1px solid #a9a9a9;
     background-color: #f0f0f0;
-    color: #555555;
+    color: #555;
     margin: 2px 0 !important;
     vertical-align: middle;
     font-family: inherit;
@@ -164,7 +164,7 @@
 }
 #af-wrapper .info {
     border: 1px solid #ccc;
-    background-color: #ffffbb;
+    background-color: #ffb;
     margin-bottom: 10px;
 }
 #af-wrapper .info span {
@@ -185,13 +185,13 @@
 }
 #af-wrapper .pages strong {
     background-color: #737373;
-    color: #FFFFFF;
+    color: #fff;
     font-size: 95%;
     padding: 0 5px;
 }
 #af-wrapper .pages a {
     background-color: #2D89CC;
-    color: #FFFFFF !important;
+    color: #fff !important;
     font-size: 95%;
     padding: 0 5px;
 }
@@ -224,7 +224,7 @@
     text-decoration: none;
 }
 #af-wrapper .breadcrumbs .sep {
-    margin: 0 3px 0 3px;
+    margin: 0 3px;
 }
 
 /* CONTENT WRAPPERS*/
@@ -349,96 +349,36 @@
     font-weight: bold;
 }
 
-/*------------------------------------------------*/
-/*-------------------[icomoon]--------------------*/
-/*------------(http://icomoon.io)-----------------*/
-/*------------------------------------------------*/
-@font-face {
-	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?13z6re');
-	src:url('fonts/icomoon.eot?13z6re#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?13z6re') format('truetype'),
-		url('fonts/icomoon.woff?13z6re') format('woff'),
-		url('fonts/icomoon.svg?13z6re#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-#af-wrapper [class^="icon-"],
-#af-wrapper [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-	font-family: 'icomoon' !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+/* ICONS */
+#af-wrapper [class^="dashicons-"],
+#af-wrapper [class*=" dashicons-"] {
     padding-right: 5px;
-    font-size: 1.2em;
-    vertical-align: text-top;
     border-radius: inherit; /* comp */
     background: none; /* comp */
     color: inherit; /* comp */
     display: inline; /* comp */
     position: initial; /* comp */
 }
-#af-wrapper [class^="icon-"]:before,
-#af-wrapper [class*=" icon-"]:before {
-    font-family: inherit !important;
+#af-wrapper .dashicons-overview:before,
+#af-wrapper .dashicons-admin-page-small:before {
+	content: "\f214";
 }
-#af-wrapper .icon-home:before {
-	content: "\e900";
+#af-wrapper .dashicons-normal_open:before,
+#af-wrapper .dashicons-sticky_open:before {
+    content: "\f206";
 }
-#af-wrapper .icon-file-empty:before {
-	content: "\e901";
+#af-wrapper .dashicons-normal_closed:before,
+#af-wrapper .dashicons-sticky_closed:before {
+    content: "\f160";
 }
-#af-wrapper .icon-pushpin:before {
-	content: "\e902";
-}
-#af-wrapper .icon-bubble2:before {
-	content: "\e903";
-}
-#af-wrapper .icon-lock:before {
-	content: "\e905";
-}
-#af-wrapper .icon-unlocked:before {
-	content: "\e906";
-}
-#af-wrapper .icon-checkmark:before {
-	content: "\e908";
-}
-#af-wrapper .icon-shuffle:before {
-	content: "\e909";
-}
-#af-wrapper .icon-pencil2:before {
-    content: "\e90b";
-}
-#af-wrapper .icon-quotes-left:before {
-    content: "\e90c";
-}
-#af-wrapper .icon-bin:before {
-    content: "\e90d";
-}
-#af-wrapper .icon-files-empty-small:before {
-	content: "\e90f";
-}
-#af-wrapper .icon-overview:before {
-    content: "\e90f";
-    font-size: 2em;
-}
-#af-wrapper .icon-normal_open:before,
-#af-wrapper .icon-sticky_open:before {
-    content: "\e901";
-    font-size: 2em;
-}
-#af-wrapper .icon-normal_closed:before,
-#af-wrapper .icon-sticky_closed:before {
-    content: "\e905";
-    font-size: 2em;
-    padding-left: 15px;
+#af-wrapper .dashicons-overview:before,
+#af-wrapper .dashicons-normal_open:before,
+#af-wrapper .dashicons-sticky_open:before,
+#af-wrapper .dashicons-normal_closed:before,
+#af-wrapper .dashicons-sticky_closed:before {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
 }
 #af-wrapper .unread:before {
     color: #2D89CC;
