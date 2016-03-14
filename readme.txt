@@ -13,7 +13,7 @@ Asgaros Forum is a lightweight and simple forum plugin for WordPress.
 Asgaros Forum is the perfect WordPress plugin for you if you want to extend your website with a lightweight discussion board. It is easy to set up and manage, integrates perfectly with WordPress and comes with a small amount of features which makes it fast and simple.
 
 = Installation =
-Create a new page for your forum to display on and add the shortcode [forum] to this page. Thats all!
+Create a new page for your forum to display on and add the shortcode [forum] to this page. Add this page to your menu so you can access the forum. Thats all!
 
 = Features =
 * Topic/post management (Remove/Edit/Close/Sticky/Move)
@@ -42,11 +42,12 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 
 == Installation ==
 * Download Asgaros Forum.
-* Create a new page for your forum to display on and add the shortcode [forum] to this page. Save your page.
 * Upload the plugin files to the `/wp-content/plugins/asgaros-forum` directory, or install the plugin through the WordPress plugins screen directly.
 * Activate the plugin through the 'Plugins' screen in WordPress.
 * On the left side you will see a new admin menu called Forum.
 * Configure your Asgaros Forum options, create your Categories and Forums.
+* Create a new page for your forum to display on and add the shortcode [forum] to this page. Save your page.
+* Add this page to your menu so you can access the forum.
 * Done!
 
 == Frequently Asked Questions ==
@@ -56,7 +57,7 @@ Moderators can be added via the user edit screen in the WordPress administration
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
 = Please approve my translations =
-Please contact me in the forums if you added translations for a new language and you want to become a Project Translation Editor (PTE) for a language. I cant approve most of the translations as a non-native speaker.
+You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = Which hooks are available =
 * asgarosforum_after_post_author
 * asgarosforum_after_thread_submit
@@ -75,7 +76,7 @@ Please contact me in the forums if you added translations for a new language and
 6. Manage general options.
 
 == Changelog ==
-* Fixed: Broken links of uploaded files when filename contains umlaute
+* Fixed: Broken link of uploaded file when filename contains umlaute
 * Fixed: Display issues with some themes
 * Changed: Categories are now ordered in the administration area
 * Changed: Use default WordPress icons instead of own icon pack
