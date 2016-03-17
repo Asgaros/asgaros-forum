@@ -19,6 +19,11 @@ if (!$error) {
             $error = true;
             echo '<div class="notice">'.__('Sorry, this forum does not exist.', 'asgaros-forum').'</div>';
         }
+
+        if (!$error && !$this->get_forum_status()) {
+            $error = true;
+            echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
+        }
     } else if ($_GET['view'] == "addpost") {
         if (!$this->current_thread || !$this->access) {
             $error = true;

@@ -78,6 +78,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 == Changelog ==
 * Fixed: Broken link of uploaded file when filename contains umlaute
 * Fixed: Display issues with some themes
+* Added: Option to close forums
 * Changed: Categories are now ordered in the administration area
 * Changed: Use default WordPress icons instead of own icon pack
 * Changed: Minor design changes

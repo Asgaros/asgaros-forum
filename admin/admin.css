@@ -1,4 +1,5 @@
-#af-options input {
+#af-options input,
+#af-forums input {
     vertical-align: middle;
 }
 #af-options label {
@@ -22,7 +23,8 @@
 #af-forums .af-remove-forum {
     float: right;
 }
-#af-forums input[type="text"] {
+#af-forums input[type="text"],
+#af-forums input[type="checkbox"] {
     margin: 0 15px 0 5px;
 }
 #af-forums .af-add-new-forum {

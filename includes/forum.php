@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class asgarosforum {
     var $directory = '';
-    var $db_version = 2;
+    var $db_version = 3;
     var $date_format = "";
     var $access = true;
     var $error = '';
@@ -121,6 +121,7 @@ class asgarosforum {
             parent_id int(11) NOT NULL default '0',
             description varchar(255) NOT NULL default '',
             sort int(11) NOT NULL default '0',
+            closed int(11) NOT NULL default '0',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
@@ -530,7 +531,7 @@ class asgarosforum {
         global $wpdb;
 
         if ($id) {
-            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, COUNT(t.id) AS count_threads, (SELECT COUNT(p.id) FROM {$this->table_posts} AS p, {$this->table_threads} AS t WHERE p.parent_id = t.id AND t.parent_id = f.id) AS count_posts FROM {$this->table_forums} AS f LEFT JOIN {$this->table_threads} AS t ON t.parent_id = f.id WHERE f.parent_id = %d GROUP BY f.id ORDER BY f.sort ASC;", $id));
+            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, f.closed, COUNT(t.id) AS count_threads, (SELECT COUNT(p.id) FROM {$this->table_posts} AS p, {$this->table_threads} AS t WHERE p.parent_id = t.id AND t.parent_id = f.id) AS count_posts FROM {$this->table_forums} AS f LEFT JOIN {$this->table_threads} AS t ON t.parent_id = f.id WHERE f.parent_id = %d GROUP BY f.id ORDER BY f.sort ASC;", $id));
         } else {
             return $wpdb->get_results("SELECT id, name FROM {$this->table_forums} ORDER BY sort ASC;");
         }
@@ -695,7 +696,7 @@ class asgarosforum {
         $menu = '';
 
         if ($user_ID) {
-            if ($location == 'forum') {
+            if ($location == 'forum' && $this->get_forum_status()) {
                 $menu .= '<a href="'.$this->url_editor_thread.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
             } else if ($location == 'thread') {
                 if (!$this->get_status('closed') || $this->is_moderator()) {
@@ -924,6 +925,20 @@ class asgarosforum {
         } else {
             return false;
         }
+    }
+
+    // Returns TRUE if the forum is opened or the user has at least moderator rights.
+    function get_forum_status() {
+        if (!$this->is_moderator()) {
+            global $wpdb;
+            $closed = intval($wpdb->get_var($wpdb->prepare("SELECT closed FROM {$this->table_forums} WHERE id = %d;", $this->current_forum)));
+
+            if ($closed === 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     function attach_files($post_id) {

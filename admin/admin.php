@@ -259,6 +259,7 @@ class asgarosforum_admin {
                 foreach ($_POST['forum_id'][$category->term_id] as $key => $forum_id) {
                     $name = trim($_POST['forum_name'][$category->term_id][$key]);
                     $description = trim($_POST['forum_description'][$category->term_id][$key]);
+                    $closed = ($_POST['forum_closed'][$category->term_id][$key] === 'on') ? 1 : 0;
 
                     if (empty($name)) {
                         if ($forum_id != 'new') {
@@ -269,10 +270,10 @@ class asgarosforum_admin {
                     }
 
                     if ($forum_id == 'new') {
-                        $wpdb->insert($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id), array('%s', '%s', '%d', '%d'));
+                        $wpdb->insert($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id, 'closed' => $closed), array('%s', '%s', '%d', '%d', '%d'));
                         $listed_forums[] = $wpdb->insert_id;
                     } else {
-                        $wpdb->update($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id), array('id' => $forum_id), array('%s', '%s', '%d', '%d'), array('%d'));
+                        $wpdb->update($asgarosforum->table_forums, array('name' => $name, 'description' => $description, 'sort' => $order, 'parent_id' => $category->term_id, 'closed' => $closed), array('id' => $forum_id), array('%s', '%s', '%d', '%d', '%d'), array('%d'));
                         $listed_forums[] = $forum_id;
                     }
 
