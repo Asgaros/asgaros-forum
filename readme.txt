@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.0
 Tested up to: 4.4.2
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 6. Manage general options.
 
 == Changelog ==
+= 1.0.12 =
 * Fixed: Broken link of uploaded file when filename contains umlaute
 * Fixed: Display issues with some themes
 * Added: Option to close forums
