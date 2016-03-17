@@ -10,6 +10,7 @@
     border: none;
     text-decoration: none;
     box-shadow: none;
+    font-size: inherit; /* comp */
 }
 #af-wrapper small {
     font-size: smaller;
@@ -258,12 +259,12 @@
 }
 #af-wrapper .post-date {
     float: left;
-    font-size: 11px;
     font-style: italic;
     padding: 5px 10px;
 }
 #af-wrapper .post-date a {
     color: #777;
+    font-size: 11px;
 }
 #af-wrapper .post-menu {
     float: right;
