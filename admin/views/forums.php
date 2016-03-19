@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) exit;
                                 <input type="hidden" name="forum_id[<?php echo $category->term_id; ?>][]" value="<?php echo $forum->id; ?>" />
                                 <label><?php _e('Name:', 'asgaros-forum'); ?><input type="text" name="forum_name[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->name)); ?>" /></label>
                                 <label><?php _e('Description:', 'asgaros-forum'); ?><input type="text" name="forum_description[<?php echo $category->term_id; ?>][]" value="<?php echo esc_html(stripslashes($forum->description)); ?>" /></label>
-                                <label><?php _e('Closed', 'asgaros-forum'); ?>:<input type="checkbox" name="forum_closed[<?php echo $category->term_id; ?>][]" <?php checked(!empty($forum->closed)); ?> /></label>
+                                <label><?php _e('Closed', 'asgaros-forum'); ?>:<input type="checkbox" name="forum_closed[<?php echo $category->term_id; ?>][<?php echo $forum->id; ?>]" <?php checked(!empty($forum->closed)); ?> /></label>
                                 <label>
                                     <a href="#" class="af-sort-up dashicons-before dashicons-arrow-up"></a>
                                     <a href="#" class="af-sort-down dashicons-before dashicons-arrow-down"></a>

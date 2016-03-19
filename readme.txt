@@ -77,6 +77,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Missing closed-checkbox when adding new forums
+* Fixed: Wrong forum closing in the administration area
 = 1.0.12 =
 * Fixed: Broken link of uploaded file when filename contains umlaute
 * Fixed: Display issues with some themes

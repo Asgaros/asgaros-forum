@@ -259,7 +259,7 @@ class asgarosforum_admin {
                 foreach ($_POST['forum_id'][$category->term_id] as $key => $forum_id) {
                     $name = trim($_POST['forum_name'][$category->term_id][$key]);
                     $description = trim($_POST['forum_description'][$category->term_id][$key]);
-                    $closed = ($_POST['forum_closed'][$category->term_id][$key] === 'on') ? 1 : 0;
+                    $closed = (!empty($_POST['forum_closed'][$category->term_id][$forum_id])) ? 1 : 0;
 
                     if (empty($name)) {
                         if ($forum_id != 'new') {
