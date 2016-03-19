@@ -44,6 +44,7 @@ if (!defined('ABSPATH')) exit;
             <input type="hidden" name="forum_id[][]" value="new" />
             <label><?php _e('Name:', 'asgaros-forum'); ?><input type="text" name="forum_name[][]" value="" /></label>
             <label><?php _e('Description:', 'asgaros-forum'); ?><input type="text" name="forum_description[][]" value="" /></label>
+            <label><?php _e('Closed', 'asgaros-forum'); ?>:<input type="checkbox" name="forum_closed[][]" /></label>
             <label>
                 <a href="#" class="af-sort-up dashicons-before dashicons-arrow-up"></a>
                 <a href="#" class="af-sort-down dashicons-before dashicons-arrow-down"></a>
