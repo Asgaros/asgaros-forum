@@ -36,7 +36,7 @@ if (!is_user_logged_in()) {
                     }
                     ?>
                     <strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
-                    <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_userposts($post->author_id); ?></small>
+                    <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_elements($post->author_id, $this->table_posts, 'author_id'); ?></small>
                     <?php do_action('asgarosforum_after_post_author', $post->author_id); ?>
                 </div>
                 <div class="post-message">

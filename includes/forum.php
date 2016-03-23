@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 class asgarosforum {
     var $directory = '';
     var $db_version = 3;
-    var $date_format = "";
+    var $date_format = '';
     var $access = true;
     var $error = '';
     var $url_home = '';
@@ -16,11 +16,11 @@ class asgarosforum {
     var $url_editor_edit = '';
     var $url_markallread = '';
     var $url_movethread = '';
-    var $upload_path = "";
-    var $upload_url = "";
-    var $table_forums = "";
-    var $table_threads = "";
-    var $table_posts = "";
+    var $upload_path = '';
+    var $upload_url = '';
+    var $table_forums = '';
+    var $table_threads = '';
+    var $table_posts = '';
     var $current_category = false;
     var $current_forum = false;
     var $current_thread = false;
@@ -109,7 +109,7 @@ class asgarosforum {
 
     function install() {
         global $wpdb;
-        $installed_ver = get_option("asgarosforum_db_version");
+        $installed_ver = get_option('asgarosforum_db_version');
 
         if ($installed_ver != $this->db_version) {
             $charset_collate = $wpdb->get_charset_collate();
@@ -147,13 +147,13 @@ class asgarosforum {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 
             dbDelta($sql1);
             dbDelta($sql2);
             dbDelta($sql3);
 
-            update_option("asgarosforum_db_version", $this->db_version);
+            update_option('asgarosforum_db_version', $this->db_version);
         }
     }
 
@@ -308,26 +308,26 @@ class asgarosforum {
         $pre = '';
 
         if ($this->access && $this->current_view) {
-            if ($this->current_view == "forum") {
+            if ($this->current_view == 'forum') {
                 if ($this->current_forum) {
                     $pre = esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).' - ';
                 }
-            } else if ($this->current_view == "thread") {
+            } else if ($this->current_view == 'thread') {
                 if ($this->current_thread) {
                     $pre = esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads))).' - ';
                 }
-            } else if ($this->current_view == "editpost") {
-                $pre = __('Edit Post', 'asgaros-forum') . ' - ';
-            } else if ($this->current_view == "addpost") {
-                $pre = __('Post Reply', 'asgaros-forum') . ' - ';
-            } else if ($this->current_view == "addthread") {
-                $pre = __('New Thread', 'asgaros-forum') . ' - ';
-            } else if ($this->current_view == "movethread") {
-                $pre = __('Move Thread', 'asgaros-forum') . ' - ';
+            } else if ($this->current_view == 'editpost') {
+                $pre = __('Edit Post', 'asgaros-forum').' - ';
+            } else if ($this->current_view == 'addpost') {
+                $pre = __('Post Reply', 'asgaros-forum').' - ';
+            } else if ($this->current_view == 'addthread') {
+                $pre = __('New Thread', 'asgaros-forum').' - ';
+            } else if ($this->current_view == 'movethread') {
+                $pre = __('Move Thread', 'asgaros-forum').' - ';
             }
         }
 
-        return $pre . $title;
+        return $pre.$title;
     }
 
     function add_mce_buttons($buttons, $editor_id) {
@@ -607,7 +607,7 @@ class asgarosforum {
 
     // TODO: optimize
     // For Widgets
-    function get_last_posts($items = 1, $where = "") {
+    function get_last_posts($items = 1, $where = '') {
         global $wpdb;
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$this->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$this->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
@@ -666,19 +666,14 @@ class asgarosforum {
         return current_time('Y-m-d H:i:s');
     }
 
-    function count_userposts($author_id) {
-        global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$this->table_posts} WHERE author_id = %d;", $author_id));
-    }
-
     function get_post_author($post_id) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d;", $post_id));
     }
 
-    function count_elements($id, $location) {
+    function count_elements($id, $location, $where = 'parent_id') {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d;", $id));
+        return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$location} WHERE {$where} = %d;", $id));
     }
 
     function is_moderator() {
