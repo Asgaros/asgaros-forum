@@ -15,6 +15,10 @@
 #af-wrapper small {
     font-size: smaller;
 }
+#af-wrapper strong,
+#af-wrapper span {
+    font-size: inherit; /* comp */
+}
 #af-wrapper .space {
     margin-bottom: 20px !important;
 }

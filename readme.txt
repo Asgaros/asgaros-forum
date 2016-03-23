@@ -77,6 +77,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Closed forums were not saved correctly
+* Fixed: Display issues with some themes
 * Performance improvements and code optimizations
 = 1.0.12 =
 * Fixed: Broken link of uploaded file when filename contains umlaute
