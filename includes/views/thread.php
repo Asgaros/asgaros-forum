@@ -57,6 +57,6 @@ if (!is_user_logged_in()) {
 
 <div>
     <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
-    <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>
+    <div class="forum-menu"><?php echo $this->forum_menu('thread', false);?></div>
     <div class="clear"></div>
 </div>

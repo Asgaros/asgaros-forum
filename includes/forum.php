@@ -686,7 +686,7 @@ class asgarosforum {
         return false;
     }
 
-    function forum_menu($location) {
+    function forum_menu($location, $showallbuttons = true) {
         global $user_ID;
         $menu = '';
 
@@ -698,7 +698,7 @@ class asgarosforum {
                     $menu .= '<a href="'.$this->url_editor_post.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
                 }
 
-                if ($this->is_moderator()) {
+                if ($this->is_moderator() && $showallbuttons) {
                     $menu .= '<a href="'.$this->url_movethread.'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
                     $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
