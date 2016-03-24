@@ -66,6 +66,10 @@ You can approve translations by yourself if you are a Project Translation Editor
 * asgarosforum_action_add_category_form_fields
 * asgarosforum_action_edit_category_form_fields
 * asgarosforum_action_save_category_form_fields
+= Which filters are available =
+* asgarosforum_filter_post_username
+* asgarosforum_filter_post_content
+* asgarosforum_filter_editor_settings
 
 == Screenshots ==
 1. The forum overview.
@@ -78,6 +82,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 == Changelog ==
 * Fixed: Closed forums were not saved correctly
 * Fixed: Display issues with some themes
+* Added: asgarosforum_filter_post_username filter
 * Changed: Show moderator buttons only at the beginning of threads
 * Performance improvements and code optimizations
 = 1.0.12 =

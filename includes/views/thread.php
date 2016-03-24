@@ -35,7 +35,7 @@ if (!is_user_logged_in()) {
                         echo '<br />';
                     }
                     ?>
-                    <strong><?php echo $this->get_username($post->author_id, true); ?></strong><br />
+                    <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->get_username($post->author_id, true), $post->author_id); ?></strong><br />
                     <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$this->count_elements($post->author_id, $this->table_posts, 'author_id'); ?></small>
                     <?php do_action('asgarosforum_after_post_author', $post->author_id); ?>
                 </div>
