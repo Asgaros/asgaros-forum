@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Thu Mar 17 2016 22:58:35 GMT+0100 (MitteleuropÃ¤ische "
+"PO-Revision-Date: Fri Mar 25 2016 01:11:07 GMT+0100 (MitteleuropÃ¤ische "
 "Zeit)\n"
 "Last-Translator: root <root@root.root>\n"
 "Language-Team: \n"
@@ -139,7 +139,7 @@ msgid "http://thomasbelser.net"
 msgstr "http://thomasbelser.net"
 
 #: ../admin/admin.php:37 ../admin/admin.php:181 ../admin/admin.php:181 ..
-#: includes/forum.php:734
+#: includes/forum.php:729
 msgid "Forum"
 msgstr "Forum"
 
@@ -260,20 +260,20 @@ msgstr "Redigera kategori"
 msgid "Update Category"
 msgstr "Uppdatera Kategori"
 
-#: ../includes/forum.php:320 ../includes/forum.php:750 ../includes/views/editor.
+#: ../includes/forum.php:320 ../includes/forum.php:745 ../includes/views/editor.
 #: php:88
 msgid "Edit Post"
 msgstr "Redigér indlæg"
 
-#: ../includes/forum.php:322 ../includes/forum.php:748
+#: ../includes/forum.php:322 ../includes/forum.php:743
 msgid "Post Reply"
 msgstr "Besvar indlæg"
 
-#: ../includes/forum.php:324 ../includes/forum.php:700 ../includes/forum.php:752
+#: ../includes/forum.php:324 ../includes/forum.php:695 ../includes/forum.php:747
 msgid "New Thread"
 msgstr "Nyt indlæg"
 
-#: ../includes/forum.php:326 ../includes/forum.php:707
+#: ../includes/forum.php:326 ../includes/forum.php:702
 msgid "Move Thread"
 msgstr "Flyt tråd"
 
@@ -331,7 +331,7 @@ msgstr "Ingen tråde endnu!"
 msgid "Quote"
 msgstr "Citat"
 
-#: ../includes/forum.php:649 ../includes/forum.php:708
+#: ../includes/forum.php:649 ../includes/forum.php:703
 msgid "Are you sure you want to remove this?"
 msgstr "Er du sikker på at du vil slette dette?"
 
@@ -343,47 +343,47 @@ msgstr "Fjern"
 msgid "Edit"
 msgstr "Ændre"
 
-#: ../includes/forum.php:703
+#: ../includes/forum.php:698
 msgid "Reply"
 msgstr "Svar"
 
-#: ../includes/forum.php:708
+#: ../includes/forum.php:703
 msgid "Delete Thread"
 msgstr "Slet tråd"
 
-#: ../includes/forum.php:711
+#: ../includes/forum.php:706
 msgid "Undo Sticky"
 msgstr "Fjern Sticky"
 
-#: ../includes/forum.php:713
+#: ../includes/forum.php:708
 msgid "Sticky"
 msgstr "Sticky"
 
-#: ../includes/forum.php:717
+#: ../includes/forum.php:712
 msgid "Re-open"
 msgstr "Genåben"
 
-#: ../includes/forum.php:719
+#: ../includes/forum.php:714
 msgid "Close"
 msgstr "Luk"
 
-#: ../includes/forum.php:770
+#: ../includes/forum.php:765
 msgid "Pages:"
 msgstr "Sider:"
 
-#: ../includes/forum.php:797
+#: ../includes/forum.php:792
 msgid "First"
 msgstr "Fornavn"
 
-#: ../includes/forum.php:815
+#: ../includes/forum.php:810
 msgid "Last"
 msgstr "Efternavn"
 
-#: ../includes/forum.php:1019
+#: ../includes/forum.php:1014
 msgid "Delete"
 msgstr "Slet"
 
-#: ../includes/forum.php:1028 ../includes/forum.php:1032
+#: ../includes/forum.php:1023 ../includes/forum.php:1027
 msgid "Uploaded files:"
 msgstr "Uploadede filer:"
 

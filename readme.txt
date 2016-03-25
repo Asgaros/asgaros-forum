@@ -3,7 +3,7 @@ Contributors: Asgaros
 Tags: forums, discussion
 Requires at least: 4.3.0
 Tested up to: 4.4.2
-Stable tag: 1.0.12
+Stable tag: 1.0.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,20 +25,6 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Easy color customization
 * Mobile device compatibility
 * Supports multiple languages
-
-= Translations =
-* Bosnian
-* Danish
-* English
-* Finnish
-* French
-* German
-* Hungarian
-* Italian
-* Norwegian (Bokmål)
-* Portuguese (Portugal)
-* Russian
-* Spanish
 
 == Installation ==
 * Download Asgaros Forum.
@@ -80,6 +66,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 6. Manage general options.
 
 == Changelog ==
+= 1.0.13 =
 * Fixed: Closed forums were not saved correctly
 * Fixed: Display issues with some themes
 * Added: asgarosforum_filter_post_username filter

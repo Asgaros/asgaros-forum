@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Thu Mar 17 2016 22:58:39 GMT+0100 (MitteleuropÃ¤ische "
+"PO-Revision-Date: Fri Mar 25 2016 01:11:11 GMT+0100 (MitteleuropÃ¤ische "
 "Zeit)\n"
 "Last-Translator: root <root@root.root>\n"
 "Language-Team: \n"
@@ -105,7 +105,7 @@ msgid "http://thomasbelser.net"
 msgstr "http://thomasbelser.net"
 
 #: ../admin/admin.php:37 ../admin/admin.php:181 ../admin/admin.php:181 ..
-#: includes/forum.php:734
+#: includes/forum.php:729
 msgid "Forum"
 msgstr "Foro"
 
@@ -246,20 +246,20 @@ msgstr "Buscar categorías"
 msgid "No Categories found."
 msgstr "Categorías no encontradas."
 
-#: ../includes/forum.php:320 ../includes/forum.php:750 ../includes/views/editor.
+#: ../includes/forum.php:320 ../includes/forum.php:745 ../includes/views/editor.
 #: php:88
 msgid "Edit Post"
 msgstr "Editar mensaje"
 
-#: ../includes/forum.php:322 ../includes/forum.php:748
+#: ../includes/forum.php:322 ../includes/forum.php:743
 msgid "Post Reply"
 msgstr "Responder tema"
 
-#: ../includes/forum.php:324 ../includes/forum.php:700 ../includes/forum.php:752
+#: ../includes/forum.php:324 ../includes/forum.php:695 ../includes/forum.php:747
 msgid "New Thread"
 msgstr "Nuevo tema"
 
-#: ../includes/forum.php:326 ../includes/forum.php:707
+#: ../includes/forum.php:326 ../includes/forum.php:702
 msgid "Move Thread"
 msgstr "Mover tema"
 
@@ -326,7 +326,7 @@ msgstr "¡Todavía no hay temas!"
 msgid "Quote"
 msgstr "Citar"
 
-#: ../includes/forum.php:649 ../includes/forum.php:708
+#: ../includes/forum.php:649 ../includes/forum.php:703
 msgid "Are you sure you want to remove this?"
 msgstr "¿Estas seguro de qué quieres borrar esto?"
 
@@ -338,47 +338,47 @@ msgstr "Eliminar"
 msgid "Edit"
 msgstr "Editar"
 
-#: ../includes/forum.php:703
+#: ../includes/forum.php:698
 msgid "Reply"
 msgstr "Responder"
 
-#: ../includes/forum.php:708
+#: ../includes/forum.php:703
 msgid "Delete Thread"
 msgstr "Eliminar tema"
 
-#: ../includes/forum.php:711
+#: ../includes/forum.php:706
 msgid "Undo Sticky"
 msgstr "Quitar fijo"
 
-#: ../includes/forum.php:713
+#: ../includes/forum.php:708
 msgid "Sticky"
 msgstr "Fijar"
 
-#: ../includes/forum.php:717
+#: ../includes/forum.php:712
 msgid "Re-open"
 msgstr "Reabrir"
 
-#: ../includes/forum.php:719
+#: ../includes/forum.php:714
 msgid "Close"
 msgstr "Cerrar"
 
-#: ../includes/forum.php:770
+#: ../includes/forum.php:765
 msgid "Pages:"
 msgstr "Páginas:"
 
-#: ../includes/forum.php:797
+#: ../includes/forum.php:792
 msgid "First"
 msgstr "Primero"
 
-#: ../includes/forum.php:815
+#: ../includes/forum.php:810
 msgid "Last"
 msgstr "Último"
 
-#: ../includes/forum.php:1019
+#: ../includes/forum.php:1014
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../includes/forum.php:1028 ../includes/forum.php:1032
+#: ../includes/forum.php:1023 ../includes/forum.php:1027
 msgid "Uploaded files:"
 msgstr "Archivos subidos:"
 

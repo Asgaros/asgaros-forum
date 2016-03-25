@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Thu Mar 17 2016 22:58:26 GMT+0100 (MitteleuropÃ¤ische "
+"POT-Revision-Date: Fri Mar 25 2016 01:10:57 GMT+0100 (MitteleuropÃ¤ische "
 "Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -47,7 +47,7 @@ msgid "http://thomasbelser.net"
 msgstr ""
 
 #: ../admin/admin.php:37 ../admin/admin.php:181 ../admin/admin.php:181 ..
-#: /includes/forum.php:734
+#: /includes/forum.php:729
 msgid "Forum"
 msgstr ""
 
@@ -218,20 +218,20 @@ msgstr ""
 msgid "No Categories found."
 msgstr ""
 
-#: ../includes/forum.php:320 ../includes/forum.php:750 ../includes/views/editor.
+#: ../includes/forum.php:320 ../includes/forum.php:745 ../includes/views/editor.
 #: php:88
 msgid "Edit Post"
 msgstr ""
 
-#: ../includes/forum.php:322 ../includes/forum.php:748
+#: ../includes/forum.php:322 ../includes/forum.php:743
 msgid "Post Reply"
 msgstr ""
 
-#: ../includes/forum.php:324 ../includes/forum.php:700 ../includes/forum.php:752
+#: ../includes/forum.php:324 ../includes/forum.php:695 ../includes/forum.php:747
 msgid "New Thread"
 msgstr ""
 
-#: ../includes/forum.php:326 ../includes/forum.php:707
+#: ../includes/forum.php:326 ../includes/forum.php:702
 msgid "Move Thread"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:649 ../includes/forum.php:708
+#: ../includes/forum.php:649 ../includes/forum.php:703
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
@@ -310,47 +310,47 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../includes/forum.php:703
+#: ../includes/forum.php:698
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:708
+#: ../includes/forum.php:703
 msgid "Delete Thread"
 msgstr ""
 
-#: ../includes/forum.php:711
+#: ../includes/forum.php:706
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:713
+#: ../includes/forum.php:708
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:717
+#: ../includes/forum.php:712
 msgid "Re-open"
 msgstr ""
 
-#: ../includes/forum.php:719
+#: ../includes/forum.php:714
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:770
+#: ../includes/forum.php:765
 msgid "Pages:"
 msgstr ""
 
-#: ../includes/forum.php:797
+#: ../includes/forum.php:792
 msgid "First"
 msgstr ""
 
-#: ../includes/forum.php:815
+#: ../includes/forum.php:810
 msgid "Last"
 msgstr ""
 
-#: ../includes/forum.php:1019
+#: ../includes/forum.php:1014
 msgid "Delete"
 msgstr ""
 
-#: ../includes/forum.php:1028 ../includes/forum.php:1032
+#: ../includes/forum.php:1023 ../includes/forum.php:1027
 msgid "Uploaded files:"
 msgstr ""
 
