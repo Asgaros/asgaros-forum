@@ -21,6 +21,8 @@
 }
 #af-wrapper .space {
     margin-bottom: 20px !important;
+    visibility: inherit; /* comp */
+    height: inherit; /* comp */
 }
 #af-wrapper .clear {
     clear: both;

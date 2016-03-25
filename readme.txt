@@ -66,6 +66,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.0.13 =
 * Fixed: Closed forums were not saved correctly
 * Fixed: Display issues with some themes
