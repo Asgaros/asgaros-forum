@@ -84,6 +84,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 * Fixed: Display issues with some themes
 * Added: asgarosforum_filter_post_username filter
 * Changed: Show moderator buttons only at the beginning of threads
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.0.12 =
 * Fixed: Broken link of uploaded file when filename contains umlaute

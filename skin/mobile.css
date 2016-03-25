@@ -41,6 +41,10 @@
 #af-wrapper .post-menu {
     float: left;
     width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+#af-wrapper .post-author {
+    border-bottom: 1px solid #ddd;
 }
 #af-wrapper .post-header {
     text-align: center;
