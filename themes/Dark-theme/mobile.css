@@ -1,0 +1,51 @@
+#af-wrapper .forum div,
+#af-wrapper .thread div,
+#af-wrapper .post-author {
+    border-right: none;
+}
+#af-wrapper .forum-status,
+#af-wrapper .thread-status {
+    width: 40px;
+    border-right: 1px solid #cecece !important;
+}
+#af-wrapper .forum-stats,
+#af-wrapper .forum-poster,
+#af-wrapper .thread-stats,
+#af-wrapper .thread-poster,
+#af-wrapper .post-author img,
+#af-wrapper .post-author br,
+#af-wrapper .post-author small {
+    display: none !important;
+}
+#af-wrapper .editor-row,
+#af-wrapper .editor-cell {
+    width: 100% !important;
+    border: none !important;
+}
+#af-wrapper .post-content,
+#af-wrapper .editor-row {
+    display: inline;
+}
+#af-wrapper .editor-cell,
+#af-wrapper .post-author,
+#af-wrapper .post-message,
+#af-wrapper .post-date {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+#af-wrapper .pages,
+#af-wrapper .forum-menu {
+    margin-bottom: 10px;
+}
+#af-wrapper .post-menu {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+#af-wrapper .post-author {
+    border-bottom: 1px solid #ddd;
+}
+#af-wrapper .post-header {
+    text-align: center;
+}

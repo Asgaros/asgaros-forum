@@ -49,4 +49,8 @@ $upload_path = $upload_dir['basedir'].'/asgarosforum/';
 
 recursiveDelete($upload_path);
 
-?>
+// Delete themes.
+$theme_path = WP_CONTENT_DIR . '/asgaros-themes';
+recursiveDelete( $theme_path );
+
+
