@@ -917,12 +917,20 @@ class asgarosforum {
             }
 
             $wpdb->update($this->table_threads, array('status' => $new_status), array('id' => $this->current_thread), array('%s'), array('%d'));
+
+            // Update cache
+            $this->cache['get_status'][$this->current_thread] = $new_status;
         }
     }
 
     function get_status($property) {
         global $wpdb;
-        $status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
+
+        if (empty($this->cache['get_status'][$this->current_thread])) {
+            $this->cache['get_status'][$this->current_thread] = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
+        }
+
+        $status = $this->cache['get_status'][$this->current_thread];
 
         if ($property == 'sticky' && ($status == 'sticky_open' || $status == 'sticky_closed')) {
             return true;
