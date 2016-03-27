@@ -69,6 +69,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 == Changelog ==
 * Fixed: Display issues with some themes
 * Changed: Hide page-navigation when there is only one page
+* Performance improvements and code optimizations
 = 1.0.13 =
 * Fixed: Closed forums were not saved correctly
 * Fixed: Display issues with some themes

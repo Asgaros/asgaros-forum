@@ -42,6 +42,7 @@ class asgarosforum {
         'teeny'         => true,
         'quicktags'     => false
     );
+    var $cache = array();   // Used to store selected database queries.
 
     function __construct($directory) {
         global $wpdb;
@@ -574,7 +575,12 @@ class asgarosforum {
 
     function get_name($id, $location) {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));
+
+        if (empty($this->cache['get_name'][$location][$id])) {
+            $this->cache['get_name'][$location][$id] = $wpdb->get_var($wpdb->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));
+        }
+
+        return $this->cache['get_name'][$location][$id];
     }
 
     function cut_string($string, $length = 33) {
