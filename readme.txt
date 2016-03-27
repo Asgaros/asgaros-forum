@@ -1,5 +1,6 @@
 === Asgaros Forum ===
 Contributors: Asgaros
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
 Tags: forums, discussion
 Requires at least: 4.3.0
 Tested up to: 4.4.2
@@ -67,6 +68,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Display issues with some themes
+* Changed: Hide page-navigation when there is only one page
 = 1.0.13 =
 * Fixed: Closed forums were not saved correctly
 * Fixed: Display issues with some themes

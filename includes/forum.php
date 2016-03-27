@@ -779,39 +779,43 @@ class asgarosforum {
             $select_url = $this->url_forum;
         }
 
-        if ($num_pages <= 6) {
-            for ($i = 0; $i < $num_pages; ++$i) {
-                if ($i == $this->current_page) {
-                    $out .= ' <strong>'.($i + 1).'</strong>';
-                } else {
-                    $out .= ' <a href="'.$this->get_link($select_source, $select_url, ($i + 1)).'">'.($i + 1).'</a>';
+        if ($num_pages > 1) {
+            if ($num_pages <= 6) {
+                for ($i = 0; $i < $num_pages; ++$i) {
+                    if ($i == $this->current_page) {
+                        $out .= ' <strong>'.($i + 1).'</strong>';
+                    } else {
+                        $out .= ' <a href="'.$this->get_link($select_source, $select_url, ($i + 1)).'">'.($i + 1).'</a>';
+                    }
+                }
+            } else {
+                if ($this->current_page >= 4) {
+                    $out .= ' <a href="'.$this->get_link($select_source, $select_url).'">'.__('First', 'asgaros-forum').'</a> <<';
+                }
+
+                for ($i = 3; $i > 0; $i--) {
+                    if ((($this->current_page + 1) - $i) > 0) {
+                        $out .= ' <a href="'.$this->get_link($select_source, $select_url, (($this->current_page + 1) - $i)).'">'.(($this->current_page + 1) - $i).'</a>';
+                    }
+                }
+
+                $out .= ' <strong>'.($this->current_page + 1).'</strong>';
+
+                for ($i = 1; $i <= 3; $i++) {
+                    if ((($this->current_page + 1) + $i) <= $num_pages) {
+                        $out .= ' <a href="'.$this->get_link($select_source, $select_url, (($this->current_page + 1) + $i)).'">'.(($this->current_page + 1) + $i).'</a>';
+                    }
+                }
+
+                if ($num_pages - $this->current_page >= 5) {
+                    $out .= ' >> <a href="'.$this->get_link($select_source, $select_url, $num_pages).'">'.__('Last', 'asgaros-forum').'</a>';
                 }
             }
+
+            return $out;
         } else {
-            if ($this->current_page >= 4) {
-                $out .= ' <a href="'.$this->get_link($select_source, $select_url).'">'.__('First', 'asgaros-forum').'</a> <<';
-            }
-
-            for ($i = 3; $i > 0; $i--) {
-                if ((($this->current_page + 1) - $i) > 0) {
-                    $out .= ' <a href="'.$this->get_link($select_source, $select_url, (($this->current_page + 1) - $i)).'">'.(($this->current_page + 1) - $i).'</a>';
-                }
-            }
-
-            $out .= ' <strong>'.($this->current_page + 1).'</strong>';
-
-            for ($i = 1; $i <= 3; $i++) {
-                if ((($this->current_page + 1) + $i) <= $num_pages) {
-                    $out .= ' <a href="'.$this->get_link($select_source, $select_url, (($this->current_page + 1) + $i)).'">'.(($this->current_page + 1) + $i).'</a>';
-                }
-            }
-
-            if ($num_pages - $this->current_page >= 5) {
-                $out .= ' >> <a href="'.$this->get_link($select_source, $select_url, $num_pages).'">'.__('Last', 'asgaros-forum').'</a>';
-            }
+            return '';
         }
-
-        return $out;
     }
 
     function delete_thread($thread_id, $admin_action = false) {
