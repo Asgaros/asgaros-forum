@@ -559,7 +559,7 @@ class asgarosforum {
         $start = $this->current_page * $this->options['posts_per_page'];
         $end = $this->options['posts_per_page'];
 
-        return $wpdb->get_results($wpdb->prepare("SELECT id, text, date, date_edit, author_id, uploads FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
+        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, (SELECT COUNT(p2.id) FROM {$this->table_posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, uploads FROM {$this->table_posts} AS p1 WHERE p1.parent_id = %d ORDER BY p1.id ASC LIMIT %d, %d;", $this->current_thread, $start, $end));
     }
 
     function is_first_post($post_id) {
