@@ -8,7 +8,10 @@ if (!is_user_logged_in()) {
 
 ?>
 <div>
-    <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
+    <?php
+    $pageing = $this->pageing($this->table_posts);
+    echo $pageing;
+    ?>
     <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>
     <div class="clear"></div>
 </div>
@@ -56,7 +59,7 @@ if (!is_user_logged_in()) {
 </div>
 
 <div>
-    <div class="pages"><?php echo $this->pageing($this->table_posts); ?></div>
+    <?php echo $pageing; ?>
     <div class="forum-menu"><?php echo $this->forum_menu('thread', false);?></div>
     <div class="clear"></div>
 </div>

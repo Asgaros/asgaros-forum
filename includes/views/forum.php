@@ -9,11 +9,10 @@ if (!is_user_logged_in()) {
 ?>
 
 <div>
-    <div class="pages">
-        <?php if ($counter_normal > 0) {
-            echo $this->pageing($this->table_threads);
-        } ?>
-    </div>
+    <?php
+    $pageing = ($counter_normal > 0) ? $this->pageing($this->table_threads) : '';
+    echo $pageing;
+    ?>
     <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
     <div class="clear"></div>
 </div>
@@ -38,11 +37,7 @@ if (!is_user_logged_in()) {
     </div>
 
     <div>
-        <div class="pages">
-            <?php if ($counter_normal > 0) {
-                echo $this->pageing($this->table_threads);
-            } ?>
-        </div>
+        <?php echo $pageing; ?>
         <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
         <div class="clear"></div>
     </div>

@@ -768,7 +768,7 @@ class asgarosforum {
 
     function pageing($location) {
         global $wpdb;
-        $out = __('Pages:', 'asgaros-forum');
+        $out = '<div class="pages">'.__('Pages:', 'asgaros-forum');
         $num_pages = 0;
         $select_source = '';
         $select_url = '';
@@ -818,6 +818,7 @@ class asgarosforum {
                 }
             }
 
+            $out .= '</div>';
             return $out;
         } else {
             return '';
