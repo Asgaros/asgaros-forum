@@ -15,7 +15,7 @@ $forum_counter = 0;
                 $forum_counter++;
                 $lastpost_data = $this->get_lastpost_data($forum->id, 'p.id, p.date, p.parent_id, p.author_id, t.name', 't');
                 ?>
-                <div class="forum">
+                <div class="forum" id="forum-<?php echo $forum->id; ?>">
                     <div class="forum-status"><?php $this->get_thread_image($lastpost_data, 'overview'); ?></div>
                     <div class="forum-name">
                         <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo esc_html(stripslashes($forum->name)); ?></a></strong>
