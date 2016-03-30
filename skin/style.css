@@ -4,6 +4,7 @@
     font-size: 13px;
     color: #444;
     line-height: 1.65;
+    text-shadow: none; /* comp */
 }
 #af-wrapper a {
     color: #2d89cc;
@@ -17,7 +18,7 @@
 }
 #af-wrapper strong,
 #af-wrapper span {
-    font-size: inherit; /* comp */
+    font-size: inherit !important; /* comp */
 }
 #af-wrapper .space {
     margin-bottom: 20px !important;
