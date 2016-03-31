@@ -4,8 +4,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"PO-Revision-Date: Fri Mar 25 2016 01:11:07 GMT+0100 (MitteleuropÃ¤ische "
-"Zeit)\n"
+"PO-Revision-Date: Thu Mar 31 2016 22:45:43 GMT+0200 (MitteleuropÃ¤ische "
+"Sommerzeit)\n"
 "Last-Translator: root <root@root.root>\n"
 "Language-Team: \n"
 "Language: Danish\n"
@@ -52,35 +52,39 @@ msgstr ""
 msgid "Closed"
 msgstr ""
 
-#: ../admin/views/options.php:28
+#: ../admin/views/options.php:24
 msgid "Highlight administrator/moderator names"
 msgstr ""
 
-#: ../admin/views/options.php:32
+#: ../admin/views/options.php:28
 msgid "Show edit date"
 msgstr ""
 
-#: ../admin/views/options.php:36
+#: ../admin/views/options.php:32
 msgid "Forum visible to logged in users only"
 msgstr ""
 
-#: ../includes/forum.php:93
+#: ../admin/views/options.php:43 ../includes/views/editor.php:112
+msgid "Allowed filetypes:"
+msgstr ""
+
+#: ../includes/forum.php:97
 msgid "Add new Category"
 msgstr ""
 
-#: ../includes/forum.php:94
+#: ../includes/forum.php:98
 msgid "Search Categories"
 msgstr ""
 
-#: ../includes/forum.php:95
+#: ../includes/forum.php:99
 msgid "No Categories found."
 msgstr ""
 
-#: ../includes/forum.php:379
+#: ../includes/forum.php:383
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:379 ../includes/views/forum.php:6 ..
+#: ../includes/forum.php:383 ../includes/views/forum.php:6 ..
 #: includes/views/thread.php:6
 msgid "Login"
 msgstr ""
@@ -113,7 +117,7 @@ msgid_plural "%s Posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/views/thread.php:49
+#: ../includes/views/thread.php:52
 #, php-format
 msgid "Last edited on %s"
 msgstr ""
@@ -139,7 +143,7 @@ msgid "http://thomasbelser.net"
 msgstr "http://thomasbelser.net"
 
 #: ../admin/admin.php:37 ../admin/admin.php:181 ../admin/admin.php:181 ..
-#: includes/forum.php:729
+#: includes/forum.php:738
 msgid "Forum"
 msgstr "Forum"
 
@@ -151,7 +155,7 @@ msgstr "Order"
 msgid "Options"
 msgstr "Valg"
 
-#: ../admin/admin.php:183 ../admin/admin.php:183 ../includes/forum.php:89
+#: ../admin/admin.php:183 ../admin/admin.php:183 ../includes/forum.php:93
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -207,11 +211,11 @@ msgstr "Antal svar vist pr. side:"
 msgid "Threads to show per page:"
 msgstr "Antal tråde pr. side:"
 
-#: ../admin/views/options.php:24
+#: ../admin/views/options.php:40
 msgid "Allow file uploads"
 msgstr "Tillad fil uploads"
 
-#: ../admin/views/options.php:41
+#: ../admin/views/options.php:46
 msgid "Save Options"
 msgstr "Gem indstillinger"
 
@@ -248,142 +252,142 @@ msgstr "Vis antal emner:"
 msgid "The forum page:"
 msgstr "Forum siden:"
 
-#: ../includes/forum.php:90
+#: ../includes/forum.php:94
 msgid "Category"
 msgstr "Kategori"
 
-#: ../includes/forum.php:91
+#: ../includes/forum.php:95
 msgid "Edit Category"
 msgstr "Redigera kategori"
 
-#: ../includes/forum.php:92
+#: ../includes/forum.php:96
 msgid "Update Category"
 msgstr "Uppdatera Kategori"
 
-#: ../includes/forum.php:320 ../includes/forum.php:745 ../includes/views/editor.
+#: ../includes/forum.php:324 ../includes/forum.php:754 ../includes/views/editor.
 #: php:88
 msgid "Edit Post"
 msgstr "Redigér indlæg"
 
-#: ../includes/forum.php:322 ../includes/forum.php:743
+#: ../includes/forum.php:326 ../includes/forum.php:752
 msgid "Post Reply"
 msgstr "Besvar indlæg"
 
-#: ../includes/forum.php:324 ../includes/forum.php:695 ../includes/forum.php:747
+#: ../includes/forum.php:328 ../includes/forum.php:704 ../includes/forum.php:756
 msgid "New Thread"
 msgstr "Nyt indlæg"
 
-#: ../includes/forum.php:326 ../includes/forum.php:702
+#: ../includes/forum.php:330 ../includes/forum.php:711
 msgid "Move Thread"
 msgstr "Flyt tråd"
 
-#: ../includes/forum.php:394
+#: ../includes/forum.php:398
 msgid "There are no categories yet!"
 msgstr "Der er ikke nogen kategorier endnu!"
 
-#: ../includes/forum.php:407 ../includes/views/editor.php:20
+#: ../includes/forum.php:411 ../includes/views/editor.php:20
 msgid "Sorry, this forum does not exist."
 msgstr "Forummet eksisterer ikke."
 
-#: ../includes/forum.php:419
+#: ../includes/forum.php:423
 msgid "Thread closed"
 msgstr "Lukket tråd"
 
-#: ../includes/forum.php:423
+#: ../includes/forum.php:427
 msgid "Sorry, but there are no posts."
 msgstr "Der er ikke nogen indlæg."
 
-#: ../includes/forum.php:426 ../includes/views/editor.php:30
+#: ../includes/forum.php:430 ../includes/views/editor.php:30
 msgid "Sorry, this thread does not exist."
 msgstr "Denne tråd eksisterer ikke."
 
-#: ../includes/forum.php:433
+#: ../includes/forum.php:437
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr "Flyt \"<strong>%s</strong>\" til nyt forum:"
 
-#: ../includes/forum.php:442
+#: ../includes/forum.php:446
 msgid "Move"
 msgstr "Flyt"
 
-#: ../includes/forum.php:446
+#: ../includes/forum.php:450
 msgid "You are not allowed to move threads."
 msgstr "Du har ikke tilladelse til at flytte tråde."
 
-#: ../includes/forum.php:619
+#: ../includes/forum.php:628
 msgid "Last post by"
 msgstr "Sidste indlæg af"
 
-#: ../includes/forum.php:620
+#: ../includes/forum.php:629
 msgid "in"
 msgstr "i"
 
-#: ../includes/forum.php:621 ../includes/views/editor.php:43
+#: ../includes/forum.php:630 ../includes/views/editor.php:43
 #, php-format
 msgid "on %s"
 msgstr "på %s"
 
-#: ../includes/forum.php:623
+#: ../includes/forum.php:632
 msgid "No threads yet!"
 msgstr "Ingen tråde endnu!"
 
-#: ../includes/forum.php:645
+#: ../includes/forum.php:654
 msgid "Quote"
 msgstr "Citat"
 
-#: ../includes/forum.php:649 ../includes/forum.php:703
+#: ../includes/forum.php:658 ../includes/forum.php:712
 msgid "Are you sure you want to remove this?"
 msgstr "Er du sikker på at du vil slette dette?"
 
-#: ../includes/forum.php:649
+#: ../includes/forum.php:658
 msgid "Remove"
 msgstr "Fjern"
 
-#: ../includes/forum.php:653
+#: ../includes/forum.php:662
 msgid "Edit"
 msgstr "Ændre"
 
-#: ../includes/forum.php:698
+#: ../includes/forum.php:707
 msgid "Reply"
 msgstr "Svar"
 
-#: ../includes/forum.php:703
+#: ../includes/forum.php:712
 msgid "Delete Thread"
 msgstr "Slet tråd"
 
-#: ../includes/forum.php:706
+#: ../includes/forum.php:715
 msgid "Undo Sticky"
 msgstr "Fjern Sticky"
 
-#: ../includes/forum.php:708
+#: ../includes/forum.php:717
 msgid "Sticky"
 msgstr "Sticky"
 
-#: ../includes/forum.php:712
+#: ../includes/forum.php:721
 msgid "Re-open"
 msgstr "Genåben"
 
-#: ../includes/forum.php:714
+#: ../includes/forum.php:723
 msgid "Close"
 msgstr "Luk"
 
-#: ../includes/forum.php:765
+#: ../includes/forum.php:774
 msgid "Pages:"
 msgstr "Sider:"
 
-#: ../includes/forum.php:792
+#: ../includes/forum.php:802
 msgid "First"
 msgstr "Fornavn"
 
-#: ../includes/forum.php:810
+#: ../includes/forum.php:820
 msgid "Last"
 msgstr "Efternavn"
 
-#: ../includes/forum.php:1014
+#: ../includes/forum.php:1041
 msgid "Delete"
 msgstr "Slet"
 
-#: ../includes/forum.php:1023 ../includes/forum.php:1027
+#: ../includes/forum.php:1050 ../includes/forum.php:1054
 msgid "Uploaded files:"
 msgstr "Uploadede filer:"
 
@@ -436,12 +440,12 @@ msgstr "Din besked:"
 msgid "Upload Files:"
 msgstr "Upload filer:"
 
-#: ../includes/views/editor.php:113
+#: ../includes/views/editor.php:114
 msgid "Add another file ..."
 msgstr "Tilføj endnu en fil ..."
 
-#: ../includes/views/editor.php:121 ../includes/views/editor.php:123 ..
-#: includes/views/editor.php:125
+#: ../includes/views/editor.php:122 ../includes/views/editor.php:124 ..
+#: includes/views/editor.php:126
 msgid "Submit"
 msgstr "Send"
 
@@ -453,11 +457,11 @@ msgstr "Oprettet af:"
 msgid "You need to login in order to create posts and topics."
 msgstr "Du skal være logget ind for at oprette poster og emner."
 
-#: ../includes/views/forum.php:25
+#: ../includes/views/forum.php:24
 msgid "Sticky Threads"
 msgstr "Sticky tråde"
 
-#: ../includes/views/forum.php:50
+#: ../includes/views/forum.php:45
 msgid "There are no threads yet!"
 msgstr "Der er ingen tråde endnu!"
 
@@ -477,6 +481,6 @@ msgstr "Ingen nye indlæg"
 msgid "Mark All Read"
 msgstr "Makér alt som læst"
 
-#: ../includes/views/thread.php:39
+#: ../includes/views/thread.php:42
 msgid "Posts:"
 msgstr "Indlæg:"
