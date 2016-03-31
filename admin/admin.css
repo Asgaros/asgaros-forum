@@ -39,6 +39,7 @@
 #af-forums input[type="submit"] {
     margin-top: 25px;
 }
+#af-options input[id="allowed_filetypes"],
 #af-forums input[type="text"] {
     width: 300px;
 }

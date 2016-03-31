@@ -109,6 +109,7 @@ if (!$error) {
     		<div class="editor-row">
     			<div class="editor-cell"><span><?php _e('Upload Files:', 'asgaros-forum'); ?></span></div>
     			<div class="editor-cell">
+                    <?php echo __('Allowed filetypes:', 'asgaros-forum').'&nbsp'.esc_html($this->options['allowed_filetypes']).'<br />'; ?>
                     <input type="file" name="forumfile[]" /><br />
                     <a id="add_file_link" href="#"><?php _e('Add another file ...', 'asgaros-forum'); ?></a>
     			</div>

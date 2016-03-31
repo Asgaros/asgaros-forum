@@ -18,6 +18,7 @@ class asgarosforum {
     var $url_movethread = '';
     var $upload_path = '';
     var $upload_url = '';
+    var $upload_allowed_filetypes = array();
     var $table_forums = '';
     var $table_threads = '';
     var $table_posts = '';
@@ -30,6 +31,7 @@ class asgarosforum {
     var $options_default = array(
         'posts_per_page'        => 10,
         'threads_per_page'      => 20,
+        'allowed_filetypes'     => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'    => false,
         'highlight_admin'       => true,
         'show_edit_date'        => true,
@@ -56,6 +58,7 @@ class asgarosforum {
         $upload_dir = wp_upload_dir();
         $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
         $this->upload_url = $upload_dir['baseurl'].'/asgarosforum/';
+        $this->upload_allowed_filetypes = explode(',', $this->options['allowed_filetypes']);
 
         register_activation_hook(__FILE__, array($this, 'install'));
         add_action('plugins_loaded', array($this, 'install'));
@@ -982,7 +985,12 @@ class asgarosforum {
         if (isset($_FILES['forumfile'])) {
             foreach ($_FILES['forumfile']['name'] as $index =>$tmpName) {
                 if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
-                    $files[$index] = true;
+                    $file_extension = strtolower(pathinfo($_FILES['forumfile']['name'][$index], PATHINFO_EXTENSION));
+
+                    // Check if its allowed to upload an file with this extension.
+                    if (in_array($file_extension, $this->upload_allowed_filetypes)) {
+                        $files[$index] = true;
+                    }
                 }
             }
         }

@@ -221,7 +221,7 @@ class asgarosforum_admin {
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = true;
                 } else {
-                    $saved_ops[$k] = esc_sql(stripslashes($_POST[$k]));
+                    $saved_ops[$k] = esc_sql(stripslashes(strtolower($_POST[$k])));
                 }
             } else {
                 if (is_numeric($v)) {
@@ -229,7 +229,7 @@ class asgarosforum_admin {
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = false;
                 } else {
-                    $saved_ops[$k] = '';
+                    $saved_ops[$k] = $v;
                 }
             }
         }

@@ -2,8 +2,8 @@
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
 Tags: forums, discussion
-Requires at least: 4.3.0
-Tested up to: 4.4.2
+Requires at least: 4.3
+Tested up to: 4.5
 Stable tag: 1.0.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,6 +38,8 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Done!
 
 == Frequently Asked Questions ==
+= I cant upload my files =
+By default only files of the following filetype can be uploaded: jpg, jpeg, gif, png, bmp, pdf. You can add more filetypes to this list in the forum administration.
 = Where can I add moderators? =
 Moderators can be added via the user edit screen in the WordPress administration interface.
 = I want help to translate Asgaros Forum =
@@ -68,6 +70,8 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Display issues with some themes
+* Added: Option to set allowed filetypes for uploads
+* Changed: Only the following filetypes can be uploaded by default: jpg, jpeg, gif, png, bmp, pdf
 * Changed: Hide page-navigation when there is only one page
 * Changed: Provide spanish translation updates via WordPress Updater
 * Performance improvements and code optimizations
