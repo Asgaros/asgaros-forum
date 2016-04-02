@@ -69,6 +69,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Categories were not sorted correctly
 = 1.0.14 =
 * Fixed: Display issues with some themes
 * Added: Option to modify allowed filetypes for uploads

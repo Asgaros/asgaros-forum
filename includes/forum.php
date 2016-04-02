@@ -528,7 +528,7 @@ class asgarosforum {
     }
 
     function categories_compare($a, $b) {
-        return strcmp($a->order, $b->order);
+        return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
     }
 
     function get_forums($id = false) {
