@@ -1,20 +1,13 @@
 <?php
-/**
- * Asgaros Forum
- *
- * @package asgaros-forum
- */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if (!defined('ABSPATH')) exit;
 
 /**
- * Class Asgaros ThemeManager
+ * Class ThemeManager
  *
  * @author Graeme Hinchliffe <graeme@hisol.co.uk>
  */
-class AsgarosThemeManager
+class ThemeManager
 {
 	const AF_THEMEPATH = 'asgaros-themes';
 	const AF_SKINPATH = 'skin';
@@ -24,7 +17,7 @@ class AsgarosThemeManager
 	/**
 	 * Singleton instance ID
 	 *
-	 * @var AsgarosThemeManager
+	 * @var ThemeManager
 	 */
 	protected static $instance = null;
 
@@ -109,25 +102,25 @@ class AsgarosThemeManager
 	 *
 	 * @param string $plugin_root Root dir of the plugin.
 	 *
-	 * @return AsgarosThemeManager|static
+	 * @return ThemeManager|static
 	 */
-	public static function instance( $plugin_root = '' ) {
+	public static function instance( $plugin_root = '', $directory = '' ) {
 		if ( null === static::$instance ) {
-			static::$instance = new static( $plugin_root );
+			static::$instance = new static( $plugin_root, $directory );
 		}
 
 		return static::$instance;
 	}
 
 	/**
-	 * AsgarosThemeManager constructor.
+	 * ThemeManager constructor.
 	 *
 	 * @param string $plugin_root Root dir of the plugin.
 	 */
-	private function __construct( $plugin_root = '' ) {
+	private function __construct( $plugin_root = '', $directory = '' ) {
 		global $asgarosforum;
 		self::$root = trailingslashit( $plugin_root );
-		self::$plugin_root = trailingslashit( plugin_dir_path( __FILE__ ) );
+		self::$plugin_root = $directory;
 		static::find_themes();
 		self::$current_theme = $asgarosforum->options['theme'];
 

@@ -232,7 +232,7 @@ class asgarosforum_admin {
                 }
 
                 if ($k == 'theme') {
-                    AsgarosThemeManager::set_current_theme($_POST[$k]);
+                    ThemeManager::set_current_theme($_POST[$k]);
                 }
             } else {
                 if (is_numeric($v)) {

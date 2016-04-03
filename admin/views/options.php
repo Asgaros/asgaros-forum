@@ -49,9 +49,9 @@ if (!defined('ABSPATH')) exit;
             <label for="theme"><?php _e('Forum theme', 'asgaros-forum'); ?></label>
             <select name="theme" class="options">
                 <?php
-                $themes = AsgarosThemeManager::get_themes();
+                $themes = ThemeManager::get_themes();
                 foreach ($themes as $k => $v) {
-                ?><option value = "<?=$k?>" <?php if ( $k == AsgarosThemeManager::get_current_theme() ) { echo "selected"; }?>><?=$v['name']?></option >
+                ?><option value = "<?=$k?>" <?php if ( $k == ThemeManager::get_current_theme() ) { echo "selected"; }?>><?=$v['name']?></option >
                 <?php } ?>
             </select>
         </p>

@@ -275,7 +275,7 @@ class asgarosforum {
     }
 
     function setup_header() {
-        $theme = AsgarosThemeManager::get_current_theme_path();
+        $theme = ThemeManager::get_current_theme_path();
         echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/widgets.css" />';
 
         if (!$this->execute_plugin()) {
@@ -284,7 +284,7 @@ class asgarosforum {
 
         echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/style.css" />';
 
-        if ( AsgarosThemeManager::get_current_theme() === AsgarosThemeManager::AF_DEFAULT_THEME) {
+        if ( ThemeManager::get_current_theme() === ThemeManager::AF_DEFAULT_THEME) {
             if ( $this->options[ 'custom_color' ] !== $this->options_default[ 'custom_color' ] ) {
                 echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/custom-color.php?color='
                     . substr( $this->options[ 'custom_color' ], 1 ) . '" />';
