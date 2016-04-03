@@ -91,7 +91,7 @@
 #af-wrapper .thread div {
     display: table-cell;
     border-right: 1px solid #cecece;
-    padding: 0 10px;
+    padding: 5px 10px;
     vertical-align: middle;
     box-sizing: content-box;
 }
@@ -123,6 +123,11 @@
 #af-wrapper .forum small,
 #af-wrapper .thread small {
     display: block;
+}
+#af-wrapper .forum-subforums {
+    border-top: 1px solid #ddd;
+    padding-top: 5px;
+    margin-top: 5px;
 }
 #af-wrapper .bright {
     background-color: #eee;

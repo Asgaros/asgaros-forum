@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class asgarosforum {
     var $directory = '';
-    var $db_version = 3;
+    var $db_version = 4;
     var $date_format = '';
     var $access = true;
     var $error = '';
@@ -123,6 +123,7 @@ class asgarosforum {
             id int(11) NOT NULL auto_increment,
             name varchar(255) NOT NULL default '',
             parent_id int(11) NOT NULL default '0',
+            parent_forum int(11) NOT NULL default '0',
             description varchar(255) NOT NULL default '',
             sort int(11) NOT NULL default '0',
             closed int(11) NOT NULL default '0',
@@ -531,11 +532,11 @@ class asgarosforum {
         return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
     }
 
-    function get_forums($id = false) {
+    function get_forums($id = false, $parent_forum = 0) {
         global $wpdb;
 
         if ($id) {
-            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, f.closed, COUNT(t.id) AS count_threads, (SELECT COUNT(p.id) FROM {$this->table_posts} AS p, {$this->table_threads} AS t WHERE p.parent_id = t.id AND t.parent_id = f.id) AS count_posts FROM {$this->table_forums} AS f LEFT JOIN {$this->table_threads} AS t ON t.parent_id = f.id WHERE f.parent_id = %d GROUP BY f.id ORDER BY f.sort ASC;", $id));
+            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, f.closed, COUNT(t.id) AS count_threads, (SELECT COUNT(p.id) FROM {$this->table_posts} AS p, {$this->table_threads} AS t WHERE p.parent_id = t.id AND t.parent_id = f.id) AS count_posts, (SELECT COUNT(sf.id) FROM {$this->table_forums} AS sf WHERE sf.parent_forum = f.id) AS count_subforums FROM {$this->table_forums} AS f LEFT JOIN {$this->table_threads} AS t ON t.parent_id = f.id WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
         } else {
             return $wpdb->get_results("SELECT id, name FROM {$this->table_forums} ORDER BY sort ASC;");
         }
