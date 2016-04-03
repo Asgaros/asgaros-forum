@@ -36,7 +36,8 @@ class asgarosforum {
         'highlight_admin'       => true,
         'show_edit_date'        => true,
         'require_login'         => false,
-        'custom_color'          => '#2d89cc'
+        'custom_color'          => '#2d89cc',
+        'theme'                 => 'default',
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -274,20 +275,24 @@ class asgarosforum {
     }
 
     function setup_header() {
-        echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/widgets.css" />';
+        $theme = AsgarosThemeManager::get_current_theme_path();
+        echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/widgets.css" />';
 
         if (!$this->execute_plugin()) {
             return;
         }
 
-        echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/style.css" />';
+        echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/style.css" />';
 
-        if ($this->options['custom_color'] !== $this->options_default['custom_color']) {
-            echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/custom-color.php?color='.substr($this->options['custom_color'], 1).'" />';
+        if ( AsgarosThemeManager::get_current_theme() === AsgarosThemeManager::AF_DEFAULT_THEME) {
+            if ( $this->options[ 'custom_color' ] !== $this->options_default[ 'custom_color' ] ) {
+                echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/custom-color.php?color='
+                    . substr( $this->options[ 'custom_color' ], 1 ) . '" />';
+            }
         }
 
         if (wp_is_mobile()) {
-            echo '<link rel="stylesheet" type="text/css" href="'.$this->directory.'skin/mobile.css" />';
+            echo '<link rel="stylesheet" type="text/css" href="' . $theme . '/mobile.css" />';
         }
     }
 

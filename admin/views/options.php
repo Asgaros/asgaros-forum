@@ -32,6 +32,7 @@ if (!defined('ABSPATH')) exit;
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <label for="custom_color">Default Asgaros theme only</label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
         </p>
         <h3>Uploads</h3>
@@ -42,6 +43,17 @@ if (!defined('ABSPATH')) exit;
         <p>
             <label for="allowed_filetypes"><?php _e('Allowed filetypes:', 'asgaros-forum'); ?></label>
             <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3" />
+        </p>
+        <h3>Themes</h3>
+        <p>
+            <label for="theme"><?php _e('Forum theme', 'asgaros-forum'); ?></label>
+            <select name="theme" class="options">
+                <?php
+                $themes = AsgarosThemeManager::get_themes();
+                foreach ($themes as $k => $v) {
+                ?><option value = "<?=$k?>" <?php if ( $k == AsgarosThemeManager::get_current_theme() ) { echo "selected"; }?>><?=$v['name']?></option >
+                <?php } ?>
+            </select>
         </p>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>" />
     </form>

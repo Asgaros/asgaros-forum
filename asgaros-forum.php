@@ -36,15 +36,18 @@ add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
 require('includes/forum.php');
 require('includes/forum-widgets.php');
+require( 'asgarosthememanager.php' );
 require('admin/admin.php');
 
 global $asgarosforum;
 global $asgarosforum_admin;
 $directory = plugin_dir_url(__FILE__);
 $asgarosforum = new asgarosforum($directory);
+AsgarosThemeManager::instance( WP_CONTENT_DIR . '/' . AsgarosThemeManager::AF_THEMEPATH );
 
-if (is_admin()) {
+if ( is_admin() ) {
     $asgarosforum_admin = new asgarosforum_admin();
+    AsgarosThemeManager::install();
+    AsgarosThemeManager::rescan_themes();
 }
 
-?>
