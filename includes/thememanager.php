@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) exit;
  */
 class ThemeManager
 {
-	const AF_THEMEPATH = 'asgaros-themes';
+	const AF_THEMEPATH = 'themes-asgarosforum';
 	const AF_SKINPATH = 'skin';
 	const AF_THEMES = 'themes';
 	const AF_DEFAULT_THEME = '**';
@@ -194,3 +194,5 @@ class ThemeManager
 		static::find_themes();
 	}
 }
+
+?>

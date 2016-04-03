@@ -50,3 +50,5 @@ if ( is_admin() ) {
     ThemeManager::install();
     ThemeManager::rescan_themes();
 }
+
+?>

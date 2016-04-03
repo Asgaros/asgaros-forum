@@ -338,4 +338,5 @@ class asgarosforum_admin {
         $wpdb->delete($asgarosforum->table_forums, array('id' => $forum_id), array('%d'));
     }
 }
+
 ?>

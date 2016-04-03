@@ -46,11 +46,10 @@ function recursiveDelete($str) {
 
 $upload_dir = wp_upload_dir();
 $upload_path = $upload_dir['basedir'].'/asgarosforum/';
-
 recursiveDelete($upload_path);
 
-// Delete themes.
-$theme_path = WP_CONTENT_DIR . '/asgaros-themes';
+// Delete themes
+$theme_path = WP_CONTENT_DIR.'/themes-asgarosforum';
 recursiveDelete( $theme_path );
 
-
+?>
