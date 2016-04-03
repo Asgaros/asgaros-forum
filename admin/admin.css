@@ -36,7 +36,8 @@
     display: inline-block;
 }
 #af-options input[type="submit"],
-#af-forums input[type="submit"] {
+#af-forums input[type="submit"],
+#af-options h3 {
     margin-top: 25px;
 }
 #af-options input[id="allowed_filetypes"],

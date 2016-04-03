@@ -31,10 +31,6 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?> />
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>
-        <p>
-            <label for="custom_color">Default Asgaros theme only</label>
-            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
-        </p>
         <h3>Uploads</h3>
         <p>
             <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php checked(!empty($asgarosforum->options['allow_file_uploads'])); ?> />
@@ -54,6 +50,9 @@ if (!defined('ABSPATH')) exit;
                 ?><option value = "<?=$k?>" <?php if ( $k == ThemeManager::get_current_theme() ) { echo "selected"; }?>><?=$v['name']?></option >
                 <?php } ?>
             </select>
+        </p>
+        <p>
+            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
         </p>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>" />
     </form>
