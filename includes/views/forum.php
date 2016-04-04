@@ -20,15 +20,26 @@ if (!is_user_logged_in()) {
 <?php if ($counter_total > 0) { ?>
     <div class="title-element"><?php echo esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))); ?></div>
     <div class="content-element">
-        <?php if ($sticky_threads && !$this->current_page) { ?>
+        <?php
+        // Subforums
+        $subforums = $this->get_forums($this->current_category, $this->current_forum);
+        if (count($subforums) > 0) {
+            echo '<div class="bright">'.__('Subforums', 'asgaros-forum').'</div>';
+            foreach ($subforums as $forum) {
+                require('forum-element.php');
+            }
+        }
+
+        // Sticky threads
+        if ($sticky_threads && !$this->current_page) { ?>
             <div class="bright"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>
             <?php foreach ($sticky_threads as $thread) {
                 require('thread-element.php');
             }
+        }
 
-            if ($counter_normal > 0) { ?>
-                <div class="bright"></div>
-            <?php }
+        if ($counter_normal > 0 && (($sticky_threads && !$this->current_page) || (count($subforums) > 0))) {
+            echo '<div class="bright"></div>';
         }
 
         foreach ($threads as $thread) {
