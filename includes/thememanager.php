@@ -26,7 +26,7 @@ class ThemeManager
 	 *
 	 * @var string
 	 */
-	private static $root;
+	private static $theme_root;
 
 	/**
 	 * Path to the plugin itself
@@ -104,9 +104,9 @@ class ThemeManager
 	 *
 	 * @return ThemeManager|static
 	 */
-	public static function instance( $plugin_root = '', $directory = '' ) {
+	public static function instance($plugin_root = '') {
 		if ( null === static::$instance ) {
-			static::$instance = new static( $plugin_root, $directory );
+			static::$instance = new static($plugin_root);
 		}
 
 		return static::$instance;
@@ -117,10 +117,10 @@ class ThemeManager
 	 *
 	 * @param string $plugin_root Root dir of the plugin.
 	 */
-	private function __construct( $plugin_root = '', $directory = '' ) {
+	private function __construct($plugin_root = '') {
 		global $asgarosforum;
-		self::$root = trailingslashit( $plugin_root );
-		self::$plugin_root = $directory;
+		self::$theme_root = trailingslashit(WP_CONTENT_DIR.'/'.self::AF_THEMEPATH);
+		self::$plugin_root = $plugin_root;
 		static::find_themes();
 		self::$current_theme = $asgarosforum->options['theme'];
 
@@ -142,7 +142,7 @@ class ThemeManager
 		);
 
 		// Check the themes directory for more themes.
-		foreach ( glob( self::$root . '/*' ) as $themepath ) {
+		foreach ( glob( self::$theme_root . '/*' ) as $themepath ) {
 			// Check that only directories with style.css files are considered.
 			if ( is_dir( $themepath ) && is_file( $themepath . '/style.css' ) ) {
 				$trimmed = preg_filter( '/^.*\//', '', $themepath, 1 );
@@ -159,8 +159,8 @@ class ThemeManager
 	 * Check to see if the themes folder exists, if not create it and initiate a rescan
 	 */
 	public static function install() {
-		if ( ! is_dir( self::$root ) ) {
-			wp_mkdir_p( self::$root );
+		if ( ! is_dir( self::$theme_root ) ) {
+			wp_mkdir_p( self::$theme_root );
 			static::copy_example_theme( 'Dark-theme' );
 		}
 	}
@@ -174,7 +174,7 @@ class ThemeManager
 		// Check the example theme exists first.
 		if ( is_dir( self::$plugin_root . '/' . self::AF_THEMES . '/' . $theme ) ) {
 			// Now make sure the destination is available.
-			$theme_path = self::$root . $theme;
+			$theme_path = self::$theme_root . $theme;
 			if ( ! is_dir( $theme_path ) ) {
 				// All clear, copy the example into place.
 				wp_mkdir_p( $theme_path );

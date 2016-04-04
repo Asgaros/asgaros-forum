@@ -50,6 +50,6 @@ recursiveDelete($upload_path);
 
 // Delete themes
 $theme_path = WP_CONTENT_DIR.'/themes-asgarosforum';
-recursiveDelete( $theme_path );
+recursiveDelete($theme_path);
 
 ?>
