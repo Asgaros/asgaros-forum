@@ -51,9 +51,11 @@ if (!defined('ABSPATH')) exit;
                 <?php } ?>
             </select>
         </p>
+        <?php if (ThemeManager::get_current_theme() === ThemeManager::AF_DEFAULT_THEME) { ?>
         <p>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
         </p>
+        <?php } ?>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>" />
     </form>
 </div>
