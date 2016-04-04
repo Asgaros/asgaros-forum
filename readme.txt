@@ -70,6 +70,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Categories were not sorted correctly
+* Performance improvements and code optimizations
 = 1.0.14 =
 * Fixed: Display issues with some themes
 * Added: Option to modify allowed filetypes for uploads
