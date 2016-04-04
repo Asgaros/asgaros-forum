@@ -23,7 +23,7 @@ if (!is_user_logged_in()) {
         <?php if ($sticky_threads && !$this->current_page) { ?>
             <div class="bright"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>
             <?php foreach ($sticky_threads as $thread) {
-                require('forum-thread.php');
+                require('thread-element.php');
             }
 
             if ($counter_normal > 0) { ?>
@@ -32,7 +32,7 @@ if (!is_user_logged_in()) {
         }
 
         foreach ($threads as $thread) {
-            require('forum-thread.php');
+            require('thread-element.php');
         } ?>
     </div>
 
