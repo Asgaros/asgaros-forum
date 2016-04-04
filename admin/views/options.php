@@ -31,7 +31,7 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?> />
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>
-        <h3>Uploads</h3>
+        <h3><?php _e('Uploads', 'asgaros-forum'); ?></h3>
         <p>
             <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php checked(!empty($asgarosforum->options['allow_file_uploads'])); ?> />
             <label for="allow_file_uploads"><?php _e('Allow file uploads', 'asgaros-forum'); ?></label>
@@ -40,7 +40,7 @@ if (!defined('ABSPATH')) exit;
             <label for="allowed_filetypes"><?php _e('Allowed filetypes:', 'asgaros-forum'); ?></label>
             <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3" />
         </p>
-        <h3>Themes</h3>
+        <h3><?php _e('Appearance', 'asgaros-forum'); ?></h3>
         <p>
             <label for="theme"><?php _e('Forum theme', 'asgaros-forum'); ?></label>
             <select name="theme" class="options">

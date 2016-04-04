@@ -70,6 +70,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Categories were not sorted correctly
+* Added: Missing translation strings
 * Performance improvements and code optimizations
 = 1.0.14 =
 * Fixed: Display issues with some themes
