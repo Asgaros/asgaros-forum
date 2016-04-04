@@ -227,12 +227,10 @@ class asgarosforum_admin {
                     $saved_ops[$k] = ((int)$_POST[$k] > 0) ? (int)$_POST[$k] : $v;
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = true;
+                } else if ($k === 'theme') {
+                    $saved_ops[$k] = esc_sql(stripslashes($_POST[$k]));
                 } else {
                     $saved_ops[$k] = esc_sql(stripslashes(strtolower($_POST[$k])));
-                }
-
-                if ($k == 'theme') {
-                    ThemeManager::set_current_theme($_POST[$k]);
                 }
             } else {
                 if (is_numeric($v)) {
@@ -249,6 +247,7 @@ class asgarosforum_admin {
 
         update_option('asgarosforum_options', $saved_ops);
         $asgarosforum->options = get_option('asgarosforum_options', array());
+        ThemeManager::set_current_theme($asgarosforum->options['theme']);
         $this->saved = true;
     }
 
