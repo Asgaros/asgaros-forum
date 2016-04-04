@@ -1,3 +1,9 @@
+<?php
+
+if (!defined('ABSPATH')) exit;
+
+?>
+
 <div class="thread">
     <?php $lastpost_data = $this->get_lastpost_data($thread->id, 'p.id, p.date, p.author_id, p.parent_id', 'p'); ?>
     <div class="thread-status"><?php $this->get_thread_image($lastpost_data, $thread->status); ?></div>
