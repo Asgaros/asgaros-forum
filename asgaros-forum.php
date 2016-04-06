@@ -42,13 +42,11 @@ require('admin/admin.php');
 global $asgarosforum;
 global $asgarosforum_admin;
 $plugin_root_url = plugin_dir_url(__FILE__);
-$plugin_root_dir = plugin_dir_path(__FILE__);
 $asgarosforum = new asgarosforum($plugin_root_url);
-ThemeManager::instance($plugin_root_dir);
+ThemeManager::instance($plugin_root_url);
 
 if (is_admin()) {
     $asgarosforum_admin = new asgarosforum_admin();
-    ThemeManager::rescan_themes();
 }
 
 ?>

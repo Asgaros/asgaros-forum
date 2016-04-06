@@ -5,14 +5,7 @@ if (!defined('ABSPATH')) exit;
 class asgarosforum_admin {
     var $saved = false;
 
-	/**
-	 * Array of available themes selectable
-	 *
-	 * @var array
-	 */
-	protected $themes = array();
-
-    function __construct() {
+	function __construct() {
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_init', array($this, 'save_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
