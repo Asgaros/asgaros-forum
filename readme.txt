@@ -49,7 +49,7 @@ You can help to translate Asgaros Forum on this site:
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = How can I add my own theme? =
-You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). Each theme needs at least a `style.css` file, but the files for mobile-compatibility (`mobile.css`) and the widget (`widget.css`) should be included too. All themes in this directory can be activated in the forum options.
+You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have at least those files: `style.css`, `mobile.css` and `widgets.css`.
 = Which hooks are available =
 * asgarosforum_after_post_author
 * asgarosforum_after_thread_submit

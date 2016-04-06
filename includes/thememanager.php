@@ -52,7 +52,7 @@ class ThemeManager {
 			// Check the themes directory for more themes.
 			foreach (glob(self::$themes_root.'*') as $themepath) {
 				// Check that only directories with style.css files are considered.
-				if (is_dir($themepath) && is_file($themepath.'/style.css')) {
+				if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/mobile.css') && is_file($themepath.'/widgets.css')) {
 					$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
 					self::$themes[$trimmed] = array(
 						'name'	=> $trimmed,
@@ -85,6 +85,11 @@ class ThemeManager {
 	// Returns the URL to the path of the selected theme
 	public static function get_current_theme_url() {
 		return self::$themes[self::get_current_theme()]['url'];
+	}
+
+	// Check if current theme is the default theme
+	public static function is_default_theme() {
+		return (self::get_current_theme() === self::AF_DEFAULT_THEME) ? true : false;
 	}
 }
 

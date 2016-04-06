@@ -54,7 +54,7 @@ if (!defined('ABSPATH')) exit;
         </p>
         <?php }
 
-        if (ThemeManager::get_current_theme() === ThemeManager::AF_DEFAULT_THEME) { ?>
+        if (ThemeManager::is_default_theme()) { ?>
         <p>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
         </p>

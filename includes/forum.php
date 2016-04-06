@@ -284,7 +284,7 @@ class asgarosforum {
 
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css" />';
 
-        if (ThemeManager::get_current_theme() === ThemeManager::AF_DEFAULT_THEME) {
+        if (ThemeManager::is_default_theme()) {
             if ($this->options['custom_color'] !== $this->options_default['custom_color']) {
                 echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($this->options['custom_color'], 1).'" />';
             }
