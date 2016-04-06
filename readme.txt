@@ -24,6 +24,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * File uploads
 * Recent Forum Posts Widget
 * Easy color customization
+* Theme manager
 * Mobile device compatibility
 * Supports multiple languages
 
@@ -47,6 +48,8 @@ You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
+= How can I add my own theme? =
+You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). Each theme needs at least a `style.css` file, but the files for mobile-compatibility (`mobile.css`) and the widget (`widget.css`) should be included too. All themes in this directory can be activated in the forum options.
 = Which hooks are available =
 * asgarosforum_after_post_author
 * asgarosforum_after_thread_submit
@@ -70,6 +73,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 
 == Changelog ==
 * Fixed: Categories were not sorted correctly
+* Added: Theme manager (thanks to Hisol)
 * Added: Missing translation strings
 * Performance improvements and code optimizations
 = 1.0.14 =
