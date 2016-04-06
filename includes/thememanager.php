@@ -47,16 +47,21 @@ class ThemeManager {
 			'url'  => '',
 		);
 
-		// Check the themes directory for more themes.
-		foreach ( glob( self::$themes_root . '/*' ) as $themepath ) {
-			// Check that only directories with style.css files are considered.
-			if ( is_dir( $themepath ) && is_file( $themepath . '/style.css' ) ) {
-				$trimmed = preg_filter( '/^.*\//', '', $themepath, 1 );
-				self::$themes[ $trimmed ] = array(
-					'name' => $trimmed,
-					'path' => $themepath,
-					'url' => self::AF_THEMEPATH . '/' . $trimmed,
-				);
+		// Create themes directory if it doesnt exist
+		if ( ! is_dir( self::$themes_root ) ) {
+			wp_mkdir_p( self::$themes_root );
+		} else {
+			// Check the themes directory for more themes.
+			foreach ( glob( self::$themes_root . '/*' ) as $themepath ) {
+				// Check that only directories with style.css files are considered.
+				if ( is_dir( $themepath ) && is_file( $themepath . '/style.css' ) ) {
+					$trimmed = preg_filter( '/^.*\//', '', $themepath, 1 );
+					self::$themes[ $trimmed ] = array(
+						'name' => $trimmed,
+						'path' => $themepath,
+						'url' => self::AF_THEMEPATH . '/' . $trimmed,
+					);
+				}
 			}
 		}
 	}
@@ -107,37 +112,6 @@ class ThemeManager {
 
 		$url = content_url( $path );
 		return $url;
-	}
-
-	/**
-	 * Check to see if the themes folder exists, if not create it and initiate a rescan
-	 */
-	public static function install() {
-		if ( ! is_dir( self::$themes_root ) ) {
-			wp_mkdir_p( self::$themes_root );
-			static::copy_example_theme( 'Dark-theme' );
-		}
-	}
-
-	/**
-	 * Check the example exists and doesn't already exist in the themes directory, then copy it there.
-	 *
-	 * @param string $theme Name of the example theme to copy.
-	 */
-	private static function copy_example_theme( $theme ) {
-		// Check the example theme exists first.
-		if ( is_dir( self::$plugin_root . '/' . self::AF_THEMES . '/' . $theme ) ) {
-			// Now make sure the destination is available.
-			$theme_path = self::$themes_root . $theme;
-			if ( ! is_dir( $theme_path ) ) {
-				// All clear, copy the example into place.
-				wp_mkdir_p( $theme_path );
-				foreach ( glob( self::$plugin_root . self::AF_THEMES . '/' . $theme . '/*' ) as $source ) {
-					$filename = preg_filter( '/^.*\//', '', $source, 1 );
-					copy( $source, $theme_path . '/' . $filename );
-				}
-			}
-		}
 	}
 
 	/**

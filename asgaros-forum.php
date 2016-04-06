@@ -48,7 +48,6 @@ ThemeManager::instance($plugin_root_dir);
 
 if (is_admin()) {
     $asgarosforum_admin = new asgarosforum_admin();
-    ThemeManager::install();
     ThemeManager::rescan_themes();
 }
 
