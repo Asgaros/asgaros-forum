@@ -41,17 +41,20 @@ if (!defined('ABSPATH')) exit;
             <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3" />
         </p>
         <h3><?php _e('Appearance', 'asgaros-forum'); ?></h3>
+        <?php
+        $themes = ThemeManager::get_themes();
+        if (count($themes) > 1) { ?>
         <p>
-            <label for="theme"><?php _e('Forum theme', 'asgaros-forum'); ?></label>
-            <select name="theme" class="options">
-                <?php
-                $themes = ThemeManager::get_themes();
-                foreach ($themes as $k => $v) {
-                ?><option value = "<?=$k?>" <?php if ( $k == ThemeManager::get_current_theme() ) { echo "selected"; }?>><?=$v['name']?></option >
-                <?php } ?>
+            <label for="theme"><?php _e('Theme', 'asgaros-forum'); ?>:</label>
+            <select name="theme">
+                <?php foreach ($themes as $k => $v) {
+                    echo '<option value="'.$k.'" '.selected($k, ThemeManager::get_current_theme(), false).'>'.$v['name'].'</option>';
+                } ?>
             </select>
         </p>
-        <?php if (ThemeManager::get_current_theme() === ThemeManager::AF_DEFAULT_THEME) { ?>
+        <?php }
+
+        if (ThemeManager::get_current_theme() === ThemeManager::AF_DEFAULT_THEME) { ?>
         <p>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc" />
         </p>
