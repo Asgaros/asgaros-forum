@@ -27,5 +27,14 @@
 
         // Adding color picker
         $('.custom-color').wpColorPicker();
+
+        // Show/hide color pickers
+        $('select[name="theme"]').change(function() {
+            if ($('select[name="theme"]').val() === 'default') {
+                $('#af-options .custom-color-selector').show();
+            } else {
+                $('#af-options .custom-color-selector').hide();
+            }
+        });
     });
 })(jQuery);
