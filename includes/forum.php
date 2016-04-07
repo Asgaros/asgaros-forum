@@ -27,6 +27,7 @@ class asgarosforum {
     var $current_thread = false;
     var $current_view = false;
     var $current_page = 0;
+    var $parent_forum = false;
     var $options = array();
     var $options_default = array(
         'posts_per_page'        => 10,
@@ -184,6 +185,7 @@ class asgarosforum {
                 $forum_id = $_GET['id'];
                 if ($this->element_exists($forum_id, $this->table_forums)) {
                     $this->current_forum = $forum_id;
+                    $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
@@ -194,6 +196,7 @@ class asgarosforum {
                 if ($this->element_exists($thread_id, $this->table_threads)) {
                     $this->current_thread = $thread_id;
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
+                    $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
@@ -202,6 +205,7 @@ class asgarosforum {
                 if ($this->element_exists($post_id, $this->table_posts)) {
                     $this->current_thread = $this->get_parent_id($post_id, $this->table_posts);
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
+                    $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 }
                 break;
@@ -734,13 +738,18 @@ class asgarosforum {
         return $menu;
     }
 
-    function get_parent_id($id, $location) {
+    function get_parent_id($id, $location, $value = 'parent_id') {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$location} WHERE id = %d;", $id));
+        return $wpdb->get_var($wpdb->prepare("SELECT {$value} FROM {$location} WHERE id = %d;", $id));
     }
 
     function breadcrumbs() {
         $trail = '<span class="dashicons-before dashicons-admin-home"></span><a href="'.$this->url_home.'">'.__('Forum', 'asgaros-forum').'</a>';
+
+        if ($this->parent_forum && $this->parent_forum > 0 && $this->access) {
+            $link = $this->get_link($this->parent_forum, $this->url_forum);
+            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->table_forums))).'</a>';
+        }
 
         if ($this->current_forum && $this->access) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
