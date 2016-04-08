@@ -79,10 +79,10 @@ class asgarosforum {
     function execute_plugin() {
         global $post;
 
-        if (!(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum'))) {
-            return false;
-        } else {
+        if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -644,9 +644,14 @@ class asgarosforum {
         return $lastpost;
     }
 
-    function get_lastpost_data($id, $data, $location) {
+    function get_lastpost_in_thread($id) {
         global $wpdb;
-        return $wpdb->get_row($wpdb->prepare("SELECT {$data} FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id=t.id WHERE {$location}.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
+        return $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
+    }
+
+    function get_lastpost_in_forum($id) {
+        global $wpdb;
+        return $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$this->table_forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
     }
 
     function get_thread_starter($thread_id) {

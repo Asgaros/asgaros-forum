@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 ?>
 
 <div class="thread">
-    <?php $lastpost_data = $this->get_lastpost_data($thread->id, 'p.id, p.date, p.author_id, p.parent_id', 'p'); ?>
+    <?php $lastpost_data = $this->get_lastpost_in_thread($thread->id); ?>
     <div class="thread-status"><?php $this->get_thread_image($lastpost_data, $thread->status); ?></div>
     <div class="thread-name">
         <strong><a href="<?php echo $this->get_link($thread->id, $this->url_thread); ?>" title="<?php echo esc_html(stripslashes($thread->name)); ?>"><?php echo esc_html($this->cut_string(stripslashes($thread->name))); ?></a></strong>

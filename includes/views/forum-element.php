@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-$lastpost_data = $this->get_lastpost_data($forum->id, 'p.id, p.date, p.parent_id, p.author_id, t.name', 't');
+$lastpost_data = $this->get_lastpost_in_forum($forum->id);
 
 ?>
 <div class="forum" id="forum-<?php echo $forum->id; ?>">
