@@ -75,6 +75,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Categories were not sorted correctly
 * Added: Theme manager (thanks to Hisol)
 * Added: Missing translation strings
+* Changed: Link subject of last post to the topic
 * Performance improvements and code optimizations
 = 1.0.14 =
 * Fixed: Display issues with some themes
