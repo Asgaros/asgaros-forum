@@ -17,19 +17,22 @@ if (!is_user_logged_in()) {
     <div class="clear"></div>
 </div>
 
-<?php if ($counter_total > 0) { ?>
+<?php
+// Subforums
+$subforums = $this->get_forums($this->current_category, $this->current_forum);
+if (count($subforums) > 0) {
+    echo '<div class="title-element">'.__('Subforums', 'asgaros-forum').'</div>';
+    echo '<div class="content-element">';
+    foreach ($subforums as $forum) {
+        require('forum-element.php');
+    }
+    echo '</div>';
+}
+
+if ($counter_total > 0) { ?>
     <div class="title-element"><?php echo esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))); ?></div>
     <div class="content-element">
         <?php
-        // Subforums
-        $subforums = $this->get_forums($this->current_category, $this->current_forum);
-        if (count($subforums) > 0) {
-            echo '<div class="bright">'.__('Subforums', 'asgaros-forum').'</div>';
-            foreach ($subforums as $forum) {
-                require('forum-element.php');
-            }
-        }
-
         // Sticky threads
         if ($sticky_threads && !$this->current_page) { ?>
             <div class="bright"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>
@@ -38,7 +41,7 @@ if (!is_user_logged_in()) {
             }
         }
 
-        if ($counter_normal > 0 && (($sticky_threads && !$this->current_page) || (count($subforums) > 0))) {
+        if ($counter_normal > 0 && (($sticky_threads && !$this->current_page))) {
             echo '<div class="bright"></div>';
         }
 
