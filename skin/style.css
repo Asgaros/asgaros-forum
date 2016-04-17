@@ -20,6 +20,9 @@
 #af-wrapper span {
     font-size: inherit !important; /* comp */
 }
+#af-wrapper div {
+    border-radius: 0; /* comp */
+}
 #af-wrapper .space {
     margin-bottom: 20px !important;
     visibility: inherit; /* comp */
