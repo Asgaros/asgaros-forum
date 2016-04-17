@@ -17,7 +17,8 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 Create a new page for your forum to display on and add the shortcode [forum] to this page. Add this page to your menu so you can access the forum. Thats all!
 
 = Features =
-* Topic/post management (Remove/Edit/Close/Sticky/Move)
+* Topic & post management
+* Sub-forums
 * Moderators
 * Permissions
 * Powerful editor
@@ -73,6 +74,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Categories were not sorted correctly
+* Added: Sub-forum functionality
 * Added: Theme manager (thanks to Hisol)
 * Added: Missing translation strings
 * Changed: Link subject of last post to the topic
