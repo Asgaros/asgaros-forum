@@ -1,12 +1,5 @@
 (function($) {
     $(document).ready(function() {
-        $('body').on('click', '.af-remove-forum', function() {
-            var answer = confirm(asgarosforum_admin.remove_forum_warning);
-            if (answer) {
-                $(this).parent().remove();
-            }
-            return false;
-        });
         $('.inline-edit-col input[name=slug]').parents('label').hide();
 
         // Adding color picker

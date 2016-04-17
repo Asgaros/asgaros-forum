@@ -5,7 +5,7 @@
     <h2><?php _e('Forums', 'asgaros-forum'); ?></h2>
     <?php if ($this->saved) { ?>
         <div class="updated">
-            <p><?php _e('Your Forums have been saved.', 'asgaros-forum'); ?></p>
+            <p><?php _e('Forum structure updated.', 'asgaros-forum'); ?></p>
         </div>
     <?php
     }
@@ -22,22 +22,18 @@
                     <input type="hidden" id="forum_<?php echo $forum->id; ?>_closed" value="<?php echo esc_html(stripslashes($forum->closed)); ?>" />
                     <input type="hidden" id="forum_<?php echo $forum->id; ?>_order" value="<?php echo esc_html(stripslashes($forum->sort)); ?>" />
                     <span class="forum-name">
-                        <?php echo '<b>'.esc_html(stripslashes($forum->name)).'</b>&nbsp;<i>('.esc_html(stripslashes($forum->description)).')</i>'; ?>
-                    </span>
-                    <span class="forum-status">
                         <?php
                         if ($forum->closed == 1) {
-                            echo '<span class="dashicons-before dashicons-lock"></span>';
+                            echo '<span class="dashicons-before dashicons-lock"></span>&nbsp;';
                         }
+                        echo '<b>'.esc_html(stripslashes($forum->name)).'</b>';
                         ?>
                     </span>
                     <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.esc_html(stripslashes($forum->sort)); ?></span>
                     <span class="forum-actions">
-                        <a data-value-id="<?php echo $forum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline?width=500&amp;height=130&amp;inlineId=forum-delete" class="forum-delete-link delete thickbox" title="<?php _e('Delete this forum', 'asgaros-forum'); ?>"><?php _e('Delete', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
-                        <a data-value-id="<?php echo $forum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline?width=500&amp;height=240&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Edit forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $forum->parent_forum; ?>"><?php _e('Edit forum', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
-                        <a data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline?width=500&amp;height=240&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Add new sub-forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $forum->id; ?>"><?php _e('Add new sub-forum', 'asgaros-forum'); ?></a>
-
-
+                        <a data-value-id="<?php echo $forum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=130&amp;inlineId=forum-delete" class="forum-delete-link delete thickbox" title="<?php _e('Delete this forum', 'asgaros-forum'); ?>"><?php _e('Delete', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
+                        <a data-value-id="<?php echo $forum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=235&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Edit forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $forum->parent_forum; ?>"><?php _e('Edit forum', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
+                        <a data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=235&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Add new sub-forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $forum->id; ?>"><?php _e('Add new sub-forum', 'asgaros-forum'); ?></a>
                     </span>
                 </div>
                 <?php
@@ -50,27 +46,26 @@
                             <input type="hidden" id="forum_<?php echo $subforum->id; ?>_description" value="<?php echo esc_html(stripslashes($subforum->description)); ?>" />
                             <input type="hidden" id="forum_<?php echo $subforum->id; ?>_closed" value="<?php echo esc_html(stripslashes($subforum->closed)); ?>" />
                             <input type="hidden" id="forum_<?php echo $subforum->id; ?>_order" value="<?php echo esc_html(stripslashes($subforum->sort)); ?>" />
-                            <span class="forum-name">&middot;&nbsp;
-                                <?php echo '<b>'.esc_html(stripslashes($subforum->name)).'</b>&nbsp;<i>('.esc_html(stripslashes($subforum->description)).')</i>'; ?>
-                            </span>
-                            <span class="forum-status">
+                            <span class="forum-name">
+                                <span class="subforum"></span>
                                 <?php
-                                if ($forum->closed == 1) {
-                                    echo '<span class="dashicons-before dashicons-lock"></span>';
+                                if ($subforum->closed == 1) {
+                                    echo '<span class="dashicons-before dashicons-lock"></span>&nbsp;';
                                 }
+                                echo '<b>'.esc_html(stripslashes($subforum->name)).'</b>';
                                 ?>
                             </span>
                             <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.esc_html(stripslashes($subforum->sort)); ?></span>
                             <span class="forum-actions">
-                                <a data-value-id="<?php echo $subforum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline?width=500&amp;height=130&amp;inlineId=forum-delete" class="forum-delete-link delete thickbox" title="<?php _e('Delete this forum', 'asgaros-forum'); ?>"><?php _e('Delete', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
-                                <a data-value-id="<?php echo $subforum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline?width=500&amp;height=240&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Edit forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $subforum->parent_forum; ?>"><?php _e('Edit forum', 'asgaros-forum'); ?></a>
+                                <a data-value-id="<?php echo $subforum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=130&amp;inlineId=forum-delete" class="forum-delete-link delete thickbox" title="<?php _e('Delete this forum', 'asgaros-forum'); ?>"><?php _e('Delete', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
+                                <a data-value-id="<?php echo $subforum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=235&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Edit forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $subforum->parent_forum; ?>"><?php _e('Edit forum', 'asgaros-forum'); ?></a>
                             </span>
                         </div>
                     <?php
                     }
                 }
             } ?>
-            <a href="#TB_inline?width=500&amp;height=240&amp;inlineId=forum-editor" class="forum-editor-link dashicons-before dashicons-plus thickbox" title="<?php _e('Add new forum', 'asgaros-forum'); ?>" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0"><?php _e('Add new forum', 'asgaros-forum'); ?></a><br />
+            <a href="#TB_inline&amp;width=500&amp;height=235&amp;inlineId=forum-editor" class="forum-editor-link dashicons-before dashicons-plus thickbox" title="<?php _e('Add new forum', 'asgaros-forum'); ?>" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0"><?php _e('Add new forum', 'asgaros-forum'); ?></a><br />
         <?php
         }
     } else {
@@ -107,6 +102,7 @@
 
             <p class="submit">
                 <input type="submit" name="af-create-edit-forum-submit" value="<?php _e('Save', 'asgaros-forum'); ?>" class="button button-primary" />
+                <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
             </p>
         </form>
     </div>

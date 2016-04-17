@@ -1,14 +1,10 @@
+/* OPTIONS */
 #af-options input {
     vertical-align: middle;
 }
 #af-options label {
     display: inline-block;
     min-width: 250px;
-}
-#af-forums .dashicons-before {
-    text-decoration: none;
-    font-size: 14px;
-    display: inline-block;
 }
 #af-options input[type="submit"],
 #af-options h3 {
@@ -17,66 +13,46 @@
 #af-options input[id="allowed_filetypes"] {
     width: 300px;
 }
+/* CATEGORIES */
 .term-name-wrap p,
 .term-slug-wrap,
 .term-description-wrap {
     display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* FORUM */
+#af-forums .dashicons-before {
+    font-size: 14px;
+    display: inline-block;
+}
 #af-forums a {
     text-decoration: none;
-}
-#af-forums .forum-delete-link {
-    color: #a00;
-}
-#af-forums .forum-editor-link {
-    padding: 10px 0;
 }
 #af-forums h3 {
     font-weight: normal;
 }
+#af-forums .forum-delete-link {
+    color: #a00;
+}
+#af-forums .forum-editor-link,
+#af-forums .forum-delete-link {
+    padding: 10px 0;
+}
 #af-forums .forum {
-    display: block;
     padding: 8px;
     border-bottom: 1px solid #ddd;
 }
+#af-forums .subforum {
+    margin-left: 20px;
+    padding-left: 5px;
+    border-left: 2px solid #ccc;
+}
 #af-forums .forum-name {
-    width: 100%;
-    max-width: 400px;
+    width: 360px;
     display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-#af-forums .forum-name i {
-    color: #666;
-}
-#af-forums .forum-status {
-    display: inline-block;
-    width: 50px;
-    text-align: center;
 }
 #af-forums .forum-order {
+    width: 125px;
     display: inline-block;
-    width: 150px;
 }
 #af-forums .forum-actions {
     display: inline-block;
