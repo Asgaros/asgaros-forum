@@ -452,7 +452,7 @@ class asgarosforum {
                 $strOUT .= '<option value="'.$f->id.'"'.($f->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($f->name).'</option>';
             }
 
-            $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'" /></form>';
+            $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'"></form>';
 
             echo $strOUT;
         } else {
@@ -1059,7 +1059,7 @@ class asgarosforum {
                     } else {
                         $upload_list_elements .= '<div class="uploaded-file">';
                         $upload_list_elements .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
-                        $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'" />';
+                        $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
                         $upload_list_elements .= '</div>';
                     }
                 }

@@ -39,7 +39,7 @@ class asgarosforum_admin {
         echo '<tr>';
         echo '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
         echo '<td>';
-        echo '<input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).' />';
+        echo '<input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'>';
         echo '</td></tr></table>';
     }
 
@@ -53,7 +53,7 @@ class asgarosforum_admin {
 
     function set_current_menu($parent_file) {
         global $submenu_file;
-        $parent_file = ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') ? 'asgarosforum' : $parent_file;
+        $parent_file = ($submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') ? 'asgarosforum-options' : $parent_file;
         return $parent_file;
     }
 
@@ -102,7 +102,7 @@ class asgarosforum_admin {
     function add_category_form_fields() {
         echo '<div class="form-field form-required term-order-wrap">';
             echo '<label>'.__('Order', 'asgaros-forum').'</label>';
-            echo '<input type="number" name="category_order" value="1" size="3" />';
+            echo '<input type="number" name="category_order" value="1" size="3">';
         echo '</div>';
 
         echo '<div class="form-field form-required term-category_access-wrap">';
@@ -126,7 +126,7 @@ class asgarosforum_admin {
         echo '<tr class="form-field form-required term-order-wrap">';
             echo '<th scope="row">'.__('Order', 'asgaros-forum').'</th>';
             echo '<td>';
-                echo '<input type="text" name="category_order" value="'.$order.'" />';
+                echo '<input type="text" name="category_order" value="'.$order.'">';
             echo '</td>';
         echo '</tr>';
 
@@ -178,10 +178,10 @@ class asgarosforum_admin {
     }
 
     function add_admin_pages() {
-        add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'), 'dashicons-clipboard');
-        add_submenu_page('asgarosforum', __('Options', 'asgaros-forum'), __('Options', 'asgaros-forum'), 'administrator', 'asgarosforum', array($this, 'options_page'));
-        add_submenu_page('asgarosforum', __('Categories', 'asgaros-forum'), __('Categories', 'asgaros-forum'), 'administrator', 'edit-tags.php?taxonomy=asgarosforum-category&orderby=order&order=asc', null);
-        add_submenu_page('asgarosforum', __('Forums', 'asgaros-forum'), __('Forums', 'asgaros-forum'), 'administrator', 'asgarosforum-structure', array($this, 'forums_page'));
+        add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'), 'dashicons-clipboard');
+        add_submenu_page('asgarosforum-options', __('Options', 'asgaros-forum'), __('Options', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'));
+        add_submenu_page('asgarosforum-options', __('Categories', 'asgaros-forum'), __('Categories', 'asgaros-forum'), 'manage_options', 'edit-tags.php?taxonomy=asgarosforum-category&orderby=order&order=asc', null);
+        add_submenu_page('asgarosforum-options', __('Forums', 'asgaros-forum'), __('Forums', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'forums_page'));
     }
 
     function enqueue_admin_scripts($hook) {
@@ -280,9 +280,9 @@ class asgarosforum_admin {
                     array('%d')
                 );
             }
-        }
 
-        $this->saved = true;
+            $this->saved = true;
+        }
     }
 
     function delete_category($term_id, $term_taxonomy_id, $deleted_term) {
