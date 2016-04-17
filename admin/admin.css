@@ -1,34 +1,9 @@
-#af-options input,
-#af-forums input {
+#af-options input {
     vertical-align: middle;
 }
 #af-options label {
     display: inline-block;
     min-width: 250px;
-}
-#af-forums h3 {
-    font-weight: normal;
-    padding-top: 10px;
-}
-#af-forums ol {
-    margin: 0 0 10px;
-}
-#af-forums .forum {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
-#af-forums #new-element {
-    display: none;
-}
-#af-forums .af-remove-forum {
-    float: right;
-}
-#af-forums input[type="text"],
-#af-forums input[type="checkbox"] {
-    margin: 0 15px 0 5px;
-}
-#af-forums .af-add-new-forum {
-    padding: 8px;
 }
 #af-forums .dashicons-before {
     text-decoration: none;
@@ -36,16 +11,90 @@
     display: inline-block;
 }
 #af-options input[type="submit"],
-#af-forums input[type="submit"],
 #af-options h3 {
     margin-top: 25px;
 }
-#af-options input[id="allowed_filetypes"],
-#af-forums input[type="text"] {
+#af-options input[id="allowed_filetypes"] {
     width: 300px;
 }
 .term-name-wrap p,
 .term-slug-wrap,
 .term-description-wrap {
     display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FORUM */
+#af-forums a {
+    text-decoration: none;
+}
+#af-forums .forum-delete-link {
+    color: #a00;
+}
+#af-forums .forum-editor-link {
+    padding: 10px 0;
+}
+#af-forums h3 {
+    font-weight: normal;
+}
+#af-forums .forum {
+    display: block;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+#af-forums .forum-name {
+    width: 100%;
+    max-width: 400px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#af-forums .forum-name i {
+    color: #666;
+}
+#af-forums .forum-status {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+}
+#af-forums .forum-order {
+    display: inline-block;
+    width: 150px;
+}
+#af-forums .forum-actions {
+    display: inline-block;
+}
+#add-edit-forum-form .form-table th {
+    width: 150px;
+    padding: 10px 10px 10px 0;
+}
+#add-edit-forum-form .form-table td {
+    padding: 5px 10px;
+}
+#add-edit-forum-form input[type="text"] {
+    width: 300px;
+}
+#delete-forum-form input[type="submit"] {
+    background-color: #d54e21;
+    border-color: #d54e21;
+    color: #fff;
+    text-shadow: none;
+    box-shadow: none;
 }

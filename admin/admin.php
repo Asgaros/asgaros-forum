@@ -201,6 +201,12 @@ class asgarosforum_admin {
             $this->save_options();
         } else if (isset($_POST['af_forums_submit'])) {
             $this->save_forums();
+        } else if (isset($_POST['af-create-edit-forum-submit'])) {
+            $this->create_edit_forum();
+        } else if (isset($_POST['asgaros-forum-delete-forum'])) {
+            if (!empty($_POST['forum-id']) && is_numeric($_POST['forum-id']) && !empty($_POST['forum-category']) && is_numeric($_POST['forum-category'])) {
+                $this->delete_forum($_POST['forum-id'], $_POST['forum-category']);
+            }
         }
     }
 
@@ -304,6 +310,37 @@ class asgarosforum_admin {
         $this->saved = true;
     }
 
+    function create_edit_forum() {
+        global $asgarosforum, $wpdb;
+        $forum_id           = $_POST['forum_id'];
+        $forum_category     = $_POST['forum_category'];
+        $forum_parent_forum = $_POST['forum_parent_forum'];
+        $forum_name         = trim($_POST['forum_name']);
+        $forum_description  = trim($_POST['forum_description']);
+        $forum_closed       = (isset($_POST['forum_closed'])) ? 1 : 0;
+        $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
+
+        if (!empty($forum_name)) {
+            if ($forum_id === 'new') {
+                $wpdb->insert(
+                    $asgarosforum->table_forums,
+                    array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
+                    array('%s', '%d', '%d', '%s', '%d', '%d')
+                );
+            } else {
+                $wpdb->update(
+                    $asgarosforum->table_forums,
+                    array('name' => $forum_name, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
+                    array('id' => $forum_id),
+                    array('%s', '%s', '%d', '%d'),
+                    array('%d')
+                );
+            }
+        }
+
+        $this->saved = true;
+    }
+
     function delete_category($term_id, $term_taxonomy_id, $deleted_term) {
         global $wpdb, $asgarosforum;
 
@@ -311,14 +348,24 @@ class asgarosforum_admin {
 
         if (!empty($forums)) {
             foreach ($forums as $forum) {
-                $this->delete_forum($forum);
+                $this->delete_forum($forum, $term_id);
             }
         }
     }
 
-    function delete_forum($forum_id) {
+    function delete_forum($forum_id, $category_id) {
         global $wpdb, $asgarosforum;
 
+        // Delete all subforums first
+        $subforums = $asgarosforum->get_forums($category_id, $forum_id);
+
+        if (count($subforums) > 0) {
+            foreach ($subforums as $subforum) {
+                $this->delete_forum($subforum->id, $category_id);
+            }
+        }
+
+        // Delete all threads
         $threads = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$forum_id};");
 
         if (!empty($threads)) {
@@ -326,7 +373,7 @@ class asgarosforum_admin {
                 $asgarosforum->delete_thread($thread, true);
             }
         }
-
+        // Last but not least delete the forum
         $wpdb->delete($asgarosforum->table_forums, array('id' => $forum_id), array('%d'));
     }
 }
