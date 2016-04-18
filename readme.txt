@@ -40,6 +40,8 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Done!
 
 == Frequently Asked Questions ==
+= I cant see new posts/threads or modifications I made to the forum =
+If you are using some third-party plugin for caching (WP Super Cache for example) and disable caching for the forum-page, everything should work fine again.
 = I cant upload my files =
 By default only files of the following filetype can be uploaded: jpg, jpeg, gif, png, bmp, pdf. You can modify the allowed filetypes inside the forum administration.
 = Where can I add moderators? =
