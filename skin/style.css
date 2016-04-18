@@ -230,10 +230,10 @@
     font-size: 12px;
     margin-bottom: 10px;
     width: 100%;
-    color: #636363;
+    color: #444;
 }
 #af-wrapper .breadcrumbs a {
-    color: #636363;
+    color: #444;
 }
 #af-wrapper .breadcrumbs a:hover {
     color: #2D89CC;
@@ -247,6 +247,7 @@
 #af-wrapper .content-element {
     border: 1px solid #2d89cc;
     margin-bottom: 10px;
+    background-color: #fff;
 }
 #af-wrapper .content-element a:hover {
     text-decoration: underline;
