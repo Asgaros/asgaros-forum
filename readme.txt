@@ -49,6 +49,7 @@ Moderators can be added via the user edit screen in the WordPress administration
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
+Please dont send me your own .po/.mo files because they are hard to maintain.
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = How can I add my own theme? =
@@ -84,6 +85,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Missing translation strings
 * Changed: Link subject of last post to the topic
 * Changed: Minor design changes
+* Removed: Incomplete and outdated translation files
 * Performance improvements and code optimizations
 = 1.0.14 =
 * Fixed: Display issues with some themes
