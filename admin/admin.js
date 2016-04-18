@@ -3,7 +3,7 @@
         $('.inline-edit-col input[name=slug]').parents('label').hide();
 
         // Adding color picker
-        $('.custom-color').wpColorPicker();
+        $('.color-picker').wpColorPicker();
 
         // Show/hide color pickers
         $('select[name="theme"]').change(function() {

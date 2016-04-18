@@ -1,5 +1,6 @@
+<?php header('Content-type: text/css; charset: UTF-8'); ?>
+
 <?php
-header('Content-type: text/css; charset: UTF-8');
 if (isset($_GET['color']) && !empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['color'])) {
 $color = '#'.$_GET['color'];
 ?>
@@ -16,6 +17,17 @@ $color = '#'.$_GET['color'];
 }
 #af-wrapper .content-element {
     border: 1px solid <?php echo $color; ?> !important;
+}
+<?php
+}
+?>
+
+<?php
+if (isset($_GET['background-color']) && !empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['background-color'])) {
+$background_color = '#'.$_GET['background-color'];
+?>
+#af-wrapper .content-element {
+    background-color: <?php echo $background_color; ?> !important;
 }
 <?php
 }

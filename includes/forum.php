@@ -30,15 +30,16 @@ class asgarosforum {
     var $parent_forum = false;
     var $options = array();
     var $options_default = array(
-        'posts_per_page'        => 10,
-        'threads_per_page'      => 20,
-        'allowed_filetypes'     => 'jpg,jpeg,gif,png,bmp,pdf',
-        'allow_file_uploads'    => false,
-        'highlight_admin'       => true,
-        'show_edit_date'        => true,
-        'require_login'         => false,
-        'custom_color'          => '#2d89cc',
-        'theme'                 => 'default'
+        'posts_per_page'            => 10,
+        'threads_per_page'          => 20,
+        'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
+        'allow_file_uploads'        => false,
+        'highlight_admin'           => true,
+        'show_edit_date'            => true,
+        'require_login'             => false,
+        'custom_color'              => '#2d89cc',
+        'custom_background_color'   => '#fff',
+        'theme'                     => 'default'
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -289,8 +290,8 @@ class asgarosforum {
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css" />';
 
         if (ThemeManager::is_default_theme()) {
-            if ($this->options['custom_color'] !== $this->options_default['custom_color']) {
-                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($this->options['custom_color'], 1).'" />';
+            if (($this->options['custom_color'] !== $this->options_default['custom_color']) || ($this->options['custom_background_color'] !== $this->options_default['custom_background_color'])) {
+                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($this->options['custom_color'], 1).'&amp;background-color='.substr($this->options['custom_background_color'], 1).'" />';
             }
         }
 

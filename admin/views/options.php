@@ -54,7 +54,12 @@ if (!defined('ABSPATH')) exit;
         </p>
         <?php } ?>
         <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
-            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="custom-color" name="custom_color" data-default-color="#2d89cc">
+            <label for="custom_color"><?php _e('Forum color:', 'asgaros-forum'); ?></label>
+            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="color-picker" name="custom_color" id="custom_color" data-default-color="#2d89cc">
+        </p>
+        <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
+            <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
+            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#fff">
         </p>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>">
     </form>

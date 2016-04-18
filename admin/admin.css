@@ -13,6 +13,9 @@
 #af-options input[id="allowed_filetypes"] {
     width: 300px;
 }
+#af-options .wp-color-result {
+    margin: 0;
+}
 /* CATEGORIES */
 .term-name-wrap p,
 .term-slug-wrap,
