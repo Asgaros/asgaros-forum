@@ -6,7 +6,7 @@ $forum_counter = 0;
 
 ?>
 <?php foreach ($categories as $category) { ?>
-    <div class="title-element"><?php echo $category->name; ?></div>
+    <div class="title-element" id="forum-category-<?php echo $category->term_id; ?>"><?php echo $category->name; ?></div>
     <div class="content-element space">
         <?php
         $frs = $this->get_forums($category->term_id);
