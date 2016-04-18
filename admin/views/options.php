@@ -58,6 +58,10 @@ if (!defined('ABSPATH')) exit;
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="color-picker" name="custom_color" id="custom_color" data-default-color="#2d89cc">
         </p>
         <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
+            <label for="custom_text_color"><?php _e('Text color:', 'asgaros-forum'); ?></label>
+            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="#444">
+        </p>
+        <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
             <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#fff">
         </p>
