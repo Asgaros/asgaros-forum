@@ -242,7 +242,7 @@ class asgarosforum_admin {
 
         update_option('asgarosforum_options', $saved_ops);
         $asgarosforum->options = get_option('asgarosforum_options', array());
-        ThemeManager::set_current_theme($asgarosforum->options['theme']);
+        AsgarosForumThemeManager::set_current_theme($asgarosforum->options['theme']);
         $this->saved = true;
     }
 

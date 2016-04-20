@@ -2,27 +2,27 @@
 
 if (!defined('ABSPATH')) exit;
 
-class ThemeManager {
+class AsgarosForumThemeManager {
 	const AF_THEMEPATH = 'themes-asgarosforum';
 	const AF_SKINPATH = 'skin';
 	const AF_DEFAULT_THEME = 'default';
 
-	protected static $instance = null;	// ThemeManager instance
+	private static $instance = null;	// AsgarosForumThemeManager instance
 	private static $themes_root;		// Path to themes directory
 	private static $plugin_url;			// URL to plugin directory
 	private static $themes = array();	// Array of available themes
 	private static $current_theme;		// The current theme
 
-	// ThemeManager instance creator
-	public static function instance($plugin_url) {
-		if (static::$instance === null) {
-			static::$instance = new static($plugin_url);
+	// AsgarosForumThemeManager instance creator
+	public static function getInstance($plugin_url) {
+		if (self::$instance === null) {
+			self::$instance = new self($plugin_url);
 		} else {
-			return static::$instance;
+			return self::$instance;
 		}
 	}
 
-	// ThemeManager constructor
+	// AsgarosForumThemeManager constructor
 	private function __construct($plugin_url) {
 		global $asgarosforum;
 		self::$themes_root = trailingslashit(WP_CONTENT_DIR.'/'.self::AF_THEMEPATH);

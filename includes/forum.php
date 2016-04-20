@@ -2,9 +2,8 @@
 
 if (!defined('ABSPATH')) exit;
 
-class asgarosforum {
+class AsgarosForum {
     var $directory = '';
-    var $db_version = 4;
     var $date_format = '';
     var $access = true;
     var $error = '';
@@ -51,21 +50,18 @@ class asgarosforum {
     var $cache = array();   // Used to store selected database queries.
 
     function __construct($directory) {
-        global $wpdb;
         $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->date_format = get_option('date_format').', '.get_option('time_format');
-        $this->table_forums = $wpdb->prefix.'forum_forums';
-        $this->table_threads = $wpdb->prefix.'forum_threads';
-        $this->table_posts = $wpdb->prefix.'forum_posts';
+        $this->table_forums = AsgarosForumDatabase::getTable('forums');
+        $this->table_threads = AsgarosForumDatabase::getTable('threads');
+        $this->table_posts = AsgarosForumDatabase::getTable('posts');
 
         $upload_dir = wp_upload_dir();
         $this->upload_path = $upload_dir['basedir'].'/asgarosforum/';
         $this->upload_url = $upload_dir['baseurl'].'/asgarosforum/';
         $this->upload_allowed_filetypes = explode(',', $this->options['allowed_filetypes']);
 
-        register_activation_hook(__FILE__, array($this, 'install'));
-        add_action('plugins_loaded', array($this, 'install'));
         add_action('init', array($this, 'register_category_taxonomy'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
@@ -113,57 +109,6 @@ class asgarosforum {
 				)
             )
         );
-    }
-
-    function install() {
-        global $wpdb;
-        $installed_ver = get_option('asgarosforum_db_version');
-
-        if ($installed_ver != $this->db_version) {
-            $charset_collate = $wpdb->get_charset_collate();
-
-            $sql1 = "
-            CREATE TABLE $this->table_forums (
-            id int(11) NOT NULL auto_increment,
-            name varchar(255) NOT NULL default '',
-            parent_id int(11) NOT NULL default '0',
-            parent_forum int(11) NOT NULL default '0',
-            description varchar(255) NOT NULL default '',
-            sort int(11) NOT NULL default '0',
-            closed int(11) NOT NULL default '0',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
-
-            $sql2 = "
-            CREATE TABLE $this->table_threads (
-            id int(11) NOT NULL auto_increment,
-            parent_id int(11) NOT NULL default '0',
-            views int(11) NOT NULL default '0',
-            name varchar(255) NOT NULL default '',
-            status varchar(20) NOT NULL default 'normal_open',
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
-
-            $sql3 = "
-            CREATE TABLE $this->table_posts (
-            id int(11) NOT NULL auto_increment,
-            text longtext,
-            parent_id int(11) NOT NULL default '0',
-            date datetime NOT NULL default '0000-00-00 00:00:00',
-            date_edit datetime NOT NULL default '0000-00-00 00:00:00',
-            author_id int(11) NOT NULL default '0',
-            uploads longtext,
-            PRIMARY KEY  (id)
-            ) $charset_collate;";
-
-            require_once(ABSPATH.'wp-admin/includes/upgrade.php');
-
-            dbDelta($sql1);
-            dbDelta($sql2);
-            dbDelta($sql3);
-
-            update_option('asgarosforum_db_version', $this->db_version);
-        }
     }
 
     function prepare() {
@@ -281,7 +226,7 @@ class asgarosforum {
     }
 
     function setup_header() {
-        $themeurl = ThemeManager::get_current_theme_url();
+        $themeurl = AsgarosForumThemeManager::get_current_theme_url();
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css" />';
 
         if (!$this->execute_plugin()) {
@@ -290,7 +235,7 @@ class asgarosforum {
 
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css" />';
 
-        if (ThemeManager::is_default_theme()) {
+        if (AsgarosForumThemeManager::is_default_theme()) {
             if (($this->options['custom_color'] !== $this->options_default['custom_color']) || ($this->options['custom_text_color'] !== $this->options_default['custom_text_color']) || ($this->options['custom_background_color'] !== $this->options_default['custom_background_color'])) {
                 echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($this->options['custom_color'], 1).'&amp;text-color='.substr($this->options['custom_text_color'], 1).'&amp;background-color='.substr($this->options['custom_background_color'], 1).'" />';
             }

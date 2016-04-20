@@ -42,26 +42,26 @@ if (!defined('ABSPATH')) exit;
         </p>
         <h3><?php _e('Appearance', 'asgaros-forum'); ?></h3>
         <?php
-        $themes = ThemeManager::get_themes();
+        $themes = AsgarosForumThemeManager::get_themes();
         if (count($themes) > 1) { ?>
         <p>
             <label for="theme"><?php _e('Theme', 'asgaros-forum'); ?>:</label>
             <select name="theme">
                 <?php foreach ($themes as $k => $v) {
-                    echo '<option value="'.$k.'" '.selected($k, ThemeManager::get_current_theme(), false).'>'.$v['name'].'</option>';
+                    echo '<option value="'.$k.'" '.selected($k, AsgarosForumThemeManager::get_current_theme(), false).'>'.$v['name'].'</option>';
                 } ?>
             </select>
         </p>
         <?php } ?>
-        <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
+        <p class="custom-color-selector" <?php if (!AsgarosForumThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
             <label for="custom_color"><?php _e('Forum color:', 'asgaros-forum'); ?></label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="color-picker" name="custom_color" id="custom_color" data-default-color="#2d89cc">
         </p>
-        <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
+        <p class="custom-color-selector" <?php if (!AsgarosForumThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
             <label for="custom_text_color"><?php _e('Text color:', 'asgaros-forum'); ?></label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="#444">
         </p>
-        <p class="custom-color-selector" <?php if (!ThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
+        <p class="custom-color-selector" <?php if (!AsgarosForumThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
             <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#fff">
         </p>
