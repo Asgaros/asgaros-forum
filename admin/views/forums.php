@@ -79,7 +79,7 @@
             <input type="hidden" id="forum_new_name" value="">
             <input type="hidden" id="forum_new_description" value="">
             <input type="hidden" id="forum_new_closed" value="">
-            <input type="hidden" id="forum_new_order" value="">
+            <input type="hidden" id="forum_new_order" value="1">
 
             <table class="form-table">
                 <tr>

@@ -22,7 +22,7 @@
             var forum_name          = '';
             var forum_description   = '';
             var forum_closed        = '';
-            var forum_order         = '';
+            var forum_order         = '1';
 
             if (forum_id !== 'new') {
                 forum_name          = $('#forum_'+forum_id+'_name').val();
