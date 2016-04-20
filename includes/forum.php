@@ -37,8 +37,8 @@ class AsgarosForum {
         'show_edit_date'            => true,
         'require_login'             => false,
         'custom_color'              => '#2d89cc',
-        'custom_text_color'         => '#444',
-        'custom_background_color'   => '#fff',
+        'custom_text_color'         => '#444444',
+        'custom_background_color'   => '#ffffff',
         'theme'                     => 'default'
     );
     var $options_editor = array(

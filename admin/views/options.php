@@ -59,11 +59,11 @@ if (!defined('ABSPATH')) exit;
         </p>
         <p class="custom-color-selector" <?php if (!AsgarosForumThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
             <label for="custom_text_color"><?php _e('Text color:', 'asgaros-forum'); ?></label>
-            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="#444">
+            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="#444444">
         </p>
         <p class="custom-color-selector" <?php if (!AsgarosForumThemeManager::is_default_theme()) { echo 'style="display: none;"'; } ?>>
             <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
-            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#fff">
+            <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#ffffff">
         </p>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>">
     </form>
