@@ -267,7 +267,7 @@
     border-radius: inherit; /* comp */
 }
 #af-wrapper .post-header {
-    background-color: #f7f7f7;
+    background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 1px solid #ddd;
     border-top: 2px solid #ccc;
     box-sizing: content-box;
@@ -314,7 +314,7 @@
     border-right: 1px solid #dedede;
     width: 125px;
     padding: 7px;
-    background-color: #f3f3f3;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 #af-wrapper .post-message {
     display: table-cell;
