@@ -81,6 +81,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Categories were not sorted correctly
 * Fixed: Display issues with some themes
 * Added: Sub-forum functionality
+* Added: Banning functionality
 * Added: Theme manager (thanks to Hisol)
 * Added: Text color picker
 * Added: Background color picker
