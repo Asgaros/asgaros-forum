@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) exit;
         </div>
     <?php } ?>
     <form method="post">
+        <h3><?php _e('General', 'asgaros-forum'); ?></h3>
         <p>
             <label for="posts_per_page"><?php _e('Replies to show per page:', 'asgaros-forum'); ?></label>
             <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3">

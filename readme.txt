@@ -21,6 +21,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Sub-forums
 * Moderators
 * Permissions
+* Banning
 * Powerful editor
 * File uploads
 * Recent Forum Posts Widget
@@ -82,12 +83,12 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Display issues with some themes
 * Added: Sub-forum functionality
 * Added: Banning functionality
-* Added: Theme manager (thanks to Hisol)
-* Added: Text color picker
-* Added: Background color picker
+* Added: Theme manager functionality (thanks to Hisol)
+* Added: Color picker for the text
+* Added: Color picker for the background
 * Added: Missing translation strings
 * Changed: Administrators cant be set to forum-moderators anymore
-* Changed: Link subject of last post to the topic
+* Changed: Subject in last-post-view links to the topic
 * Changed: Minor design changes
 * Removed: Incomplete and outdated translation files
 * Performance improvements and code optimizations

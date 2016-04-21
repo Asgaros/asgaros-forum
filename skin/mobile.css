@@ -6,7 +6,7 @@
 #af-wrapper .forum-status,
 #af-wrapper .thread-status {
     width: 40px;
-    border-right: 1px solid #cecece !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.15) !important;
 }
 #af-wrapper .forum-stats,
 #af-wrapper .forum-poster,
@@ -41,10 +41,10 @@
 #af-wrapper .post-menu {
     float: left;
     width: 100%;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 #af-wrapper .post-author {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 #af-wrapper .post-header {
     text-align: center;
