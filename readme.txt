@@ -46,6 +46,8 @@ If you are using some third-party plugin for caching (WP Super Cache for example
 By default only files of the following filetype can be uploaded: jpg, jpeg, gif, png, bmp, pdf. You can modify the allowed filetypes inside the forum administration.
 = Where can I add moderators? =
 Moderators can be added via the user edit screen in the WordPress administration interface.
+= Where can I ban users? =
+Users can be banned via the user edit screen in the WordPress administration interface.
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).

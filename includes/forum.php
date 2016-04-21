@@ -613,7 +613,7 @@ class AsgarosForum {
 
         $o = '';
 
-        if ($user_ID && (!$this->get_status('closed') || $this->is_moderator())) {
+        if ($user_ID && (!$this->get_status('closed') || $this->is_moderator()) && !$this->is_banned()) {
             $o .= '<a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
 
@@ -621,7 +621,7 @@ class AsgarosForum {
             $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
         }
 
-        if (($this->is_moderator()) || $user_ID == $author_id) {
+        if (($this->is_moderator() || $user_ID == $author_id) && !$this->is_banned()) {
             $o .= '<a href="'.$this->url_editor_edit.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
         }
 
@@ -651,10 +651,43 @@ class AsgarosForum {
     function is_moderator() {
         global $user_ID;
 
-        if ($user_ID && (is_super_admin($user_ID) || get_user_meta($user_ID, 'asgarosforum_moderator', true) == 1)) {
-            return true;
+        if ($user_ID) {
+            // Always true for administrators
+            if (is_super_admin($user_ID)) {
+                return true;
+            }
+
+            // Always false for banned users
+            if (get_user_meta($user_ID, 'asgarosforum_banned', true) == 1) {
+                return false;
+            }
+
+            // And true for moderators of course ...
+            if (get_user_meta($user_ID, 'asgarosforum_moderator', true) == 1) {
+                return true;
+            }
         }
 
+        // Otherwise false ...
+        return false;
+    }
+
+    function is_banned() {
+        global $user_ID;
+
+        if ($user_ID) {
+            // Always false for administrators
+            if (is_super_admin($user_ID)) {
+                return false;
+            }
+
+            // And true for banned users of course. Moderators can be banned too in this case.
+            if (get_user_meta($user_ID, 'asgarosforum_banned', true) == 1) {
+                return true;
+            }
+        }
+
+        // Otherwise false ...
         return false;
     }
 
@@ -663,10 +696,10 @@ class AsgarosForum {
         $menu = '';
 
         if ($user_ID) {
-            if ($location == 'forum' && $this->get_forum_status()) {
+            if ($location == 'forum' && !$this->is_banned() && $this->get_forum_status()) {
                 $menu .= '<a href="'.$this->url_editor_thread.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
             } else if ($location == 'thread') {
-                if (!$this->get_status('closed') || $this->is_moderator()) {
+                if ((!$this->get_status('closed') || $this->is_moderator()) && !$this->is_banned()) {
                     $menu .= '<a href="'.$this->url_editor_post.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
                 }
 

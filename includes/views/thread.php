@@ -40,6 +40,11 @@ if (!is_user_logged_in()) {
                     ?>
                     <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->get_username($post->author_id, true), $post->author_id); ?></strong><br />
                     <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$post->author_posts; ?></small>
+                    <?php
+                    if (get_user_meta($post->author_id, 'asgarosforum_banned', true) == 1) {
+                        echo '<br /><small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
+                    }
+                    ?>
                     <?php do_action('asgarosforum_after_post_author', $post->author_id); ?>
                 </div>
                 <div class="post-message">

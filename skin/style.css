@@ -37,6 +37,10 @@
 #af-wrapper .highlight-moderator {
     color: #099922;
 }
+#af-wrapper .banned {
+    color: red;
+    font-style: italic;
+}
 
 /* EDITOR */
 #af-wrapper .editor-row {

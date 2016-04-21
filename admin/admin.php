@@ -24,9 +24,9 @@ class asgarosforum_admin {
         add_action('delete_asgarosforum-category', array($this, 'delete_category'), 10, 3);
         add_action('get_terms', array($this, 'get_ordered_terms'));
 
-        // Moderator stuff
-        add_action('edit_user_profile', array($this, 'moderator_profile_fields'));
-        add_action('edit_user_profile_update', array($this, 'moderator_profile_fields_update'));
+        // Moderator and Banning
+        add_action('edit_user_profile', array($this, 'user_profile_fields'));
+        add_action('edit_user_profile_update', array($this, 'user_profile_fields_update'));
     }
 
     function user_profile_fields($user) {
@@ -38,9 +38,13 @@ class asgarosforum_admin {
         echo '<table class="form-table">';
         echo '<tr>';
         echo '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
-        echo '<td>';
-        echo '<input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'>';
-        echo '</td></tr></table>';
+        echo '<td><input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'></td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<th><label for="asgarosforum_banned">'.__('Banned User', 'asgaros-forum').'</label></th>';
+        echo '<td><input type="checkbox" name="asgarosforum_banned" id="asgarosforum_banned" value="1" '.checked(get_the_author_meta('asgarosforum_banned', $user->ID), '1', false).'></td>';
+        echo '</tr>';
+        echo '</table>';
     }
 
     function user_profile_fields_update($user_id) {
@@ -49,6 +53,7 @@ class asgarosforum_admin {
         }
 
         update_usermeta(absint($user_id), 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
+        update_usermeta(absint($user_id), 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
     }
 
     function set_current_menu($parent_file) {

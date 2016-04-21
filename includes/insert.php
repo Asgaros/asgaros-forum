@@ -8,6 +8,11 @@ $subject = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
 $content = trim($_POST['message']);
 $redirect = '';
 
+// Cancel if user is banned ...
+if (empty($this->error) && $this->is_banned()) {
+    $this->error .= '<span>'.__('You are banned!', 'asgaros-forum').'</span>';
+}
+
 if (isset($_POST['edit_post_submit'])) {
     if (!$this->element_exists($post_id, $this->table_posts)) {
         $this->error .= '<span>'.__('Sorry, this post does not exist.', 'asgaros-forum').'</span>';
