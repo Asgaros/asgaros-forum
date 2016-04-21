@@ -29,10 +29,9 @@ if (count($subforums) > 0) {
     echo '</div>';
 }
 
-if ($counter_total > 0) { ?>
-    <div class="title-element"><?php echo esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))); ?></div>
-    <div class="content-element">
-        <?php
+if ($counter_total > 0) {
+    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</div>';
+    echo '<div class="content-element">';
         // Sticky threads
         if ($sticky_threads && !$this->current_page) { ?>
             <div class="bright"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>
@@ -55,6 +54,9 @@ if ($counter_total > 0) { ?>
         <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
         <div class="clear"></div>
     </div>
-<?php } else { ?>
-    <div class="notice"><?php _e('There are no threads yet!', 'asgaros-forum'); ?></div>
-<?php } ?>
+<?php } else {
+    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</div>';
+    echo '<div class="content-element">';
+    echo '<div class="notice">'.__('There are no threads yet!', 'asgaros-forum').'</div>';
+    echo '</div>';
+} ?>

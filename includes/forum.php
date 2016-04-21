@@ -390,7 +390,8 @@ class AsgarosForum {
     function movethread() {
         if ($this->is_moderator() && $this->access) {
             $strOUT = '<form method="post" action="'.$this->url_movethread.'&amp;move_thread">';
-            $strOUT .= sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)))).'<br />';
+            $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)))).'</div>';
+            $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
 
             $frs = $this->get_forums();
@@ -399,7 +400,7 @@ class AsgarosForum {
                 $strOUT .= '<option value="'.$f->id.'"'.($f->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($f->name).'</option>';
             }
 
-            $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'"></form>';
+            $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'"></div></div></form>';
 
             echo $strOUT;
         } else {

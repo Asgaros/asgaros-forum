@@ -131,6 +131,7 @@
     border-top: 1px solid #ddd;
     padding-top: 5px;
     margin-top: 5px;
+    word-break: break-word;
 }
 #af-wrapper .bright {
     background-color: #eee;
