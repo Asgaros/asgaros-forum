@@ -29,8 +29,8 @@ class asgarosforum_admin {
         add_action('edit_user_profile_update', array($this, 'moderator_profile_fields_update'));
     }
 
-    function moderator_profile_fields($user) {
-        if (!current_user_can('manage_options')) {
+    function user_profile_fields($user) {
+        if (!current_user_can('manage_options') || user_can($user->ID, 'manage_options')) {
             return false;
         }
 
@@ -43,8 +43,8 @@ class asgarosforum_admin {
         echo '</td></tr></table>';
     }
 
-    function moderator_profile_fields_update($user_id) {
-        if (!current_user_can('manage_options')) {
+    function user_profile_fields_update($user_id) {
+        if (!current_user_can('manage_options') || user_can($user->ID, 'manage_options')) {
             return false;
         }
 

@@ -83,6 +83,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Text color picker
 * Added: Background color picker
 * Added: Missing translation strings
+* Changed: Administrators cant be set to forum-moderators anymore
 * Changed: Link subject of last post to the topic
 * Changed: Minor design changes
 * Removed: Incomplete and outdated translation files
