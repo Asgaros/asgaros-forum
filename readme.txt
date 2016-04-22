@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forums, discussion
 Requires at least: 4.3
 Tested up to: 4.5
-Stable tag: 1.0.14
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,7 +52,7 @@ Users can be banned via the user edit screen in the WordPress administration int
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
-Please dont send me your own .po/.mo files because they are hard to maintain.
+Please only use this site and dont send me your own .po/.mo files because it is hard to maintain if I get multiple translation-files for a language.
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = How can I add my own theme? =
@@ -79,8 +79,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.1.0 =
 * Fixed: Categories were not sorted correctly
 * Fixed: Display issues with some themes
+* Fixed: Prevent accessing some PHP-files directly
 * Added: Sub-forum functionality
 * Added: Banning functionality
 * Added: Theme manager functionality (thanks to Hisol)
@@ -89,8 +91,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Missing translation strings
 * Changed: Administrators cant be set to forum-moderators anymore
 * Changed: Subject in last-post-view links to the topic
+* Changed: Revised forum management
 * Changed: Minor design changes
-* Removed: Incomplete and outdated translation files
+* Changed: Provide translation files via WordPress Updater only
 * Performance improvements and code optimizations
 = 1.0.14 =
 * Fixed: Display issues with some themes
@@ -155,9 +158,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Changed: Editor error messages are now shown on the editor page
 * Changed: Minor design changes
 = 1.0.6 =
-* Added: "Last edited" info to posts
 * Fixed: Wrong word wrap
 * Fixed: Display issues with some themes
+* Added: "Last edited" info to posts
 * Changed: Provide hungarian translation updates via WordPress Updater
 * Changed: Added author_id to asgarosforum_after_post_author action hook
 * Performance improvements and code optimizations
