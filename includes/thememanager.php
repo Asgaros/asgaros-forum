@@ -50,14 +50,18 @@ class AsgarosForumThemeManager {
 			wp_mkdir_p(self::$themes_root);
 		} else {
 			// Check the themes directory for more themes.
-			foreach (glob(self::$themes_root.'*') as $themepath) {
-				// Check that only directories with style.css files are considered.
-				if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/mobile.css') && is_file($themepath.'/widgets.css')) {
-					$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
-					self::$themes[$trimmed] = array(
-						'name'	=> $trimmed,
-						'url'	=> content_url(self::AF_THEMEPATH.'/'.$trimmed)
-					);
+			$themes = glob(self::$themes_root.'*');
+
+			if (is_array($themes) && count($themes) > 0) {
+				foreach ($themes as $themepath) {
+					// Check that only directories with style.css files are considered.
+					if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/mobile.css') && is_file($themepath.'/widgets.css')) {
+						$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
+						self::$themes[$trimmed] = array(
+							'name'	=> $trimmed,
+							'url'	=> content_url(self::AF_THEMEPATH.'/'.$trimmed)
+						);
+					}
 				}
 			}
 		}
