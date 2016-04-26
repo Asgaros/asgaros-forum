@@ -27,7 +27,7 @@ class AsgarosForumThemeManager {
 		global $asgarosforum;
 		self::$themes_root = trailingslashit(WP_CONTENT_DIR.'/'.self::AF_THEMEPATH);
 		self::$plugin_url = trailingslashit($plugin_url);
-		static::find_themes();
+		$this->find_themes();
 
 		if (!empty(self::$themes[$asgarosforum->options['theme']])) {
 			self::$current_theme = $asgarosforum->options['theme'];
