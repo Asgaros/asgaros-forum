@@ -80,6 +80,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: PHP parse-error when using a PHP version less than 5.3
+* Performance improvements and code optimizations
 = 1.1.1 =
 * Fixed: PHP-Warning in theme-manager
 = 1.1.0 =

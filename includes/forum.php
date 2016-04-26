@@ -583,9 +583,10 @@ class AsgarosForum {
         $lastpost = false;
 
         if ($lastpost_data) {
+            $lastpost_link = $this->get_postlink($lastpost_data->parent_id, $lastpost_data->id);
             $lastpost = '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>';
-            $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong><a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
-            $lastpost .= '<small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$this->get_postlink($lastpost_data->parent_id, $lastpost_data->id).'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
+            $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
+            $lastpost .= '<small>'.sprintf(__('on %s', 'asgaros-forum'), '<a href="'.$lastpost_link.'">'.$this->format_date($lastpost_data->date).'</a>').'</small>';
         } else if ($context === 'forum') {
             $lastpost = '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
         }
