@@ -68,3 +68,5 @@ if (!is_user_logged_in()) {
     <div class="forum-menu"><?php echo $this->forum_menu('thread', false);?></div>
     <div class="clear"></div>
 </div>
+
+<?php AsgarosForumNotifications::showSubscriptionLink(); ?>

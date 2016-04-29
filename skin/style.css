@@ -375,6 +375,15 @@
     font-weight: bold;
 }
 
+/* SUBSCRIPTIONS */
+#af-wrapper #topic-subscription {
+    display: block;
+}
+#af-wrapper #topic-subscription a {
+    font-size: 11px;
+    font-style: italic;
+}
+
 /* ICONS */
 #af-wrapper [class^="dashicons-"],
 #af-wrapper [class*=" dashicons-"] {
