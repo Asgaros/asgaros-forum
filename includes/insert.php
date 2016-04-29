@@ -42,7 +42,7 @@ if (empty($this->error)) {
 
         // Only handle uploads when the option is enabled.
         if ($this->options['allow_file_uploads']) {
-            $uploads = maybe_serialize($this->attach_files($post_id));
+            $uploads = maybe_serialize(AsgarosForumUploads::uploadFiles($post_id));
             $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
         }
 
@@ -56,7 +56,7 @@ if (empty($this->error)) {
 
         // Only handle uploads when the option is enabled.
         if ($this->options['allow_file_uploads']) {
-            $uploads = maybe_serialize($this->attach_files($post_id));
+            $uploads = maybe_serialize(AsgarosForumUploads::uploadFiles($post_id));
             $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
         }
 
@@ -64,7 +64,7 @@ if (empty($this->error)) {
 
         $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
     } else if (isset($_POST['edit_post_submit'])) {
-        $uploads = maybe_serialize($this->attach_files($post_id));
+        $uploads = maybe_serialize(AsgarosForumUploads::uploadFiles($post_id));
         $date = $this->current_time();
         $wpdb->update($this->table_posts, array('text' => $content, 'uploads' => $uploads, 'date_edit' => $date), array('id' => $post_id), array('%s', '%s', '%s'), array('%d'));
 

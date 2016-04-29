@@ -103,7 +103,7 @@ if (!$error) {
                 </div>
             </div>
             <?php if ($_GET['view'] == "editpost") { ?>
-                <?php $this->file_list($post->id, $post->uploads); ?>
+                <?php AsgarosForumUploads::getFileList($post->id, $post->uploads); ?>
             <?php } ?>
             <?php if ($this->options['allow_file_uploads']) { ?>
     		<div class="editor-row">

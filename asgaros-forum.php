@@ -39,10 +39,12 @@ require('includes/forum-permissions.php');
 require('includes/forum.php');
 require('includes/forum-widgets.php');
 require('includes/forum-thememanager.php');
+require('includes/forum-uploads.php');
 require('admin/admin.php');
 
 AsgarosForumDatabase::getInstance();
 AsgarosForumPermissions::getInstance();
+AsgarosForumUploads::getInstance();
 
 global $asgarosforum;
 global $asgarosforum_admin;
