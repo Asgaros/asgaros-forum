@@ -207,7 +207,7 @@ class AsgarosForum {
             $category_access = get_term_meta($this->current_category, 'category_access', true);
 
             if (!empty($category_access)) {
-                if (!empty($category_access) && (($category_access === 'loggedin' && !is_user_logged_in()) || ($category_access === 'moderator' && !$this->is_moderator()))) {
+                if (!empty($category_access) && (($category_access === 'loggedin' && !is_user_logged_in()) || ($category_access === 'moderator' && !AsgarosForumPermissions::isModerator('current')))) {
                     $access = false;
                 }
             }
@@ -388,7 +388,7 @@ class AsgarosForum {
     }
 
     function movethread() {
-        if ($this->is_moderator() && $this->access) {
+        if (AsgarosForumPermissions::isModerator('current') && $this->access) {
             $strOUT = '<form method="post" action="'.$this->url_movethread.'&amp;move_thread">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
@@ -474,7 +474,7 @@ class AsgarosForum {
             $category->category_access = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
 
             // Remove categories from array where the user has no access.
-            if (($category->category_access === 'loggedin' && !is_user_logged_in()) || ($category->category_access === 'moderator' && !$this->is_moderator())) {
+            if (($category->category_access === 'loggedin' && !is_user_logged_in()) || ($category->category_access === 'moderator' && !AsgarosForumPermissions::isModerator('current'))) {
                 unset($categories[$key]);
             }
         }
@@ -561,7 +561,7 @@ class AsgarosForum {
             if ($this->options['highlight_admin'] && !$widget) {
                 if (user_can($user_id, 'manage_options')) {
                     $username = '<span class="highlight-admin">'.$username.'</span>';
-                } else if (get_user_meta($user_id, 'asgarosforum_moderator', true) == 1) {
+                } else if (AsgarosForumPermissions::isModerator($user_id)) {
                     $username = '<span class="highlight-moderator">'.$username.'</span>';
                 }
             }
@@ -614,15 +614,15 @@ class AsgarosForum {
 
         $o = '';
 
-        if ($user_ID && (!$this->get_status('closed') || $this->is_moderator()) && !$this->is_banned()) {
+        if ($user_ID && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current')) {
             $o .= '<a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
 
-        if (($counter > 1 || $this->current_page >= 1) && $this->is_moderator()) {
+        if (($counter > 1 || $this->current_page >= 1) && AsgarosForumPermissions::isModerator('current')) {
             $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
         }
 
-        if (($this->is_moderator() || $user_ID == $author_id) && !$this->is_banned()) {
+        if ((AsgarosForumPermissions::isModerator('current') || $user_ID == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
             $o .= '<a href="'.$this->url_editor_edit.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
         }
 
@@ -649,62 +649,19 @@ class AsgarosForum {
         return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$location} WHERE {$where} = %d;", $id));
     }
 
-    function is_moderator() {
-        global $user_ID;
-
-        if ($user_ID) {
-            // Always true for administrators
-            if (is_super_admin($user_ID)) {
-                return true;
-            }
-
-            // Always false for banned users
-            if (get_user_meta($user_ID, 'asgarosforum_banned', true) == 1) {
-                return false;
-            }
-
-            // And true for moderators of course ...
-            if (get_user_meta($user_ID, 'asgarosforum_moderator', true) == 1) {
-                return true;
-            }
-        }
-
-        // Otherwise false ...
-        return false;
-    }
-
-    function is_banned() {
-        global $user_ID;
-
-        if ($user_ID) {
-            // Always false for administrators
-            if (is_super_admin($user_ID)) {
-                return false;
-            }
-
-            // And true for banned users of course. Moderators can be banned too in this case.
-            if (get_user_meta($user_ID, 'asgarosforum_banned', true) == 1) {
-                return true;
-            }
-        }
-
-        // Otherwise false ...
-        return false;
-    }
-
     function forum_menu($location, $showallbuttons = true) {
         global $user_ID;
         $menu = '';
 
         if ($user_ID) {
-            if ($location == 'forum' && !$this->is_banned() && $this->get_forum_status()) {
+            if ($location == 'forum' && !AsgarosForumPermissions::isBanned('current') && $this->get_forum_status()) {
                 $menu .= '<a href="'.$this->url_editor_thread.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
             } else if ($location == 'thread') {
-                if ((!$this->get_status('closed') || $this->is_moderator()) && !$this->is_banned()) {
+                if (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current'))) {
                     $menu .= '<a href="'.$this->url_editor_post.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
                 }
 
-                if ($this->is_moderator() && $showallbuttons) {
+                if (AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
                     $menu .= '<a href="'.$this->url_movethread.'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
                     $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
@@ -833,7 +790,7 @@ class AsgarosForum {
     function delete_thread($thread_id, $admin_action = false) {
         global $wpdb;
 
-        if ($this->is_moderator()) {
+        if (AsgarosForumPermissions::isModerator('current')) {
             if ($thread_id) {
                 // Delete uploads
                 $posts = $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
@@ -856,7 +813,7 @@ class AsgarosForum {
         global $wpdb;
         $newForumID = $_POST['newForumID'];
 
-        if ($this->is_moderator() && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
+        if (AsgarosForumPermissions::isModerator('current') && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
             $wpdb->update($this->table_threads, array('parent_id' => $newForumID), array('id' => $this->current_thread), array('%d'), array('%d'));
             wp_redirect(html_entity_decode($this->url_thread . $this->current_thread));
             exit;
@@ -867,7 +824,7 @@ class AsgarosForum {
         global $wpdb;
         $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? $_GET['post'] : 0;
 
-        if ($this->is_moderator() && $this->element_exists($post_id, $this->table_posts)) {
+        if (AsgarosForumPermissions::isModerator('current') && $this->element_exists($post_id, $this->table_posts)) {
             $wpdb->delete($this->table_posts, array('id' => $post_id), array('%d'));
             $this->remove_post_files($post_id);
         }
@@ -912,7 +869,7 @@ class AsgarosForum {
         global $wpdb;
         $new_status = '';
 
-        if ($this->is_moderator()) {
+        if (AsgarosForumPermissions::isModerator('current')) {
             if ($property == 'sticky') {
                 $new_status .= ($this->get_status('sticky')) ? 'normal_' : 'sticky_';
                 $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
@@ -948,7 +905,7 @@ class AsgarosForum {
 
     // Returns TRUE if the forum is opened or the user has at least moderator rights.
     function get_forum_status() {
-        if (!$this->is_moderator()) {
+        if (!AsgarosForumPermissions::isModerator('current')) {
             global $wpdb;
             $closed = intval($wpdb->get_var($wpdb->prepare("SELECT closed FROM {$this->table_forums} WHERE id = %d;", $this->current_forum)));
 

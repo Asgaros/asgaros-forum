@@ -30,7 +30,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $categories_list = array();
         $where = '';
 
-        if (!$asgarosforum->is_moderator()) {
+        if (!AsgarosForumPermissions::isModerator('current')) {
             $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'moderator');
             $categories_list = array_merge($categories_list, $categories);
         }

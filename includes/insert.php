@@ -9,7 +9,7 @@ $content = trim($_POST['message']);
 $redirect = '';
 
 // Cancel if user is banned ...
-if (empty($this->error) && $this->is_banned()) {
+if (empty($this->error) && AsgarosForumPermissions::isBanned('current')) {
     $this->error .= '<span>'.__('You are banned!', 'asgaros-forum').'</span>';
 }
 
@@ -18,7 +18,7 @@ if (isset($_POST['edit_post_submit'])) {
         $this->error .= '<span>'.__('Sorry, this post does not exist.', 'asgaros-forum').'</span>';
     }
 
-    if (empty($this->error) && $user_ID != $this->get_post_author($post_id) && !$this->is_moderator()) {
+    if (empty($this->error) && $user_ID != $this->get_post_author($post_id) && !AsgarosForumPermissions::isModerator('current')) {
         $this->error .= '<span>'.__('You are not allowed to do this.', 'asgaros-forum').'</span>';
     }
 }
