@@ -49,7 +49,7 @@ class AsgarosForumPermissions {
         }
     }
 
-    function isBanned($userid = false) {
+    public static function isBanned($userid = false) {
         if ($userid) {
             if ($userid === 'current') {
                 // Return for current user
