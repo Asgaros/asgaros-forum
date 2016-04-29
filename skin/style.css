@@ -239,6 +239,8 @@
 }
 #af-wrapper .breadcrumbs a {
     color: #444;
+    background: none; /* comp */
+    padding: inherit; /* comp */
 }
 #af-wrapper .breadcrumbs a:hover {
     color: #2D89CC;
@@ -246,6 +248,8 @@
 }
 #af-wrapper .breadcrumbs .sep {
     margin: 0 3px;
+    background: none; /* comp */
+    padding: inherit; /* comp */
 }
 
 /* CONTENT WRAPPERS*/
