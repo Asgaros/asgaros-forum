@@ -36,6 +36,7 @@ add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
 require('includes/forum-database.php');
 require('includes/forum-permissions.php');
+require('includes/forum-notifications.php');
 require('includes/forum.php');
 require('includes/forum-widgets.php');
 require('includes/forum-thememanager.php');
@@ -44,6 +45,7 @@ require('admin/admin.php');
 
 AsgarosForumDatabase::getInstance();
 AsgarosForumPermissions::getInstance();
+AsgarosForumNotifications::getInstance();
 AsgarosForumUploads::getInstance();
 
 global $asgarosforum;
