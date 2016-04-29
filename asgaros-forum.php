@@ -34,11 +34,11 @@ function asgarosforum_load_plugin_textdomain() {
 }
 add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
-require('includes/database.php');
-require('includes/af-permissions.php');
+require('includes/forum-database.php');
+require('includes/forum-permissions.php');
 require('includes/forum.php');
 require('includes/forum-widgets.php');
-require('includes/thememanager.php');
+require('includes/forum-thememanager.php');
 require('admin/admin.php');
 
 AsgarosForumDatabase::getInstance();
