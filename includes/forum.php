@@ -188,6 +188,10 @@ class AsgarosForum {
             $this->change_status('sticky');
         } else if (isset($_GET['closed'])) {
             $this->change_status('closed');
+        } else if (isset($_GET['subscribe_topic'])) {
+            AsgarosForumNotifications::subscribeTopic();
+        } else if (isset($_GET['unsubscribe_topic'])) {
+            AsgarosForumNotifications::unsubscribeTopic();
         }
 
         $this->check_access();
