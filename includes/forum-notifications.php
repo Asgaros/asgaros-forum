@@ -43,9 +43,9 @@ class AsgarosForumNotifications {
     // Checks if the current user has a subscription for the current topic
     public static function isSubscribed($topic_id) {
         $user_id = get_current_user_id();
-        $status = get_user_meta($user_id, 'asgarosforum_subscription_topic_'.$topic_id, true);
+        $status = get_user_meta($user_id, 'asgarosforum_subscription_topic');
 
-        if (!empty($status)) {
+        if (in_array($topic_id, $status)) {
             return true;
         } else {
             return false;
@@ -58,7 +58,10 @@ class AsgarosForumNotifications {
         $user_id = get_current_user_id();
         $topic_id = $asgarosforum->current_thread;
 
-        add_user_meta($user_id, 'asgarosforum_subscription_topic_'.$topic_id, true, true);
+        // Only subscribe user if he is not already subscribed for this topic.
+        if (!self::isSubscribed($topic_id)) {
+            add_user_meta($user_id, 'asgarosforum_subscription_topic', $topic_id);
+        }
     }
 
     // Unsubscribes the current user from the current topic
@@ -67,7 +70,8 @@ class AsgarosForumNotifications {
         $user_id = get_current_user_id();
         $topic_id = $asgarosforum->current_thread;
 
-        delete_user_meta($user_id, 'asgarosforum_subscription_topic_'.$topic_id);
+        delete_user_meta($user_id, 'asgarosforum_subscription_topic', $topic_id);
+    }
     }
 }
 
