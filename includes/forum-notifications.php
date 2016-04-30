@@ -72,6 +72,11 @@ class AsgarosForumNotifications {
 
         delete_user_meta($user_id, 'asgarosforum_subscription_topic', $topic_id);
     }
+
+    // Removes all subscriptions for a topic. This is used when a topic gets deleted.
+    public static function removeTopicSubscriptions($topic_id) {
+        delete_metadata('user', 0, 'asgarosforum_subscription_topic', $topic_id, true);
+    }
     }
 }
 

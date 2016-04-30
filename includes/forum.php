@@ -797,6 +797,7 @@ class AsgarosForum {
 
                 $wpdb->delete($this->table_posts, array('parent_id' => $thread_id), array('%d'));
                 $wpdb->delete($this->table_threads, array('id' => $thread_id), array('%d'));
+                AsgarosForumNotifications::removeTopicSubscriptions($thread_id);
 
                 if (!$admin_action) {
                     wp_redirect(html_entity_decode($this->url_forum . $this->current_forum));
