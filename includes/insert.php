@@ -60,6 +60,9 @@ if (empty($this->error)) {
             $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
         }
 
+        // Send notification about new post to subscribers
+        AsgarosForumNotifications::notifyTopicSubscribers();
+
         do_action('asgarosforum_after_post_submit', $post_id);
 
         $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));

@@ -17,6 +17,7 @@ class AsgarosForumNotifications {
     // AsgarosForumNotifications constructor
 	private function __construct() {}
 
+    // Generates an (un)subscription link based on subscription status.
     public static function showSubscriptionLink() {
         global $asgarosforum;
 
@@ -40,7 +41,7 @@ class AsgarosForumNotifications {
         }
     }
 
-    // Checks if the current user has a subscription for the current topic
+    // Checks if the current user has a subscription for the current topic.
     public static function isSubscribed($topic_id) {
         $user_id = get_current_user_id();
         $status = get_user_meta($user_id, 'asgarosforum_subscription_topic');
@@ -52,7 +53,7 @@ class AsgarosForumNotifications {
         }
     }
 
-    // Subscribes the current user to the current topic
+    // Subscribes the current user to the current topic.
     public static function subscribeTopic() {
         global $asgarosforum;
         $user_id = get_current_user_id();
@@ -64,7 +65,7 @@ class AsgarosForumNotifications {
         }
     }
 
-    // Unsubscribes the current user from the current topic
+    // Unsubscribes the current user from the current topic.
     public static function unsubscribeTopic() {
         global $asgarosforum;
         $user_id = get_current_user_id();
@@ -77,6 +78,29 @@ class AsgarosForumNotifications {
     public static function removeTopicSubscriptions($topic_id) {
         delete_metadata('user', 0, 'asgarosforum_subscription_topic', $topic_id, true);
     }
+
+    // Notify all users which are subscribed to a topic.
+    public static function notifyTopicSubscribers() {
+        global $asgarosforum;
+        return;
+
+        // Check if this functionality is enabled
+        if ($asgarosforum->options['allow_subscriptions']) {
+            $topic_subscribers = get_users(
+                array(
+                    'meta_key'      => 'asgarosforum_subscription_topic',
+                    'meta_value'    => $asgarosforum->current_thread,
+                    'fields'        => array('user_email')
+                )
+            );
+
+            __('New answer: PLACEHOLDER', 'asgaros-forum');
+            __('In', 'asgaros-forum');
+            __('Link:', 'asgaros-forum');
+            __('Unsubscribe from this topic:', 'asgaros-forum');
+            print_r($topic_subscribers);
+            die();
+        }
     }
 }
 
