@@ -82,7 +82,6 @@ class AsgarosForumNotifications {
     // Notify all users which are subscribed to a topic.
     public static function notifyTopicSubscribers() {
         global $asgarosforum;
-        return;
 
         // Check if this functionality is enabled
         if ($asgarosforum->options['allow_subscriptions']) {
@@ -94,11 +93,23 @@ class AsgarosForumNotifications {
                 )
             );
 
-            __('New answer: PLACEHOLDER', 'asgaros-forum');
+            $notification_to = array();
+
+            foreach($topic_subscribers as $subscriber) {
+                array_push($notification_to, $subscriber->user_email);
+            }
+
+            $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
+
+            $notification_subject = __('New answer: '.$thread_name, 'asgaros-forum');
+            $notification_message = __("Hello,\r\n\r\nthere is a new answer in the following forum-topic:\r\n")
+            print_r($notification_subject);
+
+            /*__('New answer: PLACEHOLDER', 'asgaros-forum');
             __('In', 'asgaros-forum');
             __('Link:', 'asgaros-forum');
             __('Unsubscribe from this topic:', 'asgaros-forum');
-            print_r($topic_subscribers);
+            print_r($topic_subscribers);*/
             die();
         }
     }
