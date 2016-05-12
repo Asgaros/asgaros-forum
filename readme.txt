@@ -19,6 +19,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 = Features =
 * Topic & post management
 * Sub-forums
+* Subscriptions
 * Moderators
 * Permissions
 * Banning
@@ -81,6 +82,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: PHP parse-error when using a PHP version less than 5.3
 * Fixed: Display issues with some themes
+* Added: Subscriber functionality
 * Performance improvements and code optimizations
 = 1.1.1 =
 * Fixed: PHP-Warning in theme-manager

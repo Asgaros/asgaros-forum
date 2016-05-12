@@ -60,12 +60,12 @@ if (empty($this->error)) {
             $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
         }
 
+        $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
+
         // Send notification about new post to subscribers
-        AsgarosForumNotifications::notifyTopicSubscribers();
+        AsgarosForumNotifications::notifyTopicSubscribers($content, $redirect);
 
         do_action('asgarosforum_after_post_submit', $post_id);
-
-        $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
     } else if (isset($_POST['edit_post_submit'])) {
         $uploads = maybe_serialize(AsgarosForumUploads::uploadFiles($post_id));
         $date = $this->current_time();

@@ -80,11 +80,17 @@ class AsgarosForumNotifications {
     }
 
     // Notify all users which are subscribed to a topic.
-    public static function notifyTopicSubscribers() {
+    public static function notifyTopicSubscribers($answer_text, $answer_link) {
         global $asgarosforum;
 
         // Check if this functionality is enabled
         if ($asgarosforum->options['allow_subscriptions']) {
+            $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
+
+            $notification_subject = __('New answer: '.$thread_name, 'asgaros-forum');
+            $notification_message = sprintf(__("Hello,\r\n\r\nyou get this mail because there is a new answer in a forum-topic you have subscribed to:\r\n%s\r\n\r\nAnswer:\r\n%s\r\n\r\nLink to the new answer:\r\n%s\r\n\r\nYou can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!"), $thread_name, $answer_text, $answer_link);
+
+            // Get subscribed users
             $topic_subscribers = get_users(
                 array(
                     'meta_key'      => 'asgarosforum_subscription_topic',
@@ -93,24 +99,9 @@ class AsgarosForumNotifications {
                 )
             );
 
-            $notification_to = array();
-
             foreach($topic_subscribers as $subscriber) {
-                array_push($notification_to, $subscriber->user_email);
+                wp_mail($subscriber->user_email, $notification_subject, $notification_message);
             }
-
-            $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
-
-            $notification_subject = __('New answer: '.$thread_name, 'asgaros-forum');
-            $notification_message = __("Hello,\r\n\r\nthere is a new answer in the following forum-topic:\r\n")
-            print_r($notification_subject);
-
-            /*__('New answer: PLACEHOLDER', 'asgaros-forum');
-            __('In', 'asgaros-forum');
-            __('Link:', 'asgaros-forum');
-            __('Unsubscribe from this topic:', 'asgaros-forum');
-            print_r($topic_subscribers);*/
-            die();
         }
     }
 }
