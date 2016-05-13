@@ -95,7 +95,8 @@ class AsgarosForumNotifications {
                 array(
                     'meta_key'      => 'asgarosforum_subscription_topic',
                     'meta_value'    => $asgarosforum->current_thread,
-                    'fields'        => array('user_email')
+                    'fields'        => array('user_email'),
+                    'exclude'       => array(get_current_user_id())
                 )
             );
 
