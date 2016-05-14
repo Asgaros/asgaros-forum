@@ -87,7 +87,7 @@ class AsgarosForumNotifications {
         if ($asgarosforum->options['allow_subscriptions']) {
             $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
 
-            $notification_subject = __('New answer: '.$thread_name, 'asgaros-forum');
+            $notification_subject = '['.get_bloginfo('name').'] '.__('New answer: '.$thread_name, 'asgaros-forum');
             $notification_message = sprintf(__("Hello,\r\n\r\nyou get this mail because there is a new answer in a forum-topic you have subscribed to:\r\n%s\r\n\r\nAnswer:\r\n%s\r\n\r\nLink to the new answer:\r\n%s\r\n\r\nYou can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!"), $thread_name, $answer_text, $answer_link);
 
             // Get subscribed users
