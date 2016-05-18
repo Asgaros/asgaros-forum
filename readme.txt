@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forums, discussion
 Requires at least: 4.3
 Tested up to: 4.5
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,9 +80,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.1.2 =
 * Fixed: PHP parse-error when using a PHP version less than 5.3
 * Fixed: Display issues with some themes
-* Added: Subscriber functionality
+* Added: Notifications functionality
 * Performance improvements and code optimizations
 = 1.1.1 =
 * Fixed: PHP-Warning in theme-manager
