@@ -88,7 +88,7 @@ class AsgarosForumNotifications {
             $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
 
             $notification_subject = sprintf(__('[%s] New answer: %s', 'asgaros-forum'), get_bloginfo('name'), $thread_name);
-            $notification_message = sprintf(__("Hello,\r\n\r\nyou get this mail because there is a new answer in a forum-topic you have subscribed to:\r\n%s\r\n\r\nAnswer:\r\n%s\r\n\r\nLink to the new answer:\r\n%s\r\n\r\nYou can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!"), $thread_name, $answer_text, $answer_link);
+            $notification_message = sprintf(__("Hello,\r\n\r\nyou got this mail because there is a new answer in a forum-topic you have subscribed to:\r\n%s\r\n\r\nAnswer:\r\n%s\r\n\r\nLink to the new answer:\r\n%s\r\n\r\nYou can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!"), $thread_name, $answer_text, $answer_link);
 
             // Get subscribed users
             $topic_subscribers = get_users(
@@ -103,6 +103,18 @@ class AsgarosForumNotifications {
             foreach($topic_subscribers as $subscriber) {
                 wp_mail($subscriber->user_email, $notification_subject, $notification_message);
             }
+        }
+    }
+
+    public static function notifyAdministrator($topic_name, $topic_text, $topic_link) {
+        global $asgarosforum;
+
+        // Check if this functionality is enabled
+        if ($asgarosforum->options['admin_subscriptions']) {
+            $notification_subject = sprintf(__('[%s] New topic: %s', 'asgaros-forum'), get_bloginfo('name'), $topic_name);
+            $notification_message = sprintf(__("Hello,\r\n\r\nyou got this mail because there is a new forum-topic:\r\n%s\r\n\r\nText:\r\n%s\r\n\r\nLink to the new topic:\r\n%s"), $topic_name, $topic_text, $topic_link);
+
+            wp_mail(get_bloginfo('admin_email'), $notification_subject, $notification_message);
         }
     }
 }

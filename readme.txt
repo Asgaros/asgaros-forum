@@ -19,7 +19,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 = Features =
 * Topic & post management
 * Sub-forums
-* Subscriptions
+* Notifications
 * Moderators
 * Permissions
 * Banning

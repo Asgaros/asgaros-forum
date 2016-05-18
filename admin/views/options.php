@@ -32,6 +32,11 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?>>
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>
+        <h3><?php _e('Notifications', 'asgaros-forum'); ?></h3>
+        <p>
+            <input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>>
+            <label for="admin_subscriptions"><?php _e('Notify administrator about new topics', 'asgaros-forum'); ?></label>
+        </p>
         <p>
             <input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>>
             <label for="allow_subscriptions"><?php _e('Allow thread-subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>

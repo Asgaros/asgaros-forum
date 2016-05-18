@@ -46,9 +46,12 @@ if (empty($this->error)) {
             $wpdb->update($this->table_posts, array('uploads' => $uploads), array('id' => $post_id), array('%s'), array('%d'));
         }
 
-        do_action('asgarosforum_after_thread_submit', $post_id);
-
         $redirect = html_entity_decode($this->get_link($thread_id, $this->url_thread).'#postid-'.$post_id);
+
+        // Send notification about new topic to administrator
+        AsgarosForumNotifications::notifyAdministrator($subject, $content, $redirect);
+
+        do_action('asgarosforum_after_thread_submit', $post_id);
     } else if (isset($_POST['add_post_submit'])) {
         $date = $this->current_time();
         $wpdb->insert($this->table_posts, array('text' => $content, 'parent_id' => $this->current_thread, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));

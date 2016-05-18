@@ -30,6 +30,7 @@ class AsgarosForum {
         'threads_per_page'          => 20,
         'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'        => false,
+        'admin_subscriptions'       => false,
         'allow_subscriptions'       => true,
         'highlight_admin'           => true,
         'show_edit_date'            => true,
