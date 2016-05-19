@@ -28,6 +28,7 @@ class AsgarosForum {
     var $options_default = array(
         'posts_per_page'            => 10,
         'threads_per_page'          => 20,
+        'minimalistic_editor'       => true,
         'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'        => false,
         'admin_subscriptions'       => false,
@@ -51,6 +52,7 @@ class AsgarosForum {
     function __construct($directory) {
         $this->directory = $directory;
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
+        $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
         $this->date_format = get_option('date_format').', '.get_option('time_format');
         $this->table_forums = AsgarosForumDatabase::getTable('forums');
         $this->table_threads = AsgarosForumDatabase::getTable('threads');

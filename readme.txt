@@ -80,6 +80,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to disable the minimal-configuration of the editor
 = 1.1.2 =
 * Fixed: PHP parse-error when using a PHP version less than 5.3
 * Fixed: Display issues with some themes
