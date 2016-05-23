@@ -38,7 +38,7 @@ if (!is_user_logged_in()) {
                         echo '<br />';
                     }
                     ?>
-                    <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->get_username($post->author_id, true), $post->author_id); ?></strong><br />
+                    <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->get_username($post->author_id), $post->author_id); ?></strong><br />
                     <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$post->author_posts; ?></small>
                     <?php
                     if (AsgarosForumPermissions::isBanned($post->author_id)) {

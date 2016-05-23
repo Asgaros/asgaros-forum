@@ -324,6 +324,7 @@
     width: 125px;
     padding: 7px;
     background-color: rgba(0, 0, 0, 0.05);
+    word-wrap: break-word;
 }
 #af-wrapper .post-message {
     display: table-cell;

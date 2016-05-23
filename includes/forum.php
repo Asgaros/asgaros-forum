@@ -552,17 +552,17 @@ class AsgarosForum {
         return $string;
     }
 
-    function get_username($user_id, $wrap = false, $widget = false) {
+    function get_username($user_id, $widget = false) {
         $user = get_userdata($user_id);
 
         if ($user) {
-            $username = ($wrap) ? wordwrap($user->display_name, 22, "-<br/>", true) : $user->display_name;
+            $username = '';
 
             if ($this->options['highlight_admin'] && !$widget) {
                 if (user_can($user_id, 'manage_options')) {
-                    $username = '<span class="highlight-admin">'.$username.'</span>';
+                    $username = '<span class="highlight-admin">'.$user->display_name.'</span>';
                 } else if (AsgarosForumPermissions::isModerator($user_id)) {
-                    $username = '<span class="highlight-moderator">'.$username.'</span>';
+                    $username = '<span class="highlight-moderator">'.$user->display_name.'</span>';
                 }
             }
 
