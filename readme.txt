@@ -80,6 +80,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Correct sanitizing of URL parameters 
 * Fixed: Removed unnecessary hyphen from username
 * Added: Option to disable the minimal-configuration of the editor
 = 1.1.2 =

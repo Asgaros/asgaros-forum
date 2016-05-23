@@ -37,7 +37,7 @@ if (!$error) {
 
         if (!$error) {
             if (!isset($_POST['message']) && isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->table_posts)) {
-                $quote_id = $_GET['quote'];
+                $quote_id = esc_html($_GET['quote']);
                 $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d;", $quote_id));
                 $display_name = $this->get_username($text->author_id);
                 $threadcontent = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($text->date)).'</div>'.$text->text.'</blockquote><br />';
@@ -50,7 +50,7 @@ if (!$error) {
         }
 
         if (!$error) {
-            $id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : 0;
+            $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? (int)$_GET['id'] : 0;
             $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));
 
             if (($user_ID != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {

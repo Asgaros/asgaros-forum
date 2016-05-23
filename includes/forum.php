@@ -115,17 +115,17 @@ class AsgarosForum {
         global $user_ID;
 
         if (isset($_GET['view'])) {
-            $this->current_view = $_GET['view'];
+            $this->current_view = esc_html($_GET['view']);
         }
 
-        if (isset($_GET['part']) && $_GET['part'] > 0) {
-            $this->current_page = ($_GET['part'] - 1);
+        if (isset($_GET['part']) && is_numeric($_GET['part']) && $_GET['part'] > 0) {
+            $this->current_page = (esc_html($_GET['part']) - 1);
         }
 
         switch ($this->current_view) {
             case 'forum':
             case 'addthread':
-                $forum_id = $_GET['id'];
+                $forum_id = esc_html($_GET['id']);
                 if ($this->element_exists($forum_id, $this->table_forums)) {
                     $this->current_forum = $forum_id;
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
@@ -135,7 +135,7 @@ class AsgarosForum {
             case 'movethread':
             case 'thread':
             case 'addpost':
-                $thread_id = $_GET['id'];
+                $thread_id = esc_html($_GET['id']);
                 if ($this->element_exists($thread_id, $this->table_threads)) {
                     $this->current_thread = $thread_id;
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
@@ -144,7 +144,7 @@ class AsgarosForum {
                 }
                 break;
             case 'editpost':
-                $post_id = $_GET['id'];
+                $post_id = esc_html($_GET['id']);
                 if ($this->element_exists($post_id, $this->table_posts)) {
                     $this->current_thread = $this->get_parent_id($post_id, $this->table_posts);
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
@@ -411,7 +411,7 @@ class AsgarosForum {
     function element_exists($id, $location) {
         global $wpdb;
 
-        if (!empty($id) && $wpdb->get_row($wpdb->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
+        if (!empty($id) && is_numeric($id) && $wpdb->get_row($wpdb->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
             return true;
         } else {
             return false;
@@ -823,7 +823,7 @@ class AsgarosForum {
 
     function remove_post() {
         global $wpdb;
-        $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? $_GET['post'] : 0;
+        $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? esc_html($_GET['post']) : 0;
 
         if (AsgarosForumPermissions::isModerator('current') && $this->element_exists($post_id, $this->table_posts)) {
             $wpdb->delete($this->table_posts, array('id' => $post_id), array('%d'));
