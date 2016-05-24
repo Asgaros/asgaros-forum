@@ -70,6 +70,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_post_username
 * asgarosforum_filter_post_content
 * asgarosforum_filter_editor_settings
+* asgarosforum_filter_get_posts
+* asgarosforum_filter_get_threads
+* asgarosforum_filter_get_posts_order
+* asgarosforum_filter_get_threads_order
 
 == Screenshots ==
 1. The forum overview.
@@ -81,6 +85,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: The notification-text in mails is now translatable
+* Added: asgarosforum_filter_get_posts filter
+* Added: asgarosforum_filter_get_posts_order filter
 = 1.1.4 =
 * Fixed: The names of some users were not shown correctly
 = 1.1.3 =
