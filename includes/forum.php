@@ -556,13 +556,13 @@ class AsgarosForum {
         $user = get_userdata($user_id);
 
         if ($user) {
-            $username = '';
+            $username = $user->display_name;
 
             if ($this->options['highlight_admin'] && !$widget) {
                 if (user_can($user_id, 'manage_options')) {
-                    $username = '<span class="highlight-admin">'.$user->display_name.'</span>';
+                    $username = '<span class="highlight-admin">'.$username.'</span>';
                 } else if (AsgarosForumPermissions::isModerator($user_id)) {
-                    $username = '<span class="highlight-moderator">'.$user->display_name.'</span>';
+                    $username = '<span class="highlight-moderator">'.$username.'</span>';
                 }
             }
 
