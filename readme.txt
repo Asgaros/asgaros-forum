@@ -80,6 +80,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: The notification-text in mails is now translatable
 = 1.1.4 =
 * Fixed: The names of some users were not shown correctly
 = 1.1.3 =
