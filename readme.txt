@@ -81,7 +81,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 = 1.1.4 =
-* Fixed: The name of some users were not shown correctly
+* Fixed: The names of some users were not shown correctly
 = 1.1.3 =
 * Fixed: Correct sanitizing of URL parameters
 * Fixed: Removed unnecessary hyphen from username
