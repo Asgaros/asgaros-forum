@@ -39,13 +39,18 @@ if (!is_user_logged_in()) {
                     }
                     ?>
                     <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->get_username($post->author_id), $post->author_id); ?></strong><br />
-                    <small><?php echo __('Posts:', 'asgaros-forum').'&nbsp;'.$post->author_posts; ?></small>
                     <?php
+                    // Only show post-counter for existent users.
+                    if (get_userdata($post->author_id) != false) {
+                        echo '<small>'.__('Posts:', 'asgaros-forum').'&nbsp;'.$post->author_posts.'</small>';
+                    }
+
                     if (AsgarosForumPermissions::isBanned($post->author_id)) {
                         echo '<br /><small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
                     }
+
+                    do_action('asgarosforum_after_post_author', $post->author_id);
                     ?>
-                    <?php do_action('asgarosforum_after_post_author', $post->author_id); ?>
                 </div>
                 <div class="post-message">
                     <?php
