@@ -167,14 +167,22 @@ class asgarosforum_admin {
 
         if ($submenu_file === 'edit-tags.php?taxonomy=asgarosforum-category&orderby=order&order=asc') {
             if (!empty($_GET['orderby']) && $_GET['orderby'] === 'order') {
-                foreach ($categories as $key => $category) {
-                    $category->order = get_term_meta($category->term_id, 'order', true);
+                $skipOrder = false;
+
+                foreach ($categories as $category) {
+                    if (isset($category->taxonomy) && $category->taxonomy === 'asgarosforum-category') {
+                        $category->order = get_term_meta($category->term_id, 'order', true);
+                    } else {
+                        $skipOrder = true;
+                    }
                 }
 
-                usort($categories, array($asgarosforum, 'categories_compare'));
+                if (!$skipOrder) {
+                    usort($categories, array($asgarosforum, 'categories_compare'));
 
-                if (!empty($_GET['order']) && $_GET['order'] === 'desc') {
-                    $categories = array_reverse($categories);
+                    if (!empty($_GET['order']) && $_GET['order'] === 'desc') {
+                        $categories = array_reverse($categories);
+                    }
                 }
             }
         }

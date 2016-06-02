@@ -85,6 +85,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: The notification-text in mails is now translatable
+* Fixed: Rare PHP-notice in categories-configuration
 * Added: asgarosforum_filter_get_posts filter
 * Added: asgarosforum_filter_get_posts_order filter
 = 1.1.4 =
