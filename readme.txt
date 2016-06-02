@@ -60,6 +60,7 @@ You can approve translations by yourself if you are a Project Translation Editor
 You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have at least those files: `style.css`, `mobile.css` and `widgets.css`.
 = Which hooks are available =
 * asgarosforum_after_post_author
+* asgarosforum_after_post_message
 * asgarosforum_after_thread_submit
 * asgarosforum_after_post_submit
 * asgarosforum_after_edit_submit
