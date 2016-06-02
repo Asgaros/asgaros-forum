@@ -38,7 +38,7 @@ function recursiveDelete($str) {
     } else if (is_dir($str)) {
         $scan = glob(rtrim($str, '/').'/*');
 
-        foreach($scan as $index => $path) {
+        foreach($scan as $path) {
             recursiveDelete($path);
         }
 

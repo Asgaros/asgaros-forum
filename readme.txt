@@ -91,6 +91,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_after_post_message hook
 * Added: asgarosforum_filter_get_posts filter
 * Added: asgarosforum_filter_get_posts_order filter
+* Performance improvements and code optimizations
 = 1.1.4 =
 * Fixed: The names of some users were not shown correctly
 = 1.1.3 =

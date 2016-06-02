@@ -42,7 +42,7 @@ if (!is_user_logged_in()) {
                     <?php
                     // Only show post-counter for existent users.
                     if (get_userdata($post->author_id) != false) {
-                        echo '<small>'.__('Posts:', 'asgaros-forum').'&nbsp;'.$post->author_posts.'</small>';
+                        echo '<small>'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $post->author_posts).'</small>';
                     }
 
                     if (AsgarosForumPermissions::isBanned($post->author_id)) {
