@@ -27,6 +27,7 @@
     margin-bottom: 20px !important;
     visibility: inherit; /* comp */
     height: inherit; /* comp */
+    padding: 0; /* comp */
 }
 #af-wrapper .clear {
     clear: both;
