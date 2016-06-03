@@ -35,6 +35,8 @@ class AsgarosForumThemeManager {
 			// If the selected theme is not there, use the default.
 			self::$current_theme = self::AF_DEFAULT_THEME;
 		}
+
+		add_action('wp_head', array($this, 'setHeader'));
 	}
 
 	// Find what themes we have available
@@ -94,6 +96,29 @@ class AsgarosForumThemeManager {
 	// Check if current theme is the default theme
 	public static function is_default_theme() {
 		return (self::get_current_theme() === self::AF_DEFAULT_THEME) ? true : false;
+	}
+
+	public static function setHeader() {
+		global $asgarosforum;
+		$themeurl = self::get_current_theme_url();
+
+        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css" />';
+
+        if (!$asgarosforum->execute_plugin()) {
+            return;
+        }
+
+        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css" />';
+
+        if (self::is_default_theme()) {
+            if (($asgarosforum->options['custom_color'] !== $asgarosforum->options_default['custom_color']) || ($asgarosforum->options['custom_text_color'] !== $asgarosforum->options_default['custom_text_color']) || ($asgarosforum->options['custom_background_color'] !== $asgarosforum->options_default['custom_background_color'])) {
+                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr($asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr($asgarosforum->options['custom_background_color'], 1).'" />';
+            }
+        }
+
+        if (wp_is_mobile()) {
+            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css" />';
+        }
 	}
 }
 

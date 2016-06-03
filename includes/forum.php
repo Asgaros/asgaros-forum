@@ -61,7 +61,6 @@ class AsgarosForum {
         add_action('init', array($this, 'register_category_taxonomy'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
-        add_action('wp_head', array($this, 'setup_header'));
         add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
         add_filter('document_title_parts', array($this, 'change_document_title_parts'));
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
@@ -225,27 +224,6 @@ class AsgarosForum {
         wp_enqueue_style('dashicons');
     }
 
-    function setup_header() {
-        $themeurl = AsgarosForumThemeManager::get_current_theme_url();
-        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css" />';
-
-        if (!$this->execute_plugin()) {
-            return;
-        }
-
-        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css" />';
-
-        if (AsgarosForumThemeManager::is_default_theme()) {
-            if (($this->options['custom_color'] !== $this->options_default['custom_color']) || ($this->options['custom_text_color'] !== $this->options_default['custom_text_color']) || ($this->options['custom_background_color'] !== $this->options_default['custom_background_color'])) {
-                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($this->options['custom_color'], 1).'&amp;text-color='.substr($this->options['custom_text_color'], 1).'&amp;background-color='.substr($this->options['custom_background_color'], 1).'" />';
-            }
-        }
-
-        if (wp_is_mobile()) {
-            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css" />';
-        }
-    }
-
     function change_wp_title($title, $sep, $seplocation) {
         if (!$this->execute_plugin()) {
             return $title;
@@ -362,6 +340,8 @@ class AsgarosForum {
             $counter_normal = count($threads);
             $counter_total = $counter_normal + count($sticky_threads);
 
+            $this->showLoginMessage();
+
             require('views/forum.php');
         } else {
             echo '<div class="notice">'.__('Sorry, this forum does not exist.', 'asgaros-forum').'</div>';
@@ -378,12 +358,20 @@ class AsgarosForum {
 
                 $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
 
+                $this->showLoginMessage();
+
                 require('views/thread.php');
             } else {
                 echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
             }
         } else {
             echo '<div class="notice">'.__('Sorry, this thread does not exist.', 'asgaros-forum').'</div>';
+        }
+    }
+
+    function showLoginMessage() {
+        if (!is_user_logged_in()) {
+            echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
         }
     }
 
