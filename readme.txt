@@ -85,6 +85,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Correct filtering of posts inside the widget
 * Fixed: Hide post-counter for deleted users
 * Fixed: The notification-text in mails is now translatable
 * Fixed: Rare PHP-notice in categories-configuration

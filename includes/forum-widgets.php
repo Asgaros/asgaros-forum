@@ -27,8 +27,12 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $target = (!empty($instance['target'])) ? $instance['target'] : '';
 
         // Get categories which should be included.
+        $filter = array();
         $categories_list = array();
         $where = '';
+
+        $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
+        $categories_list = array_merge($categories_list, $filter);
 
         if (!AsgarosForumPermissions::isModerator('current')) {
             $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'moderator');
