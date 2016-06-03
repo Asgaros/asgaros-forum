@@ -90,6 +90,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: The notification-text in mails is now translatable
 * Fixed: Rare PHP-notice in categories-configuration
 * Fixed: Display issues with some themes
+* Added: Subscribe checkbox in editor for the current topic
 * Added: asgarosforum_after_post_message hook
 * Added: asgarosforum_filter_get_posts filter
 * Added: asgarosforum_filter_get_posts_order filter

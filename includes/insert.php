@@ -36,6 +36,7 @@ if (empty($this->error)) {
         $date = $this->current_time();
         $wpdb->insert($this->table_threads, array('name' => $subject, 'parent_id' => $this->current_forum), array('%s', '%d'));
         $thread_id = $wpdb->insert_id;
+        $this->current_thread = $thread_id;
 
         $wpdb->insert($this->table_posts, array('text' => $content, 'parent_id' => $thread_id, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
         $post_id = $wpdb->insert_id;
@@ -47,6 +48,8 @@ if (empty($this->error)) {
         }
 
         $redirect = html_entity_decode($this->get_link($thread_id, $this->url_thread).'#postid-'.$post_id);
+
+        AsgarosForumNotifications::updateSubscriptionStatus();
 
         // Send notification about new topic to administrator
         AsgarosForumNotifications::notifyAdministrator($subject, $content, $redirect);
@@ -65,6 +68,8 @@ if (empty($this->error)) {
 
         $redirect = html_entity_decode($this->get_postlink($this->current_thread, $post_id));
 
+        AsgarosForumNotifications::updateSubscriptionStatus();
+
         // Send notification about new post to subscribers
         AsgarosForumNotifications::notifyTopicSubscribers($content, $redirect);
 
@@ -77,6 +82,8 @@ if (empty($this->error)) {
         if (isset($_POST['subject']) && !empty($subject)) {
             $wpdb->update($this->table_threads, array('name' => $subject), array('id' => $this->current_thread), array('%s'), array('%d'));
         }
+
+        AsgarosForumNotifications::updateSubscriptionStatus();
 
         do_action('asgarosforum_after_edit_submit', $post_id);
 

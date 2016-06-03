@@ -41,16 +41,34 @@ class AsgarosForumNotifications {
         }
     }
 
+    // Generates an subscription option in the editor based on subscription status.
+    public static function showEditorSubscriptionOption() {
+        global $asgarosforum;
+
+        // Check if this functionality is enabled and user is logged in
+        if ($asgarosforum->options['allow_subscriptions']) {
+            echo '<div class="editor-row">';
+            echo '<div class="editor-cell"><span>'.__('Subscription:', 'asgaros-forum').'</span></div>';
+            echo '<div class="editor-cell">';
+            echo '<input type="checkbox" name="subscribe_checkbox" id="subscribe_checkbox" '.checked(self::isSubscribed($asgarosforum->current_thread), true, false).'>';
+            echo '<label for="subscribe_checkbox">'.__('<b>Subscribe</b> to this topic.', 'asgaros-forum').'</label>';
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+
     // Checks if the current user has a subscription for the current topic.
     public static function isSubscribed($topic_id) {
-        $user_id = get_current_user_id();
-        $status = get_user_meta($user_id, 'asgarosforum_subscription_topic');
+        if ($topic_id) {
+            $user_id = get_current_user_id();
+            $status = get_user_meta($user_id, 'asgarosforum_subscription_topic');
 
-        if (in_array($topic_id, $status)) {
-            return true;
-        } else {
-            return false;
+            if (in_array($topic_id, $status)) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     // Subscribes the current user to the current topic.
@@ -72,6 +90,15 @@ class AsgarosForumNotifications {
         $topic_id = $asgarosforum->current_thread;
 
         delete_user_meta($user_id, 'asgarosforum_subscription_topic', $topic_id);
+    }
+
+    // Update the subscription-status based on the editor checkbox
+    public static function updateSubscriptionStatus() {
+        if (isset($_POST['subscribe_checkbox']) && $_POST['subscribe_checkbox']) {
+            self::subscribeTopic();
+        } else {
+            self::unsubscribeTopic();
+        }
     }
 
     // Removes all subscriptions for a topic. This is used when a topic gets deleted.

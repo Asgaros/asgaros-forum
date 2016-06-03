@@ -115,6 +115,7 @@ if (!$error) {
     			</div>
     		</div>
             <?php } ?>
+            <?php AsgarosForumNotifications::showEditorSubscriptionOption(); ?>
             <div class="editor-row">
                 <div class="editor-cell"></div>
                 <div class="editor-cell">
