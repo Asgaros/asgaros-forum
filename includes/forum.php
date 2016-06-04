@@ -129,6 +129,8 @@ class AsgarosForum {
                     $this->current_forum = $forum_id;
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
+                } else {
+                    $this->error = __('Sorry, this forum does not exist.', 'asgaros-forum');
                 }
                 break;
             case 'movethread':
@@ -140,6 +142,8 @@ class AsgarosForum {
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
+                } else {
+                    $this->error = __('Sorry, this thread does not exist.', 'asgaros-forum');
                 }
                 break;
             case 'editpost':
@@ -149,6 +153,8 @@ class AsgarosForum {
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
+                } else {
+                    $this->error = __('Sorry, this post does not exist.', 'asgaros-forum');
                 }
                 break;
         }
@@ -294,30 +300,34 @@ class AsgarosForum {
         ob_start();
         echo '<div id="af-wrapper">';
 
-        if ($this->access) {
-            echo $this->breadcrumbs();
-
-            switch ($this->current_view) {
-                case 'movethread':
-                    $this->movethread();
-                    break;
-                case 'forum':
-                    $this->showforum($this->current_forum);
-                    break;
-                case 'thread':
-                    $this->showthread($this->current_thread);
-                    break;
-                case 'addthread':
-                case 'addpost':
-                case 'editpost':
-                    include('views/editor.php');
-                    break;
-                default:
-                    $this->overview();
-                    break;
-            }
+        if (!empty($this->error)) {
+            echo '<div class="error">'.$this->error.'</div>';
         } else {
-            echo '<div class="info">'.__('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            if ($this->access) {
+                echo $this->breadcrumbs();
+
+                switch ($this->current_view) {
+                    case 'movethread':
+                        $this->movethread();
+                        break;
+                    case 'forum':
+                        $this->showforum();
+                        break;
+                    case 'thread':
+                        $this->showthread();
+                        break;
+                    case 'addthread':
+                    case 'addpost':
+                    case 'editpost':
+                        include('views/editor.php');
+                        break;
+                    default:
+                        $this->overview();
+                        break;
+                }
+            } else {
+                echo '<div class="info">'.__('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            }
         }
 
         echo '</div>';
@@ -337,38 +347,30 @@ class AsgarosForum {
     }
 
     function showforum() {
-        if ($this->current_forum && $this->access) {
-            $threads = $this->get_threads($this->current_forum);
-            $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
-            $counter_normal = count($threads);
-            $counter_total = $counter_normal + count($sticky_threads);
+        $threads = $this->get_threads($this->current_forum);
+        $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
+        $counter_normal = count($threads);
+        $counter_total = $counter_normal + count($sticky_threads);
 
-            $this->showLoginMessage();
+        $this->showLoginMessage();
 
-            require('views/forum.php');
-        } else {
-            echo '<div class="notice">'.__('Sorry, this forum does not exist.', 'asgaros-forum').'</div>';
-        }
+        require('views/forum.php');
     }
 
     function showthread() {
-        if ($this->current_thread && $this->access) {
-            global $wpdb, $wp_embed;
-            $posts = $this->get_posts();
+        global $wpdb, $wp_embed;
+        $posts = $this->get_posts();
 
-            if ($posts) {
-                $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views + 1 WHERE id = %d", $this->current_thread));
+        if ($posts) {
+            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views + 1 WHERE id = %d", $this->current_thread));
 
-                $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
+            $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
 
-                $this->showLoginMessage();
+            $this->showLoginMessage();
 
-                require('views/thread.php');
-            } else {
-                echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
-            }
+            require('views/thread.php');
         } else {
-            echo '<div class="notice">'.__('Sorry, this thread does not exist.', 'asgaros-forum').'</div>';
+            echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
         }
     }
 

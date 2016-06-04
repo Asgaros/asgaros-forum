@@ -15,21 +15,11 @@ if (!$user_ID) {
 
 if (!$error) {
     if ($_GET['view'] == "addthread") {
-        if (!$this->current_forum || !$this->access) {
-            $error = true;
-            echo '<div class="notice">'.__('Sorry, this forum does not exist.', 'asgaros-forum').'</div>';
-        }
-
         if (!$error && (!$this->get_forum_status() || AsgarosForumPermissions::isBanned('current'))) {
             $error = true;
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
         }
     } else if ($_GET['view'] == "addpost") {
-        if (!$this->current_thread || !$this->access) {
-            $error = true;
-            echo '<div class="notice">'.__('Sorry, this thread does not exist.', 'asgaros-forum').'</div>';
-        }
-
         if (!$error && (($this->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current'))) {
             $error = true;
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
@@ -44,11 +34,6 @@ if (!$error) {
             }
         }
     } else if ($_GET['view'] == "editpost") {
-        if (!$this->element_exists($_GET['id'], $this->table_posts) || !$this->access) {
-            $error = true;
-            echo '<div class="notice">'.__('Sorry, this post does not exist.', 'asgaros-forum').'</div>';
-        }
-
         if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? (int)$_GET['id'] : 0;
             $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));

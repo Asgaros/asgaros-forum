@@ -11,10 +11,6 @@ $redirect = '';
 AsgarosForumInsert::validateData();
 
 if (AsgarosForumInsert::getAction() === 'edit_post') {
-    if (!$this->element_exists($post_id, $this->table_posts)) {
-        $this->error .= '<span>'.__('Sorry, this post does not exist.', 'asgaros-forum').'</span>';
-    }
-
     if (empty($this->error) && $user_ID != $this->get_post_author($post_id) && !AsgarosForumPermissions::isModerator('current')) {
         $this->error .= '<span>'.__('You are not allowed to do this.', 'asgaros-forum').'</span>';
     }

@@ -185,7 +185,8 @@
 
 /* NOTICE */
 #af-wrapper .info,
-#af-wrapper .notice {
+#af-wrapper .notice,
+#af-wrapper .error {
     text-align: center;
     font-size: 13px;
     font-style: italic;
