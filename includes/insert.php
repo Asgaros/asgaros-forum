@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 global $wpdb;
-$post_id = esc_html($_GET['id']);
+$post_id = absint($_GET['id']);
 $subject = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
 $content = trim($_POST['message']);
 $redirect = '';
