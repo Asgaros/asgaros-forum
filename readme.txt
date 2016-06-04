@@ -85,6 +85,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Prevent modification of topic-subject
 = 1.1.5 =
 * Fixed: Correct filtering of posts inside the widget
 * Fixed: Hide post-counter for deleted users

@@ -79,7 +79,7 @@ if (empty($this->error)) {
         $date = $this->current_time();
         $wpdb->update($this->table_posts, array('text' => $content, 'uploads' => $uploads, 'date_edit' => $date), array('id' => $post_id), array('%s', '%s', '%s'), array('%d'));
 
-        if (isset($_POST['subject']) && !empty($subject)) {
+        if ($this->is_first_post($post_id) && isset($_POST['subject']) && !empty($subject)) {
             $wpdb->update($this->table_threads, array('name' => $subject), array('id' => $this->current_thread), array('%s'), array('%d'));
         }
 
