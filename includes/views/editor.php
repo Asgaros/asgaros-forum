@@ -71,11 +71,11 @@ if (!$error) {
     }
 }
 
-if (!$error) {
-    if (!empty($this->error)) {
-        echo '<div class="info">'.$this->error.'</div>';
-    }
+if (!empty($this->error)) {
+    echo '<div class="info">'.$this->error.'</div>';
+}
 
+if (!$error) {
      ?>
     <form name="addform" method="post" enctype="multipart/form-data">
         <div class="title-element">
@@ -120,13 +120,14 @@ if (!$error) {
                 <div class="editor-cell"></div>
                 <div class="editor-cell">
                 <?php if ($_GET['view'] == "addthread") { ?>
-                    <input type="submit" name="add_thread_submit" value="<?php _e('Submit', 'asgaros-forum'); ?>">
+                    <input type="hidden" name="submit_action" value="add_thread">
                 <?php } else if ($_GET['view'] == "addpost") { ?>
-                    <input type="submit" name="add_post_submit" value="<?php _e('Submit', 'asgaros-forum'); ?>">
+                    <input type="hidden" name="submit_action" value="add_post">
                 <?php } else if ($_GET['view'] == "editpost") { ?>
-                    <input type="submit" name="edit_post_submit" value="<?php _e('Submit', 'asgaros-forum'); ?>">
+                    <input type="hidden" name="submit_action" value="edit_post">
                     <input type="hidden" name="part_id" value="<?php echo $_GET['part']; ?>">
                 <?php } ?>
+                <input type="submit" value="<?php _e('Submit', 'asgaros-forum'); ?>">
                 </div>
             </div>
         </div>

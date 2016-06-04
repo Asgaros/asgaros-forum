@@ -61,9 +61,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 = Which hooks are available =
 * asgarosforum_after_post_author
 * asgarosforum_after_post_message
-* asgarosforum_after_thread_submit
-* asgarosforum_after_post_submit
-* asgarosforum_after_edit_submit
+* asgarosforum_after_add_thread_submit
+* asgarosforum_after_add_post_submit
+* asgarosforum_after_edit_post_submit
 * asgarosforum_action_add_category_form_fields
 * asgarosforum_action_edit_category_form_fields
 * asgarosforum_action_save_category_form_fields
@@ -86,6 +86,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Prevent modification of topic-subject
+* Changed: Renamed asgarosforum_after_thread_submit hook into asgarosforum_after_add_thread_submit
+* Changed: Renamed asgarosforum_after_post_submit hook into asgarosforum_after_add_post_submit
+* Changed: Renamed asgarosforum_after_edit_submit hook into asgarosforum_after_edit_post_submit
+* Performance improvements and code optimizations
 = 1.1.5 =
 * Fixed: Correct filtering of posts inside the widget
 * Fixed: Hide post-counter for deleted users

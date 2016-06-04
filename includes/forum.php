@@ -6,7 +6,7 @@ class AsgarosForum {
     var $directory = '';
     var $date_format = '';
     var $access = true;
-    var $error = '';
+    var $error = false;
     var $url_home = '';
     var $url_forum = '';
     var $url_thread = '';
@@ -172,8 +172,11 @@ class AsgarosForum {
             update_user_meta($user_ID, 'asgarosforum_lastvisit', $this->current_time());
         }
 
-        if ((isset($_POST['add_thread_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit'])) && $user_ID) {
-            require('insert.php');
+        if (isset($_POST['submit_action']) && $user_ID) {
+            AsgarosForumInsert::determineAction();
+            if (AsgarosForumInsert::getAction()) {
+                require('insert.php');
+            }
         } else if (isset($_GET['view']) && $_GET['view'] == "markallread" && $user_ID) {
             $time = $this->current_time();
             setcookie("wpafcookie", $time, 0, "/");
