@@ -57,7 +57,7 @@ if (!defined('ABSPATH')) exit;
                     if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
                         echo '<div class="post-edit">'.sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'</div>';
                     }
-                    do_action('asgarosforum_after_post_message', $post->author_id);
+                    do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
                     ?>
                 </div>
             </div>
