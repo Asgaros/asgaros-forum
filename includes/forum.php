@@ -6,6 +6,7 @@ class AsgarosForum {
     var $directory = '';
     var $date_format = '';
     var $error = false;
+    var $info = false;
     var $url_home = '';
     var $url_forum = '';
     var $url_thread = '';
@@ -20,6 +21,7 @@ class AsgarosForum {
     var $current_category = false;
     var $current_forum = false;
     var $current_thread = false;
+    var $current_post = false;
     var $current_view = false;
     var $current_page = 0;
     var $parent_forum = false;
@@ -148,6 +150,7 @@ class AsgarosForum {
             case 'editpost':
                 $post_id = absint($_GET['id']);
                 if ($this->element_exists($post_id, $this->table_posts)) {
+                    $this->current_post = $post_id;
                     $this->current_thread = $this->get_parent_id($post_id, $this->table_posts);
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
@@ -183,7 +186,10 @@ class AsgarosForum {
         if (isset($_POST['submit_action']) && $user_ID) {
             AsgarosForumInsert::determineAction();
             if (AsgarosForumInsert::getAction()) {
-                require('insert.php');
+                AsgarosForumInsert::setData();
+                if (AsgarosForumInsert::validateExecution()) {
+                    AsgarosForumInsert::insertData();
+                }
             }
         } else if (isset($_GET['view']) && $_GET['view'] == "markallread" && $user_ID) {
             $time = $this->current_time();
@@ -319,6 +325,10 @@ class AsgarosForum {
             echo '<div class="error">'.$this->error.'</div>';
         } else {
             echo $this->breadcrumbs();
+
+            if (!empty($this->info)) {
+                echo '<div class="info">'.$this->info.'</div>';
+            }
 
             switch ($this->current_view) {
                 case 'movethread':
