@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForum {
     var $directory = '';
     var $date_format = '';
-    var $access = true;
     var $error = false;
     var $url_home = '';
     var $url_forum = '';
@@ -168,6 +167,9 @@ class AsgarosForum {
         $this->url_markallread = add_query_arg(array('view' => 'markallread'), $this->url_home);
         $this->url_movethread = add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home);
 
+        // Check
+        $this->check_access();
+
         // Override editor settings
         $this->options_editor = apply_filters('asgarosforum_filter_editor_settings', $this->options_editor);
 
@@ -204,24 +206,37 @@ class AsgarosForum {
         } else if (isset($_GET['unsubscribe_topic'])) {
             AsgarosForumNotifications::unsubscribeTopic();
         }
-
-        $this->check_access();
     }
 
     function check_access() {
-        $access = ($this->options['require_login'] && !is_user_logged_in()) ? false : true;
+        // Check login access.
+        if ($this->options['require_login'] && !is_user_logged_in()) {
+            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+            return false;
+        }
 
-        if ($access) {
-            $category_access = get_term_meta($this->current_category, 'category_access', true);
+        // Check category access.
+        $category_access = get_term_meta($this->current_category, 'category_access', true);
 
-            if (!empty($category_access)) {
-                if (!empty($category_access) && (($category_access === 'loggedin' && !is_user_logged_in()) || ($category_access === 'moderator' && !AsgarosForumPermissions::isModerator('current')))) {
-                    $access = false;
-                }
+        if (!empty($category_access)) {
+            if ($category_access === 'loggedin' && !is_user_logged_in()) {
+                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+                return false;
+            }
+
+            if ($category_access === 'moderator' && !AsgarosForumPermissions::isModerator('current')) {
+                $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+                return false;
             }
         }
 
-        $this->access = apply_filters('asgarosforum_filter_check_access', $access, $this->current_category);
+        // Check custom access.
+        $custom_access = apply_filters('asgarosforum_filter_check_access', true, $this->current_category);
+
+        if (!$custom_access) {
+            $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+            return false;
+        }
     }
 
     function enqueue_front_scripts() {
@@ -254,7 +269,7 @@ class AsgarosForum {
     function get_title($title) {
         $pre = '';
 
-        if ($this->access && $this->current_view) {
+        if (!$this->error && $this->current_view) {
             if ($this->current_view == 'forum') {
                 if ($this->current_forum) {
                     $pre = esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).' - ';
@@ -303,30 +318,26 @@ class AsgarosForum {
         if (!empty($this->error)) {
             echo '<div class="error">'.$this->error.'</div>';
         } else {
-            if ($this->access) {
-                echo $this->breadcrumbs();
+            echo $this->breadcrumbs();
 
-                switch ($this->current_view) {
-                    case 'movethread':
-                        $this->movethread();
-                        break;
-                    case 'forum':
-                        $this->showforum();
-                        break;
-                    case 'thread':
-                        $this->showthread();
-                        break;
-                    case 'addthread':
-                    case 'addpost':
-                    case 'editpost':
-                        include('views/editor.php');
-                        break;
-                    default:
-                        $this->overview();
-                        break;
-                }
-            } else {
-                echo '<div class="info">'.__('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            switch ($this->current_view) {
+                case 'movethread':
+                    $this->movethread();
+                    break;
+                case 'forum':
+                    $this->showforum();
+                    break;
+                case 'thread':
+                    $this->showthread();
+                    break;
+                case 'addthread':
+                case 'addpost':
+                case 'editpost':
+                    include('views/editor.php');
+                    break;
+                default:
+                    $this->overview();
+                    break;
             }
         }
 
@@ -381,7 +392,7 @@ class AsgarosForum {
     }
 
     function movethread() {
-        if (AsgarosForumPermissions::isModerator('current') && $this->access) {
+        if (AsgarosForumPermissions::isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->url_movethread.'&amp;move_thread">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
@@ -687,27 +698,27 @@ class AsgarosForum {
     function breadcrumbs() {
         $trail = '<span class="dashicons-before dashicons-admin-home"></span><a href="'.$this->url_home.'">'.__('Forum', 'asgaros-forum').'</a>';
 
-        if ($this->parent_forum && $this->parent_forum > 0 && $this->access) {
+        if ($this->parent_forum && $this->parent_forum > 0) {
             $link = $this->get_link($this->parent_forum, $this->url_forum);
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->table_forums))).'</a>';
         }
 
-        if ($this->current_forum && $this->access) {
+        if ($this->current_forum) {
             $link = $this->get_link($this->current_forum, $this->url_forum);
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</a>';
         }
 
-        if ($this->current_thread && $this->access) {
+        if ($this->current_thread) {
             $link = $this->get_link($this->current_thread, $this->url_thread);
             $name = stripslashes($this->get_name($this->current_thread, $this->table_threads));
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
         }
 
-        if ($this->current_view == 'addpost' && $this->access) {
+        if ($this->current_view == 'addpost') {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Post Reply', 'asgaros-forum');
-        } else if ($this->current_view == 'editpost' && $this->access) {
+        } else if ($this->current_view == 'editpost') {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Edit Post', 'asgaros-forum');
-        } else if ($this->current_view == 'addthread' && $this->access) {
+        } else if ($this->current_view == 'addthread') {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('New Thread', 'asgaros-forum');
         }
 
