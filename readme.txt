@@ -90,6 +90,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Post number to the bottom of posts
 * Changed: Revised editor
 * Changed: Improved error handling
+* Changed: Post number is linking to the post now instead of the date
 * Changed: Added post ID to asgarosforum_after_post_message hook
 * Changed: Renamed asgarosforum_after_thread_submit hook into asgarosforum_after_add_thread_submit
 * Changed: Renamed asgarosforum_after_post_submit hook into asgarosforum_after_add_post_submit
