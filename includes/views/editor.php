@@ -90,15 +90,9 @@ if (!$error) {
             if ($this->current_view === 'editpost') {
                 AsgarosForumUploads::getFileList($post->id, $post->uploads);
             }
-            if ($this->options['allow_file_uploads']) { ?>
-    		<div class="editor-row editor-row-uploads">
-    			<span class="row-title"><?php _e('Upload Files:', 'asgaros-forum'); ?></span>
-                <input type="file" name="forumfile[]"><br />
-                <a id="add_file_link"><?php _e('Add another file ...', 'asgaros-forum'); ?></a><br />
-                <span class="upload-filetypes"><?php echo __('Allowed filetypes:', 'asgaros-forum').'&nbsp<i>'.esc_html($this->options['allowed_filetypes']).'</i>'; ?></span>
-    		</div>
-            <?php }
-            AsgarosForumNotifications::showEditorSubscriptionOption(); ?>
+            AsgarosForumUploads::showEditorUploadForm();
+            AsgarosForumNotifications::showEditorSubscriptionOption();
+            ?>
             <div class="editor-row">
                 <?php if ($this->current_view === 'addthread') { ?>
                     <input type="hidden" name="submit_action" value="add_thread">

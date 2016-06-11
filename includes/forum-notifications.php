@@ -45,7 +45,7 @@ class AsgarosForumNotifications {
     public static function showEditorSubscriptionOption() {
         global $asgarosforum;
 
-        // Check if this functionality is enabled and user is logged in
+        // Check if this functionality is enabled.
         if ($asgarosforum->options['allow_subscriptions']) {
             echo '<div class="editor-row">';
             echo '<span class="row-title">'.__('Subscription:', 'asgaros-forum').'</span>';
