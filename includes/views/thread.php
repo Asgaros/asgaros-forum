@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) exit;
         ?>
         <div class="post" id="postid-<?php echo $post->id; ?>">
             <div class="post-header">
-                <div class="post-date"><a href="<?php echo $this->get_postlink($this->current_thread, $post->id, ($this->current_page + 1)); ?>"><?php echo $this->format_date($post->date); ?></a></div>
+                <div class="post-date"><?php echo $this->format_date($post->date); ?></div>
                 <?php echo $this->post_menu($post->id, $post->author_id, $counter); ?>
                 <div class="clear"></div>
             </div>
@@ -54,9 +54,12 @@ if (!defined('ABSPATH')) exit;
                     $post_content = apply_filters('asgarosforum_filter_post_content', $post_content);
                     echo $post_content;
                     AsgarosForumUploads::getFileList($post->id, $post->uploads, true);
+                    echo '<div class="post-footer">';
                     if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
-                        echo '<div class="post-edit">'.sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'</div>';
+                        echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'&nbsp;&middot;&nbsp;';
                     }
+                    echo '<a href="'.$this->get_postlink($this->current_thread, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+                    echo '</div>';
                     do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
                     ?>
                 </div>

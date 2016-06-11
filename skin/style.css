@@ -315,9 +315,7 @@
 #af-wrapper .post-date {
     float: left;
     font-style: italic;
-    padding: 4px 10px;
-}
-#af-wrapper .post-date a {
+    padding: 5px 10px;
     color: #777;
     font-size: 11px;
 }
@@ -375,7 +373,7 @@
     max-width: 100% !important;
     height: auto !important;
 }
-#af-wrapper .post-edit {
+#af-wrapper .post-footer {
     display: block;
     font-style: italic;
     font-size: 11px;
@@ -385,6 +383,9 @@
     padding: 5px 10px;
     bottom: 0;
     right: 0;
+}
+#af-wrapper .post-footer a {
+    color: #999;
 }
 
 /* QUOTES */
