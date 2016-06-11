@@ -14,12 +14,12 @@ if (!$user_ID) {
 }
 
 if (!$error) {
-    if ($_GET['view'] == "addthread") {
+    if ($this->current_view === 'addthread') {
         if (!$error && (!$this->get_forum_status() || AsgarosForumPermissions::isBanned('current'))) {
             $error = true;
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
         }
-    } else if ($_GET['view'] == "addpost") {
+    } else if ($this->current_view === 'addpost') {
         if (!$error && (($this->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current'))) {
             $error = true;
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
@@ -33,7 +33,7 @@ if (!$error) {
                 $threadcontent = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($text->date)).'</div>'.$text->text.'</blockquote><br />';
             }
         }
-    } else if ($_GET['view'] == "editpost") {
+    } else if ($this->current_view === 'editpost') {
         if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
             $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));
@@ -65,55 +65,50 @@ if (!$error) {
     <form name="addform" method="post" enctype="multipart/form-data">
         <div class="title-element">
             <?php
-            if ($_GET['view'] == "addthread") {
-                _e('Post new Thread', 'asgaros-forum');
-            } else if ($_GET['view'] == "addpost") {
+            if ($this->current_view === 'addthread') {
+                _e('New Thread', 'asgaros-forum');
+            } else if ($this->current_view === 'addpost') {
                 echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)));
-            } else if ($_GET['view'] == "editpost") {
+            } else if ($this->current_view === 'editpost') {
                 _e('Edit Post', 'asgaros-forum');
             }
             ?>
         </div>
         <div class="content-element">
-            <?php if ($_GET['view'] == "addthread" || ($_GET['view'] == "editpost" && $this->is_first_post($post->id))) { ?>
-                <div class="editor-row">
-                    <div class="editor-cell"><span><?php _e('Subject:', 'asgaros-forum'); ?></span></div>
-                    <div class="editor-cell"><input type="text" name="subject" value="<?php echo esc_html(stripslashes($threadname)); ?>"></div>
+            <?php if ($this->current_view === 'addthread' || ($this->current_view == 'editpost' && $this->is_first_post($post->id))) { ?>
+                <div class="editor-row-subject">
+                    <label for="subject"><?php _e('Subject:', 'asgaros-forum'); ?></label>
+                    <span>
+                        <input type="text" id="subject" name="subject" value="<?php echo esc_html(stripslashes($threadname)); ?>">
+                    </span>
                 </div>
             <?php } ?>
-            <div class="editor-row">
-                <div class="editor-cell"><span><?php _e('Message:', 'asgaros-forum'); ?></span></div>
-                <div class="editor-cell message-editor">
-                    <?php wp_editor(stripslashes($threadcontent), 'message', $this->options_editor); ?>
-                </div>
+            <div class="editor-row no-padding">
+                <?php wp_editor(stripslashes($threadcontent), 'message', $this->options_editor); ?>
             </div>
-            <?php if ($_GET['view'] == "editpost") { ?>
-                <?php AsgarosForumUploads::getFileList($post->id, $post->uploads); ?>
-            <?php } ?>
-            <?php if ($this->options['allow_file_uploads']) { ?>
-    		<div class="editor-row">
-    			<div class="editor-cell"><span><?php _e('Upload Files:', 'asgaros-forum'); ?></span></div>
-    			<div class="editor-cell">
-                    <?php echo __('Allowed filetypes:', 'asgaros-forum').'&nbsp'.esc_html($this->options['allowed_filetypes']).'<br />'; ?>
-                    <input type="file" name="forumfile[]"><br />
-                    <a id="add_file_link" href="#"><?php _e('Add another file ...', 'asgaros-forum'); ?></a>
-    			</div>
+            <?php
+            if ($this->current_view === 'editpost') {
+                AsgarosForumUploads::getFileList($post->id, $post->uploads);
+            }
+            if ($this->options['allow_file_uploads']) { ?>
+    		<div class="editor-row editor-row-uploads">
+    			<span class="row-title"><?php _e('Upload Files:', 'asgaros-forum'); ?></span>
+                <input type="file" name="forumfile[]"><br />
+                <a id="add_file_link"><?php _e('Add another file ...', 'asgaros-forum'); ?></a><br />
+                <span class="upload-filetypes"><?php echo __('Allowed filetypes:', 'asgaros-forum').'&nbsp<i>'.esc_html($this->options['allowed_filetypes']).'</i>'; ?></span>
     		</div>
-            <?php } ?>
-            <?php AsgarosForumNotifications::showEditorSubscriptionOption(); ?>
+            <?php }
+            AsgarosForumNotifications::showEditorSubscriptionOption(); ?>
             <div class="editor-row">
-                <div class="editor-cell"></div>
-                <div class="editor-cell">
-                <?php if ($_GET['view'] == "addthread") { ?>
+                <?php if ($this->current_view === 'addthread') { ?>
                     <input type="hidden" name="submit_action" value="add_thread">
-                <?php } else if ($_GET['view'] == "addpost") { ?>
+                <?php } else if ($this->current_view === 'addpost') { ?>
                     <input type="hidden" name="submit_action" value="add_post">
-                <?php } else if ($_GET['view'] == "editpost") { ?>
+                <?php } else if ($this->current_view === 'editpost') { ?>
                     <input type="hidden" name="submit_action" value="edit_post">
                     <input type="hidden" name="part_id" value="<?php echo ($this->current_page + 1); ?>">
                 <?php } ?>
                 <input type="submit" value="<?php _e('Submit', 'asgaros-forum'); ?>">
-                </div>
             </div>
         </div>
     </form>

@@ -17,16 +17,13 @@
 #af-wrapper .post-author small {
     display: none !important;
 }
-#af-wrapper .editor-row,
-#af-wrapper .editor-cell {
+#af-wrapper .editor-row {
     width: 100% !important;
     border: none !important;
 }
-#af-wrapper .post-content,
-#af-wrapper .editor-row {
+#af-wrapper .post-content {
     display: inline;
 }
-#af-wrapper .editor-cell,
 #af-wrapper .post-author,
 #af-wrapper .post-message,
 #af-wrapper .post-date {

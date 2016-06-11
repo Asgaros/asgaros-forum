@@ -87,6 +87,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: Prevent modification of topic-subject
 * Fixed: Prevent submitting the same form multiple times
+* Changed: Revised editor
 * Changed: Improved error handling
 * Changed: Added post ID to asgarosforum_after_post_message hook
 * Changed: Renamed asgarosforum_after_thread_submit hook into asgarosforum_after_add_thread_submit

@@ -140,11 +140,9 @@ class AsgarosForumUploads {
                     $upload_list .= '<ul>'.$upload_list_elements.'</ul>';
                 } else {
                     $upload_list .= '<div class="editor-row">';
-                    $upload_list .= '<div class="editor-cell"><span>'.__('Uploaded files:', 'asgaros-forum').'</span></div>';
-                    $upload_list .= '<div class="editor-cell">';
+                    $upload_list .= '<span class="row-title">'.__('Uploaded files:', 'asgaros-forum').'</span>';
                     $upload_list .= '<div class="files-to-delete"></div>';
                     $upload_list .= $upload_list_elements;
-                    $upload_list .= '</div>';
                     $upload_list .= '</div>';
                 }
             }

@@ -191,7 +191,7 @@ class AsgarosForum {
                     AsgarosForumInsert::insertData();
                 }
             }
-        } else if (isset($_GET['view']) && $_GET['view'] == "markallread" && $user_ID) {
+        } else if ($this->current_view === 'markallread' && $user_ID) {
             $time = $this->current_time();
             setcookie("wpafcookie", $time, 0, "/");
             update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
@@ -724,11 +724,11 @@ class AsgarosForum {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
         }
 
-        if ($this->current_view == 'addpost') {
+        if ($this->current_view === 'addpost') {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Post Reply', 'asgaros-forum');
-        } else if ($this->current_view == 'editpost') {
+        } else if ($this->current_view === 'editpost') {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Edit Post', 'asgaros-forum');
-        } else if ($this->current_view == 'addthread') {
+        } else if ($this->current_view === 'addthread') {
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('New Thread', 'asgaros-forum');
         }
 

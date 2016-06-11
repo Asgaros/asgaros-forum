@@ -46,8 +46,8 @@
 /* INPUT ELEMENTS */
 #af-wrapper input {
     padding: 3px 6px;
-    border: 1px solid #a9a9a9;
-    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
     color: #555;
     margin: 2px 0 !important;
     vertical-align: middle;
@@ -62,13 +62,42 @@
 }
 
 /* EDITOR */
-#af-wrapper .editor-row {
-    display: table;
+#af-wrapper .editor-row,
+#af-wrapper .editor-row-subject {
+    display: block;
     width: 100%;
     line-height: normal;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    padding: 8px 15px;
+    box-sizing: border-box;
 }
-#af-wrapper .editor-row input[type="text"],
+#af-wrapper .editor-row-subject label {
+    float: left;
+    font-size: 18px;
+    line-height: 2em;
+}
+#af-wrapper .editor-row-subject span {
+    display: block;
+    overflow: hidden;
+    padding: 0 0 0 1em;
+}
+#af-wrapper .editor-row-subject input {
+    width: 100%;
+    line-height: 1.5em;
+    font-size: 18px;
+    margin: 1px 0 !important;
+    box-sizing: border-box;
+}
+#af-wrapper .editor-row .row-title {
+    display: block;
+    font-size: 18px !important;
+    margin: 2px 0 8px 0;
+}
+#af-wrapper .editor-row-uploads .upload-filetypes {
+    display: block;
+    font-size: 12px;
+    padding: 10px 0;
+}
 #af-wrapper .editor-row input[type="file"],
 #af-wrapper .editor-row input[type="submit"] {
     width: 100%;
@@ -83,24 +112,15 @@
 #af-wrapper .editor-row:last-child {
     border-bottom: none;
 }
-#af-wrapper .editor-cell {
-    display: table-cell;
-    width: auto;
-    padding: 5px 10px;
-}
-#af-wrapper .editor-cell:first-child {
-    min-width: 180px;
-    width: 180px;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-}
-#af-wrapper .editor-cell span {
-    font-weight: bold;
-}
-#af-wrapper .message-editor {
+#af-wrapper .no-padding {
     padding: 0;
 }
 #af-wrapper .quicktags-toolbar input {
     width: auto;
+}
+#af-wrapper .editor-row-uploads a,
+#af-wrapper .editor-row .delete {
+    cursor: pointer;
 }
 
 /* OVERVIEW/FORUM */
