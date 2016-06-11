@@ -10,8 +10,19 @@
         });
 
         // Disable submit-button after first submit
-        $('#af-wrapper form').submit(function() {
-            $('#af-wrapper input[type="submit"]').attr('disabled', true);
-        });
+        jQuery.fn.preventDoubleSubmission = function() {
+            $(this).on('submit', function(e) {
+                var $form = $(this);
+
+                if ($form.data('submitted') === true) {
+                    e.preventDefault();
+                } else {
+                    $form.data('submitted', true);
+                }
+            });
+
+            return this;
+        };
+        $('#forum-editor-form').preventDoubleSubmission();
     });
 })(jQuery);

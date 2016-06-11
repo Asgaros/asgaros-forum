@@ -62,7 +62,7 @@ if (!empty($this->error)) {
 
 if (!$error) {
      ?>
-    <form name="addform" method="post" enctype="multipart/form-data">
+    <form id="forum-editor-form" name="addform" method="post" enctype="multipart/form-data">
         <div class="title-element">
             <?php
             if ($this->current_view === 'addthread') {
