@@ -2,7 +2,7 @@
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
 Tags: forums, discussion
-Requires at least: 4.3
+Requires at least: 4.4
 Tested up to: 4.5
 Stable tag: 1.1.5
 License: GPLv2 or later
