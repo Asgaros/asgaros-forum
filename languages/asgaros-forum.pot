@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Fri Jun 03 2016 22:41:29 GMT+0200 (Mitteleuropäische "
+"POT-Revision-Date: Thu Jun 16 2016 23:40:00 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -47,7 +47,7 @@ msgid "http://thomasbelser.net"
 msgstr ""
 
 #: ../admin/admin.php:37 ../admin/admin.php:194 ../admin/admin.php:194 ..
-#: /includes/forum.php:683
+#: /includes/forum.php:709
 msgid "Forum"
 msgstr ""
 
@@ -87,7 +87,7 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: ../admin/admin.php:196 ../admin/admin.php:196 ../includes/forum.php:88
+#: ../admin/admin.php:196 ../admin/admin.php:196 ../includes/forum.php:89
 msgid "Categories"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgstr ""
 msgid "Allow file uploads"
 msgstr ""
 
-#: ../admin/views/options.php:54 ../includes/views/editor.php:112
+#: ../admin/views/options.php:54 ../includes/forum-uploads.php:163
 msgid "Allowed filetypes:"
 msgstr ""
 
@@ -236,11 +236,28 @@ msgstr ""
 msgid "Save Options"
 msgstr ""
 
+#: ../includes/forum-insert.php:43
+msgid "You are banned!"
+msgstr ""
+
+#: ../includes/forum-insert.php:49 ../includes/views/editor.php:20 ..
+#: /includes/views/editor.php:25
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: ../includes/forum-insert.php:55
+msgid "You must enter a subject."
+msgstr ""
+
+#: ../includes/forum-insert.php:61
+msgid "You must enter a message."
+msgstr ""
+
 #: ../includes/forum-notifications.php:31
 msgid "<b>Unsubscribe</b> from this topic."
 msgstr ""
 
-#: ../includes/forum-notifications.php:36 ../includes/forum-notifications.php:54
+#: ../includes/forum-notifications.php:36 ../includes/forum-notifications.php:53
 msgid "<b>Subscribe</b> to this topic."
 msgstr ""
 
@@ -248,12 +265,12 @@ msgstr ""
 msgid "Subscription:"
 msgstr ""
 
-#: ../includes/forum-notifications.php:117
+#: ../includes/forum-notifications.php:115
 #, php-format
 msgid "[%s] New answer: %s"
 msgstr ""
 
-#: ../includes/forum-notifications.php:118
+#: ../includes/forum-notifications.php:116
 #, php-format
 msgid ""
 "Hello,\n"
@@ -272,12 +289,12 @@ msgid ""
 "the topic as a logged-in user. Please dont answer to this mail!"
 msgstr ""
 
-#: ../includes/forum-notifications.php:141
+#: ../includes/forum-notifications.php:139
 #, php-format
 msgid "[%s] New topic: %s"
 msgstr ""
 
-#: ../includes/forum-notifications.php:142
+#: ../includes/forum-notifications.php:140
 #, php-format
 msgid ""
 "Hello,\n"
@@ -294,6 +311,14 @@ msgstr ""
 
 #: ../includes/forum-uploads.php:139 ../includes/forum-uploads.php:143
 msgid "Uploaded files:"
+msgstr ""
+
+#: ../includes/forum-uploads.php:160
+msgid "Upload Files:"
+msgstr ""
+
+#: ../includes/forum-uploads.php:162
+msgid "Add another file ..."
 msgstr ""
 
 #: ../includes/forum-widgets.php:7
@@ -329,220 +354,195 @@ msgstr ""
 msgid "The forum page:"
 msgstr ""
 
-#: ../includes/forum.php:89
+#: ../includes/forum.php:90
 msgid "Category"
 msgstr ""
 
-#: ../includes/forum.php:90
+#: ../includes/forum.php:91
 msgid "Edit Category"
 msgstr ""
 
-#: ../includes/forum.php:91
+#: ../includes/forum.php:92
 msgid "Update Category"
 msgstr ""
 
-#: ../includes/forum.php:92
+#: ../includes/forum.php:93
 msgid "Add new Category"
 msgstr ""
 
-#: ../includes/forum.php:93
+#: ../includes/forum.php:94
 msgid "Search Categories"
 msgstr ""
 
-#: ../includes/forum.php:94
+#: ../includes/forum.php:95
 msgid "No Categories found."
 msgstr ""
 
-#: ../includes/forum.php:258 ../includes/forum.php:704 ../includes/views/editor.
-#: php:88
-msgid "Edit Post"
-msgstr ""
-
-#: ../includes/forum.php:260 ../includes/forum.php:702
-msgid "Post Reply"
-msgstr ""
-
-#: ../includes/forum.php:262 ../includes/forum.php:649 ../includes/forum.php:706
-msgid "New Thread"
-msgstr ""
-
-#: ../includes/forum.php:264 ../includes/forum.php:656
-msgid "Move Thread"
-msgstr ""
-
-#: ../includes/forum.php:317
-msgid "Sorry, only logged in users have access to the forum."
-msgstr ""
-
-#: ../includes/forum.php:317 ../includes/forum.php:374
-msgid "Login"
-msgstr ""
-
-#: ../includes/forum.php:332
-msgid "There are no categories yet!"
-msgstr ""
-
-#: ../includes/forum.php:347 ../includes/views/editor.php:20
+#: ../includes/forum.php:134
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: ../includes/forum.php:359
-msgid "Thread closed"
-msgstr ""
-
-#: ../includes/forum.php:365
-msgid "Sorry, but there are no posts."
-msgstr ""
-
-#: ../includes/forum.php:368 ../includes/views/editor.php:30
+#: ../includes/forum.php:147
 msgid "Sorry, this thread does not exist."
 msgstr ""
 
-#: ../includes/forum.php:374
+#: ../includes/forum.php:159
+msgid "Sorry, this post does not exist."
+msgstr ""
+
+#: ../includes/forum.php:220
+msgid "Sorry, only logged in users have access to the forum."
+msgstr ""
+
+#: ../includes/forum.php:220 ../includes/forum.php:229 ../includes/forum.php:400
+msgid "Login"
+msgstr ""
+
+#: ../includes/forum.php:229
+msgid "Sorry, only logged in users have access to this category."
+msgstr ""
+
+#: ../includes/forum.php:234 ../includes/forum.php:243
+msgid "Sorry, you dont have access to this area."
+msgstr ""
+
+#: ../includes/forum.php:288 ../includes/forum.php:730 ../includes/views/editor.
+#: php:73
+msgid "Edit Post"
+msgstr ""
+
+#: ../includes/forum.php:290 ../includes/forum.php:728
+msgid "Post Reply"
+msgstr ""
+
+#: ../includes/forum.php:292 ../includes/forum.php:675 ../includes/forum.php:732 .
+#: ./includes/views/editor.php:69
+msgid "New Thread"
+msgstr ""
+
+#: ../includes/forum.php:294 ../includes/forum.php:682
+msgid "Move Thread"
+msgstr ""
+
+#: ../includes/forum.php:366
+msgid "There are no categories yet!"
+msgstr ""
+
+#: ../includes/forum.php:388
+msgid "Thread closed"
+msgstr ""
+
+#: ../includes/forum.php:394
+msgid "Sorry, but there are no posts."
+msgstr ""
+
+#: ../includes/forum.php:400
 msgid "You need to login in order to create posts and topics."
 msgstr ""
 
-#: ../includes/forum.php:381
+#: ../includes/forum.php:407
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: ../includes/forum.php:391
+#: ../includes/forum.php:417
 msgid "Move"
 msgstr ""
 
-#: ../includes/forum.php:395
+#: ../includes/forum.php:421
 msgid "You are not allowed to move threads."
 msgstr ""
 
-#: ../includes/forum.php:578
+#: ../includes/forum.php:604
 msgid "Last post by"
 msgstr ""
 
-#: ../includes/forum.php:579
+#: ../includes/forum.php:605
 msgid "in"
 msgstr ""
 
-#: ../includes/forum.php:580 ../includes/views/editor.php:43
+#: ../includes/forum.php:606 ../includes/views/editor.php:33
 #, php-format
 msgid "on %s"
 msgstr ""
 
-#: ../includes/forum.php:582
+#: ../includes/forum.php:608
 msgid "No threads yet!"
 msgstr ""
 
-#: ../includes/forum.php:609
+#: ../includes/forum.php:635
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:613 ../includes/forum.php:657
+#: ../includes/forum.php:639 ../includes/forum.php:683
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: ../includes/forum.php:613
+#: ../includes/forum.php:639
 msgid "Remove"
 msgstr ""
 
-#: ../includes/forum.php:617
+#: ../includes/forum.php:643
 msgid "Edit"
 msgstr ""
 
-#: ../includes/forum.php:652
+#: ../includes/forum.php:678
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:657
+#: ../includes/forum.php:683
 msgid "Delete Thread"
 msgstr ""
 
-#: ../includes/forum.php:660
+#: ../includes/forum.php:686
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:662
+#: ../includes/forum.php:688
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:666
+#: ../includes/forum.php:692
 msgid "Re-open"
 msgstr ""
 
-#: ../includes/forum.php:668
+#: ../includes/forum.php:694
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:724
+#: ../includes/forum.php:750
 msgid "Pages:"
 msgstr ""
 
-#: ../includes/forum.php:752
+#: ../includes/forum.php:778
 msgid "First"
 msgstr ""
 
-#: ../includes/forum.php:770
+#: ../includes/forum.php:796
 msgid "Last"
-msgstr ""
-
-#: ../includes/insert.php:13
-msgid "You are banned!"
-msgstr ""
-
-#: ../includes/insert.php:18 ../includes/views/editor.php:49
-msgid "Sorry, this post does not exist."
-msgstr ""
-
-#: ../includes/insert.php:22 ../includes/views/editor.php:25 ..
-#: /includes/views/editor.php:35
-msgid "You are not allowed to do this."
-msgstr ""
-
-#: ../includes/insert.php:27
-msgid "You must enter a subject."
-msgstr ""
-
-#: ../includes/insert.php:31
-msgid "You must enter a message."
 msgstr ""
 
 #: ../includes/views/editor.php:13
 msgid "Sorry, you don't have permission to post."
 msgstr ""
 
-#: ../includes/views/editor.php:43
+#: ../includes/views/editor.php:33
 msgid "Quote from"
 msgstr ""
 
-#: ../includes/views/editor.php:58
+#: ../includes/views/editor.php:43
 msgid "Sorry, you are not allowed to edit this post."
 msgstr ""
 
-#: ../includes/views/editor.php:84
-msgid "Post new Thread"
-msgstr ""
-
-#: ../includes/views/editor.php:86
+#: ../includes/views/editor.php:71
 msgid "Post Reply:"
 msgstr ""
 
-#: ../includes/views/editor.php:95
+#: ../includes/views/editor.php:80
 msgid "Subject:"
 msgstr ""
 
-#: ../includes/views/editor.php:100
-msgid "Message:"
-msgstr ""
-
-#: ../includes/views/editor.php:110
-msgid "Upload Files:"
-msgstr ""
-
-#: ../includes/views/editor.php:114
-msgid "Add another file ..."
-msgstr ""
-
-#: ../includes/views/editor.php:123 ../includes/views/editor.php:125 ..
-#: /includes/views/editor.php:127
+#: ../includes/views/editor.php:105
 msgid "Submit"
 msgstr ""
 
@@ -610,7 +610,7 @@ msgstr[1] ""
 msgid "Banned"
 msgstr ""
 
-#: ../includes/views/thread.php:58
+#: ../includes/views/thread.php:59
 #, php-format
 msgid "Last edited on %s"
 msgstr ""
