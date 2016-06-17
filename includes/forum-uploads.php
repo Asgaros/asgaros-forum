@@ -160,7 +160,7 @@ class AsgarosForumUploads {
 			echo '<span class="row-title">'.__('Upload Files:', 'asgaros-forum').'</span>';
 			echo '<input type="file" name="forumfile[]"><br />';
 			echo '<a id="add_file_link">'.__('Add another file ...', 'asgaros-forum').'</a><br />';
-			echo '<span class="upload-filetypes">'.__('Allowed filetypes:', 'asgaros-forum').'&nbsp<i>'.esc_html($asgarosforum->options['allowed_filetypes']).'</i></span>';
+			echo '<span class="upload-filetypes">'.__('Allowed filetypes:', 'asgaros-forum').'&nbsp;<i>'.esc_html($asgarosforum->options['allowed_filetypes']).'</i></span>';
 			echo '</div>';
 		}
 	}
