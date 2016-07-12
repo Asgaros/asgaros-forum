@@ -161,14 +161,14 @@ class AsgarosForum {
                 break;
         }
 
-        $this->url_home = get_permalink();
-        $this->url_forum = add_query_arg(array('view' => 'forum'), $this->url_home).'&amp;id=';
-        $this->url_thread = add_query_arg(array('view' => 'thread'), $this->url_home).'&amp;id=';
-        $this->url_editor_thread = add_query_arg(array('view' => 'addthread', 'id' => $this->current_forum), $this->url_home);
-        $this->url_editor_post = add_query_arg(array('view' => 'addpost', 'id' => $this->current_thread), $this->url_home);
-        $this->url_editor_edit = add_query_arg(array('view' => 'editpost'), $this->url_home).'&amp;id=';
-        $this->url_markallread = add_query_arg(array('view' => 'markallread'), $this->url_home);
-        $this->url_movethread = add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home);
+        $this->url_home = esc_url(get_permalink());
+        $this->url_forum = esc_url(add_query_arg(array('view' => 'forum'), $this->url_home).'&amp;id=');
+        $this->url_thread = esc_url(add_query_arg(array('view' => 'thread'), $this->url_home).'&amp;id=');
+        $this->url_editor_thread = esc_url(add_query_arg(array('view' => 'addthread', 'id' => $this->current_forum), $this->url_home));
+        $this->url_editor_post = esc_url(add_query_arg(array('view' => 'addpost', 'id' => $this->current_thread), $this->url_home));
+        $this->url_editor_edit = esc_url(add_query_arg(array('view' => 'editpost'), $this->url_home).'&amp;id=');
+        $this->url_markallread = esc_url(add_query_arg(array('view' => 'markallread'), $this->url_home));
+        $this->url_movethread = esc_url(add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home));
 
         // Check
         $this->check_access();
@@ -217,7 +217,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(get_permalink())).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
             return false;
         }
 
@@ -226,7 +226,7 @@ class AsgarosForum {
 
         if (!empty($category_access)) {
             if ($category_access === 'loggedin' && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(get_permalink())).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
                 return false;
             }
 
@@ -397,7 +397,7 @@ class AsgarosForum {
 
     function showLoginMessage() {
         if (!is_user_logged_in()) {
-            echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.wp_login_url(get_permalink()).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(get_permalink())).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
         }
     }
 
@@ -435,7 +435,7 @@ class AsgarosForum {
     // TODO: optimize.
     function get_link($id, $location, $page = 1) {
         $page_appendix = ($page > 1) ? '&amp;part='.$page : '';
-        return $location . $id . $page_appendix;
+        return esc_url($location.$id.$page_appendix);
     }
 
     function get_postlink($thread_id, $post_id, $page = 0) {
