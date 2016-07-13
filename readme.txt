@@ -89,6 +89,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Correct escaping of URLs
 * Fixed: Prevent modification of topic-subject
 * Fixed: Prevent submitting the same form multiple times
+* Fixed: Redirect to the current forum-page after login
 * Added: Post number to the bottom of posts
 * Changed: Revised editor
 * Changed: Improved error handling

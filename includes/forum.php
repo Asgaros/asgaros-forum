@@ -23,6 +23,7 @@ class AsgarosForum {
     var $current_thread = false;
     var $current_post = false;
     var $current_view = false;
+    var $current_url = false;
     var $current_page = 0;
     var $parent_forum = false;
     var $options = array();
@@ -112,7 +113,7 @@ class AsgarosForum {
             return;
         }
 
-        global $user_ID;
+        global $user_ID, $wp;
 
         if (isset($_GET['view'])) {
             $this->current_view = esc_html($_GET['view']);
@@ -169,6 +170,7 @@ class AsgarosForum {
         $this->url_editor_edit = esc_url(add_query_arg(array('view' => 'editpost'), $this->url_home).'&amp;id=');
         $this->url_markallread = esc_url(add_query_arg(array('view' => 'markallread'), $this->url_home));
         $this->url_movethread = esc_url(add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home));
+        $this->current_url = esc_url(add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request))));
 
         // Check
         $this->check_access();
@@ -217,7 +219,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(get_permalink())).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->current_url)).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
             return false;
         }
 
@@ -226,7 +228,7 @@ class AsgarosForum {
 
         if (!empty($category_access)) {
             if ($category_access === 'loggedin' && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(get_permalink())).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->current_url)).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
                 return false;
             }
 
@@ -397,7 +399,7 @@ class AsgarosForum {
 
     function showLoginMessage() {
         if (!is_user_logged_in()) {
-            echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(get_permalink())).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->current_url)).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
         }
     }
 
