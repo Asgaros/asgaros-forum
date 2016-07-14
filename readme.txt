@@ -87,7 +87,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
-* Fixed: HTML is now shown correctly in notification-mails
+* Fixed: HTML is now rendered correctly in notification-mails
 * Fixed: Correct escaping of URLs
 * Fixed: Prevent modification of topic-subject
 * Fixed: Prevent submitting the same form multiple times
@@ -102,6 +102,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Changed: Renamed asgarosforum_after_thread_submit hook into asgarosforum_after_add_thread_submit
 * Changed: Renamed asgarosforum_after_post_submit hook into asgarosforum_after_add_post_submit
 * Changed: Renamed asgarosforum_after_edit_submit hook into asgarosforum_after_edit_post_submit
+* Changed: Improved compatibility with some third-party plugins
 * Performance improvements and code optimizations
 = 1.1.5 =
 * Fixed: Correct filtering of posts inside the widget
