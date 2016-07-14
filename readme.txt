@@ -75,6 +75,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_get_threads
 * asgarosforum_filter_get_posts_order
 * asgarosforum_filter_get_threads_order
+* asgarosforum_filter_notify_administrator_message
+* asgarosforum_filter_notify_topic_subscribers_message
 
 == Screenshots ==
 1. The forum overview.
@@ -91,6 +93,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Prevent submitting the same form multiple times
 * Fixed: Redirect to the current forum-page after login
 * Added: Post number to the bottom of posts
+* Added: asgarosforum_filter_notify_administrator_message filter
+* Added: asgarosforum_filter_notify_topic_subscribers_message filter
 * Changed: Revised editor
 * Changed: Improved error handling
 * Changed: Post number is linking to the post now instead of the date
@@ -182,7 +186,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Display issues with some themes
 * Added: Category access permissions
 * Added: Filter asgarosforum_filter_editor_settings
-* Changed: Better support of some third-party plugins
+* Changed: Improved compatibility with some third-party plugins
 * Performance improvements and code optimizations
 = 1.0.8 =
 * Fixed: Insert forum at the correct shortcode position
