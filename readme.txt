@@ -87,6 +87,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: HTML is now shown correctly in notification-mails
 * Fixed: Correct escaping of URLs
 * Fixed: Prevent modification of topic-subject
 * Fixed: Prevent submitting the same form multiple times

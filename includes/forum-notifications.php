@@ -113,7 +113,7 @@ class AsgarosForumNotifications {
             $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
 
             $notification_subject = sprintf(__('[%s] New answer: %s', 'asgaros-forum'), get_bloginfo('name'), $thread_name);
-            $notification_message = sprintf(__("Hello,\r\n\r\nyou got this mail because there is a new answer in a forum-topic you have subscribed to:\r\n%s\r\n\r\nAnswer:\r\n%s\r\n\r\nLink to the new answer:\r\n%s\r\n\r\nYou can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!", 'asgaros-forum'), $thread_name, $answer_text, $answer_link);
+            $notification_message = sprintf(__('Hello,<br /><br />you got this mail because there is a new answer in a forum-topic you have subscribed to:<br />%s<br /><br />Answer:<br />%s<br /><br />Link to the new answer:<br />%s<br /><br />You can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!', 'asgaros-forum'), $thread_name, wpautop($answer_text), $answer_link);
             $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $thread_name, $answer_text, $answer_link);
 
             // Get subscribed users
@@ -126,9 +126,13 @@ class AsgarosForumNotifications {
                 )
             );
 
+            add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
+
             foreach($topic_subscribers as $subscriber) {
                 wp_mail($subscriber->user_email, $notification_subject, $notification_message);
             }
+
+            remove_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
         }
     }
 
@@ -138,11 +142,19 @@ class AsgarosForumNotifications {
         // Check if this functionality is enabled
         if ($asgarosforum->options['admin_subscriptions']) {
             $notification_subject = sprintf(__('[%s] New topic: %s', 'asgaros-forum'), get_bloginfo('name'), $topic_name);
-            $notification_message = sprintf(__("Hello,\r\n\r\nyou got this mail because there is a new forum-topic:\r\n%s\r\n\r\nText:\r\n%s\r\n\r\nLink to the new topic:\r\n%s", 'asgaros-forum'), $topic_name, $topic_text, $topic_link);
+            $notification_message = sprintf(__('Hello,<br /><br />you got this mail because there is a new forum-topic:<br />%s<br /><br />Text:<br />%s<br /><br />Link to the new topic:<br />%s', 'asgaros-forum'), $topic_name, wpautop($topic_text), $topic_link);
             $notification_message = apply_filters('asgarosforum_filter_notify_administrator_message', $notification_message, $topic_name, $topic_text, $topic_link);
 
+            add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
+
             wp_mail(get_bloginfo('admin_email'), $notification_subject, $notification_message);
+
+            remove_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
         }
+    }
+
+    public static function wpdocs_set_html_mail_content_type() {
+        return 'text/html';
     }
 }
 
