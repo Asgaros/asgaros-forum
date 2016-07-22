@@ -87,6 +87,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Correct escaping in notification mails
+* Fixed: Display issues in notification mails with some characters
 = 1.1.6 =
 * Fixed: HTML is now rendered correctly in notification-mails
 * Fixed: Correct escaping of URLs
