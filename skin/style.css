@@ -177,6 +177,9 @@
 #af-wrapper .forum small,
 #af-wrapper .thread small {
     display: block;
+    font-style: normal; /* comp */
+    letter-spacing: normal; /* comp */
+    line-height: inherit; /* comp */
 }
 #af-wrapper .forum-subforums {
     border-top: 1px solid rgba(0, 0, 0, 0.15);
