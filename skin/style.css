@@ -42,6 +42,9 @@
     color: red;
     font-style: italic;
 }
+#af-wrapper iframe {
+    max-width: 100%;
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
