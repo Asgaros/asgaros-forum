@@ -91,6 +91,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Display issues in notification mails with some characters
 * Fixed: Resize external iframe-content (e.g. YouTube videos) correctly
 * Fixed: Display issues with some themes
+* Fixed: Added missing translation strings
 = 1.1.6 =
 * Fixed: HTML is now rendered correctly in notification-mails
 * Fixed: Correct escaping of URLs
@@ -137,12 +138,12 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Categories were not sorted correctly
 * Fixed: Display issues with some themes
 * Fixed: Prevent accessing some PHP-files directly
+* Fixed: Added missing translation strings
 * Added: Sub-forum functionality
 * Added: Banning functionality
 * Added: Theme manager functionality (thanks to Hisol)
 * Added: Color picker for the text
 * Added: Color picker for the background
-* Added: Missing translation strings
 * Changed: Administrators cant be set to forum-moderators anymore
 * Changed: Subject in last-post-view links to the topic
 * Changed: Revised forum management
@@ -246,7 +247,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Updated: English, german and russian translation
 = 1.0.2 =
 * Fixed: Dont modify page titles outside of the forum
-* Fixed: Removed untranslatable strings
+* Fixed: Added missing translation strings
 * Added: Editor button for adding images to posts
 * Added: CSS design rules for better mobile device compatibility
 * Added: Finnish translation (thanks to juhani.honkanen)
@@ -256,9 +257,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Updated: English and german translation
 * Performance improvements and code optimizations
 = 1.0.1 =
-* Fixed: Removed untranslatable strings
+* Fixed: Added missing translation strings
 * Fixed: Display issues with some default themes
-* Added: Missing translation strings
 * Changed: Minor design changes
 * Changed: Translation slug from asgarosforum to asgaros-forum
 * Updated: German translation

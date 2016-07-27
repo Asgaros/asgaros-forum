@@ -587,7 +587,7 @@ class AsgarosForum {
 
             return $username;
         } else {
-            return 'Deleted user';
+            return __('Deleted user', 'asgaros-forum');
         }
     }
 
