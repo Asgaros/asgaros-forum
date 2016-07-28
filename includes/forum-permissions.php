@@ -22,10 +22,8 @@ class AsgarosForumPermissions {
 	}
 
     public static function setCurrentUserPermissions() {
-        global $user_ID;
-
-        self::$current_user_is_moderator = self::isModerator($user_ID);
-        self::$current_user_is_banned = self::isBanned($user_ID);
+        self::$current_user_is_moderator = self::isModerator(get_current_user_id());
+        self::$current_user_is_banned = self::isBanned(get_current_user_id());
     }
 
     public static function isModerator($userid = false) {

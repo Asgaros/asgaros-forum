@@ -114,7 +114,7 @@ class AsgarosForumUploads {
     }
 
 	public static function getFileList($post_id, $uploads, $frontend = false) {
-		global $asgarosforum, $user_ID;
+		global $asgarosforum;
 
         $path = self::$upload_path.$post_id.'/';
         $url = self::$upload_url.$post_id.'/';
@@ -124,7 +124,7 @@ class AsgarosForumUploads {
 
         if (!empty($uploads) && is_dir($path)) {
 			// Generate special message instead of file-list in the frontend when hiding uploads for guests.
-			if ($frontend && !$user_ID && $asgarosforum->options['hide_uploads_from_guests']) {
+			if ($frontend && !is_user_logged_in() && $asgarosforum->options['hide_uploads_from_guests']) {
 				$upload_list_elements .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($asgarosforum->current_url)).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
 			} else {
 	            foreach ($uploads as $upload) {

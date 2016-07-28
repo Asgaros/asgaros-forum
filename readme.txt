@@ -93,6 +93,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Display issues with some themes
 * Fixed: Added missing translation strings
 * Added: Option to hide uploads from guests
+* Performance improvements and code optimizations
 = 1.1.6 =
 * Fixed: HTML is now rendered correctly in notification-mails
 * Fixed: Correct escaping of URLs

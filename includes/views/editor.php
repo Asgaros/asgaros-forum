@@ -8,7 +8,7 @@ $threadname = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
 $threadcontent = (isset($_POST['message'])) ? trim($_POST['message']) : '';
 $error = false;
 
-if (!$user_ID) {
+if (!is_user_logged_in()) {
     $error = true;
     echo '<div class="notice">'.__('Sorry, you don\'t have permission to post.', 'asgaros-forum').'</div>';
 }
@@ -38,7 +38,7 @@ if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
             $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));
 
-            if (($user_ID != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
+            if ((get_current_user_id() != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
                 $error = true;
                 echo '<div class="notice">'.__('Sorry, you are not allowed to edit this post.', 'asgaros-forum').'</div>';
             }

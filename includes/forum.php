@@ -114,7 +114,7 @@ class AsgarosForum {
             return;
         }
 
-        global $user_ID, $wp;
+        global $wp;
 
         if (isset($_GET['view'])) {
             $this->current_view = esc_html($_GET['view']);
@@ -180,13 +180,13 @@ class AsgarosForum {
         $this->options_editor = apply_filters('asgarosforum_filter_editor_settings', $this->options_editor);
 
         // Set cookie
-        if ($user_ID && !isset($_COOKIE['wpafcookie'])) {
-            $last = get_user_meta($user_ID, 'asgarosforum_lastvisit', true);
+        if (is_user_logged_in() && !isset($_COOKIE['wpafcookie'])) {
+            $last = get_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', true);
             setcookie("wpafcookie", $last, 0, "/");
-            update_user_meta($user_ID, 'asgarosforum_lastvisit', $this->current_time());
+            update_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', $this->current_time());
         }
 
-        if (isset($_POST['submit_action']) && $user_ID) {
+        if (isset($_POST['submit_action']) && is_user_logged_in()) {
             AsgarosForumInsert::determineAction();
             if (AsgarosForumInsert::getAction()) {
                 AsgarosForumInsert::setData();
@@ -194,10 +194,10 @@ class AsgarosForum {
                     AsgarosForumInsert::insertData();
                 }
             }
-        } else if ($this->current_view === 'markallread' && $user_ID) {
+        } else if ($this->current_view === 'markallread' && is_user_logged_in()) {
             $time = $this->current_time();
             setcookie("wpafcookie", $time, 0, "/");
-            update_user_meta($user_ID, 'asgarosforum_lastvisit', $time);
+            update_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', $time);
             wp_redirect(html_entity_decode($this->url_home));
             exit;
         } else if (isset($_GET['move_thread'])) {
@@ -319,7 +319,7 @@ class AsgarosForum {
     }
 
     function forum() {
-        global $wpdb, $user_ID;
+        global $wpdb;
 
         ob_start();
         echo '<div id="af-wrapper">';
@@ -630,11 +630,9 @@ class AsgarosForum {
     }
 
     function post_menu($post_id, $author_id, $counter) {
-        global $user_ID;
-
         $o = '';
 
-        if ($user_ID && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current')) {
+        if (is_user_logged_in() && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current')) {
             $o .= '<a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
 
@@ -642,7 +640,7 @@ class AsgarosForum {
             $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
         }
 
-        if ((AsgarosForumPermissions::isModerator('current') || $user_ID == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
+        if ((AsgarosForumPermissions::isModerator('current') || get_current_user_id() == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
             $o .= '<a href="'.$this->url_editor_edit.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
         }
 
@@ -670,10 +668,9 @@ class AsgarosForum {
     }
 
     function forum_menu($location, $showallbuttons = true) {
-        global $user_ID;
         $menu = '';
 
-        if ($user_ID) {
+        if (is_user_logged_in()) {
             if ($location == 'forum' && !AsgarosForumPermissions::isBanned('current') && $this->get_forum_status()) {
                 $menu .= '<a href="'.$this->url_editor_thread.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
             } else if ($location == 'thread') {
@@ -739,9 +736,7 @@ class AsgarosForum {
     }
 
     function last_visit() {
-        global $user_ID;
-
-        if ($user_ID && isset($_COOKIE['wpafcookie'])) {
+        if (is_user_logged_in() && isset($_COOKIE['wpafcookie'])) {
             return $_COOKIE['wpafcookie'];
         } else {
             return "0000-00-00 00:00:00";
@@ -852,14 +847,13 @@ class AsgarosForum {
     }
 
     function get_thread_image($lastpost_data, $status) {
-        global $user_ID;
         $unread_status = '';
 
         if ($lastpost_data) {
             $lastpost_time = $lastpost_data->date;
             $lastpost_author_id = $lastpost_data->author_id;
 
-            if ($lastpost_time && $user_ID != $lastpost_author_id) {
+            if ($lastpost_time && get_current_user_id() != $lastpost_author_id) {
                 $lp = strtotime($lastpost_time);
                 $lv = strtotime($this->last_visit());
 

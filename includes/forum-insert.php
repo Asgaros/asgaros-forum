@@ -30,7 +30,6 @@ class AsgarosForumInsert {
     }
 
     public static function validateExecution() {
-        global $user_ID;
         global $asgarosforum;
 
         // Cancel if there is already an error.
@@ -45,7 +44,7 @@ class AsgarosForumInsert {
         }
 
         // Cancel if the current user is not allowed to edit that post.
-        if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && $user_ID != $asgarosforum->get_post_author($asgarosforum->current_post)) {
+        if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && get_current_user_id() != $asgarosforum->get_post_author($asgarosforum->current_post)) {
             $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }
@@ -66,7 +65,6 @@ class AsgarosForumInsert {
     }
 
     public static function insertData() {
-        global $user_ID;
         global $wpdb;
         global $asgarosforum;
 
@@ -78,7 +76,7 @@ class AsgarosForumInsert {
             $wpdb->insert($asgarosforum->table_threads, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
             $asgarosforum->current_thread = $wpdb->insert_id;
 
-            $wpdb->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
+            $wpdb->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => get_current_user_id()), array('%s', '%d', '%s', '%d'));
             $asgarosforum->current_post = $wpdb->insert_id;
 
             // Only handle uploads when the option is enabled.
@@ -92,7 +90,7 @@ class AsgarosForumInsert {
             // Send notification about new topic to administrator
             AsgarosForumNotifications::notifyAdministrator(self::$dataSubject, self::$dataContent, $redirect);
         } else if (self::getAction() === 'add_post') {
-            $wpdb->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => $user_ID), array('%s', '%d', '%s', '%d'));
+            $wpdb->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => get_current_user_id()), array('%s', '%d', '%s', '%d'));
             $asgarosforum->current_post = $wpdb->insert_id;
 
             // Only handle uploads when the option is enabled.
