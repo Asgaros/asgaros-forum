@@ -114,6 +114,8 @@ class AsgarosForumUploads {
     }
 
 	public static function getFileList($post_id, $uploads, $frontend = false) {
+		global $asgarosforum, $user_ID;
+
         $path = self::$upload_path.$post_id.'/';
         $url = self::$upload_url.$post_id.'/';
         $uploads = maybe_unserialize($uploads);
@@ -121,18 +123,23 @@ class AsgarosForumUploads {
         $upload_list_elements = '';
 
         if (!empty($uploads) && is_dir($path)) {
-            foreach ($uploads as $upload) {
-                if (file_exists($path.basename($upload))) {
-                    if ($frontend) {
-                        $upload_list_elements .= '<li><a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
-                    } else {
-                        $upload_list_elements .= '<div class="uploaded-file">';
-                        $upload_list_elements .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
-                        $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
-                        $upload_list_elements .= '</div>';
-                    }
-                }
-            }
+			// Generate special message instead of file-list in the frontend when hiding uploads for guests.
+			if ($frontend && !$user_ID && $asgarosforum->options['hide_uploads_from_guests']) {
+				$upload_list_elements .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($asgarosforum->current_url)).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
+			} else {
+	            foreach ($uploads as $upload) {
+	                if (file_exists($path.basename($upload))) {
+	                    if ($frontend) {
+	                        $upload_list_elements .= '<li><a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
+	                    } else {
+	                        $upload_list_elements .= '<div class="uploaded-file">';
+	                        $upload_list_elements .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
+	                        $upload_list_elements .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
+	                        $upload_list_elements .= '</div>';
+	                    }
+	                }
+	            }
+			}
 
             if (!empty($upload_list_elements)) {
                 if ($frontend) {

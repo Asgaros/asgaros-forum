@@ -33,6 +33,7 @@ class AsgarosForum {
         'minimalistic_editor'       => true,
         'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'        => false,
+        'hide_uploads_from_guests'  => false,
         'admin_subscriptions'       => false,
         'allow_subscriptions'       => true,
         'highlight_admin'           => true,
