@@ -51,6 +51,21 @@ if (!defined('ABSPATH')) exit;
                 <div class="post-message">
                     <?php
                     $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
+
+                    if ($this->options['allow_shortcodes']) {
+                        // Prevent executing specific shortcodes in posts.
+                        $filtered_shortcodes = array();
+                        $filtered_shortcodes[] = 'forum';
+                        $filtered_shortcodes = apply_filters('asgarosforum_filter_post_shortcodes', $filtered_shortcodes);
+
+                        foreach ($filtered_shortcodes as $value) {
+                            remove_shortcode($value);
+                        }
+
+                        // Run shortcodes.
+                        $post_content = do_shortcode($post_content);
+                    }
+
                     $post_content = apply_filters('asgarosforum_filter_post_content', $post_content);
                     echo $post_content;
                     AsgarosForumUploads::getFileList($post->id, $post->uploads, true);

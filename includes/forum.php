@@ -31,6 +31,7 @@ class AsgarosForum {
         'posts_per_page'            => 10,
         'threads_per_page'          => 20,
         'minimalistic_editor'       => true,
+        'allow_shortcodes'          => false,
         'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'        => false,
         'hide_uploads_from_guests'  => false,

@@ -70,6 +70,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 = Which filters are available =
 * asgarosforum_filter_post_username
 * asgarosforum_filter_post_content
+* asgarosforum_filter_post_shortcodes
 * asgarosforum_filter_editor_settings
 * asgarosforum_filter_get_posts
 * asgarosforum_filter_get_threads
@@ -92,6 +93,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Resize external iframe-content (e.g. YouTube videos) correctly
 * Fixed: Display issues with some themes
 * Fixed: Added missing translation strings
+* Added: Option to allow shortcodes in posts
 * Added: Option to hide uploads from guests
 * Performance improvements and code optimizations
 = 1.1.6 =

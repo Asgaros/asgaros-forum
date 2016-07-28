@@ -25,6 +25,10 @@ if (!defined('ABSPATH')) exit;
             <label for="minimalistic_editor"><?php _e('Use minimalistic editor', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="allow_shortcodes" id="allow_shortcodes" <?php checked(!empty($asgarosforum->options['allow_shortcodes'])); ?>>
+            <label for="allow_shortcodes"><?php _e('Allow shortcodes in posts', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?>>
             <label for="highlight_admin"><?php _e('Highlight administrator/moderator names', 'asgaros-forum'); ?></label>
         </p>
