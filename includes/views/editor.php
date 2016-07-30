@@ -10,7 +10,7 @@ $error = false;
 
 if (!is_user_logged_in()) {
     $error = true;
-    echo '<div class="notice">'.__('Sorry, you don\'t have permission to post.', 'asgaros-forum').'</div>';
+    echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
 }
 
 if (!$error) {
