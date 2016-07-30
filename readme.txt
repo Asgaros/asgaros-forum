@@ -93,7 +93,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Resize external iframe-content (e.g. YouTube videos) correctly
 * Fixed: Display issues with some themes
 * Fixed: Added missing translation strings
-* Fixed: Misleading error strings
+* Fixed: Misleading strings
 * Added: Option to allow shortcodes in posts
 * Added: Option to hide uploads from guests
 * Performance improvements and code optimizations

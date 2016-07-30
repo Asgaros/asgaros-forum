@@ -16,7 +16,7 @@ $forum_counter = 0;
                 require('forum-element.php');
             }
         } else { ?>
-            <div class="notice"><?php _e('There are no forums yet!', 'asgaros-forum'); ?></div>
+            <div class="notice"><?php _e('In this category are no forums yet!', 'asgaros-forum'); ?></div>
         <?php } ?>
     </div>
 <?php } ?>
