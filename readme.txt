@@ -18,6 +18,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 
 = Features =
 * Topic & post management
+* Guest postings
 * Sub-forums
 * Notifications
 * Moderators
@@ -50,6 +51,9 @@ By default only files of the following filetype can be uploaded: jpg, jpeg, gif,
 Moderators can be added via the user edit screen in the WordPress administration interface.
 = Where can I ban users? =
 Users can be banned via the user edit screen in the WordPress administration interface.
+= How can I add a captcha to the editor for guests? =
+To extend your forum with a captcha you have to use one of the available third-party captcha-plugins for WordPress and extend your themes functions.php file with the checking-logic via the available hooks and filters by your own. For example you can use the plugin [Really Simple CAPTCHA](https://wordpress.org/plugins/really-simple-captcha/) and extend your themes functions.php file with this code:
+[https://gist.github.com/Asgaros/6d4b88b1f5013efb910d9fcd01284698](https://gist.github.com/Asgaros/6d4b88b1f5013efb910d9fcd01284698).
 = I want help to translate Asgaros Forum =
 You can help to translate Asgaros Forum on this site:
 [https://translate.wordpress.org/projects/wp-plugins/asgaros-forum](https://translate.wordpress.org/projects/wp-plugins/asgaros-forum).
@@ -67,6 +71,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_action_add_category_form_fields
 * asgarosforum_action_edit_category_form_fields
 * asgarosforum_action_save_category_form_fields
+* asgarosforum_editor_custom_content_bottom
 = Which filters are available =
 * asgarosforum_filter_post_username
 * asgarosforum_filter_post_content
@@ -78,6 +83,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_get_threads_order
 * asgarosforum_filter_notify_administrator_message
 * asgarosforum_filter_notify_topic_subscribers_message
+* asgarosforum_filter_insert_custom_validation
 
 == Screenshots ==
 1. The forum overview.
@@ -94,8 +100,11 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Display issues with some themes
 * Fixed: Added missing translation strings
 * Fixed: Misleading strings
+* Added: Option to allow guest postings
 * Added: Option to allow shortcodes in posts
 * Added: Option to hide uploads from guests
+* Added: asgarosforum_editor_custom_content_bottom hook
+* Added: asgarosforum_filter_insert_custom_validation filter
 * Performance improvements and code optimizations
 = 1.1.6 =
 * Fixed: HTML is now rendered correctly in notification-mails

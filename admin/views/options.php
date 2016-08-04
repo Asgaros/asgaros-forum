@@ -29,6 +29,10 @@ if (!defined('ABSPATH')) exit;
             <label for="allow_shortcodes"><?php _e('Allow shortcodes in posts', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
+            <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?>>
             <label for="highlight_admin"><?php _e('Highlight administrator/moderator names', 'asgaros-forum'); ?></label>
         </p>

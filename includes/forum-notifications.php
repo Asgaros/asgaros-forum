@@ -46,7 +46,7 @@ class AsgarosForumNotifications {
         global $asgarosforum;
 
         // Check if this functionality is enabled.
-        if ($asgarosforum->options['allow_subscriptions']) {
+        if (is_user_logged_in() && $asgarosforum->options['allow_subscriptions']) {
             echo '<div class="editor-row">';
             echo '<span class="row-title">'.__('Subscription:', 'asgaros-forum').'</span>';
             echo '<input type="checkbox" name="subscribe_checkbox" id="subscribe_checkbox" '.checked(self::isSubscribed($asgarosforum->current_thread), true, false).'>';

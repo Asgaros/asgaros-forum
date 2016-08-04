@@ -8,19 +8,19 @@ $threadname = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
 $threadcontent = (isset($_POST['message'])) ? trim($_POST['message']) : '';
 $error = false;
 
-if (!is_user_logged_in()) {
+if (!is_user_logged_in() && (!$this->options['allow_guest_postings'] || $this->current_view === 'editpost')) {
     $error = true;
     echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
 }
 
 if (!$error) {
     if ($this->current_view === 'addthread') {
-        if (!$error && (!$this->get_forum_status() || AsgarosForumPermissions::isBanned('current'))) {
+        if (!$error && (!$this->get_forum_status() || (is_user_logged_in() && AsgarosForumPermissions::isBanned('current')))) {
             $error = true;
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
         }
     } else if ($this->current_view === 'addpost') {
-        if (!$error && (($this->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current'))) {
+        if (!$error && ((is_user_logged_in() && (($this->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current'))) || (!is_user_logged_in() && $this->get_status('closed')))) {
             $error = true;
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
         }
@@ -38,7 +38,7 @@ if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
             $post = $wpdb->get_row($wpdb->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));
 
-            if ((get_current_user_id() != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
+            if (!is_user_logged_in() || (get_current_user_id() != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
                 $error = true;
                 echo '<div class="notice">'.__('Sorry, you are not allowed to edit this post.', 'asgaros-forum').'</div>';
             }
@@ -92,6 +92,8 @@ if (!$error) {
             }
             AsgarosForumUploads::showEditorUploadForm();
             AsgarosForumNotifications::showEditorSubscriptionOption();
+
+            do_action('asgarosforum_editor_custom_content_bottom');
             ?>
             <div class="editor-row">
                 <?php if ($this->current_view === 'addthread') { ?>

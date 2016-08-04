@@ -32,6 +32,7 @@ class AsgarosForum {
         'threads_per_page'          => 20,
         'minimalistic_editor'       => true,
         'allow_shortcodes'          => false,
+        'allow_guest_postings'      => false,
         'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'        => false,
         'hide_uploads_from_guests'  => false,
@@ -187,7 +188,7 @@ class AsgarosForum {
             update_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', $this->current_time());
         }
 
-        if (isset($_POST['submit_action']) && is_user_logged_in()) {
+        if (isset($_POST['submit_action']) && (is_user_logged_in() || (!is_user_logged_in() && $this->options['allow_guest_postings']))) {
             AsgarosForumInsert::determineAction();
             if (AsgarosForumInsert::getAction()) {
                 AsgarosForumInsert::setData();
@@ -400,7 +401,7 @@ class AsgarosForum {
     }
 
     function showLoginMessage() {
-        if (!is_user_logged_in()) {
+        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
             echo '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->current_url)).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
         }
     }
@@ -574,22 +575,26 @@ class AsgarosForum {
     }
 
     function get_username($user_id, $widget = false) {
-        $user = get_userdata($user_id);
-
-        if ($user) {
-            $username = $user->display_name;
-
-            if ($this->options['highlight_admin'] && !$widget) {
-                if (user_can($user_id, 'manage_options')) {
-                    $username = '<span class="highlight-admin">'.$username.'</span>';
-                } else if (AsgarosForumPermissions::isModerator($user_id)) {
-                    $username = '<span class="highlight-moderator">'.$username.'</span>';
-                }
-            }
-
-            return $username;
+        if ($user_id == 0) {
+            return __('Guest', 'asgaros-forum');
         } else {
-            return __('Deleted user', 'asgaros-forum');
+            $user = get_userdata($user_id);
+
+            if ($user) {
+                $username = $user->display_name;
+
+                if ($this->options['highlight_admin'] && !$widget) {
+                    if (user_can($user_id, 'manage_options')) {
+                        $username = '<span class="highlight-admin">'.$username.'</span>';
+                    } else if (AsgarosForumPermissions::isModerator($user_id)) {
+                        $username = '<span class="highlight-moderator">'.$username.'</span>';
+                    }
+                }
+
+                return $username;
+            } else {
+                return __('Deleted user', 'asgaros-forum');
+            }
         }
     }
 
@@ -633,16 +638,19 @@ class AsgarosForum {
     function post_menu($post_id, $author_id, $counter) {
         $o = '';
 
-        if (is_user_logged_in() && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current')) {
+        // TODO: isBanned() check is maybe not necessary because it is already performed in isModerator() check?
+        if ((!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')) || (is_user_logged_in() && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current'))) {
             $o .= '<a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
 
-        if (($counter > 1 || $this->current_page >= 1) && AsgarosForumPermissions::isModerator('current')) {
-            $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
-        }
+        if (is_user_logged_in()) {
+            if (($counter > 1 || $this->current_page >= 1) && AsgarosForumPermissions::isModerator('current')) {
+                $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;remove_post&amp;post='.$post_id.'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
+            }
 
-        if ((AsgarosForumPermissions::isModerator('current') || get_current_user_id() == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
-            $o .= '<a href="'.$this->url_editor_edit.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
+            if ((AsgarosForumPermissions::isModerator('current') || get_current_user_id() == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
+                $o .= '<a href="'.$this->url_editor_edit.$post_id.'&amp;part='.($this->current_page + 1).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
+            }
         }
 
         $o = (!empty($o)) ? $o = '<div class="post-menu">'.$o.'</div>' : $o;
@@ -671,30 +679,26 @@ class AsgarosForum {
     function forum_menu($location, $showallbuttons = true) {
         $menu = '';
 
-        if (is_user_logged_in()) {
-            if ($location == 'forum' && !AsgarosForumPermissions::isBanned('current') && $this->get_forum_status()) {
-                $menu .= '<a href="'.$this->url_editor_thread.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
-            } else if ($location == 'thread') {
-                if (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current'))) {
-                    $menu .= '<a href="'.$this->url_editor_post.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
-                }
+        if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->get_forum_status()) {
+            $menu .= '<a href="'.$this->url_editor_thread.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
+        } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
+            $menu .= '<a href="'.$this->url_editor_post.'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
+        }
 
-                if (AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
-                    $menu .= '<a href="'.$this->url_movethread.'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
-                    $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
+        if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
+            $menu .= '<a href="'.$this->url_movethread.'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
-                    if ($this->get_status('sticky')) {
-                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
-                    } else {
-                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="dashicons-before dashicons-admin-post"></span><span>'.__('Sticky', 'asgaros-forum').'</span></a>';
-                    }
+            if ($this->get_status('sticky')) {
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
+            } else {
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="dashicons-before dashicons-admin-post"></span><span>'.__('Sticky', 'asgaros-forum').'</span></a>';
+            }
 
-                    if ($this->get_status('closed')) {
-                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
-                    } else {
-                        $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
-                    }
-                }
+            if ($this->get_status('closed')) {
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
+            } else {
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
             }
         }
 

@@ -61,6 +61,12 @@ class AsgarosForumInsert {
             return false;
         }
 
+        // Do custom insert validation checks.
+        $custom_check = apply_filters('asgarosforum_filter_insert_custom_validation', true);
+        if (!$custom_check) {
+            return false;
+        }
+
         return true;
     }
 
