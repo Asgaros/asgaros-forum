@@ -94,6 +94,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Rare PHP-warning when using notifications
 = 1.2.0 =
 * Fixed: Correct escaping in notification mails
 * Fixed: Display issues in notification mails with some characters

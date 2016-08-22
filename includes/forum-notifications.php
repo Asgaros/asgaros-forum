@@ -60,7 +60,7 @@ class AsgarosForumNotifications {
         if ($topic_id) {
             $status = get_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic');
 
-            if (in_array($topic_id, $status)) {
+            if ($status && in_array($topic_id, $status)) {
                 return true;
             }
         }
