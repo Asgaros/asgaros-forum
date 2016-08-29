@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forums, discussion, multisite
 Requires at least: 4.4
 Tested up to: 4.6
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,12 +95,12 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.2.1 =
 * Fixed: Prevent generation of wrong canonical links
 * Fixed: Rare PHP-warning when using notifications
 * Added: Multisite compatibility
 * Changed: Show login-links at all pages
 * Search Engine Optimizations
-* Performance improvements and code optimizations
 = 1.2.0 =
 * Fixed: Correct escaping in notification mails
 * Fixed: Display issues in notification mails with some characters
