@@ -188,6 +188,11 @@ class AsgarosForum {
             update_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', $this->current_time());
         }
 
+        // Prevent generation of some head-elements.
+        remove_action('wp_head', 'rel_canonical');
+        remove_action('wp_head', 'wp_shortlink_wp_head');
+        remove_action('wp_head', 'wp_oembed_add_discovery_links');
+
         if (isset($_POST['submit_action']) && (is_user_logged_in() || (!is_user_logged_in() && $this->options['allow_guest_postings']))) {
             AsgarosForumInsert::determineAction();
             if (AsgarosForumInsert::getAction()) {
