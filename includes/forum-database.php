@@ -21,15 +21,20 @@ class AsgarosForumDatabase {
 
     // AsgarosForumDatabase constructor
 	private function __construct() {
+        $this->setTables();
+        register_activation_hook(__FILE__, array($this, 'activatePlugin'));
+        add_action('wpmu_new_blog', array($this, 'buildSubsite'));
+        add_filter('wpmu_drop_tables', 'deleteSubsite');
+        add_action('plugins_loaded', array($this, 'buildDatabase'));
+	}
+
+    private function setTables() {
         global $wpdb;
 
         self::$table_forums     = $wpdb->prefix.'forum_forums';
         self::$table_threads    = $wpdb->prefix.'forum_threads';
         self::$table_posts      = $wpdb->prefix.'forum_posts';
-
-        register_activation_hook(__FILE__, array($this, 'buildDatabase'));
-        add_action('plugins_loaded', array($this, 'buildDatabase'));
-	}
+    }
 
     public static function getTable($name) {
         if ($name === 'forums') {
@@ -39,6 +44,55 @@ class AsgarosForumDatabase {
         } else if ($name === 'posts') {
             return self::$table_posts;
         }
+    }
+
+    public static function activatePlugin($networkwide) {
+        global $wpdb;
+
+        if (function_exists('is_multisite') && is_multisite()) {
+            // Check if it is a network activation. If so, run the database-creation for each id.
+            if ($networkwide) {
+                $old_blog =  $wpdb->blogid;
+
+                // Get all blog ids
+                $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+
+                foreach ($blogids as $blog_id) {
+                    switch_to_blog($blog_id);
+                    $this->setTables();
+                    $this->buildDatabase();
+                }
+
+                switch_to_blog($old_blog);
+                $this->setTables();
+            }
+        } else {
+            $this->buildDatabase();
+        }
+    }
+
+    // Create tables for a new subsite in a multisite installation.
+    public static function buildSubsite($blog_id, $user_id, $domain, $path, $site_id, $meta) {
+        if (!function_exists('is_plugin_active_for_network')) {
+            require_once(ABSPATH.'/wp-admin/includes/plugin.php');
+        }
+
+        if (is_plugin_active_for_network('asgaros-forum/asgaros-forum.php')) {
+            switch_to_blog($blog_id);
+            $this->setTables();
+            $this->buildDatabase();
+            restore_current_blog();
+            $this->setTables();
+        }
+    }
+
+    // Delete tables during a subsite uninstall.
+    public function deleteSubsite($tables) {
+        global $wpdb;
+        $tables[] = $wpdb->prefix.'forum_forums';
+        $tables[] = $wpdb->prefix.'forum_threads';
+        $tables[] = $wpdb->prefix.'forum_posts';
+        return $tables;
     }
 
     public static function buildDatabase() {

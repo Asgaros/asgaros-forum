@@ -1,7 +1,7 @@
 === Asgaros Forum ===
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
-Tags: forums, discussion
+Tags: forums, discussion, multisite
 Requires at least: 4.4
 Tested up to: 4.6
 Stable tag: 1.2.0
@@ -29,6 +29,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Recent Forum Posts Widget
 * Easy color customization
 * Theme manager
+* Multisite compatibility
 * Mobile device compatibility
 * Supports multiple languages
 
@@ -94,9 +95,11 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
-* Fixed: Improved SEO by preventing generation of wrong canonical links
+* Fixed: Prevent generation of wrong canonical links
 * Fixed: Rare PHP-warning when using notifications
+* Added: Multisite compatibility
 * Changed: Show login-links at all pages
+* Search Engine Optimizations
 * Performance improvements and code optimizations
 = 1.2.0 =
 * Fixed: Correct escaping in notification mails
