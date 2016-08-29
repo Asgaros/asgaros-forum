@@ -85,8 +85,10 @@ if (!defined('ABSPATH')) exit;
 
 <div>
     <?php echo $pageing; ?>
-    <div class="forum-menu"><?php echo $this->forum_menu('thread', false);?></div>
+    <div class="forum-menu"><?php echo $this->forum_menu('thread', false); ?></div>
     <div class="clear"></div>
 </div>
 
-<?php AsgarosForumNotifications::showSubscriptionLink(); ?>
+<?php
+AsgarosForumNotifications::showSubscriptionLink();
+?>

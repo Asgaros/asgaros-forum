@@ -97,6 +97,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Improved SEO by preventing generation of wrong canonical links
 * Fixed: Rare PHP-warning when using notifications
 * Changed: Show login-links at all pages
+* Performance improvements and code optimizations
 = 1.2.0 =
 * Fixed: Correct escaping in notification mails
 * Fixed: Display issues in notification mails with some characters

@@ -28,7 +28,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-//Textdomain Hook
+//Textdomain Hook TODO: Remove it because of 4.6 changes
 function asgarosforum_load_plugin_textdomain() {
     load_plugin_textdomain('asgaros-forum', FALSE, basename(dirname(__FILE__)).'/languages/');
 }

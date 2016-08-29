@@ -641,7 +641,6 @@ class AsgarosForum {
     function post_menu($post_id, $author_id, $counter) {
         $o = '';
 
-        // TODO: isBanned() check is maybe not necessary because it is already performed in isModerator() check?
         if ((!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')) || (is_user_logged_in() && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current'))) {
             $o .= '<a href="'.$this->url_editor_post.'&amp;quote='.$post_id.'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
