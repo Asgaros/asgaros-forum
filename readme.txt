@@ -101,6 +101,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Multisite compatibility
 * Changed: Show login-links at all pages
 * Search Engine Optimizations
+* Performance improvements and code optimizations
 = 1.2.0 =
 * Fixed: Correct escaping in notification mails
 * Fixed: Display issues in notification mails with some characters
