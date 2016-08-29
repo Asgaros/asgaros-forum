@@ -340,6 +340,8 @@ class AsgarosForum {
                 echo '<div class="info">'.$this->info.'</div>';
             }
 
+            $this->showLoginMessage();
+
             switch ($this->current_view) {
                 case 'movethread':
                     $this->movethread();
@@ -383,8 +385,6 @@ class AsgarosForum {
         $counter_normal = count($threads);
         $counter_total = $counter_normal + count($sticky_threads);
 
-        $this->showLoginMessage();
-
         require('views/forum.php');
     }
 
@@ -396,8 +396,6 @@ class AsgarosForum {
             $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views + 1 WHERE id = %d", $this->current_thread));
 
             $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
-
-            $this->showLoginMessage();
 
             require('views/thread.php');
         } else {
