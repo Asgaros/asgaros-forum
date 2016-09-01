@@ -95,6 +95,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Remove tables on multisite installations correctly
 = 1.2.1 =
 * Fixed: Prevent generation of wrong canonical links
 * Fixed: Rare PHP-warning when using notifications
