@@ -162,7 +162,7 @@ class AsgarosForumUploads {
 		global $asgarosforum;
 
         // Check if this functionality is enabled and user is logged in
-        if (is_user_logged_in() && $asgarosforum->options['allow_file_uploads']) {
+        if ((is_user_logged_in() || $asgarosforum->options['allow_file_uploads_guests']) && $asgarosforum->options['allow_file_uploads']) {
 			echo '<div class="editor-row editor-row-uploads">';
 			echo '<span class="row-title">'.__('Upload Files:', 'asgaros-forum').'</span>';
 			echo '<input type="file" name="forumfile[]"><br />';
