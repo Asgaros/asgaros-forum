@@ -51,14 +51,15 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 
 		$posts = $asgarosforum->get_last_posts($number, $where);
 
-		if (!empty($posts)) {
-            echo $args['before_widget'];
+        echo $args['before_widget'];
 
-            if ($title) {
-                echo $args['before_title'].$title.$args['after_title'];
-            }
+        if ($title) {
+            echo $args['before_title'].$title.$args['after_title'];
+        }
 
+        if (!empty($posts)) {
             echo '<ul class="asgarosforum-widget">';
+
             foreach ($posts as $post) {
                 echo '<li>';
                 echo '<span class="post-link"><a href="'.$asgarosforum->get_widget_link($post->parent_id, $post->id, get_the_permalink($target)).'" title="'.esc_html(stripslashes($post->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($post->name))).'</a></span>';
@@ -66,9 +67,13 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 				echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($post->date), current_time('timestamp'))).'</span>';
 			    echo '</li>';
             }
+            
             echo '</ul>';
-            echo $args['after_widget'];
+        } else {
+            _e('No posts yet!', 'asgaros-forum');
         }
+
+        echo $args['after_widget'];
     }
 
     public function form($instance) {
