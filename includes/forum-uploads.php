@@ -47,6 +47,31 @@ class AsgarosForumUploads {
         }
 	}
 
+	// Gets a list of files which will be uploaded with new posts/topics.
+	// This function is used to store the file list directly in the database during post-creation to avoid an additional update-query.
+	public static function prepareFileList() {
+		$links = array();
+
+		if (isset($_FILES['forumfile'])) {
+            foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
+                if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
+                    $file_extension = strtolower(pathinfo($_FILES['forumfile']['name'][$index], PATHINFO_EXTENSION));
+
+                    // Check if its allowed to upload an file with this extension.
+                    if (in_array($file_extension, self::$upload_allowed_filetypes)) {
+						$name = sanitize_file_name(stripslashes($_FILES['forumfile']['name'][$index]));
+
+		                if (!empty($name)) {
+							$links[] = $name;
+						}
+                    }
+                }
+            }
+        }
+		
+		return $links;
+	}
+
 	public static function uploadFiles($post_id) {
         $files = array();
         $links = array();
@@ -72,7 +97,7 @@ class AsgarosForumUploads {
 
         // Check for files to upload
         if (isset($_FILES['forumfile'])) {
-            foreach ($_FILES['forumfile']['name'] as $index =>$tmpName) {
+            foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
                 if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
                     $file_extension = strtolower(pathinfo($_FILES['forumfile']['name'][$index], PATHINFO_EXTENSION));
 
