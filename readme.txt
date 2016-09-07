@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forums, discussion, multisite
 Requires at least: 4.4
 Tested up to: 4.6
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.2.2 =
 * Fixed: Remove tables on multisite installations correctly
 * Fixed: Dont hide widget when there are no recent posts
 * Fixed: Display issues with some themes
