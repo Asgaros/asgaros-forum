@@ -74,6 +74,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_action_save_category_form_fields
 * asgarosforum_editor_custom_content_bottom
 = Which filters are available =
+* asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
 * asgarosforum_filter_post_content
 * asgarosforum_filter_post_shortcodes
@@ -98,6 +99,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Remove tables on multisite installations correctly
 * Fixed: Dont hide widget when there are no recent posts
 * Added: Option to allow uploads from guests
+* Added: asgarosforum_filter_login_message filter
 * Performance improvements and code optimizations
 = 1.2.1 =
 * Fixed: Prevent generation of wrong canonical links
