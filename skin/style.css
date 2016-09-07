@@ -105,6 +105,9 @@
 #af-wrapper .editor-row input[type="submit"] {
     width: 100%;
     box-sizing: border-box;
+    box-shadow: none; /* comp */
+    border-radius: initial; /* comp */
+    text-shadow: initial; /* comp */
 }
 #af-wrapper .editor-row input[type="checkbox"] {
     margin-top: 0 !important;
@@ -272,6 +275,8 @@
     margin-bottom: 10px;
     width: 100%;
     color: #444;
+    float: none; /* comp */
+    padding: initial; /* comp */
 }
 #af-wrapper .breadcrumbs a {
     color: #444;

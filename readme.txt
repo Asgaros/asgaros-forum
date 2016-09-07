@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: Remove tables on multisite installations correctly
 * Fixed: Dont hide widget when there are no recent posts
+* Fixed: Display issues with some themes
 * Added: Option to allow uploads from guests
 * Added: asgarosforum_filter_login_message filter
 * Performance improvements and code optimizations
