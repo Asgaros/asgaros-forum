@@ -9,7 +9,7 @@ $lastpost_data = $this->get_lastpost_in_forum($forum->id);
     <div class="forum-status"><?php $this->get_thread_image($lastpost_data, 'overview'); ?></div>
     <div class="forum-name">
         <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo esc_html(stripslashes($forum->name)); ?></a></strong>
-        <small><?php echo $forum->description; ?></small>
+        <small><?php echo stripslashes($forum->description); ?></small>
         <?php
         if ($forum->count_subforums > 0) {
             echo '<small class="forum-subforums">';
