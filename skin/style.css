@@ -322,6 +322,7 @@
     border-top: 2px solid rgba(0, 0, 0, 0.2);
     box-sizing: content-box;
     height: 29px; /* comp */
+    padding: inherit; /* comp */
 }
 #af-wrapper .post-date {
     float: left;
