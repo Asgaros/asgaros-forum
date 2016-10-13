@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: Remove slashes in the forum description
 * Fixed: Escape HTML in the forum description
+* Changed: Links in notification mails are now clickable
 = 1.2.2 =
 * Fixed: Remove tables on multisite installations correctly
 * Fixed: Dont hide widget when there are no recent posts
