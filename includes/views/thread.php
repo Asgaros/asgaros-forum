@@ -45,7 +45,7 @@ if (!defined('ABSPATH')) exit;
                         echo '<br /><small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
                     }
 
-                    do_action('asgarosforum_after_post_author', $post->author_id);
+                    do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
                     ?>
                 </div>
                 <div class="post-message">
