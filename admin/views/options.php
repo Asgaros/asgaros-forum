@@ -47,7 +47,7 @@ if (!defined('ABSPATH')) exit;
         <h3><?php _e('Notifications', 'asgaros-forum'); ?></h3>
         <p>
             <input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>>
-            <label for="admin_subscriptions"><?php _e('Notify administrator about new topics', 'asgaros-forum'); ?></label>
+            <label for="admin_subscriptions"><?php _e('Notify site owner about new topics', 'asgaros-forum'); ?></label>
         </p>
         <p>
             <input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>>
