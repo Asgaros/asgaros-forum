@@ -29,6 +29,13 @@ if (!defined('ABSPATH')) exit;
             <div class="post-content">
                 <div class="post-author">
                     <?php
+                    // TODO: Add global variable to store userid.
+                    $userID = get_current_user_id();
+
+                    if ($this->options['highlight_authors'] && $counter > 1 && $userID && $userID == $post->author_id) {
+                        echo '<small class="post-author-marker">'.__('Thread Author', 'asgaros-forum').'</small>';
+                    }
+
                     if ($avatars_available) {
                         echo get_avatar($post->author_id, 60);
                         echo '<br />';

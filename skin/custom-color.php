@@ -12,7 +12,8 @@ $color = '#'.$_GET['color'];
 #af-wrapper input[type="submit"],
 #af-wrapper .forum-menu a,
 #af-wrapper .pages a,
-#af-wrapper .title-element {
+#af-wrapper .title-element,
+#af-wrapper .post-author-marker {
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .content-element {

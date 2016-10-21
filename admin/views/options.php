@@ -37,6 +37,10 @@ if (!defined('ABSPATH')) exit;
             <label for="highlight_admin"><?php _e('Highlight administrator/moderator names', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="highlight_authors" id="highlight_authors" <?php checked(!empty($asgarosforum->options['highlight_authors'])); ?>>
+            <label for="highlight_authors"><?php _e('Highlight thread authors', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?>>
             <label for="show_edit_date"><?php _e('Show edit date', 'asgaros-forum'); ?></label>
         </p>

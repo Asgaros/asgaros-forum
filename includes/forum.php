@@ -39,6 +39,7 @@ class AsgarosForum {
         'admin_subscriptions'       => false,
         'allow_subscriptions'       => true,
         'highlight_admin'           => true,
+        'highlight_authors'         => true,
         'show_edit_date'            => true,
         'require_login'             => false,
         'custom_color'              => '#2d89cc',

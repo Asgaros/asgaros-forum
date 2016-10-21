@@ -97,6 +97,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Various fixes in the read/unread-logic
+* Added: Option to highlight thread authors
 * Changed: Read/Unread icons are now better recognizable
 * Performance improvements and code optimizations
 = 1.2.3 =
