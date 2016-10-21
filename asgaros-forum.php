@@ -41,19 +41,20 @@ require('includes/forum-notifications.php');
 require('includes/forum.php');
 require('includes/forum-widgets.php');
 require('includes/forum-thememanager.php');
+require('includes/forum-unread.php');
 require('includes/forum-uploads.php');
 require('admin/admin.php');
 
-AsgarosForumDatabase::getInstance();
-AsgarosForumPermissions::getInstance();
-AsgarosForumNotifications::getInstance();
-AsgarosForumUploads::getInstance();
+AsgarosForumDatabase::createInstance();
+AsgarosForumPermissions::createInstance();
+AsgarosForumUnread::createInstance();
+AsgarosForumUploads::createInstance();
 
 global $asgarosforum;
 global $asgarosforum_admin;
 $plugin_root_url = plugin_dir_url(__FILE__);
 $asgarosforum = new AsgarosForum($plugin_root_url);
-AsgarosForumThemeManager::getInstance($plugin_root_url);
+AsgarosForumThemeManager::createInstance($plugin_root_url);
 
 if (is_admin()) {
     $asgarosforum_admin = new asgarosforum_admin();

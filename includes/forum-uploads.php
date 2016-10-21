@@ -11,12 +11,12 @@ class AsgarosForumUploads {
 	private static $upload_allowed_filetypes;
 
 	// AsgarosForumUploads instance creator
-	public static function getInstance() {
+	public static function createInstance() {
 		if (self::$instance === null) {
 			self::$instance = new self;
-		} else {
-			return self::$instance;
 		}
+
+        return self::$instance;
 	}
 
 	// AsgarosForumUploads constructor
@@ -68,7 +68,7 @@ class AsgarosForumUploads {
                 }
             }
         }
-		
+
 		return $links;
 	}
 

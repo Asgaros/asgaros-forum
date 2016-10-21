@@ -96,6 +96,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Various fixes in the read/unread-logic
+* Changed: Read/Unread icons are now better recognizable
+* Performance improvements and code optimizations
 = 1.2.3 =
 * Fixed: Remove slashes in the forum description
 * Fixed: Escape HTML in the forum description

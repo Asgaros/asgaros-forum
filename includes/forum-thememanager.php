@@ -14,12 +14,12 @@ class AsgarosForumThemeManager {
 	private static $current_theme;		// The current theme
 
 	// AsgarosForumThemeManager instance creator
-	public static function getInstance($plugin_url) {
+	public static function createInstance($plugin_url) {
 		if (self::$instance === null) {
 			self::$instance = new self($plugin_url);
-		} else {
-			return self::$instance;
 		}
+
+        return self::$instance;
 	}
 
 	// AsgarosForumThemeManager constructor

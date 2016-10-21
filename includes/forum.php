@@ -13,7 +13,6 @@ class AsgarosForum {
     var $url_editor_thread = '';
     var $url_editor_post = '';
     var $url_editor_edit = '';
-    var $url_markallread = '';
     var $url_movethread = '';
     var $table_forums = '';
     var $table_threads = '';
@@ -172,7 +171,6 @@ class AsgarosForum {
         $this->url_editor_thread = esc_url(add_query_arg(array('view' => 'addthread', 'id' => $this->current_forum), $this->url_home));
         $this->url_editor_post = esc_url(add_query_arg(array('view' => 'addpost', 'id' => $this->current_thread), $this->url_home));
         $this->url_editor_edit = esc_url(add_query_arg(array('view' => 'editpost'), $this->url_home).'&amp;id=');
-        $this->url_markallread = esc_url(add_query_arg(array('view' => 'markallread'), $this->url_home));
         $this->url_movethread = esc_url(add_query_arg(array('view' => 'movethread', 'id' => $this->current_thread), $this->url_home));
         $this->current_url = esc_url(add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request))));
 
@@ -181,13 +179,6 @@ class AsgarosForum {
 
         // Override editor settings
         $this->options_editor = apply_filters('asgarosforum_filter_editor_settings', $this->options_editor);
-
-        // Set cookie
-        if (is_user_logged_in() && !isset($_COOKIE['wpafcookie'])) {
-            $last = get_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', true);
-            setcookie("wpafcookie", $last, 0, "/");
-            update_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', $this->current_time());
-        }
 
         // Prevent generation of some head-elements.
         remove_action('wp_head', 'rel_canonical');
@@ -202,12 +193,8 @@ class AsgarosForum {
                     AsgarosForumInsert::insertData();
                 }
             }
-        } else if ($this->current_view === 'markallread' && is_user_logged_in()) {
-            $time = $this->current_time();
-            setcookie("wpafcookie", $time, 0, "/");
-            update_user_meta(get_current_user_id(), 'asgarosforum_lastvisit', $time);
-            wp_redirect(html_entity_decode($this->url_home));
-            exit;
+        } else if ($this->current_view === 'markallread') {
+            AsgarosForumUnread::markAllRead();
         } else if (isset($_GET['move_thread'])) {
             $this->move_thread();
         } else if (isset($_GET['delete_thread'])) {
@@ -629,16 +616,6 @@ class AsgarosForum {
         return $lastpost;
     }
 
-    function get_lastpost_in_thread($id) {
-        global $wpdb;
-        return $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
-    }
-
-    function get_lastpost_in_forum($id) {
-        global $wpdb;
-        return $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$this->table_forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
-    }
-
     function get_thread_starter($thread_id) {
         global $wpdb;
         return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
@@ -748,14 +725,6 @@ class AsgarosForum {
         return '<div class="breadcrumbs">'.$trail.'</div>';
     }
 
-    function last_visit() {
-        if (is_user_logged_in() && isset($_COOKIE['wpafcookie'])) {
-            return $_COOKIE['wpafcookie'];
-        } else {
-            return "0000-00-00 00:00:00";
-        }
-    }
-
     function pageing($location) {
         global $wpdb;
         $out = '<div class="pages">'.__('Pages:', 'asgaros-forum');
@@ -859,24 +828,30 @@ class AsgarosForum {
         }
     }
 
-    function get_thread_image($lastpost_data, $status) {
-        $unread_status = '';
+    // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
+    function get_lastpost_in_thread($id) {
+        global $wpdb;
 
-        if ($lastpost_data) {
-            $lastpost_time = $lastpost_data->date;
-            $lastpost_author_id = $lastpost_data->author_id;
-
-            if ($lastpost_time && get_current_user_id() != $lastpost_author_id) {
-                $lp = strtotime($lastpost_time);
-                $lv = strtotime($this->last_visit());
-
-                if ($lp > $lv) {
-                    $unread_status = ' unread';
-                }
-            }
+        if (empty($this->cache['get_lastpost_in_thread'][$id])) {
+            $this->cache['get_lastpost_in_thread'][$id] = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
         }
 
-        echo '<span class="dashicons-before dashicons-'.$status.$unread_status.'"></span>';
+        return $this->cache['get_lastpost_in_thread'][$id];
+    }
+
+    // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
+    function get_lastpost_in_forum($id) {
+        global $wpdb;
+
+        if (empty($this->cache['get_lastpost_in_forum'][$id])) {
+            return $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$this->table_forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
+        }
+
+        return $this->cache['get_lastpost_in_forum'][$id];
+    }
+
+    function get_thread_image($unreadStatus, $status) {
+        echo '<span class="dashicons-before dashicons-'.$status.$unreadStatus.'"></span>';
     }
 
     function change_status($property) {

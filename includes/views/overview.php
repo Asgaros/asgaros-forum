@@ -4,8 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 $forum_counter = 0;
 
-?>
-<?php foreach ($categories as $category) { ?>
+foreach ($categories as $category) { ?>
     <div class="title-element" id="forum-category-<?php echo $category->term_id; ?>"><?php echo $category->name; ?></div>
     <div class="content-element space">
         <?php
@@ -19,11 +18,11 @@ $forum_counter = 0;
             <div class="notice"><?php _e('In this category are no forums yet!', 'asgaros-forum'); ?></div>
         <?php } ?>
     </div>
-<?php } ?>
-<?php if ($forum_counter > 0) { ?>
-<div class="footer">
-    <span class="dashicons-before dashicons-admin-page-small unread"></span><?php _e('New posts', 'asgaros-forum'); ?> &middot;
-    <span class="dashicons-before dashicons-admin-page-small"></span><?php _e('No new posts', 'asgaros-forum'); ?> &middot;
-    <span class="dashicons-before dashicons-yes"></span><a href="<?php echo $this->url_markallread; ?>"><?php _e('Mark All Read', 'asgaros-forum'); ?></a>
-</div>
-<?php } ?>
+<?php
+}
+
+if ($forum_counter > 0) {
+    AsgarosForumUnread::showUnreadControls();
+}
+
+?>

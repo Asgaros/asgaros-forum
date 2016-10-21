@@ -6,7 +6,12 @@ $lastpost_data = $this->get_lastpost_in_forum($forum->id);
 
 ?>
 <div class="forum" id="forum-<?php echo $forum->id; ?>">
-    <div class="forum-status"><?php $this->get_thread_image($lastpost_data, 'overview'); ?></div>
+    <div class="forum-status">
+        <?php
+        $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id);
+        $this->get_thread_image($unreadStatus, 'overview');
+        ?>
+    </div>
     <div class="forum-name">
         <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo esc_html(stripslashes($forum->name)); ?></a></strong>
         <small><?php echo esc_html(stripslashes($forum->description)); ?></small>

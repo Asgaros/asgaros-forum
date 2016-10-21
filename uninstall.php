@@ -46,10 +46,10 @@ function deleteData() {
     delete_site_option('asgarosforum_db_version');
 
     // Delete user meta data
-    delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
     delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
     delete_metadata('user', 0, 'asgarosforum_banned', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_topic', '', true);
+    delete_metadata('user', 0, 'asgarosforum_unread_cleared', '', true);
 
     // Delete terms
     $terms = $wpdb->get_col('SELECT t.term_id FROM '.$wpdb->terms.' AS t INNER JOIN '.$wpdb->term_taxonomy.' AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy = "asgarosforum-category";');
@@ -71,6 +71,9 @@ function deleteData() {
     // Delete themes
     $theme_path = WP_CONTENT_DIR.'/themes-asgarosforum';
     recursiveDelete($theme_path);
+
+    // Delete data which has been used in old versions of the plugin.
+    delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
 }
 
 ?>

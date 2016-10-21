@@ -462,3 +462,6 @@
 #af-wrapper .unread:before {
     color: #2D89CC;
 }
+#af-wrapper .read:before {
+    opacity: 0.5;
+}

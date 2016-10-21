@@ -8,12 +8,12 @@ class AsgarosForumPermissions {
     private static $current_user_is_banned;
 
     // AsgarosForumPermissions instance creator
-	public static function getInstance() {
+    public static function createInstance() {
 		if (self::$instance === null) {
 			self::$instance = new self;
-		} else {
-			return self::$instance;
 		}
+
+        return self::$instance;
 	}
 
     // AsgarosForumPermissions constructor
