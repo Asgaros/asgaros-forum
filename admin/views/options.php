@@ -55,7 +55,7 @@ if (!defined('ABSPATH')) exit;
         </p>
         <p>
             <input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>>
-            <label for="allow_subscriptions"><?php _e('Allow thread-subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>
+            <label for="allow_subscriptions"><?php _e('Allow subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>
         </p>
         <h3><?php _e('Uploads', 'asgaros-forum'); ?></h3>
         <p>
