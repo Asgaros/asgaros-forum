@@ -86,6 +86,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_notify_administrator_message
 * asgarosforum_filter_notify_topic_subscribers_message
 * asgarosforum_filter_insert_custom_validation
+* asgarosforum_filter_subject_before_insert
+* asgarosforum_filter_content_before_insert
 
 == Screenshots ==
 1. The forum overview.
@@ -98,6 +100,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: Various fixes in the read/unread-logic
 * Added: Option to highlight thread authors
+* Added: asgarosforum_filter_subject_before_insert filter
+* Added: asgarosforum_filter_content_before_insert filter
 * Changed: Read/Unread icons are now better recognizable
 * Performance improvements and code optimizations
 = 1.2.3 =

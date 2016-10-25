@@ -21,11 +21,11 @@ class AsgarosForumInsert {
 
     public static function setData() {
         if (isset($_POST['subject'])) {
-            self::$dataSubject = trim($_POST['subject']);
+            self::$dataSubject = apply_filters('asgarosforum_filter_subject_before_insert', trim($_POST['subject']));
         }
 
         if (isset($_POST['message'])) {
-            self::$dataContent = trim($_POST['message']);
+            self::$dataContent = apply_filters('asgarosforum_filter_content_before_insert', trim($_POST['message']));
         }
     }
 
