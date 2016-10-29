@@ -17,6 +17,7 @@ if (!defined('ABSPATH')) exit;
     <?php
     $counter = 0;
     $avatars_available = get_option('show_avatars');
+    $threadStarter = $this->get_thread_starter($this->current_thread);
     foreach ($posts as $post) {
         $counter++;
         ?>
@@ -29,10 +30,7 @@ if (!defined('ABSPATH')) exit;
             <div class="post-content">
                 <div class="post-author">
                     <?php
-                    // TODO: Add global variable to store userid.
-                    $userID = get_current_user_id();
-
-                    if ($this->options['highlight_authors'] && $counter > 1 && $userID && $userID == $post->author_id) {
+                    if ($this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $threadStarter == $post->author_id) {
                         echo '<small class="post-author-marker">'.__('Thread Author', 'asgaros-forum').'</small>';
                     }
 
