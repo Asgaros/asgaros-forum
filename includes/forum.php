@@ -202,9 +202,9 @@ class AsgarosForum {
             $this->delete_thread($this->current_thread);
         } else if (isset($_GET['remove_post'])) {
             $this->remove_post();
-        } else if (isset($_GET['sticky'])) {
+        } else if (isset($_GET['sticky_topic']) || isset($_GET['unsticky_topic'])) {
             $this->change_status('sticky');
-        } else if (isset($_GET['closed'])) {
+        } else if (isset($_GET['open_topic']) || isset($_GET['close_topic'])) {
             $this->change_status('closed');
         } else if (isset($_GET['subscribe_topic'])) {
             AsgarosForumNotifications::subscribeTopic();
@@ -676,15 +676,15 @@ class AsgarosForum {
             $menu .= '<a href="'.$this->url_thread.$this->current_thread.'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
             if ($this->get_status('sticky')) {
-                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;unsticky_topic"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
             } else {
-                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky"><span class="dashicons-before dashicons-admin-post"></span><span>'.__('Sticky', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;sticky_topic"><span class="dashicons-before dashicons-admin-post"></span><span>'.__('Sticky', 'asgaros-forum').'</span></a>';
             }
 
             if ($this->get_status('closed')) {
-                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;open_topic"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
             } else {
-                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;closed"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->get_link($this->current_thread, $this->url_thread).'&amp;close_topic"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
             }
         }
 
