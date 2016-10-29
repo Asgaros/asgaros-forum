@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forums, discussion, multisite
 Requires at least: 4.4
 Tested up to: 4.6
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,9 +98,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.2.4 =
 * Fixed: Various fixes in the read/unread-logic
 * Added: Option to highlight thread authors
-* Added: Option in user profile to get notifications on new topics
+* Added: Option in user profiles to get notifications on new topics
 * Added: asgarosforum_filter_subject_before_insert filter
 * Added: asgarosforum_filter_content_before_insert filter
 * Changed: Read/Unread icons are now better recognizable
