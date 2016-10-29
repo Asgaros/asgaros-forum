@@ -83,7 +83,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_get_threads
 * asgarosforum_filter_get_posts_order
 * asgarosforum_filter_get_threads_order
-* asgarosforum_filter_notify_administrator_message
+* asgarosforum_filter_notify_global_topic_subscribers_message
 * asgarosforum_filter_notify_topic_subscribers_message
 * asgarosforum_filter_insert_custom_validation
 * asgarosforum_filter_subject_before_insert
@@ -100,9 +100,11 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: Various fixes in the read/unread-logic
 * Added: Option to highlight thread authors
+* Added: Option in user profile to get notifications on new topics
 * Added: asgarosforum_filter_subject_before_insert filter
 * Added: asgarosforum_filter_content_before_insert filter
 * Changed: Read/Unread icons are now better recognizable
+* Changed: Renamed asgarosforum_filter_notify_administrator_message filter into asgarosforum_filter_notify_global_topic_subscribers_message
 * Performance improvements and code optimizations
 = 1.2.3 =
 * Fixed: Remove slashes in the forum description

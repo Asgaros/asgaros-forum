@@ -94,8 +94,8 @@ class AsgarosForumInsert {
 
             $redirect = html_entity_decode($asgarosforum->get_link($asgarosforum->current_thread, $asgarosforum->url_thread).'#postid-'.$asgarosforum->current_post);
 
-            // Send notification about new topic to administrator
-            AsgarosForumNotifications::notifyAdministrator(self::$dataSubject, self::$dataContent, $redirect);
+            // Send notification about new topic to global subscribers.
+            AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect);
         } else if (self::getAction() === 'add_post') {
             $uploads = maybe_serialize(AsgarosForumUploads::prepareFileList());
 

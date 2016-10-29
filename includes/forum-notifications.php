@@ -119,18 +119,45 @@ class AsgarosForumNotifications {
         }
     }
 
-    public static function notifyAdministrator($topic_name, $topic_text, $topic_link) {
+    public static function notifyGlobalTopicSubscribers($topic_name, $topic_text, $topic_link) {
         global $asgarosforum;
 
         // Check if this functionality is enabled
-        if ($asgarosforum->options['admin_subscriptions']) {
+        if ($asgarosforum->options['admin_subscriptions'] || $asgarosforum->options['allow_subscriptions']) {
+            $subscriberMails = array();
             $notification_subject = sprintf(__('[%s] New topic: %s', 'asgaros-forum'), get_bloginfo('name'), esc_html(stripslashes($topic_name)));
             $notification_message = sprintf(__('Hello,<br /><br />you got this mail because there is a new forum-topic:<br />%s<br /><br />Text:<br />%s<br /><br />Link to the new topic:<br /><a href="%s">%s</a>', 'asgaros-forum'), esc_html(stripslashes($topic_name)), wpautop(stripslashes($topic_text)), $topic_link, $topic_link);
-            $notification_message = apply_filters('asgarosforum_filter_notify_administrator_message', $notification_message, $topic_name, $topic_text, $topic_link);
+            $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $topic_name, $topic_text, $topic_link);
+
+            if ($asgarosforum->options['allow_subscriptions']) {
+                // Get subscribed users
+                $global_topic_subscribers = get_users(
+                    array(
+                        'meta_key'      => 'asgarosforum_subscription_global_topics',
+                        'meta_value'    => 1,
+                        'fields'        => array('user_email'),
+                        'exclude'       => array(get_current_user_id())
+                    )
+                );
+
+                foreach($global_topic_subscribers as $subscriber) {
+                    if (!in_array($subscriber->user_email, $subscriberMails)) {
+                        $subscriberMails[] = $subscriber->user_email;
+                    }
+                }
+            }
+
+            if ($asgarosforum->options['admin_subscriptions']) {
+                if (!in_array(get_bloginfo('admin_email'), $subscriberMails)) {
+                    $subscriberMails[] = get_bloginfo('admin_email');
+                }
+            }
 
             add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
 
-            wp_mail(get_bloginfo('admin_email'), $notification_subject, $notification_message);
+            foreach($subscriberMails as $subscriberMail) {
+                wp_mail($subscriberMail, $notification_subject, $notification_message);
+            }
 
             remove_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
         }

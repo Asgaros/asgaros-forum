@@ -24,36 +24,55 @@ class asgarosforum_admin {
         add_action('delete_asgarosforum-category', array($this, 'delete_category'), 10, 3);
         add_action('get_terms', array($this, 'get_ordered_terms'));
 
-        // Moderator and Banning
+        // User profile options.
         add_action('edit_user_profile', array($this, 'user_profile_fields'));
+        add_action('show_user_profile', array($this, 'user_profile_fields'));
         add_action('edit_user_profile_update', array($this, 'user_profile_fields_update'));
+        add_action('personal_options_update', array($this, 'user_profile_fields_update'));
     }
 
     function user_profile_fields($user) {
-        if (!current_user_can('manage_options') || user_can($user->ID, 'manage_options')) {
-            return false;
+        global $asgarosforum;
+        $output = '';
+
+        // Show settings only when current user is admin and he edits a non-admin user.
+        if (current_user_can('manage_options') && !user_can($user->ID, 'manage_options')) {
+            $output .= '<tr>';
+            $output .= '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
+            $output .= '<td><input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'></td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+            $output .= '<th><label for="asgarosforum_banned">'.__('Banned User', 'asgaros-forum').'</label></th>';
+            $output .= '<td><input type="checkbox" name="asgarosforum_banned" id="asgarosforum_banned" value="1" '.checked(get_the_author_meta('asgarosforum_banned', $user->ID), '1', false).'></td>';
+            $output .= '</tr>';
         }
 
-        echo '<h3>'.__('Forum', 'asgaros-forum').'</h3>';
-        echo '<table class="form-table">';
-        echo '<tr>';
-        echo '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
-        echo '<td><input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'></td>';
-        echo '</tr>';
-        echo '<tr>';
-        echo '<th><label for="asgarosforum_banned">'.__('Banned User', 'asgaros-forum').'</label></th>';
-        echo '<td><input type="checkbox" name="asgarosforum_banned" id="asgarosforum_banned" value="1" '.checked(get_the_author_meta('asgarosforum_banned', $user->ID), '1', false).'></td>';
-        echo '</tr>';
-        echo '</table>';
+        if ($asgarosforum->options['allow_subscriptions'] && $user->user_email !== get_bloginfo('admin_email')) {
+            $output .= '<tr>';
+            $output .= '<th><label for="asgarosforum_subscription_global_topics">'.__('Notify about new topics', 'asgaros-forum').'</label></th>';
+            $output .= '<td><input type="checkbox" name="asgarosforum_subscription_global_topics" id="asgarosforum_subscription_global_topics" value="1" '.checked(get_the_author_meta('asgarosforum_subscription_global_topics', $user->ID), '1', false).'></td>';
+            $output .= '</tr>';
+        }
+
+        if (!empty($output)) {
+            echo '<h3>'.__('Forum', 'asgaros-forum').'</h3>';
+            echo '<table class="form-table">';
+            echo $output;
+            echo '</table>';
+        }
     }
 
     function user_profile_fields_update($user_id) {
-        if (!current_user_can('manage_options') || user_can($user->ID, 'manage_options')) {
-            return false;
+        global $asgarosforum;
+
+        if (current_user_can('manage_options') && !user_can($user->ID, 'manage_options')) {
+            update_usermeta(absint($user_id), 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
+            update_usermeta(absint($user_id), 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
         }
 
-        update_usermeta(absint($user_id), 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
-        update_usermeta(absint($user_id), 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
+        if ($asgarosforum->options['allow_subscriptions']) {
+            update_usermeta(absint($user_id), 'asgarosforum_subscription_global_topics', wp_kses_post($_POST['asgarosforum_subscription_global_topics']));
+        }
     }
 
     function set_current_menu($parent_file) {
