@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 1.2.4 =
 * Fixed: Various fixes in the read/unread-logic
 * Added: Option to highlight thread authors

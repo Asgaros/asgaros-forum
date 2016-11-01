@@ -13,7 +13,7 @@ $lastpost_data = $this->get_lastpost_in_forum($forum->id);
         ?>
     </div>
     <div class="forum-name">
-        <strong><a href="<?php echo $this->get_link($forum->id, $this->url_forum); ?>"><?php echo esc_html(stripslashes($forum->name)); ?></a></strong>
+        <strong><a href="<?php echo $this->get_link($forum->id, $this->links->forum); ?>"><?php echo esc_html(stripslashes($forum->name)); ?></a></strong>
         <small><?php echo esc_html(stripslashes($forum->description)); ?></small>
         <?php
         if ($forum->count_subforums > 0) {
@@ -25,7 +25,7 @@ $lastpost_data = $this->get_lastpost_in_forum($forum->id);
             $subforums_counter = 0;
             foreach ($subforums as $subforum) {
                 echo ($subforums_counter > 0) ? '&nbsp;&middot;&nbsp;' : '';
-                echo '<a href="'.$this->get_link($subforum->id, $this->url_forum).'">'.esc_html(stripslashes($subforum->name)).'</a>';
+                echo '<a href="'.$this->get_link($subforum->id, $this->links->forum).'">'.esc_html(stripslashes($subforum->name)).'</a>';
                 $subforums_counter++;
             }
 

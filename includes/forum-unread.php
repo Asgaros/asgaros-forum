@@ -56,7 +56,7 @@ class AsgarosForumUnread {
         }
 
         // Redirect to the forum overview.
-        wp_redirect(html_entity_decode($asgarosforum->url_home));
+        wp_redirect(html_entity_decode($asgarosforum->links->home));
         exit;
     }
 
