@@ -436,14 +436,6 @@ class AsgarosForum {
         return $this->get_link($thread_id, $this->links->topic, $page) . '#postid-' . $post_id;
     }
 
-    function get_widget_link($thread_id, $post_id, $target) {
-        global $wpdb;
-        $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
-        $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
-
-        return $this->get_link($thread_id, add_query_arg(array('view' => 'thread'), $target).'&amp;id=', $page).'#postid-'.$post_id;
-    }
-
     function get_all_categories_by_meta($key, $value, $compare = 'LIKE') {
         $categories = get_terms('asgarosforum-category', array(
             'fields' => 'ids',
@@ -578,13 +570,6 @@ class AsgarosForum {
                 return __('Deleted user', 'asgaros-forum');
             }
         }
-    }
-
-    // TODO: optimize
-    // For Widgets
-    function get_last_posts($items = 1, $where = '') {
-        global $wpdb;
-        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$this->table_posts} AS p1 LEFT JOIN {$this->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$this->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$this->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
     function get_lastpost($lastpost_data, $context = 'forum') {

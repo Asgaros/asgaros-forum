@@ -26,7 +26,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Banning
 * Powerful editor
 * File uploads
-* Recent Forum Posts Widget
+* Widgets
 * Easy color customization
 * Theme manager
 * Multisite compatibility
@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Recent Forum Topics Widget
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.2.4 =
