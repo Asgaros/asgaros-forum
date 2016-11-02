@@ -22,7 +22,6 @@ class AsgarosForumWidgets {
     }
 
     public static function filterCategories() {
-        global $asgarosforum;
         $filter = array();
         $categories_list = array();
         $where = '';
@@ -31,12 +30,32 @@ class AsgarosForumWidgets {
         $categories_list = array_merge($categories_list, $filter);
 
         if (!AsgarosForumPermissions::isModerator('current')) {
-            $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'moderator');
+            $categories = get_terms('asgarosforum-category', array(
+                'fields'        => 'ids',
+                'hide_empty'    => false,
+                'meta_query'    => array(
+                    array(
+                        'key'       => 'category_access',
+                        'value'     => 'moderator',
+                        'compare'   => 'LIKE'
+                    )
+                )
+            ));
             $categories_list = array_merge($categories_list, $categories);
         }
 
         if (!is_user_logged_in()) {
-            $categories = $asgarosforum->get_all_categories_by_meta('category_access', 'loggedin');
+            $categories = get_terms('asgarosforum-category', array(
+                'fields'        => 'ids',
+                'hide_empty'    => false,
+                'meta_query'    => array(
+                    array(
+                        'key'       => 'category_access',
+                        'value'     => 'loggedin',
+                        'compare'   => 'LIKE'
+                    )
+                )
+            ));
             $categories_list = array_merge($categories_list, $categories);
         }
 

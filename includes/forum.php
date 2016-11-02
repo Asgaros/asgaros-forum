@@ -436,22 +436,6 @@ class AsgarosForum {
         return $this->get_link($thread_id, $this->links->topic, $page) . '#postid-' . $post_id;
     }
 
-    function get_all_categories_by_meta($key, $value, $compare = 'LIKE') {
-        $categories = get_terms('asgarosforum-category', array(
-            'fields' => 'ids',
-            'hide_empty' => false,
-            'meta_query' => array(
-                array(
-                    'key' => $key,
-                    'value' => $value,
-                    'compare' => $compare
-                )
-            )
-        ));
-
-        return $categories;
-    }
-
     function get_categories($disable_hooks = false) {
         $filter = array();
 
