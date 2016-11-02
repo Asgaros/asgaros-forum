@@ -741,7 +741,7 @@ class AsgarosForum {
                 }
             } else {
                 if ($this->current_page >= 4) {
-                    $out .= ' <a href="'.$this->get_link($select_source, $select_url).'">'.__('First', 'asgaros-forum').'</a> <<';
+                    $out .= ' <a href="'.$this->get_link($select_source, $select_url).'">'.__('First', 'asgaros-forum').'</a> &laquo;';
                 }
 
                 for ($i = 3; $i > 0; $i--) {
@@ -759,7 +759,7 @@ class AsgarosForum {
                 }
 
                 if ($num_pages - $this->current_page >= 5) {
-                    $out .= ' >> <a href="'.$this->get_link($select_source, $select_url, $num_pages).'">'.__('Last', 'asgaros-forum').'</a>';
+                    $out .= ' &raquo; <a href="'.$this->get_link($select_source, $select_url, $num_pages).'">'.__('Last', 'asgaros-forum').'</a>';
                 }
             }
 
