@@ -3,13 +3,15 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumWidgets {
-    public static function getLastPosts($items = 1, $where = '') {
+    public static function getLastPosts($items = 1) {
         global $wpdb, $asgarosforum;
+        $where = self::filterCategories();
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
-    public static function getLastTopics($items = 1, $where = '') {
+    public static function getLastTopics($items = 1) {
         global $wpdb, $asgarosforum;
+        $where = self::filterCategories();
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $items));
     }
 
@@ -67,8 +69,15 @@ class AsgarosForumWidgets {
         return $where;
     }
 
-    public static function showWidget($args, $title, $target, $elements, $contentType) {
+    public static function showWidget($args, $title, $target, $number, $contentType) {
         global $asgarosforum;
+
+        $elements = null;
+        if ($contentType === 'posts') {
+            $elements = self::getLastPosts($number);
+        } else if ($contentType === 'topics') {
+            $elements = self::getLastTopics($number);
+        }
 
         echo $args['before_widget'];
 
@@ -98,6 +107,14 @@ class AsgarosForumWidgets {
 
         echo $args['after_widget'];
     }
+
+    public static function updateWidget($new_instance, $old_instance) {
+        $instance = $old_instance;
+		$instance['title'] = sanitize_text_field($new_instance['title']);
+		$instance['number'] = (int)$new_instance['number'];
+        $instance['target'] = sanitize_text_field($new_instance['target']);
+		return $instance;
+    }
 }
 
 class AsgarosForumRecentPosts_Widget extends WP_Widget {
@@ -122,10 +139,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 
         $target = (!empty($instance['target'])) ? $instance['target'] : '';
 
-        $where = AsgarosForumWidgets::filterCategories();
-		$posts = AsgarosForumWidgets::getLastPosts($number, $where);
-
-        AsgarosForumWidgets::showWidget($args, $title, $target, $posts, 'posts');
+        AsgarosForumWidgets::showWidget($args, $title, $target, $number, 'posts');
     }
 
     public function form($instance) {
@@ -154,11 +168,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 	}
 
     public function update($new_instance, $old_instance) {
-		$instance = $old_instance;
-		$instance['title'] = sanitize_text_field($new_instance['title']);
-		$instance['number'] = (int)$new_instance['number'];
-        $instance['target'] = sanitize_text_field($new_instance['target']);
-		return $instance;
+		return AsgarosForumWidgets::updateWidget($new_instance, $old_instance);
 	}
 }
 
@@ -184,10 +194,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 
         $target = (!empty($instance['target'])) ? $instance['target'] : '';
 
-        $where = AsgarosForumWidgets::filterCategories();
-		$topics = AsgarosForumWidgets::getLastTopics($number, $where);
-
-        AsgarosForumWidgets::showWidget($args, $title, $target, $topics, 'topics');
+        AsgarosForumWidgets::showWidget($args, $title, $target, $number, 'topics');
     }
 
     public function form($instance) {
@@ -216,11 +223,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 	}
 
     public function update($new_instance, $old_instance) {
-		$instance = $old_instance;
-		$instance['title'] = sanitize_text_field($new_instance['title']);
-		$instance['number'] = (int)$new_instance['number'];
-        $instance['target'] = sanitize_text_field($new_instance['target']);
-		return $instance;
+		return AsgarosForumWidgets::updateWidget($new_instance, $old_instance);
 	}
 }
 
