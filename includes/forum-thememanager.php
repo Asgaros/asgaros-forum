@@ -104,7 +104,7 @@ class AsgarosForumThemeManager {
 
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css" />';
 
-        if (!$asgarosforum->execute_plugin()) {
+        if (!$asgarosforum->executePlugin) {
             return;
         }
 

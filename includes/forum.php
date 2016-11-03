@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
+    var $executePlugin = false;
     var $directory = '';
     var $date_format = '';
     var $error = false;
@@ -68,16 +69,6 @@ class AsgarosForum {
         add_shortcode('forum', array($this, 'forum'));
     }
 
-    function execute_plugin() {
-        global $post;
-
-        if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     static function register_category_taxonomy() {
         register_taxonomy(
             'asgarosforum-category',
@@ -106,7 +97,12 @@ class AsgarosForum {
     }
 
     function prepare() {
-        if (!$this->execute_plugin()) {
+        global $post;
+
+        if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
+            $this->executePlugin = true;
+        } else {
+            $this->executePlugin = false;
             return;
         }
 
@@ -230,7 +226,7 @@ class AsgarosForum {
     }
 
     function enqueue_front_scripts() {
-        if (!$this->execute_plugin()) {
+        if (!$this->executePlugin) {
             return;
         }
 
@@ -239,7 +235,7 @@ class AsgarosForum {
     }
 
     function change_wp_title($title, $sep, $seplocation) {
-        if (!$this->execute_plugin()) {
+        if (!$this->executePlugin) {
             return $title;
         }
 
@@ -247,7 +243,7 @@ class AsgarosForum {
     }
 
     function change_document_title_parts($title) {
-        if (!$this->execute_plugin()) {
+        if (!$this->executePlugin) {
             return $title;
         }
 
@@ -283,7 +279,7 @@ class AsgarosForum {
     }
 
     function add_mce_buttons($buttons, $editor_id) {
-        if (!$this->execute_plugin() || $editor_id !== 'message') {
+        if (!$this->executePlugin || $editor_id !== 'message') {
             return $buttons;
         } else {
             $buttons[] = 'image';
@@ -292,7 +288,7 @@ class AsgarosForum {
     }
 
     function disable_captions($args) {
-        if (!$this->execute_plugin()) {
+        if (!$this->executePlugin) {
             return $args;
         } else {
             return true;
