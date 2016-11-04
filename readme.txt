@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Never highlight guests as topic-authors
 * Added: Recent Forum Topics Widget
 * Changed: Minor design changes
 * Performance improvements and code optimizations

@@ -30,7 +30,7 @@ if (!defined('ABSPATH')) exit;
             <div class="post-content">
                 <div class="post-author">
                     <?php
-                    if ($this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $threadStarter == $post->author_id) {
+                    if ($this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $threadStarter != 0 && $threadStarter == $post->author_id) {
                         echo '<small class="post-author-marker">'.__('Thread Author', 'asgaros-forum').'</small>';
                     }
 
