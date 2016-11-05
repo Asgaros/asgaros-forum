@@ -99,6 +99,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Never highlight guests as topic-authors
+* Added: Database-driven read/unread-logic across topics
 * Added: Recent Forum Topics Widget
 * Changed: Minor design changes
 * Performance improvements and code optimizations

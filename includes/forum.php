@@ -192,6 +192,11 @@ class AsgarosForum {
         } else if (isset($_GET['unsubscribe_topic'])) {
             AsgarosForumNotifications::unsubscribeTopic();
         }
+
+        // Mark visited topic as read.
+        if ($this->current_view === 'thread' && $this->current_thread) {
+            AsgarosForumUnread::markThreadRead();
+        }
     }
 
     function check_access() {

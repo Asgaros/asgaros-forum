@@ -6,6 +6,7 @@ class AsgarosForumUnread {
     private static $instance = null;
     private static $userID;
     private static $markAllReadLink;
+    private static $excludedItems = array();
 
     // AsgarosForumUnread instance creator
     public static function createInstance() {
@@ -34,11 +35,19 @@ class AsgarosForumUnread {
             if (!get_user_meta(self::$userID, 'asgarosforum_unread_cleared', true)) {
                 add_user_meta(self::$userID, 'asgarosforum_unread_cleared', '0000-00-00 00:00:00');
             }
+
+            // Get IDs of excluded topics.
+            self::$excludedItems = get_user_meta(self::$userID, 'asgarosforum_unread_exclude', true);
         } else {
             // Create a cookie when it does not exist.
             if (!isset($_COOKIE['asgarosforum_unread_cleared'])) {
                 // There is no cookie set so basically the forum has never been visited.
                 setcookie('asgarosforum_unread_cleared', '0000-00-00 00:00:00', 2147483647);
+            }
+
+            // Get IDs of excluded topics.
+            if (isset($_COOKIE['asgarosforum_unread_exclude'])) {
+                self::$excludedItems = maybe_unserialize($_COOKIE['asgarosforum_unread_exclude']);
             }
         }
     }
@@ -51,8 +60,10 @@ class AsgarosForumUnread {
 
         if (self::$userID) {
             update_user_meta(self::$userID, 'asgarosforum_unread_cleared', $currentTime);
+            delete_user_meta(self::$userID, 'asgarosforum_unread_exclude');
         } else {
             setcookie('asgarosforum_unread_cleared', $currentTime, 2147483647);
+            unset($_COOKIE['asgarosforum_unread_exclude']);
         }
 
         // Redirect to the forum overview.
@@ -60,27 +71,18 @@ class AsgarosForumUnread {
         exit;
     }
 
-    /*
     // Marks a thread as read when open it.
     public static function markThreadRead() {
-        // TODO: Not used yet ...
         global $asgarosforum;
 
-        if (self::$userID) {
-            $status = get_user_meta(self::$userID, 'asgarosforum_unread_exclude');
+        self::$excludedItems[$asgarosforum->current_thread] = intval($asgarosforum->get_lastpost_in_thread($asgarosforum->current_thread)->id);
 
-            // Only mark as read when it is not already in database.
-            if ($status && !in_array($asgarosforum->current_thread, $status)) {
-                add_user_meta(self::$userID, 'asgarosforum_unread_exclude', $asgarosforum->current_thread);
-            }
+        if (self::$userID) {
+            update_user_meta(self::$userID, 'asgarosforum_unread_exclude', self::$excludedItems);
         } else {
+            setcookie('asgarosforum_unread_exclude', maybe_serialize(self::$excludedItems), 2147483647);
         }
     }
-
-    public static function removeThreadMarkings() {
-        //
-    }
-    */
 
     public static function getLastVisit() {
         if (self::$userID) {
@@ -115,12 +117,29 @@ class AsgarosForumUnread {
     public static function getStatusForum($id) {
         global $asgarosforum, $wpdb;
         $lastpostData = null;
+        $lastpostList = null;
 
         // Only ignore posts from the loggedin user because we cant determine if a post from a guest was created by the visiting guest.
         if (self::$userID) {
-            $lastpostData = $wpdb->get_row($wpdb->prepare("SELECT p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) ORDER BY p.id DESC LIMIT 1;", self::$userID, $id, $id));
+            $sql = $wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
+            $lastpostList = $wpdb->get_results($sql);
         } else {
-            $lastpostData = $asgarosforum->get_lastpost_in_forum($id);
+            $sql = $wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
+            $lastpostList = $wpdb->get_results($sql);
+        }
+
+        foreach ($lastpostList as $key => $lastpostListItem) {
+            // This topic has not been opened yet, so it is actually the last post.
+            if (!isset(self::$excludedItems[$lastpostListItem->parent_id])) {
+                $lastpostData = $lastpostListItem;
+                break;
+            }
+
+            // This topic has been opened, but there is already a newer post, so it is actually the last post.
+            if (isset(self::$excludedItems[$lastpostListItem->parent_id]) && $lastpostListItem->id > self::$excludedItems[$lastpostListItem->parent_id]) {
+                $lastpostData = $lastpostListItem;
+                break;
+            }
         }
 
         return self::getStatus($lastpostData);
@@ -130,8 +149,8 @@ class AsgarosForumUnread {
         global $asgarosforum;
         $lastpostData = $asgarosforum->get_lastpost_in_thread($id);
 
-        // Set empty lastpostData for loggedin user when he is the author of the last post.
-        if (self::$userID && $lastpostData->author_id == self::$userID) {
+        // Set empty lastpostData for loggedin user when he is the author of the last post or when topic already read.
+        if ((self::$userID && $lastpostData->author_id == self::$userID) || (isset(self::$excludedItems[$id]) && self::$excludedItems[$id] == $lastpostData->id)) {
             $lastpostData = null;
         }
 
