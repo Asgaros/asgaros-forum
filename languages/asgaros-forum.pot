@@ -6,8 +6,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Sat Oct 29 2016 22:47:55 GMT+0200 (Mitteleuropäische "
-"Sommerzeit)\n"
+"POT-Revision-Date: Tue Nov 08 2016 17:49:02 GMT+0100 (Mitteleuropäische "
+"Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgid "Notify about new topics"
 msgstr ""
 
 #: ../admin/admin.php:58 ../admin/admin.php:213 ../admin/admin.php:213 ..
-#: /includes/forum.php:700
+#: /includes/forum.php:655
 msgid "Forum"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: ../admin/admin.php:215 ../admin/admin.php:215 ../includes/forum.php:94
+#: ../admin/admin.php:215 ../admin/admin.php:215 ../includes/forum.php:78
 msgid "Categories"
 msgstr ""
 
@@ -317,15 +317,15 @@ msgid ""
 "href=\"%s\">%s</a>"
 msgstr ""
 
-#: ../includes/forum-unread.php:143
+#: ../includes/forum-unread.php:162
 msgid "New posts"
 msgstr ""
 
-#: ../includes/forum-unread.php:144
+#: ../includes/forum-unread.php:163
 msgid "No new posts"
 msgstr ""
 
-#: ../includes/forum-unread.php:145
+#: ../includes/forum-unread.php:164
 msgid "Mark All Read"
 msgstr ""
 
@@ -333,8 +333,8 @@ msgstr ""
 msgid "You need to login to have access to uploads."
 msgstr ""
 
-#: ../includes/forum-uploads.php:153 ../includes/forum.php:219 ../includes/forum.
-#: php:228 ../includes/forum.php:399
+#: ../includes/forum-uploads.php:153 ../includes/forum.php:205 ../includes/forum.
+#: php:214 ../includes/forum.php:385
 msgid "Login"
 msgstr ""
 
@@ -350,212 +350,232 @@ msgstr ""
 msgid "Add another file ..."
 msgstr ""
 
-#: ../includes/forum-widgets.php:7
-msgid "Shows recent posts in Asgaros Forum."
-msgstr ""
-
-#: ../includes/forum-widgets.php:8
-msgid "Asgaros Forum: Recent Posts"
-msgstr ""
-
-#: ../includes/forum-widgets.php:18 ../includes/forum-widgets.php:80
-msgid "Recent forum posts"
-msgstr ""
-
-#: ../includes/forum-widgets.php:66
+#: ../includes/forum-widgets.php:94
 msgid "by"
 msgstr ""
 
-#: ../includes/forum-widgets.php:67
+#: ../includes/forum-widgets.php:95
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/forum-widgets.php:73
+#: ../includes/forum-widgets.php:102
 msgid "No posts yet!"
 msgstr ""
 
-#: ../includes/forum-widgets.php:85
+#: ../includes/forum-widgets.php:104
+msgid "No topics yet!"
+msgstr ""
+
+#: ../includes/forum-widgets.php:122
+msgid "Shows recent posts in Asgaros Forum."
+msgstr ""
+
+#: ../includes/forum-widgets.php:123
+msgid "Asgaros Forum: Recent Posts"
+msgstr ""
+
+#: ../includes/forum-widgets.php:131 ../includes/forum-widgets.php:146
+msgid "Recent forum posts"
+msgstr ""
+
+#: ../includes/forum-widgets.php:151 ../includes/forum-widgets.php:206
 msgid "Title:"
 msgstr ""
 
-#: ../includes/forum-widgets.php:90
-msgid "Number of topics to show:"
+#: ../includes/forum-widgets.php:156
+msgid "Number of posts to show:"
 msgstr ""
 
-#: ../includes/forum-widgets.php:95
+#: ../includes/forum-widgets.php:161 ../includes/forum-widgets.php:216
 msgid "The forum page:"
 msgstr ""
 
-#: ../includes/forum.php:95
+#: ../includes/forum-widgets.php:177
+msgid "Shows recent topics in Asgaros Forum."
+msgstr ""
+
+#: ../includes/forum-widgets.php:178
+msgid "Asgaros Forum: Recent Topics"
+msgstr ""
+
+#: ../includes/forum-widgets.php:186 ../includes/forum-widgets.php:201
+msgid "Recent forum topics"
+msgstr ""
+
+#: ../includes/forum-widgets.php:211
+msgid "Number of topics to show:"
+msgstr ""
+
+#: ../includes/forum.php:79
 msgid "Category"
 msgstr ""
 
-#: ../includes/forum.php:96
+#: ../includes/forum.php:80
 msgid "Edit Category"
 msgstr ""
 
-#: ../includes/forum.php:97
+#: ../includes/forum.php:81
 msgid "Update Category"
 msgstr ""
 
-#: ../includes/forum.php:98
+#: ../includes/forum.php:82
 msgid "Add new Category"
 msgstr ""
 
-#: ../includes/forum.php:99
+#: ../includes/forum.php:83
 msgid "Search Categories"
 msgstr ""
 
-#: ../includes/forum.php:100
+#: ../includes/forum.php:84
 msgid "No Categories found."
 msgstr ""
 
-#: ../includes/forum.php:139
+#: ../includes/forum.php:126
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: ../includes/forum.php:152
+#: ../includes/forum.php:139
 msgid "Sorry, this thread does not exist."
 msgstr ""
 
-#: ../includes/forum.php:164
+#: ../includes/forum.php:151
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: ../includes/forum.php:219
+#: ../includes/forum.php:205
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:228
+#: ../includes/forum.php:214
 msgid "Sorry, only logged in users have access to this category."
 msgstr ""
 
-#: ../includes/forum.php:233 ../includes/forum.php:242
+#: ../includes/forum.php:219 ../includes/forum.php:228
 msgid "Sorry, you dont have access to this area."
 msgstr ""
 
-#: ../includes/forum.php:287 ../includes/forum.php:721 ../includes/views/editor.
+#: ../includes/forum.php:273 ../includes/forum.php:676 ../includes/views/editor.
 #: php:73
 msgid "Edit Post"
 msgstr ""
 
-#: ../includes/forum.php:289 ../includes/forum.php:719
+#: ../includes/forum.php:275 ../includes/forum.php:674
 msgid "Post Reply"
 msgstr ""
 
-#: ../includes/forum.php:291 ../includes/forum.php:669 ../includes/forum.php:723 .
+#: ../includes/forum.php:277 ../includes/forum.php:624 ../includes/forum.php:678 .
 #: ./includes/views/editor.php:69
 msgid "New Thread"
 msgstr ""
 
-#: ../includes/forum.php:293 ../includes/forum.php:675
+#: ../includes/forum.php:279 ../includes/forum.php:630
 msgid "Move Thread"
 msgstr ""
 
-#: ../includes/forum.php:367
+#: ../includes/forum.php:353
 msgid "There are no categories yet!"
 msgstr ""
 
-#: ../includes/forum.php:387
+#: ../includes/forum.php:373
 msgid "Thread closed"
 msgstr ""
 
-#: ../includes/forum.php:391
+#: ../includes/forum.php:377
 msgid "Sorry, but there are no posts."
 msgstr ""
 
-#: ../includes/forum.php:399
+#: ../includes/forum.php:385
 msgid "You need to login in order to create posts and topics."
 msgstr ""
 
-#: ../includes/forum.php:409
+#: ../includes/forum.php:395
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: ../includes/forum.php:419
+#: ../includes/forum.php:405
 msgid "Move"
 msgstr ""
 
-#: ../includes/forum.php:423
+#: ../includes/forum.php:409
 msgid "You are not allowed to move threads."
 msgstr ""
 
-#: ../includes/forum.php:576
+#: ../includes/forum.php:538
 msgid "Guest"
 msgstr ""
 
-#: ../includes/forum.php:593
+#: ../includes/forum.php:555
 msgid "Deleted user"
 msgstr ""
 
-#: ../includes/forum.php:610
+#: ../includes/forum.php:565
 msgid "Last post by"
 msgstr ""
 
-#: ../includes/forum.php:611
+#: ../includes/forum.php:566
 msgid "in"
 msgstr ""
 
-#: ../includes/forum.php:612 ../includes/views/editor.php:33
+#: ../includes/forum.php:567 ../includes/views/editor.php:33
 #, php-format
 msgid "on %s"
 msgstr ""
 
-#: ../includes/forum.php:614
+#: ../includes/forum.php:569
 msgid "No threads yet!"
 msgstr ""
 
-#: ../includes/forum.php:629
+#: ../includes/forum.php:584
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:634 ../includes/forum.php:676
+#: ../includes/forum.php:589 ../includes/forum.php:631
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: ../includes/forum.php:634
+#: ../includes/forum.php:589
 msgid "Remove"
 msgstr ""
 
-#: ../includes/forum.php:638
+#: ../includes/forum.php:593
 msgid "Edit"
 msgstr ""
 
-#: ../includes/forum.php:671
+#: ../includes/forum.php:626
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:676
+#: ../includes/forum.php:631
 msgid "Delete Thread"
 msgstr ""
 
-#: ../includes/forum.php:679
+#: ../includes/forum.php:634
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:681
+#: ../includes/forum.php:636
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:685
+#: ../includes/forum.php:640
 msgid "Re-open"
 msgstr ""
 
-#: ../includes/forum.php:687
+#: ../includes/forum.php:642
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:731
+#: ../includes/forum.php:686
 msgid "Pages:"
 msgstr ""
 
-#: ../includes/forum.php:759
+#: ../includes/forum.php:714
 msgid "First"
 msgstr ""
 
-#: ../includes/forum.php:777
+#: ../includes/forum.php:732
 msgid "Last"
 msgstr ""
 
