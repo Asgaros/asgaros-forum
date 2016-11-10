@@ -35,6 +35,7 @@ function asgarosforum_load_plugin_textdomain() {
 add_action('plugins_loaded', 'asgarosforum_load_plugin_textdomain');
 
 require('includes/forum-database.php');
+require('includes/forum-taxonomies.php');
 require('includes/forum-rewrite.php');
 require('includes/forum-permissions.php');
 require('includes/forum-insert.php');
@@ -47,6 +48,7 @@ require('includes/forum-uploads.php');
 require('admin/admin.php');
 
 AsgarosForumDatabase::createInstance();
+AsgarosForumTaxonomies::createInstance();
 AsgarosForumRewrite::createInstance();
 AsgarosForumPermissions::createInstance();
 AsgarosForumUnread::createInstance();

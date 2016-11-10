@@ -59,7 +59,6 @@ class AsgarosForum {
         $this->table_threads = AsgarosForumDatabase::getTable('threads');
         $this->table_posts = AsgarosForumDatabase::getTable('posts');
 
-        add_action('init', array($this, 'register_category_taxonomy'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
@@ -68,33 +67,6 @@ class AsgarosForum {
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
         add_shortcode('forum', array($this, 'forum'));
-    }
-
-    static function register_category_taxonomy() {
-        register_taxonomy(
-            'asgarosforum-category',
-            null,
-            array(
-                'labels' => array(
-                    'name'          => __('Categories', 'asgaros-forum'),
-                    'singular_name' => __('Category', 'asgaros-forum'),
-                    'edit_item'     => __('Edit Category', 'asgaros-forum'),
-                    'update_item'   => __('Update Category', 'asgaros-forum'),
-                    'add_new_item'  => __('Add new Category', 'asgaros-forum'),
-                    'search_items'  => __('Search Categories', 'asgaros-forum'),
-                    'not_found'     => __('No Categories found.', 'asgaros-forum')
-                ),
-                'public' => false,
-                'show_ui' => true,
-                'rewrite' => false,
-                'capabilities' => array(
-                    'manage_terms' => 'edit_users',
-					'edit_terms'   => 'edit_users',
-					'delete_terms' => 'edit_users',
-					'assign_terms' => 'edit_users'
-				)
-            )
-        );
     }
 
     function prepare() {

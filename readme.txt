@@ -99,6 +99,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Changed: Forum location has to be selected in the settings
+* Performance improvements and code optimizations
 = 1.2.5 =
 * Fixed: Never highlight guests as topic-authors
 * Added: Database-driven read/unread-logic across topics

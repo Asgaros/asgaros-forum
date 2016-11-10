@@ -11,7 +11,6 @@ class asgarosforum_admin {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 
         // Taxonomy stuff
-        add_action('init', 'asgarosforum::register_category_taxonomy');
         add_filter('parent_file', array($this, 'set_current_menu'));
         add_filter('submenu_file', array($this, 'set_current_submenu'));
         add_filter('manage_edit-asgarosforum-category_columns', array($this, 'manage_columns'));
