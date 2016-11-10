@@ -65,7 +65,7 @@ class AsgarosForumRewrite {
         global $asgarosforum, $wp;
 
         $links = new StdClass;
-        $links->home = esc_url(get_permalink());
+        $links->home = esc_url(get_page_link($asgarosforum->options['location']));
         $links->forum = esc_url(add_query_arg(array('view' => 'forum'), $links->home).'&amp;id=');
         $links->topic = esc_url(add_query_arg(array('view' => 'thread'), $links->home).'&amp;id=');
         $links->topic_add = esc_url(add_query_arg(array('view' => 'addthread', 'id' => $asgarosforum->current_forum), $links->home));

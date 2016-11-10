@@ -103,11 +103,6 @@ class AsgarosForumThemeManager {
 		$themeurl = self::get_current_theme_url();
 
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css" />';
-
-        if (!$asgarosforum->executePlugin) {
-            return;
-        }
-
         echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css" />';
 
         if (self::is_default_theme()) {

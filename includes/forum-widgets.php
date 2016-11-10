@@ -15,8 +15,9 @@ class AsgarosForumWidgets {
         return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $items));
     }
 
-    public static function getWidgetLink($thread_id, $post_id, $target) {
+    public static function getWidgetLink($thread_id, $post_id) {
         global $wpdb, $asgarosforum;
+        $target = get_page_link($asgarosforum->options['location']);
         $wpdb->get_col($wpdb->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
         $page = ceil($wpdb->num_rows / $asgarosforum->options['posts_per_page']);
 
@@ -69,7 +70,7 @@ class AsgarosForumWidgets {
         return $where;
     }
 
-    public static function showWidget($args, $title, $target, $number, $contentType) {
+    public static function showWidget($args, $title, $number, $contentType) {
         global $asgarosforum;
 
         $elements = null;
@@ -90,7 +91,7 @@ class AsgarosForumWidgets {
 
             foreach ($elements as $element) {
                 echo '<li>';
-                echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id, get_the_permalink($target)).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
+                echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
                 echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($element->author_id, true).'</b></span>';
 				echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
 			    echo '</li>';
@@ -112,7 +113,6 @@ class AsgarosForumWidgets {
         $instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['number'] = (int)$new_instance['number'];
-        $instance['target'] = sanitize_text_field($new_instance['target']);
 		return $instance;
     }
 }
@@ -137,15 +137,12 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 			$number = 3;
         }
 
-        $target = (!empty($instance['target'])) ? $instance['target'] : '';
-
-        AsgarosForumWidgets::showWidget($args, $title, $target, $number, 'posts');
+        AsgarosForumWidgets::showWidget($args, $title, $number, 'posts');
     }
 
     public function form($instance) {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum posts', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 3;
-        $target = isset($instance['target']) ? esc_attr($instance['target']) : '';
 
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
@@ -156,15 +153,6 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 		echo '<label for="'.$this->get_field_id('number').'">'.__('Number of posts to show:', 'asgaros-forum').'</label>&nbsp;';
 		echo '<input class="tiny-text" id="'.$this->get_field_id('number').'" name="'.$this->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
 		echo '</p>';
-
-        echo '<p>';
-        echo '<label for="'.$this->get_field_id('target').'">'.__('The forum page:', 'asgaros-forum').'</label>&nbsp;';
-        wp_dropdown_pages(array(
-            'id'        => $this->get_field_id('target'),
-            'name'      => $this->get_field_name('target'),
-            'selected'  => $target
-        ));
-        echo '</p>';
 	}
 
     public function update($new_instance, $old_instance) {
@@ -192,15 +180,12 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 			$number = 3;
         }
 
-        $target = (!empty($instance['target'])) ? $instance['target'] : '';
-
-        AsgarosForumWidgets::showWidget($args, $title, $target, $number, 'topics');
+        AsgarosForumWidgets::showWidget($args, $title, $number, 'topics');
     }
 
     public function form($instance) {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum topics', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 3;
-        $target = isset($instance['target']) ? esc_attr($instance['target']) : '';
 
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
@@ -211,15 +196,6 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 		echo '<label for="'.$this->get_field_id('number').'">'.__('Number of topics to show:', 'asgaros-forum').'</label>&nbsp;';
 		echo '<input class="tiny-text" id="'.$this->get_field_id('number').'" name="'.$this->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
 		echo '</p>';
-
-        echo '<p>';
-        echo '<label for="'.$this->get_field_id('target').'">'.__('The forum page:', 'asgaros-forum').'</label>&nbsp;';
-        wp_dropdown_pages(array(
-            'id'        => $this->get_field_id('target'),
-            'name'      => $this->get_field_name('target'),
-            'selected'  => $target
-        ));
-        echo '</p>';
 	}
 
     public function update($new_instance, $old_instance) {

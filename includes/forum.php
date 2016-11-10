@@ -21,6 +21,7 @@ class AsgarosForum {
     var $parent_forum = false;
     var $options = array();
     var $options_default = array(
+        'location'                  => '',
         'posts_per_page'            => 10,
         'threads_per_page'          => 20,
         'minimalistic_editor'       => true,
@@ -99,10 +100,11 @@ class AsgarosForum {
     function prepare() {
         global $post;
 
-        if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
+        if ($post->ID == $this->options['location'] && is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
             $this->executePlugin = true;
         } else {
             $this->executePlugin = false;
+            $this->error = __('The forum has not been configured correctly.', 'asgaros-forum');
             return;
         }
 

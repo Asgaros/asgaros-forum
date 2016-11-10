@@ -34,13 +34,13 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Supports multiple languages
 
 == Installation ==
-* Download Asgaros Forum.
-* Upload the plugin files to the `/wp-content/plugins/asgaros-forum` directory, or install the plugin through the WordPress plugins screen directly.
-* Activate the plugin through the 'Plugins' screen in WordPress.
-* On the left side you will see a new admin menu called Forum.
-* Configure your Asgaros Forum options, create your Categories and Forums.
-* Create a new page for your forum to display on and add the shortcode [forum] to this page. Save your page.
-* Add this page to your menu so you can access the forum.
+* Download `Asgaros Forum`.
+* Upload the plugin files to the `/wp-content/plugins/asgaros-forum` directory or install the plugin directly via the WordPress plugins screen.
+* Activate the plugin via the `Plugins` screen in WordPress.
+* Create a new page for your forum and add the `[forum]` shortcode to it. Save and publish this page.
+* Add this page to your sites menu so you can access it.
+* On the left side of the administration area you will find a new menu called `Forum`.
+* Configure your options and create the categories/forums there.
 * Done!
 
 == Frequently Asked Questions ==
@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Changed: Forum location has to be selected in the settings
 = 1.2.5 =
 * Fixed: Never highlight guests as topic-authors
 * Added: Database-driven read/unread-logic across topics
