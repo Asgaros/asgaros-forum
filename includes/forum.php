@@ -72,7 +72,7 @@ class AsgarosForum {
     function prepare() {
         global $post;
 
-        if ($post->ID == $this->options['location'] && is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
+        if (isset($post) && $post->ID == $this->options['location'] && is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
             $this->executePlugin = true;
         } else {
             $this->executePlugin = false;
