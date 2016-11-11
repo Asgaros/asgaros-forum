@@ -18,8 +18,13 @@ class AsgarosForumWidgets {
     public static function getWidgetLink($thread_id, $post_id) {
         global $wpdb, $asgarosforum;
         $target = get_page_link($asgarosforum->options['location']);
-        $wpdb->get_col($wpdb->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
-        $page = ceil($wpdb->num_rows / $asgarosforum->options['posts_per_page']);
+
+        if (empty($asgarosforum->cache['getWidgetLink'][$thread_id])) {
+            $wpdb->get_col($wpdb->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
+            $asgarosforum->cache['getWidgetLink'][$thread_id] = $wpdb->num_rows;
+        }
+
+        $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);
 
         return $asgarosforum->get_link($thread_id, add_query_arg(array('view' => 'thread'), $target).'&amp;id=', $page).'#postid-'.$post_id;
     }
