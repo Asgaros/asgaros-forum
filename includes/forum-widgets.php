@@ -78,37 +78,41 @@ class AsgarosForumWidgets {
     public static function showWidget($args, $title, $number, $contentType) {
         global $asgarosforum;
 
-        $elements = null;
-        if ($contentType === 'posts') {
-            $elements = self::getLastPosts($number);
-        } else if ($contentType === 'topics') {
-            $elements = self::getLastTopics($number);
-        }
-
         echo $args['before_widget'];
 
         if ($title) {
             echo $args['before_title'].$title.$args['after_title'];
         }
 
-        if (!empty($elements)) {
-            echo '<ul class="asgarosforum-widget">';
-
-            foreach ($elements as $element) {
-                echo '<li>';
-                echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
-                echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($element->author_id, true).'</b></span>';
-				echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
-			    echo '</li>';
-            }
-
-            echo '</ul>';
-        } else {
+        if (!empty($asgarosforum->options['location']) && has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum')) {
+            $elements = null;
             if ($contentType === 'posts') {
-                _e('No posts yet!', 'asgaros-forum');
+                $elements = self::getLastPosts($number);
             } else if ($contentType === 'topics') {
-                _e('No topics yet!', 'asgaros-forum');
+                $elements = self::getLastTopics($number);
             }
+
+            if (!empty($elements)) {
+                echo '<ul class="asgarosforum-widget">';
+
+                foreach ($elements as $element) {
+                    echo '<li>';
+                    echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
+                    echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($element->author_id, true).'</b></span>';
+                    echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
+                    echo '</li>';
+                }
+
+                echo '</ul>';
+            } else {
+                if ($contentType === 'posts') {
+                    _e('No posts yet!', 'asgaros-forum');
+                } else if ($contentType === 'topics') {
+                    _e('No topics yet!', 'asgaros-forum');
+                }
+            }
+        } else {
+            _e('The forum has not been configured correctly.', 'asgaros-forum');
         }
 
         echo $args['after_widget'];

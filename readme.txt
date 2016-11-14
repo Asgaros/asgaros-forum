@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Only show widgets when the forum is configured correctly
 * Changed: Forum location has to be selected in the settings
 * Performance improvements and code optimizations
 = 1.2.5 =
