@@ -14,19 +14,19 @@ class AsgarosForumThemeManager {
 	private static $current_theme;		// The current theme
 
 	// AsgarosForumThemeManager instance creator
-	public static function createInstance($plugin_url) {
+	public static function createInstance() {
 		if (self::$instance === null) {
-			self::$instance = new self($plugin_url);
+			self::$instance = new self;
 		}
 
         return self::$instance;
 	}
 
 	// AsgarosForumThemeManager constructor
-	private function __construct($plugin_url) {
+	private function __construct() {
 		global $asgarosforum;
 		self::$themes_root = trailingslashit(WP_CONTENT_DIR.'/'.self::AF_THEMEPATH);
-		self::$plugin_url = trailingslashit($plugin_url);
+		self::$plugin_url = $asgarosforum->directory;
 		$this->find_themes();
 
 		if (!empty(self::$themes[$asgarosforum->options['theme']])) {

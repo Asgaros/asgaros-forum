@@ -47,12 +47,8 @@ AsgarosForumRewrite::createInstance();
 AsgarosForumPermissions::createInstance();
 AsgarosForumUnread::createInstance();
 AsgarosForumUploads::createInstance();
-
-global $asgarosforum;
-global $asgarosforum_admin;
-$plugin_root_url = plugin_dir_url(__FILE__);
-$asgarosforum = new AsgarosForum($plugin_root_url);
-AsgarosForumThemeManager::createInstance($plugin_root_url);
+$asgarosforum = new AsgarosForum();
+AsgarosForumThemeManager::createInstance();
 
 if (is_admin()) {
     $asgarosforum_admin = new asgarosforum_admin();

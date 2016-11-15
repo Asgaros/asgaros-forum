@@ -99,6 +99,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Only show widgets when the forum is configured correctly
+* Fixed: Rare PHP-notices
 * Changed: Forum location has to be selected in the settings
 * Performance improvements and code optimizations
 * The required minimum WordPress version is now 4.6

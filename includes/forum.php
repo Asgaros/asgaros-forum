@@ -50,8 +50,8 @@ class AsgarosForum {
     );
     var $cache = array();   // Used to store selected database queries.
 
-    function __construct($directory) {
-        $this->directory = $directory;
+    function __construct() {
+        $this->directory = plugin_dir_url(dirname(__FILE__));
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
         $this->date_format = get_option('date_format').', '.get_option('time_format');
@@ -88,12 +88,13 @@ class AsgarosForum {
             $this->current_page = (absint($_GET['part']) - 1);
         }
 
+        $elementID = (isset($_GET['id'])) ? absint($_GET['id']) : false;
+
         switch ($this->current_view) {
             case 'forum':
             case 'addthread':
-                $forum_id = absint($_GET['id']);
-                if ($this->element_exists($forum_id, $this->table_forums)) {
-                    $this->current_forum = $forum_id;
+                if ($this->element_exists($elementID, $this->table_forums)) {
+                    $this->current_forum = $elementID;
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
                 } else {
@@ -103,9 +104,8 @@ class AsgarosForum {
             case 'movethread':
             case 'thread':
             case 'addpost':
-                $thread_id = absint($_GET['id']);
-                if ($this->element_exists($thread_id, $this->table_threads)) {
-                    $this->current_thread = $thread_id;
+                if ($this->element_exists($elementID, $this->table_threads)) {
+                    $this->current_thread = $elementID;
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
@@ -114,10 +114,9 @@ class AsgarosForum {
                 }
                 break;
             case 'editpost':
-                $post_id = absint($_GET['id']);
-                if ($this->element_exists($post_id, $this->table_posts)) {
-                    $this->current_post = $post_id;
-                    $this->current_thread = $this->get_parent_id($post_id, $this->table_posts);
+                if ($this->element_exists($elementID, $this->table_posts)) {
+                    $this->current_post = $elementID;
+                    $this->current_thread = $this->get_parent_id($this->current_post, $this->table_posts);
                     $this->current_forum = $this->get_parent_id($this->current_thread, $this->table_threads);
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->table_forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->table_forums);
