@@ -2,7 +2,7 @@
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
 Tags: forums, discussion, multisite
-Requires at least: 4.4
+Requires at least: 4.6
 Tested up to: 4.6
 Stable tag: 1.2.5
 License: GPLv2 or later
@@ -101,6 +101,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Only show widgets when the forum is configured correctly
 * Changed: Forum location has to be selected in the settings
 * Performance improvements and code optimizations
+* The required minimum WordPress version is now 4.6
 = 1.2.5 =
 * Fixed: Never highlight guests as topic-authors
 * Added: Database-driven read/unread-logic across topics
