@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) exit;
     <div class="thread-status">
         <?php
         $unreadStatus = AsgarosForumUnread::getStatusThread($thread->id);
-        $this->get_thread_image($unreadStatus, $thread->status);
+        echo '<span class="dashicons-before dashicons-'.$thread->status.$unreadStatus.'"></span>';
         ?>
     </div>
     <div class="thread-name">

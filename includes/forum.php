@@ -780,10 +780,6 @@ class AsgarosForum {
         return $this->cache['get_lastpost_in_forum'][$id];
     }
 
-    function get_thread_image($unreadStatus, $status) {
-        echo '<span class="dashicons-before dashicons-'.$status.$unreadStatus.'"></span>';
-    }
-
     function change_status($property) {
         global $wpdb;
         $new_status = '';

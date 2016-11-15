@@ -9,7 +9,7 @@ $lastpost_data = $this->get_lastpost_in_forum($forum->id);
     <div class="forum-status">
         <?php
         $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id);
-        $this->get_thread_image($unreadStatus, 'overview');
+        echo '<span class="dashicons-before dashicons-overview'.$unreadStatus.'"></span>';
         ?>
     </div>
     <div class="forum-name">
