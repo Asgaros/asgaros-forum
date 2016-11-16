@@ -28,13 +28,13 @@
 
 if (!defined('ABSPATH')) exit;
 
+require('includes/forum.php');
 require('includes/forum-database.php');
 require('includes/forum-taxonomies.php');
 require('includes/forum-rewrite.php');
 require('includes/forum-permissions.php');
 require('includes/forum-insert.php');
 require('includes/forum-notifications.php');
-require('includes/forum.php');
 require('includes/forum-widgets.php');
 require('includes/forum-thememanager.php');
 require('includes/forum-unread.php');
@@ -42,12 +42,12 @@ require('includes/forum-uploads.php');
 require('admin/admin.php');
 
 AsgarosForumDatabase::createInstance();
+$asgarosforum = new AsgarosForum();
 AsgarosForumTaxonomies::createInstance();
 AsgarosForumRewrite::createInstance();
 AsgarosForumPermissions::createInstance();
-AsgarosForumUnread::createInstance();
 AsgarosForumUploads::createInstance();
-$asgarosforum = new AsgarosForum();
+AsgarosForumUnread::createInstance();
 AsgarosForumThemeManager::createInstance();
 
 if (is_admin()) {

@@ -6,6 +6,7 @@ class AsgarosForumDatabase {
     const DATABASE_VERSION = 4;
 
     private static $instance = null;
+    private static $db;
     private static $table_forums;
     private static $table_threads;
     private static $table_posts;
@@ -21,6 +22,8 @@ class AsgarosForumDatabase {
 
     // AsgarosForumDatabase constructor
 	private function __construct() {
+        global $wpdb;
+        self::$db = $wpdb;
         $this->setTables();
         register_activation_hook(__FILE__, array($this, 'activatePlugin'));
         add_action('wpmu_new_blog', array($this, 'buildSubsite'));
@@ -29,11 +32,9 @@ class AsgarosForumDatabase {
 	}
 
     private function setTables() {
-        global $wpdb;
-
-        self::$table_forums     = $wpdb->prefix.'forum_forums';
-        self::$table_threads    = $wpdb->prefix.'forum_threads';
-        self::$table_posts      = $wpdb->prefix.'forum_posts';
+        self::$table_forums     = self::$db->prefix.'forum_forums';
+        self::$table_threads    = self::$db->prefix.'forum_threads';
+        self::$table_posts      = self::$db->prefix.'forum_posts';
     }
 
     public static function getTable($name) {
@@ -47,15 +48,13 @@ class AsgarosForumDatabase {
     }
 
     public static function activatePlugin($networkwide) {
-        global $wpdb;
-
         if (function_exists('is_multisite') && is_multisite()) {
             // Check if it is a network activation. If so, run the database-creation for each id.
             if ($networkwide) {
-                $old_blog =  $wpdb->blogid;
+                $old_blog =  self::$db->blogid;
 
                 // Get all blog ids
-                $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+                $blogids = self::$db->get_col('SELECT blog_id FROM '.self::$db->blogs);
 
                 foreach ($blogids as $blog_id) {
                     switch_to_blog($blog_id);
@@ -88,19 +87,17 @@ class AsgarosForumDatabase {
 
     // Delete tables during a subsite uninstall.
     public function deleteSubsite($tables) {
-        global $wpdb;
-        $tables[] = $wpdb->prefix.'forum_forums';
-        $tables[] = $wpdb->prefix.'forum_threads';
-        $tables[] = $wpdb->prefix.'forum_posts';
+        $tables[] = self::$db->prefix.'forum_forums';
+        $tables[] = self::$db->prefix.'forum_threads';
+        $tables[] = self::$db->prefix.'forum_posts';
         return $tables;
     }
 
     public static function buildDatabase() {
-        global $wpdb;
         $database_version_installed = get_option('asgarosforum_db_version');
 
         if ($database_version_installed != self::DATABASE_VERSION) {
-            $charset_collate = $wpdb->get_charset_collate();
+            $charset_collate = self::$db->get_charset_collate();
 
             $sql1 = "
             CREATE TABLE ".self::$table_forums." (

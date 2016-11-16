@@ -115,17 +115,17 @@ class AsgarosForumUnread {
     }
 
     public static function getStatusForum($id) {
-        global $asgarosforum, $wpdb;
+        global $asgarosforum;
         $lastpostData = null;
         $lastpostList = null;
 
         // Only ignore posts from the loggedin user because we cant determine if a post from a guest was created by the visiting guest.
         if (self::$userID) {
-            $sql = $wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
-            $lastpostList = $wpdb->get_results($sql);
+            $sql = $asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
+            $lastpostList = $asgarosforum->db->get_results($sql);
         } else {
-            $sql = $wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
-            $lastpostList = $wpdb->get_results($sql);
+            $sql = $asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->table_posts} AS p INNER JOIN {$asgarosforum->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->table_forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->table_posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
+            $lastpostList = $asgarosforum->db->get_results($sql);
         }
 
         foreach ($lastpostList as $key => $lastpostListItem) {

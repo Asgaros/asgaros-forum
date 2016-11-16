@@ -4,24 +4,24 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumWidgets {
     public static function getLastPosts($items = 1) {
-        global $wpdb, $asgarosforum;
+        global $asgarosforum;
         $where = self::filterCategories();
-        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
+        return $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
     }
 
     public static function getLastTopics($items = 1) {
-        global $wpdb, $asgarosforum;
+        global $asgarosforum;
         $where = self::filterCategories();
-        return $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $items));
+        return $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $items));
     }
 
     public static function getWidgetLink($thread_id, $post_id) {
-        global $wpdb, $asgarosforum;
+        global $asgarosforum;
         $target = get_page_link($asgarosforum->options['location']);
 
         if (empty($asgarosforum->cache['getWidgetLink'][$thread_id])) {
-            $wpdb->get_col($wpdb->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
-            $asgarosforum->cache['getWidgetLink'][$thread_id] = $wpdb->num_rows;
+            $asgarosforum->db->get_col($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
+            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->num_rows;
         }
 
         $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);

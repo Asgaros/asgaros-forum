@@ -71,7 +71,6 @@ class AsgarosForumInsert {
     }
 
     public static function insertData() {
-        global $wpdb;
         global $asgarosforum;
 
         $redirect = '';
@@ -79,13 +78,13 @@ class AsgarosForumInsert {
         $date = $asgarosforum->current_time();
 
         if (self::getAction() === 'add_thread') {
-            $wpdb->insert($asgarosforum->table_threads, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
-            $asgarosforum->current_thread = $wpdb->insert_id;
+            $asgarosforum->db->insert($asgarosforum->table_threads, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
+            $asgarosforum->current_thread = $asgarosforum->db->insert_id;
 
             $uploads = maybe_serialize(AsgarosForumUploads::prepareFileList());
 
-            $wpdb->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => $uploads), array('%s', '%d', '%s', '%d', '%s'));
-            $asgarosforum->current_post = $wpdb->insert_id;
+            $asgarosforum->db->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => $uploads), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
             // Only handle uploads when the option is enabled.
             if ($asgarosforum->options['allow_file_uploads']) {
@@ -99,8 +98,8 @@ class AsgarosForumInsert {
         } else if (self::getAction() === 'add_post') {
             $uploads = maybe_serialize(AsgarosForumUploads::prepareFileList());
 
-            $wpdb->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => $uploads), array('%s', '%d', '%s', '%d', '%s'));
-            $asgarosforum->current_post = $wpdb->insert_id;
+            $asgarosforum->db->insert($asgarosforum->table_posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_thread, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => $uploads), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
             // Only handle uploads when the option is enabled.
             if ($asgarosforum->options['allow_file_uploads']) {
@@ -113,10 +112,10 @@ class AsgarosForumInsert {
             AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect);
         } else if (self::getAction() === 'edit_post') {
             $uploads = maybe_serialize(AsgarosForumUploads::uploadFiles($asgarosforum->current_post));
-            $wpdb->update($asgarosforum->table_posts, array('text' => self::$dataContent, 'uploads' => $uploads, 'date_edit' => $date), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s'), array('%d'));
+            $asgarosforum->db->update($asgarosforum->table_posts, array('text' => self::$dataContent, 'uploads' => $uploads, 'date_edit' => $date), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s'), array('%d'));
 
             if ($asgarosforum->is_first_post($asgarosforum->current_post) && !empty(self::$dataSubject)) {
-                $wpdb->update($asgarosforum->table_threads, array('name' => self::$dataSubject), array('id' => $asgarosforum->current_thread), array('%s'), array('%d'));
+                $asgarosforum->db->update($asgarosforum->table_threads, array('name' => self::$dataSubject), array('id' => $asgarosforum->current_thread), array('%s'), array('%d'));
             }
 
             $redirect = html_entity_decode($asgarosforum->get_postlink($asgarosforum->current_thread, $asgarosforum->current_post, $_POST['part_id']));

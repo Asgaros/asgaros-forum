@@ -286,7 +286,7 @@ class asgarosforum_admin {
     }
 
     function save_forum() {
-        global $asgarosforum, $wpdb;
+        global $asgarosforum;
         $forum_id           = $_POST['forum_id'];
         $forum_category     = $_POST['forum_category'];
         $forum_parent_forum = $_POST['forum_parent_forum'];
@@ -297,13 +297,13 @@ class asgarosforum_admin {
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
-                $wpdb->insert(
+                $asgarosforum->db->insert(
                     $asgarosforum->table_forums,
                     array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
                     array('%s', '%d', '%d', '%s', '%d', '%d')
                 );
             } else {
-                $wpdb->update(
+                $asgarosforum->db->update(
                     $asgarosforum->table_forums,
                     array('name' => $forum_name, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
                     array('id' => $forum_id),
@@ -317,9 +317,9 @@ class asgarosforum_admin {
     }
 
     function delete_category($term_id, $term_taxonomy_id, $deleted_term) {
-        global $wpdb, $asgarosforum;
+        global $asgarosforum;
 
-        $forums = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$term_id};");
+        $forums = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$term_id};");
 
         if (!empty($forums)) {
             foreach ($forums as $forum) {
@@ -329,7 +329,7 @@ class asgarosforum_admin {
     }
 
     function delete_forum($forum_id, $category_id) {
-        global $wpdb, $asgarosforum;
+        global $asgarosforum;
 
         // Delete all subforums first
         $subforums = $asgarosforum->get_forums($category_id, $forum_id);
@@ -341,7 +341,7 @@ class asgarosforum_admin {
         }
 
         // Delete all threads
-        $threads = $wpdb->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$forum_id};");
+        $threads = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$forum_id};");
 
         if (!empty($threads)) {
             foreach ($threads as $thread) {
@@ -349,7 +349,7 @@ class asgarosforum_admin {
             }
         }
         // Last but not least delete the forum
-        $wpdb->delete($asgarosforum->table_forums, array('id' => $forum_id), array('%d'));
+        $asgarosforum->db->delete($asgarosforum->table_forums, array('id' => $forum_id), array('%d'));
 
         $this->saved = true;
     }

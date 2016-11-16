@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
     var $executePlugin = false;
+    var $db = false;
     var $directory = '';
     var $date_format = '';
     var $error = false;
@@ -51,6 +52,8 @@ class AsgarosForum {
     var $cache = array();   // Used to store selected database queries.
 
     function __construct() {
+        global $wpdb;
+        $this->db = $wpdb;
         $this->directory = plugin_dir_url(dirname(__FILE__));
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
@@ -274,8 +277,6 @@ class AsgarosForum {
     }
 
     function forum() {
-        global $wpdb;
-
         ob_start();
         echo '<div id="af-wrapper">';
 
@@ -337,11 +338,11 @@ class AsgarosForum {
     }
 
     function showthread() {
-        global $wpdb, $wp_embed;
+        global $wp_embed;
         $posts = $this->get_posts();
 
         if ($posts) {
-            $wpdb->query($wpdb->prepare("UPDATE {$this->table_threads} SET views = views + 1 WHERE id = %d", $this->current_thread));
+            $this->db->query($this->db->prepare("UPDATE {$this->table_threads} SET views = views + 1 WHERE id = %d", $this->current_thread));
 
             $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
 
@@ -384,9 +385,7 @@ class AsgarosForum {
     }
 
     function element_exists($id, $location) {
-        global $wpdb;
-
-        if (!empty($id) && is_numeric($id) && $wpdb->get_row($wpdb->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
+        if (!empty($id) && is_numeric($id) && $this->db->get_row($this->db->prepare("SELECT id FROM {$location} WHERE id = %d;", $id))) {
             return true;
         } else {
             return false;
@@ -400,11 +399,9 @@ class AsgarosForum {
     }
 
     function get_postlink($thread_id, $post_id, $page = 0) {
-        global $wpdb;
-
         if (!$page) {
-            $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
-            $page = ceil($wpdb->num_rows / $this->options['posts_per_page']);
+            $this->db->get_col($this->db->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+            $page = ceil($this->db->num_rows / $this->options['posts_per_page']);
         }
 
         return $this->get_link($thread_id, $this->links->topic, $page) . '#postid-' . $post_id;
@@ -440,46 +437,41 @@ class AsgarosForum {
     }
 
     function get_forums($id = false, $parent_forum = 0) {
-        global $wpdb;
-
         if ($id) {
-            return $wpdb->get_results($wpdb->prepare("SELECT f.id, f.name, f.description, f.closed, f.sort, f.parent_forum, (SELECT COUNT(ct_t.id) FROM {$this->table_threads} AS ct_t, {$this->table_forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_threads, (SELECT COUNT(cp_p.id) FROM {$this->table_posts} AS cp_p, {$this->table_threads} AS cp_t, {$this->table_forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(csf_f.id) FROM {$this->table_forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums FROM {$this->table_forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
+            return $this->db->get_results($this->db->prepare("SELECT f.id, f.name, f.description, f.closed, f.sort, f.parent_forum, (SELECT COUNT(ct_t.id) FROM {$this->table_threads} AS ct_t, {$this->table_forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_threads, (SELECT COUNT(cp_p.id) FROM {$this->table_posts} AS cp_p, {$this->table_threads} AS cp_t, {$this->table_forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(csf_f.id) FROM {$this->table_forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums FROM {$this->table_forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
         } else {
             // Load all forums.
-            return $wpdb->get_results("SELECT id, name FROM {$this->table_forums} ORDER BY sort ASC;");
+            return $this->db->get_results("SELECT id, name FROM {$this->table_forums} ORDER BY sort ASC;");
         }
     }
 
     function get_threads($id, $type = 'normal') {
-        global $wpdb;
         $limit = "";
 
         if ($type == 'normal') {
             $start = $this->current_page * $this->options['threads_per_page'];
             $end = $this->options['threads_per_page'];
-            $limit = $wpdb->prepare("LIMIT %d, %d", $start, $end);
+            $limit = $this->db->prepare("LIMIT %d, %d", $start, $end);
         }
 
         $order = apply_filters('asgarosforum_filter_get_threads_order', "(SELECT MAX(id) FROM {$this->table_posts} AS p WHERE p.parent_id = t.id) DESC");
-        $results = $wpdb->get_results($wpdb->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY {$order} {$limit};", $id, $type.'%'));
+        $results = $this->db->get_results($this->db->prepare("SELECT t.id, t.name, t.views, t.status FROM {$this->table_threads} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY {$order} {$limit};", $id, $type.'%'));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
         return $results;
     }
 
     function get_posts() {
-        global $wpdb;
         $start = $this->current_page * $this->options['posts_per_page'];
         $end = $this->options['posts_per_page'];
 
         $order = apply_filters('asgarosforum_filter_get_posts_order', 'p1.id ASC');
-        $results = $wpdb->get_results($wpdb->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, (SELECT COUNT(p2.id) FROM {$this->table_posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, uploads FROM {$this->table_posts} AS p1 WHERE p1.parent_id = %d ORDER BY {$order} LIMIT %d, %d;", $this->current_thread, $start, $end));
+        $results = $this->db->get_results($this->db->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, (SELECT COUNT(p2.id) FROM {$this->table_posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, uploads FROM {$this->table_posts} AS p1 WHERE p1.parent_id = %d ORDER BY {$order} LIMIT %d, %d;", $this->current_thread, $start, $end));
         $results = apply_filters('asgarosforum_filter_get_posts', $results);
         return $results;
     }
 
     function is_first_post($post_id) {
-        global $wpdb;
-        $first_post_id = $wpdb->get_var("SELECT id FROM {$this->table_posts} WHERE parent_id = {$this->current_thread} ORDER BY id ASC LIMIT 1;");
+        $first_post_id = $this->db->get_var("SELECT id FROM {$this->table_posts} WHERE parent_id = {$this->current_thread} ORDER BY id ASC LIMIT 1;");
 
         if ($first_post_id == $post_id) {
             return true;
@@ -489,10 +481,8 @@ class AsgarosForum {
     }
 
     function get_name($id, $location) {
-        global $wpdb;
-
         if (empty($this->cache['get_name'][$location][$id])) {
-            $this->cache['get_name'][$location][$id] = $wpdb->get_var($wpdb->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));
+            $this->cache['get_name'][$location][$id] = $this->db->get_var($this->db->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));
         }
 
         return $this->cache['get_name'][$location][$id];
@@ -546,8 +536,7 @@ class AsgarosForum {
     }
 
     function get_thread_starter($thread_id) {
-        global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
+        return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->table_posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
     }
 
     function post_menu($post_id, $author_id, $counter) {
@@ -581,13 +570,11 @@ class AsgarosForum {
     }
 
     function get_post_author($post_id) {
-        global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d;", $post_id));
+        return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d;", $post_id));
     }
 
     function count_elements($id, $location, $where = 'parent_id') {
-        global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM {$location} WHERE {$where} = %d;", $id));
+        return $this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$location} WHERE {$where} = %d;", $id));
     }
 
     function forum_menu($location, $showallbuttons = true) {
@@ -620,8 +607,7 @@ class AsgarosForum {
     }
 
     function get_parent_id($id, $location, $value = 'parent_id') {
-        global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT {$value} FROM {$location} WHERE id = %d;", $id));
+        return $this->db->get_var($this->db->prepare("SELECT {$value} FROM {$location} WHERE id = %d;", $id));
     }
 
     function breadcrumbs() {
@@ -655,19 +641,18 @@ class AsgarosForum {
     }
 
     function pageing($location) {
-        global $wpdb;
         $out = '<div class="pages">'.__('Pages:', 'asgaros-forum');
         $num_pages = 0;
         $select_source = '';
         $select_url = '';
 
         if ($location == $this->table_posts) {
-            $count = $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d;", $this->current_thread));
+            $count = $this->db->get_var($this->db->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d;", $this->current_thread));
             $num_pages = ceil($count / $this->options['posts_per_page']);
             $select_source = $this->current_thread;
             $select_url = $this->links->topic;
         } else if ($location == $this->table_threads) {
-            $count = $wpdb->get_var($wpdb->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->current_forum, "normal%"));
+            $count = $this->db->get_var($this->db->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->current_forum, "normal%"));
             $num_pages = ceil($count / $this->options['threads_per_page']);
             $select_source = $this->current_forum;
             $select_url = $this->links->forum;
@@ -714,18 +699,16 @@ class AsgarosForum {
     }
 
     function delete_thread($thread_id, $admin_action = false) {
-        global $wpdb;
-
         if (AsgarosForumPermissions::isModerator('current')) {
             if ($thread_id) {
                 // Delete uploads
-                $posts = $wpdb->get_col($wpdb->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+                $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
                 foreach ($posts as $post) {
                     AsgarosForumUploads::deletePostFiles($post);
                 }
 
-                $wpdb->delete($this->table_posts, array('parent_id' => $thread_id), array('%d'));
-                $wpdb->delete($this->table_threads, array('id' => $thread_id), array('%d'));
+                $this->db->delete($this->table_posts, array('parent_id' => $thread_id), array('%d'));
+                $this->db->delete($this->table_threads, array('id' => $thread_id), array('%d'));
                 AsgarosForumNotifications::removeTopicSubscriptions($thread_id);
 
                 if (!$admin_action) {
@@ -737,32 +720,28 @@ class AsgarosForum {
     }
 
     function move_thread() {
-        global $wpdb;
         $newForumID = $_POST['newForumID'];
 
         if (AsgarosForumPermissions::isModerator('current') && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
-            $wpdb->update($this->table_threads, array('parent_id' => $newForumID), array('id' => $this->current_thread), array('%d'), array('%d'));
+            $this->db->update($this->table_threads, array('parent_id' => $newForumID), array('id' => $this->current_thread), array('%d'), array('%d'));
             wp_redirect(html_entity_decode($this->links->topic . $this->current_thread));
             exit;
         }
     }
 
     function remove_post() {
-        global $wpdb;
         $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? absint($_GET['post']) : 0;
 
         if (AsgarosForumPermissions::isModerator('current') && $this->element_exists($post_id, $this->table_posts)) {
-            $wpdb->delete($this->table_posts, array('id' => $post_id), array('%d'));
+            $this->db->delete($this->table_posts, array('id' => $post_id), array('%d'));
             AsgarosForumUploads::deletePostFiles($post_id);
         }
     }
 
     // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
     function get_lastpost_in_thread($id) {
-        global $wpdb;
-
         if (empty($this->cache['get_lastpost_in_thread'][$id])) {
-            $this->cache['get_lastpost_in_thread'][$id] = $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
+            $this->cache['get_lastpost_in_thread'][$id] = $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
         }
 
         return $this->cache['get_lastpost_in_thread'][$id];
@@ -770,17 +749,14 @@ class AsgarosForum {
 
     // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
     function get_lastpost_in_forum($id) {
-        global $wpdb;
-
         if (empty($this->cache['get_lastpost_in_forum'][$id])) {
-            return $wpdb->get_row($wpdb->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$this->table_forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
+            return $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->table_posts} AS p INNER JOIN {$this->table_threads} AS t ON p.parent_id = t.id INNER JOIN {$this->table_forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
         }
 
         return $this->cache['get_lastpost_in_forum'][$id];
     }
 
     function change_status($property) {
-        global $wpdb;
         $new_status = '';
 
         if (AsgarosForumPermissions::isModerator('current')) {
@@ -792,7 +768,7 @@ class AsgarosForum {
                 $new_status .= ($this->get_status('closed')) ? 'open' : 'closed';
             }
 
-            $wpdb->update($this->table_threads, array('status' => $new_status), array('id' => $this->current_thread), array('%s'), array('%d'));
+            $this->db->update($this->table_threads, array('status' => $new_status), array('id' => $this->current_thread), array('%s'), array('%d'));
 
             // Update cache
             $this->cache['get_status'][$this->current_thread] = $new_status;
@@ -800,10 +776,8 @@ class AsgarosForum {
     }
 
     function get_status($property) {
-        global $wpdb;
-
         if (empty($this->cache['get_status'][$this->current_thread])) {
-            $this->cache['get_status'][$this->current_thread] = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
+            $this->cache['get_status'][$this->current_thread] = $this->db->get_var($this->db->prepare("SELECT status FROM {$this->table_threads} WHERE id = %d;", $this->current_thread));
         }
 
         $status = $this->cache['get_status'][$this->current_thread];
@@ -820,8 +794,7 @@ class AsgarosForum {
     // Returns TRUE if the forum is opened or the user has at least moderator rights.
     function get_forum_status() {
         if (!AsgarosForumPermissions::isModerator('current')) {
-            global $wpdb;
-            $closed = intval($wpdb->get_var($wpdb->prepare("SELECT closed FROM {$this->table_forums} WHERE id = %d;", $this->current_forum)));
+            $closed = intval($this->db->get_var($this->db->prepare("SELECT closed FROM {$this->table_forums} WHERE id = %d;", $this->current_forum)));
 
             if ($closed === 1) {
                 return false;
