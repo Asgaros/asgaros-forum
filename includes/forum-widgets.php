@@ -3,18 +3,6 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumWidgets {
-    public static function getLastPosts($items = 1) {
-        global $asgarosforum;
-        $where = self::filterCategories();
-        return $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $items));
-    }
-
-    public static function getLastTopics($items = 1) {
-        global $asgarosforum;
-        $where = self::filterCategories();
-        return $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $items));
-    }
-
     public static function getWidgetLink($thread_id, $post_id) {
         global $asgarosforum;
         $target = get_page_link($asgarosforum->options['location']);
@@ -75,7 +63,7 @@ class AsgarosForumWidgets {
         return $where;
     }
 
-    public static function showWidget($args, $title, $number, $contentType) {
+    public static function showWidget($args, $title, $numberOfItems, $contentType) {
         global $asgarosforum;
 
         echo $args['before_widget'];
@@ -86,10 +74,11 @@ class AsgarosForumWidgets {
 
         if (!empty($asgarosforum->options['location']) && has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum')) {
             $elements = null;
+            $where = self::filterCategories();
             if ($contentType === 'posts') {
-                $elements = self::getLastPosts($number);
+                $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
             } else if ($contentType === 'topics') {
-                $elements = self::getLastTopics($number);
+                $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_threads} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
             }
 
             if (!empty($elements)) {
@@ -142,7 +131,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 
 		$number = (!empty($instance['number'])) ? absint($instance['number']) : 3;
 
-        if (!$number) {
+        if ($number == 0) {
 			$number = 3;
         }
 
