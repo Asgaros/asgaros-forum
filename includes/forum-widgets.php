@@ -5,15 +5,14 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumWidgets {
     public static function getWidgetLink($thread_id, $post_id) {
         global $asgarosforum;
-        $target = get_page_link($asgarosforum->options['location']);
 
         if (empty($asgarosforum->cache['getWidgetLink'][$thread_id])) {
-            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
+            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT count(id) FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
         }
 
         $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);
 
-        return $asgarosforum->get_link($thread_id, add_query_arg(array('view' => 'thread'), $target).'&amp;id=', $page).'#postid-'.$post_id;
+        return $asgarosforum->rewrite->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
     }
 
     public static function filterCategories() {

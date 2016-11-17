@@ -91,7 +91,7 @@ class AsgarosForumInsert {
                 AsgarosForumUploads::uploadFiles($asgarosforum->current_post);
             }
 
-            $redirect = html_entity_decode($asgarosforum->get_link($asgarosforum->current_thread, $asgarosforum->links->topic).'#postid-'.$asgarosforum->current_post);
+            $redirect = html_entity_decode($asgarosforum->rewrite->getLink('topic', $asgarosforum->current_thread, false, '#postid-'.$asgarosforum->current_post));
 
             // Send notification about new topic to global subscribers.
             AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect);
