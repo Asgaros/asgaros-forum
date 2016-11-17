@@ -4,38 +4,35 @@ if (!defined('ABSPATH')) exit;
 
 $lastpost_data = $this->get_lastpost_in_forum($forum->id);
 
-?>
-<div class="forum" id="forum-<?php echo $forum->id; ?>">
-    <div class="forum-status">
-        <?php
+echo '<div class="forum" id="forum-'.$forum->id.'">';
+    echo '<div class="forum-status">';
         $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id);
         echo '<span class="dashicons-before dashicons-overview'.$unreadStatus.'"></span>';
-        ?>
-    </div>
-    <div class="forum-name">
-        <strong><a href="<?php echo $this->get_link($forum->id, $this->links->forum); ?>"><?php echo esc_html(stripslashes($forum->name)); ?></a></strong>
-        <small><?php echo esc_html(stripslashes($forum->description)); ?></small>
-        <?php
+    echo '</div>';
+    echo '<div class="forum-name">';
+        echo '<strong><a href="'.$this->get_link($forum->id, $this->links->forum).'">'.esc_html(stripslashes($forum->name)).'</a></strong>';
+        echo '<small>'.esc_html(stripslashes($forum->description)).'</small>';
+
+        // Show subforums.
         if ($forum->count_subforums > 0) {
             echo '<small class="forum-subforums">';
             echo '<b>'.__('Subforums', 'asgaros-forum').':</b>&nbsp;';
 
             $subforums = $this->get_forums($category->term_id, $forum->id);
+            $subforumsFirstDone = false;
 
-            $subforums_counter = 0;
             foreach ($subforums as $subforum) {
-                echo ($subforums_counter > 0) ? '&nbsp;&middot;&nbsp;' : '';
+                echo ($subforumsFirstDone) ? '&nbsp;&middot;&nbsp;' : '';
                 echo '<a href="'.$this->get_link($subforum->id, $this->links->forum).'">'.esc_html(stripslashes($subforum->name)).'</a>';
-                $subforums_counter++;
+                $subforumsFirstDone = true;
             }
 
             echo '</small>';
         }
-        ?>
-    </div>
-    <div class="forum-stats">
-        <small><?php echo sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads); ?></small>
-        <small><?php echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts); ?></small>
-    </div>
-    <div class="forum-poster"><?php echo $this->get_lastpost($lastpost_data); ?></div>
-</div>
+    echo '</div>';
+    echo '<div class="forum-stats">';
+        echo '<small>'.sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads).'</small>';
+        echo '<small>'.sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts).'</small>';
+    echo '</div>';
+    echo '<div class="forum-poster">'.$this->get_lastpost($lastpost_data).'</div>';
+echo '</div>';

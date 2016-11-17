@@ -2,27 +2,23 @@
 
 if (!defined('ABSPATH')) exit;
 
-$forum_counter = 0;
+$forumsAvailable = false;
 
-foreach ($categories as $category) { ?>
-    <div class="title-element" id="forum-category-<?php echo $category->term_id; ?>"><?php echo $category->name; ?></div>
-    <div class="content-element space">
-        <?php
-        $frs = $this->get_forums($category->term_id);
-        if (count($frs) > 0) {
-            foreach ($frs as $forum) {
-                $forum_counter++;
+foreach ($categories as $category) {
+    echo '<div class="title-element" id="forum-category-'.$category->term_id.'">'.$category->name.'</div>';
+    echo '<div class="content-element space">';
+        $forums = $this->get_forums($category->term_id);
+        if (empty($forums)) {
+            echo '<div class="notice">'.__('In this category are no forums yet!', 'asgaros-forum').'</div>';
+        } else {
+            foreach ($forums as $forum) {
+                $forumsAvailable = true;
                 require('forum-element.php');
             }
-        } else { ?>
-            <div class="notice"><?php _e('In this category are no forums yet!', 'asgaros-forum'); ?></div>
-        <?php } ?>
-    </div>
-<?php
+        }
+    echo '</div>';
 }
 
-if ($forum_counter > 0) {
+if ($forumsAvailable) {
     AsgarosForumUnread::showUnreadControls();
 }
-
-?>

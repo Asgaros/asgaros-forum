@@ -573,10 +573,6 @@ class AsgarosForum {
         return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->table_posts} WHERE id = %d;", $post_id));
     }
 
-    function count_elements($id, $location, $where = 'parent_id') {
-        return $this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$location} WHERE {$where} = %d;", $id));
-    }
-
     function forum_menu($location, $showallbuttons = true) {
         $menu = '';
 

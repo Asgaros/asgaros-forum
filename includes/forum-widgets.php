@@ -8,8 +8,7 @@ class AsgarosForumWidgets {
         $target = get_page_link($asgarosforum->options['location']);
 
         if (empty($asgarosforum->cache['getWidgetLink'][$thread_id])) {
-            $asgarosforum->db->get_col($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
-            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->num_rows;
+            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
         }
 
         $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);
