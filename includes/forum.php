@@ -61,8 +61,8 @@ class AsgarosForum {
         $this->table_forums = AsgarosForumDatabase::getTable('forums');
         $this->table_threads = AsgarosForumDatabase::getTable('threads');
         $this->table_posts = AsgarosForumDatabase::getTable('posts');
-        $this->rewrite = new AsgarosForumRewrite();
 
+        add_action('init', array($this, 'initialize'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
@@ -71,6 +71,10 @@ class AsgarosForum {
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
         add_shortcode('forum', array($this, 'forum'));
+    }
+
+    function initialize() {
+        $this->rewrite = new AsgarosForumRewrite();
     }
 
     function prepare() {

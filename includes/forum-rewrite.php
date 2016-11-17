@@ -6,12 +6,9 @@ class AsgarosForumRewrite {
     private $linkList = array();
 
     public function __construct() {
-        add_action('init', array($this, 'initialize'));
-	}
-
-    // Set all base links.
-    public function initialize() {
         global $asgarosforum, $wp;
+
+        // Set all base links.
         $this->linkList['home']        = esc_url(get_page_link($asgarosforum->options['location']));
         $this->linkList['forum']       = esc_url(add_query_arg(array('view' => 'forum'), $this->linkList['home']));
         $this->linkList['topic']       = esc_url(add_query_arg(array('view' => 'thread'), $this->linkList['home']));
@@ -20,7 +17,7 @@ class AsgarosForumRewrite {
         $this->linkList['post_add']    = esc_url(add_query_arg(array('view' => 'addpost'), $this->linkList['home']));
         $this->linkList['post_edit']   = esc_url(add_query_arg(array('view' => 'editpost'), $this->linkList['home']));
         $this->linkList['current']     = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
-    }
+	}
 
     // Builds and returns a requested link.
     public function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '') {
