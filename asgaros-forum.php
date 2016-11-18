@@ -43,7 +43,6 @@ require('admin/admin.php');
 
 AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();
-AsgarosForumTaxonomies::createInstance();
 AsgarosForumPermissions::createInstance();
 AsgarosForumUploads::createInstance();
 AsgarosForumUnread::createInstance();

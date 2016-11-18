@@ -74,6 +74,7 @@ class AsgarosForum {
     }
 
     function initialize() {
+        new AsgarosForumTaxonomies();
         $this->rewrite = new AsgarosForumRewrite();
     }
 
@@ -393,8 +394,8 @@ class AsgarosForum {
 
     function get_postlink($thread_id, $post_id, $page = 0) {
         if (!$page) {
-            $this->db->get_col($this->db->prepare("SELECT id FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
-            $page = ceil($this->db->num_rows / $this->options['posts_per_page']);
+            $postNumber = $this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$this->table_posts} WHERE parent_id = %d;", $thread_id));
+            $page = ceil($postNumber / $this->options['posts_per_page']);
         }
 
         return $this->rewrite->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
@@ -649,11 +650,11 @@ class AsgarosForum {
 
         if ($num_pages > 1) {
             if ($num_pages <= 6) {
-                for ($i = 0; $i < $num_pages; ++$i) {
-                    if ($i == $this->current_page) {
-                        $out .= ' <strong>'.($i + 1).'</strong>';
+                for ($i = 1; $i <= $num_pages; $i++) {
+                    if ($i == ($this->current_page + 1)) {
+                        $out .= ' <strong>'.$i.'</strong>';
                     } else {
-                        $out .= ' <a href="'.$this->rewrite->getLink($select_url, $select_source, array('part' => ($i + 1))).'">'.($i + 1).'</a>';
+                        $out .= ' <a href="'.$this->rewrite->getLink($select_url, $select_source, array('part' => $i)).'">'.$i.'</a>';
                     }
                 }
             } else {
@@ -746,9 +747,9 @@ class AsgarosForum {
     }
 
     function change_status($property) {
-        $new_status = '';
-
         if (AsgarosForumPermissions::isModerator('current')) {
+            $new_status = '';
+            
             if ($property == 'sticky') {
                 $new_status .= ($this->get_status('sticky')) ? 'normal_' : 'sticky_';
                 $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';

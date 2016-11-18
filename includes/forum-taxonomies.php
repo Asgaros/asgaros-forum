@@ -3,24 +3,8 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumTaxonomies {
-	private static $instance = null;
-
-	// AsgarosForumTaxonomies instance creator
-	public static function createInstance() {
-		if (self::$instance === null) {
-			self::$instance = new self;
-		}
-
-        return self::$instance;
-	}
-
-	// AsgarosForumTaxonomies constructor
-	private function __construct() {
-		add_action('init', array($this, 'registerTaxonomies'));
-	}
-
-    public static function registerTaxonomies() {
-        register_taxonomy(
+	public function __construct() {
+		register_taxonomy(
             'asgarosforum-category',
             null,
             array(
@@ -44,5 +28,5 @@ class AsgarosForumTaxonomies {
 				)
             )
         );
-    }
+	}
 }
