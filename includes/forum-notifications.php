@@ -11,14 +11,14 @@ class AsgarosForumNotifications {
         if ($asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
             echo '<div id="topic-subscription">';
 
-            if (self::isSubscribed($asgarosforum->current_thread)) {
+            if (self::isSubscribed($asgarosforum->current_topic)) {
                 // User has subscription for this topic
-                echo '<a href="'.$asgarosforum->rewrite->getLink('topic', $asgarosforum->current_thread, array('unsubscribe_topic' => 1)).'">';
+                echo '<a href="'.$asgarosforum->rewrite->getLink('topic', $asgarosforum->current_topic, array('unsubscribe_topic' => 1)).'">';
                 _e('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
                 echo '</a>';
             } else {
                 // User has no subscription for this topic
-                echo '<a href="'.$asgarosforum->rewrite->getLink('topic', $asgarosforum->current_thread, array('subscribe_topic' => 1)).'">';
+                echo '<a href="'.$asgarosforum->rewrite->getLink('topic', $asgarosforum->current_topic, array('subscribe_topic' => 1)).'">';
                 _e('<b>Subscribe</b> to this topic.', 'asgaros-forum');
                 echo '</a>';
             }
@@ -35,7 +35,7 @@ class AsgarosForumNotifications {
         if (is_user_logged_in() && $asgarosforum->options['allow_subscriptions']) {
             echo '<div class="editor-row">';
             echo '<span class="row-title">'.__('Subscription:', 'asgaros-forum').'</span>';
-            echo '<input type="checkbox" name="subscribe_checkbox" id="subscribe_checkbox" '.checked(self::isSubscribed($asgarosforum->current_thread), true, false).'>';
+            echo '<input type="checkbox" name="subscribe_checkbox" id="subscribe_checkbox" '.checked(self::isSubscribed($asgarosforum->current_topic), true, false).'>';
             echo '<label for="subscribe_checkbox">'.__('<b>Subscribe</b> to this topic.', 'asgaros-forum').'</label>';
             echo '</div>';
         }
@@ -57,7 +57,7 @@ class AsgarosForumNotifications {
     // Subscribes the current user to the current topic.
     public static function subscribeTopic() {
         global $asgarosforum;
-        $topic_id = $asgarosforum->current_thread;
+        $topic_id = $asgarosforum->current_topic;
 
         // Only subscribe user if he is not already subscribed for this topic.
         if (!self::isSubscribed($topic_id)) {
@@ -68,7 +68,7 @@ class AsgarosForumNotifications {
     // Unsubscribes the current user from the current topic.
     public static function unsubscribeTopic() {
         global $asgarosforum;
-        $topic_id = $asgarosforum->current_thread;
+        $topic_id = $asgarosforum->current_topic;
 
         delete_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic', $topic_id);
     }
@@ -93,7 +93,7 @@ class AsgarosForumNotifications {
 
         // Check if this functionality is enabled
         if ($asgarosforum->options['allow_subscriptions']) {
-            $thread_name = $asgarosforum->get_name($asgarosforum->current_thread, $asgarosforum->table_threads);
+            $thread_name = $asgarosforum->get_name($asgarosforum->current_topic, $asgarosforum->table_topics);
 
             $notification_subject = sprintf(__('[%s] New answer: %s', 'asgaros-forum'), get_bloginfo('name'), esc_html(stripslashes($thread_name)));
             $notification_message = sprintf(__('Hello,<br /><br />you got this mail because there is a new answer in a forum-topic you have subscribed to:<br />%s<br /><br />Answer:<br />%s<br /><br />Link to the new answer:<br /><a href="%s">%s</a><br /><br />You can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!', 'asgaros-forum'), esc_html(stripslashes($thread_name)), wpautop(stripslashes($answer_text)), $answer_link, $answer_link);
@@ -103,7 +103,7 @@ class AsgarosForumNotifications {
             $topic_subscribers = get_users(
                 array(
                     'meta_key'      => 'asgarosforum_subscription_topic',
-                    'meta_value'    => $asgarosforum->current_thread,
+                    'meta_value'    => $asgarosforum->current_topic,
                     'fields'        => array('user_email'),
                     'exclude'       => array(get_current_user_id())
                 )

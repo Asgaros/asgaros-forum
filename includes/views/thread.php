@@ -12,12 +12,12 @@ if (!defined('ABSPATH')) exit;
     <div class="clear"></div>
 </div>
 
-<div class="title-element"><?php echo esc_html($this->cut_string(stripslashes($this->get_name($this->current_thread, $this->table_threads)), 70)).$meClosed; ?></div>
+<div class="title-element"><?php echo esc_html($this->cut_string(stripslashes($this->get_name($this->current_topic, $this->table_topics)), 70)).$meClosed; ?></div>
 <div class="content-element">
     <?php
     $counter = 0;
     $avatars_available = get_option('show_avatars');
-    $threadStarter = $this->get_thread_starter($this->current_thread);
+    $threadStarter = $this->get_thread_starter($this->current_topic);
     foreach ($posts as $post) {
         $counter++;
         ?>
@@ -78,7 +78,7 @@ if (!defined('ABSPATH')) exit;
                     if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
                         echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'&nbsp;&middot;&nbsp;';
                     }
-                    echo '<a href="'.$this->get_postlink($this->current_thread, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+                    echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
                     echo '</div>';
                     do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
                     ?>

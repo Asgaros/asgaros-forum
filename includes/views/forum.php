@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 <div>
     <?php
-    $pageing = ($counter_normal > 0) ? $this->pageing($this->table_threads) : '';
+    $pageing = ($counter_normal > 0) ? $this->pageing($this->table_topics) : '';
     echo $pageing;
     ?>
     <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>

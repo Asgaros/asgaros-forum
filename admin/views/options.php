@@ -29,8 +29,8 @@ $locationSetUp = (!empty($asgarosforum->options['location']) && has_shortcode(ge
             <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3">
         </p>
         <p>
-            <label for="threads_per_page"><?php _e('Threads to show per page:', 'asgaros-forum'); ?></label>
-            <input type="text" name="threads_per_page" id="threads_per_page" value="<?php echo stripslashes($asgarosforum->options['threads_per_page']); ?>" size="3">
+            <label for="topics_per_page"><?php _e('Threads to show per page:', 'asgaros-forum'); ?></label>
+            <input type="text" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3">
         </p>
         <p>
             <input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($asgarosforum->options['minimalistic_editor'])); ?>>

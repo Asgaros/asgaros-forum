@@ -13,7 +13,7 @@ class AsgarosForumRewrite {
         $this->linkList['forum']       = esc_url(add_query_arg(array('view' => 'forum'), $this->linkList['home']));
         $this->linkList['topic']       = esc_url(add_query_arg(array('view' => 'thread'), $this->linkList['home']));
         $this->linkList['topic_add']   = esc_url(add_query_arg(array('view' => 'addthread'), $this->linkList['home']));
-        $this->linkList['topic_move']  = esc_url(add_query_arg(array('view' => 'movethread'), $this->linkList['home']));
+        $this->linkList['topic_move']  = esc_url(add_query_arg(array('view' => 'movetopic'), $this->linkList['home']));
         $this->linkList['post_add']    = esc_url(add_query_arg(array('view' => 'addpost'), $this->linkList['home']));
         $this->linkList['post_edit']   = esc_url(add_query_arg(array('view' => 'editpost'), $this->linkList['home']));
         $this->linkList['current']     = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));

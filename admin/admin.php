@@ -341,7 +341,7 @@ class asgarosforum_admin {
         }
 
         // Delete all threads
-        $threads = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->table_threads} WHERE parent_id = {$forum_id};");
+        $threads = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->table_topics} WHERE parent_id = {$forum_id};");
 
         if (!empty($threads)) {
             foreach ($threads as $thread) {

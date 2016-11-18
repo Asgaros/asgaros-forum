@@ -50,7 +50,7 @@ if (!$error) {
             }
 
             if (!isset($_POST['subject']) && $this->is_first_post($post->id)) {
-                $threadname = $this->db->get_var($this->db->prepare("SELECT name FROM {$this->table_threads} WHERE id = %d;", $post->parent_id));
+                $threadname = $this->db->get_var($this->db->prepare("SELECT name FROM {$this->table_topics} WHERE id = %d;", $post->parent_id));
             }
         }
     }
@@ -68,7 +68,7 @@ if (!$error) {
             if ($this->current_view === 'addthread') {
                 _e('New Thread', 'asgaros-forum');
             } else if ($this->current_view === 'addpost') {
-                echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_thread, $this->table_threads)));
+                echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_topic, $this->table_topics)));
             } else if ($this->current_view === 'editpost') {
                 _e('Edit Post', 'asgaros-forum');
             }

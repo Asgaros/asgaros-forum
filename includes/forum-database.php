@@ -8,7 +8,7 @@ class AsgarosForumDatabase {
     private static $instance = null;
     private static $db;
     private static $table_forums;
-    private static $table_threads;
+    private static $table_topics;
     private static $table_posts;
 
     // AsgarosForumDatabase instance creator
@@ -33,7 +33,7 @@ class AsgarosForumDatabase {
 
     private function setTables() {
         self::$table_forums     = self::$db->prefix.'forum_forums';
-        self::$table_threads    = self::$db->prefix.'forum_threads';
+        self::$table_topics    = self::$db->prefix.'forum_threads';
         self::$table_posts      = self::$db->prefix.'forum_posts';
     }
 
@@ -41,7 +41,7 @@ class AsgarosForumDatabase {
         if ($name === 'forums') {
             return self::$table_forums;
         } else if ($name === 'threads') {
-            return self::$table_threads;
+            return self::$table_topics;
         } else if ($name === 'posts') {
             return self::$table_posts;
         }
@@ -112,7 +112,7 @@ class AsgarosForumDatabase {
             ) $charset_collate;";
 
             $sql2 = "
-            CREATE TABLE ".self::$table_threads." (
+            CREATE TABLE ".self::$table_topics." (
             id int(11) NOT NULL auto_increment,
             parent_id int(11) NOT NULL default '0',
             views int(11) NOT NULL default '0',
