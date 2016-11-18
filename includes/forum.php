@@ -355,14 +355,11 @@ class AsgarosForum {
     }
 
     function showLoginMessage() {
-        $loginMessage = '';
-
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
             $loginMessage = '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->rewrite->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
+            echo $loginMessage;
         }
-
-        $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
-        echo $loginMessage;
     }
 
     function movetopic() {

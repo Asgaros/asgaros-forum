@@ -99,6 +99,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Only show widgets when the forum is configured correctly
+* Fixed: Show filtered login-message only when necessary
 * Fixed: Rare PHP-notices
 * Changed: Forum location has to be selected in the settings
 * Performance improvements and code optimizations
