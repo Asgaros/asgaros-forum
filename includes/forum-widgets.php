@@ -12,7 +12,7 @@ class AsgarosForumWidgets {
 
         $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);
 
-        return $asgarosforum->rewrite->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
+        return $asgarosforum->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
     }
 
     public static function filterCategories() {
@@ -70,36 +70,32 @@ class AsgarosForumWidgets {
             echo $args['before_title'].$title.$args['after_title'];
         }
 
-        if (!empty($asgarosforum->options['location']) && has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum')) {
-            $elements = null;
-            $where = self::filterCategories();
-            if ($contentType === 'posts') {
-                $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
-            } else if ($contentType === 'topics') {
-                $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+        $elements = null;
+        $where = self::filterCategories();
+        if ($contentType === 'posts') {
+            $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
+        } else if ($contentType === 'topics') {
+            $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+        }
+
+        if (!empty($elements)) {
+            echo '<ul class="asgarosforum-widget">';
+
+            foreach ($elements as $element) {
+                echo '<li>';
+                echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
+                echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($element->author_id, true).'</b></span>';
+                echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
+                echo '</li>';
             }
 
-            if (!empty($elements)) {
-                echo '<ul class="asgarosforum-widget">';
-
-                foreach ($elements as $element) {
-                    echo '<li>';
-                    echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
-                    echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($element->author_id, true).'</b></span>';
-                    echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
-                    echo '</li>';
-                }
-
-                echo '</ul>';
-            } else {
-                if ($contentType === 'posts') {
-                    _e('No posts yet!', 'asgaros-forum');
-                } else if ($contentType === 'topics') {
-                    _e('No topics yet!', 'asgaros-forum');
-                }
-            }
+            echo '</ul>';
         } else {
-            _e('The forum has not been configured correctly.', 'asgaros-forum');
+            if ($contentType === 'posts') {
+                _e('No posts yet!', 'asgaros-forum');
+            } else if ($contentType === 'topics') {
+                _e('No topics yet!', 'asgaros-forum');
+            }
         }
 
         echo $args['after_widget'];

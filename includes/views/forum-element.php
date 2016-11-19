@@ -10,7 +10,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         echo '<span class="dashicons-before dashicons-overview'.$unreadStatus.'"></span>';
     echo '</div>';
     echo '<div class="forum-name">';
-        echo '<strong><a href="'.$this->rewrite->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a></strong>';
+        echo '<strong><a href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a></strong>';
         echo '<small>'.esc_html(stripslashes($forum->description)).'</small>';
 
         // Show subforums.
@@ -23,7 +23,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
 
             foreach ($subforums as $subforum) {
                 echo ($subforumsFirstDone) ? '&nbsp;&middot;&nbsp;' : '';
-                echo '<a href="'.$this->rewrite->getLink('forum', $subforum->id).'">'.esc_html(stripslashes($subforum->name)).'</a>';
+                echo '<a href="'.$this->getLink('forum', $subforum->id).'">'.esc_html(stripslashes($subforum->name)).'</a>';
                 $subforumsFirstDone = true;
             }
 

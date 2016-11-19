@@ -13,12 +13,12 @@ class AsgarosForumNotifications {
 
             if (self::isSubscribed($asgarosforum->current_topic)) {
                 // User has subscription for this topic
-                echo '<a href="'.$asgarosforum->rewrite->getLink('topic', $asgarosforum->current_topic, array('unsubscribe_topic' => 1)).'">';
+                echo '<a href="'.$asgarosforum->getLink('topic', $asgarosforum->current_topic, array('unsubscribe_topic' => 1)).'">';
                 _e('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
                 echo '</a>';
             } else {
                 // User has no subscription for this topic
-                echo '<a href="'.$asgarosforum->rewrite->getLink('topic', $asgarosforum->current_topic, array('subscribe_topic' => 1)).'">';
+                echo '<a href="'.$asgarosforum->getLink('topic', $asgarosforum->current_topic, array('subscribe_topic' => 1)).'">';
                 _e('<b>Subscribe</b> to this topic.', 'asgaros-forum');
                 echo '</a>';
             }

@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForum {
     var $executePlugin = false;
     var $db = null;
-    var $rewrite = null;
     var $directory = '';
     var $date_format = '';
     var $error = false;
@@ -20,11 +19,12 @@ class AsgarosForum {
     var $current_view = false;
     var $current_page = 0;
     var $parent_forum = false;
+    var $links = array();
     var $options = array();
     var $options_default = array(
-        'location'                  => false,
+        'location'                  => 0,
         'posts_per_page'            => 10,
-        'topics_per_page'          => 20,
+        'topics_per_page'           => 20,
         'minimalistic_editor'       => true,
         'allow_shortcodes'          => false,
         'allow_guest_postings'      => false,
@@ -70,7 +70,10 @@ class AsgarosForum {
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
+
+        // Register multiple shortcodes because sometimes users ignore the fact that shortcodes are case-sensitive.
         add_shortcode('forum', array($this, 'forum'));
+        add_shortcode('Forum', array($this, 'forum'));
     }
 
     function initialize() {
@@ -79,14 +82,26 @@ class AsgarosForum {
 
     function prepare() {
         global $post;
+        global $wp;
 
-        // Set all links.
-        $this->rewrite = new AsgarosForumRewrite();
-
-        if (isset($post) && $post->ID == $this->options['location'] && is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
+        if (is_a($post, 'WP_Post') && (has_shortcode($post->post_content, 'forum') || has_shortcode($post->post_content, 'Forum'))) {
             $this->executePlugin = true;
-        } else {
-            $this->error = __('The forum has not been configured correctly.', 'asgaros-forum');
+            $this->options['location'] = $post->ID;
+        }
+
+        // Set all base links.
+        if ($this->executePlugin || get_post($this->options['location'])) {
+            $this->links['home']        = esc_url(get_page_link($this->options['location']));
+            $this->links['forum']       = esc_url(add_query_arg(array('view' => 'forum'), $this->links['home']));
+            $this->links['topic']       = esc_url(add_query_arg(array('view' => 'thread'), $this->links['home']));
+            $this->links['topic_add']   = esc_url(add_query_arg(array('view' => 'addthread'), $this->links['home']));
+            $this->links['topic_move']  = esc_url(add_query_arg(array('view' => 'movetopic'), $this->links['home']));
+            $this->links['post_add']    = esc_url(add_query_arg(array('view' => 'addpost'), $this->links['home']));
+            $this->links['post_edit']   = esc_url(add_query_arg(array('view' => 'editpost'), $this->links['home']));
+            $this->links['current']     = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
+        }
+
+        if (!$this->executePlugin) {
             return;
         }
 
@@ -182,7 +197,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->rewrite->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
             return false;
         }
 
@@ -191,7 +206,7 @@ class AsgarosForum {
 
         if (!empty($category_access)) {
             if ($category_access === 'loggedin' && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->rewrite->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
                 return false;
             }
 
@@ -358,7 +373,7 @@ class AsgarosForum {
 
     function showLoginMessage() {
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $loginMessage = '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->rewrite->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            $loginMessage = '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
             $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
             echo $loginMessage;
         }
@@ -366,7 +381,7 @@ class AsgarosForum {
 
     function movetopic() {
         if (AsgarosForumPermissions::isModerator('current')) {
-            $strOUT = '<form method="post" action="'.$this->rewrite->getLink('topic_move', $this->current_topic, array('move_thread' => 1)).'">';
+            $strOUT = '<form method="post" action="'.$this->getLink('topic_move', $this->current_topic, array('move_thread' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_topic, $this->table_topics)))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
@@ -399,7 +414,7 @@ class AsgarosForum {
             $page = ceil($postNumber / $this->options['posts_per_page']);
         }
 
-        return $this->rewrite->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
+        return $this->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
     }
 
     function get_categories($disable_hooks = false) {
@@ -538,16 +553,16 @@ class AsgarosForum {
         $o = '';
 
         if ((!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')) || (is_user_logged_in() && (!$this->get_status('closed') || AsgarosForumPermissions::isModerator('current')) && !AsgarosForumPermissions::isBanned('current'))) {
-            $o .= '<a href="'.$this->rewrite->getLink('post_add', $this->current_topic, array('quote' => $post_id)).'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
+            $o .= '<a href="'.$this->getLink('post_add', $this->current_topic, array('quote' => $post_id)).'"><span class="dashicons-before dashicons-editor-quote"></span>'.__('Quote', 'asgaros-forum').'</a>';
         }
 
         if (is_user_logged_in()) {
             if (($counter > 1 || $this->current_page >= 1) && AsgarosForumPermissions::isModerator('current')) {
-                $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->rewrite->getLink('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
+                $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->getLink('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
             }
 
             if ((AsgarosForumPermissions::isModerator('current') || get_current_user_id() == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
-                $o .= '<a href="'.$this->rewrite->getLink('post_edit', $post_id, array('part' => ($this->current_page + 1))).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
+                $o .= '<a href="'.$this->getLink('post_edit', $post_id, array('part' => ($this->current_page + 1))).'"><span class="dashicons-before dashicons-edit"></span>'.__('Edit', 'asgaros-forum').'</a>';
             }
         }
 
@@ -572,25 +587,25 @@ class AsgarosForum {
         $menu = '';
 
         if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->get_forum_status()) {
-            $menu .= '<a href="'.$this->rewrite->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
         } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
-            $menu .= '<a href="'.$this->rewrite->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
         }
 
         if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
-            $menu .= '<a href="'.$this->rewrite->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
-            $menu .= '<a href="'.$this->rewrite->getLink('topic', $this->current_topic, array('delete_thread' => 1)).'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_thread' => 1)).'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
 
             if ($this->get_status('sticky')) {
-                $menu .= '<a href="'.$this->rewrite->getLink('topic', $this->current_topic, array('unsticky_topic' => 1)).'"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('unsticky_topic' => 1)).'"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
             } else {
-                $menu .= '<a href="'.$this->rewrite->getLink('topic', $this->current_topic, array('sticky_topic' => 1)).'"><span class="dashicons-before dashicons-admin-post"></span><span>'.__('Sticky', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('sticky_topic' => 1)).'"><span class="dashicons-before dashicons-admin-post"></span><span>'.__('Sticky', 'asgaros-forum').'</span></a>';
             }
 
             if ($this->get_status('closed')) {
-                $menu .= '<a href="'.$this->rewrite->getLink('topic', $this->current_topic, array('open_topic' => 1)).'"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('open_topic' => 1)).'"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
             } else {
-                $menu .= '<a href="'.$this->rewrite->getLink('topic', $this->current_topic, array('close_topic' => 1)).'"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('close_topic' => 1)).'"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
             }
         }
 
@@ -602,20 +617,20 @@ class AsgarosForum {
     }
 
     function breadcrumbs() {
-        $trail = '<span class="dashicons-before dashicons-admin-home"></span><a href="'.$this->rewrite->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
+        $trail = '<span class="dashicons-before dashicons-admin-home"></span><a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
         if ($this->parent_forum && $this->parent_forum > 0) {
-            $link = $this->rewrite->getLink('forum', $this->parent_forum);
+            $link = $this->getLink('forum', $this->parent_forum);
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->table_forums))).'</a>';
         }
 
         if ($this->current_forum) {
-            $link = $this->rewrite->getLink('forum', $this->current_forum);
+            $link = $this->getLink('forum', $this->current_forum);
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</a>';
         }
 
         if ($this->current_topic) {
-            $link = $this->rewrite->getLink('topic', $this->current_topic);
+            $link = $this->getLink('topic', $this->current_topic);
             $name = stripslashes($this->get_name($this->current_topic, $this->table_topics));
             $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
         }
@@ -655,17 +670,17 @@ class AsgarosForum {
                     if ($i == ($this->current_page + 1)) {
                         $out .= ' <strong>'.$i.'</strong>';
                     } else {
-                        $out .= ' <a href="'.$this->rewrite->getLink($select_url, $select_source, array('part' => $i)).'">'.$i.'</a>';
+                        $out .= ' <a href="'.$this->getLink($select_url, $select_source, array('part' => $i)).'">'.$i.'</a>';
                     }
                 }
             } else {
                 if ($this->current_page >= 4) {
-                    $out .= ' <a href="'.$this->rewrite->getLink($select_url, $select_source).'">'.__('First', 'asgaros-forum').'</a> &laquo;';
+                    $out .= ' <a href="'.$this->getLink($select_url, $select_source).'">'.__('First', 'asgaros-forum').'</a> &laquo;';
                 }
 
                 for ($i = 3; $i > 0; $i--) {
                     if ((($this->current_page + 1) - $i) > 0) {
-                        $out .= ' <a href="'.$this->rewrite->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) - $i))).'">'.(($this->current_page + 1) - $i).'</a>';
+                        $out .= ' <a href="'.$this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) - $i))).'">'.(($this->current_page + 1) - $i).'</a>';
                     }
                 }
 
@@ -673,12 +688,12 @@ class AsgarosForum {
 
                 for ($i = 1; $i <= 3; $i++) {
                     if ((($this->current_page + 1) + $i) <= $num_pages) {
-                        $out .= ' <a href="'.$this->rewrite->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) + $i))).'">'.(($this->current_page + 1) + $i).'</a>';
+                        $out .= ' <a href="'.$this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) + $i))).'">'.(($this->current_page + 1) + $i).'</a>';
                     }
                 }
 
                 if ($num_pages - $this->current_page >= 5) {
-                    $out .= ' &raquo; <a href="'.$this->rewrite->getLink($select_url, $select_source, array('part' => $num_pages)).'">'.__('Last', 'asgaros-forum').'</a>';
+                    $out .= ' &raquo; <a href="'.$this->getLink($select_url, $select_source, array('part' => $num_pages)).'">'.__('Last', 'asgaros-forum').'</a>';
                 }
             }
 
@@ -703,7 +718,7 @@ class AsgarosForum {
                 AsgarosForumNotifications::removeTopicSubscriptions($thread_id);
 
                 if (!$admin_action) {
-                    wp_redirect(html_entity_decode($this->rewrite->getLink('forum', $this->current_forum)));
+                    wp_redirect(html_entity_decode($this->getLink('forum', $this->current_forum)));
                     exit;
                 }
             }
@@ -715,7 +730,7 @@ class AsgarosForum {
 
         if (AsgarosForumPermissions::isModerator('current') && $newForumID && $this->element_exists($newForumID, $this->table_forums)) {
             $this->db->update($this->table_topics, array('parent_id' => $newForumID), array('id' => $this->current_topic), array('%d'), array('%d'));
-            wp_redirect(html_entity_decode($this->rewrite->getLink('topic', $this->current_topic)));
+            wp_redirect(html_entity_decode($this->getLink('topic', $this->current_topic)));
             exit;
         }
     }
@@ -793,6 +808,23 @@ class AsgarosForum {
         }
 
         return true;
+    }
+
+    // Builds and returns a requested link.
+    public function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '') {
+        // Only generate a link when that type is available.
+        if (isset($this->links[$type])) {
+            // Set an ID if available, otherwise initialize the base-link.
+            $link = ($elementID) ? add_query_arg('id', $elementID, $this->links[$type]) : $this->links[$type];
+
+            // Set additional parameters if available, otherwise let the link unchanged.
+            $link = ($additionalParameters) ? add_query_arg($additionalParameters, $link) : $link;
+
+            // Return escaped URL with optional appendix at the end if set.
+            return esc_url($link.$appendix);
+        } else {
+            return false;
+        }
     }
 }
 

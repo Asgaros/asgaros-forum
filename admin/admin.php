@@ -267,8 +267,6 @@ class asgarosforum_admin {
                     $saved_ops[$k] = $v;
                 }
             }
-
-
         }
 
         update_option('asgarosforum_options', $saved_ops);
