@@ -22,7 +22,7 @@ class AsgarosForum {
     var $parent_forum = false;
     var $options = array();
     var $options_default = array(
-        'location'                  => '',
+        'location'                  => false,
         'posts_per_page'            => 10,
         'topics_per_page'          => 20,
         'minimalistic_editor'       => true,
@@ -75,16 +75,17 @@ class AsgarosForum {
 
     function initialize() {
         new AsgarosForumTaxonomies();
-        $this->rewrite = new AsgarosForumRewrite();
     }
 
     function prepare() {
         global $post;
 
+        // Set all links.
+        $this->rewrite = new AsgarosForumRewrite();
+
         if (isset($post) && $post->ID == $this->options['location'] && is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'forum')) {
             $this->executePlugin = true;
         } else {
-            $this->executePlugin = false;
             $this->error = __('The forum has not been configured correctly.', 'asgaros-forum');
             return;
         }
@@ -749,7 +750,7 @@ class AsgarosForum {
     function change_status($property) {
         if (AsgarosForumPermissions::isModerator('current')) {
             $new_status = '';
-            
+
             if ($property == 'sticky') {
                 $new_status .= ($this->get_status('sticky')) ? 'normal_' : 'sticky_';
                 $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
