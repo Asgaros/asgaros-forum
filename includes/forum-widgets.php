@@ -16,12 +16,9 @@ class AsgarosForumWidgets {
     }
 
     public static function filterCategories() {
-        $filter = array();
-        $categories_list = array();
         $where = '';
-
-        $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
-        $categories_list = array_merge($categories_list, $filter);
+        $categories_list = array();
+        $categories_list = apply_filters('asgarosforum_filter_get_categories', $categories_list);
 
         if (!AsgarosForumPermissions::isModerator('current')) {
             $categories = get_terms('asgarosforum-category', array(
@@ -61,8 +58,14 @@ class AsgarosForumWidgets {
         return $where;
     }
 
-    public static function showWidget($args, $title, $numberOfItems, $contentType) {
+    public static function showWidget($args, $title, $contentType, $instance) {
         global $asgarosforum;
+
+        $numberOfItems = (!empty($instance['number'])) ? absint($instance['number']) : 3;
+
+        if (!$numberOfItems) {
+			$numberOfItems = 3;
+        }
 
         echo $args['before_widget'];
 
@@ -101,6 +104,21 @@ class AsgarosForumWidgets {
         echo $args['after_widget'];
     }
 
+    public static function showForm($instance, $object, $defaultTitle) {
+        $title = isset($instance['title']) ? esc_attr($instance['title']) : $defaultTitle;
+        $number = isset($instance['number']) ? absint($instance['number']) : 3;
+
+		echo '<p>';
+		echo '<label for="'.$object->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
+		echo '<input class="widefat" id="'.$object->get_field_id('title').'" name="'.$object->get_field_name('title').'" type="text" value="'.$title.'">';
+		echo '</p>';
+
+        echo '<p>';
+		echo '<label for="'.$object->get_field_id('number').'">'.__('Number of posts to show:', 'asgaros-forum').'</label>&nbsp;';
+		echo '<input class="tiny-text" id="'.$object->get_field_id('number').'" name="'.$object->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
+		echo '</p>';
+    }
+
     public static function updateWidget($new_instance, $old_instance) {
         $instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
@@ -123,28 +141,11 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 		$title = (!empty($instance['title'])) ? $instance['title'] : __('Recent forum posts', 'asgaros-forum');
         $title = apply_filters('widget_title', $title, $instance, $this->id_base);
 
-		$number = (!empty($instance['number'])) ? absint($instance['number']) : 3;
-
-        if ($number == 0) {
-			$number = 3;
-        }
-
-        AsgarosForumWidgets::showWidget($args, $title, $number, 'posts');
+        AsgarosForumWidgets::showWidget($args, $title, 'posts', $instance);
     }
 
     public function form($instance) {
-        $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum posts', 'asgaros-forum');
-        $number = isset($instance['number']) ? absint($instance['number']) : 3;
-
-		echo '<p>';
-		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
-		echo '<input class="widefat" id="'.$this->get_field_id('title').'" name="'.$this->get_field_name('title').'" type="text" value="'.$title.'">';
-		echo '</p>';
-
-        echo '<p>';
-		echo '<label for="'.$this->get_field_id('number').'">'.__('Number of posts to show:', 'asgaros-forum').'</label>&nbsp;';
-		echo '<input class="tiny-text" id="'.$this->get_field_id('number').'" name="'.$this->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
-		echo '</p>';
+        AsgarosForumWidgets::showForm($instance, $this, __('Recent forum posts', 'asgaros-forum'));
 	}
 
     public function update($new_instance, $old_instance) {
@@ -166,28 +167,11 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 		$title = (!empty($instance['title'])) ? $instance['title'] : __('Recent forum topics', 'asgaros-forum');
         $title = apply_filters('widget_title', $title, $instance, $this->id_base);
 
-		$number = (!empty($instance['number'])) ? absint($instance['number']) : 3;
-
-        if (!$number) {
-			$number = 3;
-        }
-
-        AsgarosForumWidgets::showWidget($args, $title, $number, 'topics');
+        AsgarosForumWidgets::showWidget($args, $title, 'topics', $instance);
     }
 
     public function form($instance) {
-        $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum topics', 'asgaros-forum');
-        $number = isset($instance['number']) ? absint($instance['number']) : 3;
-
-		echo '<p>';
-		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
-		echo '<input class="widefat" id="'.$this->get_field_id('title').'" name="'.$this->get_field_name('title').'" type="text" value="'.$title.'">';
-		echo '</p>';
-
-        echo '<p>';
-		echo '<label for="'.$this->get_field_id('number').'">'.__('Number of topics to show:', 'asgaros-forum').'</label>&nbsp;';
-		echo '<input class="tiny-text" id="'.$this->get_field_id('number').'" name="'.$this->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
-		echo '</p>';
+        AsgarosForumWidgets::showForm($instance, $this, __('Recent forum topics', 'asgaros-forum'));
 	}
 
     public function update($new_instance, $old_instance) {
