@@ -2,6 +2,14 @@
 
 if (!defined('ABSPATH')) exit;
 
+$locationSetUp = false;
+if ($asgarosforum->options['location']) {
+    $postElement = get_post($asgarosforum->options['location']);
+    if ($postElement && (has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum') || has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'Forum'))) {
+        $locationSetUp = true;
+    }
+}
+
 ?>
 <div class="wrap" id="af-options">
     <h2><?php _e('Options', 'asgaros-forum'); ?></h2>
@@ -16,6 +24,12 @@ if (!defined('ABSPATH')) exit;
             <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>
             <?php wp_dropdown_pages(array('selected' => esc_attr($asgarosforum->options['location']),'name' => 'location', 'id' => 'location')); ?>
         </p>
+        <?php
+        if (!$locationSetUp) {
+            echo '<p class="description">'.__('Please select the page which contains the [forum]-shortcode.', 'asgaros-forum').'</p>';
+            echo '<div class="hide">';
+        }
+        ?>
         <p>
             <label for="posts_per_page"><?php _e('Replies to show per page:', 'asgaros-forum'); ?></label>
             <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3">
@@ -103,6 +117,11 @@ if (!defined('ABSPATH')) exit;
             <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#ffffff">
         </p>
+        <?php
+        if (!$locationSetUp) {
+            echo '</div>';
+        }
+        ?>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>">
     </form>
 </div>

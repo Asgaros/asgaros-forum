@@ -37,7 +37,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Download `Asgaros Forum`.
 * Upload the plugin files to the `/wp-content/plugins/asgaros-forum` directory or install the plugin directly via the WordPress plugins screen.
 * Activate the plugin via the `Plugins` screen in WordPress.
-* Create a new page for your forum and add the `[forum]` shortcode to it. Save and publish this page.
+* Create a new page for your forum, add the `[forum]` shortcode to it and save the page.
 * Add this page to your sites menu so you can access it.
 * On the left side of the administration area you will find a new menu called `Forum`.
 * Configure your options and create the categories/forums there.
@@ -98,9 +98,11 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Only show widgets when the forum is configured correctly
 * Fixed: Show filtered login-message only when necessary
 * Fixed: Rare PHP-notices
 * Changed: Moved location-selection from widgets to forum-settings
+* Setup improvements
 * Performance improvements and code optimizations
 * The required minimum WordPress version is now 4.6
 = 1.2.5 =
