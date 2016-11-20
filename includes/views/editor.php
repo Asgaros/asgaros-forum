@@ -26,9 +26,9 @@ if (!$error) {
         }
 
         if (!$error) {
-            if (!isset($_POST['message']) && isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->table_posts)) {
+            if (!isset($_POST['message']) && isset($_GET['quote']) && $this->element_exists($_GET['quote'], $this->tables->posts)) {
                 $quote_id = absint($_GET['quote']);
-                $text = $this->db->get_row($this->db->prepare("SELECT text, author_id, date FROM {$this->table_posts} WHERE id = %d;", $quote_id));
+                $text = $this->db->get_row($this->db->prepare("SELECT text, author_id, date FROM {$this->tables->posts} WHERE id = %d;", $quote_id));
                 $display_name = $this->get_username($text->author_id);
                 $threadcontent = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($text->date)).'</div>'.$text->text.'</blockquote><br />';
             }
@@ -36,7 +36,7 @@ if (!$error) {
     } else if ($this->current_view === 'editpost') {
         if (!$error) {
             $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
-            $post = $this->db->get_row($this->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->table_posts} WHERE id = %d;", $id));
+            $post = $this->db->get_row($this->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->tables->posts} WHERE id = %d;", $id));
 
             if (!is_user_logged_in() || (get_current_user_id() != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
                 $error = true;
@@ -50,7 +50,7 @@ if (!$error) {
             }
 
             if (!isset($_POST['subject']) && $this->is_first_post($post->id)) {
-                $threadname = $this->db->get_var($this->db->prepare("SELECT name FROM {$this->table_topics} WHERE id = %d;", $post->parent_id));
+                $threadname = $this->db->get_var($this->db->prepare("SELECT name FROM {$this->tables->topics} WHERE id = %d;", $post->parent_id));
             }
         }
     }
@@ -68,7 +68,7 @@ if (!$error) {
             if ($this->current_view === 'addthread') {
                 _e('New Thread', 'asgaros-forum');
             } else if ($this->current_view === 'addpost') {
-                echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_topic, $this->table_topics)));
+                echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)));
             } else if ($this->current_view === 'editpost') {
                 _e('Edit Post', 'asgaros-forum');
             }

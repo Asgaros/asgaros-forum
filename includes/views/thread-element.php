@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) exit;
         <small><?php _e('Created by:', 'asgaros-forum'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
     </div>
     <div class="thread-stats">
-        <?php $count_answers = (int)($this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$this->table_posts} WHERE parent_id = %d;", $thread->id)) - 1); ?>
+        <?php $count_answers = (int)($this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$this->tables->posts} WHERE parent_id = %d;", $thread->id)) - 1); ?>
         <small><?php echo sprintf(_n('%s Answer', '%s Answers', $count_answers, 'asgaros-forum'), $count_answers); ?></small>
         <small><?php echo sprintf(_n('%s View', '%s Views', (int)$thread->views, 'asgaros-forum'), (int)$thread->views); ?></small>
     </div>

@@ -7,7 +7,7 @@ class AsgarosForumWidgets {
         global $asgarosforum;
 
         if (empty($asgarosforum->cache['getWidgetLink'][$thread_id])) {
-            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT count(id) FROM {$asgarosforum->table_posts} WHERE parent_id = %d;", $thread_id));
+            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT count(id) FROM {$asgarosforum->tables->posts} WHERE parent_id = %d;", $thread_id));
         }
 
         $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);
@@ -76,9 +76,9 @@ class AsgarosForumWidgets {
         $elements = null;
         $where = self::filterCategories();
         if ($contentType === 'posts') {
-            $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->table_topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
+            $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->tables->posts} AS p1 LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->tables->topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
         } else if ($contentType === 'topics') {
-            $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->table_posts} AS p1 LEFT JOIN {$asgarosforum->table_posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->table_topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->table_forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+            $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->tables->posts} AS p1 LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->tables->topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
         }
 
         if (!empty($elements)) {

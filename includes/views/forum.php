@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 <div>
     <?php
-    $pageing = ($counter_normal > 0) ? $this->pageing($this->table_topics) : '';
+    $pageing = ($counter_normal > 0) ? $this->pageing($this->tables->topics) : '';
     echo $pageing;
     ?>
     <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
@@ -26,7 +26,7 @@ if (count($subforums) > 0) {
 }
 
 if ($counter_total > 0) {
-    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</div>';
+    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</div>';
     echo '<div class="content-element">';
         // Sticky threads
         if ($sticky_threads && !$this->current_page) { ?>
@@ -51,7 +51,7 @@ if ($counter_total > 0) {
         <div class="clear"></div>
     </div>
 <?php } else {
-    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->table_forums))).'</div>';
+    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</div>';
     echo '<div class="content-element">';
     echo '<div class="notice">'.__('There are no threads yet!', 'asgaros-forum').'</div>';
     echo '</div>';

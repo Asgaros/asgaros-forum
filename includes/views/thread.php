@@ -5,14 +5,14 @@ if (!defined('ABSPATH')) exit;
 ?>
 <div>
     <?php
-    $pageing = $this->pageing($this->table_posts);
+    $pageing = $this->pageing($this->tables->posts);
     echo $pageing;
     ?>
     <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>
     <div class="clear"></div>
 </div>
 
-<div class="title-element"><?php echo esc_html($this->cut_string(stripslashes($this->get_name($this->current_topic, $this->table_topics)), 70)).$meClosed; ?></div>
+<div class="title-element"><?php echo esc_html($this->cut_string(stripslashes($this->get_name($this->current_topic, $this->tables->topics)), 70)).$meClosed; ?></div>
 <div class="content-element">
     <?php
     $counter = 0;

@@ -37,14 +37,12 @@ class AsgarosForumDatabase {
         self::$table_posts      = self::$db->prefix.'forum_posts';
     }
 
-    public static function getTable($name) {
-        if ($name === 'forums') {
-            return self::$table_forums;
-        } else if ($name === 'threads') {
-            return self::$table_topics;
-        } else if ($name === 'posts') {
-            return self::$table_posts;
-        }
+    public static function getTables() {
+        $tables = new stdClass();
+        $tables->forums = self::$table_forums;
+        $tables->topics = self::$table_topics;
+        $tables->posts = self::$table_posts;
+        return $tables;
     }
 
     public static function activatePlugin($networkwide) {

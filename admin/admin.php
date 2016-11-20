@@ -296,13 +296,13 @@ class asgarosforum_admin {
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
                 $asgarosforum->db->insert(
-                    $asgarosforum->table_forums,
+                    $asgarosforum->tables->forums,
                     array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
                     array('%s', '%d', '%d', '%s', '%d', '%d')
                 );
             } else {
                 $asgarosforum->db->update(
-                    $asgarosforum->table_forums,
+                    $asgarosforum->tables->forums,
                     array('name' => $forum_name, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
                     array('id' => $forum_id),
                     array('%s', '%s', '%d', '%d'),
@@ -317,7 +317,7 @@ class asgarosforum_admin {
     function delete_category($term_id, $term_taxonomy_id, $deleted_term) {
         global $asgarosforum;
 
-        $forums = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->table_forums} WHERE parent_id = {$term_id};");
+        $forums = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->tables->forums} WHERE parent_id = {$term_id};");
 
         if (!empty($forums)) {
             foreach ($forums as $forum) {
@@ -339,7 +339,7 @@ class asgarosforum_admin {
         }
 
         // Delete all threads
-        $threads = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->table_topics} WHERE parent_id = {$forum_id};");
+        $threads = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->tables->topics} WHERE parent_id = {$forum_id};");
 
         if (!empty($threads)) {
             foreach ($threads as $thread) {
@@ -347,7 +347,7 @@ class asgarosforum_admin {
             }
         }
         // Last but not least delete the forum
-        $asgarosforum->db->delete($asgarosforum->table_forums, array('id' => $forum_id), array('%d'));
+        $asgarosforum->db->delete($asgarosforum->tables->forums, array('id' => $forum_id), array('%d'));
 
         $this->saved = true;
     }
