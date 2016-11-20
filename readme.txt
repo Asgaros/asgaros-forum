@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forums, discussion, multisite
 Requires at least: 4.6
 Tested up to: 4.6
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.2.6 =
 * Fixed: Only show widgets when the forum is configured correctly
 * Fixed: Show filtered login-message only when necessary
 * Fixed: Rare PHP-notices
