@@ -60,6 +60,7 @@ class AsgarosForumUnread {
         } else {
             setcookie('asgarosforum_unread_cleared', $currentTime, 2147483647);
             unset($_COOKIE['asgarosforum_unread_exclude']);
+            setcookie('asgarosforum_unread_exclude', '', time() - 3600);
         }
 
         // Redirect to the forum overview.
