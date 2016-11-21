@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken read/unread-logic
 = 1.2.6 =
 * Fixed: Only show widgets when the forum is configured correctly
 * Fixed: Show filtered login-message only when necessary

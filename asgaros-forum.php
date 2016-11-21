@@ -44,7 +44,6 @@ AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();
 AsgarosForumPermissions::createInstance();
 AsgarosForumUploads::createInstance();
-AsgarosForumUnread::createInstance();
 AsgarosForumThemeManager::createInstance();
 
 if (is_admin()) {

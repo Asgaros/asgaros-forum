@@ -74,6 +74,7 @@ class AsgarosForum {
 
     function initialize() {
         new AsgarosForumTaxonomies();
+        AsgarosForumUnread::createInstance();
     }
 
     function prepare() {

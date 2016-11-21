@@ -19,10 +19,6 @@ class AsgarosForumUnread {
 
     // AsgarosForumUnread constructor
 	private function __construct() {
-        add_action('wp', array($this, 'initUnreadSettings'));
-    }
-
-    public static function initUnreadSettings() {
         // Determine with the user ID if the user is logged in.
         self::$userID = get_current_user_id();
 
