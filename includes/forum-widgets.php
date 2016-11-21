@@ -79,8 +79,16 @@ class AsgarosForumWidgets {
             if ($postElement && (has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum') || has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'Forum'))) {
                 $locationSetUp = true;
             }
+        } else {
+            // Try to get the forum-location when it is not set correctly.
+            $pageID = $asgarosforum->db->get_var('SELECT ID FROM '.$asgarosforum->db->prefix.'posts WHERE post_type <> "revision" AND (post_content LIKE "%[forum]%" OR post_content LIKE "%[Forum]%");');
+            if ($pageID) {
+                $asgarosforum->options['location'] = $pageID;
+                $asgarosforum->setLinks();
+                $locationSetUp = true;
+            }
         }
-        
+
         if ($locationSetUp) {
             $elements = null;
             $where = self::filterCategories();

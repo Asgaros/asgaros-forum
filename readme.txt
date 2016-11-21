@@ -100,6 +100,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Fixed: Broken read/unread-logic
 * Fixed: Remove cookies for guests correctly when mark all forums as read
+* Changed: Try to determine widget-links when forum-location is not set correctly
 = 1.2.6 =
 * Fixed: Only show widgets when the forum is configured correctly
 * Fixed: Show filtered login-message only when necessary
