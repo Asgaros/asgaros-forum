@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken link-generation with some WordPress configurations
 = 1.2.7 =
 * Fixed: Broken read/unread-logic
 * Fixed: Remove cookies for guests correctly when mark all forums as read

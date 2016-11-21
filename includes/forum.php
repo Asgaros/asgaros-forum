@@ -184,13 +184,13 @@ class AsgarosForum {
 
     function setLinks() {
         global $wp;
-        $this->links['home']        = esc_url(get_page_link($this->options['location']));
-        $this->links['forum']       = esc_url(add_query_arg(array('view' => 'forum'), $this->links['home']));
-        $this->links['topic']       = esc_url(add_query_arg(array('view' => 'thread'), $this->links['home']));
-        $this->links['topic_add']   = esc_url(add_query_arg(array('view' => 'addthread'), $this->links['home']));
-        $this->links['topic_move']  = esc_url(add_query_arg(array('view' => 'movetopic'), $this->links['home']));
-        $this->links['post_add']    = esc_url(add_query_arg(array('view' => 'addpost'), $this->links['home']));
-        $this->links['post_edit']   = esc_url(add_query_arg(array('view' => 'editpost'), $this->links['home']));
+        $this->links['home']        = get_page_link($this->options['location']);
+        $this->links['forum']       = add_query_arg(array('view' => 'forum'), $this->links['home']);
+        $this->links['topic']       = add_query_arg(array('view' => 'thread'), $this->links['home']);
+        $this->links['topic_add']   = add_query_arg(array('view' => 'addthread'), $this->links['home']);
+        $this->links['topic_move']  = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
+        $this->links['post_add']    = add_query_arg(array('view' => 'addpost'), $this->links['home']);
+        $this->links['post_edit']   = add_query_arg(array('view' => 'editpost'), $this->links['home']);
         $this->links['current']     = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
     }
 

@@ -23,7 +23,7 @@ class AsgarosForumUnread {
         self::$userID = get_current_user_id();
 
         // Generate link for mark all forums read.
-        self::$markAllReadLink = esc_url(add_query_arg(array('view' => 'markallread'), esc_url(get_permalink())));
+        self::$markAllReadLink = esc_url(add_query_arg(array('view' => 'markallread'), get_permalink()));
 
         // Initialize data. For guests we use a cookie as source, otherwise use database.
         if (self::$userID) {
