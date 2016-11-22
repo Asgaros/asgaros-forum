@@ -22,3 +22,5 @@ foreach ($categories as $category) {
 if ($forumsAvailable) {
     AsgarosForumUnread::showUnreadControls();
 }
+
+do_action('asgarosforum_overview_custom_content_bottom');

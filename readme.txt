@@ -72,6 +72,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_action_add_category_form_fields
 * asgarosforum_action_edit_category_form_fields
 * asgarosforum_action_save_category_form_fields
+* asgarosforum_overview_custom_content_bottom
 * asgarosforum_editor_custom_content_bottom
 = Which filters are available =
 * asgarosforum_filter_login_message
@@ -98,6 +99,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_overview_custom_content_bottom hook
 = 1.2.8 =
 * Fixed: Broken link-generation with some WordPress configurations
 = 1.2.7 =
