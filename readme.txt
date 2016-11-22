@@ -89,6 +89,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_insert_custom_validation
 * asgarosforum_filter_subject_before_insert
 * asgarosforum_filter_content_before_insert
+* asgarosforum_subscriber_mails_new_post
+* asgarosforum_subscriber_mails_new_topic
 
 == Screenshots ==
 1. The forum overview.
@@ -100,6 +102,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: asgarosforum_overview_custom_content_bottom hook
+* Added: asgarosforum_subscriber_mails_new_topic filter
+* Added: asgarosforum_subscriber_mails_new_post filter
 = 1.2.8 =
 * Fixed: Broken link-generation with some WordPress configurations
 = 1.2.7 =
