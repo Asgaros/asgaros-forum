@@ -3,119 +3,86 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumWidgets {
-    public static function getWidgetLink($thread_id, $post_id) {
-        global $asgarosforum;
+    private static $asgarosforum = null;
 
-        if (empty($asgarosforum->cache['getWidgetLink'][$thread_id])) {
-            $asgarosforum->cache['getWidgetLink'][$thread_id] = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT count(id) FROM {$asgarosforum->tables->posts} WHERE parent_id = %d;", $thread_id));
+    public function __construct($object) {
+        self::$asgarosforum = $object;
+
+        if (!self::$asgarosforum->options['require_login'] || is_user_logged_in()) {
+            register_widget('AsgarosForumRecentPosts_Widget');
+            register_widget('AsgarosForumRecentTopics_Widget');
         }
-
-        $page = ceil($asgarosforum->cache['getWidgetLink'][$thread_id] / $asgarosforum->options['posts_per_page']);
-
-        return $asgarosforum->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
     }
 
-    public static function filterCategories() {
-        $where = '';
-        $categories_list = array();
-        $categories_list = apply_filters('asgarosforum_filter_get_categories', $categories_list);
-
-        if (!AsgarosForumPermissions::isModerator('current')) {
-            $categories = get_terms('asgarosforum-category', array(
-                'fields'        => 'ids',
-                'hide_empty'    => false,
-                'meta_query'    => array(
-                    array(
-                        'key'       => 'category_access',
-                        'value'     => 'moderator',
-                        'compare'   => 'LIKE'
-                    )
-                )
-            ));
-            $categories_list = array_merge($categories_list, $categories);
-        }
-
-        if (!is_user_logged_in()) {
-            $categories = get_terms('asgarosforum-category', array(
-                'fields'        => 'ids',
-                'hide_empty'    => false,
-                'meta_query'    => array(
-                    array(
-                        'key'       => 'category_access',
-                        'value'     => 'loggedin',
-                        'compare'   => 'LIKE'
-                    )
-                )
-            ));
-            $categories_list = array_merge($categories_list, $categories);
-        }
-
-        if (!empty($categories_list)) {
-            $categories_list = implode(',', $categories_list);
-            $where = 'AND f.parent_id NOT IN ('.$categories_list.')';
-        }
-
-        return $where;
-    }
-
-    public static function showWidget($args, $title, $contentType, $instance) {
-        global $asgarosforum;
-
-        $numberOfItems = (!empty($instance['number'])) ? absint($instance['number']) : 3;
-
-        if (!$numberOfItems) {
-			$numberOfItems = 3;
+    public static function showWidget($args, $instance, $widgetType) {
+        $title = null;
+        if ($instance['title']) {
+            $title = $instance['title'];
+        } else {
+            if ($widgetType === 'posts') {
+                $title = __('Recent forum posts', 'asgaros-forum');
+            } else if ($widgetType === 'topics') {
+                $title = __('Recent forum topics', 'asgaros-forum');
+            }
         }
 
         echo $args['before_widget'];
+        echo $args['before_title'].$title.$args['after_title'];
 
-        if ($title) {
-            echo $args['before_title'].$title.$args['after_title'];
-        }
+        $locationSetUp = self::$asgarosforum->checkForShortcode();
 
-        $locationSetUp = false;
-        if ($asgarosforum->options['location']) {
-            $postElement = get_post($asgarosforum->options['location']);
-            if ($postElement && (has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum') || has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'Forum'))) {
-                $locationSetUp = true;
-            }
-        } else {
-            // Try to get the forum-location when it is not set correctly.
-            $pageID = $asgarosforum->db->get_var('SELECT ID FROM '.$asgarosforum->db->prefix.'posts WHERE post_type <> "revision" AND (post_content LIKE "%[forum]%" OR post_content LIKE "%[Forum]%");');
+        // Try to get the forum-location when it is not set correctly.
+        if (!$locationSetUp) {
+            $pageID = self::$asgarosforum->db->get_var('SELECT ID FROM '.self::$asgarosforum->db->prefix.'posts WHERE post_type = "page" AND (post_content LIKE "%[forum]%" OR post_content LIKE "%[Forum]%");');
             if ($pageID) {
-                $asgarosforum->options['location'] = $pageID;
-                $asgarosforum->setLinks();
+                self::$asgarosforum->options['location'] = $pageID;
+                self::$asgarosforum->setLinks();
                 $locationSetUp = true;
             }
         }
 
         if ($locationSetUp) {
-            $elements = null;
-            $where = self::filterCategories();
-            if ($contentType === 'posts') {
-                $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->tables->posts} AS p1 LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN {$asgarosforum->tables->topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
-            } else if ($contentType === 'topics') {
-                $elements = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name FROM {$asgarosforum->tables->posts} AS p1 LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN {$asgarosforum->tables->topics} AS t ON (t.id = p1.parent_id) LEFT JOIN {$asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+            // Build query for filtering elements first.
+            $filterList = apply_filters('asgarosforum_filter_get_categories', array());
+            $metaQueryFilter = self::$asgarosforum->getCategoriesFilter();
+
+            if ($metaQueryFilter) {
+                $categories = get_terms('asgarosforum-category', array(
+                    'fields'        => 'ids',
+                    'hide_empty'    => false,
+                    'meta_query'    => $metaQueryFilter
+                ));
+                $filterList = array_merge($filterList, $categories);
             }
 
-            if (!empty($elements)) {
+            $where = ($filterList) ? 'AND f.parent_id NOT IN ('.implode(',', $filterList).')' : '';
+
+            // Select the elements.
+            $elements = null;
+            $numberOfItems = ($instance['number']) ? absint($instance['number']) : 3;
+
+            if ($widgetType === 'posts') {
+                $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name, (SELECT COUNT(id) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p1.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p1 LEFT JOIN ".self::$asgarosforum->tables->posts." AS p2 ON (p1.parent_id = p2.parent_id AND p1.id < p2.id) LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p1.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY p1.id DESC LIMIT %d;", $numberOfItems));
+            } else if ($widgetType === 'topics') {
+                $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p1.id, p1.date, p1.parent_id, p1.author_id, t.name, (SELECT COUNT(id) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p1.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p1 LEFT JOIN ".self::$asgarosforum->tables->posts." AS p2 ON (p1.parent_id = p2.parent_id AND p1.id > p2.id) LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p1.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p2.id IS NULL {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+            }
+
+            if ($elements) {
                 echo '<ul class="asgarosforum-widget">';
 
                 foreach ($elements as $element) {
+                    // Calculate the page, where the last post is calculated.
+                    $pageNumber = ceil($element->post_counter / self::$asgarosforum->options['posts_per_page']);
                     echo '<li>';
-                    echo '<span class="post-link"><a href="'.AsgarosForumWidgets::getWidgetLink($element->parent_id, $element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
-                    echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$asgarosforum->get_username($element->author_id, true).'</b></span>';
+                    echo '<span class="post-link"><a href="'.self::$asgarosforum->getLink('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
+                    echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->get_username($element->author_id, true).'</b></span>';
                     echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
                     echo '</li>';
                 }
 
                 echo '</ul>';
             } else {
-                if ($contentType === 'posts') {
-                    _e('No posts yet!', 'asgaros-forum');
-                } else if ($contentType === 'topics') {
-                    _e('No topics yet!', 'asgaros-forum');
-                }
+                _e('No topics yet!', 'asgaros-forum');
             }
         } else {
             _e('The forum has not been configured correctly.', 'asgaros-forum');
@@ -134,13 +101,13 @@ class AsgarosForumWidgets {
 		echo '</p>';
 
         echo '<p>';
-		echo '<label for="'.$object->get_field_id('number').'">'.__('Number of posts to show:', 'asgaros-forum').'</label>&nbsp;';
+		echo '<label for="'.$object->get_field_id('number').'">'.__('Number of topics to show:', 'asgaros-forum').'</label>&nbsp;';
 		echo '<input class="tiny-text" id="'.$object->get_field_id('number').'" name="'.$object->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
 		echo '</p>';
     }
 
     public static function updateWidget($new_instance, $old_instance) {
-        $instance = $old_instance;
+        $instance = array();
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['number'] = (int)$new_instance['number'];
 		return $instance;
@@ -154,14 +121,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
     }
 
     public function widget($args, $instance) {
-        if (!isset($args['widget_id'])) {
-			$args['widget_id'] = $this->id;
-		}
-
-		$title = (!empty($instance['title'])) ? $instance['title'] : __('Recent forum posts', 'asgaros-forum');
-        $title = apply_filters('widget_title', $title, $instance, $this->id_base);
-
-        AsgarosForumWidgets::showWidget($args, $title, 'posts', $instance);
+        AsgarosForumWidgets::showWidget($args, $instance, 'posts');
     }
 
     public function form($instance) {
@@ -180,14 +140,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
     }
 
     public function widget($args, $instance) {
-        if (!isset($args['widget_id'])) {
-			$args['widget_id'] = $this->id;
-		}
-
-		$title = (!empty($instance['title'])) ? $instance['title'] : __('Recent forum topics', 'asgaros-forum');
-        $title = apply_filters('widget_title', $title, $instance, $this->id_base);
-
-        AsgarosForumWidgets::showWidget($args, $title, 'topics', $instance);
+        AsgarosForumWidgets::showWidget($args, $instance, 'topics');
     }
 
     public function form($instance) {
@@ -198,16 +151,3 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 		return AsgarosForumWidgets::updateWidget($new_instance, $old_instance);
 	}
 }
-
-function asgarosforum_widgets_init() {
-    global $asgarosforum;
-
-    if (!$asgarosforum->options['require_login'] || is_user_logged_in()) {
-        register_widget('AsgarosForumRecentPosts_Widget');
-        register_widget('AsgarosForumRecentTopics_Widget');
-    }
-}
-
-add_action('widgets_init', 'asgarosforum_widgets_init');
-
-?>

@@ -104,6 +104,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_overview_custom_content_bottom hook
 * Added: asgarosforum_subscriber_mails_new_topic filter
 * Added: asgarosforum_subscriber_mails_new_post filter
+* Performance improvements and code optimizations
 = 1.2.8 =
 * Fixed: Broken link-generation with some WordPress configurations
 = 1.2.7 =

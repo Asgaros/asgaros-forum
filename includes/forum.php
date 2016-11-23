@@ -59,6 +59,7 @@ class AsgarosForum {
         $this->tables = AsgarosForumDatabase::getTables();
 
         add_action('init', array($this, 'initialize'));
+        add_action('widgets_init', array($this, 'initialize_widgets'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
@@ -77,10 +78,14 @@ class AsgarosForum {
         AsgarosForumUnread::createInstance();
     }
 
+    function initialize_widgets() {
+        new AsgarosForumWidgets($this);
+    }
+
     function prepare() {
         global $post;
 
-        if (is_a($post, 'WP_Post') && (has_shortcode($post->post_content, 'forum') || has_shortcode($post->post_content, 'Forum'))) {
+        if (is_a($post, 'WP_Post') && $this->checkForShortcode($post)) {
             $this->executePlugin = true;
             $this->options['location'] = $post->ID;
         }
@@ -179,6 +184,19 @@ class AsgarosForum {
         // Mark visited topic as read.
         if ($this->current_view === 'thread' && $this->current_topic) {
             AsgarosForumUnread::markThreadRead();
+        }
+    }
+
+    function checkForShortcode($postObject = false) {
+        // If no post-object is set, use the location.
+        if (!$postObject && $this->options['location']) {
+            $postObject = get_post($this->options['location']);
+        }
+
+        if ($postObject && (has_shortcode($postObject->post_content, 'forum') || has_shortcode($postObject->post_content, 'Forum'))) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -402,29 +420,44 @@ class AsgarosForum {
         return $this->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
     }
 
-    function get_categories($disable_hooks = false) {
+    function get_categories($enableFiltering = true) {
         $filter = array();
+        $metaQueryFilter = array();
 
-        if (!$disable_hooks) {
+        if ($enableFiltering) {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
+            $metaQueryFilter = $this->getCategoriesFilter('AND', 'NOT LIKE');
         }
 
-        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter));
-
-        foreach ($categories as $key => $category) {
-            $term_meta = get_term_meta($category->term_id);
-            $category->order = $term_meta['order'][0];
-            $category->category_access = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
-
-            // Remove categories from array where the user has no access.
-            if (($category->category_access === 'loggedin' && !is_user_logged_in()) || ($category->category_access === 'moderator' && !AsgarosForumPermissions::isModerator('current'))) {
-                unset($categories[$key]);
-            }
-        }
-
-        usort($categories, array($this, 'categories_compare'));
+        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'meta_key' => 'order', 'orderby' => 'order', 'meta_query' => $metaQueryFilter));
 
         return $categories;
+    }
+
+    function getCategoriesFilter($relation = 'OR', $compare = 'LIKE') {
+        $metaQueryFilter = array('relation' => $relation);
+
+        if (!AsgarosForumPermissions::isModerator('current')) {
+            $metaQueryFilter[] = array(
+                'key'       => 'category_access',
+                'value'     => 'moderator',
+                'compare'   => $compare
+            );
+        }
+
+        if (!is_user_logged_in()) {
+            $metaQueryFilter[] = array(
+                'key'       => 'category_access',
+                'value'     => 'loggedin',
+                'compare'   => $compare
+            );
+        }
+
+        if (sizeof($metaQueryFilter) > 1) {
+            return $metaQueryFilter;
+        } else {
+            return array();
+        }
     }
 
     function categories_compare($a, $b) {

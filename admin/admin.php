@@ -278,7 +278,7 @@ class asgarosforum_admin {
     /* STRUCTURE */
     function forums_page() {
         global $asgarosforum;
-        $categories = $asgarosforum->get_categories(true);
+        $categories = $asgarosforum->get_categories(false);
 
         require('views/forums.php');
     }

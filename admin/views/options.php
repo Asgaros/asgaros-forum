@@ -2,13 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-$locationSetUp = false;
-if ($asgarosforum->options['location']) {
-    $postElement = get_post($asgarosforum->options['location']);
-    if ($postElement && (has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'forum') || has_shortcode(get_post($asgarosforum->options['location'])->post_content, 'Forum'))) {
-        $locationSetUp = true;
-    }
-}
+$locationSetUp = $asgarosforum->checkForShortcode();
 
 ?>
 <div class="wrap" id="af-options">
