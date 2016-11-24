@@ -426,7 +426,7 @@ class AsgarosForum {
 
         if ($enableFiltering) {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
-            $metaQueryFilter = $this->getCategoriesFilter('AND', 'NOT LIKE');
+            $metaQueryFilter = $this->getCategoriesFilter();
         }
 
         $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'meta_key' => 'order', 'orderby' => 'order', 'meta_query' => $metaQueryFilter));
@@ -434,14 +434,14 @@ class AsgarosForum {
         return $categories;
     }
 
-    function getCategoriesFilter($relation = 'OR', $compare = 'LIKE') {
-        $metaQueryFilter = array('relation' => $relation);
+    function getCategoriesFilter() {
+        $metaQueryFilter = array('relation' => 'AND');
 
         if (!AsgarosForumPermissions::isModerator('current')) {
             $metaQueryFilter[] = array(
                 'key'       => 'category_access',
                 'value'     => 'moderator',
-                'compare'   => $compare
+                'compare'   => 'NOT LIKE'
             );
         }
 
@@ -449,7 +449,7 @@ class AsgarosForum {
             $metaQueryFilter[] = array(
                 'key'       => 'category_access',
                 'value'     => 'loggedin',
-                'compare'   => $compare
+                'compare'   => 'NOT LIKE'
             );
         }
 
