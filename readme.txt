@@ -3,7 +3,7 @@ Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
 Tags: forums, discussion, multisite
 Requires at least: 4.6
-Tested up to: 4.6
+Tested up to: 4.7
 Stable tag: 1.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -105,6 +105,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_subscriber_mails_new_topic filter
 * Added: asgarosforum_subscriber_mails_new_post filter
 * Performance improvements and code optimizations
+* Compatibility with WordPress 4.7
 = 1.2.8 =
 * Fixed: Broken link-generation with some WordPress configurations
 = 1.2.7 =
