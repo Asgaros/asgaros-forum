@@ -109,48 +109,50 @@ class AsgarosForumUploads {
         return $links;
     }
 
-	public static function getFileList($post_id, $uploads) {
-		$path = self::$upload_path.$post_id.'/';
-        $url = self::$upload_url.$post_id.'/';
-        $uploads = maybe_unserialize($uploads);
-        $uploadedFiles = '';
+	public static function getFileList($postObject) {
+		if ($postObject) {
+			$path = self::$upload_path.$postObject->id.'/';
+	        $url = self::$upload_url.$postObject->id.'/';
+	        $uploads = maybe_unserialize($postObject->uploads);
+	        $uploadedFiles = '';
 
-        if (!empty($uploads) && is_dir($path)) {
-			if (self::$asgarosforum->current_view === 'thread') {
-				// Generate special message instead of file-list when hiding uploads for guests.
-				if (!is_user_logged_in() && self::$asgarosforum->options['hide_uploads_from_guests']) {
-					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
-				} else {
+	        if (!empty($uploads) && is_dir($path)) {
+				if (self::$asgarosforum->current_view === 'thread') {
+					// Generate special message instead of file-list when hiding uploads for guests.
+					if (!is_user_logged_in() && self::$asgarosforum->options['hide_uploads_from_guests']) {
+						$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
+					} else {
+						foreach ($uploads as $upload) {
+			                if (file_exists($path.basename($upload))) {
+			                    $uploadedFiles .= '<li><a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
+			                }
+			            }
+					}
+
+					if (!empty($uploadedFiles)) {
+		                echo '<strong>'.__('Uploaded files:', 'asgaros-forum').'</strong>';
+		                echo '<ul>'.$uploadedFiles.'</ul>';
+					}
+				} else if (self::$asgarosforum->current_view === 'editpost') {
 					foreach ($uploads as $upload) {
 		                if (file_exists($path.basename($upload))) {
-		                    $uploadedFiles .= '<li><a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
+		                    $uploadedFiles .= '<li>';
+		                    $uploadedFiles .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
+		                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
+		                    $uploadedFiles .= '</li>';
 		                }
 		            }
-				}
 
-				if (!empty($uploadedFiles)) {
-	                echo '<strong>'.__('Uploaded files:', 'asgaros-forum').'</strong>';
-	                echo '<ul>'.$uploadedFiles.'</ul>';
+					if (!empty($uploadedFiles)) {
+		                echo '<div class="editor-row">';
+		                	echo '<span class="row-title">'.__('Uploaded files:', 'asgaros-forum').'</span>';
+		                	echo '<div class="files-to-delete"></div>';
+		                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
+		                echo '</div>';
+		            }
 				}
-			} else if (self::$asgarosforum->current_view === 'editpost') {
-				foreach ($uploads as $upload) {
-	                if (file_exists($path.basename($upload))) {
-	                    $uploadedFiles .= '<li>';
-	                    $uploadedFiles .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
-	                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
-	                    $uploadedFiles .= '</li>';
-	                }
-	            }
-
-				if (!empty($uploadedFiles)) {
-	                echo '<div class="editor-row">';
-	                	echo '<span class="row-title">'.__('Uploaded files:', 'asgaros-forum').'</span>';
-	                	echo '<div class="files-to-delete"></div>';
-	                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
-	                echo '</div>';
-	            }
-			}
-        }
+	        }
+		}
     }
 
 	public static function showEditorUploadForm() {

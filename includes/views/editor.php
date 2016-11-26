@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-$post = "";
+$post = false;
 $thread = "";
 $threadname = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
 $threadcontent = (isset($_POST['message'])) ? trim($_POST['message']) : '';
@@ -87,7 +87,7 @@ if (!$error) {
                 <?php wp_editor(stripslashes($threadcontent), 'message', $this->options_editor); ?>
             </div>
             <?php
-            AsgarosForumUploads::getFileList($post->id, $post->uploads);
+            AsgarosForumUploads::getFileList($post);
             AsgarosForumUploads::showEditorUploadForm();
             AsgarosForumNotifications::showEditorSubscriptionOption();
 
