@@ -1,7 +1,7 @@
 <?php header('Content-type: text/css; charset: UTF-8'); ?>
 
 <?php
-if (isset($_GET['color']) && !empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['color'])) {
+if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['color'])) {
 $color = '#'.$_GET['color'];
 ?>
 #af-wrapper a,
@@ -24,7 +24,7 @@ $color = '#'.$_GET['color'];
 ?>
 
 <?php
-if (isset($_GET['text-color']) && !empty($_GET['text-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['text-color'])) {
+if (!empty($_GET['text-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['text-color'])) {
 $text_color = '#'.$_GET['text-color'];
 ?>
 #af-wrapper,
@@ -37,7 +37,7 @@ $text_color = '#'.$_GET['text-color'];
 ?>
 
 <?php
-if (isset($_GET['background-color']) && !empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['background-color'])) {
+if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['background-color'])) {
 $background_color = '#'.$_GET['background-color'];
 ?>
 #af-wrapper .content-element {

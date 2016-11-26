@@ -35,7 +35,7 @@ if (!$error) {
         }
     } else if ($this->current_view === 'editpost') {
         if (!$error) {
-            $id = (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
+            $id = (!empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
             $post = $this->db->get_row($this->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM {$this->tables->posts} WHERE id = %d;", $id));
 
             if (!is_user_logged_in() || (get_current_user_id() != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
