@@ -87,9 +87,7 @@ if (!$error) {
                 <?php wp_editor(stripslashes($threadcontent), 'message', $this->options_editor); ?>
             </div>
             <?php
-            if ($this->current_view === 'editpost') {
-                AsgarosForumUploads::getFileList($post->id, $post->uploads);
-            }
+            AsgarosForumUploads::getFileList($post->id, $post->uploads);
             AsgarosForumUploads::showEditorUploadForm();
             AsgarosForumNotifications::showEditorSubscriptionOption();
 

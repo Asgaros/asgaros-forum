@@ -80,38 +80,32 @@ class AsgarosForumInsert {
             $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
             $asgarosforum->current_topic = $asgarosforum->db->insert_id;
 
-            $uploads = maybe_serialize(AsgarosForumUploads::prepareFileList());
+            $uploadList = AsgarosForumUploads::prepareFileList();
 
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => $uploads), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
-            // Only handle uploads when the option is enabled.
-            if ($asgarosforum->options['allow_file_uploads']) {
-                AsgarosForumUploads::uploadFiles($asgarosforum->current_post);
-            }
+            AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
 
             $redirect = html_entity_decode($asgarosforum->getLink('topic', $asgarosforum->current_topic, false, '#postid-'.$asgarosforum->current_post));
 
             // Send notification about new topic to global subscribers.
             AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect);
         } else if (self::getAction() === 'add_post') {
-            $uploads = maybe_serialize(AsgarosForumUploads::prepareFileList());
+            $uploadList = AsgarosForumUploads::prepareFileList();
 
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => $uploads), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
-            // Only handle uploads when the option is enabled.
-            if ($asgarosforum->options['allow_file_uploads']) {
-                AsgarosForumUploads::uploadFiles($asgarosforum->current_post);
-            }
+            AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
 
             $redirect = html_entity_decode($asgarosforum->get_postlink($asgarosforum->current_topic, $asgarosforum->current_post));
 
             // Send notification about new post to subscribers
             AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect);
         } else if (self::getAction() === 'edit_post') {
-            $uploads = maybe_serialize(AsgarosForumUploads::uploadFiles($asgarosforum->current_post));
-            $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => $uploads, 'date_edit' => $date), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s'), array('%d'));
+            $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post);
+            $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s'), array('%d'));
 
             if ($asgarosforum->is_first_post($asgarosforum->current_post) && !empty(self::$dataSubject)) {
                 $asgarosforum->db->update($asgarosforum->tables->topics, array('name' => self::$dataSubject), array('id' => $asgarosforum->current_topic), array('%s'), array('%d'));

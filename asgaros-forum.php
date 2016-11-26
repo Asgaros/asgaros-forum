@@ -43,7 +43,6 @@ require('admin/admin.php');
 AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();
 AsgarosForumPermissions::createInstance();
-AsgarosForumUploads::createInstance();
 AsgarosForumThemeManager::createInstance();
 
 if (is_admin()) {

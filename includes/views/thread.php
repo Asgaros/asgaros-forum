@@ -73,7 +73,7 @@ if (!defined('ABSPATH')) exit;
 
                     $post_content = apply_filters('asgarosforum_filter_post_content', $post_content);
                     echo $post_content;
-                    AsgarosForumUploads::getFileList($post->id, $post->uploads, true);
+                    AsgarosForumUploads::getFileList($post->id, $post->uploads);
                     echo '<div class="post-footer">';
                     if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
                         echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'&nbsp;&middot;&nbsp;';
