@@ -92,6 +92,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_subscriber_mails_new_post
 * asgarosforum_subscriber_mails_new_topic
 * asgarosforum_filter_subscribers_query_new_post
+* asgarosforum_filter_subscribers_query_new_topic
 
 == Screenshots ==
 1. The forum overview.
@@ -105,6 +106,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Dont send notifications about new posts/topics in restricted categories to all users
 * Fixed: Dont send notifications to banned users
 * Added: asgarosforum_overview_custom_content_bottom hook
+* Added: asgarosforum_filter_subscribers_query_new_topic filter
 * Added: asgarosforum_filter_subscribers_query_new_post filter
 * Added: asgarosforum_subscriber_mails_new_topic filter
 * Added: asgarosforum_subscriber_mails_new_post filter

@@ -180,6 +180,8 @@ class AsgarosForumNotifications {
                     );
                 }
 
+                $global_topic_subscribers_meta_query = apply_filters('asgarosforum_filter_subscribers_query_new_topic', $global_topic_subscribers_meta_query);
+
                 // Get subscribed users
                 $global_topic_subscribers = get_users(
                     array(
