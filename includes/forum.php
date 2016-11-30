@@ -17,6 +17,7 @@ class AsgarosForum {
     var $current_view = false;
     var $current_page = 0;
     var $parent_forum = false;
+    var $category_access_level = false;
     var $links = array();
     var $options = array();
     var $options_default = array(
@@ -221,15 +222,15 @@ class AsgarosForum {
         }
 
         // Check category access.
-        $category_access = get_term_meta($this->current_category, 'category_access', true);
+        $this->category_access_level = get_term_meta($this->current_category, 'category_access', true);
 
-        if (!empty($category_access)) {
-            if ($category_access === 'loggedin' && !is_user_logged_in()) {
+        if ($this->category_access_level) {
+            if ($this->category_access_level === 'loggedin' && !is_user_logged_in()) {
                 $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
                 return;
             }
 
-            if ($category_access === 'moderator' && !AsgarosForumPermissions::isModerator('current')) {
+            if ($this->category_access_level === 'moderator' && !AsgarosForumPermissions::isModerator('current')) {
                 $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
                 return;
             }

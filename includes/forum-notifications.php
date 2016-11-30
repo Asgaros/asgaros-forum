@@ -99,23 +99,33 @@ class AsgarosForumNotifications {
             $notification_message = sprintf(__('Hello,<br /><br />you got this mail because there is a new answer in a forum-topic you have subscribed to:<br />%s<br /><br />Answer:<br />%s<br /><br />Link to the new answer:<br /><a href="%s">%s</a><br /><br />You can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!', 'asgaros-forum'), esc_html(stripslashes($thread_name)), wpautop(stripslashes($answer_text)), $answer_link, $answer_link);
             $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $thread_name, $answer_text, $answer_link);
 
+            $topic_subscribers_meta_query = array(
+                'relation'  => 'AND',
+                array(
+                    'key'       => 'asgarosforum_subscription_topic',
+                    'value'     => $asgarosforum->current_topic,
+                    'compare'   => '='
+                ),
+                array(
+                    'key'       => 'asgarosforum_banned',
+                    'compare'   => 'NOT EXISTS'
+                )
+            );
+
+            // Only get moderators when this is a restricted category.
+            if ($asgarosforum->category_access_level == 'moderator') {
+                $topic_subscribers_meta_query[] = array(
+                    'key'       => 'asgarosforum_moderator',
+                    'compare'   => 'EXISTS'
+                );
+            }
+
             // Get subscribed users
             $topic_subscribers = get_users(
                 array(
                     'fields'        => array('user_email'),
                     'exclude'       => array(get_current_user_id()),
-                    'meta_query'    => array(
-                        'relation'  => 'AND',
-                        array(
-                            'key'       => 'asgarosforum_subscription_topic',
-                            'value'     => $asgarosforum->current_topic,
-                            'compare'   => '='
-                        ),
-                        array(
-                            'key'       => 'asgarosforum_banned',
-                            'compare'   => 'NOT EXISTS'
-                        )
-                    )
+                    'meta_query'    => $topic_subscribers_meta_query
                 )
             );
 
@@ -148,22 +158,32 @@ class AsgarosForumNotifications {
             $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $topic_name, $topic_text, $topic_link);
 
             if ($asgarosforum->options['allow_subscriptions']) {
+                $global_topic_subscribers_meta_query = array(
+                    'relation'  => 'AND',
+                    array(
+                        'key'       => 'asgarosforum_subscription_global_topics',
+                        'compare'   => 'EXISTS'
+                    ),
+                    array(
+                        'key'       => 'asgarosforum_banned',
+                        'compare'   => 'NOT EXISTS'
+                    )
+                );
+
+                // Only get moderators when this is a restricted category.
+                if ($asgarosforum->category_access_level == 'moderator') {
+                    $global_topic_subscribers_meta_query[] = array(
+                        'key'       => 'asgarosforum_moderator',
+                        'compare'   => 'EXISTS'
+                    );
+                }
+
                 // Get subscribed users
                 $global_topic_subscribers = get_users(
                     array(
                         'fields'        => array('user_email'),
                         'exclude'       => array(get_current_user_id()),
-                        'meta_query'    => array(
-                            'relation'  => 'AND',
-                            array(
-                                'key'       => 'asgarosforum_subscription_global_topics',
-                                'compare'   => 'EXISTS'
-                            ),
-                            array(
-                                'key'       => 'asgarosforum_banned',
-                                'compare'   => 'NOT EXISTS'
-                            )
-                        )
+                        'meta_query'    => $global_topic_subscribers_meta_query
                     )
                 );
 
