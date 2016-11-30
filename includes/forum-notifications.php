@@ -102,10 +102,20 @@ class AsgarosForumNotifications {
             // Get subscribed users
             $topic_subscribers = get_users(
                 array(
-                    'meta_key'      => 'asgarosforum_subscription_topic',
-                    'meta_value'    => $asgarosforum->current_topic,
                     'fields'        => array('user_email'),
-                    'exclude'       => array(get_current_user_id())
+                    'exclude'       => array(get_current_user_id()),
+                    'meta_query'    => array(
+                        'relation'  => 'AND',
+                        array(
+                            'key'       => 'asgarosforum_subscription_topic',
+                            'value'     => $asgarosforum->current_topic,
+                            'compare'   => '='
+                        ),
+                        array(
+                            'key'       => 'asgarosforum_banned',
+                            'compare'   => 'NOT EXISTS'
+                        )
+                    )
                 )
             );
 
@@ -141,10 +151,19 @@ class AsgarosForumNotifications {
                 // Get subscribed users
                 $global_topic_subscribers = get_users(
                     array(
-                        'meta_key'      => 'asgarosforum_subscription_global_topics',
-                        'meta_value'    => 1,
                         'fields'        => array('user_email'),
-                        'exclude'       => array(get_current_user_id())
+                        'exclude'       => array(get_current_user_id()),
+                        'meta_query'    => array(
+                            'relation'  => 'AND',
+                            array(
+                                'key'       => 'asgarosforum_subscription_global_topics',
+                                'compare'   => 'EXISTS'
+                            ),
+                            array(
+                                'key'       => 'asgarosforum_banned',
+                                'compare'   => 'NOT EXISTS'
+                            )
+                        )
                     )
                 );
 
