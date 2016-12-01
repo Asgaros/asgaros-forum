@@ -124,7 +124,7 @@ class AsgarosForumUploads {
 					} else {
 						foreach ($uploads as $upload) {
 			                if (file_exists($path.basename($upload))) {
-			                    $uploadedFiles .= '<li><a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
+			                    $uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
 			                }
 			            }
 					}
