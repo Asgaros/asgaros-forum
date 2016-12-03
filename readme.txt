@@ -104,6 +104,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken widgets with some WordPress configurations
 * Fixed: Dont send notifications about new posts/topics in restricted categories to all users
 * Fixed: Dont send notifications to banned users
 * Added: asgarosforum_{current_view}_custom_content_top hooks
