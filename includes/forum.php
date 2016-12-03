@@ -585,7 +585,7 @@ class AsgarosForum {
 
         if (is_user_logged_in()) {
             if (($counter > 1 || $this->current_page >= 1) && AsgarosForumPermissions::isModerator('current')) {
-                $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->getLink('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'"><span class="dashicons-before dashicons-trash"></span>'.__('Remove', 'asgaros-forum').'</a>';
+                $o .= '<a onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->getLink('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'"><span class="dashicons-before dashicons-trash"></span>'.__('Delete', 'asgaros-forum').'</a>';
             }
 
             if ((AsgarosForumPermissions::isModerator('current') || get_current_user_id() == $author_id) && !AsgarosForumPermissions::isBanned('current')) {
@@ -621,7 +621,7 @@ class AsgarosForum {
 
         if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
             $menu .= '<a href="'.$this->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
-            $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_thread' => 1)).'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_thread' => 1)).'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete', 'asgaros-forum').'</span></a>';
 
             if ($this->get_status('sticky')) {
                 $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('unsticky_topic' => 1)).'"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
