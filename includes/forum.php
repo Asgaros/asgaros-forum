@@ -145,6 +145,9 @@ class AsgarosForum {
                     $this->error = __('Sorry, this post does not exist.', 'asgaros-forum');
                 }
                 break;
+            default:
+                $this->current_view = 'overview';
+                break;
         }
 
         // Check
@@ -304,6 +307,8 @@ class AsgarosForum {
         ob_start();
         echo '<div id="af-wrapper">';
 
+        do_action('asgarosforum_'.$this->current_view.'_custom_content_top');
+
         if (!empty($this->error)) {
             echo '<div class="error">'.$this->error.'</div>';
         } else {
@@ -331,13 +336,12 @@ class AsgarosForum {
                     include('views/editor.php');
                     break;
                 default:
-                    $this->current_view = 'overview';
                     $this->overview();
                     break;
             }
-
-            do_action('asgarosforum_'.$this->current_view.'_custom_content_bottom');
         }
+
+        do_action('asgarosforum_'.$this->current_view.'_custom_content_bottom');
 
         echo '</div>';
         $output = ob_get_contents();
