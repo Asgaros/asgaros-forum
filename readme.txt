@@ -110,6 +110,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_filter_subscribers_query_new_post filter
 * Added: asgarosforum_subscriber_mails_new_topic filter
 * Added: asgarosforum_subscriber_mails_new_post filter
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 * Compatibility with WordPress 4.7
 = 1.2.8 =

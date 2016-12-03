@@ -98,8 +98,9 @@
 }
 #af-wrapper .editor-row-uploads .upload-filetypes {
     display: block;
-    font-size: 12px;
+    font-size: 12px !important;
     padding: 10px 0;
+    color: #666;
 }
 #af-wrapper .editor-row input[type="file"],
 #af-wrapper .editor-row input[type="submit"] {
@@ -151,7 +152,7 @@
 #af-wrapper .thread div {
     display: table-cell;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 5px 10px;
+    padding: 4px 8px;
     vertical-align: middle;
     box-sizing: content-box;
 }
@@ -264,7 +265,7 @@
 #af-wrapper .title-element {
     background-color: #2d89cc;
     color: #fff;
-    padding: 5px 5px 5px 10px;
+    padding: 4px 10px;
     display: block;
     font-weight: bold;
 }
@@ -465,9 +466,9 @@
 #af-wrapper .dashicons-sticky_open:before,
 #af-wrapper .dashicons-normal_closed:before,
 #af-wrapper .dashicons-sticky_closed:before {
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
+    font-size: 35px;
+    width: 35px;
+    height: 35px;
 }
 #af-wrapper .unread:before {
     color: #2D89CC;
