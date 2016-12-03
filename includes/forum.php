@@ -331,9 +331,12 @@ class AsgarosForum {
                     include('views/editor.php');
                     break;
                 default:
+                    $this->current_view = 'overview';
                     $this->overview();
                     break;
             }
+
+            do_action('asgarosforum_'.$this->current_view.'_custom_content_bottom');
         }
 
         echo '</div>';
