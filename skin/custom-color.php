@@ -16,7 +16,7 @@ $color = '#'.$_GET['color'];
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .content-element {
-    border: 1px solid <?php echo $color; ?> !important;
+    border-top: 2px solid <?php echo $color; ?> !important;
 }
 <?php
 }

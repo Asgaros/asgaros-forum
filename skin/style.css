@@ -263,7 +263,7 @@
 
 /* TITLE */
 #af-wrapper .title-element {
-    background-color: #2d89cc;
+    background-color: rgba(45, 137, 204, 0.85);
     color: #fff;
     padding: 4px 10px;
     display: block;
@@ -354,7 +354,7 @@
 
 /* CONTENT WRAPPERS*/
 #af-wrapper .content-element {
-    border: 1px solid #2d89cc;
+    border-top: 2px solid #2d89cc;
     margin-bottom: 10px;
     background-color: #fff;
 }
