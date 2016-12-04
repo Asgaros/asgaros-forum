@@ -620,7 +620,7 @@ class AsgarosForum {
         }
 
         if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
-            $menu .= '<a href="'.$this->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move', 'asgaros-forum').'</span></a>';
             $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_thread' => 1)).'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete', 'asgaros-forum').'</span></a>';
 
             if ($this->get_status('sticky')) {
