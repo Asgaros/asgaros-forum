@@ -308,6 +308,9 @@
 #af-wrapper img.avatar {
     float: none;
     margin: 0;
+    border-radius: initial;
+    border: 2px solid #fff;
+    outline: 1px solid #ccc;
 }
 
 /* POST */

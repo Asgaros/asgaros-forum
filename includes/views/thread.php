@@ -35,7 +35,7 @@ if (!defined('ABSPATH')) exit;
                     }
 
                     if ($avatars_available) {
-                        echo get_avatar($post->author_id, 60);
+                        echo get_avatar($post->author_id, 80);
                         echo '<br />';
                     }
                     ?>
