@@ -1,7 +1,7 @@
 === Asgaros Forum ===
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
-Tags: forums, discussion, multisite
+Tags: forums, discussion, multisite, community
 Requires at least: 4.6
 Tested up to: 4.7
 Stable tag: 1.2.9
