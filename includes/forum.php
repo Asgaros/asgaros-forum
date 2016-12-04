@@ -312,7 +312,7 @@ class AsgarosForum {
         if (!empty($this->error)) {
             echo '<div class="error">'.$this->error.'</div>';
         } else {
-            echo $this->breadcrumbs();
+            $this->breadcrumbs();
 
             if (!empty($this->info)) {
                 echo '<div class="info">'.$this->info.'</div>';
@@ -644,33 +644,55 @@ class AsgarosForum {
     }
 
     function breadcrumbs() {
-        $trail = '<span class="dashicons-before dashicons-admin-home"></span><a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
+        echo '<div id="top-container">';
+
+        echo '<div id="breadcrumbs">';
+        echo '<span class="dashicons-before dashicons-admin-home"></span>';
+        echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
+
+        $trail = '';
 
         if ($this->parent_forum && $this->parent_forum > 0) {
-            $link = $this->getLink('forum', $this->parent_forum);
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->tables->forums))).'</a>';
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo '<a href="'.$this->getLink('forum', $this->parent_forum).'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->tables->forums))).'</a>';
         }
 
         if ($this->current_forum) {
-            $link = $this->getLink('forum', $this->current_forum);
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</a>';
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo '<a href="'.$this->getLink('forum', $this->current_forum).'">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</a>';
         }
 
         if ($this->current_topic) {
-            $link = $this->getLink('topic', $this->current_topic);
             $name = stripslashes($this->get_name($this->current_topic, $this->tables->topics));
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;<a href="'.$link.'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo '<a href="'.$this->getLink('topic', $this->current_topic).'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
         }
 
         if ($this->current_view === 'addpost') {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Post Reply', 'asgaros-forum');
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo __('Post Reply', 'asgaros-forum');
         } else if ($this->current_view === 'editpost') {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('Edit Post', 'asgaros-forum');
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo __('Edit Post', 'asgaros-forum');
         } else if ($this->current_view === 'addthread') {
-            $trail .= '&nbsp;<span class="sep">&rarr;</span>&nbsp;' . __('New Thread', 'asgaros-forum');
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo __('New Thread', 'asgaros-forum');
         }
 
-        return '<div class="breadcrumbs">'.$trail.'</div>';
+        echo '</div>';
+
+
+
+        echo '<div id="forum-search">';
+        echo '<span class="dashicons-before dashicons-search"></span>';
+        echo '<input type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
+        echo '</div>';
+
+
+
+
+        echo '<div class="clear"></div>';
+        echo '</div>';
     }
 
     function pageing($location) {

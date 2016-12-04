@@ -5,7 +5,6 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 $color = '#'.$_GET['color'];
 ?>
 #af-wrapper a,
-#af-wrapper .breadcrumbs a:hover,
 #af-wrapper .unread:before {
 	color: <?php echo $color; ?> !important;
 }
@@ -27,9 +26,7 @@ $color = '#'.$_GET['color'];
 if (!empty($_GET['text-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['text-color'])) {
 $text_color = '#'.$_GET['text-color'];
 ?>
-#af-wrapper,
-#af-wrapper .breadcrumbs,
-#af-wrapper .breadcrumbs a {
+#af-wrapper {
     color: <?php echo $text_color; ?> !important;
 }
 <?php

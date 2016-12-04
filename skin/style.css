@@ -270,28 +270,86 @@
     font-weight: bold;
 }
 
+/* TOP CONTAINER */
+#af-wrapper #top-container {
+    background-color: #e8e8e8;
+    margin-bottom: 15px;
+    display: block;
+    color: #666;
+    line-height: 30px;
+}
+
 /* BREADCRUMBS */
-#af-wrapper .breadcrumbs {
-    font-size: 12px;
-    margin-bottom: 10px;
-    width: 100%;
-    color: #444;
-    float: none; /* comp */
-    padding: initial; /* comp */
+#af-wrapper #breadcrumbs {
+    float: left;
+    font-size: 11px;
+    padding: 0;
 }
-#af-wrapper .breadcrumbs a {
-    color: #444;
+#af-wrapper #breadcrumbs a,
+#af-wrapper #breadcrumbs span {
+    display: inline-block;
+    padding: 0 5px 0 5px;
+}
+#af-wrapper #breadcrumbs a {
+    color: #666;
     background: none; /* comp */
-    padding: inherit; /* comp */
 }
-#af-wrapper .breadcrumbs a:hover {
-    color: #2D89CC;
+#af-wrapper #breadcrumbs a:hover {
+    color: #444;
     text-decoration: none;
 }
-#af-wrapper .breadcrumbs .sep {
-    margin: 0 3px;
-    background: none; /* comp */
-    padding: inherit; /* comp */
+#af-wrapper #breadcrumbs span {
+    background-color: #b4b9be;
+    color: #fff;
+}
+#af-wrapper #breadcrumbs span::before {
+    line-height: 30px;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+}
+#af-wrapper #breadcrumbs .separator {
+    padding: 0;
+}
+
+/* SEARCH */
+#af-wrapper #forum-search {
+    float: right;
+    width: 234px;
+    background-color: #b4b9be;
+}
+#af-wrapper #forum-search span {
+    display: inline-block;
+    padding: 0 5px 0 5px;
+    color: #fff;
+}
+#af-wrapper #forum-search span:before {
+    line-height: 30px;
+}
+#af-wrapper #forum-search input {
+    vertical-align: inherit;
+    font-style: italic;
+    margin: 5px !important;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    border-bottom: 2px solid #ddd;
+    background-color: #b4b9be;
+    width: 190px;
+    font-size: 12px;
+    line-height: normal;
+}
+#af-wrapper #forum-search input::-webkit-input-placeholder {
+	color: #fff;
+}
+#af-wrapper #forum-search input::-moz-placeholder {
+	color: #fff;
+}
+#af-wrapper #forum-search input:-moz-placeholder {
+	color: #fff;
+}
+#af-wrapper #forum-search input:-ms-input-placeholder {
+	color: #fff;
 }
 
 /* CONTENT WRAPPERS*/
