@@ -326,6 +326,9 @@
 #af-wrapper #forum-search span:before {
     line-height: 30px;
 }
+#af-wrapper #forum-search form {
+    display: initial;
+}
 #af-wrapper #forum-search input {
     vertical-align: inherit;
     font-style: italic;

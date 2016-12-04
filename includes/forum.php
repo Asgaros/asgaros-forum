@@ -145,6 +145,8 @@ class AsgarosForum {
                     $this->error = __('Sorry, this post does not exist.', 'asgaros-forum');
                 }
                 break;
+            case 'search':
+                break;
             default:
                 $this->current_view = 'overview';
                 break;
@@ -208,6 +210,7 @@ class AsgarosForum {
     function setLinks() {
         global $wp;
         $this->links['home']        = get_page_link($this->options['location']);
+        $this->links['search']      = add_query_arg(array('view' => 'search'), $this->links['home']);
         $this->links['forum']       = add_query_arg(array('view' => 'forum'), $this->links['home']);
         $this->links['topic']       = add_query_arg(array('view' => 'thread'), $this->links['home']);
         $this->links['topic_add']   = add_query_arg(array('view' => 'addthread'), $this->links['home']);
@@ -280,6 +283,8 @@ class AsgarosForum {
                 $title = __('New Thread', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'movetopic') {
                 $title = __('Move Thread', 'asgaros-forum').' - '.$title;
+            } else if ($this->current_view == 'search') {
+                $title = __('Search', 'asgaros-forum').' - '.$title;
             }
         }
 
@@ -321,6 +326,9 @@ class AsgarosForum {
             $this->showLoginMessage();
 
             switch ($this->current_view) {
+                case 'search':
+                    include('views/search.php');
+                    break;
                 case 'movetopic':
                     $this->movetopic();
                     break;
@@ -670,26 +678,26 @@ class AsgarosForum {
 
         if ($this->current_view === 'addpost') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo __('Post Reply', 'asgaros-forum');
+            echo '<a href="#">'.__('Post Reply', 'asgaros-forum').'</a>';
         } else if ($this->current_view === 'editpost') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo __('Edit Post', 'asgaros-forum');
+            echo '<a href="#">'.__('Edit Post', 'asgaros-forum').'</a>';
         } else if ($this->current_view === 'addthread') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo __('New Thread', 'asgaros-forum');
+            echo '<a href="#">'.__('New Thread', 'asgaros-forum').'</a>';
+        } else if ($this->current_view === 'search') {
+            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+            echo '<a href="#">'.__('Search', 'asgaros-forum').'</a>';
         }
 
         echo '</div>';
 
-
-
         echo '<div id="forum-search">';
         echo '<span class="dashicons-before dashicons-search"></span>';
-        echo '<input type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
+        echo '<form method="post" action="'.$this->getLink('search').'">';
+        echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
+        echo '</form>';
         echo '</div>';
-
-
-
 
         echo '<div class="clear"></div>';
         echo '</div>';
