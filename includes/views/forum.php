@@ -19,7 +19,11 @@ $subforums = $this->get_forums($this->current_category, $this->current_forum);
 if (count($subforums) > 0) {
     echo '<div class="title-element">'.__('Subforums', 'asgaros-forum').'</div>';
     echo '<div class="content-element">';
+    $elementMarker = '';
+    $forumsCounter = 0;
     foreach ($subforums as $forum) {
+        $forumsCounter++;
+        $elementMarker = ($forumsCounter & 1) ? 'odd' : 'even';
         require('forum-element.php');
     }
     echo '</div>';
@@ -30,17 +34,26 @@ if ($counter_total > 0) {
     echo '<div class="content-element">';
         // Sticky threads
         if ($sticky_threads && !$this->current_page) { ?>
-            <div class="bright"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>
-            <?php foreach ($sticky_threads as $thread) {
+            <div class="sticky-top"><?php _e('Sticky Threads', 'asgaros-forum'); ?></div>
+            <?php
+            $elementMarker = '';
+            $elementsCounter = 0;
+            foreach ($sticky_threads as $thread) {
+                $elementsCounter++;
+                $elementMarker = ($elementsCounter & 1) ? 'odd' : 'even';
                 require('thread-element.php');
             }
         }
 
         if ($counter_normal > 0 && (($sticky_threads && !$this->current_page))) {
-            echo '<div class="bright"></div>';
+            echo '<div class="sticky-bottom"></div>';
         }
 
+        $elementMarker = '';
+        $elementsCounter = 0;
         foreach ($threads as $thread) {
+            $elementsCounter++;
+            $elementMarker = ($elementsCounter & 1) ? 'odd' : 'even';
             require('thread-element.php');
         } ?>
     </div>

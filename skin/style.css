@@ -23,12 +23,6 @@
 #af-wrapper div {
     border-radius: 0; /* comp */
 }
-#af-wrapper .space {
-    margin-bottom: 20px !important;
-    visibility: inherit; /* comp */
-    height: inherit; /* comp */
-    padding: 0; /* comp */
-}
 #af-wrapper .clear {
     clear: both;
 }
@@ -142,23 +136,20 @@
     display: table;
     height: 60px;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid #e1e1e1;
 }
-#af-wrapper .content-element .forum:last-child,
-#af-wrapper .content-element .thread:last-child {
-    border-bottom: none;
+#af-wrapper .content-element .odd {
+    background-color: #fff;
+}
+#af-wrapper .content-element .even {
+    background-color: #f9f9f9;
 }
 #af-wrapper .forum div,
 #af-wrapper .thread div {
     display: table-cell;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
     padding: 4px 8px;
     vertical-align: middle;
     box-sizing: content-box;
-}
-#af-wrapper .forum div:last-child,
-#af-wrapper .thread div:last-child {
-    border-right: none;
 }
 #af-wrapper .forum-status,
 #af-wrapper .thread-status {
@@ -172,11 +163,13 @@
 #af-wrapper .forum-stats,
 #af-wrapper .thread-stats {
     width: 100px;
-    text-align: center;
+    text-align: right;
+    border-right: 1px solid #e1e1e1;
+    padding-right: 15px !important;
 }
 #af-wrapper .forum-poster,
 #af-wrapper .thread-poster {
-    width: 220px;
+    width: 218px;
     line-height: 1.6;
 }
 #af-wrapper .forum-name strong,
@@ -189,15 +182,22 @@
     line-height: inherit; /* comp */
 }
 #af-wrapper .forum-subforums {
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    border-top: 1px solid #e1e1e1;
     padding-top: 5px;
     margin-top: 5px;
     word-break: break-word;
 }
-#af-wrapper .bright {
+#af-wrapper .sticky-top {
     background-color: #eee;
+    color: #666;
     padding: 3px 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 12px;
+    font-style: italic;
+}
+#af-wrapper .sticky-bottom {
+    background-color: #e1e1e1;
+    padding: 3px 10px;
 }
 
 /* MENU */
@@ -263,7 +263,8 @@
 
 /* TITLE */
 #af-wrapper .title-element {
-    background-color: rgba(45, 137, 204, 0.85);
+    background-color: #2d89cc;
+    border-bottom: 2px solid #0073aa;
     color: #fff;
     padding: 4px 10px;
     display: block;
@@ -295,7 +296,7 @@
     background: none; /* comp */
 }
 #af-wrapper #breadcrumbs a:hover {
-    color: #444;
+    color: #555;
     text-decoration: none;
 }
 #af-wrapper #breadcrumbs span {
@@ -357,9 +358,9 @@
 
 /* CONTENT WRAPPERS*/
 #af-wrapper .content-element {
-    border-top: 2px solid #2d89cc;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     background-color: #fff;
+    border: 1px solid #e1e1e1;
 }
 #af-wrapper .content-element a:hover {
     text-decoration: underline;
@@ -380,11 +381,11 @@
     padding: 0; /* comp */
     border: none; /* comp */
     border-radius: inherit; /* comp */
+    border-bottom: 2px solid #e1e1e1;
 }
 #af-wrapper .post-header {
     background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    border-top: 2px solid rgba(0, 0, 0, 0.2);
     box-sizing: content-box;
     height: 29px; /* comp */
     padding: inherit; /* comp */
@@ -433,6 +434,7 @@
 }
 #af-wrapper .post-author-marker {
     background-color: #2d89cc;
+    border-bottom: 2px solid #0073aa;
     margin-left: -7px;
     margin-bottom: 7px;
     padding: 2px 15px;

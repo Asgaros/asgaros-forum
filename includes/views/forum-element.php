@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 $lastpost_data = $this->get_lastpost_in_forum($forum->id);
 
-echo '<div class="forum" id="forum-'.$forum->id.'">';
+echo '<div class="forum '.$elementMarker.'" id="forum-'.$forum->id.'">';
     echo '<div class="forum-status">';
         $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id);
         echo '<span class="dashicons-before dashicons-overview'.$unreadStatus.'"></span>';

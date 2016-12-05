@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 ?>
 
-<div class="thread">
+<div class="thread <?php echo $elementMarker; ?>">
     <?php $lastpost_data = $this->get_lastpost_in_thread($thread->id); ?>
     <div class="thread-status">
         <?php

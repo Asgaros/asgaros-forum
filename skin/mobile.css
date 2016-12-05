@@ -3,11 +3,6 @@
 #af-wrapper .post-author {
     border-right: none;
 }
-#af-wrapper .forum-status,
-#af-wrapper .thread-status {
-    width: 40px;
-    border-right: 1px solid rgba(0, 0, 0, 0.15) !important;
-}
 #af-wrapper .forum-stats,
 #af-wrapper .forum-poster,
 #af-wrapper .thread-stats,

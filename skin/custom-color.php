@@ -15,8 +15,9 @@ $color = '#'.$_GET['color'];
 #af-wrapper .post-author-marker {
     background-color: <?php echo $color; ?> !important;
 }
-#af-wrapper .content-element {
-    border-top: 2px solid <?php echo $color; ?> !important;
+#af-wrapper .title-element,
+#af-wrapper .post-author-marker {
+    border-bottom: 2px solid <?php echo $color; ?> !important;
 }
 <?php
 }
