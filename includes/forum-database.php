@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 4;
+    const DATABASE_VERSION = 5;
 
     private static $instance = null;
     private static $db;
@@ -136,6 +136,14 @@ class AsgarosForumDatabase {
             dbDelta($sql1);
             dbDelta($sql2);
             dbDelta($sql3);
+
+            if ($database_version_installed < 5) {
+                // Because most of the WordPress users are using a MySQL version below 5.6,
+                // we have to set the ENGINE for the post-table to MyISAM because InnoDB doesnt
+                // support FULLTEXT before MySQL version 5.6.
+                $wpdb->query('ALTER TABLE '.self::$table_posts.' ENGINE = MyISAM;');
+                $wpdb->query('ALTER TABLE '.self::$table_posts.' ADD FULLTEXT (text);');
+            }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);
         }
