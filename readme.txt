@@ -1,14 +1,14 @@
 === Asgaros Forum ===
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
-Tags: forums, discussion, multisite, community
+Tags: forum, forums, discussion, multisite, community, bulletin, board
 Requires at least: 4.6
 Tested up to: 4.7
 Stable tag: 1.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Asgaros Forum is the best discussion solution for WordPress packed with features! The perfect integration into WordPress keeps it lightweight, easy to use and ultra fast.
+Asgaros Forum is the best forum solution for WordPress! It comes with dozens of features in a beautiful design and stays lightweight, easy to use and ultra fast.
 
 == Description ==
 Asgaros Forum is the perfect WordPress plugin for you if you want to extend your website with a lightweight discussion board. It is easy to set up and manage, integrates perfectly with WordPress and comes with a small amount of features which makes it fast and simple.
@@ -23,6 +23,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Notifications
 * Moderators
 * Permissions
+* Search
 * Banning
 * Powerful editor
 * File uploads

@@ -38,6 +38,7 @@ require('includes/forum-widgets.php');
 require('includes/forum-thememanager.php');
 require('includes/forum-unread.php');
 require('includes/forum-uploads.php');
+require('includes/forum-search.php');
 require('admin/admin.php');
 
 AsgarosForumDatabase::createInstance();

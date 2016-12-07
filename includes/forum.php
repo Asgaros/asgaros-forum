@@ -694,7 +694,8 @@ class AsgarosForum {
 
         echo '<div id="forum-search">';
         echo '<span class="dashicons-before dashicons-search"></span>';
-        echo '<form method="post" action="'.$this->getLink('search').'">';
+        echo '<form method="get" action="'.$this->getLink('search').'">';
+        echo '<input name="view" type="hidden" value="search">';
         echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
         echo '</form>';
         echo '</div>';
@@ -708,6 +709,7 @@ class AsgarosForum {
         $num_pages = 0;
         $select_source = '';
         $select_url = '';
+        $link = '';
 
         if ($location == $this->tables->posts) {
             $count = $this->db->get_var($this->db->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d;", $this->current_topic));
@@ -719,6 +721,19 @@ class AsgarosForum {
             $num_pages = ceil($count / $this->options['topics_per_page']);
             $select_source = $this->current_forum;
             $select_url = 'forum';
+        } else if ($location === 'search') {
+            $categories = $this->get_categories();
+            $categoriesFilter = array();
+
+            foreach ($categories as $category) {
+                $categoriesFilter[] = $category->term_id;
+            }
+
+            $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
+
+            $count = $this->db->get_var("SELECT count(t.id) FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".AsgarosForumSearch::$searchKeywords."' IN BOOLEAN MODE) {$where};");
+            $num_pages = ceil($count / $this->options['topics_per_page']);
+            $select_url = 'search';
         }
 
         if ($num_pages > 1) {
@@ -727,17 +742,35 @@ class AsgarosForum {
                     if ($i == ($this->current_page + 1)) {
                         $out .= ' <strong>'.$i.'</strong>';
                     } else {
-                        $out .= ' <a href="'.$this->getLink($select_url, $select_source, array('part' => $i)).'">'.$i.'</a>';
+                        if ($location === 'search') {
+                            $link = $this->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => $i));
+                        } else {
+                            $link = $this->getLink($select_url, $select_source, array('part' => $i));
+                        }
+
+                        $out .= ' <a href="'.$link.'">'.$i.'</a>';
                     }
                 }
             } else {
                 if ($this->current_page >= 4) {
-                    $out .= ' <a href="'.$this->getLink($select_url, $select_source).'">'.__('First', 'asgaros-forum').'</a> &laquo;';
+                    if ($location === 'search') {
+                        $link = $this->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords));
+                    } else {
+                        $link = $this->getLink($select_url, $select_source);
+                    }
+
+                    $out .= ' <a href="'.$link.'">'.__('First', 'asgaros-forum').'</a> &laquo;';
                 }
 
                 for ($i = 3; $i > 0; $i--) {
                     if ((($this->current_page + 1) - $i) > 0) {
-                        $out .= ' <a href="'.$this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) - $i))).'">'.(($this->current_page + 1) - $i).'</a>';
+                        if ($location === 'search') {
+                            $link = $this->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => (($this->current_page + 1) - $i)));
+                        } else {
+                            $link = $this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) - $i)));
+                        }
+
+                        $out .= ' <a href="'.$link.'">'.(($this->current_page + 1) - $i).'</a>';
                     }
                 }
 
@@ -745,12 +778,24 @@ class AsgarosForum {
 
                 for ($i = 1; $i <= 3; $i++) {
                     if ((($this->current_page + 1) + $i) <= $num_pages) {
-                        $out .= ' <a href="'.$this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) + $i))).'">'.(($this->current_page + 1) + $i).'</a>';
+                        if ($location === 'search') {
+                            $link = $this->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => (($this->current_page + 1) + $i)));
+                        } else {
+                            $link = $this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) + $i)));
+                        }
+
+                        $out .= ' <a href="'.$link.'">'.(($this->current_page + 1) + $i).'</a>';
                     }
                 }
 
                 if ($num_pages - $this->current_page >= 5) {
-                    $out .= ' &raquo; <a href="'.$this->getLink($select_url, $select_source, array('part' => $num_pages)).'">'.__('Last', 'asgaros-forum').'</a>';
+                    if ($location === 'search') {
+                        $link = $this->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => $num_pages));
+                    } else {
+                        $link = $this->getLink($select_url, $select_source, array('part' => $num_pages));
+                    }
+
+                    $out .= ' &raquo; <a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
                 }
             }
 
@@ -882,6 +927,38 @@ class AsgarosForum {
         } else {
             return false;
         }
+    }
+
+    public function getSearchResults() {
+        if (!empty($_GET['keywords'])) {
+            AsgarosForumSearch::$searchKeywords = esc_sql(trim($_GET['keywords']));
+            $keywords = AsgarosForumSearch::$searchKeywords;
+
+            if (!empty($keywords)) {
+                $categories = $this->get_categories();
+                $categoriesFilter = array();
+
+                foreach ($categories as $category) {
+                    $categoriesFilter[] = $category->term_id;
+                }
+
+                $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
+
+                $start = $this->current_page * $this->options['topics_per_page'];
+                $end = $this->options['topics_per_page'];
+                $limit = $this->db->prepare("LIMIT %d, %d", $start, $end);
+
+                $query = "SELECT t.*, MATCH (p.text) AGAINST ('".$keywords."' IN BOOLEAN MODE) AS score FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."' IN BOOLEAN MODE) {$where} ORDER BY score DESC, id DESC {$limit};";
+
+                $results = $this->db->get_results($query);
+
+                if (!empty($results)) {
+                    return $results;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

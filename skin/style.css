@@ -274,6 +274,7 @@
 /* TOP CONTAINER */
 #af-wrapper #top-container {
     background-color: #e8e8e8;
+    border-bottom: 2px solid #b4b9be;
     margin-bottom: 15px;
     display: block;
     color: #666;
@@ -316,7 +317,7 @@
 /* SEARCH */
 #af-wrapper #forum-search {
     float: right;
-    width: 234px;
+    width: 235px;
     background-color: #b4b9be;
 }
 #af-wrapper #forum-search span {
