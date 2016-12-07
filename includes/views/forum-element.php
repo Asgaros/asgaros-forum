@@ -31,7 +31,7 @@ echo '<div class="forum '.$elementMarker.'" id="forum-'.$forum->id.'">';
         }
     echo '</div>';
     echo '<div class="forum-stats">';
-        echo '<small>'.sprintf(_n('%s Thread', '%s Threads', $forum->count_threads, 'asgaros-forum'), $forum->count_threads).'</small>';
+        echo '<small>'.sprintf(_n('%s Topic', '%s Topics', $forum->count_threads, 'asgaros-forum'), $forum->count_threads).'</small>';
         echo '<small>'.sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts).'</small>';
     echo '</div>';
     echo '<div class="forum-poster">'.$this->get_lastpost($lastpost_data).'</div>';

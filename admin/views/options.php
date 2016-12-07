@@ -29,7 +29,7 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3">
         </p>
         <p>
-            <label for="topics_per_page"><?php _e('Threads to show per page:', 'asgaros-forum'); ?></label>
+            <label for="topics_per_page"><?php _e('Topics to show per page:', 'asgaros-forum'); ?></label>
             <input type="text" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3">
         </p>
         <p>
@@ -54,7 +54,7 @@ $locationSetUp = $asgarosforum->checkForShortcode();
         </p>
         <p>
             <input type="checkbox" name="highlight_authors" id="highlight_authors" <?php checked(!empty($asgarosforum->options['highlight_authors'])); ?>>
-            <label for="highlight_authors"><?php _e('Highlight thread authors', 'asgaros-forum'); ?></label>
+            <label for="highlight_authors"><?php _e('Highlight topic authors', 'asgaros-forum'); ?></label>
         </p>
         <p>
             <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?>>

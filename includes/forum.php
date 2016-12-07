@@ -132,7 +132,7 @@ class AsgarosForum {
                     $this->parent_forum = $this->get_parent_id($this->current_forum, $this->tables->forums, 'parent_forum');
                     $this->current_category = $this->get_parent_id($this->current_forum, $this->tables->forums);
                 } else {
-                    $this->error = __('Sorry, this thread does not exist.', 'asgaros-forum');
+                    $this->error = __('Sorry, this topic does not exist.', 'asgaros-forum');
                 }
                 break;
             case 'editpost':
@@ -285,9 +285,9 @@ class AsgarosForum {
             } else if ($this->current_view == 'addpost') {
                 $title = __('Post Reply', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'addthread') {
-                $title = __('New Thread', 'asgaros-forum').' - '.$title;
+                $title = __('New Topic', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'movetopic') {
-                $title = __('Move Thread', 'asgaros-forum').' - '.$title;
+                $title = __('Move Topic', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'search') {
                 $title = __('Search', 'asgaros-forum').' - '.$title;
             }
@@ -365,11 +365,7 @@ class AsgarosForum {
     function overview() {
         $categories = $this->get_categories();
 
-        if ($categories) {
-            require('views/overview.php');
-        } else {
-            echo '<div class="notice">'.__('There are no categories yet!', 'asgaros-forum').'</div>';
-        }
+        require('views/overview.php');
     }
 
     function showforum() {
@@ -388,7 +384,7 @@ class AsgarosForum {
         if ($posts) {
             $this->db->query($this->db->prepare("UPDATE {$this->tables->topics} SET views = views + 1 WHERE id = %d", $this->current_topic));
 
-            $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Thread closed', 'asgaros-forum').')' : '';
+            $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Topic closed', 'asgaros-forum').')' : '';
 
             require('views/thread.php');
         } else {
@@ -575,11 +571,11 @@ class AsgarosForum {
 
         if ($lastpost_data) {
             $lastpost_link = $this->get_postlink($lastpost_data->parent_id, $lastpost_data->id);
-            $lastpost = '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>';
+            $lastpost .= '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>';
             $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
             $lastpost .= '<small>'.sprintf(__('%s ago', 'asgaros-forum'), '<a href="'.$lastpost_link.'">'.human_time_diff(strtotime($lastpost_data->date), current_time('timestamp')).'</a>').'</small>';
         } else if ($context === 'forum') {
-            $lastpost = '<small>'.__('No threads yet!', 'asgaros-forum').'</small>';
+            $lastpost = '<small>'.__('No topics yet!', 'asgaros-forum').'</small>';
         }
 
         return $lastpost;
@@ -627,7 +623,7 @@ class AsgarosForum {
         $menu = '';
 
         if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->get_forum_status()) {
-            $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Thread', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
         } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
             $menu .= '<a href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
         }
@@ -643,7 +639,7 @@ class AsgarosForum {
             }
 
             if ($this->get_status('closed')) {
-                $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('open_topic' => 1)).'"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Re-open', 'asgaros-forum').'</span></a>';
+                $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('open_topic' => 1)).'"><span class="dashicons-before dashicons-unlock"></span><span>'.__('Open', 'asgaros-forum').'</span></a>';
             } else {
                 $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('close_topic' => 1)).'"><span class="dashicons-before dashicons-lock"></span><span>'.__('Close', 'asgaros-forum').'</span></a>';
             }
@@ -689,7 +685,7 @@ class AsgarosForum {
             echo '<a href="#">'.__('Edit Post', 'asgaros-forum').'</a>';
         } else if ($this->current_view === 'addthread') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="#">'.__('New Thread', 'asgaros-forum').'</a>';
+            echo '<a href="#">'.__('New Topic', 'asgaros-forum').'</a>';
         } else if ($this->current_view === 'search') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
             echo '<a href="#">'.__('Search', 'asgaros-forum').'</a>';

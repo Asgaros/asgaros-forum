@@ -39,6 +39,13 @@
 #af-wrapper iframe {
     max-width: 100%;
 }
+#af-wrapper .main-title {
+    font-size: 20px;
+    border: none;
+    margin-bottom: 15px;
+    font-weight: normal;
+    color: #444;
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
@@ -187,17 +194,9 @@
     margin-top: 5px;
     word-break: break-word;
 }
-#af-wrapper .sticky-top {
-    background-color: #eee;
-    color: #666;
-    padding: 3px 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    font-size: 12px;
-    font-style: italic;
-}
 #af-wrapper .sticky-bottom {
-    background-color: #e1e1e1;
-    padding: 3px 10px;
+    background-color: #f0f0f0;
+    padding: 2px 10px;
 }
 
 /* MENU */
@@ -266,7 +265,7 @@
     background-color: #2d89cc;
     border-bottom: 2px solid #0073aa;
     color: #fff;
-    padding: 4px 10px;
+    padding: 3px 10px;
     display: block;
     font-weight: bold;
 }
@@ -278,7 +277,7 @@
     margin-bottom: 15px;
     display: block;
     color: #666;
-    line-height: 30px;
+    line-height: 26px;
 }
 
 /* BREADCRUMBS */
@@ -304,14 +303,17 @@
     background-color: #b4b9be;
     color: #fff;
 }
-#af-wrapper #breadcrumbs span::before {
-    line-height: 30px;
+#af-wrapper #breadcrumbs span::before,
+#af-wrapper #forum-search span:before {
+    line-height: 26px;
     width: 18px;
     height: 18px;
     font-size: 18px;
 }
 #af-wrapper #breadcrumbs .separator {
     padding: 0;
+    color: #b4b9be;
+    background: none;
 }
 
 /* SEARCH */
@@ -325,16 +327,12 @@
     padding: 0 5px 0 5px;
     color: #fff;
 }
-#af-wrapper #forum-search span:before {
-    line-height: 30px;
-}
 #af-wrapper #forum-search form {
     display: initial;
 }
 #af-wrapper #forum-search input {
     vertical-align: inherit;
     font-style: italic;
-    margin: 5px !important;
     padding: 0;
     border: 0;
     color: #fff;
@@ -520,13 +518,15 @@
 #af-wrapper .dashicons-admin-page-small:before {
 	content: "\f214";
 }
-#af-wrapper .dashicons-normal_open:before,
-#af-wrapper .dashicons-sticky_open:before {
+#af-wrapper .dashicons-normal_open:before {
     content: "\f206";
 }
-#af-wrapper .dashicons-normal_closed:before,
-#af-wrapper .dashicons-sticky_closed:before {
+#af-wrapper .dashicons-normal_closed:before {
     content: "\f160";
+}
+#af-wrapper .dashicons-sticky_open:before,
+#af-wrapper .dashicons-sticky_closed:before {
+    content: "\f109";
 }
 #af-wrapper .dashicons-overview:before,
 #af-wrapper .dashicons-normal_open:before,

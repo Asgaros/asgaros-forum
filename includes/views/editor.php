@@ -66,7 +66,7 @@ if (!$error) {
         <div class="title-element">
             <?php
             if ($this->current_view === 'addthread') {
-                _e('New Thread', 'asgaros-forum');
+                _e('New Topic', 'asgaros-forum');
             } else if ($this->current_view === 'addpost') {
                 echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)));
             } else if ($this->current_view === 'editpost') {
