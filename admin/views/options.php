@@ -33,6 +33,10 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <input type="text" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3">
         </p>
         <p>
+            <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
+            <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($asgarosforum->options['minimalistic_editor'])); ?>>
             <label for="minimalistic_editor"><?php _e('Use minimalistic editor', 'asgaros-forum'); ?></label>
         </p>

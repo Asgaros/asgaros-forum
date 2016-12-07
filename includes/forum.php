@@ -33,6 +33,7 @@ class AsgarosForum {
         'hide_uploads_from_guests'  => false,
         'admin_subscriptions'       => false,
         'allow_subscriptions'       => true,
+        'enable_search'             => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_edit_date'            => true,
@@ -146,6 +147,10 @@ class AsgarosForum {
                 }
                 break;
             case 'search':
+                // Go back to overview when search is not enabled.
+                if (!$this->options['enable_search']) {
+                    $this->current_view = 'overview';
+                }
                 break;
             default:
                 $this->current_view = 'overview';
@@ -692,13 +697,15 @@ class AsgarosForum {
 
         echo '</div>';
 
-        echo '<div id="forum-search">';
-        echo '<span class="dashicons-before dashicons-search"></span>';
-        echo '<form method="get" action="'.$this->getLink('search').'">';
-        echo '<input name="view" type="hidden" value="search">';
-        echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
-        echo '</form>';
-        echo '</div>';
+        if ($this->options['enable_search']) {
+            echo '<div id="forum-search">';
+            echo '<span class="dashicons-before dashicons-search"></span>';
+            echo '<form method="get" action="'.$this->getLink('search').'">';
+            echo '<input name="view" type="hidden" value="search">';
+            echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
+            echo '</form>';
+            echo '</div>';
+        }
 
         echo '<div class="clear"></div>';
         echo '</div>';
