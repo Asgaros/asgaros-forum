@@ -206,10 +206,11 @@
 #af-wrapper .forum-menu a {
     display: inline-block;
     background-color: #2d89cc;
-    padding: 3px 5px;
+    padding: 2px 5px;
     margin-left: 3px;
     color: #fff !important;
     margin-bottom: 5px;
+    border-bottom: 2px solid #0073aa;
 }
 
 /* NOTICE */

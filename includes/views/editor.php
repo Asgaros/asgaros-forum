@@ -61,19 +61,17 @@ if (!empty($this->error)) {
 }
 
 if (!$error) {
-     ?>
+    echo '<h1 class="main-title">';
+    if ($this->current_view === 'addthread') {
+        _e('New Topic', 'asgaros-forum');
+    } else if ($this->current_view === 'addpost') {
+        echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)));
+    } else if ($this->current_view === 'editpost') {
+        _e('Edit Post', 'asgaros-forum');
+    }
+    echo '</h1>'; ?>
     <form id="forum-editor-form" name="addform" method="post" enctype="multipart/form-data">
-        <div class="title-element">
-            <?php
-            if ($this->current_view === 'addthread') {
-                _e('New Topic', 'asgaros-forum');
-            } else if ($this->current_view === 'addpost') {
-                echo __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)));
-            } else if ($this->current_view === 'editpost') {
-                _e('Edit Post', 'asgaros-forum');
-            }
-            ?>
-        </div>
+        <div class="title-element"></div>
         <div class="content-element">
             <?php if ($this->current_view === 'addthread' || ($this->current_view == 'editpost' && $this->is_first_post($post->id))) { ?>
                 <div class="editor-row-subject">

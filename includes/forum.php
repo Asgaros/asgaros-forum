@@ -401,6 +401,8 @@ class AsgarosForum {
     }
 
     function movetopic() {
+        echo '<h1 class="main-title">'.__('Move Topic', 'asgaros-forum').'</h1>';
+
         if (AsgarosForumPermissions::isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->getLink('topic_move', $this->current_topic, array('move_thread' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)))).'</div>';
@@ -623,9 +625,9 @@ class AsgarosForum {
         $menu = '';
 
         if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->get_forum_status()) {
-            $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
         } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
-            $menu .= '<a href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-format-aside"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
         }
 
         if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {

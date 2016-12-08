@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.__('Overview', 'asgaros-forum').'</h1>';
+echo '<h1 class="main-title">'.__('Forum', 'asgaros-forum').'</h1>';
 
 if ($categories) {
     $forumsAvailable = false;

@@ -2,6 +2,8 @@
 
 if (!defined('ABSPATH')) exit;
 
+echo '<h1 class="main-title">'.__('Search', 'asgaros-forum').'</h1>';
+
 $results = $this->getSearchResults();
 
 if ($results) {
