@@ -736,7 +736,7 @@ class AsgarosForum {
 
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
 
-            $count = $this->db->get_var("SELECT count(t.id) FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".AsgarosForumSearch::$searchKeywords."' IN BOOLEAN MODE) {$where};");
+            $count = $this->db->get_var("SELECT count(t.id) FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".AsgarosForumSearch::$searchKeywords."*' IN BOOLEAN MODE) {$where};");
             $num_pages = ceil($count / $this->options['topics_per_page']);
             $select_url = 'search';
         }
@@ -953,7 +953,7 @@ class AsgarosForum {
                 $end = $this->options['topics_per_page'];
                 $limit = $this->db->prepare("LIMIT %d, %d", $start, $end);
 
-                $query = "SELECT t.*, MATCH (p.text) AGAINST ('".$keywords."' IN BOOLEAN MODE) AS score FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."' IN BOOLEAN MODE) {$where} ORDER BY score DESC, id DESC {$limit};";
+                $query = "SELECT t.*, MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) AS score FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) {$where} ORDER BY score DESC, id DESC {$limit};";
 
                 $results = $this->db->get_results($query);
 
