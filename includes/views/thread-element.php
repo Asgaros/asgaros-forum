@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) exit;
         ?>
     </div>
     <div class="thread-name">
-        <strong><a href="<?php echo $this->getLink('topic', $thread->id); ?>" title="<?php echo esc_html(stripslashes($thread->name)); ?>"><?php echo esc_html($this->cut_string(stripslashes($thread->name))); ?></a></strong>
+        <strong><a href="<?php echo $this->getLink('topic', $thread->id); ?>" title="<?php echo esc_html(stripslashes($thread->name)); ?>"><?php echo esc_html(stripslashes($thread->name)); ?></a></strong>
         <small><?php _e('Created by:', 'asgaros-forum'); ?> <i><?php echo $this->get_username($this->get_thread_starter($thread->id)); ?></i></small>
     </div>
     <div class="thread-stats">

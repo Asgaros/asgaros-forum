@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.esc_html($this->cut_string(stripslashes($this->get_name($this->current_topic, $this->tables->topics)), 70)).'</h1>';
+echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics))).'</h1>';
 
 ?>
 <div>
@@ -14,7 +14,7 @@ echo '<h1 class="main-title">'.esc_html($this->cut_string(stripslashes($this->ge
     <div class="clear"></div>
 </div>
 
-<div class="title-element"><?php echo esc_html($this->cut_string(stripslashes($this->get_name($this->current_topic, $this->tables->topics)), 70)).$meClosed; ?></div>
+<div class="title-element"><?php echo $meClosed; ?></div>
 <div class="content-element">
     <?php
     $counter = 0;

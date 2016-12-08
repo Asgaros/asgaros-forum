@@ -105,6 +105,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Dont shorten topic titles
 * Added: Search functionality
 * Revised design
 = 1.2.9 =

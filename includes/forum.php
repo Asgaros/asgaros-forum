@@ -534,9 +534,9 @@ class AsgarosForum {
         return $this->cache['get_name'][$location][$id];
     }
 
-    function cut_string($string, $length = 33) {
+    function cut_string($string, $length = 30) {
         if (strlen($string) > $length) {
-            return mb_substr($string, 0, $length, 'UTF-8') . ' ...';
+            return mb_substr($string, 0, $length, 'UTF-8') . ' &hellip;';
         }
 
         return $string;
