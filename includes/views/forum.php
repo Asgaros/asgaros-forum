@@ -19,7 +19,10 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
 // Subforums
 $subforums = $this->get_forums($this->current_category, $this->current_forum);
 if (count($subforums) > 0) {
-    echo '<div class="title-element">'.__('Subforums', 'asgaros-forum').'</div>';
+    echo '<div class="title-element">';
+        echo __('Subforums', 'asgaros-forum');
+        echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
+    echo '</div>';
     echo '<div class="content-element">';
     $elementMarker = '';
     $forumsCounter = 0;
@@ -32,7 +35,10 @@ if (count($subforums) > 0) {
 }
 
 if ($counter_total > 0) {
-    echo '<div class="title-element">'.__('Topics', 'asgaros-forum').'</div>';
+    echo '<div class="title-element">';
+        echo __('Topics', 'asgaros-forum');
+        echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
+    echo '</div>';
     echo '<div class="content-element">';
         // Sticky threads
         if ($sticky_threads && !$this->current_page) { ?>

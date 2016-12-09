@@ -536,7 +536,7 @@ class AsgarosForum {
         return $this->cache['get_name'][$location][$id];
     }
 
-    function cut_string($string, $length = 30) {
+    function cut_string($string, $length = 33) {
         if (strlen($string) > $length) {
             return mb_substr($string, 0, $length, 'UTF-8') . ' &hellip;';
         }
@@ -573,9 +573,11 @@ class AsgarosForum {
 
         if ($lastpost_data) {
             $lastpost_link = $this->get_postlink($lastpost_data->parent_id, $lastpost_data->id);
-            $lastpost .= '<small>'.__('Last post by', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></small>';
-            $lastpost .= ($context === 'forum') ? '<small>'.__('in', 'asgaros-forum').'&nbsp;<strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
-            $lastpost .= '<small>'.sprintf(__('%s ago', 'asgaros-forum'), '<a href="'.$lastpost_link.'">'.human_time_diff(strtotime($lastpost_data->date), current_time('timestamp')).'</a>').'</small>';
+            $lastpost .= ($context === 'forum') ? '<small><strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
+            $lastpost .= '<small>';
+            $lastpost .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></span>&nbsp;&middot;&nbsp;';
+            $lastpost .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a></span>';
+            $lastpost .= '</small>';
         } else if ($context === 'forum') {
             $lastpost = '<small>'.__('No topics yet!', 'asgaros-forum').'</small>';
         }

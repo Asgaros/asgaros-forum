@@ -8,7 +8,10 @@ if ($categories) {
     $forumsAvailable = false;
 
     foreach ($categories as $category) {
-        echo '<div class="title-element" id="forum-category-'.$category->term_id.'">'.$category->name.'</div>';
+        echo '<div class="title-element" id="forum-category-'.$category->term_id.'">';
+            echo $category->name;
+            echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
+        echo '</div>';
         echo '<div class="content-element">';
             $forums = $this->get_forums($category->term_id);
             if (empty($forums)) {
