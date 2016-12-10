@@ -16,8 +16,12 @@ $color = '#'.$_GET['color'];
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .title-element,
-#af-wrapper .post-author-marker {
+#af-wrapper .post-author-marker,
+#af-wrapper .forum-menu a {
     border-bottom: 2px solid <?php echo $color; ?> !important;
+}
+#af-wrapper input[type="submit"] {
+	border: 1px solid <?php echo $color; ?> !important;
 }
 <?php
 }
@@ -38,7 +42,8 @@ $text_color = '#'.$_GET['text-color'];
 if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['background-color'])) {
 $background_color = '#'.$_GET['background-color'];
 ?>
-#af-wrapper .content-element {
+#af-wrapper .content-element,
+#af-wrapper .content-element .odd {
     background-color: <?php echo $background_color; ?> !important;
 }
 <?php

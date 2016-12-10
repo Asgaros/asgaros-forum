@@ -153,11 +153,8 @@
     width: 100%;
     border-bottom: 1px solid #e1e1e1;
 }
-#af-wrapper .content-element .odd {
-    background-color: #fff;
-}
 #af-wrapper .content-element .even {
-    background-color: #f9f9f9;
+    background-color: rgba(0, 0, 0, 0.025);
 }
 #af-wrapper .forum div,
 #af-wrapper .thread div {
@@ -290,6 +287,7 @@
     display: block;
     font-weight: bold;
     height: 21px;
+    box-sizing: initial; /* comp */
 }
 
 /* TOP CONTAINER */
@@ -363,6 +361,7 @@
     width: 190px;
     font-size: 12px;
     line-height: normal;
+    display: initial; /* comp */
 }
 #af-wrapper #forum-search input::-webkit-input-placeholder {
 	color: #fff;
