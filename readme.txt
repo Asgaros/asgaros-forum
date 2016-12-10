@@ -95,6 +95,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_subscriber_mails_new_topic
 * asgarosforum_filter_subscribers_query_new_post
 * asgarosforum_filter_subscribers_query_new_topic
+* asgarosforum_filter_error_message_require_login
 
 == Screenshots ==
 1. The forum overview.
@@ -105,9 +106,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
-* Fixed: Dont shorten topic titles
 * Added: Search functionality
-* Revised design
+* Added: asgarosforum_filter_error_message_require_login filter
+* Changed: Dont shorten topic titles
+* New design
 = 1.2.9 =
 * Fixed: Broken widgets with some WordPress configurations
 * Fixed: Dont send notifications about new posts/topics in restricted categories to all users

@@ -229,6 +229,7 @@ class AsgarosForum {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
             $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+            $this->error = apply_filters('asgarosforum_filter_error_message_require_login', $this->error);
             return;
         }
 
