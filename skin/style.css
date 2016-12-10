@@ -185,7 +185,7 @@
 #af-wrapper .forum-poster,
 #af-wrapper .thread-poster {
     width: 218px;
-    line-height: 2.2;
+    line-height: 1.6;
     text-align: center;
 }
 #af-wrapper .forum-poster .dashicons-before:before,
@@ -194,7 +194,7 @@
     width: 12px;
     height: 12px;
     vertical-align: top;
-    padding: 5px 5px 5px 0;
+    padding: 2px;
 }
 #af-wrapper .forum-name strong,
 #af-wrapper .thread-name strong,
