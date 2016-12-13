@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Tue Dec 13 2016 23:06:18 GMT+0100 (Mitteleuropäische "
+"POT-Revision-Date: Tue Dec 13 2016 23:38:10 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -263,7 +263,10 @@ msgid "https://github.com/Asgaros/asgaros-forum"
 msgstr ""
 
 #. Description of the plugin
-msgid "A lightweight and simple forum plugin for WordPress."
+msgid ""
+"Asgaros Forum is the best forum solution for WordPress! It comes with dozens "
+"of features in a beautiful design and stays lightweight, easy to use and "
+"ultra fast."
 msgstr ""
 
 #. Author of the plugin
