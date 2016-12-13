@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Sun Dec 04 2016 00:06:56 GMT+0100 (Mitteleuropäische "
+"POT-Revision-Date: Tue Dec 13 2016 23:06:18 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -39,7 +39,7 @@ msgid "Notify about new topics"
 msgstr ""
 
 #: ../admin/admin.php:57 ../admin/admin.php:212 ../admin/admin.php:212 ..
-#: /includes/forum.php:647
+#: /includes/forum.php:663 ../includes/views/overview.php:5
 msgid "Forum"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 
 #: ../admin/views/forums.php:34 ../admin/views/forums.php:60 ..
 #: /admin/views/forums.php:117 ../includes/forum-uploads.php:140 ..
-#: /includes/forum.php:588 ../includes/forum.php:624
+#: /includes/forum.php:600 ../includes/forum.php:636
 msgid "Delete"
 msgstr ""
 
@@ -163,90 +163,94 @@ msgid "Replies to show per page:"
 msgstr ""
 
 #: ../admin/views/options.php:32
-msgid "Threads to show per page:"
+msgid "Topics to show per page:"
 msgstr ""
 
 #: ../admin/views/options.php:37
-msgid "Use minimalistic editor"
+msgid "Enable search functionality"
 msgstr ""
 
 #: ../admin/views/options.php:41
-msgid "Allow shortcodes in posts"
+msgid "Use minimalistic editor"
 msgstr ""
 
 #: ../admin/views/options.php:45
-msgid "Allow guest postings"
+msgid "Allow shortcodes in posts"
 msgstr ""
 
 #: ../admin/views/options.php:49
-msgid "Highlight administrator/moderator names"
+msgid "Allow guest postings"
 msgstr ""
 
 #: ../admin/views/options.php:53
-msgid "Highlight thread authors"
+msgid "Highlight administrator/moderator names"
 msgstr ""
 
 #: ../admin/views/options.php:57
-msgid "Show edit date"
+msgid "Highlight topic authors"
 msgstr ""
 
 #: ../admin/views/options.php:61
+msgid "Show edit date"
+msgstr ""
+
+#: ../admin/views/options.php:65
 msgid "Forum visible to logged in users only"
 msgstr ""
 
-#: ../admin/views/options.php:63
+#: ../admin/views/options.php:67
 msgid "Notifications"
 msgstr ""
 
-#: ../admin/views/options.php:66
+#: ../admin/views/options.php:70
 msgid "Notify site owner about new topics"
 msgstr ""
 
-#: ../admin/views/options.php:70
+#: ../admin/views/options.php:74
 msgid "Allow subscriptions (for logged-in users only)"
 msgstr ""
 
-#: ../admin/views/options.php:72
+#: ../admin/views/options.php:76
 msgid "Uploads"
 msgstr ""
 
-#: ../admin/views/options.php:75
+#: ../admin/views/options.php:79
 msgid "Allow file uploads"
 msgstr ""
 
-#: ../admin/views/options.php:79
+#: ../admin/views/options.php:83
 msgid "Guests can upload files"
 msgstr ""
 
-#: ../admin/views/options.php:83
+#: ../admin/views/options.php:87
 msgid "Show uploads to logged-in users only"
 msgstr ""
 
-#: ../admin/views/options.php:86 ../includes/forum-uploads.php:164
+#: ../admin/views/options.php:90 ../includes/forum-uploads.php:164
 msgid "Allowed filetypes:"
 msgstr ""
 
-#: ../admin/views/options.php:89
+#: ../admin/views/options.php:93
 msgid "Appearance"
 msgstr ""
 
-#: ../admin/views/options.php:94
+#: ../admin/views/options.php:98
 msgid "Theme"
 msgstr ""
 
-#: ../admin/views/options.php:103
+#: ../admin/views/options.php:107
 msgid "Forum color:"
 msgstr ""
 
-#: ../admin/views/options.php:107
+#: ../admin/views/options.php:111
 msgid "Text color:"
 msgstr ""
 
-#: ../admin/views/options.php:111
+#: ../admin/views/options.php:115
 msgid "Background color:"
 msgstr ""
 
-#: ../admin/views/options.php:119
+#: ../admin/views/options.php:123
 msgid "Save Options"
 msgstr ""
 
@@ -367,8 +371,8 @@ msgstr ""
 msgid "You need to login to have access to uploads."
 msgstr ""
 
-#: ../includes/forum-uploads.php:123 ../includes/forum.php:223 ../includes/forum.
-#: php:232 ../includes/forum.php:388
+#: ../includes/forum-uploads.php:123 ../includes/forum.php:231 ../includes/forum.
+#: php:241 ../includes/forum.php:398
 msgid "Login"
 msgstr ""
 
@@ -396,12 +400,12 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: ../includes/forum-widgets.php:76
+#: ../includes/forum-widgets.php:76 ../includes/forum.php:579
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/forum-widgets.php:82
+#: ../includes/forum-widgets.php:82 ../includes/forum.php:581
 msgid "No topics yet!"
 msgstr ""
 
@@ -433,143 +437,135 @@ msgstr ""
 msgid "Asgaros Forum: Recent Topics"
 msgstr ""
 
-#: ../includes/forum.php:122
+#: ../includes/forum.php:123
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: ../includes/forum.php:134
-msgid "Sorry, this thread does not exist."
+#: ../includes/forum.php:135
+msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: ../includes/forum.php:145
+#: ../includes/forum.php:146
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: ../includes/forum.php:223
+#: ../includes/forum.php:231
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:232
+#: ../includes/forum.php:241
 msgid "Sorry, only logged in users have access to this category."
 msgstr ""
 
-#: ../includes/forum.php:237 ../includes/forum.php:246
+#: ../includes/forum.php:246 ../includes/forum.php:255
 msgid "Sorry, you dont have access to this area."
 msgstr ""
 
-#: ../includes/forum.php:276 ../includes/forum.php:668 ../includes/views/editor.
-#: php:73
+#: ../includes/forum.php:285 ../includes/forum.php:688 ../includes/views/editor.
+#: php:70
 msgid "Edit Post"
 msgstr ""
 
-#: ../includes/forum.php:278 ../includes/forum.php:666
+#: ../includes/forum.php:287 ../includes/forum.php:685
 msgid "Post Reply"
 msgstr ""
 
-#: ../includes/forum.php:280 ../includes/forum.php:617 ../includes/forum.php:670 .
-#: ./includes/views/editor.php:69
-msgid "New Thread"
+#: ../includes/forum.php:289 ../includes/forum.php:629 ../includes/forum.php:691 .
+#: ./includes/views/editor.php:66
+msgid "New Topic"
 msgstr ""
 
-#: ../includes/forum.php:282 ../includes/forum.php:623
-msgid "Move Thread"
+#: ../includes/forum.php:291 ../includes/forum.php:405
+msgid "Move Topic"
 msgstr ""
 
-#: ../includes/forum.php:358
-msgid "There are no categories yet!"
-msgstr ""
-
-#: ../includes/forum.php:378
-msgid "Thread closed"
-msgstr ""
-
-#: ../includes/forum.php:382
-msgid "Sorry, but there are no posts."
+#: ../includes/forum.php:293 ../includes/forum.php:694 ../includes/views/search.
+#: php:5
+msgid "Search"
 msgstr ""
 
 #: ../includes/forum.php:388
+msgid "Topic closed"
+msgstr ""
+
+#: ../includes/forum.php:392
+msgid "Sorry, but there are no posts."
+msgstr ""
+
+#: ../includes/forum.php:398
 msgid "You need to login in order to create posts and topics."
 msgstr ""
 
-#: ../includes/forum.php:397
+#: ../includes/forum.php:409
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: ../includes/forum.php:407
+#: ../includes/forum.php:419 ../includes/forum.php:635
 msgid "Move"
 msgstr ""
 
-#: ../includes/forum.php:411
+#: ../includes/forum.php:423
 msgid "You are not allowed to move threads."
 msgstr ""
 
-#: ../includes/forum.php:538
+#: ../includes/forum.php:550
 msgid "Guest"
 msgstr ""
 
-#: ../includes/forum.php:555
+#: ../includes/forum.php:567
 msgid "Deleted user"
 msgstr ""
 
-#: ../includes/forum.php:565
-msgid "Last post by"
+#: ../includes/forum.php:578 ../includes/views/thread-element.php:17
+msgid "By"
 msgstr ""
 
-#: ../includes/forum.php:566
-msgid "in"
-msgstr ""
-
-#: ../includes/forum.php:567 ../includes/views/editor.php:33
-#, php-format
-msgid "on %s"
-msgstr ""
-
-#: ../includes/forum.php:569
-msgid "No threads yet!"
-msgstr ""
-
-#: ../includes/forum.php:583
+#: ../includes/forum.php:595
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:588 ../includes/forum.php:624
+#: ../includes/forum.php:600 ../includes/forum.php:636
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: ../includes/forum.php:592
+#: ../includes/forum.php:604
 msgid "Edit"
 msgstr ""
 
-#: ../includes/forum.php:619
+#: ../includes/forum.php:631
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:627
+#: ../includes/forum.php:639
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:629
+#: ../includes/forum.php:641
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:633
-msgid "Re-open"
+#: ../includes/forum.php:645
+msgid "Open"
 msgstr ""
 
-#: ../includes/forum.php:635
+#: ../includes/forum.php:647
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:677
+#: ../includes/forum.php:704
+msgid "Search ..."
+msgstr ""
+
+#: ../includes/forum.php:714
 msgid "Pages:"
 msgstr ""
 
-#: ../includes/forum.php:705
+#: ../includes/forum.php:768
 msgid "First"
 msgstr ""
 
-#: ../includes/forum.php:723
+#: ../includes/forum.php:804
 msgid "Last"
 msgstr ""
 
@@ -577,54 +573,72 @@ msgstr ""
 msgid "Quote from"
 msgstr ""
 
+#: ../includes/views/editor.php:33
+#, php-format
+msgid "on %s"
+msgstr ""
+
 #: ../includes/views/editor.php:43
 msgid "Sorry, you are not allowed to edit this post."
 msgstr ""
 
-#: ../includes/views/editor.php:71
+#: ../includes/views/editor.php:68
 msgid "Post Reply:"
 msgstr ""
 
-#: ../includes/views/editor.php:80
+#: ../includes/views/editor.php:78
 msgid "Subject:"
 msgstr ""
 
-#: ../includes/views/editor.php:105
+#: ../includes/views/editor.php:103
 msgid "Submit"
 msgstr ""
 
-#: ../includes/views/forum-element.php:19 ../includes/views/forum.php:20
+#: ../includes/views/forum-element.php:19 ../includes/views/forum.php:23
 msgid "Subforums"
 msgstr ""
 
 #: ../includes/views/forum-element.php:34
 #, php-format
-msgid "%s Thread"
-msgid_plural "%s Threads"
+msgid "%s Topic"
+msgid_plural "%s Topics"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/views/forum-element.php:35 ../includes/views/thread.php:46
+#: ../includes/views/forum-element.php:35 ../includes/views/thread.php:48
 #, php-format
 msgid "%s Post"
 msgid_plural "%s Posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/views/forum.php:33
-msgid "Sticky Threads"
+#: ../includes/views/forum.php:24 ../includes/views/forum.php:40 ..
+#: /includes/views/overview.php:13
+msgid "Last post:"
 msgstr ""
 
-#: ../includes/views/forum.php:56
-msgid "There are no threads yet!"
+#: ../includes/views/forum.php:39
+msgid "Topics"
 msgstr ""
 
-#: ../includes/views/overview.php:12
+#: ../includes/views/forum.php:76
+msgid "There are no topics yet!"
+msgstr ""
+
+#: ../includes/views/overview.php:18
 msgid "In this category are no forums yet!"
 msgstr ""
 
-#: ../includes/views/thread-element.php:17
-msgid "Created by:"
+#: ../includes/views/overview.php:36
+msgid "There are no categories yet!"
+msgstr ""
+
+#: ../includes/views/search.php:13
+msgid "Search results:"
+msgstr ""
+
+#: ../includes/views/search.php:25
+msgid "No results found for:"
 msgstr ""
 
 #: ../includes/views/thread-element.php:21
@@ -641,15 +655,15 @@ msgid_plural "%s Views"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/views/thread.php:34
-msgid "Thread Author"
+#: ../includes/views/thread.php:36
+msgid "Topic Author"
 msgstr ""
 
-#: ../includes/views/thread.php:50
+#: ../includes/views/thread.php:52
 msgid "Banned"
 msgstr ""
 
-#: ../includes/views/thread.php:79
+#: ../includes/views/thread.php:81
 #, php-format
 msgid "Last edited on %s"
 msgstr ""

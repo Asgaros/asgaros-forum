@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forum, forums, discussion, multisite, community, bulletin, board
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: 1.2.9
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,10 +106,12 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.3.0 =
 * Added: Search functionality
 * Added: asgarosforum_filter_error_message_require_login filter
 * Changed: Dont shorten topic titles
-* New design
+* Search Engine Optimizations
+* Revised design
 = 1.2.9 =
 * Fixed: Broken widgets with some WordPress configurations
 * Fixed: Dont send notifications about new posts/topics in restricted categories to all users
