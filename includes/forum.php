@@ -718,12 +718,12 @@ class AsgarosForum {
         $link = '';
 
         if ($location == $this->tables->posts) {
-            $count = $this->db->get_var($this->db->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d;", $this->current_topic));
+            $count = $this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d;", $this->current_topic));
             $num_pages = ceil($count / $this->options['posts_per_page']);
             $select_source = $this->current_topic;
             $select_url = 'topic';
         } else if ($location == $this->tables->topics) {
-            $count = $this->db->get_var($this->db->prepare("SELECT count(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->current_forum, "normal%"));
+            $count = $this->db->get_var($this->db->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->current_forum, "normal%"));
             $num_pages = ceil($count / $this->options['topics_per_page']);
             $select_source = $this->current_forum;
             $select_url = 'forum';
@@ -736,8 +736,9 @@ class AsgarosForum {
             }
 
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
-
-            $count = $this->db->get_var("SELECT count(t.id) FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".AsgarosForumSearch::$searchKeywords."*' IN BOOLEAN MODE) {$where};");
+            $keywords = AsgarosForumSearch::$searchKeywords;
+            $count = $this->db->get_col("SELECT t.id FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) {$where} GROUP BY p.parent_id;");
+            $count = count($count);
             $num_pages = ceil($count / $this->options['topics_per_page']);
             $select_url = 'search';
         }
@@ -954,7 +955,7 @@ class AsgarosForum {
                 $end = $this->options['topics_per_page'];
                 $limit = $this->db->prepare("LIMIT %d, %d", $start, $end);
 
-                $query = "SELECT t.*, MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) AS score FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) {$where} ORDER BY score DESC, p.id DESC {$limit};";
+                $query = "SELECT t.*, MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) AS score FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) {$where} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
 
                 $results = $this->db->get_results($query);
 
