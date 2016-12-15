@@ -312,7 +312,7 @@
     padding: 0 5px 0 5px;
 }
 #af-wrapper #breadcrumbs a {
-    color: #666;
+    color: #666 !important;
     background: none; /* comp */
 }
 #af-wrapper #breadcrumbs a:hover {
