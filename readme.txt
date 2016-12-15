@@ -106,6 +106,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Changed: Minor design changes
 = 1.3.0 =
 * Added: Search functionality
 * Added: asgarosforum_filter_error_message_require_login filter
