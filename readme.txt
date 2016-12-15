@@ -106,6 +106,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Sort search results correctly by relevance and date
 * Changed: Minor design changes
 = 1.3.0 =
 * Added: Search functionality
