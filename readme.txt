@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Group search results by topic to avoid duplicates
 * Fixed: Sort search results correctly by relevance and date
 * Fixed: Wrong stylings when using custome colors
+* Fixed: Display issues with some themes
 * Changed: Minor design changes
 = 1.3.0 =
 * Added: Search functionality
