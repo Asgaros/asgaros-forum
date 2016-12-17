@@ -9,7 +9,8 @@
 #af-wrapper .thread-poster,
 #af-wrapper .post-author img,
 #af-wrapper .post-author br,
-#af-wrapper .post-author small {
+#af-wrapper .post-author small,
+#af-wrapper .last-post-headline {
     display: none !important;
 }
 #af-wrapper .editor-row {
