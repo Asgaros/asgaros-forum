@@ -346,6 +346,10 @@ class asgarosforum_admin {
                 $asgarosforum->delete_thread($thread, true);
             }
         }
+
+        // Delete subscriptions for this forum.
+        AsgarosForumNotifications::removeForumSubscriptions($forum_id);
+
         // Last but not least delete the forum
         $asgarosforum->db->delete($asgarosforum->tables->forums, array('id' => $forum_id), array('%d'));
 

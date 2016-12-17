@@ -70,6 +70,10 @@ if ($counter_total > 0) {
         <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
         <div class="clear"></div>
     </div>
+
+    <?php
+    AsgarosForumNotifications::showForumSubscriptionLink();
+    ?>
 <?php } else {
     echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</div>';
     echo '<div class="content-element">';

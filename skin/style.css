@@ -518,10 +518,12 @@
 }
 
 /* SUBSCRIPTIONS */
-#af-wrapper #topic-subscription {
+#af-wrapper #topic-subscription,
+#af-wrapper #forum-subscription {
     display: block;
 }
-#af-wrapper #topic-subscription a {
+#af-wrapper #topic-subscription a,
+#af-wrapper #forum-subscription a {
     font-size: 11px;
     font-style: italic;
 }

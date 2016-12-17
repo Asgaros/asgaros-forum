@@ -97,5 +97,5 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
 </div>
 
 <?php
-AsgarosForumNotifications::showSubscriptionLink();
+AsgarosForumNotifications::showTopicSubscriptionLink();
 ?>

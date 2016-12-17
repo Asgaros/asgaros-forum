@@ -106,6 +106,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Subscriptions for specific forums
 * Fixed: Group search results by topic to avoid duplicates
 * Fixed: Sort search results correctly by relevance and date
 * Fixed: Wrong stylings when using custome colors

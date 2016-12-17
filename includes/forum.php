@@ -191,6 +191,10 @@ class AsgarosForum {
             AsgarosForumNotifications::subscribeTopic();
         } else if (isset($_GET['unsubscribe_topic'])) {
             AsgarosForumNotifications::unsubscribeTopic();
+        } else if (isset($_GET['subscribe_forum'])) {
+            AsgarosForumNotifications::subscribeForum();
+        } else if (isset($_GET['unsubscribe_forum'])) {
+            AsgarosForumNotifications::unsubscribeForum();
         }
 
         // Mark visited topic as read.
