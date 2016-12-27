@@ -293,7 +293,6 @@
 
 /* TOP CONTAINER */
 #af-wrapper #top-container {
-    background-color: #e8e8e8;
     border-bottom: 2px solid #b4b9be;
     margin-bottom: 15px;
     display: block;
@@ -306,6 +305,7 @@
     float: left;
     font-size: 11px;
     padding: 0;
+    margin: 0; /* comp */
 }
 #af-wrapper #breadcrumbs a,
 #af-wrapper #breadcrumbs span {
@@ -385,6 +385,8 @@
 }
 #af-wrapper .content-element a:hover {
     text-decoration: underline;
+    outline: none; /* comp */
+    background-color: inherit; /* comp */
 }
 
 /* THREAD */
