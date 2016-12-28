@@ -34,6 +34,7 @@ class AsgarosForum {
         'admin_subscriptions'       => false,
         'allow_subscriptions'       => true,
         'enable_search'             => true,
+        'show_statistics'           => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_edit_date'            => true,

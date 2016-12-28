@@ -44,7 +44,8 @@ if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/'
 $background_color = '#'.$_GET['background-color'];
 ?>
 #af-wrapper .content-element,
-#af-wrapper .content-element .odd {
+#af-wrapper .content-element .odd,
+#af-wrapper #statistics {
     background-color: <?php echo $background_color; ?> !important;
 }
 <?php

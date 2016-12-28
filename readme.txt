@@ -22,6 +22,7 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Sub-forums
 * Notifications
 * Moderators
+* Statistics
 * Permissions
 * Search
 * Banning
@@ -76,6 +77,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_{current_view}_custom_content_top
 * asgarosforum_{current_view}_custom_content_bottom
 * asgarosforum_editor_custom_content_bottom
+* asgarosforum_statistics_custom_element
+* asgarosforum_statistics_custom_content_bottom
 = Which filters are available =
 * asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
@@ -106,6 +109,11 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Statistics functionality
+* Added: asgarosforum_statistics_custom_element hook
+* Added: asgarosforum_statistics_custom_content_bottom hook
+* Fixed: Display issues with some themes
+* Changed: Minor design changes
 = 1.3.1 =
 * Added: Subscriptions for specific forums
 * Fixed: Group search results by topic to avoid duplicates

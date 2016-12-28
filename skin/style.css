@@ -293,10 +293,10 @@
 
 /* TOP CONTAINER */
 #af-wrapper #top-container {
-    border-bottom: 2px solid #b4b9be;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     margin-bottom: 15px;
     display: block;
-    color: #666;
     line-height: 26px;
 }
 
@@ -321,8 +321,8 @@
     text-decoration: none;
 }
 #af-wrapper #breadcrumbs span {
-    background-color: #b4b9be;
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #666;
 }
 #af-wrapper #breadcrumbs span::before,
 #af-wrapper #forum-search span:before {
@@ -331,9 +331,11 @@
     height: 18px;
     font-size: 18px;
 }
+#af-wrapper #breadcrumbs span.dashicons-admin-home {
+    color: #fff;
+}
 #af-wrapper #breadcrumbs .separator {
     padding: 0;
-    color: #b4b9be;
     background: none;
 }
 
@@ -341,7 +343,7 @@
 #af-wrapper #forum-search {
     float: right;
     width: 235px;
-    background-color: #b4b9be;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 #af-wrapper #forum-search span {
     display: inline-block;
@@ -358,7 +360,7 @@
     border: 0;
     color: #fff;
     border-bottom: 2px solid #ddd;
-    background-color: #b4b9be;
+    background-color: inherit;
     width: 190px;
     font-size: 12px;
     line-height: normal;
@@ -529,6 +531,51 @@
     font-size: 11px;
     font-style: italic;
 }
+
+/* STATISTICS */
+#af-wrapper #statistics {
+    margin: 15px 0;
+    width: 100%;
+    background-color: #fff;
+}
+#af-wrapper #statistics #statistics-header {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    padding: 3px 10px;
+}
+#af-wrapper #statistics strong:before {
+    padding-right: 5px;
+}
+#af-wrapper #statistics-body {
+    float: left;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    box-sizing: border-box;
+}
+#af-wrapper #statistics .statistics-element {
+    width: 200px;
+    display: inline-block;
+    margin: 10px 0;
+    border-right: 1px solid #ddd;
+}
+#af-wrapper #statistics .statistics-element:last-child {
+    border-right: none;
+}
+#af-wrapper #statistics .element-number {
+    font-size: 20px;
+    line-height: 32px;
+}
+#af-wrapper #statistics .element-number:before {
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    line-height: 32px;
+    padding: 1px 5px 0 0;
+}
+#af-wrapper #statistics .element-name {}
 
 /* ICONS */
 #af-wrapper [class^="dashicons-"],

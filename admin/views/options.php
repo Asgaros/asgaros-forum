@@ -37,6 +37,10 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($asgarosforum->options['show_statistics'])); ?>>
+            <label for="enable_search"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($asgarosforum->options['minimalistic_editor'])); ?>>
             <label for="minimalistic_editor"><?php _e('Use minimalistic editor', 'asgaros-forum'); ?></label>
         </p>

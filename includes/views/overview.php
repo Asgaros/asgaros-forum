@@ -32,6 +32,8 @@ if ($categories) {
     if ($forumsAvailable) {
         AsgarosForumUnread::showUnreadControls();
     }
+
+    AsgarosForumStatistics::showStatistics();
 } else {
     echo '<div class="notice">'.__('There are no categories yet!', 'asgaros-forum').'</div>';
 }
