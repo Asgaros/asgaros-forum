@@ -14,22 +14,10 @@ class AsgarosForumStatistics {
                     echo '<strong class="dashicons-before dashicons-chart-line">'.__('Statistics', 'asgaros-forum').'</strong>';
                 echo '</div>';
                 echo '<div id="statistics-body">';
-                    echo '<div class="statistics-element">';
-                        echo '<div class="element-number dashicons-before dashicons-editor-alignleft">'.$data->topics.'</div>';
-                        echo '<div class="element-name">'.__('Topics', 'asgaros-forum').'</div>';
-                    echo '</div>';
-                    echo '<div class="statistics-element">';
-                        echo '<div class="element-number dashicons-before dashicons-format-quote">'.$data->posts.'</div>';
-                        echo '<div class="element-name">'.__('Posts', 'asgaros-forum').'</div>';
-                    echo '</div>';
-                    echo '<div class="statistics-element">';
-                        echo '<div class="element-number dashicons-before dashicons-visibility">'.$data->views.'</div>';
-                        echo '<div class="element-name">'.__('Views', 'asgaros-forum').'</div>';
-                    echo '</div>';
-                    echo '<div class="statistics-element">';
-                        echo '<div class="element-number dashicons-before dashicons-groups">'.$data->users.'</div>';
-                        echo '<div class="element-name">'.__('Users', 'asgaros-forum').'</div>';
-                    echo '</div>';
+                    self::renderStatisticsElement(__('Topics', 'asgaros-forum'), $data->topics, 'dashicons-before dashicons-editor-alignleft');
+                    self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'dashicons-before dashicons-format-quote');
+                    self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'dashicons-before dashicons-visibility');
+                    self::renderStatisticsElement(__('Users', 'asgaros-forum'), $data->users, 'dashicons-before dashicons-groups');
                     do_action('asgarosforum_statistics_custom_element');
                 echo '</div>';
                 do_action('asgarosforum_statistics_custom_content_bottom');
@@ -46,5 +34,12 @@ class AsgarosForumStatistics {
         $data = $asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
         $data->users = count_users()['total_users'];
         return $data;
+    }
+
+    public static function renderStatisticsElement($title, $data, $iconClass) {
+        echo '<div class="statistics-element">';
+            echo '<div class="element-number '.$iconClass.'">'.$data.'</div>';
+            echo '<div class="element-name">'.$title.'</div>';
+        echo '</div>';
     }
 }
