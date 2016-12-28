@@ -33,6 +33,7 @@ class AsgarosForumStatistics {
                     do_action('asgarosforum_statistics_custom_element');
                 echo '</div>';
                 do_action('asgarosforum_statistics_custom_content_bottom');
+                echo '<div class="clear"></div>';
             echo '</div>';
         }
     }
