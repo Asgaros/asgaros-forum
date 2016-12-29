@@ -32,7 +32,8 @@ class AsgarosForumStatistics {
         $queryPosts = "SELECT COUNT(id) FROM {$asgarosforum->tables->posts}";
         $queryViews = "SELECT SUM(views) FROM {$asgarosforum->tables->topics}";
         $data = $asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
-        $data->users = count_users()['total_users'];
+        $users = count_users();
+        $data->users = $users['total_users'];
         return $data;
     }
 
