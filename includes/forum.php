@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
+    var $version = '1.3.3';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
@@ -267,7 +268,7 @@ class AsgarosForum {
             return;
         }
 
-        wp_enqueue_script('asgarosforum-js', $this->directory.'js/script.js', array('jquery'));
+        wp_enqueue_script('asgarosforum-js', $this->directory.'js/script.js', array('jquery'), $this->version);
         wp_enqueue_style('dashicons');
     }
 

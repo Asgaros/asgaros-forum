@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Reload scripts and stylesheets after plugin update
 = 1.3.3 =
 * Fixed: Parse error when using some older versions of PHP
 = 1.3.2 =
