@@ -117,10 +117,11 @@ class AsgarosForum {
         switch ($this->current_view) {
             case 'forum':
             case 'addthread':
-                if ($this->element_exists($elementID, $this->tables->forums)) {
-                    $this->current_forum = $elementID;
-                    $this->parent_forum = $this->get_parent_id($this->current_forum, $this->tables->forums, 'parent_forum');
-                    $this->current_category = $this->get_parent_id($this->current_forum, $this->tables->forums);
+                $parents = $this->loadParents($elementID, 'forum');
+                if ($parents) {
+                    $this->current_forum = $parents->current_forum;
+                    $this->parent_forum = $parents->parent_forum;
+                    $this->current_category = $parents->current_category;
                 } else {
                     $this->error = __('Sorry, this forum does not exist.', 'asgaros-forum');
                 }
@@ -128,22 +129,24 @@ class AsgarosForum {
             case 'movetopic':
             case 'thread':
             case 'addpost':
-                if ($this->element_exists($elementID, $this->tables->topics)) {
-                    $this->current_topic = $elementID;
-                    $this->current_forum = $this->get_parent_id($this->current_topic, $this->tables->topics);
-                    $this->parent_forum = $this->get_parent_id($this->current_forum, $this->tables->forums, 'parent_forum');
-                    $this->current_category = $this->get_parent_id($this->current_forum, $this->tables->forums);
+                $parents = $this->loadParents($elementID, 'topic');
+                if ($parents) {
+                    $this->current_topic = $parents->current_topic;
+                    $this->current_forum = $parents->current_forum;
+                    $this->parent_forum = $parents->parent_forum;
+                    $this->current_category = $parents->current_category;
                 } else {
                     $this->error = __('Sorry, this topic does not exist.', 'asgaros-forum');
                 }
                 break;
             case 'editpost':
-                if ($this->element_exists($elementID, $this->tables->posts)) {
-                    $this->current_post = $elementID;
-                    $this->current_topic = $this->get_parent_id($this->current_post, $this->tables->posts);
-                    $this->current_forum = $this->get_parent_id($this->current_topic, $this->tables->topics);
-                    $this->parent_forum = $this->get_parent_id($this->current_forum, $this->tables->forums, 'parent_forum');
-                    $this->current_category = $this->get_parent_id($this->current_forum, $this->tables->forums);
+                $parents = $this->loadParents($elementID, 'post');
+                if ($parents) {
+                    $this->current_post = $parents->current_post;
+                    $this->current_topic = $parents->current_topic;
+                    $this->current_forum = $parents->current_forum;
+                    $this->parent_forum = $parents->parent_forum;
+                    $this->current_category = $parents->current_category;
                 } else {
                     $this->error = __('Sorry, this post does not exist.', 'asgaros-forum');
                 }
@@ -657,10 +660,6 @@ class AsgarosForum {
         return $menu;
     }
 
-    function get_parent_id($id, $location, $value = 'parent_id') {
-        return $this->db->get_var($this->db->prepare("SELECT {$value} FROM {$location} WHERE id = %d;", $id));
-    }
-
     function breadcrumbs() {
         echo '<div id="top-container">';
 
@@ -969,6 +968,31 @@ class AsgarosForum {
                     return $results;
                 }
             }
+        }
+
+        return false;
+    }
+
+    // Checks if an element exists and loads all parent ids based on the given id and its content type.
+    public function loadParents($id, $contentType) {
+        $query = '';
+
+        switch ($contentType) {
+            case 'post':
+                $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic, p.id AS current_post FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) LEFT JOIN {$this->tables->posts} AS p ON (t.id = p.parent_id) WHERE p.id = {$id};";
+                break;
+            case 'topic':
+                $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) WHERE t.id = {$id};";
+                break;
+            case 'forum':
+                $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum FROM {$this->tables->forums} AS f WHERE f.id = {$id};";
+                break;
+        }
+
+        $results = $this->db->get_row($query);
+
+        if ($results) {
+            return $results;
         }
 
         return false;
