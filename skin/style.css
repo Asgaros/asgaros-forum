@@ -193,6 +193,7 @@
     height: 12px;
     vertical-align: top;
     padding: 2px;
+    box-sizing: initial; /* comp */
 }
 #af-wrapper .forum-name strong,
 #af-wrapper .thread-name strong,
