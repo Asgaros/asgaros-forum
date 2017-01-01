@@ -141,8 +141,8 @@ class AsgarosForumDatabase {
                 // Because most of the WordPress users are using a MySQL version below 5.6,
                 // we have to set the ENGINE for the post-table to MyISAM because InnoDB doesnt
                 // support FULLTEXT before MySQL version 5.6.
-                $wpdb->query('ALTER TABLE '.self::$table_posts.' ENGINE = MyISAM;');
-                $wpdb->query('ALTER TABLE '.self::$table_posts.' ADD FULLTEXT (text);');
+                self::$db->query('ALTER TABLE '.self::$table_posts.' ENGINE = MyISAM;');
+                self::$db->query('ALTER TABLE '.self::$table_posts.' ADD FULLTEXT (text);');
             }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);
