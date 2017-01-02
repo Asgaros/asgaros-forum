@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.3.4 =
 * Added: Signature functionality
 * Fixed: Reload scripts and stylesheets after plugin update
 * Fixed: Display issues with some themes
