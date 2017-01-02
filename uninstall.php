@@ -48,6 +48,7 @@ function deleteData() {
     // Delete user meta data
     delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
     delete_metadata('user', 0, 'asgarosforum_banned', '', true);
+    delete_metadata('user', 0, 'asgarosforum_signature', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_topic', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_forum', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_global_topics', '', true);

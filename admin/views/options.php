@@ -49,6 +49,10 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <label for="allow_shortcodes"><?php _e('Allow shortcodes in posts', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="allow_signatures" id="allow_signatures" <?php checked(!empty($asgarosforum->options['allow_signatures'])); ?>>
+            <label for="allow_signatures"><?php _e('Allow signatures', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
             <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
         </p>

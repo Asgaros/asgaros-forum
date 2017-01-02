@@ -81,7 +81,18 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
                         echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'&nbsp;&middot;&nbsp;';
                     }
                     echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+
+                    // Show signature.
+                    if ($this->options['allow_signatures']) {
+                        $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
+
+                        if (!empty($signature)) {
+                            echo '<div class="signature">'.$signature.'</div>';
+                        }
+                    }
+
                     echo '</div>';
+
                     do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
                     ?>
                 </div>

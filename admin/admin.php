@@ -53,6 +53,13 @@ class asgarosforum_admin {
             $output .= '</tr>';
         }
 
+        if ($asgarosforum->options['allow_signatures']) {
+            $output .= '<tr>';
+            $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
+            $output .= '<td><textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_the_author_meta('asgarosforum_signature', $user->ID).'</textarea></td>';
+            $output .= '</tr>';
+        }
+
         if (!empty($output)) {
             echo '<h3>'.__('Forum', 'asgaros-forum').'</h3>';
             echo '<table class="form-table">';
@@ -71,6 +78,10 @@ class asgarosforum_admin {
 
         if ($asgarosforum->options['allow_subscriptions']) {
             update_usermeta(absint($user_id), 'asgarosforum_subscription_global_topics', wp_kses_post($_POST['asgarosforum_subscription_global_topics']));
+        }
+
+        if ($asgarosforum->options['allow_signatures']) {
+            update_usermeta(absint($user_id), 'asgarosforum_signature', trim(wp_kses_post($_POST['asgarosforum_signature'])));
         }
     }
 
