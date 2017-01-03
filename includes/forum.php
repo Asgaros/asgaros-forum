@@ -98,7 +98,7 @@ class AsgarosForum {
 
         // Set all base links.
         if ($this->executePlugin || get_post($this->options['location'])) {
-            $this->setLinks();
+            $this->links = AsgarosForumRewrite::setLinks();
         }
 
         if (!$this->executePlugin) {
@@ -220,19 +220,6 @@ class AsgarosForum {
         } else {
             return false;
         }
-    }
-
-    function setLinks() {
-        global $wp;
-        $this->links['home']        = get_page_link($this->options['location']);
-        $this->links['search']      = add_query_arg(array('view' => 'search'), $this->links['home']);
-        $this->links['forum']       = add_query_arg(array('view' => 'forum'), $this->links['home']);
-        $this->links['topic']       = add_query_arg(array('view' => 'thread'), $this->links['home']);
-        $this->links['topic_add']   = add_query_arg(array('view' => 'addthread'), $this->links['home']);
-        $this->links['topic_move']  = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
-        $this->links['post_add']    = add_query_arg(array('view' => 'addpost'), $this->links['home']);
-        $this->links['post_edit']   = add_query_arg(array('view' => 'editpost'), $this->links['home']);
-        $this->links['current']     = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
     }
 
     function check_access() {
@@ -497,7 +484,7 @@ class AsgarosForum {
 
     function get_forums($id = false, $parent_forum = 0) {
         if ($id) {
-            return $this->db->get_results($this->db->prepare("SELECT f.id, f.name, f.description, f.closed, f.sort, f.parent_forum, (SELECT COUNT(ct_t.id) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_threads, (SELECT COUNT(cp_p.id) FROM {$this->tables->posts} AS cp_p, {$this->tables->topics} AS cp_t, {$this->tables->forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(csf_f.id) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
+            return $this->db->get_results($this->db->prepare("SELECT f.id, f.name, f.description, f.closed, f.sort, f.parent_forum, (SELECT COUNT(ct_t.id) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_threads, (SELECT COUNT(cp_p.id) FROM {$this->tables->posts} AS cp_p, {$this->tables->topics} AS cp_t, {$this->tables->forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(csf_f.id) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums, f.slug FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
         } else {
             // Load all forums.
             return $this->db->get_results("SELECT id, name FROM {$this->tables->forums} ORDER BY sort ASC;");

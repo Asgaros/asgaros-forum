@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 5;
+    const DATABASE_VERSION = 6;
 
     private static $instance = null;
     private static $db;
@@ -92,6 +92,8 @@ class AsgarosForumDatabase {
     }
 
     public static function buildDatabase() {
+        global $asgarosforum;
+
         $database_version_installed = get_option('asgarosforum_db_version');
 
         if ($database_version_installed != self::DATABASE_VERSION) {
@@ -143,6 +145,15 @@ class AsgarosForumDatabase {
                 // support FULLTEXT before MySQL version 5.6.
                 self::$db->query('ALTER TABLE '.self::$table_posts.' ENGINE = MyISAM;');
                 self::$db->query('ALTER TABLE '.self::$table_posts.' ADD FULLTEXT (text);');
+            }
+
+            if ($database_version_installed < 6) {
+                $forums = self::$db->get_results("SELECT id, name FROM ".self::$table_forums." WHERE slug = '' ORDER BY id ASC;");
+
+                foreach ($forums as $forum) {
+                    $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, self::$table_forums);
+                    self::$db->update(self::$table_forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
+                }
             }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);

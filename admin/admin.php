@@ -303,13 +303,14 @@ class asgarosforum_admin {
         $forum_description  = trim($_POST['forum_description']);
         $forum_closed       = (isset($_POST['forum_closed'])) ? 1 : 0;
         $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
+        $forum_slug         = AsgarosForumRewrite::createUniqueSlug($forum_name, $asgarosforum->tables->forums);
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
                 $asgarosforum->db->insert(
                     $asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
-                    array('%s', '%d', '%d', '%s', '%d', '%d')
+                    array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed, 'slug' => $forum_slug),
+                    array('%s', '%d', '%d', '%s', '%d', '%d', '%s')
                 );
             } else {
                 $asgarosforum->db->update(
