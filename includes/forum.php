@@ -976,24 +976,26 @@ class AsgarosForum {
 
     // Checks if an element exists and loads all parent ids based on the given id and its content type.
     public function loadParents($id, $contentType) {
-        $query = '';
+        if ($id) {
+            $query = '';
 
-        switch ($contentType) {
-            case 'post':
-                $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic, p.id AS current_post FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) LEFT JOIN {$this->tables->posts} AS p ON (t.id = p.parent_id) WHERE p.id = {$id};";
-                break;
-            case 'topic':
-                $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) WHERE t.id = {$id};";
-                break;
-            case 'forum':
-                $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum FROM {$this->tables->forums} AS f WHERE f.id = {$id};";
-                break;
-        }
+            switch ($contentType) {
+                case 'post':
+                    $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic, p.id AS current_post FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) LEFT JOIN {$this->tables->posts} AS p ON (t.id = p.parent_id) WHERE p.id = {$id};";
+                    break;
+                case 'topic':
+                    $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) WHERE t.id = {$id};";
+                    break;
+                case 'forum':
+                    $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum FROM {$this->tables->forums} AS f WHERE f.id = {$id};";
+                    break;
+            }
 
-        $results = $this->db->get_row($query);
+            $results = $this->db->get_row($query);
 
-        if ($results) {
-            return $results;
+            if ($results) {
+                return $results;
+            }
         }
 
         return false;
