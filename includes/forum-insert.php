@@ -11,7 +11,7 @@ class AsgarosForumInsert {
 
     public static function getAction() {
         // If no action is set, try to determine one.
-        if (!$action && ($_POST['submit_action'] === 'add_thread' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
+        if (!self::$action && ($_POST['submit_action'] === 'add_thread' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
             self::$action = $_POST['submit_action'];
         }
 

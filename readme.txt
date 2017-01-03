@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: PHP-notices during creation or editing of content
 = 1.3.4 =
 * Added: Signature functionality
 * Fixed: Reload scripts and stylesheets after plugin update
