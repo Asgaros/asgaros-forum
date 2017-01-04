@@ -3,10 +3,22 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumRewrite {
+    private static $asgarosforum = null;
+    private static $usePermalinks = false;
+
+    public function __construct($object) {
+		self::$asgarosforum = $object;
+
+        // Check if permalinks are enabled.
+        if (get_option('permalink_structure')) {
+            $usePermalinks = true;
+        }
+	}
+
     public static function setLinks() {
-        global $asgarosforum, $wp;
+        global $wp;
         $links = array();
-        $links['home']        = get_page_link($asgarosforum->options['location']);
+        $links['home']        = get_page_link(self::$asgarosforum->options['location']);
         $links['search']      = add_query_arg(array('view' => 'search'), $links['home']);
         $links['forum']       = add_query_arg(array('view' => 'forum'), $links['home']);
         $links['topic']       = add_query_arg(array('view' => 'thread'), $links['home']);
@@ -19,10 +31,9 @@ class AsgarosForumRewrite {
     }
 
     public static function createUniqueSlug($name, $location) {
-        global $asgarosforum;
         $slug = sanitize_title($name);
         $slug = (is_numeric($slug)) ? 'forum-'.$slug : $slug;
-        $existingSlugs = $asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug LIKE '".$slug."%';");
+        $existingSlugs = self::$asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug LIKE '".$slug."%';");
 
         if (count($existingSlugs) !== 0 && in_array($slug, $existingSlugs)) {
             $max = 1;

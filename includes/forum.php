@@ -80,6 +80,7 @@ class AsgarosForum {
 
     function initialize() {
         new AsgarosForumTaxonomies();
+        new AsgarosForumRewrite($this);
         new AsgarosForumUploads($this);
         AsgarosForumUnread::createInstance();
     }
