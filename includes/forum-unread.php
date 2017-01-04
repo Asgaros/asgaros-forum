@@ -111,31 +111,34 @@ class AsgarosForumUnread {
         return $status;
     }
 
-    public static function getStatusForum($id) {
+    public static function getStatusForum($id, $topicsAvailable) {
         global $asgarosforum;
         $lastpostData = null;
         $lastpostList = null;
 
-        // Only ignore posts from the loggedin user because we cant determine if a post from a guest was created by the visiting guest.
-        if (self::$userID) {
-            $sql = $asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->tables->posts} AS p INNER JOIN {$asgarosforum->tables->topics} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->tables->forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
-            $lastpostList = $asgarosforum->db->get_results($sql);
-        } else {
-            $sql = $asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->tables->posts} AS p INNER JOIN {$asgarosforum->tables->topics} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->tables->forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
-            $lastpostList = $asgarosforum->db->get_results($sql);
-        }
-
-        foreach ($lastpostList as $key => $lastpostListItem) {
-            // This topic has not been opened yet, so it is actually the last post.
-            if (!isset(self::$excludedItems[$lastpostListItem->parent_id])) {
-                $lastpostData = $lastpostListItem;
-                break;
+        // Only do the checks when there are topics available.
+        if ($topicsAvailable) {
+            // Only ignore posts from the loggedin user because we cant determine if a post from a guest was created by the visiting guest.
+            if (self::$userID) {
+                $sql = $asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->tables->posts} AS p INNER JOIN {$asgarosforum->tables->topics} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->tables->forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
+                $lastpostList = $asgarosforum->db->get_results($sql);
+            } else {
+                $sql = $asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$asgarosforum->tables->posts} AS p INNER JOIN {$asgarosforum->tables->topics} AS t ON p.parent_id = t.id INNER JOIN {$asgarosforum->tables->forums} AS f ON t.parent_id = f.id LEFT JOIN {$asgarosforum->tables->posts} AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
+                $lastpostList = $asgarosforum->db->get_results($sql);
             }
 
-            // This topic has been opened, but there is already a newer post, so it is actually the last post.
-            if (isset(self::$excludedItems[$lastpostListItem->parent_id]) && $lastpostListItem->id > self::$excludedItems[$lastpostListItem->parent_id]) {
-                $lastpostData = $lastpostListItem;
-                break;
+            foreach ($lastpostList as $key => $lastpostListItem) {
+                // This topic has not been opened yet, so it is actually the last post.
+                if (!isset(self::$excludedItems[$lastpostListItem->parent_id])) {
+                    $lastpostData = $lastpostListItem;
+                    break;
+                }
+
+                // This topic has been opened, but there is already a newer post, so it is actually the last post.
+                if (isset(self::$excludedItems[$lastpostListItem->parent_id]) && $lastpostListItem->id > self::$excludedItems[$lastpostListItem->parent_id]) {
+                    $lastpostData = $lastpostListItem;
+                    break;
+                }
             }
         }
 

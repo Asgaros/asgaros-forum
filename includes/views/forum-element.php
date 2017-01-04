@@ -11,7 +11,7 @@ if ($forum->count_threads) {
 
 echo '<div class="forum '.$elementMarker.'" id="forum-'.$forum->id.'">';
     echo '<div class="forum-status">';
-        $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id);
+        $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id, $forum->count_threads);
         echo '<span class="dashicons-before dashicons-overview'.$unreadStatus.'"></span>';
     echo '</div>';
     echo '<div class="forum-name">';
