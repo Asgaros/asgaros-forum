@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken mark all read-button
 * Fixed: PHP-notices during creation or editing of content
 * Performance improvements and code optimizations
 = 1.3.4 =

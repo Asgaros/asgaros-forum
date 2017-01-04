@@ -153,6 +153,8 @@ class AsgarosForum {
                     $this->error = __('Sorry, this post does not exist.', 'asgaros-forum');
                 }
                 break;
+            case 'markallread':
+                break;
             case 'search':
                 // Go back to overview when search is not enabled.
                 if (!$this->options['enable_search']) {
