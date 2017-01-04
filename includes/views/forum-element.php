@@ -2,7 +2,12 @@
 
 if (!defined('ABSPATH')) exit;
 
-$lastpost_data = $this->get_lastpost_in_forum($forum->id);
+$lastpost_data = false;
+
+// Only fetch lastpost data when there are topics in the forum.
+if ($forum->count_threads) {
+    $lastpost_data = $this->get_lastpost_in_forum($forum->id);
+}
 
 echo '<div class="forum '.$elementMarker.'" id="forum-'.$forum->id.'">';
     echo '<div class="forum-status">';
