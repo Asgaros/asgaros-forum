@@ -14,6 +14,15 @@
             }
         });
 
+        // Show/hide upload options.
+        $('#allow_file_uploads').change(function() {
+            if (this.checked) {
+                $('#af-options .uploads-option').show();
+            } else {
+                $('#af-options .uploads-option').hide();
+            }
+        });
+
         // Create/edit forum dialog.
         $('.forum-editor-link').click(function() {
             var forum_id            = $(this).attr('data-value-id');

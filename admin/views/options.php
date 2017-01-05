@@ -82,23 +82,26 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <label for="allow_subscriptions"><?php _e('Allow subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>
         </p>
         <h3><?php _e('Uploads', 'asgaros-forum'); ?></h3>
+        <?php
+        $uploadsOption = checked(!empty($asgarosforum->options['allow_file_uploads']), true, false);
+        ?>
         <p>
-            <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php checked(!empty($asgarosforum->options['allow_file_uploads'])); ?>>
+            <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php echo $uploadsOption; ?>>
             <label for="allow_file_uploads"><?php _e('Allow file uploads', 'asgaros-forum'); ?></label>
         </p>
-        <p>
+        <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <input type="checkbox" name="allow_file_uploads_guests" id="allow_file_uploads_guests" <?php checked(!empty($asgarosforum->options['allow_file_uploads_guests'])); ?>>
             <label for="allow_file_uploads_guests"><?php _e('Guests can upload files', 'asgaros-forum'); ?></label>
         </p>
-        <p>
+        <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <input type="checkbox" name="hide_uploads_from_guests" id="hide_uploads_from_guests" <?php checked(!empty($asgarosforum->options['hide_uploads_from_guests'])); ?>>
             <label for="hide_uploads_from_guests"><?php _e('Show uploads to logged-in users only', 'asgaros-forum'); ?></label>
         </p>
-        <p>
+        <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <label for="allowed_filetypes"><?php _e('Allowed filetypes:', 'asgaros-forum'); ?></label>
             <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3">
         </p>
-        <p>
+        <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <label for="uploads_maximum_number"><?php _e('Maximum uploads per post:', 'asgaros-forum'); ?></label>
             <input type="number" name="uploads_maximum_number" id="uploads_maximum_number" value="<?php echo stripslashes($asgarosforum->options['uploads_maximum_number']); ?>" size="3" min="0">
         </p>
