@@ -8,6 +8,7 @@ class AsgarosForumUploads {
 	private static $upload_path;
 	private static $upload_url;
 	private static $upload_allowed_filetypes;
+	private static $uploaded_files_number = 0;
 
 	public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -136,6 +137,7 @@ class AsgarosForumUploads {
 				} else if (self::$asgarosforum->current_view === 'editpost') {
 					foreach ($uploads as $upload) {
 		                if (file_exists($path.basename($upload))) {
+							self::$uploaded_files_number++;
 		                    $uploadedFiles .= '<li>';
 		                    $uploadedFiles .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
 		                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
@@ -159,8 +161,24 @@ class AsgarosForumUploads {
         if (self::$asgarosforum->options['allow_file_uploads'] && (is_user_logged_in() || self::$asgarosforum->options['allow_file_uploads_guests'])) {
 			echo '<div class="editor-row editor-row-uploads">';
 				echo '<span class="row-title">'.__('Upload Files:', 'asgaros-forum').'</span>';
-				echo '<input type="file" name="forumfile[]"><br />';
-				echo '<a id="add_file_link">'.__('Add another file ...', 'asgaros-forum').'</a><br /><br />';
+
+				$flag = 'style="display: none;"';
+
+				if (self::$asgarosforum->options['uploads_maximum_number'] == 0 || self::$uploaded_files_number < self::$asgarosforum->options['uploads_maximum_number']) {
+					self::$uploaded_files_number++;
+					echo '<input type="file" name="forumfile[]"><br />';
+
+					if (self::$asgarosforum->options['uploads_maximum_number'] == 0 || self::$uploaded_files_number < self::$asgarosforum->options['uploads_maximum_number']) {
+						$flag = '';
+					}
+				}
+
+				echo '<a id="add_file_link" data-maximum-number="'.self::$asgarosforum->options['uploads_maximum_number'].'" '.$flag.'>'.__('Add another file ...', 'asgaros-forum').'</a>';
+
+				if (self::$asgarosforum->options['uploads_maximum_number'] != 0) {
+					echo '<span class="upload-filetypes">'.__('Maximum uploads per post:', 'asgaros-forum').'&nbsp;<i>'.esc_html(self::$asgarosforum->options['uploads_maximum_number']).'</i></span>';
+				}
+
 				echo '<span class="upload-filetypes">'.__('Allowed filetypes:', 'asgaros-forum').'&nbsp;<i>'.esc_html(self::$asgarosforum->options['allowed_filetypes']).'</i></span>';
 			echo '</div>';
 		}

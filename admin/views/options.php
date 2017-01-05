@@ -98,6 +98,10 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <label for="allowed_filetypes"><?php _e('Allowed filetypes:', 'asgaros-forum'); ?></label>
             <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3">
         </p>
+        <p>
+            <label for="uploads_maximum_number"><?php _e('Maximum uploads per post:', 'asgaros-forum'); ?></label>
+            <input type="number" name="uploads_maximum_number" id="uploads_maximum_number" value="<?php echo stripslashes($asgarosforum->options['uploads_maximum_number']); ?>" size="3" min="0">
+        </p>
         <h3><?php _e('Appearance', 'asgaros-forum'); ?></h3>
         <?php
         $themes = AsgarosForumThemeManager::get_themes();
