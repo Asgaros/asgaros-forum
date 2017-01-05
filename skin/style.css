@@ -498,8 +498,8 @@
     font-size: 11px;
     color: #999;
     text-align: right;
-    position: absolute;
-    padding: 5px 10px;
+    position: relative;
+    padding: 5px 0;
     bottom: 0;
     right: 0;
     width: 100%;
@@ -513,8 +513,8 @@
 #af-wrapper .signature {
     display: block;
     border-top: 2px solid rgba(0, 0, 0, 0.1);
-    margin: 5px 0;
-    padding: 5px 0;
+    margin-top: 5px;
+    padding-top: 5px;
     text-align: left;
 }
 
