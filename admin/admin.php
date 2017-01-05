@@ -230,9 +230,9 @@ class asgarosforum_admin {
         global $submenu_file, $asgarosforum;
 
         if (strstr($hook, 'asgarosforum') !== false || $submenu_file == 'edit-tags.php?taxonomy=asgarosforum-category') {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css');
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), false, true);
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
         }
     }
 

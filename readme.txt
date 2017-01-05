@@ -112,6 +112,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Option to limit number of uploads per post
 * Fixed: Broken mark all read-button
 * Fixed: PHP-notices during creation or editing of content
+* Fixed: Reload scripts and stylesheets in administration after plugin update
+* Changed: Minor usability improvements to the forum configuration
 * Performance improvements and code optimizations
 = 1.3.4 =
 * Added: Signature functionality
