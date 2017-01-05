@@ -83,7 +83,7 @@ class AsgarosForum {
         new AsgarosForumTaxonomies();
         new AsgarosForumRewrite($this);
         new AsgarosForumUploads($this);
-        AsgarosForumUnread::createInstance();
+        new AsgarosForumUnread($this);
     }
 
     function initialize_widgets() {

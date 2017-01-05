@@ -26,11 +26,11 @@ $locationSetUp = $asgarosforum->checkForShortcode();
         ?>
         <p>
             <label for="posts_per_page"><?php _e('Replies to show per page:', 'asgaros-forum'); ?></label>
-            <input type="text" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3">
+            <input type="number" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3" min="1">
         </p>
         <p>
             <label for="topics_per_page"><?php _e('Topics to show per page:', 'asgaros-forum'); ?></label>
-            <input type="text" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3">
+            <input type="number" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3" min="1">
         </p>
         <p>
             <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
