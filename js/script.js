@@ -37,7 +37,7 @@
             var maximumNumber = linkElement.attr('data-maximum-number');
 
             if (maximumNumber > 0) {
-                var inputsNumber = $('.editor-row-uploads input').length;
+                var inputsNumber = $('.editor-row-uploads input[type="file"]').length;
                 var filesNumber = $('.uploaded-files li').length;
                 var totalNumber = inputsNumber + filesNumber;
 

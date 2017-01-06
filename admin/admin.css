@@ -19,6 +19,10 @@
 #af-options .hide {
     display: none;
 }
+#af-options .description {
+    vertical-align: middle;
+    color: #666;
+}
 /* CATEGORIES */
 .term-name-wrap p,
 .term-slug-wrap,

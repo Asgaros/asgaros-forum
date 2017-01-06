@@ -102,8 +102,14 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3">
         </p>
         <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
-            <label for="uploads_maximum_number"><?php _e('Maximum uploads per post:', 'asgaros-forum'); ?></label>
+            <label for="uploads_maximum_number"><?php _e('Maximum files per post:', 'asgaros-forum'); ?></label>
             <input type="number" name="uploads_maximum_number" id="uploads_maximum_number" value="<?php echo stripslashes($asgarosforum->options['uploads_maximum_number']); ?>" size="3" min="0">
+            <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+        </p>
+        <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
+            <label for="uploads_maximum_size"><?php _e('Maximum file size (in megabyte):', 'asgaros-forum'); ?></label>
+            <input type="number" name="uploads_maximum_size" id="uploads_maximum_size" value="<?php echo stripslashes($asgarosforum->options['uploads_maximum_size']); ?>" size="3" min="0">
+            <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
         </p>
         <h3><?php _e('Appearance', 'asgaros-forum'); ?></h3>
         <?php

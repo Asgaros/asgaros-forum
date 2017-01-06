@@ -259,24 +259,20 @@ class asgarosforum_admin {
         $saved_ops = array();
 
         foreach ($asgarosforum->options_default as $k => $v) {
-            if (!empty($_POST[$k])) {
-                if (is_numeric($v)) {
+            if (isset($_POST[$k])) {
+                if ($k === 'uploads_maximum_number' || $k === 'uploads_maximum_size') {
+                    $saved_ops[$k] = ((int)$_POST[$k] >= 0) ? (int)$_POST[$k] : $v;
+                } else if (is_numeric($v)) {
                     $saved_ops[$k] = ((int)$_POST[$k] > 0) ? (int)$_POST[$k] : $v;
                 } else if (is_bool($v)) {
-                    $saved_ops[$k] = true;
+                    $saved_ops[$k] = $k;
                 } else if ($k === 'theme') {
-                    $saved_ops[$k] = esc_sql(stripslashes($_POST[$k]));
+                    $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
                 } else {
-                    $saved_ops[$k] = esc_sql(stripslashes(strtolower($_POST[$k])));
+                    $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes(strtolower($_POST[$k]))) : $v;
                 }
             } else {
-                if (is_numeric($v)) {
-                    $saved_ops[$k] = $v;
-                } else if (is_bool($v)) {
-                    $saved_ops[$k] = false;
-                } else {
-                    $saved_ops[$k] = $v;
-                }
+                $saved_ops[$k] = $v;
             }
         }
 
