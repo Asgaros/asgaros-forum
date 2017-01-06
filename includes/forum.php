@@ -78,11 +78,12 @@ class AsgarosForum {
         // Register multiple shortcodes because sometimes users ignore the fact that shortcodes are case-sensitive.
         add_shortcode('forum', array($this, 'forum'));
         add_shortcode('Forum', array($this, 'forum'));
+
+        new AsgarosForumRewrite($this);
     }
 
     function initialize() {
         new AsgarosForumTaxonomies();
-        new AsgarosForumRewrite($this);
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
     }

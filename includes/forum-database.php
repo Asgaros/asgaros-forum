@@ -108,6 +108,7 @@ class AsgarosForumDatabase {
             description varchar(255) NOT NULL default '',
             sort int(11) NOT NULL default '0',
             closed int(11) NOT NULL default '0',
+            slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
