@@ -88,6 +88,7 @@ class AsgarosForum {
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
         new AsgarosForumThemeManager($this);
+        new AsgarosForumEditor($this);
     }
 
     function initialize_widgets() {
@@ -352,7 +353,7 @@ class AsgarosForum {
                 case 'addthread':
                 case 'addpost':
                 case 'editpost':
-                    include('views/editor.php');
+                    AsgarosForumEditor::showEditor();
                     break;
                 default:
                     $this->overview();
