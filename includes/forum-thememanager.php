@@ -6,31 +6,20 @@ class AsgarosForumThemeManager {
 	const AF_THEMEPATH = 'themes-asgarosforum';
 	const AF_SKINPATH = 'skin';
 	const AF_DEFAULT_THEME = 'default';
-
-	private static $instance = null;	// AsgarosForumThemeManager instance
+	private static $asgarosforum = null;
 	private static $themes_root;		// Path to themes directory
 	private static $plugin_url;			// URL to plugin directory
 	private static $themes = array();	// Array of available themes
 	private static $current_theme;		// The current theme
 
-	// AsgarosForumThemeManager instance creator
-	public static function createInstance() {
-		if (self::$instance === null) {
-			self::$instance = new self;
-		}
-
-        return self::$instance;
-	}
-
-	// AsgarosForumThemeManager constructor
-	private function __construct() {
-		global $asgarosforum;
+	public function __construct($object) {
+		self::$asgarosforum = $object;
 		self::$themes_root = trailingslashit(WP_CONTENT_DIR.'/'.self::AF_THEMEPATH);
-		self::$plugin_url = $asgarosforum->directory;
+		self::$plugin_url = self::$asgarosforum->directory;
 		$this->find_themes();
 
-		if (!empty(self::$themes[$asgarosforum->options['theme']])) {
-			self::$current_theme = $asgarosforum->options['theme'];
+		if (!empty(self::$themes[self::$asgarosforum->options['theme']])) {
+			self::$current_theme = self::$asgarosforum->options['theme'];
 		} else {
 			// If the selected theme is not there, use the default.
 			self::$current_theme = self::AF_DEFAULT_THEME;
@@ -99,22 +88,19 @@ class AsgarosForumThemeManager {
 	}
 
 	public static function setHeader() {
-		global $asgarosforum;
 		$themeurl = self::get_current_theme_url();
 
-        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css?ver='.$asgarosforum->version.'" />';
-        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css?ver='.$asgarosforum->version.'" />';
+        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css?ver='.self::$asgarosforum->version.'" />';
+        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css?ver='.self::$asgarosforum->version.'" />';
 
         if (self::is_default_theme()) {
-            if (($asgarosforum->options['custom_color'] !== $asgarosforum->options_default['custom_color']) || ($asgarosforum->options['custom_text_color'] !== $asgarosforum->options_default['custom_text_color']) || ($asgarosforum->options['custom_background_color'] !== $asgarosforum->options_default['custom_background_color'])) {
-                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr($asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr($asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr($asgarosforum->options['custom_background_color'], 1).'&ver='.$asgarosforum->version.'" />';
+            if ((self::$asgarosforum->options['custom_color'] !== self::$asgarosforum->options_default['custom_color']) || (self::$asgarosforum->options['custom_text_color'] !== self::$asgarosforum->options_default['custom_text_color']) || (self::$asgarosforum->options['custom_background_color'] !== self::$asgarosforum->options_default['custom_background_color'])) {
+                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr(self::$asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr(self::$asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr(self::$asgarosforum->options['custom_background_color'], 1).'&ver='.self::$asgarosforum->version.'" />';
             }
         }
 
         if (wp_is_mobile()) {
-            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css?ver='.$asgarosforum->version.'" />';
+            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css?ver='.self::$asgarosforum->version.'" />';
         }
 	}
 }
-
-?>

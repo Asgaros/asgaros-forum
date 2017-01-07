@@ -87,6 +87,7 @@ class AsgarosForum {
         new AsgarosForumPermissions();
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
+        new AsgarosForumThemeManager($this);
     }
 
     function initialize_widgets() {

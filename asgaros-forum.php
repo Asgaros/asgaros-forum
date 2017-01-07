@@ -45,7 +45,6 @@ require('admin/admin.php');
 
 AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();
-AsgarosForumThemeManager::createInstance();
 
 if (is_admin()) {
     $asgarosforum_admin = new asgarosforum_admin();
