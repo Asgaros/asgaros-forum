@@ -14,6 +14,13 @@
 
             // Check if we can add more upload elements.
             checkUploadsMaximumNumber();
+
+            // When there are no uploads anymore, remove the editor row.
+            var filesNumber = $('.uploaded-files li').length;
+
+            if (filesNumber == 0) {
+                $('.uploaded-files').parent().remove();
+            }
         });
 
         // Disable submit-button after first submit

@@ -85,8 +85,7 @@ if (!$error) {
                 <?php wp_editor(stripslashes($threadcontent), 'message', $this->options_editor); ?>
             </div>
             <?php
-            AsgarosForumUploads::getFileList($post);
-            AsgarosForumUploads::showEditorUploadForm();
+            AsgarosForumUploads::showEditorUploadForm($post);
             AsgarosForumNotifications::showEditorSubscriptionOption();
 
             do_action('asgarosforum_editor_custom_content_bottom');

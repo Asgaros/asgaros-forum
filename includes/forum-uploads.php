@@ -8,7 +8,6 @@ class AsgarosForumUploads {
 	private static $upload_path;
 	private static $upload_url;
 	private static $upload_allowed_filetypes;
-	private static $uploaded_files_number = 0;
 
 	public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -123,46 +122,57 @@ class AsgarosForumUploads {
 	        $uploadedFiles = '';
 
 	        if (!empty($uploads) && is_dir($path)) {
-				if (self::$asgarosforum->current_view === 'thread') {
-					// Generate special message instead of file-list when hiding uploads for guests.
-					if (!is_user_logged_in() && self::$asgarosforum->options['hide_uploads_from_guests']) {
-						$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
-					} else {
-						foreach ($uploads as $upload) {
-			                if (file_exists($path.basename($upload))) {
-			                    $uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
-			                }
-			            }
-					}
-
-					if (!empty($uploadedFiles)) {
-		                echo '<strong>'.__('Uploaded files:', 'asgaros-forum').'</strong>';
-		                echo '<ul>'.$uploadedFiles.'</ul>';
-					}
-				} else if (self::$asgarosforum->current_view === 'editpost') {
+				// Generate special message instead of file-list when hiding uploads for guests.
+				if (!is_user_logged_in() && self::$asgarosforum->options['hide_uploads_from_guests']) {
+					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
+				} else {
 					foreach ($uploads as $upload) {
 		                if (file_exists($path.basename($upload))) {
-							self::$uploaded_files_number++;
-		                    $uploadedFiles .= '<li>';
-		                    $uploadedFiles .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
-		                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
-		                    $uploadedFiles .= '</li>';
+		                    $uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
 		                }
 		            }
+				}
 
-					if (!empty($uploadedFiles)) {
-		                echo '<div class="editor-row">';
-		                	echo '<span class="row-title">'.__('Uploaded files:', 'asgaros-forum').'</span>';
-		                	echo '<div class="files-to-delete"></div>';
-		                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
-		                echo '</div>';
-		            }
+				if (!empty($uploadedFiles)) {
+	                echo '<strong>'.__('Uploaded files:', 'asgaros-forum').'</strong>';
+	                echo '<ul>'.$uploadedFiles.'</ul>';
 				}
 	        }
 		}
     }
 
-	public static function showEditorUploadForm() {
+	public static function showEditorUploadForm($postObject) {
+		$uploadedFilesCounter = 0;
+
+		// Show list of uploaded files first. Also shown when uploads are disabled to manage existing files if it was enabled before.
+		if ($postObject) {
+			$path = self::$upload_path.$postObject->id.'/';
+	        $url = self::$upload_url.$postObject->id.'/';
+	        $uploads = maybe_unserialize($postObject->uploads);
+	        $uploadedFiles = '';
+
+			if (!empty($uploads) && is_dir($path) && self::$asgarosforum->current_view === 'editpost') {
+				foreach ($uploads as $upload) {
+	                if (file_exists($path.basename($upload))) {
+						$uploadedFilesCounter++;
+	                    $uploadedFiles .= '<li>';
+	                    $uploadedFiles .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
+	                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
+	                    $uploadedFiles .= '</li>';
+	                }
+	            }
+
+				if (!empty($uploadedFiles)) {
+	                echo '<div class="editor-row">';
+	                	echo '<span class="row-title">'.__('Uploaded files:', 'asgaros-forum').'</span>';
+	                	echo '<div class="files-to-delete"></div>';
+	                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
+	                echo '</div>';
+	            }
+			}
+		}
+
+		// Show upload controls.
         if (self::$asgarosforum->options['allow_file_uploads'] && (is_user_logged_in() || self::$asgarosforum->options['allow_file_uploads_guests'])) {
 			echo '<div class="editor-row editor-row-uploads">';
 				echo '<span class="row-title">'.__('Upload Files:', 'asgaros-forum').'</span>';
@@ -174,11 +184,11 @@ class AsgarosForumUploads {
 
 				$flag = 'style="display: none;"';
 
-				if (self::$asgarosforum->options['uploads_maximum_number'] == 0 || self::$uploaded_files_number < self::$asgarosforum->options['uploads_maximum_number']) {
-					self::$uploaded_files_number++;
+				if (self::$asgarosforum->options['uploads_maximum_number'] == 0 || $uploadedFilesCounter < self::$asgarosforum->options['uploads_maximum_number']) {
+					$uploadedFilesCounter++;
 					echo '<input type="file" name="forumfile[]"><br />';
 
-					if (self::$asgarosforum->options['uploads_maximum_number'] == 0 || self::$uploaded_files_number < self::$asgarosforum->options['uploads_maximum_number']) {
+					if (self::$asgarosforum->options['uploads_maximum_number'] == 0 || $uploadedFilesCounter < self::$asgarosforum->options['uploads_maximum_number']) {
 						$flag = '';
 					}
 				}
