@@ -346,12 +346,12 @@ class asgarosforum_admin {
             }
         }
 
-        // Delete all threads
-        $threads = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->tables->topics} WHERE parent_id = {$forum_id};");
+        // Delete all topics.
+        $topics = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->tables->topics} WHERE parent_id = {$forum_id};");
 
-        if (!empty($threads)) {
-            foreach ($threads as $thread) {
-                $asgarosforum->delete_thread($thread, true);
+        if (!empty($topics)) {
+            foreach ($topics as $topic) {
+                $asgarosforum->delete_topic($topic, true);
             }
         }
 

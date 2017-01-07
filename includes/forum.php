@@ -192,8 +192,8 @@ class AsgarosForum {
             AsgarosForumUnread::markAllRead();
         } else if (isset($_GET['move_thread'])) {
             $this->move_thread();
-        } else if (isset($_GET['delete_thread'])) {
-            $this->delete_thread($this->current_topic);
+        } else if (isset($_GET['delete_topic'])) {
+            $this->delete_topic($this->current_topic);
         } else if (isset($_GET['remove_post'])) {
             $this->remove_post();
         } else if (isset($_GET['sticky_topic']) || isset($_GET['unsticky_topic'])) {
@@ -637,7 +637,7 @@ class AsgarosForum {
 
         if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
             $menu .= '<a href="'.$this->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move', 'asgaros-forum').'</span></a>';
-            $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_thread' => 1)).'&amp;delete_thread" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete', 'asgaros-forum').'</span></a>';
+            $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete', 'asgaros-forum').'</span></a>';
 
             if ($this->get_status('sticky')) {
                 $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('unsticky_topic' => 1)).'"><span class="dashicons-before dashicons-sticky"></span><span>'.__('Undo Sticky', 'asgaros-forum').'</span></a>';
@@ -813,7 +813,7 @@ class AsgarosForum {
         }
     }
 
-    function delete_thread($thread_id, $admin_action = false) {
+    function delete_topic($thread_id, $admin_action = false) {
         if (AsgarosForumPermissions::isModerator('current')) {
             if ($thread_id) {
                 // Delete uploads
