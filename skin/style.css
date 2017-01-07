@@ -477,7 +477,7 @@
     display: table-cell;
     width: auto;
     vertical-align: top;
-    padding: 15px;
+    padding: 15px 15px 60px;
     word-break: break-word;
     position: relative;
 }
@@ -485,7 +485,7 @@
     margin: 0 0 20px;
 }
 #af-wrapper .post-message ul {
-    padding: inherit;
+    padding: 15px;
     margin: 0;
 }
 #af-wrapper .post-message img {
@@ -498,8 +498,8 @@
     font-size: 11px;
     color: #999;
     text-align: right;
-    position: relative;
-    padding: 5px 0;
+    position: absolute;
+    padding: 5px 10px;
     bottom: 0;
     right: 0;
     width: 100%;
