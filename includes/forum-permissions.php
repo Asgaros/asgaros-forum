@@ -6,6 +6,7 @@ class AsgarosForumPermissions {
     private static $instance = null;
     private static $current_user_is_moderator;
     private static $current_user_is_banned;
+    public static $current_user_id;
 
     // AsgarosForumPermissions instance creator
     public static function createInstance() {
@@ -17,14 +18,11 @@ class AsgarosForumPermissions {
 	}
 
     // AsgarosForumPermissions constructor
-	private function __construct() {
-        add_action('init', array($this, 'setCurrentUserPermissions'));
+	public function __construct() {
+        self::$current_user_id = get_current_user_id();
+        self::$current_user_is_moderator = self::isModerator(self::$current_user_id);
+        self::$current_user_is_banned = self::isBanned(self::$current_user_id);
 	}
-
-    public static function setCurrentUserPermissions() {
-        self::$current_user_is_moderator = self::isModerator(get_current_user_id());
-        self::$current_user_is_banned = self::isBanned(get_current_user_id());
-    }
 
     public static function isModerator($userid = false) {
         if ($userid) {

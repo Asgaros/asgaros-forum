@@ -5,11 +5,11 @@ if (!defined('ABSPATH')) exit;
 ?>
 
 <div class="thread <?php echo $elementMarker; ?>">
-    <?php $lastpost_data = $this->get_lastpost_in_thread($thread->id); ?>
+    <?php $lastpost_data = $this->get_lastpost_in_topic($thread->id); ?>
     <div class="thread-status">
         <?php
-        $unreadStatus = AsgarosForumUnread::getStatusThread($thread->id);
-        echo '<span class="dashicons-before dashicons-'.$thread->status.$unreadStatus.'"></span>';
+        $unreadStatus = AsgarosForumUnread::getStatusTopic($thread->id);
+        echo '<span class="dashicons-before dashicons-'.$thread->status.' '.$unreadStatus.'"></span>';
         ?>
     </div>
     <div class="thread-name">

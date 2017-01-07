@@ -84,6 +84,7 @@ class AsgarosForum {
 
     function initialize() {
         new AsgarosForumTaxonomies();
+        new AsgarosForumPermissions();
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
     }
@@ -211,7 +212,7 @@ class AsgarosForum {
 
         // Mark visited topic as read.
         if ($this->current_view === 'thread' && $this->current_topic) {
-            AsgarosForumUnread::markThreadRead();
+            AsgarosForumUnread::markTopicRead();
         }
     }
 
@@ -853,12 +854,12 @@ class AsgarosForum {
     }
 
     // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
-    function get_lastpost_in_thread($id) {
-        if (empty($this->cache['get_lastpost_in_thread'][$id])) {
-            $this->cache['get_lastpost_in_thread'][$id] = $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
+    function get_lastpost_in_topic($id) {
+        if (empty($this->cache['get_lastpost_in_topic'][$id])) {
+            $this->cache['get_lastpost_in_topic'][$id] = $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
         }
 
-        return $this->cache['get_lastpost_in_thread'][$id];
+        return $this->cache['get_lastpost_in_topic'][$id];
     }
 
     // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)

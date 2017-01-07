@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumUnread {
     private static $asgarosforum = null;
     private static $userID;
-    private static $markAllReadLink;
     private static $excludedItems = array();
 
     public function __construct($object) {
@@ -13,9 +12,6 @@ class AsgarosForumUnread {
 
         // Determine with the user ID if the user is logged in.
         self::$userID = get_current_user_id();
-
-        // Generate link for mark all forums read.
-        self::$markAllReadLink = esc_url(add_query_arg(array('view' => 'markallread'), get_permalink()));
 
         // Initialize data. For guests we use a cookie as source, otherwise use database.
         if (self::$userID) {
@@ -57,9 +53,9 @@ class AsgarosForumUnread {
         exit;
     }
 
-    // Marks a thread as read when open it.
-    public static function markThreadRead() {
-        self::$excludedItems[self::$asgarosforum->current_topic] = intval(self::$asgarosforum->get_lastpost_in_thread(self::$asgarosforum->current_topic)->id);
+    // Marks a topic as read when an user opens it.
+    public static function markTopicRead() {
+        self::$excludedItems[self::$asgarosforum->current_topic] = intval(self::$asgarosforum->get_lastpost_in_topic(self::$asgarosforum->current_topic)->id);
 
         if (self::$userID) {
             update_user_meta(self::$userID, 'asgarosforum_unread_exclude', self::$excludedItems);
@@ -79,18 +75,17 @@ class AsgarosForumUnread {
     }
 
     public static function getStatus($lastpostData) {
-        $status = ' read';
+        $status = 'read';
 
         if ($lastpostData) {
             $lastpostTime = $lastpostData->date;
 
-            // TODO: Produces wrong results when -> forum with more than one unread threads -> post in one thread -> shows as read
             if ($lastpostTime) {
                 $lp = strtotime($lastpostTime);
                 $lv = strtotime(self::getLastVisit());
 
                 if ($lp > $lv) {
-                    $status = ' unread';
+                    $status = 'unread';
                 }
             }
         }
@@ -106,10 +101,10 @@ class AsgarosForumUnread {
         if ($topicsAvailable) {
             // Only ignore posts from the loggedin user because we cant determine if a post from a guest was created by the visiting guest.
             if (self::$userID) {
-                $sql = self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM ".self::$asgarosforum->tables->posts." AS p INNER JOIN ".self::$asgarosforum->tables->topics." AS t ON p.parent_id = t.id INNER JOIN ".self::$asgarosforum->tables->forums." AS f ON t.parent_id = f.id LEFT JOIN ".self::$asgarosforum->tables->posts." AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
+                $sql = self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id FROM ".self::$asgarosforum->tables->posts." AS p INNER JOIN ".self::$asgarosforum->tables->topics." AS t ON p.parent_id = t.id INNER JOIN ".self::$asgarosforum->tables->forums." AS f ON t.parent_id = f.id LEFT JOIN ".self::$asgarosforum->tables->posts." AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", self::$userID, $id, $id, self::getLastVisit());
                 $lastpostList = self::$asgarosforum->db->get_results($sql);
             } else {
-                $sql = self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM ".self::$asgarosforum->tables->posts." AS p INNER JOIN ".self::$asgarosforum->tables->topics." AS t ON p.parent_id = t.id INNER JOIN ".self::$asgarosforum->tables->forums." AS f ON t.parent_id = f.id LEFT JOIN ".self::$asgarosforum->tables->posts." AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
+                $sql = self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id FROM ".self::$asgarosforum->tables->posts." AS p INNER JOIN ".self::$asgarosforum->tables->topics." AS t ON p.parent_id = t.id INNER JOIN ".self::$asgarosforum->tables->forums." AS f ON t.parent_id = f.id LEFT JOIN ".self::$asgarosforum->tables->posts." AS p2 ON p.parent_id = p2.parent_id AND p.id < p2.id WHERE p2.id IS NULL AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, self::getLastVisit());
                 $lastpostList = self::$asgarosforum->db->get_results($sql);
             }
 
@@ -131,8 +126,8 @@ class AsgarosForumUnread {
         return self::getStatus($lastpostData);
     }
 
-    public static function getStatusThread($id) {
-        $lastpostData = self::$asgarosforum->get_lastpost_in_thread($id);
+    public static function getStatusTopic($id) {
+        $lastpostData = self::$asgarosforum->get_lastpost_in_topic($id);
 
         // Set empty lastpostData for loggedin user when he is the author of the last post or when topic already read.
         if ((self::$userID && $lastpostData->author_id == self::$userID) || (isset(self::$excludedItems[$id]) && self::$excludedItems[$id] == $lastpostData->id)) {
@@ -143,10 +138,10 @@ class AsgarosForumUnread {
     }
 
     public static function showUnreadControls() {
-        echo '<div class="footer">';
+        echo '<div class="read-unread">';
             echo '<span class="dashicons-before dashicons-admin-page-small unread"></span>'.__('New posts', 'asgaros-forum').' &middot; ';
             echo '<span class="dashicons-before dashicons-admin-page-small read"></span>'.__('No new posts', 'asgaros-forum').' &middot; ';
-            echo '<span class="dashicons-before dashicons-yes"></span><a href="'.self::$markAllReadLink.'">'.__('Mark All Read', 'asgaros-forum').'</a>';
+            echo '<span class="dashicons-before dashicons-yes"></span><a href="'.self::$asgarosforum->getLink('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a>';
         echo '</div>';
     }
 }

@@ -254,8 +254,8 @@
     display: block;
 }
 
-/* FOOTER */
-#af-wrapper .footer {
+/* READ/UNREAD */
+#af-wrapper .read-unread {
     width: 100%;
     display: block;
     background-color: inherit; /* comp */

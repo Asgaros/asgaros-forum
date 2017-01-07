@@ -43,7 +43,7 @@ class AsgarosForumInsert {
         }
 
         // Cancel if the current user is not allowed to edit that post.
-        if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && get_current_user_id() != $asgarosforum->get_post_author($asgarosforum->current_post)) {
+        if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && AsgarosForumPermissions::$current_user_id != $asgarosforum->get_post_author($asgarosforum->current_post)) {
             $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }
@@ -82,7 +82,7 @@ class AsgarosForumInsert {
 
             $uploadList = AsgarosForumUploads::prepareFileList();
 
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
@@ -94,7 +94,7 @@ class AsgarosForumInsert {
         } else if (self::getAction() === 'add_post') {
             $uploadList = AsgarosForumUploads::prepareFileList();
 
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => get_current_user_id(), 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
