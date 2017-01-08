@@ -29,7 +29,7 @@ class AsgarosForumPermissions {
             if ($userid === 'current') {
                 // Return for current user
                 return self::$current_user_is_moderator;
-            } else if (is_super_admin($userid)) {
+            } else if (is_super_admin($userid) || user_can($userid, 'administrator')) {
                 // Always true for administrators
                 return true;
             } else if (get_user_meta($userid, 'asgarosforum_banned', true) == 1) {
@@ -50,7 +50,7 @@ class AsgarosForumPermissions {
             if ($userid === 'current') {
                 // Return for current user
                 return self::$current_user_is_banned;
-            } else if (is_super_admin($userid)) {
+            } else if (is_super_admin($userid) || user_can($userid, 'administrator')) {
                 // Always false for administrators
                 return false;
             } else if (get_user_meta($userid, 'asgarosforum_banned', true) == 1) {
