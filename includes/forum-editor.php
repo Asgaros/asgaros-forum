@@ -9,66 +9,100 @@ class AsgarosForumEditor {
 		self::$asgarosforum = $object;
 	}
 
-    public static function showEditor() {
-        $post = false;
-        $thread = "";
-        $threadname = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
-        $threadcontent = (isset($_POST['message'])) ? trim($_POST['message']) : '';
-        $error = false;
+    // Check permissions before loading the editor.
+    private static function checkPermissions() {
+        switch (self::$asgarosforum->current_view) {
+            case 'addthread':
+                // Error when the user is not logged-in and guest-posting is disabled.
+                if (!is_user_logged_in() && !self::$asgarosforum->options['allow_guest_postings']) {
+                    return false;
+                    break;
+                }
 
-        if (!is_user_logged_in() && (!self::$asgarosforum->options['allow_guest_postings'] || self::$asgarosforum->current_view === 'editpost')) {
-            $error = true;
-            echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
+                // Error when the user is banned.
+                if (AsgarosForumPermissions::isBanned('current')) {
+                    return false;
+                    break;
+                }
+
+                // Error when the forum is closed.
+                if (!self::$asgarosforum->forumIsOpen()) {
+                    return false;
+                    break;
+                }
+                break;
+            case 'addpost':
+                // Error when user is not logged-in and guest-posting is disabled.
+                if (!is_user_logged_in() && !self::$asgarosforum->options['allow_guest_postings']) {
+                    return false;
+                    break;
+                }
+
+                // Error when the user is banned.
+                if (AsgarosForumPermissions::isBanned('current')) {
+                    return false;
+                    break;
+                }
+
+                // Error when the topic is closed and the user is not a moderator.
+                if (self::$asgarosforum->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) {
+                    return false;
+                    break;
+                }
+                break;
+            case 'editpost':
+                // Error when user is not logged-in.
+                if (!is_user_logged_in()) {
+                    return false;
+                    break;
+                }
+
+                // Error when the user is banned.
+                if (AsgarosForumPermissions::isBanned('current')) {
+                    return false;
+                    break;
+                }
+
+                // Error when the current user is not the author of the post and also not a moderator.
+                if (AsgarosForumPermissions::$current_user_id != self::$asgarosforum->get_post_author(self::$asgarosforum->current_post) && !AsgarosForumPermissions::isModerator('current')) {
+                    return false;
+                    break;
+                }
+                break;
         }
 
-        if (!$error) {
-            if (self::$asgarosforum->current_view === 'addthread') {
-                if (!$error && (!self::$asgarosforum->get_forum_status() || (is_user_logged_in() && AsgarosForumPermissions::isBanned('current')))) {
-                    $error = true;
-                    echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
-                }
-            } else if (self::$asgarosforum->current_view === 'addpost') {
-                if (!$error && ((is_user_logged_in() && ((self::$asgarosforum->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current'))) || (!is_user_logged_in() && self::$asgarosforum->get_status('closed')))) {
-                    $error = true;
-                    echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
-                }
+        return true;
+    }
 
-                if (!$error) {
-                    if (!isset($_POST['message']) && isset($_GET['quote']) && self::$asgarosforum->element_exists($_GET['quote'], self::$asgarosforum->tables->posts)) {
-                        $quote_id = absint($_GET['quote']);
-                        $text = self::$asgarosforum->db->get_row(self::$asgarosforum->db->prepare("SELECT text, author_id, date FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", $quote_id));
-                        $display_name = self::$asgarosforum->get_username($text->author_id);
-                        $threadcontent = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$display_name.' '.sprintf(__('on %s', 'asgaros-forum'), self::$asgarosforum->format_date($text->date)).'</div>'.$text->text.'</blockquote><br />';
+    public static function showEditor() {
+        if (!self::checkPermissions()) {
+            echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
+        } else {
+            $post = false;
+            $subject = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
+            $message = (isset($_POST['message'])) ? trim($_POST['message']) : '';
+
+            if (self::$asgarosforum->current_view === 'addpost') {
+                if (!isset($_POST['message']) && isset($_GET['quote'])) {
+                    $quoteData = self::$asgarosforum->db->get_row(self::$asgarosforum->db->prepare("SELECT text, author_id, date FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", absint($_GET['quote'])));
+
+                    if ($quoteData) {
+                        $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.self::$asgarosforum->get_username($quoteData->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), self::$asgarosforum->format_date($quoteData->date)).'</div>'.$quoteData->text.'</blockquote><br />';
                     }
                 }
             } else if (self::$asgarosforum->current_view === 'editpost') {
-                if (!$error) {
-                    $id = (!empty($_GET['id']) && is_numeric($_GET['id'])) ? absint($_GET['id']) : 0;
-                    $post = self::$asgarosforum->db->get_row(self::$asgarosforum->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", $id));
+                $post = self::$asgarosforum->db->get_row(self::$asgarosforum->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", self::$asgarosforum->current_post));
 
-                    if (!is_user_logged_in() || (get_current_user_id() != $post->author_id && !AsgarosForumPermissions::isModerator('current')) || AsgarosForumPermissions::isBanned('current')) {
-                        $error = true;
-                        echo '<div class="notice">'.__('Sorry, you are not allowed to edit this post.', 'asgaros-forum').'</div>';
-                    }
+                if (!isset($_POST['message'])) {
+                    $message = $post->text;
                 }
 
-                if (!$error) {
-                    if (!isset($_POST['message'])) {
-                        $threadcontent = $post->text;
-                    }
-
-                    if (!isset($_POST['subject']) && self::$asgarosforum->is_first_post($post->id)) {
-                        $threadname = self::$asgarosforum->db->get_var(self::$asgarosforum->db->prepare("SELECT name FROM ".self::$asgarosforum->tables->topics." WHERE id = %d;", $post->parent_id));
-                    }
+                // TODO: Is first post query can get removed and get via the before query (get min(id)).
+                if (!isset($_POST['subject']) && self::$asgarosforum->is_first_post($post->id)) {
+                    $subject = self::$asgarosforum->db->get_var(self::$asgarosforum->db->prepare("SELECT name FROM ".self::$asgarosforum->tables->topics." WHERE id = %d;", $post->parent_id));
                 }
             }
-        }
 
-        if (!empty(self::$asgarosforum->error)) {
-            echo '<div class="info">'.self::$asgarosforum->error.'</div>';
-        }
-
-        if (!$error) {
             echo '<h1 class="main-title">';
             if (self::$asgarosforum->current_view === 'addthread') {
                 _e('New Topic', 'asgaros-forum');
@@ -85,12 +119,12 @@ class AsgarosForumEditor {
                         <div class="editor-row-subject">
                             <label for="subject"><?php _e('Subject:', 'asgaros-forum'); ?></label>
                             <span>
-                                <input type="text" id="subject" name="subject" value="<?php echo esc_html(stripslashes($threadname)); ?>">
+                                <input type="text" id="subject" name="subject" value="<?php echo esc_html(stripslashes($subject)); ?>">
                             </span>
                         </div>
                     <?php } ?>
                     <div class="editor-row no-padding">
-                        <?php wp_editor(stripslashes($threadcontent), 'message', self::$asgarosforum->options_editor); ?>
+                        <?php wp_editor(stripslashes($message), 'message', self::$asgarosforum->options_editor); ?>
                     </div>
                     <?php
                     AsgarosForumUploads::showEditorUploadForm($post);
@@ -111,7 +145,7 @@ class AsgarosForumEditor {
                     </div>
                 </div>
             </form>
-        <?php
+            <?php
         }
     }
 }

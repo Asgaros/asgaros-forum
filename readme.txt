@@ -114,7 +114,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Broken mark all read-button
 * Fixed: Site administrators could not moderate topics/posts on multisite installations
 * Fixed: Dont let post-footer hide post-content
-* Fixed: PHP-notices during creation or editing of content
+* Fixed: PHP notices during creation or editing of content
 * Fixed: Reload scripts and stylesheets in administration after plugin update
 * Minor usability improvements
 * Performance improvements and code optimizations

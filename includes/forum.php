@@ -631,7 +631,7 @@ class AsgarosForum {
     function forum_menu($location, $showallbuttons = true) {
         $menu = '';
 
-        if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->get_forum_status()) {
+        if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->forumIsOpen()) {
             $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
         } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
             $menu .= '<a href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
@@ -909,7 +909,7 @@ class AsgarosForum {
     }
 
     // Returns TRUE if the forum is opened or the user has at least moderator rights.
-    function get_forum_status() {
+    function forumIsOpen() {
         if (!AsgarosForumPermissions::isModerator('current')) {
             $closed = intval($this->db->get_var($this->db->prepare("SELECT closed FROM {$this->tables->forums} WHERE id = %d;", $this->current_forum)));
 
