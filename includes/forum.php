@@ -698,15 +698,7 @@ class AsgarosForum {
 
         echo '</div>';
 
-        if ($this->options['enable_search']) {
-            echo '<div id="forum-search">';
-            echo '<span class="dashicons-before dashicons-search"></span>';
-            echo '<form method="get" action="'.$this->getLink('search').'">';
-            echo '<input name="view" type="hidden" value="search">';
-            echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
-            echo '</form>';
-            echo '</div>';
-        }
+        AsgarosForumSearch::showSearchInput();
 
         echo '<div class="clear"></div>';
         echo '</div>';
