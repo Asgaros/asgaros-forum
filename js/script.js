@@ -7,6 +7,25 @@
             $('#forum-editor-form').slideToggle();
         });
 
+        $('a.forum-editor-quote-button').click(function(e) {
+            e.preventDefault();
+
+            // Build quote.
+            var quoteID = $(this).attr('data-value-id');
+            var quoteContent = $('#postid-'+quoteID+' .post-quote-container').html();
+
+            // At quote to the end of the editor.
+            tinyMCE.activeEditor.setContent(tinyMCE.activeEditor.getContent()+quoteContent);
+
+            // Focus the editor at the last line.
+            tinyMCE.activeEditor.focus();
+            tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
+            tinyMCE.activeEditor.selection.collapse(false);
+
+            // Call slideDown() instead of slideToggle() so we can add multiple quotes at once.
+            $('#forum-editor-form').slideDown();
+        });
+
         $('a#add_file_link').click(function() {
             // Insert new upload element.
             $('<input type="file" name="forumfile[]" /><br />').insertBefore(this);
