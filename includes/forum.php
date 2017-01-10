@@ -579,7 +579,7 @@ class AsgarosForum {
         $lastpost = false;
 
         if ($lastpost_data) {
-            $lastpost_link = $this->get_postlink($lastpost_data->parent_id, $lastpost_data->id);
+            $lastpost_link = $this->getLink('topic', $lastpost_data->parent_id, array('part' => ceil($lastpost_data->number_of_posts/$this->options['posts_per_page'])), '#postid-'.$lastpost_data->id);
             $lastpost .= ($context === 'forum') ? '<small><strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
             $lastpost .= '<small><span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></span></small>';
             $lastpost .= '<small><span class="dashicons-before dashicons-calendar-alt"><a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a></span></small>';
@@ -850,7 +850,7 @@ class AsgarosForum {
     // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
     function get_lastpost_in_topic($id) {
         if (empty($this->cache['get_lastpost_in_topic'][$id])) {
-            $this->cache['get_lastpost_in_topic'][$id] = $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
+            $this->cache['get_lastpost_in_topic'][$id] = $this->db->get_row($this->db->prepare("SELECT (SELECT COUNT(p_inner.id) FROM {$this->tables->posts} AS p_inner WHERE p_inner.parent_id = p.parent_id) AS number_of_posts, p.id, p.date, p.author_id, p.parent_id FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
         }
 
         return $this->cache['get_lastpost_in_topic'][$id];
@@ -859,7 +859,7 @@ class AsgarosForum {
     // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
     function get_lastpost_in_forum($id) {
         if (empty($this->cache['get_lastpost_in_forum'][$id])) {
-            return $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id INNER JOIN {$this->tables->forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
+            return $this->db->get_row($this->db->prepare("SELECT (SELECT COUNT(p_inner.id) FROM {$this->tables->posts} AS p_inner WHERE p_inner.parent_id = p.parent_id) AS number_of_posts, p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id INNER JOIN {$this->tables->forums} AS f ON t.parent_id = f.id WHERE f.id = %d OR f.parent_forum = %d ORDER BY p.id DESC LIMIT 1;", $id, $id));
         }
 
         return $this->cache['get_lastpost_in_forum'][$id];
