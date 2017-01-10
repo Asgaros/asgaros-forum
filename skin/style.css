@@ -57,7 +57,6 @@
 #af-wrapper input {
     padding: 3px 6px;
     border: 1px solid #ddd;
-    background-color: #f5f5f5;
     color: #555;
     margin: 2px 0 !important;
     vertical-align: middle;
@@ -77,7 +76,7 @@
     display: block;
     width: 100%;
     line-height: normal;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid #e1e1e1;
     padding: 8px 15px;
     box-sizing: border-box;
 }
@@ -97,6 +96,9 @@
     font-size: 18px;
     margin: 1px 0 !important;
     box-sizing: border-box;
+    box-shadow: inset 0px 1px 4px #e0e0e0;
+    -moz-box-shadow: inset 0px 1px 4px #e0e0e0;
+    -webkit-box-shadow: inset 0px 1px 4px #e0e0e0;
 }
 #af-wrapper .editor-row .row-title {
     display: block;
