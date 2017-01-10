@@ -109,6 +109,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Multi-Quoting functionality
+* Fixed: Display issues with some themes
+* Changed: Show editor at the same page when adding posts or topics
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.3.6 =

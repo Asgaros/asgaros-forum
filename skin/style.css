@@ -476,7 +476,7 @@
     margin: 0 0 20px;
 }
 #af-wrapper .post-message ul {
-    padding: 15px;
+    padding: 15px !important; /* comp */
     margin: 0;
 }
 #af-wrapper .post-message img {
