@@ -50,7 +50,7 @@ class AsgarosForum {
     );
     var $options_editor = array(
         'media_buttons' => false,
-        'textarea_rows' => 12,
+        'editor_height' => 250,
         'teeny'         => true,
         'quicktags'     => false
     );
@@ -124,7 +124,7 @@ class AsgarosForum {
 
         switch ($this->current_view) {
             case 'forum':
-            case 'addthread':
+            case 'addtopic':
                 $parents = $this->loadParents($elementID, 'forum');
                 if ($parents) {
                     $this->current_forum = $parents->current_forum;
@@ -291,7 +291,7 @@ class AsgarosForum {
                 $title = __('Edit Post', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'addpost') {
                 $title = __('Post Reply', 'asgaros-forum').' - '.$title;
-            } else if ($this->current_view == 'addthread') {
+            } else if ($this->current_view == 'addtopic') {
                 $title = __('New Topic', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'movetopic') {
                 $title = __('Move Topic', 'asgaros-forum').' - '.$title;
@@ -350,7 +350,7 @@ class AsgarosForum {
                 case 'thread':
                     $this->showthread();
                     break;
-                case 'addthread':
+                case 'addtopic':
                 case 'addpost':
                 case 'editpost':
                     AsgarosForumEditor::showEditor();
@@ -632,9 +632,9 @@ class AsgarosForum {
         $menu = '';
 
         if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->forumIsOpen()) {
-            $menu .= '<a href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
+            $menu .= '<a class="forum-editor-button" href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
         } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
-            $menu .= '<a href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
+            $menu .= '<a class="forum-editor-button" href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
         }
 
         if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
@@ -688,7 +688,7 @@ class AsgarosForum {
         } else if ($this->current_view === 'editpost') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
             echo '<a href="#">'.__('Edit Post', 'asgaros-forum').'</a>';
-        } else if ($this->current_view === 'addthread') {
+        } else if ($this->current_view === 'addtopic') {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
             echo '<a href="#">'.__('New Topic', 'asgaros-forum').'</a>';
         } else if ($this->current_view === 'search') {

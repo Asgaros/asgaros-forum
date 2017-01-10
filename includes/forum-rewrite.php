@@ -22,7 +22,7 @@ class AsgarosForumRewrite {
         $links['search']      = add_query_arg(array('view' => 'search'), $links['home']);
         $links['forum']       = add_query_arg(array('view' => 'forum'), $links['home']);
         $links['topic']       = add_query_arg(array('view' => 'thread'), $links['home']);
-        $links['topic_add']   = add_query_arg(array('view' => 'addthread'), $links['home']);
+        $links['topic_add']   = add_query_arg(array('view' => 'addtopic'), $links['home']);
         $links['topic_move']  = add_query_arg(array('view' => 'movetopic'), $links['home']);
         $links['post_add']    = add_query_arg(array('view' => 'addpost'), $links['home']);
         $links['post_edit']   = add_query_arg(array('view' => 'editpost'), $links['home']);

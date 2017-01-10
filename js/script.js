@@ -1,5 +1,12 @@
 (function($) {
     $(document).ready(function() {
+        // Show editor inside another view.
+        $('a.forum-editor-button').click(function(e) {
+            e.preventDefault();
+
+            $('#forum-editor-form').slideToggle();
+        });
+
         $('a#add_file_link').click(function() {
             // Insert new upload element.
             $('<input type="file" name="forumfile[]" /><br />').insertBefore(this);
@@ -7,6 +14,7 @@
             // Check if we can add more upload elements.
             checkUploadsMaximumNumber();
         });
+
         $('.uploaded-files a.delete').click(function() {
             var filename= $(this).attr('data-filename');
             $('.files-to-delete').append('<input type="hidden" name="deletefile[]" value="'+filename+'" />');
