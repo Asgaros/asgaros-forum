@@ -14,6 +14,8 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
     <div class="clear"></div>
 </div>
 
+<?php AsgarosForumEditor::showEditor('addpost', true); ?>
+
 <div class="title-element"><?php echo $meClosed; ?></div>
 <div class="content-element">
     <?php
