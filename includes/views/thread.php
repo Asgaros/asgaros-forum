@@ -59,7 +59,7 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
                 </div>
                 <div class="post-message">
                     <?php
-                    echo '<div class="post-quote-container" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->get_username($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.$post->text.'</blockquote><br /></div>';
+                    echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->get_username($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.$post->text.'</blockquote><br /></div>';
                     $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
 
                     if ($this->options['allow_shortcodes']) {

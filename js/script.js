@@ -12,7 +12,7 @@
 
             // Build quote.
             var quoteID = $(this).attr('data-value-id');
-            var quoteContent = $('#postid-'+quoteID+' .post-quote-container').html();
+            var quoteContent = $('#post-quote-container-'+quoteID).html();
 
             // At quote to the end of the editor.
             tinyMCE.activeEditor.setContent(tinyMCE.activeEditor.getContent()+quoteContent);
