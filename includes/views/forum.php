@@ -24,11 +24,7 @@ if (count($subforums) > 0) {
         echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
     echo '</div>';
     echo '<div class="content-element">';
-    $elementMarker = '';
-    $forumsCounter = 0;
     foreach ($subforums as $forum) {
-        $forumsCounter++;
-        $elementMarker = ($forumsCounter & 1) ? 'odd' : 'even';
         require('forum-element.php');
     }
     echo '</div>';
@@ -41,13 +37,8 @@ if ($counter_total > 0) {
     echo '</div>';
     echo '<div class="content-element">';
         // Sticky threads
-        if ($sticky_threads && !$this->current_page) { ?>
-            <?php
-            $elementMarker = '';
-            $elementsCounter = 0;
+        if ($sticky_threads && !$this->current_page) {
             foreach ($sticky_threads as $thread) {
-                $elementsCounter++;
-                $elementMarker = ($elementsCounter & 1) ? 'odd' : 'even';
                 require('thread-element.php');
             }
         }
@@ -56,11 +47,7 @@ if ($counter_total > 0) {
             echo '<div class="sticky-bottom"></div>';
         }
 
-        $elementMarker = '';
-        $elementsCounter = 0;
         foreach ($threads as $thread) {
-            $elementsCounter++;
-            $elementMarker = ($elementsCounter & 1) ? 'odd' : 'even';
             require('thread-element.php');
         } ?>
     </div>

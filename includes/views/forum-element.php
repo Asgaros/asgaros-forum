@@ -9,7 +9,7 @@ if ($forum->count_threads) {
     $lastpost_data = $this->get_lastpost_in_forum($forum->id);
 }
 
-echo '<div class="forum '.$elementMarker.'" id="forum-'.$forum->id.'">';
+echo '<div class="forum" id="forum-'.$forum->id.'">';
     echo '<div class="forum-status">';
         $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id, $forum->count_threads);
         echo '<span class="dashicons-before dashicons-overview '.$unreadStatus.'"></span>';

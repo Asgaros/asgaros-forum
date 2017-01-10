@@ -17,11 +17,7 @@ echo '</div>';
 echo '<div class="content-element">';
 
 if ($results) {
-    $elementMarker = '';
-    $elementsCounter = 0;
     foreach ($results as $thread) {
-        $elementsCounter++;
-        $elementMarker = ($elementsCounter & 1) ? 'odd' : 'even';
         require('thread-element.php');
     }
 } else {

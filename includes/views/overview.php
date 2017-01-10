@@ -17,12 +17,8 @@ if ($categories) {
             if (empty($forums)) {
                 echo '<div class="notice">'.__('In this category are no forums yet!', 'asgaros-forum').'</div>';
             } else {
-                $elementMarker = '';
-                $forumsCounter = 0;
                 foreach ($forums as $forum) {
                     $forumsAvailable = true;
-                    $forumsCounter++;
-                    $elementMarker = ($forumsCounter & 1) ? 'odd' : 'even';
                     require('forum-element.php');
                 }
             }

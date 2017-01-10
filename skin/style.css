@@ -47,6 +47,11 @@
     font-weight: normal;
     color: #444;
 }
+#af-wrapper .content-element .forum:nth-child(even),
+#af-wrapper .content-element .thread:nth-child(even),
+#af-wrapper .content-element .editor-row:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.025);
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
@@ -157,9 +162,6 @@
     height: 60px;
     width: 100%;
     border-bottom: 1px solid #e1e1e1;
-}
-#af-wrapper .content-element .even {
-    background-color: rgba(0, 0, 0, 0.025);
 }
 #af-wrapper .forum div,
 #af-wrapper .thread div {
