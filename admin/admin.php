@@ -272,7 +272,11 @@ class asgarosforum_admin {
                     $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes(strtolower($_POST[$k]))) : $v;
                 }
             } else {
-                $saved_ops[$k] = $v;
+                if (is_bool($v)) {
+                    $saved_ops[$k] = false;
+                } else {
+                    $saved_ops[$k] = $v;
+                }
             }
         }
 
