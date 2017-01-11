@@ -327,6 +327,8 @@
 #af-wrapper #breadcrumbs a {
     color: #666 !important;
     background: none; /* comp */
+    border: none; /* comp */
+    padding: 0; /* comp */
 }
 #af-wrapper #breadcrumbs a:hover {
     color: #444 !important;
