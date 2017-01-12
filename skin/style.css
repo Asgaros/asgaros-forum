@@ -598,7 +598,7 @@
 }
 #af-wrapper .dashicons-overview:before,
 #af-wrapper .dashicons-admin-page-small:before {
-	content: "\f214";
+    content: "\f214";
 }
 #af-wrapper .dashicons-normal_open:before {
     content: "\f206";

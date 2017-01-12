@@ -1,5 +1,5 @@
 <?php
-// If uninstall is not called from WordPress, exit
+
 if (!defined('WP_UNINSTALL_PLUGIN')) {
     exit();
 }
@@ -27,7 +27,7 @@ function recursiveDelete($str) {
     } else if (is_dir($str)) {
         $scan = glob(rtrim($str, '/').'/*');
 
-        foreach($scan as $path) {
+        foreach ($scan as $path) {
             recursiveDelete($path);
         }
 

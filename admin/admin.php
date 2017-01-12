@@ -2,10 +2,10 @@
 
 if (!defined('ABSPATH')) exit;
 
-class asgarosforum_admin {
+class AsgarosForumAdmin {
     var $saved = false;
 
-	function __construct() {
+    function __construct() {
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_init', array($this, 'save_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
@@ -17,7 +17,7 @@ class asgarosforum_admin {
         add_action('manage_asgarosforum-category_custom_column', array($this, 'manage_custom_columns'), 10, 3);
         add_filter('manage_edit-asgarosforum-category_sortable_columns', array($this, 'manage_sortable_columns'));
         add_action('asgarosforum-category_add_form_fields', array($this, 'add_category_form_fields'));
-		add_action('asgarosforum-category_edit_form_fields', array($this, 'edit_category_form_fields'));
+        add_action('asgarosforum-category_edit_form_fields', array($this, 'edit_category_form_fields'));
         add_action('create_asgarosforum-category', array($this, 'save_category_form_fields'));
         add_action('edit_asgarosforum-category', array($this, 'save_category_form_fields'));
         add_action('delete_asgarosforum-category', array($this, 'delete_category'), 10, 3);

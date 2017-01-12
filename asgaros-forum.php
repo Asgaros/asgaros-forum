@@ -48,7 +48,7 @@ AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();
 
 if (is_admin()) {
-    $asgarosforum_admin = new asgarosforum_admin();
+    $asgarosforum_admin = new AsgarosForumAdmin();
 }
 
 ?>

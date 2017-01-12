@@ -1,8 +1,9 @@
-<?php header('Content-type: text/css; charset: UTF-8'); ?>
-
 <?php
+
+header('Content-type: text/css; charset: UTF-8');
+
 if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['color'])) {
-$color = '#'.$_GET['color'];
+	$color = '#'.$_GET['color'];
 ?>
 #af-wrapper a,
 #af-wrapper .unread:before {
@@ -25,11 +26,9 @@ $color = '#'.$_GET['color'];
 }
 <?php
 }
-?>
 
-<?php
 if (!empty($_GET['text-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['text-color'])) {
-$text_color = '#'.$_GET['text-color'];
+	$text_color = '#'.$_GET['text-color'];
 ?>
 #af-wrapper,
 #af-wrapper .main-title {
@@ -37,11 +36,9 @@ $text_color = '#'.$_GET['text-color'];
 }
 <?php
 }
-?>
 
-<?php
 if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['background-color'])) {
-$background_color = '#'.$_GET['background-color'];
+	$background_color = '#'.$_GET['background-color'];
 ?>
 #af-wrapper .content-element,
 #af-wrapper .content-element .odd,
