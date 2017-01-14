@@ -4,7 +4,16 @@
         $('a.forum-editor-button').click(function(e) {
             e.preventDefault();
 
-            $('#forum-editor-form').slideToggle();
+            $('#forum-editor-form').slideToggle(400, function() {
+                // Focus subject line or editor.
+                var focusElement = $('.editor-row-subject input');
+
+                if (focusElement.length) {
+                    focusElement[0].focus();
+                } else {
+                    tinyMCE.activeEditor.focus();
+                }
+            });
         });
 
         $('a.forum-editor-quote-button').click(function(e) {
@@ -17,13 +26,13 @@
             // At quote to the end of the editor.
             tinyMCE.activeEditor.setContent(tinyMCE.activeEditor.getContent()+quoteContent);
 
-            // Focus the editor at the last line.
-            tinyMCE.activeEditor.focus();
-            tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
-            tinyMCE.activeEditor.selection.collapse(false);
-
             // Call slideDown() instead of slideToggle() so we can add multiple quotes at once.
-            $('#forum-editor-form').slideDown();
+            $('#forum-editor-form').slideDown(400, function() {
+                // Focus the editor at the last line.
+                tinyMCE.activeEditor.focus();
+                tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
+                tinyMCE.activeEditor.selection.collapse(false);
+            });
         });
 
         $('a#add_file_link').click(function() {
