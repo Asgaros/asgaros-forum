@@ -15,7 +15,9 @@ if (!defined('ABSPATH')) exit;
         <p>
             <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>
             <?php
-            wp_dropdown_pages(array('selected' => esc_attr($asgarosforum->options['location']),'name' => 'location', 'id' => 'location'));
+            // Set a post_status argument because of a core bug.
+            // See: https://core.trac.wordpress.org/ticket/8592
+            wp_dropdown_pages(array('selected' => esc_attr($asgarosforum->options['location']), 'name' => 'location', 'id' => 'location', 'post_status' => array('publish', 'pending', 'draft', 'private')));
             echo '<span class="description">'.__('Page which contains the [forum]-shortcode.', 'asgaros-forum').'</span>';
             ?>
         </p>
