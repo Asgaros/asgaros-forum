@@ -2,8 +2,6 @@
 
 if (!defined('ABSPATH')) exit;
 
-$locationSetUp = $asgarosforum->checkForShortcode();
-
 ?>
 <div class="wrap" id="af-options">
     <h2><?php _e('Options', 'asgaros-forum'); ?></h2>
@@ -16,14 +14,11 @@ $locationSetUp = $asgarosforum->checkForShortcode();
         <h3><?php _e('General', 'asgaros-forum'); ?></h3>
         <p>
             <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>
-            <?php wp_dropdown_pages(array('selected' => esc_attr($asgarosforum->options['location']),'name' => 'location', 'id' => 'location')); ?>
+            <?php
+            wp_dropdown_pages(array('selected' => esc_attr($asgarosforum->options['location']),'name' => 'location', 'id' => 'location'));
+            echo '<span class="description">'.__('Page which contains the [forum]-shortcode.', 'asgaros-forum').'</span>';
+            ?>
         </p>
-        <?php
-        if (!$locationSetUp) {
-            echo '<p class="description">'.__('Please select the page which contains the [forum]-shortcode.', 'asgaros-forum').'</p>';
-            echo '<div class="hide">';
-        }
-        ?>
         <p>
             <label for="posts_per_page"><?php _e('Replies to show per page:', 'asgaros-forum'); ?></label>
             <input type="number" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($asgarosforum->options['posts_per_page']); ?>" size="3" min="1">
@@ -136,11 +131,6 @@ $locationSetUp = $asgarosforum->checkForShortcode();
             <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
             <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#ffffff">
         </p>
-        <?php
-        if (!$locationSetUp) {
-            echo '</div>';
-        }
-        ?>
         <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>">
     </form>
 </div>
