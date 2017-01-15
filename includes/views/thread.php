@@ -47,7 +47,8 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
                     <?php
                     // Only show post-counter for existent users.
                     if (get_userdata($post->author_id) != false) {
-                        echo '<small>'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $post->author_posts).'</small>';
+                        $author_posts_i18n = number_format_i18n($post->author_posts);
+                        echo '<small>'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
                     }
 
                     if (AsgarosForumPermissions::isBanned($post->author_id)) {

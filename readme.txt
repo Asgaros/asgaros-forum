@@ -113,6 +113,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Private/pending/draft pages can now be set as the forum location
 * Fixed: Display issues with some themes
 * Changed: Show editor at the same page when adding posts or topics
+* Changed: Show all numbers in a format based on the used locale
 * Changed: Always show all forum options
 * Changed: Minor design changes
 * Performance improvements and code optimizations

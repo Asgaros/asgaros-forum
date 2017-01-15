@@ -108,8 +108,8 @@ class AsgarosForumAdmin {
 
     function manage_custom_columns($out, $column, $term_id) {
         if ($column == 'order') {
-            $order = get_term_meta($term_id, 'order', true);
-            $out = sprintf('<p>%s</p>', esc_attr($order));
+            $order = number_format_i18n(esc_attr(get_term_meta($term_id, 'order', true)));
+            $out = sprintf('<p>%s</p>', $order);
         } else if ($column == 'category_access') {
             $access = get_term_meta($term_id, 'category_access', true);
             $access_name = __('Everyone', 'asgaros-forum');

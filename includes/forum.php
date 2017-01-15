@@ -741,7 +741,7 @@ class AsgarosForum {
             if ($num_pages <= 6) {
                 for ($i = 1; $i <= $num_pages; $i++) {
                     if ($i == ($this->current_page + 1)) {
-                        $out .= ' <strong>'.$i.'</strong>';
+                        $out .= ' <strong>'.number_format_i18n($i).'</strong>';
                     } else {
                         if ($location === 'search') {
                             $link = $this->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => $i));
@@ -749,7 +749,7 @@ class AsgarosForum {
                             $link = $this->getLink($select_url, $select_source, array('part' => $i));
                         }
 
-                        $out .= ' <a href="'.$link.'">'.$i.'</a>';
+                        $out .= ' <a href="'.$link.'">'.number_format_i18n($i).'</a>';
                     }
                 }
             } else {
@@ -771,11 +771,11 @@ class AsgarosForum {
                             $link = $this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) - $i)));
                         }
 
-                        $out .= ' <a href="'.$link.'">'.(($this->current_page + 1) - $i).'</a>';
+                        $out .= ' <a href="'.$link.'">'.number_format_i18n(($this->current_page + 1) - $i).'</a>';
                     }
                 }
 
-                $out .= ' <strong>'.($this->current_page + 1).'</strong>';
+                $out .= ' <strong>'.number_format_i18n($this->current_page + 1).'</strong>';
 
                 for ($i = 1; $i <= 3; $i++) {
                     if ((($this->current_page + 1) + $i) <= $num_pages) {
@@ -785,7 +785,7 @@ class AsgarosForum {
                             $link = $this->getLink($select_url, $select_source, array('part' => (($this->current_page + 1) + $i)));
                         }
 
-                        $out .= ' <a href="'.$link.'">'.(($this->current_page + 1) + $i).'</a>';
+                        $out .= ' <a href="'.$link.'">'.number_format_i18n(($this->current_page + 1) + $i).'</a>';
                     }
                 }
 

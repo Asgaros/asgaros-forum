@@ -29,7 +29,7 @@
                         echo '<b>'.esc_html(stripslashes($forum->name)).'</b>';
                         ?>
                     </span>
-                    <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.esc_html(stripslashes($forum->sort)); ?></span>
+                    <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.number_format_i18n(esc_html(stripslashes($forum->sort))); ?></span>
                     <span class="forum-actions">
                         <a data-value-id="<?php echo $forum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=130&amp;inlineId=forum-delete" class="forum-delete-link delete thickbox" title="<?php _e('Delete this forum', 'asgaros-forum'); ?>"><?php _e('Delete', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
                         <a data-value-id="<?php echo $forum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=235&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Edit forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $forum->parent_forum; ?>"><?php _e('Edit forum', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
@@ -55,7 +55,7 @@
                                 echo '<b>'.esc_html(stripslashes($subforum->name)).'</b>';
                                 ?>
                             </span>
-                            <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.esc_html(stripslashes($subforum->sort)); ?></span>
+                            <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.number_format_i18n(esc_html(stripslashes($subforum->sort))); ?></span>
                             <span class="forum-actions">
                                 <a data-value-id="<?php echo $subforum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=130&amp;inlineId=forum-delete" class="forum-delete-link delete thickbox" title="<?php _e('Delete this forum', 'asgaros-forum'); ?>"><?php _e('Delete', 'asgaros-forum'); ?></a>&nbsp;&middot;&nbsp;
                                 <a data-value-id="<?php echo $subforum->id; ?>" data-value-category="<?php echo $category->term_id; ?>" href="#TB_inline&amp;width=500&amp;height=235&amp;inlineId=forum-editor" class="forum-editor-link thickbox" title="<?php _e('Edit forum', 'asgaros-forum'); ?>" data-value-parent-forum="<?php echo $subforum->parent_forum; ?>"><?php _e('Edit forum', 'asgaros-forum'); ?></a>

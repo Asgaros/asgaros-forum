@@ -39,7 +39,7 @@ class AsgarosForumStatistics {
 
     public static function renderStatisticsElement($title, $data, $iconClass) {
         echo '<div class="statistics-element">';
-            echo '<div class="element-number '.$iconClass.'">'.$data.'</div>';
+            echo '<div class="element-number '.$iconClass.'">'.number_format_i18n($data).'</div>';
             echo '<div class="element-name">'.$title.'</div>';
         echo '</div>';
     }

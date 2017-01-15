@@ -36,8 +36,10 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         }
     echo '</div>';
     echo '<div class="forum-stats">';
-        echo '<small>'.sprintf(_n('%s Topic', '%s Topics', $forum->count_threads, 'asgaros-forum'), $forum->count_threads).'</small>';
-        echo '<small>'.sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $forum->count_posts).'</small>';
+        $count_topics_i18n = number_format_i18n($forum->count_threads);
+        $count_posts_i18n = number_format_i18n($forum->count_posts);
+        echo '<small>'.sprintf(_n('%s Topic', '%s Topics', $forum->count_threads, 'asgaros-forum'), $count_topics_i18n).'</small>';
+        echo '<small>'.sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n).'</small>';
     echo '</div>';
     echo '<div class="forum-poster">'.$this->get_lastpost($lastpost_data).'</div>';
 echo '</div>';
