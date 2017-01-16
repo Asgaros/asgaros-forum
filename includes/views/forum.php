@@ -4,6 +4,8 @@ if (!defined('ABSPATH')) exit;
 
 echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</h1>';
 
+AsgarosForumEditor::showEditor('addtopic', true);
+
 ?>
 
 <div>
@@ -16,7 +18,6 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
 </div>
 
 <?php
-AsgarosForumEditor::showEditor('addtopic', true);
 // Subforums
 $subforums = $this->get_forums($this->current_category, $this->current_forum);
 if (count($subforums) > 0) {
