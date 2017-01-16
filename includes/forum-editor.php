@@ -119,9 +119,9 @@ class AsgarosForumEditor {
 				echo '<h1 class="main-title">'.$editorTitle.'</h1>';
 			}
 
+			// We need the tabindex attribute in the form for scrolling.
 			?>
-
-            <form id="forum-editor-form" name="addform" method="post" enctype="multipart/form-data"<?php if ($inOtherView && !isset($_POST['subject']) && !isset($_POST['message'])) { echo ' style="display: none;"'; } ?>>
+            <form id="forum-editor-form" tabindex="-1" name="addform" method="post" enctype="multipart/form-data"<?php if ($inOtherView && !isset($_POST['subject']) && !isset($_POST['message'])) { echo ' style="display: none;"'; } ?>>
                 <div class="title-element"><?php if ($inOtherView) { echo $editorTitle; } ?></div>
                 <div class="content-element">
                     <?php if ($editorView === 'addtopic' || ($editorView == 'editpost' && self::$asgarosforum->is_first_post($post->id))) { ?>

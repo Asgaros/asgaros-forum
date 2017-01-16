@@ -110,6 +110,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Status change of topics was not working with some WordPress configurations
+* Fixed: Scroll to the editor when creating new posts
 * Fixed: Display issues with some themes
 * Changed: Position of the editor
 = 1.3.7 =

@@ -52,6 +52,9 @@
 #af-wrapper .content-element .editor-row:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.025);
 }
+#af-wrapper #forum-editor-form {
+    outline: none;
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {

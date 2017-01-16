@@ -11,6 +11,10 @@
                 if (focusElement.length) {
                     focusElement[0].focus();
                 } else {
+                    // We need to focus the form first to ensure scrolling.
+                    $('#forum-editor-form').focus();
+
+                    // Focus the editor.
                     tinyMCE.activeEditor.focus();
                 }
             });
@@ -28,6 +32,9 @@
 
             // Call slideDown() instead of slideToggle() so we can add multiple quotes at once.
             $('#forum-editor-form').slideDown(400, function() {
+                // We need to focus the form first to ensure scrolling.
+                $('#forum-editor-form').focus();
+                
                 // Focus the editor at the last line.
                 tinyMCE.activeEditor.focus();
                 tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
