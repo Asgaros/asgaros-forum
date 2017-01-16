@@ -198,9 +198,13 @@ class AsgarosForum {
             $this->delete_topic($this->current_topic);
         } else if (isset($_GET['remove_post'])) {
             $this->remove_post();
-        } else if (isset($_GET['sticky_topic']) || isset($_GET['unsticky_topic'])) {
+        } else if (isset($_GET['sticky_topic'])) {
             $this->change_status('sticky');
-        } else if (isset($_GET['open_topic']) || isset($_GET['close_topic'])) {
+        } else if (isset($_GET['unsticky_topic'])) {
+            $this->change_status('normal');
+        } else if (isset($_GET['open_topic'])) {
+            $this->change_status('open');
+        } else if (isset($_GET['close_topic'])) {
             $this->change_status('closed');
         } else if (isset($_GET['subscribe_topic'])) {
             AsgarosForumNotifications::subscribeTopic();
@@ -870,11 +874,17 @@ class AsgarosForum {
             $new_status = '';
 
             if ($property == 'sticky') {
-                $new_status .= ($this->get_status('sticky')) ? 'normal_' : 'sticky_';
+                $new_status .= 'sticky_';
+                $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
+            } else if ($property == 'normal') {
+                $new_status .= 'normal_';
                 $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
             } else if ($property == 'closed') {
                 $new_status .= ($this->get_status('sticky')) ? 'sticky_' : 'normal_';
-                $new_status .= ($this->get_status('closed')) ? 'open' : 'closed';
+                $new_status .= 'closed';
+            } else if ($property == 'open') {
+                $new_status .= ($this->get_status('sticky')) ? 'sticky_' : 'normal_';
+                $new_status .= 'open';
             }
 
             $this->db->update($this->tables->topics, array('status' => $new_status), array('id' => $this->current_topic), array('%s'), array('%d'));
