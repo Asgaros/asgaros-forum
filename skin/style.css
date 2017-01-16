@@ -375,6 +375,7 @@
     line-height: normal;
     display: initial; /* comp */
     outline: none;
+    box-shadow: none; /* comp */
 }
 
 /* CONTENT WRAPPERS*/

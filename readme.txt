@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.3.7 =
 * Added: Possibility to add multiple quotes at once
 * Fixed: Private/pending/draft pages can now be set as the forum location
