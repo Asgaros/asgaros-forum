@@ -397,6 +397,7 @@
     border-radius: initial;
     border: 2px solid #fff;
     outline: 1px solid #ccc;
+    display: initial; /* comp */
 }
 
 /* POST */
