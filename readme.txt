@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,11 +109,12 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.3.8 =
 * Fixed: Notifications about new topics were sent to all users who subscribed to specific forums
 * Fixed: Status change of topics was not working with some WordPress configurations
-* Fixed: Scroll to the editor when creating new posts
+* Fixed: Scroll to the correct editor position when creating new posts
 * Fixed: Display issues with some themes
-* Changed: Position of the editor
+* Changed: Small adjustment to the editor location
 = 1.3.7 =
 * Added: Possibility to add multiple quotes at once
 * Fixed: Private/pending/draft pages can now be set as the forum location
