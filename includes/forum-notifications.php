@@ -251,6 +251,7 @@ class AsgarosForumNotifications {
                     'relation'  => 'AND',
                     array(
                         'key'       => 'asgarosforum_subscription_forum',
+                        'value'     => $asgarosforum->current_forum,
                         'compare'   => 'EXISTS'
                     ),
                     array(

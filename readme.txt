@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Notifications about new topics were sent to all users who subscribed to specific forums
 * Fixed: Status change of topics was not working with some WordPress configurations
 * Fixed: Scroll to the editor when creating new posts
 * Fixed: Display issues with some themes
