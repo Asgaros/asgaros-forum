@@ -374,6 +374,7 @@
     border: 0;
     background-color: inherit;
     width: 190px;
+    height: initial; /* comp */
     font-size: 12px;
     line-height: normal;
     display: initial; /* comp */
