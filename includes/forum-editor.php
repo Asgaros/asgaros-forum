@@ -77,7 +77,7 @@ class AsgarosForumEditor {
     public static function showEditor($editorView = false, $inOtherView = false) {
 		$editorView = ($editorView) ? $editorView : self::$asgarosforum->current_view;
 
-        if (!self::checkPermissions($editorView)) {
+        if (!self::checkPermissions($editorView) && !$inOtherView) {
             echo '<div class="notice">'.__('You are not allowed to do this.', 'asgaros-forum').'</div>';
         } else {
             $post = false;

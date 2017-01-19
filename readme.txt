@@ -109,6 +109,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Dont show error in forums/topics when the guest-posting functionality is disabled
 * Fixed: Display issues with some themes
 * Performance improvements and code optimizations
 = 1.3.8 =
