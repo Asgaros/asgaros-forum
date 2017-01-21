@@ -6,7 +6,9 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 	$color = '#'.$_GET['color'];
 ?>
 #af-wrapper a,
-#af-wrapper .unread:before {
+#af-wrapper .unread:before,
+#af-wrapper #topic-subscription,
+#af-wrapper #forum-subscription {
 	color: <?php echo $color; ?> !important;
 }
 #af-wrapper input[type="submit"],

@@ -410,6 +410,7 @@
     padding: 0; /* comp */
     border: none; /* comp */
     border-radius: inherit; /* comp */
+    width: 100%; /* comp */
     border-bottom: 2px solid #e1e1e1;
 }
 #af-wrapper .post-header {
@@ -541,9 +542,11 @@
 #af-wrapper #topic-subscription,
 #af-wrapper #forum-subscription {
     display: block;
+    color: #2d89cc;
 }
 #af-wrapper #topic-subscription a,
 #af-wrapper #forum-subscription a {
+    margin-left: 5px;
     font-size: 11px;
     font-style: italic;
 }

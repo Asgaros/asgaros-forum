@@ -9,7 +9,7 @@ class AsgarosForumNotifications {
 
         // Check if this functionality is enabled and user is logged in
         if ($asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            echo '<div id="topic-subscription">';
+            echo '<div id="topic-subscription" class="dashicons-before dashicons-email-alt">';
 
             if (self::isSubscribed('topic', $asgarosforum->current_topic)) {
                 // User has subscription for this topic
@@ -33,7 +33,7 @@ class AsgarosForumNotifications {
 
         // Check if this functionality is enabled and user is logged in
         if ($asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            echo '<div id="forum-subscription">';
+            echo '<div id="forum-subscription" class="dashicons-before dashicons-email-alt">';
 
             if (self::isSubscribed('forum', $asgarosforum->current_forum)) {
                 // User has subscription for this topic
