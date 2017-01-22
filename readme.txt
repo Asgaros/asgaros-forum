@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: 1.3.8
+Stable tag: 1.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,7 +109,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
-* Fixed: Dont show error in forums/topics when the guest-posting functionality is disabled
+= 1.3.9 =
+* Fixed: Dont show error for logged-out users when the guest-posting functionality is disabled
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
 * Performance improvements and code optimizations
