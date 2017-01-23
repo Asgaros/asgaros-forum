@@ -988,6 +988,12 @@ class AsgarosForum {
         // Assign error message, because when this location is reached, no parents has been set.
         $this->error = $error[$contentType];
     }
+
+    public function debugOutput($output) {
+        print_r('<pre>');
+        print_r($output);
+        print_r('</pre>');
+    }
 }
 
 ?>
