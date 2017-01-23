@@ -125,39 +125,15 @@ class AsgarosForum {
         switch ($this->current_view) {
             case 'forum':
             case 'addtopic':
-                $parents = $this->loadParents($elementID, 'forum');
-                if ($parents) {
-                    $this->current_forum = $parents->current_forum;
-                    $this->parent_forum = $parents->parent_forum;
-                    $this->current_category = $parents->current_category;
-                } else {
-                    $this->error = __('Sorry, this forum does not exist.', 'asgaros-forum');
-                }
+                $this->setParents($elementID, 'forum');
                 break;
             case 'movetopic':
             case 'thread':
             case 'addpost':
-                $parents = $this->loadParents($elementID, 'topic');
-                if ($parents) {
-                    $this->current_topic = $parents->current_topic;
-                    $this->current_forum = $parents->current_forum;
-                    $this->parent_forum = $parents->parent_forum;
-                    $this->current_category = $parents->current_category;
-                } else {
-                    $this->error = __('Sorry, this topic does not exist.', 'asgaros-forum');
-                }
+                $this->setParents($elementID, 'topic');
                 break;
             case 'editpost':
-                $parents = $this->loadParents($elementID, 'post');
-                if ($parents) {
-                    $this->current_post = $parents->current_post;
-                    $this->current_topic = $parents->current_topic;
-                    $this->current_forum = $parents->current_forum;
-                    $this->parent_forum = $parents->parent_forum;
-                    $this->current_category = $parents->current_category;
-                } else {
-                    $this->error = __('Sorry, this post does not exist.', 'asgaros-forum');
-                }
+                $this->setParents($elementID, 'post');
                 break;
             case 'markallread':
                 break;
@@ -972,11 +948,18 @@ class AsgarosForum {
         return false;
     }
 
-    // Checks if an element exists and loads all parent ids based on the given id and its content type.
-    public function loadParents($id, $contentType) {
+    // Checks if an element exists and sets all parent IDs based on the given id and its content type.
+    public function setParents($id, $contentType) {
+        // Set possible error messages.
+        $error = array();
+        $error['post']  = __('Sorry, this post does not exist.', 'asgaros-forum');
+        $error['topic'] = __('Sorry, this topic does not exist.', 'asgaros-forum');
+        $error['forum'] = __('Sorry, this forum does not exist.', 'asgaros-forum');
+
         if ($id) {
             $query = '';
 
+            // Build the query.
             switch ($contentType) {
                 case 'post':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.parent_forum AS parent_forum, t.id AS current_topic, p.id AS current_post FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) LEFT JOIN {$this->tables->posts} AS p ON (t.id = p.parent_id) WHERE p.id = {$id};";
@@ -991,12 +974,19 @@ class AsgarosForum {
 
             $results = $this->db->get_row($query);
 
+            // When the element exists, set parents and exit function.
             if ($results) {
-                return $results;
+                $this->current_forum    = $results->current_forum;
+                $this->parent_forum     = $results->parent_forum;
+                $this->current_category = $results->current_category;
+                $this->current_topic    = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic : false;
+                $this->current_post     = ($contentType === 'post') ? $results->current_post : false;
+                return;
             }
         }
 
-        return false;
+        // Assign error message, because when this location is reached, no parents has been set.
+        $this->error = $error[$contentType];
     }
 }
 
