@@ -111,7 +111,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Performance improvements and code optimizations
 = 1.3.9 =
-* Fixed: Dont show error for logged-out users when the guest-posting functionality is disabled
+* Fixed: Dont show error to logged-out users when the guest-posting functionality is disabled
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
 * Performance improvements and code optimizations
