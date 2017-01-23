@@ -369,7 +369,7 @@ class AsgarosForum {
         $posts = $this->get_posts();
 
         if ($posts) {
-            $this->db->query($this->db->prepare("UPDATE {$this->tables->topics} SET views = views + 1 WHERE id = %d", $this->current_topic));
+            $this->incrementTopicViews();
 
             $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Topic closed', 'asgaros-forum').')' : '';
 
@@ -377,6 +377,10 @@ class AsgarosForum {
         } else {
             echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
         }
+    }
+
+    public function incrementTopicViews() {
+        $this->db->query($this->db->prepare("UPDATE {$this->tables->topics} SET views = views + 1 WHERE id = %d", $this->current_topic));
     }
 
     function showLoginMessage() {
