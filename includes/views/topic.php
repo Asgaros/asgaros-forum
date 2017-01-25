@@ -4,8 +4,6 @@ if (!defined('ABSPATH')) exit;
 
 echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics))).'</h1>';
 
-AsgarosForumEditor::showEditor('addpost', true);
-
 ?>
 <div>
     <?php
@@ -26,7 +24,7 @@ AsgarosForumEditor::showEditor('addpost', true);
         require('post-element.php');
     } ?>
 </div>
-
+<?php AsgarosForumEditor::showEditor('addpost', true); ?>
 <div>
     <?php echo $pageing; ?>
     <div class="forum-menu"><?php echo $this->forum_menu('thread', false); ?></div>
