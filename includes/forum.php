@@ -373,7 +373,7 @@ class AsgarosForum {
 
             $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Topic closed', 'asgaros-forum').')' : '';
 
-            require('views/thread.php');
+            require('views/topic.php');
         } else {
             echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
         }

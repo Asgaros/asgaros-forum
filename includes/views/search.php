@@ -18,7 +18,7 @@ echo '<div class="content-element">';
 
 if ($results) {
     foreach ($results as $thread) {
-        require('thread-element.php');
+        require('topic-element.php');
     }
 } else {
     echo __('No results found for:', 'asgaros-forum').' <b>'.AsgarosForumSearch::$searchKeywords.'</b>';
