@@ -41,7 +41,7 @@ if ($counter_total > 0) {
         // Sticky threads
         if ($sticky_threads && !$this->current_page) {
             foreach ($sticky_threads as $thread) {
-                require('thread-element.php');
+                require('topic-element.php');
             }
         }
 
@@ -50,7 +50,7 @@ if ($counter_total > 0) {
         }
 
         foreach ($threads as $thread) {
-            require('thread-element.php');
+            require('topic-element.php');
         } ?>
     </div>
 
