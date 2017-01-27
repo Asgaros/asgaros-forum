@@ -483,6 +483,7 @@
 }
 #af-wrapper .post-message p {
     margin: 0 0 20px;
+    padding: 0px; /* comp */
 }
 #af-wrapper .post-message ul {
     padding: 15px !important; /* comp */
