@@ -2,7 +2,7 @@
 Contributors: Asgaros
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A5464D83ACMJ
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros
-Requires at least: 4.6
+Requires at least: 4.7
 Tested up to: 4.7
 Stable tag: 1.3.9
 License: GPLv2 or later
@@ -114,6 +114,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Display issues with some themes
 * Changed: Show editor for new posts in the lower area
 * Performance improvements and code optimizations
+* The required minimum WordPress version is now 4.7
 = 1.3.9 =
 * Fixed: Dont show error to logged-out users when the guest-posting functionality is disabled
 * Fixed: Display issues with some themes
