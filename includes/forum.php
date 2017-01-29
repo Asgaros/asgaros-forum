@@ -298,7 +298,7 @@ class AsgarosForum {
     }
 
     function forum($atts) {
-        AsgarosForumShortcodes::checkAttributes($atts);
+        //AsgarosForumShortcodes::checkAttributes($atts);
 
         ob_start();
         echo '<div id="af-wrapper">';
