@@ -324,7 +324,7 @@ class AsgarosForum {
                         include('views/search.php');
                         break;
                     case 'movetopic':
-                        $this->movetopic();
+                        $this->showMoveTopic();
                         break;
                     case 'forum':
                         $this->showforum();
@@ -405,7 +405,7 @@ class AsgarosForum {
         }
     }
 
-    function movetopic() {
+    function showMoveTopic() {
         echo '<h1 class="main-title">'.__('Move Topic', 'asgaros-forum').'</h1>';
 
         if (AsgarosForumPermissions::isModerator('current')) {
