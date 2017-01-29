@@ -43,15 +43,9 @@ $counter++;
             $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
 
             if ($this->options['allow_shortcodes']) {
-                // Prevent executing specific shortcodes in posts.
-                $filtered_shortcodes = array();
-                $filtered_shortcodes[] = 'forum';
-                $filtered_shortcodes[] = 'Forum';
-                $filtered_shortcodes = apply_filters('asgarosforum_filter_post_shortcodes', $filtered_shortcodes);
-
-                foreach ($filtered_shortcodes as $value) {
-                    remove_shortcode($value);
-                }
+                add_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
+                $post_content = strip_shortcodes($post_content);
+                remove_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
 
                 // Run shortcodes.
                 $post_content = do_shortcode($post_content);
