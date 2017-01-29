@@ -79,5 +79,3 @@ function deleteData() {
     // Delete data which has been used in old versions of the plugin.
     delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
 }
-
-?>

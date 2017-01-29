@@ -39,6 +39,7 @@ class AsgarosForum {
         'allow_signatures'          => false,
         'enable_search'             => true,
         'show_statistics'           => true,
+        'show_breadcrumbs'          => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_edit_date'            => true,
@@ -311,7 +312,7 @@ class AsgarosForum {
             if ($this->current_view === 'post') {
                 $this->showSinglePost();
             } else {
-                $this->breadcrumbs();
+                $this->showHeader();
 
                 if (!empty($this->info)) {
                     echo '<div class="info">'.$this->info.'</div>';
@@ -660,49 +661,14 @@ class AsgarosForum {
         return $menu;
     }
 
-    function breadcrumbs() {
-        echo '<div id="top-container">';
-
-        echo '<div id="breadcrumbs">';
-        echo '<span class="dashicons-before dashicons-admin-home"></span>';
-        echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
-
-        if ($this->parent_forum && $this->parent_forum > 0) {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="'.$this->getLink('forum', $this->parent_forum).'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->tables->forums))).'</a>';
+    function showHeader() {
+        if ($this->options['show_breadcrumbs'] || $this->options['enable_search']) {
+            echo '<div id="top-container">';
+            AsgarosForumBreadCrumbs::showBreadCrumbs();
+            AsgarosForumSearch::showSearchInput();
+            echo '<div class="clear"></div>';
+            echo '</div>';
         }
-
-        if ($this->current_forum) {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="'.$this->getLink('forum', $this->current_forum).'">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</a>';
-        }
-
-        if ($this->current_topic) {
-            $name = stripslashes($this->get_name($this->current_topic, $this->tables->topics));
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="'.$this->getLink('topic', $this->current_topic).'" title="'.esc_html($name).'">'.esc_html($this->cut_string($name)).'</a>';
-        }
-
-        if ($this->current_view === 'addpost') {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="#">'.__('Post Reply', 'asgaros-forum').'</a>';
-        } else if ($this->current_view === 'editpost') {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="#">'.__('Edit Post', 'asgaros-forum').'</a>';
-        } else if ($this->current_view === 'addtopic') {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="#">'.__('New Topic', 'asgaros-forum').'</a>';
-        } else if ($this->current_view === 'search') {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-            echo '<a href="#">'.__('Search', 'asgaros-forum').'</a>';
-        }
-
-        echo '</div>';
-
-        AsgarosForumSearch::showSearchInput();
-
-        echo '<div class="clear"></div>';
-        echo '</div>';
     }
 
     function pageing($location) {

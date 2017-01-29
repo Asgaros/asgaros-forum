@@ -41,6 +41,7 @@ require('includes/forum-unread.php');
 require('includes/forum-uploads.php');
 require('includes/forum-search.php');
 require('includes/forum-statistics.php');
+require('includes/forum-breadcrumbs.php');
 require('includes/forum-editor.php');
 require('includes/forum-shortcodes.php');
 require('admin/admin.php');
@@ -51,5 +52,3 @@ $asgarosforum = new AsgarosForum();
 if (is_admin()) {
     $asgarosforum_admin = new AsgarosForumAdmin();
 }
-
-?>

@@ -34,6 +34,10 @@ if (!defined('ABSPATH')) exit;
             <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="show_breadcrumbs" id="show_breadcrumbs" <?php checked(!empty($asgarosforum->options['show_breadcrumbs'])); ?>>
+            <label for="show_breadcrumbs"><?php _e('Show breadcrumbs', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($asgarosforum->options['show_statistics'])); ?>>
             <label for="enable_search"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
         </p>
