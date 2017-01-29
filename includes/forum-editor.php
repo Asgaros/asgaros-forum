@@ -101,7 +101,7 @@ class AsgarosForumEditor {
 
                 // TODO: Is first post query can get removed and get via the before query (get min(id)).
                 if (!isset($_POST['subject']) && self::$asgarosforum->is_first_post($post->id)) {
-                    $subject = self::$asgarosforum->db->get_var(self::$asgarosforum->db->prepare("SELECT name FROM ".self::$asgarosforum->tables->topics." WHERE id = %d;", $post->parent_id));
+                    $subject = self::$asgarosforum->get_name($post->parent_id, self::$asgarosforum->tables->topics);
                 }
             }
 
