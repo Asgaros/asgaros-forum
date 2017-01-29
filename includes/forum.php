@@ -166,7 +166,7 @@ class AsgarosForum {
         } else if ($this->current_view === 'markallread') {
             AsgarosForumUnread::markAllRead();
         } else if (isset($_GET['move_thread'])) {
-            $this->move_thread();
+            $this->moveTopic();
         } else if (isset($_GET['delete_topic'])) {
             $this->delete_topic($this->current_topic);
         } else if (isset($_GET['remove_post'])) {
@@ -330,7 +330,7 @@ class AsgarosForum {
                         $this->showforum();
                         break;
                     case 'thread':
-                        $this->showthread();
+                        $this->showTopic();
                         break;
                     case 'addtopic':
                     case 'addpost':
@@ -360,7 +360,7 @@ class AsgarosForum {
         global $wp_embed;
         $counter = 0;
         $avatars_available = get_option('show_avatars');
-        $threadStarter = $this->get_thread_starter($this->current_topic);
+        $threadStarter = $this->get_topic_starter($this->current_topic);
         $post = $this->getSinglePost();
 
         echo '<div class="title-element"></div>';
@@ -378,7 +378,7 @@ class AsgarosForum {
         require('views/forum.php');
     }
 
-    function showthread() {
+    function showTopic() {
         global $wp_embed;
         $posts = $this->get_posts();
 
@@ -593,7 +593,7 @@ class AsgarosForum {
         return $lastpost;
     }
 
-    function get_thread_starter($thread_id) {
+    function get_topic_starter($thread_id) {
         return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
     }
 
@@ -810,18 +810,18 @@ class AsgarosForum {
         }
     }
 
-    function delete_topic($thread_id, $admin_action = false) {
+    function delete_topic($topicID, $admin_action = false) {
         if (AsgarosForumPermissions::isModerator('current')) {
-            if ($thread_id) {
+            if ($topicID) {
                 // Delete uploads
-                $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $thread_id));
+                $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topicID));
                 foreach ($posts as $post) {
                     AsgarosForumUploads::deletePostFiles($post);
                 }
 
-                $this->db->delete($this->tables->posts, array('parent_id' => $thread_id), array('%d'));
-                $this->db->delete($this->tables->topics, array('id' => $thread_id), array('%d'));
-                AsgarosForumNotifications::removeTopicSubscriptions($thread_id);
+                $this->db->delete($this->tables->posts, array('parent_id' => $topicID), array('%d'));
+                $this->db->delete($this->tables->topics, array('id' => $topicID), array('%d'));
+                AsgarosForumNotifications::removeTopicSubscriptions($topicID);
 
                 if (!$admin_action) {
                     wp_redirect(html_entity_decode($this->getLink('forum', $this->current_forum)));
@@ -831,7 +831,7 @@ class AsgarosForum {
         }
     }
 
-    function move_thread() {
+    function moveTopic() {
         $newForumID = $_POST['newForumID'];
 
         if (AsgarosForumPermissions::isModerator('current') && $newForumID && $this->element_exists($newForumID, $this->tables->forums)) {
