@@ -3,17 +3,21 @@
 if (!defined('ABSPATH')) exit;
 
 $counter++;
-?>
-<div class="post" id="postid-<?php echo $post->id; ?>">
-    <div class="post-header">
-        <div class="post-date"><?php echo $this->format_date($post->date); ?></div>
-        <?php echo $this->post_menu($post->id, $post->author_id, $counter); ?>
+
+echo '<div class="post" id="postid-'.$post->id.'">';
+    echo '<div class="post-header">';
+        echo '<div class="post-date">'.$this->format_date($post->date).'</div>';
+
+        if ($this->current_view != 'post') {
+            echo $this->post_menu($post->id, $post->author_id, $counter);
+        }
+        ?>
         <div class="clear"></div>
     </div>
     <div class="post-content">
         <div class="post-author">
             <?php
-            if ($this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $threadStarter != 0 && $threadStarter == $post->author_id) {
+            if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $threadStarter != 0 && $threadStarter == $post->author_id) {
                 echo '<small class="post-author-marker">'.__('Topic Author', 'asgaros-forum').'</small>';
             }
 
@@ -58,10 +62,13 @@ $counter++;
             if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
                 echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'&nbsp;&middot;&nbsp;';
             }
-            echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+
+            if ($this->current_view != 'post') {
+                echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+            }
 
             // Show signature.
-            if ($this->options['allow_signatures']) {
+            if ($this->current_view != 'post' && $this->options['allow_signatures']) {
                 $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
 
                 if (!empty($signature)) {

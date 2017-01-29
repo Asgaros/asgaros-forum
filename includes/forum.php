@@ -298,7 +298,7 @@ class AsgarosForum {
     }
 
     function forum($atts) {
-        //AsgarosForumShortcodes::checkAttributes($atts);
+        AsgarosForumShortcodes::checkAttributes($atts);
 
         ob_start();
         echo '<div id="af-wrapper">';
@@ -358,8 +358,15 @@ class AsgarosForum {
 
     function showSinglePost() {
         global $wp_embed;
+        $counter = 0;
+        $avatars_available = get_option('show_avatars');
+        $threadStarter = $this->get_thread_starter($this->current_topic);
         $post = $this->getSinglePost();
-        require('views/single-post.php');
+
+        echo '<div class="title-element"></div>';
+        echo '<div class="content-element">';
+        require('views/post-element.php');
+        echo '</div>';
     }
 
     function showforum() {
