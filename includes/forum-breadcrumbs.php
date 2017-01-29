@@ -32,6 +32,8 @@ class AsgarosForumBreadCrumbs {
                 $breadCrumsLinks[] = '<a href="#">'.__('Edit Post', 'asgaros-forum').'</a>';
             } else if ($asgarosforum->current_view === 'addtopic') {
                 $breadCrumsLinks[] = '<a href="#">'.__('New Topic', 'asgaros-forum').'</a>';
+            } else if ($asgarosforum->current_view === 'movetopic') {
+                $breadCrumsLinks[] = '<a href="#">'.__('Move Topic', 'asgaros-forum').'</a>';
             } else if ($asgarosforum->current_view === 'search') {
                 $breadCrumsLinks[] = '<a href="#">'.__('Search', 'asgaros-forum').'</a>';
             }
