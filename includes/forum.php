@@ -667,8 +667,6 @@ class AsgarosForum {
         echo '<span class="dashicons-before dashicons-admin-home"></span>';
         echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
-        $trail = '';
-
         if ($this->parent_forum && $this->parent_forum > 0) {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
             echo '<a href="'.$this->getLink('forum', $this->parent_forum).'">'.esc_html(stripslashes($this->get_name($this->parent_forum, $this->tables->forums))).'</a>';

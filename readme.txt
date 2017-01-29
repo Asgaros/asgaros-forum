@@ -110,6 +110,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Add: Shortcode extension to show a specific post
+* Performance improvements and code optimizations
 = 1.3.10 =
 * Fixed: Filter [Forum] shortcodes from posts
 * Fixed: Remove filtered shortcodes from post content only
