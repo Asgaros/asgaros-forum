@@ -297,7 +297,9 @@ class AsgarosForum {
         }
     }
 
-    function forum() {
+    function forum($atts) {
+        //AsgarosForumShortcodes::checkAttributes($atts);
+
         ob_start();
         echo '<div id="af-wrapper">';
 
@@ -306,35 +308,39 @@ class AsgarosForum {
         if (!empty($this->error)) {
             echo '<div class="error">'.$this->error.'</div>';
         } else {
-            $this->breadcrumbs();
+            if ($this->current_view === 'post') {
+                $this->showSinglePost();
+            } else {
+                $this->breadcrumbs();
 
-            if (!empty($this->info)) {
-                echo '<div class="info">'.$this->info.'</div>';
-            }
+                if (!empty($this->info)) {
+                    echo '<div class="info">'.$this->info.'</div>';
+                }
 
-            $this->showLoginMessage();
+                $this->showLoginMessage();
 
-            switch ($this->current_view) {
-                case 'search':
-                    include('views/search.php');
-                    break;
-                case 'movetopic':
-                    $this->movetopic();
-                    break;
-                case 'forum':
-                    $this->showforum();
-                    break;
-                case 'thread':
-                    $this->showthread();
-                    break;
-                case 'addtopic':
-                case 'addpost':
-                case 'editpost':
-                    AsgarosForumEditor::showEditor();
-                    break;
-                default:
-                    $this->overview();
-                    break;
+                switch ($this->current_view) {
+                    case 'search':
+                        include('views/search.php');
+                        break;
+                    case 'movetopic':
+                        $this->movetopic();
+                        break;
+                    case 'forum':
+                        $this->showforum();
+                        break;
+                    case 'thread':
+                        $this->showthread();
+                        break;
+                    case 'addtopic':
+                    case 'addpost':
+                    case 'editpost':
+                        AsgarosForumEditor::showEditor();
+                        break;
+                    default:
+                        $this->overview();
+                        break;
+                }
             }
         }
 
@@ -348,6 +354,12 @@ class AsgarosForum {
         $categories = $this->get_categories();
 
         require('views/overview.php');
+    }
+
+    function showSinglePost() {
+        global $wp_embed;
+        $post = $this->getSinglePost();
+        require('views/single-post.php');
     }
 
     function showforum() {
@@ -502,6 +514,11 @@ class AsgarosForum {
         $results = $this->db->get_results($this->db->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, (SELECT COUNT(p2.id) FROM {$this->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, p1.uploads FROM {$this->tables->posts} AS p1 WHERE p1.parent_id = %d ORDER BY {$order} LIMIT %d, %d;", $this->current_topic, $start, $end));
         $results = apply_filters('asgarosforum_filter_get_posts', $results);
         return $results;
+    }
+
+    function getSinglePost() {
+        $result = $this->db->get_row($this->db->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, (SELECT COUNT(p2.id) FROM {$this->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, p1.uploads FROM {$this->tables->posts} AS p1 WHERE p1.id = %d;", $this->current_post));
+        return $result;
     }
 
     function is_first_post($post_id) {

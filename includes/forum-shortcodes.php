@@ -15,7 +15,9 @@ class AsgarosForumShortcodes {
 
     static function checkAttributes($atts) {
         global $asgarosforum;
-        //$asgarosforum->debugOutput($atts);
+
+        // Normalize attribute keys.
+        $atts = array_change_key_case((array)$atts, CASE_LOWER);
 
         if (!empty($atts['post'])) {
             $postID = $atts['post'];
