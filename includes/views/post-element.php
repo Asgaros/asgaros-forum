@@ -46,6 +46,7 @@ $counter++;
                 // Prevent executing specific shortcodes in posts.
                 $filtered_shortcodes = array();
                 $filtered_shortcodes[] = 'forum';
+                $filtered_shortcodes[] = 'Forum';
                 $filtered_shortcodes = apply_filters('asgarosforum_filter_post_shortcodes', $filtered_shortcodes);
 
                 foreach ($filtered_shortcodes as $value) {
