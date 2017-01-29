@@ -386,7 +386,7 @@ class AsgarosForum {
         if ($posts) {
             $this->incrementTopicViews();
 
-            $meClosed = ($this->get_status('closed')) ? '&nbsp;('.__('Topic closed', 'asgaros-forum').')' : '';
+            $meClosed = ($this->get_status('closed')) ? '('.__('Topic closed', 'asgaros-forum').')' : '';
 
             require('views/topic.php');
         } else {
