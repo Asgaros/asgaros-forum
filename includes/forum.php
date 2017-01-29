@@ -75,10 +75,6 @@ class AsgarosForum {
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
 
-        // Register multiple shortcodes because sometimes users ignore the fact that shortcodes are case-sensitive.
-        add_shortcode('forum', array($this, 'forum'));
-        add_shortcode('Forum', array($this, 'forum'));
-
         new AsgarosForumRewrite($this);
     }
 
@@ -89,6 +85,7 @@ class AsgarosForum {
         new AsgarosForumUnread($this);
         new AsgarosForumThemeManager($this);
         new AsgarosForumEditor($this);
+        new AsgarosForumShortcodes($this);
     }
 
     function initialize_widgets() {

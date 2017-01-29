@@ -3,6 +3,16 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumShortcodes {
+    private static $asgarosforum = null;
+
+    public function __construct($object) {
+		self::$asgarosforum = $object;
+
+        // Register multiple shortcodes because sometimes users ignore the fact that shortcodes are case-sensitive.
+        add_shortcode('forum', array(self::$asgarosforum, 'forum'));
+        add_shortcode('Forum', array(self::$asgarosforum, 'forum'));
+    }
+
     static function checkAttributes($atts) {
         global $asgarosforum;
         //$asgarosforum->debugOutput($atts);
