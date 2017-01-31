@@ -21,8 +21,26 @@ class AsgarosForumShortcodes {
 
         if (!empty($atts['post'])) {
             $postID = $atts['post'];
+
             $asgarosforum->current_view = 'post';
             $asgarosforum->setParents($postID, 'post');
+        } else if (!empty($atts['topic'])) {
+            $topicID = $atts['topic'];
+            $allowedViews = array('movetopic', 'addpost', 'editpost', 'thread');
+
+            // Ensure that we are in the correct element.
+            if ($asgarosforum->current_topic != $topicID) {
+                $asgarosforum->setParents($topicID, 'topic');
+                $asgarosforum->current_view = 'thread';
+            }
+            // Ensure that we are in a correct view.
+            else if (!in_array($asgarosforum->current_view, $allowedViews)) {
+                $asgarosforum->current_view = 'thread';
+            }
+
+            // Configure components.
+            $asgarosforum->options['enable_search'] = false;
+            AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
         }
     }
 

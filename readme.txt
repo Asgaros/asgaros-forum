@@ -111,6 +111,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Added: Option to hide breadcrumbs
 * Added: Shortcode extension to show a specific post
+* Added: Shortcode extension to show a specific topic
 * Fixed: Show full breadcrumbs when moving topics
 * Changed: Minor design changes
 * Performance improvements and code optimizations
