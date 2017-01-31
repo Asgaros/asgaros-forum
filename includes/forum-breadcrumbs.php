@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumBreadCrumbs {
+    public static $breadCrumbsLevel = 3;
     public static $breadCrumbsElements = 0;
 
     public static function showBreadCrumbs() {
@@ -11,17 +12,22 @@ class AsgarosForumBreadCrumbs {
         if ($asgarosforum->options['show_breadcrumbs']) {
             // Build breadcrumbs links.
             $breadCrumsLinks = array();
-            $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
-            if ($asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
-                $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->parent_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->parent_forum, $asgarosforum->tables->forums))).'</a>';
+            if (self::$breadCrumbsLevel >= 3) {
+                $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
             }
 
-            if ($asgarosforum->current_forum) {
-                $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->current_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->current_forum, $asgarosforum->tables->forums))).'</a>';
+            if (self::$breadCrumbsLevel >= 2) {
+                if ($asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
+                    $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->parent_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->parent_forum, $asgarosforum->tables->forums))).'</a>';
+                }
+
+                if ($asgarosforum->current_forum) {
+                    $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->current_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->current_forum, $asgarosforum->tables->forums))).'</a>';
+                }
             }
 
-            if ($asgarosforum->current_topic) {
+            if (self::$breadCrumbsLevel >= 1 && $asgarosforum->current_topic) {
                 $name = stripslashes($asgarosforum->get_name($asgarosforum->current_topic, $asgarosforum->tables->topics));
                 $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('topic', $asgarosforum->current_topic).'" title="'.esc_html($name).'">'.esc_html($asgarosforum->cut_string($name)).'</a>';
             }
