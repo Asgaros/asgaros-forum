@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumBreadCrumbs {
-    public static $breadCrumbsLevel = 3;
+    public static $breadCrumbsLevel = 4;
     public static $breadCrumbsElements = 0;
 
     public static function showBreadCrumbs() {
@@ -13,18 +13,16 @@ class AsgarosForumBreadCrumbs {
             // Build breadcrumbs links.
             $breadCrumsLinks = array();
 
-            if (self::$breadCrumbsLevel >= 3) {
+            if (self::$breadCrumbsLevel >= 4) {
                 $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
             }
 
-            if (self::$breadCrumbsLevel >= 2) {
-                if ($asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
-                    $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->parent_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->parent_forum, $asgarosforum->tables->forums))).'</a>';
-                }
+            if (self::$breadCrumbsLevel >= 3 && $asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
+                $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->parent_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->parent_forum, $asgarosforum->tables->forums))).'</a>';
+            }
 
-                if ($asgarosforum->current_forum) {
-                    $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->current_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->current_forum, $asgarosforum->tables->forums))).'</a>';
-                }
+            if (self::$breadCrumbsLevel >= 2 && $asgarosforum->current_forum) {
+                $breadCrumsLinks[] = '<a href="'.$asgarosforum->getLink('forum', $asgarosforum->current_forum).'">'.esc_html(stripslashes($asgarosforum->get_name($asgarosforum->current_forum, $asgarosforum->tables->forums))).'</a>';
             }
 
             if (self::$breadCrumbsLevel >= 1 && $asgarosforum->current_topic) {
