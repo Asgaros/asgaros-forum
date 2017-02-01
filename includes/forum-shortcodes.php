@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumShortcodes {
     private static $asgarosforum = null;
+    public static $shortcodeSearchFilter = '';
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -33,14 +34,48 @@ class AsgarosForumShortcodes {
                 $asgarosforum->setParents($topicID, 'topic');
                 $asgarosforum->current_view = 'thread';
             }
+
             // Ensure that we are in a correct view.
             else if (!in_array($asgarosforum->current_view, $allowedViews)) {
                 $asgarosforum->current_view = 'thread';
             }
 
+            // Check category access.
+            $asgarosforum->check_access();
+
             // Configure components.
             $asgarosforum->options['enable_search'] = false;
             AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
+        } else if (!empty($atts['forum'])) {
+            $forumID = $atts['forum'];
+            $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search');
+
+            // Ensure that we are in the correct element.
+            if ($asgarosforum->current_forum != $forumID && $asgarosforum->parent_forum != $forumID) {
+                $asgarosforum->setParents($forumID, 'forum');
+
+                // Only change view when not inside the search.
+                if ($asgarosforum->current_view != 'search') {
+                    $asgarosforum->current_view = 'forum';
+                }
+            }
+
+            // Ensure that we are in a correct view.
+            else if (!in_array($asgarosforum->current_view, $allowedViews)) {
+                $asgarosforum->current_view = 'forum';
+            }
+
+            // Check category access.
+            $asgarosforum->check_access();
+
+            // Configure components.
+            if ($asgarosforum->parent_forum != $forumID) {
+                AsgarosForumBreadCrumbs::$breadCrumbsLevel = 2;
+            } else {
+                AsgarosForumBreadCrumbs::$breadCrumbsLevel = 3;
+            }
+
+            self::$shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
         }
     }
 
