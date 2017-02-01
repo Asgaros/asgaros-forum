@@ -149,6 +149,37 @@
     display: block;
     padding: 10px 0;
 }
+#af-wrapper .editor-row .left {
+    display: block;
+    float: left;
+    width: 100px;
+}
+#af-wrapper .editor-row .right {
+    display: block;
+    margin-left: 110px;
+}
+#af-wrapper .editor-row .cancel,
+#af-wrapper .editor-row .cancel-back {
+    color: white;
+    border: 1px solid #f91111;
+    background-color: #ff5454;
+    padding: 3px 6px;
+    margin: 2px 0 !important;
+    vertical-align: middle;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-radius: initial;
+    text-shadow: initial;
+    display: block;
+    text-align: center;
+}
+#af-wrapper .editor-row .cancel:hover,
+#af-wrapper .editor-row .cancel-back:hover {
+    background-color: #ff5454;
+    text-decoration: none;
+}
 
 /* OVERVIEW/FORUM */
 #af-wrapper .last-post-headline {

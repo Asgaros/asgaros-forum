@@ -158,7 +158,15 @@ class AsgarosForumEditor {
                             echo '<input type="hidden" name="submit_action" value="edit_post">';
                             echo '<input type="hidden" name="part_id" value="'.(self::$asgarosforum->current_page + 1).'">';
                         }
-                        echo '<input type="submit" value="'.__('Submit', 'asgaros-forum').'">';
+
+						echo '<div class="left">';
+						if ($inOtherView) {
+							echo '<a href="'.$actionURL.'" class="cancel">'.__('Cancel', 'asgaros-forum').'</a>';
+						} else {
+							echo '<a href="'.$actionURL.'" class="cancel-back">'.__('Cancel', 'asgaros-forum').'</a>';
+						}
+						echo '</div>';
+	                    echo '<div class="right"><input type="submit" value="'.__('Submit', 'asgaros-forum').'"></div>';
                     echo '</div>';
                 echo '</div>';
             echo '</form>';

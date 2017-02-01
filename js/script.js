@@ -4,6 +4,9 @@
         $('a.forum-editor-button').click(function(e) {
             e.preventDefault();
 
+            // Hide new post/topic buttons.
+            $('a.forum-editor-button').hide();
+
             $('#forum-editor-form').slideToggle(400, function() {
                 // Focus subject line or editor.
                 var focusElement = $('.editor-row-subject input');
@@ -20,8 +23,22 @@
             });
         });
 
+        // Close editor.
+        $('.editor-row a.cancel').click(function(e) {
+            e.preventDefault();
+
+            $('#forum-editor-form').slideToggle(400, function() {
+                $('a.forum-editor-button').show();
+                $('.editor-row-subject input').val('');
+                tinyMCE.activeEditor.setContent('');
+            });
+        });
+
         $('a.forum-editor-quote-button').click(function(e) {
             e.preventDefault();
+
+            // Hide new post/topic buttons.
+            $('a.forum-editor-button').hide();
 
             // Build quote.
             var quoteID = $(this).attr('data-value-id');
@@ -34,7 +51,7 @@
             $('#forum-editor-form').slideDown(400, function() {
                 // We need to focus the form first to ensure scrolling.
                 $('#forum-editor-form').focus();
-                
+
                 // Focus the editor at the last line.
                 tinyMCE.activeEditor.focus();
                 tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
