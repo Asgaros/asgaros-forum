@@ -8,7 +8,7 @@ AsgarosForumEditor::showEditor('addtopic', true);
 
 ?>
 
-<div>
+<div class="pages-and-menu">
     <?php
     $pageing = ($counter_normal > 0) ? $this->pageing($this->tables->topics) : '';
     echo $pageing;
@@ -54,7 +54,7 @@ if ($counter_total > 0) {
         } ?>
     </div>
 
-    <div>
+    <div class="pages-and-menu">
         <?php echo $pageing; ?>
         <div class="forum-menu"><?php echo $this->forum_menu('forum'); ?></div>
         <div class="clear"></div>

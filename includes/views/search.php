@@ -7,7 +7,7 @@ echo '<h1 class="main-title">'.__('Search', 'asgaros-forum').'</h1>';
 $results = $this->getSearchResults();
 
 if ($results) {
-    echo '<div>'.$this->pageing('search').'<div class="clear"></div></div>';
+    echo '<div class="pages-and-menu">'.$this->pageing('search').'<div class="clear"></div></div>';
 }
 
 echo '<div class="title-element">';
@@ -25,3 +25,7 @@ if ($results) {
 }
 
 echo '</div>';
+
+if ($results) {
+    echo '<div class="pages-and-menu">'.$this->pageing('search').'<div class="clear"></div></div>';
+}

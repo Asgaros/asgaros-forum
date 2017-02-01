@@ -55,6 +55,10 @@
 #af-wrapper #forum-editor-form {
     outline: none;
 }
+#af-wrapper .pages-and-menu {
+    display: block;
+    height: 35px;
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
