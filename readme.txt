@@ -52,6 +52,8 @@ If you are using some third-party plugin for caching (WP Super Cache for example
 By default only files of the following filetype can be uploaded: jpg, jpeg, gif, png, bmp, pdf. You can modify the allowed filetypes inside the forum administration.
 = Where can I add moderators? =
 Moderators can be added via the user edit screen in the WordPress administration interface.
+= How can I show a specific post/topic/forum/category on a page? =
+You can extend the shortcodes with different parameters to show specific content only. For example: `[forum post="POSTID"]`, `[forum topic="TOPICID"]`, `[forum forum="FORUMID"]` or `[forum category="CATEGORYID"]`.
 = Where can I ban users? =
 Users can be banned via the user edit screen in the WordPress administration interface.
 = How can I add a captcha to the editor for guests? =
@@ -113,6 +115,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Shortcode extension to show a specific post
 * Added: Shortcode extension to show a specific topic
 * Added: Shortcode extension to show a specific forum
+* Added: Shortcode extension to show a specific category
 * Added: Cancel button to editor
 * Fixed: Show full breadcrumbs when moving topics
 * Changed: Hide new post/topic buttons when editor is active

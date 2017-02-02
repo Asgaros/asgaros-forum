@@ -76,6 +76,24 @@ class AsgarosForumShortcodes {
             }
 
             self::$shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
+        } else if (!empty($atts['category'])) {
+            $categoryID = $atts['category'];
+
+            // Ensure that we are in the correct element.
+            if ($asgarosforum->current_category != $categoryID) {
+                $asgarosforum->setParents($categoryID, 'category');
+
+                // Only change view when not inside the search.
+                if ($asgarosforum->current_view != 'search') {
+                    $asgarosforum->current_view = 'default';
+                }
+            }
+
+            // Check category access.
+            $asgarosforum->check_access();
+
+            // Configure components.
+            self::$shortcodeSearchFilter = 'AND f.parent_id = '.$categoryID;
         }
     }
 

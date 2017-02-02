@@ -448,14 +448,20 @@ class AsgarosForum {
 
     function get_categories($enableFiltering = true) {
         $filter = array();
+        $include = array();
         $metaQueryFilter = array();
 
         if ($enableFiltering) {
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
             $metaQueryFilter = $this->getCategoriesFilter();
+
+            // Set include filter when extended shortcode is used.
+            if ($this->current_category) {
+                $include[] = $this->current_category;
+            }
         }
 
-        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'meta_key' => 'order', 'orderby' => 'order', 'meta_query' => $metaQueryFilter));
+        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_key' => 'order', 'orderby' => 'order', 'meta_query' => $metaQueryFilter));
 
         return $categories;
     }
@@ -944,9 +950,11 @@ class AsgarosForum {
         $error['post']  = __('Sorry, this post does not exist.', 'asgaros-forum');
         $error['topic'] = __('Sorry, this topic does not exist.', 'asgaros-forum');
         $error['forum'] = __('Sorry, this forum does not exist.', 'asgaros-forum');
+        $error['category'] = __('Sorry, this category does not exist.', 'asgaros-forum');
 
         if ($id) {
             $query = '';
+            $results = false;
 
             // Build the query.
             switch ($contentType) {
@@ -961,13 +969,17 @@ class AsgarosForum {
                     break;
             }
 
-            $results = $this->db->get_row($query);
+            if ($contentType === 'category') {
+                $results = get_term($id, 'asgarosforum-category');
+            } else {
+                $results = $this->db->get_row($query);
+            }
 
             // When the element exists, set parents and exit function.
             if ($results) {
-                $this->current_forum    = $results->current_forum;
-                $this->parent_forum     = $results->parent_forum;
-                $this->current_category = $results->current_category;
+                $this->current_category = ($contentType === 'category') ? $results->term_id : $results->current_category;
+                $this->parent_forum     = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->parent_forum : false;
+                $this->current_forum    = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->current_forum : false;
                 $this->current_topic    = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic : false;
                 $this->current_post     = ($contentType === 'post') ? $results->current_post : false;
                 return;
