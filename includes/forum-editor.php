@@ -120,8 +120,10 @@ class AsgarosForumEditor {
 			}
 
 			$actionURL = '';
-			if ($editorView == 'addpost' || $editorView == 'editpost') {
+			if ($editorView == 'addpost') {
 				$actionURL = self::$asgarosforum->getLink('topic', self::$asgarosforum->current_topic);
+			} else if ($editorView == 'editpost') {
+				$actionURL = self::$asgarosforum->getLink('post_edit', self::$asgarosforum->current_post);
 			} else if ($editorView == 'addtopic') {
 				$actionURL = self::$asgarosforum->getLink('forum', self::$asgarosforum->current_forum);
 			}
