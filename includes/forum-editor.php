@@ -165,6 +165,9 @@ class AsgarosForumEditor {
 						if ($inOtherView) {
 							echo '<a href="'.$actionURL.'" class="cancel">'.__('Cancel', 'asgaros-forum').'</a>';
 						} else {
+							if ($editorView === 'editpost') {
+								$actionURL = self::$asgarosforum->getLink('topic', self::$asgarosforum->current_topic);
+							}
 							echo '<a href="'.$actionURL.'" class="cancel-back">'.__('Cancel', 'asgaros-forum').'</a>';
 						}
 						echo '</div>';
