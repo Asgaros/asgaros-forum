@@ -12,7 +12,7 @@
 
     if (!empty($categories)) {
         foreach ($categories as $category) { ?>
-            <h3><?php echo stripslashes($category->name); ?></h3>
+            <h3><?php echo stripslashes($category->name); ?><span class="element-id">(<?php _e('ID', 'asgaros-forum'); ?>: <?php echo $category->term_id; ?>)</span></h3>
             <?php
             $forums = $asgarosforum->get_forums($category->term_id);
             foreach ($forums as $forum) { ?>
@@ -26,7 +26,7 @@
                         if ($forum->closed == 1) {
                             echo '<span class="dashicons-before dashicons-lock"></span>&nbsp;';
                         }
-                        echo '<b>'.esc_html(stripslashes($forum->name)).'</b>';
+                        echo '<b>'.esc_html(stripslashes($forum->name)).'<span class="element-id">('.__('ID', 'asgaros-forum').': '.$forum->id.')</span></b>';
                         ?>
                     </span>
                     <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.number_format_i18n(esc_html(stripslashes($forum->sort))); ?></span>
@@ -52,7 +52,7 @@
                                 if ($subforum->closed == 1) {
                                     echo '<span class="dashicons-before dashicons-lock"></span>&nbsp;';
                                 }
-                                echo '<b>'.esc_html(stripslashes($subforum->name)).'</b>';
+                                echo '<b>'.esc_html(stripslashes($subforum->name)).'<span class="element-id">('.__('ID', 'asgaros-forum').': '.$subforum->id.')</span></b>';
                                 ?>
                             </span>
                             <span class="forum-order"><?php echo __('Order:', 'asgaros-forum').'&nbsp;'.number_format_i18n(esc_html(stripslashes($subforum->sort))); ?></span>

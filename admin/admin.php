@@ -102,12 +102,16 @@ class AsgarosForumAdmin {
         $columns['order'] = __('Order', 'asgaros-forum');
         $columns['category_access'] = __('Access', 'asgaros-forum');
         $columns = apply_filters('asgarosforum_filter_manage_columns', $columns);
+        $columns['id'] = __('ID', 'asgaros-forum');
 
         return $columns;
     }
 
     function manage_custom_columns($out, $column, $term_id) {
-        if ($column == 'order') {
+        if ($column == 'id') {
+            $id = number_format_i18n($term_id);
+            $out = sprintf('<p>%s</p>', $id);
+        } else if ($column == 'order') {
             $order = number_format_i18n(esc_attr(get_term_meta($term_id, 'order', true)));
             $out = sprintf('<p>%s</p>', $order);
         } else if ($column == 'category_access') {

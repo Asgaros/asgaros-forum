@@ -30,6 +30,12 @@
     display: none;
 }
 /* FORUM */
+#af-forums .element-id {
+    margin-left: 5px;
+    color: #aaa;
+    font-style: italic;
+    font-weight: normal;
+}
 #af-forums .dashicons-before {
     font-size: 14px;
     display: inline-block;
