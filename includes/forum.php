@@ -456,8 +456,8 @@ class AsgarosForum {
             $metaQueryFilter = $this->getCategoriesFilter();
 
             // Set include filter when extended shortcode is used.
-            if ($this->current_category) {
-                $include[] = $this->current_category;
+            if (AsgarosForumShortcodes::$includeCategories) {
+                $include = AsgarosForumShortcodes::$includeCategories;
             }
         }
 
@@ -950,7 +950,6 @@ class AsgarosForum {
         $error['post']  = __('Sorry, this post does not exist.', 'asgaros-forum');
         $error['topic'] = __('Sorry, this topic does not exist.', 'asgaros-forum');
         $error['forum'] = __('Sorry, this forum does not exist.', 'asgaros-forum');
-        $error['category'] = __('Sorry, this category does not exist.', 'asgaros-forum');
 
         if ($id) {
             $query = '';
@@ -969,15 +968,11 @@ class AsgarosForum {
                     break;
             }
 
-            if ($contentType === 'category') {
-                $results = get_term($id, 'asgarosforum-category');
-            } else {
-                $results = $this->db->get_row($query);
-            }
+            $results = $this->db->get_row($query);
 
             // When the element exists, set parents and exit function.
             if ($results) {
-                $this->current_category = ($contentType === 'category') ? $results->term_id : $results->current_category;
+                $this->current_category = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->current_category : false;
                 $this->parent_forum     = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->parent_forum : false;
                 $this->current_forum    = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->current_forum : false;
                 $this->current_topic    = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic : false;

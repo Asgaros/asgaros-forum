@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumShortcodes {
     private static $asgarosforum = null;
     public static $shortcodeSearchFilter = '';
+    public static $includeCategories = false;
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -77,11 +78,15 @@ class AsgarosForumShortcodes {
 
             self::$shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
         } else if (!empty($atts['category'])) {
-            $categoryID = $atts['category'];
+            self::$includeCategories = explode(',', $atts['category']);
 
             // Ensure that we are in the correct element.
-            if ($asgarosforum->current_category != $categoryID) {
-                $asgarosforum->setParents($categoryID, 'category');
+            if (!in_array($asgarosforum->current_category, self::$includeCategories)) {
+                $asgarosforum->current_category = false;
+                $asgarosforum->parent_forum     = false;
+                $asgarosforum->current_forum    = false;
+                $asgarosforum->current_topic    = false;
+                $asgarosforum->current_post     = false;
 
                 // Only change view when not inside the search.
                 if ($asgarosforum->current_view != 'search') {
@@ -90,10 +95,9 @@ class AsgarosForumShortcodes {
             }
 
             // Check category access.
-            $asgarosforum->check_access();
-
-            // Configure components.
-            self::$shortcodeSearchFilter = 'AND f.parent_id = '.$categoryID;
+            if ($asgarosforum->current_category) {
+                $asgarosforum->check_access();
+            }
         }
     }
 

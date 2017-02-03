@@ -53,7 +53,7 @@ By default only files of the following filetype can be uploaded: jpg, jpeg, gif,
 = Where can I add moderators? =
 Moderators can be added via the user edit screen in the WordPress administration interface.
 = How can I show a specific post/topic/forum/category on a page? =
-You can extend the shortcodes with different parameters to show specific content only. For example: `[forum post="POSTID"]`, `[forum topic="TOPICID"]`, `[forum forum="FORUMID"]` or `[forum category="CATEGORYID"]`.
+You can extend the shortcodes with different parameters to show specific content only. For example: `[forum post="POSTID"]`, `[forum topic="TOPICID"]`, `[forum forum="FORUMID"]`, `[forum category="CATEGORYID"]` or `[forum category="CATEGORYID1,CATEGORYID2"]`.
 = Where can I ban users? =
 Users can be banned via the user edit screen in the WordPress administration interface.
 = How can I add a captcha to the editor for guests? =
