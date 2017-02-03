@@ -57,7 +57,7 @@
 }
 #af-wrapper .pages-and-menu {
     display: block;
-    height: 35px;
+    min-height: 35px;
 }
 
 /* INPUT ELEMENTS */

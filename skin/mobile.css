@@ -10,8 +10,7 @@
 #af-wrapper .post-author img,
 #af-wrapper .post-author br,
 #af-wrapper .post-author small,
-#af-wrapper .last-post-headline,
-#af-wrapper #statistics {
+#af-wrapper .last-post-headline {
     display: none !important;
 }
 #af-wrapper .editor-row {
@@ -42,4 +41,16 @@
 }
 #af-wrapper .post-header {
     text-align: center;
+}
+#af-wrapper #statistics .statistics-element {
+    border: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+#af-wrapper #statistics .element-number,
+#af-wrapper #statistics .element-name {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 32px;
 }
