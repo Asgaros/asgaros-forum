@@ -21,10 +21,10 @@ class AsgarosForumTaxonomies {
                 'show_ui' => true,
                 'rewrite' => false,
                 'capabilities' => array(
-                    'manage_terms' => 'edit_users',
-					'edit_terms'   => 'edit_users',
-					'delete_terms' => 'edit_users',
-					'assign_terms' => 'edit_users'
+                    'manage_terms' => 'manage_options',
+					'edit_terms'   => 'manage_options',
+					'delete_terms' => 'manage_options',
+					'assign_terms' => 'manage_options'
 				)
             )
         );

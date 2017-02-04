@@ -3,11 +3,15 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumStatistics {
-    public static function showStatistics() {
-        global $asgarosforum;
+    private static $asgarosforum = null;
 
+    public function __construct($object) {
+		self::$asgarosforum = $object;
+    }
+
+    public static function showStatistics() {
         // Check if this functionality is enabled.
-        if ($asgarosforum->options['show_statistics']) {
+        if (self::$asgarosforum->options['show_statistics']) {
             $data = self::getData();
             echo '<div id="statistics">';
                 echo '<div id="statistics-header">';
@@ -27,11 +31,10 @@ class AsgarosForumStatistics {
     }
 
     public static function getData() {
-        global $asgarosforum;
-        $queryTopics = "SELECT COUNT(id) FROM {$asgarosforum->tables->topics}";
-        $queryPosts = "SELECT COUNT(id) FROM {$asgarosforum->tables->posts}";
-        $queryViews = "SELECT SUM(views) FROM {$asgarosforum->tables->topics}";
-        $data = $asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
+        $queryTopics = 'SELECT COUNT(id) FROM '.self::$asgarosforum->tables->topics;
+        $queryPosts = 'SELECT COUNT(id) FROM '.self::$asgarosforum->tables->posts;
+        $queryViews = 'SELECT SUM(views) FROM '.self::$asgarosforum->tables->topics;
+        $data = self::$asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
         $users = count_users();
         $data->users = $users['total_users'];
         return $data;

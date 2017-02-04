@@ -7,10 +7,10 @@ class AsgarosForumThemeManager {
 	const AF_SKINPATH = 'skin';
 	const AF_DEFAULT_THEME = 'default';
 	private static $asgarosforum = null;
-	private static $themes_root;		// Path to themes directory
-	private static $plugin_url;			// URL to plugin directory
-	private static $themes = array();	// Array of available themes
-	private static $current_theme;		// The current theme
+	private static $themes_root;		// Path to themes directory.
+	private static $plugin_url;			// URL to plugin directory.
+	private static $themes = array();	// Array of available themes.
+	private static $current_theme;		// The current theme.
 
 	public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -28,7 +28,7 @@ class AsgarosForumThemeManager {
 		add_action('wp_head', array($this, 'setHeader'));
 	}
 
-	// Find what themes we have available
+	// Find available themes.
 	private static function find_themes() {
 		// Always ensure that the default theme is available.
 		self::$themes[self::AF_DEFAULT_THEME] = array(
@@ -43,9 +43,9 @@ class AsgarosForumThemeManager {
 			// Check the themes directory for more themes.
 			$themes = glob(self::$themes_root.'*');
 
-			if (is_array($themes) && count($themes) > 0) {
+			if (is_array($themes) && !empty($themes)) {
 				foreach ($themes as $themepath) {
-					// Check that only directories with style.css files are considered.
+					// Ensure that only themes appears which contains all necessary files.
 					if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/mobile.css') && is_file($themepath.'/widgets.css')) {
 						$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
 						self::$themes[$trimmed] = array(
@@ -58,31 +58,31 @@ class AsgarosForumThemeManager {
 		}
 	}
 
-	// Get all available themes
+	// Get all available themes.
 	public static function get_themes() {
 		return self::$themes;
 	}
 
-	// Get the current theme
+	// Get the current theme.
 	public static function get_current_theme() {
 		return self::$current_theme;
 	}
 
-	// Set the current theme
+	// Set the current theme.
 	public static function set_current_theme($theme) {
 		if (empty(self::$themes[$theme])) {
-			self::$current_theme = 'default';
+			self::$current_theme = self::AF_DEFAULT_THEME;
 		} else {
 			self::$current_theme = $theme;
 		}
 	}
 
-	// Returns the URL to the path of the selected theme
+	// Returns the URL to the path of the selected theme.
 	public static function get_current_theme_url() {
 		return self::$themes[self::get_current_theme()]['url'];
 	}
 
-	// Check if current theme is the default theme
+	// Check if current theme is the default theme.
 	public static function is_default_theme() {
 		return (self::get_current_theme() === self::AF_DEFAULT_THEME) ? true : false;
 	}

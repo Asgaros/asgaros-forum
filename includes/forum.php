@@ -87,6 +87,7 @@ class AsgarosForum {
         new AsgarosForumThemeManager($this);
         new AsgarosForumEditor($this);
         new AsgarosForumShortcodes($this);
+        new AsgarosForumStatistics($this);
     }
 
     function initialize_widgets() {
@@ -957,5 +958,3 @@ class AsgarosForum {
         print_r('</pre>');
     }
 }
-
-?>

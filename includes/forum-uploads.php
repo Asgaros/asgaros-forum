@@ -82,7 +82,7 @@ class AsgarosForumUploads {
 	        // Register existing files.
 	        if (!empty($_POST['existingfile'])) {
 	            foreach ($_POST['existingfile'] as $file) {
-	                if (file_exists($path.basename($file))) {
+	                if (is_file($path.basename($file))) {
 	                    $links[] = $file;
 	                }
 	            }
@@ -91,7 +91,7 @@ class AsgarosForumUploads {
 	        // Remove deleted files.
 	        if (!empty($_POST['deletefile'])) {
 	            foreach ($_POST['deletefile'] as $file) {
-	                if (file_exists($path.basename($file))) {
+	                if (is_file($path.basename($file))) {
 	                    unlink($path.basename($file));
 	                }
 	            }
@@ -127,7 +127,7 @@ class AsgarosForumUploads {
 					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
 				} else {
 					foreach ($uploads as $upload) {
-		                if (file_exists($path.basename($upload))) {
+		                if (is_file($path.basename($upload))) {
 		                    $uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a></li>';
 		                }
 		            }
@@ -153,7 +153,7 @@ class AsgarosForumUploads {
 
 			if (!empty($uploads) && is_dir($path) && self::$asgarosforum->current_view === 'editpost') {
 				foreach ($uploads as $upload) {
-	                if (file_exists($path.basename($upload))) {
+	                if (is_file($path.basename($upload))) {
 						$uploadedFilesCounter++;
 	                    $uploadedFiles .= '<li>';
 	                    $uploadedFiles .= '<a href="'.$url.utf8_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
