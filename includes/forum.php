@@ -909,40 +909,6 @@ class AsgarosForum {
         }
     }
 
-    public function getSearchResults() {
-        if (!empty($_GET['keywords'])) {
-            AsgarosForumSearch::$searchKeywords = esc_sql(trim($_GET['keywords']));
-            $keywords = AsgarosForumSearch::$searchKeywords;
-
-            if (!empty($keywords)) {
-                $categories = $this->get_categories();
-                $categoriesFilter = array();
-
-                foreach ($categories as $category) {
-                    $categoriesFilter[] = $category->term_id;
-                }
-
-                $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
-
-                $start = $this->current_page * $this->options['topics_per_page'];
-                $end = $this->options['topics_per_page'];
-                $limit = $this->db->prepare("LIMIT %d, %d", $start, $end);
-
-                $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
-
-                $query = "SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$this->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(id) - 1) FROM {$this->tables->posts} WHERE parent_id = t.id) AS answers, MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) AS score FROM {$this->tables->topics} AS t, {$this->tables->posts} AS p, {$this->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".$keywords."*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
-
-                $results = $this->db->get_results($query);
-
-                if (!empty($results)) {
-                    return $results;
-                }
-            }
-        }
-
-        return false;
-    }
-
     // Checks if an element exists and sets all parent IDs based on the given id and its content type.
     public function setParents($id, $contentType) {
         // Set possible error messages.

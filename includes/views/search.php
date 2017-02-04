@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 echo '<h1 class="main-title">'.__('Search', 'asgaros-forum').'</h1>';
 
-$results = $this->getSearchResults();
+$results = AsgarosForumSearch::getSearchResults();
 
 if ($results) {
     echo '<div class="pages-and-menu">'.$this->pageing('search').'<div class="clear"></div></div>';
