@@ -124,6 +124,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Changed: Show statistics in the mobile view
 * Changed: Show pagination under search results
 * Changed: Minor design changes
+* Search Engine Optimizations
 * Performance improvements and code optimizations
 = 1.3.10 =
 * Fixed: Filter [Forum] shortcodes from posts

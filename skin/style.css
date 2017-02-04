@@ -359,7 +359,7 @@
 #af-wrapper #breadcrumbs span {
     display: inline-block;
 }
-#af-wrapper #breadcrumbs span {
+#af-wrapper #breadcrumbs .dashicons-before {
     padding: 0 5px 0 5px;
 }
 #af-wrapper #breadcrumbs a {
