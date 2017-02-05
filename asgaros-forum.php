@@ -44,6 +44,7 @@ require('includes/forum-statistics.php');
 require('includes/forum-breadcrumbs.php');
 require('includes/forum-editor.php');
 require('includes/forum-shortcodes.php');
+require('includes/forum-pagination.php');
 require('admin/admin.php');
 
 AsgarosForumDatabase::createInstance();
