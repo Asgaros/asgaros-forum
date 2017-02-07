@@ -240,6 +240,7 @@ class AsgarosForumNotifications {
                     )
                 );
 
+                // TODO: array can be optimized so that only the value gets returned. Look in query generation.
                 foreach($global_topic_subscribers as $subscriber) {
                     if (!in_array($subscriber->user_email, $subscriberMails)) {
                         $subscriberMails[] = $subscriber->user_email;

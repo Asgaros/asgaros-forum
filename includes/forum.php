@@ -38,6 +38,7 @@ class AsgarosForum {
         'allow_subscriptions'       => true,
         'allow_signatures'          => false,
         'enable_search'             => true,
+        'show_who_is_online'        => true,
         'show_statistics'           => true,
         'show_breadcrumbs'          => true,
         'highlight_admin'           => true,
@@ -70,6 +71,7 @@ class AsgarosForum {
         add_action('widgets_init', array($this, 'initialize_widgets'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
+        add_action('clear_auth_cookie', array('AsgarosForumOnline', 'deleteUserTimeStamp'));
         add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
         add_filter('document_title_parts', array($this, 'change_document_title_parts'));
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
@@ -88,6 +90,7 @@ class AsgarosForum {
         new AsgarosForumEditor($this);
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
+        new AsgarosForumOnline($this);
     }
 
     function initialize_widgets() {

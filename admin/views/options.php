@@ -38,6 +38,10 @@ if (!defined('ABSPATH')) exit;
             <label for="show_breadcrumbs"><?php _e('Show breadcrumbs', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($asgarosforum->options['show_who_is_online'])); ?>>
+            <label for="show_who_is_online"><?php _e('Show who is online', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($asgarosforum->options['show_statistics'])); ?>>
             <label for="show_statistics"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
         </p>

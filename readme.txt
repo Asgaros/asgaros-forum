@@ -25,10 +25,12 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 * Statistics
 * Permissions
 * Search
+* Who is online
 * Banning
 * Powerful editor
 * File uploads
 * Widgets
+* Multiple forum instances
 * Easy color customization
 * Theme manager
 * Multisite compatibility
@@ -111,11 +113,12 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
-* Added: Option to hide breadcrumbs
+* Added: Option to show who is online
 * Added: Shortcode extension to show a specific post
 * Added: Shortcode extension to show a specific topic
 * Added: Shortcode extension to show a specific forum
 * Added: Shortcode extension to show one or more specific categories
+* Added: Option to hide breadcrumbs
 * Added: Cancel button to editor
 * Added: Show IDs of forums/categories inside the administration area
 * Fixed: Load stylesheets and scripts only on forum page

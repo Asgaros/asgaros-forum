@@ -22,6 +22,7 @@ class AsgarosForumStatistics {
                     self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'dashicons-before dashicons-format-quote');
                     self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'dashicons-before dashicons-visibility');
                     self::renderStatisticsElement(__('Users', 'asgaros-forum'), $data->users, 'dashicons-before dashicons-groups');
+                    AsgarosForumOnline::renderStatisticsElement();
                     do_action('asgarosforum_statistics_custom_element');
                 echo '</div>';
                 do_action('asgarosforum_statistics_custom_content_bottom');
