@@ -39,7 +39,7 @@ if (!defined('ABSPATH')) exit;
         </p>
         <p>
             <input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($asgarosforum->options['show_statistics'])); ?>>
-            <label for="enable_search"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
+            <label for="show_statistics"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
         </p>
         <p>
             <input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($asgarosforum->options['minimalistic_editor'])); ?>>
