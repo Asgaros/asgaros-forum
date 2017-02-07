@@ -29,7 +29,7 @@ class AsgarosForumWidgets {
         echo $args['before_widget'];
         echo $args['before_title'].$title.$args['after_title'];
 
-        $locationSetUp = self::$asgarosforum->checkForShortcode();
+        $locationSetUp = AsgarosForumShortcodes::checkForShortcode();
 
         // Try to get the forum-location when it is not set correctly.
         if (!$locationSetUp) {

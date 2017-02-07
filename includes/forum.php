@@ -97,7 +97,7 @@ class AsgarosForum {
     function prepare() {
         global $post;
 
-        if (is_a($post, 'WP_Post') && $this->checkForShortcode($post)) {
+        if (is_a($post, 'WP_Post') && AsgarosForumShortcodes::checkForShortcode($post)) {
             $this->executePlugin = true;
             $this->options['location'] = $post->ID;
         }
@@ -147,6 +147,8 @@ class AsgarosForum {
                 break;
         }
 
+        AsgarosForumShortcodes::handleAttributes();
+
         // Check
         $this->check_access();
 
@@ -194,19 +196,6 @@ class AsgarosForum {
         // Mark visited topic as read.
         if ($this->current_view === 'thread' && $this->current_topic) {
             AsgarosForumUnread::markTopicRead();
-        }
-    }
-
-    function checkForShortcode($postObject = false) {
-        // If no post-object is set, use the location.
-        if (!$postObject && $this->options['location']) {
-            $postObject = get_post($this->options['location']);
-        }
-
-        if ($postObject && (has_shortcode($postObject->post_content, 'forum') || has_shortcode($postObject->post_content, 'Forum'))) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -299,9 +288,7 @@ class AsgarosForum {
         }
     }
 
-    function forum($atts) {
-        AsgarosForumShortcodes::checkAttributes($atts);
-
+    function forum() {
         ob_start();
         echo '<div id="af-wrapper">';
 

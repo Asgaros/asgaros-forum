@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumShortcodes {
     private static $asgarosforum = null;
+    private static $postObject = null;
     public static $shortcodeSearchFilter = '';
     public static $includeCategories = false;
 
@@ -15,86 +16,81 @@ class AsgarosForumShortcodes {
         add_shortcode('Forum', array(self::$asgarosforum, 'forum'));
     }
 
-    static function checkAttributes($atts) {
-        // Normalize attribute keys.
-        $atts = array_change_key_case((array)$atts, CASE_LOWER);
+    public static function checkForShortcode($object = false) {
+        self::$postObject = $object;
 
-        if (!empty($atts['post'])) {
-            $postID = $atts['post'];
+        // If no post-object is set, use the location.
+        if (!self::$postObject && self::$asgarosforum->options['location']) {
+            self::$postObject = get_post(self::$asgarosforum->options['location']);
+        }
 
-            self::$asgarosforum->current_view = 'post';
-            self::$asgarosforum->setParents($postID, 'post');
-        } else if (!empty($atts['topic'])) {
-            $topicID = $atts['topic'];
-            $allowedViews = array('movetopic', 'addpost', 'editpost', 'thread');
+        if (self::$postObject && (has_shortcode(self::$postObject->post_content, 'forum') || has_shortcode(self::$postObject->post_content, 'Forum'))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-            // Ensure that we are in the correct element.
-            if (self::$asgarosforum->current_topic != $topicID) {
-                self::$asgarosforum->setParents($topicID, 'topic');
-                self::$asgarosforum->current_view = 'thread';
-            }
+    public static function handleAttributes() {
+        $atts = array();
+        $pattern = get_shortcode_regex();
 
-            // Ensure that we are in a correct view.
-            else if (!in_array(self::$asgarosforum->current_view, $allowedViews)) {
-                self::$asgarosforum->current_view = 'thread';
-            }
+        if (preg_match_all('/'.$pattern.'/s', self::$postObject->post_content, $matches) && array_key_exists(2, $matches) && (in_array('forum', $matches[2]) || in_array('Forum', $matches[2]))) {
+            $atts = shortcode_parse_atts($matches[3][0]);
 
-            // Check category access.
-            self::$asgarosforum->check_access();
+            if (!empty($atts)) {
+                // Normalize attribute keys.
+                $atts = array_change_key_case((array)$atts, CASE_LOWER);
 
-            // Configure components.
-            self::$asgarosforum->options['enable_search'] = false;
-            AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
-        } else if (!empty($atts['forum'])) {
-            $forumID = $atts['forum'];
-            $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search');
+                if (!empty($atts['post']) && ctype_digit($atts['post'])) {
+                    $postID = $atts['post'];
+                    self::$asgarosforum->current_view = 'post';
+                    self::$asgarosforum->setParents($postID, 'post');
+                } else if (!empty($atts['topic']) && ctype_digit($atts['topic'])) {
+                    $topicID = $atts['topic'];
+                    $allowedViews = array('movetopic', 'addpost', 'editpost', 'thread');
 
-            // Ensure that we are in the correct element.
-            if (self::$asgarosforum->current_forum != $forumID && self::$asgarosforum->parent_forum != $forumID) {
-                self::$asgarosforum->setParents($forumID, 'forum');
+                    // Ensure that we are in the correct element.
+                    if (self::$asgarosforum->current_topic != $topicID) {
+                        self::$asgarosforum->setParents($topicID, 'topic');
+                        self::$asgarosforum->current_view = 'thread';
+                    } else if (!in_array(self::$asgarosforum->current_view, $allowedViews)) {
+                        // Ensure that we are in an allowed view.
+                        self::$asgarosforum->current_view = 'thread';
+                    }
 
-                // Only change view when not inside the search.
-                if (self::$asgarosforum->current_view != 'search') {
-                    self::$asgarosforum->current_view = 'forum';
+                    // Configure components.
+                    self::$asgarosforum->options['enable_search'] = false;
+                    AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
+                } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
+                    $forumID = $atts['forum'];
+                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search');
+
+                    // Ensure that we are in the correct element.
+                    if (self::$asgarosforum->current_forum != $forumID && self::$asgarosforum->parent_forum != $forumID && self::$asgarosforum->current_view != 'search') {
+                        self::$asgarosforum->setParents($forumID, 'forum');
+                        self::$asgarosforum->current_view = 'forum';
+                    } else if (!in_array(self::$asgarosforum->current_view, $allowedViews)) {
+                        // Ensure that we are in an allowed view.
+                        self::$asgarosforum->current_view = 'forum';
+                    }
+
+                    // Configure components.
+                    AsgarosForumBreadCrumbs::$breadCrumbsLevel = (self::$asgarosforum->parent_forum != $forumID) ? 2 : 3;
+                    self::$shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
+                } else if (!empty($atts['category'])) {
+                    self::$includeCategories = explode(',', $atts['category']);
+
+                    // Ensure that we are in the correct element.
+                    if (!in_array(self::$asgarosforum->current_category, self::$includeCategories) && self::$asgarosforum->current_view != 'search') {
+                        self::$asgarosforum->current_category   = false;
+                        self::$asgarosforum->parent_forum       = false;
+                        self::$asgarosforum->current_forum      = false;
+                        self::$asgarosforum->current_topic      = false;
+                        self::$asgarosforum->current_post       = false;
+                        self::$asgarosforum->current_view       = 'default';
+                    }
                 }
-            }
-
-            // Ensure that we are in a correct view.
-            else if (!in_array(self::$asgarosforum->current_view, $allowedViews)) {
-                self::$asgarosforum->current_view = 'forum';
-            }
-
-            // Check category access.
-            self::$asgarosforum->check_access();
-
-            // Configure components.
-            if (self::$asgarosforum->parent_forum != $forumID) {
-                AsgarosForumBreadCrumbs::$breadCrumbsLevel = 2;
-            } else {
-                AsgarosForumBreadCrumbs::$breadCrumbsLevel = 3;
-            }
-
-            self::$shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
-        } else if (!empty($atts['category'])) {
-            self::$includeCategories = explode(',', $atts['category']);
-
-            // Ensure that we are in the correct element.
-            if (!in_array(self::$asgarosforum->current_category, self::$includeCategories)) {
-                self::$asgarosforum->current_category = false;
-                self::$asgarosforum->parent_forum     = false;
-                self::$asgarosforum->current_forum    = false;
-                self::$asgarosforum->current_topic    = false;
-                self::$asgarosforum->current_post     = false;
-
-                // Only change view when not inside the search.
-                if (self::$asgarosforum->current_view != 'search') {
-                    self::$asgarosforum->current_view = 'default';
-                }
-            }
-
-            // Check category access.
-            if (self::$asgarosforum->current_category) {
-                self::$asgarosforum->check_access();
             }
         }
     }
