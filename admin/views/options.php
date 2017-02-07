@@ -118,7 +118,7 @@ if (!defined('ABSPATH')) exit;
         if (count($themes) > 1) { ?>
         <p>
             <label for="theme"><?php _e('Theme', 'asgaros-forum'); ?>:</label>
-            <select name="theme">
+            <select name="theme" id="theme">
                 <?php foreach ($themes as $k => $v) {
                     echo '<option value="'.$k.'" '.selected($k, AsgarosForumThemeManager::get_current_theme(), false).'>'.$v['name'].'</option>';
                 } ?>
