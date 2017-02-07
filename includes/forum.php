@@ -114,6 +114,9 @@ class AsgarosForum {
             return;
         }
 
+        // Update online status.
+        AsgarosForumOnline::updateOnlineStatus();
+
         if (isset($_GET['view'])) {
             $this->current_view = esc_html($_GET['view']);
         }

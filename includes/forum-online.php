@@ -14,7 +14,9 @@ class AsgarosForumOnline {
     public function __construct($object) {
 		self::$asgarosforum = $object;
         self::$functionalityEnabled = self::$asgarosforum->options['show_who_is_online'];
+    }
 
+    public static function updateOnlineStatus() {
         if (self::$functionalityEnabled) {
             self::$userID = get_current_user_id();
             self::$currentTimeStamp = self::$asgarosforum->current_time();
