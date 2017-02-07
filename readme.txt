@@ -119,14 +119,15 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Shortcode extension to show a specific forum
 * Added: Shortcode extension to show one or more specific categories
 * Added: Option to hide breadcrumbs
+* Added: Show statistics in the mobile view
 * Added: Cancel button to editor
 * Added: Show IDs of forums/categories inside the administration area
 * Fixed: Load stylesheets and scripts only on forum page
 * Fixed: Wrong labels in forum configuration
 * Changed: Hide new post/topic buttons when editor is active
-* Changed: Show statistics in the mobile view
 * Changed: Show pagination under search results
 * Changed: Show full breadcrumbs when moving topics
+* Changed: Structure of the forum configuration
 * Changed: Minor design changes
 * Search Engine Optimizations
 * Performance improvements and code optimizations

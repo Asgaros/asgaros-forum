@@ -9,7 +9,7 @@ class AsgarosForumBreadCrumbs {
     public static function showBreadCrumbs() {
         global $asgarosforum;
 
-        if ($asgarosforum->options['show_breadcrumbs']) {
+        if ($asgarosforum->options['enable_breadcrumbs']) {
             // Build breadcrumbs links.
             $breadCrumsLinks = array();
 

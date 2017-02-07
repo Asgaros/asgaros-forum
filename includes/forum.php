@@ -40,7 +40,7 @@ class AsgarosForum {
         'enable_search'             => true,
         'show_who_is_online'        => true,
         'show_statistics'           => true,
-        'show_breadcrumbs'          => true,
+        'enable_breadcrumbs'          => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_edit_date'            => true,
@@ -659,7 +659,7 @@ class AsgarosForum {
     }
 
     function showHeader() {
-        if ($this->options['show_breadcrumbs'] || $this->options['enable_search']) {
+        if ($this->options['enable_breadcrumbs'] || $this->options['enable_search']) {
             echo '<div id="top-container">';
             AsgarosForumBreadCrumbs::showBreadCrumbs();
             AsgarosForumSearch::showSearchInput();

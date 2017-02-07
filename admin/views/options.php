@@ -30,36 +30,12 @@ if (!defined('ABSPATH')) exit;
             <input type="number" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3" min="1">
         </p>
         <p>
-            <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
-            <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
-            <input type="checkbox" name="show_breadcrumbs" id="show_breadcrumbs" <?php checked(!empty($asgarosforum->options['show_breadcrumbs'])); ?>>
-            <label for="show_breadcrumbs"><?php _e('Show breadcrumbs', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
-            <input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($asgarosforum->options['show_who_is_online'])); ?>>
-            <label for="show_who_is_online"><?php _e('Show who is online', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
-            <input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($asgarosforum->options['show_statistics'])); ?>>
-            <label for="show_statistics"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
             <input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($asgarosforum->options['minimalistic_editor'])); ?>>
             <label for="minimalistic_editor"><?php _e('Use minimalistic editor', 'asgaros-forum'); ?></label>
         </p>
         <p>
             <input type="checkbox" name="allow_shortcodes" id="allow_shortcodes" <?php checked(!empty($asgarosforum->options['allow_shortcodes'])); ?>>
             <label for="allow_shortcodes"><?php _e('Allow shortcodes in posts', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
-            <input type="checkbox" name="allow_signatures" id="allow_signatures" <?php checked(!empty($asgarosforum->options['allow_signatures'])); ?>>
-            <label for="allow_signatures"><?php _e('Allow signatures', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
-            <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
-            <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
         </p>
         <p>
             <input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?>>
@@ -76,6 +52,31 @@ if (!defined('ABSPATH')) exit;
         <p>
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?>>
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
+        </p>
+        <h3><?php _e('Features', 'asgaros-forum'); ?></h3>
+        <p>
+            <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
+            <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="enable_breadcrumbs" id="enable_breadcrumbs" <?php checked(!empty($asgarosforum->options['enable_breadcrumbs'])); ?>>
+            <label for="enable_breadcrumbs"><?php _e('Enable breadcrumbs', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($asgarosforum->options['show_who_is_online'])); ?>>
+            <label for="show_who_is_online"><?php _e('Show who is online', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($asgarosforum->options['show_statistics'])); ?>>
+            <label for="show_statistics"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="allow_signatures" id="allow_signatures" <?php checked(!empty($asgarosforum->options['allow_signatures'])); ?>>
+            <label for="allow_signatures"><?php _e('Allow signatures', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
+            <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
         </p>
         <h3><?php _e('Notifications', 'asgaros-forum'); ?></h3>
         <p>
