@@ -455,7 +455,13 @@ class AsgarosForum {
             }
         }
 
-        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_key' => 'order', 'orderby' => 'order', 'meta_query' => $metaQueryFilter));
+        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_query' => $metaQueryFilter));
+
+        foreach ($categories as $category) {
+            $category->order = get_term_meta($category->term_id, 'order', true);
+        }
+        
+        usort($categories, array($this, 'categories_compare'));
 
         return $categories;
     }

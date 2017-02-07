@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Tue Feb 07 2017 16:05:19 GMT+0100 (Mitteleuropäische "
+"POT-Revision-Date: Tue Feb 07 2017 16:52:02 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -104,7 +104,7 @@ msgstr ""
 
 #: ../admin/views/forums.php:34 ../admin/views/forums.php:60 ..
 #: /admin/views/forums.php:117 ../includes/forum-uploads.php:159 ..
-#: /includes/forum.php:610 ../includes/forum.php:646
+#: /includes/forum.php:616 ../includes/forum.php:652
 msgid "Delete"
 msgstr ""
 
@@ -326,7 +326,7 @@ msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:50 ../includes/forum-breadcrumbs.php:50 ..
 #: /includes/forum-editor.php:110 ../includes/forum.php:269 ../includes/forum.php:
-#: 639
+#: 645
 msgid "New Topic"
 msgstr ""
 
@@ -534,12 +534,12 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: ../includes/forum-widgets.php:76 ../includes/forum.php:589
+#: ../includes/forum-widgets.php:76 ../includes/forum.php:595
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/forum-widgets.php:82 ../includes/forum.php:591
+#: ../includes/forum-widgets.php:82 ../includes/forum.php:597
 msgid "No topics yet!"
 msgstr ""
 
@@ -600,7 +600,7 @@ msgstr ""
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: ../includes/forum.php:418 ../includes/forum.php:645
+#: ../includes/forum.php:418 ../includes/forum.php:651
 msgid "Move"
 msgstr ""
 
@@ -608,59 +608,59 @@ msgstr ""
 msgid "You are not allowed to move threads."
 msgstr ""
 
-#: ../includes/forum.php:560
+#: ../includes/forum.php:566
 msgid "Guest"
 msgstr ""
 
-#: ../includes/forum.php:577
+#: ../includes/forum.php:583
 msgid "Deleted user"
 msgstr ""
 
-#: ../includes/forum.php:588 ../includes/views/topic-element.php:17
+#: ../includes/forum.php:594 ../includes/views/topic-element.php:17
 msgid "By"
 msgstr ""
 
-#: ../includes/forum.php:605
+#: ../includes/forum.php:611
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:610 ../includes/forum.php:646
+#: ../includes/forum.php:616 ../includes/forum.php:652
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: ../includes/forum.php:614
+#: ../includes/forum.php:620
 msgid "Edit"
 msgstr ""
 
-#: ../includes/forum.php:641
+#: ../includes/forum.php:647
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:649
+#: ../includes/forum.php:655
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:651
+#: ../includes/forum.php:657
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:655
+#: ../includes/forum.php:661
 msgid "Open"
 msgstr ""
 
-#: ../includes/forum.php:657
+#: ../includes/forum.php:663
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:807
+#: ../includes/forum.php:813
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: ../includes/forum.php:808
+#: ../includes/forum.php:814
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: ../includes/forum.php:809
+#: ../includes/forum.php:815
 msgid "Sorry, this forum does not exist."
 msgstr ""
 

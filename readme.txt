@@ -123,6 +123,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Show statistics in the mobile view
 * Added: Cancel button to editor
 * Added: Show IDs of forums/categories inside the administration area
+* Fixed: Sort categories correctly in the forum-overview
 * Fixed: Load stylesheets and scripts only on forum page
 * Fixed: Wrong labels in forum configuration
 * Changed: Hide new post/topic buttons when editor is active
