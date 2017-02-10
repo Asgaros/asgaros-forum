@@ -416,6 +416,9 @@
     outline: none;
     box-shadow: none; /* comp */
 }
+#af-wrapper #forum-search p {
+    display: none;
+}
 
 /* CONTENT WRAPPERS*/
 #af-wrapper .content-element {

@@ -126,6 +126,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Fixed: Sort categories correctly in the forum-overview
 * Fixed: Load stylesheets and scripts only on forum page
 * Fixed: Wrong labels in forum configuration
+* Fixed: Display issues with some themes
 * Changed: Hide new post/topic buttons when editor is active
 * Changed: Show pagination under search results
 * Changed: Show full breadcrumbs when moving topics
