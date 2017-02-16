@@ -113,6 +113,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Correct escaping of keywords in search results view
+* Changed: Keep keywords in search input field
+* Changed: Minor design changes
+* Performance improvements and code optimizations
 = 1.4.0 =
 * Added: Option to show who is online
 * Added: Shortcode extension to show a specific post

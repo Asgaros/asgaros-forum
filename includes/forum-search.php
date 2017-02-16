@@ -3,51 +3,52 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumSearch {
+    private static $asgarosforum = null;
     static $searchKeywords = '';
 
-    public static function showSearchInput() {
-        global $asgarosforum;
+    public function __construct($object) {
+		self::$asgarosforum = $object;
 
-        if ($asgarosforum->options['enable_search']) {
+        if (!empty($_GET['keywords'])) {
+            self::$searchKeywords = esc_sql(trim($_GET['keywords']));
+        }
+    }
+
+    public static function showSearchInput() {
+        if (self::$asgarosforum->options['enable_search']) {
             echo '<div id="forum-search">';
             echo '<span class="dashicons-before dashicons-search"></span>';
-            echo '<form method="get" action="'.$asgarosforum->getLink('search').'">';
+            echo '<form method="get" action="'.self::$asgarosforum->getLink('search').'">';
             echo '<input name="view" type="hidden" value="search">';
-            echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'">';
+            echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'" value="'.self::$searchKeywords.'">';
             echo '</form>';
             echo '</div>';
         }
     }
 
     public static function getSearchResults() {
-        global $asgarosforum;
+        if (!empty(self::$searchKeywords)) {
+            $categories = self::$asgarosforum->get_categories();
+            $categoriesFilter = array();
 
-        if (!empty($_GET['keywords'])) {
-            self::$searchKeywords = esc_sql(trim($_GET['keywords']));
+            foreach ($categories as $category) {
+                $categoriesFilter[] = $category->term_id;
+            }
 
-            if (!empty(self::$searchKeywords)) {
-                $categories = $asgarosforum->get_categories();
-                $categoriesFilter = array();
+            $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
 
-                foreach ($categories as $category) {
-                    $categoriesFilter[] = $category->term_id;
-                }
+            $start = self::$asgarosforum->current_page * self::$asgarosforum->options['topics_per_page'];
+            $end = self::$asgarosforum->options['topics_per_page'];
+            $limit = self::$asgarosforum->db->prepare("LIMIT %d, %d", $start, $end);
 
-                $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
+            $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
 
-                $start = $asgarosforum->current_page * $asgarosforum->options['topics_per_page'];
-                $end = $asgarosforum->options['topics_per_page'];
-                $limit = $asgarosforum->db->prepare("LIMIT %d, %d", $start, $end);
+            $query = "SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(id) - 1) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = t.id) AS answers, MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) AS score FROM ".self::$asgarosforum->tables->topics." AS t, ".self::$asgarosforum->tables->posts." AS p, ".self::$asgarosforum->tables->forums." AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
 
-                $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
+            $results = self::$asgarosforum->db->get_results($query);
 
-                $query = "SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(id) - 1) FROM {$asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers, MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) AS score FROM {$asgarosforum->tables->topics} AS t, {$asgarosforum->tables->posts} AS p, {$asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
-
-                $results = $asgarosforum->db->get_results($query);
-
-                if (!empty($results)) {
-                    return $results;
-                }
+            if (!empty($results)) {
+                return $results;
             }
         }
 

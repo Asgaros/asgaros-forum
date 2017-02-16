@@ -91,6 +91,7 @@ class AsgarosForum {
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumOnline($this);
+        new AsgarosForumSearch($this);
     }
 
     function initialize_widgets() {
@@ -460,7 +461,7 @@ class AsgarosForum {
         foreach ($categories as $category) {
             $category->order = get_term_meta($category->term_id, 'order', true);
         }
-        
+
         usort($categories, array($this, 'categories_compare'));
 
         return $categories;
