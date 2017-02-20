@@ -39,14 +39,14 @@ if ($counter_total > 0) {
         echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
     echo '</div>';
     echo '<div class="content-element">';
-        // Sticky threads
-        if ($sticky_threads && !$this->current_page) {
-            foreach ($sticky_threads as $thread) {
+        // Sticky topics
+        if ($sticky_topics && !$this->current_page) {
+            foreach ($sticky_topics as $thread) {
                 require('topic-element.php');
             }
         }
 
-        if ($counter_normal > 0 && (($sticky_threads && !$this->current_page))) {
+        if ($counter_normal > 0 && (($sticky_topics && !$this->current_page))) {
             echo '<div class="sticky-bottom"></div>';
         }
 

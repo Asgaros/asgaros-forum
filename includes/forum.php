@@ -355,7 +355,7 @@ class AsgarosForum {
         global $wp_embed;
         $counter = 0;
         $avatars_available = get_option('show_avatars');
-        $threadStarter = $this->get_topic_starter($this->current_topic);
+        $topicStarter = $this->get_topic_starter($this->current_topic);
         $post = $this->getSinglePost();
 
         echo '<div class="title-element"></div>';
@@ -366,9 +366,9 @@ class AsgarosForum {
 
     function showforum() {
         $threads = $this->get_threads($this->current_forum);
-        $sticky_threads = $this->get_threads($this->current_forum, 'sticky');
+        $sticky_topics = $this->get_threads($this->current_forum, 'sticky');
         $counter_normal = count($threads);
-        $counter_total = $counter_normal + count($sticky_threads);
+        $counter_total = $counter_normal + count($sticky_topics);
 
         require('views/forum.php');
     }

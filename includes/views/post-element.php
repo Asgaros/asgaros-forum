@@ -17,7 +17,7 @@ echo '<div class="post" id="postid-'.$post->id.'">';
     <div class="post-content">
         <div class="post-author<?php if (AsgarosForumOnline::isUserOnline($post->author_id)) { echo ' user-online'; } ?>">
             <?php
-            if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $threadStarter != 0 && $threadStarter == $post->author_id) {
+            if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
                 echo '<small class="post-author-marker">'.__('Topic Author', 'asgaros-forum').'</small>';
             }
 

@@ -20,7 +20,7 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
     <?php
     $counter = 0;
     $avatars_available = get_option('show_avatars');
-    $threadStarter = $this->get_topic_starter($this->current_topic);
+    $topicStarter = $this->get_topic_starter($this->current_topic);
     foreach ($posts as $post) {
         require('post-element.php');
     } ?>
