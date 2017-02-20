@@ -19,7 +19,6 @@ class AsgarosForum {
     var $current_page = 0;
     var $parent_forum = false;
     var $category_access_level = false;
-    var $links = array();
     var $options = array();
     var $options_default = array(
         'location'                  => 0,
@@ -108,7 +107,7 @@ class AsgarosForum {
 
         // Set all base links.
         if ($this->executePlugin || get_post($this->options['location'])) {
-            $this->links = AsgarosForumRewrite::setLinks();
+            AsgarosForumRewrite::setLinks();
         }
 
         if (!$this->executePlugin) {
@@ -792,19 +791,7 @@ class AsgarosForum {
 
     // Builds and returns a requested link.
     public function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '') {
-        // Only generate a link when that type is available.
-        if (isset($this->links[$type])) {
-            // Set an ID if available, otherwise initialize the base-link.
-            $link = ($elementID) ? add_query_arg('id', $elementID, $this->links[$type]) : $this->links[$type];
-
-            // Set additional parameters if available, otherwise let the link unchanged.
-            $link = ($additionalParameters) ? add_query_arg($additionalParameters, $link) : $link;
-
-            // Return escaped URL with optional appendix at the end if set.
-            return esc_url($link.$appendix);
-        } else {
-            return false;
-        }
+        return AsgarosForumRewrite::getLink($type, $elementID, $additionalParameters, $appendix);
     }
 
     // Checks if an element exists and sets all parent IDs based on the given id and its content type.
