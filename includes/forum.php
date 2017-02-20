@@ -133,8 +133,11 @@ class AsgarosForum {
                 $this->setParents($elementID, 'forum');
                 break;
             case 'movetopic':
+            case 'topic':
             case 'thread':
             case 'addpost':
+                // Fallback for old view-name.
+                $this->current_view = ($this->current_view == 'topic') ? 'thread' : $this->current_view;
                 $this->setParents($elementID, 'topic');
                 break;
             case 'editpost':
