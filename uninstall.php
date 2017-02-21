@@ -65,7 +65,7 @@ function deleteData() {
 
     // Drop custom tables
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_forums;");
-    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_threads;");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_topics;");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_posts;");
 
     // Delete uploaded files
@@ -79,4 +79,5 @@ function deleteData() {
 
     // Delete data which has been used in old versions of the plugin.
     delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_threads;");
 }

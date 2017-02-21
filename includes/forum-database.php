@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 6;
+    const DATABASE_VERSION = 7;
 
     private static $instance = null;
     private static $db;
@@ -32,9 +32,9 @@ class AsgarosForumDatabase {
 	}
 
     private function setTables() {
-        self::$table_forums     = self::$db->prefix.'forum_forums';
-        self::$table_topics    = self::$db->prefix.'forum_threads';
-        self::$table_posts      = self::$db->prefix.'forum_posts';
+        self::$table_forums = self::$db->prefix.'forum_forums';
+        self::$table_topics = self::$db->prefix.'forum_topics';
+        self::$table_posts  = self::$db->prefix.'forum_posts';
     }
 
     public static function getTables() {
@@ -86,8 +86,11 @@ class AsgarosForumDatabase {
     // Delete tables during a subsite uninstall.
     public function deleteSubsite($tables) {
         $tables[] = self::$db->prefix.'forum_forums';
-        $tables[] = self::$db->prefix.'forum_threads';
+        $tables[] = self::$db->prefix.'forum_topics';
         $tables[] = self::$db->prefix.'forum_posts';
+
+        // Delete data which has been used in old versions of the plugin.
+        $tables[] = self::$db->prefix.'forum_threads';
         return $tables;
     }
 
@@ -97,6 +100,9 @@ class AsgarosForumDatabase {
         $database_version_installed = get_option('asgarosforum_db_version');
 
         if ($database_version_installed != self::DATABASE_VERSION) {
+            // Rename old table.
+            self::$db->query('RENAME TABLE '.self::$db->prefix.'forum_threads TO '.self::$table_topics.';');
+
             $charset_collate = self::$db->get_charset_collate();
 
             $sql1 = "
