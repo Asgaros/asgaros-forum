@@ -59,6 +59,10 @@
     display: block;
     min-height: 35px;
 }
+#af-wrapper .uploaded-file img {
+    width: 300px;
+    height: auto;
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {

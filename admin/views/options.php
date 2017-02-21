@@ -100,6 +100,10 @@ if (!defined('ABSPATH')) exit;
             <label for="allow_file_uploads_guests"><?php _e('Guests can upload files', 'asgaros-forum'); ?></label>
         </p>
         <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
+            <input type="checkbox" name="uploads_show_thumbnails" id="uploads_show_thumbnails" <?php checked(!empty($asgarosforum->options['uploads_show_thumbnails'])); ?>>
+            <label for="uploads_show_thumbnails"><?php _e('Show thumbnails', 'asgaros-forum'); ?></label>
+        </p>
+        <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <input type="checkbox" name="hide_uploads_from_guests" id="hide_uploads_from_guests" <?php checked(!empty($asgarosforum->options['hide_uploads_from_guests'])); ?>>
             <label for="hide_uploads_from_guests"><?php _e('Show uploads to logged-in users only', 'asgaros-forum'); ?></label>
         </p>
