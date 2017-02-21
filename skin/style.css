@@ -59,9 +59,19 @@
     display: block;
     min-height: 35px;
 }
+
+/* UPLOADS */
+#af-wrapper .uploaded-file {
+    display: block;
+    margin-bottom: 5px;
+}
 #af-wrapper .uploaded-file img {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
     width: 300px;
     height: auto;
+    margin: 0;
+    vertical-align: middle;
 }
 
 /* INPUT ELEMENTS */
