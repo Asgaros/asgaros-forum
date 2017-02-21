@@ -101,7 +101,10 @@ class AsgarosForumDatabase {
 
         if ($database_version_installed != self::DATABASE_VERSION) {
             // Rename old table.
-            self::$db->query('RENAME TABLE '.self::$db->prefix.'forum_threads TO '.self::$table_topics.';');
+            $renameTable = self::$db->get_results('SHOW TABLES LIKE "'.self::$db->prefix.'forum_threads";');
+            if (!empty($renameTable)) {
+                self::$db->query('RENAME TABLE '.self::$db->prefix.'forum_threads TO '.self::$table_topics.';');
+            }
 
             $charset_collate = self::$db->get_charset_collate();
 
