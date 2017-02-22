@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 7;
+    const DATABASE_VERSION = 8;
 
     private static $instance = null;
     private static $db;
@@ -128,6 +128,7 @@ class AsgarosForumDatabase {
             views int(11) NOT NULL default '0',
             name varchar(255) NOT NULL default '',
             status varchar(20) NOT NULL default 'normal_open',
+            slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
