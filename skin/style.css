@@ -225,29 +225,29 @@
     box-sizing: content-box;
 }
 #af-wrapper .forum-status,
-#af-wrapper .thread-status {
+#af-wrapper .topic-status {
     width: 50px;
     text-align: center;
 }
 #af-wrapper .forum-name,
-#af-wrapper .thread-name {
+#af-wrapper .topic-name {
     width: auto;
 }
 #af-wrapper .forum-stats,
-#af-wrapper .thread-stats {
+#af-wrapper .topic-stats {
     width: 100px;
     text-align: right;
     border-right: 1px solid #e1e1e1;
     padding-right: 15px !important;
 }
 #af-wrapper .forum-poster,
-#af-wrapper .thread-poster {
+#af-wrapper .topic-poster {
     width: 226px;
     line-height: 1.6;
     text-align: center;
 }
 #af-wrapper .forum-poster .dashicons-before:before,
-#af-wrapper .thread-poster .dashicons-before:before {
+#af-wrapper .topic-poster .dashicons-before:before {
     font-size: 12px;
     width: 12px;
     height: 12px;
@@ -256,7 +256,7 @@
     box-sizing: initial; /* comp */
 }
 #af-wrapper .forum-name strong,
-#af-wrapper .thread-name strong,
+#af-wrapper .topic-name strong,
 #af-wrapper .forum small,
 #af-wrapper .thread small {
     display: block;
@@ -264,7 +264,7 @@
     letter-spacing: normal; /* comp */
     line-height: inherit; /* comp */
 }
-#af-wrapper .thread-name small {
+#af-wrapper .topic-name small {
     font-style: italic;
 }
 #af-wrapper .forum-subforums {

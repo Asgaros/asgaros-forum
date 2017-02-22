@@ -179,7 +179,7 @@ class AsgarosForum {
             }
         } else if ($this->current_view === 'markallread') {
             AsgarosForumUnread::markAllRead();
-        } else if (isset($_GET['move_thread'])) {
+        } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
         } else if (isset($_GET['delete_topic'])) {
             $this->delete_topic($this->current_topic);
@@ -369,8 +369,8 @@ class AsgarosForum {
     }
 
     function showforum() {
-        $threads = $this->get_threads($this->current_forum);
-        $sticky_topics = $this->get_threads($this->current_forum, 'sticky');
+        $threads = $this->get_topics($this->current_forum);
+        $sticky_topics = $this->get_topics($this->current_forum, 'sticky');
         $counter_normal = count($threads);
         $counter_total = $counter_normal + count($sticky_topics);
 
@@ -408,7 +408,7 @@ class AsgarosForum {
         echo '<h1 class="main-title">'.__('Move Topic', 'asgaros-forum').'</h1>';
 
         if (AsgarosForumPermissions::isModerator('current')) {
-            $strOUT = '<form method="post" action="'.$this->getLink('topic_move', $this->current_topic, array('move_thread' => 1)).'">';
+            $strOUT = '<form method="post" action="'.$this->getLink('topic_move', $this->current_topic, array('move_topic' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
@@ -502,14 +502,14 @@ class AsgarosForum {
 
     function get_forums($id = false, $parent_forum = 0) {
         if ($id) {
-            return $this->db->get_results($this->db->prepare("SELECT f.id, f.name, f.description, f.closed, f.sort, f.parent_forum, (SELECT COUNT(ct_t.id) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_threads, (SELECT COUNT(cp_p.id) FROM {$this->tables->posts} AS cp_p, {$this->tables->topics} AS cp_t, {$this->tables->forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(csf_f.id) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums, f.slug FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
+            return $this->db->get_results($this->db->prepare("SELECT f.id, f.name, f.description, f.closed, f.sort, f.parent_forum, (SELECT COUNT(ct_t.id) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_topics, (SELECT COUNT(cp_p.id) FROM {$this->tables->posts} AS cp_p, {$this->tables->topics} AS cp_t, {$this->tables->forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(csf_f.id) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums, f.slug FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum));
         } else {
             // Load all forums.
             return $this->db->get_results("SELECT id, name FROM {$this->tables->forums} ORDER BY sort ASC;");
         }
     }
 
-    function get_threads($id, $type = 'normal') {
+    function get_topics($id, $type = 'normal') {
         $limit = "";
 
         if ($type == 'normal') {
@@ -647,11 +647,11 @@ class AsgarosForum {
 
         if ($location === 'forum' && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) && $this->forumIsOpen()) {
             $menu .= '<a class="forum-editor-button" href="'.$this->getLink('topic_add', $this->current_forum).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('New Topic', 'asgaros-forum').'</span></a>';
-        } else if ($location === 'thread' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
+        } else if ($location === 'topic' && ((is_user_logged_in() && (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && !AsgarosForumPermissions::isBanned('current')))) || (!is_user_logged_in() && $this->options['allow_guest_postings'] && !$this->get_status('closed')))) {
             $menu .= '<a class="forum-editor-button" href="'.$this->getLink('post_add', $this->current_topic).'"><span class="dashicons-before dashicons-plus-alt"></span><span>'.__('Reply', 'asgaros-forum').'</span></a>';
         }
 
-        if (is_user_logged_in() && $location === 'thread' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
+        if (is_user_logged_in() && $location === 'topic' && AsgarosForumPermissions::isModerator('current') && $showallbuttons) {
             $menu .= '<a href="'.$this->getLink('topic_move', $this->current_topic).'"><span class="dashicons-before dashicons-randomize"></span><span>'.__('Move', 'asgaros-forum').'</span></a>';
             $menu .= '<a href="'.$this->getLink('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');"><span class="dashicons-before dashicons-trash"></span><span>'.__('Delete', 'asgaros-forum').'</span></a>';
 

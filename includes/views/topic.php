@@ -11,7 +11,7 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
     $paginationRendering = $pagination->renderPagination($this->tables->posts);
     echo $paginationRendering;
     ?>
-    <div class="forum-menu"><?php echo $this->forum_menu('thread');?></div>
+    <div class="forum-menu"><?php echo $this->forum_menu('topic');?></div>
     <div class="clear"></div>
 </div>
 
@@ -28,7 +28,7 @@ echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->curr
 <?php AsgarosForumEditor::showEditor('addpost', true); ?>
 <div class="pages-and-menu">
     <?php echo $paginationRendering; ?>
-    <div class="forum-menu"><?php echo $this->forum_menu('thread', false); ?></div>
+    <div class="forum-menu"><?php echo $this->forum_menu('topic', false); ?></div>
     <div class="clear"></div>
 </div>
 
