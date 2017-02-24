@@ -47,6 +47,7 @@ require('includes/forum-shortcodes.php');
 require('includes/forum-pagination.php');
 require('includes/forum-online.php');
 require('admin/admin.php');
+require('admin/admin-structure-table.php');
 
 AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();

@@ -29,64 +29,81 @@
 .term-description-wrap {
     display: none;
 }
-/* FORUM */
-#af-forums .element-id {
-    margin-left: 5px;
-    color: #aaa;
-    font-style: italic;
-    font-weight: normal;
-}
-#af-forums .dashicons-before {
+/* STRUCTURE */
+#af-structure .dashicons-before {
     font-size: 14px;
     display: inline-block;
 }
-#af-forums a {
+#af-structure a {
     text-decoration: none;
 }
-#af-forums h3 {
-    font-weight: normal;
-}
-#af-forums .forum-delete-link {
+#af-structure .forum-delete-link {
     color: #a00;
 }
-#af-forums .forum-editor-link,
-#af-forums .forum-delete-link {
-    padding: 10px 0;
+#af-structure .forum-delete-link:hover {
+    color: red;
 }
-#af-forums .forum {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+#af-structure .padding-top {
+    padding-top: 10px;
 }
-#af-forums .subforum {
+#af-structure .tablenav,
+#af-structure .forums tfoot {
+    display: none;
+}
+#af-structure .hndle {
+    cursor: default;
+}
+#af-structure .element-id {
+    color: silver;
+    font-weight: 600;
+}
+#af-structure .subforum {
+    display: block;
     margin-left: 20px;
-    padding-left: 5px;
-    border-left: 2px solid #ccc;
+    border-left: 3px solid #ddd;
+    padding-left: 5px
 }
-#af-forums .forum-name {
-    width: 360px;
-    display: inline-block;
+#af-structure th {
+    width: initial;
+    vertical-align: middle;
+    color: #444;
 }
-#af-forums .forum-order {
-    width: 125px;
-    display: inline-block;
+#af-structure #forum_name {
+    padding: 3px 8px;
+    font-size: 1.7em;
+    line-height: 100%;
+    height: 1.7em;
+    width: 100%;
+    outline: 0;
+    margin: 0 0 3px;
+    background-color: #fff;
 }
-#af-forums .forum-actions {
-    display: inline-block;
+#af-structure #forum-editor .form-table th {
+    min-width: 150px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
-#add-edit-forum-form .form-table th {
-    width: 150px;
-    padding: 10px 10px 10px 0;
+#af-structure #forum-editor .form-table td {
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
-#add-edit-forum-form .form-table td {
-    padding: 5px 10px;
-}
-#add-edit-forum-form input[type="text"] {
-    width: 300px;
-}
-#delete-forum-form input[type="submit"] {
+#af-structure #forum-delete input[type="submit"] {
     background-color: #d54e21;
     border-color: #d54e21;
     color: #fff;
     text-shadow: none;
     box-shadow: none;
+}
+#af-structure .forum-name {
+    font-weight: 600;
+}
+#af-structure .forum-description {
+    font-style: italic;
+}
+#af-structure .wp-list-table td {
+    vertical-align: middle;
+}
+#af-structure .column-status,
+#af-structure .column-sort {
+    width: 125px;
 }

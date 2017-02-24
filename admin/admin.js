@@ -25,6 +25,9 @@
 
         // Create/edit forum dialog.
         $('.forum-editor-link').click(function() {
+            resetEditor();
+
+            var editor_title        = $(this).attr('data-value-editor-title');
             var forum_id            = $(this).attr('data-value-id');
             var forum_category      = $(this).attr('data-value-category');
             var forum_parent_forum  = $(this).attr('data-value-parent-forum');
@@ -53,19 +56,44 @@
             }
 
             $('#forum-editor input[name=forum_order]').val(forum_order);
+
+            setTitle(editor_title);
+
+            // Show editor.
+            $('#forum-editor').show();
+            $('#structure-editor').show();
+            $('#forum-editor input[name=forum_name]').focus();
         });
 
         // Delete forum dialog.
         $('.forum-delete-link').click(function() {
+            resetEditor();
+
+            var editor_title        = $(this).attr('data-value-editor-title');
             var forum_id            = $(this).attr('data-value-id');
             var forum_category      = $(this).attr('data-value-category');
 
             $('#forum-delete input[name=forum-id]').val(forum_id);
             $('#forum-delete input[name=forum-category]').val(forum_category);
+
+            setTitle(editor_title);
+
+            $('#forum-delete').show();
+            $('#structure-editor').show();
         });
 
-        $('#af-forums .button-cancel').click(function() {
-            tb_remove();
+        $('#structure-editor .button-cancel').click(function() {
+            resetEditor();
         })
+
+        function setTitle(title) {
+            $('#structure-editor h2 span').html(title);
+        }
+
+        function resetEditor() {
+            $('#structure-editor').hide();
+            $('#forum-editor').hide();
+            $('#forum-delete').hide();
+        }
     });
 })(jQuery);
