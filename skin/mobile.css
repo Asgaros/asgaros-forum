@@ -44,9 +44,7 @@
 }
 #af-wrapper #statistics .statistics-element {
     border: none;
-    display: block;
     text-align: center;
-    width: 100%;
 }
 #af-wrapper #statistics .element-number,
 #af-wrapper #statistics .element-name {

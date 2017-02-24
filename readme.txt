@@ -113,6 +113,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Changed: Minor design changes
 = 1.4.1 =
 * Added: Option to show thumbnails for uploads
 * Fixed: Correct escaping of keywords in search results view
