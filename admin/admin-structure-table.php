@@ -73,10 +73,10 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
 
     function get_columns() {
         $columns = array(
-            'name'      => __('Name', 'asgaros-forum'),
-            'status'    => __('Status', 'asgaros-forum'),
-            'sort'      => __('Order', 'asgaros-forum'),
-            'actions'   => __('Actions', 'asgaros-forum')
+            'name'      => __('Name:', 'asgaros-forum'),
+            'status'    => __('Status:', 'asgaros-forum'),
+            'sort'      => __('Order:', 'asgaros-forum'),
+            'actions'   => __('Actions:', 'asgaros-forum')
         );
 
         return $columns;

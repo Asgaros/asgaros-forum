@@ -1,7 +1,5 @@
 (function($) {
     $(document).ready(function() {
-        $('.inline-edit-col input[name=slug]').parents('label').hide();
-
         // Adding color picker
         $('.color-picker').wpColorPicker();
 
@@ -21,6 +19,41 @@
             } else {
                 $('#af-options .uploads-option').hide();
             }
+        });
+
+        // Create/edit category dialog.
+        $('.category-editor-link').click(function() {
+            resetEditor();
+
+            var editor_title        = $(this).attr('data-value-editor-title');
+            var category_id         = $(this).attr('data-value-id');
+            var category_name       = '';
+            var category_access     = 'everyone';
+            var category_order      = '1';
+
+            if (category_id !== 'new') {
+                category_name       = $('#category_'+category_id+'_name').val();
+                category_access     = $('#category_'+category_id+'_access').val();
+                category_order      = $('#category_'+category_id+'_order').val();
+            }
+
+            $('#category-editor input[name=category_id]').val(category_id);
+            $('#category-editor input[name=category_name]').val(category_name);
+
+            $('#category-editor select[name=category_access] option').each(function() {
+                if ($(this).val() == category_access) {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+
+            $('#category-editor input[name=category_order]').val(category_order);
+
+            setTitle(editor_title);
+
+            // Show editor.
+            $('#category-editor').show();
+            $('#structure-editor').show();
+            $('#category-editor input[name=category_name]').focus();
         });
 
         // Create/edit forum dialog.
@@ -65,6 +98,21 @@
             $('#forum-editor input[name=forum_name]').focus();
         });
 
+        // Delete category dialog.
+        $('.category-delete-link').click(function() {
+            resetEditor();
+
+            var editor_title        = $(this).attr('data-value-editor-title');
+            var category_id         = $(this).attr('data-value-id');
+
+            $('#category-delete input[name=category-id]').val(category_id);
+
+            setTitle(editor_title);
+
+            $('#category-delete').show();
+            $('#structure-editor').show();
+        });
+
         // Delete forum dialog.
         $('.forum-delete-link').click(function() {
             resetEditor();
@@ -92,6 +140,8 @@
 
         function resetEditor() {
             $('#structure-editor').hide();
+            $('#category-editor').hide();
+            $('#category-delete').hide();
             $('#forum-editor').hide();
             $('#forum-delete').hide();
         }

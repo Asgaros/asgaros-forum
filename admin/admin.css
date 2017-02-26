@@ -23,13 +23,21 @@
     vertical-align: middle;
     color: #666;
 }
-/* CATEGORIES */
-.term-name-wrap p,
-.term-slug-wrap,
-.term-description-wrap {
-    display: none;
-}
 /* STRUCTURE */
+#af-structure .category-actions {
+    float: right;
+    font-weight: normal;
+    font-size: 13px;
+}
+#af-structure .category-actions a {
+    color: white;
+}
+#af-structure .category-actions a.category-editor-link:hover {
+    color: #73d5f5 !important;
+}
+#af-structure .category-actions a.category-delete-link:hover {
+    color: #ffb2b2 !important;
+}
 #af-structure .dashicons-before {
     font-size: 14px;
     display: inline-block;
@@ -46,12 +54,17 @@
 #af-structure .padding-top {
     padding-top: 10px;
 }
+#af-structure .margin-bottom {
+    margin-bottom: 20px;
+}
 #af-structure .tablenav,
 #af-structure .forums tfoot {
     display: none;
 }
 #af-structure .hndle {
     cursor: default;
+    background-color: #2d89cc;
+    color: white;
 }
 #af-structure .element-id {
     color: silver;
@@ -68,6 +81,7 @@
     vertical-align: middle;
     color: #444;
 }
+#af-structure #category_name,
 #af-structure #forum_name {
     padding: 3px 8px;
     font-size: 1.7em;
@@ -78,15 +92,21 @@
     margin: 0 0 3px;
     background-color: #fff;
 }
+#af-structure #category-editor .form-table th,
 #af-structure #forum-editor .form-table th {
     min-width: 150px;
     padding-top: 8px;
     padding-bottom: 8px;
 }
+#af-structure #category-editor .form-table td,
 #af-structure #forum-editor .form-table td {
     padding-top: 8px;
     padding-bottom: 8px;
 }
+#af-structure input[type="text"] {
+    width: 100%;
+}
+#af-structure #category-delete input[type="submit"],
 #af-structure #forum-delete input[type="submit"] {
     background-color: #d54e21;
     border-color: #d54e21;

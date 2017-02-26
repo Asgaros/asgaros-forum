@@ -75,9 +75,6 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_after_add_thread_submit
 * asgarosforum_after_add_post_submit
 * asgarosforum_after_edit_post_submit
-* asgarosforum_action_add_category_form_fields
-* asgarosforum_action_edit_category_form_fields
-* asgarosforum_action_save_category_form_fields
 * asgarosforum_{current_view}_custom_content_top
 * asgarosforum_{current_view}_custom_content_bottom
 * asgarosforum_editor_custom_content_bottom
@@ -113,7 +110,13 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Revised structure administration
 * Changed: Minor design changes
+* Removed: asgarosforum_action_add_category_form_fields hook
+* Removed: asgarosforum_action_edit_category_form_fields hook
+* Removed: asgarosforum_action_save_category_form_fields hook
+* Removed: asgarosforum_filter_manage_columns filter
+* Removed: asgarosforum_filter_manage_custom_columns filter
 = 1.4.1 =
 * Added: Option to show thumbnails for uploads
 * Fixed: Correct escaping of keywords in search results view
