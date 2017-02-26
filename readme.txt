@@ -16,6 +16,9 @@ Asgaros Forum is the perfect WordPress plugin for you if you want to extend your
 = Installation =
 Create a new page for your forum to display on and add the shortcode [forum] to this page. Add this page to your menu so you can access the forum. Thats all!
 
+= Demo & Support =
+Check out our [official website](https://www.asgaros.de/support/) if you want to see a demo of the plugin or if you need support.
+
 = Features =
 * Topic & post management
 * Guest postings
