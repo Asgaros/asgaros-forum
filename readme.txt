@@ -113,6 +113,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.4.2 =
 * Revised structure administration
 * Changed: Minor design changes
