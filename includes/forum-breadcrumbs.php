@@ -22,20 +22,20 @@ class AsgarosForumBreadCrumbs {
 
             if (self::$breadCrumbsLevel >= 3 && $asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
                 $elementLink = $asgarosforum->getLink('forum', $asgarosforum->parent_forum);
-                $elementName = esc_html(stripslashes($asgarosforum->get_name($asgarosforum->parent_forum, $asgarosforum->tables->forums)));
+                $elementName = esc_html(stripslashes($asgarosforum->parent_forum_name));
                 $elementTitle = $elementName;
                 $breadCrumsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
             }
 
             if (self::$breadCrumbsLevel >= 2 && $asgarosforum->current_forum) {
                 $elementLink = $asgarosforum->getLink('forum', $asgarosforum->current_forum);
-                $elementName = esc_html(stripslashes($asgarosforum->get_name($asgarosforum->current_forum, $asgarosforum->tables->forums)));
+                $elementName = esc_html(stripslashes($asgarosforum->current_forum_name));
                 $elementTitle = $elementName;
                 $breadCrumsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
             }
 
             if (self::$breadCrumbsLevel >= 1 && $asgarosforum->current_topic) {
-                $name = stripslashes($asgarosforum->get_name($asgarosforum->current_topic, $asgarosforum->tables->topics));
+                $name = stripslashes($asgarosforum->current_topic_name);
                 $elementLink = $asgarosforum->getLink('topic', $asgarosforum->current_topic);
                 $elementName = esc_html($asgarosforum->cut_string($name));
                 $elementTitle = esc_html($name);

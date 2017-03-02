@@ -265,9 +265,9 @@ class AsgarosForum {
     function get_title($title) {
         if ($this->executePlugin && !$this->error && $this->current_view) {
             if ($this->current_view == 'forum' && $this->current_forum) {
-                $title = esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).' - '.$title;
+                $title = esc_html(stripslashes($this->current_forum_name)).' - '.$title;
             } else if ($this->current_view == 'thread' && $this->current_topic) {
-                $title = esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics))).' - '.$title;
+                $title = esc_html(stripslashes($this->current_topic_name)).' - '.$title;
             } else if ($this->current_view == 'editpost') {
                 $title = __('Edit Post', 'asgaros-forum').' - '.$title;
             } else if ($this->current_view == 'addpost') {
@@ -412,7 +412,7 @@ class AsgarosForum {
 
         if (AsgarosForumPermissions::isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->getLink('topic_move', $this->current_topic, array('move_topic' => 1)).'">';
-            $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics)))).'</div>';
+            $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
 
@@ -550,14 +550,6 @@ class AsgarosForum {
         } else {
             return false;
         }
-    }
-
-    function get_name($id, $location) {
-        if (empty($this->cache['get_name'][$location][$id])) {
-            $this->cache['get_name'][$location][$id] = $this->db->get_var($this->db->prepare("SELECT name FROM {$location} WHERE id = %d;", $id));
-        }
-
-        return $this->cache['get_name'][$location][$id];
     }
 
     function cut_string($string, $length = 33) {

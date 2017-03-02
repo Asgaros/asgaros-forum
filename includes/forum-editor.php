@@ -95,13 +95,13 @@ class AsgarosForumEditor {
             } else if ($editorView === 'editpost') {
                 $post = self::$asgarosforum->db->get_row(self::$asgarosforum->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", self::$asgarosforum->current_post));
 
-                if (!isset($_POST['message'])) {
+				if (!isset($_POST['message'])) {
                     $message = $post->text;
                 }
 
                 // TODO: Is first post query can get removed and get via the before query (get min(id)).
                 if (!isset($_POST['subject']) && self::$asgarosforum->is_first_post($post->id)) {
-                    $subject = self::$asgarosforum->get_name($post->parent_id, self::$asgarosforum->tables->topics);
+                    $subject = self::$asgarosforum->current_topic_name;
                 }
             }
 
@@ -109,7 +109,7 @@ class AsgarosForumEditor {
             if ($editorView === 'addtopic') {
                 $editorTitle = __('New Topic', 'asgaros-forum');
             } else if ($editorView === 'addpost') {
-                $editorTitle = __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes(self::$asgarosforum->get_name(self::$asgarosforum->current_topic, self::$asgarosforum->tables->topics)));
+                $editorTitle = __('Post Reply:', 'asgaros-forum').' '.esc_html(stripslashes(self::$asgarosforum->current_topic_name));
             } else if ($editorView === 'editpost') {
                 $editorTitle = __('Edit Post', 'asgaros-forum');
             }

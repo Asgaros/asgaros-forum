@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</h1>';
+echo '<h1 class="main-title">'.esc_html(stripslashes($this->current_forum_name)).'</h1>';
 
 AsgarosForumEditor::showEditor('addtopic', true);
 
@@ -61,7 +61,7 @@ if ($counter_total > 0) {
         <div class="clear"></div>
     </div>
 <?php } else {
-    echo '<div class="title-element">'.esc_html(stripslashes($this->get_name($this->current_forum, $this->tables->forums))).'</div>';
+    echo '<div class="title-element">'.esc_html(stripslashes($this->current_forum_name)).'</div>';
     echo '<div class="content-element">';
     echo '<div class="notice">'.__('There are no topics yet!', 'asgaros-forum').'</div>';
     echo '</div>';

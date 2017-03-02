@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.esc_html(stripslashes($this->get_name($this->current_topic, $this->tables->topics))).'</h1>';
+echo '<h1 class="main-title">'.esc_html(stripslashes($this->current_topic_name)).'</h1>';
 
 ?>
 <div class="pages-and-menu">
