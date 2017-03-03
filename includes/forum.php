@@ -11,6 +11,7 @@ class AsgarosForum {
     var $date_format = '';
     var $error = false;
     var $info = false;
+    var $current_title = false;
     var $current_category = false;
     var $current_forum = false;
     var $current_forum_name = false;
@@ -165,6 +166,8 @@ class AsgarosForum {
         // Check
         $this->check_access();
 
+        $this->setCurrentTitle();
+
         // Override editor settings.
         $this->options_editor = apply_filters('asgarosforum_filter_editor_settings', $this->options_editor);
 
@@ -262,23 +265,29 @@ class AsgarosForum {
         return $title;
     }
 
-    function get_title($title) {
-        if ($this->executePlugin && !$this->error && $this->current_view) {
+    function setCurrentTitle() {
+        if (!$this->error && $this->current_view) {
             if ($this->current_view == 'forum' && $this->current_forum) {
-                $title = esc_html(stripslashes($this->current_forum_name)).' - '.$title;
+                $this->current_title = esc_html(stripslashes($this->current_forum_name));
             } else if ($this->current_view == 'thread' && $this->current_topic) {
-                $title = esc_html(stripslashes($this->current_topic_name)).' - '.$title;
+                $this->current_title = esc_html(stripslashes($this->current_topic_name));
             } else if ($this->current_view == 'editpost') {
-                $title = __('Edit Post', 'asgaros-forum').' - '.$title;
+                $this->current_title = __('Edit Post', 'asgaros-forum');
             } else if ($this->current_view == 'addpost') {
-                $title = __('Post Reply', 'asgaros-forum').' - '.$title;
+                $this->current_title = __('Post Reply', 'asgaros-forum');
             } else if ($this->current_view == 'addtopic') {
-                $title = __('New Topic', 'asgaros-forum').' - '.$title;
+                $this->current_title = __('New Topic', 'asgaros-forum');
             } else if ($this->current_view == 'movetopic') {
-                $title = __('Move Topic', 'asgaros-forum').' - '.$title;
+                $this->current_title = __('Move Topic', 'asgaros-forum');
             } else if ($this->current_view == 'search') {
-                $title = __('Search', 'asgaros-forum').' - '.$title;
+                $this->current_title = __('Search', 'asgaros-forum');
             }
+        }
+    }
+
+    function get_title($title) {
+        if ($this->executePlugin && $this->current_title) {
+            $title = $this->current_title.' - '.$title;
         }
 
         return $title;
