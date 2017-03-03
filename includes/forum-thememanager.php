@@ -92,13 +92,19 @@ class AsgarosForumThemeManager {
 
 		// SEO stuff.
 		if (self::$asgarosforum->executePlugin) {
-			//$currentLink = self::$asgarosforum->getLink('current');
-			//$currentTitle = (self::$asgarosforum->current_title) ? self::$asgarosforum->current_title : get_the_title();
+			$currentLink = self::$asgarosforum->getLink('current');
+			$currentTitle = (self::$asgarosforum->current_title) ? self::$asgarosforum->current_title : get_the_title();
+			$currentTitle = (self::$asgarosforum->current_page > 0) ? $currentTitle.' - '.__('Page', 'asgaros-forum').' '.(self::$asgarosforum->current_page + 1) : $currentTitle;
+			$currentDescription = (self::$asgarosforum->current_description) ? self::$asgarosforum->current_description : $currentTitle;
 
-			//echo '<link rel="canonical" href="'.$currentLink.'" />'.PHP_EOL;
-			//echo '<meta property="og:url" content="'.$currentLink.'" />'.PHP_EOL;
-			//echo '<meta property="og:title" content="'.$currentTitle.'" />'.PHP_EOL;
-			//echo '<meta name="twitter:title" content="'.$currentTitle.'" />'.PHP_EOL;
+			echo '<link rel="canonical" href="'.$currentLink.'" />'.PHP_EOL;
+			echo '<meta name="description" content="'.$currentDescription.'" />'.PHP_EOL;
+			echo '<meta property="og:url" content="'.$currentLink.'" />'.PHP_EOL;
+			echo '<meta property="og:title" content="'.$currentTitle.'" />'.PHP_EOL;
+			echo '<meta property="og:description" content="'.$currentDescription.'" />'.PHP_EOL;
+			echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />'.PHP_EOL;
+			echo '<meta name="twitter:title" content="'.$currentTitle.'" />'.PHP_EOL;
+			echo '<meta name="twitter:description" content="'.$currentDescription.'" />'.PHP_EOL;
 		}
 
 		$themeurl = self::get_current_theme_url();
