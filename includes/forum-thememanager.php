@@ -88,22 +88,37 @@ class AsgarosForumThemeManager {
 	}
 
 	public static function setHeader() {
+		echo '<!-- Asgaros Forum: BEGIN -->'.PHP_EOL;
+
+		// SEO stuff.
+		if (self::$asgarosforum->executePlugin) {
+			//$currentLink = self::$asgarosforum->getLink('current');
+			//$currentTitle = (self::$asgarosforum->current_title) ? self::$asgarosforum->current_title : get_the_title();
+
+			//echo '<link rel="canonical" href="'.$currentLink.'" />'.PHP_EOL;
+			//echo '<meta property="og:url" content="'.$currentLink.'" />'.PHP_EOL;
+			//echo '<meta property="og:title" content="'.$currentTitle.'" />'.PHP_EOL;
+			//echo '<meta name="twitter:title" content="'.$currentTitle.'" />'.PHP_EOL;
+		}
+
 		$themeurl = self::get_current_theme_url();
 
-        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css?ver='.self::$asgarosforum->version.'" />';
+        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css?ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
 
 		if (self::$asgarosforum->executePlugin) {
-	        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css?ver='.self::$asgarosforum->version.'" />';
+	        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css?ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
 
 	        if (self::is_default_theme()) {
 	            if ((self::$asgarosforum->options['custom_color'] !== self::$asgarosforum->options_default['custom_color']) || (self::$asgarosforum->options['custom_text_color'] !== self::$asgarosforum->options_default['custom_text_color']) || (self::$asgarosforum->options['custom_background_color'] !== self::$asgarosforum->options_default['custom_background_color'])) {
-	                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr(self::$asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr(self::$asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr(self::$asgarosforum->options['custom_background_color'], 1).'&ver='.self::$asgarosforum->version.'" />';
+	                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr(self::$asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr(self::$asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr(self::$asgarosforum->options['custom_background_color'], 1).'&ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
 	            }
 	        }
 
 	        if (wp_is_mobile()) {
-	            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css?ver='.self::$asgarosforum->version.'" />';
+	            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css?ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
 	        }
 		}
+
+		echo '<!-- Asgaros Forum: END -->'.PHP_EOL;
 	}
 }
