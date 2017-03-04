@@ -217,8 +217,14 @@
     width: 100%;
     border-bottom: 1px solid #e1e1e1;
 }
-#af-wrapper .forum div,
-#af-wrapper .thread div {
+#af-wrapper .forum-status,
+#af-wrapper .forum-name,
+#af-wrapper .forum-stats,
+#af-wrapper .forum-poster,
+#af-wrapper .topic-status,
+#af-wrapper .topic-name,
+#af-wrapper .topic-stats,
+#af-wrapper .topic-poster {
     display: table-cell;
     padding: 4px 8px;
     vertical-align: middle;

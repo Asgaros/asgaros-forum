@@ -116,6 +116,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Open Graph tags
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
+* Mobile Theme Improvements
 * Search Engine Optimizations
 * Performance improvements and code optimizations
 = 1.4.2 =
