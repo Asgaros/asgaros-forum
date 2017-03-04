@@ -92,7 +92,7 @@ class AsgarosForumThemeManager {
 
 		// SEO stuff.
 		if (self::$asgarosforum->executePlugin) {
-			$currentLink = self::$asgarosforum->getLink('current');
+			$currentLink = (self::$asgarosforum->current_page > 0) ? self::$asgarosforum->getLink('current') : esc_url(remove_query_arg('part', self::$asgarosforum->getLink('current', false, false, '', false)));
 			$currentTitle = (self::$asgarosforum->current_title) ? self::$asgarosforum->current_title : get_the_title();
 			$currentTitle = (self::$asgarosforum->current_page > 0) ? $currentTitle.' - '.__('Page', 'asgaros-forum').' '.(self::$asgarosforum->current_page + 1) : $currentTitle;
 			$currentDescription = (self::$asgarosforum->current_description) ? self::$asgarosforum->current_description : $currentTitle;

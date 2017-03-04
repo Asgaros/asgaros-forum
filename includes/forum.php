@@ -799,8 +799,8 @@ class AsgarosForum {
     }
 
     // Builds and returns a requested link.
-    public function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '') {
-        return AsgarosForumRewrite::getLink($type, $elementID, $additionalParameters, $appendix);
+    public function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '', $escapeURL = true) {
+        return AsgarosForumRewrite::getLink($type, $elementID, $additionalParameters, $appendix, $escapeURL);
     }
 
     // Checks if an element exists and sets all parent IDs based on the given id and its content type.

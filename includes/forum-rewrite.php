@@ -17,7 +17,7 @@ class AsgarosForumRewrite {
 	}
 
     // Builds and returns a requested link.
-    public static function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '') {
+    public static function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '', $escapeURL = true) {
         // Only generate a link when that type is available.
         if (isset(self::$links[$type])) {
             // Set an ID if available, otherwise initialize the base-link.
@@ -26,8 +26,12 @@ class AsgarosForumRewrite {
             // Set additional parameters if available, otherwise let the link unchanged.
             $link = ($additionalParameters) ? add_query_arg($additionalParameters, $link) : $link;
 
-            // Return escaped URL with optional appendix at the end if set.
-            return esc_url($link.$appendix);
+            // Return (escaped) URL with optional appendix at the end if set.
+            if ($escapeURL) {
+                return esc_url($link.$appendix);
+            } else {
+                return $link.$appendix;
+            }
         } else {
             return false;
         }
