@@ -5,14 +5,12 @@
         border-right: none;
     }
     #af-wrapper .forum-stats,
-    #af-wrapper .forum-poster,
     #af-wrapper .topic-stats,
-    #af-wrapper .topic-poster,
     #af-wrapper .post-author img,
     #af-wrapper .post-author br,
     #af-wrapper .post-author small,
     #af-wrapper .last-post-headline {
-        display: none !important;
+        display: none;
     }
     #af-wrapper .editor-row {
         width: 100% !important;
@@ -52,5 +50,12 @@
         display: inline-block;
         font-size: 18px;
         line-height: 32px;
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    #af-wrapper .forum-poster,
+    #af-wrapper .topic-poster {
+        display: none;
     }
 }
