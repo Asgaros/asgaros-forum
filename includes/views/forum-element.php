@@ -9,9 +9,15 @@ if ($forum->count_topics) {
     $lastpost_data = $this->get_lastpost_in_forum($forum->id);
 }
 
+// Get the read/unread status of a forum.
+$unreadStatus = AsgarosForumUnread::getStatusForum($forum->id, $forum->count_topics);
+
+// Format the element counters.
+$count_topics_i18n = number_format_i18n($forum->count_topics);
+$count_posts_i18n = number_format_i18n($forum->count_posts);
+
 echo '<div class="forum" id="forum-'.$forum->id.'">';
     echo '<div class="forum-status">';
-        $unreadStatus = AsgarosForumUnread::getStatusForum($forum->id, $forum->count_topics);
         echo '<span class="dashicons-before dashicons-overview '.$unreadStatus.'"></span>';
     echo '</div>';
     echo '<div class="forum-name">';
@@ -36,8 +42,6 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         }
     echo '</div>';
     echo '<div class="forum-stats">';
-        $count_topics_i18n = number_format_i18n($forum->count_topics);
-        $count_posts_i18n = number_format_i18n($forum->count_posts);
         echo '<small>'.sprintf(_n('%s Topic', '%s Topics', $forum->count_topics, 'asgaros-forum'), $count_topics_i18n).'</small>';
         echo '<small>'.sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n).'</small>';
     echo '</div>';

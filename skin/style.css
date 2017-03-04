@@ -226,13 +226,13 @@
 #af-wrapper .topic-stats,
 #af-wrapper .topic-poster {
     display: table-cell;
-    padding: 4px 8px;
+    box-sizing: border-box;
     vertical-align: middle;
-    box-sizing: content-box;
+    padding: 4px;
 }
 #af-wrapper .forum-status,
 #af-wrapper .topic-status {
-    width: 50px;
+    width: 65px;
     text-align: center;
 }
 #af-wrapper .forum-name,
@@ -243,14 +243,13 @@
 #af-wrapper .topic-stats {
     width: 100px;
     text-align: right;
-    border-right: 1px solid #e1e1e1;
-    padding-right: 15px !important;
+    padding-right: 10px;
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
     width: 230px;
-    line-height: 1.6;
     text-align: center;
+    border-left: 1px solid #e1e1e1;
 }
 #af-wrapper .forum-poster .dashicons-before:before,
 #af-wrapper .topic-poster .dashicons-before:before {
@@ -275,8 +274,8 @@
 }
 #af-wrapper .forum-subforums {
     border-top: 1px solid #e1e1e1;
-    padding-top: 5px;
-    margin-top: 5px;
+    padding-top: 3px;
+    margin-top: 3px;
     word-break: break-word;
 }
 #af-wrapper .sticky-bottom {
@@ -444,7 +443,9 @@
 #af-wrapper .content-element {
     margin-bottom: 15px;
     background-color: #fff;
-    border: 1px solid #e1e1e1;
+    border-left: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
 }
 #af-wrapper .content-element a:hover {
     text-decoration: underline;
