@@ -40,6 +40,7 @@ echo '<div class="post" id="postid-'.$post->id.'">';
 
             do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
             ?>
+            <div class="clear"></div>
         </div>
         <div class="post-message">
             <?php
