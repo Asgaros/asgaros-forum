@@ -470,7 +470,7 @@
     border: none; /* comp */
     border-radius: inherit; /* comp */
     width: 100%; /* comp */
-    border-bottom: 2px solid #e1e1e1;
+    border-bottom: 5px solid #e1e1e1;
 }
 #af-wrapper .post-header {
     background-color: rgba(0, 0, 0, 0.03);
@@ -493,8 +493,7 @@
 }
 #af-wrapper .post-menu a {
     display: table-cell;
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 4px 6px;
+    padding: 4px 10px;
 }
 #af-wrapper .post-menu a:hover {
     color: #005C92;
@@ -518,7 +517,7 @@
     border-right: 1px solid rgba(0, 0, 0, 0.15);
     width: 125px;
     padding: 7px;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
     word-wrap: break-word;
 }
 #af-wrapper .post-author-marker {
@@ -666,7 +665,7 @@
 /* ICONS */
 #af-wrapper [class^="dashicons-"],
 #af-wrapper [class*=" dashicons-"] {
-    padding-right: 5px;
+    padding-right: 3px;
     border-radius: inherit; /* comp */
     background: none; /* comp */
     color: inherit; /* comp */
