@@ -24,7 +24,7 @@ $subforums = $this->get_forums($this->current_category, $this->current_forum);
 if (count($subforums) > 0) {
     echo '<div class="title-element">';
         echo __('Subforums', 'asgaros-forum');
-        echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
+        echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
     echo '</div>';
     echo '<div class="content-element">';
     foreach ($subforums as $forum) {
@@ -36,7 +36,7 @@ if (count($subforums) > 0) {
 if ($counter_total > 0) {
     echo '<div class="title-element">';
         echo __('Topics', 'asgaros-forum');
-        echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
+        echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
     echo '</div>';
     echo '<div class="content-element">';
         // Sticky topics

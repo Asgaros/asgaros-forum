@@ -12,7 +12,7 @@ echo $paginationRendering;
 
 echo '<div class="title-element">';
     echo __('Search results:', 'asgaros-forum').' '.esc_html(AsgarosForumSearch::$searchKeywords);
-    echo '<span class="last-post-headline">'.__('Last post:', 'asgaros-forum').'</span>';
+    echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
 echo '</div>';
 echo '<div class="content-element">';
 
