@@ -1,3 +1,27 @@
+.asgarosforum-widget {
+    font-size: 12px;
+}
+.asgarosforum-widget .widget-element {
+    display: table;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+}
+.asgarosforum-widget .widget-avatar,
+.asgarosforum-widget .widget-content {
+    display: table-cell;
+    vertical-align: top;
+}
+.asgarosforum-widget .widget-avatar {
+    width: 42px;
+}
+.asgarosforum-widget .widget-avatar img {
+    border: 1px solid #fff;
+    outline: 1px solid #ccc;
+    margin: 5px 10px 0 0;
+}
 .asgarosforum-widget span {
     display: block;
 }
+.asgarosforum-widget span.post-link {
