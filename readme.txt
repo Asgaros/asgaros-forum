@@ -83,6 +83,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_editor_custom_content_bottom
 * asgarosforum_statistics_custom_element
 * asgarosforum_statistics_custom_content_bottom
+* asgarosforum_admin_show_custom_category_data
 = Which filters are available =
 * asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
@@ -115,6 +116,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: Avatars to widgets
+* Added: asgarosforum_admin_show_custom_category_data hook
 * Added: asgarosforum_filter_widget_title_length filter
 * Fixed: Strip slashes of forum names/descriptions in structure-administration
 * Changed: Minor design changes

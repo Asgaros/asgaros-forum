@@ -147,6 +147,7 @@
                                         _e('Order:', 'asgaros-forum');
                                         echo ' ';
                                         echo $order;
+                                        do_action('asgarosforum_admin_show_custom_category_data');
                                         echo ')';
                                         ?>
                                     </span>
