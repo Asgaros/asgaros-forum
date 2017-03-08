@@ -98,6 +98,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_insert_custom_validation
 * asgarosforum_filter_subject_before_insert
 * asgarosforum_filter_content_before_insert
+* asgarosforum_filter_widget_title_length
 * asgarosforum_subscriber_mails_new_post
 * asgarosforum_subscriber_mails_new_topic
 * asgarosforum_filter_subscribers_query_new_post
@@ -114,6 +115,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: Avatars to widgets
+* Added: asgarosforum_filter_widget_title_length filter
 * Changed: Minor design changes
 = 1.4.3 =
 * Added: Open Graph tags

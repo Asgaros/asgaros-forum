@@ -66,6 +66,7 @@ class AsgarosForumWidgets {
 
             if ($elements) {
                 $avatars_available = get_option('show_avatars');
+                $widgetTitleLength = apply_filters('asgarosforum_filter_widget_title_length', 33);
 
                 echo '<div class="asgarosforum-widget">';
 
@@ -78,7 +79,7 @@ class AsgarosForumWidgets {
                         echo '<div class="widget-avatar">'.get_avatar($element->author_id, 30).'</div>';
                     }
                     echo '<div class="widget-content">';
-                        echo '<span class="post-link"><a href="'.self::$asgarosforum->getLink('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name))).'</a></span>';
+                        echo '<span class="post-link"><a href="'.self::$asgarosforum->getLink('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name), $widgetTitleLength)).'</a></span>';
                         echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->get_username($element->author_id, true).'</b></span>';
                         echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).'</span>';
                     echo '</div>';
