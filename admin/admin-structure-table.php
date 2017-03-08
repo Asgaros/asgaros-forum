@@ -35,9 +35,9 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_order" value="'.esc_html(stripslashes($item['sort'])).'">';
 
         if ($item['parent_forum']) {
-            $columnHTML .= sprintf('<span class="subforum"><span class="forum-name">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span></span>', $item['name'], $item['id'], $item['description']);
+            $columnHTML .= sprintf('<span class="subforum"><span class="forum-name">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span></span>', stripslashes($item['name']), $item['id'], stripslashes($item['description']));
         } else {
-            $columnHTML .= sprintf('<span class="forum-name">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span>', $item['name'], $item['id'], $item['description']);
+            $columnHTML .= sprintf('<span class="forum-name">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span>', stripslashes($item['name']), $item['id'], stripslashes($item['description']));
         }
 
         return $columnHTML;
