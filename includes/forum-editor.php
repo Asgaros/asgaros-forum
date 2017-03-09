@@ -114,11 +114,6 @@ class AsgarosForumEditor {
                 $editorTitle = __('Edit Post', 'asgaros-forum');
             }
 
-			// Show the main title only when the editor is not in another view.
-			if (!$inOtherView) {
-				echo '<h1 class="main-title">'.$editorTitle.'</h1>';
-			}
-
 			$actionURL = '';
 			if ($editorView == 'addpost') {
 				$actionURL = self::$asgarosforum->getLink('topic', self::$asgarosforum->current_topic);

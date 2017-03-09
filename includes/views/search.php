@@ -2,8 +2,6 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.__('Search', 'asgaros-forum').'</h1>';
-
 $results = AsgarosForumSearch::getSearchResults();
 $pagination = new AsgarosForumPagination($this);
 $paginationRendering = ($results) ? '<div class="pages-and-menu">'.$pagination->renderPagination('search').'<div class="clear"></div></div>' : '';

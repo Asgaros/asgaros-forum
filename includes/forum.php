@@ -275,7 +275,7 @@ class AsgarosForum {
             } else if ($this->current_view == 'editpost') {
                 $this->current_title = __('Edit Post', 'asgaros-forum');
             } else if ($this->current_view == 'addpost') {
-                $this->current_title = __('Post Reply', 'asgaros-forum');
+                $this->current_title = __('Post Reply', 'asgaros-forum').': '.esc_html(stripslashes($this->current_topic_name));
             } else if ($this->current_view == 'addtopic') {
                 $this->current_title = __('New Topic', 'asgaros-forum');
             } else if ($this->current_view == 'movetopic') {
@@ -330,6 +330,7 @@ class AsgarosForum {
                 }
 
                 $this->showLoginMessage();
+                $this->showMainTitle();
 
                 switch ($this->current_view) {
                     case 'search':
@@ -360,6 +361,12 @@ class AsgarosForum {
 
         echo '</div>';
         return ob_get_clean();
+    }
+
+    function showMainTitle() {
+        $mainTitle = ($this->current_title) ? $this->current_title : __('Forum', 'asgaros-forum');
+
+        echo '<h1 class="main-title">'.$mainTitle.'</h1>';
     }
 
     function overview() {
@@ -418,8 +425,6 @@ class AsgarosForum {
     }
 
     function showMoveTopic() {
-        echo '<h1 class="main-title">'.__('Move Topic', 'asgaros-forum').'</h1>';
-
         if (AsgarosForumPermissions::isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->getLink('topic_move', $this->current_topic, array('move_topic' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';

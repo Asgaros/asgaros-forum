@@ -2,8 +2,6 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.esc_html(stripslashes($this->current_forum_name)).'</h1>';
-
 AsgarosForumEditor::showEditor('addtopic', true);
 
 ?>

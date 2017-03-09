@@ -2,8 +2,6 @@
 
 if (!defined('ABSPATH')) exit;
 
-echo '<h1 class="main-title">'.esc_html(stripslashes($this->current_topic_name)).'</h1>';
-
 ?>
 <div class="pages-and-menu">
     <?php
