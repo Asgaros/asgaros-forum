@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) exit;
     </div>
     <div class="topic-name">
         <strong><a href="<?php echo $this->getLink('topic', $thread->id); ?>" title="<?php echo esc_html(stripslashes($thread->name)); ?>"><?php echo esc_html(stripslashes($thread->name)); ?></a></strong>
-        <small><?php echo __('By', 'asgaros-forum').'&nbsp;<b>'.$this->get_username($thread->author_id); ?></b></small>
+        <small><?php echo __('By', 'asgaros-forum').'&nbsp;<b>'.$this->getUsername($thread->author_id); ?></b></small>
     </div>
     <div class="topic-stats">
         <?php

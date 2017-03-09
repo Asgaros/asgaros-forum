@@ -26,7 +26,7 @@ echo '<div class="post" id="postid-'.$post->id.'">';
                 echo '<br />';
             }
             ?>
-            <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->get_username($post->author_id), $post->author_id); ?></strong><br />
+            <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong><br />
             <?php
             // Only show post-counter for existent users.
             if (get_userdata($post->author_id) != false) {
@@ -44,7 +44,7 @@ echo '<div class="post" id="postid-'.$post->id.'">';
         </div>
         <div class="post-message">
             <?php
-            echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->get_username($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.stripslashes($post->text).'</blockquote><br /></div>';
+            echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.stripslashes($post->text).'</blockquote><br /></div>';
             $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
 
             if ($this->options['allow_shortcodes']) {

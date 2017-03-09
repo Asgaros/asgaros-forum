@@ -118,7 +118,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Avatars to widgets
 * Added: asgarosforum_filter_widget_title_length filter
 * Fixed: Strip slashes of forum names/descriptions in structure-administration
+* Changed: Highlight administrators/moderators in widgets
 * Changed: Minor design changes
+* Performance improvements and code optimizations
 = 1.4.3 =
 * Added: Open Graph tags
 * Fixed: Display issues with some themes

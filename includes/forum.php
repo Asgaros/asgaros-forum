@@ -570,28 +570,30 @@ class AsgarosForum {
         return $string;
     }
 
-    function get_username($user_id, $widget = false) {
-        if ($user_id == 0) {
-            return __('Guest', 'asgaros-forum');
-        } else {
+    function getUsername($user_id) {
+        if ($user_id) {
             $user = get_userdata($user_id);
 
             if ($user) {
-                $username = $user->display_name;
-
-                if ($this->options['highlight_admin'] && !$widget) {
-                    if (user_can($user_id, 'manage_options')) {
-                        $username = '<span class="highlight-admin">'.$username.'</span>';
-                    } else if (AsgarosForumPermissions::isModerator($user_id)) {
-                        $username = '<span class="highlight-moderator">'.$username.'</span>';
-                    }
-                }
-
-                return $username;
+                return $this->highlightUsername($user);
             } else {
                 return __('Deleted user', 'asgaros-forum');
             }
+        } else {
+            return __('Guest', 'asgaros-forum');
         }
+    }
+
+    function highlightUsername($user) {
+        if ($this->options['highlight_admin']) {
+            if (is_super_admin($user->ID) || user_can($user->ID, 'administrator')) {
+                return '<span class="highlight-admin">'.$user->display_name.'</span>';
+            } else if (AsgarosForumPermissions::isModerator($user->ID)) {
+                return '<span class="highlight-moderator">'.$user->display_name.'</span>';
+            }
+        }
+
+        return $user->display_name;
     }
 
     function get_lastpost($lastpost_data, $context = 'forum') {
@@ -600,7 +602,7 @@ class AsgarosForum {
         if ($lastpost_data) {
             $lastpost_link = $this->getLink('topic', $lastpost_data->parent_id, array('part' => ceil($lastpost_data->number_of_posts/$this->options['posts_per_page'])), '#postid-'.$lastpost_data->id);
             $lastpost .= ($context === 'forum') ? '<small><strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
-            $lastpost .= '<small><span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;<strong>'.$this->get_username($lastpost_data->author_id).'</strong></span></small>';
+            $lastpost .= '<small><span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;<strong>'.$this->getUsername($lastpost_data->author_id).'</strong></span></small>';
             $lastpost .= '<small><span class="dashicons-before dashicons-calendar-alt"><a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a></span></small>';
         } else if ($context === 'forum') {
             $lastpost = '<small>'.__('No topics yet!', 'asgaros-forum').'</small>';

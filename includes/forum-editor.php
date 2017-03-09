@@ -89,7 +89,7 @@ class AsgarosForumEditor {
                     $quoteData = self::$asgarosforum->db->get_row(self::$asgarosforum->db->prepare("SELECT text, author_id, date FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", absint($_GET['quote'])));
 
                     if ($quoteData) {
-                        $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.self::$asgarosforum->get_username($quoteData->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), self::$asgarosforum->format_date($quoteData->date)).'</div>'.stripslashes($quoteData->text).'</blockquote><br />';
+                        $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.self::$asgarosforum->getUsername($quoteData->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), self::$asgarosforum->format_date($quoteData->date)).'</div>'.stripslashes($quoteData->text).'</blockquote><br />';
 					}
                 }
             } else if ($editorView === 'editpost') {
