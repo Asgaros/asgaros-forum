@@ -675,6 +675,7 @@ class AsgarosForum {
             }
         }
 
+        $menu = (!empty($menu)) ? '<div class="forum-menu">'.$menu.'</div>' : $menu;
         return $menu;
     }
 
