@@ -45,7 +45,7 @@ class AsgarosForum {
         'enable_search'             => true,
         'show_who_is_online'        => true,
         'show_statistics'           => true,
-        'enable_breadcrumbs'          => true,
+        'enable_breadcrumbs'        => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_edit_date'            => true,
