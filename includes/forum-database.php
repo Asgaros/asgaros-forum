@@ -26,7 +26,7 @@ class AsgarosForumDatabase {
         self::$db = $wpdb;
         $this->setTables();
         register_activation_hook(__FILE__, array($this, 'activatePlugin'));
-        add_action('wpmu_new_blog', array($this, 'buildSubsite'));
+        add_action('wpmu_new_blog', array($this, 'buildSubsite'), 10, 6);
         add_filter('wpmu_drop_tables', array($this, 'deleteSubsite'));
         add_action('plugins_loaded', array($this, 'buildDatabase'));
 	}
