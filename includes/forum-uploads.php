@@ -61,20 +61,24 @@ class AsgarosForumUploads {
 		return $files;
 	}
 
-	public static function uploadFiles($post_id, $uploadList = false) {
+	public static function createUploadFolders($path) {
+		if (!is_dir(self::$upload_path)) {
+			mkdir(self::$upload_path);
+		}
+
+		if (!is_dir($path)) {
+			mkdir($path);
+		}
+	}
+
+	public static function uploadFiles($post_id, $uploadList) {
 		$path = self::$upload_path.$post_id.'/';
 		$links = array();
-		$files = ($uploadList) ? $uploadList : self::prepareFileList();
+		$files = $uploadList;
 
 		// When there are files to upload, create the folders first.
         if (!empty($files)) {
-            if (!is_dir(self::$upload_path)) {
-                mkdir(self::$upload_path);
-            }
-
-            if (!is_dir($path)) {
-                mkdir($path);
-            }
+            self::createUploadFolders($path);
 		}
 
 		// Continue when the destination-folder got created correctly.

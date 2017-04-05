@@ -75,12 +75,11 @@ class AsgarosForumInsert {
         $redirect = '';
 
         $date = $asgarosforum->current_time();
+        $uploadList = AsgarosForumUploads::prepareFileList();
 
         if (self::getAction() === 'add_thread') {
             $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
             $asgarosforum->current_topic = $asgarosforum->db->insert_id;
-
-            $uploadList = AsgarosForumUploads::prepareFileList();
 
             $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
@@ -92,8 +91,6 @@ class AsgarosForumInsert {
             // Send notification about new topic to global subscribers.
             AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect);
         } else if (self::getAction() === 'add_post') {
-            $uploadList = AsgarosForumUploads::prepareFileList();
-
             $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
@@ -104,7 +101,7 @@ class AsgarosForumInsert {
             // Send notification about new post to subscribers
             AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect);
         } else if (self::getAction() === 'edit_post') {
-            $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post);
+            $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
             $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s'), array('%d'));
 
             if ($asgarosforum->is_first_post($asgarosforum->current_post) && !empty(self::$dataSubject)) {
