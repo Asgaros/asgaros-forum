@@ -84,6 +84,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_statistics_custom_element
 * asgarosforum_statistics_custom_content_bottom
 * asgarosforum_admin_show_custom_category_data
+* asgarosforum_before_delete_post
+* asgarosforum_before_delete_topic
+* asgarosforum_after_delete_post
+* asgarosforum_after_delete_topic
 = Which filters are available =
 * asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
@@ -115,6 +119,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_before_delete_post hook
+* Added: asgarosforum_before_delete_topic hook
+* Added: asgarosforum_after_delete_post hook
+* Added: asgarosforum_after_delete_topic hook
 * Fixed: Broken and missing links of uploaded files when their names contains umlaute
 = 1.4.4 =
 * Added: Avatars to widgets
