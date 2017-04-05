@@ -75,7 +75,7 @@ class AsgarosForumInsert {
         $redirect = '';
 
         $date = $asgarosforum->current_time();
-        $uploadList = AsgarosForumUploads::prepareFileList();
+        $uploadList = AsgarosForumUploads::getUploadList();
 
         if (self::getAction() === 'add_thread') {
             $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
