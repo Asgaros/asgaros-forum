@@ -119,6 +119,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Widget option to hide avatars
 * Added: asgarosforum_before_delete_post hook
 * Added: asgarosforum_before_delete_topic hook
 * Added: asgarosforum_after_delete_post hook
