@@ -174,7 +174,7 @@
 }
 #af-wrapper .editor-row .cancel,
 #af-wrapper .editor-row .cancel-back {
-    color: white;
+    color: white !important;
     border: 1px solid #f91111;
     background-color: #ff5454;
     padding: 3px 6px;
