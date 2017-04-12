@@ -124,7 +124,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_before_delete_topic hook
 * Added: asgarosforum_after_delete_post hook
 * Added: asgarosforum_after_delete_topic hook
-* Fixed: Broken and missing links of uploaded files when their names contains umlaute
+* Fixed: Broken and missing links of uploaded files when their names contains special characters
+* Changed: Indent subforums in forums-list when moving topics
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.4.4 =

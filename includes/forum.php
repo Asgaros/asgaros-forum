@@ -431,10 +431,26 @@ class AsgarosForum {
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
 
-            $frs = $this->get_forums();
+            $categories = $this->get_categories();
 
-            foreach ($frs as $f) {
-                $strOUT .= '<option value="'.$f->id.'"'.($f->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($f->name).'</option>';
+            if ($categories) {
+                foreach ($categories as $category) {
+                    $forums = $this->get_forums($category->term_id);
+
+                    if ($forums) {
+                        foreach ($forums as $forum) {
+                            $strOUT .= '<option value="'.$forum->id.'"'.($forum->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
+
+                            if ($forum->count_subforums > 0) {
+                                $subforums = $this->get_forums($category->term_id, $forum->id);
+
+                                foreach ($subforums as $subforum) {
+                                    $strOUT .= '<option value="'.$subforum->id.'"'.($subforum->id == $this->current_forum ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'"></div></div></form>';
