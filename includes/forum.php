@@ -24,6 +24,7 @@ class AsgarosForum {
     var $parent_forum = false;
     var $parent_forum_name = false;
     var $category_access_level = false;
+    var $parents_set = false;
     var $options = array();
     var $options_default = array(
         'location'                  => 0,
@@ -871,6 +872,7 @@ class AsgarosForum {
                 $this->current_topic        = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic : false;
                 $this->current_topic_name   = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic_name : false;
                 $this->current_post         = ($contentType === 'post') ? $results->current_post : false;
+                $this->parents_set          = true;
                 return;
             }
         }
