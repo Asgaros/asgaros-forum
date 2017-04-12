@@ -527,9 +527,8 @@
     margin-bottom: 7px;
     padding: 2px 15px;
     color: #fff;
-    font-weight: bold;
     margin-right: -7px;
-    float: left;
+    display: block;
 }
 #af-wrapper .post-message {
     display: table-cell;
