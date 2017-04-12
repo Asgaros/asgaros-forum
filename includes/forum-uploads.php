@@ -86,7 +86,7 @@ class AsgarosForumUploads {
 	        // Register existing files.
 	        if (!empty($_POST['existingfile'])) {
 	            foreach ($_POST['existingfile'] as $file) {
-	                if (is_file($path.wp_basename(utf8_decode($file)))) {
+	                if (is_file($path.wp_basename($file))) {
 	                    $links[] = $file;
 	                }
 	            }
@@ -95,8 +95,8 @@ class AsgarosForumUploads {
 	        // Remove deleted files.
 	        if (!empty($_POST['deletefile'])) {
 	            foreach ($_POST['deletefile'] as $file) {
-	                if (is_file($path.wp_basename(utf8_decode($file)))) {
-	                    unlink($path.wp_basename(utf8_decode($file)));
+	                if (is_file($path.wp_basename($file))) {
+	                    unlink($path.wp_basename($file));
 	                }
 	            }
 	        }
@@ -104,7 +104,7 @@ class AsgarosForumUploads {
 			// Upload new files.
 	        if (!empty($files)) {
 	            foreach($files as $index => $name) {
-	                move_uploaded_file($_FILES['forumfile']['tmp_name'][$index], $path.utf8_decode($name));
+	                move_uploaded_file($_FILES['forumfile']['tmp_name'][$index], $path.$name);
 	                $links[] = $name;
 	            }
 	        }
@@ -132,8 +132,8 @@ class AsgarosForumUploads {
 					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
 				} else {
 					foreach ($uploads as $upload) {
-		                if (is_file($path.wp_basename(utf8_decode($upload)))) {
-							$imageThumbnail = (self::$asgarosforum->options['uploads_show_thumbnails']) ? wp_get_image_editor($path.wp_basename(utf8_decode($upload))) : false;
+		                if (is_file($path.wp_basename($upload))) {
+							$imageThumbnail = (self::$asgarosforum->options['uploads_show_thumbnails']) ? wp_get_image_editor($path.wp_basename($upload)) : false;
 
 							if ($imageThumbnail && !is_wp_error($imageThumbnail)) {
 								$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank"><img class="resize" src="'.$url.utf8_uri_encode($upload).'" alt="'.$upload.'" /></a></li>';
@@ -164,7 +164,7 @@ class AsgarosForumUploads {
 
 			if (!empty($uploads) && is_dir($path)) {
 				foreach ($uploads as $upload) {
-	                if (is_file($path.wp_basename(utf8_decode($upload)))) {
+	                if (is_file($path.wp_basename($upload))) {
 						$uploadedFilesCounter++;
 	                    $uploadedFiles .= '<li>';
 	                    $uploadedFiles .= '<a href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
