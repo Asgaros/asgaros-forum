@@ -36,3 +36,6 @@
 .asgarosforum-widget .highlight-moderator {
     color: #099922;
 }
+.asgarosforum-widget .post-date {
+    font-style: italic;
+}
