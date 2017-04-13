@@ -39,3 +39,7 @@
 .asgarosforum-widget .post-date {
     font-style: italic;
 }
+.asgarosforum-widget .post-author,
+.asgarosforum-widget .post-date {
+    font-size: 11px;
+}
