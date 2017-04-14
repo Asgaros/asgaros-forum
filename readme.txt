@@ -126,6 +126,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_before_delete_topic hook
 * Added: asgarosforum_after_delete_post hook
 * Added: asgarosforum_after_delete_topic hook
+* Fixed: Huge performance drops when the forum contains a lot of posts/topics
 * Fixed: Prevent creation of hidden content
 * Fixed: Broken and missing links when names of uploaded files contains special characters
 * Fixed: Do not try to generate thumbnails for uploaded pdf files
