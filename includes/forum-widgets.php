@@ -87,7 +87,7 @@ class AsgarosForumWidgets {
                         if ($widgetType === 'topics' && $element->post_counter > 1) {
                             $answers = ($element->post_counter - 1);
                             $count_answers_i18n = number_format_i18n($answers);
-                            $count_answers_i18n_text = ', '.sprintf(_n('%s reply', '%s replies', $answers, 'asgaros-forum'), $count_answers_i18n);
+                            $count_answers_i18n_text = ', '.sprintf(_n('%s Answer', '%s Answers', $answers, 'asgaros-forum'), $count_answers_i18n);
                         }
 
                         echo '<span class="post-link"><a href="'.self::$asgarosforum->getLink('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name), $widgetTitleLength)).'</a></span>';
