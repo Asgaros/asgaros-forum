@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.7
 Tested up to: 4.7
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.4.5 =
 * Added: Widget option to hide avatars
 * Added: Reply counter to recent forum topics widget
 * Added: Show author in notification mails
@@ -126,10 +127,10 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_before_delete_topic hook
 * Added: asgarosforum_after_delete_post hook
 * Added: asgarosforum_after_delete_topic hook
-* Fixed: Huge performance drops when the forum contains a lot of posts/topics
+* Fixed: Huge performance drops when the forum has a lot of posts/topics
 * Fixed: Prevent creation of hidden content
-* Fixed: Broken and missing links when names of uploaded files contains special characters
-* Fixed: Do not try to generate thumbnails for uploaded pdf files
+* Fixed: Broken/missing links when the filename of uploads contains special characters
+* Fixed: Do not try to generate thumbnails for pdf uploads
 * Fixed: Dont show HTML-entities in the subject of notification mails
 * Changed: Indent subforums in forums-list when moving topics
 * Changed: Minor design changes
