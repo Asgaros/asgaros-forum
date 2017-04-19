@@ -119,6 +119,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Some strings could not get translated
 = 1.4.5 =
 * Added: Widget option to hide avatars
 * Added: Reply counter to recent forum topics widget

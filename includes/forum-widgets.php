@@ -125,7 +125,7 @@ class AsgarosForumWidgets {
 
         echo '<p>';
         echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.$object->get_field_id('show_avatar').'" name="'.$object->get_field_name('show_avatar').'" />';
-		echo '<label for="'.$object->get_field_id('show_avatar').'">'.__('Show avatars?').'</label>';
+		echo '<label for="'.$object->get_field_id('show_avatar').'">'.__('Show avatars?', 'asgaros-forum').'</label>';
         echo '</p>';
     }
 
