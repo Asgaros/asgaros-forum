@@ -16,6 +16,7 @@ if (!defined('ABSPATH')) exit;
         <strong><a href="<?php echo $this->getLink('topic', $thread->id); ?>" title="<?php echo esc_html(stripslashes($thread->name)); ?>"><?php echo esc_html(stripslashes($thread->name)); ?></a></strong>
         <small><?php echo __('By', 'asgaros-forum').'&nbsp;<b>'.$this->getUsername($thread->author_id); ?></b></small>
     </div>
+    <?php do_action('asgarosforum_custom_topic_column'); ?>
     <div class="topic-stats">
         <?php
         $count_answers_i18n = number_format_i18n($thread->answers);

@@ -41,6 +41,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
             echo '</small>';
         }
     echo '</div>';
+    do_action('asgarosforum_custom_forum_column');
     echo '<div class="forum-stats">';
         echo '<small>'.sprintf(_n('%s Topic', '%s Topics', $forum->count_topics, 'asgaros-forum'), $count_topics_i18n).'</small>';
         echo '<small>'.sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n).'</small>';

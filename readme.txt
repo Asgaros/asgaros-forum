@@ -88,6 +88,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_before_delete_topic
 * asgarosforum_after_delete_post
 * asgarosforum_after_delete_topic
+* asgarosforum_custom_forum_column
+* asgarosforum_custom_topic_column
 = Which filters are available =
 * asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
@@ -119,6 +121,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_custom_forum_column hook
+* Added: asgarosforum_custom_topic_column hook
 * Fixed: Some strings could not get translated
 = 1.4.5 =
 * Added: Widget option to hide avatars
