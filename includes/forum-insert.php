@@ -108,7 +108,7 @@ class AsgarosForumInsert {
             AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect, AsgarosForumPermissions::$current_user_id);
         } else if (self::getAction() === 'edit_post') {
             $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
-            $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s'), array('%d'));
+            $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date, 'author_edit' => AsgarosForumPermissions::$current_user_id), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
             if ($asgarosforum->is_first_post($asgarosforum->current_post) && !empty(self::$dataSubject)) {
                 $asgarosforum->db->update($asgarosforum->tables->topics, array('name' => self::$dataSubject), array('id' => $asgarosforum->current_topic), array('%s'), array('%d'));

@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 8;
+    const DATABASE_VERSION = 9;
 
     private static $instance = null;
     private static $db;
@@ -140,6 +140,7 @@ class AsgarosForumDatabase {
             date datetime NOT NULL default '0000-00-00 00:00:00',
             date_edit datetime NOT NULL default '0000-00-00 00:00:00',
             author_id int(11) NOT NULL default '0',
+            author_edit int(11) NOT NULL default '0',
             uploads longtext,
             PRIMARY KEY  (id)
             ) $charset_collate;";

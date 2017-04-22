@@ -121,6 +121,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Show who edited a post
 * Added: asgarosforum_custom_forum_column hook
 * Added: asgarosforum_custom_topic_column hook
 * Fixed: Some strings could not get translated

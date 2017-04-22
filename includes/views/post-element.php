@@ -61,7 +61,14 @@ echo '<div class="post" id="postid-'.$post->id.'">';
             AsgarosForumUploads::showUploadedFiles($post);
             echo '<div class="post-footer">';
             if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
-                echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit)).'&nbsp;&middot;&nbsp;';
+                // Show who edited a post (when the information exist in the database).
+                if ($post->author_edit) {
+                    echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                } else {
+                    echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                }
+
+                echo '&nbsp;&middot;&nbsp;';
             }
 
             if ($this->current_view != 'post') {
