@@ -127,3 +127,10 @@
 #af-structure .column-sort {
     width: 125px;
 }
+/* USERGROUPS */
+#af-structure #usergroups-editor th {
+    vertical-align: top;
+}
+#af-structure #usergroups-editor td label {
+    display: block;
+}

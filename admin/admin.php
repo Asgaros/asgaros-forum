@@ -169,6 +169,7 @@ class AsgarosForumAdmin {
 
             update_term_meta($category_id, 'category_access', $category_access);
             update_term_meta($category_id, 'order', $category_order);
+            AsgarosForumUserGroups::saveUserGroupsOfCategory($category_id);
 
             $this->saved = true;
         }

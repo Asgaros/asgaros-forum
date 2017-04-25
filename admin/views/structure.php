@@ -15,7 +15,7 @@
             <div class="postbox-container">
 
                 <div id="structure-editor" class="postbox" style="display: none;">
-                    <h2 class="hndle"><span></span></h2>
+                    <h2 class="hndle"></h2>
                     <div class="inside">
                         <div id="category-editor" style="display: none;">
                             <form method="post">
@@ -40,6 +40,7 @@
                                         <th><label for="category_order"><?php _e('Order:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="number" size="4" id="category_order" name="category_order" value="" min="1"></td>
                                     </tr>
+                                    <?php AsgarosForumUserGroups::renderCategoryEditorFields(); ?>
                                 </table>
 
                                 <p class="submit">
@@ -121,41 +122,37 @@
                         echo '<input type="hidden" id="category_'.$category->term_id.'_name" value="'.esc_html(stripslashes($category->name)).'">';
                         echo '<input type="hidden" id="category_'.$category->term_id.'_access" value="'.$access.'">';
                         echo '<input type="hidden" id="category_'.$category->term_id.'_order" value="'.$order.'">';
+                        AsgarosForumUserGroups::renderHiddenFields($category->term_id);
 
                         $forums = $asgarosforum->get_forums($category->term_id, 0, ARRAY_A);
                         ?>
                         <div class="postbox">
                             <h2 class="hndle">
-                                <span>
-                                    <?php echo stripslashes($category->name); ?>&nbsp;
-                                    <span class="element-id">
-                                        <?php
-                                        echo '(';
-                                        _e('ID', 'asgaros-forum'); ?>: <?php echo $category->term_id; ?>
-                                        <?php
-                                        echo ' | ';
-                                        _e('Access:', 'asgaros-forum');
-                                        echo ' ';
-                                        if ($access === 'everyone') {
-                                            _e('Everyone', 'asgaros-forum');
-                                        } else if ($access === 'loggedin') {
-                                            _e('Logged in users only', 'asgaros-forum');
-                                        } else if ($access === 'moderator') {
-                                            _e('Moderators only', 'asgaros-forum');
-                                        }
-                                        echo ' | ';
-                                        _e('Order:', 'asgaros-forum');
-                                        echo ' ';
-                                        echo $order;
-                                        do_action('asgarosforum_admin_show_custom_category_data', $category->term_id);
-                                        echo ')';
-                                        ?>
-                                    </span>
-                                    <span class="category-actions">
-                                        <a href="#" class="category-delete-link" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
-                                        |
-                                        <a href="#" class="category-editor-link" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
-                                    </span>
+                                <?php echo stripslashes($category->name); ?>&nbsp;
+                                <span class="element-id">
+                                    <?php
+                                    echo '(';
+                                    echo __('ID', 'asgaros-forum').': '.$category->term_id;
+                                    echo ' | ';
+                                    echo __('Access:', 'asgaros-forum').' ';
+                                    if ($access === 'everyone') {
+                                        _e('Everyone', 'asgaros-forum');
+                                    } else if ($access === 'loggedin') {
+                                        _e('Logged in users only', 'asgaros-forum');
+                                    } else if ($access === 'moderator') {
+                                        _e('Moderators only', 'asgaros-forum');
+                                    }
+                                    echo ' | ';
+                                    echo __('Order:', 'asgaros-forum').' '.$order;
+                                    AsgarosForumUserGroups::renderUserGroupsInCategory($category->term_id);
+                                    do_action('asgarosforum_admin_show_custom_category_data', $category->term_id);
+                                    echo ')';
+                                    ?>
+                                </span>
+                                <span class="category-actions">
+                                    <a href="#" class="category-delete-link" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
+                                    |
+                                    <a href="#" class="category-editor-link" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
                                 </span>
                             </h2>
                             <div class="inside">

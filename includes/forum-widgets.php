@@ -43,7 +43,9 @@ class AsgarosForumWidgets {
 
         if ($locationSetUp) {
             // Build query for filtering elements first.
-            $excludeList = apply_filters('asgarosforum_filter_get_categories', array());
+            $excludeList = array();
+            $excludeList = AsgarosForumUserGroups::filterCategories($excludeList);
+            $excludeList = apply_filters('asgarosforum_filter_get_categories', $excludeList);
             $metaQueryFilter = self::$asgarosforum->getCategoriesFilter();
             $categoriesList = get_terms('asgarosforum-category', array(
                 'fields'        => 'ids',

@@ -98,6 +98,7 @@ class AsgarosForum {
         new AsgarosForumStatistics($this);
         new AsgarosForumOnline($this);
         new AsgarosForumSearch($this);
+        new AsgarosForumUserGroups($this);
     }
 
     function initialize_widgets() {
@@ -238,6 +239,12 @@ class AsgarosForum {
                 $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
                 return;
             }
+        }
+
+        // Check user groups access.
+        if (!AsgarosForumUserGroups::checkAccess($this->current_category)) {
+            $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+            return;
         }
 
         // Check custom access.
@@ -485,6 +492,7 @@ class AsgarosForum {
         $metaQueryFilter = array();
 
         if ($enableFiltering) {
+            $filter = AsgarosForumUserGroups::filterCategories($filter);
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
             $metaQueryFilter = $this->getCategoriesFilter();
 

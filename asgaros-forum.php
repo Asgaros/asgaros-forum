@@ -28,6 +28,7 @@
 
 if (!defined('ABSPATH')) exit;
 
+// Include Asgaros Forum Core Files.
 require('includes/forum.php');
 require('includes/forum-database.php');
 require('includes/forum-taxonomies.php');
@@ -46,6 +47,7 @@ require('includes/forum-editor.php');
 require('includes/forum-shortcodes.php');
 require('includes/forum-pagination.php');
 require('includes/forum-online.php');
+require('includes/forum-usergroups.php');
 require('admin/admin.php');
 require('admin/admin-structure-table.php');
 

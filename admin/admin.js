@@ -30,11 +30,13 @@
             var category_name       = '';
             var category_access     = 'everyone';
             var category_order      = '1';
+            var category_usergroups = '';
 
             if (category_id !== 'new') {
                 category_name       = $('#category_'+category_id+'_name').val();
                 category_access     = $('#category_'+category_id+'_access').val();
                 category_order      = $('#category_'+category_id+'_order').val();
+                category_usergroups = $('#category_'+category_id+'_usergroups').val().split(',');
             }
 
             $('#category-editor input[name=category_id]').val(category_id);
@@ -47,6 +49,14 @@
             });
 
             $('#category-editor input[name=category_order]').val(category_order);
+
+            $('#category-editor #usergroups-editor input[type=checkbox').each(function() {
+                if (jQuery.inArray($(this).val(), category_usergroups) != -1) {
+                    $(this).prop('checked', true);
+                } else {
+                    $(this).prop('checked', false);
+                }
+            });
 
             setTitle(editor_title);
 
@@ -135,7 +145,7 @@
         })
 
         function setTitle(title) {
-            $('#structure-editor h2 span').html(title);
+            $('#structure-editor h2').html(title);
         }
 
         function resetEditor() {
