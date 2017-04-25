@@ -124,6 +124,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Show who edited a post
 * Added: asgarosforum_custom_forum_column hook
 * Added: asgarosforum_custom_topic_column hook
+* Fixed: Dont remove paragraphes from quotes
 * Fixed: Some strings could not get translated
 * Performance improvements and code optimizations
 = 1.4.5 =
