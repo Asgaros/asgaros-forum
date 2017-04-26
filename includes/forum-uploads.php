@@ -12,6 +12,10 @@ class AsgarosForumUploads {
 	public function __construct($object) {
 		self::$asgarosforum = $object;
 
+		add_action('init', array($this, 'initialize'));
+	}
+
+	public function initialize() {
 		$upload_dir = wp_upload_dir();
         self::$upload_path = $upload_dir['basedir'].'/'.self::AF_UPLOADFOLDER.'/';
         self::$upload_url = $upload_dir['baseurl'].'/'.self::AF_UPLOADFOLDER.'/';

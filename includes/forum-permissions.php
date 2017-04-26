@@ -3,26 +3,22 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumPermissions {
-    private static $instance = null;
+    private static $asgarosforum = null;
     private static $current_user_is_moderator;
     private static $current_user_is_banned;
     public static $current_user_id;
 
-    // AsgarosForumPermissions instance creator
-    public static function createInstance() {
-		if (self::$instance === null) {
-			self::$instance = new self;
-		}
+    public function __construct($object) {
+        self::$asgarosforum = $object;
 
-        return self::$instance;
+        add_action('init', array($this, 'initialize'));
 	}
 
-    // AsgarosForumPermissions constructor
-	public function __construct() {
+    public function initialize() {
         self::$current_user_id = get_current_user_id();
         self::$current_user_is_moderator = self::isModerator(self::$current_user_id);
         self::$current_user_is_banned = self::isBanned(self::$current_user_id);
-	}
+    }
 
     public static function isModerator($userid = false) {
         if ($userid) {

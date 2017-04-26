@@ -7,6 +7,12 @@ class AsgarosForumStatistics {
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
+
+        add_action('init', array($this, 'initialize'));
+    }
+
+    public function initialize() {
+        // Empty ...
     }
 
     public static function showStatistics() {

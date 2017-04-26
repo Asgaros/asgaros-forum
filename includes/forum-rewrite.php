@@ -14,7 +14,13 @@ class AsgarosForumRewrite {
         if (get_option('permalink_structure')) {
             $usePermalinks = true;
         }
+
+        add_action('init', array($this, 'initialize'));
 	}
+
+    public function initialize() {
+        // Empty ...
+    }
 
     // Builds and returns a requested link.
     public static function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '', $escapeURL = true) {

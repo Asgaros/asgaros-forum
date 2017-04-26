@@ -11,6 +11,10 @@ class AsgarosForumShortcodes {
     public function __construct($object) {
 		self::$asgarosforum = $object;
 
+        add_action('init', array($this, 'initialize'));
+    }
+
+    public function initialize() {
         // Register multiple shortcodes because sometimes users ignore the fact that shortcodes are case-sensitive.
         add_shortcode('forum', array(self::$asgarosforum, 'forum'));
         add_shortcode('Forum', array(self::$asgarosforum, 'forum'));

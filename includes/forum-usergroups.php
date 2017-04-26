@@ -7,6 +7,12 @@ class AsgarosForumUserGroups {
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
+
+        add_action('init', array($this, 'initialize'));
+    }
+
+    public function initialize() {
+        // Empty ...
     }
 
     // Adds a new user groups string to the structure page.

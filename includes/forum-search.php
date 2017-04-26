@@ -9,6 +9,10 @@ class AsgarosForumSearch {
     public function __construct($object) {
 		self::$asgarosforum = $object;
 
+        add_action('init', array($this, 'initialize'));
+    }
+
+    public function initialize() {
         if (!empty($_GET['keywords'])) {
             self::$searchKeywords = esc_sql(trim($_GET['keywords']));
         }

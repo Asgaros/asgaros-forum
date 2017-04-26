@@ -8,6 +8,15 @@ class AsgarosForumWidgets {
     public function __construct($object) {
         self::$asgarosforum = $object;
 
+        add_action('init', array($this, 'initialize'));
+        add_action('widgets_init', array($this, 'initializeWidgets'));
+    }
+
+    public function initialize() {
+        // Empty ...
+    }
+
+    public function initializeWidgets() {
         if (!self::$asgarosforum->options['require_login'] || is_user_logged_in()) {
             register_widget('AsgarosForumRecentPosts_Widget');
             register_widget('AsgarosForumRecentTopics_Widget');

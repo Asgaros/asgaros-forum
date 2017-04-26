@@ -7,7 +7,13 @@ class AsgarosForumEditor {
 
 	public function __construct($object) {
 		self::$asgarosforum = $object;
+
+		add_action('init', array($this, 'initialize'));
 	}
+
+	public function initialize() {
+        // Empty ...
+    }
 
     // Check permissions before loading the editor.
     private static function checkPermissions($editorView) {

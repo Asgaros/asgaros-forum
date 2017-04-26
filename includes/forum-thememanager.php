@@ -14,6 +14,11 @@ class AsgarosForumThemeManager {
 
 	public function __construct($object) {
 		self::$asgarosforum = $object;
+
+		add_action('init', array($this, 'initialize'));
+	}
+
+	public function initialize() {
 		self::$themes_root = trailingslashit(WP_CONTENT_DIR.'/'.self::AF_THEMEPATH);
 		self::$plugin_url = self::$asgarosforum->directory;
 		$this->find_themes();

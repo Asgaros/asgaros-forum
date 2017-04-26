@@ -73,8 +73,6 @@ class AsgarosForum {
         $this->date_format = get_option('date_format').', '.get_option('time_format');
         $this->tables = AsgarosForumDatabase::getTables();
 
-        add_action('init', array($this, 'initialize'));
-        add_action('widgets_init', array($this, 'initialize_widgets'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('clear_auth_cookie', array('AsgarosForumOnline', 'deleteUserTimeStamp'));
@@ -85,11 +83,8 @@ class AsgarosForum {
         add_filter('disable_captions', array($this, 'disable_captions'));
 
         new AsgarosForumRewrite($this);
-    }
-
-    function initialize() {
-        new AsgarosForumTaxonomies();
-        new AsgarosForumPermissions();
+        new AsgarosForumTaxonomies($this);
+        new AsgarosForumPermissions($this);
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
         new AsgarosForumThemeManager($this);
@@ -99,9 +94,6 @@ class AsgarosForum {
         new AsgarosForumOnline($this);
         new AsgarosForumSearch($this);
         new AsgarosForumUserGroups($this);
-    }
-
-    function initialize_widgets() {
         new AsgarosForumWidgets($this);
     }
 

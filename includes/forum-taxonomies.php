@@ -3,7 +3,15 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumTaxonomies {
-	public function __construct() {
+	private static $asgarosforum = null;
+
+	public function __construct($object) {
+		self::$asgarosforum = $object;
+
+		add_action('init', array($this, 'initialize'));
+	}
+
+	public function initialize() {
 		register_taxonomy(
             'asgarosforum-category',
             null,
