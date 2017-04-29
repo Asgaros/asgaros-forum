@@ -14,7 +14,7 @@
         <div id="post-body" class="metabox-holder">
             <div class="postbox-container">
 
-                <div id="structure-editor" class="postbox" style="display: none;">
+                <div id="structure-editor-container" class="postbox" style="display: none;">
                     <h2 class="hndle"></h2>
                     <div class="inside">
                         <div id="category-editor" style="display: none;">

@@ -50,6 +50,7 @@ require('includes/forum-online.php');
 require('includes/forum-usergroups.php');
 require('admin/admin.php');
 require('admin/admin-structure-table.php');
+require('admin/admin-usergroups-table.php');
 
 AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();

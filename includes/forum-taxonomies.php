@@ -20,5 +20,14 @@ class AsgarosForumTaxonomies {
                 'rewrite' => false
             )
         );
+
+		register_taxonomy(
+			'asgarosforum-usergroup',
+			null,
+			array(
+				'public' => false,
+				'rewrite' => false
+			)
+		);
 	}
 }

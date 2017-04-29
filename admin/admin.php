@@ -21,16 +21,21 @@ class AsgarosForumAdmin {
         global $asgarosforum;
         $output = '';
 
-        // Show settings only when current user is admin and he edits a non-admin user.
-        if (current_user_can('manage_options') && !user_can($user->ID, 'manage_options')) {
-            $output .= '<tr>';
-            $output .= '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
-            $output .= '<td><input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'></td>';
-            $output .= '</tr>';
-            $output .= '<tr>';
-            $output .= '<th><label for="asgarosforum_banned">'.__('Banned User', 'asgaros-forum').'</label></th>';
-            $output .= '<td><input type="checkbox" name="asgarosforum_banned" id="asgarosforum_banned" value="1" '.checked(get_the_author_meta('asgarosforum_banned', $user->ID), '1', false).'></td>';
-            $output .= '</tr>';
+        // Show settings only when current user is admin ...
+        if (current_user_can('manage_options')) {
+            // ... and he edits a non-admin user.
+            if (!user_can($user->ID, 'manage_options')) {
+                $output .= '<tr>';
+                $output .= '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
+                $output .= '<td><input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'></td>';
+                $output .= '</tr>';
+                $output .= '<tr>';
+                $output .= '<th><label for="asgarosforum_banned">'.__('Banned User', 'asgaros-forum').'</label></th>';
+                $output .= '<td><input type="checkbox" name="asgarosforum_banned" id="asgarosforum_banned" value="1" '.checked(get_the_author_meta('asgarosforum_banned', $user->ID), '1', false).'></td>';
+                $output .= '</tr>';
+            }
+
+            $output .= AsgarosForumUserGroups::showUserProfileFields($user->ID);
         }
 
         if ($asgarosforum->options['allow_subscriptions'] && $user->user_email !== get_bloginfo('admin_email')) {
@@ -76,16 +81,15 @@ class AsgarosForumAdmin {
         add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'), 'dashicons-clipboard');
         add_submenu_page('asgarosforum-options', __('Options', 'asgaros-forum'), __('Options', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'));
         add_submenu_page('asgarosforum-options', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'structure_page'));
+        add_submenu_page('asgarosforum-options', __('User Groups', 'asgaros-forum'), __('User Groups', 'asgaros-forum'), 'manage_options', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
     }
 
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
-        if (strstr($hook, 'asgarosforum') !== false) {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);
-            wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
-        }
+        wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);
+        wp_enqueue_style('wp-color-picker');
+        wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
     }
 
     function save_settings() {
@@ -102,6 +106,12 @@ class AsgarosForumAdmin {
         } else if (isset($_POST['asgaros-forum-delete-category'])) {
             if (!empty($_POST['category-id']) && is_numeric($_POST['category-id'])) {
                 $this->delete_category($_POST['category-id']);
+            }
+        } else if (isset($_POST['af-create-edit-usergroup-submit'])) {
+            $this->saved = AsgarosForumUserGroups::saveUserGroup();
+        } else if (isset($_POST['asgaros-forum-delete-usergroup'])) {
+            if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
+                AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
             }
         }
     }
@@ -249,6 +259,11 @@ class AsgarosForumAdmin {
         $asgarosforum->db->delete($asgarosforum->tables->forums, array('id' => $forum_id), array('%d'));
 
         $this->saved = true;
+    }
+
+    /* USERGROUPS */
+    function usergroups_page() {
+        require('views/usergroups.php');
     }
 }
 

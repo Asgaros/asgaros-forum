@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumUserGroups {
     private static $asgarosforum = null;
+    private static $taxonomyName = 'asgarosforum-usergroup';
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -15,12 +16,73 @@ class AsgarosForumUserGroups {
         // Empty ...
     }
 
+    // Returns all usergroups
+    public static function getUserGroups() {
+        return get_terms(self::$taxonomyName, array('hide_empty' => false));
+    }
+
+    // Returns usergroup by id/slug/name/term_taxonomy_id
+    public static function getUserGroupBy($value, $by = 'id') {
+        return get_term_by($by, $value, self::$taxonomyName);
+    }
+
+    // Returns color of usergroup
+    public static function getUserGroupColor($term_id) {
+        return get_term_meta($term_id, 'usergroup-color', true);
+    }
+
+    // Returns usergroups of user
+    public static function getUserGroupsForUser($user_id, $fields = 'all') {
+        return wp_get_object_terms($user_id, self::$taxonomyName, array('fields' => $fields));
+    }
+
+    // Returns usergroups of post
+    public static function getUserGroupsForPost($post_id) {
+        return get_post_meta($post_id, 'usergroups', true);
+    }
+
+    // Returns users in usergroup
+    public static function getUsersInUserGroup($usergroup_id) {
+        return get_objects_in_term($usergroup_id, self::$taxonomyName);
+    }
+
+    // Checks if a user is in a specific user group.
+    public static function isUserInUserGroup($userID, $userGroupID) {
+        return is_object_in_term($userID, self::$taxonomyName, $userGroupID);
+    }
+
+    public static function saveUserGroup() {
+        global $asgarosforum;
+        $usergroup_id       = $_POST['usergroup_id'];
+        $usergroup_name     = trim($_POST['usergroup_name']);
+        $usergroup_color    = trim($_POST['usergroup_color']);
+
+        if (!empty($usergroup_name)) {
+            if ($usergroup_id === 'new') {
+                $newTerm = wp_insert_term($usergroup_name, self::$taxonomyName);
+                $usergroup_id = $newTerm['term_id'];
+            } else {
+                wp_update_term($usergroup_id, self::$taxonomyName, array('name' => $usergroup_name));
+            }
+
+            update_term_meta($usergroup_id, 'usergroup-color', $usergroup_color);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function deleteUserGroup($userGroupID) {
+        wp_delete_term($userGroupID, self::$taxonomyName);
+    }
+
     // Adds a new user groups string to the structure page.
     public static function renderUserGroupsInCategory($categoryID) {
         $userGroupsInCategory = get_term_meta($categoryID, 'usergroups', true);
 
         if ($userGroupsInCategory) {
-            $userGroupsNames = get_terms('user-group', array('hide_empty' => false, 'include' => $userGroupsInCategory, 'fields' => 'names'));
+            $userGroupsNames = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $userGroupsInCategory, 'fields' => 'names'));
 
             if (!empty($userGroupsNames)) {
                 $userGroupsString = esc_attr(implode(', ', $userGroupsNames));
@@ -31,7 +93,7 @@ class AsgarosForumUserGroups {
     }
 
     public static function renderCategoryEditorFields() {
-        $available_usergroups = get_terms('user-group', array('hide_empty' => false));
+        $available_usergroups = get_terms(self::$taxonomyName, array('hide_empty' => false));
 
         if (!empty($available_usergroups) && !is_wp_error($available_usergroups)) {
             echo '<tr id="usergroups-editor">';
@@ -70,7 +132,7 @@ class AsgarosForumUserGroups {
 
     public static function filterCategories($filter) {
         global $user_ID;
-        $groups_of_user = wp_get_object_terms($user_ID, 'user-group', array('fields' => 'ids'));
+        $groups_of_user = wp_get_object_terms($user_ID, self::$taxonomyName, array('fields' => 'ids'));
         $categories = get_terms('asgarosforum-category', array('hide_empty' => false)); // TODO: Produces a duplicate query.
 
         if (!empty($categories) && !is_wp_error($categories) && !is_super_admin($user_ID)) {
@@ -100,7 +162,7 @@ class AsgarosForumUserGroups {
         $status = true;
 
         global $user_ID;
-        $groups_of_user = wp_get_object_terms($user_ID, 'user-group', array('fields' => 'ids'));
+        $groups_of_user = wp_get_object_terms($user_ID, self::$taxonomyName, array('fields' => 'ids'));
         $usergroups = get_term_meta($categoryID, 'usergroups', true);
 
         if (!empty($usergroups) && !is_super_admin($user_ID)) {
@@ -128,7 +190,7 @@ class AsgarosForumUserGroups {
             // Get all objects (users) which are in that group.
             $userids = array();
             foreach ($usergroups as $usergroup) {
-                $userids = array_merge($userids, get_objects_in_term($usergroup, 'user-group'));
+                $userids = array_merge($userids, get_objects_in_term($usergroup, self::$taxonomyName));
             }
 
             // Get mail-adresses of those users.
@@ -157,5 +219,31 @@ class AsgarosForumUserGroups {
         }
 
         return $mails;
+    }
+
+    public static function showUserProfileFields($userID) {
+        $output = '';
+        $usergroups = self::getUserGroups();
+
+        if (!empty($usergroups)) {
+            $output .= '<tr>';
+            $output .= '<th><label>'.__('User Groups', 'asgaros-forum').'</label></th>';
+            $output .= '<td>';
+
+            foreach ($usergroups as $usergroup) {
+                $color = self::getUserGroupColor($usergroup->term_id);
+
+				$output .= '<input type="checkbox" name="user-group[]" id="user-group-'.$usergroup->slug.'" value="'.$usergroup->slug.'" '.checked(true, self::isUserInUserGroup($userID, $usergroup->term_id), false).' />';
+                $output .= '<label class="usergroup-label" for="user-group-'.$usergroup->slug.'" style="border: 3px solid '.$color.';">';
+                $output .= $usergroup->name;
+                $output .= '</label>';
+                $output .= '<br />';
+			}
+
+            $output .= '</td>';
+    		$output .= '</tr>';
+		}
+
+        return $output;
     }
 }
