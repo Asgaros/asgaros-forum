@@ -90,6 +90,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_after_delete_topic
 * asgarosforum_custom_forum_column
 * asgarosforum_custom_topic_column
+* asgarosforum_after_first_post
 = Which filters are available =
 * asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
@@ -122,6 +123,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: Show who edited a post
+* Added: asgarosforum_after_first_post hook
 * Added: asgarosforum_custom_forum_column hook
 * Added: asgarosforum_custom_topic_column hook
 * Fixed: Dont remove paragraphs from quotes

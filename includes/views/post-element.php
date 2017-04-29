@@ -91,3 +91,12 @@ echo '<div class="post" id="postid-'.$post->id.'">';
         </div>
     </div>
 </div>
+
+<?php
+
+// Hook for custom-stuff after first post.
+if ($counter == 1) {
+    do_action('asgarosforum_after_first_post');
+}
+
+?>
