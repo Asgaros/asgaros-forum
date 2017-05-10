@@ -128,6 +128,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: asgarosforum_custom_topic_column hook
 * Fixed: Dont remove paragraphs from quotes
 * Fixed: Some strings could not get translated
+* Changed: Show possible error messages when updating the structure
 * Performance improvements and code optimizations
 = 1.4.5 =
 * Added: Widget option to hide avatars

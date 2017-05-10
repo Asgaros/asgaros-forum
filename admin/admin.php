@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumAdmin {
     var $saved = false;
+    var $error = false;
 
     function __construct() {
         add_action('admin_menu', array($this, 'add_admin_pages'));
@@ -176,6 +177,13 @@ class AsgarosForumAdmin {
         if (!empty($category_name)) {
             if ($category_id === 'new') {
                 $newTerm = wp_insert_term($category_name, 'asgarosforum-category');
+
+                // Return possible error.
+                if (is_wp_error($newTerm)) {
+                    $this->error = $newTerm->get_error_message();
+                    return;
+                }
+
                 $category_id = $newTerm['term_id'];
             } else {
                 wp_update_term($category_id, 'asgarosforum-category', array('name' => $category_name));

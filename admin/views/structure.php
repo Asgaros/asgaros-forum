@@ -2,11 +2,13 @@
 
 <div class="wrap" id="af-structure">
     <h2><?php _e('Structure', 'asgaros-forum'); ?></h2>
-    <?php if ($this->saved) { ?>
-        <div class="updated">
-            <p><?php _e('Structure updated.', 'asgaros-forum'); ?></p>
-        </div>
     <?php
+    if ($this->error) {
+        echo '<div class="error"><p>'.$this->error.'</p></div>';
+    }
+
+    if ($this->saved) {
+        echo '<div class="updated"><p>'.__('Structure updated.', 'asgaros-forum').'</p></div>';
     }
     ?>
 
