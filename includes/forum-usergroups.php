@@ -10,11 +10,43 @@ class AsgarosForumUserGroups {
 		self::$asgarosforum = $object;
 
         add_action('init', array($this, 'initialize'));
+
+        // Users List in Administration.
+        add_filter('manage_users_columns', array($this, 'manageUsersColumns'));
+        add_action('manage_users_custom_column', array($this, 'manageUsersCustomColumn'), 10, 3);
     }
 
     public function initialize() {
         // Empty ...
     }
+
+    // Users List in Administration.
+    public function manageUsersColumns($columns) {
+        $columns['user-group'] = __('User Groups', 'asgaros-forum');
+        return $columns;
+  	}
+
+    function manageUsersCustomColumn($out, $column, $user_id) {
+		if ($column === 'user-group') {
+            $usergroups = self::getUserGroupsForUser($user_id);
+
+    		if (!empty($usergroups)) {
+        		$tags = '';
+
+        		foreach ($usergroups as $usergroup) {
+        			$href = add_query_arg(array('user-group' => $usergroup->slug), admin_url('users.php'));
+                    $color = self::getUserGroupColor($usergroup->term_id);
+        			$tags .= '<a class="usergroup-tag" style="border: 3px solid '.$color.';" href="'.$href.'" title="'.$usergroup->description.'">'.$usergroup->name.'</a>';
+        		}
+
+        		return $tags;
+            } else {
+                return false;
+            }
+		} else {
+            return $out;
+        }
+	}
 
     // Returns all usergroups
     public static function getUserGroups() {
@@ -233,8 +265,8 @@ class AsgarosForumUserGroups {
             foreach ($usergroups as $usergroup) {
                 $color = self::getUserGroupColor($usergroup->term_id);
 
-				$output .= '<input type="checkbox" name="user-group[]" id="user-group-'.$usergroup->slug.'" value="'.$usergroup->slug.'" '.checked(true, self::isUserInUserGroup($userID, $usergroup->term_id), false).' />';
-                $output .= '<label class="usergroup-label" for="user-group-'.$usergroup->slug.'" style="border: 3px solid '.$color.';">';
+				$output .= '<input type="checkbox" name="'.self::$taxonomyName.'[]" id="'.self::$taxonomyName.'-'.$usergroup->slug.'" value="'.$usergroup->slug.'" '.checked(true, self::isUserInUserGroup($userID, $usergroup->term_id), false).' />';
+                $output .= '<label class="usergroup-label" for="'.self::$taxonomyName.'-'.$usergroup->slug.'" style="border: 3px solid '.$color.';">';
                 $output .= $usergroup->name;
                 $output .= '</label>';
                 $output .= '<br />';
@@ -245,5 +277,19 @@ class AsgarosForumUserGroups {
 		}
 
         return $output;
+    }
+
+    public static function updateUserProfileFields($user_id, $user_groups = array(), $bulk = false) {
+        if (empty($user_groups) && !$bulk) {
+            $user_groups = isset($_POST[self::$taxonomyName]) ? $_POST[self::$taxonomyName] : null;
+		}
+
+		if (is_null($user_groups) || empty($user_groups)) {
+            wp_delete_object_term_relationships($user_id, self::$taxonomyName);
+		} else {
+			wp_set_object_terms($user_id, $user_groups, self::$taxonomyName, false);
+		}
+
+		clean_object_term_cache($user_id, self::$taxonomyName);
     }
 }

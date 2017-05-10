@@ -9,15 +9,9 @@ class uc_usergroups {
         $this->directory = $directory;
 
         // Users list stuff
-        add_filter('manage_users_columns', array($this, 'manage_users_columns'));
-		add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
         add_action('delete_user', array($this, 'delete_term_relationships'));
         add_action('pre_user_query', array($this, 'user_query'));
 		add_filter('views_users', array($this, 'views'));
-
-        // User profile stuff
-        add_action('personal_options_update', array($this, 'save_user_usergroups'), 10, 3);
-		add_action('edit_user_profile_update', array($this, 'save_user_usergroups'), 10, 3);
 
         // Taxonomy stuff
         add_filter('manage_edit-user-group_columns', array($this,'manage_usergroup_columns'));
@@ -33,55 +27,8 @@ class uc_usergroups {
 	}
 
     /* USERS LIST STUFF */
-	function manage_users_columns($columns) {
-		$columns['user-group'] = __('Usergroups', 'usergroup-content');
-		return $columns;
-	}
-
-    function manage_users_custom_column($out, $column, $user_id) {
-		if ($column === 'user-group') {
-            $terms = $this->get_usergroups_for_user($user_id);
-
-    		if (!empty($terms)) {
-        		$tags = '';
-
-        		foreach($terms as $term) {
-        			$href = add_query_arg(array('user-group' => $term->slug), admin_url('users.php'));
-                    $color = $this->get_usergroup_color($term->term_id);
-        			$tags .= '<a class="usergroup-tag" style="border: 3px solid '.$color.';" href="'.$href.'" title="'.$term->description.'">'.$term->name.'</a>';
-        		}
-
-        		return $tags;
-            } else {
-                return false;
-            }
-		} else {
-            return $out;
-        }
-	}
-
     function delete_term_relationships($user_id) {
 		wp_delete_object_term_relationships($user_id, 'user-group');
-	}
-
-    /* USER PROFILE STUFF */
-    function save_user_usergroups($user_id, $user_groups = array(), $bulk = false) {
-        // Make sure the current user can edit the user and assign terms before proceeding.
-		if (!current_user_can('edit_users')) {
-			return;
-		}
-
-		if (empty($user_groups) && !$bulk) {
-            $user_groups = isset($_POST['user-group']) ? $_POST['user-group'] : null;
-		}
-
-		if (is_null($user_groups) || empty($user_groups)) {
-            $this->delete_term_relationships($user_id);
-		} else {
-			wp_set_object_terms($user_id, $user_groups, 'user-group', false);
-		}
-
-		clean_object_term_cache($user_id, 'user-group');
 	}
 
     /* TAXONOMY STUFF */

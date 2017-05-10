@@ -63,9 +63,13 @@ class AsgarosForumAdmin {
     function user_profile_fields_update($user_id) {
         global $asgarosforum;
 
-        if (current_user_can('manage_options') && !user_can($user->ID, 'manage_options')) {
-            update_usermeta(absint($user_id), 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
-            update_usermeta(absint($user_id), 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
+        if (current_user_can('manage_options')) {
+            if (!user_can($user->ID, 'manage_options')) {
+                update_usermeta(absint($user_id), 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
+                update_usermeta(absint($user_id), 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
+            }
+
+            AsgarosForumUserGroups::updateUserProfileFields($user_id);
         }
 
         if ($asgarosforum->options['allow_subscriptions']) {
