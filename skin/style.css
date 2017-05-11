@@ -200,7 +200,7 @@
     float: right;
     font-weight: normal;
     font-style: italic;
-    width: 216px;
+    width: 222px;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
 }
@@ -247,7 +247,7 @@
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
-    width: 240px;
+    width: 242px;
     text-align: center;
     border-left: 1px solid #e1e1e1;
 }
