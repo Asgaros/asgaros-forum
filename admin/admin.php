@@ -92,9 +92,13 @@ class AsgarosForumAdmin {
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
-        wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);
-        wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
+        wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->directory.'admin/admin-common.css', array(), $asgarosforum->version);
+
+        if (strstr($hook, 'asgarosforum') !== false) {
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);
+            wp_enqueue_style('wp-color-picker');
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
+        }
     }
 
     function save_settings() {
@@ -113,7 +117,13 @@ class AsgarosForumAdmin {
                 $this->delete_category($_POST['category-id']);
             }
         } else if (isset($_POST['af-create-edit-usergroup-submit'])) {
-            $this->saved = AsgarosForumUserGroups::saveUserGroup();
+            $saveStatus = AsgarosForumUserGroups::saveUserGroup();
+
+            if (is_wp_error($saveStatus)) {
+                $this->error = $saveStatus->get_error_message();
+            } else {
+                $this->saved = $saveStatus;
+            }
         } else if (isset($_POST['asgaros-forum-delete-usergroup'])) {
             if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
                 AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);

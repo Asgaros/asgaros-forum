@@ -2,11 +2,13 @@
 
 <div class="wrap" id="af-usergroups">
     <h2><?php _e('User Groups', 'asgaros-forum'); ?></h2>
-    <?php if ($this->saved) { ?>
-        <div class="updated">
-            <p><?php _e('User Groups updated.', 'asgaros-forum'); ?></p>
-        </div>
     <?php
+    if ($this->error) {
+        echo '<div class="error"><p>'.$this->error.'</p></div>';
+    }
+
+    if ($this->saved) {
+        echo '<div class="updated"><p>'.__('User Groups updated.', 'asgaros-forum').'</p></div>';
     }
     ?>
 
@@ -58,7 +60,6 @@
                 </a>
 
                 <?php
-                global $asgarosforum;
                 $usergroups = AsgarosForumUserGroups::getUserGroups();
 
                 if (!empty($usergroups)) {
@@ -66,7 +67,7 @@
                     $userGroupsTable->prepare_items();
                     $userGroupsTable->display();
 
-                    echo '<a href="#" class="usergroup-editor-link dashicons-before dashicons-plus margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add User Group', 'asgaros-forum').'">';
+                    echo '<a href="#" class="usergroup-editor-link dashicons-before dashicons-plus margin-bottom margin-top padding-top" data-value-id="new" data-value-editor-title="'.__('Add User Group', 'asgaros-forum').'">';
                         _e('Add User Group', 'asgaros-forum');
                     echo '</a>';
                 }

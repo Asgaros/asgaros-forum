@@ -23,6 +23,7 @@ Check out our [official website](https://www.asgaros.de/support/) if you want to
 * Topic & post management
 * Guest postings
 * Sub-forums
+* User groups
 * Notifications
 * Moderators
 * Statistics
@@ -122,6 +123,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: User groups functionality
 * Added: Show who edited a post
 * Added: asgarosforum_after_first_post hook
 * Added: asgarosforum_custom_forum_column hook

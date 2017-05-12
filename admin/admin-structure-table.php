@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-if(!class_exists('WP_List_Table')){
+if (!class_exists('WP_List_Table')){
     require_once(ABSPATH.'wp-admin/includes/class-wp-list-table.php');
 }
 
@@ -10,8 +10,6 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
     var $table_data = array();
 
     function __construct($table_data) {
-        global $status, $page;
-
         $this->table_data = $table_data;
 
         parent::__construct(

@@ -1,0 +1,15 @@
+.af-usergroup-tag {
+    padding: 0 3px;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    color: #333;
+    margin: 2px;
+    display: inline-block;
+}
+.af-userlist-color {
+    width: 19px;
+    height: 19px;
+    float: left;
+    margin-right: 8px;
+}

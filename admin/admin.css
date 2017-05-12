@@ -147,13 +147,13 @@
 #af-usergroups .margin-bottom {
     margin-bottom: 20px;
 }
+#af-usergroups .margin-top {
+    margin-top: 20px;
+}
 #af-usergroups .hndle {
     cursor: default;
     background-color: #2d89cc;
     color: white;
-}
-#af-usergroups input[type="text"] {
-    width: 100%;
 }
 #af-usergroups #usergroup_name {
     padding: 3px 8px;
@@ -175,74 +175,39 @@
 #af-usergroups .usergroups tfoot {
     display: none;
 }
-
-
-
-
-
-
-.usergroup-tag,
-.usergroup-label {
-    padding: 0 5px;
-    border-radius: 3px;
-    color: #000;
-    margin: 2px;
-    display: inline-block;
-}
-.usergroup-color {
-    width: 25px;
-    height: 25px;
-}
-.userlist-color {
-    width: 19px;
-    height: 19px;
-    float: left;
-    margin-right: 8px;
-}
-
-
-
-
-
-
-
-
-
-
-#af-structure th {
-    width: initial;
-    vertical-align: middle;
-    color: #444;
-}
-#af-structure #category-editor .form-table th,
-#af-structure #forum-editor .form-table th {
-    min-width: 150px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-#af-structure #category-editor .form-table td,
-#af-structure #forum-editor .form-table td {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-#af-structure #category-delete input[type="submit"],
-#af-structure #forum-delete input[type="submit"] {
+#af-usergroups #usergroup-delete input[type="submit"] {
     background-color: #d54e21;
     border-color: #d54e21;
     color: #fff;
     text-shadow: none;
     box-shadow: none;
 }
-#af-structure .forum-name {
+#af-usergroups th {
+    width: initial;
+    vertical-align: middle;
+    color: #444;
+}
+#af-usergroups #usergroup-editor .form-table th {
+    min-width: 150px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#af-usergroups #usergroup-editor .form-table td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#af-usergroups .usergroup-name {
     font-weight: 600;
 }
-#af-structure .forum-description {
-    font-style: italic;
-}
-#af-structure .wp-list-table td {
+#af-usergroups .wp-list-table td {
     vertical-align: middle;
 }
-#af-structure .column-status,
-#af-structure .column-sort {
+#af-usergroups .column-color,
+#af-usergroups .column-users {
     width: 125px;
+}
+#af-usergroups .usergroup-color {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #000;
 }

@@ -115,7 +115,7 @@
             var editor_title    = $(this).attr('data-value-editor-title');
             var usergroup_id    = $(this).attr('data-value-id');
             var usergroup_name  = '';
-            var usergroup_color = '#333333';
+            var usergroup_color = '#444444';
 
             if (usergroup_id !== 'new') {
                 usergroup_name  = $('#usergroup_'+usergroup_id+'_name').val();
@@ -125,6 +125,7 @@
             $('#usergroup-editor input[name=usergroup_id]').val(usergroup_id);
             $('#usergroup-editor input[name=usergroup_name]').val(usergroup_name);
             $('#usergroup-editor input[name=usergroup_color]').val(usergroup_color);
+            $('#usergroup-editor input[name=usergroup_color]').wpColorPicker('color', usergroup_color);
 
             setUserGroupTitle(editor_title);
 
