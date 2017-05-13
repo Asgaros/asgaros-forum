@@ -92,13 +92,13 @@ class AsgarosForumAdmin {
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
-        wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->directory.'admin/admin-common.css', array(), $asgarosforum->version);
-        wp_enqueue_script('asgarosforum-admin-common-js', $asgarosforum->directory.'admin/admin-common.js', array(), $asgarosforum->version, true);
+        wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->directory.'admin/css/admin-common.css', array(), $asgarosforum->version);
+        wp_enqueue_script('asgarosforum-admin-common-js', $asgarosforum->directory.'admin/js/admin-common.js', array(), $asgarosforum->version, true);
 
         if (strstr($hook, 'asgarosforum') !== false) {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/css/admin.css', array(), $asgarosforum->version);
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/js/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
         }
     }
 
