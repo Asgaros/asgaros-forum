@@ -93,6 +93,7 @@ class AsgarosForumAdmin {
         global $asgarosforum;
 
         wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->directory.'admin/admin-common.css', array(), $asgarosforum->version);
+        wp_enqueue_script('asgarosforum-admin-common-js', $asgarosforum->directory.'admin/admin-common.js', array(), $asgarosforum->version, true);
 
         if (strstr($hook, 'asgarosforum') !== false) {
             wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/admin.css', array(), $asgarosforum->version);

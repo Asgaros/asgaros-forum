@@ -9,15 +9,14 @@ class AsgarosForumUserGroups {
     public function __construct($object) {
 		self::$asgarosforum = $object;
 
-        // Users List in Administration.
+        // Users list in administration.
         add_filter('manage_users_columns', array($this, 'manageUsersColumns'));
         add_action('manage_users_custom_column', array($this, 'manageUsersCustomColumn'), 10, 3);
         add_action('delete_user', array($this, 'delete_term_relationships'));
 
-
-        // Users list stuff
-        //add_action('pre_user_query', array($this, 'user_query'));
-		//add_filter('views_users', array($this, 'views'));
+        // Filtering users list in administration by user group.
+		add_filter('views_users', array($this, 'views'));
+        add_action('pre_user_query', array($this, 'user_query'));
 
 		/* Bulk edit */
 		//add_action('admin_init', array($this, 'bulk_edit_action'));
@@ -38,7 +37,7 @@ class AsgarosForumUserGroups {
         		$tags = '';
 
         		foreach ($usergroups as $usergroup) {
-        			$href = add_query_arg(array('user-group' => $usergroup->term_id), admin_url('users.php'));
+        			$href = add_query_arg(array('forum-user-group' => $usergroup->term_id), admin_url('users.php'));
                     $color = self::getUserGroupColor($usergroup->term_id);
         			$tags .= '<a class="af-usergroup-tag" style="border-color: '.$color.';" href="'.$href.'" title="'.$usergroup->description.'">'.$usergroup->name.'</a>';
         		}
@@ -308,6 +307,57 @@ class AsgarosForumUserGroups {
 		clean_object_term_cache($user_id, self::$taxonomyName);
     }
 
+	public function views($views) {
+        $usergroups = self::getUserGroups();
+
+        if ($usergroups) {
+            // Show name of current usergroup.
+            $currentUserGroup = (!empty($_GET['forum-user-group'])) ? self::getUserGroupBy($_GET['forum-user-group']) : false;
+
+            if ($currentUserGroup) {
+                $color = self::getUserGroupColor($currentUserGroup->term_id);
+                echo '<h2><div class="af-userlist-color" style="background-color: '.$color.';"></div>'.$currentUserGroup->name.'</h2>';
+            }
+
+            $form = '<form method="get" action="'.admin_url('users.php').'">';
+            $form .= '<select name="forum-user-group" id="forum-user-group-select"><option value="0">'.__('Select Forum User Group ...', 'asgaros-forum').'</option>';
+
+            foreach ($usergroups as $term) {
+    			$form .= '<option value="'.$term->term_id.'"'.selected($term->term_id, ($currentUserGroup) ? $currentUserGroup->term_id : '', false).'>'.$term->name.'</option>';
+    		}
+
+            $form .= '</select></form>';
+
+            $views['forum-user-group'] = $form;
+        }
+
+		return $views;
+	}
+
+	public function user_query($Query = '') {
+		global $pagenow, $wpdb;
+
+		if ($pagenow == 'users.php') {
+            if (!empty($_GET['forum-user-group'])) {
+    			$userGroup = $_GET['forum-user-group'];
+    			$term = self::getUserGroupBy($userGroup);
+
+                if (!empty($term)) {
+        			$user_ids = self::getUsersInUserGroup($term->term_id);
+
+                    if (!empty($user_ids)) {
+            			$ids = implode(',', wp_parse_id_list($user_ids));
+            			$Query->query_where .= " AND $wpdb->users.ID IN ($ids)";
+                    } else {
+                        $Query->query_where .= " AND $wpdb->users.ID IN (-1)";
+                    }
+                }
+    		}
+        } else {
+            return;
+        }
+	}
+
     /* NOT YET IMPLEMENTED */
     /*
 	function bulk_edit_action() {
@@ -350,18 +400,18 @@ class AsgarosForumUserGroups {
 		?>
 		<form method="post" id="bulkedituser-groupform" class="alignright" style="clear:right; margin:0 10px;">
 			<fieldset>
-				<legend class="screen-reader-text"><?php _e('Update User Groups', 'usergroup-content'); ?></legend>
+				<legend class="screen-reader-text"><?php _e('Update User Groups', 'asgaros-forum'); ?></legend>
 				<div>
-					<label for="groupactionadd" style="margin-right:5px;"><input name="groupaction" value="add" type="radio" id="groupactionadd" checked="checked" /> <?php _e('Add users to', 'usergroup-content'); ?></label>
-					<label for="groupactionremove"><input name="groupaction" value="remove" type="radio" id="groupactionremove" /> <?php _e('Remove users from', 'usergroup-content'); ?></label>
+					<label for="groupactionadd" style="margin-right:5px;"><input name="groupaction" value="add" type="radio" id="groupactionadd" checked="checked" /> <?php _e('Add users to', 'asgaros-forum'); ?></label>
+					<label for="groupactionremove"><input name="groupaction" value="remove" type="radio" id="groupactionremove" /> <?php _e('Remove users from', 'asgaros-forum'); ?></label>
 				</div>
 				<div>
 					<input name="users" value="" type="hidden" id="bulkedituser-groupusers" />
 
-					<label for="usergroups-select" class="screen-reader-text"><?php _('User Group', 'usergroup-content'); ?></label>
+					<label for="usergroups-select" class="screen-reader-text"><?php _('User Group', 'asgaros-forum'); ?></label>
 					<select name="user-group" id="usergroups-select" style="max-width: 300px;">
 						<?php
-						$select = '<option value="">'.__( 'Select User Group&hellip;', 'usergroup-content').'</option>';
+						$select = '<option value="">'.__( 'Select User Group&hellip;', 'asgaros-forum').'</option>';
 						foreach($terms as $term) {
 							$select .= '<option value="'.$term->slug.'">'.$term->name.'</option>'."\n";
 						}
@@ -386,70 +436,5 @@ class AsgarosForumUserGroups {
 		</script>
 		<?php
 		return $views;
-	}*/
-
-	/*function views($views) {
-        $terms = $this->get_usergroups();
-
-        if ($terms) {
-            // Show name of current usergroup.
-            $usergroup = (!empty($_GET['user-group'])) ? $this->get_usergroup_by($_GET['user-group'], 'slug') : false;
-
-            if ($usergroup) {
-                $color = $this->get_usergroup_color($usergroup->term_id);
-                echo '<h2><div class="af-userlist-color" style="background-color: '.$color.';"></div>'.$usergroup->name.'</h2>';
-            }
-
-            // Build usergroup select dropdown
-            $args = array();
-
-            if (isset($_GET['s'])) {
-                $args['s'] = $_GET['s'];
-            }
-
-            if (isset($_GET['role'])) {
-                $args['role'] = $_GET['role'];
-            }
-
-            $form = '<label for="usergroups-select">'.__('Usergroups:', 'usergroup-content').' </label>';
-            $form .= '<form method="get" action="'.esc_url(preg_replace('/(.*?)\/users/ism', 'users', add_query_arg($args, remove_query_arg('user-group')))).'" style="display: inline;">';
-            $form .= '<select name="user-group" id="usergroups-select"><option value="0">'.__('All Users', 'usergroup-content').'</option>';
-
-            foreach($terms as $term) {
-    			$form .= '<option value="'.$term->slug.'"'.selected($term->slug, ($usergroup) ? $usergroup->slug : '', false).'>'.$term->name.'</option>';
-    		}
-
-            $form .= '</select>';
-		    $form .= '</form>';
-            $views['user-group'] = $form;
-        }
-
-		return $views;
-	}
-
-	function user_query($Query = '') {
-		global $pagenow, $wpdb;
-
-		if ($pagenow !== 'users.php') {
-            return;
-        }
-
-		if (!empty($_GET['user-group'])) {
-			$group = $_GET['user-group'];
-			$ids = array();
-			$term = $this->get_usergroup_by(esc_attr($group), 'slug');
-
-            if (!empty($term)) {
-    			$user_ids = $this->get_users_in_usergroup($term->term_id);
-
-                if (!empty($user_ids)) {
-        		    $ids = array_merge($user_ids, $ids);
-        			$ids = implode(',', wp_parse_id_list( $user_ids ) );
-        			$Query->query_where .= " AND $wpdb->users.ID IN ($ids)";
-                } else {
-                    $Query->query_where .= " AND $wpdb->users.ID IN (-1)";
-                }
-            }
-		}
 	}*/
 }

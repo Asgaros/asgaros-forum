@@ -29,7 +29,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         $columnHTML = '';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_color" value="'.esc_html(stripslashes($item['color'])).'">';
-        $columnHTML .= '<a class="usergroup-name" href="'.admin_url('users.php?user-group='.$item['term_id']).'">'.stripslashes($item['name']).'</a>';
+        $columnHTML .= '<a class="usergroup-name" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'">'.stripslashes($item['name']).'</a>';
 
         return $columnHTML;
     }

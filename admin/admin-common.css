@@ -8,8 +8,9 @@
     display: inline-block;
 }
 .af-userlist-color {
-    width: 19px;
-    height: 19px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #000;
     float: left;
     margin-right: 8px;
 }
