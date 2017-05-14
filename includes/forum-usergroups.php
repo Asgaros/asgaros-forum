@@ -311,24 +311,23 @@ class AsgarosForumUserGroups {
         $usergroups = self::getUserGroups();
 
         if ($usergroups) {
-            // Show name of current usergroup.
-            $currentUserGroup = (!empty($_GET['forum-user-group'])) ? self::getUserGroupBy($_GET['forum-user-group']) : false;
+            $views['forum-user-group'] = '<li>'.__('Forum User Groups:', 'asgaros-forum').'&nbsp;</li>';
 
-            if ($currentUserGroup) {
-                $color = self::getUserGroupColor($currentUserGroup->term_id);
-                echo '<h2><div class="af-userlist-color" style="background-color: '.$color.';"></div>'.$currentUserGroup->name.'</h2>';
-            }
-
-            $form = '<form method="get" action="'.admin_url('users.php').'">';
-            $form .= '<select name="forum-user-group" id="forum-user-group-select"><option value="0">'.__('Select Forum User Group ...', 'asgaros-forum').'</option>';
+            $loopCounter = 0;
 
             foreach ($usergroups as $term) {
-    			$form .= '<option value="'.$term->term_id.'"'.selected($term->term_id, ($currentUserGroup) ? $currentUserGroup->term_id : '', false).'>'.$term->name.'</option>';
-    		}
+                $loopCounter++;
+                $cssClass = (!empty($_GET['forum-user-group']) && $_GET['forum-user-group'] == $term->term_id) ? 'class="current"' : '';
 
-            $form .= '</select></form>';
+                $views['forum-user-group'] .= '<li>';
 
-            $views['forum-user-group'] = $form;
+                if ($loopCounter > 1) {
+                    $views['forum-user-group'] .= '&nbsp;|&nbsp;';
+                }
+
+                $views['forum-user-group'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-group='.$term->term_id).'">'.$term->name.'</a>';
+                $views['forum-user-group'] .= '</li>';
+            }
         }
 
 		return $views;
