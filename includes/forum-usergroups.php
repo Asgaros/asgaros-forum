@@ -9,6 +9,8 @@ class AsgarosForumUserGroups {
     public function __construct($object) {
 		self::$asgarosforum = $object;
 
+        add_action('init', array($this, 'initialize'));
+
         // Users list in administration.
         add_filter('manage_users_columns', array($this, 'manageUsersColumns'));
         add_action('manage_users_custom_column', array($this, 'manageUsersCustomColumn'), 10, 3);
@@ -22,6 +24,10 @@ class AsgarosForumUserGroups {
         add_filter('bulk_actions-users', array($this, 'bulk_actions_users'));
         add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
         add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
+    }
+
+    public function initialize() {
+        self::$taxonomyName = apply_filters('asgarosforum_filter_user_groups_taxonomy_name', self::$taxonomyName);
     }
 
     // Users List in Administration.

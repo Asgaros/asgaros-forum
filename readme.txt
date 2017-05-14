@@ -113,6 +113,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_subscribers_query_new_post
 * asgarosforum_filter_subscribers_query_new_topic
 * asgarosforum_filter_error_message_require_login
+* asgarosforum_filter_user_groups_taxonomy_name
 
 == Screenshots ==
 1. The forum overview.
