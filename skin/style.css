@@ -615,6 +615,7 @@
     margin: 15px 0;
     width: 100%;
     background-color: #fff;
+    font-size: 12px;
 }
 #af-wrapper #statistics #statistics-header {
     display: block;
@@ -632,6 +633,19 @@
     border: 1px solid #e1e1e1;
     text-align: center;
     box-sizing: border-box;
+}
+#af-wrapper #statistics-online-users {
+    display: block;
+    text-align: left;
+    padding: 3px;
+    margin: 0 20px;
+    border-top: 1px solid #e1e1e1;
+}
+#af-wrapper #statistics-online-users .dashicons-before:before {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+    padding: 2px;
 }
 #af-wrapper #statistics .statistics-element {
     width: 175px;

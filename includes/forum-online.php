@@ -72,6 +72,41 @@ class AsgarosForumOnline {
         }
     }
 
+    public static function renderOnlineInformation() {
+        if (self::$functionalityEnabled) {
+            $newestMember = get_users(array('orderby' => 'ID', 'order' => 'DESC', 'number' => 1));
+            $currentlyOnline = (!empty(self::$onlineList)) ? get_users(array('include' => self::$onlineList)) : false;
+
+            echo '<div id="statistics-online-users">';
+            echo '<span class="dashicons-before dashicons-businessman">'.__('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.self::$asgarosforum->highlightUsername($newestMember[0]).'</i></span>';
+            echo '&nbsp;&middot;&nbsp;';
+            echo '<span class="dashicons-before dashicons-groups">';
+
+            if ($currentlyOnline) {
+                echo __('Currently Online:', 'asgaros-forum').'&nbsp;<i>';
+
+                $loopCounter = 0;
+
+                foreach ($currentlyOnline as $onlineUser) {
+                    $loopCounter++;
+
+                    if ($loopCounter > 1) {
+                        echo ', ';
+                    }
+
+                    echo self::$asgarosforum->highlightUsername($onlineUser);
+                }
+
+                echo '</i>';
+            } else {
+                echo '<i>'.__('Currently nobody is online.', 'asgaros-forum').'</i>';
+            }
+
+            echo '</span>';
+            echo '</div>';
+        }
+    }
+
     public static function isUserOnline($userID) {
         if (self::$functionalityEnabled && in_array($userID, self::$onlineList)) {
             return true;

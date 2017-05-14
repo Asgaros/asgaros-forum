@@ -125,6 +125,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: User groups functionality
+* Added: Show newest member in overview
+* Added: Show names of online users in overview
 * Added: Show who edited a post
 * Added: asgarosforum_after_first_post hook
 * Added: asgarosforum_custom_forum_column hook
