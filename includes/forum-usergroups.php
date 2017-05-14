@@ -311,7 +311,7 @@ class AsgarosForumUserGroups {
         $usergroups = self::getUserGroups();
 
         if ($usergroups) {
-            $views['forum-user-group'] = '<li>'.__('Forum User Groups:', 'asgaros-forum').'&nbsp;</li>';
+            $views['forum-user-group'] = __('Forum User Groups:', 'asgaros-forum').'&nbsp;';
 
             $loopCounter = 0;
 
@@ -319,14 +319,11 @@ class AsgarosForumUserGroups {
                 $loopCounter++;
                 $cssClass = (!empty($_GET['forum-user-group']) && $_GET['forum-user-group'] == $term->term_id) ? 'class="current"' : '';
 
-                $views['forum-user-group'] .= '<li>';
-
                 if ($loopCounter > 1) {
                     $views['forum-user-group'] .= '&nbsp;|&nbsp;';
                 }
 
                 $views['forum-user-group'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-group='.$term->term_id).'">'.$term->name.'</a>';
-                $views['forum-user-group'] .= '</li>';
             }
         }
 
