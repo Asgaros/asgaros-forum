@@ -32,7 +32,7 @@ class AsgarosForumUserGroups {
 
     // Users List in Administration.
     public function manageUsersColumns($columns) {
-        $columns['forum-user-groups'] = __('Forum User Groups', 'asgaros-forum');
+        $columns['forum-user-groups'] = __('Forum', 'asgaros-forum');
         return $columns;
   	}
 
@@ -318,7 +318,7 @@ class AsgarosForumUserGroups {
         $usergroups = self::getUserGroups();
 
         if ($usergroups) {
-            $views['forum-user-group'] = __('Forum User Groups:', 'asgaros-forum').'&nbsp;';
+            $views['forum-user-group'] = __('Forum:', 'asgaros-forum').'&nbsp;';
 
             $loopCounter = 0;
 
@@ -367,11 +367,11 @@ class AsgarosForumUserGroups {
         if (!empty($userGroups)) {
             // TODO: Maybe optimize those two foreach-loops into one.
             foreach ($userGroups as $usergroup) {
-                $bulk_actions['forum_user_group_add_'.$usergroup->term_id] = __('Add to:', 'asgaros-forum').' '.$usergroup->name;
+                $bulk_actions['forum_user_group_add_'.$usergroup->term_id] = __('Add to', 'asgaros-forum').' '.$usergroup->name;
             }
 
             foreach ($userGroups as $usergroup) {
-                $bulk_actions['forum_user_group_remove_'.$usergroup->term_id] = __('Remove from:', 'asgaros-forum').' '.$usergroup->name;
+                $bulk_actions['forum_user_group_remove_'.$usergroup->term_id] = __('Remove from', 'asgaros-forum').' '.$usergroup->name;
             }
         }
         return $bulk_actions;
