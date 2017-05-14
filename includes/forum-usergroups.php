@@ -18,9 +18,10 @@ class AsgarosForumUserGroups {
 		add_filter('views_users', array($this, 'views'));
         add_action('pre_user_query', array($this, 'user_query'));
 
-		/* Bulk edit */
-		//add_action('admin_init', array($this, 'bulk_edit_action'));
-		//add_filter('views_users', array($this, 'bulk_edit'));
+		// Bulk edit inside the users list.
+        add_filter('bulk_actions-users', array($this, 'bulk_actions_users'));
+        add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
+        add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
     }
 
     // Users List in Administration.
@@ -354,83 +355,71 @@ class AsgarosForumUserGroups {
         }
 	}
 
-    /* NOT YET IMPLEMENTED */
-    /*
-	function bulk_edit_action() {
-		if (!isset( $_REQUEST['bulkedituser-groupsubmit'] ) || empty($_POST['user-group'])) { return; }
+    public function bulk_actions_users($bulk_actions) {
+        $userGroups = self::getUserGroups();
 
-		check_admin_referer('bulk-edit-user-group');
+        if (!empty($userGroups)) {
+            // TODO: Maybe optimize those two foreach-loops into one.
+            foreach ($userGroups as $usergroup) {
+                $bulk_actions['forum_user_group_add_'.$usergroup->term_id] = __('Add to:', 'asgaros-forum').' '.$usergroup->name;
+            }
 
-		// Get an array of users from the string
-		parse_str(urldecode($_POST['users']), $users);
+            foreach ($userGroups as $usergroup) {
+                $bulk_actions['forum_user_group_remove_'.$usergroup->term_id] = __('Remove from:', 'asgaros-forum').' '.$usergroup->name;
+            }
+        }
+        return $bulk_actions;
+    }
 
-		if(empty($users)) { return; }
+    public function handle_bulk_actions_users($redirect_to, $action, $user_ids) {
+        // Check for a triggered bulk action first.
+        $bulkActionFound = false;
+        $userGroups = self::getUserGroups();
 
-		$action = $_POST['groupaction'];
+        if (!empty($userGroups)) {
+            foreach ($userGroups as $usergroup) {
+                if ($action == 'forum_user_group_add_'.$usergroup->term_id) {
+                    $bulkActionFound = array('add', $usergroup->term_id);
+                    break;
+                } else if ($action == 'forum_user_group_remove_'.$usergroup->term_id) {
+                    $bulkActionFound = array('remove', $usergroup->term_id);
+                    break;
+                }
+            }
+        }
 
-        foreach($users['users'] as $user) {
-			$update_groups = array();
-			$groups = $this->get_usergroups_for_user($user);
-			foreach($groups as $group) {
-				$update_groups[$group->slug] = $group->slug;
-			}
+        // Cancel handler when no bulk action found or the user_ids array is empty.
+        if (!$bulkActionFound || empty($user_ids)) {
+            return $redirect_to;
+        }
 
-			if($action === 'add') {
-				if(!in_array($_POST['user-group'], $update_groups)) {
-					$update_groups[] = $_POST['user-group'];
-				}
-			} elseif($action === 'remove') {
-				unset($update_groups[$_POST['user-group']]);
-			}
+        foreach ($user_ids as $user_id) {
+            $groupsOfUser = self::getUserGroupsForUser($user_id, 'ids');
 
-			// Delete all user groups if they're empty
-			if(empty($update_groups)) { $update_groups = null; }
+            if ($bulkActionFound[0] === 'add') {
+                if (!in_array($bulkActionFound[1], $groupsOfUser)) {
+                    $groupsOfUser[] = $bulkActionFound[1];
+                }
+            } else if ($bulkActionFound[0] === 'remove') {
+                $searchKey = $key = array_search($bulkActionFound[1], $groupsOfUser);
 
-			self::save_user_usergroups( $user, $update_groups, true);
-		}
-	}
+                if ($searchKey !== false) {
+                    unset($groupsOfUser[$searchKey]);
+                }
+            }
 
-	function bulk_edit($views) {
-		if (!current_user_can('edit_users') ) { return $views; }
-		$terms = get_terms('user-group', array('hide_empty' => false));
-		?>
-		<form method="post" id="bulkedituser-groupform" class="alignright" style="clear:right; margin:0 10px;">
-			<fieldset>
-				<legend class="screen-reader-text"><?php _e('Update User Groups', 'asgaros-forum'); ?></legend>
-				<div>
-					<label for="groupactionadd" style="margin-right:5px;"><input name="groupaction" value="add" type="radio" id="groupactionadd" checked="checked" /> <?php _e('Add users to', 'asgaros-forum'); ?></label>
-					<label for="groupactionremove"><input name="groupaction" value="remove" type="radio" id="groupactionremove" /> <?php _e('Remove users from', 'asgaros-forum'); ?></label>
-				</div>
-				<div>
-					<input name="users" value="" type="hidden" id="bulkedituser-groupusers" />
+            self::updateUserProfileFields($user_id, $groupsOfUser, true);
+        }
 
-					<label for="usergroups-select" class="screen-reader-text"><?php _('User Group', 'asgaros-forum'); ?></label>
-					<select name="user-group" id="usergroups-select" style="max-width: 300px;">
-						<?php
-						$select = '<option value="">'.__( 'Select User Group&hellip;', 'asgaros-forum').'</option>';
-						foreach($terms as $term) {
-							$select .= '<option value="'.$term->slug.'">'.$term->name.'</option>'."\n";
-						}
-						echo $select;
-						?>
-					</select>
-					<?php wp_nonce_field('bulk-edit-user-group') ?>
-				</div>
-				<div class="clear" style="margin-top:.5em;">
-					<?php submit_button( __( 'Update' ), 'small', 'bulkedituser-groupsubmit', false ); ?>
-				</div>
-			</fieldset>
-		</form>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$('#bulkedituser-groupform').remove().insertAfter('ul.subsubsub');
-				$('#bulkedituser-groupform').live('submit', function() {
-					var users = $('.wp-list-table.users .check-column input:checked').serialize();
-					$('#bulkedituser-groupusers').val(users);
-				});
-			});
-		</script>
-		<?php
-		return $views;
-	}*/
+        $redirect_to = add_query_arg('forum_user_groups_assigned', 1, $redirect_to);
+        return $redirect_to;
+    }
+
+    public function bulk_actions_admin_notices() {
+        if (empty($_REQUEST['forum_user_groups_assigned'])) {
+            return;
+        }
+
+        printf('<div class="updated"><p>'.__('User groups assignments updated.', 'asgaros-forum').'</p></div>');
+    }
 }
