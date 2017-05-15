@@ -101,7 +101,15 @@ class AsgarosForumUserGroups {
     public static function saveUserGroup() {
         $usergroup_id       = $_POST['usergroup_id'];
         $usergroup_name     = trim($_POST['usergroup_name']);
-        $usergroup_color    = (!empty(trim($_POST['usergroup_color']))) ? trim($_POST['usergroup_color']) : '#444444';
+        $usergroup_color    = '#444444';
+
+        if (isset($_POST['usergroup_color'])) {
+            $tmp = trim($_POST['usergroup_color']);
+
+            if (!empty($tmp)) {
+                $usergroup_color = $tmp;
+            }
+        }
 
         if (!empty($usergroup_name)) {
             if ($usergroup_id === 'new') {
