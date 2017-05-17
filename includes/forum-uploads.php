@@ -36,6 +36,42 @@ class AsgarosForumUploads {
         }
 	}
 
+	// Check if its allowed to upload files with those extensions.
+	public static function checkUploadsExtension() {
+		if (self::$asgarosforum->options['allow_file_uploads'] && !empty($_FILES['forumfile'])) {
+			foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
+				if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
+					$file_extension = strtolower(pathinfo($_FILES['forumfile']['name'][$index], PATHINFO_EXTENSION));
+
+					if (!in_array($file_extension, self::$upload_allowed_filetypes)) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+	// Check if its allowed to upload files with those sizes.
+	public static function checkUploadsSize() {
+		if (self::$asgarosforum->options['allow_file_uploads'] && !empty($_FILES['forumfile'])) {
+			foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
+				if (!empty($_FILES['forumfile']['error'][$index]) && $_FILES['forumfile']['error'][$index] == 2) {
+					return false;
+				} else if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
+					$maximumFileSize = (1024 * (1024 * self::$asgarosforum->options['uploads_maximum_size']));
+
+					if ($maximumFileSize != 0 && $_FILES['forumfile']['size'][$index] > $maximumFileSize) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
 	// Generates the list of new files to upload.
 	public static function getUploadList() {
 		$files = array();
@@ -43,21 +79,11 @@ class AsgarosForumUploads {
 		if (self::$asgarosforum->options['allow_file_uploads'] && !empty($_FILES['forumfile'])) {
             foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
                 if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
-                    $file_extension = strtolower(pathinfo($_FILES['forumfile']['name'][$index], PATHINFO_EXTENSION));
+					$name = sanitize_file_name(stripslashes($_FILES['forumfile']['name'][$index]));
 
-                    // Check if its allowed to upload an file with this extension.
-                    if (in_array($file_extension, self::$upload_allowed_filetypes)) {
-						// Check if the size of the file is not too big.
-						$maximumFileSize = (1024 * (1024 * self::$asgarosforum->options['uploads_maximum_size']));
-
-						if ($maximumFileSize == 0 || $_FILES['forumfile']['size'][$index] <= $maximumFileSize) {
-							$name = sanitize_file_name(stripslashes($_FILES['forumfile']['name'][$index]));
-
-			                if (!empty($name)) {
-								$files[$index] = $name;
-							}
-						}
-                    }
+			        if (!empty($name)) {
+						$files[$index] = $name;
+					}
                 }
             }
         }

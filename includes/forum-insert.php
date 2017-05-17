@@ -66,6 +66,18 @@ class AsgarosForumInsert {
             return false;
         }
 
+        // Cancel when the file extension of uploads are not allowed.
+        if (!AsgarosForumUploads::checkUploadsExtension()) {
+            $asgarosforum->info = __('You are not allowed to upload files with that file extension.', 'asgaros-forum');
+            return false;
+        }
+
+        // Cancel when the file size of uploads is too big.
+        if (!AsgarosForumUploads::checkUploadsSize()) {
+            $asgarosforum->info = __('You are not allowed to upload files with that file size.', 'asgaros-forum');
+            return false;
+        }
+
         // Do custom insert validation checks.
         $custom_check = apply_filters('asgarosforum_filter_insert_custom_validation', true);
         if (!$custom_check) {
