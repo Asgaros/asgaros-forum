@@ -56,11 +56,18 @@ function deleteData() {
     delete_metadata('user', 0, 'asgarosforum_unread_exclude', '', true);
     delete_metadata('user', 0, 'asgarosforum_online_timestamp', '', true);
 
-    // Delete terms
+    // Delete category terms.
     $terms = $wpdb->get_col('SELECT t.term_id FROM '.$wpdb->terms.' AS t INNER JOIN '.$wpdb->term_taxonomy.' AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy = "asgarosforum-category";');
 
     foreach ($terms as $term) {
         wp_delete_term($term, 'asgarosforum-category');
+    }
+
+    // Delete usergroup terms.
+    $terms = $wpdb->get_col('SELECT t.term_id FROM '.$wpdb->terms.' AS t INNER JOIN '.$wpdb->term_taxonomy.' AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy = "asgarosforum-usergroup";');
+
+    foreach ($terms as $term) {
+        wp_delete_term($term, 'asgarosforum-usergroup');
     }
 
     // Drop custom tables
