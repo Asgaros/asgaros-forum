@@ -5,15 +5,7 @@ if (!defined('ABSPATH')) exit;
 $counter++;
 
 echo '<div class="post" id="postid-'.$post->id.'">';
-    echo '<div class="post-header">';
-        echo '<div class="post-date">'.$this->format_date($post->date).'</div>';
-
-        if ($this->current_view != 'post') {
-            echo $this->post_menu($post->id, $post->author_id, $counter);
-        }
-        ?>
-        <div class="clear"></div>
-    </div>
+?>
     <div class="post-content">
         <div class="post-author<?php if (AsgarosForumOnline::isUserOnline($post->author_id)) { echo ' user-online'; } ?>">
             <?php
@@ -44,6 +36,17 @@ echo '<div class="post" id="postid-'.$post->id.'">';
         </div>
         <div class="post-message">
             <?php
+
+            echo '<div class="forum-post-header">';
+            echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
+
+            if ($this->current_view != 'post') {
+                echo $this->post_menu($post->id, $post->author_id, $counter);
+            }
+
+            echo '<div class="clear"></div>';
+            echo '</div>';
+
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br /></div>';
             $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
 

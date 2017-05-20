@@ -125,6 +125,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Changed: Show possible error messages when uploading files
+* Changed: Minor design changes
+* Performance improvements and code optimizations
 = 1.5.1 =
 * Fixed: Fatal PHP error on some versions of PHP
 = 1.5.0 =

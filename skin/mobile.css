@@ -11,7 +11,7 @@
     #af-wrapper .post-author br {
         display: none;
     }
-    #af-wrapper .post-header div {
+    #af-wrapper .forum-post-header div {
         display: block;
     }
     #af-wrapper .post-content {
@@ -42,10 +42,7 @@
     #af-wrapper .post-author {
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     }
-    #af-wrapper .post-menu a {
-        border: none;
-    }
-    #af-wrapper .post-header {
+    #af-wrapper .forum-post-header {
         height: initial;
     }
     #af-wrapper #statistics .statistics-element {

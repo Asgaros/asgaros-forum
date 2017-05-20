@@ -296,6 +296,12 @@
     margin-bottom: 5px;
     border-bottom: 2px solid #0073aa;
 }
+#af-wrapper .forum-menu a:before {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    padding: 1px 2px 0 0;
+}
 
 /* NOTICE */
 #af-wrapper .info,
@@ -472,32 +478,42 @@
     width: 100%; /* comp */
     border-bottom: 5px solid #e1e1e1;
 }
-#af-wrapper .post-header {
-    background-color: rgba(0, 0, 0, 0.03);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+#af-wrapper .forum-post-header {
+    border-bottom: 1px solid #eee;
     box-sizing: content-box;
-    height: 29px; /* comp */
-    padding: inherit; /* comp */
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    font-size: 12px;
 }
-#af-wrapper .post-date {
+#af-wrapper .forum-post-date {
     float: left;
     font-style: italic;
-    padding: 5px 10px;
     color: #777;
     font-size: 11px;
+    padding: 0 3px;
 }
-#af-wrapper .post-menu {
+#af-wrapper .forum-post-menu {
     float: right;
-    display: table;
-    height: 100%;
 }
-#af-wrapper .post-menu a {
-    display: table-cell;
+#af-wrapper .forum-post-menu a {
+    color: #2d89cc;
     padding: 4px 10px;
 }
-#af-wrapper .post-menu a:hover {
+#af-wrapper .forum-post-menu a:hover {
     color: #005C92;
     text-decoration: none;
+}
+#af-wrapper .forum-post-menu a:before {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    padding: 1px 2px 0 0;
+}
+#af-wrapper .forum-post-menu a.dashicons-trash {
+    color: #a00;
+}
+#af-wrapper .forum-post-menu a.dashicons-trash:hover {
+    color: red;
 }
 #af-wrapper .post-content {
     display: table;
@@ -514,7 +530,7 @@
     display: table-cell;
     text-align: center;
     vertical-align: top;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    border-right: 1px solid #eee;
     width: 125px;
     padding: 7px;
     background-color: rgba(0, 0, 0, 0.03);
@@ -534,7 +550,7 @@
     display: table-cell;
     width: auto;
     vertical-align: top;
-    padding: 15px 15px 60px;
+    padding: 8px 15px 60px;
     word-break: break-word;
     position: relative;
 }
@@ -637,9 +653,9 @@
 #af-wrapper #statistics-online-users {
     display: block;
     text-align: left;
-    padding: 3px;
-    margin: 0 20px;
-    border-top: 1px solid #e1e1e1;
+    padding: 3px 20px;
+    border-top: 1px solid #eee;
+    background-color: #fbfbfb;
 }
 #af-wrapper #statistics-online-users .dashicons-before:before {
     font-size: 14px;
