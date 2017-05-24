@@ -701,8 +701,7 @@
     display: inline; /* comp */
     position: initial; /* comp */
 }
-#af-wrapper .dashicons-overview:before,
-#af-wrapper .dashicons-admin-page-small:before {
+#af-wrapper .dashicons-overview:before {
     content: "\f214";
 }
 #af-wrapper .dashicons-normal_open:before {
