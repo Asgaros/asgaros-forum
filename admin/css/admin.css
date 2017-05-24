@@ -10,9 +10,6 @@
 #af-options h3 {
     margin-top: 25px;
 }
-#af-options input[id="allowed_filetypes"] {
-    width: 300px;
-}
 #af-options .wp-color-result {
     margin: 0;
 }

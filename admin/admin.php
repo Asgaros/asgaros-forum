@@ -151,8 +151,10 @@ class AsgarosForumAdmin {
                     $saved_ops[$k] = $k;
                 } else if ($k === 'theme') {
                     $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
-                } else {
+                } else if ($k === 'allowed_filetypes') {
                     $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes(strtolower($_POST[$k]))) : $v;
+                } else {
+                    $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
                 }
             } else {
                 if (is_bool($v)) {

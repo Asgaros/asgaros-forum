@@ -124,6 +124,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to set notification sender name
+* Added: Option to set notification sender mail
 * Changed: Show possible error messages when uploading files
 * Changed: Minor design changes
 * Performance improvements and code optimizations

@@ -42,6 +42,8 @@ class AsgarosForum {
         'uploads_show_thumbnails'   => true,
         'admin_subscriptions'       => false,
         'allow_subscriptions'       => true,
+        'notification_sender_name'  => '',
+        'notification_sender_mail'  => '',
         'allow_signatures'          => false,
         'enable_search'             => true,
         'show_who_is_online'        => true,

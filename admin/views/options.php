@@ -87,6 +87,24 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>>
             <label for="allow_subscriptions"><?php _e('Allow subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>
         </p>
+        <?php
+        // Set some default sender information.
+        if (empty($asgarosforum->options['notification_sender_name'])) {
+            $asgarosforum->options['notification_sender_name'] = get_bloginfo('name');
+        }
+
+        if (empty($asgarosforum->options['notification_sender_mail'])) {
+            $asgarosforum->options['notification_sender_mail'] = get_bloginfo('admin_email');
+        }
+        ?>
+        <p>
+            <label for="notification_sender_name"><?php _e('Sender name:', 'asgaros-forum'); ?></label>
+            <input class="regular-text" type="text" name="notification_sender_name" id="notification_sender_name" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_name'])); ?>">
+        </p>
+        <p>
+            <label for="notification_sender_mail"><?php _e('Sender mail:', 'asgaros-forum'); ?></label>
+            <input class="regular-text" type="text" name="notification_sender_mail" id="notification_sender_mail" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_mail'])); ?>">
+        </p>
         <h3><?php _e('Uploads', 'asgaros-forum'); ?></h3>
         <?php
         $uploadsOption = checked(!empty($asgarosforum->options['allow_file_uploads']), true, false);
@@ -109,7 +127,7 @@ if (!defined('ABSPATH')) exit;
         </p>
         <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <label for="allowed_filetypes"><?php _e('Allowed filetypes:', 'asgaros-forum'); ?></label>
-            <input type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo stripslashes($asgarosforum->options['allowed_filetypes']); ?>" size="3">
+            <input class="regular-text" type="text" name="allowed_filetypes" id="allowed_filetypes" value="<?php echo esc_html(stripslashes($asgarosforum->options['allowed_filetypes'])); ?>">
         </p>
         <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
             <label for="uploads_maximum_number"><?php _e('Maximum files per post:', 'asgaros-forum'); ?></label>
