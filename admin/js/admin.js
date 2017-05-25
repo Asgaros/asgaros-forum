@@ -44,7 +44,7 @@
 
             $('#category-editor select[name=category_access] option').each(function() {
                 if ($(this).val() == category_access) {
-                    $(this).attr('selected', 'selected');
+                    $(this).prop('selected', true);
                 }
             });
 

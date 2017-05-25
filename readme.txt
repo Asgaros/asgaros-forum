@@ -127,6 +127,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Option to set notification sender name
 * Added: Option to set notification sender mail
 * Fixed: Display issues with some themes
+* Fixed: JavaScript warning when editing the forum structure
 * Changed: Show possible error messages when uploading files
 * Changed: Minor design changes
 * Performance improvements and code optimizations
