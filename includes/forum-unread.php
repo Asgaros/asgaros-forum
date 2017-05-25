@@ -9,11 +9,9 @@ class AsgarosForumUnread {
 
     public function __construct($object) {
         self::$asgarosforum = $object;
-
-        add_action('init', array($this, 'initialize'));
     }
 
-    public function initialize() {
+    public static function prepareUnreadStatus() {
         // Determine with the user ID if the user is logged in.
         self::$userID = get_current_user_id();
 

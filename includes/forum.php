@@ -116,6 +116,9 @@ class AsgarosForum {
             return;
         }
 
+        // Prepare unread status.
+        AsgarosForumUnread::prepareUnreadStatus();
+
         // Update online status.
         AsgarosForumOnline::updateOnlineStatus();
 
