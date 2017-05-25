@@ -504,9 +504,9 @@
     text-decoration: none;
 }
 #af-wrapper .forum-post-menu a:before {
-    font-size: 18px;
-    height: 18px;
-    width: 18px;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
     padding: 1px 2px 0 0;
 }
 #af-wrapper .forum-post-menu a.dashicons-trash {
@@ -530,7 +530,7 @@
     display: table-cell;
     text-align: center;
     vertical-align: top;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #e1e1e1;
     width: 125px;
     padding: 7px;
     background-color: rgba(0, 0, 0, 0.03);
@@ -550,7 +550,7 @@
     display: table-cell;
     width: auto;
     vertical-align: top;
-    padding: 8px 15px 60px;
+    padding: 6px 15px 60px;
     word-break: break-word;
     position: relative;
 }
