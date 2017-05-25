@@ -440,6 +440,7 @@
     display: initial; /* comp */
     outline: none;
     box-shadow: none; /* comp */
+    min-height: initial; /* comp */
 }
 #af-wrapper #forum-search p {
     display: none;
