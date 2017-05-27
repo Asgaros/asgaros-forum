@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Mon May 15 2017 11:17:10 GMT+0200 (Mitteleuropäische "
+"POT-Revision-Date: Sat May 27 2017 11:29:43 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ../admin/admin.php:57 ../admin/admin.php:86 ../admin/admin.php:86 ..
 #: /includes/forum-breadcrumbs.php:18 ../includes/forum-usergroups.php:35 ..
-#: /includes/forum.php:367
+#: /includes/forum.php:372
 msgid "Forum"
 msgstr ""
 
@@ -115,8 +115,8 @@ msgstr ""
 
 #: ../admin/tables/admin-usergroups-table.php:43 ../admin/views/structure.php:93 .
 #: ./admin/views/structure.php:106 ../admin/views/usergroups.php:50 ..
-#: /includes/forum-uploads.php:175 ../includes/forum.php:645 ../includes/forum.
-#: php:685
+#: /includes/forum-uploads.php:201 ../includes/forum.php:650 ../includes/forum.
+#: php:690
 msgid "Delete"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgstr ""
 msgid "Edit User Group"
 msgstr ""
 
-#: ../admin/tables/admin-usergroups-table.php:45 ../includes/forum.php:649
+#: ../admin/tables/admin-usergroups-table.php:45 ../includes/forum.php:654
 msgid "Edit"
 msgstr ""
 
@@ -224,63 +224,71 @@ msgstr ""
 msgid "Allow subscriptions (for logged-in users only)"
 msgstr ""
 
-#: ../admin/views/options.php:90
-msgid "Uploads"
+#: ../admin/views/options.php:101
+msgid "Sender name:"
 msgstr ""
 
-#: ../admin/views/options.php:96
-msgid "Allow file uploads"
-msgstr ""
-
-#: ../admin/views/options.php:100
-msgid "Guests can upload files"
-msgstr ""
-
-#: ../admin/views/options.php:104
-msgid "Show thumbnails"
+#: ../admin/views/options.php:105
+msgid "Sender mail:"
 msgstr ""
 
 #: ../admin/views/options.php:108
+msgid "Uploads"
+msgstr ""
+
+#: ../admin/views/options.php:114
+msgid "Allow file uploads"
+msgstr ""
+
+#: ../admin/views/options.php:118
+msgid "Guests can upload files"
+msgstr ""
+
+#: ../admin/views/options.php:122
+msgid "Show thumbnails"
+msgstr ""
+
+#: ../admin/views/options.php:126
 msgid "Show uploads to logged-in users only"
 msgstr ""
 
-#: ../admin/views/options.php:111 ../includes/forum-uploads.php:228
+#: ../admin/views/options.php:129 ../includes/forum-uploads.php:254
 msgid "Allowed filetypes:"
 msgstr ""
 
-#: ../admin/views/options.php:115 ../includes/forum-uploads.php:221
+#: ../admin/views/options.php:133 ../includes/forum-uploads.php:247
 msgid "Maximum files per post:"
 msgstr ""
 
-#: ../admin/views/options.php:117 ../admin/views/options.php:122
+#: ../admin/views/options.php:135 ../admin/views/options.php:140
 msgid "(0 = No limitation)"
 msgstr ""
 
-#: ../admin/views/options.php:120 ../includes/forum-uploads.php:225
+#: ../admin/views/options.php:138 ../includes/forum-uploads.php:251
 msgid "Maximum file size (in megabyte):"
 msgstr ""
 
-#: ../admin/views/options.php:124
+#: ../admin/views/options.php:142
 msgid "Appearance"
 msgstr ""
 
-#: ../admin/views/options.php:129
+#: ../admin/views/options.php:147
 msgid "Theme"
 msgstr ""
 
-#: ../admin/views/options.php:141
+#: ../admin/views/options.php:159
 msgid "Forum color:"
 msgstr ""
 
-#: ../admin/views/options.php:145
+#: ../admin/views/options.php:163
 msgid "Text color:"
 msgstr ""
 
-#: ../admin/views/options.php:149
+#: ../admin/views/options.php:167
 msgid "Background color:"
 msgstr ""
 
-#: ../admin/views/options.php:152
+#: ../admin/views/options.php:170
 msgid "Save Options"
 msgstr ""
 
@@ -385,28 +393,28 @@ msgid "Thomas Belser"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:46 ../includes/forum-breadcrumbs.php:46 ..
-#: /includes/forum.php:278
+#: /includes/forum.php:283
 msgid "Post Reply"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:48 ../includes/forum-breadcrumbs.php:48 ..
-#: /includes/forum-editor.php:120 ../includes/forum.php:276
+#: /includes/forum-editor.php:120 ../includes/forum.php:281
 msgid "Edit Post"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:50 ../includes/forum-breadcrumbs.php:50 ..
-#: /includes/forum-editor.php:116 ../includes/forum.php:280 ../includes/forum.php:
-#: 678
+#: /includes/forum-editor.php:116 ../includes/forum.php:285 ../includes/forum.php:
+#: 683
 msgid "New Topic"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:52 ../includes/forum-breadcrumbs.php:52 ..
-#: /includes/forum.php:282
+#: /includes/forum.php:287
 msgid "Move Topic"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:54 ../includes/forum-breadcrumbs.php:54 ..
-#: /includes/forum.php:284
+#: /includes/forum.php:289
 msgid "Search"
 msgstr ""
 
@@ -415,11 +423,11 @@ msgstr ""
 msgid "You are not allowed to do this."
 msgstr ""
 
-#: ../includes/forum-editor.php:98 ../includes/views/post-element.php:47
+#: ../includes/forum-editor.php:98 ../includes/views/post-element.php:50
 msgid "Quote from"
 msgstr ""
 
-#: ../includes/forum-editor.php:98 ../includes/views/post-element.php:47
+#: ../includes/forum-editor.php:98 ../includes/views/post-element.php:50
 #, php-format
 msgid "on %s"
 msgstr ""
@@ -448,6 +456,14 @@ msgstr ""
 msgid "You must enter a message."
 msgstr ""
 
+#: ../includes/forum-insert.php:71
+msgid "You are not allowed to upload files with that file extension."
+msgstr ""
+
+#: ../includes/forum-insert.php:77
+msgid "You are not allowed to upload files with that file size."
+msgstr ""
+
 #: ../includes/forum-notifications.php:17
 msgid "<b>Unsubscribe</b> from this topic."
 msgstr ""
@@ -470,7 +486,7 @@ msgstr ""
 
 #: ../includes/forum-notifications.php:147
 #, php-format
-msgid "[%s] New answer: %s"
+msgid "New answer: %s"
 msgstr ""
 
 #: ../includes/forum-notifications.php:148
@@ -484,12 +500,12 @@ msgid ""
 "answer to this mail!"
 msgstr ""
 
-#: ../includes/forum-notifications.php:209
+#: ../includes/forum-notifications.php:211
 #, php-format
-msgid "[%s] New topic: %s"
+msgid "New topic: %s"
 msgstr ""
 
-#: ../includes/forum-notifications.php:210
+#: ../includes/forum-notifications.php:212
 #, php-format
 msgid ""
 "Hello,<br /><br />You received this message because there is a new forum-"
@@ -553,36 +569,36 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: ../includes/forum-unread.php:146
+#: ../includes/forum-unread.php:144
 msgid "New posts"
 msgstr ""
 
-#: ../includes/forum-unread.php:147
+#: ../includes/forum-unread.php:145
 msgid "No new posts"
 msgstr ""
 
-#: ../includes/forum-unread.php:148
+#: ../includes/forum-unread.php:146
 msgid "Mark All Read"
 msgstr ""
 
-#: ../includes/forum-uploads.php:136
+#: ../includes/forum-uploads.php:162
 msgid "You need to login to have access to uploads."
 msgstr ""
 
-#: ../includes/forum-uploads.php:136 ../includes/forum.php:216 ../includes/forum.
-#: php:226 ../includes/forum.php:421
+#: ../includes/forum-uploads.php:162 ../includes/forum.php:221 ../includes/forum.
+#: php:231 ../includes/forum.php:426
 msgid "Login"
 msgstr ""
 
-#: ../includes/forum-uploads.php:153 ../includes/forum-uploads.php:183
+#: ../includes/forum-uploads.php:179 ../includes/forum-uploads.php:209
 msgid "Uploaded files:"
 msgstr ""
 
-#: ../includes/forum-uploads.php:194
+#: ../includes/forum-uploads.php:220
 msgid "Upload Files:"
 msgstr ""
 
-#: ../includes/forum-uploads.php:212
+#: ../includes/forum-uploads.php:238
 msgid "Add another file ..."
 msgstr ""
 
@@ -631,12 +647,12 @@ msgstr[1] ""
 msgid "by"
 msgstr ""
 
-#: ../includes/forum-widgets.php:106 ../includes/forum.php:628
+#: ../includes/forum-widgets.php:106 ../includes/forum.php:633
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/forum-widgets.php:113 ../includes/forum.php:630
+#: ../includes/forum-widgets.php:113 ../includes/forum.php:635
 msgid "No topics yet!"
 msgstr ""
 
@@ -672,88 +688,88 @@ msgstr ""
 msgid "Asgaros Forum: Recent Topics"
 msgstr ""
 
-#: ../includes/forum.php:216
+#: ../includes/forum.php:221
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:226
+#: ../includes/forum.php:231
 msgid "Sorry, only logged in users have access to this category."
 msgstr ""
 
-#: ../includes/forum.php:231 ../includes/forum.php:238 ../includes/forum.php:246
+#: ../includes/forum.php:236 ../includes/forum.php:243 ../includes/forum.php:251
 msgid "Sorry, you dont have access to this area."
 msgstr ""
 
-#: ../includes/forum.php:411
+#: ../includes/forum.php:416
 msgid "Sorry, but there are no posts."
 msgstr ""
 
-#: ../includes/forum.php:421
+#: ../includes/forum.php:426
 msgid "You need to login in order to create posts and topics."
 msgstr ""
 
-#: ../includes/forum.php:430
+#: ../includes/forum.php:435
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: ../includes/forum.php:456 ../includes/forum.php:684
+#: ../includes/forum.php:461 ../includes/forum.php:689
 msgid "Move"
 msgstr ""
 
-#: ../includes/forum.php:460
+#: ../includes/forum.php:465
 msgid "You are not allowed to move threads."
 msgstr ""
 
-#: ../includes/forum.php:602
+#: ../includes/forum.php:607
 msgid "Deleted user"
 msgstr ""
 
-#: ../includes/forum.php:605
+#: ../includes/forum.php:610
 msgid "Guest"
 msgstr ""
 
-#: ../includes/forum.php:627 ../includes/views/topic-element.php:17
+#: ../includes/forum.php:632 ../includes/views/topic-element.php:17
 msgid "By"
 msgstr ""
 
-#: ../includes/forum.php:645 ../includes/forum.php:685
+#: ../includes/forum.php:650 ../includes/forum.php:690
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: ../includes/forum.php:654
+#: ../includes/forum.php:659
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:680
+#: ../includes/forum.php:685
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:688
+#: ../includes/forum.php:693
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:690
+#: ../includes/forum.php:695
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:694
+#: ../includes/forum.php:699
 msgid "Open"
 msgstr ""
 
-#: ../includes/forum.php:696
+#: ../includes/forum.php:701
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:841
+#: ../includes/forum.php:846
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: ../includes/forum.php:842
+#: ../includes/forum.php:847
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: ../includes/forum.php:843
+#: ../includes/forum.php:848
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
@@ -768,7 +784,7 @@ msgid_plural "%s Topics"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/views/forum-element.php:47 ../includes/views/post-element.php:34
+#: ../includes/views/forum-element.php:47 ../includes/views/post-element.php:26
 #, php-format
 msgid "%s Post"
 msgid_plural "%s Posts"
@@ -792,20 +808,20 @@ msgstr ""
 msgid "There are no categories yet!"
 msgstr ""
 
-#: ../includes/views/post-element.php:21
+#: ../includes/views/post-element.php:13
 msgid "Topic Author"
 msgstr ""
 
-#: ../includes/views/post-element.php:38
+#: ../includes/views/post-element.php:30
 msgid "Banned"
 msgstr ""
 
-#: ../includes/views/post-element.php:66
+#: ../includes/views/post-element.php:69
 #, php-format
 msgid "Last edited on %s by %s"
 msgstr ""
 
-#: ../includes/views/post-element.php:68
+#: ../includes/views/post-element.php:71
 #, php-format
 msgid "Last edited on %s"
 msgstr ""
