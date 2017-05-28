@@ -125,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: Option to change icon of forums
+* Performance improvements and code optimizations
 = 1.5.2 =
 * Added: Option to set notification sender name
 * Added: Option to set notification sender mail

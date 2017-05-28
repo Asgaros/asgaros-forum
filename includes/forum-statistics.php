@@ -41,8 +41,8 @@ class AsgarosForumStatistics {
     }
 
     public static function getData() {
-        $queryTopics = 'SELECT COUNT(id) FROM '.self::$asgarosforum->tables->topics;
-        $queryPosts = 'SELECT COUNT(id) FROM '.self::$asgarosforum->tables->posts;
+        $queryTopics = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->topics;
+        $queryPosts = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->posts;
         $queryViews = 'SELECT SUM(views) FROM '.self::$asgarosforum->tables->topics;
         $data = self::$asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
         $users = count_users();

@@ -17,12 +17,12 @@ class AsgarosForumPagination {
         $link = '';
 
         if ($location == $this->asgarosforum->tables->posts) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d;", $this->asgarosforum->current_topic));
+            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $this->asgarosforum->current_topic));
             $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
             $select_source = $this->asgarosforum->current_topic;
             $select_url = 'topic';
         } else if ($location == $this->asgarosforum->tables->topics) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(id) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->asgarosforum->current_forum, "normal%"));
+            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->asgarosforum->current_forum, "normal%"));
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
             $select_source = $this->asgarosforum->current_forum;
             $select_url = 'forum';

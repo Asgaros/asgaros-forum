@@ -47,7 +47,7 @@ class AsgarosForumSearch {
 
             $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
 
-            $query = "SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(id) - 1) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = t.id) AS answers, MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) AS score FROM ".self::$asgarosforum->tables->topics." AS t, ".self::$asgarosforum->tables->posts." AS p, ".self::$asgarosforum->tables->forums." AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
+            $query = "SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = t.id) AS answers, MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) AS score FROM ".self::$asgarosforum->tables->topics." AS t, ".self::$asgarosforum->tables->posts." AS p, ".self::$asgarosforum->tables->forums." AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('".self::$searchKeywords."*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
 
             $results = self::$asgarosforum->db->get_results($query);
 
