@@ -76,12 +76,14 @@
             var forum_parent_forum  = $(this).attr('data-value-parent-forum');
             var forum_name          = '';
             var forum_description   = '';
+            var forum_icon          = 'dashicons-editor-justify';
             var forum_closed        = '';
             var forum_order         = '1';
 
             if (forum_id !== 'new') {
                 forum_name          = $('#forum_'+forum_id+'_name').val();
                 forum_description   = $('#forum_'+forum_id+'_description').val();
+                forum_icon          = $('#forum_'+forum_id+'_icon').val();
                 forum_closed        = $('#forum_'+forum_id+'_closed').val();
                 forum_order         = $('#forum_'+forum_id+'_order').val();
             }
@@ -91,6 +93,7 @@
             $('#forum-editor input[name=forum_parent_forum]').val(forum_parent_forum);
             $('#forum-editor input[name=forum_name]').val(forum_name);
             $('#forum-editor input[name=forum_description]').val(forum_description);
+            $('#forum-editor input[name=forum_icon]').val(forum_icon);
 
             if (forum_closed == 1) {
                 $('#forum-editor input[name=forum_closed]').prop('checked', true);

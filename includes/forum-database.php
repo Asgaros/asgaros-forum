@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 9;
+    const DATABASE_VERSION = 10;
 
     private static $instance = null;
     private static $db;
@@ -115,6 +115,7 @@ class AsgarosForumDatabase {
             parent_id int(11) NOT NULL default '0',
             parent_forum int(11) NOT NULL default '0',
             description varchar(255) NOT NULL default '',
+            icon varchar(255) NOT NULL default '',
             sort int(11) NOT NULL default '0',
             closed int(11) NOT NULL default '0',
             slug varchar(255) NOT NULL default '',

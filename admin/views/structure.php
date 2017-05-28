@@ -68,6 +68,15 @@
                                         <td><input type="text" size="100" id="forum_description" name="forum_description" value=""></td>
                                     </tr>
                                     <tr>
+                                        <th><label for="forum_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label></th>
+                                        <td>
+                                            <input type="text" size="50" id="forum_icon" name="forum_icon" value="">
+                                            <a href="https://developer.wordpress.org/resource/dashicons/#editor-justify" target="_blank">
+                                                <?php _e('List of available icons.', 'asgaros-forum'); ?>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <th><label for="forum_closed"><?php _e('Closed:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="checkbox" id="forum_closed" name="forum_closed"></td>
                                     </tr>

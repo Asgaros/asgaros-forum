@@ -216,6 +216,8 @@ class AsgarosForumAdmin {
         $forum_parent_forum = $_POST['forum_parent_forum'];
         $forum_name         = trim($_POST['forum_name']);
         $forum_description  = trim($_POST['forum_description']);
+        $forum_icon         = trim($_POST['forum_icon']);
+        $forum_icon         = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
         $forum_closed       = (isset($_POST['forum_closed'])) ? 1 : 0;
         $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
         $forum_slug         = AsgarosForumRewrite::createUniqueSlug($forum_name, $asgarosforum->tables->forums);
@@ -224,15 +226,15 @@ class AsgarosForumAdmin {
             if ($forum_id === 'new') {
                 $asgarosforum->db->insert(
                     $asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed, 'slug' => $forum_slug),
-                    array('%s', '%d', '%d', '%s', '%d', '%d', '%s')
+                    array('name' => $forum_name, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed, 'slug' => $forum_slug),
+                    array('%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s')
                 );
             } else {
                 $asgarosforum->db->update(
                     $asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'description' => $forum_description, 'sort' => $forum_order, 'closed' => $forum_closed),
+                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed),
                     array('id' => $forum_id),
-                    array('%s', '%s', '%d', '%d'),
+                    array('%s', '%s', '%s', '%d', '%d'),
                     array('%d')
                 );
             }

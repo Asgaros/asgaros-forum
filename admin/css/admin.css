@@ -79,6 +79,9 @@
     color: silver;
     font-weight: 600;
 }
+#af-structure .parentforum {
+    display: block;
+}
 #af-structure .subforum {
     display: block;
     margin-left: 20px;
@@ -116,7 +119,7 @@
     padding-top: 8px;
     padding-bottom: 8px;
 }
-#af-structure input[type="text"] {
+#af-structure #forum_description {
     width: 100%;
 }
 #af-structure #category-delete input[type="submit"],
@@ -138,6 +141,17 @@
 #af-structure .wp-list-table td,
 #af-usergroups .wp-list-table td {
     vertical-align: middle;
+}
+#af-structure .column-icon {
+    width: 40px;
+}
+#af-structure td.column-icon {
+    padding-left: 5px;
+}
+#af-structure .forum-icon:before {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
 }
 #af-structure .column-status,
 #af-structure .column-sort,

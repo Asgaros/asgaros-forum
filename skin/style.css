@@ -702,9 +702,6 @@
     display: inline; /* comp */
     position: initial; /* comp */
 }
-#af-wrapper .dashicons-overview:before {
-    content: "\f214";
-}
 #af-wrapper .dashicons-normal_open:before {
     content: "\f206";
 }
@@ -715,7 +712,7 @@
 #af-wrapper .dashicons-sticky_closed:before {
     content: "\f109";
 }
-#af-wrapper .dashicons-overview:before,
+#af-wrapper .forum-dashicon:before,
 #af-wrapper .dashicons-normal_open:before,
 #af-wrapper .dashicons-sticky_open:before,
 #af-wrapper .dashicons-normal_closed:before,

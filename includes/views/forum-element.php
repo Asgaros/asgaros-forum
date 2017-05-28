@@ -18,7 +18,9 @@ $count_posts_i18n = number_format_i18n($forum->count_posts);
 
 echo '<div class="forum" id="forum-'.$forum->id.'">';
     echo '<div class="forum-status">';
-        echo '<span class="dashicons-before dashicons-overview '.$unreadStatus.'"></span>';
+        $forumIcon = trim(esc_html(stripslashes($forum->icon)));
+        $forumIcon = (empty($forumIcon)) ? 'dashicons-editor-justify' : $forumIcon;
+        echo '<span class="forum-dashicon dashicons-before '.$forumIcon.' '.$unreadStatus.'"></span>';
     echo '</div>';
     echo '<div class="forum-name">';
         echo '<strong><a href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a></strong>';
