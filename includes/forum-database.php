@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 10;
+    const DATABASE_VERSION = 11;
 
     private static $instance = null;
     private static $db;
@@ -167,6 +167,11 @@ class AsgarosForumDatabase {
                     $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, self::$table_forums);
                     self::$db->update(self::$table_forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
                 }
+            }
+
+            // Add index to author_id to make countings faster.
+            if ($database_version_installed < 11) {
+                self::$db->query('ALTER TABLE '.self::$table_posts.' ADD INDEX(author_id);');
             }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);
