@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Sat May 27 2017 11:29:43 GMT+0200 (Mitteleuropäische "
+"POT-Revision-Date: Mon Jun 05 2017 19:07:47 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -61,50 +61,53 @@ msgstr ""
 msgid "User Groups"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:36 ../admin/tables/admin-structure-
-#: table.php:38 ../admin/views/structure.php:137
+#: ../admin/tables/admin-structure-table.php:45 ../admin/views/structure.php:146
 msgid "ID"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:46
+#: ../admin/tables/admin-structure-table.php:59
 msgid "Closed"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:48
+#: ../admin/tables/admin-structure-table.php:61
 msgid "Normal"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:54 ../admin/tables/admin-structure-
-#: table.php:55
+#: ../admin/tables/admin-structure-table.php:67 ../admin/tables/admin-structure-
+#: table.php:68
 msgid "Delete Forum"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:58 ../admin/tables/admin-structure-
-#: table.php:59
+#: ../admin/tables/admin-structure-table.php:71 ../admin/tables/admin-structure-
+#: table.php:72
 msgid "Edit Forum"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:64 ../admin/tables/admin-structure-
-#: table.php:65
+#: ../admin/tables/admin-structure-table.php:77 ../admin/tables/admin-structure-
+#: table.php:78
 msgid "Add Sub-Forum"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:74 ../admin/tables/admin-usergroups-
+#: ../admin/tables/admin-structure-table.php:87 ../admin/tables/admin-usergroups-
 #: table.php:52 ../admin/views/structure.php:28 ../admin/views/structure.php:63 ..
 #: /admin/views/usergroups.php:28
 msgid "Name:"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:75
+#: ../admin/tables/admin-structure-table.php:88 ../admin/views/structure.php:71
+msgid "Icon:"
+msgstr ""
+
+#: ../admin/tables/admin-structure-table.php:89
 msgid "Status:"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:76 ../admin/views/structure.php:42 ..
-#: /admin/views/structure.php:75 ../admin/views/structure.php:148
+#: ../admin/tables/admin-structure-table.php:90 ../admin/views/structure.php:42 ..
+#: /admin/views/structure.php:84 ../admin/views/structure.php:157
 msgid "Order:"
 msgstr ""
 
-#: ../admin/tables/admin-structure-table.php:77 ../admin/tables/admin-usergroups-
+#: ../admin/tables/admin-structure-table.php:91 ../admin/tables/admin-usergroups-
 #: table.php:55
 msgid "Actions:"
 msgstr ""
@@ -113,8 +116,8 @@ msgstr ""
 msgid "Delete User Group"
 msgstr ""
 
-#: ../admin/tables/admin-usergroups-table.php:43 ../admin/views/structure.php:93 .
-#: ./admin/views/structure.php:106 ../admin/views/usergroups.php:50 ..
+#: ../admin/tables/admin-usergroups-table.php:43 ../admin/views/structure.php:102 
+#: ../admin/views/structure.php:115 ../admin/views/usergroups.php:50 ..
 #: /includes/forum-uploads.php:201 ../includes/forum.php:650 ../includes/forum.
 #: php:690
 msgid "Delete"
@@ -296,29 +299,29 @@ msgstr ""
 msgid "Structure updated."
 msgstr ""
 
-#: ../admin/views/structure.php:32 ../admin/views/structure.php:139
+#: ../admin/views/structure.php:32 ../admin/views/structure.php:148
 msgid "Access:"
 msgstr ""
 
-#: ../admin/views/structure.php:35 ../admin/views/structure.php:141
+#: ../admin/views/structure.php:35 ../admin/views/structure.php:150
 msgid "Everyone"
 msgstr ""
 
-#: ../admin/views/structure.php:36 ../admin/views/structure.php:143
+#: ../admin/views/structure.php:36 ../admin/views/structure.php:152
 msgid "Logged in users only"
 msgstr ""
 
-#: ../admin/views/structure.php:37 ../admin/views/structure.php:145
+#: ../admin/views/structure.php:37 ../admin/views/structure.php:154
 msgid "Moderators only"
 msgstr ""
 
-#: ../admin/views/structure.php:49 ../admin/views/structure.php:81 ..
+#: ../admin/views/structure.php:49 ../admin/views/structure.php:90 ..
 #: /admin/views/usergroups.php:38
 msgid "Save"
 msgstr ""
 
-#: ../admin/views/structure.php:50 ../admin/views/structure.php:82 ..
-#: /admin/views/structure.php:94 ../admin/views/structure.php:107 ..
+#: ../admin/views/structure.php:50 ../admin/views/structure.php:91 ..
+#: /admin/views/structure.php:103 ../admin/views/structure.php:116 ..
 #: /admin/views/usergroups.php:39 ../admin/views/usergroups.php:51 ..
 #: /includes/forum-editor.php:167 ../includes/forum-editor.php:172
 msgid "Cancel"
@@ -328,36 +331,40 @@ msgstr ""
 msgid "Description:"
 msgstr ""
 
-#: ../admin/views/structure.php:71
+#: ../admin/views/structure.php:75
+msgid "List of available icons."
+msgstr ""
+
+#: ../admin/views/structure.php:80
 msgid "Closed:"
 msgstr ""
 
-#: ../admin/views/structure.php:90
+#: ../admin/views/structure.php:99
 msgid ""
 "Deleting this category will also permanently delete all forums, sub-forums, "
 "topics and posts inside it. Are you sure you want to delete this category?"
 msgstr ""
 
-#: ../admin/views/structure.php:103
+#: ../admin/views/structure.php:112
 msgid ""
 "Deleting this forum will also permanently delete all sub-forums, topics and "
 "posts inside it. Are you sure you want to delete this forum?"
 msgstr ""
 
-#: ../admin/views/structure.php:114 ../admin/views/structure.php:115 ..
-#: /admin/views/structure.php:174 ../admin/views/structure.php:175
+#: ../admin/views/structure.php:123 ../admin/views/structure.php:124 ..
+#: /admin/views/structure.php:183 ../admin/views/structure.php:184
 msgid "Add Category"
 msgstr ""
 
-#: ../admin/views/structure.php:155 ../admin/views/structure.php:155
+#: ../admin/views/structure.php:164 ../admin/views/structure.php:164
 msgid "Delete Category"
 msgstr ""
 
-#: ../admin/views/structure.php:157 ../admin/views/structure.php:157
+#: ../admin/views/structure.php:166 ../admin/views/structure.php:166
 msgid "Edit Category"
 msgstr ""
 
-#: ../admin/views/structure.php:168 ../admin/views/structure.php:169
+#: ../admin/views/structure.php:177 ../admin/views/structure.php:178
 msgid "Add Forum"
 msgstr ""
 
@@ -773,18 +780,18 @@ msgstr ""
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: ../includes/views/forum-element.php:30 ../includes/views/forum.php:24
+#: ../includes/views/forum-element.php:32 ../includes/views/forum.php:24
 msgid "Subforums"
 msgstr ""
 
-#: ../includes/views/forum-element.php:46
+#: ../includes/views/forum-element.php:48
 #, php-format
 msgid "%s Topic"
 msgid_plural "%s Topics"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/views/forum-element.php:47 ../includes/views/post-element.php:26
+#: ../includes/views/forum-element.php:49 ../includes/views/post-element.php:26
 #, php-format
 msgid "%s Post"
 msgid_plural "%s Posts"
