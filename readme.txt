@@ -124,6 +124,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.5.3 =
 * Added: Option to change icon of forums
 * Fixed: Missing data when using shortcode parameter for specific post

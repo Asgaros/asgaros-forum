@@ -663,6 +663,7 @@
     width: 14px;
     height: 14px;
     padding: 2px;
+    box-sizing: initial; /* comp */
 }
 #af-wrapper #statistics .statistics-element {
     width: 175px;
