@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 11;
+    const DATABASE_VERSION = 12;
 
     private static $instance = null;
     private static $db;
@@ -169,9 +169,14 @@ class AsgarosForumDatabase {
                 }
             }
 
-            // Add index to author_id to make countings faster.
+            // Add index to posts.author_id to make countings faster.
             if ($database_version_installed < 11) {
                 self::$db->query('ALTER TABLE '.self::$table_posts.' ADD INDEX(author_id);');
+            }
+
+            // Add index to posts.parent_id for faster queries.
+            if ($database_version_installed < 12) {
+                self::$db->query('ALTER TABLE '.self::$table_posts.' ADD INDEX(parent_id);');
             }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);
