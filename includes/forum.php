@@ -440,14 +440,14 @@ class AsgarosForum {
 
             if ($categories) {
                 foreach ($categories as $category) {
-                    $forums = $this->get_forums($category->term_id);
+                    $forums = $this->get_forums($category->term_id, 0, true);
 
                     if ($forums) {
                         foreach ($forums as $forum) {
                             $strOUT .= '<option value="'.$forum->id.'"'.($forum->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
 
                             if ($forum->count_subforums > 0) {
-                                $subforums = $this->get_forums($category->term_id, $forum->id);
+                                $subforums = $this->get_forums($category->term_id, $forum->id, true);
 
                                 foreach ($subforums as $subforum) {
                                     $strOUT .= '<option value="'.$subforum->id.'"'.($subforum->id == $this->current_forum ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';
@@ -540,12 +540,14 @@ class AsgarosForum {
         return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
     }
 
-    function get_forums($id = false, $parent_forum = 0, $output_type = OBJECT) {
+    function get_forums($id = false, $parent_forum = 0, $compact = false, $output_type = OBJECT) {
         if ($id) {
-            return $this->db->get_results($this->db->prepare("SELECT f.id, f.parent_id, f.name, f.description, f.icon, f.closed, f.sort, f.parent_forum, (SELECT COUNT(*) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_topics, (SELECT COUNT(*) FROM {$this->tables->posts} AS cp_p, {$this->tables->topics} AS cp_t, {$this->tables->forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(*) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums, f.slug FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
-        } else {
-            // Load all forums.
-            return $this->db->get_results("SELECT id, name FROM {$this->tables->forums} ORDER BY sort ASC;", $output_type);
+            // The compact mode only loads the fields in the forums-table and counts its existing subforums.
+            if ($compact) {
+                return $this->db->get_results($this->db->prepare("SELECT f.*, (SELECT COUNT(*) FROM {$this->tables->forums} AS sub_f WHERE sub_f.parent_forum = f.id) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
+            } else {
+                return $this->db->get_results($this->db->prepare("SELECT f.id, f.parent_id, f.name, f.description, f.icon, f.closed, f.sort, f.parent_forum, (SELECT COUNT(*) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_topics, (SELECT COUNT(*) FROM {$this->tables->posts} AS cp_p, {$this->tables->topics} AS cp_t, {$this->tables->forums} AS cp_f WHERE cp_p.parent_id = cp_t.id AND cp_t.parent_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(*) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums, f.slug FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
+            }
         }
     }
 

@@ -261,7 +261,7 @@ class AsgarosForumAdmin {
         global $asgarosforum;
 
         // Delete all subforums first
-        $subforums = $asgarosforum->get_forums($category_id, $forum_id);
+        $subforums = $asgarosforum->get_forums($category_id, $forum_id, true);
 
         if (count($subforums) > 0) {
             foreach ($subforums as $subforum) {

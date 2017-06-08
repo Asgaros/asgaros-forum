@@ -135,7 +135,7 @@
                         echo '<input type="hidden" id="category_'.$category->term_id.'_order" value="'.$order.'">';
                         AsgarosForumUserGroups::renderHiddenFields($category->term_id);
 
-                        $forums = $asgarosforum->get_forums($category->term_id, 0, ARRAY_A);
+                        $forums = $asgarosforum->get_forums($category->term_id, 0, true, ARRAY_A);
                         ?>
                         <div class="postbox">
                             <h2 class="hndle">
