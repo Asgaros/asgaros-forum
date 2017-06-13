@@ -18,7 +18,11 @@
                     $('#forum-editor-form').focus();
 
                     // Focus the editor.
-                    tinyMCE.activeEditor.focus();
+                    if (tinyMCE.activeEditor) {
+                        tinyMCE.activeEditor.focus();
+                    } else {
+                        $('textarea[id="message"]').focus();
+                    }
                 }
             });
         });
@@ -30,7 +34,12 @@
             $('#forum-editor-form').slideToggle(400, function() {
                 $('a.forum-editor-button').show();
                 $('.editor-row-subject input').val('');
-                tinyMCE.activeEditor.setContent('');
+
+                if (tinyMCE.activeEditor) {
+                    tinyMCE.activeEditor.setContent('');
+                } else {
+                    $('textarea[id="message"]').val('');
+                }
             });
         });
 
@@ -45,7 +54,11 @@
             var quoteContent = $('#post-quote-container-'+quoteID).html();
 
             // At quote to the end of the editor.
-            tinyMCE.activeEditor.setContent(tinyMCE.activeEditor.getContent()+quoteContent);
+            if (tinyMCE.activeEditor) {
+                tinyMCE.activeEditor.setContent(tinyMCE.activeEditor.getContent()+quoteContent);
+            } else {
+                $('textarea[id="message"]').val($('textarea[id="message"]').val()+quoteContent);
+            }
 
             // Call slideDown() instead of slideToggle() so we can add multiple quotes at once.
             $('#forum-editor-form').slideDown(400, function() {
@@ -53,9 +66,13 @@
                 $('#forum-editor-form').focus();
 
                 // Focus the editor at the last line.
-                tinyMCE.activeEditor.focus();
-                tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
-                tinyMCE.activeEditor.selection.collapse(false);
+                if (tinyMCE.activeEditor) {
+                    tinyMCE.activeEditor.focus();
+                    tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
+                    tinyMCE.activeEditor.selection.collapse(false);
+                } else {
+                    $('textarea[id="message"]').focus();
+                }
             });
         });
 
