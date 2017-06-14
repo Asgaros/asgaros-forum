@@ -316,6 +316,7 @@
     border: 1px solid #ccc;
     background-color: #ffb;
     margin-bottom: 10px;
+    color: #444;
 }
 #af-wrapper .info span {
     display: block;
