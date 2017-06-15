@@ -39,6 +39,11 @@
     #af-wrapper .forum-menu {
         margin-bottom: 10px;
     }
+    #af-wrapper .pages a,
+    #af-wrapper .pages strong {
+        font-size: 130% !important;
+        padding: 3px 5px;
+    }
     #af-wrapper .post-author {
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     }
