@@ -159,7 +159,7 @@ class AsgarosForumUploads {
 				// Generate special message instead of file-list when hiding uploads for guests.
 				if (!is_user_logged_in() && self::$asgarosforum->options['hide_uploads_from_guests']) {
 					// TODO: Login link rendering can be put in own function.
-					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></li>';
+					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url(self::$asgarosforum->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a></li>';
 				} else {
 					foreach ($uploads as $upload) {
 		                if (is_file($path.wp_basename($upload))) {

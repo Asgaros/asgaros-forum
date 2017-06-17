@@ -124,6 +124,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Register links to some error messages
+* Fixed: Huge performance drops when the forum has a lot of posts/topics
 * Fixed: Broken editor with some editor-configurations
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues with some themes

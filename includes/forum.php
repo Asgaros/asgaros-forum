@@ -218,7 +218,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
             $this->error = apply_filters('asgarosforum_filter_error_message_require_login', $this->error);
             return;
         }
@@ -228,7 +228,7 @@ class AsgarosForum {
 
         if ($this->category_access_level) {
             if ($this->category_access_level === 'loggedin' && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a>';
+                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
                 return;
             }
 
@@ -423,7 +423,7 @@ class AsgarosForum {
 
     function showLoginMessage() {
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $loginMessage = '<div class="info">'.__('You need to login in order to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">&raquo; '.__('Login', 'asgaros-forum').'</a></div>';
+            $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a></div>';
             $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
             echo $loginMessage;
         }
