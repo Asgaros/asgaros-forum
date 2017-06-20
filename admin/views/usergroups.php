@@ -26,7 +26,7 @@
                                 <table class="form-table">
                                     <tr>
                                         <th><label class="post-attributes-label-wrapper" for="usergroup_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
-                                        <td><input type="text" size="100" name="usergroup_name" id="usergroup_name" value="" required></td>
+                                        <td><input type="text" size="100" maxlength="200" name="usergroup_name" id="usergroup_name" value="" required></td>
                                     </tr>
                                     <tr id="usergroup-color-settings">
                                         <th><label for="usergroup_color"><?php _e('Color:', 'asgaros-forum'); ?></label></th>

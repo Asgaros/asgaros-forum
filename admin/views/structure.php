@@ -26,7 +26,7 @@
                                 <table class="form-table">
                                     <tr>
                                         <th><label class="post-attributes-label-wrapper" for="category_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
-                                        <td><input type="text" size="100" name="category_name" id="category_name" value="" required></td>
+                                        <td><input type="text" size="100" maxlength="200" name="category_name" id="category_name" value="" required></td>
                                     </tr>
                                     <tr>
                                         <th><label for="category_access"><?php _e('Access:', 'asgaros-forum'); ?></label></th>
@@ -61,11 +61,11 @@
                                 <table class="form-table">
                                     <tr>
                                         <th><label class="post-attributes-label-wrapper" for="forum_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
-                                        <td><input type="text" size="100" name="forum_name" id="forum_name" value="" required></td>
+                                        <td><input type="text" size="100" maxlength="255" name="forum_name" id="forum_name" value="" required></td>
                                     </tr>
                                     <tr>
                                         <th><label for="forum_description"><?php _e('Description:', 'asgaros-forum'); ?></label></th>
-                                        <td><input type="text" size="100" id="forum_description" name="forum_description" value=""></td>
+                                        <td><input type="text" size="100" maxlength="255" id="forum_description" name="forum_description" value=""></td>
                                     </tr>
                                     <tr>
                                         <th><label for="forum_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label></th>
