@@ -125,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Fixed: Limit maximum characters in a couple of input fields
+* Fixed: Display issues in administration with small screen resolutions
 * Fixed: Wrong stylings when using custom colors
 = 1.5.4 =
 * Added: Register links to some error messages

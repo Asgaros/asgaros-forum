@@ -161,7 +161,7 @@
 }
 #af-structure .column-actions,
 #af-usergroups .column-actions {
-    width: 400px;
+    max-width: 400px;
 }
 #af-usergroups .usergroup-color {
     width: 25px;
