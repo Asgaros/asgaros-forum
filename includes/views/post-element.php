@@ -14,7 +14,8 @@ echo '<div class="post" id="postid-'.$post->id.'">';
             }
 
             if ($avatars_available) {
-                echo get_avatar($post->author_id, 80);
+                $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 80);
+                echo get_avatar($post->author_id, $avatar_size);
                 echo '<br />';
             }
             ?>

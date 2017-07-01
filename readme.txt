@@ -114,6 +114,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_subscribers_query_new_topic
 * asgarosforum_filter_error_message_require_login
 * asgarosforum_filter_user_groups_taxonomy_name
+* asgarosforum_filter_avatar_size
 
 == Screenshots ==
 1. The forum overview.
@@ -124,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_filter_avatar_size filter
 * Fixed: Limit maximum characters in a couple of input fields
 * Fixed: Display issues in administration with small screen resolutions
 * Fixed: Wrong stylings when using custom colors
