@@ -125,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to show description in forum
 * Added: asgarosforum_filter_avatar_size filter
 * Fixed: Limit maximum characters in a couple of input fields
 * Fixed: Display issues in administration with small screen resolutions

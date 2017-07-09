@@ -50,6 +50,10 @@ if (!defined('ABSPATH')) exit;
             <label for="show_edit_date"><?php _e('Show edit date', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="show_description_in_forum" id="show_description_in_forum" <?php checked(!empty($asgarosforum->options['show_description_in_forum'])); ?>>
+            <label for="show_description_in_forum"><?php _e('Show description in forum', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?>>
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>

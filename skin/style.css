@@ -43,9 +43,13 @@
 #af-wrapper .main-title {
     font-size: 20px;
     border: none;
-    margin-bottom: 15px;
+    margin: 10px 0;
     font-weight: normal;
     color: #444;
+}
+#af-wrapper .main-description {
+    display: block;
+    margin-bottom: 10px;
 }
 #af-wrapper .content-element .forum:nth-child(even),
 #af-wrapper .content-element .thread:nth-child(even),

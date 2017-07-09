@@ -52,6 +52,7 @@ class AsgarosForum {
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_edit_date'            => true,
+        'show_description_in_forum' => false,
         'require_login'             => false,
         'custom_color'              => '#2d89cc',
         'custom_text_color'         => '#444444',
@@ -335,7 +336,7 @@ class AsgarosForum {
                 }
 
                 $this->showLoginMessage();
-                $this->showMainTitle();
+                $this->showMainTitleAndDescription();
 
                 switch ($this->current_view) {
                     case 'search':
@@ -368,10 +369,14 @@ class AsgarosForum {
         return ob_get_clean();
     }
 
-    function showMainTitle() {
+    function showMainTitleAndDescription() {
         $mainTitle = ($this->current_title) ? $this->current_title : __('Forum', 'asgaros-forum');
 
         echo '<h1 class="main-title">'.$mainTitle.'</h1>';
+
+        if ($this->current_view === 'forum' && $this->options['show_description_in_forum'] && !empty($this->current_description)) {
+            echo '<div class="main-description">'.$this->current_description.'</div>';
+        }
     }
 
     function overview() {
