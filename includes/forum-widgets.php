@@ -63,16 +63,24 @@ class AsgarosForumWidgets {
                 'meta_query'    => $metaQueryFilter
             ));
 
-            $where = ($categoriesList) ? 'AND f.parent_id IN ('.implode(',', $categoriesList).')' : '';
+            $where = ($categoriesList) ? 'AND f.parent_id IN ('.implode(',', $categoriesList).')' : false;
 
             // Select the elements.
             $elements = null;
             $numberOfItems = ($instance['number']) ? absint($instance['number']) : 3;
 
-            if ($widgetType === 'posts') {
-                $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".self::$asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) {$where} ORDER BY p.id DESC LIMIT %d;", $numberOfItems));
-            } else if ($widgetType === 'topics') {
-                $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".self::$asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+            // Dont show last posts/topics in widgets when user cant access any categories.
+            if ($where) {
+                if ($widgetType === 'posts') {
+                    $elementIDs = self::$asgarosforum->db->get_col(self::$asgarosforum->db->prepare("SELECT MAX(p.id) AS id FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM ".self::$asgarosforum->tables->forums." AS f WHERE f.id = t.parent_id {$where}) GROUP BY p.parent_id ORDER BY MAX(p.id) DESC LIMIT %d;", $numberOfItems));
+
+                    // Select data if selectable elements exist.
+                    if (!empty($elementIDs)) {
+                        $elements = self::$asgarosforum->db->get_results("SELECT p.id, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE p.id IN (".implode(',', $elementIDs).") ORDER BY p.id DESC;");
+                    }
+                } else if ($widgetType === 'topics') {
+                    $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".self::$asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+                }
             }
 
             if ($elements) {
