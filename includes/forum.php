@@ -604,20 +604,31 @@ class AsgarosForum {
         return $string;
     }
 
+    /**
+     * Returns and caches a username.
+     */
+    var $cacheGetUsername = array();
     function getUsername($user_id) {
         if ($user_id) {
-            $user = get_userdata($user_id);
+            if (empty($this->cacheGetUsername[$user_id])) {
+                $user = get_userdata($user_id);
 
-            if ($user) {
-                return $this->highlightUsername($user);
-            } else {
-                return __('Deleted user', 'asgaros-forum');
+                if ($user) {
+                    $this->cacheGetUsername[$user_id] = $this->highlightUsername($user);
+                } else {
+                    $this->cacheGetUsername[$user_id] = __('Deleted user', 'asgaros-forum');
+                }
             }
+
+            return $this->cacheGetUsername[$user_id];
         } else {
             return __('Guest', 'asgaros-forum');
         }
     }
 
+    /**
+     * Highlights a username when he is an administrator/moderator.
+     */
     function highlightUsername($user) {
         if ($this->options['highlight_admin']) {
             if (is_super_admin($user->ID) || user_can($user->ID, 'administrator')) {
