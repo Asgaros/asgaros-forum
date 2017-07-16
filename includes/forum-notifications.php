@@ -340,6 +340,16 @@ class AsgarosForumNotifications {
 
         return $header;
     }
+
+    public static function showSubscriptionOverviewLink() {
+        global $asgarosforum;
+
+        if ($asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
+            echo '<div id="subscription-overview-link">';
+            echo '<a href="'.$asgarosforum->getLink('subscriptions').'"><span class="dashicons-before dashicons-email-alt"></span></a>';
+            echo '</div>';
+        }
+    }
 }
 
 ?>

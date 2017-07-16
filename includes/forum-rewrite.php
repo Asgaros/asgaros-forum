@@ -46,16 +46,17 @@ class AsgarosForumRewrite {
     public static function setLinks() {
         global $wp;
         $links = array();
-        $links['home']        = get_page_link(self::$asgarosforum->options['location']);
-        $links['search']      = add_query_arg(array('view' => 'search'), $links['home']);
-        $links['forum']       = add_query_arg(array('view' => 'forum'), $links['home']);
-        $links['topic']       = add_query_arg(array('view' => 'thread'), $links['home']);
-        $links['topic_add']   = add_query_arg(array('view' => 'addtopic'), $links['home']);
-        $links['topic_move']  = add_query_arg(array('view' => 'movetopic'), $links['home']);
-        $links['post_add']    = add_query_arg(array('view' => 'addpost'), $links['home']);
-        $links['post_edit']   = add_query_arg(array('view' => 'editpost'), $links['home']);
-        $links['markallread'] = add_query_arg(array('view' => 'markallread'), $links['home']);
-        $links['current']     = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
+        $links['home']          = get_page_link(self::$asgarosforum->options['location']);
+        $links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $links['home']);
+        $links['search']        = add_query_arg(array('view' => 'search'), $links['home']);
+        $links['forum']         = add_query_arg(array('view' => 'forum'), $links['home']);
+        $links['topic']         = add_query_arg(array('view' => 'thread'), $links['home']);
+        $links['topic_add']     = add_query_arg(array('view' => 'addtopic'), $links['home']);
+        $links['topic_move']    = add_query_arg(array('view' => 'movetopic'), $links['home']);
+        $links['post_add']      = add_query_arg(array('view' => 'addpost'), $links['home']);
+        $links['post_edit']     = add_query_arg(array('view' => 'editpost'), $links['home']);
+        $links['markallread']   = add_query_arg(array('view' => 'markallread'), $links['home']);
+        $links['current']       = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
         self::$links = $links;
     }
 
