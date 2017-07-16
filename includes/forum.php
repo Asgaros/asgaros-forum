@@ -635,11 +635,15 @@ class AsgarosForum {
 
         if ($lastpost_data) {
             $lastpost_link = $this->getLink('topic', $lastpost_data->parent_id, array('part' => ceil($lastpost_data->number_of_posts/$this->options['posts_per_page'])), '#postid-'.$lastpost_data->id);
-            $lastpost .= ($context === 'forum') ? '<small><strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name))).'</a></strong></small>' : '';
-            $lastpost .= '<small><span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;<strong>'.$this->getUsername($lastpost_data->author_id).'</strong></span></small>';
-            $lastpost .= '<small><span class="dashicons-before dashicons-calendar-alt"><a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a></span></small>';
+
+            if ($context === 'forum') {
+                $lastpost = '<strong><a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name), 30)).'</a></strong><br>';
+            }
+
+            $lastpost .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;<strong>'.$this->getUsername($lastpost_data->author_id).'</strong></span><br>';
+            $lastpost .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a></span>';
         } else if ($context === 'forum') {
-            $lastpost = '<small>'.__('No topics yet!', 'asgaros-forum').'</small>';
+            $lastpost = __('No topics yet!', 'asgaros-forum');
         }
 
         return $lastpost;
@@ -714,11 +718,12 @@ class AsgarosForum {
     }
 
     function showHeader() {
-        if ($this->options['enable_breadcrumbs'] || $this->options['enable_search'] || ($this->options['allow_subscriptions'] && is_user_logged_in())) {
+        //if ($this->options['enable_breadcrumbs'] || $this->options['enable_search'] || ($this->options['allow_subscriptions'] && is_user_logged_in())) {
+        if ($this->options['enable_breadcrumbs'] || $this->options['enable_search']) {
             echo '<div id="top-container">';
             AsgarosForumBreadCrumbs::showBreadCrumbs();
             AsgarosForumSearch::showSearchInput();
-            AsgarosForumNotifications::showSubscriptionOverviewLink();
+            //AsgarosForumNotifications::showSubscriptionOverviewLink();
             echo '<div class="clear"></div>';
             echo '</div>';
         }

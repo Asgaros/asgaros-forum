@@ -54,7 +54,7 @@
 #af-wrapper .content-element .forum:nth-child(even),
 #af-wrapper .content-element .thread:nth-child(even),
 #af-wrapper .content-element .editor-row:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.025);
+    background-color: rgba(0, 0, 0, 0.02);
 }
 #af-wrapper #forum-editor-form {
     outline: none;
@@ -219,7 +219,7 @@
     display: table;
     height: 60px;
     width: 100%;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid #eee;
 }
 #af-wrapper .forum-status,
 #af-wrapper .forum-name,
@@ -248,12 +248,15 @@
     width: 100px;
     text-align: right;
     padding-right: 10px;
+    font-size: smaller;
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
     width: 242px;
-    text-align: center;
-    border-left: 1px solid #e1e1e1;
+    text-align: left;
+    border-left: 1px solid #eee;
+    font-size: smaller;
+    padding-left: 10px;
 }
 #af-wrapper .forum-poster .dashicons-before:before,
 #af-wrapper .topic-poster .dashicons-before:before {
@@ -469,9 +472,9 @@
 #af-wrapper .content-element {
     margin-bottom: 15px;
     background-color: #fff;
-    border-left: 1px solid #e1e1e1;
-    border-right: 1px solid #e1e1e1;
-    border-bottom: 1px solid #e1e1e1;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 #af-wrapper .content-element a:hover {
     text-decoration: underline;

@@ -21,9 +21,9 @@ if (!defined('ABSPATH')) exit;
         <?php
         $count_answers_i18n = number_format_i18n($thread->answers);
         $count_views_i18n = number_format_i18n($thread->views);
+        echo sprintf(_n('%s Answer', '%s Answers', $thread->answers, 'asgaros-forum'), $count_answers_i18n).'<br>';
+        echo sprintf(_n('%s View', '%s Views', $thread->views, 'asgaros-forum'), $count_views_i18n);
         ?>
-        <small><?php echo sprintf(_n('%s Answer', '%s Answers', $thread->answers, 'asgaros-forum'), $count_answers_i18n); ?></small>
-        <small><?php echo sprintf(_n('%s View', '%s Views', $thread->views, 'asgaros-forum'), $count_views_i18n); ?></small>
     </div>
     <div class="topic-poster"><?php echo $this->get_lastpost($lastpost_data, 'thread'); ?></div>
 </div>
