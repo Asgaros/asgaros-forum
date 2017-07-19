@@ -494,7 +494,6 @@ class AsgarosForum {
         $metaQueryFilter = array();
 
         if ($enableFiltering) {
-            $filter = AsgarosForumUserGroups::filterCategories($filter);
             $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
             $metaQueryFilter = $this->getCategoriesFilter();
 
@@ -505,6 +504,11 @@ class AsgarosForum {
         }
 
         $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_query' => $metaQueryFilter));
+
+        // Filter categories by usergroups.
+        if ($enableFiltering) {
+            $categories = AsgarosForumUserGroups::filterCategories($categories);
+        }
 
         foreach ($categories as $category) {
             $category->order = get_term_meta($category->term_id, 'order', true);

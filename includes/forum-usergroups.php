@@ -190,33 +190,30 @@ class AsgarosForumUserGroups {
         }
     }
 
-    public static function filterCategories($filter) {
+    public static function filterCategories($categories) {
         global $user_ID;
-        $groups_of_user = self::getUserGroupsForUser($user_ID, 'ids');
-        $categories = get_terms('asgarosforum-category', array('hide_empty' => false)); // TODO: Produces a duplicate query.
+        $filteredCategories = $categories;
 
-        if (!empty($categories) && !is_wp_error($categories) && !is_super_admin($user_ID)) {
-            foreach ($categories as $category) {
-                $usergroups = get_term_meta($category->term_id, 'usergroups', true);
+        // Do the following checks when user is not an administrator.
+        if (!is_super_admin($user_ID)) {
+            $groups_of_user = self::getUserGroupsForUser($user_ID, 'ids');
 
-                if (!empty($usergroups)) {
-                    $hide = true;
+            if (!empty($filteredCategories) && !is_wp_error($filteredCategories)) {
+                foreach ($filteredCategories as $key => $category) {
+                    $usergroups = get_term_meta($category->term_id, 'usergroups', true);
 
-                    // TODO: Optimize with early break ...
-                    foreach ($usergroups as $usergroup) {
-                        if (in_array($usergroup, $groups_of_user)) {
-                            $hide = false;
+                    if (!empty($usergroups)) {
+                        $intersect = array_intersect($usergroups, $groups_of_user);
+
+                        if (empty($intersect)) {
+                            unset($filteredCategories[$key]);
                         }
-                    }
-
-                    if ($hide) {
-                        $filter[] = $category->term_id;
                     }
                 }
             }
         }
 
-        return $filter;
+        return $filteredCategories;
     }
 
     public static function checkAccess($categoryID) {
