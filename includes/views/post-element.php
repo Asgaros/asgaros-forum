@@ -49,6 +49,7 @@ echo '<div class="post" id="postid-'.$post->id.'">';
             echo '</div>';
 
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br /></div>';
+            global $wp_embed;
             $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
 
             if ($this->options['allow_shortcodes']) {

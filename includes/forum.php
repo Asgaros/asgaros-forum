@@ -386,7 +386,6 @@ class AsgarosForum {
     }
 
     function showSinglePost() {
-        global $wp_embed;
         $counter = 0;
         $avatars_available = get_option('show_avatars');
         $topicStarter = $this->get_topic_starter($this->current_topic);
@@ -408,7 +407,6 @@ class AsgarosForum {
     }
 
     function showTopic() {
-        global $wp_embed;
         $posts = $this->get_posts();
 
         if ($posts) {
@@ -510,10 +508,12 @@ class AsgarosForum {
             $categories = AsgarosForumUserGroups::filterCategories($categories);
         }
 
+        // Get information about ordering.
         foreach ($categories as $category) {
             $category->order = get_term_meta($category->term_id, 'order', true);
         }
 
+        // Sort the categories based on ordering information.
         usort($categories, array($this, 'categories_compare'));
 
         return $categories;
