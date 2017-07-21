@@ -50,7 +50,7 @@
 
             $('#category-editor input[name=category_order]').val(category_order);
 
-            $('#category-editor #usergroups-editor input[type=checkbox').each(function() {
+            $('#usergroups-editor input[type=checkbox]').each(function() {
                 if (jQuery.inArray($(this).val(), category_usergroups) != -1) {
                     $(this).prop('checked', true);
                 } else {
