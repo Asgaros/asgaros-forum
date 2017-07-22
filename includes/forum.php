@@ -375,7 +375,7 @@ class AsgarosForum {
         echo '<h1 class="main-title">'.$mainTitle.'</h1>';
 
         if ($this->current_view === 'forum' && $this->options['show_description_in_forum'] && !empty($this->current_description)) {
-            echo '<div class="main-description">'.$this->current_description.'</div>';
+            echo '<div class="main-description">'.esc_html(stripslashes($this->current_description)).'</div>';
         }
     }
 
