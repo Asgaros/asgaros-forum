@@ -82,7 +82,7 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
             <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
         </p>
-        <h3><?php _e('Notifications', 'asgaros-forum'); ?></h3>
+        <h3><?php _e('Subscriptions', 'asgaros-forum'); ?></h3>
         <p>
             <input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>>
             <label for="admin_subscriptions"><?php _e('Notify site owner about new topics', 'asgaros-forum'); ?></label>

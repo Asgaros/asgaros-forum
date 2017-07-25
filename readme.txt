@@ -125,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Subscription overview
 * Fixed: Strip slashes when showing the description inside of a forum
 = 1.5.6 =
 * Fixed: Broken structure administration

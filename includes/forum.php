@@ -137,7 +137,7 @@ class AsgarosForum {
             case 'forum':
             case 'addtopic':
                 $this->setParents($elementID, 'forum');
-                break;
+            break;
             case 'movetopic':
             case 'topic':
             case 'thread':
@@ -145,21 +145,27 @@ class AsgarosForum {
                 // Fallback for old view-name.
                 $this->current_view = ($this->current_view == 'topic') ? 'thread' : $this->current_view;
                 $this->setParents($elementID, 'topic');
-                break;
+            break;
             case 'editpost':
                 $this->setParents($elementID, 'post');
-                break;
+            break;
             case 'markallread':
-                break;
+            break;
+            case 'subscriptions':
+                // Go back to overview when subscriptions are not enabled.
+                if (!$this->options['allow_subscriptions'] || !is_user_logged_in()) {
+                    $this->current_view = 'overview';
+                }
+            break;
             case 'search':
                 // Go back to overview when search is not enabled.
                 if (!$this->options['enable_search']) {
                     $this->current_view = 'overview';
                 }
-                break;
+            break;
             default:
                 $this->current_view = 'overview';
-                break;
+            break;
         }
 
         AsgarosForumShortcodes::handleAttributes();
@@ -288,6 +294,8 @@ class AsgarosForum {
                 $this->current_title = __('Move Topic', 'asgaros-forum');
             } else if ($this->current_view == 'search') {
                 $this->current_title = __('Search', 'asgaros-forum');
+            } else if ($this->current_view == 'subscriptions') {
+                $this->current_title = __('Subscriptions', 'asgaros-forum');
             }
         }
     }
@@ -341,24 +349,27 @@ class AsgarosForum {
                 switch ($this->current_view) {
                     case 'search':
                         include('views/search.php');
-                        break;
+                    break;
+                    case 'subscriptions':
+                        AsgarosForumNotifications::showSubscriptions();
+                    break;
                     case 'movetopic':
                         $this->showMoveTopic();
-                        break;
+                    break;
                     case 'forum':
                         $this->showforum();
-                        break;
+                    break;
                     case 'thread':
                         $this->showTopic();
-                        break;
+                    break;
                     case 'addtopic':
                     case 'addpost':
                     case 'editpost':
                         AsgarosForumEditor::showEditor();
-                        break;
+                    break;
                     default:
                         $this->overview();
-                        break;
+                    break;
                 }
             }
         }
@@ -560,6 +571,11 @@ class AsgarosForum {
         }
     }
 
+    function getSpecificForums($ids) {
+        $results = $this->db->get_results("SELECT id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
+        return $results;
+    }
+
     function get_topics($id, $type = 'normal') {
         $limit = "";
 
@@ -572,6 +588,11 @@ class AsgarosForum {
         $order = apply_filters('asgarosforum_filter_get_threads_order', "(SELECT MAX(id) FROM {$this->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
         $results = $this->db->get_results($this->db->prepare("SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$this->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE %s ORDER BY {$order} {$limit};", $id, $type.'%'));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
+        return $results;
+    }
+
+    function getSpecificTopics($ids) {
+        $results = $this->db->get_results("SELECT id, name FROM {$this->tables->topics} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
         return $results;
     }
 
@@ -733,12 +754,11 @@ class AsgarosForum {
     }
 
     function showHeader() {
-        //if ($this->options['enable_breadcrumbs'] || $this->options['enable_search'] || ($this->options['allow_subscriptions'] && is_user_logged_in())) {
-        if ($this->options['enable_breadcrumbs'] || $this->options['enable_search']) {
+        if ($this->options['enable_breadcrumbs'] || $this->options['enable_search'] || ($this->options['allow_subscriptions'] && is_user_logged_in())) {
             echo '<div id="top-container">';
             AsgarosForumBreadCrumbs::showBreadCrumbs();
             AsgarosForumSearch::showSearchInput();
-            //AsgarosForumNotifications::showSubscriptionOverviewLink();
+            AsgarosForumNotifications::showSubscriptionOverviewLink();
             echo '<div class="clear"></div>';
             echo '</div>';
         }
@@ -883,13 +903,13 @@ class AsgarosForum {
             switch ($contentType) {
                 case 'post':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.name AS current_forum_name, f.parent_forum AS parent_forum, pf.name AS parent_forum_name, t.id AS current_topic, t.name AS current_topic_name, p.id AS current_post, p.text AS current_description FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->forums} AS pf ON (pf.id = f.parent_forum) LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) LEFT JOIN {$this->tables->posts} AS p ON (t.id = p.parent_id) WHERE p.id = {$id};";
-                    break;
+                break;
                 case 'topic':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.name AS current_forum_name, f.parent_forum AS parent_forum, pf.name AS parent_forum_name, t.id AS current_topic, t.name AS current_topic_name, (SELECT td.text FROM {$this->tables->posts} AS td WHERE td.parent_id = t.id ORDER BY td.id ASC LIMIT 1) AS current_description FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->forums} AS pf ON (pf.id = f.parent_forum) LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) WHERE t.id = {$id};";
-                    break;
+                break;
                 case 'forum':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.name AS current_forum_name, f.parent_forum AS parent_forum, pf.name AS parent_forum_name, f.description AS current_description FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->forums} AS pf ON (pf.id = f.parent_forum) WHERE f.id = {$id};";
-                    break;
+                break;
             }
 
             $results = $this->db->get_row($query);

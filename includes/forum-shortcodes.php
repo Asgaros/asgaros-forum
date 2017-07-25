@@ -68,7 +68,7 @@ class AsgarosForumShortcodes {
                     AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
                 } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
                     $forumID = $atts['forum'];
-                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search');
+                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search', 'subscriptions');
 
                     // Ensure that we are in the correct element.
                     if (self::$asgarosforum->current_forum != $forumID && self::$asgarosforum->parent_forum != $forumID && self::$asgarosforum->current_view != 'search') {

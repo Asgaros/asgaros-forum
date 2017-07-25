@@ -350,6 +350,49 @@ class AsgarosForumNotifications {
             echo '</div>';
         }
     }
+
+    // Shows all subscriptions of a user (topics/forums).
+    public static function showSubscriptions() {
+        global $asgarosforum;
+        $subscribedTopics = get_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic');
+        $subscribedForums = get_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum');
+
+        $title = __('Topics', 'asgaros-forum');
+
+        if (!empty($subscribedTopics)) {
+            $subscribedTopics = $asgarosforum->getSpecificTopics($subscribedTopics);
+        }
+
+        self::renderSubscriptionsList($title, $subscribedTopics, 'topic');
+
+        $title = __('Forums', 'asgaros-forum');
+
+        if (!empty($subscribedForums)) {
+            $subscribedForums = $asgarosforum->getSpecificForums($subscribedForums);
+        }
+
+        self::renderSubscriptionsList($title, $subscribedForums, 'forum');
+    }
+
+    // Renders a list of a certain subscription type for the current user.
+    public static function renderSubscriptionsList($title, $data, $type) {
+        global $asgarosforum;
+
+        echo '<div class="title-element">'.$title.'</div>';
+        echo '<div class="content-element">';
+
+        if (empty($data)) {
+            echo '<div class="notice">'.__('No subscriptions yet!', 'asgaros-forum').'</div>';
+        } else {
+            foreach ($data as $item) {
+                echo '<div class="subscription">';
+                echo '<a href="'.$asgarosforum->getLink($type, $item->id).'" title="'.esc_html(stripslashes($item->name)).'">'.esc_html(stripslashes($item->name)).'</a>';
+                echo '</div>';
+            }
+        }
+
+        echo '</div>';
+    }
 }
 
 ?>

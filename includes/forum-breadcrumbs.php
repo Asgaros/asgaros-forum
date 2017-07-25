@@ -52,6 +52,8 @@ class AsgarosForumBreadCrumbs {
                 $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Move Topic', 'asgaros-forum'), 'name' => __('Move Topic', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'search') {
                 $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Search', 'asgaros-forum'), 'name' => __('Search', 'asgaros-forum'), 'position' => false);
+            } else if ($asgarosforum->current_view === 'subscriptions') {
+                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Subscriptions', 'asgaros-forum'), 'name' => __('Subscriptions', 'asgaros-forum'), 'position' => false);
             }
 
             // Render breadcrums links.
