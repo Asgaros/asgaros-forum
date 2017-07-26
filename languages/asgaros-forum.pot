@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Wed Dec 30 2015 22:23:17 GMT+0100 (Mitteleuropäische "
 "Zeit)\n"
-"POT-Revision-Date: Fri Jul 21 2017 23:01:45 GMT+0200 (Mitteleuropäische "
+"POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ../admin/admin.php:57 ../admin/admin.php:86 ../admin/admin.php:86 ..
 #: /includes/forum-breadcrumbs.php:18 ../includes/forum-usergroups.php:35 ..
-#: /includes/forum.php:373
+#: /includes/forum.php:384
 msgid "Forum"
 msgstr ""
 
@@ -118,8 +118,8 @@ msgstr ""
 
 #: ../admin/tables/admin-usergroups-table.php:43 ../admin/views/structure.php:102 
 #: ../admin/views/structure.php:115 ../admin/views/usergroups.php:50 ..
-#: /includes/forum-uploads.php:201 ../includes/forum.php:676 ../includes/forum.
-#: php:716
+#: /includes/forum-uploads.php:201 ../includes/forum.php:697 ../includes/forum.
+#: php:737
 msgid "Delete"
 msgstr ""
 
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Edit User Group"
 msgstr ""
 
-#: ../admin/tables/admin-usergroups-table.php:45 ../includes/forum.php:680
+#: ../admin/tables/admin-usergroups-table.php:45 ../includes/forum.php:701
 msgid "Edit"
 msgstr ""
 
@@ -219,8 +219,9 @@ msgstr ""
 msgid "Allow guest postings"
 msgstr ""
 
-#: ../admin/views/options.php:85
-msgid "Notifications"
+#: ../admin/views/options.php:85 ../includes/forum-breadcrumbs.php:56 ..
+#: /includes/forum-breadcrumbs.php:56 ../includes/forum.php:298
+msgid "Subscriptions"
 msgstr ""
 
 #: ../admin/views/options.php:88
@@ -404,28 +405,28 @@ msgid "Thomas Belser"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:46 ../includes/forum-breadcrumbs.php:46 ..
-#: /includes/forum.php:284
+#: /includes/forum.php:290
 msgid "Post Reply"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:48 ../includes/forum-breadcrumbs.php:48 ..
-#: /includes/forum-editor.php:120 ../includes/forum.php:282
+#: /includes/forum-editor.php:120 ../includes/forum.php:288
 msgid "Edit Post"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:50 ../includes/forum-breadcrumbs.php:50 ..
-#: /includes/forum-editor.php:116 ../includes/forum.php:286 ../includes/forum.php:
-#: 709
+#: /includes/forum-editor.php:116 ../includes/forum.php:292 ../includes/forum.php:
+#: 730
 msgid "New Topic"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:52 ../includes/forum-breadcrumbs.php:52 ..
-#: /includes/forum.php:288
+#: /includes/forum.php:294
 msgid "Move Topic"
 msgstr ""
 
 #: ../includes/forum-breadcrumbs.php:54 ../includes/forum-breadcrumbs.php:54 ..
-#: /includes/forum.php:290
+#: /includes/forum.php:296
 msgid "Search"
 msgstr ""
 
@@ -524,6 +525,19 @@ msgid ""
 "/>Link to the new topic:<br /><a href=\"%s\">%s</a>"
 msgstr ""
 
+#: ../includes/forum-notifications.php:360 ../includes/forum-statistics.php:28 ..
+#: /includes/views/forum.php:36
+msgid "Topics"
+msgstr ""
+
+#: ../includes/forum-notifications.php:368
+msgid "Forums"
+msgstr ""
+
+#: ../includes/forum-notifications.php:385
+msgid "No subscriptions yet!"
+msgstr ""
+
 #: ../includes/forum-online.php:71
 msgid "Online"
 msgstr ""
@@ -560,10 +574,6 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: ../includes/forum-statistics.php:28 ../includes/views/forum.php:36
-msgid "Topics"
-msgstr ""
-
 #: ../includes/forum-statistics.php:29
 msgid "Posts"
 msgstr ""
@@ -576,7 +586,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: ../includes/forum-thememanager.php:102
+#: ../includes/forum-thememanager.php:103
 msgid "Page"
 msgstr ""
 
@@ -596,13 +606,13 @@ msgstr ""
 msgid "You need to login to have access to uploads."
 msgstr ""
 
-#: ../includes/forum-uploads.php:162 ../includes/forum.php:222 ../includes/forum.
-#: php:232 ../includes/forum.php:429
+#: ../includes/forum-uploads.php:162 ../includes/forum.php:228 ../includes/forum.
+#: php:238 ../includes/forum.php:440
 msgid "Login"
 msgstr ""
 
-#: ../includes/forum-uploads.php:162 ../includes/forum.php:222 ../includes/forum.
-#: php:232 ../includes/forum.php:429
+#: ../includes/forum-uploads.php:162 ../includes/forum.php:228 ../includes/forum.
+#: php:238 ../includes/forum.php:440
 msgid "Register"
 msgstr ""
 
@@ -663,12 +673,12 @@ msgstr[1] ""
 msgid "by"
 msgstr ""
 
-#: ../includes/forum-widgets.php:119 ../includes/forum.php:659
+#: ../includes/forum-widgets.php:119 ../includes/forum.php:680
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: ../includes/forum-widgets.php:126 ../includes/forum.php:661
+#: ../includes/forum-widgets.php:126 ../includes/forum.php:682
 msgid "No topics yet!"
 msgstr ""
 
@@ -704,88 +714,88 @@ msgstr ""
 msgid "Asgaros Forum: Recent Topics"
 msgstr ""
 
-#: ../includes/forum.php:222
+#: ../includes/forum.php:228
 msgid "Sorry, only logged in users have access to the forum."
 msgstr ""
 
-#: ../includes/forum.php:232
+#: ../includes/forum.php:238
 msgid "Sorry, only logged in users have access to this category."
 msgstr ""
 
-#: ../includes/forum.php:237 ../includes/forum.php:244 ../includes/forum.php:252
+#: ../includes/forum.php:243 ../includes/forum.php:250 ../includes/forum.php:258
 msgid "Sorry, you dont have access to this area."
 msgstr ""
 
-#: ../includes/forum.php:419
+#: ../includes/forum.php:430
 msgid "Sorry, but there are no posts."
 msgstr ""
 
-#: ../includes/forum.php:429
+#: ../includes/forum.php:440
 msgid "You need to log in to create posts and topics."
 msgstr ""
 
-#: ../includes/forum.php:438
+#: ../includes/forum.php:449
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: ../includes/forum.php:464 ../includes/forum.php:715
+#: ../includes/forum.php:475 ../includes/forum.php:736
 msgid "Move"
 msgstr ""
 
-#: ../includes/forum.php:468
+#: ../includes/forum.php:479
 msgid "You are not allowed to move threads."
 msgstr ""
 
-#: ../includes/forum.php:623
+#: ../includes/forum.php:644
 msgid "Deleted user"
 msgstr ""
 
-#: ../includes/forum.php:629
+#: ../includes/forum.php:650
 msgid "Guest"
 msgstr ""
 
-#: ../includes/forum.php:658 ../includes/views/topic-element.php:17
+#: ../includes/forum.php:679 ../includes/views/topic-element.php:17
 msgid "By"
 msgstr ""
 
-#: ../includes/forum.php:676 ../includes/forum.php:716
+#: ../includes/forum.php:697 ../includes/forum.php:737
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: ../includes/forum.php:685
+#: ../includes/forum.php:706
 msgid "Quote"
 msgstr ""
 
-#: ../includes/forum.php:711
+#: ../includes/forum.php:732
 msgid "Reply"
 msgstr ""
 
-#: ../includes/forum.php:719
+#: ../includes/forum.php:740
 msgid "Undo Sticky"
 msgstr ""
 
-#: ../includes/forum.php:721
+#: ../includes/forum.php:742
 msgid "Sticky"
 msgstr ""
 
-#: ../includes/forum.php:725
+#: ../includes/forum.php:746
 msgid "Open"
 msgstr ""
 
-#: ../includes/forum.php:727
+#: ../includes/forum.php:748
 msgid "Close"
 msgstr ""
 
-#: ../includes/forum.php:874
+#: ../includes/forum.php:894
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: ../includes/forum.php:875
+#: ../includes/forum.php:895
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: ../includes/forum.php:876
+#: ../includes/forum.php:896
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
