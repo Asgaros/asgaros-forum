@@ -30,6 +30,7 @@ class AsgarosForumThemeManager {
 			self::$current_theme = self::AF_DEFAULT_THEME;
 		}
 
+		add_filter('mce_css', array($this, 'addEditorCSS'));
 		add_action('wp_head', array($this, 'setHeader'));
 	}
 
@@ -92,7 +93,7 @@ class AsgarosForumThemeManager {
 		return (self::get_current_theme() === self::AF_DEFAULT_THEME) ? true : false;
 	}
 
-	public static function setHeader() {
+	public function setHeader() {
 		echo '<!-- Asgaros Forum: BEGIN -->'.PHP_EOL;
 
 		// SEO stuff.
@@ -131,5 +132,16 @@ class AsgarosForumThemeManager {
 		}
 
 		echo '<!-- Asgaros Forum: END -->'.PHP_EOL;
+	}
+
+	// Add a custom stylesheet to the TinyMCE editor.
+	public function addEditorCSS($mce_css) {
+		if (!empty($mce_css)) {
+			$mce_css .= ',';
+		}
+
+		$mce_css .= self::get_current_theme_url().'/editor.css?ver='.self::$asgarosforum->version;
+
+		return $mce_css;
 	}
 }

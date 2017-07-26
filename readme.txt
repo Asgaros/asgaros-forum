@@ -72,7 +72,7 @@ Please only use this site and dont send me your own .po/.mo files because it is 
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = How can I add my own theme? =
-You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have at least those files: `style.css`, `mobile.css` and `widgets.css`.
+You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have the following files: `style.css`, `mobile.css`, `widgets.css` and `editor.css`.
 = Which hooks are available =
 * asgarosforum_after_post_author
 * asgarosforum_after_post_message
@@ -127,6 +127,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Added: Subscription overview
 * Fixed: Strip slashes when showing the description inside of a forum
+* Changed: Highlight quotes in the editor
 * Changed: Minor design changes
 = 1.5.6 =
 * Fixed: Broken structure administration
