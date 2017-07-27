@@ -115,19 +115,18 @@ class AsgarosForumThemeManager {
 
 		$themeurl = self::get_current_theme_url();
 
-        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/widgets.css?ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
-
+         	wp_enqueue_style( 'af-widgets', $themeurl.'/widgets.css',  array(), self::$asgarosforum->version, '' );
 		if (self::$asgarosforum->executePlugin) {
-	        echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/style.css?ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
+	        wp_enqueue_style( 'af-style', $themeurl.'/style.css',  array(), self::$asgarosforum->version, '' );
 
 	        if (self::is_default_theme()) {
 	            if ((self::$asgarosforum->options['custom_color'] !== self::$asgarosforum->options_default['custom_color']) || (self::$asgarosforum->options['custom_text_color'] !== self::$asgarosforum->options_default['custom_text_color']) || (self::$asgarosforum->options['custom_background_color'] !== self::$asgarosforum->options_default['custom_background_color'])) {
-	                echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/custom-color.php?color='.substr(self::$asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr(self::$asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr(self::$asgarosforum->options['custom_background_color'], 1).'&ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
+	                wp_enqueue_style( 'af-custom-color', $themeurl.'/custom-color.php?color='.substr(self::$asgarosforum->options['custom_color'], 1).'&amp;text-color='.substr(self::$asgarosforum->options['custom_text_color'], 1).'&amp;background-color='.substr(self::$asgarosforum->options['custom_background_color'], 1),  array(), self::$asgarosforum->version, '' );
 	            }
 	        }
 
 	        if (wp_is_mobile()) {
-	            echo '<link rel="stylesheet" type="text/css" href="'.$themeurl.'/mobile.css?ver='.self::$asgarosforum->version.'" />'.PHP_EOL;
+	            wp_enqueue_style( 'af-mobile', $themeurl.'/mobile.css',  array(), self::$asgarosforum->version, '' );
 	        }
 		}
 
