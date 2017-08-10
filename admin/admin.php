@@ -63,22 +63,40 @@ class AsgarosForumAdmin {
 
     function user_profile_fields_update($user_id) {
         global $asgarosforum;
+        $user_id = absint($user_id);
 
         if (current_user_can('manage_options')) {
-            if (!user_can($user->ID, 'manage_options')) {
-                update_usermeta(absint($user_id), 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
-                update_usermeta(absint($user_id), 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
+            if (!user_can($user_id, 'manage_options')) {
+                if (isset($_POST['asgarosforum_moderator'])) {
+                    update_user_meta($user_id, 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
+                } else {
+                    delete_user_meta($user_id, 'asgarosforum_moderator');
+                }
+
+                if (isset($_POST['asgarosforum_banned'])) {
+                    update_user_meta($user_id, 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
+                } else {
+                    delete_user_meta($user_id, 'asgarosforum_banned');
+                }
             }
 
             AsgarosForumUserGroups::updateUserProfileFields($user_id);
         }
 
         if ($asgarosforum->options['allow_subscriptions']) {
-            update_usermeta(absint($user_id), 'asgarosforum_subscription_global_topics', wp_kses_post($_POST['asgarosforum_subscription_global_topics']));
+            if (isset($_POST['asgarosforum_subscription_global_topics'])) {
+                update_user_meta($user_id, 'asgarosforum_subscription_global_topics', wp_kses_post($_POST['asgarosforum_subscription_global_topics']));
+            } else {
+                delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
+            }
         }
 
         if ($asgarosforum->options['allow_signatures']) {
-            update_usermeta(absint($user_id), 'asgarosforum_signature', trim(wp_kses_post($_POST['asgarosforum_signature'])));
+            if (isset($_POST['asgarosforum_signature'])) {
+                update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post($_POST['asgarosforum_signature'])));
+            } else {
+                delete_user_meta($user_id, 'asgarosforum_signature');
+            }
         }
     }
 
