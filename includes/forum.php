@@ -409,9 +409,9 @@ class AsgarosForum {
     }
 
     function showforum() {
-        $threads = $this->get_topics($this->current_forum);
+        $topics = $this->get_topics($this->current_forum);
         $sticky_topics = $this->get_topics($this->current_forum, 'sticky');
-        $counter_normal = count($threads);
+        $counter_normal = count($topics);
         $counter_total = $counter_normal + count($sticky_topics);
 
         require('views/forum.php');
@@ -488,13 +488,13 @@ class AsgarosForum {
         }
     }
 
-    function get_postlink($thread_id, $post_id, $page = 0) {
+    function get_postlink($topic_id, $post_id, $page = 0) {
         if (!$page) {
-            $postNumber = $this->db->get_var($this->db->prepare("SELECT COUNT(*) FROM {$this->tables->posts} WHERE parent_id = %d;", $thread_id));
+            $postNumber = $this->db->get_var($this->db->prepare("SELECT COUNT(*) FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
             $page = ceil($postNumber / $this->options['posts_per_page']);
         }
 
-        return $this->getLink('topic', $thread_id, array('part' => $page), '#postid-'.$post_id);
+        return $this->getLink('topic', $topic_id, array('part' => $page), '#postid-'.$post_id);
     }
 
     function get_categories($enableFiltering = true) {
@@ -685,8 +685,8 @@ class AsgarosForum {
         return $lastpost;
     }
 
-    function get_topic_starter($thread_id) {
-        return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $thread_id));
+    function get_topic_starter($topic_id) {
+        return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $topic_id));
     }
 
     function post_menu($post_id, $author_id, $counter) {

@@ -39,7 +39,7 @@ if ($counter_total > 0) {
     echo '<div class="content-element">';
         // Sticky topics
         if ($sticky_topics && !$this->current_page) {
-            foreach ($sticky_topics as $thread) {
+            foreach ($sticky_topics as $topic) {
                 require('topic-element.php');
             }
         }
@@ -48,7 +48,7 @@ if ($counter_total > 0) {
             echo '<div class="sticky-bottom"></div>';
         }
 
-        foreach ($threads as $thread) {
+        foreach ($topics as $topic) {
             require('topic-element.php');
         } ?>
     </div>

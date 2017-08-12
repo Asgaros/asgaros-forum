@@ -15,7 +15,7 @@ echo '</div>';
 echo '<div class="content-element">';
 
 if ($results) {
-    foreach ($results as $thread) {
+    foreach ($results as $topic) {
         require('topic-element.php');
     }
 } else {
