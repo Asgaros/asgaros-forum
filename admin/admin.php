@@ -238,7 +238,7 @@ class AsgarosForumAdmin {
         $forum_icon         = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
         $forum_closed       = (isset($_POST['forum_closed'])) ? 1 : 0;
         $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
-        $forum_slug         = AsgarosForumRewrite::createUniqueSlug($forum_name, $asgarosforum->tables->forums);
+        $forum_slug         = AsgarosForumRewrite::createUniqueSlug($forum_name, $asgarosforum->tables->forums, 'forum');
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {

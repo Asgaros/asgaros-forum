@@ -160,11 +160,12 @@ class AsgarosForumDatabase {
                 self::$db->query('ALTER TABLE '.self::$table_posts.' ADD FULLTEXT (text);');
             }
 
+            // Create forum slugs.
             if ($database_version_installed < 6) {
                 $forums = self::$db->get_results("SELECT id, name FROM ".self::$table_forums." WHERE slug = '' ORDER BY id ASC;");
 
                 foreach ($forums as $forum) {
-                    $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, self::$table_forums);
+                    $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, self::$table_forums, 'forum');
                     self::$db->update(self::$table_forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
                 }
             }

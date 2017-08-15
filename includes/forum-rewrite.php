@@ -60,9 +60,9 @@ class AsgarosForumRewrite {
         self::$links = $links;
     }
 
-    public static function createUniqueSlug($name, $location) {
+    public static function createUniqueSlug($name, $location, $type) {
         $slug = sanitize_title($name);
-        $slug = (is_numeric($slug)) ? 'forum-'.$slug : $slug;
+        $slug = (is_numeric($slug)) ? $type.'-'.$slug : $slug;
         $existingSlugs = self::$asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug LIKE '".$slug."%';");
 
         if (count($existingSlugs) !== 0 && in_array($slug, $existingSlugs)) {
