@@ -138,7 +138,7 @@ class AsgarosForumInsert {
 
         AsgarosForumNotifications::updateSubscriptionStatus();
 
-        do_action('asgarosforum_after_'.self::getAction().'_submit', $asgarosforum->current_post);
+        do_action('asgarosforum_after_'.self::getAction().'_submit', $asgarosforum->current_post, $asgarosforum->current_topic);
 
         wp_redirect($redirect);
         exit;
