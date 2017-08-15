@@ -96,14 +96,21 @@ class AsgarosForumInsert {
         $uploadList = AsgarosForumUploads::getUploadList();
 
         if (self::getAction() === 'add_thread') {
-            $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum), array('%s', '%d'));
+            // Get a slug for the new topic.
+            $topic_slug = AsgarosForumRewrite::createUniqueSlug(self::$dataSubject, $asgarosforum->tables->topics, 'topic');
+
+            // Create topic.
+            $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum, 'slug' => $topic_slug), array('%s', '%d', '%s'));
             $asgarosforum->current_topic = $asgarosforum->db->insert_id;
 
+            // Create the post.
             $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
+            // Upload files.
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
 
+            // Create redirect link.
             $redirect = html_entity_decode($asgarosforum->getLink('topic', $asgarosforum->current_topic, false, '#postid-'.$asgarosforum->current_post));
 
             // Send notification about new topic to global subscribers.
