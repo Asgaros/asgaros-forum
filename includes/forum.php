@@ -933,4 +933,9 @@ class AsgarosForum {
         // Assign error message, because when this location is reached, no parents has been set.
         $this->error = $error[$contentType];
     }
+
+    // Gets all data of a topic based on its ID.
+    public function getTopic($topicID) {
+        return $this->db->get_row($this->db->prepare("SELECT * FROM {$this->tables->topics} WHERE id = %d;", $topicID));
+    }
 }
