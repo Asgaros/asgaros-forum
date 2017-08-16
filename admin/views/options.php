@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) exit;
         </div>
     <?php } ?>
     <form method="post">
+        <?php wp_nonce_field('asgaros_forum_save_options'); ?>
         <h3><?php _e('General', 'asgaros-forum'); ?></h3>
         <p>
             <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>

@@ -21,6 +21,7 @@
                     <div class="inside">
                         <div id="usergroup-editor" style="display: none;">
                             <form method="post">
+                                <?php wp_nonce_field('asgaros_forum_save_usergroup'); ?>
                                 <input type="hidden" name="usergroup_id" value="new">
 
                                 <table class="form-table">
@@ -43,6 +44,7 @@
 
                         <div id="usergroup-delete" style="display: none;">
                             <form method="post">
+                                <?php wp_nonce_field('asgaros_forum_delete_usergroup'); ?>
                                 <input type="hidden" name="usergroup-id" value="0">
                                 <p><?php _e('Are you sure you want to delete this user group?', 'asgaros-forum'); ?></p>
 

@@ -21,6 +21,7 @@
                     <div class="inside">
                         <div id="category-editor" style="display: none;">
                             <form method="post">
+                                <?php wp_nonce_field('asgaros_forum_save_category'); ?>
                                 <input type="hidden" name="category_id" value="new">
 
                                 <table class="form-table">
@@ -54,6 +55,7 @@
 
                         <div id="forum-editor" style="display: none;">
                             <form method="post">
+                                <?php wp_nonce_field('asgaros_forum_save_forum'); ?>
                                 <input type="hidden" name="forum_id" value="new">
                                 <input type="hidden" name="forum_category" value="0">
                                 <input type="hidden" name="forum_parent_forum" value="0">
@@ -95,6 +97,7 @@
 
                         <div id="category-delete" style="display: none;">
                             <form method="post">
+                                <?php wp_nonce_field('asgaros_forum_delete_category'); ?>
                                 <input type="hidden" name="category-id" value="0">
                                 <p><?php _e('Deleting this category will also permanently delete all forums, sub-forums, topics and posts inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
 
@@ -107,6 +110,7 @@
 
                         <div id="forum-delete" style="display: none;">
                             <form method="post">
+                                <?php wp_nonce_field('asgaros_forum_delete_forum'); ?>
                                 <input type="hidden" name="forum-id" value="0">
                                 <input type="hidden" name="forum-category" value="0">
                                 <p><?php _e('Deleting this forum will also permanently delete all sub-forums, topics and posts inside it. Are you sure you want to delete this forum?', 'asgaros-forum'); ?></p>

@@ -123,20 +123,38 @@ class AsgarosForumAdmin {
         // Only save changes when the user is an administrator.
         if (current_user_can('manage_options')) {
             if (isset($_POST['af_options_submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_options');
+
                 $this->save_options();
             } else if (isset($_POST['af-create-edit-forum-submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_forum');
+
                 $this->save_forum();
             } else if (isset($_POST['asgaros-forum-delete-forum'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_delete_forum');
+
                 if (!empty($_POST['forum-id']) && is_numeric($_POST['forum-id']) && !empty($_POST['forum-category']) && is_numeric($_POST['forum-category'])) {
                     $this->delete_forum($_POST['forum-id'], $_POST['forum-category']);
                 }
             } else if (isset($_POST['af-create-edit-category-submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_category');
+
                 $this->save_category();
             } else if (isset($_POST['asgaros-forum-delete-category'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_delete_category');
+
                 if (!empty($_POST['category-id']) && is_numeric($_POST['category-id'])) {
                     $this->delete_category($_POST['category-id']);
                 }
             } else if (isset($_POST['af-create-edit-usergroup-submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_usergroup');
+
                 $saveStatus = AsgarosForumUserGroups::saveUserGroup();
 
                 if (is_wp_error($saveStatus)) {
@@ -145,6 +163,9 @@ class AsgarosForumAdmin {
                     $this->saved = $saveStatus;
                 }
             } else if (isset($_POST['asgaros-forum-delete-usergroup'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_delete_usergroup');
+                
                 if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
                     AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
                 }
