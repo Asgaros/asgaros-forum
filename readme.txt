@@ -125,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Prevent non-admin users from modifying settings
 * Fixed: PHP errors when updating user profile
 * Changed: Enqueue stylesheets
 * Performance improvements and code optimizations

@@ -120,31 +120,34 @@ class AsgarosForumAdmin {
     }
 
     function save_settings() {
-        if (isset($_POST['af_options_submit'])) {
-            $this->save_options();
-        } else if (isset($_POST['af-create-edit-forum-submit'])) {
-            $this->save_forum();
-        } else if (isset($_POST['asgaros-forum-delete-forum'])) {
-            if (!empty($_POST['forum-id']) && is_numeric($_POST['forum-id']) && !empty($_POST['forum-category']) && is_numeric($_POST['forum-category'])) {
-                $this->delete_forum($_POST['forum-id'], $_POST['forum-category']);
-            }
-        } else if (isset($_POST['af-create-edit-category-submit'])) {
-            $this->save_category();
-        } else if (isset($_POST['asgaros-forum-delete-category'])) {
-            if (!empty($_POST['category-id']) && is_numeric($_POST['category-id'])) {
-                $this->delete_category($_POST['category-id']);
-            }
-        } else if (isset($_POST['af-create-edit-usergroup-submit'])) {
-            $saveStatus = AsgarosForumUserGroups::saveUserGroup();
+        // Only save changes when the user is an administrator.
+        if (current_user_can('manage_options')) {
+            if (isset($_POST['af_options_submit'])) {
+                $this->save_options();
+            } else if (isset($_POST['af-create-edit-forum-submit'])) {
+                $this->save_forum();
+            } else if (isset($_POST['asgaros-forum-delete-forum'])) {
+                if (!empty($_POST['forum-id']) && is_numeric($_POST['forum-id']) && !empty($_POST['forum-category']) && is_numeric($_POST['forum-category'])) {
+                    $this->delete_forum($_POST['forum-id'], $_POST['forum-category']);
+                }
+            } else if (isset($_POST['af-create-edit-category-submit'])) {
+                $this->save_category();
+            } else if (isset($_POST['asgaros-forum-delete-category'])) {
+                if (!empty($_POST['category-id']) && is_numeric($_POST['category-id'])) {
+                    $this->delete_category($_POST['category-id']);
+                }
+            } else if (isset($_POST['af-create-edit-usergroup-submit'])) {
+                $saveStatus = AsgarosForumUserGroups::saveUserGroup();
 
-            if (is_wp_error($saveStatus)) {
-                $this->error = $saveStatus->get_error_message();
-            } else {
-                $this->saved = $saveStatus;
-            }
-        } else if (isset($_POST['asgaros-forum-delete-usergroup'])) {
-            if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
-                AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
+                if (is_wp_error($saveStatus)) {
+                    $this->error = $saveStatus->get_error_message();
+                } else {
+                    $this->saved = $saveStatus;
+                }
+            } else if (isset($_POST['asgaros-forum-delete-usergroup'])) {
+                if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
+                    AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
+                }
             }
         }
     }
