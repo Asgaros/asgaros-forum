@@ -19,10 +19,14 @@ $counter++;
         ?>
         <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong><br />
         <?php
-        // Only show post-counter for existent users.
-        if (get_userdata($post->author_id) != false) {
-            $author_posts_i18n = number_format_i18n($post->author_posts);
-            echo '<small>'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
+
+        // Show author posts counter if activated.
+        if ($this->options['show_author_posts_counter']) {
+            // Only show post-counter for existing users.
+            if (get_userdata($post->author_id) != false) {
+                $author_posts_i18n = number_format_i18n($post->author_posts);
+                echo '<small>'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
+            }
         }
 
         if (AsgarosForumPermissions::isBanned($post->author_id)) {

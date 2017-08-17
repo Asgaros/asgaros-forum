@@ -51,6 +51,7 @@ class AsgarosForum {
         'enable_breadcrumbs'        => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
+        'show_author_posts_counter' => true,
         'show_edit_date'            => true,
         'show_description_in_forum' => false,
         'require_login'             => false,

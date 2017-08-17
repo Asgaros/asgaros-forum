@@ -47,6 +47,10 @@ if (!defined('ABSPATH')) exit;
             <label for="highlight_authors"><?php _e('Highlight topic authors', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="show_author_posts_counter" id="show_author_posts_counter" <?php checked(!empty($asgarosforum->options['show_author_posts_counter'])); ?>>
+            <label for="show_author_posts_counter"><?php _e('Show author posts counter', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?>>
             <label for="show_edit_date"><?php _e('Show edit date', 'asgaros-forum'); ?></label>
         </p>
