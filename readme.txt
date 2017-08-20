@@ -125,6 +125,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Changed: Minor design changes
 = 1.5.9 =
 * Added: Option to hide author posts counter
 * Fixed: Prevent cross-site request forgery in settings
