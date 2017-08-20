@@ -6,6 +6,7 @@ class AsgarosForumRewrite {
     private static $asgarosforum = null;
     private static $usePermalinks = false;
     private static $links = array();
+    public static $slugCache = array();
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
@@ -61,15 +62,24 @@ class AsgarosForumRewrite {
     }
 
     public static function createUniqueSlug($name, $location, $type) {
+        // Cache all existing slugs if not already done.
+        if (empty(self::$slugCache[$type])) {
+            self::$slugCache[$type] = self::$asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug <> '';");
+        }
+
+        // Suggest a new slug for the element.
         $slug = sanitize_title($name);
         $slug = (is_numeric($slug)) ? $type.'-'.$slug : $slug;
-        $existingSlugs = self::$asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug LIKE '".$slug."%';");
 
-        if (count($existingSlugs) !== 0 && in_array($slug, $existingSlugs)) {
+        // Modify the suggested slug when it already exists.
+        if (!empty(self::$slugCache[$type]) && in_array($slug, self::$slugCache[$type])) {
             $max = 1;
-            while (in_array(($slug.'-'.++$max), $existingSlugs));
+            while (in_array(($slug.'-'.++$max), self::$slugCache[$type]));
             $slug .= '-'.$max;
         }
+
+        // Safe newly generated slug in cache.
+        self::$slugCache[$type][] = $slug;
 
         return $slug;
     }

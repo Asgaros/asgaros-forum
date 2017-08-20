@@ -419,6 +419,15 @@ class AsgarosForum {
     }
 
     function showTopic() {
+        // Create a unique slug for this topic if necessary.
+        $topic = $this->getTopic($this->current_topic);
+
+        if (empty($topic->slug)) {
+            $slug = AsgarosForumRewrite::createUniqueSlug($topic->name, $this->tables->topics, 'topic');
+            $this->db->update($this->tables->topics, array('slug' => $slug), array('id' => $topic->id), array('%s'), array('%d'));
+        }
+
+        // Get posts of topic.
         $posts = $this->get_posts();
 
         if ($posts) {
