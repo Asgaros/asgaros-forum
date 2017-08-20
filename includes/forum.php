@@ -486,7 +486,7 @@ class AsgarosForum {
 
             echo $strOUT;
         } else {
-            echo '<div class="notice">'.__('You are not allowed to move threads.', 'asgaros-forum').'</div>';
+            echo '<div class="notice">'.__('You are not allowed to move topics.', 'asgaros-forum').'</div>';
         }
     }
 

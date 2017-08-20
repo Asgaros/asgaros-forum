@@ -52,7 +52,7 @@
     margin-bottom: 10px;
 }
 #af-wrapper .content-element .forum:nth-child(even),
-#af-wrapper .content-element .thread:nth-child(even),
+#af-wrapper .content-element .topic:nth-child(even),
 #af-wrapper .content-element .editor-row:nth-child(even),
 #af-wrapper .content-element .subscription:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.02);
@@ -211,12 +211,12 @@
 }
 #af-wrapper .forum [class^="dashicons-"],
 #af-wrapper .forum [class*=" dashicons-"],
-#af-wrapper .thread [class^="dashicons-"],
-#af-wrapper .thread [class*=" dashicons-"] {
+#af-wrapper .topic [class^="dashicons-"],
+#af-wrapper .topic [class*=" dashicons-"] {
     padding: 0;
 }
 #af-wrapper .forum,
-#af-wrapper .thread {
+#af-wrapper .topic {
     display: table;
     height: 60px;
     width: 100%;
@@ -271,7 +271,7 @@
 #af-wrapper .forum-name strong,
 #af-wrapper .topic-name strong,
 #af-wrapper .forum small,
-#af-wrapper .thread small {
+#af-wrapper .topic small {
     display: block;
     font-style: normal; /* comp */
     letter-spacing: normal; /* comp */

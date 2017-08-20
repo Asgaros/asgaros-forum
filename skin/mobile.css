@@ -1,6 +1,6 @@
 @media only screen and (max-width : 768px) {
     #af-wrapper .forum div,
-    #af-wrapper .thread div,
+    #af-wrapper .topic div,
     #af-wrapper .post-author {
         border-right: none;
     }
