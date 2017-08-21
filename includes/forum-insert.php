@@ -4,12 +4,16 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumInsert {
     private static $action = false;
-
-    // Data for insertion is stored here.
     private static $dataSubject;
     private static $dataContent;
 
-    public static function getAction() {
+    public static function doInsertion() {
+        if (self::prepareExecution()) {
+            self::insertData();
+        }
+    }
+
+    private static function getAction() {
         // If no action is set, try to determine one.
         if (!self::$action && ($_POST['submit_action'] === 'add_thread' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
             self::$action = $_POST['submit_action'];
@@ -18,7 +22,7 @@ class AsgarosForumInsert {
         return self::$action;
     }
 
-    public static function setData() {
+    private static function setData() {
         if (isset($_POST['subject'])) {
             self::$dataSubject = apply_filters('asgarosforum_filter_subject_before_insert', trim($_POST['subject']));
         }
@@ -28,11 +32,17 @@ class AsgarosForumInsert {
         }
     }
 
-    public static function prepareExecution() {
+    private static function prepareExecution() {
         global $asgarosforum;
 
         // Cancel if there is already an error.
         if (!empty($asgarosforum->error)) {
+            return false;
+        }
+
+        // Cancel if the current user is not logged-in and guest postings are disabled.
+        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
+            $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }
 
@@ -96,7 +106,7 @@ class AsgarosForumInsert {
         return true;
     }
 
-    public static function insertData() {
+    private static function insertData() {
         global $asgarosforum;
 
         $redirect = '';
