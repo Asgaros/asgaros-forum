@@ -126,6 +126,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Changed: Minor design changes
+* Performance improvements and code optimizations
 = 1.5.9 =
 * Added: Option to hide author posts counter
 * Fixed: Prevent cross-site request forgery in settings

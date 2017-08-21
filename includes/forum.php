@@ -185,11 +185,8 @@ class AsgarosForum {
         remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
         if (isset($_POST['submit_action']) && (is_user_logged_in() || $this->options['allow_guest_postings'])) {
-            if (AsgarosForumInsert::getAction()) {
-                AsgarosForumInsert::setData();
-                if (AsgarosForumInsert::validateExecution()) {
-                    AsgarosForumInsert::insertData();
-                }
+            if (AsgarosForumInsert::prepareExecution()) {
+                AsgarosForumInsert::insertData();
             }
         } else if ($this->current_view === 'markallread') {
             AsgarosForumUnread::markAllRead();

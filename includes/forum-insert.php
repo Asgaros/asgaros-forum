@@ -28,7 +28,7 @@ class AsgarosForumInsert {
         }
     }
 
-    public static function validateExecution() {
+    public static function prepareExecution() {
         global $asgarosforum;
 
         // Cancel if there is already an error.
@@ -47,6 +47,15 @@ class AsgarosForumInsert {
             $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }
+
+        // Cancel when no action could be determined.
+        if (!self::getAction()) {
+            $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
+            return false;
+        }
+
+        // Set the data.
+        self::setData();
 
         // Cancel if the current user is not allowed to edit that post.
         if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && AsgarosForumPermissions::$current_user_id != $asgarosforum->get_post_author($asgarosforum->current_post)) {
