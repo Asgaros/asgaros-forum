@@ -63,7 +63,7 @@ $counter++;
             $post_content = do_shortcode($post_content);
         }
 
-        $post_content = apply_filters('asgarosforum_filter_post_content', $post_content);
+        $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
         echo $post_content;
         AsgarosForumUploads::showUploadedFiles($post);
         echo '<div class="post-footer">';
