@@ -44,7 +44,7 @@ $counter++;
         echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
 
         if ($this->current_view != 'post') {
-            echo $this->post_menu($post->id, $post->author_id, $counter);
+            echo $this->showPostMenu($post->id, $post->author_id, $counter);
         }
 
         echo '<div class="clear"></div>';

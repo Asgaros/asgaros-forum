@@ -292,6 +292,7 @@
 /* MENU */
 #af-wrapper .forum-menu {
     float: right;
+    margin-bottom: 5px;
 }
 #af-wrapper .forum-menu a {
     display: inline-block;
@@ -299,7 +300,6 @@
     padding: 2px 5px;
     margin-left: 3px;
     color: #fff !important;
-    margin-bottom: 5px;
     border-bottom: 2px solid #0073aa;
 }
 #af-wrapper .forum-menu a:before {

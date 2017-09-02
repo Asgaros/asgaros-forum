@@ -11,7 +11,7 @@ AsgarosForumEditor::showEditor('addtopic', true);
     $pagination = new AsgarosForumPagination($this);
     $paginationRendering = ($counter_normal > 0) ? $pagination->renderPagination($this->tables->topics) : '';
     echo $paginationRendering;
-    echo $this->forum_menu('forum');
+    echo $this->showForumMenu();
     ?>
     <div class="clear"></div>
 </div>
@@ -56,7 +56,7 @@ if ($counter_total > 0) {
     <div class="pages-and-menu">
         <?php
         echo $paginationRendering;
-        echo $this->forum_menu('forum');
+        echo $this->showForumMenu();
         ?>
         <div class="clear"></div>
     </div>

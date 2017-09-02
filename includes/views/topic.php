@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) exit;
     $pagination = new AsgarosForumPagination($this);
     $paginationRendering = $pagination->renderPagination($this->tables->posts);
     echo $paginationRendering;
-    echo $this->forum_menu('topic');
+    echo $this->showTopicMenu();
     ?>
     <div class="clear"></div>
 </div>
@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) exit;
 <div class="pages-and-menu">
     <?php
     echo $paginationRendering;
-    echo $this->forum_menu('topic', false);
+    echo $this->showTopicMenu(false);
     ?>
     <div class="clear"></div>
 </div>
