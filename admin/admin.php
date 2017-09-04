@@ -165,7 +165,7 @@ class AsgarosForumAdmin {
             } else if (isset($_POST['asgaros-forum-delete-usergroup'])) {
                 // Verify nonce first.
                 check_admin_referer('asgaros_forum_delete_usergroup');
-                
+
                 if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
                     AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
                 }
@@ -190,7 +190,7 @@ class AsgarosForumAdmin {
                 } else if (is_numeric($v)) {
                     $saved_ops[$k] = ((int)$_POST[$k] > 0) ? (int)$_POST[$k] : $v;
                 } else if (is_bool($v)) {
-                    $saved_ops[$k] = $k;
+                    $saved_ops[$k] = $v;
                 } else if ($k === 'theme') {
                     $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
                 } else if ($k === 'allowed_filetypes') {
