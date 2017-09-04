@@ -64,6 +64,10 @@ if (!defined('ABSPATH')) exit;
         </p>
         <h3><?php _e('Features', 'asgaros-forum'); ?></h3>
         <p>
+            <input type="checkbox" name="enable_profiles" id="enable_profiles" <?php checked(!empty($asgarosforum->options['enable_profiles'])); ?>>
+            <label for="enable_profiles"><?php _e('Enable profiles', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
             <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
         </p>

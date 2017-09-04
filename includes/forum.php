@@ -46,6 +46,7 @@ class AsgarosForum {
         'notification_sender_mail'  => '',
         'allow_signatures'          => false,
         'enable_search'             => true,
+        'enable_profiles'           => true,
         'show_who_is_online'        => true,
         'show_statistics'           => true,
         'enable_breadcrumbs'        => true,
