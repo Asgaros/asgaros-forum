@@ -26,4 +26,13 @@ class AsgarosForumProfile {
     public function functionalityEnabled() {
         return $this->asgarosforum->options['enable_profiles'];
     }
+
+    // Sets the current view when the functionality is enabled.
+    public function setCurrentView() {
+        if ($this->functionalityEnabled()) {
+            $this->asgarosforum->current_view = 'profile';
+        } else {
+            $this->asgarosforum->current_view = 'overview';
+        }
+    }
 }

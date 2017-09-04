@@ -165,6 +165,10 @@ class AsgarosForum {
                     $this->current_view = 'overview';
                 }
             break;
+            case 'profile':
+                $profile = AsgarosForumProfile::getInstance();
+                $profile->setCurrentView();
+                break;
             default:
                 $this->current_view = 'overview';
             break;
