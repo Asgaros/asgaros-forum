@@ -281,22 +281,25 @@ class AsgarosForum {
 
     function setCurrentTitle() {
         if (!$this->error && $this->current_view) {
-            if ($this->current_view == 'forum' && $this->current_forum) {
+            if ($this->current_view === 'forum' && $this->current_forum) {
                 $this->current_title = esc_html(stripslashes($this->current_forum_name));
-            } else if ($this->current_view == 'thread' && $this->current_topic) {
+            } else if ($this->current_view === 'thread' && $this->current_topic) {
                 $this->current_title = esc_html(stripslashes($this->current_topic_name));
-            } else if ($this->current_view == 'editpost') {
+            } else if ($this->current_view === 'editpost') {
                 $this->current_title = __('Edit Post', 'asgaros-forum');
-            } else if ($this->current_view == 'addpost') {
+            } else if ($this->current_view === 'addpost') {
                 $this->current_title = __('Post Reply', 'asgaros-forum').': '.esc_html(stripslashes($this->current_topic_name));
-            } else if ($this->current_view == 'addtopic') {
+            } else if ($this->current_view === 'addtopic') {
                 $this->current_title = __('New Topic', 'asgaros-forum');
-            } else if ($this->current_view == 'movetopic') {
+            } else if ($this->current_view === 'movetopic') {
                 $this->current_title = __('Move Topic', 'asgaros-forum');
-            } else if ($this->current_view == 'search') {
+            } else if ($this->current_view === 'search') {
                 $this->current_title = __('Search', 'asgaros-forum');
-            } else if ($this->current_view == 'subscriptions') {
+            } else if ($this->current_view === 'subscriptions') {
                 $this->current_title = __('Subscriptions', 'asgaros-forum');
+            } else if ($this->current_view === 'profile') {
+                $profile = AsgarosForumProfile::getInstance();
+                $profile->setCurrentTitle();
             }
         }
     }

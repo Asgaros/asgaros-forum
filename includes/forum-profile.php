@@ -35,4 +35,20 @@ class AsgarosForumProfile {
             $this->asgarosforum->current_view = 'overview';
         }
     }
+
+    // Sets the current title.
+    public function setCurrentTitle() {
+        $titleSuffix = '';
+
+        if (!empty($_GET['id'])) {
+            $userID = absint($_GET['id']);
+            $userData = get_user_by('id', $userID);
+
+            if ($userData) {
+                $titleSuffix = ': '.$userData->display_name;
+            }
+        }
+        
+        $this->asgarosforum->current_title = __('Profile', 'asgaros-forum').$titleSuffix;
+    }
 }
