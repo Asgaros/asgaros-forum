@@ -714,6 +714,11 @@ class AsgarosForum {
         return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE id = %d;", $post_id));
     }
 
+    // Returns the topics created by a user.
+    function getTopicsByUser($userID) {
+        return $this->db->get_results("SELECT * FROM {$this->tables->posts} GROUP BY parent_id HAVING author_id = {$userID};");
+    }
+
     /**
      * Generating menus for forums, topics and posts.
      */
