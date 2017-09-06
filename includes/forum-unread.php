@@ -132,8 +132,10 @@ class AsgarosForumUnread {
         $lastpostData = self::$asgarosforum->get_lastpost_in_topic($id);
 
         // Set empty lastpostData for loggedin user when he is the author of the last post or when topic already read.
-        if ((self::$userID && $lastpostData->author_id == self::$userID) || (isset(self::$excludedItems[$id]) && self::$excludedItems[$id] == $lastpostData->id)) {
-            $lastpostData = null;
+        if ($lastpostData) {
+            if ((self::$userID && $lastpostData->author_id == self::$userID) || (isset(self::$excludedItems[$id]) && self::$excludedItems[$id] == $lastpostData->id)) {
+                $lastpostData = null;
+            }
         }
 
         return self::getStatus($lastpostData);
