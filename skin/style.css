@@ -713,6 +713,35 @@
     outline: 1px solid #82f338;
 }
 
+/* PROFILE */
+#af-wrapper #forum-profile {
+    padding: 16px;
+    border: 1px solid #e1e1e1;
+    background-color: #f9f9f9;
+}
+#af-wrapper #forum-profile .avatar {
+    float: right;
+}
+#af-wrapper #forum-profile div {
+    display: block;
+    margin: 2px 0;
+}
+#af-wrapper #forum-profile div span:first-child {
+    margin-right: 5px;
+    display: inline-block;
+    width: 150px;
+    vertical-align: top;
+}
+#af-wrapper #forum-profile div span:nth-child(2) {
+    font-style: italic;
+}
+#af-wrapper #forum-profile .display-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #2d89cc;
+    font-weight: bold;
+}
+
 /* ICONS */
 #af-wrapper [class^="dashicons-"],
 #af-wrapper [class*=" dashicons-"] {

@@ -9,7 +9,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .unread:before,
 #af-wrapper #topic-subscription,
 #af-wrapper #forum-subscription,
-#af-wrapper .forum-post-menu a {
+#af-wrapper .forum-post-menu a,
+#af-wrapper #forum-profile .display-name {
 	color: <?php echo $color; ?> !important;
 }
 #af-wrapper input[type="submit"],

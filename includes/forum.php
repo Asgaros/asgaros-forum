@@ -373,6 +373,10 @@ class AsgarosForum {
                     case 'editpost':
                         AsgarosForumEditor::showEditor();
                     break;
+                    case 'profile':
+                        $profile = AsgarosForumProfile::getInstance();
+                        $profile->showProfile();
+                    break;
                     default:
                         $this->overview();
                     break;
