@@ -55,6 +55,19 @@ class AsgarosForumProfile {
         }
     }
 
+    // Sets the breadcrumbs.
+    public function setBreadCrumbs($breadCrumbs) {
+        $userData = $this->getUserData();
+
+        if ($userData) {
+            $breadCrumbs[] = array('link' => $this->asgarosforum->getLink('current'), 'title' => __('Profile', 'asgaros-forum').': '.$userData->display_name, 'name' => __('Profile', 'asgaros-forum').': '.$userData->display_name, 'position' => false);
+        } else {
+            $breadCrumbs[] = array('link' => $this->asgarosforum->getLink('current'), 'title' => __('Profile', 'asgaros-forum'), 'name' => __('Profile', 'asgaros-forum'), 'position' => false);
+        }
+
+        return $breadCrumbs;
+    }
+
     // Shows the profile of a user.
     public function showProfile($userID = false) {
         $userData = $this->getUserData($userID);

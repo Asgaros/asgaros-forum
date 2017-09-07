@@ -11,27 +11,27 @@ class AsgarosForumBreadCrumbs {
 
         if ($asgarosforum->options['enable_breadcrumbs']) {
             // Build breadcrumbs links.
-            $breadCrumsLinks = array();
+            $breadCrumbsLinks = array();
 
             if (self::$breadCrumbsLevel >= 4) {
                 $elementLink = $asgarosforum->getLink('home');
                 $elementName = __('Forum', 'asgaros-forum');
                 $elementTitle = $elementName;
-                $breadCrumsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 1);
+                $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 1);
             }
 
             if (self::$breadCrumbsLevel >= 3 && $asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
                 $elementLink = $asgarosforum->getLink('forum', $asgarosforum->parent_forum);
                 $elementName = esc_html(stripslashes($asgarosforum->parent_forum_name));
                 $elementTitle = $elementName;
-                $breadCrumsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
+                $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
             }
 
             if (self::$breadCrumbsLevel >= 2 && $asgarosforum->current_forum) {
                 $elementLink = $asgarosforum->getLink('forum', $asgarosforum->current_forum);
                 $elementName = esc_html(stripslashes($asgarosforum->current_forum_name));
                 $elementTitle = $elementName;
-                $breadCrumsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
+                $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
             }
 
             if (self::$breadCrumbsLevel >= 1 && $asgarosforum->current_topic) {
@@ -39,26 +39,29 @@ class AsgarosForumBreadCrumbs {
                 $elementLink = $asgarosforum->getLink('topic', $asgarosforum->current_topic);
                 $elementName = esc_html($asgarosforum->cut_string($name));
                 $elementTitle = esc_html($name);
-                $breadCrumsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 3);
+                $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 3);
             }
 
             if ($asgarosforum->current_view === 'addpost') {
-                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Post Reply', 'asgaros-forum'), 'name' => __('Post Reply', 'asgaros-forum'), 'position' => false);
+                $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Post Reply', 'asgaros-forum'), 'name' => __('Post Reply', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'editpost') {
-                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Edit Post', 'asgaros-forum'), 'name' => __('Edit Post', 'asgaros-forum'), 'position' => false);
+                $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Edit Post', 'asgaros-forum'), 'name' => __('Edit Post', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'addtopic') {
-                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('New Topic', 'asgaros-forum'), 'name' => __('New Topic', 'asgaros-forum'), 'position' => false);
+                $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('New Topic', 'asgaros-forum'), 'name' => __('New Topic', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'movetopic') {
-                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Move Topic', 'asgaros-forum'), 'name' => __('Move Topic', 'asgaros-forum'), 'position' => false);
+                $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Move Topic', 'asgaros-forum'), 'name' => __('Move Topic', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'search') {
-                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Search', 'asgaros-forum'), 'name' => __('Search', 'asgaros-forum'), 'position' => false);
+                $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Search', 'asgaros-forum'), 'name' => __('Search', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'subscriptions') {
-                $breadCrumsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Subscriptions', 'asgaros-forum'), 'name' => __('Subscriptions', 'asgaros-forum'), 'position' => false);
+                $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Subscriptions', 'asgaros-forum'), 'name' => __('Subscriptions', 'asgaros-forum'), 'position' => false);
+            } else if ($asgarosforum->current_view === 'profile') {
+                $profile = AsgarosForumProfile::getInstance();
+                $breadCrumbsLinks = $profile->setBreadCrumbs($breadCrumbsLinks);
             }
 
-            // Render breadcrums links.
+            // Render breadcrumbs links.
             echo '<div id="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
-            foreach ($breadCrumsLinks as $element) {
+            foreach ($breadCrumbsLinks as $element) {
                 self::renderBreadCrumbsElement($element);
             }
             echo '</div>';
