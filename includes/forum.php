@@ -853,7 +853,7 @@ class AsgarosForum {
             if ($topicID) {
                 do_action('asgarosforum_before_delete_topic', $topicID);
 
-                // Delete uploads
+                // Delete uploads.
                 $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topicID));
                 foreach ($posts as $post) {
                     AsgarosForumUploads::deletePostFiles($post);
