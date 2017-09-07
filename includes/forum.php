@@ -382,6 +382,7 @@ class AsgarosForum {
 
         do_action('asgarosforum_'.$this->current_view.'_custom_content_bottom');
 
+        echo '<div class="clear"></div>';
         echo '</div>';
         return ob_get_clean();
     }
