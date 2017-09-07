@@ -9,6 +9,7 @@ class AsgarosForum {
     var $tables = null;
     var $directory = '';
     var $date_format = '';
+    var $time_format = '';
     var $error = false;
     var $info = false;
     var $current_title = false;
@@ -75,7 +76,8 @@ class AsgarosForum {
         $this->directory = plugin_dir_url(dirname(__FILE__));
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
-        $this->date_format = get_option('date_format').', '.get_option('time_format');
+        $this->date_format = get_option('date_format');
+        $this->time_format = get_option('time_format');
         $this->tables = AsgarosForumDatabase::getTables();
 
         add_action('wp', array($this, 'prepare'));
@@ -702,8 +704,12 @@ class AsgarosForum {
         return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $topic_id));
     }
 
-    function format_date($date) {
-        return date_i18n($this->date_format, strtotime($date));
+    function format_date($date, $full = true) {
+        if ($full) {
+            return date_i18n($this->date_format.', '.$this->time_format, strtotime($date));
+        } else {
+            return date_i18n($this->date_format, strtotime($date));
+        }
     }
 
     function current_time() {
