@@ -21,6 +21,15 @@
             }
         });
 
+        // Show/hide profile options.
+        $('#enable_profiles').change(function() {
+            if (this.checked) {
+                $('#af-options .profile-option').show();
+            } else {
+                $('#af-options .profile-option').hide();
+            }
+        });
+
         // Create/edit category dialog.
         $('.category-editor-link').click(function() {
             resetStructureEditor();

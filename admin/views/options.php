@@ -64,10 +64,6 @@ if (!defined('ABSPATH')) exit;
         </p>
         <h3><?php _e('Features', 'asgaros-forum'); ?></h3>
         <p>
-            <input type="checkbox" name="enable_profiles" id="enable_profiles" <?php checked(!empty($asgarosforum->options['enable_profiles'])); ?>>
-            <label for="enable_profiles"><?php _e('Enable profiles', 'asgaros-forum'); ?></label>
-        </p>
-        <p>
             <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
             <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
         </p>
@@ -117,6 +113,18 @@ if (!defined('ABSPATH')) exit;
         <p>
             <label for="notification_sender_mail"><?php _e('Sender mail:', 'asgaros-forum'); ?></label>
             <input class="regular-text" type="text" name="notification_sender_mail" id="notification_sender_mail" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_mail'])); ?>">
+        </p>
+        <h3><?php _e('Profiles', 'asgaros-forum'); ?></h3>
+        <?php
+        $profileOption = checked(!empty($asgarosforum->options['enable_profiles']), true, false);
+        ?>
+        <p>
+            <input type="checkbox" name="enable_profiles" id="enable_profiles" <?php checked(!empty($asgarosforum->options['enable_profiles'])); ?>>
+            <label for="enable_profiles"><?php _e('Enable profiles', 'asgaros-forum'); ?></label>
+        </p>
+        <p class="profile-option" <?php if (!$profileOption) { echo 'style="display: none;"'; } ?>>
+            <input type="checkbox" name="hide_profiles_from_guests" id="hide_profiles_from_guests" <?php checked(!empty($asgarosforum->options['hide_profiles_from_guests'])); ?>>
+            <label for="hide_profiles_from_guests"><?php _e('Show profiles to logged-in users only', 'asgaros-forum'); ?></label>
         </p>
         <h3><?php _e('Uploads', 'asgaros-forum'); ?></h3>
         <?php
