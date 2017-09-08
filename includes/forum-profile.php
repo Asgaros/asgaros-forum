@@ -22,9 +22,18 @@ class AsgarosForumProfile {
         $this->asgarosforum = $asgarosforum;
     }
 
-    // Check if the profile functionality is enabled.
+    // Checks if the profile functionality is enabled.
     public function functionalityEnabled() {
         return $this->asgarosforum->options['enable_profiles'];
+    }
+
+    // Checks if profile links should be hidden for the current user.
+    public function hideProfileLink() {
+        if (!is_user_logged_in() && $this->asgarosforum->options['hide_profiles_from_guests']) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Sets the required links.
@@ -79,7 +88,7 @@ class AsgarosForumProfile {
         $userData = $this->getUserData($userID);
 
         if ($userData) {
-            if (!is_user_logged_in() && $this->asgarosforum->options['hide_profiles_from_guests']) {
+            if ($this->hideProfileLink()) {
                 echo __('You need to login to have access to profiles.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->asgarosforum->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
             } else {
                 $showAvatars = get_option('show_avatars');
