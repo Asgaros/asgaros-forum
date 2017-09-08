@@ -174,7 +174,7 @@ class AsgarosForumProfile {
     }
 
     public function getProfileLink($userObject) {
-        if ($this->hideProfileLink()) {
+        if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
             return '%s';
         } else {
             return '<a class="profile-link" href="'.$this->asgarosforum->getLink('profile', $userObject->ID).'">%s</a>';
