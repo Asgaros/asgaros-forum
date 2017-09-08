@@ -68,7 +68,7 @@ class AsgarosForumInsert {
         self::setData();
 
         // Cancel if the current user is not allowed to edit that post.
-        if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && AsgarosForumPermissions::$current_user_id != $asgarosforum->get_post_author($asgarosforum->current_post)) {
+        if (self::getAction() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && AsgarosForumPermissions::$currentUserID != $asgarosforum->get_post_author($asgarosforum->current_post)) {
             $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }
@@ -123,7 +123,7 @@ class AsgarosForumInsert {
             $asgarosforum->current_topic = $asgarosforum->db->insert_id;
 
             // Create the post.
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$currentUserID, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
             // Upload files.
@@ -133,9 +133,9 @@ class AsgarosForumInsert {
             $redirect = html_entity_decode($asgarosforum->getLink('topic', $asgarosforum->current_topic, false, '#postid-'.$asgarosforum->current_post));
 
             // Send notification about new topic to global subscribers.
-            AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$current_user_id);
+            AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'add_post') {
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$current_user_id, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
+            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$currentUserID, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
             $asgarosforum->current_post = $asgarosforum->db->insert_id;
 
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
@@ -143,10 +143,10 @@ class AsgarosForumInsert {
             $redirect = html_entity_decode($asgarosforum->get_postlink($asgarosforum->current_topic, $asgarosforum->current_post));
 
             // Send notification about new post to subscribers
-            AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect, AsgarosForumPermissions::$current_user_id);
+            AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'edit_post') {
             $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
-            $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date, 'author_edit' => AsgarosForumPermissions::$current_user_id), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
+            $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date, 'author_edit' => AsgarosForumPermissions::$currentUserID), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
             if ($asgarosforum->is_first_post($asgarosforum->current_post) && !empty(self::$dataSubject)) {
                 $asgarosforum->db->update($asgarosforum->tables->topics, array('name' => self::$dataSubject), array('id' => $asgarosforum->current_topic), array('%s'), array('%d'));

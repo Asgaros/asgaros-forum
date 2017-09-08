@@ -70,7 +70,7 @@ class AsgarosForumEditor {
                 }
 
                 // Error when the current user is not the author of the post and also not a moderator.
-                if (AsgarosForumPermissions::$current_user_id != self::$asgarosforum->get_post_author(self::$asgarosforum->current_post) && !AsgarosForumPermissions::isModerator('current')) {
+                if (AsgarosForumPermissions::$currentUserID != self::$asgarosforum->get_post_author(self::$asgarosforum->current_post) && !AsgarosForumPermissions::isModerator('current')) {
                     return false;
                     break;
                 }
