@@ -172,4 +172,12 @@ class AsgarosForumProfile {
             echo '<span>'.$cellValue.'</span>';
         echo '</div>';
     }
+
+    public function getProfileLink($userObject) {
+        if ($this->hideProfileLink()) {
+            return '%s';
+        } else {
+            return '<a class="profile-link" href="'.$this->asgarosforum->getLink('profile', $userObject->ID).'">%s</a>';
+        }
+    }
 }

@@ -27,10 +27,12 @@
 #af-wrapper .clear {
     clear: both;
 }
-#af-wrapper .highlight-admin {
+#af-wrapper .highlight-admin,
+#af-wrapper .highlight-admin a {
     color: #e00000;
 }
-#af-wrapper .highlight-moderator {
+#af-wrapper .highlight-moderator,
+#af-wrapper .highlight-moderator a {
     color: #099922;
 }
 #af-wrapper .banned {
@@ -740,6 +742,9 @@
     margin-bottom: 10px;
     color: #2d89cc;
     font-weight: bold;
+}
+#af-wrapper .profile-link:hover {
+    text-decoration: underline;
 }
 
 /* ICONS */

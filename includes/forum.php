@@ -660,7 +660,7 @@ class AsgarosForum {
                 $user = get_userdata($user_id);
 
                 if ($user) {
-                    $this->cacheGetUsername[$user_id] = $this->highlightUsername($user);
+                    $this->cacheGetUsername[$user_id] = $this->renderUsername($user);
                 } else {
                     $this->cacheGetUsername[$user_id] = __('Deleted user', 'asgaros-forum');
                 }
@@ -673,18 +673,32 @@ class AsgarosForum {
     }
 
     /**
+     * Renders a username.
+     */
+    function renderUsername($userObject) {
+        $profile = AsgarosForumProfile::getInstance();
+        $profileLink = $profile->getProfileLink($userObject);
+        $highlighted = $this->highlightUsername($userObject);
+
+        $renderedUserName = sprintf($profileLink, $userObject->display_name);
+        $renderedUserName = sprintf($highlighted, $renderedUserName);
+
+        return $renderedUserName;
+    }
+
+    /**
      * Highlights a username when he is an administrator/moderator.
      */
     function highlightUsername($user) {
         if ($this->options['highlight_admin']) {
             if (is_super_admin($user->ID) || user_can($user->ID, 'administrator')) {
-                return '<span class="highlight-admin">'.$user->display_name.'</span>';
+                return '<span class="highlight-admin">%s</span>';
             } else if (AsgarosForumPermissions::isModerator($user->ID)) {
-                return '<span class="highlight-moderator">'.$user->display_name.'</span>';
+                return '<span class="highlight-moderator">%s</span>';
             }
         }
 
-        return $user->display_name;
+        return '%s';
     }
 
     function get_lastpost($lastpost_data, $context = 'forum') {

@@ -78,7 +78,7 @@ class AsgarosForumOnline {
             $currentlyOnline = (!empty(self::$onlineList)) ? get_users(array('include' => self::$onlineList)) : false;
 
             echo '<div id="statistics-online-users">';
-            echo '<span class="dashicons-before dashicons-businessman">'.__('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.self::$asgarosforum->highlightUsername($newestMember[0]).'</i></span>';
+            echo '<span class="dashicons-before dashicons-businessman">'.__('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.self::$asgarosforum->renderUsername($newestMember[0]).'</i></span>';
             echo '&nbsp;&middot;&nbsp;';
             echo '<span class="dashicons-before dashicons-groups">';
 
@@ -94,7 +94,7 @@ class AsgarosForumOnline {
                         echo ', ';
                     }
 
-                    echo self::$asgarosforum->highlightUsername($onlineUser);
+                    echo self::$asgarosforum->renderUsername($onlineUser);
                 }
 
                 echo '</i>';
