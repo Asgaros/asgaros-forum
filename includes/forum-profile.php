@@ -27,6 +27,12 @@ class AsgarosForumProfile {
         return $this->asgarosforum->options['enable_profiles'];
     }
 
+    // Sets the required links.
+    public function setLinks($linksObject) {
+        $linksObject['profile'] = add_query_arg(array('view' => 'profile'), $linksObject['home']);
+        return $linksObject;
+    }
+
     // Sets the current view when the functionality is enabled.
     public function setCurrentView() {
         if ($this->functionalityEnabled()) {
