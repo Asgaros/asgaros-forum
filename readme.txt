@@ -25,6 +25,7 @@ Check out our [official website](https://www.asgaros.de/support/) if you want to
 * Sub-forums
 * User groups
 * Notifications
+* Profiles
 * Moderators
 * Statistics
 * Permissions
@@ -92,6 +93,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_custom_forum_column
 * asgarosforum_custom_topic_column
 * asgarosforum_after_first_post
+* asgarosforum_custom_profile_content
 = Which filters are available =
 * asgarosforum_filter_login_message
 * asgarosforum_filter_post_username
@@ -125,6 +127,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Added: Profile functionality
 * Fixed: Rare PHP-notices
 * Changed: Minor design changes
 * Performance improvements and code optimizations
