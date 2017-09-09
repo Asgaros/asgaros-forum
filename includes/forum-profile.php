@@ -130,7 +130,7 @@ class AsgarosForumProfile {
                 // Show website.
                 if (!empty($userData->user_url)) {
                     $cellTitle = __('Website:', 'asgaros-forum');
-                    $cellValue = '<a href="'.$userData->user_url.'" target="_blank">'.$userData->user_url.'</a>';
+                    $cellValue = '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>';
 
                     $this->renderProfileRow($cellTitle, $cellValue);
                 }
