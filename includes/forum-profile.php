@@ -157,7 +157,7 @@ class AsgarosForumProfile {
 
                 $this->renderProfileRow($cellTitle, $cellValue);
 
-                do_action('asgarosforum_custom_profile_content', $userData->ID);
+                do_action('asgarosforum_custom_profile_content', $userData);
 
                 echo '<div class="clear"></div>';
 
