@@ -129,6 +129,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: Profile functionality
+* Fixed: Subscriptions view not working with certain shortcode parameters
 * Fixed: Rare PHP-notices
 * Changed: Minor design changes
 * Performance improvements and code optimizations
