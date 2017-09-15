@@ -60,10 +60,13 @@ class AsgarosForumBreadCrumbs {
             }
 
             // Render breadcrumbs links.
-            echo '<div id="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
-            foreach ($breadCrumbsLinks as $element) {
-                self::renderBreadCrumbsElement($element);
-            }
+            echo '<div id="breadcrumbs-container">';
+                echo '<div id="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
+                foreach ($breadCrumbsLinks as $element) {
+                    self::renderBreadCrumbsElement($element);
+                }
+                echo '</div>';
+                echo '<div class="clear"></div>';
             echo '</div>';
         }
     }

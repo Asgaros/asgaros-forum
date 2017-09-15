@@ -853,14 +853,16 @@ class AsgarosForum {
     }
 
     function showHeader() {
-        if ($this->options['enable_breadcrumbs'] || $this->options['enable_search'] || ($this->options['allow_subscriptions'] && is_user_logged_in())) {
-            echo '<div id="top-container">';
-            AsgarosForumBreadCrumbs::showBreadCrumbs();
-            AsgarosForumSearch::showSearchInput();
-            AsgarosForumNotifications::showSubscriptionOverviewLink();
-            echo '<div class="clear"></div>';
+        echo '<div id="forum-header-container">';
+            echo '<div id="forum-header-container-top">';
+                echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
+                $profile = AsgarosForumProfile::getInstance();
+                $profile->renderCurrentUsersProfileLink();
+                AsgarosForumSearch::showSearchInput();
+                AsgarosForumNotifications::showSubscriptionOverviewLink();
             echo '</div>';
-        }
+            AsgarosForumBreadCrumbs::showBreadCrumbs();
+        echo '</div>';
     }
 
     function delete_topic($topicID, $admin_action = false) {

@@ -185,4 +185,21 @@ class AsgarosForumProfile {
             return '<a class="profile-link" href="'.$profileLink.'">%s</a>';
         }
     }
+
+    public function renderCurrentUsersProfileLink() {
+        // First check if the user is logged in.
+        if ($this->functionalityEnabled()) {
+            // Only continue if the current user is logged in.
+            if (is_user_logged_in()) {
+                // Get current user.
+                $currentUserObject = wp_get_current_user();
+
+                // Get and build profile link.
+                $profileLink = $this->getProfileLink($currentUserObject);
+                $profileLink = sprintf($profileLink, __('My Profile', 'asgaros-forum'));
+
+                echo $profileLink;
+            }
+        }
+    }
 }

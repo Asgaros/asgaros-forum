@@ -371,13 +371,29 @@
     box-sizing: initial; /* comp */
 }
 
-/* TOP CONTAINER */
-#af-wrapper #top-container {
-    background-color: #f9f9f9;
-    border: 1px solid #e1e1e1;
+/* HEADER CONTAINER */
+#af-wrapper #forum-header-container {
     margin-bottom: 15px;
     display: block;
-    line-height: 26px;
+    border: 1px solid #e1e1e1;
+}
+#af-wrapper #forum-header-container-top {
+    display: block;
+    background-color: #f3f3f3;
+    border-bottom: 3px solid #e1e1e1;
+    line-height: 40px;
+}
+#af-wrapper #forum-header-container-top a {
+    padding: 0 20px;
+    font-size: 14px;
+    color: #444;
+    border-left: 1px solid #ccc;
+}
+#af-wrapper #forum-header-container-top a:first-child {
+    border-left: none;
+}
+#af-wrapper #forum-header-container-top a:hover {
+    text-decoration: underline;
 }
 
 /* SUBSCRIPTION OVERVIEW */
@@ -391,6 +407,7 @@
 }
 #af-wrapper #subscription-overview-link a {
     color: #444;
+    padding: 0 10px;
 }
 #af-wrapper .subscription {
     width: 100%;
@@ -399,8 +416,19 @@
     padding: 4px;
     box-sizing: border-box;
 }
+#af-wrapper #subscription-overview-link span::before {
+    line-height: 40px;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+}
 
 /* BREADCRUMBS */
+#af-wrapper #breadcrumbs-container {
+    display: block;
+    background-color: #fff;
+    line-height: 26px;
+}
 #af-wrapper #breadcrumbs {
     float: left;
     font-size: 11px;
@@ -425,9 +453,7 @@
     color: #444 !important;
     text-decoration: none;
 }
-#af-wrapper #breadcrumbs span::before,
-#af-wrapper #forum-search span:before,
-#af-wrapper #subscription-overview-link span::before {
+#af-wrapper #breadcrumbs span::before {
     line-height: 26px;
     width: 18px;
     height: 18px;
@@ -440,7 +466,7 @@
 /* SEARCH */
 #af-wrapper #forum-search {
     float: right;
-    width: 235px;
+    width: 234px;
     box-sizing: border-box;
     background-color: #fff;
     border: none;
@@ -473,6 +499,12 @@
 }
 #af-wrapper #forum-search p {
     display: none;
+}
+#af-wrapper #forum-search span:before {
+    line-height: 40px;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
 }
 
 /* CONTENT WRAPPERS*/
