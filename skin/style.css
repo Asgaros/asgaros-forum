@@ -375,19 +375,18 @@
 #af-wrapper #forum-header-container {
     margin-bottom: 15px;
     display: block;
-    border: 1px solid #e1e1e1;
 }
 #af-wrapper #forum-header-container-top {
     display: block;
-    background-color: #f3f3f3;
-    border-bottom: 3px solid #e1e1e1;
+    background-color: #2d89cc;
+    border-bottom: 2px solid #0073aa;
     line-height: 40px;
 }
 #af-wrapper #forum-header-container-top a {
     padding: 0 20px;
     font-size: 14px;
-    color: #444;
-    border-left: 1px solid #ccc;
+    color: #fff;
+    border-left: 1px solid #0073aa;
 }
 #af-wrapper #forum-header-container-top a:first-child {
     border-left: none;
@@ -400,13 +399,13 @@
 #af-wrapper #subscription-overview-link {
     float: right;
     padding: 0 10px;
-    border-left: 1px solid #e1e1e1;
+    border-left: 1px solid #0073aa;
 }
 #af-wrapper #subscription-overview-link span {
     padding: 0;
 }
 #af-wrapper #subscription-overview-link a {
-    color: #444;
+    color: #fff;
     padding: 0 10px;
 }
 #af-wrapper .subscription {
@@ -426,8 +425,11 @@
 /* BREADCRUMBS */
 #af-wrapper #breadcrumbs-container {
     display: block;
-    background-color: #fff;
+    background-color: #fafafa;
     line-height: 26px;
+    border-color: #e1e1e1;
+    border-width: 1px;
+    border-style: none solid solid solid;
 }
 #af-wrapper #breadcrumbs {
     float: left;
@@ -470,10 +472,9 @@
     box-sizing: border-box;
     background-color: #fff;
     border: none;
-    border-left: 1px solid #e1e1e1;
-    box-shadow: inset 0px 1px 4px #e0e0e0;
-    -moz-box-shadow: inset 0px 1px 4px #e0e0e0;
-    -webkit-box-shadow: inset 0px 1px 4px #e0e0e0;
+    line-height: 38px;
+    border-top: 2px solid #2d89cc;
+    border-right: 2px solid #2d89cc;
 }
 #af-wrapper #forum-search span {
     display: inline-block;
@@ -501,7 +502,7 @@
     display: none;
 }
 #af-wrapper #forum-search span:before {
-    line-height: 40px;
+    line-height: 38px;
     width: 18px;
     height: 18px;
     font-size: 18px;
