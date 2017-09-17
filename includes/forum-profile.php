@@ -89,7 +89,7 @@ class AsgarosForumProfile {
 
         if ($userData) {
             if ($this->hideProfileLink()) {
-                echo __('You need to login to have access to profiles.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->asgarosforum->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
+                echo __('You need to login to have access to profiles.', 'asgaros-forum');
             } else {
                 $showAvatars = get_option('show_avatars');
                 $userOnline = (AsgarosForumOnline::isUserOnline($userData->ID)) ? ' class="user-online"' : '';

@@ -229,7 +229,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
+            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum');
             $this->error = apply_filters('asgarosforum_filter_error_message_require_login', $this->error);
             return;
         }
@@ -239,7 +239,7 @@ class AsgarosForum {
 
         if ($this->category_access_level) {
             if ($this->category_access_level === 'loggedin' && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
+                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum');
                 return;
             }
 
@@ -338,14 +338,17 @@ class AsgarosForum {
 
         do_action('asgarosforum_'.$this->current_view.'_custom_content_top');
 
+        // Show Header Area except for single posts.
+        if ($this->current_view !== 'post') {
+            $this->showHeader();
+        }
+
         if (!empty($this->error)) {
             echo '<div class="error">'.$this->error.'</div>';
         } else {
             if ($this->current_view === 'post') {
                 $this->showSinglePost();
             } else {
-                $this->showHeader();
-
                 if (!empty($this->info)) {
                     echo '<div class="info">'.$this->info.'</div>';
                 }
@@ -458,7 +461,7 @@ class AsgarosForum {
 
     function showLoginMessage() {
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'&nbsp;<a href="'.esc_url(wp_login_url($this->getLink('current'))).'">'.__('Login', 'asgaros-forum').'</a>&nbsp;&middot;&nbsp;<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a></div>';
+            $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'</div>';
             $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
             echo $loginMessage;
         }
@@ -858,11 +861,34 @@ class AsgarosForum {
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
                 $profile = AsgarosForumProfile::getInstance();
                 $profile->renderCurrentUsersProfileLink();
+
+                $this->showLoginLink();
+                $this->showRegisterLink();
+                $this->showLogoutLink();
+
                 AsgarosForumSearch::showSearchInput();
                 AsgarosForumNotifications::showSubscriptionOverviewLink();
             echo '</div>';
             AsgarosForumBreadCrumbs::showBreadCrumbs();
         echo '</div>';
+    }
+
+    function showLogoutLink() {
+        if (is_user_logged_in()) {
+            echo '<a href="'.wp_logout_url($this->getLink('current', false, false, '', false)).'">'.__('Logout', 'asgaros-forum').'</a>';
+        }
+    }
+
+    function showLoginLink() {
+        if (!is_user_logged_in()) {
+            echo '<a href="'.wp_login_url($this->getLink('current', false, false, '', false)).'">'.__('Login', 'asgaros-forum').'</a>';
+        }
+    }
+
+    function showRegisterLink() {
+        if (!is_user_logged_in()) {
+            echo '<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
+        }
     }
 
     function delete_topic($topicID, $admin_action = false) {

@@ -131,6 +131,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: Profile functionality
 * Fixed: Subscriptions view not working with certain shortcode parameters
 * Fixed: Rare PHP-notices
+* Changed: Login/Logout/Register links are now accessible everywhere
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.5.9 =
