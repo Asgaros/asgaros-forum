@@ -869,7 +869,11 @@ class AsgarosForum {
                 AsgarosForumSearch::showSearchInput();
                 AsgarosForumNotifications::showSubscriptionOverviewLink();
             echo '</div>';
-            AsgarosForumBreadCrumbs::showBreadCrumbs();
+
+            // Show breadcrumbs only when there is no access error.
+            if (empty($this->error)) {
+                AsgarosForumBreadCrumbs::showBreadCrumbs();
+            }
         echo '</div>';
     }
 
