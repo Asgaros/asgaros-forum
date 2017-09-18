@@ -55,8 +55,7 @@ class AsgarosForumBreadCrumbs {
             } else if ($asgarosforum->current_view === 'subscriptions') {
                 $breadCrumbsLinks[] = array('link' => $asgarosforum->getLink('current'), 'title' => __('Subscriptions', 'asgaros-forum'), 'name' => __('Subscriptions', 'asgaros-forum'), 'position' => false);
             } else if ($asgarosforum->current_view === 'profile') {
-                $profile = AsgarosForumProfile::getInstance();
-                $breadCrumbsLinks = $profile->setBreadCrumbs($breadCrumbsLinks);
+                $breadCrumbsLinks = $asgarosforum->profile->setBreadCrumbs($breadCrumbsLinks);
             }
 
             // Render breadcrumbs links.

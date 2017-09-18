@@ -3,23 +3,10 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumProfile {
-    protected static $instance = null;
     private $asgarosforum = null;
 
-    public static function getInstance() {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    protected function __clone() {}
-
-    protected function __construct() {
-        global $asgarosforum;
-
-        $this->asgarosforum = $asgarosforum;
+    public function __construct($object) {
+        $this->asgarosforum = $object;
     }
 
     // Checks if the profile functionality is enabled.

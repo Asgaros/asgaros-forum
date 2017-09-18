@@ -70,6 +70,7 @@ class AsgarosForum {
         'quicktags'     => false
     );
     var $cache = array();   // Used to store selected database queries.
+    var $profile = null;
 
     function __construct() {
         global $wpdb;
@@ -103,6 +104,8 @@ class AsgarosForum {
         new AsgarosForumSearch($this);
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
+
+        $this->profile = new AsgarosForumProfile($this);
     }
 
     function prepare() {
@@ -169,8 +172,7 @@ class AsgarosForum {
                 }
             break;
             case 'profile':
-                $profile = AsgarosForumProfile::getInstance();
-                $profile->setCurrentView();
+                $this->profile->setCurrentView();
                 break;
             default:
                 $this->current_view = 'overview';
@@ -301,8 +303,7 @@ class AsgarosForum {
             } else if ($this->current_view === 'subscriptions') {
                 $this->current_title = __('Subscriptions', 'asgaros-forum');
             } else if ($this->current_view === 'profile') {
-                $profile = AsgarosForumProfile::getInstance();
-                $profile->setCurrentTitle();
+                $this->profile->setCurrentTitle();
             }
         }
     }
@@ -378,8 +379,7 @@ class AsgarosForum {
                         AsgarosForumEditor::showEditor();
                     break;
                     case 'profile':
-                        $profile = AsgarosForumProfile::getInstance();
-                        $profile->showProfile();
+                        $this->profile->showProfile();
                     break;
                     default:
                         $this->overview();
@@ -679,8 +679,7 @@ class AsgarosForum {
      * Renders a username.
      */
     function renderUsername($userObject) {
-        $profile = AsgarosForumProfile::getInstance();
-        $profileLink = $profile->getProfileLink($userObject);
+        $profileLink = $this->profile->getProfileLink($userObject);
         $highlighted = $this->highlightUsername($userObject);
 
         $renderedUserName = sprintf($profileLink, $userObject->display_name);
@@ -859,8 +858,7 @@ class AsgarosForum {
         echo '<div id="forum-header-container">';
             echo '<div id="forum-header-container-top">';
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
-                $profile = AsgarosForumProfile::getInstance();
-                $profile->renderCurrentUsersProfileLink();
+                $this->profile->renderCurrentUsersProfileLink();
 
                 $this->showLoginLink();
                 $this->showRegisterLink();
