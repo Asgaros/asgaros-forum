@@ -379,7 +379,6 @@
 #af-wrapper #forum-header-container-top {
     display: block;
     background-color: #2d89cc;
-    border-bottom: 2px solid #0073aa;
     line-height: 40px;
 }
 #af-wrapper #forum-header-container-top a {
@@ -472,9 +471,8 @@
     box-sizing: border-box;
     background-color: #fff;
     border: none;
-    line-height: 38px;
-    border-top: 2px solid #2d89cc;
-    border-right: 2px solid #2d89cc;
+    line-height: 34px;
+    border: 3px solid #2d89cc;
 }
 #af-wrapper #forum-search span {
     display: inline-block;
@@ -502,7 +500,7 @@
     display: none;
 }
 #af-wrapper #forum-search span:before {
-    line-height: 38px;
+    line-height: 34px;
     width: 18px;
     height: 18px;
     font-size: 18px;
