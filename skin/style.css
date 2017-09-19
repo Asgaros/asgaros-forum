@@ -384,7 +384,7 @@
 #af-wrapper #forum-header-container-top a {
     padding: 0 20px;
     font-size: 14px;
-    color: #fff;
+    color: #fff !important;
     border-left: 1px solid #0073aa;
 }
 #af-wrapper #forum-header-container-top a:first-child {

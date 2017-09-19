@@ -17,16 +17,18 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .forum-menu a,
 #af-wrapper .pages a,
 #af-wrapper .title-element,
-#af-wrapper .post-author-marker {
+#af-wrapper .post-author-marker,
+#af-wrapper #forum-header-container-top {
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .title-element,
 #af-wrapper .post-author-marker,
-#af-wrapper .forum-menu a {
-    border-bottom: 2px solid <?php echo $color; ?> !important;
-}
-#af-wrapper input[type="submit"] {
-	border: 1px solid <?php echo $color; ?> !important;
+#af-wrapper .forum-menu a,
+#af-wrapper input[type="submit"],
+#af-wrapper #forum-search,
+#af-wrapper #subscription-overview-link,
+#af-wrapper #forum-header-container-top a {
+	border-color: <?php echo $color; ?> !important;
 }
 <?php
 }
