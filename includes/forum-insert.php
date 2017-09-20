@@ -41,7 +41,7 @@ class AsgarosForumInsert {
         }
 
         // Cancel if the current user is not logged-in and guest postings are disabled.
-        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
+        if (!is_user_logged_in() && !$asgarosforum->options['allow_guest_postings']) {
             $asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }

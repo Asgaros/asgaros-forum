@@ -128,6 +128,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken guest-posting functionality
 = 1.6.0 =
 * Added: Profile functionality
 * Fixed: Subscriptions view not working with certain shortcode parameters
