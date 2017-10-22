@@ -901,6 +901,8 @@ class AsgarosForum {
 
                 AsgarosForumSearch::showSearchInput();
                 AsgarosForumNotifications::showSubscriptionOverviewLink();
+
+                echo '<div class="clear"></div>';
             echo '</div>';
 
             // Show breadcrumbs only when there is no access error.
