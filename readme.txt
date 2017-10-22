@@ -128,7 +128,8 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
-* Added: Page number to meta title
+* Changed: Prevent indexing of the following views: addtopic, movetopic, addpost, editpost, search
+* Changed: Add page number to meta title
 = 1.6.1 =
 * Fixed: Broken guest-posting functionality
 = 1.6.0 =

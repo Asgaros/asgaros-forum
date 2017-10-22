@@ -103,6 +103,19 @@ class AsgarosForumThemeManager {
 			$currentTitle = (self::$asgarosforum->getMetaTitle()) ? self::$asgarosforum->getMetaTitle() : get_the_title();
 			$currentDescription = (self::$asgarosforum->current_description) ? self::$asgarosforum->current_description : $currentTitle;
 
+			// Prevent indexing of some views.
+			switch (self::$asgarosforum->current_view) {
+				case 'addtopic':
+				case 'movetopic':
+				case 'addpost':
+				case 'editpost':
+				case 'search':
+					echo '<meta name="robots" content="noindex, follow" />'.PHP_EOL;
+				break;
+				default:
+				break;
+			}
+
 			echo '<link rel="canonical" href="'.$currentLink.'" />'.PHP_EOL;
 			echo '<meta name="description" content="'.$currentDescription.'" />'.PHP_EOL;
 			echo '<meta property="og:url" content="'.$currentLink.'" />'.PHP_EOL;
