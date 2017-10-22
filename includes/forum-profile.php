@@ -46,15 +46,17 @@ class AsgarosForumProfile {
         return get_user_by('id', $userID);
     }
 
-    // Sets the current title.
-    public function setCurrentTitle() {
+    // Gets the current title.
+    public function getCurrentTitle() {
+        $currentTitle = __('Profile', 'asgaros-forum');
+
         $userData = $this->getUserData();
 
         if ($userData) {
-            $this->asgarosforum->current_title = __('Profile', 'asgaros-forum').': '.$userData->display_name;
-        } else {
-            $this->asgarosforum->current_title = __('Profile', 'asgaros-forum');
+            $currentTitle .= ': '.$userData->display_name;
         }
+
+        return $currentTitle;
     }
 
     // Sets the breadcrumbs.

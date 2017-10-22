@@ -12,7 +12,6 @@ class AsgarosForum {
     var $time_format = '';
     var $error = false;
     var $info = false;
-    var $current_title = false;
     var $current_description = false;
     var $current_category = false;
     var $current_forum = false;
@@ -181,10 +180,8 @@ class AsgarosForum {
 
         AsgarosForumShortcodes::handleAttributes();
 
-        // Check
+        // Check access.
         $this->check_access();
-
-        $this->setCurrentTitle();
 
         // Override editor settings.
         $this->options_editor = apply_filters('asgarosforum_filter_editor_settings', $this->options_editor);
@@ -284,33 +281,71 @@ class AsgarosForum {
         return $title;
     }
 
-    function setCurrentTitle() {
+    // Gets the pages meta title.
+    public function getMetaTitle() {
+        // Get the main title by default with disabled default title generation.
+        $metaTitle = $this->getMainTitle(false);
+
+        // Apply custom modifications.
         if (!$this->error && $this->current_view) {
             if ($this->current_view === 'forum' && $this->current_forum) {
-                $this->current_title = esc_html(stripslashes($this->current_forum_name));
+                $metaTitle = $this->addCurrentPageToString($metaTitle);
             } else if ($this->current_view === 'thread' && $this->current_topic) {
-                $this->current_title = esc_html(stripslashes($this->current_topic_name));
-            } else if ($this->current_view === 'editpost') {
-                $this->current_title = __('Edit Post', 'asgaros-forum');
-            } else if ($this->current_view === 'addpost') {
-                $this->current_title = __('Post Reply', 'asgaros-forum').': '.esc_html(stripslashes($this->current_topic_name));
-            } else if ($this->current_view === 'addtopic') {
-                $this->current_title = __('New Topic', 'asgaros-forum');
-            } else if ($this->current_view === 'movetopic') {
-                $this->current_title = __('Move Topic', 'asgaros-forum');
-            } else if ($this->current_view === 'search') {
-                $this->current_title = __('Search', 'asgaros-forum');
-            } else if ($this->current_view === 'subscriptions') {
-                $this->current_title = __('Subscriptions', 'asgaros-forum');
-            } else if ($this->current_view === 'profile') {
-                $this->profile->setCurrentTitle();
+                $metaTitle = $this->addCurrentPageToString($metaTitle);
             }
         }
+
+        return $metaTitle;
+    }
+
+    // Gets the pages main title.
+    public function getMainTitle($setDefaultTitle = true) {
+        $mainTitle = false;
+
+        if ($setDefaultTitle) {
+            $mainTitle = __('Forum', 'asgaros-forum');
+        }
+
+        if (!$this->error && $this->current_view) {
+            if ($this->current_view === 'forum' && $this->current_forum) {
+                $mainTitle = esc_html(stripslashes($this->current_forum_name));
+            } else if ($this->current_view === 'thread' && $this->current_topic) {
+                $mainTitle = esc_html(stripslashes($this->current_topic_name));
+            } else if ($this->current_view === 'editpost') {
+                $mainTitle = __('Edit Post', 'asgaros-forum');
+            } else if ($this->current_view === 'addpost') {
+                $mainTitle = __('Post Reply', 'asgaros-forum').': '.esc_html(stripslashes($this->current_topic_name));
+            } else if ($this->current_view === 'addtopic') {
+                $mainTitle = __('New Topic', 'asgaros-forum');
+            } else if ($this->current_view === 'movetopic') {
+                $mainTitle = __('Move Topic', 'asgaros-forum');
+            } else if ($this->current_view === 'search') {
+                $mainTitle = __('Search', 'asgaros-forum');
+            } else if ($this->current_view === 'subscriptions') {
+                $mainTitle = __('Subscriptions', 'asgaros-forum');
+            } else if ($this->current_view === 'profile') {
+                $mainTitle = $this->profile->getCurrentTitle();
+            }
+        }
+
+        return $mainTitle;
+    }
+
+    // Adds the current page to a string.
+    function addCurrentPageToString($someString) {
+        if ($this->current_page > 0) {
+            $currentPage = $this->current_page + 1;
+            $someString .= ' - '.__('Page', 'asgaros-forum').' '.$currentPage;
+        }
+
+        return $someString;
     }
 
     function get_title($title) {
-        if ($this->executePlugin && $this->current_title) {
-            $title = $this->current_title.' - '.$title;
+        $metaTitle = $this->getMetaTitle();
+
+        if ($this->executePlugin && $metaTitle) {
+            $title = $metaTitle.' - '.$title;
         }
 
         return $title;
@@ -396,7 +431,7 @@ class AsgarosForum {
     }
 
     function showMainTitleAndDescription() {
-        $mainTitle = ($this->current_title) ? $this->current_title : __('Forum', 'asgaros-forum');
+        $mainTitle = $this->getMainTitle();
 
         echo '<h1 class="main-title">'.$mainTitle.'</h1>';
 
