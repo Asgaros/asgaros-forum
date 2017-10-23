@@ -62,6 +62,18 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?>>
             <label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label>
         </p>
+        <p>
+            <input type="checkbox" name="show_login_button" id="show_login_button" <?php checked(!empty($asgarosforum->options['show_login_button'])); ?>>
+            <label for="show_login_button"><?php _e('Show login button', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="show_logout_button" id="show_logout_button" <?php checked(!empty($asgarosforum->options['show_logout_button'])); ?>>
+            <label for="show_logout_button"><?php _e('Show logout button', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
+            <input type="checkbox" name="show_register_button" id="show_register_button" <?php checked(!empty($asgarosforum->options['show_register_button'])); ?>>
+            <label for="show_register_button"><?php _e('Show register button', 'asgaros-forum'); ?></label>
+        </p>
         <h3><?php _e('Features', 'asgaros-forum'); ?></h3>
         <p>
             <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>

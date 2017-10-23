@@ -48,6 +48,9 @@ class AsgarosForum {
         'allow_signatures'          => false,
         'enable_search'             => true,
         'enable_profiles'           => true,
+        'show_login_button'         => true,
+        'show_logout_button'        => true,
+        'show_register_button'      => true,
         'show_who_is_online'        => true,
         'show_statistics'           => true,
         'enable_breadcrumbs'        => true,
@@ -913,19 +916,19 @@ class AsgarosForum {
     }
 
     function showLogoutLink() {
-        if (is_user_logged_in()) {
+        if (is_user_logged_in() && $this->options['show_logout_button']) {
             echo '<a href="'.wp_logout_url($this->getLink('current', false, false, '', false)).'">'.__('Logout', 'asgaros-forum').'</a>';
         }
     }
 
     function showLoginLink() {
-        if (!is_user_logged_in()) {
+        if (!is_user_logged_in() && $this->options['show_login_button']) {
             echo '<a href="'.wp_login_url($this->getLink('current', false, false, '', false)).'">'.__('Login', 'asgaros-forum').'</a>';
         }
     }
 
     function showRegisterLink() {
-        if (!is_user_logged_in() && get_option('users_can_register')) {
+        if (!is_user_logged_in() && get_option('users_can_register') && $this->options['show_register_button']) {
             echo '<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
         }
     }
