@@ -902,6 +902,8 @@ class AsgarosForum {
                 $this->showRegisterLink();
                 $this->showLogoutLink();
 
+                do_action('asgarosforum_custom_header_menu');
+
                 AsgarosForumSearch::showSearchInput();
                 AsgarosForumNotifications::showSubscriptionOverviewLink();
 
