@@ -303,7 +303,7 @@ class AsgarosForum {
         $mainTitle = false;
 
         if ($setDefaultTitle) {
-            $mainTitle = __('Forum', 'asgaros-forum');
+            $mainTitle = __('Overview', 'asgaros-forum');
         }
 
         if (!$this->error && $this->current_view) {
