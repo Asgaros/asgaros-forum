@@ -33,13 +33,20 @@
 .asgarosforum-widget .highlight-admin,
 .asgarosforum-widget .highlight-admin a {
     color: #e00000 !important;
-    text-decoration: none;
 }
 .asgarosforum-widget .highlight-moderator,
 .asgarosforum-widget .highlight-moderator a {
     color: #099922 !important;
+}
+.asgarosforum-widget .post-link a,
+.asgarosforum-widget .post-author a {
     text-decoration: none;
 }
+.asgarosforum-widget .post-link a:hover,
+.asgarosforum-widget .post-author a:hover {
+    text-decoration: underline;
+}
+
 .asgarosforum-widget .post-date {
     font-style: italic;
 }
