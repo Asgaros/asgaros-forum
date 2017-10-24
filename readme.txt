@@ -131,6 +131,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Added: Options to hide login/logout/register buttons
 * Added: asgarosforum_custom_header_menu hook
+* Fixed: Styling issues with highlighted usernames
 * Fixed: Display issues with some themes
 * Changed: Prevent indexing of the following views: addtopic, movetopic, addpost, editpost, search
 * Changed: Add page number to meta title

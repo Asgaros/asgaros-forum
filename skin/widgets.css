@@ -30,11 +30,15 @@
     font-weight: bold;
     text-decoration: none;
 }
-.asgarosforum-widget .highlight-admin {
-    color: #e00000;
+.asgarosforum-widget .highlight-admin,
+.asgarosforum-widget .highlight-admin a {
+    color: #e00000 !important;
+    text-decoration: none;
 }
-.asgarosforum-widget .highlight-moderator {
-    color: #099922;
+.asgarosforum-widget .highlight-moderator,
+.asgarosforum-widget .highlight-moderator a {
+    color: #099922 !important;
+    text-decoration: none;
 }
 .asgarosforum-widget .post-date {
     font-style: italic;
