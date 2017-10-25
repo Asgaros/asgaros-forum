@@ -26,10 +26,6 @@
 .asgarosforum-widget .post-date {
     display: block;
 }
-.asgarosforum-widget .post-link a {
-    font-weight: bold;
-    text-decoration: none;
-}
 .asgarosforum-widget .highlight-admin,
 .asgarosforum-widget .highlight-admin a {
     color: #e00000 !important;
