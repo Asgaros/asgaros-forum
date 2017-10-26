@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.7
 Tested up to: 4.8
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,12 +129,13 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.6.2 =
 * Added: Options to hide login/logout/register buttons
 * Added: asgarosforum_custom_header_menu hook
 * Fixed: Styling issues with highlighted usernames
 * Fixed: Display issues with some themes
 * Changed: Prevent indexing of the following views: addtopic, movetopic, addpost, editpost, search
-* Changed: Add page number to meta title
+* Changed: Show page number in meta title
 * Changed: Minor design changes
 = 1.6.1 =
 * Fixed: Broken guest-posting functionality
