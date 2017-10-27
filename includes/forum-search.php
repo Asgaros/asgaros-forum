@@ -24,6 +24,19 @@ class AsgarosForumSearch {
             echo '<span class="dashicons-before dashicons-search"></span>';
             echo '<form method="get" action="'.self::$asgarosforum->getLink('search').'">';
             echo '<input name="view" type="hidden" value="search">';
+
+            // Workaround for broken search in posts when using plain permalink structure.
+            if (!empty($_GET['p'])) {
+                $value = esc_html(trim($_GET['p']));
+                echo '<input name="p" type="hidden" value="'.$value.'">';
+            }
+
+            // Workaround for broken search in pages when using plain permalink structure.
+            if (!empty($_GET['page_id'])) {
+                $value = esc_html(trim($_GET['page_id']));
+                echo '<input name="page_id" type="hidden" value="'.$value.'">';
+            }
+
             echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'" value="'.self::$searchKeywords.'">';
             echo '</form>';
             echo '</div>';
