@@ -339,14 +339,18 @@
 }
 
 /* PAGEING */
-#af-wrapper .pages {
+#af-wrapper .pages-and-menu .pages {
     float: left;
+}
+#af-wrapper .pages {
+    display: inline-block;
 }
 #af-wrapper .pages strong {
     background-color: #737373;
     color: #fff;
     font-size: 95% !important;
     padding: 0 5px;
+    margin: 0 2px;
     font-weight: normal;
 }
 #af-wrapper .pages a {
@@ -354,8 +358,14 @@
     color: #fff !important;
     font-size: 95%;
     padding: 0 5px;
+    margin: 0 2px;
 }
-#af-wrapper .pages a:hover {
+#af-wrapper .topic .pages a {
+    font-size: 100%;
+    padding: 1px 4px;
+}
+#af-wrapper .pages a:hover,
+#af-wrapper .topic .pages a:hover {
     background-color: #005C92;
     text-decoration: none !important;
 }

@@ -14,7 +14,13 @@ if (!defined('ABSPATH')) exit;
     </div>
     <div class="topic-name">
         <a href="<?php echo $this->getLink('topic', $topic->id); ?>" title="<?php echo esc_html(stripslashes($topic->name)); ?>"><?php echo esc_html(stripslashes($topic->name)); ?></a>
-        <small><?php echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic->author_id); ?></small>
+        <?php
+        echo '<small>';
+        echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic->author_id);
+        $topicPagination = new AsgarosForumPagination($this);
+        $topicPagination->renderTopicOverviewPagination($topic->id);
+        echo '</small>';
+        ?>
     </div>
     <?php do_action('asgarosforum_custom_topic_column', $topic->id); ?>
     <div class="topic-stats">

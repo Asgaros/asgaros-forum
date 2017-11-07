@@ -9,22 +9,51 @@ class AsgarosForumPagination {
 		$this->asgarosforum = $object;
     }
 
-    public function renderPagination($location) {
-        $out = '<div class="pages">'.__('Pages:', 'asgaros-forum');
+    public function renderTopicOverviewPagination($topicID) {
+        $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = %d;", $topicID));
+        $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
+
+        // Only show pagination when there is more than one page.
+        if ($num_pages > 1) {
+            echo '&nbsp;&middot;&nbsp;<div class="pages">';
+
+            if ($num_pages <= 5) {
+                for ($i = 1; $i <= $num_pages; $i++) {
+                    $link = $this->asgarosforum->getLink('topic', $topicID, array('part' => $i));
+
+                    echo '<a href="'.$link.'">'.number_format_i18n($i).'</a>';
+                }
+            } else {
+                for ($i = 1; $i <= 3; $i++) {
+                    $link = $this->asgarosforum->getLink('topic', $topicID, array('part' => $i));
+
+                    echo '<a href="'.$link.'">'.number_format_i18n($i).'</a>';
+                }
+
+                $link = $this->asgarosforum->getLink('topic', $topicID, array('part' => $num_pages));
+                echo '&raquo;<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
+            }
+
+            echo '</div>';
+        }
+    }
+
+    public function renderPagination($location, $sourceID = false) {
+        $current_page = $this->asgarosforum->current_page;
         $num_pages = 0;
         $select_source = '';
         $select_url = '';
         $link = '';
 
         if ($location == $this->asgarosforum->tables->posts) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $this->asgarosforum->current_topic));
+            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
-            $select_source = $this->asgarosforum->current_topic;
+            $select_source = $sourceID;
             $select_url = 'topic';
         } else if ($location == $this->asgarosforum->tables->topics) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $this->asgarosforum->current_forum, "normal%"));
+            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $sourceID, "normal%"));
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
-            $select_source = $this->asgarosforum->current_forum;
+            $select_source = $sourceID;
             $select_url = 'forum';
         } else if ($location === 'search') {
             $categories = $this->asgarosforum->get_categories();
@@ -43,11 +72,15 @@ class AsgarosForumPagination {
             $select_url = 'search';
         }
 
+        // Only show pagination when there is more than one page.
         if ($num_pages > 1) {
-            if ($num_pages <= 6) {
+            $out = '<div class="pages">';
+            $out .= __('Pages:', 'asgaros-forum');
+
+            if ($num_pages <= 5) {
                 for ($i = 1; $i <= $num_pages; $i++) {
-                    if ($i == ($this->asgarosforum->current_page + 1)) {
-                        $out .= ' <strong>'.number_format_i18n($i).'</strong>';
+                    if ($i == ($current_page + 1)) {
+                        $out .= '<strong>'.number_format_i18n($i).'</strong>';
                     } else {
                         if ($location === 'search') {
                             $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => $i));
@@ -55,61 +88,61 @@ class AsgarosForumPagination {
                             $link = $this->asgarosforum->getLink($select_url, $select_source, array('part' => $i));
                         }
 
-                        $out .= ' <a href="'.$link.'">'.number_format_i18n($i).'</a>';
+                        $out .= '<a href="'.$link.'">'.number_format_i18n($i).'</a>';
                     }
                 }
             } else {
-                if ($this->asgarosforum->current_page >= 4) {
+                if ($current_page >= 3) {
                     if ($location === 'search') {
                         $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords));
                     } else {
                         $link = $this->asgarosforum->getLink($select_url, $select_source);
                     }
 
-                    $out .= ' <a href="'.$link.'">'.__('First', 'asgaros-forum').'</a> &laquo;';
+                    $out .= '<a href="'.$link.'">'.__('First', 'asgaros-forum').'</a>&laquo;';
                 }
 
-                for ($i = 3; $i > 0; $i--) {
-                    if ((($this->asgarosforum->current_page + 1) - $i) > 0) {
+                for ($i = 2; $i > 0; $i--) {
+                    if ((($current_page + 1) - $i) > 0) {
                         if ($location === 'search') {
-                            $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => (($this->asgarosforum->current_page + 1) - $i)));
+                            $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => (($current_page + 1) - $i)));
                         } else {
-                            $link = $this->asgarosforum->getLink($select_url, $select_source, array('part' => (($this->asgarosforum->current_page + 1) - $i)));
+                            $link = $this->asgarosforum->getLink($select_url, $select_source, array('part' => (($current_page + 1) - $i)));
                         }
 
-                        $out .= ' <a href="'.$link.'">'.number_format_i18n(($this->asgarosforum->current_page + 1) - $i).'</a>';
+                        $out .= '<a href="'.$link.'">'.number_format_i18n(($current_page + 1) - $i).'</a>';
                     }
                 }
 
-                $out .= ' <strong>'.number_format_i18n($this->asgarosforum->current_page + 1).'</strong>';
+                $out .= '<strong>'.number_format_i18n($current_page + 1).'</strong>';
 
-                for ($i = 1; $i <= 3; $i++) {
-                    if ((($this->asgarosforum->current_page + 1) + $i) <= $num_pages) {
+                for ($i = 1; $i <= 2; $i++) {
+                    if ((($current_page + 1) + $i) <= $num_pages) {
                         if ($location === 'search') {
-                            $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => (($this->asgarosforum->current_page + 1) + $i)));
+                            $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => (($current_page + 1) + $i)));
                         } else {
-                            $link = $this->asgarosforum->getLink($select_url, $select_source, array('part' => (($this->asgarosforum->current_page + 1) + $i)));
+                            $link = $this->asgarosforum->getLink($select_url, $select_source, array('part' => (($current_page + 1) + $i)));
                         }
 
-                        $out .= ' <a href="'.$link.'">'.number_format_i18n(($this->asgarosforum->current_page + 1) + $i).'</a>';
+                        $out .= '<a href="'.$link.'">'.number_format_i18n(($current_page + 1) + $i).'</a>';
                     }
                 }
 
-                if ($num_pages - $this->asgarosforum->current_page >= 5) {
+                if ($num_pages - $current_page >= 4) {
                     if ($location === 'search') {
                         $link = $this->asgarosforum->getLink($select_url, false, array('keywords' => AsgarosForumSearch::$searchKeywords, 'part' => $num_pages));
                     } else {
                         $link = $this->asgarosforum->getLink($select_url, $select_source, array('part' => $num_pages));
                     }
 
-                    $out .= ' &raquo; <a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
+                    $out .= '&raquo;<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
                 }
             }
 
             $out .= '</div>';
             return $out;
         } else {
-            return '';
+            return false;
         }
     }
 }

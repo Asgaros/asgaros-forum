@@ -9,7 +9,7 @@ AsgarosForumEditor::showEditor('addtopic', true);
 <div class="pages-and-menu">
     <?php
     $pagination = new AsgarosForumPagination($this);
-    $paginationRendering = ($counter_normal > 0) ? $pagination->renderPagination($this->tables->topics) : '';
+    $paginationRendering = ($counter_normal > 0) ? $pagination->renderPagination($this->tables->topics, $this->current_forum) : '';
     echo $paginationRendering;
     echo $this->showForumMenu();
     ?>
