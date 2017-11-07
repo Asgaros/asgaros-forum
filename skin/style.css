@@ -346,16 +346,18 @@
     display: inline-block;
 }
 #af-wrapper .pages strong {
-    background-color: #737373;
-    color: #fff;
+    background-color: #e1e1e1;
+    border: 1px solid #999;
+    color: #666;
     font-size: 95% !important;
     padding: 0 5px;
     margin: 0 2px;
     font-weight: normal;
 }
 #af-wrapper .pages a {
-    background-color: #2D89CC;
-    color: #fff !important;
+    background-color: #fafafa;
+    border: 1px solid #e1e1e1;
+    color: #666 !important;
     font-size: 95%;
     padding: 0 5px;
     margin: 0 2px;
@@ -366,7 +368,7 @@
 }
 #af-wrapper .pages a:hover,
 #af-wrapper .topic .pages a:hover {
-    background-color: #005C92;
+    background-color: #e1e1e1;
     text-decoration: none !important;
 }
 

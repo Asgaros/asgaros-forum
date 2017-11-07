@@ -15,7 +15,6 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 }
 #af-wrapper input[type="submit"],
 #af-wrapper .forum-menu a,
-#af-wrapper .pages a,
 #af-wrapper .title-element,
 #af-wrapper .post-author-marker,
 #af-wrapper #forum-header-container-top {
