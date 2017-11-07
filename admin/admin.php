@@ -19,6 +19,7 @@ class AsgarosForumAdmin {
     }
 
     function user_profile_fields($user) {
+        // TODO: get_the_author_meta can be removed. Use get_user_meta instead.
         global $asgarosforum;
         $output = '';
 
@@ -54,7 +55,7 @@ class AsgarosForumAdmin {
         }
 
         if (!empty($output)) {
-            echo '<h3>'.__('Forum', 'asgaros-forum').'</h3>';
+            echo '<h2>'.__('Forum', 'asgaros-forum').'</h2>';
             echo '<table class="form-table">';
             echo $output;
             echo '</table>';

@@ -149,7 +149,7 @@ class AsgarosForumNotifications {
             $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $topic_name, $answer_text, $answer_link, $author_name);
 
             $topic_subscribers_meta_query = array(
-                'relation'  => 'AND',
+                'relation'      => 'AND',
                 array(
                     'key'       => 'asgarosforum_subscription_topic',
                     'value'     => $asgarosforum->current_topic,
