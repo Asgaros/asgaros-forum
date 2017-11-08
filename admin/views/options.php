@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 ?>
 <div class="wrap" id="af-options">
-    <h2><?php _e('Options', 'asgaros-forum'); ?></h2>
+    <h1><?php _e('Options', 'asgaros-forum'); ?></h1>
     <?php if ($this->saved) { ?>
         <div class="updated">
             <p><?php _e('Your options have been saved.', 'asgaros-forum'); ?></p>
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) exit;
     <?php } ?>
     <form method="post">
         <?php wp_nonce_field('asgaros_forum_save_options'); ?>
-        <h3><?php _e('General', 'asgaros-forum'); ?></h3>
+        <h2><?php _e('General', 'asgaros-forum'); ?></h2>
         <p>
             <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>
             <?php
@@ -74,7 +74,7 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="show_register_button" id="show_register_button" <?php checked(!empty($asgarosforum->options['show_register_button'])); ?>>
             <label for="show_register_button"><?php _e('Show register button', 'asgaros-forum'); ?></label>
         </p>
-        <h3><?php _e('Features', 'asgaros-forum'); ?></h3>
+        <h2><?php _e('Features', 'asgaros-forum'); ?></h2>
         <p>
             <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
             <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
@@ -99,7 +99,7 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
             <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
         </p>
-        <h3><?php _e('Subscriptions', 'asgaros-forum'); ?></h3>
+        <h2><?php _e('Subscriptions', 'asgaros-forum'); ?></h2>
         <p>
             <input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>>
             <label for="admin_subscriptions"><?php _e('Notify site owner about new topics', 'asgaros-forum'); ?></label>
@@ -126,7 +126,7 @@ if (!defined('ABSPATH')) exit;
             <label for="notification_sender_mail"><?php _e('Sender mail:', 'asgaros-forum'); ?></label>
             <input class="regular-text" type="text" name="notification_sender_mail" id="notification_sender_mail" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_mail'])); ?>">
         </p>
-        <h3><?php _e('Profiles', 'asgaros-forum'); ?></h3>
+        <h2><?php _e('Profiles', 'asgaros-forum'); ?></h2>
         <?php
         $profileOption = checked(!empty($asgarosforum->options['enable_profiles']), true, false);
         ?>
@@ -138,7 +138,7 @@ if (!defined('ABSPATH')) exit;
             <input type="checkbox" name="hide_profiles_from_guests" id="hide_profiles_from_guests" <?php checked(!empty($asgarosforum->options['hide_profiles_from_guests'])); ?>>
             <label for="hide_profiles_from_guests"><?php _e('Show profiles to logged-in users only', 'asgaros-forum'); ?></label>
         </p>
-        <h3><?php _e('Uploads', 'asgaros-forum'); ?></h3>
+        <h2><?php _e('Uploads', 'asgaros-forum'); ?></h2>
         <?php
         $uploadsOption = checked(!empty($asgarosforum->options['allow_file_uploads']), true, false);
         ?>
@@ -172,7 +172,7 @@ if (!defined('ABSPATH')) exit;
             <input type="number" name="uploads_maximum_size" id="uploads_maximum_size" value="<?php echo stripslashes($asgarosforum->options['uploads_maximum_size']); ?>" size="3" min="0">
             <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
         </p>
-        <h3><?php _e('Appearance', 'asgaros-forum'); ?></h3>
+        <h2><?php _e('Appearance', 'asgaros-forum'); ?></h2>
         <?php
         $themes = AsgarosForumThemeManager::get_themes();
         if (count($themes) > 1) { ?>

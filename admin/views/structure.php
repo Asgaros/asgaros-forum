@@ -1,7 +1,7 @@
 <?php if (!defined('ABSPATH')) exit; ?>
 
 <div class="wrap" id="af-structure">
-    <h2><?php _e('Structure', 'asgaros-forum'); ?></h2>
+    <h1><?php _e('Structure', 'asgaros-forum'); ?></h1>
     <?php
     if ($this->error) {
         echo '<div class="error"><p>'.$this->error.'</p></div>';
