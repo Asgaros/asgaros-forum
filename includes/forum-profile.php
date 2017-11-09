@@ -146,6 +146,14 @@ class AsgarosForumProfile {
 
                 $this->renderProfileRow($cellTitle, $cellValue);
 
+                // Show biographical info.
+                if (!empty($userData->description)) {
+                    $cellTitle = __('Biographical Info:', 'asgaros-forum');
+                    $cellValue = $userData->description;
+
+                    $this->renderProfileRow($cellTitle, $cellValue);
+                }
+
                 do_action('asgarosforum_custom_profile_content', $userData);
 
                 echo '<div class="clear"></div>';

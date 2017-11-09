@@ -768,16 +768,17 @@
     float: right;
 }
 #af-wrapper #forum-profile div {
-    display: block;
+    display: table;
     margin: 2px 0;
 }
 #af-wrapper #forum-profile div span:first-child {
     margin-right: 5px;
-    display: inline-block;
+    display: table-cell;
     width: 150px;
     vertical-align: top;
 }
 #af-wrapper #forum-profile div span:nth-child(2) {
+    display: table-cell;
     font-style: italic;
 }
 #af-wrapper #forum-profile .display-name {
