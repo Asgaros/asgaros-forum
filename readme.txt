@@ -131,6 +131,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 == Changelog ==
 * Added: Pagination in topic-overview
 * Added: Biographical info to profile
+* Added: Signature to profile
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 * Compatibility with WordPress 4.9

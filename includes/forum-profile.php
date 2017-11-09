@@ -154,6 +154,18 @@ class AsgarosForumProfile {
                     $this->renderProfileRow($cellTitle, $cellValue);
                 }
 
+                // Show signature.
+                if ($this->asgarosforum->options['allow_signatures']) {
+                    $signature = trim(esc_html(get_user_meta($userData->ID, 'asgarosforum_signature', true)));
+
+                    if (!empty($signature)) {
+                        $cellTitle = __('Signature:', 'asgaros-forum');
+                        $cellValue = $signature;
+
+                        $this->renderProfileRow($cellTitle, $cellValue);
+                    }
+                }
+
                 do_action('asgarosforum_custom_profile_content', $userData);
 
                 echo '<div class="clear"></div>';
