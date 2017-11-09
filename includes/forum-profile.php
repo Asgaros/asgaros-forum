@@ -149,7 +149,7 @@ class AsgarosForumProfile {
                 // Show biographical info.
                 if (!empty($userData->description)) {
                     $cellTitle = __('Biographical Info:', 'asgaros-forum');
-                    $cellValue = $userData->description;
+                    $cellValue = trim(esc_html($userData->description));
 
                     $this->renderProfileRow($cellTitle, $cellValue);
                 }
