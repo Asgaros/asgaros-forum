@@ -1,4 +1,72 @@
+#asgaros-panel {
+    position: relative;
+    overflow: auto;
+    margin: 16px 0;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background: #fff;
+    font-size: 13px;
+}
+#asgaros-panel .sub-panel-left,
+#asgaros-panel .sub-panel-right {
+    min-width: 200px;
+}
+#asgaros-panel .sub-panel-left {
+    height: 65px;
+    float: left;
+}
+#asgaros-panel .sub-panel-right {
+    color: #0073aa;
+    font-size: 18px;
+    float: right;
+    text-align: right;
+}
+#asgaros-panel a {
+    font-size: 16px;
+    text-decoration: none;
+    padding: 0 10px;
+    line-height: 65px;
+}
+#asgaros-panel .dashicons-before:before {
+    color: #82878c;
+    font: 400 20px/1 dashicons;
+    speak: none;
+    display: inline-block;
+    padding: 1px 10px 0 0;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
+    vertical-align: top;
+    line-height: 65px;
+}
+#asgaros-panel h1 {
+    padding: 0;
+    color: #444;
+    line-height: 65px;
+    border-left: 1px solid #f1f1f1;
+    padding-left: 16px;
+    font-size: 28px;
+}
+#asgaros-panel .error-panel {
+    border-left: 4px solid #dc3232;
+}
+#asgaros-panel .updated-panel {
+    border-left: 4px solid #46b450;
+}
+#asgaros-panel .error-panel p,
+#asgaros-panel .updated-panel p {
+    border: 1px solid #f1f1f1;
+    padding: 8px;
+    margin: 8px 0 0;
+    background-color: #fafafa;
+}
 /* OPTIONS */
+#af-options .clear {
+    clear: both;
+}
 #af-options input {
     vertical-align: middle;
 }

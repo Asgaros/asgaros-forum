@@ -135,6 +135,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 * Compatibility with WordPress 4.9
+* Added link to the official support forum to the administration area
 = 1.6.2 =
 * Added: Options to hide login/logout/register buttons
 * Added: asgarosforum_custom_header_menu hook

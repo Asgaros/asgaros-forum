@@ -4,12 +4,11 @@ if (!defined('ABSPATH')) exit;
 
 ?>
 <div class="wrap" id="af-options">
-    <h1><?php _e('Options', 'asgaros-forum'); ?></h1>
-    <?php if ($this->saved) { ?>
-        <div class="updated">
-            <p><?php _e('Your options have been saved.', 'asgaros-forum'); ?></p>
-        </div>
-    <?php } ?>
+    <?php
+    $title = __('Options', 'asgaros-forum');
+    $titleUpdated = __('Options updated.', 'asgaros-forum');
+    $this->render_admin_header($title, $titleUpdated);
+    ?>
     <form method="post">
         <?php wp_nonce_field('asgaros_forum_save_options'); ?>
         <h2><?php _e('General', 'asgaros-forum'); ?></h2>

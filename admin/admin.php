@@ -334,6 +334,32 @@ class AsgarosForumAdmin {
     function usergroups_page() {
         require('views/usergroups.php');
     }
-}
 
-?>
+    function render_admin_header($title, $titleUpdated) {
+        global $asgarosforum;
+
+        echo '<div id="asgaros-panel">';
+            echo '<div class="header-panel">';
+                echo '<div class="sub-panel-left">';
+                    echo '<img src="'.$asgarosforum->directory.'admin/images/logo.png">';
+                echo '</div>';
+                echo '<div class="sub-panel-left">';
+                    echo '<h1>'.$title.'</h1>';
+                echo '</div>';
+                echo '<div class="sub-panel-right">';
+                    echo '<a href="https://www.asgaros.de/support/" target="_blank" class="dashicons-before dashicons-admin-users">'.__('Official Support Forum', 'asgaros-forum').'</a>';
+                    echo '&bull;';
+                    echo '<a href="https://www.paypal.me/asgaros" target="_blank" class="dashicons-before dashicons-heart">'.__('Donate', 'asgaros-forum').'</a>';
+                echo '</div>';
+                echo '<div class="clear"></div>';
+            echo '</div>';
+
+            if ($this->error) {
+                echo '<div class="error-panel"><p>'.$this->error.'</p></div>';
+            } else if ($this->saved) {
+                echo '<div class="updated-panel"><p>'.$titleUpdated.'</p></div>';
+            }
+
+        echo '</div>';
+    }
+}
