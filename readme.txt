@@ -130,6 +130,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 
 == Changelog ==
 * Added: Pagination in topic-overview
+* Added: User groups to profile
 * Added: Biographical info to profile
 * Added: Signature to profile
 * Changed: Minor design changes
