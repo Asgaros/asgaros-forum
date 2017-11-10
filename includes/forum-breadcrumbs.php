@@ -20,16 +20,29 @@ class AsgarosForumBreadCrumbs {
                 $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 1);
             }
 
+            // Define category prefix.
+            $categoryPrefix = '';
+
+            if (self::$breadCrumbsLevel >= 4 && $asgarosforum->current_category) {
+                $category_name = $asgarosforum->get_category_name($asgarosforum->current_category);
+
+                if ($category_name) {
+                    $categoryPrefix = $category_name.': ';
+                }
+            }
+
+            // Define forum breadcrumbs.
             if (self::$breadCrumbsLevel >= 3 && $asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
                 $elementLink = $asgarosforum->getLink('forum', $asgarosforum->parent_forum);
-                $elementName = esc_html(stripslashes($asgarosforum->parent_forum_name));
+                $elementName = $categoryPrefix.esc_html(stripslashes($asgarosforum->parent_forum_name));
                 $elementTitle = $elementName;
                 $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
+                $categoryPrefix = '';
             }
 
             if (self::$breadCrumbsLevel >= 2 && $asgarosforum->current_forum) {
                 $elementLink = $asgarosforum->getLink('forum', $asgarosforum->current_forum);
-                $elementName = esc_html(stripslashes($asgarosforum->current_forum_name));
+                $elementName = $categoryPrefix.esc_html(stripslashes($asgarosforum->current_forum_name));
                 $elementTitle = $elementName;
                 $breadCrumbsLinks[] = array('link' => $elementLink, 'title' => $elementTitle, 'name' => $elementName, 'position' => 2);
             }

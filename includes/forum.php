@@ -592,6 +592,16 @@ class AsgarosForum {
         return $categories;
     }
 
+    function get_category_name($category_id) {
+        $category = get_term($category_id, 'asgarosforum-category');
+
+        if ($category) {
+            return $category->name;
+        } else {
+            return false;
+        }
+    }
+
     function getCategoriesFilter() {
         $metaQueryFilter = array('relation' => 'AND');
 
