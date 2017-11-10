@@ -60,16 +60,17 @@ class AsgarosForumProfile {
     }
 
     // Sets the breadcrumbs.
-    public function setBreadCrumbs($breadCrumbs) {
+    public function setBreadCrumbs() {
+        $elementLink = $this->asgarosforum->getLink('current');
+        $elementTitle = __('Profile', 'asgaros-forum');
+
         $userData = $this->getUserData();
 
         if ($userData) {
-            $breadCrumbs[] = array('link' => $this->asgarosforum->getLink('current'), 'title' => __('Profile', 'asgaros-forum').': '.$userData->display_name, 'name' => __('Profile', 'asgaros-forum').': '.$userData->display_name, 'position' => false);
-        } else {
-            $breadCrumbs[] = array('link' => $this->asgarosforum->getLink('current'), 'title' => __('Profile', 'asgaros-forum'), 'name' => __('Profile', 'asgaros-forum'), 'position' => false);
+            $elementTitle = __('Profile', 'asgaros-forum').': '.$userData->display_name;
         }
 
-        return $breadCrumbs;
+        AsgarosForumBreadCrumbs::addToBreadCrumbsList($elementLink, $elementTitle);
     }
 
     // Shows the profile of a user.
