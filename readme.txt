@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/asgaros
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+= 1.6.3 =
 * Added: Pagination in topic-overview
 * Added: Category name to breadcrumbs
 * Added: User groups to profile
