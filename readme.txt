@@ -119,6 +119,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * asgarosforum_filter_user_groups_taxonomy_name
 * asgarosforum_filter_avatar_size
 * asgarosforum_filter_profile_link
+* asgarosforum_filter_forum_menu
+* asgarosforum_filter_topic_menu
+* asgarosforum_filter_post_menu
 
 == Screenshots ==
 1. The forum overview.
@@ -134,6 +137,9 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 * Added: User groups to profile
 * Added: Biographical info to profile
 * Added: Signature to profile
+* Added: asgarosforum_filter_forum_menu filter
+* Added: asgarosforum_filter_topic_menu filter
+* Added: asgarosforum_filter_post_menu filter
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 * Compatibility with WordPress 4.9

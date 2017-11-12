@@ -817,6 +817,8 @@ class AsgarosForum {
             }
         }
 
+        $menu = apply_filters('asgarosforum_filter_forum_menu', $menu);
+
         return $menu;
     }
 
@@ -867,6 +869,8 @@ class AsgarosForum {
         }
 
         $menu = (!empty($menu)) ? '<div class="forum-menu">'.$menu.'</div>' : $menu;
+        $menu = apply_filters('asgarosforum_filter_topic_menu', $menu);
+
         return $menu;
     }
 
@@ -899,6 +903,8 @@ class AsgarosForum {
         }
 
         $menu = (!empty($menu)) ? '<div class="forum-post-menu">'.$menu.'</div>' : $menu;
+        $menu = apply_filters('asgarosforum_filter_post_menu', $menu);
+
         return $menu;
     }
 
