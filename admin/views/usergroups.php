@@ -52,23 +52,35 @@
                     </div>
                 </div>
 
-                <a href="#" class="usergroup-editor-link dashicons-before dashicons-plus margin-bottom padding-top" data-value-id="new" data-value-editor-title="<?php _e('Add User Group', 'asgaros-forum'); ?>">
-                    <?php _e('Add User Group', 'asgaros-forum'); ?>
-                </a>
+                <!--
+                <div class="postbox">
+                    <h2 class="hndle">
+                        <?php _e('Default User Groups', 'asgaros-forum'); ?>
+                    </h2>
+                    <div class="inside"></div>
+                </div>
+                -->
 
-                <?php
-                $usergroups = AsgarosForumUserGroups::getUserGroups();
+                <div class="postbox">
+                    <h2 class="hndle">
+                        <?php _e('Custom User Groups', 'asgaros-forum'); ?>
+                    </h2>
+                    <div class="inside">
+                        <?php
+                        $usergroups = AsgarosForumUserGroups::getUserGroups();
 
-                if (!empty($usergroups)) {
-                    $userGroupsTable = new Asgaros_Forum_Admin_UserGroups_Table($usergroups);
-                    $userGroupsTable->prepare_items();
-                    $userGroupsTable->display();
-
-                    echo '<a href="#" class="usergroup-editor-link dashicons-before dashicons-plus margin-bottom margin-top padding-top" data-value-id="new" data-value-editor-title="'.__('Add User Group', 'asgaros-forum').'">';
-                        _e('Add User Group', 'asgaros-forum');
-                    echo '</a>';
-                }
-                ?>
+                        if (!empty($usergroups)) {
+                            $userGroupsTable = new Asgaros_Forum_Admin_UserGroups_Table($usergroups);
+                            $userGroupsTable->prepare_items();
+                            $userGroupsTable->display();
+                        }
+                        
+                        echo '<a href="#" class="usergroup-editor-link dashicons-before dashicons-plus padding-top" data-value-id="new" data-value-editor-title="'.__('Add User Group', 'asgaros-forum').'">';
+                            _e('Add User Group', 'asgaros-forum');
+                        echo '</a>';
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

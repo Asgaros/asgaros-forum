@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Changed: Truncate long quotes
+* Changed: Minor design changes
 = 1.6.3 =
 * Added: Pagination in topic-overview
 * Added: Category name to breadcrumbs
