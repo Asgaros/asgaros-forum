@@ -132,6 +132,7 @@ You can add own themes for your forum in the `/wp-content/themes-asgarosforum` d
 6. Manage general options.
 
 == Changelog ==
+* Changed: Truncate long quotes
 = 1.6.3 =
 * Added: Pagination in topic-overview
 * Added: Category name to breadcrumbs

@@ -673,6 +673,20 @@
 #af-wrapper blockquote:before {
     content: none; /* comp */
 }
+#af-wrapper .post-message > blockquote {
+    max-height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+#af-wrapper .post-message > blockquote:after {
+    content: "";
+    position: absolute;
+    top: 208px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(rgba(249, 249, 249, 0), rgba(249, 249, 249, 1));
+}
 #af-wrapper .quotetitle {
     font-style: italic;
     font-weight: bold;
