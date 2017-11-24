@@ -119,7 +119,7 @@ class AsgarosForumInsert {
             $asgarosforum->current_topic = self::insertTopic($asgarosforum->current_forum, self::$dataSubject);
 
             // Create the post.
-            $asgarosforum->current_post = self::insertPost(self::$dataContent, $asgarosforum->current_topic, $uploadList);
+            $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $uploadList);
 
             // Upload files.
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
@@ -131,7 +131,7 @@ class AsgarosForumInsert {
             AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'add_post') {
             // Create the post.
-            $asgarosforum->current_post = self::insertPost(self::$dataContent, $asgarosforum->current_topic, $uploadList);
+            $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $uploadList);
 
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
 
@@ -173,7 +173,7 @@ class AsgarosForumInsert {
     }
 
     // Inserts a new post.
-    public static function insertPost($text, $topicID, $uploads) {
+    public static function insertPost($topicID, $text, $uploads) {
         global $asgarosforum;
 
         // Get the current time.
