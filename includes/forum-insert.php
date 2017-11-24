@@ -116,10 +116,11 @@ class AsgarosForumInsert {
 
         if (self::getAction() === 'add_topic') {
             // Create the topic.
-            $asgarosforum->current_topic = self::insertTopic($asgarosforum->current_forum, self::$dataSubject);
+            $insertedIDs = self::insertTopic($asgarosforum->current_forum, self::$dataSubject, self::$dataContent, $uploadList);
 
-            // Create the post.
-            $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $uploadList);
+            // Assign the inserted IDs.
+            $asgarosforum->current_topic = $insertedIDs->topic_id;
+            $asgarosforum->current_post = $insertedIDs->post_id;
 
             // Upload files.
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
@@ -159,7 +160,7 @@ class AsgarosForumInsert {
     }
 
     // Inserts a new topic.
-    public static function insertTopic($forumID, $name) {
+    public static function insertTopic($forumID, $name, $text, $uploads = array()) {
         global $asgarosforum;
 
         // Get a slug for the new topic.
@@ -168,12 +169,19 @@ class AsgarosForumInsert {
         // Insert the topic.
         $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => $name, 'parent_id' => $forumID, 'slug' => $topic_slug), array('%s', '%d', '%s'));
 
-        // Return the ID of the inserted topic.
-        return $asgarosforum->db->insert_id;
+        // Save the ID of the new topic.
+        $insertedIDs = new stdClass;
+        $insertedIDs->topic_id = $asgarosforum->db->insert_id;
+
+        // Now create a post inside this topic and save its ID as well.
+        $insertedIDs->post_id = self::insertPost($insertedIDs->topic_id, $text, $uploads);
+
+        // Return the IDs of the inserted content.
+        return $insertedIDs;
     }
 
     // Inserts a new post.
-    public static function insertPost($topicID, $text, $uploads) {
+    public static function insertPost($topicID, $text, $uploads = array()) {
         global $asgarosforum;
 
         // Get the current time.
