@@ -74,54 +74,9 @@ Please only use this site and dont send me your own .po/.mo files because it is 
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = How can I add my own theme? =
 You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have the following files: `style.css`, `mobile.css`, `widgets.css` and `editor.css`.
-= Which hooks are available =
-* asgarosforum_after_post_author
-* asgarosforum_after_post_message
-* asgarosforum_after_add_thread_submit
-* asgarosforum_after_add_post_submit
-* asgarosforum_after_edit_post_submit
-* asgarosforum_{current_view}_custom_content_top
-* asgarosforum_{current_view}_custom_content_bottom
-* asgarosforum_editor_custom_content_bottom
-* asgarosforum_statistics_custom_element
-* asgarosforum_statistics_custom_content_bottom
-* asgarosforum_admin_show_custom_category_data
-* asgarosforum_before_delete_post
-* asgarosforum_before_delete_topic
-* asgarosforum_after_delete_post
-* asgarosforum_after_delete_topic
-* asgarosforum_custom_forum_column
-* asgarosforum_custom_topic_column
-* asgarosforum_after_first_post
-* asgarosforum_custom_profile_content
-* asgarosforum_custom_header_menu
-= Which filters are available =
-* asgarosforum_filter_login_message
-* asgarosforum_filter_post_username
-* asgarosforum_filter_post_content
-* asgarosforum_filter_post_shortcodes
-* asgarosforum_filter_editor_settings
-* asgarosforum_filter_get_posts
-* asgarosforum_filter_get_threads
-* asgarosforum_filter_get_posts_order
-* asgarosforum_filter_get_threads_order
-* asgarosforum_filter_notify_global_topic_subscribers_message
-* asgarosforum_filter_notify_topic_subscribers_message
-* asgarosforum_filter_insert_custom_validation
-* asgarosforum_filter_subject_before_insert
-* asgarosforum_filter_content_before_insert
-* asgarosforum_filter_widget_title_length
-* asgarosforum_subscriber_mails_new_post
-* asgarosforum_subscriber_mails_new_topic
-* asgarosforum_filter_subscribers_query_new_post
-* asgarosforum_filter_subscribers_query_new_topic
-* asgarosforum_filter_error_message_require_login
-* asgarosforum_filter_user_groups_taxonomy_name
-* asgarosforum_filter_avatar_size
-* asgarosforum_filter_profile_link
-* asgarosforum_filter_forum_menu
-* asgarosforum_filter_topic_menu
-* asgarosforum_filter_post_menu
+= Which hooks and filters are available? =
+You can find a list of available hooks and filters on this site:
+[https://www.asgaros.de/support/?view=thread&id=407](https://www.asgaros.de/support/?view=thread&id=407).
 
 == Screenshots ==
 1. The forum overview.
