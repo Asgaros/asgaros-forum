@@ -15,7 +15,7 @@ class AsgarosForumInsert {
 
     private static function getAction() {
         // If no action is set, try to determine one.
-        if (!self::$action && ($_POST['submit_action'] === 'add_thread' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
+        if (!self::$action && ($_POST['submit_action'] === 'add_topic' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
             self::$action = $_POST['submit_action'];
         }
 
@@ -74,7 +74,7 @@ class AsgarosForumInsert {
         }
 
         // Cancel if subject is empty.
-        if ((self::getAction() === 'add_thread' || (self::getAction() === 'edit_post' && $asgarosforum->is_first_post($asgarosforum->current_post))) && empty(self::$dataSubject)) {
+        if ((self::getAction() === 'add_topic' || (self::getAction() === 'edit_post' && $asgarosforum->is_first_post($asgarosforum->current_post))) && empty(self::$dataSubject)) {
             $asgarosforum->info = __('You must enter a subject.', 'asgaros-forum');
             return false;
         }
@@ -114,17 +114,12 @@ class AsgarosForumInsert {
         $date = $asgarosforum->current_time();
         $uploadList = AsgarosForumUploads::getUploadList();
 
-        if (self::getAction() === 'add_thread') {
-            // Get a slug for the new topic.
-            $topic_slug = AsgarosForumRewrite::createUniqueSlug(self::$dataSubject, $asgarosforum->tables->topics, 'topic');
-
-            // Create topic.
-            $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => self::$dataSubject, 'parent_id' => $asgarosforum->current_forum, 'slug' => $topic_slug), array('%s', '%d', '%s'));
-            $asgarosforum->current_topic = $asgarosforum->db->insert_id;
+        if (self::getAction() === 'add_topic') {
+            // Create the topic.
+            $asgarosforum->current_topic = self::insertTopic($asgarosforum->current_forum, self::$dataSubject);
 
             // Create the post.
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$currentUserID, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
-            $asgarosforum->current_post = $asgarosforum->db->insert_id;
+            $asgarosforum->current_post = self::insertPost(self::$dataContent, $asgarosforum->current_topic, $uploadList);
 
             // Upload files.
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
@@ -135,8 +130,8 @@ class AsgarosForumInsert {
             // Send notification about new topic to global subscribers.
             AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'add_post') {
-            $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => self::$dataContent, 'parent_id' => $asgarosforum->current_topic, 'date' => $date, 'author_id' => AsgarosForumPermissions::$currentUserID, 'uploads' => maybe_serialize($uploadList)), array('%s', '%d', '%s', '%d', '%s'));
-            $asgarosforum->current_post = $asgarosforum->db->insert_id;
+            // Create the post.
+            $asgarosforum->current_post = self::insertPost(self::$dataContent, $asgarosforum->current_topic, $uploadList);
 
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
 
@@ -161,6 +156,34 @@ class AsgarosForumInsert {
 
         wp_redirect($redirect);
         exit;
+    }
+
+    // Inserts a new topic.
+    public static function insertTopic($forumID, $name) {
+        global $asgarosforum;
+
+        // Get a slug for the new topic.
+        $topic_slug = AsgarosForumRewrite::createUniqueSlug($name, $asgarosforum->tables->topics, 'topic');
+
+        // Insert the topic.
+        $asgarosforum->db->insert($asgarosforum->tables->topics, array('name' => $name, 'parent_id' => $forumID, 'slug' => $topic_slug), array('%s', '%d', '%s'));
+
+        // Return the ID of the inserted topic.
+        return $asgarosforum->db->insert_id;
+    }
+
+    // Inserts a new post.
+    public static function insertPost($text, $topicID, $uploads) {
+        global $asgarosforum;
+
+        // Get the current time.
+        $date = $asgarosforum->current_time();
+
+        // Insert the post.
+        $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topicID, 'date' => $date, 'author_id' => AsgarosForumPermissions::$currentUserID, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%s', '%d', '%s'));
+
+        // Return the ID of the inserted post.
+        return $asgarosforum->db->insert_id;
     }
 }
 

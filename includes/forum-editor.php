@@ -154,7 +154,7 @@ class AsgarosForumEditor {
 
                     echo '<div class="editor-row">';
                         if ($editorView === 'addtopic') {
-                            echo '<input type="hidden" name="submit_action" value="add_thread">';
+                            echo '<input type="hidden" name="submit_action" value="add_topic">';
                         } else if ($editorView === 'addpost') {
                             echo '<input type="hidden" name="submit_action" value="add_post">';
                         } else if ($editorView === 'editpost') {
