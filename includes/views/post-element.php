@@ -25,7 +25,7 @@ $counter++;
             // Only show post-counter for existing users.
             if (get_userdata($post->author_id) != false) {
                 $author_posts_i18n = number_format_i18n($post->author_posts);
-                echo '<small>'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
+                echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
             }
         }
 
