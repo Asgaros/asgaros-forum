@@ -195,7 +195,7 @@ class AsgarosForum {
         remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
         if (isset($_POST['submit_action'])) {
-            AsgarosForumInsert::doInsertion();
+            AsgarosForumContent::doInsertion();
         } else if ($this->current_view === 'markallread') {
             AsgarosForumUnread::markAllRead();
         } else if (isset($_GET['move_topic'])) {

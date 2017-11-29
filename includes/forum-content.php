@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class AsgarosForumInsert {
+class AsgarosForumContent {
     private static $action = false;
     private static $dataSubject;
     private static $dataContent;
@@ -156,6 +156,24 @@ class AsgarosForumInsert {
 
         wp_redirect($redirect);
         exit;
+    }
+
+    // Inserts a new forum.
+    public static function insertForum($categoryID, $name, $description, $parentForum, $icon, $order, $closed) {
+        global $asgarosforum;
+
+        // Get a slug for the new forum.
+        $forum_slug = AsgarosForumRewrite::createUniqueSlug($name, $asgarosforum->tables->forums, 'forum');
+
+        // Insert the forum.
+        $asgarosforum->db->insert(
+            $asgarosforum->tables->forums,
+            array('name' => $name, 'parent_id' => $categoryID, 'parent_forum' => $parentForum, 'description' => $description, 'icon' => $icon, 'sort' => $order, 'closed' => $closed, 'slug' => $forum_slug),
+            array('%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s')
+        );
+
+        // Return the ID of the inserted forum.
+        return $asgarosforum->db->insert_id;
     }
 
     // Inserts a new topic.
