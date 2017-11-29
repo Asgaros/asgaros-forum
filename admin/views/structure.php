@@ -180,10 +180,11 @@
                         </div>
                         <?php
                     }
+
+                    echo '<a href="#" class="category-editor-link dashicons-before dashicons-plus margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+                        _e('Add Category', 'asgaros-forum');
+                    echo '</a>';
                 }
-                echo '<a href="#" class="category-editor-link dashicons-before dashicons-plus margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
-                    _e('Add Category', 'asgaros-forum');
-                echo '</a>';
                 ?>
             </div>
         </div>
