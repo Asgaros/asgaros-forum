@@ -110,8 +110,6 @@ class AsgarosForumInsert {
         global $asgarosforum;
 
         $redirect = '';
-
-        $date = $asgarosforum->current_time();
         $uploadList = AsgarosForumUploads::getUploadList();
 
         if (self::getAction() === 'add_topic') {
@@ -141,6 +139,7 @@ class AsgarosForumInsert {
             // Send notification about new post to subscribers
             AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'edit_post') {
+            $date = $asgarosforum->current_time();
             $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
             $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date, 'author_edit' => AsgarosForumPermissions::$currentUserID), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 

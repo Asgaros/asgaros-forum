@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Truncate long quotes
 * Changed: Minor design changes
 * Changed: Renamed asgarosforum_after_add_thread_submit hook into asgarosforum_after_add_topic_submit
+* Performance improvements and code optimizations
 = 1.6.3 =
 * Added: Pagination in topic-overview
 * Added: Category name to breadcrumbs
