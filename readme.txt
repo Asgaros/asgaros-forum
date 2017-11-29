@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to automatically create topics for new blog posts
 * Changed: Truncate long quotes
 * Changed: Minor design changes
 * Changed: Renamed asgarosforum_after_add_thread_submit hook into asgarosforum_after_add_topic_submit

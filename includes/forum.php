@@ -63,7 +63,9 @@ class AsgarosForum {
         'custom_color'              => '#2d89cc',
         'custom_text_color'         => '#444444',
         'custom_background_color'   => '#ffffff',
-        'theme'                     => 'default'
+        'theme'                     => 'default',
+        'create_blog_topics'        => false,
+        'create_blog_topics_id'     => 0
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -92,6 +94,11 @@ class AsgarosForum {
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
+
+        // Add hook when topics should get created for new blog posts.
+        if ($this->options['create_blog_topics']) {
+            add_action('transition_post_status', array($this, 'createBlogTopic'), 10, 3);
+        }
 
         new AsgarosForumRewrite($this);
         new AsgarosForumTaxonomies($this);
@@ -1124,5 +1131,15 @@ class AsgarosForum {
     // Gets all data of a topic based on its ID.
     public function getTopic($topicID) {
         return $this->db->get_row($this->db->prepare("SELECT * FROM {$this->tables->topics} WHERE id = %d;", $topicID));
+    }
+
+    public function createBlogTopic($new_status, $old_status, $post) {
+        if ($new_status == 'publish' && $old_status != 'publish') {
+            $forumID = $this->options['create_blog_topics_id'];
+
+            if (AsgarosForumContent::forumExists($forumID)) {
+            	AsgarosForumContent::insertTopic($forumID, $post->post_title, $post->post_content);
+            }
+        }
     }
 }

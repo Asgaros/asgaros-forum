@@ -30,6 +30,40 @@ if (!defined('ABSPATH')) exit;
             <input type="number" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($asgarosforum->options['topics_per_page']); ?>" size="3" min="1">
         </p>
         <p>
+            <input type="checkbox" name="create_blog_topics" id="create_blog_topics" <?php checked(!empty($asgarosforum->options['create_blog_topics'])); ?>>
+            <label for="create_blog_topics"><?php _e('Create topics for new blog posts in the following forum:', 'asgaros-forum'); ?></label>
+
+            <?php
+            echo '<select name="create_blog_topics_id">';
+
+            echo '<option value="0"'.(0 == $asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.__('Select Forum', 'asgaros-forum').'</option>';
+
+            $categories = $asgarosforum->get_categories();
+
+            if ($categories) {
+                foreach ($categories as $category) {
+                    $forums = $asgarosforum->get_forums($category->term_id, 0, true);
+
+                    if ($forums) {
+                        foreach ($forums as $forum) {
+                            echo '<option value="'.$forum->id.'"'.($forum->id == $asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
+
+                            if ($forum->count_subforums > 0) {
+                                $subforums = $asgarosforum->get_forums($category->term_id, $forum->id, true);
+
+                                foreach ($subforums as $subforum) {
+                                    echo '<option value="'.$subforum->id.'"'.($subforum->id == $asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            echo '</select>';
+            ?>
+        </p>
+        <p>
             <input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($asgarosforum->options['minimalistic_editor'])); ?>>
             <label for="minimalistic_editor"><?php _e('Use minimalistic editor', 'asgaros-forum'); ?></label>
         </p>
