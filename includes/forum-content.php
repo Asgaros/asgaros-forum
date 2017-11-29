@@ -158,6 +158,10 @@ class AsgarosForumContent {
         exit;
     }
 
+    //======================================================================
+    // FUNCTIONS FOR INSERTING CONTENT.
+    //======================================================================
+
     // Inserts a new forum.
     public static function insertForum($categoryID, $name, $description, $parentForum, $icon, $order, $closed) {
         global $asgarosforum;
@@ -210,6 +214,72 @@ class AsgarosForumContent {
         // Return the ID of the inserted post.
         return $asgarosforum->db->insert_id;
     }
+
+    //======================================================================
+    // FUNCTIONS TO CHECK IF SPECIFIC CONTENT EXISTS.
+    //======================================================================
+
+    // Checks if a category exists.
+    public static function categoryExists($categoryID) {
+        if ($categoryID) {
+            $check = get_term($categoryID, 'asgarosforum-category');
+
+            if ($check) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Checks if a forum exists.
+    public static function forumExists($forumID) {
+        global $asgarosforum;
+
+        if ($forumID) {
+            $check = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->tables->forums} WHERE id = %d", $forumID));
+
+            if ($check) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Checks if a topic exists.
+    public static function topicExists($topicID) {
+        global $asgarosforum;
+
+        if ($topicID) {
+            $check = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->tables->topics} WHERE id = %d", $topicID));
+
+            if ($check) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Checks if a post exists.
+    public static function postExists($postID) {
+        global $asgarosforum;
+
+        if ($postID) {
+            $check = $asgarosforum->db->get_var($asgarosforum->db->prepare("SELECT id FROM {$asgarosforum->tables->posts} WHERE id = %d", $postID));
+
+            if ($check) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //======================================================================
+    // FUNCTIONS FOR GETTING CONTENT.
+    //======================================================================
 }
 
 ?>
