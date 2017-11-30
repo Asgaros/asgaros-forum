@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to automatically create topics for new blog posts
+* Fixed: Broken subscriptions/profile-view when using shortcode with category-parameter
 * Changed: Truncate long quotes
 * Changed: Minor design changes
 * Changed: Renamed asgarosforum_after_add_thread_submit hook into asgarosforum_after_add_topic_submit

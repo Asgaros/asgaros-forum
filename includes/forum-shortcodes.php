@@ -86,7 +86,7 @@ class AsgarosForumShortcodes {
                     self::$includeCategories = explode(',', $atts['category']);
 
                     // Ensure that we are in the correct element.
-                    if (!in_array(self::$asgarosforum->current_category, self::$includeCategories) && self::$asgarosforum->current_view != 'search') {
+                    if (!in_array(self::$asgarosforum->current_category, self::$includeCategories) && self::$asgarosforum->current_view != 'search' && self::$asgarosforum->current_view != 'subscriptions' && self::$asgarosforum->current_view != 'profile') {
                         self::$asgarosforum->current_category   = false;
                         self::$asgarosforum->parent_forum       = false;
                         self::$asgarosforum->current_forum      = false;
