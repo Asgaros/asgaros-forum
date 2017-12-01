@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 1.6.4 =
 * Added: Option to automatically create topics for new blog posts
 * Fixed: Broken subscriptions/profile-view when using shortcode with category-parameter

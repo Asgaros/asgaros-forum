@@ -27,6 +27,16 @@ class AsgarosForumUserGroups {
     }
 
     public function initialize() {
+        // Register the taxonomies.
+        register_taxonomy(
+			self::$taxonomyName,
+			null,
+			array(
+				'public' => false,
+				'rewrite' => false
+			)
+		);
+
         self::$taxonomyName = apply_filters('asgarosforum_filter_user_groups_taxonomy_name', self::$taxonomyName);
     }
 
