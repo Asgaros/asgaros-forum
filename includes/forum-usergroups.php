@@ -27,6 +27,10 @@ class AsgarosForumUserGroups {
     }
 
     public function initialize() {
+        self::initializeTaxonomy();
+    }
+
+    public static function initializeTaxonomy() {
         // Register the taxonomies.
         register_taxonomy(
 			self::$taxonomyName,
@@ -66,12 +70,7 @@ class AsgarosForumUserGroups {
 
         $status = wp_insert_term($categoryName, self::$taxonomyName);
 
-        // Return possible error.
-        if (is_wp_error($status)) {
-            return $status;
-        } else {
-            return true;
-        }
+        return $status;
     }
 
     public static function insertUserGroupsOfForumCategory($forumCategoryID, $userGroups) {
@@ -115,12 +114,7 @@ class AsgarosForumUserGroups {
 
         $status = wp_update_term($categoryID, self::$taxonomyName, array('name' => $categoryName));
 
-        // Return possible error.
-        if (is_wp_error($status)) {
-            return $status;
-        } else {
-            return true;
-        }
+        return $status;
     }
 
     public static function updateUserGroupColor($userGroupID, $userGroupColor) {
@@ -129,12 +123,7 @@ class AsgarosForumUserGroups {
 
         $status = update_term_meta($userGroupID, 'usergroup-color', $userGroupColor);
 
-        // Return possible error.
-        if (is_wp_error($status)) {
-            return $status;
-        } else {
-            return true;
-        }
+        return $status;
     }
 
     //======================================================================

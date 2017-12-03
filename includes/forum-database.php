@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 12;
+    const DATABASE_VERSION = 13;
 
     private static $instance = null;
     private static $db;
@@ -178,6 +178,35 @@ class AsgarosForumDatabase {
             // Add index to posts.parent_id for faster queries.
             if ($database_version_installed < 12) {
                 self::$db->query('ALTER TABLE '.self::$table_posts.' ADD INDEX(parent_id);');
+            }
+
+            // Add existing user groups to a default user groups category and/or create an example user group.
+            if ($database_version_installed < 13) {
+                // Initialize taxonomy first.
+                AsgarosForumUserGroups::initializeTaxonomy();
+
+                // Create a new example category first.
+                $defaultCategoryName = __('Custom User Groups', 'asgaros-forum');
+                $defaultCategory = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
+
+                // Now get all existing elements.
+                $existingCategories = AsgarosForumUserGroups::getUserGroupCategories();
+
+                // When there is only one element, then it is the newly created category.
+                if (count($existingCategories) > 1) {
+                    // Move every existing user group into the new default category.
+                    foreach ($existingCategories as $category) {
+                        // But ensure to not move the new default category into it.
+                        if ($category->term_id != $defaultCategory['term_id']) {
+                            $color = AsgarosForumUserGroups::getUserGroupColor($category->term_id);
+                            AsgarosForumUserGroups::updateUserGroup($category->term_id, $defaultCategory['term_id'], $category->name, $color);
+                        }
+                    }
+                } else {
+                    // Add an example user group.
+                    $defaultUserGroupName = __('Example User Group', 'asgaros-forum');
+                    $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
+                }
             }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);
