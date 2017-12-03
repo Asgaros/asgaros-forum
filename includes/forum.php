@@ -643,7 +643,7 @@ class AsgarosForum {
     }
 
     function getSpecificForums($ids) {
-        $results = $this->db->get_results("SELECT id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
+        $results = $this->db->get_results("SELECT id, parent_id AS category_id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
         return $results;
     }
 
@@ -663,7 +663,7 @@ class AsgarosForum {
     }
 
     function getSpecificTopics($ids) {
-        $results = $this->db->get_results("SELECT id, name FROM {$this->tables->topics} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
+        $results = $this->db->get_results("SELECT t.id, f.parent_id AS category_id, t.name FROM {$this->tables->topics} AS t LEFT JOIN {$this->tables->forums} AS f ON (f.id = t.parent_id) WHERE t.id IN (".implode(',', $ids).") ORDER BY t.id ASC;");
         return $results;
     }
 

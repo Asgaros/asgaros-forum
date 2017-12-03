@@ -84,6 +84,16 @@ class AsgarosForumPermissions {
             return false;
         }
     }
+
+    public static function canUserAccessForumCategory($userID, $forumCategoryID) {
+        $access_level = get_term_meta($forumCategoryID, 'category_access', true);
+
+        if ($access_level == 'moderator' && !AsgarosForumPermissions::isModerator('current')) {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 ?>

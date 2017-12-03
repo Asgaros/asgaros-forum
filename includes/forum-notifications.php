@@ -354,13 +354,16 @@ class AsgarosForumNotifications {
     // Shows all subscriptions of a user (topics/forums).
     public static function showSubscriptions() {
         global $asgarosforum;
-        $subscribedTopics = get_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic');
-        $subscribedForums = get_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum');
+        $userID = get_current_user_id();
+
+        $subscribedTopics = get_user_meta($userID, 'asgarosforum_subscription_topic');
+        $subscribedForums = get_user_meta($userID, 'asgarosforum_subscription_forum');
 
         $title = __('Topics', 'asgaros-forum');
 
         if (!empty($subscribedTopics)) {
             $subscribedTopics = $asgarosforum->getSpecificTopics($subscribedTopics);
+            $subscribedTopics = self::filterList($subscribedTopics, $userID);
         }
 
         self::renderSubscriptionsList($title, $subscribedTopics, 'topic');
@@ -369,6 +372,7 @@ class AsgarosForumNotifications {
 
         if (!empty($subscribedForums)) {
             $subscribedForums = $asgarosforum->getSpecificForums($subscribedForums);
+            $subscribedForums = self::filterList($subscribedForums, $userID);
         }
 
         self::renderSubscriptionsList($title, $subscribedForums, 'forum');
@@ -392,6 +396,25 @@ class AsgarosForumNotifications {
         }
 
         echo '</div>';
+    }
+
+    public static function filterList($data, $userID) {
+        // Filter the list based on category.
+        foreach ($data as $key => $item) {
+            $canAccess = AsgarosForumUserGroups::canUserAccessForumCategory($userID, $item->category_id);
+
+            if (!$canAccess) {
+                unset($data[$key]);
+            } else {
+                $canPermAccess = AsgarosForumPermissions::canUserAccessForumCategory($userID, $item->category_id);
+
+                if (!$canPermAccess) {
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        return $data;
     }
 }
 
