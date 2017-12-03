@@ -11,10 +11,10 @@
         <div id="post-body" class="metabox-holder">
             <div class="postbox-container">
 
-                <div id="structure-editor-container" class="postbox" style="display: none;">
+                <div id="editor-container" class="postbox" style="display: none;">
                     <h2 class="hndle"></h2>
                     <div class="inside">
-                        <div id="category-editor" style="display: none;">
+                        <div class="editor-instance" id="category-editor" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_save_category'); ?>
                                 <input type="hidden" name="category_id" value="new">
@@ -48,7 +48,7 @@
                             </form>
                         </div>
 
-                        <div id="forum-editor" style="display: none;">
+                        <div class="editor-instance" id="forum-editor" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_save_forum'); ?>
                                 <input type="hidden" name="forum_id" value="new">
@@ -90,7 +90,7 @@
                             </form>
                         </div>
 
-                        <div id="category-delete" class="delete-layer" style="display: none;">
+                        <div class="editor-instance delete-layer" id="category-delete" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_category'); ?>
                                 <input type="hidden" name="category-id" value="0">
@@ -103,7 +103,7 @@
                             </form>
                         </div>
 
-                        <div id="forum-delete" class="delete-layer" style="display: none;">
+                        <div class="editor-instance delete-layer" id="forum-delete" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_forum'); ?>
                                 <input type="hidden" name="forum-id" value="0">

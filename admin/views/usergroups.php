@@ -11,10 +11,10 @@
         <div id="post-body" class="metabox-holder">
             <div class="postbox-container">
 
-                <div id="usergroup-editor-container" class="postbox" style="display: none;">
+                <div id="editor-container" class="postbox" style="display: none;">
                     <h2 class="hndle"></h2>
                     <div class="inside">
-                        <div id="usergroup-editor" style="display: none;">
+                        <div class="editor-instance" id="usergroup-editor" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_save_usergroup'); ?>
                                 <input type="hidden" name="usergroup_id" value="new">
@@ -38,7 +38,7 @@
                             </form>
                         </div>
 
-                        <div id="usergroup-delete" class="delete-layer" style="display: none;">
+                        <div class="editor-instance delete-layer" id="usergroup-delete" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_usergroup'); ?>
                                 <input type="hidden" name="usergroup-id" value="0">
@@ -51,7 +51,7 @@
                             </form>
                         </div>
 
-                        <div id="usergroup-category-editor" style="display: none;">
+                        <div class="editor-instance" id="usergroup-category-editor" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_save_usergroup_category'); ?>
                                 <input type="hidden" name="usergroup_category_id" value="new">
@@ -70,7 +70,7 @@
                             </form>
                         </div>
 
-                        <div id="usergroup-category-delete" class="delete-layer" style="display: none;">
+                        <div class="editor-instance delete-layer" id="usergroup-category-delete" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_usergroup_category'); ?>
                                 <input type="hidden" name="usergroup-category-id" value="0">

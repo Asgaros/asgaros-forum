@@ -164,7 +164,7 @@ if (!defined('ABSPATH')) exit;
         $profileOption = checked(!empty($asgarosforum->options['enable_profiles']), true, false);
         ?>
         <p>
-            <input type="checkbox" name="enable_profiles" id="enable_profiles" <?php checked(!empty($asgarosforum->options['enable_profiles'])); ?>>
+            <input type="checkbox" name="enable_profiles" id="enable_profiles" class="show_hide_initiator" data-hide-class="profile-option" <?php checked(!empty($asgarosforum->options['enable_profiles'])); ?>>
             <label for="enable_profiles"><?php _e('Enable profiles', 'asgaros-forum'); ?></label>
         </p>
         <p class="profile-option" <?php if (!$profileOption) { echo 'style="display: none;"'; } ?>>
@@ -176,7 +176,7 @@ if (!defined('ABSPATH')) exit;
         $uploadsOption = checked(!empty($asgarosforum->options['allow_file_uploads']), true, false);
         ?>
         <p>
-            <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" <?php echo $uploadsOption; ?>>
+            <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" class="show_hide_initiator" data-hide-class="uploads-option" <?php echo $uploadsOption; ?>>
             <label for="allow_file_uploads"><?php _e('Allow file uploads', 'asgaros-forum'); ?></label>
         </p>
         <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
