@@ -1,3 +1,4 @@
+/* PANEL */
 #asgaros-panel {
     position: relative;
     overflow: auto;
@@ -97,48 +98,36 @@
 #af-structure .category-actions a {
     color: white;
 }
-#af-structure .category-actions a.category-editor-link:hover {
-    color: #73d5f5 !important;
-}
-#af-structure .category-actions a.category-delete-link:hover {
+#af-structure .category-actions .action-delete:hover {
     color: #ffb2b2 !important;
 }
-#af-structure .dashicons-before,
-#af-usergroups .dashicons-before {
+#af-structure .category-actions .action-edit:hover {
+    color: #73d5f5 !important;
+}
+#af-structure .dashicons-before {
     font-size: 14px;
     display: inline-block;
 }
-#af-structure a,
-#af-usergroups a {
+#af-structure a {
     text-decoration: none;
 }
-#af-structure .forum-delete-link,
-#af-usergroups .usergroup-delete-link {
+#af-structure .link-delete {
     color: #a00;
 }
-#af-structure .forum-delete-link:hover,
-#af-usergroups .usergroup-delete-link:hover {
+#af-structure .link-delete:hover {
     color: red;
 }
-#af-structure .padding-top,
-#af-usergroups .padding-top {
+#af-structure .padding-top {
     padding-top: 10px;
 }
-#af-structure .margin-bottom,
-#af-usergroups .margin-bottom {
+#af-structure .margin-bottom {
     margin-bottom: 20px;
 }
-#af-usergroups .margin-top {
-    margin-top: 20px;
-}
 #af-structure .tablenav,
-#af-structure .forums tfoot,
-#af-usergroups .tablenav,
-#af-usergroups .usergroups tfoot {
+#af-structure tfoot {
     display: none;
 }
-#af-structure .hndle,
-#af-usergroups .hndle {
+#af-structure .hndle {
     cursor: default;
     background-color: #2d89cc;
     color: white;
@@ -156,15 +145,12 @@
     border-left: 3px solid #ddd;
     padding-left: 5px
 }
-#af-structure th,
-#af-usergroups th {
+#af-structure th {
     width: initial;
     vertical-align: middle;
     color: #444;
 }
-#af-structure #category_name,
-#af-structure #forum_name,
-#af-usergroups #usergroup_name {
+#af-structure .element-name {
     padding: 3px 8px;
     font-size: 1.7em;
     line-height: 100%;
@@ -174,40 +160,29 @@
     margin: 0 0 3px;
     background-color: #fff;
 }
-#af-structure #category-editor .form-table th,
-#af-structure #forum-editor .form-table th,
-#af-usergroups #usergroup-editor .form-table th {
-    min-width: 150px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-#af-structure #category-editor .form-table td,
-#af-structure #forum-editor .form-table td,
-#af-usergroups #usergroup-editor .form-table td {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
 #af-structure #forum_description {
     width: 100%;
 }
-#af-structure #category-delete input[type="submit"],
-#af-structure #forum-delete input[type="submit"],
-#af-usergroups #usergroup-delete input[type="submit"] {
+#af-structure .delete-layer input[type="submit"] {
     background-color: #d54e21;
     border-color: #d54e21;
     color: #fff;
     text-shadow: none;
     box-shadow: none;
 }
-#af-structure .forum-name,
-#af-usergroups .usergroup-name {
-    font-weight: 600;
+#af-structure .postbox .form-table th {
+    min-width: 150px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#af-structure .postbox .form-table td {
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 #af-structure .forum-description {
     font-style: italic;
 }
-#af-structure .wp-list-table td,
-#af-usergroups .wp-list-table td {
+#af-structure .wp-list-table td {
     vertical-align: middle;
 }
 #af-structure .column-icon {
@@ -216,6 +191,9 @@
 #af-structure td.column-icon {
     padding-left: 5px;
 }
+#af-structure .make-bold {
+    font-weight: 600;
+}
 #af-structure .forum-icon:before {
     width: 40px;
     height: 40px;
@@ -223,22 +201,29 @@
 }
 #af-structure .column-status,
 #af-structure .column-sort,
-#af-usergroups .column-color,
-#af-usergroups .column-users {
+#af-structure .column-color,
+#af-structure .column-users {
     width: 125px;
 }
-#af-structure .column-actions,
-#af-usergroups .column-actions {
+#af-structure .column-actions {
     max-width: 400px;
 }
-#af-usergroups .usergroup-color {
+#af-structure .usergroup-color {
     width: 25px;
     height: 25px;
     border: 1px solid #000;
 }
 #af-structure #usergroups-editor th,
-#af-usergroups #usergroup-color-settings th {
+#af-structure #usergroup-color-settings th {
     vertical-align: top;
+}
+#af-structure #usergroups-editor td span {
+    display: block;
+    font-weight: 600;
+    padding: 15px 0 5px;
+}
+#af-structure #usergroups-editor td span:first-of-type {
+    padding-top: 0px;
 }
 #af-structure #usergroups-editor td label {
     display: block;

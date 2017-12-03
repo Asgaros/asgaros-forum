@@ -29,7 +29,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         $columnHTML = '';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_color" value="'.esc_html(stripslashes($item['color'])).'">';
-        $columnHTML .= '<a class="usergroup-name" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'">'.stripslashes($item['name']).'</a>';
+        $columnHTML .= '<a class="make-bold" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'">'.stripslashes($item['name']).'</a>';
 
         return $columnHTML;
     }
@@ -40,9 +40,9 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
 
     function column_actions($item) {
         $columnHTML = '';
-        $columnHTML .= '<a href="#" class="usergroup-delete-link" data-value-id="'.$item['term_id'].'" data-value-editor-title="'.__('Delete User Group', 'asgaros-forum').'">'.__('Delete', 'asgaros-forum').'</a>';
+        $columnHTML .= '<a href="#" class="usergroup-delete-link link-delete" data-value-id="'.$item['term_id'].'" data-value-editor-title="'.__('Delete User Group', 'asgaros-forum').'">'.__('Delete', 'asgaros-forum').'</a>';
         $columnHTML .= ' | ';
-        $columnHTML .= '<a href="#" class="usergroup-editor-link" data-value-id="'.$item['term_id'].'" data-value-editor-title="'.__('Edit User Group', 'asgaros-forum').'">'.__('Edit', 'asgaros-forum').'</a>';
+        $columnHTML .= '<a href="#" class="usergroup-editor-link" data-value-id="'.$item['term_id'].'" data-value-category="'.$item['parent'].'" data-value-editor-title="'.__('Edit User Group', 'asgaros-forum').'">'.__('Edit', 'asgaros-forum').'</a>';
 
         return $columnHTML;
     }
@@ -67,7 +67,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         foreach ($this->table_data as $usergroup) {
             $usergroup = (array)$usergroup; // Convert object to array.
             $usergroup['color'] = AsgarosForumUserGroups::getUserGroupColor($usergroup['term_id']);
-            $usergroup['users'] = AsgarosForumUserGroups::countUsersInUserGroup($usergroup['term_id']);
+            $usergroup['users'] = AsgarosForumUserGroups::countUsersOfUserGroup($usergroup['term_id']);
             $data[] = $usergroup;
         }
 

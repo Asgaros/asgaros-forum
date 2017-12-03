@@ -120,14 +120,38 @@
             $('#forum-editor input[name=forum_name]').focus();
         });
 
+        // Create/edit usergroup category dialog.
+        $('.usergroup-category-editor-link').click(function() {
+            resetUserGroupEditor();
+
+            var editor_title            = $(this).attr('data-value-editor-title');
+            var usergroup_category_id   = $(this).attr('data-value-id');
+            var usergroup_category_name = '';
+
+            if (usergroup_category_id !== 'new') {
+                usergroup_category_name = $('#usergroup_category_'+usergroup_category_id+'_name').val();
+            }
+
+            $('#usergroup-category-editor input[name=usergroup_category_id]').val(usergroup_category_id);
+            $('#usergroup-category-editor input[name=usergroup_category_name]').val(usergroup_category_name);
+
+            setUserGroupTitle(editor_title);
+
+            // Show editor.
+            $('#usergroup-category-editor').show();
+            $('#usergroup-editor-container').show();
+            $('#usergroup-category-editor input[name=usergroup_category_name]').focus();
+        });
+
         // Create/edit usergroup dialog.
         $('.usergroup-editor-link').click(function() {
             resetUserGroupEditor();
 
-            var editor_title    = $(this).attr('data-value-editor-title');
-            var usergroup_id    = $(this).attr('data-value-id');
-            var usergroup_name  = '';
-            var usergroup_color = '#444444';
+            var editor_title        = $(this).attr('data-value-editor-title');
+            var usergroup_id        = $(this).attr('data-value-id');
+            var usergroup_category  = $(this).attr('data-value-category');
+            var usergroup_name      = '';
+            var usergroup_color     = '#444444';
 
             if (usergroup_id !== 'new') {
                 usergroup_name  = $('#usergroup_'+usergroup_id+'_name').val();
@@ -135,6 +159,7 @@
             }
 
             $('#usergroup-editor input[name=usergroup_id]').val(usergroup_id);
+            $('#usergroup-editor input[name=usergroup_category]').val(usergroup_category);
             $('#usergroup-editor input[name=usergroup_name]').val(usergroup_name);
             $('#usergroup-editor input[name=usergroup_color]').val(usergroup_color);
             $('#usergroup-editor input[name=usergroup_color]').wpColorPicker('color', usergroup_color);
@@ -194,6 +219,21 @@
             $('#usergroup-editor-container').show();
         });
 
+        // Delete user group category dialog.
+        $('.usergroup-category-delete-link').click(function() {
+            resetUserGroupEditor();
+
+            var editor_title    = $(this).attr('data-value-editor-title');
+            var usergroup_category_id    = $(this).attr('data-value-id');
+
+            $('#usergroup-category-delete input[name=usergroup-category-id]').val(usergroup_category_id);
+
+            setUserGroupTitle(editor_title);
+
+            $('#usergroup-category-delete').show();
+            $('#usergroup-editor-container').show();
+        });
+
         $('#usergroup-editor-container .button-cancel').click(function() {
             resetUserGroupEditor();
         })
@@ -220,6 +260,8 @@
 
         function resetUserGroupEditor() {
             $('#usergroup-editor-container').hide();
+            $('#usergroup-category-editor').hide();
+            $('#usergroup-category-delete').hide();
             $('#usergroup-editor').hide();
             $('#usergroup-delete').hide();
         }

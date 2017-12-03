@@ -21,13 +21,13 @@
 
                                 <table class="form-table">
                                     <tr>
-                                        <th><label class="post-attributes-label-wrapper" for="category_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
-                                        <td><input type="text" size="100" maxlength="200" name="category_name" id="category_name" value="" required></td>
+                                        <th><label for="category_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                                        <td><input class="element-name" type="text" size="100" maxlength="200" name="category_name" id="category_name" value="" required></td>
                                     </tr>
                                     <tr>
                                         <th><label for="category_access"><?php _e('Access:', 'asgaros-forum'); ?></label></th>
                                         <td>
-                                            <select name="category_access">
+                                            <select name="category_access" id="category_access">
                                                 <option value="everyone"><?php _e('Everyone', 'asgaros-forum'); ?></option>
                                                 <option value="loggedin"><?php _e('Logged in users only', 'asgaros-forum'); ?></option>
                                                 <option value="moderator"><?php _e('Moderators only', 'asgaros-forum'); ?></option>
@@ -57,8 +57,8 @@
 
                                 <table class="form-table">
                                     <tr>
-                                        <th><label class="post-attributes-label-wrapper" for="forum_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
-                                        <td><input type="text" size="100" maxlength="255" name="forum_name" id="forum_name" value="" required></td>
+                                        <th><label for="forum_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                                        <td><input class="element-name" type="text" size="100" maxlength="255" name="forum_name" id="forum_name" value="" required></td>
                                     </tr>
                                     <tr>
                                         <th><label for="forum_description"><?php _e('Description:', 'asgaros-forum'); ?></label></th>
@@ -90,7 +90,7 @@
                             </form>
                         </div>
 
-                        <div id="category-delete" style="display: none;">
+                        <div id="category-delete" class="delete-layer" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_category'); ?>
                                 <input type="hidden" name="category-id" value="0">
@@ -103,7 +103,7 @@
                             </form>
                         </div>
 
-                        <div id="forum-delete" style="display: none;">
+                        <div id="forum-delete" class="delete-layer" style="display: none;">
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_forum'); ?>
                                 <input type="hidden" name="forum-id" value="0">
@@ -160,9 +160,9 @@
                                     ?>
                                 </span>
                                 <span class="category-actions">
-                                    <a href="#" class="category-delete-link" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
+                                    <a href="#" class="category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
                                     |
-                                    <a href="#" class="category-editor-link" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
+                                    <a href="#" class="category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
                                 </span>
                             </h2>
                             <div class="inside">

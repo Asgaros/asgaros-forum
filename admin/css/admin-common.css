@@ -7,3 +7,11 @@
     margin: 2px;
     display: inline-block;
 }
+.usergroups-editor span {
+    display: block;
+    font-weight: 600;
+    padding: 15px 0 5px;
+}
+.usergroups-editor span:first-of-type {
+    padding-top: 0px;
+}

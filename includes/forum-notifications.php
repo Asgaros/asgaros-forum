@@ -186,7 +186,7 @@ class AsgarosForumNotifications {
                 }
             }
 
-            $subscriberMails = AsgarosForumUserGroups::filterSubscriberMails($subscriberMails);
+            $subscriberMails = AsgarosForumUserGroups::filterSubscriberMails($subscriberMails, $asgarosforum->current_category);
             $subscriberMails = apply_filters('asgarosforum_subscriber_mails_new_post', $subscriberMails);
 
             add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
@@ -292,7 +292,7 @@ class AsgarosForumNotifications {
                 }
             }
 
-            $subscriberMails = AsgarosForumUserGroups::filterSubscriberMails($subscriberMails);
+            $subscriberMails = AsgarosForumUserGroups::filterSubscriberMails($subscriberMails, $asgarosforum->current_category);
             $subscriberMails = apply_filters('asgarosforum_subscriber_mails_new_topic', $subscriberMails);
 
             if ($asgarosforum->options['admin_subscriptions']) {

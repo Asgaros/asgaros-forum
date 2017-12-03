@@ -88,6 +88,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Categories for user groups
+* Fixed: Administrators didnt get notifications in some cases when using user groups
+* Changed: Show number of users for each user group in the user overview
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.6.4 =
 * Added: Option to automatically create topics for new blog posts

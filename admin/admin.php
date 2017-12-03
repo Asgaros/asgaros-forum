@@ -152,6 +152,17 @@ class AsgarosForumAdmin {
                 if (!empty($_POST['category-id']) && is_numeric($_POST['category-id'])) {
                     $this->delete_category($_POST['category-id']);
                 }
+            } else if (isset($_POST['af-create-edit-usergroup-category-submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_usergroup_category');
+
+                $saveStatus = AsgarosForumUserGroups::saveUserGroupCategory();
+
+                if (is_wp_error($saveStatus)) {
+                    $this->error = $saveStatus->get_error_message();
+                } else {
+                    $this->saved = $saveStatus;
+                }
             } else if (isset($_POST['af-create-edit-usergroup-submit'])) {
                 // Verify nonce first.
                 check_admin_referer('asgaros_forum_save_usergroup');
@@ -169,6 +180,13 @@ class AsgarosForumAdmin {
 
                 if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
                     AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
+                }
+            } else if (isset($_POST['asgaros-forum-delete-usergroup-category'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_delete_usergroup_category');
+
+                if (!empty($_POST['usergroup-category-id']) && is_numeric($_POST['usergroup-category-id'])) {
+                    AsgarosForumUserGroups::deleteUserGroupCategory($_POST['usergroup-category-id']);
                 }
             }
         }
@@ -246,7 +264,7 @@ class AsgarosForumAdmin {
 
             update_term_meta($category_id, 'category_access', $category_access);
             update_term_meta($category_id, 'order', $category_order);
-            AsgarosForumUserGroups::saveUserGroupsOfCategory($category_id);
+            AsgarosForumUserGroups::saveUserGroupsOfForumCategory($category_id);
 
             $this->saved = true;
         }

@@ -42,7 +42,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
             $columnHTML .= '<span class="parentforum">';
         }
 
-        $columnHTML .= sprintf('<span class="forum-name">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span></span>', stripslashes($item['name']), $item['id'], stripslashes($item['description']));
+        $columnHTML .= sprintf('<span class="make-bold">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span></span>', stripslashes($item['name']), $item['id'], stripslashes($item['description']));
 
         return $columnHTML;
     }
@@ -64,7 +64,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
 
     function column_actions($item) {
         $actionHTML = '';
-        $actionHTML .= '<a href="#" class="forum-delete-link" data-value-id="'.$item['id'].'" data-value-category="'.$item['parent_id'].'" data-value-editor-title="'.__('Delete Forum', 'asgaros-forum').'">';
+        $actionHTML .= '<a href="#" class="forum-delete-link link-delete" data-value-id="'.$item['id'].'" data-value-category="'.$item['parent_id'].'" data-value-editor-title="'.__('Delete Forum', 'asgaros-forum').'">';
         $actionHTML .= __('Delete Forum', 'asgaros-forum');
         $actionHTML .= '</a>';
         $actionHTML .= ' | ';
