@@ -346,7 +346,7 @@ class AsgarosForumNotifications {
 
         if ($asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
             echo '<div id="subscription-overview-link">';
-            echo '<a href="'.$asgarosforum->getLink('subscriptions').'"><span class="dashicons-before dashicons-email-alt"></span></a>';
+            echo '<a title="'.__('Subscriptions', 'asgaros-forum').'" href="'.$asgarosforum->getLink('subscriptions').'"><span class="dashicons-before dashicons-email-alt"></span></a>';
             echo '</div>';
         }
     }
