@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-30 16:30+0000\n"
+"POT-Creation-Date: 2017-12-05 19:31+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -41,8 +41,8 @@ msgid "Signature"
 msgstr ""
 
 #: admin/admin.php:58 admin/admin.php:105 admin/admin.php:105
-#: includes/forum-breadcrumbs.php:24 includes/forum-usergroups.php:35
-#: includes/forum.php:921
+#: includes/forum-breadcrumbs.php:24 includes/forum-usergroups.php:283
+#: includes/forum.php:913
 msgid "Forum"
 msgstr ""
 
@@ -54,16 +54,16 @@ msgstr ""
 msgid "Structure"
 msgstr ""
 
-#: admin/admin.php:108 admin/admin.php:108 includes/forum-usergroups.php:288
+#: admin/admin.php:108 admin/admin.php:108 includes/forum-usergroups.php:435
 #: admin/views/usergroups.php:5
 msgid "User Groups"
 msgstr ""
 
-#: admin/admin.php:346
+#: admin/admin.php:364
 msgid "Official Support Forum"
 msgstr ""
 
-#: admin/admin.php:348
+#: admin/admin.php:366
 msgid "Donate"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgid "Edit Post"
 msgstr ""
 
 #: includes/forum-breadcrumbs.php:70 includes/forum-editor.php:116
-#: includes/forum.php:329 includes/forum.php:821
+#: includes/forum.php:329 includes/forum.php:813
 msgid "New Topic"
 msgstr ""
 
@@ -89,8 +89,8 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/forum-breadcrumbs.php:82 includes/forum.php:335
-#: admin/views/options.php:135
+#: includes/forum-breadcrumbs.php:82 includes/forum-notifications.php:349
+#: includes/forum.php:335 admin/views/options.php:135
 msgid "Subscriptions"
 msgstr ""
 
@@ -120,6 +120,14 @@ msgstr ""
 msgid "You are not allowed to upload files with that file size."
 msgstr ""
 
+#: includes/forum-database.php:189
+msgid "Custom User Groups"
+msgstr ""
+
+#: includes/forum-database.php:207
+msgid "Example User Group"
+msgstr ""
+
 #: includes/forum-editor.php:98 includes/views/post-element.php:53
 msgid "Quote from"
 msgstr ""
@@ -140,7 +148,8 @@ msgstr ""
 #: includes/forum-editor.php:167 includes/forum-editor.php:172
 #: admin/views/structure.php:46 admin/views/structure.php:88
 #: admin/views/structure.php:101 admin/views/structure.php:115
-#: admin/views/usergroups.php:35 admin/views/usergroups.php:48
+#: admin/views/usergroups.php:36 admin/views/usergroups.php:49
+#: admin/views/usergroups.php:68 admin/views/usergroups.php:81
 msgid "Cancel"
 msgstr ""
 
@@ -197,16 +206,16 @@ msgid ""
 "/>Link to the new topic:<br /><a href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/forum-notifications.php:360 includes/forum-statistics.php:28
+#: includes/forum-notifications.php:362 includes/forum-statistics.php:28
 #: includes/views/forum.php:36
 msgid "Topics"
 msgstr ""
 
-#: includes/forum-notifications.php:368
+#: includes/forum-notifications.php:371
 msgid "Forums"
 msgstr ""
 
-#: includes/forum-notifications.php:385
+#: includes/forum-notifications.php:389
 msgid "No subscriptions yet!"
 msgstr ""
 
@@ -271,8 +280,8 @@ msgstr ""
 msgid "Banned"
 msgstr ""
 
-#: includes/forum-profile.php:124 includes/forum-usergroups.php:150
-#: includes/forum-usergroups.php:160
+#: includes/forum-profile.php:124 includes/forum-usergroups.php:332
+#: includes/forum-usergroups.php:349
 msgid "User Groups:"
 msgstr ""
 
@@ -348,9 +357,10 @@ msgstr ""
 msgid "Uploaded files:"
 msgstr ""
 
-#: includes/forum-uploads.php:201 includes/forum.php:850 includes/forum.php:891
+#: includes/forum-uploads.php:201 includes/forum.php:842 includes/forum.php:883
 #: admin/tables/admin-usergroups-table.php:43 admin/views/structure.php:100
-#: admin/views/structure.php:114 admin/views/usergroups.php:47
+#: admin/views/structure.php:114 admin/views/usergroups.php:48
+#: admin/views/usergroups.php:80
 msgid "Delete"
 msgstr ""
 
@@ -374,25 +384,25 @@ msgstr ""
 msgid "Allowed filetypes:"
 msgstr ""
 
-#: includes/forum-usergroups.php:166
+#: includes/forum-usergroups.php:360
 msgid ""
 "When user groups are selected, only users of the selected user groups will "
 "have access to the category."
 msgstr ""
 
-#: includes/forum-usergroups.php:326
+#: includes/forum-usergroups.php:471
 msgid "Forum:"
 msgstr ""
 
-#: includes/forum-usergroups.php:375
+#: includes/forum-usergroups.php:523
 msgid "Add to"
 msgstr ""
 
-#: includes/forum-usergroups.php:379
+#: includes/forum-usergroups.php:527
 msgid "Remove from"
 msgstr ""
 
-#: includes/forum-usergroups.php:434
+#: includes/forum-usergroups.php:585
 msgid "User groups assignments updated."
 msgstr ""
 
@@ -415,12 +425,12 @@ msgstr[1] ""
 msgid "by"
 msgstr ""
 
-#: includes/forum-widgets.php:119 includes/forum.php:772
+#: includes/forum-widgets.php:119 includes/forum.php:764
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: includes/forum-widgets.php:126 includes/forum.php:774
+#: includes/forum-widgets.php:126 includes/forum.php:766
 msgid "No topics yet!"
 msgstr ""
 
@@ -489,7 +499,7 @@ msgstr ""
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: includes/forum.php:544 includes/forum.php:845
+#: includes/forum.php:544 includes/forum.php:837
 msgid "Move"
 msgstr ""
 
@@ -497,71 +507,71 @@ msgstr ""
 msgid "You are not allowed to move topics."
 msgstr ""
 
-#: includes/forum.php:723
+#: includes/forum.php:715
 msgid "Deleted user"
 msgstr ""
 
-#: includes/forum.php:729
+#: includes/forum.php:721
 msgid "Guest"
 msgstr ""
 
-#: includes/forum.php:771 includes/views/topic-element.php:19
+#: includes/forum.php:763 includes/views/topic-element.php:19
 msgid "By"
 msgstr ""
 
-#: includes/forum.php:838
+#: includes/forum.php:830
 msgid "Reply"
 msgstr ""
 
-#: includes/forum.php:849 includes/forum.php:890
+#: includes/forum.php:841 includes/forum.php:882
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: includes/forum.php:856
+#: includes/forum.php:848
 msgid "Undo Sticky"
 msgstr ""
 
-#: includes/forum.php:861
+#: includes/forum.php:853
 msgid "Sticky"
 msgstr ""
 
-#: includes/forum.php:868
+#: includes/forum.php:860
 msgid "Open"
 msgstr ""
 
-#: includes/forum.php:873
+#: includes/forum.php:865
 msgid "Close"
 msgstr ""
 
-#: includes/forum.php:899 admin/tables/admin-usergroups-table.php:45
+#: includes/forum.php:891 admin/tables/admin-usergroups-table.php:45
 msgid "Edit"
 msgstr ""
 
-#: includes/forum.php:908
+#: includes/forum.php:900
 msgid "Quote"
 msgstr ""
 
-#: includes/forum.php:945
+#: includes/forum.php:937
 msgid "Logout"
 msgstr ""
 
-#: includes/forum.php:951
+#: includes/forum.php:943
 msgid "Login"
 msgstr ""
 
-#: includes/forum.php:957
+#: includes/forum.php:949
 msgid "Register"
 msgstr ""
 
-#: includes/forum.php:1088
+#: includes/forum.php:1080
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: includes/forum.php:1089
+#: includes/forum.php:1081
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: includes/forum.php:1090
+#: includes/forum.php:1082
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
@@ -594,7 +604,8 @@ msgstr ""
 
 #: admin/tables/admin-structure-table.php:87
 #: admin/tables/admin-usergroups-table.php:52 admin/views/structure.php:24
-#: admin/views/structure.php:60 admin/views/usergroups.php:24
+#: admin/views/structure.php:60 admin/views/usergroups.php:25
+#: admin/views/usergroups.php:61
 msgid "Name:"
 msgstr ""
 
@@ -624,7 +635,7 @@ msgstr ""
 msgid "Edit User Group"
 msgstr ""
 
-#: admin/tables/admin-usergroups-table.php:53 admin/views/usergroups.php:28
+#: admin/tables/admin-usergroups-table.php:53 admin/views/usergroups.php:29
 msgid "Color:"
 msgstr ""
 
@@ -833,7 +844,7 @@ msgid "Moderators only"
 msgstr ""
 
 #: admin/views/structure.php:45 admin/views/structure.php:87
-#: admin/views/usergroups.php:34
+#: admin/views/usergroups.php:35 admin/views/usergroups.php:67
 msgid "Save"
 msgstr ""
 
@@ -863,14 +874,18 @@ msgstr ""
 
 #: admin/views/structure.php:122 admin/views/structure.php:123
 #: admin/views/structure.php:184 admin/views/structure.php:185
+#: admin/views/usergroups.php:88 admin/views/usergroups.php:89
+#: admin/views/usergroups.php:127 admin/views/usergroups.php:128
 msgid "Add Category"
 msgstr ""
 
 #: admin/views/structure.php:163 admin/views/structure.php:163
+#: admin/views/usergroups.php:105 admin/views/usergroups.php:105
 msgid "Delete Category"
 msgstr ""
 
 #: admin/views/structure.php:165 admin/views/structure.php:165
+#: admin/views/usergroups.php:107 admin/views/usergroups.php:107
 msgid "Edit Category"
 msgstr ""
 
@@ -882,20 +897,22 @@ msgstr ""
 msgid "User Groups updated."
 msgstr ""
 
-#: admin/views/usergroups.php:44
+#: admin/views/usergroups.php:45
 msgid "Are you sure you want to delete this user group?"
 msgstr ""
 
-#: admin/views/usergroups.php:58
-msgid "Default User Groups"
+#: admin/views/usergroups.php:77
+msgid ""
+"Deleting this category will also permanently delete all user groups inside "
+"it. Are you sure you want to delete this category?"
 msgstr ""
 
-#: admin/views/usergroups.php:66
-msgid "Custom User Groups"
-msgstr ""
-
-#: admin/views/usergroups.php:78 admin/views/usergroups.php:79
+#: admin/views/usergroups.php:119 admin/views/usergroups.php:120
 msgid "Add User Group"
+msgstr ""
+
+#: admin/views/usergroups.php:136
+msgid "Default User Groups"
 msgstr ""
 
 #: includes/views/forum-element.php:37 includes/views/forum.php:24
