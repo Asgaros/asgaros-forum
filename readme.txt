@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Categories for user groups
 * Fixed: Administrators didnt get notifications in some cases when using user groups
 * Fixed: Hide topics and forums from subscription list when a user has no access to it
+* Fixed: Display issues with some themes
 * Changed: Show number of users for each user group in the user overview
 * Changed: Minor design changes
 * Performance improvements and code optimizations

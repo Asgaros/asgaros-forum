@@ -601,6 +601,7 @@
     padding: 7px;
     background-color: rgba(0, 0, 0, 0.03);
     word-wrap: break-word;
+    position: initial; /* comp */
 }
 #af-wrapper .post-author-marker {
     background-color: #2d89cc;
