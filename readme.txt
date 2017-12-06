@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Only create automatic topics for new blog posts instead for all post types
 = 1.6.6 =
 * Fixed: Do additional error checks during database upgrade to prevent some errors during an update
 = 1.6.5 =

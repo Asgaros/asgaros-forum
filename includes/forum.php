@@ -1126,7 +1126,7 @@ class AsgarosForum {
     }
 
     public function createBlogTopic($new_status, $old_status, $post) {
-        if ($new_status == 'publish' && $old_status != 'publish') {
+        if ($post->post_type == 'post' && $new_status == 'publish' && $old_status != 'publish') {
             $forumID = $this->options['create_blog_topics_id'];
 
             if (AsgarosForumContent::forumExists($forumID)) {
