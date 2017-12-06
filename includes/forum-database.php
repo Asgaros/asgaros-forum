@@ -189,23 +189,26 @@ class AsgarosForumDatabase {
                 $defaultCategoryName = __('Custom User Groups', 'asgaros-forum');
                 $defaultCategory = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
 
-                // Now get all existing elements.
-                $existingCategories = AsgarosForumUserGroups::getUserGroupCategories();
+                // Ensure that no error happened.
+                if (!is_wp_error($defaultCategory)) {
+                    // Now get all existing elements.
+                    $existingCategories = AsgarosForumUserGroups::getUserGroupCategories();
 
-                // When there is only one element, then it is the newly created category.
-                if (count($existingCategories) > 1) {
-                    // Move every existing user group into the new default category.
-                    foreach ($existingCategories as $category) {
-                        // But ensure to not move the new default category into it.
-                        if ($category->term_id != $defaultCategory['term_id']) {
-                            $color = AsgarosForumUserGroups::getUserGroupColor($category->term_id);
-                            AsgarosForumUserGroups::updateUserGroup($category->term_id, $defaultCategory['term_id'], $category->name, $color);
+                    // When there is only one element, then it is the newly created category.
+                    if (count($existingCategories) > 1) {
+                        // Move every existing user group into the new default category.
+                        foreach ($existingCategories as $category) {
+                            // But ensure to not move the new default category into it.
+                            if ($category->term_id != $defaultCategory['term_id']) {
+                                $color = AsgarosForumUserGroups::getUserGroupColor($category->term_id);
+                                AsgarosForumUserGroups::updateUserGroup($category->term_id, $defaultCategory['term_id'], $category->name, $color);
+                            }
                         }
+                    } else {
+                        // Add an example user group.
+                        $defaultUserGroupName = __('Example User Group', 'asgaros-forum');
+                        $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
                     }
-                } else {
-                    // Add an example user group.
-                    $defaultUserGroupName = __('Example User Group', 'asgaros-forum');
-                    $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
                 }
             }
 
