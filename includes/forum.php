@@ -1129,8 +1129,11 @@ class AsgarosForum {
         if ($post->post_type == 'post' && $new_status == 'publish' && $old_status != 'publish') {
             $forumID = $this->options['create_blog_topics_id'];
 
+            $post_title = apply_filters('asgarosforum_filter_automatic_topic_title', $post->post_title, $post);
+            $post_content = apply_filters('asgarosforum_filter_automatic_topic_content', $post->post_content, $post);
+
             if (AsgarosForumContent::forumExists($forumID)) {
-            	AsgarosForumContent::insertTopic($forumID, $post->post_title, $post->post_content);
+            	AsgarosForumContent::insertTopic($forumID, $post_title, $post_content);
             }
         }
     }
