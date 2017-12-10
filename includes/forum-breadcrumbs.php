@@ -83,6 +83,10 @@ class AsgarosForumBreadCrumbs {
                 self::addToBreadCrumbsList($elementLink, $elementTitle);
             } else if ($asgarosforum->current_view === 'profile') {
                 $asgarosforum->profile->setBreadCrumbs();
+            } else if ($asgarosforum->current_view === 'members') {
+                $elementLink = $asgarosforum->getLink('current');
+                $elementTitle = __('Members', 'asgaros-forum');
+                self::addToBreadCrumbsList($elementLink, $elementTitle);
             }
 
             // Render breadcrumbs links.

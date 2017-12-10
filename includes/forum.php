@@ -48,6 +48,7 @@ class AsgarosForum {
         'allow_signatures'          => false,
         'enable_search'             => true,
         'enable_profiles'           => true,
+        'enable_memberslist'        => true,
         'show_login_button'         => true,
         'show_logout_button'        => true,
         'show_register_button'      => true,
@@ -169,19 +170,25 @@ class AsgarosForum {
             case 'markallread':
             break;
             case 'subscriptions':
-                // Go back to overview when subscriptions are not enabled.
+                // Go back to the overview when this functionality is not enabled or the user is not logged-in.
                 if (!$this->options['allow_subscriptions'] || !is_user_logged_in()) {
                     $this->current_view = 'overview';
                 }
             break;
             case 'search':
-                // Go back to overview when search is not enabled.
+                // Go back to the overview when this functionality is not enabled.
                 if (!$this->options['enable_search']) {
                     $this->current_view = 'overview';
                 }
             break;
             case 'profile':
                 $this->profile->setCurrentView();
+                break;
+            case 'members':
+                // Go back to the overview when this functionality is not enabled.
+                if (!$this->options['enable_memberslist']) {
+                    $this->current_view = 'overview';
+                }
                 break;
             default:
                 $this->current_view = 'overview';
@@ -335,6 +342,8 @@ class AsgarosForum {
                 $mainTitle = __('Subscriptions', 'asgaros-forum');
             } else if ($this->current_view === 'profile') {
                 $mainTitle = $this->profile->getCurrentTitle();
+            } else if ($this->current_view === 'members') {
+                $mainTitle = __('Members', 'asgaros-forum');
             }
         }
 
@@ -425,6 +434,9 @@ class AsgarosForum {
                     break;
                     case 'profile':
                         $this->profile->showProfile();
+                    break;
+                    case 'members':
+                        AsgarosForumMembersList::showMembersList();
                     break;
                     default:
                         $this->overview();
@@ -912,6 +924,7 @@ class AsgarosForum {
             echo '<div id="forum-header-container-top">';
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
                 $this->profile->renderCurrentUsersProfileLink();
+                AsgarosForumMembersList::renderMembersListLink();
 
                 $this->showLoginLink();
                 $this->showRegisterLink();
@@ -1136,5 +1149,11 @@ class AsgarosForum {
             	AsgarosForumContent::insertTopic($forumID, $post_title, $post_content);
             }
         }
+    }
+
+    // Returns the amount of users.
+    public function countUsers() {
+        $users = count_users();
+        return $users['total_users'];
     }
 }

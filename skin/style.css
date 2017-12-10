@@ -218,7 +218,8 @@
     padding: 0;
 }
 #af-wrapper .forum,
-#af-wrapper .topic {
+#af-wrapper .topic,
+#af-wrapper .member {
     display: table;
     height: 60px;
     width: 100%;
@@ -231,23 +232,29 @@
 #af-wrapper .topic-status,
 #af-wrapper .topic-name,
 #af-wrapper .topic-stats,
-#af-wrapper .topic-poster {
+#af-wrapper .topic-poster,
+#af-wrapper .member-avatar,
+#af-wrapper .member-name,
+#af-wrapper .member-posts {
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
     padding: 4px;
 }
 #af-wrapper .forum-status,
-#af-wrapper .topic-status {
+#af-wrapper .topic-status,
+#af-wrapper .member-avatar {
     width: 64px;
     text-align: center;
 }
 #af-wrapper .forum-name,
-#af-wrapper .topic-name {
+#af-wrapper .topic-name,
+#af-wrapper .member-name {
     width: auto;
 }
 #af-wrapper .forum-stats,
-#af-wrapper .topic-stats {
+#af-wrapper .topic-stats,
+#af-wrapper .member-posts {
     width: 100px;
     text-align: right;
     padding-right: 10px;
@@ -804,6 +811,11 @@
 }
 #af-wrapper .profile-link:hover {
     text-decoration: underline;
+}
+
+/* MEMBERS LIST */
+#af-wrapper .member-avatar img {
+    vertical-align: middle;
 }
 
 /* ICONS */

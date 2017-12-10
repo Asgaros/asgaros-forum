@@ -57,6 +57,7 @@ class AsgarosForumRewrite {
         $links['post_add']      = add_query_arg(array('view' => 'addpost'), $links['home']);
         $links['post_edit']     = add_query_arg(array('view' => 'editpost'), $links['home']);
         $links['markallread']   = add_query_arg(array('view' => 'markallread'), $links['home']);
+        $links['members']       = add_query_arg(array('view' => 'members'), $links['home']);
         $links['current']       = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
 
         $links = self::$asgarosforum->profile->setLinks($links);

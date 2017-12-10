@@ -70,6 +70,10 @@ class AsgarosForumPagination {
             $count = count($count);
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
             $select_url = 'search';
+        } else if ($location === 'members') {
+            $count = $this->asgarosforum->countUsers();
+            $num_pages = ceil($count / 25);
+            $select_url = 'members';
         }
 
         // Only show pagination when there is more than one page.

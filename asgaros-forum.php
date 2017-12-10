@@ -49,6 +49,7 @@ require('includes/forum-pagination.php');
 require('includes/forum-online.php');
 require('includes/forum-usergroups.php');
 require('includes/forum-profile.php');
+require('includes/forum-memberslist.php');
 require('admin/admin.php');
 require('admin/tables/admin-structure-table.php');
 require('admin/tables/admin-usergroups-table.php');

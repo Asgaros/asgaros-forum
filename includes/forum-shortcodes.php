@@ -68,10 +68,10 @@ class AsgarosForumShortcodes {
                     AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
                 } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
                     $forumID = $atts['forum'];
-                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search', 'subscriptions', 'profile');
+                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search', 'subscriptions', 'profile', 'members');
 
                     // Ensure that we are in the correct element.
-                    if (self::$asgarosforum->current_forum != $forumID && self::$asgarosforum->parent_forum != $forumID && self::$asgarosforum->current_view != 'search' && self::$asgarosforum->current_view != 'subscriptions' && self::$asgarosforum->current_view != 'profile') {
+                    if (self::$asgarosforum->current_forum != $forumID && self::$asgarosforum->parent_forum != $forumID && self::$asgarosforum->current_view != 'search' && self::$asgarosforum->current_view != 'subscriptions' && self::$asgarosforum->current_view != 'profile' && self::$asgarosforum->current_view != 'members') {
                         self::$asgarosforum->setParents($forumID, 'forum');
                         self::$asgarosforum->current_view = 'forum';
                     } else if (!in_array(self::$asgarosforum->current_view, $allowedViews)) {
@@ -86,7 +86,7 @@ class AsgarosForumShortcodes {
                     self::$includeCategories = explode(',', $atts['category']);
 
                     // Ensure that we are in the correct element.
-                    if (!in_array(self::$asgarosforum->current_category, self::$includeCategories) && self::$asgarosforum->current_view != 'search' && self::$asgarosforum->current_view != 'subscriptions' && self::$asgarosforum->current_view != 'profile') {
+                    if (!in_array(self::$asgarosforum->current_category, self::$includeCategories) && self::$asgarosforum->current_view != 'search' && self::$asgarosforum->current_view != 'subscriptions' && self::$asgarosforum->current_view != 'profile' && self::$asgarosforum->current_view != 'members') {
                         self::$asgarosforum->current_category   = false;
                         self::$asgarosforum->parent_forum       = false;
                         self::$asgarosforum->current_forum      = false;
