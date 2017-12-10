@@ -814,6 +814,9 @@
 }
 
 /* MEMBERS LIST */
+#af-wrapper .member-name {
+    font-weight: 600;
+}
 #af-wrapper .member-avatar img {
     vertical-align: middle;
 }
