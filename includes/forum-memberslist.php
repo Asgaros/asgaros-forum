@@ -62,32 +62,25 @@ class AsgarosForumMembersList {
     public static function getMembers() {
         global $asgarosforum, $wpdb;
 
-        // Some default variables.
-        $allUsersSearchable = array();
-        $postsCounterSearchable = array();
-
         // Get all existing users.
         $allUsers = get_users();
-
-        // Change the structure of the results for better searchability.
-        foreach ($allUsers as $user) {
-            $allUsersSearchable[$user->ID] = $user;
-        }
 
         // Now get the amount of forum posts for all users.
         $postsCounter = $wpdb->get_results("SELECT author_id, COUNT(id) AS counter FROM {$asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
 
         // Change the structure of the results for better searchability.
+        $postsCounterSearchable = array();
+
         foreach ($postsCounter as $postCounter) {
             $postsCounterSearchable[$postCounter->author_id] = $postCounter->counter;
         }
 
         // Now add the numbers of posts to the users array when they are listed in the post counter.
-        foreach ($allUsersSearchable as $key => $user) {
-            if (isset($postsCounterSearchable[$key])) {
-                $allUsersSearchable[$key]->forum_posts = $postsCounterSearchable[$key];
+        foreach ($allUsers as $key => $user) {
+            if (isset($postsCounterSearchable[$user->ID])) {
+                $allUsers[$key]->forum_posts = $postsCounterSearchable[$user->ID];
             } else {
-                $allUsersSearchable[$key]->forum_posts = 0;
+                $allUsers[$key]->forum_posts = 0;
             }
         }
 
@@ -95,7 +88,7 @@ class AsgarosForumMembersList {
         $columnForumPosts = array();
         $columnDisplayName = array();
 
-        foreach ($allUsersSearchable as $key => $user) {
+        foreach ($allUsers as $key => $user) {
             $columnForumPosts[$key] = $user->forum_posts;
             $columnDisplayName[$key] = $user->display_name;
         }
@@ -104,8 +97,8 @@ class AsgarosForumMembersList {
         $columnDisplayName = array_map('strtolower', $columnDisplayName);
 
         // Now sort the array based on the columns.
-        array_multisort($columnForumPosts, SORT_NUMERIC, SORT_DESC, $columnDisplayName, SORT_STRING, SORT_ASC, $allUsersSearchable);
+        array_multisort($columnForumPosts, SORT_NUMERIC, SORT_DESC, $columnDisplayName, SORT_STRING, SORT_ASC, $allUsers);
 
-        return $allUsersSearchable;
+        return $allUsers;
     }
 }
