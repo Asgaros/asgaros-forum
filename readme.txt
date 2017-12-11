@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/asgaros
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.7
 Tested up to: 4.9
-Requires PHP: 5.6
+Requires PHP: 5.2
 Stable tag: 1.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to hide members list for guests
+* Fixed: Parse error when using some older versions of PHP
 = 1.6.7 =
 * Added: Members list
 * Added: asgarosforum_filter_members_link filter

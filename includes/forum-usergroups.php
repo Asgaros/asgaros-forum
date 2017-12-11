@@ -171,11 +171,14 @@ class AsgarosForumUserGroups {
         $userGroups = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $include));
 
         // Now remove the categories so we only have user groups.
-        $userGroups = array_filter($userGroups, function($term) {
-            return ($term->parent != 0);
-        });
+        $userGroups = array_filter($userGroups, array('AsgarosForumUserGroups', 'getUserGroupsArrayFilter'));
 
         return $userGroups;
+    }
+
+    // Explicit callback function for array_filter() to support older versions of PHP.
+    public static function getUserGroupsArrayFilter($term) {
+        return ($term->parent != 0);
     }
 
     // Returns all user groups of a specific category.
