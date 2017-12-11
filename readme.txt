@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to hide members list for guests
 = 1.6.7 =
 * Added: Members list
 * Added: asgarosforum_filter_members_link filter

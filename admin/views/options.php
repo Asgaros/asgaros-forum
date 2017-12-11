@@ -113,6 +113,10 @@ if (!defined('ABSPATH')) exit;
             <label for="enable_memberslist"><?php _e('Enable members list', 'asgaros-forum'); ?></label>
         </p>
         <p>
+            <input type="checkbox" name="memberslist_loggedin_only" id="memberslist_loggedin_only" <?php checked(!empty($asgarosforum->options['memberslist_loggedin_only'])); ?>>
+            <label for="memberslist_loggedin_only"><?php _e('Hide members list for guests', 'asgaros-forum'); ?></label>
+        </p>
+        <p>
             <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
             <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
         </p>

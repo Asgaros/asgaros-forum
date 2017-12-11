@@ -3,10 +3,20 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumMembersList {
+    public static function functionalityEnabled() {
+        global $asgarosforum;
+
+        if (!$asgarosforum->options['enable_memberslist'] || ($asgarosforum->options['memberslist_loggedin_only'] && !is_user_logged_in())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static function renderMembersListLink() {
         global $asgarosforum;
 
-        if ($asgarosforum->options['enable_memberslist']) {
+        if (self::functionalityEnabled()) {
             $membersLink = $asgarosforum->getLink('members');
             $membersLink = apply_filters('asgarosforum_filter_members_link', $membersLink);
 
