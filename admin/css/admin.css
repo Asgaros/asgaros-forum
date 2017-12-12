@@ -65,9 +65,6 @@
     background-color: #fafafa;
 }
 /* OPTIONS */
-#af-options .clear {
-    clear: both;
-}
 #af-options input {
     vertical-align: middle;
 }
@@ -75,15 +72,8 @@
     display: inline-block;
     min-width: 250px;
 }
-#af-options input[type="submit"],
-#af-options h3 {
-    margin-top: 25px;
-}
-#af-options .wp-color-result {
-    margin: 0;
-}
-#af-options .hide {
-    display: none;
+#af-options .custom-color-selector label {
+    min-width: initial;
 }
 #af-options .description {
     vertical-align: middle;
@@ -127,6 +117,7 @@
 #af-structure tfoot {
     display: none;
 }
+#af-options .hndle,
 #af-structure .hndle {
     cursor: default;
     background-color: #2d89cc;

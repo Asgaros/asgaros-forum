@@ -90,6 +90,8 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to hide members list for guests
 * Fixed: Parse error when using some older versions of PHP
+* Changed: Design changes for the administration area
+* Performance improvements and code optimizations
 = 1.6.7 =
 * Added: Members list
 * Added: asgarosforum_filter_members_link filter
