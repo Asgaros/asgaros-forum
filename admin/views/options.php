@@ -273,6 +273,10 @@ if (!defined('ABSPATH')) exit;
                                 <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
                                 <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#ffffff">
                             </p>
+                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                                <label for="custom_border_color"><?php _e('Border color:', 'asgaros-forum'); ?></label>
+                                <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_border_color']); ?>" class="color-picker" name="custom_border_color" id="custom_border_color" data-default-color="#eeeeee">
+                            </p>
                         </div>
                     </div>
 

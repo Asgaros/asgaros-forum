@@ -65,6 +65,7 @@ class AsgarosForum {
         'custom_color'              => '#2d89cc',
         'custom_text_color'         => '#444444',
         'custom_background_color'   => '#ffffff',
+        'custom_border_color'       => '#eeeeee',
         'theme'                     => 'default',
         'create_blog_topics'        => false,
         'create_blog_topics_id'     => 0

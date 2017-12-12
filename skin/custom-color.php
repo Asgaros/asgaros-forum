@@ -54,4 +54,30 @@ if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/'
 }
 <?php
 }
+
+if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['border-color'])) {
+	$border_color = '#'.$_GET['border-color'];
+?>
+#af-wrapper .forum,
+#af-wrapper .topic,
+#af-wrapper .member,
+#af-wrapper .forum-poster,
+#af-wrapper .topic-poster,
+#af-wrapper .subscription,
+#af-wrapper .content-element,
+#af-wrapper .forum-post-header,
+#af-wrapper #statistics-body,
+#af-wrapper #statistics .statistics-element,
+#af-wrapper #statistics-online-users,
+#af-wrapper #forum-profile,
+#af-wrapper .editor-row,
+#af-wrapper .editor-row-subject,
+#af-wrapper .sticky-bottom,
+#af-wrapper .post-author,
+#af-wrapper .post-element,
+#af-wrapper .forum-subforums {
+    border-color: <?php echo $border_color; ?> !important;
+}
+<?php
+}
 ?>
