@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to change the border color
 * Added: Option to hide members list for guests
 * Fixed: Parse error when using some older versions of PHP
 * Fixed: Wrong stylings when using custom colors
