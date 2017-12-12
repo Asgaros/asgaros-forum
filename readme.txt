@@ -92,6 +92,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Parse error when using some older versions of PHP
 * Fixed: Wrong stylings when using custom colors
 * Changed: Design changes for the administration area
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.6.7 =
 * Added: Members list
