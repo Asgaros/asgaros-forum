@@ -48,7 +48,8 @@ if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/'
 #af-wrapper .content-element,
 #af-wrapper .content-element .odd,
 #af-wrapper #statistics,
-#af-wrapper #statistics-online-users {
+#af-wrapper #statistics-online-users,
+#af-wrapper #forum-profile {
     background-color: <?php echo $background_color; ?> !important;
 }
 <?php

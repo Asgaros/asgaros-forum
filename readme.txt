@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to hide members list for guests
 * Fixed: Parse error when using some older versions of PHP
+* Fixed: Wrong stylings when using custom colors
 * Changed: Design changes for the administration area
 * Performance improvements and code optimizations
 = 1.6.7 =
