@@ -79,6 +79,9 @@
     vertical-align: middle;
     color: #666;
 }
+#af-options .postbox .dashicons-before:before {
+    padding-right: 5px;
+}
 /* STRUCTURE/USER GROUPS */
 #af-structure .category-actions {
     float: right;

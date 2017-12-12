@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) exit;
                     <?php wp_nonce_field('asgaros_forum_save_options'); ?>
 
                     <div class="postbox">
-                        <h2 class="hndle"><?php _e('General', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-admin-settings"><?php _e('General', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
                                 <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>
@@ -118,16 +118,8 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle"><?php _e('Features', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-admin-plugins"><?php _e('Features', 'asgaros-forum'); ?></h2>
                         <div class="inside">
-                            <p>
-                                <input type="checkbox" name="enable_memberslist" id="enable_memberslist" <?php checked(!empty($asgarosforum->options['enable_memberslist'])); ?>>
-                                <label for="enable_memberslist"><?php _e('Enable members list', 'asgaros-forum'); ?></label>
-                            </p>
-                            <p>
-                                <input type="checkbox" name="memberslist_loggedin_only" id="memberslist_loggedin_only" <?php checked(!empty($asgarosforum->options['memberslist_loggedin_only'])); ?>>
-                                <label for="memberslist_loggedin_only"><?php _e('Hide members list for guests', 'asgaros-forum'); ?></label>
-                            </p>
                             <p>
                                 <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
                                 <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
@@ -156,7 +148,7 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle"><?php _e('Subscriptions', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-email-alt"><?php _e('Subscriptions', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
                                 <input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>>
@@ -188,7 +180,24 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle"><?php _e('Profiles', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-groups"><?php _e('Members List', 'asgaros-forum'); ?></h2>
+                        <div class="inside">
+                            <?php
+                            $membersListOption = checked(!empty($asgarosforum->options['enable_memberslist']), true, false);
+                            ?>
+                            <p>
+                                <input type="checkbox" name="enable_memberslist" id="enable_memberslist" class="show_hide_initiator" data-hide-class="memberslist-option" <?php checked(!empty($asgarosforum->options['enable_memberslist'])); ?>>
+                                <label for="enable_memberslist"><?php _e('Enable members list', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
+                                <input type="checkbox" name="memberslist_loggedin_only" id="memberslist_loggedin_only" <?php checked(!empty($asgarosforum->options['memberslist_loggedin_only'])); ?>>
+                                <label for="memberslist_loggedin_only"><?php _e('Show members list to logged-in users only', 'asgaros-forum'); ?></label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="postbox">
+                        <h2 class="hndle dashicons-before dashicons-admin-users"><?php _e('Profiles', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <?php
                             $profileOption = checked(!empty($asgarosforum->options['enable_profiles']), true, false);
@@ -205,7 +214,7 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle"><?php _e('Uploads', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-media-archive"><?php _e('Uploads', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <?php
                             $uploadsOption = checked(!empty($asgarosforum->options['allow_file_uploads']), true, false);
@@ -244,7 +253,7 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle"><?php _e('Appearance', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-admin-customizer"><?php _e('Appearance', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <?php
                             $themes = AsgarosForumThemeManager::get_themes();
