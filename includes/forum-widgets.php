@@ -92,6 +92,7 @@ class AsgarosForumWidgets {
                 $avatars_available = get_option('show_avatars');
                 $show_avatar = isset($instance['show_avatar']) ? $instance['show_avatar'] : true;
                 $widgetTitleLength = apply_filters('asgarosforum_filter_widget_title_length', 33);
+                $widgetAvatarSize = apply_filters('asgarosforum_filter_widget_avatar_size', 30);
 
                 echo '<div class="asgarosforum-widget">';
 
@@ -102,7 +103,7 @@ class AsgarosForumWidgets {
 
                     // Add avatars
                     if ($avatars_available && $show_avatar) {
-                        echo '<div class="widget-avatar">'.get_avatar($element->author_id, 30).'</div>';
+                        echo '<div class="widget-avatar">'.get_avatar($element->author_id, $widgetAvatarSize).'</div>';
                     }
 
                     echo '<div class="widget-content">';

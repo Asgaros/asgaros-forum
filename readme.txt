@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to change the border color
 * Added: Option to hide members list for guests
+* Added: asgarosforum_filter_widget_avatar_size filter
 * Fixed: Parse error when using some older versions of PHP
 * Fixed: Wrong stylings when using custom colors
 * Changed: Design changes for the administration area
