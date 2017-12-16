@@ -193,6 +193,10 @@ if (!defined('ABSPATH')) exit;
                                 <input type="checkbox" name="memberslist_loggedin_only" id="memberslist_loggedin_only" <?php checked(!empty($asgarosforum->options['memberslist_loggedin_only'])); ?>>
                                 <label for="memberslist_loggedin_only"><?php _e('Show members list to logged-in users only', 'asgaros-forum'); ?></label>
                             </p>
+                            <p class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
+                                <label for="members_per_page"><?php _e('Members per page:', 'asgaros-forum'); ?></label>
+                                <input type="number" name="members_per_page" id="members_per_page" value="<?php echo stripslashes($asgarosforum->options['members_per_page']); ?>" size="3" min="1">
+                            </p>
                         </div>
                     </div>
 

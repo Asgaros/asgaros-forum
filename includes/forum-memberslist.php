@@ -39,8 +39,8 @@ class AsgarosForumMembersList {
 
         $data = self::getMembers();
 
-        $start = $asgarosforum->current_page * 25;
-        $end = 25;
+        $start = $asgarosforum->current_page * $asgarosforum->options['members_per_page'];
+        $end = $asgarosforum->options['members_per_page'];
 
         $dataSliced = array_slice($data, $start, $end);
 

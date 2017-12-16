@@ -30,6 +30,7 @@ class AsgarosForum {
         'location'                  => 0,
         'posts_per_page'            => 10,
         'topics_per_page'           => 20,
+        'members_per_page'          => 25,
         'minimalistic_editor'       => true,
         'allow_shortcodes'          => false,
         'allow_guest_postings'      => false,

@@ -72,7 +72,7 @@ class AsgarosForumPagination {
             $select_url = 'search';
         } else if ($location === 'members') {
             $count = $this->asgarosforum->countUsers();
-            $num_pages = ceil($count / 25);
+            $num_pages = ceil($count / $this->asgarosforum->options['members_per_page']);
             $select_url = 'members';
         }
 
