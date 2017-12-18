@@ -56,7 +56,8 @@
 #af-wrapper .content-element .forum:nth-child(even),
 #af-wrapper .content-element .topic:nth-child(even),
 #af-wrapper .content-element .editor-row:nth-child(even),
-#af-wrapper .content-element .subscription:nth-child(even) {
+#af-wrapper .content-element .subscription:nth-child(even),
+#af-wrapper .content-element .member:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.02);
 }
 #af-wrapper #forum-editor-form {
