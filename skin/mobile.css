@@ -13,6 +13,8 @@
     }
     #af-wrapper .forum-post-header div {
         display: block;
+        width: 100%;
+        text-align: center;
     }
     #af-wrapper .post-element {
         display: inline;
@@ -39,6 +41,9 @@
     #af-wrapper .forum-menu {
         margin-bottom: 10px;
     }
+    #af-wrapper .forum-menu a {
+        margin-bottom: 2px;
+    }
     #af-wrapper .pages a,
     #af-wrapper .pages strong {
         font-size: 130% !important;
@@ -59,6 +64,16 @@
         display: inline-block;
         font-size: 18px;
         line-height: 32px;
+    }
+    #af-wrapper #forum-header-container-top {
+        text-align: center;
+    }
+    #af-wrapper #forum-header-container-top a {
+        display: inline-block;
+        border: none;
+    }
+    #af-wrapper #forum-search {
+        text-align: left;
     }
 }
 

@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_filter_widget_avatar_size filter
 * Fixed: Parse error when using some older versions of PHP
 * Fixed: Wrong stylings when using custom colors
+* Fixed: Display issues on mobile devices
 * Changed: Design changes for the administration area
 * Changed: Minor design changes
 * Performance improvements and code optimizations
