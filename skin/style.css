@@ -235,7 +235,8 @@
 #af-wrapper .topic-stats,
 #af-wrapper .topic-poster,
 #af-wrapper .member-avatar,
-#af-wrapper .member-name {
+#af-wrapper .member-name,
+#af-wrapper .member-posts {
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
@@ -253,7 +254,8 @@
     width: auto;
 }
 #af-wrapper .forum-stats,
-#af-wrapper .topic-stats {
+#af-wrapper .topic-stats,
+#af-wrapper .member-posts {
     width: 100px;
     text-align: right;
     padding-right: 10px;
