@@ -235,8 +235,7 @@
 #af-wrapper .topic-stats,
 #af-wrapper .topic-poster,
 #af-wrapper .member-avatar,
-#af-wrapper .member-name,
-#af-wrapper .member-posts {
+#af-wrapper .member-name {
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
@@ -254,8 +253,7 @@
     width: auto;
 }
 #af-wrapper .forum-stats,
-#af-wrapper .topic-stats,
-#af-wrapper .member-posts {
+#af-wrapper .topic-stats {
     width: 100px;
     text-align: right;
     padding-right: 10px;
@@ -279,7 +277,8 @@
     box-sizing: initial; /* comp */
 }
 #af-wrapper .forum small,
-#af-wrapper .topic small {
+#af-wrapper .topic small,
+#af-wrapper .member small {
     display: block;
     font-style: normal; /* comp */
     letter-spacing: normal; /* comp */
@@ -815,9 +814,6 @@
 }
 
 /* MEMBERS LIST */
-#af-wrapper .member-name {
-    font-weight: 600;
-}
 #af-wrapper .member-avatar img {
     vertical-align: middle;
 }

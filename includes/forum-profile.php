@@ -105,15 +105,7 @@ class AsgarosForumProfile {
 
                 // Show forum role.
                 $cellTitle = __('Forum Role:', 'asgaros-forum');
-                $cellValue = __('User', 'asgaros-forum');
-
-                if (AsgarosForumPermissions::isAdministrator($userData->ID)) {
-                    $cellValue = __('Administrator', 'asgaros-forum');
-                } else if (AsgarosForumPermissions::isModerator($userData->ID)) {
-                    $cellValue = __('Moderator', 'asgaros-forum');
-                } else if (AsgarosForumPermissions::isBanned($userData->ID)) {
-                    $cellValue = __('Banned', 'asgaros-forum');
-                }
+                $cellValue = AsgarosForumPermissions::getForumRole($userData->ID);
 
                 $this->renderProfileRow($cellTitle, $cellValue);
 

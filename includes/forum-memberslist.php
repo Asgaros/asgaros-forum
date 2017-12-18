@@ -55,11 +55,13 @@ class AsgarosForumMembersList {
                 }
 
                 echo '<div class="member-name">';
-                echo $asgarosforum->getUsername($element->ID);
-                echo '</div>';
-                echo '<div class="member-posts">';
-                $member_posts_i18n = number_format_i18n($element->forum_posts);
-                echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
+                    echo $asgarosforum->getUsername($element->ID);
+                    echo '<small>';
+                        echo AsgarosForumPermissions::getForumRole($element->ID);
+                        echo '&nbsp;&middot;&nbsp;';
+                        $member_posts_i18n = number_format_i18n($element->forum_posts);
+                        echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
+                    echo '</small>';
                 echo '</div>';
             echo '</div>';
         }

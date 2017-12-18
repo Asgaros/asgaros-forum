@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to change the border color
 * Added: Option to hide members list for guests
 * Added: Option to define number of members per page in members list
+* Added: Show user role in members list
 * Added: asgarosforum_filter_widget_avatar_size filter
 * Fixed: Parse error when using some older versions of PHP
 * Fixed: Wrong stylings when using custom colors

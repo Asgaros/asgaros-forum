@@ -85,6 +85,18 @@ class AsgarosForumPermissions {
         }
     }
 
+    public static function getForumRole($userID) {
+        if (self::isAdministrator($userID)) {
+            return __('Administrator', 'asgaros-forum');
+        } else if (self::isModerator($userID)) {
+            return __('Moderator', 'asgaros-forum');
+        } else if (self::isBanned($userID)) {
+            return __('Banned', 'asgaros-forum');
+        } else {
+            return __('User', 'asgaros-forum');
+        }
+    }
+
     public static function canUserAccessForumCategory($userID, $forumCategoryID) {
         $access_level = get_term_meta($forumCategoryID, 'category_access', true);
 
