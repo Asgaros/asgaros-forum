@@ -63,11 +63,6 @@ class AsgarosForum {
         'show_edit_date'            => true,
         'show_description_in_forum' => false,
         'require_login'             => false,
-        'custom_color'              => '#2d89cc',
-        'custom_text_color'         => '#444444',
-        'custom_background_color'   => '#ffffff',
-        'custom_border_color'       => '#eeeeee',
-        'theme'                     => 'default',
         'create_blog_topics'        => false,
         'create_blog_topics_id'     => 0
     );
@@ -84,8 +79,7 @@ class AsgarosForum {
         global $wpdb;
         $this->db = $wpdb;
         $this->directory = plugin_dir_url(dirname(__FILE__));
-        $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
-        $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
+        $this->loadOptions();
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');
         $this->tables = AsgarosForumDatabase::getTables();
@@ -119,6 +113,18 @@ class AsgarosForum {
         new AsgarosForumWidgets($this);
 
         $this->profile = new AsgarosForumProfile($this);
+    }
+
+    function loadOptions() {
+        $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
+        $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
+    }
+
+    function saveOptions($options) {
+        update_option('asgarosforum_options', $options);
+
+        // Reload options after saving them.
+		$this->loadOptions();
     }
 
     function prepare() {

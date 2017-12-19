@@ -129,15 +129,6 @@
                     echo '</a>';
                 }
                 ?>
-
-                <!--
-                <div class="postbox">
-                    <h2 class="hndle">
-                        <?php _e('Default User Groups', 'asgaros-forum'); ?>
-                    </h2>
-                    <div class="inside"></div>
-                </div>
-                -->
             </div>
         </div>
     </div>

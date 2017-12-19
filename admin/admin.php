@@ -101,11 +101,33 @@ class AsgarosForumAdmin {
         }
     }
 
+    // Add all required pages to the menu.
     function add_admin_pages() {
         add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'), 'dashicons-clipboard');
         add_submenu_page('asgarosforum-options', __('Options', 'asgaros-forum'), __('Options', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'));
         add_submenu_page('asgarosforum-options', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'structure_page'));
+        add_submenu_page('asgarosforum-options', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'manage_options', 'asgarosforum-appearance', array($this, 'appearance_page'));
         add_submenu_page('asgarosforum-options', __('User Groups', 'asgaros-forum'), __('User Groups', 'asgaros-forum'), 'manage_options', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
+    }
+
+    function options_page() {
+        global $asgarosforum;
+        require('views/options.php');
+    }
+
+    function structure_page() {
+        global $asgarosforum;
+        $categories = $asgarosforum->get_categories(false);
+
+        require('views/structure.php');
+    }
+
+    function appearance_page() {
+        require('views/appearance.php');
+    }
+
+    function usergroups_page() {
+        require('views/usergroups.php');
     }
 
     function enqueue_admin_scripts($hook) {
@@ -128,6 +150,11 @@ class AsgarosForumAdmin {
                 check_admin_referer('asgaros_forum_save_options');
 
                 $this->save_options();
+            } else if (isset($_POST['af_appearance_submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_appearance');
+
+                $this->save_appearance();
             } else if (isset($_POST['af-create-edit-forum-submit'])) {
                 // Verify nonce first.
                 check_admin_referer('asgaros_forum_save_forum');
@@ -193,11 +220,6 @@ class AsgarosForumAdmin {
     }
 
     /* OPTIONS */
-    function options_page() {
-        global $asgarosforum;
-        require('views/options.php');
-    }
-
     function save_options() {
         global $asgarosforum;
         $saved_ops = array();
@@ -210,8 +232,6 @@ class AsgarosForumAdmin {
                     $saved_ops[$k] = ((int)$_POST[$k] > 0) ? (int)$_POST[$k] : $v;
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = (bool)$_POST[$k];
-                } else if ($k === 'theme') {
-                    $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
                 } else if ($k === 'allowed_filetypes') {
                     $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes(strtolower($_POST[$k]))) : $v;
                 } else {
@@ -226,20 +246,27 @@ class AsgarosForumAdmin {
             }
         }
 
-        update_option('asgarosforum_options', $saved_ops);
-        $asgarosforum->options = get_option('asgarosforum_options', array());
-        AsgarosForumThemeManager::set_current_theme($asgarosforum->options['theme']);
+        $asgarosforum->saveOptions($saved_ops);
+        $this->saved = true;
+    }
+
+    function save_appearance() {
+        global $asgarosforum;
+        $saved_ops = array();
+
+        foreach (AsgarosForumThemeManager::$options_default as $k => $v) {
+            if (isset($_POST[$k])) {
+                $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
+            } else {
+                $saved_ops[$k] = $v;
+            }
+        }
+
+        AsgarosForumThemeManager::saveOptions($saved_ops);
         $this->saved = true;
     }
 
     /* STRUCTURE */
-    function structure_page() {
-        global $asgarosforum;
-        $categories = $asgarosforum->get_categories(false);
-
-        require('views/structure.php');
-    }
-
     function save_category() {
         global $asgarosforum;
         $category_id        = $_POST['category_id'];
@@ -345,10 +372,6 @@ class AsgarosForumAdmin {
     }
 
     /* USERGROUPS */
-    function usergroups_page() {
-        require('views/usergroups.php');
-    }
-
     function render_admin_header($title, $titleUpdated) {
         global $asgarosforum;
 

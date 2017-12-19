@@ -256,43 +256,6 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
 
-                    <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-admin-customizer"><?php _e('Appearance', 'asgaros-forum'); ?></h2>
-                        <div class="inside">
-                            <?php
-                            $themes = AsgarosForumThemeManager::get_themes();
-                            if (count($themes) > 1) { ?>
-                            <p>
-                                <label for="theme"><?php _e('Theme', 'asgaros-forum'); ?>:</label>
-                                <select name="theme" id="theme">
-                                    <?php foreach ($themes as $k => $v) {
-                                        echo '<option value="'.$k.'" '.selected($k, AsgarosForumThemeManager::get_current_theme(), false).'>'.$v['name'].'</option>';
-                                    } ?>
-                                </select>
-                            </p>
-                            <?php
-                            }
-                            $themesOption = AsgarosForumThemeManager::is_default_theme();
-                            ?>
-                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
-                                <label for="custom_color"><?php _e('Forum color:', 'asgaros-forum'); ?></label>
-                                <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_color']); ?>" class="color-picker" name="custom_color" id="custom_color" data-default-color="#2d89cc">
-                            </p>
-                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
-                                <label for="custom_text_color"><?php _e('Text color:', 'asgaros-forum'); ?></label>
-                                <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="#444444">
-                            </p>
-                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
-                                <label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label>
-                                <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="#ffffff">
-                            </p>
-                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
-                                <label for="custom_border_color"><?php _e('Border color:', 'asgaros-forum'); ?></label>
-                                <input type="text" value="<?php echo stripslashes($asgarosforum->options['custom_border_color']); ?>" class="color-picker" name="custom_border_color" id="custom_border_color" data-default-color="#eeeeee">
-                            </p>
-                        </div>
-                    </div>
-
                     <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>">
                 </form>
 

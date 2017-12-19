@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 13;
+    const DATABASE_VERSION = 14;
 
     private static $instance = null;
     private static $db;
@@ -210,6 +210,23 @@ class AsgarosForumDatabase {
                         $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
                     }
                 }
+            }
+
+            // Move appearance settings into its own options-array.
+            if ($database_version_installed < 14) {
+                // Ensure that all options are loaded first.
+                $asgarosforum->loadOptions();
+                AsgarosForumThemeManager::loadOptions();
+
+                // Build the intersect.
+                $appearance_intersect = array_intersect_key($asgarosforum->options, AsgarosForumThemeManager::$options) + AsgarosForumThemeManager::$options;
+
+                // Remove keys from old settings.
+                $options_cleaned = array_diff_key($asgarosforum->options, $appearance_intersect);
+
+                // Save all options.
+                AsgarosForumThemeManager::saveOptions($appearance_intersect);
+                $asgarosforum->saveOptions($options_cleaned);
             }
 
             update_option('asgarosforum_db_version', self::DATABASE_VERSION);

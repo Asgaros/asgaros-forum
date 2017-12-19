@@ -89,6 +89,8 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Possibility to toggle truncated quotes with a click
+* Changed: All theme and color options are now available in the appearance-area
+* Performance improvements and code optimizations
 = 1.6.8 =
 * Added: Option to change the border color
 * Added: Option to hide members list for guests
