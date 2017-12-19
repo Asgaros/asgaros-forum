@@ -60,7 +60,7 @@ class AsgarosForumAppearance {
 	private static function find_themes() {
 		// Always ensure that the default theme is available.
 		self::$themes[self::AF_DEFAULT_THEME] = array(
-			'name'	=> 'Default theme',
+			'name'	=> __('Default Theme', 'asgaros-forum'),
 			'url'	=> self::$plugin_url.self::AF_SKINPATH
 		);
 
