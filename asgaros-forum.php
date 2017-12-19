@@ -37,7 +37,7 @@ require('includes/forum-permissions.php');
 require('includes/forum-content.php');
 require('includes/forum-notifications.php');
 require('includes/forum-widgets.php');
-require('includes/forum-thememanager.php');
+require('includes/forum-appearance.php');
 require('includes/forum-unread.php');
 require('includes/forum-uploads.php');
 require('includes/forum-search.php');

@@ -103,7 +103,7 @@ class AsgarosForum {
         new AsgarosForumPermissions($this);
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
-        new AsgarosForumThemeManager($this);
+        new AsgarosForumAppearance($this);
         new AsgarosForumEditor($this);
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);

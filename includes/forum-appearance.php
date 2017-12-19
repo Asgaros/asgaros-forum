@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class AsgarosForumThemeManager {
+class AsgarosForumAppearance {
 	const AF_THEMEPATH = 'themes-asgarosforum';
 	const AF_SKINPATH = 'skin';
 	const AF_DEFAULT_THEME = 'default';

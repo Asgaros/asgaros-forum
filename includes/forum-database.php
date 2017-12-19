@@ -216,16 +216,16 @@ class AsgarosForumDatabase {
             if ($database_version_installed < 14) {
                 // Ensure that all options are loaded first.
                 $asgarosforum->loadOptions();
-                AsgarosForumThemeManager::loadOptions();
+                AsgarosForumAppearance::loadOptions();
 
                 // Build the intersect.
-                $appearance_intersect = array_intersect_key($asgarosforum->options, AsgarosForumThemeManager::$options) + AsgarosForumThemeManager::$options;
+                $appearance_intersect = array_intersect_key($asgarosforum->options, AsgarosForumAppearance::$options) + AsgarosForumAppearance::$options;
 
                 // Remove keys from old settings.
                 $options_cleaned = array_diff_key($asgarosforum->options, $appearance_intersect);
 
                 // Save all options.
-                AsgarosForumThemeManager::saveOptions($appearance_intersect);
+                AsgarosForumAppearance::saveOptions($appearance_intersect);
                 $asgarosforum->saveOptions($options_cleaned);
             }
 

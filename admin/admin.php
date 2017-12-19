@@ -254,7 +254,7 @@ class AsgarosForumAdmin {
         global $asgarosforum;
         $saved_ops = array();
 
-        foreach (AsgarosForumThemeManager::$options_default as $k => $v) {
+        foreach (AsgarosForumAppearance::$options_default as $k => $v) {
             if (isset($_POST[$k])) {
                 $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
             } else {
@@ -262,7 +262,7 @@ class AsgarosForumAdmin {
             }
         }
 
-        AsgarosForumThemeManager::saveOptions($saved_ops);
+        AsgarosForumAppearance::saveOptions($saved_ops);
         $this->saved = true;
     }
 
