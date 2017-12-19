@@ -132,5 +132,10 @@
                 }
             }
         }
+
+        // Add ability to toggle truncated quotes.
+        $('#af-wrapper .post-message > blockquote').click(function() {
+            $(this).toggleClass('full-quote');
+        });
     });
 })(jQuery);
