@@ -35,6 +35,10 @@ if (!defined('ABSPATH')) exit;
                             $themesOption = AsgarosForumAppearance::is_default_theme();
                             ?>
                             <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                                <label for="custom_font"><?php _e('Font:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="custom_font" id="custom_font" value="<?php echo esc_html(stripslashes(AsgarosForumAppearance::$options['custom_font'])); ?>">
+                            </p>
+                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
                                 <label for="custom_font_size"><?php _e('Font size:', 'asgaros-forum'); ?></label>
                                 <input class="regular-text" type="text" name="custom_font_size" id="custom_font_size" value="<?php echo esc_html(stripslashes(AsgarosForumAppearance::$options['custom_font_size'])); ?>">
                             </p>

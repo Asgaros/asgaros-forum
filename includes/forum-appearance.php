@@ -18,6 +18,7 @@ class AsgarosForumAppearance {
         'custom_text_color'         => '#444444',
         'custom_background_color'	=> '#ffffff',
         'custom_border_color'       => '#eeeeee',
+		'custom_font'				=> 'Verdana, Tahoma, sans-serif',
 		'custom_font_size'			=> '13px'
 	);
 
@@ -158,6 +159,7 @@ class AsgarosForumAppearance {
 							'text-color'		=> substr(self::$options['custom_text_color'], 1),
 							'background-color'	=> substr(self::$options['custom_background_color'], 1),
 							'border-color'		=> substr(self::$options['custom_border_color'], 1),
+							'font'				=> self::$options['custom_font'],
 							'font-size'			=> self::$options['custom_font_size']
 						),
 						$themeurl.'/custom-color.php'

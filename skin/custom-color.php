@@ -81,6 +81,15 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 <?php
 }
 
+if (!empty($_GET['font'])) {
+	$font = $_GET['font'];
+?>
+#af-wrapper {
+    font-family: <?php echo $font; ?> !important;
+}
+<?php
+}
+
 if (!empty($_GET['font-size'])) {
 	$font_size = $_GET['font-size'];
 ?>
