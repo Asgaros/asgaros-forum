@@ -72,7 +72,7 @@
     display: inline-block;
     min-width: 250px;
 }
-#af-options .custom-color-selector label {
+#af-options .wp-picker-container label {
     min-width: initial;
 }
 #af-options .description {

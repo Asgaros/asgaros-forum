@@ -17,7 +17,8 @@ class AsgarosForumAppearance {
 		'custom_color'              => '#2d89cc',
         'custom_text_color'         => '#444444',
         'custom_background_color'	=> '#ffffff',
-        'custom_border_color'       => '#eeeeee'
+        'custom_border_color'       => '#eeeeee',
+		'custom_font_size'			=> '13px'
 	);
 
 	public function __construct($object) {
@@ -150,8 +151,19 @@ class AsgarosForumAppearance {
 			wp_enqueue_style('af-style', $themeurl.'/style.css', array(), self::$asgarosforum->version);
 
 			if (self::is_default_theme()) {
-				if ((self::$options['custom_color'] !== self::$options_default['custom_color']) || (self::$options['custom_text_color'] !== self::$options_default['custom_text_color']) || (self::$options['custom_background_color'] !== self::$options_default['custom_background_color']) || (self::$options['custom_border_color'] !== self::$options_default['custom_border_color'])) {
-					wp_enqueue_style('af-custom-color', $themeurl.'/custom-color.php?color='.substr(self::$options['custom_color'], 1).'&amp;text-color='.substr(self::$options['custom_text_color'], 1).'&amp;background-color='.substr(self::$options['custom_background_color'], 1).'&amp;border-color='.substr(self::$options['custom_border_color'], 1), array(), self::$asgarosforum->version);
+				if (self::$options != self::$options_default) {
+					$custom_styles_url = add_query_arg(
+						array(
+							'color'				=> substr(self::$options['custom_color'], 1),
+							'text-color'		=> substr(self::$options['custom_text_color'], 1),
+							'background-color'	=> substr(self::$options['custom_background_color'], 1),
+							'border-color'		=> substr(self::$options['custom_border_color'], 1),
+							'font-size'			=> self::$options['custom_font_size']
+						),
+						$themeurl.'/custom-color.php'
+					);
+
+					wp_enqueue_style('af-custom-color', $custom_styles_url, array(), self::$asgarosforum->version);
 				}
 			}
 
