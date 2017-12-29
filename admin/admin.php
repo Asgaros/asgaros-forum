@@ -233,9 +233,11 @@ class AsgarosForumAdmin {
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = (bool)$_POST[$k];
                 } else if ($k === 'allowed_filetypes') {
-                    $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes(strtolower($_POST[$k]))) : $v;
+                    $tmp = esc_sql(stripslashes(strtolower(trim($_POST[$k]))));
+                    $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 } else {
-                    $saved_ops[$k] = (!empty($_POST[$k])) ? esc_sql(stripslashes($_POST[$k])) : $v;
+                    $tmp = esc_sql(stripslashes(trim($_POST[$k])));
+                    $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 }
             } else {
                 if (is_bool($v)) {
