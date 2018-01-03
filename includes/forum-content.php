@@ -111,10 +111,11 @@ class AsgarosForumContent {
 
         $redirect = '';
         $uploadList = AsgarosForumUploads::getUploadList();
+        $authorID = AsgarosForumPermissions::$currentUserID;
 
         if (self::getAction() === 'add_topic') {
             // Create the topic.
-            $insertedIDs = self::insertTopic($asgarosforum->current_forum, self::$dataSubject, self::$dataContent, $uploadList);
+            $insertedIDs = self::insertTopic($asgarosforum->current_forum, self::$dataSubject, self::$dataContent, $authorID, $uploadList);
 
             // Assign the inserted IDs.
             $asgarosforum->current_topic = $insertedIDs->topic_id;
@@ -130,7 +131,7 @@ class AsgarosForumContent {
             AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'add_post') {
             // Create the post.
-            $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $uploadList);
+            $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $authorID, $uploadList);
 
             AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
 
@@ -181,8 +182,13 @@ class AsgarosForumContent {
     }
 
     // Inserts a new topic.
-    public static function insertTopic($forumID, $name, $text, $uploads = array()) {
+    public static function insertTopic($forumID, $name, $text, $authorID = false, $uploads = array()) {
         global $asgarosforum;
+
+        // Set the author ID.
+        if (!$authorID) {
+            $authorID = AsgarosForumPermissions::$currentUserID;
+        }
 
         // Get a slug for the new topic.
         $topic_slug = AsgarosForumRewrite::createUniqueSlug($name, $asgarosforum->tables->topics, 'topic');
@@ -195,21 +201,26 @@ class AsgarosForumContent {
         $insertedIDs->topic_id = $asgarosforum->db->insert_id;
 
         // Now create a post inside this topic and save its ID as well.
-        $insertedIDs->post_id = self::insertPost($insertedIDs->topic_id, $text, $uploads);
+        $insertedIDs->post_id = self::insertPost($insertedIDs->topic_id, $text, $authorID, $uploads);
 
         // Return the IDs of the inserted content.
         return $insertedIDs;
     }
 
     // Inserts a new post.
-    public static function insertPost($topicID, $text, $uploads = array()) {
+    public static function insertPost($topicID, $text, $authorID = false, $uploads = array()) {
         global $asgarosforum;
+
+        // Set the author ID.
+        if (!$authorID) {
+            $authorID = AsgarosForumPermissions::$currentUserID;
+        }
 
         // Get the current time.
         $date = $asgarosforum->current_time();
 
         // Insert the post.
-        $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topicID, 'date' => $date, 'author_id' => AsgarosForumPermissions::$currentUserID, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%s', '%d', '%s'));
+        $asgarosforum->db->insert($asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topicID, 'date' => $date, 'author_id' => $authorID, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%s', '%d', '%s'));
 
         // Return the ID of the inserted post.
         return $asgarosforum->db->insert_id;

@@ -1155,7 +1155,7 @@ class AsgarosForum {
             $post_content = apply_filters('asgarosforum_filter_automatic_topic_content', $post->post_content, $post);
 
             if (AsgarosForumContent::forumExists($forumID)) {
-            	AsgarosForumContent::insertTopic($forumID, $post_title, $post_content);
+            	AsgarosForumContent::insertTopic($forumID, $post_title, $post_content, $post->post_author);
             }
         }
     }

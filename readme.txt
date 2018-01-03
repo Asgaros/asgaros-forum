@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to change font
 * Added: Option to change font size
 * Added: Possibility to toggle truncated quotes with a click
+* Fixed: Wrong username for automatic topic of scheduled blog post
 * Fixed: Some strings could not get translated
 * Changed: Apply additional validation rules before saving options
 * Changed: All theme and color options are now available in the appearance-area
