@@ -626,7 +626,7 @@
     display: table-cell;
     width: auto;
     vertical-align: top;
-    padding: 6px 15px 60px;
+    padding: 6px 15px 85px;
     word-break: break-word;
     position: relative;
 }
@@ -650,20 +650,24 @@
     color: #999;
     text-align: right;
     position: absolute;
-    padding: 5px 10px;
+    padding: 6px 15px;
     bottom: 0;
     right: 0;
     width: 100%;
     box-sizing: border-box;
+    line-height: 20px;
 }
 #af-wrapper .post-footer a {
     color: #999;
+}
+#af-wrapper .highlight-post {
+    border: 3px solid red;
 }
 
 /* SIGNATURES */
 #af-wrapper .signature {
     display: block;
-    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    border-top: 2px solid #eee;
     margin-top: 5px;
     padding-top: 5px;
     text-align: left;
@@ -825,6 +829,22 @@
 /* MEMBERS LIST */
 #af-wrapper .member-avatar img {
     vertical-align: middle;
+}
+
+/* REPORT */
+#af-wrapper .report-exists:before {
+    color: #ff0000;
+}
+#af-wrapper .report-link,
+#af-wrapper .report-exists {
+    padding: 0;
+}
+#af-wrapper .report-link:before,
+#af-wrapper .report-exists:before {
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+    line-height: 20px;
 }
 
 /* ICONS */

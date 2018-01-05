@@ -75,7 +75,8 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .sticky-bottom,
 #af-wrapper .post-author,
 #af-wrapper .post-element,
-#af-wrapper .forum-subforums {
+#af-wrapper .forum-subforums,
+#af-wrapper .signature {
     border-color: <?php echo $border_color; ?> !important;
 }
 <?php

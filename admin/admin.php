@@ -5,8 +5,12 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumAdmin {
     var $saved = false;
     var $error = false;
+    // TODO: Remove globals
+    private $asgarosforum = null;
 
-    function __construct() {
+    function __construct($object) {
+        $this->asgarosforum = $object;
+
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_init', array($this, 'save_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
@@ -108,6 +112,7 @@ class AsgarosForumAdmin {
         add_submenu_page('asgarosforum-options', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'structure_page'));
         add_submenu_page('asgarosforum-options', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'manage_options', 'asgarosforum-appearance', array($this, 'appearance_page'));
         add_submenu_page('asgarosforum-options', __('User Groups', 'asgaros-forum'), __('User Groups', 'asgaros-forum'), 'manage_options', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
+        add_submenu_page('asgarosforum-options', __('Reports', 'asgaros-forum'), __('Reports', 'asgaros-forum'), 'manage_options', 'asgarosforum-reports', array($this, 'reports_page'));
     }
 
     function options_page() {
@@ -128,6 +133,10 @@ class AsgarosForumAdmin {
 
     function usergroups_page() {
         require('views/usergroups.php');
+    }
+
+    function reports_page() {
+        require('views/reports.php');
     }
 
     function enqueue_admin_scripts($hook) {
@@ -214,6 +223,13 @@ class AsgarosForumAdmin {
 
                 if (!empty($_POST['usergroup-category-id']) && is_numeric($_POST['usergroup-category-id'])) {
                     AsgarosForumUserGroups::deleteUserGroupCategory($_POST['usergroup-category-id']);
+                }
+            } else if (isset($_POST['asgaros-forum-delete-report'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_delete_report');
+
+                if (!empty($_POST['report-id']) && is_numeric($_POST['report-id'])) {
+                    $this->asgarosforum->reports->remove_report($_POST['report-id']);
                 }
             }
         }

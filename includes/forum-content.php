@@ -291,6 +291,20 @@ class AsgarosForumContent {
     //======================================================================
     // FUNCTIONS FOR GETTING CONTENT.
     //======================================================================
+
+    // TODO: Remove redundant function in forum.php
+    public static function get_topic($topic_id) {
+        global $asgarosforum;
+
+        return $asgarosforum->db->get_row("SELECT * FROM {$asgarosforum->tables->topics} WHERE id = {$topic_id};");
+    }
+
+    // TODO: Remove redundant function in forum.php
+    public static function get_post($post_id) {
+        global $asgarosforum;
+
+        return $asgarosforum->db->get_row("SELECT p1.*, (SELECT COUNT(*) FROM {$asgarosforum->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts FROM {$asgarosforum->tables->posts} AS p1 WHERE p1.id = {$post_id};");
+    }
 }
 
 ?>

@@ -196,11 +196,13 @@
 #af-structure .column-status,
 #af-structure .column-sort,
 #af-structure .column-color,
-#af-structure .column-users {
+#af-structure .column-users,
+#af-structure .column-author,
+#af-structure .column-reporters {
     width: 125px;
 }
 #af-structure .column-actions {
-    max-width: 400px;
+    width: 400px;
 }
 #af-structure .usergroup-color {
     width: 25px;

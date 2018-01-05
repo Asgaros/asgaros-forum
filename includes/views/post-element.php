@@ -3,8 +3,15 @@
 if (!defined('ABSPATH')) exit;
 
 $counter++;
+
+
+$highlightClass = '';
+if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
+    $highlightClass = 'highlight-post';
+}
+
 ?>
-<div class="post-element" id="postid-<?php echo $post->id; ?>">
+<div class="post-element <?php echo $highlightClass; ?>" id="postid-<?php echo $post->id; ?>">
     <div class="post-author<?php if (AsgarosForumOnline::isUserOnline($post->author_id)) { echo ' user-online'; } ?>">
         <?php
         if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
@@ -75,10 +82,15 @@ $counter++;
                 echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
             }
 
-            echo '&nbsp;&middot;&nbsp;';
+            if ($this->current_view != 'post') {
+                echo '&nbsp;&middot;&nbsp;';
+            }
         }
 
         if ($this->current_view != 'post') {
+            // Show report button.
+            $this->reports->render_report_button($post->id, $this->current_topic);
+
             echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
         }
 

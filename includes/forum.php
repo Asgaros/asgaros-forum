@@ -73,6 +73,7 @@ class AsgarosForum {
         'quicktags'     => false
     );
     var $cache = array();   // Used to store selected database queries.
+    var $reports = null;
     var $profile = null;
 
     function __construct() {
@@ -112,6 +113,7 @@ class AsgarosForum {
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
 
+        $this->reports = new AsgarosForumReports($this);
         $this->profile = new AsgarosForumProfile($this);
     }
 
@@ -158,7 +160,7 @@ class AsgarosForum {
             $this->current_page = (absint($_GET['part']) - 1);
         }
 
-        $elementID = (isset($_GET['id'])) ? absint($_GET['id']) : false;
+        $elementID = (!empty($_GET['id'])) ? absint($_GET['id']) : false;
 
         switch ($this->current_view) {
             case 'forum':
@@ -243,6 +245,11 @@ class AsgarosForum {
             AsgarosForumNotifications::subscribeForum();
         } else if (isset($_GET['unsubscribe_forum'])) {
             AsgarosForumNotifications::unsubscribeForum();
+        } else if (isset($_GET['report_add'])) {
+            $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
+            $user_id = get_current_user_id();
+
+            $this->reports->add_report($post_id, $user_id);
         }
 
         // Mark visited topic as read.
@@ -977,10 +984,11 @@ class AsgarosForum {
             if ($topicID) {
                 do_action('asgarosforum_before_delete_topic', $topicID);
 
-                // Delete uploads.
+                // Delete uploads and reports.
                 $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topicID));
                 foreach ($posts as $post) {
                     AsgarosForumUploads::deletePostFiles($post);
+                    $this->reports->remove_report($post);
                 }
 
                 $this->db->delete($this->tables->posts, array('parent_id' => $topicID), array('%d'));
@@ -1008,12 +1016,13 @@ class AsgarosForum {
     }
 
     function remove_post() {
-        $post_id = (isset($_GET['post']) && is_numeric($_GET['post'])) ? absint($_GET['post']) : 0;
+        $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
 
         if (AsgarosForumPermissions::isModerator('current') && AsgarosForumContent::postExists($post_id)) {
             do_action('asgarosforum_before_delete_post', $post_id);
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             AsgarosForumUploads::deletePostFiles($post_id);
+            $this->reports->remove_report($post_id);
             do_action('asgarosforum_after_delete_post', $post_id);
         }
     }

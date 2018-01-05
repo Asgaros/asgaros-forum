@@ -3,13 +3,14 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 14;
+    const DATABASE_VERSION = 15;
 
     private static $instance = null;
     private static $db;
     private static $table_forums;
     private static $table_topics;
     private static $table_posts;
+    private static $table_reports;
 
     // AsgarosForumDatabase instance creator
 	public static function createInstance() {
@@ -32,16 +33,18 @@ class AsgarosForumDatabase {
 	}
 
     private function setTables() {
-        self::$table_forums = self::$db->prefix.'forum_forums';
-        self::$table_topics = self::$db->prefix.'forum_topics';
-        self::$table_posts  = self::$db->prefix.'forum_posts';
+        self::$table_forums     = self::$db->prefix.'forum_forums';
+        self::$table_topics     = self::$db->prefix.'forum_topics';
+        self::$table_posts      = self::$db->prefix.'forum_posts';
+        self::$table_reports    = self::$db->prefix.'forum_reports';
     }
 
     public static function getTables() {
         $tables = new stdClass();
-        $tables->forums = self::$table_forums;
-        $tables->topics = self::$table_topics;
-        $tables->posts = self::$table_posts;
+        $tables->forums     = self::$table_forums;
+        $tables->topics     = self::$table_topics;
+        $tables->posts      = self::$table_posts;
+        $tables->reports    = self::$table_reports;
         return $tables;
     }
 
@@ -146,11 +149,18 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
+            $sql4 = "
+            CREATE TABLE ".self::$table_reports." (
+            post_id int(11) NOT NULL default '0',
+            user_id int(11) NOT NULL default '0'
+            ) $charset_collate;";
+
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 
             dbDelta($sql1);
             dbDelta($sql2);
             dbDelta($sql3);
+            dbDelta($sql4);
 
             if ($database_version_installed < 5) {
                 // Because most of the WordPress users are using a MySQL version below 5.6,

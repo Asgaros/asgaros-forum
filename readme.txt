@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Reporting functionality
 * Added: Option to change font
 * Added: Option to change font size
 * Added: Possibility to toggle truncated quotes with a click
@@ -95,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Some strings could not get translated
 * Changed: Apply additional validation rules before saving options
 * Changed: All theme and color options are now available in the appearance-area
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.6.8 =
 * Added: Option to change the border color
