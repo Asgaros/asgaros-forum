@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to change font
 * Added: Option to change font size
 * Added: Possibility to toggle truncated quotes with a click
+* Added: asgarosforum_filter_get_sticky_topics_order filter
 * Fixed: Wrong username for automatic topic of scheduled blog post
 * Fixed: Some strings could not get translated
 * Fixed: Display issues with some themes

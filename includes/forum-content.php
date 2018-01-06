@@ -292,6 +292,15 @@ class AsgarosForumContent {
     // FUNCTIONS FOR GETTING CONTENT.
     //======================================================================
 
+    public static function get_sticky_topics($forum_id) {
+        global $asgarosforum;
+
+        $order = apply_filters('asgarosforum_filter_get_sticky_topics_order', "(SELECT MAX(id) FROM {$asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
+        $results = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT t.*, (SELECT author_id FROM {$asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'sticky%' ORDER BY {$order};", $forum_id));
+        $results = apply_filters('asgarosforum_filter_get_threads', $results);
+        return $results;
+    }
+
     // TODO: Remove redundant function in forum.php
     public static function get_topic($topic_id) {
         global $asgarosforum;
