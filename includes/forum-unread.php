@@ -23,7 +23,12 @@ class AsgarosForumUnread {
             }
 
             // Get IDs of excluded topics.
-            self::$excludedItems = get_user_meta(self::$userID, 'asgarosforum_unread_exclude', true);
+            $items = get_user_meta(self::$userID, 'asgarosforum_unread_exclude', true);
+
+            // Only add it to the exclude-list when the result is not empty because otherwise the array is converted to a string.
+            if (!empty($items)) {
+                self::$excludedItems = $items;
+            }
         } else {
             // Create a cookie when it does not exist.
             if (!isset($_COOKIE['asgarosforum_unread_cleared'])) {
