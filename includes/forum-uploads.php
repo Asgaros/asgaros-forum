@@ -215,7 +215,14 @@ class AsgarosForumUploads {
 		}
 
 		// Show upload controls.
-        if (self::$asgarosforum->options['allow_file_uploads'] && (is_user_logged_in() || self::$asgarosforum->options['allow_file_uploads_guests'])) {
+        if (self::$asgarosforum->options['allow_file_uploads']) {
+			// Dont show upload controls under certain conditions.
+			if (!is_user_logged_in() && self::$asgarosforum->options['upload_permission'] != 'everyone') {
+				return;
+			} else if (!AsgarosForumPermissions::isModerator('current') && self::$asgarosforum->options['upload_permission'] == 'moderator') {
+				return;
+			}
+
 			echo '<div class="editor-row editor-row-uploads">';
 				echo '<span class="row-title">'.__('Upload Files:', 'asgaros-forum').'</span>';
 

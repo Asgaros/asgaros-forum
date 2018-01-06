@@ -225,11 +225,7 @@ if (!defined('ABSPATH')) exit;
                             ?>
                             <p>
                                 <input type="checkbox" name="allow_file_uploads" id="allow_file_uploads" class="show_hide_initiator" data-hide-class="uploads-option" <?php echo $uploadsOption; ?>>
-                                <label for="allow_file_uploads"><?php _e('Allow file uploads', 'asgaros-forum'); ?></label>
-                            </p>
-                            <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
-                                <input type="checkbox" name="allow_file_uploads_guests" id="allow_file_uploads_guests" <?php checked(!empty($asgarosforum->options['allow_file_uploads_guests'])); ?>>
-                                <label for="allow_file_uploads_guests"><?php _e('Guests can upload files', 'asgaros-forum'); ?></label>
+                                <label for="allow_file_uploads"><?php _e('Allow uploads', 'asgaros-forum'); ?></label>
                             </p>
                             <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
                                 <input type="checkbox" name="uploads_show_thumbnails" id="uploads_show_thumbnails" <?php checked(!empty($asgarosforum->options['uploads_show_thumbnails'])); ?>>
@@ -237,7 +233,16 @@ if (!defined('ABSPATH')) exit;
                             </p>
                             <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
                                 <input type="checkbox" name="hide_uploads_from_guests" id="hide_uploads_from_guests" <?php checked(!empty($asgarosforum->options['hide_uploads_from_guests'])); ?>>
-                                <label for="hide_uploads_from_guests"><?php _e('Show uploads to logged-in users only', 'asgaros-forum'); ?></label>
+                                <label for="hide_uploads_from_guests"><?php _e('Show uploaded files to logged-in users only', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
+                                <label for="upload_permission"><?php _e('Who can upload files:', 'asgaros-forum'); ?></label>
+
+                                <select name="upload_permission" id="upload_permission">';
+                                    <option value="everyone" <?php if ($asgarosforum->options['upload_permission'] == 'everyone') { echo 'selected="selected"'; } ?>><?php _e('Everyone', 'asgaros-forum'); ?></option>
+                                    <option value="loggedin" <?php if ($asgarosforum->options['upload_permission'] == 'loggedin') { echo 'selected="selected"'; } ?>><?php _e('Logged in users only', 'asgaros-forum'); ?></option>
+                                    <option value="moderator" <?php if ($asgarosforum->options['upload_permission'] == 'moderator') { echo 'selected="selected"'; } ?>><?php _e('Moderators only', 'asgaros-forum'); ?></option>
+                                </select>
                             </p>
                             <p class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
                                 <label for="allowed_filetypes"><?php _e('Allowed filetypes:', 'asgaros-forum'); ?></label>

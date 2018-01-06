@@ -36,7 +36,7 @@ class AsgarosForum {
         'allow_guest_postings'      => false,
         'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'        => false,
-        'allow_file_uploads_guests' => false,
+        'upload_permission'         => 'loggedin',
         'hide_uploads_from_guests'  => false,
         'hide_profiles_from_guests' => false,
         'uploads_maximum_number'    => 5,

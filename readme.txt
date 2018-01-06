@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Reporting functionality
+* Added: Option to limit file uploads to moderators
 * Added: Option to change font
 * Added: Option to change font size
 * Added: Possibility to toggle truncated quotes with a click
