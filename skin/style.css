@@ -308,9 +308,9 @@
     display: inline-block;
     background-color: #2d89cc;
     padding: 2px 5px;
-    margin-left: 2px;
+    margin-left: 1px;
     color: #fff !important;
-    border-bottom: 2px solid #0073aa;
+    border-bottom: 1px solid #00689a;
 }
 #af-wrapper .forum-menu a:before {
     font-size: 18px;
@@ -383,7 +383,7 @@
 /* TITLE */
 #af-wrapper .title-element {
     background-color: #2d89cc;
-    border-bottom: 2px solid #0073aa;
+    border-bottom: 1px solid #00689a;
     color: #fff;
     padding: 3px 16px;
     display: block;
@@ -405,7 +405,7 @@
     padding: 0 20px;
     font-size: 14px;
     color: #fff !important;
-    border-left: 1px solid #0073aa;
+    border-left: 1px solid #00689a;
 }
 #af-wrapper #forum-header-container-top a:first-child {
     border-left: none;
@@ -418,7 +418,7 @@
 #af-wrapper #subscription-overview-link {
     float: right;
     padding: 0 10px;
-    border-left: 1px solid #0073aa;
+    border-left: 1px solid #00689a;
 }
 #af-wrapper #subscription-overview-link span {
     padding: 0;
@@ -615,7 +615,7 @@
 }
 #af-wrapper .post-author-marker {
     background-color: #2d89cc;
-    border-bottom: 2px solid #0073aa;
+    border-bottom: 1px solid #00689a;
     margin-left: -7px;
     margin-bottom: 7px;
     padding: 2px 15px;
@@ -737,9 +737,9 @@
 }
 #af-wrapper #statistics #statistics-header {
     display: block;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #999;
     color: #fff;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #767676;
     padding: 3px 10px;
 }
 #af-wrapper #statistics span:before {
