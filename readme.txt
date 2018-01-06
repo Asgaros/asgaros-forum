@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Possibility to toggle truncated quotes with a click
 * Fixed: Wrong username for automatic topic of scheduled blog post
 * Fixed: Some strings could not get translated
+* Fixed: Display issues with some themes
 * Changed: Apply additional validation rules before saving options
 * Changed: All theme and color options are now available in the appearance-area
 * Changed: Minor design changes

@@ -516,6 +516,7 @@
     outline: none;
     box-shadow: none; /* comp */
     min-height: initial; /* comp */
+    background-image: none; /* comp */
 }
 #af-wrapper #forum-search p {
     display: none;
