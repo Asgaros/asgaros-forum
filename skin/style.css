@@ -826,6 +826,18 @@
 #af-wrapper .profile-link:hover {
     text-decoration: underline;
 }
+#af-wrapper .edit-profile-link {
+    display: block;
+    padding-top: 16px;
+    border-top: 1px solid #eeeeee;
+    margin-top: 16px;
+}
+#af-wrapper .edit-profile-link span:before {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    padding-top: 2px;
+}
 
 /* MEMBERS LIST */
 #af-wrapper .member-avatar img {
