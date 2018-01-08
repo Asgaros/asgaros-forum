@@ -547,7 +547,7 @@
     float: none;
     margin: 0;
     border-radius: initial;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
     outline: 1px solid #ccc;
     display: initial; /* comp */
 }
@@ -850,7 +850,7 @@
 }
 #af-wrapper .report-link,
 #af-wrapper .report-exists {
-    padding: 0;
+    padding: 0 !important;
 }
 #af-wrapper .report-link:before,
 #af-wrapper .report-exists:before {
