@@ -3,28 +3,13 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
-    const DATABASE_VERSION = 15;
+    private $db;
+    private $db_version = 15;
+    private $tables;
 
-    private static $instance = null;
-    private static $db;
-    private static $table_forums;
-    private static $table_topics;
-    private static $table_posts;
-    private static $table_reports;
-
-    // AsgarosForumDatabase instance creator
-	public static function createInstance() {
-		if (self::$instance === null) {
-			self::$instance = new self;
-		}
-
-        return self::$instance;
-	}
-
-    // AsgarosForumDatabase constructor
-	private function __construct() {
+    public function __construct() {
         global $wpdb;
-        self::$db = $wpdb;
+        $this->db = $wpdb;
         $this->setTables();
         register_activation_hook(__FILE__, array($this, 'activatePlugin'));
         add_action('wpmu_new_blog', array($this, 'buildSubsite'), 10, 6);
@@ -33,29 +18,25 @@ class AsgarosForumDatabase {
 	}
 
     private function setTables() {
-        self::$table_forums     = self::$db->prefix.'forum_forums';
-        self::$table_topics     = self::$db->prefix.'forum_topics';
-        self::$table_posts      = self::$db->prefix.'forum_posts';
-        self::$table_reports    = self::$db->prefix.'forum_reports';
+        $this->tables = new stdClass();
+        $this->tables->forums   = $this->db->prefix.'forum_forums';
+        $this->tables->topics   = $this->db->prefix.'forum_topics';
+        $this->tables->posts    = $this->db->prefix.'forum_posts';
+        $this->tables->reports  = $this->db->prefix.'forum_reports';
     }
 
-    public static function getTables() {
-        $tables = new stdClass();
-        $tables->forums     = self::$table_forums;
-        $tables->topics     = self::$table_topics;
-        $tables->posts      = self::$table_posts;
-        $tables->reports    = self::$table_reports;
-        return $tables;
+    public function getTables() {
+        return $this->tables;
     }
 
-    public static function activatePlugin($networkwide) {
+    public function activatePlugin($networkwide) {
         if (function_exists('is_multisite') && is_multisite()) {
             // Check if it is a network activation. If so, run the database-creation for each id.
             if ($networkwide) {
-                $old_blog =  self::$db->blogid;
+                $old_blog =  $this->db->blogid;
 
                 // Get all blog ids
-                $blogids = self::$db->get_col('SELECT blog_id FROM '.self::$db->blogs);
+                $blogids = $this->db->get_col('SELECT blog_id FROM '.$this->db->blogs);
 
                 foreach ($blogids as $blog_id) {
                     switch_to_blog($blog_id);
@@ -72,7 +53,7 @@ class AsgarosForumDatabase {
     }
 
     // Create tables for a new subsite in a multisite installation.
-    public static function buildSubsite($blog_id, $user_id, $domain, $path, $site_id, $meta) {
+    public function buildSubsite($blog_id, $user_id, $domain, $path, $site_id, $meta) {
         if (!function_exists('is_plugin_active_for_network')) {
             require_once(ABSPATH.'/wp-admin/includes/plugin.php');
         }
@@ -88,31 +69,32 @@ class AsgarosForumDatabase {
 
     // Delete tables during a subsite uninstall.
     public function deleteSubsite($tables) {
-        $tables[] = self::$db->prefix.'forum_forums';
-        $tables[] = self::$db->prefix.'forum_topics';
-        $tables[] = self::$db->prefix.'forum_posts';
+        $tables[] = $this->db->prefix.'forum_forums';
+        $tables[] = $this->db->prefix.'forum_topics';
+        $tables[] = $this->db->prefix.'forum_posts';
 
         // Delete data which has been used in old versions of the plugin.
-        $tables[] = self::$db->prefix.'forum_threads';
+        $tables[] = $this->db->prefix.'forum_threads';
         return $tables;
     }
 
-    public static function buildDatabase() {
+    public function buildDatabase() {
         global $asgarosforum;
 
         $database_version_installed = get_option('asgarosforum_db_version');
 
-        if ($database_version_installed != self::DATABASE_VERSION) {
+        if ($database_version_installed != $this->db_version) {
             // Rename old table.
-            $renameTable = self::$db->get_results('SHOW TABLES LIKE "'.self::$db->prefix.'forum_threads";');
+            $renameTable = $this->db->get_results('SHOW TABLES LIKE "'.$this->db->prefix.'forum_threads";');
             if (!empty($renameTable)) {
-                self::$db->query('RENAME TABLE '.self::$db->prefix.'forum_threads TO '.self::$table_topics.';');
+                $this->db->query('RENAME TABLE '.$this->db->prefix.'forum_threads TO '.$this->tables->topics.';');
             }
 
-            $charset_collate = self::$db->get_charset_collate();
+            $charset_collate = $this->db->get_charset_collate();
 
-            $sql1 = "
-            CREATE TABLE ".self::$table_forums." (
+            $sql = array();
+
+            $sql[] = "CREATE TABLE ".$this->tables->forums." (
             id int(11) NOT NULL auto_increment,
             name varchar(255) NOT NULL default '',
             parent_id int(11) NOT NULL default '0',
@@ -125,8 +107,7 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql2 = "
-            CREATE TABLE ".self::$table_topics." (
+            $sql[] = "CREATE TABLE ".$this->tables->topics." (
             id int(11) NOT NULL auto_increment,
             parent_id int(11) NOT NULL default '0',
             views int(11) NOT NULL default '0',
@@ -136,8 +117,7 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql3 = "
-            CREATE TABLE ".self::$table_posts." (
+            $sql[] = "CREATE TABLE ".$this->tables->posts." (
             id int(11) NOT NULL auto_increment,
             text longtext,
             parent_id int(11) NOT NULL default '0',
@@ -149,45 +129,41 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql4 = "
-            CREATE TABLE ".self::$table_reports." (
+            $sql[] = "CREATE TABLE ".$this->tables->reports." (
             post_id int(11) NOT NULL default '0',
             user_id int(11) NOT NULL default '0'
             ) $charset_collate;";
 
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 
-            dbDelta($sql1);
-            dbDelta($sql2);
-            dbDelta($sql3);
-            dbDelta($sql4);
+            dbDelta($sql);
 
             if ($database_version_installed < 5) {
                 // Because most of the WordPress users are using a MySQL version below 5.6,
                 // we have to set the ENGINE for the post-table to MyISAM because InnoDB doesnt
                 // support FULLTEXT before MySQL version 5.6.
-                self::$db->query('ALTER TABLE '.self::$table_posts.' ENGINE = MyISAM;');
-                self::$db->query('ALTER TABLE '.self::$table_posts.' ADD FULLTEXT (text);');
+                $this->db->query('ALTER TABLE '.$this->tables->posts.' ENGINE = MyISAM;');
+                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD FULLTEXT (text);');
             }
 
             // Create forum slugs.
             if ($database_version_installed < 6) {
-                $forums = self::$db->get_results("SELECT id, name FROM ".self::$table_forums." WHERE slug = '' ORDER BY id ASC;");
+                $forums = $this->db->get_results("SELECT id, name FROM ".$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
 
                 foreach ($forums as $forum) {
-                    $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, self::$table_forums, 'forum');
-                    self::$db->update(self::$table_forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
+                    $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, $this->tables->forums, 'forum');
+                    $this->db->update($this->tables->forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
                 }
             }
 
             // Add index to posts.author_id to make countings faster.
             if ($database_version_installed < 11) {
-                self::$db->query('ALTER TABLE '.self::$table_posts.' ADD INDEX(author_id);');
+                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(author_id);');
             }
 
             // Add index to posts.parent_id for faster queries.
             if ($database_version_installed < 12) {
-                self::$db->query('ALTER TABLE '.self::$table_posts.' ADD INDEX(parent_id);');
+                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(parent_id);');
             }
 
             // Add existing user groups to a default user groups category and/or create an example user group.
@@ -239,7 +215,7 @@ class AsgarosForumDatabase {
                 $asgarosforum->saveOptions($options_cleaned);
             }
 
-            update_option('asgarosforum_db_version', self::DATABASE_VERSION);
+            update_option('asgarosforum_db_version', $this->db_version);
         }
     }
 }

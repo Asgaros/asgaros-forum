@@ -56,7 +56,6 @@ require('admin/tables/admin-structure-table.php');
 require('admin/tables/admin-usergroups-table.php');
 require('admin/tables/admin-reports-table.php');
 
-AsgarosForumDatabase::createInstance();
 $asgarosforum = new AsgarosForum();
 
 if (is_admin()) {

@@ -77,13 +77,16 @@ class AsgarosForum {
     var $profile = null;
 
     function __construct() {
+        // Initialize database.
         global $wpdb;
+        $database = new AsgarosForumDatabase();
+        $this->tables = $database->getTables();
         $this->db = $wpdb;
+
         $this->directory = plugin_dir_url(dirname(__FILE__));
         $this->loadOptions();
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');
-        $this->tables = AsgarosForumDatabase::getTables();
 
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
