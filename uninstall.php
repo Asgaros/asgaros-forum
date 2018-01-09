@@ -39,10 +39,12 @@ function deleteData() {
     global $wpdb;
 
     delete_option('asgarosforum_options');
+    delete_option('asgarosforum_appearance');
     delete_option('asgarosforum_db_version');
 
     // For site options in multisite
     delete_site_option('asgarosforum_options');
+    delete_site_option('asgarosforum_appearance');
     delete_site_option('asgarosforum_db_version');
 
     // Delete user meta data
@@ -74,6 +76,7 @@ function deleteData() {
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_forums;");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_topics;");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_posts;");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_reports;");
 
     // Delete uploaded files
     $upload_dir = wp_upload_dir();
