@@ -98,6 +98,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Mark all read not working when using category-parameters in shortcode
 * Fixed: Visited topics not marked as read in some cases
 * Fixed: Wrong username for automatic topic of scheduled blog post
+* Fixed: Wrong titles when using some SEO plugins
 * Fixed: Some strings could not get translated
 * Fixed: Display issues with some themes
 * Changed: Apply additional validation rules before saving options

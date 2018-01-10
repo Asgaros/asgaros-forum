@@ -91,11 +91,14 @@ class AsgarosForum {
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
         add_action('clear_auth_cookie', array('AsgarosForumOnline', 'deleteUserTimeStamp'));
-        add_filter('wp_title', array($this, 'change_wp_title'), 10, 3);
-        add_filter('document_title_parts', array($this, 'change_document_title_parts'));
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
+
+        // Add filters for modifying the title of the page.
+        add_filter('wp_title', array($this, 'change_wp_title'), 100, 3);
+        add_filter('document_title_parts', array($this, 'change_document_title_parts'), 100);
+        add_filter('pre_get_document_title', array($this, 'change_pre_get_document_title'), 100);
 
         // Add hook when topics should get created for new blog posts.
         if ($this->options['create_blog_topics']) {
@@ -120,6 +123,10 @@ class AsgarosForum {
         $this->profile = new AsgarosForumProfile($this);
     }
 
+    //======================================================================
+    // FUNCTIONS FOR GETTING AND SETTING OPTIONS.
+    //======================================================================
+
     function loadOptions() {
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
@@ -130,6 +137,57 @@ class AsgarosForum {
 
         // Reload options after saving them.
 		$this->loadOptions();
+    }
+
+    //======================================================================
+    // FUNCTIONS FOR PAGE TITLE.
+    //======================================================================
+
+    function change_wp_title($title, $sep, $seplocation) {
+        return $this->get_title($title);
+    }
+
+    function change_document_title_parts($title) {
+        $title['title'] = $this->get_title($title['title']);
+        return $title;
+    }
+
+    function change_pre_get_document_title($title) {
+        // Only modify it when a title is already set.
+        if (!empty($title)) {
+            $title = $this->get_title($title);
+        }
+
+        return $title;
+    }
+
+    function get_title($title) {
+        if ($this->executePlugin) {
+            $metaTitle = $this->getMetaTitle();
+
+            if ($metaTitle) {
+                $title = $metaTitle.' - '.$title;
+            }
+        }
+
+        return $title;
+    }
+
+    // Gets the pages meta title.
+    public function getMetaTitle() {
+        // Get the main title by default with disabled default title generation.
+        $metaTitle = $this->getMainTitle(false);
+
+        // Apply custom modifications.
+        if (!$this->error && $this->current_view) {
+            if ($this->current_view === 'forum' && $this->current_forum) {
+                $metaTitle = $this->addCurrentPageToString($metaTitle);
+            } else if ($this->current_view === 'thread' && $this->current_topic) {
+                $metaTitle = $this->addCurrentPageToString($metaTitle);
+            }
+        }
+
+        return $metaTitle;
     }
 
     function prepare() {
@@ -308,32 +366,6 @@ class AsgarosForum {
         wp_enqueue_style('dashicons');
     }
 
-    function change_wp_title($title, $sep, $seplocation) {
-        return $this->get_title($title);
-    }
-
-    function change_document_title_parts($title) {
-        $title['title'] = $this->get_title($title['title']);
-        return $title;
-    }
-
-    // Gets the pages meta title.
-    public function getMetaTitle() {
-        // Get the main title by default with disabled default title generation.
-        $metaTitle = $this->getMainTitle(false);
-
-        // Apply custom modifications.
-        if (!$this->error && $this->current_view) {
-            if ($this->current_view === 'forum' && $this->current_forum) {
-                $metaTitle = $this->addCurrentPageToString($metaTitle);
-            } else if ($this->current_view === 'thread' && $this->current_topic) {
-                $metaTitle = $this->addCurrentPageToString($metaTitle);
-            }
-        }
-
-        return $metaTitle;
-    }
-
     // Gets the pages main title.
     public function getMainTitle($setDefaultTitle = true) {
         $mainTitle = false;
@@ -377,16 +409,6 @@ class AsgarosForum {
         }
 
         return $someString;
-    }
-
-    function get_title($title) {
-        $metaTitle = $this->getMetaTitle();
-
-        if ($this->executePlugin && $metaTitle) {
-            $title = $metaTitle.' - '.$title;
-        }
-
-        return $title;
     }
 
     function add_mce_buttons($buttons, $editor_id) {
