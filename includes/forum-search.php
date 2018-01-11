@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumSearch {
     private static $asgarosforum = null;
-    static $searchKeywords = '';
+    public static $searchKeywords = '';
 
     public function __construct($object) {
 		self::$asgarosforum = $object;
