@@ -26,6 +26,7 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper input[type="submit"],
 #af-wrapper #forum-search,
 #af-wrapper #subscription-overview-link,
+#af-wrapper #forum-header-container-top,
 #af-wrapper #forum-header-container-top a {
 	border-color: <?php echo $color; ?> !important;
 }
