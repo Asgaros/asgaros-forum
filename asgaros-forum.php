@@ -28,7 +28,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-// Include Asgaros Forum Core Files.
+// Include Asgaros Forum core files.
 require('includes/forum.php');
 require('includes/forum-database.php');
 require('includes/forum-taxonomies.php');
@@ -36,7 +36,6 @@ require('includes/forum-rewrite.php');
 require('includes/forum-permissions.php');
 require('includes/forum-content.php');
 require('includes/forum-notifications.php');
-require('includes/forum-widgets.php');
 require('includes/forum-appearance.php');
 require('includes/forum-unread.php');
 require('includes/forum-uploads.php');
@@ -51,6 +50,14 @@ require('includes/forum-usergroups.php');
 require('includes/forum-profile.php');
 require('includes/forum-memberslist.php');
 require('includes/forum-reports.php');
+
+// Include widget files.
+require('includes/forum-widgets.php');
+require('widgets/widget-recent-posts.php');
+require('widgets/widget-recent-topics.php');
+require('widgets/widget-search.php');
+
+// Include admin files.
 require('admin/admin.php');
 require('admin/tables/admin-structure-table.php');
 require('admin/tables/admin-usergroups-table.php');
