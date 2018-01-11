@@ -35,7 +35,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
                     echo '<input name="page_id" type="hidden" value="'.$asgarosforum->options['location'].'">';
                 }
 
-                echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'" value="'.AsgarosForumSearch::$searchKeywords.'">';
+                echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'" value="'.AsgarosForumSearch::$searchKeywordsForOutput.'">';
                 echo '<button type="submit" class="dashicons-before dashicons-search"></button>';
             echo '</form>';
             echo '</div>';

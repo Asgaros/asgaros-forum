@@ -100,6 +100,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Visited topics not marked as read in some cases
 * Fixed: Wrong username for automatic topic of scheduled blog post
 * Fixed: Wrong titles when using some SEO plugins
+* Fixed: Broken search when using some special characters
 * Fixed: Some strings could not get translated
 * Fixed: Display issues with some themes
 * Changed: Apply additional validation rules before saving options
