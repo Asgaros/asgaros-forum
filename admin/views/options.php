@@ -5,8 +5,8 @@ if (!defined('ABSPATH')) exit;
 ?>
 <div class="wrap" id="af-options">
     <?php
-    $title = __('Options', 'asgaros-forum');
-    $titleUpdated = __('Options updated.', 'asgaros-forum');
+    $title = __('Settings', 'asgaros-forum');
+    $titleUpdated = __('Settings updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
     ?>
     <div id="poststuff">
@@ -261,7 +261,7 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
 
-                    <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Options', 'asgaros-forum'); ?>">
+                    <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Settings', 'asgaros-forum'); ?>">
                 </form>
 
             </div>
