@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-AsgarosForumEditor::showEditor('addtopic', true);
+$this->editor->showEditor('addtopic', true);
 
 ?>
 

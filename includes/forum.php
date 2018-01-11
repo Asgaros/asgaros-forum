@@ -75,6 +75,7 @@ class AsgarosForum {
     var $cache = array();   // Used to store selected database queries.
     var $reports = null;
     var $profile = null;
+    var $editor = null;
 
     function __construct() {
         // Initialize database.
@@ -111,7 +112,6 @@ class AsgarosForum {
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
         new AsgarosForumAppearance($this);
-        new AsgarosForumEditor($this);
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumOnline($this);
@@ -121,6 +121,7 @@ class AsgarosForum {
 
         $this->reports = new AsgarosForumReports($this);
         $this->profile = new AsgarosForumProfile($this);
+        $this->editor = new AsgarosForumEditor($this);
     }
 
     //======================================================================
@@ -471,7 +472,7 @@ class AsgarosForum {
                     case 'addtopic':
                     case 'addpost':
                     case 'editpost':
-                        AsgarosForumEditor::showEditor();
+                        $this->editor->showEditor();
                     break;
                     case 'profile':
                         $this->profile->showProfile();

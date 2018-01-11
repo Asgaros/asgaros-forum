@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) exit;
         require('post-element.php');
     } ?>
 </div>
-<?php AsgarosForumEditor::showEditor('addpost', true); ?>
+<?php $this->editor->showEditor('addpost', true); ?>
 <div class="pages-and-menu">
     <?php
     echo $paginationRendering;
