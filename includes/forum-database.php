@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 15;
+    private $db_version = 16;
     private $tables;
 
     public function __construct() {
@@ -131,7 +131,8 @@ class AsgarosForumDatabase {
 
             $sql[] = "CREATE TABLE ".$this->tables->reports." (
             post_id int(11) NOT NULL default '0',
-            user_id int(11) NOT NULL default '0'
+            user_id int(11) NOT NULL default '0',
+            PRIMARY KEY  (post_id, user_id)
             ) $charset_collate;";
 
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');
