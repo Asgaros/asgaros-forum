@@ -72,6 +72,7 @@ class AsgarosForumDatabase {
         $tables[] = $this->db->prefix.'forum_forums';
         $tables[] = $this->db->prefix.'forum_topics';
         $tables[] = $this->db->prefix.'forum_posts';
+        $tables[] = $this->db->prefix.'forum_reports';
 
         // Delete data which has been used in old versions of the plugin.
         $tables[] = $this->db->prefix.'forum_threads';
