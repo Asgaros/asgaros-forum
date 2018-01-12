@@ -13,31 +13,35 @@ class AsgarosForumReports {
     }
 
     public function initialize() {
-        // Load reports of the current user.
-        if (is_user_logged_in()) {
-            $user_id = get_current_user_id();
+        if ($this->asgarosforum->options['reports_enabled']) {
+            // Load reports of the current user.
+            if (is_user_logged_in()) {
+                $user_id = get_current_user_id();
 
-            $this->reports[$user_id] = $this->get_reports_of_user($user_id);
+                $this->reports[$user_id] = $this->get_reports_of_user($user_id);
+            }
         }
     }
 
     public function render_report_button($post_id, $topic_id) {
-        // Only show a report button when the user is logged-in.
-        if (is_user_logged_in()) {
-            $user_id = get_current_user_id();
+        if ($this->asgarosforum->options['reports_enabled']) {
+            // Only show a report button when the user is logged-in.
+            if (is_user_logged_in()) {
+                $user_id = get_current_user_id();
 
-            if (!$this->report_exists($post_id, $user_id)) {
-                $report_message = __('Are you sure that you want to report this post?', 'asgaros-forum');
-                $report_href = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
+                if (!$this->report_exists($post_id, $user_id)) {
+                    $report_message = __('Are you sure that you want to report this post?', 'asgaros-forum');
+                    $report_href = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
 
-                echo '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
-                    echo '<span class="report-link dashicons-before dashicons-warning"></span>';
-                echo '</a>';
-            } else {
-                echo '<span class="report-exists dashicons-before dashicons-warning" title="'.__('You reported this post.', 'asgaros-forum').'"></span>';
+                    echo '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
+                        echo '<span class="report-link dashicons-before dashicons-warning"></span>';
+                    echo '</a>';
+                } else {
+                    echo '<span class="report-exists dashicons-before dashicons-warning" title="'.__('You reported this post.', 'asgaros-forum').'"></span>';
+                }
+
+                echo '&nbsp;&middot;&nbsp;';
             }
-
-            echo '&nbsp;&middot;&nbsp;';
         }
     }
 

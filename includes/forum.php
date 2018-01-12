@@ -50,6 +50,7 @@ class AsgarosForum {
         'enable_search'             => true,
         'enable_profiles'           => true,
         'enable_memberslist'        => true,
+        'reports_enabled'           => true,
         'memberslist_loggedin_only' => false,
         'show_login_button'         => true,
         'show_logout_button'        => true,

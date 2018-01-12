@@ -261,6 +261,19 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
 
+                    <div class="postbox">
+                        <h2 class="hndle dashicons-before dashicons-warning"><?php _e('Reports', 'asgaros-forum'); ?></h2>
+                        <div class="inside">
+                            <?php
+                            $reportsOption = checked(!empty($asgarosforum->options['reports_enabled']), true, false);
+                            ?>
+                            <p>
+                                <input type="checkbox" name="reports_enabled" id="reports_enabled" class="show_hide_initiator" data-hide-class="reports-option" <?php checked(!empty($asgarosforum->options['reports_enabled'])); ?>>
+                                <label for="reports_enabled"><?php _e('Enable reports', 'asgaros-forum'); ?></label>
+                            </p>
+                        </div>
+                    </div>
+
                     <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Settings', 'asgaros-forum'); ?>">
                 </form>
 
