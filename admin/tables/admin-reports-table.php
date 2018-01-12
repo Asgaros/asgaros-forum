@@ -75,6 +75,8 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
     }
 
     function prepare_items() {
+        global $asgarosforum;
+
         $columns = $this->get_columns();
         $this->_column_headers = array($columns);
 
@@ -83,19 +85,8 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
 
         $this->items = array();
 
-        foreach ($this->table_data as $post_id => $user_ids) {
-            $post_object    = AsgarosForumContent::get_post($post_id);
-            $topic_object   = AsgarosForumContent::get_topic($post_object->parent_id);
-            $post_link      = AsgarosForumRewrite::get_post_link($post_id, $topic_object->id, false, array('highlight_post' => $post_id));
-
-            $this->items[] = array(
-                'post_id'       => $post_id,
-                'post_text'     => esc_html(stripslashes($post_object->text)),
-                'post_link'     => $post_link,
-                'topic_name'    => esc_html(stripslashes($topic_object->name)),
-                'author_id'     => $post_object->author_id,
-                'reporters'     => $user_ids
-            );
+        foreach ($this->table_data as $post_id => $reporter_ids) {
+            $this->items[] = $asgarosforum->reports->get_report($post_id, $reporter_ids);
         }
     }
 }

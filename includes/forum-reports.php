@@ -16,9 +16,9 @@ class AsgarosForumReports {
         if ($this->asgarosforum->options['reports_enabled']) {
             // Load reports of the current user.
             if (is_user_logged_in()) {
-                $user_id = get_current_user_id();
+                $reporter_id = get_current_user_id();
 
-                $this->reports[$user_id] = $this->get_reports_of_user($user_id);
+                $this->reports[$reporter_id] = $this->get_reports_of_user($reporter_id);
             }
         }
     }
@@ -27,9 +27,9 @@ class AsgarosForumReports {
         if ($this->asgarosforum->options['reports_enabled']) {
             // Only show a report button when the user is logged-in.
             if (is_user_logged_in()) {
-                $user_id = get_current_user_id();
+                $reporter_id = get_current_user_id();
 
-                if (!$this->report_exists($post_id, $user_id)) {
+                if (!$this->report_exists($post_id, $reporter_id)) {
                     $report_message = __('Are you sure that you want to report this post?', 'asgaros-forum');
                     $report_href = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
 
@@ -45,16 +45,38 @@ class AsgarosForumReports {
         }
     }
 
-    public function add_report($post_id, $user_id) {
+    public function add_report($post_id, $reporter_id) {
         // Only add a report when the post exists ...
         if (AsgarosForumContent::postExists($post_id)) {
             // ... and when there is not already a report from the user.
-            if (!$this->report_exists($post_id, $user_id)) {
-                $this->asgarosforum->db->insert($this->asgarosforum->tables->reports, array('post_id' => $post_id, 'user_id' => $user_id), array('%d', '%d'));
+            if (!$this->report_exists($post_id, $reporter_id)) {
+                $this->asgarosforum->db->insert($this->asgarosforum->tables->reports, array('post_id' => $post_id, 'reporter_id' => $reporter_id), array('%d', '%d'));
+
+                // Send notification to site owner about new report.
+                $this->send_notification($post_id, $reporter_id);
 
                 // Add the value also to the reports-array.
-                $this->reports[$user_id][] = $post_id;
+                $this->reports[$reporter_id][] = $post_id;
             }
+        }
+    }
+
+    public function send_notification($post_id, $reporter_id) {
+        if ($this->asgarosforum->options['reports_notifications']) {
+            $report = $this->get_report($post_id, $reporter_id);
+
+            $post_author = get_userdata($report['author_id']);
+            $reporter = get_userdata($report['reporters']);
+
+            $notification_subject = __('New report', 'asgaros-forum');
+            $notification_message = sprintf(__('Hello,<br><br>There is a new report.<br><br>Topic:<br>%s<br><br>Post:<br>%s<br><br>Post Author:<br>%s<br><br>Reporter:<br>%s<br><br>Link to the post:<br><a href="%s">%s</a>', 'asgaros-forum'), $report['topic_name'], $report['post_text_raw'], $post_author->display_name, $reporter->display_name, $report['post_link'], $report['post_link']);
+
+            $admin_mail = get_bloginfo('admin_email');
+
+            add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
+            $mail_headers = AsgarosForumNotifications::getMailHeaders();
+            wp_mail($admin_mail, $notification_subject, $notification_message, $mail_headers);
+            remove_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
         }
     }
 
@@ -62,34 +84,53 @@ class AsgarosForumReports {
         $this->asgarosforum->db->delete($this->asgarosforum->tables->reports, array('post_id' => $post_id), array('%d'));
     }
 
-    public function report_exists($post_id, $user_id) {
+    public function report_exists($post_id, $reporter_id) {
         // Load records of user first when they are not loaded yet.
-        if (!isset($this->reports[$user_id])) {
-            $this->reports[$user_id] = $this->get_reports_of_user($user_id);
+        if (!isset($this->reports[$reporter_id])) {
+            $this->reports[$reporter_id] = $this->get_reports_of_user($reporter_id);
         }
 
-        if (in_array($post_id, $this->reports[$user_id])) {
+        if (in_array($post_id, $this->reports[$reporter_id])) {
             return true;
         }
 
         return false;
     }
 
-    public function get_reports_of_user($user_id) {
-        return $this->asgarosforum->db->get_col($this->asgarosforum->db->prepare('SELECT post_id FROM '.$this->asgarosforum->tables->reports.' WHERE user_id = %d', $user_id));
+    public function get_reports_of_user($reporter_id) {
+        return $this->asgarosforum->db->get_col($this->asgarosforum->db->prepare('SELECT post_id FROM '.$this->asgarosforum->tables->reports.' WHERE reporter_id = %d', $reporter_id));
     }
 
-    // Returns all reported posts with a array of reporting users.
+    // Returns all reported posts with an array of reporting users.
     public function get_reports() {
-        $result = $this->asgarosforum->db->get_results('SELECT post_id, user_id FROM '.$this->asgarosforum->tables->reports.' ORDER BY post_id DESC;');
+        $result = $this->asgarosforum->db->get_results('SELECT post_id, reporter_id FROM '.$this->asgarosforum->tables->reports.' ORDER BY post_id DESC;');
 
         $reports = array();
 
         foreach ($result as $report) {
-            $reports[$report->post_id][] = $report->user_id;
+            $reports[$report->post_id][] = $report->reporter_id;
         }
 
         return $reports;
+    }
+
+    // Returns data of a specific report.
+    public function get_report($post_id, $reporter_ids) {
+        $post_object    = AsgarosForumContent::get_post($post_id);
+        $topic_object   = AsgarosForumContent::get_topic($post_object->parent_id);
+        $post_link      = AsgarosForumRewrite::get_post_link($post_id, $topic_object->id, false, array('highlight_post' => $post_id));
+
+        $report = array(
+            'post_id'       => $post_id,
+            'post_text'     => esc_html(stripslashes($post_object->text)),
+            'post_text_raw' => wpautop(stripslashes($post_object->text)),
+            'post_link'     => $post_link,
+            'topic_name'    => esc_html(stripslashes($topic_object->name)),
+            'author_id'     => $post_object->author_id,
+            'reporters'     => $reporter_ids
+        );
+
+        return $report;
     }
 
     public function count_reports() {

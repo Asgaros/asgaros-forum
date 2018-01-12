@@ -51,6 +51,7 @@ class AsgarosForum {
         'enable_profiles'           => true,
         'enable_memberslist'        => true,
         'reports_enabled'           => true,
+        'reports_notifications'     => true,
         'memberslist_loggedin_only' => false,
         'show_login_button'         => true,
         'show_logout_button'        => true,
@@ -310,9 +311,9 @@ class AsgarosForum {
             AsgarosForumNotifications::unsubscribeForum();
         } else if (isset($_GET['report_add'])) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
-            $user_id = get_current_user_id();
+            $reporter_id = get_current_user_id();
 
-            $this->reports->add_report($post_id, $user_id);
+            $this->reports->add_report($post_id, $reporter_id);
         }
 
         // Mark visited topic as read.

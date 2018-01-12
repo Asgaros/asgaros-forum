@@ -271,6 +271,10 @@ if (!defined('ABSPATH')) exit;
                                 <input type="checkbox" name="reports_enabled" id="reports_enabled" class="show_hide_initiator" data-hide-class="reports-option" <?php checked(!empty($asgarosforum->options['reports_enabled'])); ?>>
                                 <label for="reports_enabled"><?php _e('Enable reports', 'asgaros-forum'); ?></label>
                             </p>
+                            <p class="reports-option" <?php if (!$reportsOption) { echo 'style="display: none;"'; } ?>>
+                                <input type="checkbox" name="reports_notifications" id="reports_notifications" <?php checked(!empty($asgarosforum->options['reports_notifications'])); ?>>
+                                <label for="reports_notifications"><?php _e('Notify site owner about new reports', 'asgaros-forum'); ?></label>
+                            </p>
                         </div>
                     </div>
 
