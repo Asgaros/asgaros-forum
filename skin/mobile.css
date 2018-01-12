@@ -16,9 +16,6 @@
         width: 100%;
         text-align: center;
     }
-    #af-wrapper .post-element {
-        display: inline;
-    }
     #af-wrapper img.avatar {
         float: left;
         height: 40px;
