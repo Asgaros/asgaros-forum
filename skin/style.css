@@ -599,6 +599,7 @@
     padding: 0; /* comp */
     table-layout: fixed; /* IE */
     border-bottom: 5px solid #eee;
+    box-sizing: border-box;
 }
 #af-wrapper .post-element:before,
 #af-wrapper .post-element:after {
