@@ -26,7 +26,7 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
         $columnHTML .= '<a class="make-bold" href="'.$item['post_link'].'" target="_blank">'.$item['topic_name'].'</a>';
         $columnHTML .= '<br>';
 
-        $text = esc_html($item['post_text']);
+        $text = $item['post_text'];
 
         if (strlen($text) > 300) {
             $columnHTML .= mb_substr($text, 0, 300, 'UTF-8') . ' &hellip;';
@@ -90,9 +90,9 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
 
             $this->items[] = array(
                 'post_id'       => $post_id,
-                'post_text'     => $post_object->text,
+                'post_text'     => esc_html(stripslashes($post_object->text)),
                 'post_link'     => $post_link,
-                'topic_name'    => $topic_object->name,
+                'topic_name'    => esc_html(stripslashes($topic_object->name)),
                 'author_id'     => $post_object->author_id,
                 'reporters'     => $user_ids
             );
