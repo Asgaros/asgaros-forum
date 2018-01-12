@@ -87,4 +87,10 @@ class AsgarosForumReports {
 
         return $reports;
     }
+
+    public function count_reports() {
+        $result = $this->asgarosforum->db->get_results('SELECT * FROM '.$this->asgarosforum->tables->reports.';');
+
+        return count($result);
+    }
 }

@@ -111,7 +111,16 @@ class AsgarosForumAdmin {
         add_submenu_page('asgarosforum-structure', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'structure_page'));
         add_submenu_page('asgarosforum-structure', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'manage_options', 'asgarosforum-appearance', array($this, 'appearance_page'));
         add_submenu_page('asgarosforum-structure', __('User Groups', 'asgaros-forum'), __('User Groups', 'asgaros-forum'), 'manage_options', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
-        add_submenu_page('asgarosforum-structure', __('Reports', 'asgaros-forum'), __('Reports', 'asgaros-forum'), 'manage_options', 'asgarosforum-reports', array($this, 'reports_page'));
+
+        // Add report counter to menu.
+        $label_reports = __('Reports', 'asgaros-forum');
+        $counter_reports = $this->asgarosforum->reports->count_reports();
+
+        if ($counter_reports > 0) {
+            $label_reports = sprintf(__('Reports %s', 'asgaros-forum'), '<span class="update-plugins count-'.$counter_reports.'"><span class="plugin-count">'.number_format_i18n($counter_reports).'</span></span>');
+        }
+
+        add_submenu_page('asgarosforum-structure', __('Reports', 'asgaros-forum'), $label_reports, 'manage_options', 'asgarosforum-reports', array($this, 'reports_page'));
         add_submenu_page('asgarosforum-structure', __('Settings', 'asgaros-forum'), __('Settings', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'));
     }
 
