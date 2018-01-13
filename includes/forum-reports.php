@@ -48,15 +48,18 @@ class AsgarosForumReports {
     public function add_report($post_id, $reporter_id) {
         // Only add a report when the post exists ...
         if (AsgarosForumContent::postExists($post_id)) {
-            // ... and when there is not already a report from the user.
-            if (!$this->report_exists($post_id, $reporter_id)) {
-                $this->asgarosforum->db->insert($this->asgarosforum->tables->reports, array('post_id' => $post_id, 'reporter_id' => $reporter_id), array('%d', '%d'));
+            // ... and the user is logged in ...
+            if (is_user_logged_in()) {
+                // ... and when there is not already a report from the user.
+                if (!$this->report_exists($post_id, $reporter_id)) {
+                    $this->asgarosforum->db->insert($this->asgarosforum->tables->reports, array('post_id' => $post_id, 'reporter_id' => $reporter_id), array('%d', '%d'));
 
-                // Send notification to site owner about new report.
-                $this->send_notification($post_id, $reporter_id);
+                    // Send notification to site owner about new report.
+                    $this->send_notification($post_id, $reporter_id);
 
-                // Add the value also to the reports-array.
-                $this->reports[$reporter_id][] = $post_id;
+                    // Add the value also to the reports-array.
+                    $this->reports[$reporter_id][] = $post_id;
+                }
             }
         }
     }
