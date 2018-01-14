@@ -57,7 +57,7 @@ class AsgarosForumWidgets {
             $categoriesIDs = array();
             $excludeList = array();
             $excludeList = apply_filters('asgarosforum_filter_get_categories', $excludeList);
-            $metaQueryFilter = self::$asgarosforum->getCategoriesFilter();
+            $metaQueryFilter = AsgarosForumContent::get_categories_filter();
             $categoriesList = get_terms('asgarosforum-category', array(
                 'hide_empty'    => false,
                 'exclude'       => $excludeList,

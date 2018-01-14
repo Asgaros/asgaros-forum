@@ -111,7 +111,7 @@ class AsgarosForum {
         }
 
         new AsgarosForumRewrite($this);
-        new AsgarosForumTaxonomies($this);
+        new AsgarosForumContent($this);
         new AsgarosForumPermissions($this);
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
@@ -512,7 +512,7 @@ class AsgarosForum {
     }
 
     function overview() {
-        $categories = $this->get_categories();
+        $categories = AsgarosForumContent::get_categories();
 
         require('views/overview.php');
     }
@@ -580,7 +580,7 @@ class AsgarosForum {
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
 
-            $categories = $this->get_categories();
+            $categories = AsgarosForumContent::get_categories();
 
             if ($categories) {
                 foreach ($categories as $category) {
@@ -619,39 +619,6 @@ class AsgarosForum {
         return $this->getLink('topic', $topic_id, array('part' => $page), '#postid-'.$post_id);
     }
 
-    function get_categories($enableFiltering = true) {
-        $filter = array();
-        $include = array();
-        $metaQueryFilter = array();
-
-        if ($enableFiltering) {
-            $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
-            $metaQueryFilter = $this->getCategoriesFilter();
-
-            // Set include filter when extended shortcode is used.
-            if (AsgarosForumShortcodes::$includeCategories) {
-                $include = AsgarosForumShortcodes::$includeCategories;
-            }
-        }
-
-        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_query' => $metaQueryFilter));
-
-        // Filter categories by usergroups.
-        if ($enableFiltering) {
-            $categories = AsgarosForumUserGroups::filterCategories($categories);
-        }
-
-        // Get information about ordering.
-        foreach ($categories as $category) {
-            $category->order = get_term_meta($category->term_id, 'order', true);
-        }
-
-        // Sort the categories based on ordering information.
-        usort($categories, array($this, 'categories_compare'));
-
-        return $categories;
-    }
-
     function get_category_name($category_id) {
         $category = get_term($category_id, 'asgarosforum-category');
 
@@ -660,36 +627,6 @@ class AsgarosForum {
         } else {
             return false;
         }
-    }
-
-    function getCategoriesFilter() {
-        $metaQueryFilter = array('relation' => 'AND');
-
-        if (!AsgarosForumPermissions::isModerator('current')) {
-            $metaQueryFilter[] = array(
-                'key'       => 'category_access',
-                'value'     => 'moderator',
-                'compare'   => 'NOT LIKE'
-            );
-        }
-
-        if (!is_user_logged_in()) {
-            $metaQueryFilter[] = array(
-                'key'       => 'category_access',
-                'value'     => 'loggedin',
-                'compare'   => 'NOT LIKE'
-            );
-        }
-
-        if (sizeof($metaQueryFilter) > 1) {
-            return $metaQueryFilter;
-        } else {
-            return array();
-        }
-    }
-
-    function categories_compare($a, $b) {
-        return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
     }
 
     function get_forums($id = false, $parent_forum = 0, $compact = false, $output_type = OBJECT) {

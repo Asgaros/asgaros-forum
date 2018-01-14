@@ -50,7 +50,7 @@ class AsgarosForumSearch {
 
     public static function getSearchResults() {
         if (!empty(self::$searchKeywordsForQuery)) {
-            $categories = self::$asgarosforum->get_categories();
+            $categories = AsgarosForumContent::get_categories();
             $categoriesFilter = array();
 
             foreach ($categories as $category) {

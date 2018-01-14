@@ -189,6 +189,7 @@ class AsgarosForumNotifications {
             $subscriberMails = AsgarosForumUserGroups::filterSubscriberMails($subscriberMails, $asgarosforum->current_category);
             $subscriberMails = apply_filters('asgarosforum_subscriber_mails_new_post', $subscriberMails);
 
+            // TODO: Can put this logic in own function.
             add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
 
             $mailHeaders = self::getMailHeaders();

@@ -56,7 +56,7 @@ class AsgarosForumPagination {
             $select_source = $sourceID;
             $select_url = 'forum';
         } else if ($location === 'search') {
-            $categories = $this->asgarosforum->get_categories();
+            $categories = AsgarosForumContent::get_categories();
             $categoriesFilter = array();
 
             foreach ($categories as $category) {

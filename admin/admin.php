@@ -134,7 +134,7 @@ class AsgarosForumAdmin {
 
     function structure_page() {
         global $asgarosforum;
-        $categories = $asgarosforum->get_categories(false);
+        $categories = AsgarosForumContent::get_categories(false);
 
         require('views/structure.php');
     }

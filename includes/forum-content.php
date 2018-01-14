@@ -3,9 +3,33 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumContent {
+    private static $asgarosforum = null;
+    private static $taxonomyName = 'asgarosforum-category';
     private static $action = false;
     private static $dataSubject;
     private static $dataContent;
+
+    public function __construct($object) {
+		self::$asgarosforum = $object;
+
+        add_action('init', array($this, 'initialize'));
+    }
+
+    public function initialize() {
+        self::initializeTaxonomy();
+    }
+
+    public static function initializeTaxonomy() {
+        // Register the taxonomies.
+        register_taxonomy(
+			self::$taxonomyName,
+			null,
+			array(
+				'public'        => false,
+				'rewrite'       => false
+			)
+		);
+    }
 
     public static function doInsertion() {
         if (self::prepareExecution()) {
@@ -299,6 +323,69 @@ class AsgarosForumContent {
         $results = $asgarosforum->db->get_results($asgarosforum->db->prepare("SELECT t.*, (SELECT author_id FROM {$asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'sticky%' ORDER BY {$order};", $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
         return $results;
+    }
+
+    public static function get_categories($enable_filtering = true) {
+        $filter = array();
+        $include = array();
+        $metaQueryFilter = array();
+
+        if ($enable_filtering) {
+            $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
+            $metaQueryFilter = self::get_categories_filter();
+
+            // Set include filter when extended shortcode is used.
+            if (AsgarosForumShortcodes::$includeCategories) {
+                $include = AsgarosForumShortcodes::$includeCategories;
+            }
+        }
+
+        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_query' => $metaQueryFilter));
+
+        // Filter categories by usergroups.
+        if ($enable_filtering) {
+            $categories = AsgarosForumUserGroups::filterCategories($categories);
+        }
+
+        // Get information about ordering.
+        foreach ($categories as $category) {
+            $category->order = get_term_meta($category->term_id, 'order', true);
+        }
+
+        // Sort the categories based on ordering information.
+        usort($categories, array('AsgarosForumContent', 'get_categories_compare'));
+
+        return $categories;
+    }
+
+    public static function get_categories_filter() {
+        $metaQueryFilter = array('relation' => 'AND');
+
+        if (!AsgarosForumPermissions::isModerator('current')) {
+            $metaQueryFilter[] = array(
+                'key'       => 'category_access',
+                'value'     => 'moderator',
+                'compare'   => 'NOT LIKE'
+            );
+        }
+
+        if (!is_user_logged_in()) {
+            $metaQueryFilter[] = array(
+                'key'       => 'category_access',
+                'value'     => 'loggedin',
+                'compare'   => 'NOT LIKE'
+            );
+        }
+
+        if (sizeof($metaQueryFilter) > 1) {
+            return $metaQueryFilter;
+        } else {
+            return array();
+        }
+    }
+
+    public static function get_categories_compare($a, $b) {
+        return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
     }
 
     // TODO: Remove redundant function in forum.php
