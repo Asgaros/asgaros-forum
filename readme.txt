@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 4.9
 Requires PHP: 5.2
-Stable tag: 1.6.8
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.7.0 =
 * Added: Reaction functionality
 * Added: Reporting functionality
 * Added: Search Widget
@@ -100,7 +101,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_filter_get_sticky_topics_order filter
 * Fixed: Mark all read not working when using category-parameters in shortcode
 * Fixed: Visited topics not marked as read in certain cases
-* Fixed: Wrong author name for automatically created topics of scheduled blog posts
+* Fixed: Wrong author names for automatically created topics of scheduled blog posts
 * Fixed: Wrong titles when using certain SEO plugins
 * Fixed: Broken search when using certain special characters
 * Fixed: Some strings could not get translated
