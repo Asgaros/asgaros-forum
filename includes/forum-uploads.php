@@ -158,7 +158,6 @@ class AsgarosForumUploads {
 	        if (!empty($uploads) && is_dir($path)) {
 				// Generate special message instead of file-list when hiding uploads for guests.
 				if (!is_user_logged_in() && self::$asgarosforum->options['hide_uploads_from_guests']) {
-					// TODO: Login link rendering can be put in own function.
 					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'</li>';
 				} else {
 					foreach ($uploads as $upload) {

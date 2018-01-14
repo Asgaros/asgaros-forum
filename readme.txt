@@ -21,29 +21,27 @@ Create a new page for your forum to display on and add the shortcode [forum] to 
 Check out our [official website](https://www.asgaros.de/support/) if you want to see a demo of the plugin or if you need support.
 
 = Features =
-* Topic & post management
-* Guest postings
-* Sub-forums
-* User groups
-* Reactions
+* Simple Structure & Content Management
+* Profiles & Members List
+* Powerful Editor
 * Notifications
-* Profiles
+* Reactions
+* Uploads
+* Search
 * Moderators
 * Statistics
 * Permissions
-* Search
-* Who is online
-* Reporting
-* Banning
-* Powerful editor
-* File uploads
+* User Groups
+* Who Is Online
+* Guest Postings
+* Reporting & Banning
+* Easy Appearance Customization
 * Widgets
-* Multiple forum instances
-* Easy color customization
-* Theme manager
-* Multisite compatibility
-* Mobile device compatibility
-* Supports multiple languages
+* Mobile Theme
+* Theme Manager
+* Multilingualism
+* Multiple Instances
+* Multisite Compatibility
 
 == Installation ==
 * Download `Asgaros Forum`.
@@ -101,14 +99,14 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_prepare_{current_view} hooks
 * Added: asgarosforum_filter_get_sticky_topics_order filter
 * Fixed: Mark all read not working when using category-parameters in shortcode
-* Fixed: Visited topics not marked as read in some cases
-* Fixed: Wrong username for automatic topic of scheduled blog post
-* Fixed: Wrong titles when using some SEO plugins
-* Fixed: Broken search when using some special characters
+* Fixed: Visited topics not marked as read in certain cases
+* Fixed: Wrong author name for automatically created topics of scheduled blog posts
+* Fixed: Wrong titles when using certain SEO plugins
+* Fixed: Broken search when using certain special characters
 * Fixed: Some strings could not get translated
 * Fixed: Display issues with some themes
 * Changed: Apply additional validation rules before saving options
-* Changed: All theme and color options are now available in the appearance-area
+* Changed: All theme and color options are now available in the appearance area
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.6.8 =
