@@ -252,6 +252,7 @@
 #af-wrapper .topic-name,
 #af-wrapper .member-name {
     width: auto;
+    text-align: left; /* comp */
 }
 #af-wrapper .forum-stats,
 #af-wrapper .topic-stats,
@@ -401,6 +402,7 @@
     background-color: #2d89cc;
     line-height: 40px;
     border-bottom: 1px solid #00689a;
+    text-align: left; /* comp */
 }
 #af-wrapper #forum-header-container-top a {
     padding: 0 20px;
