@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 17;
+    private $db_version = 18;
     private $tables;
 
     public function __construct() {
@@ -19,10 +19,11 @@ class AsgarosForumDatabase {
 
     private function setTables() {
         $this->tables = new stdClass();
-        $this->tables->forums   = $this->db->prefix.'forum_forums';
-        $this->tables->topics   = $this->db->prefix.'forum_topics';
-        $this->tables->posts    = $this->db->prefix.'forum_posts';
-        $this->tables->reports  = $this->db->prefix.'forum_reports';
+        $this->tables->forums       = $this->db->prefix.'forum_forums';
+        $this->tables->topics       = $this->db->prefix.'forum_topics';
+        $this->tables->posts        = $this->db->prefix.'forum_posts';
+        $this->tables->reports      = $this->db->prefix.'forum_reports';
+        $this->tables->reactions    = $this->db->prefix.'forum_reactions';
     }
 
     public function getTables() {
@@ -73,6 +74,7 @@ class AsgarosForumDatabase {
         $tables[] = $this->db->prefix.'forum_topics';
         $tables[] = $this->db->prefix.'forum_posts';
         $tables[] = $this->db->prefix.'forum_reports';
+        $tables[] = $this->db->prefix.'forum_reactions';
 
         // Delete data which has been used in old versions of the plugin.
         $tables[] = $this->db->prefix.'forum_threads';
@@ -134,6 +136,13 @@ class AsgarosForumDatabase {
             post_id int(11) NOT NULL default '0',
             reporter_id int(11) NOT NULL default '0',
             PRIMARY KEY  (post_id, reporter_id)
+            ) $charset_collate;";
+
+            $sql[] = "CREATE TABLE ".$this->tables->reactions." (
+            post_id int(11) NOT NULL default '0',
+            user_id int(11) NOT NULL default '0',
+            reaction varchar(20) NOT NULL default '',
+            PRIMARY KEY  (post_id, user_id)
             ) $charset_collate;";
 
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');

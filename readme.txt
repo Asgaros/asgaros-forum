@@ -25,6 +25,7 @@ Check out our [official website](https://www.asgaros.de/support/) if you want to
 * Guest postings
 * Sub-forums
 * User groups
+* Reactions
 * Notifications
 * Profiles
 * Moderators
@@ -32,6 +33,7 @@ Check out our [official website](https://www.asgaros.de/support/) if you want to
 * Permissions
 * Search
 * Who is online
+* Reporting
 * Banning
 * Powerful editor
 * File uploads
@@ -88,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Reaction functionality
 * Added: Reporting functionality
 * Added: Search Widget
 * Added: Option to limit file uploads to moderators
@@ -95,6 +98,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to change font size
 * Added: Edit profile-link to profile
 * Added: Possibility to toggle truncated quotes with a click
+* Added: asgarosforum_prepare_{current_view} hooks
 * Added: asgarosforum_filter_get_sticky_topics_order filter
 * Fixed: Mark all read not working when using category-parameters in shortcode
 * Fixed: Visited topics not marked as read in some cases

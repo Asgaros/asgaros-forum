@@ -121,6 +121,10 @@ if (!defined('ABSPATH')) exit;
                         <h2 class="hndle dashicons-before dashicons-admin-plugins"><?php _e('Features', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
+                                <input type="checkbox" name="enable_reactions" id="enable_reactions" <?php checked(!empty($asgarosforum->options['enable_reactions'])); ?>>
+                                <label for="enable_reactions"><?php _e('Enable reactions', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
                                 <input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($asgarosforum->options['enable_search'])); ?>>
                                 <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
                             </p>

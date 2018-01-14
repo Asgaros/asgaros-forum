@@ -661,6 +661,12 @@
     box-sizing: border-box;
     line-height: 20px;
 }
+#af-wrapper .post-footer-meta {
+    display: block;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+}
 #af-wrapper .post-footer a {
     color: #999;
 }
@@ -858,9 +864,41 @@
 #af-wrapper .report-link:before,
 #af-wrapper .report-exists:before {
     font-size: 14px;
-    height: 14px;
     width: 14px;
+    height: 20px;
     line-height: 20px;
+}
+
+/* REACTIONS */
+#af-wrapper .post-reactions {
+    float: left;
+    cursor: default;
+}
+#af-wrapper .post-reactions .reaction-icon,
+#af-wrapper .post-reactions .reaction-icon:before,
+#af-wrapper .post-reactions .reaction-number {
+    display: inline-block;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+}
+#af-wrapper .post-reactions .reaction-number {
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    margin-right: 8px;
+}
+#af-wrapper .post-reactions a:hover .down,
+#af-wrapper .post-reactions .down .reaction-number,
+#af-wrapper .post-reactions .down .reaction-active {
+    color: rgba(255, 0, 0, 0.75);
+}
+#af-wrapper .post-reactions a:hover .up,
+#af-wrapper .post-reactions .up .reaction-number,
+#af-wrapper .post-reactions .up .reaction-active {
+    color: rgba(0, 128, 0, 0.75);
 }
 
 /* ICONS */

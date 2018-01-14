@@ -77,6 +77,7 @@ function deleteData() {
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_topics;");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_posts;");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_reports;");
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_reactions;");
 
     // Delete uploaded files
     $upload_dir = wp_upload_dir();

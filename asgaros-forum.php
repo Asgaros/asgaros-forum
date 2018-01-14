@@ -50,6 +50,7 @@ require('includes/forum-usergroups.php');
 require('includes/forum-profile.php');
 require('includes/forum-memberslist.php');
 require('includes/forum-reports.php');
+require('includes/forum-reactions.php');
 
 // Include widget files.
 require('includes/forum-widgets.php');

@@ -47,6 +47,7 @@ class AsgarosForum {
         'notification_sender_name'  => '',
         'notification_sender_mail'  => '',
         'allow_signatures'          => false,
+        'enable_reactions'          => true,
         'enable_search'             => true,
         'enable_profiles'           => true,
         'enable_memberslist'        => true,
@@ -78,6 +79,7 @@ class AsgarosForum {
     var $reports = null;
     var $profile = null;
     var $editor = null;
+    var $reactions = null;
 
     function __construct() {
         // Initialize database.
@@ -124,6 +126,7 @@ class AsgarosForum {
         $this->reports = new AsgarosForumReports($this);
         $this->profile = new AsgarosForumProfile($this);
         $this->editor = new AsgarosForumEditor($this);
+        $this->reactions = new AsgarosForumReactions($this);
     }
 
     //======================================================================
@@ -320,6 +323,8 @@ class AsgarosForum {
         if ($this->current_view === 'thread' && $this->current_topic) {
             AsgarosForumUnread::markTopicRead();
         }
+
+        do_action('asgarosforum_prepare_'.$this->current_view);
     }
 
     function check_access() {
@@ -1013,6 +1018,7 @@ class AsgarosForum {
                 foreach ($posts as $post) {
                     AsgarosForumUploads::deletePostFiles($post);
                     $this->reports->remove_report($post);
+                    $this->reactions->remove_all_reactions($post);
                 }
 
                 $this->db->delete($this->tables->posts, array('parent_id' => $topicID), array('%d'));
@@ -1047,6 +1053,7 @@ class AsgarosForum {
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             AsgarosForumUploads::deletePostFiles($post_id);
             $this->reports->remove_report($post_id);
+            $this->reactions->remove_all_reactions($post_id);
             do_action('asgarosforum_after_delete_post', $post_id);
         }
     }

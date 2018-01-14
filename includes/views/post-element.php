@@ -74,34 +74,39 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
         echo $post_content;
         AsgarosForumUploads::showUploadedFiles($post);
         echo '<div class="post-footer">';
-        if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
-            // Show who edited a post (when the information exist in the database).
-            if ($post->author_edit) {
-                echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
-            } else {
-                echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+
+            echo '<div class="post-footer-meta">';
+                $this->reactions->render_reactions_area($post->id, $this->current_topic);
+
+                if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
+                    // Show who edited a post (when the information exist in the database).
+                    if ($post->author_edit) {
+                        echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                    } else {
+                        echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                    }
+
+                    if ($this->current_view != 'post') {
+                        echo '&nbsp;&middot;&nbsp;';
+                    }
+                }
+
+                if ($this->current_view != 'post') {
+                    // Show report button.
+                    $this->reports->render_report_button($post->id, $this->current_topic);
+
+                    echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+                }
+            echo '</div>';
+
+            // Show signature.
+            if ($this->current_view != 'post' && $this->options['allow_signatures']) {
+                $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
+
+                if (!empty($signature)) {
+                    echo '<div class="signature">'.$signature.'</div>';
+                }
             }
-
-            if ($this->current_view != 'post') {
-                echo '&nbsp;&middot;&nbsp;';
-            }
-        }
-
-        if ($this->current_view != 'post') {
-            // Show report button.
-            $this->reports->render_report_button($post->id, $this->current_topic);
-
-            echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
-        }
-
-        // Show signature.
-        if ($this->current_view != 'post' && $this->options['allow_signatures']) {
-            $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
-
-            if (!empty($signature)) {
-                echo '<div class="signature">'.$signature.'</div>';
-            }
-        }
 
         echo '</div>';
 
