@@ -881,7 +881,7 @@
 #af-wrapper .post-reactions .reaction-number {
     display: inline-block;
     padding: 0;
-    width: 20px;
+    min-width: 20px;
     height: 20px;
     line-height: 20px;
     font-size: 20px;
