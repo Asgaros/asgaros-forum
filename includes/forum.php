@@ -424,6 +424,14 @@ class AsgarosForum {
             return $buttons;
         } else {
             $buttons[] = 'image';
+
+            // Remove the read-more button.
+            $searchKey = array_search('wp_more', $buttons);
+
+            if ($searchKey !== false) {
+                unset($buttons[$searchKey]);
+            }
+
             return $buttons;
         }
     }

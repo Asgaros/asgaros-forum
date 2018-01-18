@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Removed: Read more-button from editor
 = 1.7.0 =
 * Added: Reaction functionality
 * Added: Reporting functionality
