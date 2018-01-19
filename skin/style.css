@@ -521,6 +521,7 @@
     box-shadow: none; /* comp */
     min-height: initial; /* comp */
     background-image: none; /* comp */
+    float: initial; /* comp */
 }
 #af-wrapper #forum-search p {
     display: none;
