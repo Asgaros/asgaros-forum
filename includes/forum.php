@@ -75,11 +75,12 @@ class AsgarosForum {
         'teeny'         => true,
         'quicktags'     => false
     );
-    var $cache = array();   // Used to store selected database queries.
-    var $reports = null;
-    var $profile = null;
-    var $editor = null;
-    var $reactions = null;
+    var $cache          = array();   // Used to store selected database queries.
+    var $reports        = null;
+    var $profile        = null;
+    var $editor         = null;
+    var $reactions      = null;
+    var $notifications  = null;
 
     function __construct() {
         // Initialize database.
@@ -123,10 +124,11 @@ class AsgarosForum {
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
 
-        $this->reports = new AsgarosForumReports($this);
-        $this->profile = new AsgarosForumProfile($this);
-        $this->editor = new AsgarosForumEditor($this);
-        $this->reactions = new AsgarosForumReactions($this);
+        $this->reports          = new AsgarosForumReports($this);
+        $this->profile          = new AsgarosForumProfile($this);
+        $this->editor           = new AsgarosForumEditor($this);
+        $this->reactions        = new AsgarosForumReactions($this);
+        $this->notifications    = new AsgarosForumNotifications($this);
     }
 
     //======================================================================
@@ -305,13 +307,13 @@ class AsgarosForum {
         } else if (isset($_GET['close_topic'])) {
             $this->change_status('closed');
         } else if (isset($_GET['subscribe_topic'])) {
-            AsgarosForumNotifications::subscribeTopic();
+            $this->notifications->subscribe_topic();
         } else if (isset($_GET['unsubscribe_topic'])) {
-            AsgarosForumNotifications::unsubscribeTopic();
+            $this->notifications->unsubscribe_topic();
         } else if (isset($_GET['subscribe_forum'])) {
-            AsgarosForumNotifications::subscribeForum();
+            $this->notifications->subscribe_forum();
         } else if (isset($_GET['unsubscribe_forum'])) {
-            AsgarosForumNotifications::unsubscribeForum();
+            $this->notifications->unsubscribe_forum();
         } else if (isset($_GET['report_add'])) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
             $reporter_id = get_current_user_id();
@@ -473,7 +475,7 @@ class AsgarosForum {
                         include('views/search.php');
                     break;
                     case 'subscriptions':
-                        AsgarosForumNotifications::showSubscriptions();
+                        $this->notifications->show_subscription_overview();
                     break;
                     case 'movetopic':
                         $this->showMoveTopic();
@@ -923,7 +925,7 @@ class AsgarosForum {
                 do_action('asgarosforum_custom_header_menu');
 
                 AsgarosForumSearch::showSearchInput();
-                AsgarosForumNotifications::showSubscriptionOverviewLink();
+                $this->notifications->show_subscription_overview_link();
 
                 echo '<div class="clear"></div>';
             echo '</div>';
@@ -953,24 +955,24 @@ class AsgarosForum {
         }
     }
 
-    function delete_topic($topicID, $admin_action = false) {
+    function delete_topic($topic_id, $admin_action = false) {
         if (AsgarosForumPermissions::isModerator('current')) {
-            if ($topicID) {
-                do_action('asgarosforum_before_delete_topic', $topicID);
+            if ($topic_id) {
+                do_action('asgarosforum_before_delete_topic', $topic_id);
 
                 // Delete uploads and reports.
-                $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topicID));
+                $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
                 foreach ($posts as $post) {
                     AsgarosForumUploads::deletePostFiles($post);
                     $this->reports->remove_report($post);
                     $this->reactions->remove_all_reactions($post);
                 }
 
-                $this->db->delete($this->tables->posts, array('parent_id' => $topicID), array('%d'));
-                $this->db->delete($this->tables->topics, array('id' => $topicID), array('%d'));
-                AsgarosForumNotifications::removeTopicSubscriptions($topicID);
+                $this->db->delete($this->tables->posts, array('parent_id' => $topic_id), array('%d'));
+                $this->db->delete($this->tables->topics, array('id' => $topic_id), array('%d'));
+                $this->notifications->remove_all_topic_subscriptions($topic_id);
 
-                do_action('asgarosforum_after_delete_topic', $topicID);
+                do_action('asgarosforum_after_delete_topic', $topic_id);
 
                 if (!$admin_action) {
                     wp_redirect(html_entity_decode($this->getLink('forum', $this->current_forum)));

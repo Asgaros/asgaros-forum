@@ -76,10 +76,10 @@ class AsgarosForumReports {
 
             $admin_mail = get_bloginfo('admin_email');
 
-            add_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
-            $mail_headers = AsgarosForumNotifications::getMailHeaders();
+            add_filter('wp_mail_content_type', array($this->asgarosforum->notifications, 'wpdocs_set_html_mail_content_type'));
+            $mail_headers = $this->asgarosforum->notifications->get_mail_headers();
             wp_mail($admin_mail, $notification_subject, $notification_message, $mail_headers);
-            remove_filter('wp_mail_content_type', array('AsgarosForumNotifications', 'wpdocs_set_html_mail_content_type'));
+            remove_filter('wp_mail_content_type', array($this->asgarosforum->notifications, 'wpdocs_set_html_mail_content_type'));
         }
     }
 

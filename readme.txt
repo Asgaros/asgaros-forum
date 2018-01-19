@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Display issues with some themes
 * Removed: Read more-button from editor
+* Performance improvements and code optimizations
 = 1.7.0 =
 * Added: Reaction functionality
 * Added: Reporting functionality

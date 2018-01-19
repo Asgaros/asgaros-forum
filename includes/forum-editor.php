@@ -143,7 +143,7 @@ class AsgarosForumEditor {
                     echo '</div>';
 
                     AsgarosForumUploads::showEditorUploadForm($post);
-                    AsgarosForumNotifications::showEditorSubscriptionOption();
+                    $this->asgarosforum->notifications->show_editor_subscription_option();
                     do_action('asgarosforum_editor_custom_content_bottom');
 
                     echo '<div class="editor-row">';

@@ -151,8 +151,8 @@ class AsgarosForumContent {
             // Create redirect link.
             $redirect = html_entity_decode($asgarosforum->getLink('topic', $asgarosforum->current_topic, false, '#postid-'.$asgarosforum->current_post));
 
-            // Send notification about new topic to global subscribers.
-            AsgarosForumNotifications::notifyGlobalTopicSubscribers(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
+            // Send notification about new topic.
+            $asgarosforum->notifications->notify_about_new_topic(self::$dataSubject, self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'add_post') {
             // Create the post.
             $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $authorID, $uploadList);
@@ -161,8 +161,8 @@ class AsgarosForumContent {
 
             $redirect = html_entity_decode($asgarosforum->get_postlink($asgarosforum->current_topic, $asgarosforum->current_post));
 
-            // Send notification about new post to subscribers
-            AsgarosForumNotifications::notifyTopicSubscribers(self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
+            // Send notification about new post.
+            $asgarosforum->notifications->notify_about_new_post(self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'edit_post') {
             $date = $asgarosforum->current_time();
             $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
@@ -175,7 +175,7 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($asgarosforum->get_postlink($asgarosforum->current_topic, $asgarosforum->current_post, $_POST['part_id']));
         }
 
-        AsgarosForumNotifications::updateSubscriptionStatus();
+        $asgarosforum->notifications->update_topic_subscription_status();
 
         do_action('asgarosforum_after_'.self::getAction().'_submit', $asgarosforum->current_post, $asgarosforum->current_topic);
 

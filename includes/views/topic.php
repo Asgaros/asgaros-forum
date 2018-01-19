@@ -33,5 +33,5 @@ if (!defined('ABSPATH')) exit;
 </div>
 
 <?php
-AsgarosForumNotifications::showTopicSubscriptionLink();
+$this->notifications->show_topic_subscription_link();
 ?>
