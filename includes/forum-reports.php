@@ -68,11 +68,11 @@ class AsgarosForumReports {
         if ($this->asgarosforum->options['reports_notifications']) {
             $report = $this->get_report($post_id, $reporter_id);
 
-            $post_author = get_userdata($report['author_id']);
+            $author_name = $this->asgarosforum->getUsername($report['author_id']);
             $reporter = get_userdata($report['reporters']);
 
             $notification_subject = __('New report', 'asgaros-forum');
-            $notification_message = sprintf(__('Hello,<br><br>There is a new report.<br><br>Topic:<br>%s<br><br>Post:<br>%s<br><br>Post Author:<br>%s<br><br>Reporter:<br>%s<br><br>Link to the post:<br><a href="%s">%s</a>', 'asgaros-forum'), $report['topic_name'], $report['post_text_raw'], $post_author->display_name, $reporter->display_name, $report['post_link'], $report['post_link']);
+            $notification_message = sprintf(__('Hello,<br><br>There is a new report.<br><br>Topic:<br>%s<br><br>Post:<br>%s<br><br>Post Author:<br>%s<br><br>Reporter:<br>%s<br><br>Link to the post:<br><a href="%s">%s</a>', 'asgaros-forum'), $report['topic_name'], $report['post_text_raw'], $author_name, $reporter->display_name, $report['post_link'], $report['post_link']);
 
             $admin_mail = get_bloginfo('admin_email');
 

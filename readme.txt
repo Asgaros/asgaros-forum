@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Wrong usernames in reports when reporter/author are guests or got deleted
 * Fixed: Display issues with some themes
 * Removed: Read more-button from editor
 * Performance improvements and code optimizations

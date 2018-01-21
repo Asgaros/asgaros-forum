@@ -38,17 +38,28 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
     }
 
     function column_author($item) {
+        global $asgarosforum;
         $userdata = get_userdata($item['author_id']);
 
-        return '<a href="'.admin_url('user-edit.php?user_id='.$item['author_id']).'">'.$userdata->display_name.'</a>';
+        if ($userdata) {
+            return '<a href="'.admin_url('user-edit.php?user_id='.$item['author_id']).'">'.$userdata->display_name.'</a>';
+        } else {
+            return $asgarosforum->getUsername($item['author_id']);
+        }
     }
 
     function column_reporters($item) {
+        global $asgarosforum;
         $columnHTML = '';
 
         foreach ($item['reporters'] as $reporter) {
             $userdata = get_userdata($reporter);
-            $columnHTML .= '<a href="'.admin_url('user-edit.php?user_id='.$reporter).'">'.$userdata->display_name.'</a><br>';
+
+            if ($userdata) {
+                $columnHTML .= '<a href="'.admin_url('user-edit.php?user_id='.$reporter).'">'.$userdata->display_name.'</a><br>';
+            } else {
+                $columnHTML .= $asgarosforum->getUsername($reporter).'<br>';
+            }
         }
 
         return $columnHTML;
