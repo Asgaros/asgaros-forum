@@ -183,16 +183,7 @@ class AsgarosForumNotifications {
             $subscriberMails = AsgarosForumUserGroups::filterSubscriberMails($subscriberMails, $this->asgarosforum->current_category);
             $subscriberMails = apply_filters('asgarosforum_subscriber_mails_new_post', $subscriberMails);
 
-            // TODO: Can put this logic in own function.
-            add_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
-
-            $mailHeaders = $this->get_mail_headers();
-
-            foreach($subscriberMails as $subscriberMail) {
-                wp_mail($subscriberMail, $notification_subject, $notification_message, $mailHeaders);
-            }
-
-            remove_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
+            $this->send_notifications($subscriberMails, $notification_subject, $notification_message);
         }
     }
 
@@ -295,16 +286,24 @@ class AsgarosForumNotifications {
                 }
             }
 
-            add_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
-
-            $mailHeaders = $this->get_mail_headers();
-
-            foreach($subscriberMails as $subscriberMail) {
-                wp_mail($subscriberMail, $notification_subject, $notification_message, $mailHeaders);
-            }
-
-            remove_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
+            $this->send_notifications($subscriberMails, $notification_subject, $notification_message);
         }
+    }
+
+    public function send_notifications($mails, $subject, $message) {
+        add_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
+
+        $mail_headers = $this->get_mail_headers();
+
+        if (is_array($mails)) {
+            foreach($mails as $mail) {
+                wp_mail($mail, $subject, $message, $mail_headers);
+            }
+        } else {
+            wp_mail($mails, $subject, $message, $mail_headers);
+        }
+
+        remove_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
     }
 
     public function wpdocs_set_html_mail_content_type() {
