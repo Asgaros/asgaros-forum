@@ -81,6 +81,7 @@ class AsgarosForum {
     var $editor         = null;
     var $reactions      = null;
     var $notifications  = null;
+    var $appearance     = null;
 
     function __construct() {
         // Initialize database.
@@ -116,7 +117,6 @@ class AsgarosForum {
         new AsgarosForumPermissions($this);
         new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
-        new AsgarosForumAppearance($this);
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumOnline($this);
@@ -129,6 +129,7 @@ class AsgarosForum {
         $this->editor           = new AsgarosForumEditor($this);
         $this->reactions        = new AsgarosForumReactions($this);
         $this->notifications    = new AsgarosForumNotifications($this);
+        $this->appearance       = new AsgarosForumAppearance($this);
     }
 
     //======================================================================
