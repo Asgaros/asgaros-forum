@@ -67,6 +67,6 @@ if ($counter_total > 0) {
     echo '</div>';
 }
 
-$this->notifications->show_forum_subscription_link();
+$this->notifications->show_forum_subscription_link($this->current_forum);
 
 ?>
