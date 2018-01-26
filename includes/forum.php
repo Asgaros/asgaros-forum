@@ -83,6 +83,7 @@ class AsgarosForum {
     var $notifications  = null;
     var $appearance     = null;
     var $uploads        = null;
+    var $search         = null;
 
     function __construct() {
         // Initialize database.
@@ -120,7 +121,6 @@ class AsgarosForum {
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumOnline($this);
-        new AsgarosForumSearch($this);
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
 
@@ -131,6 +131,7 @@ class AsgarosForum {
         $this->notifications    = new AsgarosForumNotifications($this);
         $this->appearance       = new AsgarosForumAppearance($this);
         $this->uploads          = new AsgarosForumUploads($this);
+        $this->search           = new AsgarosForumSearch($this);
     }
 
     //======================================================================
@@ -926,7 +927,7 @@ class AsgarosForum {
 
                 do_action('asgarosforum_custom_header_menu');
 
-                AsgarosForumSearch::showSearchInput();
+                $this->search->show_search_input();
                 $this->notifications->show_subscription_overview_link();
 
                 echo '<div class="clear"></div>';
