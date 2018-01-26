@@ -82,6 +82,7 @@ class AsgarosForum {
     var $reactions      = null;
     var $notifications  = null;
     var $appearance     = null;
+    var $uploads        = null;
 
     function __construct() {
         // Initialize database.
@@ -115,7 +116,6 @@ class AsgarosForum {
         new AsgarosForumRewrite($this);
         new AsgarosForumContent($this);
         new AsgarosForumPermissions($this);
-        new AsgarosForumUploads($this);
         new AsgarosForumUnread($this);
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
@@ -130,6 +130,7 @@ class AsgarosForum {
         $this->reactions        = new AsgarosForumReactions($this);
         $this->notifications    = new AsgarosForumNotifications($this);
         $this->appearance       = new AsgarosForumAppearance($this);
+        $this->uploads          = new AsgarosForumUploads($this);
     }
 
     //======================================================================
@@ -964,7 +965,7 @@ class AsgarosForum {
                 // Delete uploads and reports.
                 $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
                 foreach ($posts as $post) {
-                    AsgarosForumUploads::deletePostFiles($post);
+                    $this->uploads->delete_post_files($post);
                     $this->reports->remove_report($post);
                     $this->reactions->remove_all_reactions($post);
                 }
@@ -999,7 +1000,7 @@ class AsgarosForum {
         if (AsgarosForumPermissions::isModerator('current') && AsgarosForumContent::postExists($post_id)) {
             do_action('asgarosforum_before_delete_post', $post_id);
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
-            AsgarosForumUploads::deletePostFiles($post_id);
+            $this->uploads->delete_post_files($post_id);
             $this->reports->remove_report($post_id);
             $this->reactions->remove_all_reactions($post_id);
             do_action('asgarosforum_after_delete_post', $post_id);

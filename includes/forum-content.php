@@ -110,13 +110,13 @@ class AsgarosForumContent {
         }
 
         // Cancel when the file extension of uploads are not allowed.
-        if (!AsgarosForumUploads::checkUploadsExtension()) {
+        if (!$asgarosforum->uploads->check_uploads_extension()) {
             $asgarosforum->info = __('You are not allowed to upload files with that file extension.', 'asgaros-forum');
             return false;
         }
 
         // Cancel when the file size of uploads is too big.
-        if (!AsgarosForumUploads::checkUploadsSize()) {
+        if (!$asgarosforum->uploads->check_uploads_size()) {
             $asgarosforum->info = __('You are not allowed to upload files with that file size.', 'asgaros-forum');
             return false;
         }
@@ -134,7 +134,7 @@ class AsgarosForumContent {
         global $asgarosforum;
 
         $redirect = '';
-        $uploadList = AsgarosForumUploads::getUploadList();
+        $uploadList = $asgarosforum->uploads->get_upload_list();
         $authorID = AsgarosForumPermissions::$currentUserID;
 
         if (self::getAction() === 'add_topic') {
@@ -146,7 +146,7 @@ class AsgarosForumContent {
             $asgarosforum->current_post = $insertedIDs->post_id;
 
             // Upload files.
-            AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
+            $asgarosforum->uploads->upload_files($asgarosforum->current_post, $uploadList);
 
             // Create redirect link.
             $redirect = html_entity_decode($asgarosforum->getLink('topic', $asgarosforum->current_topic, false, '#postid-'.$asgarosforum->current_post));
@@ -157,7 +157,7 @@ class AsgarosForumContent {
             // Create the post.
             $asgarosforum->current_post = self::insertPost($asgarosforum->current_topic, self::$dataContent, $authorID, $uploadList);
 
-            AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
+            $asgarosforum->uploads->upload_files($asgarosforum->current_post, $uploadList);
 
             $redirect = html_entity_decode($asgarosforum->get_postlink($asgarosforum->current_topic, $asgarosforum->current_post));
 
@@ -165,7 +165,7 @@ class AsgarosForumContent {
             $asgarosforum->notifications->notify_about_new_post(self::$dataContent, $redirect, AsgarosForumPermissions::$currentUserID);
         } else if (self::getAction() === 'edit_post') {
             $date = $asgarosforum->current_time();
-            $uploadList = AsgarosForumUploads::uploadFiles($asgarosforum->current_post, $uploadList);
+            $uploadList = $asgarosforum->uploads->upload_files($asgarosforum->current_post, $uploadList);
             $asgarosforum->db->update($asgarosforum->tables->posts, array('text' => self::$dataContent, 'uploads' => maybe_serialize($uploadList), 'date_edit' => $date, 'author_edit' => AsgarosForumPermissions::$currentUserID), array('id' => $asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
             if ($asgarosforum->is_first_post($asgarosforum->current_post) && !empty(self::$dataSubject)) {

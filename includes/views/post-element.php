@@ -72,7 +72,7 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
 
         $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
         echo $post_content;
-        AsgarosForumUploads::showUploadedFiles($post);
+        $this->uploads->show_uploaded_files($post);
         echo '<div class="post-footer">';
 
             echo '<div class="post-footer-meta">';

@@ -142,7 +142,7 @@ class AsgarosForumEditor {
                         wp_editor(stripslashes($message), 'message', $this->asgarosforum->options_editor);
                     echo '</div>';
 
-                    AsgarosForumUploads::showEditorUploadForm($post);
+                    $this->asgarosforum->uploads->show_editor_upload_form($post);
                     $this->asgarosforum->notifications->show_editor_subscription_option();
                     do_action('asgarosforum_editor_custom_content_bottom');
 
