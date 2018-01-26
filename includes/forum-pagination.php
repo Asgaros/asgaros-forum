@@ -65,7 +65,11 @@ class AsgarosForumPagination {
 
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
             $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
-            $count = $this->asgarosforum->db->get_col("SELECT t.id FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id;");
+
+            $query_match_name = "MATCH (t.name) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $query_match_text = "MATCH (p.text) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
+
+            $count = $this->asgarosforum->db->get_col("SELECT t.id FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND ({$query_match_name} OR {$query_match_text}) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id;");
             $count = count($count);
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
             $select_url = 'search';

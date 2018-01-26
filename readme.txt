@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Wrong usernames in reports when reporter/author are guests or got deleted
 * Fixed: Display issues with some themes
+* Changed: Search inside topic titles
 * Removed: Read more-button from editor
 * Performance improvements and code optimizations
 = 1.7.0 =

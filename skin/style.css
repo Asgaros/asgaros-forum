@@ -499,10 +499,6 @@
     border-bottom-width: 2px;
     height: 40px;
 }
-#af-wrapper #forum-search span {
-    display: inline-block;
-    padding: 0 5px 0 5px;
-}
 #af-wrapper #forum-search form {
     display: initial;
 }
@@ -526,7 +522,8 @@
 #af-wrapper #forum-search p {
     display: none;
 }
-#af-wrapper #forum-search span:before {
+#af-wrapper #forum-search:before {
+    padding: 0 5px;
     line-height: 34px;
     width: 18px;
     height: 18px;

@@ -25,8 +25,7 @@ class AsgarosForumSearch {
 
     public function show_search_input() {
         if ($this->asgarosforum->options['enable_search']) {
-            echo '<div id="forum-search">';
-            echo '<span class="dashicons-before dashicons-search"></span>';
+            echo '<div id="forum-search" class="dashicons-before dashicons-search">';
             echo '<form method="get" action="'.$this->asgarosforum->getLink('search').'">';
             echo '<input name="view" type="hidden" value="search">';
 
@@ -65,7 +64,12 @@ class AsgarosForumSearch {
 
             $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
 
-            $query = "SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers, MATCH (p.text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE) AS score FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND MATCH (p.text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY score DESC, p.id DESC {$limit};";
+            $query_author = "SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1";
+            $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
+            $query_match_name = "MATCH (t.name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $query_match_text = "MATCH (p.text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
+
+            $query = "SELECT t.*, ({$query_author}) AS author_id, ({$query_answers}) AS answers, {$query_match_name} AS score_name, {$query_match_text} AS score_text FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND ({$query_match_text} OR {$query_match_name}) {$where} {$shortcodeSearchFilter} GROUP BY p.parent_id ORDER BY (score_name + score_text) DESC, p.id DESC {$limit};";
 
             $results = $this->asgarosforum->db->get_results($query);
 
