@@ -82,7 +82,7 @@ class AsgarosForumProfile {
                 echo __('You need to login to have access to profiles.', 'asgaros-forum');
             } else {
                 $showAvatars = get_option('show_avatars');
-                $userOnline = (AsgarosForumOnline::isUserOnline($userData->ID)) ? ' class="user-online"' : '';
+                $userOnline = ($this->asgarosforum->online->is_user_online($userData->ID)) ? ' class="user-online"' : '';
 
                 echo '<div id="forum-profile"'.$userOnline.'>';
 

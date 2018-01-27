@@ -45,7 +45,7 @@ class AsgarosForumMembersList {
         $dataSliced = array_slice($data, $start, $end);
 
         foreach ($dataSliced as $element) {
-            $userOnline = (AsgarosForumOnline::isUserOnline($element->ID)) ? ' user-online' : '';
+            $userOnline = ($asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
 
             echo '<div class="member'.$userOnline.'">';
                 if ($showAvatars) {

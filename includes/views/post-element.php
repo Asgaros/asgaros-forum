@@ -12,7 +12,7 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
 
 ?>
 <div class="post-element <?php echo $highlightClass; ?>" id="postid-<?php echo $post->id; ?>">
-    <div class="post-author<?php if (AsgarosForumOnline::isUserOnline($post->author_id)) { echo ' user-online'; } ?>">
+    <div class="post-author<?php if ($this->online->is_user_online($post->author_id)) { echo ' user-online'; } ?>">
         <?php
         if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
             echo '<small class="post-author-marker">'.__('Topic Author', 'asgaros-forum').'</small>';

@@ -29,10 +29,10 @@ class AsgarosForumStatistics {
                         self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'dashicons-before dashicons-format-quote');
                         self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'dashicons-before dashicons-visibility');
                         self::renderStatisticsElement(__('Users', 'asgaros-forum'), $data->users, 'dashicons-before dashicons-groups');
-                        AsgarosForumOnline::renderStatisticsElement();
+                        self::$asgarosforum->online->render_statistics_element();
                         do_action('asgarosforum_statistics_custom_element');
                     echo '</div>';
-                    AsgarosForumOnline::renderOnlineInformation();
+                    self::$asgarosforum->online->render_online_information();
                 echo '</div>';
                 do_action('asgarosforum_statistics_custom_content_bottom');
                 echo '<div class="clear"></div>';

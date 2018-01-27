@@ -84,6 +84,7 @@ class AsgarosForum {
     var $appearance     = null;
     var $uploads        = null;
     var $search         = null;
+    var $online         = null;
 
     function __construct() {
         // Initialize database.
@@ -99,7 +100,7 @@ class AsgarosForum {
 
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
-        add_action('clear_auth_cookie', array('AsgarosForumOnline', 'deleteUserTimeStamp'));
+        add_action('clear_auth_cookie', array($this->online, 'delete_user_time_stamp'));
         add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
@@ -120,7 +121,6 @@ class AsgarosForum {
         new AsgarosForumUnread($this);
         new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
-        new AsgarosForumOnline($this);
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
 
@@ -132,6 +132,7 @@ class AsgarosForum {
         $this->appearance       = new AsgarosForumAppearance($this);
         $this->uploads          = new AsgarosForumUploads($this);
         $this->search           = new AsgarosForumSearch($this);
+        $this->online           = new AsgarosForumOnline($this);
     }
 
     //======================================================================
@@ -222,7 +223,7 @@ class AsgarosForum {
         AsgarosForumUnread::prepareUnreadStatus();
 
         // Update online status.
-        AsgarosForumOnline::updateOnlineStatus();
+        $this->online->update_online_status();
 
         if (isset($_GET['view'])) {
             $this->current_view = esc_html($_GET['view']);
