@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Include active guests in the statistics-area
 * Fixed: Wrong usernames in reports when reporter/author are guests or got deleted
 * Fixed: Display issues with some themes
 * Changed: Search inside topic titles
