@@ -11,6 +11,7 @@ class AsgarosForumOnline {
     private $interval_online = 10 * MINUTE_IN_SECONDS;
     private $online_users = array();
     private $online_guests = array();
+    private $online_guests_changed = false;
 
     public function __construct($object) {
 		$this->asgarosforum = $object;
@@ -44,7 +45,7 @@ class AsgarosForumOnline {
                     // Remove him from online-guests list.
                     if (isset($this->online_guests[$unique_id])) {
                         unset($this->online_guests[$unique_id]);
-                        update_option('asgarosforum_guests_timestamps', $this->online_guests);
+                        $this->online_guests_changed = true;
                     }
                 }
 
@@ -73,16 +74,20 @@ class AsgarosForumOnline {
                 // Add the user to the online list when he is not already included.
                 if (!isset($this->online_guests[$unique_id]) || ((strtotime($this->current_time_stamp) - strtotime($this->online_guests[$unique_id])) > $this->interval_update)) {
                     $this->online_guests[$unique_id] = $this->current_time_stamp;
+                    $this->online_guests_changed = true;
                 }
+            }
 
-                // Clean up existing entries.
-                foreach ($this->online_guests as $key => $value) {
-                    if ((strtotime($this->current_time_stamp) - strtotime($value)) > $this->interval_online) {
-                        unset($this->online_guests[$key]);
-                    }
+            // Clean up existing guests-entries.
+            foreach ($this->online_guests as $key => $value) {
+                if ((strtotime($this->current_time_stamp) - strtotime($value)) > $this->interval_online) {
+                    unset($this->online_guests[$key]);
+                    $this->online_guests_changed = true;
                 }
+            }
 
-                // Save timestamps back into database.
+            // Save guest-timestamps back into database.
+            if ($this->online_guests_changed) {
                 update_option('asgarosforum_guests_timestamps', $this->online_guests);
             }
         }
