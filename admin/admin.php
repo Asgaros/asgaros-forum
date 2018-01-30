@@ -134,7 +134,7 @@ class AsgarosForumAdmin {
 
     function structure_page() {
         global $asgarosforum;
-        $categories = AsgarosForumContent::get_categories(false);
+        $categories = $asgarosforum->content->get_categories(false);
 
         require('views/structure.php');
     }
@@ -343,7 +343,7 @@ class AsgarosForumAdmin {
                 $forum_category     = $_POST['forum_category'];
                 $forum_parent_forum = $_POST['forum_parent_forum'];
 
-                AsgarosForumContent::insertForum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed);
+                $asgarosforum->content->insert_forum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed);
             } else {
                 $asgarosforum->db->update(
                     $asgarosforum->tables->forums,

@@ -85,6 +85,7 @@ class AsgarosForum {
     var $uploads        = null;
     var $search         = null;
     var $online         = null;
+    var $content        = null;
 
     function __construct() {
         // Initialize database.
@@ -115,7 +116,6 @@ class AsgarosForum {
         }
 
         new AsgarosForumRewrite($this);
-        new AsgarosForumContent($this);
         new AsgarosForumPermissions($this);
         new AsgarosForumUnread($this);
         new AsgarosForumShortcodes($this);
@@ -132,6 +132,7 @@ class AsgarosForum {
         $this->uploads          = new AsgarosForumUploads($this);
         $this->search           = new AsgarosForumSearch($this);
         $this->online           = new AsgarosForumOnline($this);
+        $this->content          = new AsgarosForumContent($this);
     }
 
     //======================================================================
@@ -292,7 +293,7 @@ class AsgarosForum {
         remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
         if (isset($_POST['submit_action'])) {
-            AsgarosForumContent::doInsertion();
+            $this->content->do_insertion();
         } else if ($this->current_view === 'markallread') {
             AsgarosForumUnread::markAllRead();
         } else if (isset($_GET['move_topic'])) {
@@ -525,7 +526,7 @@ class AsgarosForum {
     }
 
     function overview() {
-        $categories = AsgarosForumContent::get_categories();
+        $categories = $this->content->get_categories();
 
         require('views/overview.php');
     }
@@ -534,7 +535,7 @@ class AsgarosForum {
         $counter = 0;
         $avatars_available = get_option('show_avatars');
         $topicStarter = $this->get_topic_starter($this->current_topic);
-        $post = $this->getSinglePost();
+        $post = $this->content->get_post($this->current_post);
 
         echo '<div class="title-element"></div>';
         echo '<div class="content-element">';
@@ -544,7 +545,7 @@ class AsgarosForum {
 
     function showforum() {
         $topics = $this->get_topics($this->current_forum);
-        $sticky_topics = AsgarosForumContent::get_sticky_topics($this->current_forum);
+        $sticky_topics = $this->content->get_sticky_topics($this->current_forum);
         $counter_normal = count($topics);
         $counter_total = $counter_normal + count($sticky_topics);
 
@@ -593,7 +594,7 @@ class AsgarosForum {
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
 
-            $categories = AsgarosForumContent::get_categories();
+            $categories = $this->content->get_categories();
 
             if ($categories) {
                 foreach ($categories as $category) {
@@ -682,11 +683,6 @@ class AsgarosForum {
         $results = $this->db->get_results($this->db->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, p1.author_edit, (SELECT COUNT(*) FROM {$this->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, p1.uploads FROM {$this->tables->posts} AS p1 WHERE p1.parent_id = %d ORDER BY {$order} LIMIT %d, %d;", $this->current_topic, $start, $end));
         $results = apply_filters('asgarosforum_filter_get_posts', $results);
         return $results;
-    }
-
-    function getSinglePost() {
-        $result = $this->db->get_row($this->db->prepare("SELECT p1.id, p1.text, p1.date, p1.date_edit, p1.author_id, p1.author_edit, (SELECT COUNT(*) FROM {$this->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts, p1.uploads FROM {$this->tables->posts} AS p1 WHERE p1.id = %d;", $this->current_post));
-        return $result;
     }
 
     function is_first_post($post_id) {
@@ -988,7 +984,7 @@ class AsgarosForum {
     function moveTopic() {
         $newForumID = $_POST['newForumID'];
 
-        if (AsgarosForumPermissions::isModerator('current') && $newForumID && AsgarosForumContent::forumExists($newForumID)) {
+        if (AsgarosForumPermissions::isModerator('current') && $newForumID && $this->content->forum_exists($newForumID)) {
             $this->db->update($this->tables->topics, array('parent_id' => $newForumID), array('id' => $this->current_topic), array('%d'), array('%d'));
             wp_redirect(html_entity_decode($this->getLink('topic', $this->current_topic)));
             exit;
@@ -998,7 +994,7 @@ class AsgarosForum {
     function remove_post() {
         $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
 
-        if (AsgarosForumPermissions::isModerator('current') && AsgarosForumContent::postExists($post_id)) {
+        if (AsgarosForumPermissions::isModerator('current') && $this->content->post_exists($post_id)) {
             do_action('asgarosforum_before_delete_post', $post_id);
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             $this->uploads->delete_post_files($post_id);
@@ -1144,8 +1140,8 @@ class AsgarosForum {
             $post_title = apply_filters('asgarosforum_filter_automatic_topic_title', $post->post_title, $post);
             $post_content = apply_filters('asgarosforum_filter_automatic_topic_content', $post->post_content, $post);
 
-            if (AsgarosForumContent::forumExists($forumID)) {
-            	AsgarosForumContent::insertTopic($forumID, $post_title, $post_content, $post->post_author);
+            if ($this->content->forum_exists($forumID)) {
+            	$this->content->insert_topic($forumID, $post_title, $post_content, $post->post_author);
             }
         }
     }

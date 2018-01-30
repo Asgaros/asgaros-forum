@@ -45,7 +45,7 @@ if (!defined('ABSPATH')) exit;
 
                                 echo '<option value="0"'.(0 == $asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.__('Select Forum', 'asgaros-forum').'</option>';
 
-                                $categories = AsgarosForumContent::get_categories();
+                                $categories = $asgarosforum->content->get_categories();
 
                                 if ($categories) {
                                     foreach ($categories as $category) {

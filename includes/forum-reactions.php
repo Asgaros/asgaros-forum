@@ -32,7 +32,7 @@ class AsgarosForumReactions {
     public function render_reactions_area($post_id, $topic_id) {
         if ($this->asgarosforum->options['enable_reactions']) {
             echo '<div class="post-reactions">';
-            
+
                 $active = array(
                     'down' => '',
                     'up' => ''
@@ -93,7 +93,7 @@ class AsgarosForumReactions {
 
     public function reaction_change($post_id, $user_id, $reaction) {
         // Only add a reaction when the post exists ...
-        if (AsgarosForumContent::postExists($post_id)) {
+        if ($this->asgarosforum->content->post_exists($post_id)) {
             // ... and the user is logged in ...
             if (is_user_logged_in()) {
                 // ... and when it is a valid reaction ...

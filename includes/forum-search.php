@@ -49,7 +49,7 @@ class AsgarosForumSearch {
 
     public function get_search_results() {
         if (!empty($this->search_keywords_for_query)) {
-            $categories = AsgarosForumContent::get_categories();
+            $categories = $this->asgarosforum->content->get_categories();
             $categoriesFilter = array();
 
             foreach ($categories as $category) {

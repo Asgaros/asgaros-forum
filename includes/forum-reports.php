@@ -47,7 +47,7 @@ class AsgarosForumReports {
 
     public function add_report($post_id, $reporter_id) {
         // Only add a report when the post exists ...
-        if (AsgarosForumContent::postExists($post_id)) {
+        if ($this->asgarosforum->content->post_exists($post_id)) {
             // ... and the user is logged in ...
             if (is_user_logged_in()) {
                 // ... and when there is not already a report from the user.
@@ -116,8 +116,8 @@ class AsgarosForumReports {
 
     // Returns data of a specific report.
     public function get_report($post_id, $reporter_ids) {
-        $post_object    = AsgarosForumContent::get_post($post_id);
-        $topic_object   = AsgarosForumContent::get_topic($post_object->parent_id);
+        $post_object    = $this->asgarosforum->content->get_post($post_id);
+        $topic_object   = $this->asgarosforum->content->get_topic($post_object->parent_id);
         $post_link      = AsgarosForumRewrite::get_post_link($post_id, $topic_object->id, false, array('highlight_post' => $post_id));
 
         $report = array(
