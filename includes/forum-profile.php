@@ -82,102 +82,106 @@ class AsgarosForumProfile {
                 echo __('You need to login to have access to profiles.', 'asgaros-forum');
             } else {
                 $showAvatars = get_option('show_avatars');
+                $background_style = '';
                 $userOnline = ($this->asgarosforum->online->is_user_online($userData->ID)) ? ' class="user-online"' : '';
 
                 echo '<div id="forum-profile"'.$userOnline.'>';
+                    echo '<div id="profile-header">';
+                        if ($showAvatars) {
+                            $url = get_avatar_url($userData->ID, 320);
+                            $background_style = 'style="background-image: url(\''.$url.'\');"';
+                        }
 
-                if ($showAvatars) {
-                    echo get_avatar($userData->ID, 180);
-                }
+                        echo '<div class="background-avatar" '.$background_style.'></div>';
+                        echo '<div class="background-contrast"></div>';
 
-                // Show display name.
-                echo '<div class="display-name">';
-                    echo $userData->display_name;
-                echo '</div>';
+                        // Show avatar.
+                        if ($showAvatars) {
+                            echo get_avatar($userData->ID, 160);
+                        }
 
-                // Show first name.
-                if (!empty($userData->first_name)) {
-                    $cellTitle = __('First Name:', 'asgaros-forum');
-                    $cellValue = $userData->first_name;
+                        echo '<div class="user-info">';
+                            echo '<div class="profile-display-name">'.$userData->display_name.'</div>';
+                            echo '<div class="profile-forum-role">'.AsgarosForumPermissions::getForumRole($userData->ID).'</div>';
+                        echo '</div>';
+                    echo '</div>';
 
-                    $this->renderProfileRow($cellTitle, $cellValue);
-                }
+                    echo '<div id="profile-content">';
+                        // Show first name.
+                        if (!empty($userData->first_name)) {
+                            $cellTitle = __('First Name:', 'asgaros-forum');
+                            $cellValue = $userData->first_name;
 
-                // Show forum role.
-                $cellTitle = __('Forum Role:', 'asgaros-forum');
-                $cellValue = AsgarosForumPermissions::getForumRole($userData->ID);
+                            $this->renderProfileRow($cellTitle, $cellValue);
+                        }
 
-                $this->renderProfileRow($cellTitle, $cellValue);
+                        // Show user groups.
+                        $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'names');
 
-                // Show user groups.
-                $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'names');
+                        if (!empty($userGroups)) {
+                            $cellTitle = __('User Groups:', 'asgaros-forum');
+                            $cellValue = $userGroups;
 
-                if (!empty($userGroups)) {
-                    $cellTitle = __('User Groups:', 'asgaros-forum');
-                    $cellValue = $userGroups;
+                            $this->renderProfileRow($cellTitle, $cellValue);
+                        }
 
-                    $this->renderProfileRow($cellTitle, $cellValue);
-                }
+                        // Show website.
+                        if (!empty($userData->user_url)) {
+                            $cellTitle = __('Website:', 'asgaros-forum');
+                            $cellValue = '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>';
 
-                // Show website.
-                if (!empty($userData->user_url)) {
-                    $cellTitle = __('Website:', 'asgaros-forum');
-                    $cellValue = '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>';
+                            $this->renderProfileRow($cellTitle, $cellValue);
+                        }
 
-                    $this->renderProfileRow($cellTitle, $cellValue);
-                }
-
-                // Show member since.
-                $cellTitle = __('Member Since:', 'asgaros-forum');
-                $cellValue = $this->asgarosforum->format_date($userData->user_registered, false);
-
-                $this->renderProfileRow($cellTitle, $cellValue);
-
-                // Show topics started.
-                $createdTopics = $this->asgarosforum->getTopicsByUser($userData->ID);
-                $counterTopics = count($createdTopics);
-                $cellTitle = __('Topics Started:', 'asgaros-forum');
-                $cellValue = number_format_i18n($counterTopics);
-
-                $this->renderProfileRow($cellTitle, $cellValue);
-
-                // Show replies created.
-                $createdPosts = $this->asgarosforum->countPostsByUser($userData->ID);
-                $counterPosts = $createdPosts - $counterTopics;
-                $cellTitle = __('Replies Created:', 'asgaros-forum');
-                $cellValue = number_format_i18n($counterPosts);
-
-                $this->renderProfileRow($cellTitle, $cellValue);
-
-                // Show biographical info.
-                if (!empty($userData->description)) {
-                    $cellTitle = __('Biographical Info:', 'asgaros-forum');
-                    $cellValue = trim(esc_html($userData->description));
-
-                    $this->renderProfileRow($cellTitle, $cellValue);
-                }
-
-                // Show signature.
-                if ($this->asgarosforum->options['allow_signatures']) {
-                    $signature = trim(esc_html(get_user_meta($userData->ID, 'asgarosforum_signature', true)));
-
-                    if (!empty($signature)) {
-                        $cellTitle = __('Signature:', 'asgaros-forum');
-                        $cellValue = $signature;
+                        // Show member since.
+                        $cellTitle = __('Member Since:', 'asgaros-forum');
+                        $cellValue = $this->asgarosforum->format_date($userData->user_registered, false);
 
                         $this->renderProfileRow($cellTitle, $cellValue);
-                    }
-                }
 
-                do_action('asgarosforum_custom_profile_content', $userData);
+                        // Show topics started.
+                        $createdTopics = $this->asgarosforum->getTopicsByUser($userData->ID);
+                        $counterTopics = count($createdTopics);
+                        $cellTitle = __('Topics Started:', 'asgaros-forum');
+                        $cellValue = number_format_i18n($counterTopics);
 
-                if ($userData->ID == get_current_user_id()) {
-                    echo '';
-                    echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link"><span class="dashicons-before dashicons-edit">'.__('Edit Profile', 'asgaros-forum').'</span></a>';
-                }
+                        $this->renderProfileRow($cellTitle, $cellValue);
 
-                echo '<div class="clear"></div>';
+                        // Show replies created.
+                        $createdPosts = $this->asgarosforum->countPostsByUser($userData->ID);
+                        $counterPosts = $createdPosts - $counterTopics;
+                        $cellTitle = __('Replies Created:', 'asgaros-forum');
+                        $cellValue = number_format_i18n($counterPosts);
 
+                        $this->renderProfileRow($cellTitle, $cellValue);
+
+                        // Show biographical info.
+                        if (!empty($userData->description)) {
+                            $cellTitle = __('Biographical Info:', 'asgaros-forum');
+                            $cellValue = trim(esc_html($userData->description));
+
+                            $this->renderProfileRow($cellTitle, $cellValue);
+                        }
+
+                        // Show signature.
+                        if ($this->asgarosforum->options['allow_signatures']) {
+                            $signature = trim(esc_html(get_user_meta($userData->ID, 'asgarosforum_signature', true)));
+
+                            if (!empty($signature)) {
+                                $cellTitle = __('Signature:', 'asgaros-forum');
+                                $cellValue = $signature;
+
+                                $this->renderProfileRow($cellTitle, $cellValue);
+                            }
+                        }
+
+                        do_action('asgarosforum_custom_profile_content', $userData);
+
+                        if ($userData->ID == get_current_user_id()) {
+                            echo '';
+                            echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link"><span class="dashicons-before dashicons-edit">'.__('Edit Profile', 'asgaros-forum').'</span></a>';
+                        }
+                    echo '</div>';
                 echo '</div>';
             }
         } else {

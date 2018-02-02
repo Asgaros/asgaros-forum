@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Broken usernames in reports when users dont exist
 * Fixed: Display issues with some themes
 * Removed: Read more-button from editor
+* Changed: New profile design
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.7.0 =

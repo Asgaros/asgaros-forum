@@ -17,7 +17,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .forum-menu a,
 #af-wrapper .title-element,
 #af-wrapper .post-author-marker,
-#af-wrapper #forum-header-container-top {
+#af-wrapper #forum-header-container-top,
+#af-wrapper #profile-header .background-avatar {
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .title-element,
@@ -71,6 +72,7 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper #statistics .statistics-element,
 #af-wrapper #statistics-online-users,
 #af-wrapper #forum-profile,
+#af-wrapper #profile-header,
 #af-wrapper .editor-row,
 #af-wrapper .editor-row-subject,
 #af-wrapper .sticky-bottom,
