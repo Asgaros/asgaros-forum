@@ -556,6 +556,7 @@
     border-radius: initial;
     border: 1px solid #fff;
     outline: 1px solid #ccc;
+    background-color: #fff;
     display: initial; /* comp */
 }
 
