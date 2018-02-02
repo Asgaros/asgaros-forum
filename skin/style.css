@@ -225,6 +225,7 @@
     height: 60px;
     width: 100%;
     border-bottom: 1px solid #eee;
+    line-height: 20px;
 }
 #af-wrapper .forum-status,
 #af-wrapper .forum-name,
@@ -278,6 +279,11 @@
     vertical-align: top;
     padding: 2px;
     box-sizing: initial; /* comp */
+}
+#af-wrapper .forum .forum-title,
+#af-wrapper .forum .forum-description,
+#af-wrapper .forum .forum-subforums {
+    display: block;
 }
 #af-wrapper .forum small,
 #af-wrapper .topic small,
@@ -406,7 +412,6 @@
 }
 #af-wrapper #forum-header-container-top a {
     padding: 0 20px;
-    font-size: 14px;
     color: #fff !important;
     border-left: 1px solid #00689a;
 }

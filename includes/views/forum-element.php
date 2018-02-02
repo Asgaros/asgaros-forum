@@ -23,12 +23,12 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         echo '<span class="forum-dashicon dashicons-before '.$forumIcon.' '.$unreadStatus.'"></span>';
     echo '</div>';
     echo '<div class="forum-name">';
-        echo '<a href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
+        echo '<span class="forum-title"><a href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a></span>';
 
         // Show the description of the forum when it is not empty.
         $forumDescription = esc_html(stripslashes($forum->description));
         if (!empty($forumDescription)) {
-            echo '<small>'.$forumDescription.'</small>';
+            echo '<small class="forum-description">'.$forumDescription.'</small>';
         }
 
         // Show subforums.
