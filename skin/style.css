@@ -832,11 +832,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 0.7;
-    filter: blur(25px);
-    -o-filter: blur(25px);
-    -ms-filter: blur(25px);
-    -moz-filter: blur(25px);
-    -webkit-filter: blur(25px);
+    filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    -moz-filter: blur(15px);
+    -webkit-filter: blur(15px);
 }
 #af-wrapper #profile-header .background-contrast {
     z-index: 2;
