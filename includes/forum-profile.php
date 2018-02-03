@@ -88,7 +88,7 @@ class AsgarosForumProfile {
                 echo '<div id="forum-profile"'.$userOnline.'>';
                     echo '<div id="profile-header">';
                         if ($showAvatars) {
-                            $url = get_avatar_url($userData->ID, 320);
+                            $url = get_avatar_url($userData->ID, 480);
                             $background_style = 'style="background-image: url(\''.$url.'\');"';
                         }
 
