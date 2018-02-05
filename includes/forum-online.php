@@ -7,14 +7,16 @@ class AsgarosForumOnline {
     private $current_user_id = null;
     private $current_time_stamp = null;
     private $functionality_enabled = false;
-    private $interval_update = 1 * MINUTE_IN_SECONDS;
-    private $interval_online = 10 * MINUTE_IN_SECONDS;
+    private $interval_update = false;
+    private $interval_online = false;
     private $online_users = array();
     private $online_guests = array();
     private $online_guests_changed = false;
 
     public function __construct($object) {
 		$this->asgarosforum = $object;
+        $this->interval_update = (1 * MINUTE_IN_SECONDS);
+        $this->interval_online = (10 * MINUTE_IN_SECONDS);
 
         add_action('init', array($this, 'initialize'));
         add_action('clear_auth_cookie', array($this, 'delete_user_time_stamp'));
