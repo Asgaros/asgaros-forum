@@ -412,7 +412,7 @@
 }
 #af-wrapper #forum-header-container-top a {
     padding: 0 20px;
-    color: #fff !important;
+    color: #fff;
     border-left: 1px solid #00689a;
 }
 #af-wrapper #forum-header-container-top a:first-child {
