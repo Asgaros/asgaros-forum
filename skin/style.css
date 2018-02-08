@@ -364,7 +364,6 @@
 #af-wrapper #read-unread .indicator {
     height: 12px;
     width: 12px;
-    background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
     margin: 6px;
@@ -374,6 +373,10 @@
 }
 #af-wrapper #read-unread .unread {
     background-color: #2d89cc;
+}
+#af-wrapper #read-unread .read {
+    background-color: #444;
+    opacity: 0.5;
 }
 
 /* PAGEING */

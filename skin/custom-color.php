@@ -41,6 +41,9 @@ if (!empty($_GET['text-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.
 #af-wrapper .main-title {
     color: <?php echo $text_color; ?> !important;
 }
+#af-wrapper #read-unread .read {
+	background-color: <?php echo $text_color; ?> !important;
+}
 <?php
 }
 
