@@ -101,9 +101,6 @@ class AsgarosForum {
 
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
-        add_filter('teeny_mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
-        add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
-        add_filter('disable_captions', array($this, 'disable_captions'));
 
         // Add filters for modifying the title of the page.
         add_filter('wp_title', array($this, 'change_wp_title'), 100, 3);
@@ -423,31 +420,6 @@ class AsgarosForum {
         }
 
         return $someString;
-    }
-
-    function add_mce_buttons($buttons, $editor_id) {
-        if (!$this->executePlugin || $editor_id !== 'message') {
-            return $buttons;
-        } else {
-            $buttons[] = 'image';
-
-            // Remove the read-more button.
-            $searchKey = array_search('wp_more', $buttons);
-
-            if ($searchKey !== false) {
-                unset($buttons[$searchKey]);
-            }
-
-            return $buttons;
-        }
-    }
-
-    function disable_captions($args) {
-        if ($this->executePlugin) {
-            return true;
-        } else {
-            return $args;
-        }
     }
 
     function forum() {

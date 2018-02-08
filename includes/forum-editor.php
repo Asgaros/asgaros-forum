@@ -7,7 +7,35 @@ class AsgarosForumEditor {
 
 	public function __construct($object) {
 		$this->asgarosforum = $object;
+
+		add_filter('teeny_mce_buttons', array($this, 'custom_mce_buttons'), 9999, 2);
+        add_filter('mce_buttons', array($this, 'custom_mce_buttons'), 9999, 2);
+        add_filter('disable_captions', array($this, 'disable_captions'));
 	}
+
+	public function custom_mce_buttons($buttons, $editor_id) {
+        if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
+			// Add image button.
+            $buttons[] = 'image';
+
+            // Remove the read-more button.
+            $searchKey = array_search('wp_more', $buttons);
+
+            if ($searchKey !== false) {
+                unset($buttons[$searchKey]);
+            }
+        }
+
+		return $buttons;
+    }
+
+	public function disable_captions($args) {
+        if ($this->asgarosforum->executePlugin) {
+            return true;
+        } else {
+            return $args;
+        }
+    }
 
     // Check permissions before loading the editor.
     private function checkPermissions($editorView) {
