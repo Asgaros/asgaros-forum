@@ -18,7 +18,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .title-element,
 #af-wrapper .post-author-marker,
 #af-wrapper #forum-header-container-top,
-#af-wrapper #profile-header .background-avatar {
+#af-wrapper #profile-header .background-avatar,
+#af-wrapper #read-unread .unread {
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .title-element,

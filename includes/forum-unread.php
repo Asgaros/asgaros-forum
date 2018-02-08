@@ -147,10 +147,13 @@ class AsgarosForumUnread {
     }
 
     public static function showUnreadControls() {
-        echo '<div class="read-unread">';
-            echo '<span class="dashicons-before dashicons-editor-justify unread"></span>'.__('New posts', 'asgaros-forum').' &middot; ';
-            echo '<span class="dashicons-before dashicons-editor-justify read"></span>'.__('Nothing new', 'asgaros-forum').' &middot; ';
-            echo '<span class="dashicons-before dashicons-yes"></span><a href="'.self::$asgarosforum->getLink('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a>';
+        echo '<div id="read-unread">';
+            echo '<span class="indicator unread"></span>';
+            echo '<span class="indicator-label">'.__('New posts', 'asgaros-forum').'</span>';
+            echo '<span class="indicator read"></span>';
+            echo '<span class="indicator-label">'.__('Nothing new', 'asgaros-forum').'</span>';
+            echo '<span class="dashicons-before dashicons-yes"></span>';
+            echo '<span class="indicator-label"><a href="'.self::$asgarosforum->getLink('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a></span>';
         echo '</div>';
     }
 }

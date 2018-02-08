@@ -346,11 +346,34 @@
 }
 
 /* READ/UNREAD */
-#af-wrapper .read-unread {
+#af-wrapper #read-unread {
     width: 100%;
+    height: 24px;
+    line-height: 24px;
     display: block;
     background-color: inherit; /* comp */
     color: inherit; /* comp */
+}
+#af-wrapper #read-unread span {
+    float: left;
+}
+#af-wrapper #read-unread span:before {
+    height: 24px;
+    line-height: 24px;
+}
+#af-wrapper #read-unread .indicator {
+    height: 12px;
+    width: 12px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 6px;
+}
+#af-wrapper #read-unread .indicator-label {
+    margin-right: 16px;
+}
+#af-wrapper #read-unread .unread {
+    background-color: #2d89cc;
 }
 
 /* PAGEING */
