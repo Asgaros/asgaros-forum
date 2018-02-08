@@ -19,7 +19,7 @@
     float: left;
 }
 #asgaros-panel .sub-panel-right {
-    color: #0073aa;
+    color: #82878c;
     font-size: 18px;
     float: right;
     text-align: right;
@@ -42,6 +42,9 @@
     text-decoration: none!important;
     vertical-align: top;
     line-height: 65px;
+}
+#asgaros-panel .dashicons-heart:before {
+    color: red;
 }
 #asgaros-panel h1 {
     padding: 0;
@@ -129,7 +132,9 @@
 }
 #af-structure .element-id {
     color: silver;
-    font-weight: 600;
+    font-weight: normal;
+    font-style: italic;
+    font-size: small;
 }
 #af-structure .parentforum {
     display: block;
