@@ -888,6 +888,7 @@ class AsgarosForum {
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
                 $this->profile->renderCurrentUsersProfileLink();
                 AsgarosForumMembersList::renderMembersListLink();
+                $this->notifications->show_subscription_overview_link();
 
                 $this->showLoginLink();
                 $this->showRegisterLink();
@@ -896,7 +897,6 @@ class AsgarosForum {
                 do_action('asgarosforum_custom_header_menu');
 
                 $this->search->show_search_input();
-                $this->notifications->show_subscription_overview_link();
 
                 echo '<div class="clear"></div>';
             echo '</div>';

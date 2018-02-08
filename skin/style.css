@@ -423,30 +423,12 @@
 }
 
 /* SUBSCRIPTION OVERVIEW */
-#af-wrapper #subscription-overview-link {
-    float: right;
-    padding: 0 10px;
-    border-left: 1px solid #00689a;
-}
-#af-wrapper #subscription-overview-link span {
-    padding: 0;
-}
-#af-wrapper #subscription-overview-link a {
-    color: #fff;
-    padding: 0 10px;
-}
 #af-wrapper .subscription {
     width: 100%;
     border-bottom: 1px solid #eee;
     vertical-align: middle;
     padding: 4px;
     box-sizing: border-box;
-}
-#af-wrapper #subscription-overview-link span::before {
-    line-height: 40px;
-    width: 18px;
-    height: 18px;
-    font-size: 18px;
 }
 
 /* BREADCRUMBS */
