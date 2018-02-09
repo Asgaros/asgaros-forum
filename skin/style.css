@@ -26,6 +26,7 @@
 }
 #af-wrapper .clear {
     clear: both;
+    padding: 0; /* comp */
 }
 #af-wrapper .highlight-admin,
 #af-wrapper .highlight-admin a {

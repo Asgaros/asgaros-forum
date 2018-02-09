@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 * Changed: Minor design changes
 = 1.7.2 =
 * Fixed: Parse error when using some older versions of PHP
