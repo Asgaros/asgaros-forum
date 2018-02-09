@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Mentioning functionality
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
 = 1.7.2 =

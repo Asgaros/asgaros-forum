@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumNotifications {
     private $asgarosforum = null;
-    private $mailing_list = array();
+    public $mailing_list = array();
 
     public function __construct($object) {
         $this->asgarosforum = $object;
@@ -275,7 +275,7 @@ class AsgarosForumNotifications {
     }
 
     // Adds a mail to a mailing list. Ensures that this mail is not already included.
-    private function add_to_mailing_list($mail) {
+    public function add_to_mailing_list($mail) {
         if (!in_array($mail, $this->mailing_list)) {
             $this->mailing_list[] = $mail;
         }
@@ -295,6 +295,9 @@ class AsgarosForumNotifications {
         }
 
         remove_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
+
+        // Clear mailing-list after sending notifications.
+        $this->mailing_list = array();
     }
 
     public function wpdocs_set_html_mail_content_type() {

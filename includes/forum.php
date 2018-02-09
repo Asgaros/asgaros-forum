@@ -47,6 +47,7 @@ class AsgarosForum {
         'notification_sender_name'  => '',
         'notification_sender_mail'  => '',
         'allow_signatures'          => false,
+        'enable_mentioning'         => true,
         'enable_reactions'          => true,
         'enable_search'             => true,
         'enable_profiles'           => true,
@@ -80,6 +81,7 @@ class AsgarosForum {
     var $profile        = null;
     var $editor         = null;
     var $reactions      = null;
+    var $mentioning     = null;
     var $notifications  = null;
     var $appearance     = null;
     var $uploads        = null;
@@ -124,6 +126,7 @@ class AsgarosForum {
         $this->profile          = new AsgarosForumProfile($this);
         $this->editor           = new AsgarosForumEditor($this);
         $this->reactions        = new AsgarosForumReactions($this);
+        $this->mentioning       = new AsgarosForumMentioning($this);
         $this->notifications    = new AsgarosForumNotifications($this);
         $this->appearance       = new AsgarosForumAppearance($this);
         $this->uploads          = new AsgarosForumUploads($this);
@@ -700,11 +703,16 @@ class AsgarosForum {
     /**
      * Renders a username.
      */
-    function renderUsername($userObject) {
+    function renderUsername($userObject, $custom_name = false) {
+        $user_name = $userObject->display_name;
+
+        if ($custom_name) {
+            $user_name = $custom_name;
+        }
         $profileLink = $this->profile->getProfileLink($userObject);
         $highlighted = $this->highlightUsername($userObject);
 
-        $renderedUserName = sprintf($profileLink, $userObject->display_name);
+        $renderedUserName = sprintf($profileLink, $user_name);
         $renderedUserName = sprintf($highlighted, $renderedUserName);
 
         return $renderedUserName;

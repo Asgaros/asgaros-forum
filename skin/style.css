@@ -968,6 +968,14 @@
     color: rgba(0, 128, 0, 0.75);
 }
 
+/* MENTIONING */
+#af-wrapper .mention-nice-name {
+    display: block;
+    color: #888;
+    font-size: 12px !important;
+    font-family: "Courier New";
+}
+
 /* ICONS */
 #af-wrapper [class^="dashicons-"],
 #af-wrapper [class*=" dashicons-"] {

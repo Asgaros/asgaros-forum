@@ -10,6 +10,8 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
     $highlightClass = 'highlight-post';
 }
 
+$user_data = get_userdata($post->author_id);
+
 ?>
 <div class="post-element <?php echo $highlightClass; ?>" id="postid-<?php echo $post->id; ?>">
     <div class="post-author<?php if ($this->online->is_user_online($post->author_id)) { echo ' user-online'; } ?>">
@@ -24,20 +26,22 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
             echo '<br />';
         }
         ?>
-        <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong><br />
+        <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong><br>
         <?php
 
-        // Show author posts counter if activated.
-        if ($this->options['show_author_posts_counter']) {
-            // Only show post-counter for existing users.
-            if (get_userdata($post->author_id) != false) {
+        // Condition for content which is only available for existing users.
+        if ($user_data != false) {
+            $this->mentioning->render_nice_name($post->author_id);
+
+            // Show author posts counter if activated.
+            if ($this->options['show_author_posts_counter']) {
                 $author_posts_i18n = number_format_i18n($post->author_posts);
                 echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
             }
         }
 
         if (AsgarosForumPermissions::isBanned($post->author_id)) {
-            echo '<br /><small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
+            echo '<br><small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
         }
 
         do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
@@ -59,7 +63,7 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
 
         echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br /></div>';
         global $wp_embed;
-        $post_content = make_clickable(wpautop($wp_embed->autoembed(stripslashes($post->text))));
+        $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
 
         if ($this->options['allow_shortcodes']) {
             add_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
@@ -70,7 +74,13 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
             $post_content = do_shortcode($post_content);
         }
 
+        $post_content = $this->mentioning->nice_name_to_link($post_content);
+
+        // This function has to be called at last to ensure that we dont break links to mentioned users.
+        $post_content = make_clickable($post_content);
+
         $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
+
         echo $post_content;
         $this->uploads->show_uploaded_files($post);
         echo '<div class="post-footer">';
