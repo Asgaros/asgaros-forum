@@ -3,98 +3,101 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumBreadCrumbs {
-    public static $breadCrumbsLevel = 4;
-    public static $breadCrumbsElements = 0;
-    private static $breadCrumbsLinks = array();
+    private $asgarosforum = null;
+    public $breadcrumbs_level = 4;
+    public $breadcrumbs_elements = 0;
+    public $breadcrumbs_links = array();
 
-    public static function addToBreadCrumbsList($link, $title, $position = false) {
-        self::$breadCrumbsLinks[] = array(
+    public function __construct($object) {
+        $this->asgarosforum = $object;
+    }
+
+    public function add_breadcrumb($link, $title, $position = false) {
+        $this->breadcrumbs_links[] = array(
             'link'      => $link,
             'title'     => $title,
             'position'  => $position
         );
     }
 
-    public static function showBreadCrumbs() {
-        global $asgarosforum;
-
-        if ($asgarosforum->options['enable_breadcrumbs']) {
-            if (self::$breadCrumbsLevel >= 4) {
-                $elementLink = $asgarosforum->getLink('home');
-                $elementTitle = __('Forum', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle, 1);
+    public function show_breadcrumbs() {
+        if ($this->asgarosforum->options['enable_breadcrumbs']) {
+            if ($this->breadcrumbs_level >= 4) {
+                $element_link = $this->asgarosforum->getLink('home');
+                $element_title = __('Forum', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title, 1);
             }
 
             // Define category prefix.
-            $categoryPrefix = '';
+            $category_prefix = '';
 
-            if (self::$breadCrumbsLevel >= 4 && $asgarosforum->current_category) {
-                $category_name = $asgarosforum->get_category_name($asgarosforum->current_category);
+            if ($this->breadcrumbs_level >= 4 && $this->asgarosforum->current_category) {
+                $category_name = $this->asgarosforum->get_category_name($this->asgarosforum->current_category);
 
                 if ($category_name) {
-                    $categoryPrefix = $category_name.': ';
+                    $category_prefix = $category_name.': ';
                 }
             }
 
             // Define forum breadcrumbs.
-            if (self::$breadCrumbsLevel >= 3 && $asgarosforum->parent_forum && $asgarosforum->parent_forum > 0) {
-                $elementLink = $asgarosforum->getLink('forum', $asgarosforum->parent_forum);
-                $elementTitle = $categoryPrefix.esc_html(stripslashes($asgarosforum->parent_forum_name));
-                self::addToBreadCrumbsList($elementLink, $elementTitle, 2);
-                $categoryPrefix = '';
+            if ($this->breadcrumbs_level >= 3 && $this->asgarosforum->parent_forum && $this->asgarosforum->parent_forum > 0) {
+                $element_link = $this->asgarosforum->getLink('forum', $this->asgarosforum->parent_forum);
+                $element_title = $category_prefix.esc_html(stripslashes($this->asgarosforum->parent_forum_name));
+                $this->add_breadcrumb($element_link, $element_title, 2);
+                $category_prefix = '';
             }
 
-            if (self::$breadCrumbsLevel >= 2 && $asgarosforum->current_forum) {
-                $elementLink = $asgarosforum->getLink('forum', $asgarosforum->current_forum);
-                $elementTitle = $categoryPrefix.esc_html(stripslashes($asgarosforum->current_forum_name));
-                self::addToBreadCrumbsList($elementLink, $elementTitle, 2);
+            if ($this->breadcrumbs_level >= 2 && $this->asgarosforum->current_forum) {
+                $element_link = $this->asgarosforum->getLink('forum', $this->asgarosforum->current_forum);
+                $element_title = $category_prefix.esc_html(stripslashes($this->asgarosforum->current_forum_name));
+                $this->add_breadcrumb($element_link, $element_title, 2);
             }
 
-            if (self::$breadCrumbsLevel >= 1 && $asgarosforum->current_topic) {
-                $name = stripslashes($asgarosforum->current_topic_name);
-                $elementLink = $asgarosforum->getLink('topic', $asgarosforum->current_topic);
-                $elementTitle = esc_html($asgarosforum->cut_string($name));
-                self::addToBreadCrumbsList($elementLink, $elementTitle, 3);
+            if ($this->breadcrumbs_level >= 1 && $this->asgarosforum->current_topic) {
+                $name = stripslashes($this->asgarosforum->current_topic_name);
+                $element_link = $this->asgarosforum->getLink('topic', $this->asgarosforum->current_topic);
+                $element_title = esc_html($this->asgarosforum->cut_string($name));
+                $this->add_breadcrumb($element_link, $element_title, 3);
             }
 
-            if ($asgarosforum->current_view === 'addpost') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('Post Reply', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
-            } else if ($asgarosforum->current_view === 'editpost') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('Edit Post', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
-            } else if ($asgarosforum->current_view === 'addtopic') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('New Topic', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
-            } else if ($asgarosforum->current_view === 'movetopic') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('Move Topic', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
-            } else if ($asgarosforum->current_view === 'search') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('Search', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
-            } else if ($asgarosforum->current_view === 'subscriptions') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('Subscriptions', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
-            } else if ($asgarosforum->current_view === 'profile') {
-                $asgarosforum->profile->setBreadCrumbs();
-            } else if ($asgarosforum->current_view === 'members') {
-                $elementLink = $asgarosforum->getLink('current');
-                $elementTitle = __('Members', 'asgaros-forum');
-                self::addToBreadCrumbsList($elementLink, $elementTitle);
+            if ($this->asgarosforum->current_view === 'addpost') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('Post Reply', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
+            } else if ($this->asgarosforum->current_view === 'editpost') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('Edit Post', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
+            } else if ($this->asgarosforum->current_view === 'addtopic') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('New Topic', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
+            } else if ($this->asgarosforum->current_view === 'movetopic') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('Move Topic', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
+            } else if ($this->asgarosforum->current_view === 'search') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('Search', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
+            } else if ($this->asgarosforum->current_view === 'subscriptions') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('Subscriptions', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
+            } else if ($this->asgarosforum->current_view === 'profile') {
+                $this->asgarosforum->profile->setBreadCrumbs();
+            } else if ($this->asgarosforum->current_view === 'members') {
+                $element_link = $this->asgarosforum->getLink('current');
+                $element_title = __('Members', 'asgaros-forum');
+                $this->add_breadcrumb($element_link, $element_title);
             }
 
             // Render breadcrumbs links.
             echo '<div id="breadcrumbs-container">';
                 echo '<div id="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
                     echo '<span class="dashicons-before dashicons-admin-home"></span>';
-                    foreach (self::$breadCrumbsLinks as $element) {
-                        self::renderBreadCrumbsElement($element);
+                    foreach ($this->breadcrumbs_links as $element) {
+                        $this->render_breadcrumb($element);
                     }
                 echo '</div>';
                 echo '<div class="clear"></div>';
@@ -102,8 +105,8 @@ class AsgarosForumBreadCrumbs {
         }
     }
 
-    public static function renderBreadCrumbsElement($element) {
-        if (self::$breadCrumbsElements > 0) {
+    public function render_breadcrumb($element) {
+        if ($this->breadcrumbs_elements > 0) {
             echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
         }
 
@@ -116,6 +119,6 @@ class AsgarosForumBreadCrumbs {
             }
         echo '</span>';
 
-        self::$breadCrumbsElements++;
+        $this->breadcrumbs_elements++;
     }
 }

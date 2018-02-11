@@ -70,7 +70,7 @@ class AsgarosForumProfile {
             $elementTitle = __('Profile', 'asgaros-forum').': '.$userData->display_name;
         }
 
-        AsgarosForumBreadCrumbs::addToBreadCrumbsList($elementLink, $elementTitle);
+        $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
     }
 
     // Shows the profile of a user.

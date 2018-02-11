@@ -65,7 +65,7 @@ class AsgarosForumShortcodes {
 
                     // Configure components.
                     self::$asgarosforum->options['enable_search'] = false;
-                    AsgarosForumBreadCrumbs::$breadCrumbsLevel = 1;
+                    self::$asgarosforum->breadcrumbs->breadcrumbs_level = 1;
                 } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
                     $forumID = $atts['forum'];
                     $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search', 'subscriptions', 'profile', 'members');
@@ -80,7 +80,7 @@ class AsgarosForumShortcodes {
                     }
 
                     // Configure components.
-                    AsgarosForumBreadCrumbs::$breadCrumbsLevel = (self::$asgarosforum->parent_forum != $forumID) ? 2 : 3;
+                    self::$asgarosforum->breadcrumbs->breadcrumbs_level = (self::$asgarosforum->parent_forum != $forumID) ? 2 : 3;
                     self::$shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
                 } else if (!empty($atts['category'])) {
                     self::$includeCategories = explode(',', $atts['category']);

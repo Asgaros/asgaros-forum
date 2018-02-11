@@ -88,6 +88,7 @@ class AsgarosForum {
     var $search         = null;
     var $online         = null;
     var $content        = null;
+    var $breadcrumbs    = null;
 
     function __construct() {
         // Initialize database.
@@ -133,6 +134,7 @@ class AsgarosForum {
         $this->search           = new AsgarosForumSearch($this);
         $this->online           = new AsgarosForumOnline($this);
         $this->content          = new AsgarosForumContent($this);
+        $this->breadcrumbs      = new AsgarosForumBreadCrumbs($this);
     }
 
     //======================================================================
@@ -911,7 +913,7 @@ class AsgarosForum {
 
             // Show breadcrumbs only when there is no access error.
             if (empty($this->error)) {
-                AsgarosForumBreadCrumbs::showBreadCrumbs();
+                $this->breadcrumbs->show_breadcrumbs();
             }
         echo '</div>';
     }
