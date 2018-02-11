@@ -330,7 +330,16 @@ class AsgarosForumAdmin {
 
     function save_forum() {
         global $asgarosforum;
+
+        // ID of the forum.
         $forum_id           = $_POST['forum_id'];
+
+        // Determine parent IDs.
+        $parent_ids          = explode('_', $_POST['forum_parent']);
+        $forum_category     = $parent_ids[0];
+        $forum_parent_forum = $parent_ids[1];
+
+        // Additional data.
         $forum_name         = trim($_POST['forum_name']);
         $forum_description  = trim($_POST['forum_description']);
         $forum_icon         = trim($_POST['forum_icon']);
@@ -340,16 +349,23 @@ class AsgarosForumAdmin {
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
-                $forum_category     = $_POST['forum_category'];
-                $forum_parent_forum = $_POST['forum_parent_forum'];
-
                 $asgarosforum->content->insert_forum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed);
             } else {
+                // Update forum.
                 $asgarosforum->db->update(
                     $asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed),
+                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum),
                     array('id' => $forum_id),
-                    array('%s', '%s', '%s', '%d', '%d'),
+                    array('%s', '%s', '%s', '%d', '%d', '%d', '%d'),
+                    array('%d')
+                );
+
+                // Update category ids of sub-forums in case the forum got moved.
+                $asgarosforum->db->update(
+                    $asgarosforum->tables->forums,
+                    array('parent_id' => $forum_category),
+                    array('parent_forum' => $forum_id),
+                    array('%d'),
                     array('%d')
                 );
             }

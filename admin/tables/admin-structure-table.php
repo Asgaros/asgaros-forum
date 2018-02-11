@@ -35,6 +35,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_icon" value="'.$forumIcon.'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_closed" value="'.esc_html(stripslashes($item['closed'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_order" value="'.esc_html(stripslashes($item['sort'])).'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_count_subforums" value="'.esc_html(stripslashes($item['count_subforums'])).'">';
 
         if ($item['parent_forum']) {
             $columnHTML .= '<span class="subforum">';

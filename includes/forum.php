@@ -583,7 +583,7 @@ class AsgarosForum {
                                 $subforums = $this->get_forums($category->term_id, $forum->id, true);
 
                                 foreach ($subforums as $subforum) {
-                                    $strOUT .= '<option value="'.$subforum->id.'"'.($subforum->id == $this->current_forum ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';
+                                    $strOUT .= '<option value="'.$subforum->id.'"'.($subforum->id == $this->current_forum ? ' selected="selected"' : '').'>&mdash; '.esc_html($subforum->name).'</option>';
                                 }
                             }
                         }

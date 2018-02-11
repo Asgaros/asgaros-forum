@@ -5,7 +5,39 @@
     $title = __('Structure', 'asgaros-forum');
     $titleUpdated = __('Structure updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
+
+    $categories = $asgarosforum->content->get_categories();
     ?>
+
+    <div id="hidden-data" style="display: none;">
+        <select id="data-forum-parent-one-level">
+            <?php
+            if ($categories) {
+                foreach ($categories as $category) {
+                    echo '<option value="'.$category->term_id.'_0">'.$category->name.'</option>';
+                }
+            }
+            ?>
+        </select>
+
+        <select id="data-forum-parent-two-level">
+            <?php
+            if ($categories) {
+                foreach ($categories as $category) {
+                    echo '<option value="'.$category->term_id.'_0">'.$category->name.'</option>';
+
+                    $forums = $asgarosforum->get_forums($category->term_id, 0, true);
+
+                    if ($forums) {
+                        foreach ($forums as $forum) {
+                            echo '<option value="'.$category->term_id.'_'.$forum->id.'">&mdash; '.esc_html($forum->name).'</option>';
+                        }
+                    }
+                }
+            }
+            ?>
+        </select>
+    </div>
 
     <div id="poststuff">
         <div id="post-body" class="metabox-holder">
@@ -63,6 +95,12 @@
                                     <tr>
                                         <th><label for="forum_description"><?php _e('Description:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="text" size="100" maxlength="255" id="forum_description" name="forum_description" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="forum_parent"><?php _e('Parent:', 'asgaros-forum'); ?></label></th>
+                                        <td>
+                                            <select name="forum_parent" id="forum_parent"></select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th><label for="forum_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label></th>

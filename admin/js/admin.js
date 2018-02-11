@@ -68,23 +68,47 @@
         $('.forum-editor-link').click(function() {
             resetEditor();
 
-            var forum_id            = $(this).attr('data-value-id');
-            var forum_category      = $(this).attr('data-value-category');
-            var forum_parent_forum  = $(this).attr('data-value-parent-forum');
-            var forum_name          = '';
-            var forum_description   = '';
-            var forum_icon          = 'dashicons-editor-justify';
-            var forum_closed        = '';
-            var forum_order         = '1';
+            var forum_id                = $(this).attr('data-value-id');
+            var forum_category          = $(this).attr('data-value-category');
+            var forum_parent_forum      = $(this).attr('data-value-parent-forum');
+            var forum_name              = '';
+            var forum_description       = '';
+            var forum_icon              = 'dashicons-editor-justify';
+            var forum_closed            = '';
+            var forum_order             = '1';
+            var forum_count_subforums   = '0';
 
             if (forum_id !== 'new') {
-                forum_name          = $('#forum_'+forum_id+'_name').val();
-                forum_description   = $('#forum_'+forum_id+'_description').val();
-                forum_icon          = $('#forum_'+forum_id+'_icon').val();
-                forum_closed        = $('#forum_'+forum_id+'_closed').val();
-                forum_order         = $('#forum_'+forum_id+'_order').val();
+                forum_name              = $('#forum_'+forum_id+'_name').val();
+                forum_description       = $('#forum_'+forum_id+'_description').val();
+                forum_icon              = $('#forum_'+forum_id+'_icon').val();
+                forum_closed            = $('#forum_'+forum_id+'_closed').val();
+                forum_order             = $('#forum_'+forum_id+'_order').val();
+                forum_count_subforums   = $('#forum_'+forum_id+'_count_subforums').val();
             }
 
+            // Create parent-dropdown.
+            $('#forum_parent').empty();
+
+            if (forum_count_subforums == 0) {
+                var cloned_select = $('#hidden-data #data-forum-parent-two-level').html();
+                $('#forum-editor select[name=forum_parent]').html(cloned_select);
+
+                // Remove itself from list because its not possible to assign a forum to itself.
+                $('#forum-editor option[value='+forum_category+'_'+forum_id+']').remove();
+            } else {
+                var cloned_select = $('#hidden-data #data-forum-parent-one-level').html();
+                $('#forum-editor select[name=forum_parent]').html(cloned_select);
+            }
+
+            // Select parent element.
+            $('#forum-editor select[name=forum_parent] option').each(function() {
+                if ($(this).val() == forum_category+'_'+forum_parent_forum) {
+                    $(this).prop('selected', true);
+                }
+            });
+
+            // Apply values.
             $('#forum-editor input[name=forum_id]').val(forum_id);
             $('#forum-editor input[name=forum_category]').val(forum_category);
             $('#forum-editor input[name=forum_parent_forum]').val(forum_parent_forum);
