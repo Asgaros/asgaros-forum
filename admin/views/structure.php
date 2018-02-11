@@ -175,7 +175,7 @@
                         $forums = $asgarosforum->get_forums($category->term_id, 0, true, ARRAY_A);
                         ?>
                         <div class="postbox">
-                            <h2 class="hndle">
+                            <h2 class="hndle dashicons-before dashicons-archive">
                                 <?php echo stripslashes($category->name); ?>&nbsp;
                                 <span class="element-id">
                                     <?php

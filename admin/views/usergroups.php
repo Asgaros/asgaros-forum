@@ -99,7 +99,7 @@
                         $usergroups = AsgarosForumUserGroups::getUserGroupsOfCategory($category->term_id);
                         ?>
                         <div class="postbox">
-                            <h2 class="hndle">
+                            <h2 class="hndle dashicons-before dashicons-groups">
                                 <?php echo stripslashes($category->name); ?>
                                 <span class="category-actions">
                                     <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>

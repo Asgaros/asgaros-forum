@@ -100,7 +100,7 @@
 #af-structure .category-actions .action-edit:hover {
     color: #73d5f5 !important;
 }
-#af-structure .dashicons-before {
+#af-structure a.dashicons-before {
     font-size: 14px;
     display: inline-block;
 }
