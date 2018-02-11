@@ -68,6 +68,12 @@
     display: block;
     min-height: 35px;
 }
+#af-wrapper .profile-link:hover,
+#af-wrapper .edit-profile-link:hover,
+#af-wrapper #forum-header-container-top a:hover,
+#af-wrapper #read-unread a:hover {
+    text-decoration: underline;
+}
 
 /* UPLOADS */
 #af-wrapper .uploaded-file {
@@ -444,9 +450,6 @@
 }
 #af-wrapper #forum-header-container-top a:first-child {
     border-left: none;
-}
-#af-wrapper #forum-header-container-top a:hover {
-    text-decoration: underline;
 }
 
 /* SUBSCRIPTION OVERVIEW */
@@ -898,9 +901,6 @@
 #af-wrapper #profile-content div span:nth-child(2) {
     display: table-cell;
     font-style: italic;
-}
-#af-wrapper .profile-link:hover {
-    text-decoration: underline;
 }
 #af-wrapper .edit-profile-link {
     display: block;
