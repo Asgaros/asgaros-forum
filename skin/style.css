@@ -473,7 +473,7 @@
 #af-wrapper #breadcrumbs {
     float: left;
     font-size: 11px;
-    padding: 0;
+    padding: 0 8px;
     margin: 0; /* comp */
     color: #666;
 }
@@ -501,7 +501,7 @@
     font-size: 18px;
 }
 #af-wrapper #breadcrumbs .dashicons-admin-home {
-    padding: 0 8px;
+    padding: 0 8px 0 0;
 }
 
 /* SEARCH */
