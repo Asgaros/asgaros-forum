@@ -26,7 +26,7 @@
         display: block;
         margin: 2px;
     }
-    #af-wrapper #breadcrumbs,
+    #af-wrapper #forum-breadcrumbs,
     #af-wrapper #forum-search,
     #af-wrapper .post-author,
     #af-wrapper .post-message {
@@ -62,10 +62,10 @@
         font-size: 18px;
         line-height: 32px;
     }
-    #af-wrapper #forum-header-container-top {
+    #af-wrapper #forum-navigation {
         text-align: center;
     }
-    #af-wrapper #forum-header-container-top a {
+    #af-wrapper #forum-navigation a {
         display: inline-block;
         border: none;
     }

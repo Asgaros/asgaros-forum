@@ -893,8 +893,8 @@ class AsgarosForum {
     }
 
     function showHeader() {
-        echo '<div id="forum-header-container">';
-            echo '<div id="forum-header-container-top">';
+        echo '<div id="forum-header">';
+            echo '<div id="forum-navigation">';
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
                 $this->profile->renderCurrentUsersProfileLink();
                 AsgarosForumMembersList::renderMembersListLink();
@@ -911,10 +911,7 @@ class AsgarosForum {
                 echo '<div class="clear"></div>';
             echo '</div>';
 
-            // Show breadcrumbs only when there is no access error.
-            if (empty($this->error)) {
-                $this->breadcrumbs->show_breadcrumbs();
-            }
+            $this->breadcrumbs->show_breadcrumbs();
         echo '</div>';
     }
 

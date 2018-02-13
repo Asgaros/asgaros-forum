@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumBreadCrumbs {
     private $asgarosforum = null;
     public $breadcrumbs_level = 4;
-    public $breadcrumbs_elements = 0;
     public $breadcrumbs_links = array();
 
     public function __construct($object) {
@@ -21,7 +20,7 @@ class AsgarosForumBreadCrumbs {
     }
 
     public function show_breadcrumbs() {
-        if ($this->asgarosforum->options['enable_breadcrumbs']) {
+        if ($this->asgarosforum->options['enable_breadcrumbs'] && empty($this->asgarosforum->error)) {
             if ($this->breadcrumbs_level >= 4) {
                 $element_link = $this->asgarosforum->getLink('home');
                 $element_title = __('Forum', 'asgaros-forum');
@@ -93,23 +92,16 @@ class AsgarosForumBreadCrumbs {
             }
 
             // Render breadcrumbs links.
-            echo '<div id="breadcrumbs-container">';
-                echo '<div id="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
-                    echo '<span class="dashicons-before dashicons-admin-home"></span>';
-                    foreach ($this->breadcrumbs_links as $element) {
-                        $this->render_breadcrumb($element);
-                    }
-                echo '</div>';
-                echo '<div class="clear"></div>';
+            echo '<div id="forum-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
+                echo '<span class="dashicons-before dashicons-admin-home"></span>';
+                foreach ($this->breadcrumbs_links as $element) {
+                    $this->render_breadcrumb($element);
+                }
             echo '</div>';
         }
     }
 
     public function render_breadcrumb($element) {
-        if ($this->breadcrumbs_elements > 0) {
-            echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
-        }
-
         echo '<span property="itemListElement" typeof="ListItem">';
             echo '<a property="item" typeof="WebPage" href="'.$element['link'].'" title="'.$element['title'].'">';
             echo '<span property="name">'.$element['title'].'</span>';
@@ -119,6 +111,6 @@ class AsgarosForumBreadCrumbs {
             }
         echo '</span>';
 
-        $this->breadcrumbs_elements++;
+        echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
     }
 }

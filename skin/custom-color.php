@@ -17,7 +17,7 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .forum-menu a,
 #af-wrapper .title-element,
 #af-wrapper .post-author-marker,
-#af-wrapper #forum-header-container-top,
+#af-wrapper #forum-navigation,
 #af-wrapper #profile-header .background-avatar,
 #af-wrapper #read-unread .unread {
     background-color: <?php echo $color; ?> !important;
@@ -27,8 +27,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .forum-menu a,
 #af-wrapper input[type="submit"],
 #af-wrapper #forum-search,
-#af-wrapper #forum-header-container-top,
-#af-wrapper #forum-header-container-top a {
+#af-wrapper #forum-navigation,
+#af-wrapper #forum-navigation a {
 	border-color: <?php echo $color; ?> !important;
 }
 <?php
@@ -83,7 +83,8 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .post-element,
 #af-wrapper .forum-subforums,
 #af-wrapper .signature,
-#af-wrapper .edit-profile-link {
+#af-wrapper .edit-profile-link,
+#af-wrapper .uploaded-file img {
     border-color: <?php echo $border_color; ?> !important;
 }
 <?php
