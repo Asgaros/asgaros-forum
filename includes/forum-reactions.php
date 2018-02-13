@@ -19,7 +19,7 @@ class AsgarosForumReactions {
             // Load the reactions for the current topic.
             $this->load_reactions();
 
-            if (isset($_GET['reaction'])) {
+            if (isset($_GET['reaction']) && isset($_GET['reaction_action'])) {
                 $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
                 $user_id = get_current_user_id();
                 $reaction = (!empty($_GET['reaction'])) ? $_GET['reaction'] : '';
@@ -29,13 +29,35 @@ class AsgarosForumReactions {
         }
     }
 
+    public function load_reactions() {
+        if ($this->asgarosforum->current_topic) {
+            $reactions = $this->asgarosforum->db->get_results("SELECT r.* FROM {$this->asgarosforum->tables->reactions} AS r, {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = {$this->asgarosforum->current_topic} AND p.id = r.post_id;");
+
+            foreach ($reactions as $reaction) {
+                if (!isset($this->post_reactions[$reaction->post_id])) {
+                    $this->post_reactions[$reaction->post_id] = array();
+                }
+
+                if (!isset($this->post_reactions[$reaction->post_id][$reaction->reaction])) {
+                    $this->post_reactions[$reaction->post_id][$reaction->reaction] = array();
+                }
+
+                $this->post_reactions[$reaction->post_id][$reaction->reaction][] = $reaction->user_id;
+            }
+        }
+    }
+
     public function render_reactions_area($post_id, $topic_id) {
         if ($this->asgarosforum->options['enable_reactions']) {
             echo '<div class="post-reactions">';
 
                 $active = array(
-                    'down' => '',
-                    'up' => ''
+                    'down'  => '',
+                    'up'    => ''
+                );
+                $action = array(
+                    'down'  => 'add',
+                    'up'    => 'add'
                 );
                 $links = false;
 
@@ -43,13 +65,15 @@ class AsgarosForumReactions {
                 if (is_user_logged_in()) {
                     $user_id = get_current_user_id();
                     $reaction_exists = $this->reaction_exists($post_id, $user_id);
-
-                    $links['down'] = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'reaction' => 'down', 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
-                    $links['up'] = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'reaction' => 'up', 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
+                    $reaction_action = 'reaction_add';
 
                     if ($reaction_exists) {
                         $active[$reaction_exists] = 'reaction-active';
+                        $action[$reaction_exists] = 'remove';
                     }
+
+                    $links['down'] = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'reaction' => 'down', 'reaction_action' => $action['down'], 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
+                    $links['up'] = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'reaction' => 'up', 'reaction_action' => $action['up'], 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
                 }
 
                 // Set up the reactions counter.
@@ -73,24 +97,6 @@ class AsgarosForumReactions {
         }
     }
 
-    public function load_reactions() {
-        if ($this->asgarosforum->current_topic) {
-            $reactions = $this->asgarosforum->db->get_results("SELECT r.* FROM {$this->asgarosforum->tables->reactions} AS r, {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = {$this->asgarosforum->current_topic} AND p.id = r.post_id;");
-
-            foreach ($reactions as $reaction) {
-                if (!isset($this->post_reactions[$reaction->post_id])) {
-                    $this->post_reactions[$reaction->post_id] = array();
-                }
-
-                if (!isset($this->post_reactions[$reaction->post_id][$reaction->reaction])) {
-                    $this->post_reactions[$reaction->post_id][$reaction->reaction] = array();
-                }
-
-                $this->post_reactions[$reaction->post_id][$reaction->reaction][] = $reaction->user_id;
-            }
-        }
-    }
-
     public function reaction_change($post_id, $user_id, $reaction) {
         // Only add a reaction when the post exists ...
         if ($this->asgarosforum->content->post_exists($post_id)) {
@@ -101,11 +107,11 @@ class AsgarosForumReactions {
                     $reaction_check = $this->reaction_exists($post_id, $user_id);
 
                     // ... and when there is not already a reaction from the user.
-                    if ($reaction_check === false) {
+                    if ($reaction_check === false && $_GET['reaction_action'] == 'add') {
                         $this->add_reaction($post_id, $user_id, $reaction);
-                    } else if ($reaction_check === $reaction) {
+                    } else if ($reaction_check === $reaction && $_GET['reaction_action'] == 'remove') {
                         $this->remove_reaction($post_id, $user_id, $reaction);
-                    } else if ($reaction_check !== $reaction) {
+                    } else if ($reaction_check !== $reaction && $_GET['reaction_action'] == 'add') {
                         $this->update_reaction($post_id, $user_id, $reaction);
                     }
                 }

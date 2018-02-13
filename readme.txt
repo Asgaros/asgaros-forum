@@ -90,8 +90,10 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Mentioning functionality
 * Added: Functionality to move forums
+* Fixed: Reactions not saved correctly in some cases
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
+* Performance improvements and code optimizations
 = 1.7.2 =
 * Fixed: Parse error when using some older versions of PHP
 = 1.7.1 =
