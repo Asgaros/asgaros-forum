@@ -137,5 +137,10 @@
         $('#af-wrapper .post-message > blockquote').click(function() {
             $(this).toggleClass('full-quote');
         });
+
+        // Mobile navigation.
+        $('#forum-navigation-mobile').click(function() {
+            $('#forum-navigation').toggleClass('show-navigation');
+        });
     });
 })(jQuery);

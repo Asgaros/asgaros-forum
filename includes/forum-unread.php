@@ -154,6 +154,8 @@ class AsgarosForumUnread {
             echo '<span class="indicator-label">'.__('Nothing new', 'asgaros-forum').'</span>';
             echo '<span class="dashicons-before dashicons-yes"></span>';
             echo '<span class="indicator-label"><a href="'.self::$asgarosforum->getLink('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a></span>';
+
+            echo '<div class="clear"></div>';
         echo '</div>';
     }
 }

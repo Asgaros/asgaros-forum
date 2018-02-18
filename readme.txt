@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Functionality to move forums
 * Fixed: Reactions not saved correctly in some cases
 * Fixed: Display issues with some themes
+* Changed: Improved mobile navigation
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.7.2 =

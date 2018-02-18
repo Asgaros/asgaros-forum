@@ -894,8 +894,12 @@ class AsgarosForum {
 
     function showHeader() {
         echo '<div id="forum-header">';
+            echo '<div id="forum-navigation-mobile">';
+                echo '<a class="dashicons-before dashicons-menu"></a>';
+            echo '</div>';
             echo '<div id="forum-navigation">';
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
+
                 $this->profile->renderCurrentUsersProfileLink();
                 AsgarosForumMembersList::renderMembersListLink();
                 $this->notifications->show_subscription_overview_link();
@@ -905,14 +909,13 @@ class AsgarosForum {
                 $this->showLogoutLink();
 
                 do_action('asgarosforum_custom_header_menu');
-
-                $this->search->show_search_input();
-
-                echo '<div class="clear"></div>';
             echo '</div>';
+            $this->search->show_search_input();
 
-            $this->breadcrumbs->show_breadcrumbs();
+            echo '<div class="clear"></div>';
         echo '</div>';
+
+        $this->breadcrumbs->show_breadcrumbs();
     }
 
     function showLogoutLink() {

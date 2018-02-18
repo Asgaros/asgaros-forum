@@ -62,12 +62,19 @@
         font-size: 18px;
         line-height: 32px;
     }
+    #af-wrapper #forum-navigation-mobile {
+        display: block;
+    }
     #af-wrapper #forum-navigation {
-        text-align: center;
+        width: 100%;
+        display: none;
     }
     #af-wrapper #forum-navigation a {
-        display: inline-block;
+        display: block;
         border: none;
+    }
+    #af-wrapper .show-navigation {
+        display: block !important;
     }
     #af-wrapper #forum-search {
         text-align: left;
