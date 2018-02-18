@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 19;
+    private $db_version = 20;
     private $tables;
 
     public function __construct() {
@@ -232,6 +232,33 @@ class AsgarosForumDatabase {
                 // support FULLTEXT before MySQL version 5.6.
                 $this->db->query('ALTER TABLE '.$this->tables->topics.' ENGINE = MyISAM;');
                 $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD FULLTEXT (name);');
+            }
+
+            // Create some default content.
+            if ($database_version_installed < 20) {
+                // Initialize taxonomy first.
+                AsgarosForumContent::initialize_taxonomy();
+
+                // Get all categories first.
+                $categories = $asgarosforum->content->get_categories(false);
+
+                // Only continue when there are no categories yet.
+                if (count($categories) == 0) {
+                    // Add an example category.
+                    $default_category_name = __('Example Category', 'asgaros-forum');
+
+                    $new_category = wp_insert_term($default_category_name, 'asgarosforum-category');
+
+                    if (!is_wp_error($new_category)) {
+                        update_term_meta($new_category['term_id'], 'category_access', 'everyone');
+                        update_term_meta($new_category['term_id'], 'order', 1);
+
+                        $default_forum_name = __('First Forum', 'asgaros-forum');
+                        $default_forum_description = __('My first forum.', 'asgaros-forum');
+
+                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'dashicons-editor-justify', 1, 0);
+                    }
+                }
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

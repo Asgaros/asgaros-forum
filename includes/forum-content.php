@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumContent {
     private $asgarosforum = null;
-    private $taxonomy_name = 'asgarosforum-category';
+    private static $taxonomy_name = 'asgarosforum-category';
     private $action = false;
     private $data_subject;
     private $data_content;
@@ -16,13 +16,13 @@ class AsgarosForumContent {
     }
 
     public function initialize() {
-        $this->initialize_taxonomy();
+        self::initialize_taxonomy();
     }
 
-    public function initialize_taxonomy() {
+    public static function initialize_taxonomy() {
         // Register the taxonomies.
         register_taxonomy(
-			$this->taxonomy_name,
+			self::$taxonomy_name,
 			null,
 			array(
 				'public'        => false,
