@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumReactions {
     private $asgarosforum = null;
-    private $reactions_list = array('up', 'down');
+    private $reactions_list = array('down', 'up');
     private $post_reactions = array();
 
     public function __construct($object) {
@@ -50,7 +50,6 @@ class AsgarosForumReactions {
     public function render_reactions_area($post_id, $topic_id) {
         if ($this->asgarosforum->options['enable_reactions']) {
             echo '<div class="post-reactions">';
-
                 $active = array(
                     'down'  => '',
                     'up'    => ''
@@ -59,38 +58,38 @@ class AsgarosForumReactions {
                     'down'  => 'add',
                     'up'    => 'add'
                 );
-                $links = false;
 
-                // Generate the links and active-indicators if necessary.
                 if (is_user_logged_in()) {
                     $user_id = get_current_user_id();
                     $reaction_exists = $this->reaction_exists($post_id, $user_id);
-                    $reaction_action = 'reaction_add';
 
                     if ($reaction_exists) {
                         $active[$reaction_exists] = 'reaction-active';
                         $action[$reaction_exists] = 'remove';
                     }
-
-                    $links['down'] = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'reaction' => 'down', 'reaction_action' => $action['down'], 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
-                    $links['up'] = AsgarosForumRewrite::getLink('topic', $topic_id, array('post' => $post_id, 'reaction' => 'up', 'reaction_action' => $action['up'], 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
                 }
 
-                // Set up the reactions counter.
-                $reactions_counter_down = (isset($this->post_reactions[$post_id]['down'])) ? number_format_i18n(count($this->post_reactions[$post_id]['down'])) : 0;
-                $reactions_counter_up = (isset($this->post_reactions[$post_id]['up'])) ? number_format_i18n(count($this->post_reactions[$post_id]['up'])) : 0;
+                foreach ($this->reactions_list as $reaction) {
+                    $counter = (isset($this->post_reactions[$post_id][$reaction])) ? number_format_i18n(count($this->post_reactions[$post_id][$reaction])) : 0;
+                    $output = '<span class="reaction '.$reaction.'"><span class="reaction-icon dashicons-before dashicons-thumbs-'.$reaction.' '.$active[$reaction].'"></span><span class="reaction-number">'.$counter.'</span></span>';
 
-                // Build the reactions.
-                $reaction_down = '<span class="reaction down"><span class="reaction-icon dashicons-before dashicons-thumbs-down '.$active['down'].'"></span><span class="reaction-number">'.$reactions_counter_down.'</span></span>';
-                $reaction_up = '<span class="reaction up"><span class="reaction-icon dashicons-before dashicons-thumbs-up '.$active['up'].'"></span><span class="reaction-number">'.$reactions_counter_up.'</span></span>';
+                    if (is_user_logged_in()) {
+                        $link = AsgarosForumRewrite::getLink(
+                            'topic',
+                            $topic_id,
+                            array(
+                                'post'              => $post_id,
+                                'reaction'          => $reaction,
+                                'reaction_action'   => $action[$reaction],
+                                'part'              => ($this->asgarosforum->current_page + 1)
+                            ),
+                            '#postid-'.$post_id
+                        );
 
-                // Output of the reactions.
-                if ($links) {
-                    echo '<a href="'.$links['down'].'">'.$reaction_down.'</a>';
-                    echo '<a href="'.$links['up'].'">'.$reaction_up.'</a>';
-                } else {
-                    echo $reaction_down;
-                    echo $reaction_up;
+                        echo '<a href="'.$link.'">'.$output.'</a>';
+                    } else {
+                        echo $output;
+                    }
                 }
 
             echo '</div>';
