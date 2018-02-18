@@ -28,7 +28,9 @@ class AsgarosForumMembersList {
         global $asgarosforum;
 
         $pagination = new AsgarosForumPagination($asgarosforum);
-        $paginationRendering = '<div class="pages-and-menu">'.$pagination->renderPagination('members').'<div class="clear"></div></div>';
+        $pagination_rendering = $pagination->renderPagination('members');
+
+        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination->renderPagination('members').'<div class="clear"></div></div>' : '';
 
         echo $paginationRendering;
 
