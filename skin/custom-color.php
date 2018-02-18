@@ -84,7 +84,9 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .forum-subforums,
 #af-wrapper .signature,
 #af-wrapper .edit-profile-link,
-#af-wrapper .uploaded-file img {
+#af-wrapper .uploaded-file img,
+#af-wrapper .error,
+#af-wrapper .info {
     border-color: <?php echo $border_color; ?> !important;
 }
 <?php

@@ -342,14 +342,20 @@
     font-style: italic;
     padding: 8px !important;
 }
+#af-wrapper .error,
 #af-wrapper .info {
-    border: 1px solid #ccc;
-    background-color: #ffb;
-    margin-bottom: 10px;
+    border: 1px solid #eee;
+    margin: 15px 0;
     color: #444;
+}
+#af-wrapper .info {
+    background-color: #ffb;
 }
 #af-wrapper .info span {
     display: block;
+}
+#af-wrapper .error {
+    background-color: #fbb;
 }
 
 /* READ/UNREAD */
