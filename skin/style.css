@@ -531,7 +531,7 @@
     box-sizing: border-box;
     background-color: #fff;
     color: #444;
-    line-height: 34px;
+    line-height: 35px;
     border: 3px solid #2d89cc;
     border-bottom-width: 2px;
     height: 40px;
@@ -560,10 +560,10 @@
     display: none;
 }
 #af-wrapper #forum-search:before {
-    padding: 0 5px;
-    line-height: 34px;
-    width: 18px;
-    height: 18px;
+    padding: 0;
+    line-height: 35px;
+    width: 35px;
+    height: 35px;
     font-size: 18px;
 }
 
