@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_filter_notify_mentioned_user_message filter
 * Fixed: Display issues with some themes
 = 1.8.0 =
 * Added: Mentioning functionality
