@@ -51,6 +51,13 @@ class AsgarosForumOnline {
                     }
                 }
 
+                // Check if the online-flag exists. If not, set it.
+                $user_online_flag = get_user_meta($this->current_user_id, 'asgarosforum_online', true);
+
+                if (!$user_online_flag) {
+                    update_user_meta($this->current_user_id, 'asgarosforum_online', true);
+                }
+
                 // Get the timestamp of the current user.
                 $user_time_stamp = get_user_meta($this->current_user_id, 'asgarosforum_online_timestamp', true);
 
@@ -104,6 +111,10 @@ class AsgarosForumOnline {
                 'fields'        => 'id',
                 'meta_query'    => array(
                     'relation'  => 'AND',
+                    array(
+                        'key'       => 'asgarosforum_online',
+                        'compare'   => 'EXISTS'
+                    ),
                     array(
                         'key'       => 'asgarosforum_online_timestamp',
                         'compare'   => 'EXISTS'
@@ -186,7 +197,21 @@ class AsgarosForumOnline {
         }
     }
 
+    public function last_seen($user_id) {
+        if ($this->is_user_online($user_id)) {
+            return __('Currently online', 'asgaros-forum');
+        } else {
+            $user_time_stamp = get_user_meta($user_id, 'asgarosforum_online_timestamp', true);
+
+            if (!$user_time_stamp) {
+                return __('Never', 'asgaros-forum');
+            } else {
+                return sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($user_time_stamp), current_time('timestamp')));
+            }
+        }
+    }
+
     public function delete_user_time_stamp() {
-        delete_user_meta(get_current_user_id(), 'asgarosforum_online_timestamp');
+        delete_user_meta(get_current_user_id(), 'asgarosforum_online');
     }
 }

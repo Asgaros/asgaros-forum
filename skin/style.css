@@ -241,30 +241,24 @@
 #af-wrapper .topic-status,
 #af-wrapper .topic-name,
 #af-wrapper .topic-stats,
-#af-wrapper .topic-poster,
-#af-wrapper .member-avatar,
-#af-wrapper .member-name,
-#af-wrapper .member-posts {
+#af-wrapper .topic-poster {
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
     padding: 4px;
 }
 #af-wrapper .forum-status,
-#af-wrapper .topic-status,
-#af-wrapper .member-avatar {
+#af-wrapper .topic-status {
     width: 64px;
     text-align: center;
 }
 #af-wrapper .forum-name,
-#af-wrapper .topic-name,
-#af-wrapper .member-name {
+#af-wrapper .topic-name {
     width: auto;
     text-align: left; /* comp */
 }
 #af-wrapper .forum-stats,
-#af-wrapper .topic-stats,
-#af-wrapper .member-posts {
+#af-wrapper .topic-stats {
     width: 100px;
     text-align: right;
     padding-right: 10px;
@@ -936,8 +930,38 @@
 }
 
 /* MEMBERS LIST */
+#af-wrapper .member-avatar,
+#af-wrapper .member-name,
+#af-wrapper .member-posts,
+#af-wrapper .member-last-seen {
+    display: table-cell;
+    box-sizing: border-box;
+    vertical-align: middle;
+    padding: 4px;
+}
+#af-wrapper .member-avatar {
+    width: 64px;
+    text-align: center;
+}
 #af-wrapper .member-avatar img {
     vertical-align: middle;
+}
+#af-wrapper .member-name {
+    width: auto;
+    text-align: left; /* comp */
+}
+#af-wrapper .member-posts {
+    width: 100px;
+    text-align: right;
+    padding-right: 10px;
+    font-size: smaller;
+}
+#af-wrapper .member-last-seen {
+    width: 230px;
+    text-align: left;
+    font-size: smaller;
+    padding-left: 10px;
+    border-left: 1px solid #eee;
 }
 
 /* REPORT */

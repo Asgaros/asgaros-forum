@@ -133,6 +133,12 @@ class AsgarosForumProfile {
                             $this->renderProfileRow($cellTitle, $cellValue);
                         }
 
+                        // Show last seen.
+                        $cellTitle = __('Last seen:', 'asgaros-forum');
+                        $cellValue = $this->asgarosforum->online->last_seen($userData->ID);
+
+                        $this->renderProfileRow($cellTitle, $cellValue);
+
                         // Show member since.
                         $cellTitle = __('Member Since:', 'asgaros-forum');
                         $cellValue = $this->asgarosforum->format_date($userData->user_registered, false);

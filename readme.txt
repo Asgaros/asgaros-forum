@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Last seen-information to profiles and members list 
 * Added: Notification mail now contains the name of the person who mentioned an user
 * Added: asgarosforum_filter_notify_mentioned_user_message filter
 * Fixed: Display issues in the administration area on small screens

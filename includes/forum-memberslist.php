@@ -67,6 +67,10 @@ class AsgarosForumMembersList {
                     $member_posts_i18n = number_format_i18n($element->forum_posts);
                     echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
                 echo '</div>';
+
+                echo '<div class="member-last-seen">';
+                    echo __('Last seen:', 'asgaros-forum').' <i>'.$asgarosforum->online->last_seen($element->ID).'</i>';
+                echo '</div>';
             echo '</div>';
         }
 

@@ -56,6 +56,7 @@ function deleteData() {
     delete_metadata('user', 0, 'asgarosforum_subscription_global_topics', '', true);
     delete_metadata('user', 0, 'asgarosforum_unread_cleared', '', true);
     delete_metadata('user', 0, 'asgarosforum_unread_exclude', '', true);
+    delete_metadata('user', 0, 'asgarosforum_online', '', true);
     delete_metadata('user', 0, 'asgarosforum_online_timestamp', '', true);
 
     // Delete category terms.

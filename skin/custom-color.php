@@ -68,6 +68,7 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .member,
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster,
+#af-wrapper .member-last-seen,
 #af-wrapper .subscription,
 #af-wrapper .content-element,
 #af-wrapper .forum-post-header,
