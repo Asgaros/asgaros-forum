@@ -199,16 +199,21 @@
     height: 40px;
     font-size: 40px;
 }
-#af-structure .column-status,
-#af-structure .column-sort,
-#af-structure .column-color,
-#af-structure .column-users,
+/* Fix for the icon on small (mobile) screens */
+@media screen and (max-width: 782px) {
+    #af-structure .forum-icon:before {
+        padding-left: 35%;
+    }
+}
 #af-structure .column-author,
 #af-structure .column-reporters {
     width: 125px;
 }
-#af-structure .column-actions {
-    width: 400px;
+#af-structure .column-status,
+#af-structure .column-sort,
+#af-structure .column-color,
+#af-structure .column-users {
+    width: 100px;
 }
 #af-structure .usergroup-color {
     width: 25px;

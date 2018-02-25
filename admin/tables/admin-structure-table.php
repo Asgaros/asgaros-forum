@@ -68,13 +68,13 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $actionHTML .= '<a href="#" class="forum-delete-link link-delete" data-value-id="'.$item['id'].'" data-value-category="'.$item['parent_id'].'" data-value-editor-title="'.__('Delete Forum', 'asgaros-forum').'">';
         $actionHTML .= __('Delete Forum', 'asgaros-forum');
         $actionHTML .= '</a>';
-        $actionHTML .= ' | ';
+        $actionHTML .= ' &middot; ';
         $actionHTML .= '<a href="#" class="forum-editor-link" data-value-id="'.$item['id'].'" data-value-category="'.$item['parent_id'].'" data-value-parent-forum="'.$item['parent_forum'].'" data-value-editor-title="'.__('Edit Forum', 'asgaros-forum').'">';
         $actionHTML .= __('Edit Forum', 'asgaros-forum');
         $actionHTML .= '</a>';
 
         if (!$item['parent_forum']) {
-            $actionHTML .= ' | ';
+            $actionHTML .= ' &middot; ';
             $actionHTML .= '<a href="#" class="forum-editor-link" data-value-id="new" data-value-category="'.$item['parent_id'].'" data-value-parent-forum="'.$item['id'].'" data-value-editor-title="'.__('Add Sub-Forum', 'asgaros-forum').'">';
             $actionHTML .= __('Add Sub-Forum', 'asgaros-forum');
             $actionHTML .= '</a>';

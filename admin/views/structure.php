@@ -181,7 +181,7 @@
                                     <?php
                                     echo '(';
                                     echo __('ID', 'asgaros-forum').': '.$category->term_id;
-                                    echo ' | ';
+                                    echo ' &middot; ';
                                     echo __('Access:', 'asgaros-forum').' ';
                                     if ($access === 'everyone') {
                                         _e('Everyone', 'asgaros-forum');
@@ -190,7 +190,7 @@
                                     } else if ($access === 'moderator') {
                                         _e('Moderators only', 'asgaros-forum');
                                     }
-                                    echo ' | ';
+                                    echo ' &middot; ';
                                     echo __('Order:', 'asgaros-forum').' '.$order;
                                     AsgarosForumUserGroups::renderUserGroupsInCategory($category->term_id);
                                     do_action('asgarosforum_admin_show_custom_category_data', $category->term_id);
@@ -199,7 +199,7 @@
                                 </span>
                                 <span class="category-actions">
                                     <a href="#" class="category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
-                                    |
+                                    &middot;
                                     <a href="#" class="category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
                                 </span>
                             </h2>

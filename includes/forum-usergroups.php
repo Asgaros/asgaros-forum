@@ -332,7 +332,7 @@ class AsgarosForumUserGroups {
         $userGroupsOfForumCategory = self::getUserGroupsOfForumCategory($categoryID);
 
         if (!empty($userGroupsOfForumCategory)) {
-            echo ' | '.__('User Groups:', 'asgaros-forum').' ';
+            echo ' &middot; '.__('User Groups:', 'asgaros-forum').' ';
 
             foreach ($userGroupsOfForumCategory as $key => $userGroup) {
                 if ($key > 0) {

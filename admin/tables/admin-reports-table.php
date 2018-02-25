@@ -68,7 +68,7 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
     function column_actions($item) {
         $columnHTML = '';
         $columnHTML .= '<a href="'.$item['post_link'].'" target="_blank">'.__('View Post', 'asgaros-forum').'</a>';
-        $columnHTML .= ' | ';
+        $columnHTML .= ' &middot; ';
         $columnHTML .= '<a href="#" class="report-delete-link link-delete" data-value-id="'.$item['post_id'].'" data-value-editor-title="'.__('Delete Report', 'asgaros-forum').'">'.__('Delete Report', 'asgaros-forum').'</a>';
 
         return $columnHTML;
