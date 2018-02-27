@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-18 17:13+0000\n"
+"POT-Creation-Date: 2018-02-27 16:27+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -42,7 +42,7 @@ msgstr ""
 
 #: admin/admin.php:62 admin/admin.php:110 admin/admin.php:110
 #: includes/forum-breadcrumbs.php:26 includes/forum-usergroups.php:286
-#: includes/forum.php:898
+#: includes/forum.php:901
 msgid "Forum"
 msgstr ""
 
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: includes/forum-memberslist.php:66 includes/views/forum-element.php:54
+#: includes/forum-memberslist.php:68 includes/views/forum-element.php:54
 #: includes/views/post-element.php:39
 #, php-format
 msgid "%s Post"
@@ -202,15 +202,20 @@ msgid_plural "%s Posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum-mentioning.php:61
+#: includes/forum-memberslist.php:72 includes/forum-profile.php:137
+msgid "Last seen:"
+msgstr ""
+
+#: includes/forum-mentioning.php:67
 msgid "You have been mentioned!"
 msgstr ""
 
-#: includes/forum-mentioning.php:62
+#: includes/forum-mentioning.php:68
 #, php-format
 msgid ""
 "Hello,<br><br>You have been mentioned in a forum post.<br><br>Topic:<br>"
-"%s<br><br>Post:<br>%s<br><br>Link to the post:<br><a href=\"%s\">%s</a>"
+"%s<br><br>Mentioned by:<br>%s<br><br>Post:<br>%s<br><br>Link to the post:<br>"
+"<a href=\"%s\">%s</a>"
 msgstr ""
 
 #: includes/forum-notifications.php:24
@@ -275,27 +280,41 @@ msgstr ""
 msgid "No subscriptions yet!"
 msgstr ""
 
-#: includes/forum-online.php:127
+#: includes/forum-online.php:138
 msgid "Online"
 msgstr ""
 
-#: includes/forum-online.php:138
+#: includes/forum-online.php:149
 msgid "Newest Member:"
 msgstr ""
 
-#: includes/forum-online.php:143
+#: includes/forum-online.php:154
 msgid "Currently Online:"
 msgstr ""
 
-#: includes/forum-online.php:168
+#: includes/forum-online.php:179
 #, php-format
 msgid "%s Guest"
 msgid_plural "%s Guests"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum-online.php:173
+#: includes/forum-online.php:184
 msgid "Currently nobody is online."
+msgstr ""
+
+#: includes/forum-online.php:202
+msgid "Currently online"
+msgstr ""
+
+#: includes/forum-online.php:207
+msgid "Never"
+msgstr ""
+
+#: includes/forum-online.php:209 includes/forum-widgets.php:122
+#: includes/forum.php:749
+#, php-format
+msgid "%s ago"
 msgstr ""
 
 #: includes/forum-pagination.php:34 includes/forum-pagination.php:144
@@ -348,35 +367,35 @@ msgstr ""
 msgid "Website:"
 msgstr ""
 
-#: includes/forum-profile.php:137
+#: includes/forum-profile.php:143
 msgid "Member Since:"
 msgstr ""
 
-#: includes/forum-profile.php:145
+#: includes/forum-profile.php:151
 msgid "Topics Started:"
 msgstr ""
 
-#: includes/forum-profile.php:153
+#: includes/forum-profile.php:159
 msgid "Replies Created:"
 msgstr ""
 
-#: includes/forum-profile.php:160
+#: includes/forum-profile.php:166
 msgid "Biographical Info:"
 msgstr ""
 
-#: includes/forum-profile.php:171
+#: includes/forum-profile.php:177
 msgid "Signature:"
 msgstr ""
 
-#: includes/forum-profile.php:182
+#: includes/forum-profile.php:188
 msgid "Edit Profile"
 msgstr ""
 
-#: includes/forum-profile.php:188
+#: includes/forum-profile.php:194
 msgid "This user does not exist."
 msgstr ""
 
-#: includes/forum-profile.php:230
+#: includes/forum-profile.php:236
 msgid "My Profile"
 msgstr ""
 
@@ -512,11 +531,6 @@ msgstr[1] ""
 msgid "by"
 msgstr ""
 
-#: includes/forum-widgets.php:122 includes/forum.php:749
-#, php-format
-msgid "%s ago"
-msgstr ""
-
 #: includes/forum-widgets.php:129 includes/forum.php:751
 msgid "No topics yet!"
 msgstr ""
@@ -610,27 +624,27 @@ msgstr ""
 msgid "Quote"
 msgstr ""
 
-#: includes/forum.php:920
+#: includes/forum.php:923
 msgid "Logout"
 msgstr ""
 
-#: includes/forum.php:926
+#: includes/forum.php:929
 msgid "Login"
 msgstr ""
 
-#: includes/forum.php:932
+#: includes/forum.php:935
 msgid "Register"
 msgstr ""
 
-#: includes/forum.php:1067
+#: includes/forum.php:1070
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: includes/forum.php:1068
+#: includes/forum.php:1071
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: includes/forum.php:1069
+#: includes/forum.php:1072
 msgid "Sorry, this forum does not exist."
 msgstr ""
 

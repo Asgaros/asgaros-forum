@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 4.9
 Requires PHP: 5.2
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,8 +88,9 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Last seen-information to profiles and members list 
-* Added: Notification mail now contains the name of the person who mentioned an user
+= 1.8.1 =
+* Added: Time when an user was last seen to profiles and members list
+* Added: Name of the person who mentioned an user to notification mail
 * Added: asgarosforum_filter_notify_mentioned_user_message filter
 * Fixed: Display issues in the administration area on small screens
 * Fixed: Display issues with some themes
