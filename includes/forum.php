@@ -895,7 +895,7 @@ class AsgarosForum {
     function showHeader() {
         echo '<div id="forum-header">';
             echo '<div id="forum-navigation-mobile">';
-                echo '<a class="dashicons-before dashicons-menu"></a>';
+                echo '<a class="dashicons-before dashicons-menu">'.__('Menu', 'asgaros-forum').'</a>';
             echo '</div>';
             echo '<div id="forum-navigation">';
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';

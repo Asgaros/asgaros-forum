@@ -458,6 +458,7 @@
 }
 #af-wrapper #forum-navigation-mobile a:before {
     line-height: 40px;
+    padding-right: 5px;
 }
 #af-wrapper #forum-navigation-mobile {
     display: none;
