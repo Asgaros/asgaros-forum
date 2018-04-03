@@ -89,7 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Changed: Minor design changes
-* Changed: Minor mobile navigation improvements
+* Changed: Minor mobile design changes
 = 1.8.1 =
 * Added: Time when an user was last seen to profiles and members list
 * Added: Name of the person who mentioned an user to notification mail
