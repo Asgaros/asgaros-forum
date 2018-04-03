@@ -16,7 +16,7 @@ echo '<div class="content-element">';
 
 if ($results) {
     foreach ($results as $topic) {
-        require('topic-element.php');
+        $this->render_topic_element($topic);
     }
 } else {
     echo '<div class="notice">'.__('No results found for:', 'asgaros-forum').' <b>'.$this->search->search_keywords_for_output.'</b></div>';

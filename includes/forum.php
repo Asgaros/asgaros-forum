@@ -529,6 +529,34 @@ class AsgarosForum {
         require('views/forum.php');
     }
 
+    function render_topic_element($topic_object, $topic_type = 'topic-normal') {
+        $lastpost_data = $this->get_lastpost_in_topic($topic_object->id);
+        $unread_status = AsgarosForumUnread::getStatusTopic($topic_object->id);
+        $topic_title = esc_html(stripslashes($topic_object->name));
+
+        echo '<div class="topic '.$topic_type.'">';
+            echo '<div class="topic-status">';
+                echo '<span class="dashicons-before dashicons-'.$topic_object->status.' '.$unread_status.'"></span>';
+            echo '</div>';
+            echo '<div class="topic-name">';
+                echo '<a href="'.$this->getLink('topic', $topic_object->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
+                echo '<small>';
+                echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic_object->author_id);
+                $topic_pagination = new AsgarosForumPagination($this);
+                $topic_pagination->renderTopicOverviewPagination($topic_object->id);
+                echo '</small>';
+            echo '</div>';
+            do_action('asgarosforum_custom_topic_column', $topic_object->id);
+            echo '<div class="topic-stats">';
+                $count_answers_i18n = number_format_i18n($topic_object->answers);
+                $count_views_i18n = number_format_i18n($topic_object->views);
+                echo sprintf(_n('%s Answer', '%s Answers', $topic_object->answers, 'asgaros-forum'), $count_answers_i18n).'<br>';
+                echo sprintf(_n('%s View', '%s Views', $topic_object->views, 'asgaros-forum'), $count_views_i18n);
+            echo '</div>';
+            echo '<div class="topic-poster">'.$this->get_lastpost($lastpost_data, 'thread').'</div>';
+        echo '</div>';
+    }
+
     function showTopic() {
         // Create a unique slug for this topic if necessary.
         $topic = $this->getTopic($this->current_topic);

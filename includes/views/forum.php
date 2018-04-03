@@ -40,7 +40,7 @@ if ($counter_total > 0) {
         // Sticky topics
         if ($sticky_topics && !$this->current_page) {
             foreach ($sticky_topics as $topic) {
-                require('topic-element.php');
+                $this->render_topic_element($topic, 'topic-sticky');
             }
         }
 
@@ -49,7 +49,7 @@ if ($counter_total > 0) {
         }
 
         foreach ($topics as $topic) {
-            require('topic-element.php');
+            $this->render_topic_element($topic);
         } ?>
     </div>
 

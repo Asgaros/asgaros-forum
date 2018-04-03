@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Changed: Minor design changes
 * Changed: Minor mobile navigation improvements
 = 1.8.1 =
 * Added: Time when an user was last seen to profiles and members list

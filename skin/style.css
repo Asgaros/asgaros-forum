@@ -71,7 +71,9 @@
 #af-wrapper .profile-link:hover,
 #af-wrapper .edit-profile-link:hover,
 #af-wrapper #forum-navigation a:hover,
-#af-wrapper #read-unread a:hover {
+#af-wrapper #read-unread a:hover,
+#af-wrapper #forum-subscription a:hover,
+#af-wrapper #topic-subscription a:hover {
     text-decoration: underline;
 }
 
@@ -234,6 +236,11 @@
     border-bottom: 1px solid #eee;
     line-height: 20px;
 }
+#af-wrapper .topic-sticky,
+#af-wrapper .topic-sticky .topic-poster {
+    background-color: #f1f8ff !important;
+    border-color: #e1e4e8 !important;
+}
 #af-wrapper .forum-status,
 #af-wrapper .forum-name,
 #af-wrapper .forum-stats,
@@ -304,7 +311,7 @@
     word-break: break-word;
 }
 #af-wrapper .sticky-bottom {
-    border-bottom: 4px solid #eee;
+    border-bottom: 1px solid #e1e4e8;
 }
 
 /* MENU */
@@ -338,18 +345,19 @@
 }
 #af-wrapper .error,
 #af-wrapper .info {
-    border: 1px solid #eee;
     margin: 15px 0;
     color: #444;
 }
 #af-wrapper .info {
     background-color: #ffb;
+    border: 1px solid #d6d25e;
 }
 #af-wrapper .info span {
     display: block;
 }
 #af-wrapper .error {
     background-color: #fbb;
+    border: 1px solid #f77;
 }
 
 /* READ/UNREAD */
