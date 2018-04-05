@@ -142,5 +142,10 @@
         $('#forum-navigation-mobile').click(function() {
             $('#forum-navigation').toggleClass('show-navigation');
         });
+
+        // Automatic submit for subscription settings.
+        $('#af-wrapper input[name=subscription_level]').on('change', function() {
+            $(this).closest('form').submit();
+        });
     });
 })(jQuery);

@@ -20,8 +20,8 @@ class AsgarosForumStatistics {
         if (self::$asgarosforum->options['show_statistics']) {
             $data = self::getData();
             echo '<div id="statistics">';
-                echo '<div id="statistics-header">';
-                    echo '<span class="dashicons-before dashicons-chart-line">'.__('Statistics', 'asgaros-forum').'</span>';
+                echo '<div class="title-element title-element-dark">';
+                    echo '<span class="dashicons-before dashicons-chart-bar">'.__('Statistics', 'asgaros-forum').'</span>';
                 echo '</div>';
                 echo '<div id="statistics-body">';
                     echo '<div id="statistics-elements">';

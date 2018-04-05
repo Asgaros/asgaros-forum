@@ -53,6 +53,7 @@ function deleteData() {
     delete_metadata('user', 0, 'asgarosforum_signature', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_topic', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_forum', '', true);
+    delete_metadata('user', 0, 'asgarosforum_subscription_global_posts', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_global_topics', '', true);
     delete_metadata('user', 0, 'asgarosforum_unread_cleared', '', true);
     delete_metadata('user', 0, 'asgarosforum_unread_exclude', '', true);

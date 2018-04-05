@@ -44,13 +44,6 @@ class AsgarosForumAdmin {
             $output .= AsgarosForumUserGroups::showUserProfileFields($user->ID);
         }
 
-        if ($asgarosforum->options['allow_subscriptions'] && $user->user_email !== get_bloginfo('admin_email')) {
-            $output .= '<tr>';
-            $output .= '<th><label for="asgarosforum_subscription_global_topics">'.__('Notify about new topics', 'asgaros-forum').'</label></th>';
-            $output .= '<td><input type="checkbox" name="asgarosforum_subscription_global_topics" id="asgarosforum_subscription_global_topics" value="1" '.checked(get_the_author_meta('asgarosforum_subscription_global_topics', $user->ID), '1', false).'></td>';
-            $output .= '</tr>';
-        }
-
         if ($asgarosforum->options['allow_signatures']) {
             $output .= '<tr>';
             $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
@@ -86,14 +79,6 @@ class AsgarosForumAdmin {
             }
 
             AsgarosForumUserGroups::updateUserProfileFields($user_id);
-        }
-
-        if ($asgarosforum->options['allow_subscriptions']) {
-            if (isset($_POST['asgarosforum_subscription_global_topics'])) {
-                update_user_meta($user_id, 'asgarosforum_subscription_global_topics', wp_kses_post($_POST['asgarosforum_subscription_global_topics']));
-            } else {
-                delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
-            }
         }
 
         if ($asgarosforum->options['allow_signatures']) {

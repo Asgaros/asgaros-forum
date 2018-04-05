@@ -88,8 +88,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to subscribe to all topics and posts
+* Changed: Moved user subscription settings to the subscriptions overview
 * Changed: Minor design changes
-* Changed: Minor mobile design changes
+* Performance improvements and code optimizations
 = 1.8.1 =
 * Added: Time when an user was last seen to profiles and members list
 * Added: Name of the person who mentioned an user to notification mail

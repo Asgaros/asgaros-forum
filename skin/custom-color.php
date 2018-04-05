@@ -19,7 +19,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper .post-author-marker,
 #af-wrapper #forum-header,
 #af-wrapper #profile-header .background-avatar,
-#af-wrapper #read-unread .unread {
+#af-wrapper #read-unread .unread,
+#af-wrapper input[type="radio"]:checked:before {
     background-color: <?php echo $color; ?> !important;
 }
 #af-wrapper .title-element,
@@ -28,7 +29,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper input[type="submit"],
 #af-wrapper #forum-search,
 #af-wrapper #forum-header,
-#af-wrapper #forum-navigation a {
+#af-wrapper #forum-navigation a,
+#af-wrapper input[type="radio"]:focus {
 	border-color: <?php echo $color; ?> !important;
 }
 <?php
@@ -86,8 +88,7 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .signature,
 #af-wrapper .edit-profile-link,
 #af-wrapper .uploaded-file img,
-#af-wrapper .error,
-#af-wrapper .info {
+#af-wrapper .subscription-option {
     border-color: <?php echo $border_color; ?> !important;
 }
 <?php

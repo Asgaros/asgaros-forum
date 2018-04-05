@@ -8,6 +8,8 @@ class AsgarosForumNotifications {
 
     public function __construct($object) {
         $this->asgarosforum = $object;
+
+        add_action('asgarosforum_prepare_subscriptions', array($this, 'set_subscription_level'));
     }
 
     // Generates an (un)subscription link based on subscription status for topics.
@@ -18,13 +20,19 @@ class AsgarosForumNotifications {
 
             $link = '';
             $text = '';
+            $subscription_level = $this->get_subscription_level();
 
-            if ($this->is_subscribed('topic', $element_id)) {
-                $link = $this->asgarosforum->getLink('topic', $element_id, array('unsubscribe_topic' => 1));
-                $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
+            if ($subscription_level == 3) {
+                $link = $this->asgarosforum->getLink('subscriptions');
+                $text = __('You are subscribed to <b>all</b> topics.', 'asgaros-forum');
             } else {
-                $link = $this->asgarosforum->getLink('topic', $element_id, array('subscribe_topic' => 1));
-                $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
+                if ($this->is_subscribed('topic', $element_id)) {
+                    $link = $this->asgarosforum->getLink('topic', $element_id, array('unsubscribe_topic' => 1));
+                    $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
+                } else {
+                    $link = $this->asgarosforum->getLink('topic', $element_id, array('subscribe_topic' => 1));
+                    $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
+                }
             }
 
             echo '<a href="'.$link.'">'.$text.'</a>';
@@ -41,13 +49,19 @@ class AsgarosForumNotifications {
 
             $link = '';
             $text = '';
+            $subscription_level = $this->get_subscription_level();
 
-            if ($this->is_subscribed('forum', $element_id)) {
-                $link = $this->asgarosforum->getLink('forum', $element_id, array('unsubscribe_forum' => 1));
-                $text = __('<b>Unsubscribe</b> from this forum.', 'asgaros-forum');
+            if ($subscription_level > 1) {
+                $link = $this->asgarosforum->getLink('subscriptions');
+                $text = __('You are subscribed to <b>all</b> forums.', 'asgaros-forum');
             } else {
-                $link = $this->asgarosforum->getLink('forum', $element_id, array('subscribe_forum' => 1));
-                $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
+                if ($this->is_subscribed('forum', $element_id)) {
+                    $link = $this->asgarosforum->getLink('forum', $element_id, array('unsubscribe_forum' => 1));
+                    $text = __('<b>Unsubscribe</b> from this forum.', 'asgaros-forum');
+                } else {
+                    $link = $this->asgarosforum->getLink('forum', $element_id, array('subscribe_forum' => 1));
+                    $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
+                }
             }
 
             echo '<a href="'.$link.'">'.$text.'</a>';
@@ -150,9 +164,16 @@ class AsgarosForumNotifications {
                 'meta_query'    => array(
                     'relation'      => 'AND',
                     array(
-                        'key'       => 'asgarosforum_subscription_topic',
-                        'value'     => $this->asgarosforum->current_topic,
-                        'compare'   => '='
+                        'relation'  => 'OR',
+                        array(
+                            'key'       => 'asgarosforum_subscription_topic',
+                            'value'     => $this->asgarosforum->current_topic,
+                            'compare'   => '='
+                        ),
+                        array(
+                            'key'       => 'asgarosforum_subscription_global_posts',
+                            'compare'   => 'EXISTS'
+                        )
                     ),
                     array(
                         'key'       => 'asgarosforum_banned',
@@ -194,50 +215,26 @@ class AsgarosForumNotifications {
             $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $topic_name, $topic_text, $topic_link, $author_name);
 
             if ($this->asgarosforum->options['allow_subscriptions']) {
-                // Get global subscribers.
-                $global_subscribers_query = array(
-                    'fields'        => array('user_email'),
-                    'exclude'       => array(get_current_user_id()),
-                    'meta_query'    => array(
-                        'relation'  => 'AND',
-                        array(
-                            'key'       => 'asgarosforum_subscription_global_topics',
-                            'compare'   => 'EXISTS'
-                        ),
-                        array(
-                            'key'       => 'asgarosforum_banned',
-                            'compare'   => 'NOT EXISTS'
-                        )
-                    )
-                );
-
-                // Only get moderators when this is a restricted category.
-                if ($this->asgarosforum->category_access_level == 'moderator') {
-                    $global_subscribers_query['meta_query'][] = array(
-                        'key'       => 'asgarosforum_moderator',
-                        'compare'   => 'EXISTS'
-                    );
-                }
-
-                $global_subscribers_query = apply_filters('asgarosforum_filter_subscribers_query_new_topic', $global_subscribers_query);
-
-                $global_subscribers = get_users($global_subscribers_query);
-
-                // TODO: array can be optimized so that only the value gets returned. Look in query generation.
-                foreach($global_subscribers as $subscriber) {
-                    $this->add_to_mailing_list($subscriber->user_email);
-                }
-
-                // Get forum subscribers.
                 $forum_subscribers_query = array(
                     'fields'        => array('user_email'),
                     'exclude'       => array(get_current_user_id()),
                     'meta_query'    => array(
                         'relation'  => 'AND',
                         array(
-                            'key'       => 'asgarosforum_subscription_forum',
-                            'value'     => $this->asgarosforum->current_forum,
-                            'compare'   => '='
+                            'relation'  => 'OR',
+                            array(
+                                'key'       => 'asgarosforum_subscription_forum',
+                                'value'     => $this->asgarosforum->current_forum,
+                                'compare'   => '='
+                            ),
+                            array(
+                                'key'       => 'asgarosforum_subscription_global_posts',
+                                'compare'   => 'EXISTS'
+                            ),
+                            array(
+                                'key'       => 'asgarosforum_subscription_global_topics',
+                                'compare'   => 'EXISTS'
+                            )
                         ),
                         array(
                             'key'       => 'asgarosforum_banned',
@@ -258,6 +255,7 @@ class AsgarosForumNotifications {
 
                 $forum_subscribers = get_users($forum_subscribers_query);
 
+                // TODO: array can be optimized so that only the value gets returned. Look in query generation.
                 foreach($forum_subscribers as $subscriber) {
                     $this->add_to_mailing_list($subscriber->user_email);
                 }
@@ -334,41 +332,109 @@ class AsgarosForumNotifications {
 
     // Shows all subscriptions of a user (topics/forums).
     public function show_subscription_overview() {
-        $userID = get_current_user_id();
+        $user_id = get_current_user_id();
 
-        $subscribedTopics = get_user_meta($userID, 'asgarosforum_subscription_topic');
-        $subscribedForums = get_user_meta($userID, 'asgarosforum_subscription_forum');
+        // When site-owner notifications are enabled and we are the site owner, we need to print a notice.
+        if ($this->asgarosforum->options['admin_subscriptions']) {
+            $current_user = wp_get_current_user();
 
-        $title = __('Topics', 'asgaros-forum');
+            if ($current_user->user_email == get_bloginfo('admin_email')) {
+                echo '<div class="info">'.__('Based on your settings you will automatically get notified about new topics as a site-owner.', 'asgaros-forum').'</div>';
+            }
+        }
+
+        // Get the subscription level.
+        $subscription_level = $this->get_subscription_level();
+
+        // Render subscription settings.
+        echo '<div class="title-element title-element-dark">';
+            echo '<span class="dashicons-before dashicons-email-alt">'.__('Subscription Settings', 'asgaros-forum').'</span>';
+        echo '</div>';
+        echo '<div class="content-element">';
+            echo '<form method="post" action="'.$this->asgarosforum->getLink('subscriptions').'">';
+                echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum').'</label>';
+                echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum').'</label>';
+                echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum').'</label>';
+            echo '</form>';
+        echo '</div>';
+
+        // Topic subscriptions list always available when we are not subscribed to everything.
+        $title = __('Topic Subscriptions', 'asgaros-forum');
+        $subscribedTopics = get_user_meta($user_id, 'asgarosforum_subscription_topic');
+        $all = ($subscription_level == 3) ? true : false;
 
         if (!empty($subscribedTopics)) {
             $subscribedTopics = $this->asgarosforum->getSpecificTopics($subscribedTopics);
-            $subscribedTopics = $this->filter_list($subscribedTopics, $userID);
+            $subscribedTopics = $this->filter_list($subscribedTopics, $user_id);
         }
 
-        $this->render_subscriptions_list($title, $subscribedTopics, 'topic');
+        $this->render_subscriptions_list($title, $subscribedTopics, 'topic', $all);
 
-        $title = __('Forums', 'asgaros-forum');
+        $title = __('Forum Subscriptions', 'asgaros-forum');
+        $subscribedForums = get_user_meta($user_id, 'asgarosforum_subscription_forum');
+        $all = ($subscription_level > 1) ? true : false;
 
         if (!empty($subscribedForums)) {
             $subscribedForums = $this->asgarosforum->getSpecificForums($subscribedForums);
-            $subscribedForums = $this->filter_list($subscribedForums, $userID);
+            $subscribedForums = $this->filter_list($subscribedForums, $user_id);
         }
 
-        $this->render_subscriptions_list($title, $subscribedForums, 'forum');
+        $this->render_subscriptions_list($title, $subscribedForums, 'forum', $all);
+    }
+
+    public function set_subscription_level() {
+        if (isset($_POST['subscription_level'])) {
+            $user_id = get_current_user_id();
+
+            if ($_POST['subscription_level'] == 1) {
+                delete_user_meta($user_id, 'asgarosforum_subscription_global_posts');
+                delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
+            } else if ($_POST['subscription_level'] == 2) {
+                delete_user_meta($user_id, 'asgarosforum_subscription_global_posts');
+                update_user_meta($user_id, 'asgarosforum_subscription_global_topics', 1);
+            } else if ($_POST['subscription_level'] == 3) {
+                update_user_meta($user_id, 'asgarosforum_subscription_global_posts', 1);
+                delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
+            }
+        }
+    }
+
+    public function get_subscription_level() {
+        $user_id = get_current_user_id();
+
+        $subscription_level = 1;
+        $subscription_level_check = get_user_meta($user_id, 'asgarosforum_subscription_global_topics', true);
+
+        if (!empty($subscription_level_check)) {
+            $subscription_level = 2;
+        } else {
+            $subscription_level_check = get_user_meta($user_id, 'asgarosforum_subscription_global_posts', true);
+
+            if (!empty($subscription_level_check)) {
+                $subscription_level = 3;
+            }
+        }
+
+        return $subscription_level;
     }
 
     // Renders a list of a certain subscription type for the current user.
-    public function render_subscriptions_list($title, $data, $type) {
+    public function render_subscriptions_list($title, $data, $type, $all = false) {
         echo '<div class="title-element">'.$title.'</div>';
         echo '<div class="content-element">';
 
-        if (empty($data)) {
+        if ($all) {
+            if ($type == 'forum') {
+                echo '<div class="notice">'. __('You are subscribed to <b>all</b> forums.', 'asgaros-forum').'</div>';
+            } else if ($type == 'topic') {
+                echo '<div class="notice">'. __('You are subscribed to <b>all</b> topics.', 'asgaros-forum').'</div>';
+            }
+        } else if (empty($data)) {
             echo '<div class="notice">'.__('No subscriptions yet!', 'asgaros-forum').'</div>';
         } else {
             foreach ($data as $item) {
                 echo '<div class="subscription">';
-                echo '<a href="'.$this->asgarosforum->getLink($type, $item->id).'" title="'.esc_html(stripslashes($item->name)).'">'.esc_html(stripslashes($item->name)).'</a>';
+                    echo '<a href="'.$this->asgarosforum->getLink($type, $item->id).'" title="'.esc_html(stripslashes($item->name)).'">'.esc_html(stripslashes($item->name)).'</a>';
                 echo '</div>';
             }
         }
@@ -376,15 +442,15 @@ class AsgarosForumNotifications {
         echo '</div>';
     }
 
-    public function filter_list($data, $userID) {
+    public function filter_list($data, $user_id) {
         // Filter the list based on category.
         foreach ($data as $key => $item) {
-            $canAccess = AsgarosForumUserGroups::canUserAccessForumCategory($userID, $item->category_id);
+            $canAccess = AsgarosForumUserGroups::canUserAccessForumCategory($user_id, $item->category_id);
 
             if (!$canAccess) {
                 unset($data[$key]);
             } else {
-                $canPermAccess = AsgarosForumPermissions::canUserAccessForumCategory($userID, $item->category_id);
+                $canPermAccess = AsgarosForumPermissions::canUserAccessForumCategory($user_id, $item->category_id);
 
                 if (!$canPermAccess) {
                     unset($data[$key]);
