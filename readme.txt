@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to subscribe to all topics and posts
 * Changed: Moved user subscription settings to the subscriptions overview
 * Changed: Minor design changes
+* Fixed: Display issues on small screens
 * Performance improvements and code optimizations
 = 1.8.1 =
 * Added: Time when an user was last seen to profiles and members list
