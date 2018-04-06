@@ -10,7 +10,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper #topic-subscription,
 #af-wrapper #forum-subscription,
 #af-wrapper .forum-post-menu a,
-#af-wrapper #forum-profile .display-name {
+#af-wrapper #forum-profile .display-name,
+#af-wrapper input[type="checkbox"]:checked:before {
 	color: <?php echo $color; ?> !important;
 }
 #af-wrapper input[type="submit"],
@@ -30,7 +31,8 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper #forum-search,
 #af-wrapper #forum-header,
 #af-wrapper #forum-navigation a,
-#af-wrapper input[type="radio"]:focus {
+#af-wrapper input[type="radio"]:focus,
+#af-wrapper input[type="checkbox"]:focus {
 	border-color: <?php echo $color; ?> !important;
 }
 <?php

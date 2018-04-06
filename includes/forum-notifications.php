@@ -76,8 +76,7 @@ class AsgarosForumNotifications {
         if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
             echo '<div class="editor-row">';
             echo '<span class="row-title">'.__('Subscription:', 'asgaros-forum').'</span>';
-            echo '<input type="checkbox" name="subscribe_checkbox" id="subscribe_checkbox" '.checked($this->is_subscribed('topic', $this->asgarosforum->current_topic), true, false).'>';
-            echo '<label for="subscribe_checkbox">'.__('<b>Subscribe</b> to this topic.', 'asgaros-forum').'</label>';
+            echo '<label><input type="checkbox" name="subscribe_checkbox" '.checked($this->is_subscribed('topic', $this->asgarosforum->current_topic), true, false).'>'.__('<b>Subscribe</b> to this topic.', 'asgaros-forum').'</label>';
             echo '</div>';
         }
     }
