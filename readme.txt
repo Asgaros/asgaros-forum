@@ -89,8 +89,10 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to subscribe to all topics and posts
+* Added: Option to hide category name in breadcrumbs
 * Changed: Moved user subscription settings to the subscriptions overview
 * Changed: Minor design changes
+* Changed: Minor mobile theme improvements
 * Fixed: Display issues on small screens
 * Performance improvements and code optimizations
 = 1.8.1 =

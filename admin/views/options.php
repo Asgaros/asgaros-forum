@@ -133,10 +133,6 @@ if (!defined('ABSPATH')) exit;
                                 <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
-                                <input type="checkbox" name="enable_breadcrumbs" id="enable_breadcrumbs" <?php checked(!empty($asgarosforum->options['enable_breadcrumbs'])); ?>>
-                                <label for="enable_breadcrumbs"><?php _e('Enable breadcrumbs', 'asgaros-forum'); ?></label>
-                            </p>
-                            <p>
                                 <input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($asgarosforum->options['show_who_is_online'])); ?>>
                                 <label for="show_who_is_online"><?php _e('Show who is online', 'asgaros-forum'); ?></label>
                             </p>
@@ -151,6 +147,23 @@ if (!defined('ABSPATH')) exit;
                             <p>
                                 <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
                                 <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="postbox">
+                        <h2 class="hndle dashicons-before dashicons-location-alt"><?php _e('Breadcrumbs', 'asgaros-forum'); ?></h2>
+                        <div class="inside">
+                            <?php
+                            $breadcrumbs_option = checked(!empty($asgarosforum->options['enable_breadcrumbs']), true, false);
+                            ?>
+                            <p>
+                                <input type="checkbox" name="enable_breadcrumbs" id="enable_breadcrumbs" class="show_hide_initiator" data-hide-class="breadcrumbs-option" <?php checked(!empty($asgarosforum->options['enable_breadcrumbs'])); ?>>
+                                <label for="enable_breadcrumbs"><?php _e('Enable breadcrumbs', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p class="breadcrumbs-option" <?php if (!$breadcrumbs_option) { echo 'style="display: none;"'; } ?>>
+                                <input type="checkbox" name="breadcrumbs_show_category" id="breadcrumbs_show_category" <?php checked(!empty($asgarosforum->options['breadcrumbs_show_category'])); ?>>
+                                <label for="breadcrumbs_show_category"><?php _e('Show category name in breadcrumbs', 'asgaros-forum'); ?></label>
                             </p>
                         </div>
                     </div>

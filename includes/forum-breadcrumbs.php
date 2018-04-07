@@ -30,11 +30,13 @@ class AsgarosForumBreadCrumbs {
             // Define category prefix.
             $category_prefix = '';
 
-            if ($this->breadcrumbs_level >= 4 && $this->asgarosforum->current_category) {
-                $category_name = $this->asgarosforum->get_category_name($this->asgarosforum->current_category);
+            if ($this->asgarosforum->options['breadcrumbs_show_category']) {
+                if ($this->breadcrumbs_level >= 4 && $this->asgarosforum->current_category) {
+                    $category_name = $this->asgarosforum->get_category_name($this->asgarosforum->current_category);
 
-                if ($category_name) {
-                    $category_prefix = $category_name.': ';
+                    if ($category_name) {
+                        $category_prefix = $category_name.': ';
+                    }
                 }
             }
 

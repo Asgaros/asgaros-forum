@@ -61,6 +61,7 @@ class AsgarosForum {
         'show_who_is_online'        => true,
         'show_statistics'           => true,
         'enable_breadcrumbs'        => true,
+        'breadcrumbs_show_category' => true,
         'highlight_admin'           => true,
         'highlight_authors'         => true,
         'show_author_posts_counter' => true,
