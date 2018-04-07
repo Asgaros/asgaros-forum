@@ -573,6 +573,14 @@
     padding: 4px 16px;
     box-sizing: border-box;
 }
+#af-wrapper .subscription .unsubscribe-link {
+    float: right;
+    color: #a00;
+}
+#af-wrapper .subscription .unsubscribe-link:hover {
+    color: red;
+    text-decoration: none;
+}
 #af-wrapper .subscription-option {
     width: 33%;
     line-height: 60px;

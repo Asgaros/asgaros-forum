@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to subscribe to all topics and posts
+* Added: Possibility to unsubscribe from topics & forums inside the subscriptions overview
 * Added: Option to hide category name in breadcrumbs
 * Changed: Moved user subscription settings to the subscriptions overview
 * Changed: Minor design changes
