@@ -60,7 +60,9 @@ if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/'
 #af-wrapper #statistics-online-users,
 #af-wrapper #forum-profile,
 #af-wrapper .post-element,
-#af-wrapper .post-message {
+#af-wrapper .post-message,
+#af-wrapper .topic-sticky,
+#af-wrapper .topic-sticky .topic-poster {
     background-color: <?php echo $background_color; ?> !important;
 }
 <?php
@@ -92,7 +94,9 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .forum-subforums,
 #af-wrapper .edit-profile-link,
 #af-wrapper .uploaded-file img,
-#af-wrapper .subscription-option {
+#af-wrapper .subscription-option,
+#af-wrapper .topic-sticky,
+#af-wrapper .topic-sticky .topic-poster {
     border-color: <?php echo $border_color; ?> !important;
 }
 <?php
