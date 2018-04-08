@@ -363,9 +363,11 @@ class AsgarosForumNotifications {
         echo '</div>';
         echo '<div class="content-element">';
             echo '<form method="post" action="'.$this->asgarosforum->getLink('subscriptions').'">';
-                echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum').'</label>';
-                echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum').'</label>';
-                echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum').'</label>';
+                echo '<div id="subscription-settings">';
+                    echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum').'</label>';
+                    echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum').'</label>';
+                    echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum').'</label>';
+                echo '</div>';
             echo '</form>';
         echo '</div>';
 

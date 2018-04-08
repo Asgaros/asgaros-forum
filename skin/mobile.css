@@ -14,12 +14,6 @@
         height: 40px;
         width: 40px;
     }
-    #af-wrapper #forum-breadcrumbs,
-    #af-wrapper #forum-search {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
     #af-wrapper .pages,
     #af-wrapper .forum-menu {
         margin-bottom: 10px;
@@ -31,33 +25,6 @@
     #af-wrapper .pages strong {
         font-size: 130% !important;
         padding: 3px 5px;
-    }
-    #af-wrapper #statistics .statistics-element {
-        border: none;
-        text-align: center;
-    }
-    #af-wrapper #statistics .element-number,
-    #af-wrapper #statistics .element-name {
-        display: inline-block;
-        font-size: 18px;
-        line-height: 32px;
-    }
-    #af-wrapper #forum-navigation-mobile {
-        display: block;
-    }
-    #af-wrapper #forum-navigation {
-        width: 100%;
-        display: none;
-    }
-    #af-wrapper #forum-navigation a {
-        display: block;
-        border: none;
-    }
-    #af-wrapper .show-navigation {
-        display: block !important;
-    }
-    #af-wrapper #forum-search {
-        text-align: left;
     }
 }
 
