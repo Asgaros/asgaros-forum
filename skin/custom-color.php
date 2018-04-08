@@ -58,7 +58,9 @@ if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/'
 #af-wrapper .content-element .odd,
 #af-wrapper #statistics,
 #af-wrapper #statistics-online-users,
-#af-wrapper #forum-profile {
+#af-wrapper #forum-profile,
+#af-wrapper .post-element,
+#af-wrapper .post-message {
     background-color: <?php echo $background_color; ?> !important;
 }
 <?php
@@ -84,10 +86,10 @@ if (!empty($_GET['border-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#
 #af-wrapper .editor-row,
 #af-wrapper .editor-row-subject,
 #af-wrapper .sticky-bottom,
-#af-wrapper .post-author,
-#af-wrapper .post-element,
-#af-wrapper .forum-subforums,
 #af-wrapper .signature,
+#af-wrapper .post-element,
+#af-wrapper .post-message,
+#af-wrapper .forum-subforums,
 #af-wrapper .edit-profile-link,
 #af-wrapper .uploaded-file img,
 #af-wrapper .subscription-option {

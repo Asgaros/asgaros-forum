@@ -1,36 +1,21 @@
 @media only screen and (max-width : 768px) {
     #af-wrapper .forum div,
-    #af-wrapper .topic div,
-    #af-wrapper .post-author {
+    #af-wrapper .topic div {
         border-right: none;
     }
     #af-wrapper .forum-stats,
     #af-wrapper .topic-stats,
     #af-wrapper .member-last-seen,
-    #af-wrapper .last-post-headline,
-    #af-wrapper .post-author small:first-child,
-    #af-wrapper .post-author br {
+    #af-wrapper .last-post-headline {
         display: none;
-    }
-    #af-wrapper .forum-post-header div {
-        display: block;
-        width: 100%;
-        text-align: center;
     }
     #af-wrapper img.avatar {
         float: left;
         height: 40px;
         width: 40px;
     }
-    #af-wrapper .post-author strong,
-    #af-wrapper .post-author small {
-        display: block;
-        margin: 2px;
-    }
     #af-wrapper #forum-breadcrumbs,
-    #af-wrapper #forum-search,
-    #af-wrapper .post-author,
-    #af-wrapper .post-message {
+    #af-wrapper #forum-search {
         display: block;
         width: 100%;
         box-sizing: border-box;
@@ -46,12 +31,6 @@
     #af-wrapper .pages strong {
         font-size: 130% !important;
         padding: 3px 5px;
-    }
-    #af-wrapper .post-author {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    }
-    #af-wrapper .forum-post-header {
-        height: initial;
     }
     #af-wrapper #statistics .statistics-element {
         border: none;

@@ -46,7 +46,8 @@
 #af-wrapper .main-title {
     font-size: 20px;
     border: none;
-    margin: 15px 0;
+    margin: 0;
+    padding: 16px 4px;
     font-weight: normal;
     color: #444;
 }
@@ -514,8 +515,8 @@
     display: block;
     box-sizing: border-box;
     padding: 0px 16px;
-    height: 28px;
-    line-height: 27px;
+    height: 30px;
+    line-height: 29px;
     color: #fff;
     background-color: #2d89cc;
     border-bottom: 1px solid #00689a;
@@ -725,11 +726,13 @@
 
 /* POST */
 #af-wrapper .forum-post-header {
+    display: block;
+    width: 100%;
     border-bottom: 1px solid #eee;
-    box-sizing: content-box;
-    padding-bottom: 3px;
+    box-sizing: border-box;
     margin-bottom: 8px;
     font-size: 12px;
+    line-height: 30px;
 }
 #af-wrapper .forum-post-date {
     float: left;
@@ -743,7 +746,9 @@
 }
 #af-wrapper .forum-post-menu a {
     color: #2d89cc;
-    padding: 4px 10px;
+    padding: 0px 10px;
+    display: inline-block;
+    line-height: 30px;
 }
 #af-wrapper .forum-post-menu a:hover {
     color: #005C92;
@@ -753,7 +758,8 @@
     font-size: 16px;
     height: 16px;
     width: 16px;
-    padding: 1px 2px 0 0;
+    line-height: 30px;
+    padding: 0px 3px;
 }
 #af-wrapper .forum-post-menu a.dashicons-trash {
     color: #a00;
@@ -765,10 +771,13 @@
     display: table;
     width: 100%;
     margin: 0; /* comp */
+    margin-bottom: 8px;
     padding: 0; /* comp */
     table-layout: fixed; /* IE */
-    border-bottom: 5px solid #eee;
+    border: 1px solid #eee;
+    border-bottom-width: 2px;
     box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.02);
 }
 #af-wrapper .post-element:before,
 #af-wrapper .post-element:after {
@@ -778,30 +787,43 @@
     display: table-cell;
     text-align: center;
     vertical-align: top;
-    border-right: 1px solid #eee;
-    width: 125px;
-    padding: 7px;
-    background-color: rgba(0, 0, 0, 0.02);
+    width: 150px;
+    padding: 15px;
     word-wrap: break-word;
     position: initial; /* comp */
+    box-sizing: border-box;
+}
+#af-wrapper .post-author strong,
+#af-wrapper .post-author small,
+#af-wrapper .post-author span {
+    display: block;
+    line-height: 20px;
 }
 #af-wrapper .post-author-marker {
     background-color: #2d89cc;
     border-bottom: 1px solid #00689a;
-    margin-left: -7px;
-    margin-bottom: 7px;
-    padding: 2px 15px;
+    margin: -15px -15px 7px -15px;
+    padding: 0px 15px;
     color: #fff;
-    margin-right: -7px;
     display: block;
+    line-height: 30px !important;
 }
-#af-wrapper .post-message {
+#af-wrapper .post-wrapper {
     display: table-cell;
     width: auto;
     vertical-align: top;
-    padding: 6px 15px 85px;
+    padding: 0;
     word-break: break-word;
+    box-sizing: border-box;
+}
+#af-wrapper .post-message {
+    background-color: #fff;
+    padding: 0px 20px 40px;
+    border: none;
+    border-left: 1px solid #eee;
+    min-height: 200px;
     position: relative;
+    box-sizing: border-box;
 }
 #af-wrapper .post-message p {
     margin: 0 0 20px;
@@ -822,17 +844,12 @@
     font-size: 11px;
     color: #999;
     text-align: right;
+    padding: 10px 20px;
     position: absolute;
-    padding: 6px 15px;
     bottom: 0;
     right: 0;
     width: 100%;
     box-sizing: border-box;
-    line-height: 20px;
-}
-#af-wrapper .post-footer-meta {
-    display: block;
-    width: 100%;
     line-height: 20px;
 }
 #af-wrapper .post-footer a {
@@ -841,14 +858,46 @@
 #af-wrapper .highlight-post {
     border: 3px solid red;
 }
+@media screen and (max-width: 782px) {
+    #af-wrapper .post-element,
+    #af-wrapper .post-author,
+    #af-wrapper .post-wrapper,
+    #af-wrapper .post-message,
+    #af-wrapper .post-footer,
+    #af-wrapper .post-meta,
+    #af-wrapper .post-reactions,
+    #af-wrapper .post-signature {
+        display: block;
+        width: 100%;
+    }
+    #af-wrapper .post-message {
+        border: none;
+        border-top: 1px solid #eee;
+    }
+    #af-wrapper .forum-post-header div {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    #af-wrapper .post-element img.avatar {
+        float: left;
+        height: 40px;
+        width: 40px;
+    }
+}
 
 /* SIGNATURES */
 #af-wrapper .signature {
     display: block;
+    box-sizing: border-box;
+    font-style: italic;
+    font-size: 11px;
+    color: #888;
+    text-align: right;
+    padding: 6px 20px;
+    width: 100%;
+    line-height: 20px;
     border-top: 2px solid #eee;
-    margin-top: 5px;
-    padding-top: 5px;
-    text-align: left;
 }
 
 /* QUOTES */

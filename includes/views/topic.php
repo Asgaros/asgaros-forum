@@ -14,15 +14,13 @@ if (!defined('ABSPATH')) exit;
 </div>
 
 <div class="title-element"><?php echo $meClosed; ?></div>
-<div class="content-element">
-    <?php
-    $counter = 0;
-    $avatars_available = get_option('show_avatars');
-    $topicStarter = $this->get_topic_starter($this->current_topic);
-    foreach ($posts as $post) {
-        require('post-element.php');
-    } ?>
-</div>
+<?php
+$counter = 0;
+$avatars_available = get_option('show_avatars');
+$topicStarter = $this->get_topic_starter($this->current_topic);
+foreach ($posts as $post) {
+    require('post-element.php');
+} ?>
 <?php $this->editor->showEditor('addpost', true); ?>
 <div class="pages-and-menu">
     <?php

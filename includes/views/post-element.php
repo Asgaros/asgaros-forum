@@ -21,12 +21,11 @@ $user_data = get_userdata($post->author_id);
         }
 
         if ($avatars_available) {
-            $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 80);
+            $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 100);
             echo get_avatar($post->author_id, $avatar_size);
-            echo '<br />';
         }
         ?>
-        <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong><br>
+        <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong>
         <?php
 
         // Condition for content which is only available for existing users.
@@ -41,86 +40,90 @@ $user_data = get_userdata($post->author_id);
         }
 
         if (AsgarosForumPermissions::isBanned($post->author_id)) {
-            echo '<br><small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
+            echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
         }
 
         do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
         ?>
         <div class="clear"></div>
     </div>
-    <div class="post-message">
-        <?php
+    <div class="post-wrapper">
+        <div class="post-message">
+            <?php
 
-        echo '<div class="forum-post-header">';
-        echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
+            echo '<div class="forum-post-header">';
+            echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
 
-        if ($this->current_view != 'post') {
-            echo $this->showPostMenu($post->id, $post->author_id, $counter);
-        }
+            if ($this->current_view != 'post') {
+                echo $this->showPostMenu($post->id, $post->author_id, $counter);
+            }
 
-        echo '<div class="clear"></div>';
-        echo '</div>';
+            echo '<div class="clear"></div>';
+            echo '</div>';
 
-        echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br /></div>';
-        global $wp_embed;
-        $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
+            echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br /></div>';
+            global $wp_embed;
+            $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
 
-        if ($this->options['allow_shortcodes']) {
-            add_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
-            $post_content = strip_shortcodes($post_content);
-            remove_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
+            if ($this->options['allow_shortcodes']) {
+                add_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
+                $post_content = strip_shortcodes($post_content);
+                remove_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
 
-            // Run shortcodes.
-            $post_content = do_shortcode($post_content);
-        }
+                // Run shortcodes.
+                $post_content = do_shortcode($post_content);
+            }
 
-        $post_content = $this->mentioning->nice_name_to_link($post_content);
+            $post_content = $this->mentioning->nice_name_to_link($post_content);
 
-        // This function has to be called at last to ensure that we dont break links to mentioned users.
-        $post_content = make_clickable($post_content);
+            // This function has to be called at last to ensure that we dont break links to mentioned users.
+            $post_content = make_clickable($post_content);
 
-        $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
+            $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
 
-        echo $post_content;
-        $this->uploads->show_uploaded_files($post);
-        echo '<div class="post-footer">';
+            echo $post_content;
+            $this->uploads->show_uploaded_files($post);
 
-            echo '<div class="post-footer-meta">';
+            do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
+
+            // Show post footer.
+            echo '<div class="post-footer">';
                 $this->reactions->render_reactions_area($post->id, $this->current_topic);
 
-                if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
-                    // Show who edited a post (when the information exist in the database).
-                    if ($post->author_edit) {
-                        echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
-                    } else {
-                        echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                echo '<div class="post-meta">';
+                    if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
+                        // Show who edited a post (when the information exist in the database).
+                        if ($post->author_edit) {
+                            echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                        } else {
+                            echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                        }
+
+                        if ($this->current_view != 'post') {
+                            echo '&nbsp;&middot;&nbsp;';
+                        }
                     }
 
                     if ($this->current_view != 'post') {
-                        echo '&nbsp;&middot;&nbsp;';
+                        // Show report button.
+                        $this->reports->render_report_button($post->id, $this->current_topic);
+
+                        echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
                     }
-                }
-
-                if ($this->current_view != 'post') {
-                    // Show report button.
-                    $this->reports->render_report_button($post->id, $this->current_topic);
-
-                    echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
-                }
+                echo '</div>';
             echo '</div>';
+            ?>
+        </div>
 
-            // Show signature.
-            if ($this->current_view != 'post' && $this->options['allow_signatures']) {
-                $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
+        <?php
+        // Show signature.
+        if ($this->current_view != 'post' && $this->options['allow_signatures']) {
+            $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
 
-                if (!empty($signature)) {
-                    echo '<div class="signature">'.$signature.'</div>';
-                }
+            if (!empty($signature)) {
+                echo '<div class="signature">'.$signature.'</div>';
             }
-
-        echo '</div>';
-
-        do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
+        }
         ?>
     </div>
 </div>

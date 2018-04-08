@@ -516,9 +516,7 @@ class AsgarosForum {
         $post = $this->content->get_post($this->current_post);
 
         echo '<div class="title-element"></div>';
-        echo '<div class="content-element">';
         require('views/post-element.php');
-        echo '</div>';
     }
 
     function showforum() {
