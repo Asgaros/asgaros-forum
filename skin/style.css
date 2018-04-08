@@ -303,7 +303,11 @@
     font-style: italic;
     width: 210px;
     text-align: center;
-    color: rgba(255, 255, 255, 0.9);
+}
+@media screen and (max-width: 782px) {
+    #af-wrapper .last-post-headline {
+        display: none;
+    }
 }
 #af-wrapper .forum [class^="dashicons-"],
 #af-wrapper .forum [class*=" dashicons-"],
@@ -396,6 +400,18 @@
 }
 #af-wrapper .sticky-bottom {
     border-bottom: 1px solid #e1e4e8;
+}
+@media screen and (max-width: 782px) {
+    #af-wrapper .forum-stats,
+    #af-wrapper .topic-stats {
+        display: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    #af-wrapper .forum-poster,
+    #af-wrapper .topic-poster {
+        display: none;
+    }
 }
 
 /* MENU */
@@ -503,6 +519,16 @@
 #af-wrapper .topic .pages a:hover {
     background-color: #e1e1e1;
     text-decoration: none !important;
+}
+@media screen and (max-width: 782px) {
+    #af-wrapper .pages {
+        margin-bottom: 10px;
+    }
+    #af-wrapper .pages a,
+    #af-wrapper .pages strong {
+        font-size: 130% !important;
+        padding: 3px 5px;
+    }
 }
 
 /* TITLE */
@@ -1110,6 +1136,19 @@
     box-sizing: border-box;
     padding: 15px 0;
 }
+@media screen and (max-width: 782px) {
+    #af-wrapper #profile-header,
+    #af-wrapper #profile-header .background-avatar {
+        height: 100px;
+    }
+    #af-wrapper #profile-header .avatar {
+        height: 60px;
+        width: 60px;
+    }
+    #af-wrapper #profile-header .user-info {
+        left: 100px;
+    }
+}
 #af-wrapper #profile-header .profile-display-name {
     font-size: 24px;
     color: #2d89cc;
@@ -1177,6 +1216,11 @@
     font-size: smaller;
     padding-left: 10px;
     border-left: 1px solid #eee;
+}
+@media screen and (max-width: 782px) {
+    #af-wrapper .member-last-seen {
+        display: none;
+    }
 }
 
 /* REPORT */

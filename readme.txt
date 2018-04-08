@@ -74,7 +74,7 @@ Please only use this site and dont send me your own .po/.mo files because it is 
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = How can I add my own theme? =
-You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have the following files: `style.css`, `mobile.css`, `widgets.css` and `editor.css`.
+You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have the following files: `style.css`, `widgets.css` and `editor.css`.
 = Which hooks and filters are available? =
 You can find a list of available hooks and filters on this site:
 [https://www.asgaros.de/support/?view=thread&id=407](https://www.asgaros.de/support/?view=thread&id=407).
@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Moved user subscription settings to the subscription overview
 * Changed: Minor design changes
 * Changed: Minor mobile theme improvements
+* Changed: Mobile css rules moved into style.css file and applied via media queries
 * Fixed: Display issues on small screens
 * Performance improvements and code optimizations
 = 1.8.1 =

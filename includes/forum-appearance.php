@@ -76,7 +76,7 @@ class AsgarosForumAppearance {
 			if (is_array($themes) && !empty($themes)) {
 				foreach ($themes as $themepath) {
 					// Ensure that only themes appears which contains all necessary files.
-					if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/mobile.css') && is_file($themepath.'/widgets.css')) {
+					if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/widgets.css')) {
 						$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
 						$this->themes[$trimmed] = array(
 							'name'	=> $trimmed,
@@ -167,10 +167,6 @@ class AsgarosForumAppearance {
 
 					wp_enqueue_style('af-custom-color', $custom_styles_url, array(), $this->asgarosforum->version);
 				}
-			}
-
-			if (wp_is_mobile()) {
-				wp_enqueue_style('af-mobile', $themeurl.'/mobile.css', array(), $this->asgarosforum->version);
 			}
 		}
 	}
