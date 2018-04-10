@@ -147,5 +147,10 @@
         $('#af-wrapper input[name=subscription_level]').on('change', function() {
             $(this).closest('form').submit();
         });
+
+        // Focus search input when clicking on container.
+        $('#af-wrapper #forum-search').click(function() {
+            $('#af-wrapper #forum-search input[name=keywords]').focus();
+        });
     });
 })(jQuery);

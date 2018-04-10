@@ -14,6 +14,9 @@
     font-size: inherit; /* comp */
     font-weight: inherit; /* comp */
 }
+#af-wrapper a:hover {
+    text-decoration: underline;
+}
 #af-wrapper small {
     font-size: smaller;
 }
@@ -47,7 +50,7 @@
     font-size: 20px;
     border: none;
     margin: 0;
-    padding: 16px 4px;
+    padding: 16px 0px;
     font-weight: normal;
     color: #444;
 }
@@ -68,14 +71,6 @@
 #af-wrapper .pages-and-menu {
     display: block;
     min-height: 35px;
-}
-#af-wrapper .profile-link:hover,
-#af-wrapper .edit-profile-link:hover,
-#af-wrapper #forum-navigation a:hover,
-#af-wrapper #read-unread a:hover,
-#af-wrapper #forum-subscription a:hover,
-#af-wrapper #topic-subscription a:hover {
-    text-decoration: underline;
 }
 
 /* UPLOADS */
@@ -518,16 +513,16 @@
 #af-wrapper .pages a:hover,
 #af-wrapper .topic .pages a:hover {
     background-color: #e1e1e1;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .pages {
         margin-bottom: 10px;
     }
     #af-wrapper .pages a,
-    #af-wrapper .pages strong {
-        font-size: 130% !important;
-        padding: 3px 5px;
+    #af-wrapper .pages strong,
+    #af-wrapper .topic .pages a {
+        padding: 4px 8px;
     }
 }
 
@@ -589,6 +584,9 @@
 @media screen and (max-width: 782px) {
     #af-wrapper #forum-navigation-mobile {
         display: block;
+    }
+    #af-wrapper #forum-navigation-mobile a {
+        text-decoration: none;
     }
     #af-wrapper #forum-navigation {
         width: 100%;
@@ -681,7 +679,6 @@
 }
 #af-wrapper #forum-breadcrumbs a:hover {
     color: #444 !important;
-    text-decoration: none;
 }
 #af-wrapper #forum-breadcrumbs span::before {
     line-height: 26px;
@@ -707,6 +704,7 @@
     border: 3px solid #2d89cc;
     border-bottom-width: 2px;
     height: 40px;
+    cursor: text;
 }
 #af-wrapper #forum-search form {
     display: initial;
@@ -727,6 +725,9 @@
     min-height: initial; /* comp */
     background-image: none; /* comp */
     float: initial; /* comp */
+}
+#af-wrapper #forum-search input::-webkit-search-cancel-button {
+    display: none;
 }
 #af-wrapper #forum-search p {
     display: none;
@@ -755,7 +756,6 @@
 }
 #af-wrapper .content-element a:hover,
 #af-wrapper .post-element a:hover {
-    text-decoration: underline;
     outline: none; /* comp */
     background-color: inherit; /* comp */
 }
@@ -937,6 +937,11 @@
         float: left;
         height: 40px;
         width: 40px;
+    }
+    #af-wrapper .post-meta,
+    #af-wrapper .post-reactions {
+        text-align: center;
+        margin: 16px 0px;
     }
 }
 
