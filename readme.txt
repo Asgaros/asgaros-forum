@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 4.9
 Requires PHP: 5.2
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,13 +88,14 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.8.2 =
 * Added: Option to subscribe to all topics and posts
 * Added: Possibility to unsubscribe from subscriptions inside the subscription overview
 * Added: Option to hide category name in breadcrumbs
 * Changed: Moved user subscription settings to the subscription overview
 * Changed: Minor design changes
-* Changed: Minor mobile theme improvements
-* Changed: Mobile css rules moved into style.css file and applied via media queries
+* Changed: Mobile theme improvements
+* Changed: Moved mobile css rules into style.css file
 * Fixed: Display issues on small screens
 * Performance improvements and code optimizations
 = 1.8.1 =
