@@ -10,26 +10,32 @@ if ($forum->count_topics) {
 }
 
 // Get the read/unread status of a forum.
-$unreadStatus = AsgarosForumUnread::getStatusForum($forum->id, $forum->count_topics);
+$unread_status = AsgarosForumUnread::getStatusForum($forum->id, $forum->count_topics);
 
 // Format the element counters.
 $count_topics_i18n = number_format_i18n($forum->count_topics);
 $count_posts_i18n = number_format_i18n($forum->count_posts);
 
 echo '<div class="forum" id="forum-'.$forum->id.'">';
-    echo '<div class="forum-status">';
-        $forumIcon = trim(esc_html(stripslashes($forum->icon)));
-        $forumIcon = (empty($forumIcon)) ? 'dashicons-editor-justify' : $forumIcon;
-        echo '<span class="forum-dashicon dashicons-before '.$forumIcon.' '.$unreadStatus.'"></span>';
-    echo '</div>';
+    $forum_icon = trim(esc_html(stripslashes($forum->icon)));
+    $forum_icon = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
+
+    echo '<div class="forum-status forum-dashicon dashicons-before '.$forum_icon.' '.$unread_status.'"></div>';
     echo '<div class="forum-name">';
-        echo '<span class="forum-title"><a href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a></span>';
+        echo '<a class="forum-title" href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
 
         // Show the description of the forum when it is not empty.
-        $forumDescription = esc_html(stripslashes($forum->description));
-        if (!empty($forumDescription)) {
-            echo '<small class="forum-description">'.$forumDescription.'</small>';
+        $forum_description = esc_html(stripslashes($forum->description));
+        if (!empty($forum_description)) {
+            echo '<small class="forum-description">'.$forum_description.'</small>';
         }
+
+        // Show forum stats.
+        echo '<small class="forum-stats">';
+            echo sprintf(_n('%s Topic', '%s Topics', $forum->count_topics, 'asgaros-forum'), $count_topics_i18n);
+            echo '&nbsp;&middot;&nbsp;';
+            echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n);
+        echo '</small>';
 
         // Show subforums.
         if ($forum->count_subforums > 0) {
@@ -49,9 +55,5 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         }
     echo '</div>';
     do_action('asgarosforum_custom_forum_column', $forum->id);
-    echo '<div class="forum-stats">';
-        echo sprintf(_n('%s Topic', '%s Topics', $forum->count_topics, 'asgaros-forum'), $count_topics_i18n).'<br>';
-        echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n);
-    echo '</div>';
     echo '<div class="forum-poster">'.$this->get_lastpost($lastpost_data).'</div>';
 echo '</div>';

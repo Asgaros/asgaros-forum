@@ -6,6 +6,15 @@
     line-height: 1.65;
     text-shadow: none; /* comp */
 }
+#af-wrapper [class^="dashicons-"],
+#af-wrapper [class*=" dashicons-"] {
+    padding: 0px;
+    border-radius: inherit; /* comp */
+    background: none; /* comp */
+    color: inherit; /* comp */
+    display: inline; /* comp */
+    position: initial; /* comp */
+}
 #af-wrapper a {
     color: #2d89cc;
     border: none;
@@ -292,11 +301,19 @@
 }
 
 /* OVERVIEW/FORUM */
+#af-wrapper .forum small,
+#af-wrapper .topic small,
+#af-wrapper .member small {
+    display: block;
+    font-style: normal; /* comp */
+    letter-spacing: normal; /* comp */
+    line-height: inherit; /* comp */
+}
 #af-wrapper .last-post-headline {
     float: right;
     font-weight: normal;
     font-style: italic;
-    width: 210px;
+    width: 280px;
     text-align: center;
 }
 @media screen and (max-width: 782px) {
@@ -304,20 +321,19 @@
         display: none;
     }
 }
-#af-wrapper .forum [class^="dashicons-"],
-#af-wrapper .forum [class*=" dashicons-"],
-#af-wrapper .topic [class^="dashicons-"],
-#af-wrapper .topic [class*=" dashicons-"] {
-    padding: 0;
-}
 #af-wrapper .forum,
 #af-wrapper .topic,
 #af-wrapper .member {
     display: table;
-    min-height: 60px;
     width: 100%;
+    min-height: 80px;
     border-bottom: 1px solid #eee;
-    line-height: 22px;
+    line-height: 20px;
+}
+#af-wrapper .forum:last-child,
+#af-wrapper .topic:last-child,
+#af-wrapper .member:last-child {
+    border-bottom-width: 0px;
 }
 #af-wrapper .topic-sticky,
 #af-wrapper .topic-sticky .topic-poster {
@@ -326,41 +342,37 @@
 }
 #af-wrapper .forum-status,
 #af-wrapper .forum-name,
-#af-wrapper .forum-stats,
 #af-wrapper .forum-poster,
 #af-wrapper .topic-status,
 #af-wrapper .topic-name,
-#af-wrapper .topic-stats,
 #af-wrapper .topic-poster {
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
-    padding: 5px;
 }
 #af-wrapper .forum-status,
 #af-wrapper .topic-status {
-    width: 64px;
+    width: 80px;
     text-align: center;
 }
 #af-wrapper .forum-name,
 #af-wrapper .topic-name {
     width: auto;
+    padding: 8px 16px 8px 0px;
     text-align: left; /* comp */
 }
 #af-wrapper .forum-stats,
 #af-wrapper .topic-stats {
-    width: 100px;
-    text-align: right;
-    padding-right: 10px;
-    font-size: smaller;
+    font-style: italic !important;
+    color: #767676;
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
-    width: 242px;
+    width: 280px;
     text-align: left;
     border-left: 1px solid #eee;
     font-size: smaller;
-    padding-left: 10px;
+    padding: 8px 16px;
 }
 #af-wrapper .forum-poster .dashicons-before:before,
 #af-wrapper .topic-poster .dashicons-before:before {
@@ -370,18 +382,11 @@
     line-height: 22px;
     box-sizing: initial; /* comp */
 }
-#af-wrapper .forum .forum-title,
-#af-wrapper .forum .forum-description,
-#af-wrapper .forum .forum-subforums {
+#af-wrapper .forum .forum-title {
     display: block;
 }
-#af-wrapper .forum small,
-#af-wrapper .topic small,
-#af-wrapper .member small {
-    display: block;
-    font-style: normal; /* comp */
-    letter-spacing: normal; /* comp */
-    line-height: inherit; /* comp */
+#af-wrapper .forum .forum-subforums {
+
 }
 #af-wrapper .topic-name small {
     font-style: italic;
@@ -394,12 +399,6 @@
 }
 #af-wrapper .sticky-bottom {
     border-bottom: 1px solid #e1e4e8;
-}
-@media screen and (max-width: 782px) {
-    #af-wrapper .forum-stats,
-    #af-wrapper .topic-stats {
-        display: none;
-    }
 }
 @media screen and (max-width: 600px) {
     #af-wrapper .forum-poster,
@@ -427,9 +426,8 @@
 #af-wrapper .notice,
 #af-wrapper .error {
     text-align: center;
-    font-size: 13px;
     font-style: italic;
-    padding: 8px !important;
+    padding: 12px;
 }
 #af-wrapper .error,
 #af-wrapper .info {
@@ -529,9 +527,9 @@
 #af-wrapper .title-element {
     display: block;
     box-sizing: border-box;
-    padding: 0px 16px;
-    height: 30px;
-    line-height: 29px;
+    padding: 0px 0px 0px 16px;
+    height: 32px;
+    line-height: 31px;
     color: #fff;
     background-color: #2d89cc;
     border-bottom: 1px solid #00689a;
@@ -540,9 +538,10 @@
     background-color: #999;
     border-bottom: 1px solid #767676;
 }
-#af-wrapper .title-element span:before {
+#af-wrapper .title-element:before {
+    height: 31px;
+    line-height: 31px;
     padding-right: 5px;
-    line-height: 29px;
 }
 
 /* HEADER CONTAINER */
@@ -749,9 +748,9 @@
 #af-wrapper .content-element {
     margin-bottom: 15px;
     background-color: #fff;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-color: #eee;
+    border-style: solid;
+    border-width: 0px 1px 2px;
 }
 #af-wrapper .content-element a:hover,
 #af-wrapper .post-element a:hover {
@@ -866,7 +865,7 @@
     padding: 0px 20px 40px;
     border: none;
     border-left: 1px solid #eee;
-    min-height: 200px;
+    min-height: 250px;
     position: relative;
     box-sizing: border-box;
 }
@@ -1154,7 +1153,6 @@
 }
 #af-wrapper #profile-header .profile-display-name {
     font-size: 24px;
-    color: #2d89cc;
 }
 #af-wrapper #profile-content {
     padding: 16px 24px;
@@ -1194,10 +1192,12 @@
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
-    padding: 4px;
+}
+#af-wrapper .member div {
+    padding: 8px;
 }
 #af-wrapper .member-avatar {
-    width: 64px;
+    width: 80px;
     text-align: center;
 }
 #af-wrapper .member-avatar img {
@@ -1283,15 +1283,6 @@
 }
 
 /* ICONS */
-#af-wrapper [class^="dashicons-"],
-#af-wrapper [class*=" dashicons-"] {
-    padding-right: 3px;
-    border-radius: inherit; /* comp */
-    background: none; /* comp */
-    color: inherit; /* comp */
-    display: inline; /* comp */
-    position: initial; /* comp */
-}
 #af-wrapper .dashicons-normal_open:before {
     content: "\f206";
 }
@@ -1304,12 +1295,12 @@
 }
 #af-wrapper .forum-dashicon:before,
 #af-wrapper .dashicons-normal_open:before,
-#af-wrapper .dashicons-sticky_open:before,
 #af-wrapper .dashicons-normal_closed:before,
+#af-wrapper .dashicons-sticky_open:before,
 #af-wrapper .dashicons-sticky_closed:before {
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
 }
 #af-wrapper .unread:before {
     color: #2D89CC;

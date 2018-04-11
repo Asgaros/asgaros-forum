@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Changed: Design changes
 * Changed: Dont show subscription option in editor when you are subscribed to all topics
 = 1.8.2 =
 * Added: Option to subscribe to all topics and posts

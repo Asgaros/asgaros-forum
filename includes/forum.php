@@ -534,9 +534,7 @@ class AsgarosForum {
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';
-            echo '<div class="topic-status">';
-                echo '<span class="dashicons-before dashicons-'.$topic_object->status.' '.$unread_status.'"></span>';
-            echo '</div>';
+            echo '<div class="topic-status dashicons-before dashicons-'.$topic_object->status.' '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
                 echo '<a href="'.$this->getLink('topic', $topic_object->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
                 echo '<small>';
@@ -544,14 +542,16 @@ class AsgarosForum {
                 $topic_pagination = new AsgarosForumPagination($this);
                 $topic_pagination->renderTopicOverviewPagination($topic_object->id);
                 echo '</small>';
+                // Show topic stats.
+                echo '<small class="topic-stats">';
+                    $count_answers_i18n = number_format_i18n($topic_object->answers);
+                    $count_views_i18n = number_format_i18n($topic_object->views);
+                    echo sprintf(_n('%s Answer', '%s Answers', $topic_object->answers, 'asgaros-forum'), $count_answers_i18n);
+                    echo '&nbsp;&middot;&nbsp;';
+                    echo sprintf(_n('%s View', '%s Views', $topic_object->views, 'asgaros-forum'), $count_views_i18n);
+                echo '</small>';
             echo '</div>';
             do_action('asgarosforum_custom_topic_column', $topic_object->id);
-            echo '<div class="topic-stats">';
-                $count_answers_i18n = number_format_i18n($topic_object->answers);
-                $count_views_i18n = number_format_i18n($topic_object->views);
-                echo sprintf(_n('%s Answer', '%s Answers', $topic_object->answers, 'asgaros-forum'), $count_answers_i18n).'<br>';
-                echo sprintf(_n('%s View', '%s Views', $topic_object->views, 'asgaros-forum'), $count_views_i18n);
-            echo '</div>';
             echo '<div class="topic-poster">'.$this->get_lastpost($lastpost_data, 'thread').'</div>';
         echo '</div>';
     }
@@ -769,7 +769,7 @@ class AsgarosForum {
             $lastpost_link = $this->getLink('topic', $lastpost_data->parent_id, array('part' => ceil($lastpost_data->number_of_posts/$this->options['posts_per_page'])), '#postid-'.$lastpost_data->id);
 
             if ($context === 'forum') {
-                $lastpost = '<a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name), 32)).'</a><br>';
+                $lastpost = '<a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name), 34)).'</a><br>';
             }
 
             $lastpost .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost_data->author_id).'</span><br>';

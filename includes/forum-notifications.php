@@ -367,9 +367,7 @@ class AsgarosForumNotifications {
         $subscription_level = $this->get_subscription_level();
 
         // Render subscription settings.
-        echo '<div class="title-element title-element-dark">';
-            echo '<span class="dashicons-before dashicons-email-alt">'.__('Subscription Settings', 'asgaros-forum').'</span>';
-        echo '</div>';
+        echo '<div class="title-element title-element-dark dashicons-before dashicons-email-alt">'.__('Subscription Settings', 'asgaros-forum').'</div>';
         echo '<div class="content-element">';
             echo '<form method="post" action="'.$this->asgarosforum->getLink('subscriptions').'">';
                 echo '<div id="subscription-settings">';

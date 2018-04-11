@@ -52,7 +52,7 @@ class AsgarosForumMembersList {
             echo '<div class="member'.$userOnline.'">';
                 if ($showAvatars) {
                     echo '<div class="member-avatar">';
-                    echo get_avatar($element->ID, 50);
+                    echo get_avatar($element->ID, 60);
                     echo '</div>';
                 }
 
