@@ -171,7 +171,7 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($this->asgarosforum->get_postlink($this->asgarosforum->current_topic, $this->asgarosforum->current_post, $_POST['part_id']));
         }
 
-        $this->asgarosforum->notifications->update_topic_subscription_status();
+        $this->asgarosforum->notifications->update_topic_subscription_status($this->asgarosforum->current_topic);
 
         do_action('asgarosforum_after_'.$this->get_action().'_submit', $this->asgarosforum->current_post, $this->asgarosforum->current_topic, $this->data_subject, $this->data_content, $redirect);
 

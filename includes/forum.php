@@ -314,13 +314,17 @@ class AsgarosForum {
         } else if (isset($_GET['close_topic'])) {
             $this->change_status('closed');
         } else if (isset($_GET['subscribe_topic'])) {
-            $this->notifications->subscribe_topic();
+            $topic_id = $_GET['subscribe_topic'];
+            $this->notifications->subscribe_topic($topic_id);
         } else if (isset($_GET['unsubscribe_topic'])) {
-            $this->notifications->unsubscribe_topic();
+            $topic_id = $_GET['unsubscribe_topic'];
+            $this->notifications->unsubscribe_topic($topic_id);
         } else if (isset($_GET['subscribe_forum'])) {
-            $this->notifications->subscribe_forum();
+            $forum_id = $_GET['subscribe_forum'];
+            $this->notifications->subscribe_forum($forum_id);
         } else if (isset($_GET['unsubscribe_forum'])) {
-            $this->notifications->unsubscribe_forum();
+            $forum_id = $_GET['unsubscribe_forum'];
+            $this->notifications->unsubscribe_forum($forum_id);
         } else if (isset($_GET['report_add'])) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
             $reporter_id = get_current_user_id();

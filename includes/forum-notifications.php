@@ -104,9 +104,7 @@ class AsgarosForumNotifications {
     }
 
     // Subscribes the current user to the current topic.
-    public function subscribe_topic() {
-        $topic_id = $_GET['subscribe_topic'];
-
+    public function subscribe_topic($topic_id) {
         // Check first if this topic exists.
         if ($this->asgarosforum->content->topic_exists($topic_id)) {
             // Only subscribe user if he is not already subscribed for this topic.
@@ -117,22 +115,18 @@ class AsgarosForumNotifications {
     }
 
     // Subscribes the current user to the current forum.
-    public function subscribe_forum() {
-        $forumID = $_GET['subscribe_forum'];
-
+    public function subscribe_forum($forum_id) {
         // Check first if this forum exists.
-        if ($this->asgarosforum->content->forum_exists($forumID)) {
+        if ($this->asgarosforum->content->forum_exists($forum_id)) {
             // Only subscribe user if he is not already subscribed for this forum.
-            if (!$this->is_subscribed('forum', $forumID)) {
-                add_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum', $forumID);
+            if (!$this->is_subscribed('forum', $forum_id)) {
+                add_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum', $forum_id);
             }
         }
     }
 
     // Unsubscribes the current user from the current topic.
-    public function unsubscribe_topic() {
-        $topic_id = $_GET['unsubscribe_topic'];
-
+    public function unsubscribe_topic($topic_id) {
         // Check first if this topic exists.
         if ($this->asgarosforum->content->topic_exists($topic_id)) {
             delete_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic', $topic_id);
@@ -140,21 +134,19 @@ class AsgarosForumNotifications {
     }
 
     // Unsubscribes the current user from the current forum.
-    public function unsubscribe_forum() {
-        $forumID = $_GET['unsubscribe_forum'];
-
+    public function unsubscribe_forum($forum_id) {
         // Check first if this forum exists.
-        if ($this->asgarosforum->content->forum_exists($forumID)) {
-            delete_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum', $forumID);
+        if ($this->asgarosforum->content->forum_exists($forum_id)) {
+            delete_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum', $forum_id);
         }
     }
 
     // Update the subscription-status for a topic based on the editor-checkbox.
-    public function update_topic_subscription_status() {
+    public function update_topic_subscription_status($topic_id) {
         if (isset($_POST['subscribe_checkbox']) && $_POST['subscribe_checkbox']) {
-            $this->subscribe_topic();
+            $this->subscribe_topic($topic_id);
         } else {
-            $this->unsubscribe_topic();
+            $this->unsubscribe_topic($topic_id);
         }
     }
 
