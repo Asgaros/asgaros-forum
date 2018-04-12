@@ -171,7 +171,7 @@ class AsgarosForumNotifications {
             $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $topic_name, $answer_text, $answer_link, $author_name);
 
             $topic_subscribers_query = array(
-                'fields'        => array('user_email'),
+                'fields'        => array('id', 'user_email'),
                 'exclude'       => array(get_current_user_id()),
                 'meta_query'    => array(
                     'relation'      => 'AND',
@@ -194,26 +194,30 @@ class AsgarosForumNotifications {
                 )
             );
 
-            // Only get moderators when this is a restricted category.
-            if ($this->asgarosforum->category_access_level == 'moderator') {
-                $topic_subscribers_query['meta_query'][] = array(
-                    'key'       => 'asgarosforum_moderator',
-                    'compare'   => 'EXISTS'
-                );
-            }
-
             $topic_subscribers_query = apply_filters('asgarosforum_filter_subscribers_query_new_post', $topic_subscribers_query);
-
-            // Get subscribed users
             $topic_subscribers = get_users($topic_subscribers_query);
 
+            // Remove non-moderators from mailing list.
+            if ($this->asgarosforum->category_access_level == 'moderator') {
+                foreach ($topic_subscribers as $key => $subscriber) {
+                    if (!AsgarosForumPermissions::isModerator($subscriber->id)) {
+                        unset($topic_subscribers[$key]);
+                    }
+                }
+            }
+
+            // Generate mailing list.
             foreach($topic_subscribers as $subscriber) {
                 $this->add_to_mailing_list($subscriber->user_email);
             }
 
+            // Filter mailing list based on user groups configuration.
             $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $this->asgarosforum->current_category);
+
+            // Apply custom filters before sending.
             $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_post', $this->mailing_list);
 
+            // Send notifications.
             $this->send_notifications($this->mailing_list, $notification_subject, $notification_message);
         }
     }
@@ -228,7 +232,7 @@ class AsgarosForumNotifications {
 
             if ($this->asgarosforum->options['allow_subscriptions']) {
                 $forum_subscribers_query = array(
-                    'fields'        => array('user_email'),
+                    'fields'        => array('id', 'user_email'),
                     'exclude'       => array(get_current_user_id()),
                     'meta_query'    => array(
                         'relation'  => 'AND',
@@ -255,31 +259,36 @@ class AsgarosForumNotifications {
                     )
                 );
 
-                // Only get moderators when this is a restricted category.
-                if ($this->asgarosforum->category_access_level == 'moderator') {
-                    $forum_subscribers_query['meta_query'][] = array(
-                        'key'       => 'asgarosforum_moderator',
-                        'compare'   => 'EXISTS'
-                    );
-                }
-
                 $forum_subscribers_query = apply_filters('asgarosforum_filter_subscribers_query_new_topic', $forum_subscribers_query);
-
                 $forum_subscribers = get_users($forum_subscribers_query);
 
-                // TODO: array can be optimized so that only the value gets returned. Look in query generation.
+                // Remove non-moderators from mailing list.
+                if ($this->asgarosforum->category_access_level == 'moderator') {
+                    foreach ($forum_subscribers as $key => $subscriber) {
+                        if (!AsgarosForumPermissions::isModerator($subscriber->id)) {
+                            unset($forum_subscribers[$key]);
+                        }
+                    }
+                }
+
+                // Generate mailing list.
                 foreach($forum_subscribers as $subscriber) {
                     $this->add_to_mailing_list($subscriber->user_email);
                 }
+
+                // Filter mailing list based on user groups configuration.
+                $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $this->asgarosforum->current_category);
             }
 
-            $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $this->asgarosforum->current_category);
-            $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_topic', $this->mailing_list);
-
+            // Add site-owner to mailing list when option is enabled.
             if ($this->asgarosforum->options['admin_subscriptions']) {
                 $this->add_to_mailing_list(get_bloginfo('admin_email'));
             }
 
+            // Apply custom filters before sending.
+            $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_topic', $this->mailing_list);
+
+            // Send notifications.
             $this->send_notifications($this->mailing_list, $notification_subject, $notification_message);
         }
     }
