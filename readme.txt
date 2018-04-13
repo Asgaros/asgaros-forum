@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Serious performance issues in the notifications logic
 * Fixed: Broken subscriptions functionality for administrators in categories which are accessible for moderators only
 * Fixed: Broken subscription checkbox in editor
 * Removed: asgarosforum_filter_subscribers_query_new_post filter
