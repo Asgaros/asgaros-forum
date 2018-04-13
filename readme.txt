@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 4.9
 Requires PHP: 5.2
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.8.3 =
 * Fixed: Serious performance issues in the notifications logic
 * Fixed: Broken subscriptions functionality for administrators in categories which are accessible for moderators only
 * Fixed: Broken subscription checkbox in editor
