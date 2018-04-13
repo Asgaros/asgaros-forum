@@ -93,8 +93,9 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Broken subscription checkbox in editor
 * Removed: asgarosforum_filter_subscribers_query_new_post filter
 * Removed: asgarosforum_filter_subscribers_query_new_topic filter
-* Changed: Design changes
-* Changed: Dont show subscription checkbox in editor when you are subscribed to all topics
+* Changed: Minor design changes
+* Changed: Mobile theme improvements
+* Changed: Dont show subscription checkbox in editor when user is subscribed to all topics
 * Performance improvements and code optimizations
 = 1.8.2 =
 * Added: Option to subscribe to all topics and posts

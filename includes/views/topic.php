@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) exit;
     <div class="clear"></div>
 </div>
 
-<div class="title-element"><?php echo $meClosed; ?></div>
+<div class="title-element"></div>
 <?php
 $counter = 0;
 $avatars_available = get_option('show_avatars');

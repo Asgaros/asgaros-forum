@@ -62,6 +62,14 @@
     padding: 16px 0px;
     font-weight: normal;
     color: #444;
+    display: block;
+    line-height: 40px;
+}
+#af-wrapper .main-title:before {
+    line-height: 40px;
+    color: #aaa;
+    height: 40px;
+    padding-right: 4px;
 }
 #af-wrapper .main-description {
     display: block;
@@ -556,7 +564,7 @@
 #af-wrapper #forum-navigation-mobile {
     display: block;
     float: left;
-    line-height: 40px;
+    line-height: 44px;
     text-align: left; /* comp */
 }
 #af-wrapper #forum-navigation a,
@@ -564,14 +572,14 @@
     padding: 0 20px;
     color: #fff !important;
     border-left: 1px solid #00689a;
-    line-height: 40px;
+    line-height: 44px;
 }
 #af-wrapper #forum-navigation a:first-child,
 #af-wrapper #forum-navigation-mobile a:first-child {
     border-left: none;
 }
 #af-wrapper #forum-navigation-mobile a:before {
-    line-height: 40px;
+    line-height: 44px;
     padding-right: 5px;
 }
 #af-wrapper #forum-navigation-mobile {
@@ -654,7 +662,7 @@
     box-sizing: border-box;
     background-color: #fafafa;
     line-height: 26px;
-    border-color: #e1e1e1;
+    border-color: #eee;
     border-width: 1px;
     border-style: none solid solid solid;
     font-size: 11px;
@@ -698,10 +706,10 @@
     box-sizing: border-box;
     background-color: #fff;
     color: #444;
-    line-height: 35px;
+    line-height: 39px;
     border: 3px solid #2d89cc;
     border-bottom-width: 2px;
-    height: 40px;
+    height: 44px;
     cursor: text;
 }
 #af-wrapper #forum-search form {
@@ -732,9 +740,9 @@
 }
 #af-wrapper #forum-search:before {
     padding: 0;
-    line-height: 35px;
+    line-height: 39px;
     width: 35px;
-    height: 35px;
+    height: 39px;
     font-size: 18px;
 }
 @media screen and (max-width: 782px) {
@@ -846,11 +854,11 @@
 #af-wrapper .post-author-marker {
     background-color: #2d89cc;
     border-bottom: 1px solid #00689a;
-    margin: -15px -15px 7px -15px;
+    margin: -8px -15px 8px -15px;
     padding: 0px 15px;
     color: #fff;
     display: block;
-    line-height: 30px !important;
+    line-height: 22px !important;
 }
 #af-wrapper .post-wrapper {
     display: table-cell;
@@ -1069,6 +1077,7 @@
         display: inline-block;
         font-size: 12px;
         line-height: 30px;
+        padding: 0px 2px;
     }
 }
 

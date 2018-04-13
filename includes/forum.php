@@ -500,7 +500,12 @@ class AsgarosForum {
     function showMainTitleAndDescription() {
         $mainTitle = $this->getMainTitle();
 
-        echo '<h1 class="main-title">'.$mainTitle.'</h1>';
+        // Show lock symbol for closed topics.
+        if ($this->current_view == 'thread' && $this->get_status('closed')) {
+            echo '<h1 class="main-title dashicons-before dashicons-lock">'.$mainTitle.'</h1>';
+        } else {
+            echo '<h1 class="main-title">'.$mainTitle.'</h1>';
+        }
 
         if ($this->current_view === 'forum' && $this->options['show_description_in_forum'] && !empty($this->current_description)) {
             echo '<div class="main-description">'.esc_html(stripslashes($this->current_description)).'</div>';
@@ -574,8 +579,6 @@ class AsgarosForum {
 
         if ($posts) {
             $this->incrementTopicViews();
-
-            $meClosed = ($this->get_status('closed')) ? '<span class="dashicons-before dashicons-lock"></span>' : '';
 
             require('views/topic.php');
         } else {
