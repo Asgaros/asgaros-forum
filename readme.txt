@@ -90,6 +90,8 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Broken subscriptions functionality for administrators in categories which are accessible for moderators only
 * Fixed: Broken subscription checkbox in editor
+* Removed: asgarosforum_filter_subscribers_query_new_post filter
+* Removed: asgarosforum_filter_subscribers_query_new_topic filter
 * Changed: Design changes
 * Changed: Dont show subscription checkbox in editor when you are subscribed to all topics
 * Performance improvements and code optimizations

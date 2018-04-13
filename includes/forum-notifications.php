@@ -194,7 +194,6 @@ class AsgarosForumNotifications {
                 )
             );
 
-            $topic_subscribers_query = apply_filters('asgarosforum_filter_subscribers_query_new_post', $topic_subscribers_query);
             $topic_subscribers = get_users($topic_subscribers_query);
 
             // Remove non-moderators from mailing list.
@@ -259,7 +258,6 @@ class AsgarosForumNotifications {
                     )
                 );
 
-                $forum_subscribers_query = apply_filters('asgarosforum_filter_subscribers_query_new_topic', $forum_subscribers_query);
                 $forum_subscribers = get_users($forum_subscribers_query);
 
                 // Remove non-moderators from mailing list.
