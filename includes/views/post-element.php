@@ -55,7 +55,7 @@ $user_data = get_userdata($post->author_id);
             echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
 
             if ($this->current_view != 'post') {
-                echo $this->showPostMenu($post->id, $post->author_id, $counter);
+                echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
             }
 
             echo '<div class="clear"></div>';

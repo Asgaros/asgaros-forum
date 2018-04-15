@@ -88,6 +88,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to set time limitation for editing posts
+* Performance improvements and code optimizations
 = 1.8.3 =
 * Fixed: Serious performance issues in the notifications logic
 * Fixed: Broken subscriptions functionality for administrators in categories which are accessible for moderators only

@@ -90,9 +90,13 @@ class AsgarosForumContent {
         $this->set_data();
 
         // Cancel if the current user is not allowed to edit that post.
-        if ($this->get_action() === 'edit_post' && !AsgarosForumPermissions::isModerator('current') && AsgarosForumPermissions::$currentUserID != $this->asgarosforum->get_post_author($this->asgarosforum->current_post)) {
-            $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
-            return false;
+        if ($this->get_action() === 'edit_post') {
+            $user_id = AsgarosForumPermissions::$currentUserID;
+
+            if (!AsgarosForumPermissions::can_edit_post($user_id, $this->asgarosforum->current_post)) {
+                $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
+                return false;
+            }
         }
 
         // Cancel if subject is empty.

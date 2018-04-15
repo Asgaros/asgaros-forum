@@ -66,6 +66,7 @@ class AsgarosForum {
         'highlight_authors'         => true,
         'show_author_posts_counter' => true,
         'show_edit_date'            => true,
+        'time_limit_edit_posts'     => 0,
         'show_description_in_forum' => false,
         'require_login'             => false,
         'create_blog_topics'        => false,
@@ -808,6 +809,10 @@ class AsgarosForum {
         return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE id = %d;", $post_id));
     }
 
+    function get_post_date($post_id) {
+        return $this->db->get_var($this->db->prepare("SELECT `date` FROM {$this->tables->posts} WHERE id = %d;", $post_id));
+    }
+
     // Returns the topics created by a user.
     function getTopicsByUser($userID) {
         return $this->db->get_results("SELECT * FROM {$this->tables->posts} GROUP BY parent_id HAVING author_id = {$userID};");
@@ -892,30 +897,29 @@ class AsgarosForum {
         return $menu;
     }
 
-    function showPostMenu($postID, $authorID, $counter) {
+    function show_post_menu($post_id, $author_id, $counter, $post_date) {
         $menu = '';
 
         if (is_user_logged_in()) {
             if (AsgarosForumPermissions::isModerator('current') && ($counter > 1 || $this->current_page >= 1)) {
                 // Delete button.
-                $menu .= '<a class="dashicons-before dashicons-trash" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->getLink('topic', $this->current_topic, array('post' => $postID, 'remove_post' => 1)).'">';
+                $menu .= '<a class="dashicons-before dashicons-trash" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->getLink('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
                 $menu .= __('Delete', 'asgaros-forum');
                 $menu .= '</a>';
             }
 
-            if (!AsgarosForumPermissions::isBanned('current')) {
-                if (AsgarosForumPermissions::isModerator('current') || get_current_user_id() == $authorID) {
-                    // Edit button.
-                    $menu .= '<a class="dashicons-before dashicons-edit" href="'.$this->getLink('post_edit', $postID, array('part' => ($this->current_page + 1))).'">';
-                    $menu .= __('Edit', 'asgaros-forum');
-                    $menu .= '</a>';
-                }
+            $current_user_id = get_current_user_id();
+            if (AsgarosForumPermissions::can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
+                // Edit button.
+                $menu .= '<a class="dashicons-before dashicons-edit" href="'.$this->getLink('post_edit', $post_id, array('part' => ($this->current_page + 1))).'">';
+                $menu .= __('Edit', 'asgaros-forum');
+                $menu .= '</a>';
             }
         }
 
         if (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
             // Quote button.
-            $menu .= '<a class="forum-editor-quote-button dashicons-before dashicons-editor-quote" data-value-id="'.$postID.'" href="'.$this->getLink('post_add', $this->current_topic, array('quote' => $postID)).'">';
+            $menu .= '<a class="forum-editor-quote-button dashicons-before dashicons-editor-quote" data-value-id="'.$post_id.'" href="'.$this->getLink('post_add', $this->current_topic, array('quote' => $post_id)).'">';
             $menu .= __('Quote', 'asgaros-forum');
             $menu .= '</a>';
         }

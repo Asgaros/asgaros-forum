@@ -91,10 +91,6 @@ if (!defined('ABSPATH')) exit;
                                 <label for="show_author_posts_counter"><?php _e('Show author posts counter', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
-                                <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?>>
-                                <label for="show_edit_date"><?php _e('Show edit date', 'asgaros-forum'); ?></label>
-                            </p>
-                            <p>
                                 <input type="checkbox" name="show_description_in_forum" id="show_description_in_forum" <?php checked(!empty($asgarosforum->options['show_description_in_forum'])); ?>>
                                 <label for="show_description_in_forum"><?php _e('Show description in forum', 'asgaros-forum'); ?></label>
                             </p>
@@ -113,6 +109,15 @@ if (!defined('ABSPATH')) exit;
                             <p>
                                 <input type="checkbox" name="show_register_button" id="show_register_button" <?php checked(!empty($asgarosforum->options['show_register_button'])); ?>>
                                 <label for="show_register_button"><?php _e('Show register button', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
+                                <input type="checkbox" name="show_edit_date" id="show_edit_date" <?php checked(!empty($asgarosforum->options['show_edit_date'])); ?>>
+                                <label for="show_edit_date"><?php _e('Show edit date', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
+                                <label for="time_limit_edit_posts"><?php _e('Time limitation for editing posts (in minutes):', 'asgaros-forum'); ?></label>
+                                <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo stripslashes($asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
+                                <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </p>
                         </div>
                     </div>

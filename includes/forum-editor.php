@@ -85,14 +85,10 @@ class AsgarosForumEditor {
                     break;
                 }
 
-                // Error when the user is banned.
-                if (AsgarosForumPermissions::isBanned('current')) {
-                    return false;
-                    break;
-                }
+                // Error when the user cannot edit a post.
+				$user_id = AsgarosForumPermissions::$currentUserID;
 
-                // Error when the current user is not the author of the post and also not a moderator.
-                if (AsgarosForumPermissions::$currentUserID != $this->asgarosforum->get_post_author($this->asgarosforum->current_post) && !AsgarosForumPermissions::isModerator('current')) {
+                if (!AsgarosForumPermissions::can_edit_post($user_id, $this->asgarosforum->current_post)) {
                     return false;
                     break;
                 }

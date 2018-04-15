@@ -106,6 +106,45 @@ class AsgarosForumPermissions {
 
         return true;
     }
+
+    // This function checks if a user can edit a specified post. Optional parameters for author_id and post_date available to reduce database queries.
+    public static function can_edit_post($user_id, $post_id, $author_id = false, $post_date = false) {
+        // Disallow when user is banned.
+        if (self::isBanned($user_id)) {
+            return false;
+        }
+
+        // Allow when user is moderator.
+        if (self::isModerator($user_id)) {
+            return true;
+        }
+
+        // Disallow when user is not the author of a post.
+        $author_id = ($author_id) ? $author_id : self::$asgarosforum->get_post_author($post_id);
+
+        if ($user_id != $author_id) {
+            return false;
+        }
+
+        // Allow when there is no time limitation.
+        $time_limitation = self::$asgarosforum->options['time_limit_edit_posts'];
+
+        if ($time_limitation == 0) {
+            return true;
+        }
+
+        // Otherwise decision based on current time.
+        $date_creation = ($post_date) ? $post_date : self::$asgarosforum->get_post_date($post_id);
+        $date_creation = strtotime($date_creation);
+        $date_now = strtotime(self::$asgarosforum->current_time());
+        $date_difference = $date_now - $date_creation;
+
+        if (($time_limitation * 60) < $date_difference) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 
 ?>
