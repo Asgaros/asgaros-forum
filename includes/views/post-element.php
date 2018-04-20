@@ -43,6 +43,15 @@ $user_data = get_userdata($post->author_id);
             echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
         }
 
+        // Show usergroups of user.
+        $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id);
+
+        if (!empty($usergroups)) {
+            foreach ($usergroups as $usergroup) {
+                echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+            }
+        }
+
         do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
         ?>
         <div class="clear"></div>

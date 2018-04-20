@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to set time limitation for editing posts
+* Added: Show usergroups of user inside of posts
 * Changed: Always use defined usergroup color when output an usergroup
 * Performance improvements and code optimizations
 = 1.8.3 =

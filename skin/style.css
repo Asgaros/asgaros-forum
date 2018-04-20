@@ -92,11 +92,12 @@
 #af-wrapper .af-usergroup-tag {
     padding: 0 3px;
     border-radius: 3px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
-    color: #333;
     margin: 2px;
     display: inline-block;
+    line-height: 20px;
+    font-size: smaller !important;
 }
 
 /* UPLOADS */

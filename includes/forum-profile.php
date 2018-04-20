@@ -202,8 +202,7 @@ class AsgarosForumProfile {
             if (is_array($cellValue)) {
                 foreach ($cellValue as $value) {
                     if ($type == 'usergroups') {
-                        echo AsgarosForumUserGroups::render_usergroup_tag($value);
-                        echo '<br>';
+                        echo AsgarosForumUserGroups::render_usergroup_tag($value).'<br>';
                     } else {
                         echo $value.'<br>';
                     }

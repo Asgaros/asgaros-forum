@@ -1,11 +1,11 @@
 .af-usergroup-tag {
     padding: 0 3px;
     border-radius: 3px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
-    color: #333;
-    margin: 2px;
+    margin: 1px;
     display: inline-block;
+    line-height: 20px;
 }
 .usergroups-editor .usergroup-category-name {
     display: block;
