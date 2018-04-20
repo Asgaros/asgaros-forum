@@ -184,7 +184,6 @@ class AsgarosForumProfile {
                         do_action('asgarosforum_custom_profile_content', $userData);
 
                         if ($userData->ID == get_current_user_id()) {
-                            echo '';
                             echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link"><span class="dashicons-before dashicons-edit">'.__('Edit Profile', 'asgaros-forum').'</span></a>';
                         }
                     echo '</div>';
