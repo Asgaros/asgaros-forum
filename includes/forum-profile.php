@@ -116,13 +116,13 @@ class AsgarosForumProfile {
                         }
 
                         // Show user groups.
-                        $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'names');
+                        $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID);
 
                         if (!empty($userGroups)) {
                             $cellTitle = __('User Groups:', 'asgaros-forum');
                             $cellValue = $userGroups;
 
-                            $this->renderProfileRow($cellTitle, $cellValue);
+                            $this->renderProfileRow($cellTitle, $cellValue, 'usergroups');
                         }
 
                         // Show website.
@@ -194,20 +194,25 @@ class AsgarosForumProfile {
         }
     }
 
-    public function renderProfileRow($cellTitle, $cellValue) {
+    public function renderProfileRow($cellTitle, $cellValue, $type = '') {
         echo '<div>';
-            echo '<span>'.$cellTitle.'</span>';
-            echo '<span>';
+            echo '<div>'.$cellTitle.'</div>';
+            echo '<div>';
 
             if (is_array($cellValue)) {
                 foreach ($cellValue as $value) {
-                    echo $value.'<br>';
+                    if ($type == 'usergroups') {
+                        echo AsgarosForumUserGroups::render_usergroup_tag($value);
+                        echo '<br>';
+                    } else {
+                        echo $value.'<br>';
+                    }
                 }
             } else {
                 echo $cellValue;
             }
 
-            echo '</span>';
+            echo '</div>';
         echo '</div>';
     }
 

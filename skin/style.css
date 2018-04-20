@@ -89,6 +89,15 @@
     display: block;
     min-height: 35px;
 }
+#af-wrapper .af-usergroup-tag {
+    padding: 0 3px;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    color: #333;
+    margin: 2px;
+    display: inline-block;
+}
 
 /* UPLOADS */
 #af-wrapper .uploaded-file {
@@ -1170,13 +1179,13 @@
     display: table;
     margin: 2px 0;
 }
-#af-wrapper #profile-content div span:first-child {
+#af-wrapper #profile-content div div:first-child {
     margin-right: 5px;
     display: table-cell;
     width: 176px;
     vertical-align: top;
 }
-#af-wrapper #profile-content div span:nth-child(2) {
+#af-wrapper #profile-content div div:nth-child(2) {
     display: table-cell;
     font-style: italic;
 }

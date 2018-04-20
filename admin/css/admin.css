@@ -224,12 +224,12 @@
 #af-structure #usergroup-color-settings th {
     vertical-align: top;
 }
-#af-structure #usergroups-editor td span {
+#af-structure #usergroups-editor td .usergroup-category-name {
     display: block;
     font-weight: 600;
     padding: 15px 0 5px;
 }
-#af-structure #usergroups-editor td span:first-of-type {
+#af-structure #usergroups-editor td .usergroup-category-name:first-of-type {
     padding-top: 0px;
 }
 #af-structure #usergroups-editor td label {

@@ -295,7 +295,9 @@ class AsgarosForumUserGroups {
         		foreach ($usergroups as $usergroup) {
         			$link = add_query_arg(array('forum-user-group' => $usergroup->term_id), admin_url('users.php'));
                     $color = self::getUserGroupColor($usergroup->term_id);
-        			$output .= '<a class="af-usergroup-tag" style="border-color: '.$color.';" href="'.$link.'" title="'.$usergroup->name.'">'.$usergroup->name.'</a>';
+        			$output .= '<a href="'.$link.'" title="'.$usergroup->name.'">';
+                    $output .= self::render_usergroup_tag($usergroup);
+                    $output .= '</a>';
         		}
             }
 		}
@@ -352,12 +354,14 @@ class AsgarosForumUserGroups {
                 echo '<th><label>'.__('User Groups:', 'asgaros-forum').'</label></th>';
                 echo '<td>';
                     foreach ($userGroupCategories as $category) {
-                        echo '<span>'.$category->name.':</span>';
+                        echo '<span class="usergroup-category-name">'.$category->name.':</span>';
 
                         $userGroups = self::getUserGroupsOfCategory($category->term_id);
 
                         foreach ($userGroups as $usergroup) {
-                            echo '<label><input type="checkbox" name="category_usergroups[]" value="'.$usergroup->term_id.'">'.$usergroup->name.'</label>';
+                            echo '<label><input type="checkbox" name="category_usergroups[]" value="'.$usergroup->term_id.'">';
+                            echo self::render_usergroup_tag($usergroup);
+                            echo '</label>';
                         }
                     }
                     echo '<p class="description">'.__('When user groups are selected, only users of the selected user groups will have access to the category.', 'asgaros-forum').'</p>';
@@ -439,18 +443,20 @@ class AsgarosForumUserGroups {
             $output .= '<td>';
 
             foreach ($userGroupCategories as $category) {
-                $output .= '<span>'.$category->name.':</span>';
+                $output .= '<span class="usergroup-category-name">'.$category->name.':</span>';
 
                 $userGroups = self::getUserGroupsOfCategory($category->term_id);
 
                 foreach ($userGroups as $usergroup) {
                     $color = self::getUserGroupColor($usergroup->term_id);
+                    $is_user_in_usergroup = self::isUserInUserGroup($userID, $usergroup->term_id);
+                    $label_id = self::$taxonomyName.'-'.$usergroup->term_id;
 
-    				$output .= '<input type="checkbox" name="'.self::$taxonomyName.'[]" id="'.self::$taxonomyName.'-'.$usergroup->term_id.'" value="'.$usergroup->term_id.'" '.checked(true, self::isUserInUserGroup($userID, $usergroup->term_id), false).'>';
-                    $output .= '<label class="af-usergroup-tag" for="'.self::$taxonomyName.'-'.$usergroup->term_id.'" style="border-color: '.$color.';">';
-                    $output .= $usergroup->name;
+    				$output .= '<input type="checkbox" name="'.self::$taxonomyName.'[]" id="'.$label_id.'" value="'.$usergroup->term_id.'" '.checked(true, $is_user_in_usergroup, false).'>';
+                    $output .= '<label for="'.$label_id.'">';
+                    $output .= self::render_usergroup_tag($usergroup);
                     $output .= '</label>';
-                    $output .= '<br />';
+                    $output .= '<br>';
                 }
 			}
 
@@ -458,6 +464,13 @@ class AsgarosForumUserGroups {
     		$output .= '</tr>';
 		}
 
+        return $output;
+    }
+
+    // Renders the tag for a user group which can be used inside profiles, posts and in the administration area.
+    public static function render_usergroup_tag($usergroup_object) {
+        $color = self::getUserGroupColor($usergroup_object->term_id);
+        $output = '<span class="af-usergroup-tag" style="border-color: '.$color.';">'.$usergroup_object->name.'</span>';
         return $output;
     }
 
