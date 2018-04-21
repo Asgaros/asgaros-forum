@@ -518,7 +518,7 @@ class AsgarosForumUserGroups {
     // Renders the tag for a user group which can be used inside profiles, posts and in the administration area.
     public static function render_usergroup_tag($usergroup_object) {
         $color = self::getUserGroupColor($usergroup_object->term_id);
-        $output = '<span class="af-usergroup-tag" style="color: '.$color.'; border-color: '.$color.';">'.$usergroup_object->name.'</span>';
+        $output = '<span class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.'; border-color: '.$color.';">'.$usergroup_object->name.'</span>';
         return $output;
     }
 
