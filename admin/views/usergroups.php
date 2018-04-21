@@ -29,6 +29,10 @@
                                         <th><label for="usergroup_color"><?php _e('Color:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="text" value="#444444" class="color-picker" name="usergroup_color" id="usergroup_color" data-default-color="#444444"></td>
                                     </tr>
+                                    <tr>
+                                        <th><label for="usergroup_visibility"><?php _e('Hide user group:', 'asgaros-forum'); ?></label></th>
+                                        <td><input type="checkbox" id="usergroup_visibility" name="usergroup_visibility"></td>
+                                    </tr>
                                 </table>
 
                                 <p class="submit">
@@ -103,7 +107,7 @@
                                 <?php echo stripslashes($category->name); ?>
                                 <span class="category-actions">
                                     <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
-                                    |
+                                    &middot;
                                     <a href="#" class="usergroup-category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
                                 </span>
                             </h2>

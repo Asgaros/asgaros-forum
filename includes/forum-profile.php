@@ -116,7 +116,7 @@ class AsgarosForumProfile {
                         }
 
                         // Show user groups.
-                        $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID);
+                        $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'all', true);
 
                         if (!empty($userGroups)) {
                             $cellTitle = __('User Groups:', 'asgaros-forum');
@@ -202,7 +202,7 @@ class AsgarosForumProfile {
             if (is_array($cellValue)) {
                 foreach ($cellValue as $value) {
                     if ($type == 'usergroups') {
-                        echo AsgarosForumUserGroups::render_usergroup_tag($value).'<br>';
+                        echo AsgarosForumUserGroups::render_usergroup_tag($value);
                     } else {
                         echo $value.'<br>';
                     }

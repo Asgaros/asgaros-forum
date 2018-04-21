@@ -44,7 +44,7 @@ $user_data = get_userdata($post->author_id);
         }
 
         // Show usergroups of user.
-        $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id);
+        $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id, 'all', true);
 
         if (!empty($usergroups)) {
             foreach ($usergroups as $usergroup) {

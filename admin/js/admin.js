@@ -152,14 +152,16 @@
         $('.usergroup-editor-link').click(function() {
             resetEditor();
 
-            var usergroup_id        = $(this).attr('data-value-id');
-            var usergroup_category  = $(this).attr('data-value-category');
-            var usergroup_name      = '';
-            var usergroup_color     = '#444444';
+            var usergroup_id            = $(this).attr('data-value-id');
+            var usergroup_category      = $(this).attr('data-value-category');
+            var usergroup_name          = '';
+            var usergroup_color         = '#444444';
+            var usergroup_visibility    = '';
 
             if (usergroup_id !== 'new') {
-                usergroup_name  = $('#usergroup_'+usergroup_id+'_name').val();
-                usergroup_color = $('#usergroup_'+usergroup_id+'_color').val();
+                usergroup_name          = $('#usergroup_'+usergroup_id+'_name').val();
+                usergroup_color         = $('#usergroup_'+usergroup_id+'_color').val();
+                usergroup_visibility    = $('#usergroup_'+usergroup_id+'_visibility').val();
             }
 
             $('#usergroup-editor input[name=usergroup_id]').val(usergroup_id);
@@ -167,6 +169,12 @@
             $('#usergroup-editor input[name=usergroup_name]').val(usergroup_name);
             $('#usergroup-editor input[name=usergroup_color]').val(usergroup_color);
             $('#usergroup-editor input[name=usergroup_color]').wpColorPicker('color', usergroup_color);
+
+            if (usergroup_visibility === 'hidden') {
+                $('#usergroup-editor input[name=usergroup_visibility]').prop('checked', true);
+            } else {
+                $('#usergroup-editor input[name=usergroup_visibility]').prop('checked', false);
+            }
 
             setEditorTitle(this);
             showEditorInstance('#usergroup-editor');

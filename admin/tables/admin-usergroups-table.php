@@ -29,6 +29,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         $columnHTML = '';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_color" value="'.esc_html(stripslashes($item['color'])).'">';
+        $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_visibility" value="'.esc_html(stripslashes($item['visibility'])).'">';
         $columnHTML .= '<a class="make-bold" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'">'.stripslashes($item['name']).'</a>';
 
         return $columnHTML;
@@ -36,6 +37,14 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
 
     function column_color($item) {
         return '<div class="usergroup-color" style="background-color: '.$item['color'].';"></div>';
+    }
+
+    function column_visibility($item) {
+        if ($item['visibility'] == 'hidden') {
+            return __('Hidden', 'asgaros-forum');
+        } else {
+            return __('Visible', 'asgaros-forum');
+        }
     }
 
     function column_actions($item) {
@@ -49,10 +58,11 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
 
     function get_columns() {
         $columns = array(
-            'name'      => __('Name:', 'asgaros-forum'),
-            'color'     => __('Color:', 'asgaros-forum'),
-            'users'     => __('Users:', 'asgaros-forum'),
-            'actions'   => __('Actions:', 'asgaros-forum')
+            'name'          => __('Name:', 'asgaros-forum'),
+            'color'         => __('Color:', 'asgaros-forum'),
+            'visibility'    => __('Visibility:', 'asgaros-forum'),
+            'users'         => __('Users:', 'asgaros-forum'),
+            'actions'       => __('Actions:', 'asgaros-forum')
         );
 
         return $columns;
@@ -67,6 +77,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         foreach ($this->table_data as $usergroup) {
             $usergroup = (array)$usergroup; // Convert object to array.
             $usergroup['color'] = AsgarosForumUserGroups::getUserGroupColor($usergroup['term_id']);
+            $usergroup['visibility'] = AsgarosForumUserGroups::get_usergroup_visibility($usergroup['term_id']);
             $usergroup['users'] = AsgarosForumUserGroups::countUsersOfUserGroup($usergroup['term_id']);
             $data[] = $usergroup;
         }

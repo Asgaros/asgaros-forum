@@ -49,20 +49,30 @@ class AsgarosForumUserGroups {
     // FUNCTIONS FOR INSERTING CONTENT.
     //======================================================================
 
-    public static function insertUserGroup($categoryID, $userGroupName, $userGroupColor = '#444444') {
+    public static function insertUserGroup($categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal') {
         $userGroupName = trim($userGroupName);
         $userGroupColor = trim($userGroupColor);
+        $usergroup_visibility = trim($usergroup_visibility);
 
         $status = wp_insert_term($userGroupName, self::$taxonomyName, array('parent' => $categoryID));
 
         // Return possible error.
         if (is_wp_error($status)) {
             return $status;
-        } else {
-            $userGroupID = $status['term_id'];
-
-            return self::updateUserGroupColor($userGroupID, $userGroupColor);
         }
+
+        $userGroupID = $status['term_id'];
+
+        $status = self::updateUserGroupColor($userGroupID, $userGroupColor);
+
+        // Return possible error.
+        if (is_wp_error($status)) {
+            return $status;
+        }
+
+        $status = self::update_usergroup_visibility($userGroupID, $usergroup_visibility);
+
+        return $status;
     }
 
     public static function insertUserGroupCategory($categoryName) {
@@ -95,18 +105,28 @@ class AsgarosForumUserGroups {
     // FUNCTIONS FOR UPDATING CONTENT.
     //======================================================================
 
-    public static function updateUserGroup($userGroupID, $categoryID, $userGroupName, $userGroupColor = '#444444') {
+    public static function updateUserGroup($userGroupID, $categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal') {
         $userGroupName = trim($userGroupName);
         $userGroupColor = trim($userGroupColor);
+        $usergroup_visibility = trim($usergroup_visibility);
 
         $status = wp_update_term($userGroupID, self::$taxonomyName, array('parent' => $categoryID, 'name' => $userGroupName));
 
         // Return possible error.
         if (is_wp_error($status)) {
             return $status;
-        } else {
-            return self::updateUserGroupColor($userGroupID, $userGroupColor);
         }
+
+        $status = self::updateUserGroupColor($userGroupID, $userGroupColor);
+
+        // Return possible error.
+        if (is_wp_error($status)) {
+            return $status;
+        }
+
+        $status = self::update_usergroup_visibility($userGroupID, $usergroup_visibility);
+
+        return $status;
     }
 
     public static function updateUserGroupCategory($categoryID, $categoryName) {
@@ -122,6 +142,15 @@ class AsgarosForumUserGroups {
         $userGroupColor = (empty($userGroupColor)) ? '#444444' : $userGroupColor;
 
         $status = update_term_meta($userGroupID, 'usergroup-color', $userGroupColor);
+
+        return $status;
+    }
+
+    public static function update_usergroup_visibility($usergroup_id, $usergroup_visibility) {
+        $usergroup_visibility = trim($usergroup_visibility);
+        $usergroup_visibility = (empty($usergroup_visibility)) ? 'normal' : $usergroup_visibility;
+
+        $status = update_term_meta($usergroup_id, 'usergroup-visibility', $usergroup_visibility);
 
         return $status;
     }
@@ -205,13 +234,31 @@ class AsgarosForumUserGroups {
     }
 
     // Returns all user groups of an user.
-    public static function getUserGroupsOfUser($userID, $fields = 'all') {
-        return wp_get_object_terms($userID, self::$taxonomyName, array('fields' => $fields));
+    public static function getUserGroupsOfUser($userID, $fields = 'all', $filter_hidden = false) {
+        $usergroups_of_user = wp_get_object_terms($userID, self::$taxonomyName, array('fields' => $fields));
+
+        // Remove hidden usergroups.
+        if ($filter_hidden) {
+            foreach ($usergroups_of_user as $key => $value) {
+                $visibility = self::get_usergroup_visibility($value->term_id);
+
+                if ($visibility === 'hidden') {
+                    unset($usergroups_of_user[$key]);
+                }
+            }
+        }
+
+        return $usergroups_of_user;
     }
 
     // Returns the color of an user group.
     public static function getUserGroupColor($userGroupID) {
         return get_term_meta($userGroupID, 'usergroup-color', true);
+    }
+
+    // Returns the visibility of an usergroup.
+    public static function get_usergroup_visibility($usergroup_id) {
+        return get_term_meta($usergroup_id, 'usergroup-visibility', true);
     }
 
     // Returns all user groups of a specific forum category.
@@ -306,15 +353,16 @@ class AsgarosForumUserGroups {
 	}
 
     public static function saveUserGroup() {
-        $usergroup_id       = $_POST['usergroup_id'];
-        $usergroup_name     = $_POST['usergroup_name'];
-        $usergroup_category = $_POST['usergroup_category'];
-        $usergroup_color    = $_POST['usergroup_color'];
+        $usergroup_id           = $_POST['usergroup_id'];
+        $usergroup_name         = $_POST['usergroup_name'];
+        $usergroup_category     = $_POST['usergroup_category'];
+        $usergroup_color        = $_POST['usergroup_color'];
+        $usergroup_visibility   = (isset($_POST['usergroup_visibility'])) ? 'hidden' : 'normal';
 
         if ($usergroup_id === 'new') {
-            return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color);
+            return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility);
         } else {
-            return self::updateUserGroup($usergroup_id, $usergroup_category, $usergroup_name, $usergroup_color);
+            return self::updateUserGroup($usergroup_id, $usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility);
         }
     }
 
