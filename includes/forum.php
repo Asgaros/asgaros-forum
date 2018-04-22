@@ -117,6 +117,7 @@ class AsgarosForum {
             add_action('transition_post_status', array($this, 'createBlogTopic'), 10, 3);
         }
 
+        new AsgarosForumCompatibility($this);
         new AsgarosForumRewrite($this);
         new AsgarosForumPermissions($this);
         new AsgarosForumUnread($this);

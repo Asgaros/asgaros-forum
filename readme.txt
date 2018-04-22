@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Show usergroups of user in posts
 * Changed: Always use defined usergroup color when output an usergroup
 * Performance improvements and code optimizations
+* Improved compatibility with Autoptimize
 = 1.8.3 =
 * Fixed: Serious performance issues in the notifications logic
 * Fixed: Broken subscriptions functionality for administrators in categories which are accessible for moderators only
