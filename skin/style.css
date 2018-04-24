@@ -658,12 +658,6 @@
 #af-wrapper .subscription-option:last-child {
     border: none;
 }
-#af-wrapper .subscription-option span {
-    display: block;
-    font-size: smaller !important;
-    font-style: italic;
-    line-height: normal;
-}
 
 /* BREADCRUMBS */
 #af-wrapper #forum-breadcrumbs {
