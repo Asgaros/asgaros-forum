@@ -83,7 +83,7 @@ class AsgarosForumMembersList {
         global $asgarosforum, $wpdb;
 
         // Get all existing users.
-        $allUsers = get_users();
+        $allUsers = get_users(array('fields' => array('ID', 'display_name')));
 
         // Now get the amount of forum posts for all users.
         $postsCounter = $wpdb->get_results("SELECT author_id, COUNT(id) AS counter FROM {$asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
