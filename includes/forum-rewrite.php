@@ -53,7 +53,7 @@ class AsgarosForumRewrite {
         // Get the page of the post as well when we dont know it.
         if (!$post_page) {
             // Get all post ids of the topic.
-            $post_ids = self::$asgarosforum->db->get_col(self::$asgarosforum->db->prepare("SELECT id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = (SELECT parent_id FROM ".self::$asgarosforum->tables->posts." WHERE id = %d) ORDER BY id ASC;", $post_id));
+            $post_ids = self::$asgarosforum->db->get_col("SELECT id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = ".$topic_id." ORDER BY id ASC;");
 
             // Now get the position of the post.
             $post_position = array_search($post_id, $post_ids) + 1;
