@@ -44,19 +44,22 @@ class AsgarosForumRewrite {
         }
     }
 
+    static $cache_get_post_link_ids = array();
     public static function get_post_link($post_id, $topic_id = false, $post_page = false, $additional_parameters = array()) {
         // Get the topic ID when we dont know it yet.
         if (!$topic_id) {
-            $topic_id = $post_ids = self::$asgarosforum->db->get_var(self::$asgarosforum->db->prepare("SELECT parent_id FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", $post_id));
+            $topic_id = self::$asgarosforum->db->get_var(self::$asgarosforum->db->prepare("SELECT parent_id FROM ".self::$asgarosforum->tables->posts." WHERE id = %d;", $post_id));
         }
 
         // Get the page of the post as well when we dont know it.
         if (!$post_page) {
             // Get all post ids of the topic.
-            $post_ids = self::$asgarosforum->db->get_col("SELECT id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = ".$topic_id." ORDER BY id ASC;");
+            if (empty(self::$cache_get_post_link_ids[$topic_id])) {
+                self::$cache_get_post_link_ids[$topic_id] = self::$asgarosforum->db->get_col("SELECT id FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = ".$topic_id." ORDER BY id ASC;");
+            }
 
             // Now get the position of the post.
-            $post_position = array_search($post_id, $post_ids) + 1;
+            $post_position = array_search($post_id, self::$cache_get_post_link_ids[$topic_id]) + 1;
 
             // Now get the page on which this post is located.
             $post_page = ceil($post_position / self::$asgarosforum->options['posts_per_page']);
