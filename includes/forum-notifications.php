@@ -380,7 +380,7 @@ class AsgarosForumNotifications {
 
     public function show_subscription_overview_link() {
         if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            echo '<a class="subscriptions-link" href="'.$this->asgarosforum->getLink('subscriptions').'">'.__('Subscriptions', 'asgaros-forum').'</a>';
+            echo '<a href="'.$this->asgarosforum->getLink('subscriptions').'">'.__('Subscriptions', 'asgaros-forum').'</a>';
         }
     }
 
