@@ -30,7 +30,7 @@ class AsgarosForumMembersList {
         $pagination = new AsgarosForumPagination($asgarosforum);
         $pagination_rendering = $pagination->renderPagination('members');
 
-        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination->renderPagination('members').'<div class="clear"></div></div>' : '';
+        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
 
         echo $paginationRendering;
 
