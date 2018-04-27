@@ -88,9 +88,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Activity feed functionality
 * Added: Option to hide specific usergroups from public
 * Added: Option to set time limitation for editing posts
-* Added: Show usergroups of user in posts
+* Added: Show visible usergroups of user in posts
 * Changed: Always use defined usergroup color when output an usergroup
 * Changed: Minor design changes
 * Performance improvements and code optimizations
