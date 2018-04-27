@@ -14,11 +14,8 @@ class AsgarosForumActivity {
     }
 
     public function show_activity() {
-        $pagination = new AsgarosForumPagination($this->asgarosforum);
-        $pagination_rendering = $pagination->renderPagination('activity');
-
+        $pagination_rendering = $this->asgarosforum->pagination->renderPagination('activity');
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
-
         echo $paginationRendering;
 
         echo '<div class="title-element"></div>';

@@ -94,6 +94,7 @@ class AsgarosForum {
     var $breadcrumbs    = null;
     var $activity       = null;
     var $memberslist    = null;
+    var $pagination     = null;
 
     function __construct() {
         // Initialize database.
@@ -143,6 +144,7 @@ class AsgarosForum {
         $this->breadcrumbs      = new AsgarosForumBreadCrumbs($this);
         $this->activity         = new AsgarosForumActivity($this);
         $this->memberslist      = new AsgarosForumMembersList($this);
+        $this->pagination       = new AsgarosForumPagination($this);
     }
 
     //======================================================================

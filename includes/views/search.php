@@ -3,9 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 $results = $this->search->get_search_results();
-$pagination = new AsgarosForumPagination($this);
-$paginationRendering = ($results) ? '<div class="pages-and-menu">'.$pagination->renderPagination('search').'<div class="clear"></div></div>' : '';
-
+$paginationRendering = ($results) ? '<div class="pages-and-menu">'.$this->pagination->renderPagination('search').'<div class="clear"></div></div>' : '';
 echo $paginationRendering;
 
 echo '<div class="title-element">';

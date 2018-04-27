@@ -6,7 +6,7 @@ class AsgarosForumPagination {
     private $asgarosforum = null;
 
     public function __construct($object) {
-		$this->asgarosforum = $object;
+        $this->asgarosforum = $object;
     }
 
     public function renderTopicOverviewPagination($topicID) {

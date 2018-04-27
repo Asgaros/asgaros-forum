@@ -27,11 +27,8 @@ class AsgarosForumMembersList {
     }
 
     public function showMembersList() {
-        $pagination = new AsgarosForumPagination($this->asgarosforum);
-        $pagination_rendering = $pagination->renderPagination('members');
-
+        $pagination_rendering = $this->asgarosforum->pagination->renderPagination('members');
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
-
         echo $paginationRendering;
 
         echo '<div class="title-element"></div>';
