@@ -3,31 +3,31 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumMembersList {
-    public static function functionalityEnabled() {
-        global $asgarosforum;
+    private $asgarosforum = null;
 
-        if (!$asgarosforum->options['enable_memberslist'] || ($asgarosforum->options['memberslist_loggedin_only'] && !is_user_logged_in())) {
+    public function __construct($object) {
+        $this->asgarosforum = $object;
+    }
+
+    public function functionalityEnabled() {
+        if (!$this->asgarosforum->options['enable_memberslist'] || ($this->asgarosforum->options['memberslist_loggedin_only'] && !is_user_logged_in())) {
             return false;
         } else {
             return true;
         }
     }
 
-    public static function renderMembersListLink() {
-        global $asgarosforum;
-
-        if (self::functionalityEnabled()) {
-            $membersLink = $asgarosforum->getLink('members');
+    public function renderMembersListLink() {
+        if ($this->functionalityEnabled()) {
+            $membersLink = $this->asgarosforum->getLink('members');
             $membersLink = apply_filters('asgarosforum_filter_members_link', $membersLink);
 
             echo '<a class="members-link" href="'.$membersLink.'">'.__('Members', 'asgaros-forum').'</a>';
         }
     }
 
-    public static function showMembersList() {
-        global $asgarosforum;
-
-        $pagination = new AsgarosForumPagination($asgarosforum);
+    public function showMembersList() {
+        $pagination = new AsgarosForumPagination($this->asgarosforum);
         $pagination_rendering = $pagination->renderPagination('members');
 
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
@@ -39,15 +39,15 @@ class AsgarosForumMembersList {
 
         $showAvatars = get_option('show_avatars');
 
-        $data = self::getMembers();
+        $data = $this->getMembers();
 
-        $start = $asgarosforum->current_page * $asgarosforum->options['members_per_page'];
-        $end = $asgarosforum->options['members_per_page'];
+        $start = $this->asgarosforum->current_page * $this->asgarosforum->options['members_per_page'];
+        $end = $this->asgarosforum->options['members_per_page'];
 
         $dataSliced = array_slice($data, $start, $end);
 
         foreach ($dataSliced as $element) {
-            $userOnline = ($asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
+            $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
 
             echo '<div class="member'.$userOnline.'">';
                 if ($showAvatars) {
@@ -57,7 +57,7 @@ class AsgarosForumMembersList {
                 }
 
                 echo '<div class="member-name">';
-                    echo $asgarosforum->getUsername($element->ID);
+                    echo $this->asgarosforum->getUsername($element->ID);
                     echo '<small>';
                         echo AsgarosForumPermissions::getForumRole($element->ID);
                     echo '</small>';
@@ -69,7 +69,7 @@ class AsgarosForumMembersList {
                 echo '</div>';
 
                 echo '<div class="member-last-seen">';
-                    echo __('Last seen:', 'asgaros-forum').' <i>'.$asgarosforum->online->last_seen($element->ID).'</i>';
+                    echo __('Last seen:', 'asgaros-forum').' <i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
                 echo '</div>';
             echo '</div>';
         }
@@ -79,14 +79,12 @@ class AsgarosForumMembersList {
         echo $paginationRendering;
     }
 
-    public static function getMembers() {
-        global $asgarosforum, $wpdb;
-
+    public function getMembers() {
         // Get all existing users.
         $allUsers = get_users(array('fields' => array('ID', 'display_name')));
 
         // Now get the amount of forum posts for all users.
-        $postsCounter = $wpdb->get_results("SELECT author_id, COUNT(id) AS counter FROM {$asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
+        $postsCounter = $this->asgarosforum->db->get_results("SELECT author_id, COUNT(id) AS counter FROM {$this->asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
 
         // Change the structure of the results for better searchability.
         $postsCounterSearchable = array();

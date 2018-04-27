@@ -93,6 +93,7 @@ class AsgarosForum {
     var $content        = null;
     var $breadcrumbs    = null;
     var $activity       = null;
+    var $memberslist    = null;
 
     function __construct() {
         // Initialize database.
@@ -141,6 +142,7 @@ class AsgarosForum {
         $this->content          = new AsgarosForumContent($this);
         $this->breadcrumbs      = new AsgarosForumBreadCrumbs($this);
         $this->activity         = new AsgarosForumActivity($this);
+        $this->memberslist      = new AsgarosForumMembersList($this);
     }
 
     //======================================================================
@@ -278,7 +280,7 @@ class AsgarosForum {
                 break;
             case 'members':
                 // Go back to the overview when this functionality is not enabled.
-                if (!AsgarosForumMembersList::functionalityEnabled()) {
+                if (!$this->memberslist->functionalityEnabled()) {
                     $this->current_view = 'overview';
                 }
                 break;
@@ -493,7 +495,7 @@ class AsgarosForum {
                         $this->profile->showProfile();
                     break;
                     case 'members':
-                        AsgarosForumMembersList::showMembersList();
+                        $this->memberslist->showMembersList();
                     break;
                     case 'activity':
                         $this->activity->show_activity();
@@ -964,7 +966,7 @@ class AsgarosForum {
                 echo '<a href="'.$this->getLink('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
                 $this->profile->renderCurrentUsersProfileLink();
-                AsgarosForumMembersList::renderMembersListLink();
+                $this->memberslist->renderMembersListLink();
                 $this->notifications->show_subscription_overview_link();
                 $this->activity->show_activity_link();
 
