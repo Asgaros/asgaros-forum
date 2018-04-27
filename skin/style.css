@@ -119,7 +119,7 @@
 #af-wrapper input {
     padding: 3px 6px;
     border: 1px solid #ddd;
-    color: #555;
+    color: #444;
     margin: 0;
     vertical-align: middle;
     font-family: inherit;
@@ -277,9 +277,10 @@
 }
 #af-wrapper .editor-row-uploads .upload-filetypes {
     display: block;
-    font-size: 12px !important;
     padding: 5px 0;
-    color: #666;
+    color: #888;
+    font-style: italic;
+    font-size: smaller !important;
 }
 #af-wrapper .editor-row input[type="file"] {
     width: 100%;
@@ -383,7 +384,7 @@
 #af-wrapper .forum-stats,
 #af-wrapper .topic-stats {
     font-style: italic !important;
-    color: #767676;
+    color: #888;
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
@@ -1326,7 +1327,7 @@
 /* ACTIVITY */
 #af-wrapper .activity-element {
     display: block;
-    height: 32px;
+    min-height: 32px;
     line-height: 32px;
     padding: 0px 12px;
     border-bottom: 1px solid #eee;
