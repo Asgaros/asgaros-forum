@@ -52,6 +52,7 @@ class AsgarosForum {
         'enable_search'             => true,
         'enable_profiles'           => true,
         'enable_memberslist'        => true,
+        'enable_activity'           => false,
         'reports_enabled'           => true,
         'reports_notifications'     => true,
         'memberslist_loggedin_only' => false,
@@ -91,6 +92,7 @@ class AsgarosForum {
     var $online         = null;
     var $content        = null;
     var $breadcrumbs    = null;
+    var $activity       = null;
 
     function __construct() {
         // Initialize database.
@@ -138,6 +140,7 @@ class AsgarosForum {
         $this->online           = new AsgarosForumOnline($this);
         $this->content          = new AsgarosForumContent($this);
         $this->breadcrumbs      = new AsgarosForumBreadCrumbs($this);
+        $this->activity         = new AsgarosForumActivity($this);
     }
 
     //======================================================================
@@ -276,6 +279,11 @@ class AsgarosForum {
             case 'members':
                 // Go back to the overview when this functionality is not enabled.
                 if (!AsgarosForumMembersList::functionalityEnabled()) {
+                    $this->current_view = 'overview';
+                }
+                break;
+            case 'activity':
+                if (!$this->activity->functionality_enabled()) {
                     $this->current_view = 'overview';
                 }
                 break;
@@ -418,6 +426,8 @@ class AsgarosForum {
                 $mainTitle = $this->profile->getCurrentTitle();
             } else if ($this->current_view === 'members') {
                 $mainTitle = __('Members', 'asgaros-forum');
+            } else if ($this->current_view === 'activity') {
+                $mainTitle = __('Activity', 'asgaros-forum');
             }
         }
 
@@ -484,6 +494,9 @@ class AsgarosForum {
                     break;
                     case 'members':
                         AsgarosForumMembersList::showMembersList();
+                    break;
+                    case 'activity':
+                        $this->activity->show_activity();
                     break;
                     default:
                         $this->overview();
@@ -698,10 +711,21 @@ class AsgarosForum {
         return $results;
     }
 
-    function is_first_post($post_id) {
-        $first_post_id = $this->db->get_var("SELECT id FROM {$this->tables->posts} WHERE parent_id = {$this->current_topic} ORDER BY id ASC LIMIT 1;");
+    private $is_first_post_cache = array();
+    function is_first_post($post_id, $topic_id = false) {
+        // When we dont know the topic-id, we need to figure it out.
+        if (!$topic_id) {
+            // Check if there exists an current-topic-id.
+            if ($this->current_topic) {
+                $topic_id = $this->current_topic;
+            }
+        }
 
-        if ($first_post_id == $post_id) {
+        if (empty($this->is_first_post_cache[$topic_id])) {
+            $this->is_first_post_cache[$topic_id] = $this->db->get_var("SELECT id FROM {$this->tables->posts} WHERE parent_id = {$topic_id} ORDER BY id ASC LIMIT 1;");
+        }
+
+        if ($post_id == $this->is_first_post_cache[$topic_id]) {
             return true;
         } else {
             return false;
@@ -942,6 +966,7 @@ class AsgarosForum {
                 $this->profile->renderCurrentUsersProfileLink();
                 AsgarosForumMembersList::renderMembersListLink();
                 $this->notifications->show_subscription_overview_link();
+                $this->activity->show_activity_link();
 
                 $this->showLoginLink();
                 $this->showRegisterLink();

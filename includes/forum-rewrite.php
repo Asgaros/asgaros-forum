@@ -77,6 +77,7 @@ class AsgarosForumRewrite {
         global $wp;
         $links = array();
         $links['home']          = get_page_link(self::$asgarosforum->options['location']);
+        $links['activity']      = add_query_arg(array('view' => 'activity'), $links['home']);
         $links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $links['home']);
         $links['search']        = add_query_arg(array('view' => 'search'), $links['home']);
         $links['forum']         = add_query_arg(array('view' => 'forum'), $links['home']);

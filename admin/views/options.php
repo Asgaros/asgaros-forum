@@ -126,6 +126,10 @@ if (!defined('ABSPATH')) exit;
                         <h2 class="hndle dashicons-before dashicons-admin-plugins"><?php _e('Features', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
+                                <input type="checkbox" name="enable_activity" id="enable_activity" <?php checked(!empty($asgarosforum->options['enable_activity'])); ?>>
+                                <label for="enable_activity"><?php _e('Enable Activity Feed', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
                                 <input type="checkbox" name="enable_mentioning" id="enable_mentioning" <?php checked(!empty($asgarosforum->options['enable_mentioning'])); ?>>
                                 <label for="enable_mentioning"><?php _e('Enable Mentioning', 'asgaros-forum'); ?></label>
                             </p>

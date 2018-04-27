@@ -79,7 +79,8 @@
 #af-wrapper .content-element .topic:nth-child(even),
 #af-wrapper .content-element .editor-row:nth-child(even),
 #af-wrapper .content-element .subscription:nth-child(even),
-#af-wrapper .content-element .member:nth-child(even) {
+#af-wrapper .content-element .member:nth-child(even),
+#af-wrapper .content-element .activity-element:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.02);
 }
 #af-wrapper #forum-editor-form {
@@ -1320,4 +1321,26 @@
 }
 #af-wrapper .read:before {
     opacity: 0.5;
+}
+
+/* ACTIVITY */
+#af-wrapper .activity-element {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0px 12px;
+    border-bottom: 1px solid #eee;
+}
+#af-wrapper .activity-element:before {
+    height: 32px;
+    line-height: 32px;
+    color: #888;
+    padding-right: 8px;
+}
+#af-wrapper .activity-element:last-child {
+    border: none;
+}
+#af-wrapper .activity-time {
+    color: #888;
+    font-size: smaller;
 }
