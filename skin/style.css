@@ -641,7 +641,7 @@
 #af-wrapper .subscription-option {
     width: 33%;
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: top;
     text-align: center;
     box-sizing: border-box;
     border-right: 1px solid #eeeeee;
@@ -659,6 +659,13 @@
 }
 #af-wrapper .subscription-option:last-child {
     border: none;
+}
+#af-wrapper .subscription-option-description {
+    color: #888;
+    display: block;
+    font-size: smaller !important;
+    font-style: italic;
+    padding-top: 8px;
 }
 
 /* BREADCRUMBS */

@@ -405,15 +405,30 @@ class AsgarosForumNotifications {
         echo '<div class="content-element">';
             echo '<form method="post" action="'.$this->asgarosforum->getLink('subscriptions').'">';
                 echo '<div id="subscription-settings">';
-                    echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum').'</label>';
-                    echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum').'</label>';
-                    echo '<label class="subscription-option"><input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum').'</label>';
+                    echo '<label class="subscription-option">';
+                        echo '<input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum');
+                        echo '<span class="subscription-option-description">';
+                            _e('You get notified about activity in forums and topics you are subscribed to.', 'asgaros-forum');
+                        echo '</span>';
+                    echo '</label>';
+                    echo '<label class="subscription-option">';
+                        echo '<input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum');
+                        echo '<span class="subscription-option-description">';
+                            _e('You get notified about all new topics.', 'asgaros-forum');
+                        echo '</span>';
+                    echo '</label>';
+                    echo '<label class="subscription-option">';
+                        echo '<input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum');
+                        echo '<span class="subscription-option-description">';
+                            _e('You get notified about all new topics and posts.', 'asgaros-forum');
+                        echo '</span>';
+                    echo '</label>';
                 echo '</div>';
             echo '</form>';
         echo '</div>';
 
         // Topic subscriptions list always available when we are not subscribed to everything.
-        $title = __('Topic Subscriptions', 'asgaros-forum');
+        $title = __('Notify about new posts in:', 'asgaros-forum');
         $subscribedTopics = get_user_meta($user_id, 'asgarosforum_subscription_topic');
         $all = ($subscription_level == 3) ? true : false;
 
@@ -424,7 +439,7 @@ class AsgarosForumNotifications {
 
         $this->render_subscriptions_list($title, $subscribedTopics, 'topic', $all);
 
-        $title = __('Forum Subscriptions', 'asgaros-forum');
+        $title = __('Notify about new topics in:', 'asgaros-forum');
         $subscribedForums = get_user_meta($user_id, 'asgarosforum_subscription_forum');
         $all = ($subscription_level > 1) ? true : false;
 
@@ -479,9 +494,9 @@ class AsgarosForumNotifications {
 
         if ($all) {
             if ($type == 'forum') {
-                echo '<div class="notice">'. __('You are subscribed to <b>all</b> forums.', 'asgaros-forum').'</div>';
+                echo '<div class="notice">'. __('You get notified about <b>all</b> new topics.', 'asgaros-forum').'</div>';
             } else if ($type == 'topic') {
-                echo '<div class="notice">'. __('You are subscribed to <b>all</b> topics.', 'asgaros-forum').'</div>';
+                echo '<div class="notice">'. __('You get notified about <b>all</b> new posts.', 'asgaros-forum').'</div>';
             }
         } else if (empty($data)) {
             echo '<div class="notice">'.__('No subscriptions yet!', 'asgaros-forum').'</div>';
