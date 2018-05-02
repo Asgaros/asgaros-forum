@@ -5,14 +5,14 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 4.9
 Requires PHP: 5.2
-Stable tag: 1.8.3
+Stable tag: 1.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Asgaros Forum is the best forum solution for WordPress! It comes with dozens of features in a beautiful design and stays slight, simple and fast.
+Asgaros Forum is the best forum solution for WordPress! It comes with dozens of features in a beautiful design and stays simple and fast.
 
 == Description ==
-Asgaros Forum is the perfect WordPress plugin for you if you want to extend your website with a lightweight discussion board. It is easy to set up and manage, integrates perfectly with WordPress and comes with a small amount of features which makes it fast and simple.
+Asgaros Forum is the perfect WordPress plugin for you if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and integrates perfectly into WordPress.
 
 = Installation =
 Create a new page for your forum to display on and add the shortcode [forum] to this page. Add this page to your menu so you can access the forum. Thats all!
@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.8.4 =
 * Added: Activity feed functionality
 * Added: Option to hide specific usergroups from public
 * Added: Option to set time limitation for editing posts
