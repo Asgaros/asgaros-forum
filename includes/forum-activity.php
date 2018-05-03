@@ -35,7 +35,7 @@ class AsgarosForumActivity {
                         echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$time.'</i>';
                         echo '</div>';
                     } else {
-                        $link = AsgarosForumRewrite::get_post_link($activity->id, $activity->parent_id);
+                        $link = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
                         $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                         echo '<div class="activity-element dashicons-before dashicons-admin-comments">';
                         echo sprintf(__('%s answered in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$time.'</i>';

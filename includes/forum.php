@@ -80,6 +80,7 @@ class AsgarosForum {
         'quicktags'     => false
     );
     var $cache          = array();   // Used to store selected database queries.
+    var $rewrite        = null;
     var $reports        = null;
     var $profile        = null;
     var $editor         = null;
@@ -122,7 +123,6 @@ class AsgarosForum {
         }
 
         new AsgarosForumCompatibility($this);
-        new AsgarosForumRewrite($this);
         new AsgarosForumPermissions($this);
         new AsgarosForumUnread($this);
         new AsgarosForumShortcodes($this);
@@ -130,6 +130,7 @@ class AsgarosForum {
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
 
+        $this->rewrite          = new AsgarosForumRewrite($this);
         $this->reports          = new AsgarosForumReports($this);
         $this->profile          = new AsgarosForumProfile($this);
         $this->editor           = new AsgarosForumEditor($this);
@@ -224,7 +225,7 @@ class AsgarosForum {
 
         // Set all base links.
         if ($this->executePlugin || get_post($this->options['location'])) {
-            AsgarosForumRewrite::setLinks();
+            $this->rewrite->setLinks();
         }
 
         if (!$this->executePlugin) {
@@ -589,7 +590,7 @@ class AsgarosForum {
         $topic = $this->getTopic($this->current_topic);
 
         if (empty($topic->slug)) {
-            $slug = AsgarosForumRewrite::createUniqueSlug($topic->name, $this->tables->topics, 'topic');
+            $slug = $this->rewrite->createUniqueSlug($topic->name, $this->tables->topics, 'topic');
             $this->db->update($this->tables->topics, array('slug' => $slug), array('id' => $topic->id), array('%s'), array('%d'));
         }
 
@@ -1128,7 +1129,7 @@ class AsgarosForum {
 
     // Builds and returns a requested link.
     public function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '', $escapeURL = true) {
-        return AsgarosForumRewrite::getLink($type, $elementID, $additionalParameters, $appendix, $escapeURL);
+        return $this->rewrite->getLink($type, $elementID, $additionalParameters, $appendix, $escapeURL);
     }
 
     // Checks if an element exists and sets all parent IDs based on the given id and its content type.

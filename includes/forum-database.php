@@ -162,7 +162,7 @@ class AsgarosForumDatabase {
                 $forums = $this->db->get_results("SELECT id, name FROM ".$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
 
                 foreach ($forums as $forum) {
-                    $slug = AsgarosForumRewrite::createUniqueSlug($forum->name, $this->tables->forums, 'forum');
+                    $slug = $asgarosforum->rewrite->createUniqueSlug($forum->name, $this->tables->forums, 'forum');
                     $this->db->update($this->tables->forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
                 }
             }

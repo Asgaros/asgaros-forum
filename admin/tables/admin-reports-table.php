@@ -92,7 +92,7 @@ class Asgaros_Forum_Admin_Reports_Table extends WP_List_Table {
         $this->_column_headers = array($columns);
 
         // We need to initialize the links to make them work in the admin area.
-        AsgarosForumRewrite::setLinks();
+        $asgarosforum->rewrite->setLinks();
 
         $this->items = array();
 

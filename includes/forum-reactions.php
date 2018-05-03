@@ -74,7 +74,7 @@ class AsgarosForumReactions {
                     $output = '<span class="reaction '.$reaction.'"><span class="reaction-icon dashicons-before dashicons-thumbs-'.$reaction.' '.$active[$reaction].'"></span><span class="reaction-number">'.$counter.'</span></span>';
 
                     if (is_user_logged_in()) {
-                        $link = AsgarosForumRewrite::getLink(
+                        $link = $this->asgarosforum->rewrite->getLink(
                             'topic',
                             $topic_id,
                             array(
@@ -157,7 +157,7 @@ class AsgarosForumReactions {
     }
 
     public function redirect($post_id) {
-        $redirect_link = AsgarosForumRewrite::get_post_link($post_id);
+        $redirect_link = $this->asgarosforum->rewrite->get_post_link($post_id);
         wp_redirect(html_entity_decode($redirect_link));
         exit;
     }

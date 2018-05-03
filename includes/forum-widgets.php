@@ -27,7 +27,7 @@ class AsgarosForumWidgets {
             $pageID = self::$asgarosforum->db->get_var('SELECT ID FROM '.self::$asgarosforum->db->prefix.'posts WHERE post_type = "page" AND (post_content LIKE "%[forum]%" OR post_content LIKE "%[Forum]%");');
             if ($pageID) {
                 self::$asgarosforum->options['location'] = $pageID;
-                AsgarosForumRewrite::setLinks();
+                self::$asgarosforum->rewrite->setLinks();
                 $locationSetUp = true;
             }
         }

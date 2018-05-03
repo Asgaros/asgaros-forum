@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 1.8.4 =
 * Added: Activity feed functionality
 * Added: Option to hide specific usergroups from public
