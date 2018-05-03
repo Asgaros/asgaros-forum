@@ -20,7 +20,7 @@ class AsgarosForumWidgets {
     }
 
     public static function setUpLocation() {
-        $locationSetUp = AsgarosForumShortcodes::checkForShortcode();
+        $locationSetUp = self::$asgarosforum->shortcode->checkForShortcode();
 
         // Try to get the forum-location when it is not set correctly.
         if (!$locationSetUp) {

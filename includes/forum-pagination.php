@@ -64,7 +64,7 @@ class AsgarosForumPagination {
             }
 
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
-            $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
+            $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 
             $query_match_name = "SELECT search_name.id AS topic_id FROM {$this->asgarosforum->tables->topics} AS search_name WHERE MATCH (search_name.name) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
             $query_match_text = "SELECT search_text.parent_id AS topic_id FROM {$this->asgarosforum->tables->posts} AS search_text WHERE MATCH (search_text.text) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";

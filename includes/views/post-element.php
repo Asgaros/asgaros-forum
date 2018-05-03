@@ -75,9 +75,9 @@ $user_data = get_userdata($post->author_id);
             $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
 
             if ($this->options['allow_shortcodes']) {
-                add_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
+                add_filter('strip_shortcodes_tagnames', array($this->shortcode, 'filterShortcodes'), 10, 2);
                 $post_content = strip_shortcodes($post_content);
-                remove_filter('strip_shortcodes_tagnames', array('AsgarosForumShortcodes', 'filterShortcodes'), 10, 2);
+                remove_filter('strip_shortcodes_tagnames', array($this->shortcode, 'filterShortcodes'), 10, 2);
 
                 // Run shortcodes.
                 $post_content = do_shortcode($post_content);

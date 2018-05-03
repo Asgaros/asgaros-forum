@@ -81,6 +81,7 @@ class AsgarosForum {
     );
     var $cache          = array();   // Used to store selected database queries.
     var $rewrite        = null;
+    var $shortcode      = null;
     var $reports        = null;
     var $profile        = null;
     var $editor         = null;
@@ -125,12 +126,12 @@ class AsgarosForum {
         new AsgarosForumCompatibility($this);
         new AsgarosForumPermissions($this);
         new AsgarosForumUnread($this);
-        new AsgarosForumShortcodes($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
 
         $this->rewrite          = new AsgarosForumRewrite($this);
+        $this->shortcode        = new AsgarosForumShortcodes($this);
         $this->reports          = new AsgarosForumReports($this);
         $this->profile          = new AsgarosForumProfile($this);
         $this->editor           = new AsgarosForumEditor($this);
@@ -218,7 +219,7 @@ class AsgarosForum {
     function prepare() {
         global $post;
 
-        if (is_a($post, 'WP_Post') && AsgarosForumShortcodes::checkForShortcode($post)) {
+        if (is_a($post, 'WP_Post') && $this->shortcode->checkForShortcode($post)) {
             $this->executePlugin = true;
             $this->options['location'] = $post->ID;
         }
@@ -297,7 +298,7 @@ class AsgarosForum {
             break;
         }
 
-        AsgarosForumShortcodes::handleAttributes();
+        $this->shortcode->handleAttributes();
 
         // Check access.
         $this->check_access();

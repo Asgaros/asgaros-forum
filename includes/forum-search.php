@@ -62,7 +62,7 @@ class AsgarosForumSearch {
             $end = $this->asgarosforum->options['topics_per_page'];
             $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $start, $end);
 
-            $shortcodeSearchFilter = AsgarosForumShortcodes::$shortcodeSearchFilter;
+            $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 
             $match_name = "MATCH (search_name.name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
             $match_text = "MATCH (search_text.text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";

@@ -321,8 +321,8 @@ class AsgarosForumContent {
             $meta_query_filter = $this->get_categories_filter();
 
             // Set include filter when extended shortcode is used.
-            if (AsgarosForumShortcodes::$includeCategories) {
-                $include = AsgarosForumShortcodes::$includeCategories;
+            if ($this->asgarosforum->shortcode->includeCategories) {
+                $include = $this->asgarosforum->shortcode->includeCategories;
             }
         }
 
