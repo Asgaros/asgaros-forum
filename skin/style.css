@@ -926,6 +926,10 @@
 #af-wrapper .post-footer a {
     color: #999;
 }
+#af-wrapper .post-meta {
+    position: static; /* comp */
+    font-size: inherit; /* comp */
+}
 #af-wrapper .highlight-post {
     border: 3px solid red;
 }
