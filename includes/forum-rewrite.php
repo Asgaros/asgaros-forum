@@ -117,4 +117,84 @@ class AsgarosForumRewrite {
 
         return $slug;
     }
+
+    // Converts a slug to an id.
+    private $convert_slug_to_id_cache = array();
+    function convert_slug_to_id($slug, $type) {
+        // Check cache first.
+        if (empty($this->convert_slug_to_id_cache[$type.'-'.$slug])) {
+            // Set false as a default value in case it does not belong to an element.
+            $this->convert_slug_to_id_cache[$type.'-'.$slug] = false;
+
+            // Now try to determine an id.
+            switch ($type) {
+                case 'topic':
+                    $result = $this->asgarosforum->db->get_var('SELECT id FROM '.$this->asgarosforum->tables->topics.' WHERE slug = "'.$slug.'";');
+
+                    if ($result) {
+                        $this->convert_slug_to_id_cache[$type.'-'.$slug] = $result;
+                    }
+
+                    break;
+                case 'forum':
+                    $result = $this->asgarosforum->db->get_var('SELECT id FROM '.$this->asgarosforum->tables->forums.' WHERE slug = "'.$slug.'";');
+
+                    if ($result) {
+                        $this->convert_slug_to_id_cache[$type.'-'.$slug] = $result;
+                    }
+
+                    break;
+                case 'profile':
+                    $result = get_user_by('slug', $slug);
+
+                    if ($result) {
+                        $this->convert_slug_to_id_cache[$type.'-'.$slug] = $result->ID;
+                    }
+
+                    break;
+            }
+        }
+
+        return $this->convert_slug_to_id_cache[$type.'-'.$slug];
+    }
+
+    // Converts an id to a slug.
+    private $convert_id_to_slug_cache = array();
+    function convert_id_to_slug($id, $type) {
+        // Check cache first.
+        if (empty($this->convert_id_to_slug_cache[$type.'-'.$id])) {
+            // Set the id as a default value in case we cant find a slug.
+            $this->convert_id_to_slug_cache[$type.'-'.$id] = $id;
+
+            // Now try to determine a slug.
+            switch ($type) {
+                case 'topic':
+                    $result = $this->asgarosforum->db->get_var('SELECT slug FROM '.$this->asgarosforum->tables->topics.' WHERE id = '.$id.';');
+
+                    if ($result) {
+                        $this->convert_id_to_slug_cache[$type.'-'.$id] = $result;
+                    }
+
+                    break;
+                case 'forum':
+                    $result = $this->asgarosforum->db->get_var('SELECT slug FROM '.$this->asgarosforum->tables->forums.' WHERE id = '.$id.';');
+
+                    if ($result) {
+                        $this->convert_id_to_slug_cache[$type.'-'.$id] = $result;
+                    }
+
+                    break;
+                case 'profile':
+                    $result = get_user_by('id', $id);
+
+                    if ($result) {
+                        $this->convert_id_to_slug_cache[$type.'-'.$id] = $result->user_nicename;
+                    }
+
+                    break;
+            }
+        }
+
+        return $this->convert_id_to_slug_cache[$type.'-'.$id];
+    }
 }
