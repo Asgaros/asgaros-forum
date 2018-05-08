@@ -591,7 +591,7 @@ class AsgarosForum {
         $topic = $this->getTopic($this->current_topic);
 
         if (empty($topic->slug)) {
-            $slug = $this->rewrite->createUniqueSlug($topic->name, $this->tables->topics, 'topic');
+            $slug = $this->rewrite->create_unique_slug($topic->name, $this->tables->topics, 'topic');
             $this->db->update($this->tables->topics, array('slug' => $slug), array('id' => $topic->id), array('%s'), array('%d'));
         }
 

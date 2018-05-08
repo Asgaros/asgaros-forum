@@ -190,7 +190,7 @@ class AsgarosForumContent {
     // Inserts a new forum.
     public function insert_forum($category_id, $name, $description, $parent_forum, $icon, $order, $closed) {
         // Get a slug for the new forum.
-        $forum_slug = $this->asgarosforum->rewrite->createUniqueSlug($name, $this->asgarosforum->tables->forums, 'forum');
+        $forum_slug = $this->asgarosforum->rewrite->create_unique_slug($name, $this->asgarosforum->tables->forums, 'forum');
 
         // Insert the forum.
         $this->asgarosforum->db->insert(
@@ -211,7 +211,7 @@ class AsgarosForumContent {
         }
 
         // Get a slug for the new topic.
-        $topic_slug = $this->asgarosforum->rewrite->createUniqueSlug($name, $this->asgarosforum->tables->topics, 'topic');
+        $topic_slug = $this->asgarosforum->rewrite->create_unique_slug($name, $this->asgarosforum->tables->topics, 'topic');
 
         // Insert the topic.
         $this->asgarosforum->db->insert($this->asgarosforum->tables->topics, array('name' => $name, 'parent_id' => $forum_id, 'slug' => $topic_slug), array('%s', '%d', '%s'));
