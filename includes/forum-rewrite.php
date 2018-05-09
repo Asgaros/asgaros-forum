@@ -205,23 +205,23 @@ class AsgarosForumRewrite {
 
         // Set forum home and current link first. We need to use the internal _get_page_link function because
         // otherwise the generated links would not be correct when the forum is located on a static front page.
-        $this->links['home']    = trailingslashit(_get_page_link($this->asgarosforum->options['location']));
+        $this->links['home']    = untrailingslashit(_get_page_link($this->asgarosforum->options['location']));
         $this->links['current'] = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
 
         // Set additional links based on global permalink-settings.
         if ($this->use_permalinks) {
-            $this->links['activity']      = $this->links['home'].'activity/';
-            $this->links['subscriptions'] = $this->links['home'].'subscriptions/';
-            $this->links['search']        = $this->links['home'].'search/';
-            $this->links['forum']         = $this->links['home'].'forum/';
-            $this->links['topic']         = $this->links['home'].'topic/';
-            $this->links['topic_add']     = $this->links['home'].'addtopic/';
-            $this->links['topic_move']    = $this->links['home'].'movetopic/';
-            $this->links['post_add']      = $this->links['home'].'addpost/';
-            $this->links['post_edit']     = $this->links['home'].'editpost/';
-            $this->links['markallread']   = $this->links['home'].'markallread/';
-            $this->links['members']       = $this->links['home'].'members/';
-            $this->links['profile']       = $this->links['home'].'profile/';
+            $this->links['activity']      = $this->links['home'].'/activity/';
+            $this->links['subscriptions'] = $this->links['home'].'/subscriptions/';
+            $this->links['search']        = $this->links['home'].'/search/';
+            $this->links['forum']         = $this->links['home'].'/forum/';
+            $this->links['topic']         = $this->links['home'].'/topic/';
+            $this->links['topic_add']     = $this->links['home'].'/addtopic/';
+            $this->links['topic_move']    = $this->links['home'].'/movetopic/';
+            $this->links['post_add']      = $this->links['home'].'/addpost/';
+            $this->links['post_edit']     = $this->links['home'].'/editpost/';
+            $this->links['markallread']   = $this->links['home'].'/markallread/';
+            $this->links['members']       = $this->links['home'].'/members/';
+            $this->links['profile']       = $this->links['home'].'/profile/';
         } else {
             $this->links['activity']      = add_query_arg(array('view' => 'activity'), $this->links['home']);
             $this->links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $this->links['home']);
