@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumRewrite {
     private $asgarosforum = null;
-    private $usePermalinks = false;
+    private $use_permalinks = false;
     private $links = array();
     public $slug_cache = array();
 
@@ -13,28 +13,123 @@ class AsgarosForumRewrite {
 
         // Check if permalinks are enabled.
         if (get_option('permalink_structure')) {
-            $usePermalinks = true;
-        }
+            $this->use_permalinks = true;
 
-        add_action('init', array($this, 'initialize'));
+            add_filter('rewrite_rules_array', array($this, 'add_rewrite_rules_array'));
+            add_filter('redirect_canonical', array($this, 'disable_front_page_redirect'), 10, 2);
+        }
 	}
 
-    function initialize() {
-        // Empty ...
+    // TODO: Not working for shortcode parameters yet.
+    function add_rewrite_rules_array($rules) {
+        // Retrieve relative base url. We need to use the internal _get_page_link function because
+        // otherwise the generated links would not be correct when the forum is located on a static front page.
+        $home_url = trailingslashit(home_url());
+        $perm_url = trailingslashit(_get_page_link($this->asgarosforum->options['location']));
+        $base_url = str_replace($home_url, '', $perm_url);
+        $base_url = untrailingslashit($base_url);
+
+        // Generate the pattern.
+        $pattern = '('.preg_quote($base_url).'(?:/|$).*)$';
+
+        // Set target url.
+        $target_url = 'index.php?page_id='.$this->asgarosforum->options['location'];
+
+        // Add rule to array when it does not exists.
+        if (!in_array($target_url, $rules)) {
+            $rules = array_merge(array($pattern => $target_url), $rules);
+        }
+
+        return $rules;
+    }
+
+    // Disable canonical redirect for the static front page when the forum is located on it. Otherwise the rewrite rules would not work.
+    function disable_front_page_redirect($requested_url, $do_redirect) {
+        global $post;
+
+        if (get_option('show_on_front') === 'page') {
+            $front_page_id = get_option('page_on_front');
+
+            if ($front_page_id == $post->ID && $front_page_id == $this->asgarosforum->options['location']) {
+                $requested_url = false;
+            }
+        }
+
+        return $requested_url;
+    }
+
+    // Tries to parse the url and set the corresponding values.
+    function parse_url() {
+        if ($this->use_permalinks) {
+            $home_url = $this->getLink('home');
+            $current_url = $this->getLink('current');
+
+            // Remove the home url from the beginning of the current url.
+            $parsed_url = preg_replace('#^/?'.preg_quote($home_url).'#isu', '', $current_url, 1);
+
+            // Remove parameters from the current url.
+            $parsed_url = preg_replace('#/?\?.*$#isu', '', $parsed_url);
+
+            // Trim url and split parameters.
+            $parsed_url = trim($parsed_url, '/');
+            $parsed_url = explode('/', $parsed_url);
+
+            // Set the current view.
+            if (!empty($parsed_url[0])) {
+                $this->asgarosforum->current_view = esc_html($parsed_url[0]);
+            }
+
+            // Set the current element id.
+            if (!empty($parsed_url[1])) {
+                if (is_numeric($parsed_url[1])) {
+                    $this->asgarosforum->current_element = absint($parsed_url[1]);
+                } else {
+                    $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
+                }
+            }
+        } else {
+            // Set the current view.
+            if (!empty($_GET['view'])) {
+                $this->asgarosforum->current_view = esc_html($_GET['view']);
+            }
+
+            // Set the current element id.
+            if (!empty($_GET['id'])) {
+                $this->asgarosforum->current_element = absint($_GET['id']);
+            }
+        }
+
+        // Set the current page.
+        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
+            $this->asgarosforum->current_page = (absint($_GET['part']) - 1);
+        }
     }
 
     // Builds and returns a requested link.
-    function getLink($type, $elementID = false, $additionalParameters = false, $appendix = '', $escapeURL = true) {
+    function getLink($type, $element_id = false, $additional_parameters = false, $appendix = '', $escape_url = true) {
         // Only generate a link when that type is available.
         if (isset($this->links[$type])) {
-            // Set an ID if available, otherwise initialize the base-link.
-            $link = ($elementID) ? add_query_arg('id', $elementID, $this->links[$type]) : $this->links[$type];
+            // Initialize the base-link.
+            $link = $this->links[$type];
+
+            // Set an ID if available.
+            if ($element_id) {
+                if ($this->use_permalinks) {
+                    if (is_numeric($element_id)) {
+                        $element_id = $this->convert_id_to_slug($element_id, $type);
+                    }
+
+                    $link = $link.$element_id;
+                } else {
+                    $link = add_query_arg('id', $element_id, $link);
+                }
+            }
 
             // Set additional parameters if available, otherwise let the link unchanged.
-            $link = ($additionalParameters) ? add_query_arg($additionalParameters, $link) : $link;
+            $link = ($additional_parameters) ? add_query_arg($additional_parameters, $link) : $link;
 
             // Return (escaped) URL with optional appendix at the end if set.
-            if ($escapeURL) {
+            if ($escape_url) {
                 return esc_url($link.$appendix);
             } else {
                 return $link.$appendix;
@@ -75,24 +170,40 @@ class AsgarosForumRewrite {
 
     function setLinks() {
         global $wp;
-        $links = array();
-        $links['home']          = get_page_link($this->asgarosforum->options['location']);
-        $links['activity']      = add_query_arg(array('view' => 'activity'), $links['home']);
-        $links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $links['home']);
-        $links['search']        = add_query_arg(array('view' => 'search'), $links['home']);
-        $links['forum']         = add_query_arg(array('view' => 'forum'), $links['home']);
-        $links['topic']         = add_query_arg(array('view' => 'thread'), $links['home']);
-        $links['topic_add']     = add_query_arg(array('view' => 'addtopic'), $links['home']);
-        $links['topic_move']    = add_query_arg(array('view' => 'movetopic'), $links['home']);
-        $links['post_add']      = add_query_arg(array('view' => 'addpost'), $links['home']);
-        $links['post_edit']     = add_query_arg(array('view' => 'editpost'), $links['home']);
-        $links['markallread']   = add_query_arg(array('view' => 'markallread'), $links['home']);
-        $links['members']       = add_query_arg(array('view' => 'members'), $links['home']);
-        $links['current']       = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
 
-        $links = $this->asgarosforum->profile->setLinks($links);
+        // Set forum home and current link first. We need to use the internal _get_page_link function because
+        // otherwise the generated links would not be correct when the forum is located on a static front page.
+        $this->links['home']    = trailingslashit(_get_page_link($this->asgarosforum->options['location']));
+        $this->links['current'] = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
 
-        $this->links = $links;
+        // Set additional links based on global permalink-settings.
+        if ($this->use_permalinks) {
+            $this->links['activity']      = $this->links['home'].'activity/';
+            $this->links['subscriptions'] = $this->links['home'].'subscriptions/';
+            $this->links['search']        = $this->links['home'].'search/';
+            $this->links['forum']         = $this->links['home'].'forum/';
+            $this->links['topic']         = $this->links['home'].'topic/';
+            $this->links['topic_add']     = $this->links['home'].'addtopic/';
+            $this->links['topic_move']    = $this->links['home'].'movetopic/';
+            $this->links['post_add']      = $this->links['home'].'addpost/';
+            $this->links['post_edit']     = $this->links['home'].'editpost/';
+            $this->links['markallread']   = $this->links['home'].'markallread/';
+            $this->links['members']       = $this->links['home'].'members/';
+            $this->links['profile']       = $this->links['home'].'profile/';
+        } else {
+            $this->links['activity']      = add_query_arg(array('view' => 'activity'), $this->links['home']);
+            $this->links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $this->links['home']);
+            $this->links['search']        = add_query_arg(array('view' => 'search'), $this->links['home']);
+            $this->links['forum']         = add_query_arg(array('view' => 'forum'), $this->links['home']);
+            $this->links['topic']         = add_query_arg(array('view' => 'topic'), $this->links['home']);
+            $this->links['topic_add']     = add_query_arg(array('view' => 'addtopic'), $this->links['home']);
+            $this->links['topic_move']    = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
+            $this->links['post_add']      = add_query_arg(array('view' => 'addpost'), $this->links['home']);
+            $this->links['post_edit']     = add_query_arg(array('view' => 'editpost'), $this->links['home']);
+            $this->links['markallread']   = add_query_arg(array('view' => 'markallread'), $this->links['home']);
+            $this->links['members']       = add_query_arg(array('view' => 'members'), $this->links['home']);
+            $this->links['profile']       = add_query_arg(array('view' => 'profile'), $this->links['home']);
+        }
     }
 
     function create_unique_slug($name, $location, $type) {

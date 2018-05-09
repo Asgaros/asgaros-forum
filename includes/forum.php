@@ -20,6 +20,7 @@ class AsgarosForum {
     var $current_topic_name = false;
     var $current_post = false;
     var $current_view = false;
+    var $current_element = false;
     var $current_page = 0;
     var $parent_forum = false;
     var $parent_forum_name = false;
@@ -239,20 +240,13 @@ class AsgarosForum {
         // Update online status.
         $this->online->update_online_status();
 
-        if (isset($_GET['view'])) {
-            $this->current_view = esc_html($_GET['view']);
-        }
-
-        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
-            $this->current_page = (absint($_GET['part']) - 1);
-        }
-
-        $elementID = (!empty($_GET['id'])) ? absint($_GET['id']) : false;
+        // Parse the URL.
+        $this->rewrite->parse_url();
 
         switch ($this->current_view) {
             case 'forum':
             case 'addtopic':
-                $this->setParents($elementID, 'forum');
+                $this->setParents($this->current_element, 'forum');
             break;
             case 'movetopic':
             case 'topic':
@@ -260,10 +254,10 @@ class AsgarosForum {
             case 'addpost':
                 // Fallback for old view-name.
                 $this->current_view = ($this->current_view == 'topic') ? 'thread' : $this->current_view;
-                $this->setParents($elementID, 'topic');
+                $this->setParents($this->current_element, 'topic');
             break;
             case 'editpost':
-                $this->setParents($elementID, 'post');
+                $this->setParents($this->current_element, 'post');
             break;
             case 'markallread':
             break;

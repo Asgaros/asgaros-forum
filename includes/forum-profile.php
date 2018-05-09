@@ -23,12 +23,6 @@ class AsgarosForumProfile {
         }
     }
 
-    // Sets the required links.
-    public function setLinks($linksObject) {
-        $linksObject['profile'] = add_query_arg(array('view' => 'profile'), $linksObject['home']);
-        return $linksObject;
-    }
-
     // Sets the current view when the functionality is enabled.
     public function setCurrentView() {
         if ($this->functionalityEnabled()) {
@@ -38,12 +32,12 @@ class AsgarosForumProfile {
         }
     }
 
-    private function getUserData($userID = false) {
-        if (!$userID && !empty($_GET['id'])) {
-            $userID = absint($_GET['id']);
+    public function getUserData($user_id = false) {
+        if (!$user_id) {
+            $user_id = $this->asgarosforum->current_element;
         }
 
-        return get_user_by('id', $userID);
+        return get_user_by('id', $user_id);
     }
 
     // Gets the current title.
@@ -74,8 +68,8 @@ class AsgarosForumProfile {
     }
 
     // Shows the profile of a user.
-    public function showProfile($userID = false) {
-        $userData = $this->getUserData($userID);
+    public function showProfile() {
+        $userData = $this->getUserData();
 
         if ($userData) {
             if ($this->hideProfileLink()) {
