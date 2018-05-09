@@ -55,7 +55,7 @@ class AsgarosForumProfile {
 
     // Sets the breadcrumbs.
     public function setBreadCrumbs() {
-        $elementLink = $this->asgarosforum->getLink('current');
+        $elementLink = $this->asgarosforum->get_link('current');
         $elementTitle = __('Profile', 'asgaros-forum');
 
         $userData = $this->getUserData();
@@ -213,7 +213,7 @@ class AsgarosForumProfile {
         if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
             return '%s';
         } else {
-            $profileLink = $this->asgarosforum->getLink('profile', $userObject->ID);
+            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID);
             $profileLink = apply_filters('asgarosforum_filter_profile_link', $profileLink, $userObject);
 
             return '<a class="profile-link" href="'.$profileLink.'">%s</a>';

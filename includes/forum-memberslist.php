@@ -19,7 +19,7 @@ class AsgarosForumMembersList {
 
     public function renderMembersListLink() {
         if ($this->functionalityEnabled()) {
-            $membersLink = $this->asgarosforum->getLink('members');
+            $membersLink = $this->asgarosforum->get_link('members');
             $membersLink = apply_filters('asgarosforum_filter_members_link', $membersLink);
 
             echo '<a class="members-link" href="'.$membersLink.'">'.__('Members', 'asgaros-forum').'</a>';

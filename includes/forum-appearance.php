@@ -113,7 +113,7 @@ class AsgarosForumAppearance {
 
 		// SEO stuff.
 		if ($this->asgarosforum->executePlugin) {
-			$currentLink = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->getLink('current') : esc_url(remove_query_arg('part', $this->asgarosforum->getLink('current', false, false, '', false)));
+			$currentLink = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
 			$currentTitle = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
 			$currentDescription = ($this->asgarosforum->current_description) ? $this->asgarosforum->current_description : $currentTitle;
 

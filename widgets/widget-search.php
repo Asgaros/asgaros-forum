@@ -27,7 +27,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
             // TODO: Rewrite code so can use input-generation of search class.
             echo '<div class="asgarosforum-widget-search">';
             //echo '<span class="dashicons-before dashicons-search"></span>';
-            echo '<form method="get" action="'.$asgarosforum->getLink('search').'">';
+            echo '<form method="get" action="'.$asgarosforum->get_link('search').'">';
                 echo '<input name="view" type="hidden" value="search">';
 
                 // Workaround for broken search in posts/pages when using plain permalink structure.

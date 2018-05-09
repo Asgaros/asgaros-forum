@@ -22,7 +22,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
 
     echo '<div class="forum-status forum-dashicon dashicons-before '.$forum_icon.' '.$unread_status.'"></div>';
     echo '<div class="forum-name">';
-        echo '<a class="forum-title" href="'.$this->getLink('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
+        echo '<a class="forum-title" href="'.$this->get_link('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
 
         // Show the description of the forum when it is not empty.
         $forum_description = esc_html(stripslashes($forum->description));
@@ -47,7 +47,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
 
             foreach ($subforums as $subforum) {
                 echo ($subforumsFirstDone) ? '&nbsp;&middot;&nbsp;' : '';
-                echo '<a href="'.$this->getLink('forum', $subforum->id).'">'.esc_html(stripslashes($subforum->name)).'</a>';
+                echo '<a href="'.$this->get_link('forum', $subforum->id).'">'.esc_html(stripslashes($subforum->name)).'</a>';
                 $subforumsFirstDone = true;
             }
 

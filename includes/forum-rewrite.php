@@ -21,7 +21,7 @@ class AsgarosForumRewrite {
 	}
 
     // Ensures that all rewrite rules exist.
-    function ensure_rewrite_rules() {
+    private function ensure_rewrite_rules() {
         // Get the rewrite rule pattern.
         $pattern = $this->generate_rewrite_rule_pattern($this->asgarosforum->options['location']);
 
@@ -104,8 +104,8 @@ class AsgarosForumRewrite {
 
         // Try to set current elements based on permalinks.
         if ($this->use_permalinks) {
-            $home_url = $this->getLink('home');
-            $current_url = $this->getLink('current');
+            $home_url = $this->get_link('home');
+            $current_url = $this->get_link('current');
 
             // Remove the home url from the beginning of the current url.
             $parsed_url = preg_replace('#^/?'.preg_quote($home_url).'#isu', '', $current_url, 1);
@@ -134,7 +134,7 @@ class AsgarosForumRewrite {
     }
 
     // Builds and returns a requested link.
-    function getLink($type, $element_id = false, $additional_parameters = false, $appendix = '', $escape_url = true) {
+    function get_link($type, $element_id = false, $additional_parameters = false, $appendix = '', $escape_url = true) {
         // Only generate a link when that type is available.
         if (isset($this->links[$type])) {
             // Initialize the base-link.
@@ -191,13 +191,15 @@ class AsgarosForumRewrite {
         $additional_parameters['part'] = $post_page;
 
         // Now create the link.
-        $post_link = $this->getLink('topic', $topic_id, $additional_parameters, '#postid-'.$post_id);
+        $post_link = $this->get_link('topic', $topic_id, $additional_parameters, '#postid-'.$post_id);
 
         return $post_link;
     }
 
-    function setLinks() {
+    function set_links() {
         global $wp;
+
+        $this->ensure_rewrite_rules();
 
         // Set forum home and current link first. We need to use the internal _get_page_link function because
         // otherwise the generated links would not be correct when the forum is located on a static front page.

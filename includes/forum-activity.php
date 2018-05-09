@@ -29,7 +29,7 @@ class AsgarosForumActivity {
                     $time = sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($activity->date), current_time('timestamp')));
 
                     if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
-                        $link = $this->asgarosforum->getLink('topic', $activity->parent_id);
+                        $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
                         $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                         echo '<div class="activity-element dashicons-before dashicons-edit">';
                         echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$time.'</i>';
@@ -86,7 +86,7 @@ class AsgarosForumActivity {
 
     public function show_activity_link() {
         if ($this->functionality_enabled()) {
-            echo '<a href="'.$this->asgarosforum->getLink('activity').'">'.__('Activity', 'asgaros-forum').'</a>';
+            echo '<a href="'.$this->asgarosforum->get_link('activity').'">'.__('Activity', 'asgaros-forum').'</a>';
         }
     }
 }

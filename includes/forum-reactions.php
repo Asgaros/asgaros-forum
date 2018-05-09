@@ -74,7 +74,7 @@ class AsgarosForumReactions {
                     $output = '<span class="reaction '.$reaction.'"><span class="reaction-icon dashicons-before dashicons-thumbs-'.$reaction.' '.$active[$reaction].'"></span><span class="reaction-number">'.$counter.'</span></span>';
 
                     if (is_user_logged_in()) {
-                        $link = $this->asgarosforum->rewrite->getLink(
+                        $link = $this->asgarosforum->rewrite->get_link(
                             'topic',
                             $topic_id,
                             array(

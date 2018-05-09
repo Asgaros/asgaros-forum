@@ -149,7 +149,7 @@ class AsgarosForumContent {
             $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
 
             // Create redirect link.
-            $redirect = html_entity_decode($this->asgarosforum->getLink('topic', $this->asgarosforum->current_topic, false, '#postid-'.$this->asgarosforum->current_post));
+            $redirect = html_entity_decode($this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic, false, '#postid-'.$this->asgarosforum->current_post));
 
             // Send notification about new topic.
             $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, AsgarosForumPermissions::$currentUserID);

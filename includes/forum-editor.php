@@ -140,11 +140,11 @@ class AsgarosForumEditor {
 
 			$actionURL = '';
 			if ($editorView == 'addpost') {
-				$actionURL = $this->asgarosforum->getLink('topic', $this->asgarosforum->current_topic);
+				$actionURL = $this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic);
 			} else if ($editorView == 'editpost') {
-				$actionURL = $this->asgarosforum->getLink('post_edit', $this->asgarosforum->current_post);
+				$actionURL = $this->asgarosforum->get_link('post_edit', $this->asgarosforum->current_post);
 			} else if ($editorView == 'addtopic') {
-				$actionURL = $this->asgarosforum->getLink('forum', $this->asgarosforum->current_forum);
+				$actionURL = $this->asgarosforum->get_link('forum', $this->asgarosforum->current_forum);
 			}
 
 			// We need the tabindex attribute in the form for scrolling.
@@ -185,7 +185,7 @@ class AsgarosForumEditor {
 							echo '<a href="'.$actionURL.'" class="cancel">'.__('Cancel', 'asgaros-forum').'</a>';
 						} else {
 							if ($editorView === 'editpost') {
-								$actionURL = $this->asgarosforum->getLink('topic', $this->asgarosforum->current_topic);
+								$actionURL = $this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic);
 							}
 							echo '<a href="'.$actionURL.'" class="cancel-back">'.__('Cancel', 'asgaros-forum').'</a>';
 						}
