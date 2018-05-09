@@ -227,6 +227,7 @@ class AsgarosForum {
 
         // Set all base links.
         if ($this->executePlugin || get_post($this->options['location'])) {
+            $this->rewrite->ensure_rewrite_rules();
             $this->rewrite->setLinks();
         }
 

@@ -20,27 +20,54 @@ class AsgarosForumRewrite {
         }
 	}
 
-    // TODO: Not working for shortcode parameters yet.
+    // Ensures that all rewrite rules exist.
+    function ensure_rewrite_rules() {
+        // Get the rewrite rule pattern.
+        $pattern = $this->generate_rewrite_rule_pattern($this->asgarosforum->options['location']);
+
+        $rules = get_option('rewrite_rules');
+
+        if (!isset($rules[$pattern])) {
+            flush_rewrite_rules(false);
+        }
+    }
+
+    // Generate all necessary rewrite rules.
     function add_rewrite_rules_array($rules) {
+        // Get all pages with a shortcode first.
+        $page_ids = $this->asgarosforum->db->get_col('SELECT ID FROM '.$this->asgarosforum->db->prefix.'posts WHERE post_type = "page" AND (post_content LIKE "%[forum%" OR post_content LIKE "%[Forum%");');
+
+        if (!empty($page_ids)) {
+            foreach ($page_ids as $page_id) {
+                // Get the rewrite rule pattern.
+                $pattern = $this->generate_rewrite_rule_pattern($page_id);
+
+                // Set target url.
+                $target_url = 'index.php?page_id='.$page_id;
+
+                // Add rule to array when it does not exists.
+                if (!in_array($target_url, $rules)) {
+                    $rules = array_merge(array($pattern => $target_url), $rules);
+                }
+            }
+        }
+
+        return $rules;
+    }
+
+    // Generates a rewrite rule pattern based on the given page id.
+    private function generate_rewrite_rule_pattern($page_id) {
         // Retrieve relative base url. We need to use the internal _get_page_link function because
         // otherwise the generated links would not be correct when the forum is located on a static front page.
         $home_url = trailingslashit(home_url());
-        $perm_url = trailingslashit(_get_page_link($this->asgarosforum->options['location']));
+        $perm_url = trailingslashit(_get_page_link($page_id));
         $base_url = str_replace($home_url, '', $perm_url);
         $base_url = untrailingslashit($base_url);
 
         // Generate the pattern.
         $pattern = '('.preg_quote($base_url).'(?:/|$).*)$';
 
-        // Set target url.
-        $target_url = 'index.php?page_id='.$this->asgarosforum->options['location'];
-
-        // Add rule to array when it does not exists.
-        if (!in_array($target_url, $rules)) {
-            $rules = array_merge(array($pattern => $target_url), $rules);
-        }
-
-        return $rules;
+        return $pattern;
     }
 
     // Disable canonical redirect for the static front page when the forum is located on it. Otherwise the rewrite rules would not work.
