@@ -33,6 +33,10 @@
                                         <th><label for="usergroup_visibility"><?php _e('Hide user group:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="checkbox" id="usergroup_visibility" name="usergroup_visibility"></td>
                                     </tr>
+                                    <tr>
+                                        <th><label for="usergroup_auto_add"><?php _e('Add new users automatically:', 'asgaros-forum'); ?></label></th>
+                                        <td><input type="checkbox" id="usergroup_auto_add" name="usergroup_auto_add"></td>
+                                    </tr>
                                 </table>
 
                                 <p class="submit">

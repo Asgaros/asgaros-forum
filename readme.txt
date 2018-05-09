@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: SEO-friendly URLs
+* Added: Option to add new users to specific usergroups automatically
 * Fixed: Display issues with some themes
 * Performance improvements and code optimizations
 = 1.8.4 =

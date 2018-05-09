@@ -24,6 +24,9 @@ class AsgarosForumUserGroups {
         add_filter('bulk_actions-users', array($this, 'bulk_actions_users'));
         add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
         add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
+
+        // Certain actions when a new user registers.
+        add_action('user_register', array($this, 'add_new_user_to_usergroups'), 10, 1);
     }
 
     public function initialize() {
@@ -49,10 +52,11 @@ class AsgarosForumUserGroups {
     // FUNCTIONS FOR INSERTING CONTENT.
     //======================================================================
 
-    public static function insertUserGroup($categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal') {
+    public static function insertUserGroup($categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal', $usergroup_auto_add = 'no') {
         $userGroupName = trim($userGroupName);
         $userGroupColor = trim($userGroupColor);
         $usergroup_visibility = trim($usergroup_visibility);
+        $usergroup_auto_add = trim($usergroup_auto_add);
 
         $status = wp_insert_term($userGroupName, self::$taxonomyName, array('parent' => $categoryID));
 
@@ -71,6 +75,7 @@ class AsgarosForumUserGroups {
         }
 
         $status = self::update_usergroup_visibility($userGroupID, $usergroup_visibility);
+        $status = self::update_usergroup_auto_add($userGroupID, $usergroup_auto_add);
 
         return $status;
     }
@@ -105,10 +110,11 @@ class AsgarosForumUserGroups {
     // FUNCTIONS FOR UPDATING CONTENT.
     //======================================================================
 
-    public static function updateUserGroup($userGroupID, $categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal') {
+    public static function updateUserGroup($userGroupID, $categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal', $usergroup_auto_add = 'no') {
         $userGroupName = trim($userGroupName);
         $userGroupColor = trim($userGroupColor);
         $usergroup_visibility = trim($usergroup_visibility);
+        $usergroup_auto_add = trim($usergroup_auto_add);
 
         $status = wp_update_term($userGroupID, self::$taxonomyName, array('parent' => $categoryID, 'name' => $userGroupName));
 
@@ -125,6 +131,7 @@ class AsgarosForumUserGroups {
         }
 
         $status = self::update_usergroup_visibility($userGroupID, $usergroup_visibility);
+        $status = self::update_usergroup_auto_add($userGroupID, $usergroup_auto_add);
 
         return $status;
     }
@@ -151,6 +158,15 @@ class AsgarosForumUserGroups {
         $usergroup_visibility = (empty($usergroup_visibility)) ? 'normal' : $usergroup_visibility;
 
         $status = update_term_meta($usergroup_id, 'usergroup-visibility', $usergroup_visibility);
+
+        return $status;
+    }
+
+    public static function update_usergroup_auto_add($usergroup_id, $usergroup_auto_add) {
+        $usergroup_auto_add = trim($usergroup_auto_add);
+        $usergroup_auto_add = (empty($usergroup_auto_add)) ? 'no' : $usergroup_auto_add;
+
+        $status = update_term_meta($usergroup_id, 'usergroup-auto-add', $usergroup_auto_add);
 
         return $status;
     }
@@ -261,6 +277,11 @@ class AsgarosForumUserGroups {
         return get_term_meta($usergroup_id, 'usergroup-visibility', true);
     }
 
+    // Returns the auto add setting of an usergroup.
+    public static function get_usergroup_auto_add($usergroup_id) {
+        return get_term_meta($usergroup_id, 'usergroup-auto-add', true);
+    }
+
     // Returns all user groups of a specific forum category.
     public static function getUserGroupsOfForumCategory($forumCategoryID) {
         $userGroupsIDs = self::getUserGroupsIDsOfForumCategory($forumCategoryID);
@@ -358,11 +379,12 @@ class AsgarosForumUserGroups {
         $usergroup_category     = $_POST['usergroup_category'];
         $usergroup_color        = $_POST['usergroup_color'];
         $usergroup_visibility   = (isset($_POST['usergroup_visibility'])) ? 'hidden' : 'normal';
+        $usergroup_auto_add     = (isset($_POST['usergroup_auto_add'])) ? 'yes' : 'no';
 
         if ($usergroup_id === 'new') {
-            return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility);
+            return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add);
         } else {
-            return self::updateUserGroup($usergroup_id, $usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility);
+            return self::updateUserGroup($usergroup_id, $usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add);
         }
     }
 
@@ -647,6 +669,28 @@ class AsgarosForumUserGroups {
     public function bulk_actions_admin_notices() {
         if (!empty($_REQUEST['forum_user_groups_assigned'])) {
             printf('<div class="updated"><p>'.__('User groups assignments updated.', 'asgaros-forum').'</p></div>');
+        }
+    }
+
+    // Adds a new user automatically to specific user groups.
+    public function add_new_user_to_usergroups($user_id) {
+        $usergroups = self::getUserGroups();
+        $auto_add_list = array();
+
+        // Check for usergroups first where new users should be added automatically.
+        if (!empty($usergroups)) {
+            foreach ($usergroups as $usergroup) {
+                $auto_add = self::get_usergroup_auto_add($usergroup->term_id);
+
+                if ($auto_add == 'yes') {
+                    $auto_add_list[] = $usergroup->term_id;
+                }
+            }
+        }
+
+        // Now add the user to those usergroups.
+        if (!empty($auto_add_list)) {
+            self::insertUserGroupsOfUsers($user_id, $auto_add_list);
         }
     }
 }
