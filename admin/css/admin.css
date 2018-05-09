@@ -141,9 +141,9 @@
 }
 #af-structure .subforum {
     display: block;
-    margin-left: 20px;
+    margin-left: 16px;
     border-left: 3px solid #ddd;
-    padding-left: 5px
+    padding-left: 4px
 }
 #af-structure th {
     width: initial;
@@ -199,11 +199,11 @@
     height: 40px;
     font-size: 40px;
 }
-/* Fix for the icon on small (mobile) screens */
-@media screen and (max-width: 782px) {
-    #af-structure .forum-icon:before {
-        padding-left: 35%;
-    }
+#af-structure .parentforum .forum-icon,
+#af-structure .subforum .forum-icon {
+    display: block;
+    float: left;
+    margin-right: 8px;
 }
 #af-structure .column-author,
 #af-structure .column-reporters {
@@ -211,14 +211,24 @@
 }
 #af-structure .column-status,
 #af-structure .column-sort,
-#af-structure .column-color,
 #af-structure .column-users {
     width: 100px;
+}
+#af-structure .usergroup-name {
+    font-weight: 600;
+    line-height: 25px;
+}
+#af-structure .usergroup-name .element-id {
+    color: #888;
 }
 #af-structure .usergroup-color {
     width: 25px;
     height: 25px;
     border: 1px solid #000;
+    float: left;
+    display: block;
+    margin-right: 8px;
+    box-sizing: border-box;
 }
 #af-structure #usergroups-editor th,
 #af-structure #usergroup-color-settings th {
@@ -234,4 +244,7 @@
 }
 #af-structure #usergroups-editor td label {
     display: block;
+}
+#af-structure .clear {
+    clear: both;
 }

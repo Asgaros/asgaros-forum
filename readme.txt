@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: SEO-friendly URLs
 * Added: Option to add new users to specific usergroups automatically
 * Fixed: Display issues with some themes
+* Changed: Minor design changes in the administration area
 * Performance improvements and code optimizations
 = 1.8.4 =
 * Added: Activity feed functionality

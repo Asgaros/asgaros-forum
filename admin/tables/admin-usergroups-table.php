@@ -26,18 +26,17 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
     }
 
     function column_name($item) {
+        $users_i18n = number_format_i18n($item['users']);
+
         $columnHTML = '';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_color" value="'.esc_html(stripslashes($item['color'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_visibility" value="'.esc_html(stripslashes($item['visibility'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_auto_add" value="'.esc_html(stripslashes($item['auto_add'])).'">';
-        $columnHTML .= '<a class="make-bold" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'">'.stripslashes($item['name']).'</a>';
+        $columnHTML .= '<div class="usergroup-color" style="background-color: '.$item['color'].';"></div>';
+        $columnHTML .= '<a class="usergroup-name" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'">'.stripslashes($item['name']).' <span class="element-id">('.sprintf(_n('%s User', '%s Users', $item['users'], 'asgaros-forum'), $users_i18n).')</span></a>';
 
         return $columnHTML;
-    }
-
-    function column_color($item) {
-        return '<div class="usergroup-color" style="background-color: '.$item['color'].';"></div>';
     }
 
     function column_visibility($item) {
@@ -68,10 +67,8 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
     function get_columns() {
         $columns = array(
             'name'          => __('Name:', 'asgaros-forum'),
-            'color'         => __('Color:', 'asgaros-forum'),
             'visibility'    => __('Visibility:', 'asgaros-forum'),
             'auto_add'      => __('Automatically Add:', 'asgaros-forum'),
-            'users'         => __('Users:', 'asgaros-forum'),
             'actions'       => __('Actions:', 'asgaros-forum')
         );
 

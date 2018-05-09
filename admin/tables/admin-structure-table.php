@@ -38,20 +38,28 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_count_subforums" value="'.esc_html(stripslashes($item['count_subforums'])).'">';
 
         if ($item['parent_forum']) {
-            $columnHTML .= '<span class="subforum">';
+            $columnHTML .= '<div class="subforum">';
         } else {
-            $columnHTML .= '<span class="parentforum">';
+            $columnHTML .= '<div class="parentforum">';
         }
 
-        $columnHTML .= sprintf('<span class="make-bold">%1$s <span class="element-id">('.__('ID', 'asgaros-forum').': %2$s)</span></span><br><span class="forum-description">%3$s</span></span>', stripslashes($item['name']), $item['id'], stripslashes($item['description']));
+        $forum_icon = trim(esc_html(stripslashes($item['icon'])));
+        $forum_icon = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
+        $columnHTML .= '<span class="forum-icon dashicons-before '.$forum_icon.'"></span>';
+        $columnHTML .= '<span class="make-bold">'.stripslashes($item['name']).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.$item['id'].')</span></span>';
+        $columnHTML .= '<br>';
+        $columnHTML .= '<span class="forum-description">';
 
-        return $columnHTML;
-    }
+        if (empty($item['description'])) {
+            $columnHTML .= __('No description yet ...', 'asgaros-forum');
+        } else {
+            $columnHTML .= stripslashes($item['description']);
+        }
 
-    function column_icon($item) {
-        $forumIcon = trim(esc_html(stripslashes($item['icon'])));
-        $forumIcon = (empty($forumIcon)) ? 'dashicons-editor-justify' : $forumIcon;
-        $columnHTML = '<span class="forum-icon dashicons-before '.$forumIcon.'"></span>';
+        $columnHTML .= '</span>';
+        $columnHTML .= '<div class="clear"></div>';
+        $columnHTML .= '</div>';
+
         return $columnHTML;
     }
 
@@ -86,7 +94,6 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
     function get_columns() {
         $columns = array(
             'name'      => __('Name:', 'asgaros-forum'),
-            'icon'      => __('Icon:', 'asgaros-forum'),
             'status'    => __('Status:', 'asgaros-forum'),
             'sort'      => __('Order:', 'asgaros-forum'),
             'actions'   => __('Actions:', 'asgaros-forum')
