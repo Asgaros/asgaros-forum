@@ -60,6 +60,22 @@ class AsgarosForumRewrite {
 
     // Tries to parse the url and set the corresponding values.
     function parse_url() {
+        // Set the current view.
+        if (!empty($_GET['view'])) {
+            $this->asgarosforum->current_view = esc_html($_GET['view']);
+        }
+
+        // Set the current element id.
+        if (!empty($_GET['id'])) {
+            $this->asgarosforum->current_element = absint($_GET['id']);
+        }
+
+        // Set the current page.
+        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
+            $this->asgarosforum->current_page = (absint($_GET['part']) - 1);
+        }
+
+        // Try to set current elements based on permalinks.
         if ($this->use_permalinks) {
             $home_url = $this->getLink('home');
             $current_url = $this->getLink('current');
@@ -87,21 +103,6 @@ class AsgarosForumRewrite {
                     $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
                 }
             }
-        } else {
-            // Set the current view.
-            if (!empty($_GET['view'])) {
-                $this->asgarosforum->current_view = esc_html($_GET['view']);
-            }
-
-            // Set the current element id.
-            if (!empty($_GET['id'])) {
-                $this->asgarosforum->current_element = absint($_GET['id']);
-            }
-        }
-
-        // Set the current page.
-        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
-            $this->asgarosforum->current_page = (absint($_GET['part']) - 1);
         }
     }
 
