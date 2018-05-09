@@ -48,6 +48,7 @@ class AsgarosForum {
         'notification_sender_name'  => '',
         'notification_sender_mail'  => '',
         'allow_signatures'          => false,
+        'enable_seo_urls'           => true,
         'enable_mentioning'         => true,
         'enable_reactions'          => true,
         'enable_search'             => true,

@@ -126,6 +126,10 @@ if (!defined('ABSPATH')) exit;
                         <h2 class="hndle dashicons-before dashicons-admin-plugins"><?php _e('Features', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
+                                <input type="checkbox" name="enable_seo_urls" id="enable_seo_urls" <?php checked(!empty($asgarosforum->options['enable_seo_urls'])); ?>>
+                                <label for="enable_seo_urls"><?php _e('Enable SEO-friendly URLs', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
                                 <input type="checkbox" name="enable_activity" id="enable_activity" <?php checked(!empty($asgarosforum->options['enable_activity'])); ?>>
                                 <label for="enable_activity"><?php _e('Enable Activity Feed', 'asgaros-forum'); ?></label>
                             </p>

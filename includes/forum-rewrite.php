@@ -12,7 +12,7 @@ class AsgarosForumRewrite {
 		$this->asgarosforum = $object;
 
         // Check if permalinks are enabled.
-        if (get_option('permalink_structure')) {
+        if ($this->asgarosforum->options['enable_seo_urls'] && get_option('permalink_structure')) {
             $this->use_permalinks = true;
 
             add_filter('rewrite_rules_array', array($this, 'add_rewrite_rules_array'));
@@ -22,13 +22,15 @@ class AsgarosForumRewrite {
 
     // Ensures that all rewrite rules exist.
     private function ensure_rewrite_rules() {
-        // Get the rewrite rule pattern.
-        $pattern = $this->generate_rewrite_rule_pattern($this->asgarosforum->options['location']);
+        if ($this->use_permalinks) {
+            // Get the rewrite rule pattern.
+            $pattern = $this->generate_rewrite_rule_pattern($this->asgarosforum->options['location']);
 
-        $rules = get_option('rewrite_rules');
+            $rules = get_option('rewrite_rules');
 
-        if (!isset($rules[$pattern])) {
-            flush_rewrite_rules(false);
+            if (!isset($rules[$pattern])) {
+                flush_rewrite_rules(false);
+            }
         }
     }
 
