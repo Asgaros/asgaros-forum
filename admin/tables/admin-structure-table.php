@@ -51,7 +51,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $columnHTML .= '<span class="forum-description">';
 
         if (empty($item['description'])) {
-            $columnHTML .= __('No description yet ...', 'asgaros-forum');
+            $columnHTML .= '<span class="element-id">'.__('No description yet ...', 'asgaros-forum').'</span>';
         } else {
             $columnHTML .= stripslashes($item['description']);
         }
