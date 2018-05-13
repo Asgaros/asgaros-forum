@@ -25,6 +25,7 @@ Check out our [official website](https://www.asgaros.de/support/) if you want to
 * Profiles & Members List
 * Powerful Editor
 * Notifications
+* SEO-friendly
 * Reactions
 * Uploads
 * Search
