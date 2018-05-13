@@ -112,7 +112,6 @@ class AsgarosForum {
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');
 
-        add_action('init', array($this, 'initialize'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
 
@@ -217,28 +216,6 @@ class AsgarosForum {
         }
 
         return $metaTitle;
-    }
-
-    function initialize() {
-        // Set the current view.
-        if (!empty($_GET['view'])) {
-            $this->current_view = esc_html($_GET['view']);
-        }
-
-        // Set the current element id.
-        if (!empty($_GET['id'])) {
-            $this->current_element = absint($_GET['id']);
-        }
-
-        // Set the current page.
-        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
-            $this->current_page = (absint($_GET['part']) - 1);
-        }
-
-        // Fallback for old view-name.
-        if ($this->current_view == 'thread') {
-             $this->current_view = 'topic';
-        }
     }
 
     function prepare() {

@@ -89,8 +89,32 @@ class AsgarosForumRewrite {
 
     // Tries to parse the url and set the corresponding values.
     function parse_url() {
+        // Set the current view.
+        if (!empty($_GET['view'])) {
+            $this->asgarosforum->current_view = esc_html($_GET['view']);
+        }
+
+        // Set the current element id.
+        if (!empty($_GET['id'])) {
+            $this->asgarosforum->current_element = absint($_GET['id']);
+        }
+
+        // Set the current page.
+        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
+            $this->asgarosforum->current_page = (absint($_GET['part']) - 1);
+        }
+
+        // Fallback for old view-name.
+        if ($this->asgarosforum->current_view == 'thread') {
+             $this->asgarosforum->current_view = 'topic';
+        }
+
         // Try to set current elements based on permalinks.
         if ($this->use_permalinks) {
+            // Do a 301 redirect if necessary.
+            $this->maybe_301_redirect();
+
+            // Create base urls.
             $home_url = $this->get_link('home');
             $current_url = $this->get_link('current');
 
@@ -117,6 +141,26 @@ class AsgarosForumRewrite {
                     $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
                 }
             }
+        }
+    }
+
+    // Do a 301 redirect if necessary.
+    function maybe_301_redirect() {
+        // When permalinks are enabled and view/id are already set, an old URL was used.
+        // In this case we have to do a 301 redirect to point to the updated location.
+        // This is necessary to prevent multiple links pointing to the same content in
+        // search engines.
+        if ($this->asgarosforum->current_view) {
+            $redirect_link = $this->get_link($this->asgarosforum->current_view, $this->asgarosforum->current_element);
+
+            if ($this->asgarosforum->current_page) {
+                $redirect_link = add_query_arg(array('part' => ($this->asgarosforum->current_page + 1)), $redirect_link);
+            }
+
+            $redirect_link = html_entity_decode($redirect_link);
+
+            wp_redirect($redirect_link, 301);
+            exit;
         }
     }
 
