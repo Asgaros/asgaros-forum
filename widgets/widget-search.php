@@ -28,10 +28,9 @@ class AsgarosForumSearch_Widget extends WP_Widget {
             echo '<div class="asgarosforum-widget-search">';
             //echo '<span class="dashicons-before dashicons-search"></span>';
             echo '<form method="get" action="'.$asgarosforum->get_link('search').'">';
-                echo '<input name="view" type="hidden" value="search">';
-
                 // Workaround for broken search in posts/pages when using plain permalink structure.
-                if (!get_option('permalink_structure')) {
+                if (!$asgarosforum->rewrite->use_permalinks) {
+                    echo '<input name="view" type="hidden" value="search">';
                     echo '<input name="page_id" type="hidden" value="'.$asgarosforum->options['location'].'">';
                 }
 
