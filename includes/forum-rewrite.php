@@ -178,7 +178,7 @@ class AsgarosForumRewrite {
                         $element_id = $this->convert_id_to_slug($element_id, $type);
                     }
 
-                    $link = $link.$element_id;
+                    $link = $link.$element_id.'/';
                 } else {
                     $link = add_query_arg('id', $element_id, $link);
                 }
