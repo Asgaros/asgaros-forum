@@ -27,7 +27,11 @@ class AsgarosForumSearch {
         if ($this->asgarosforum->options['enable_search']) {
             echo '<div id="forum-search" class="dashicons-before dashicons-search">';
             echo '<form method="get" action="'.$this->asgarosforum->get_link('search').'">';
-            echo '<input name="view" type="hidden" value="search">';
+
+            // Workaround for broken search when using plain permalink structure.
+            if (!$this->asgarosforum->rewrite->use_permalinks) {
+                echo '<input name="view" type="hidden" value="search">';
+            }
 
             // Workaround for broken search in posts when using plain permalink structure.
             if (!empty($_GET['p'])) {

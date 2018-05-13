@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumRewrite {
     private $asgarosforum = null;
-    private $use_permalinks = false;
+    public $use_permalinks = false;
     private $links = array();
     public $slug_cache = array();
 

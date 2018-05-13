@@ -235,14 +235,14 @@ class AsgarosForum {
             return;
         }
 
+        // Parse the URL.
+        $this->rewrite->parse_url();
+
         // Prepare unread status.
         AsgarosForumUnread::prepareUnreadStatus();
 
         // Update online status.
         $this->online->update_online_status();
-
-        // Parse the URL.
-        $this->rewrite->parse_url();
 
         switch ($this->current_view) {
             case 'forum':
