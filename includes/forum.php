@@ -112,6 +112,7 @@ class AsgarosForum {
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');
 
+        add_action('init', array($this, 'initialize'));
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
 
@@ -210,12 +211,34 @@ class AsgarosForum {
         if (!$this->error && $this->current_view) {
             if ($this->current_view === 'forum' && $this->current_forum) {
                 $metaTitle = $this->addCurrentPageToString($metaTitle);
-            } else if ($this->current_view === 'thread' && $this->current_topic) {
+            } else if ($this->current_view === 'topic' && $this->current_topic) {
                 $metaTitle = $this->addCurrentPageToString($metaTitle);
             }
         }
 
         return $metaTitle;
+    }
+
+    function initialize() {
+        // Set the current view.
+        if (!empty($_GET['view'])) {
+            $this->current_view = esc_html($_GET['view']);
+        }
+
+        // Set the current element id.
+        if (!empty($_GET['id'])) {
+            $this->current_element = absint($_GET['id']);
+        }
+
+        // Set the current page.
+        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
+            $this->current_page = (absint($_GET['part']) - 1);
+        }
+
+        // Fallback for old view-name.
+        if ($this->current_view == 'thread') {
+             $this->current_view = 'topic';
+        }
     }
 
     function prepare() {
@@ -251,10 +274,7 @@ class AsgarosForum {
             break;
             case 'movetopic':
             case 'topic':
-            case 'thread':
             case 'addpost':
-                // Fallback for old view-name.
-                $this->current_view = ($this->current_view == 'topic') ? 'thread' : $this->current_view;
                 $this->setParents($this->current_element, 'topic');
             break;
             case 'editpost':
@@ -344,7 +364,7 @@ class AsgarosForum {
         }
 
         // Mark visited topic as read.
-        if ($this->current_view === 'thread' && $this->current_topic) {
+        if ($this->current_view === 'topic' && $this->current_topic) {
             AsgarosForumUnread::markTopicRead();
         }
 
@@ -409,7 +429,7 @@ class AsgarosForum {
         if (!$this->error && $this->current_view) {
             if ($this->current_view === 'forum' && $this->current_forum) {
                 $mainTitle = esc_html(stripslashes($this->current_forum_name));
-            } else if ($this->current_view === 'thread' && $this->current_topic) {
+            } else if ($this->current_view === 'topic' && $this->current_topic) {
                 $mainTitle = esc_html(stripslashes($this->current_topic_name));
             } else if ($this->current_view === 'editpost') {
                 $mainTitle = __('Edit Post', 'asgaros-forum');
@@ -482,7 +502,7 @@ class AsgarosForum {
                     case 'forum':
                         $this->showforum();
                     break;
-                    case 'thread':
+                    case 'topic':
                         $this->showTopic();
                     break;
                     case 'addtopic':
@@ -517,7 +537,7 @@ class AsgarosForum {
         $mainTitle = $this->getMainTitle();
 
         // Show lock symbol for closed topics.
-        if ($this->current_view == 'thread' && $this->get_status('closed')) {
+        if ($this->current_view == 'topic' && $this->get_status('closed')) {
             echo '<h1 class="main-title dashicons-before dashicons-lock">'.$mainTitle.'</h1>';
         } else {
             echo '<h1 class="main-title">'.$mainTitle.'</h1>';
@@ -577,7 +597,7 @@ class AsgarosForum {
                 echo '</small>';
             echo '</div>';
             do_action('asgarosforum_custom_topic_column', $topic_object->id);
-            echo '<div class="topic-poster">'.$this->get_lastpost($lastpost_data, 'thread').'</div>';
+            echo '<div class="topic-poster">'.$this->get_lastpost($lastpost_data, 'topic').'</div>';
         echo '</div>';
     }
 
@@ -616,7 +636,7 @@ class AsgarosForum {
 
     function showMoveTopic() {
         if (AsgarosForumPermissions::isModerator('current')) {
-            $strOUT = '<form method="post" action="'.$this->get_link('topic_move', $this->current_topic, array('move_topic' => 1)).'">';
+            $strOUT = '<form method="post" action="'.$this->get_link('movetopic', $this->current_topic, array('move_topic' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
             $strOUT .= '<select name="newForumID">';
@@ -883,7 +903,7 @@ class AsgarosForum {
 
         if (AsgarosForumPermissions::isModerator('current') && $showAllButtons) {
             // Move button.
-            $menu .= '<a class="dashicons-before dashicons-randomize" href="'.$this->get_link('topic_move', $this->current_topic).'">';
+            $menu .= '<a class="dashicons-before dashicons-randomize" href="'.$this->get_link('movetopic', $this->current_topic).'">';
             $menu .= __('Move', 'asgaros-forum');
             $menu .= '</a>';
 

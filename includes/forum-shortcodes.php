@@ -52,15 +52,15 @@ class AsgarosForumShortcodes {
                     $this->asgarosforum->setParents($postID, 'post');
                 } else if (!empty($atts['topic']) && ctype_digit($atts['topic'])) {
                     $topicID = $atts['topic'];
-                    $allowedViews = array('movetopic', 'addpost', 'editpost', 'thread', 'profile');
+                    $allowedViews = array('movetopic', 'addpost', 'editpost', 'topic', 'profile');
 
                     // Ensure that we are in the correct element.
                     if ($this->asgarosforum->current_topic != $topicID) {
                         $this->asgarosforum->setParents($topicID, 'topic');
-                        $this->asgarosforum->current_view = 'thread';
+                        $this->asgarosforum->current_view = 'topic';
                     } else if (!in_array($this->asgarosforum->current_view, $allowedViews)) {
                         // Ensure that we are in an allowed view.
-                        $this->asgarosforum->current_view = 'thread';
+                        $this->asgarosforum->current_view = 'topic';
                     }
 
                     // Configure components.
@@ -68,7 +68,7 @@ class AsgarosForumShortcodes {
                     $this->asgarosforum->breadcrumbs->breadcrumbs_level = 1;
                 } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
                     $forumID = $atts['forum'];
-                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'thread', 'search', 'subscriptions', 'profile', 'members');
+                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'topic', 'search', 'subscriptions', 'profile', 'members');
 
                     // Ensure that we are in the correct element.
                     if ($this->asgarosforum->current_forum != $forumID && $this->asgarosforum->parent_forum != $forumID && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members') {

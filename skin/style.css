@@ -778,8 +778,6 @@
     outline: none; /* comp */
     background-color: inherit; /* comp */
 }
-
-/* THREAD */
 #af-wrapper img.avatar {
     float: none;
     margin: 0;

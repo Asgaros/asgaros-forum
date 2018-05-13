@@ -89,21 +89,6 @@ class AsgarosForumRewrite {
 
     // Tries to parse the url and set the corresponding values.
     function parse_url() {
-        // Set the current view.
-        if (!empty($_GET['view'])) {
-            $this->asgarosforum->current_view = esc_html($_GET['view']);
-        }
-
-        // Set the current element id.
-        if (!empty($_GET['id'])) {
-            $this->asgarosforum->current_element = absint($_GET['id']);
-        }
-
-        // Set the current page.
-        if (isset($_GET['part']) && absint($_GET['part']) > 0) {
-            $this->asgarosforum->current_page = (absint($_GET['part']) - 1);
-        }
-
         // Try to set current elements based on permalinks.
         if ($this->use_permalinks) {
             $home_url = $this->get_link('home');
@@ -216,7 +201,7 @@ class AsgarosForumRewrite {
             $this->links['forum']         = $this->links['home'].'/forum/';
             $this->links['topic']         = $this->links['home'].'/topic/';
             $this->links['topic_add']     = $this->links['home'].'/addtopic/';
-            $this->links['topic_move']    = $this->links['home'].'/movetopic/';
+            $this->links['movetopic']     = $this->links['home'].'/movetopic/';
             $this->links['post_add']      = $this->links['home'].'/addpost/';
             $this->links['post_edit']     = $this->links['home'].'/editpost/';
             $this->links['markallread']   = $this->links['home'].'/markallread/';
@@ -229,7 +214,7 @@ class AsgarosForumRewrite {
             $this->links['forum']         = add_query_arg(array('view' => 'forum'), $this->links['home']);
             $this->links['topic']         = add_query_arg(array('view' => 'topic'), $this->links['home']);
             $this->links['topic_add']     = add_query_arg(array('view' => 'addtopic'), $this->links['home']);
-            $this->links['topic_move']    = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
+            $this->links['movetopic']     = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
             $this->links['post_add']      = add_query_arg(array('view' => 'addpost'), $this->links['home']);
             $this->links['post_edit']     = add_query_arg(array('view' => 'editpost'), $this->links['home']);
             $this->links['markallread']   = add_query_arg(array('view' => 'markallread'), $this->links['home']);
@@ -272,6 +257,7 @@ class AsgarosForumRewrite {
             // Now try to determine an id.
             switch ($type) {
                 case 'topic':
+                case 'movetopic':
                     $result = $this->asgarosforum->db->get_var('SELECT id FROM '.$this->asgarosforum->tables->topics.' WHERE slug = "'.$slug.'";');
 
                     if ($result) {
@@ -312,6 +298,7 @@ class AsgarosForumRewrite {
             // Now try to determine a slug.
             switch ($type) {
                 case 'topic':
+                case 'movetopic':
                     $result = $this->asgarosforum->db->get_var('SELECT slug FROM '.$this->asgarosforum->tables->topics.' WHERE id = '.$id.';');
 
                     if ($result) {

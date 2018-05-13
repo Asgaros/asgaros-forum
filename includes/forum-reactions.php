@@ -10,7 +10,7 @@ class AsgarosForumReactions {
     public function __construct($object) {
         $this->asgarosforum = $object;
 
-        add_action('asgarosforum_prepare_thread', array($this, 'prepare'));
+        add_action('asgarosforum_prepare_topic', array($this, 'prepare'));
         add_action('asgarosforum_prepare_post', array($this, 'prepare'));
     }
 
