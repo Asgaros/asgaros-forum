@@ -91,8 +91,10 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: SEO-friendly URLs
 * Added: Option to add new users to specific usergroups automatically
+* Added: Show last post info on small screens
 * Fixed: Display issues with some themes
 * Fixed: Display issues on small screens
+* Changed: Minor design changes
 * Changed: Minor design changes in the administration area
 * Performance improvements and code optimizations
 = 1.8.4 =

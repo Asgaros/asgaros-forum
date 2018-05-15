@@ -37,6 +37,10 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
             echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n);
         echo '</small>';
 
+        echo '<small class="forum-lastpost-small">';
+            echo $this->get_lastpost($lastpost_data, 'forum', true);
+        echo '</small>';
+
         // Show subforums.
         if ($forum->count_subforums > 0) {
             echo '<small class="forum-subforums">';

@@ -411,12 +411,6 @@
 #af-wrapper .forum .forum-title {
     display: block;
 }
-#af-wrapper .forum .forum-subforums {
-
-}
-#af-wrapper .topic-name small {
-    font-style: italic;
-}
 #af-wrapper .forum-subforums {
     border-top: 1px solid #eee;
     padding-top: 3px;
@@ -426,10 +420,18 @@
 #af-wrapper .sticky-bottom {
     border-bottom: 1px solid #e1e4e8;
 }
-@media screen and (max-width: 600px) {
+#af-wrapper .forum-lastpost-small,
+#af-wrapper .topic-lastpost-small {
+    display: none !important;
+}
+@media screen and (max-width: 782px) {
     #af-wrapper .forum-poster,
     #af-wrapper .topic-poster {
-        display: none;
+        display: none !important;
+    }
+    #af-wrapper .forum-lastpost-small,
+    #af-wrapper .topic-lastpost-small {
+        display: block !important;
     }
 }
 
