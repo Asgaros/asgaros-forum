@@ -100,6 +100,12 @@
     line-height: 20px;
     font-size: smaller !important;
 }
+@media screen and (max-width: 782px) {
+    #af-wrapper .af-usergroup-tag {
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+}
 
 /* UPLOADS */
 #af-wrapper .uploaded-file {
@@ -856,6 +862,11 @@
     position: initial; /* comp */
     box-sizing: border-box;
 }
+@media screen and (max-width: 782px) {
+    #af-wrapper .post-author {
+        position: relative;
+    }
+}
 #af-wrapper .post-author strong,
 #af-wrapper .post-author small,
 #af-wrapper .post-author span {
@@ -954,9 +965,12 @@
         text-align: center;
     }
     #af-wrapper .post-element img.avatar {
+        position: absolute;
         float: left;
         height: 40px;
         width: 40px;
+        left: 15px;
+        top: 15px;
     }
     #af-wrapper .post-meta,
     #af-wrapper .post-reactions {
