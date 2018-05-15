@@ -432,6 +432,7 @@
     #af-wrapper .forum-lastpost-small,
     #af-wrapper .topic-lastpost-small {
         display: block !important;
+        padding: 4px 0px;
     }
 }
 
