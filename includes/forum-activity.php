@@ -18,34 +18,64 @@ class AsgarosForumActivity {
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
 
-        echo '<div class="title-element"></div>';
-        echo '<div class="content-element">';
-            $data = $this->load_activity_data();
+        $data = $this->load_activity_data();
 
-            if (!empty($data)) {
-                foreach ($data as $activity) {
-                    $name_author = $this->asgarosforum->getUsername($activity->author_id);
-                    $name_topic = esc_html(stripslashes($activity->name));
-                    $time = sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($activity->date), current_time('timestamp')));
+        if (!empty($data)) {
+            $date_today = date($this->asgarosforum->date_format);
+            $date_yesterday = date($this->asgarosforum->date_format, strtotime('-1 days'));
+            $last_time = false;
+            $first_group = true;
 
-                    if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
-                        $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
-                        $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
-                        echo '<div class="activity-element dashicons-before dashicons-edit">';
-                        echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$time.'</i>';
-                        echo '</div>';
+            foreach ($data as $activity) {
+                $current_time = date($this->asgarosforum->date_format, strtotime($activity->date));
+                $human_time_diff = sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($activity->date), current_time('timestamp')));
+
+                if ($current_time == $date_today) {
+                    $current_time = __('Today', 'asgaros-forum');
+                } else if ($current_time == $date_yesterday) {
+                    $current_time = __('Yesterday', 'asgaros-forum');
+                } else {
+                    $current_time = $human_time_diff;
+                }
+
+                if ($last_time != $current_time) {
+                    $last_time = $current_time;
+                    
+                    if ($first_group) {
+                        $first_group = false;
                     } else {
-                        $link = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
-                        $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
-                        echo '<div class="activity-element dashicons-before dashicons-admin-comments">';
-                        echo sprintf(__('%s answered in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$time.'</i>';
                         echo '</div>';
                     }
+
+                    echo '<div class="title-element">'.$current_time.'</div>';
+                    echo '<div class="content-element">';
                 }
-            } else {
-                echo '<div class="notice">'.__('No activity yet!', 'asgaros-forum').'</div>';
+
+                $name_author = $this->asgarosforum->getUsername($activity->author_id);
+                $name_topic = esc_html(stripslashes($activity->name));
+
+                if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
+                    $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
+                    $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
+                    echo '<div class="activity-element dashicons-before dashicons-edit">';
+                    echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$human_time_diff.'</i>';
+                    echo '</div>';
+                } else {
+                    $link = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
+                    $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
+                    echo '<div class="activity-element dashicons-before dashicons-admin-comments">';
+                    echo sprintf(__('%s answered in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$human_time_diff.'</i>';
+                    echo '</div>';
+                }
             }
-        echo '</div>';
+
+            echo '</div>';
+        } else {
+            echo '<div class="title-element"></div>';
+            echo '<div class="content-element">';
+            echo '<div class="notice">'.__('No activity yet!', 'asgaros-forum').'</div>';
+            echo '</div>';
+        }
 
         echo $paginationRendering;
     }

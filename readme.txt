@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Show last post info on small screens
 * Fixed: Display issues with some themes
 * Fixed: Display issues on small screens
+* Changed: Group activity by time
 * Changed: Minor design changes
 * Changed: Minor design changes in the administration area
 * Performance improvements and code optimizations
