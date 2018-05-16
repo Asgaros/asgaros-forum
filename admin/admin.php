@@ -44,6 +44,13 @@ class AsgarosForumAdmin {
             $output .= AsgarosForumUserGroups::showUserProfileFields($user->ID);
         }
 
+        if ($asgarosforum->options['enable_mentioning']) {
+            $output .= '<tr>';
+            $output .= '<th><label for="asgarosforum_mention_notify">'.__('Notify me when I got mentioned', 'asgaros-forum').'</label></th>';
+            $output .= '<td><input type="checkbox" name="asgarosforum_mention_notify" id="asgarosforum_mention_notify" value="1" '.checked($asgarosforum->mentioning->user_wants_notification($user->ID), true, false).'></td>';
+            $output .= '</tr>';
+        }
+
         if ($asgarosforum->options['allow_signatures']) {
             $output .= '<tr>';
             $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
@@ -79,6 +86,14 @@ class AsgarosForumAdmin {
             }
 
             AsgarosForumUserGroups::updateUserProfileFields($user_id);
+        }
+
+        if ($asgarosforum->options['enable_mentioning']) {
+            if (isset($_POST['asgarosforum_mention_notify'])) {
+                update_user_meta($user_id, 'asgarosforum_mention_notify', 'yes');
+            } else {
+                update_user_meta($user_id, 'asgarosforum_mention_notify', 'no');
+            }
         }
 
         if ($asgarosforum->options['allow_signatures']) {

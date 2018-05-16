@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: SEO-friendly URLs
+* Added: User option to disable mentioning notifications
 * Added: Option to add new users to specific usergroups automatically
 * Added: Show last post info on small screens
 * Fixed: Display issues with some themes

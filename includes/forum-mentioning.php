@@ -40,6 +40,16 @@ class AsgarosForumMentioning {
         return $link;
     }
 
+    public function user_wants_notification($user_id) {
+        $mention_user = get_user_meta($user_id, 'asgarosforum_mention_notify', true);
+
+        if ($mention_user == 'no') {
+            return false;
+        }
+
+        return true;
+    }
+
     public function mention_users($post_id, $topic_id, $subject, $content, $link) {
         if ($this->asgarosforum->options['enable_mentioning']) {
             $matches = array();
@@ -50,7 +60,7 @@ class AsgarosForumMentioning {
                 foreach ($matches as $match) {
                     $user = get_user_by('slug', $match[1]);
 
-                    if ($user) {
+                    if ($user && $this->user_wants_notification($user->ID)) {
                         $this->asgarosforum->notifications->add_to_mailing_list($user->user_email);
                     }
                 }
