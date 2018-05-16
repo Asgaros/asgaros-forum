@@ -885,6 +885,12 @@
     display: block;
     line-height: 22px !important;
 }
+@media screen and (max-width: 782px) {
+    #af-wrapper .post-author-marker {
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+}
 #af-wrapper .post-wrapper {
     display: table-cell;
     width: auto;
