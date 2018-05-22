@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Changed: Show last seen-information only when who is online-functionality is enabled
 = 1.9.0 =
 * Added: SEO-friendly URLs
 * Added: User option to disable mentioning notifications

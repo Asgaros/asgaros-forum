@@ -6,7 +6,7 @@ class AsgarosForumOnline {
     private $asgarosforum = null;
     private $current_user_id = null;
     private $current_time_stamp = null;
-    private $functionality_enabled = false;
+    public  $functionality_enabled = false;
     private $interval_update = false;
     private $interval_online = false;
     private $online_users = array();

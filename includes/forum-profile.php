@@ -128,10 +128,12 @@ class AsgarosForumProfile {
                         }
 
                         // Show last seen.
-                        $cellTitle = __('Last seen:', 'asgaros-forum');
-                        $cellValue = $this->asgarosforum->online->last_seen($userData->ID);
+                        if ($this->asgarosforum->online->functionality_enabled) {
+                            $cellTitle = __('Last seen:', 'asgaros-forum');
+                            $cellValue = $this->asgarosforum->online->last_seen($userData->ID);
 
-                        $this->renderProfileRow($cellTitle, $cellValue);
+                            $this->renderProfileRow($cellTitle, $cellValue);
+                        }
 
                         // Show member since.
                         $cellTitle = __('Member Since:', 'asgaros-forum');

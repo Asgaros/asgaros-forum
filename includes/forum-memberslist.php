@@ -65,9 +65,11 @@ class AsgarosForumMembersList {
                     echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
                 echo '</div>';
 
-                echo '<div class="member-last-seen">';
-                    echo __('Last seen:', 'asgaros-forum').' <i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
-                echo '</div>';
+                if ($this->asgarosforum->online->functionality_enabled) {
+                    echo '<div class="member-last-seen">';
+                        echo __('Last seen:', 'asgaros-forum').' <i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
+                    echo '</div>';
+                }
             echo '</div>';
         }
 
