@@ -67,7 +67,7 @@ class AsgarosForumRewrite {
         $base_url = untrailingslashit($base_url);
 
         // Generate the pattern.
-        $pattern = '('.preg_quote($base_url).'(?:/|$).*)$';
+        $pattern = $base_url.'((?:/|$).*)$';
 
         return $pattern;
     }
@@ -235,7 +235,7 @@ class AsgarosForumRewrite {
         // Set forum home and current link first. We need to use the internal _get_page_link function because
         // otherwise the generated links would not be correct when the forum is located on a static front page.
         $this->links['home']    = untrailingslashit(_get_page_link($this->asgarosforum->options['location']));
-        $this->links['current'] = add_query_arg($_SERVER['QUERY_STRING'], '', trailingslashit(home_url($wp->request)));
+        $this->links['current'] = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
         // Set additional links based on global permalink-settings.
         if ($this->use_permalinks) {
