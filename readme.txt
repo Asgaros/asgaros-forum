@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken profile URLs when usernames are numeric
 * Fixed: Broken URLs when using certain custom permalink structures
 * Fixed: Dont show last seen-status in profiles/memberslist when who is online-functionality is disabled
 = 1.9.0 =

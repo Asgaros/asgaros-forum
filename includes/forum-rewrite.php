@@ -135,7 +135,8 @@ class AsgarosForumRewrite {
 
             // Set the current element id.
             if (!empty($parsed_url[1])) {
-                if (is_numeric($parsed_url[1])) {
+                // If we have a numeric value, its already an idea. But this does not hold for usernames because they can be numeric as well.
+                if (is_numeric($parsed_url[1]) && $this->asgarosforum->current_view != 'profile') {
                     $this->asgarosforum->current_element = absint($parsed_url[1]);
                 } else {
                     $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
