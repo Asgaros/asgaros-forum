@@ -777,11 +777,18 @@ class AsgarosForum {
         if ($custom_name) {
             $user_name = $custom_name;
         }
-        $profileLink = $this->profile->getProfileLink($userObject);
-        $highlighted = $this->highlightUsername($userObject);
 
-        $renderedUserName = sprintf($profileLink, $user_name);
-        $renderedUserName = sprintf($highlighted, $renderedUserName);
+        $renderedUserName = $user_name;
+
+        $profileLink = $this->profile->getProfileLink($userObject);
+
+        if ($profileLink) {
+            $renderedUserName = '<a class="profile-link" href="'.$profileLink.'">'.$user_name.'</a>';;
+        } else {
+            $renderedUserName = $user_name;
+        }
+
+        $renderedUserName = $this->highlight_username($userObject, $renderedUserName);
 
         return $renderedUserName;
     }
@@ -789,16 +796,16 @@ class AsgarosForum {
     /**
      * Highlights a username when he is an administrator/moderator.
      */
-    function highlightUsername($user) {
+    function highlight_username($user, $string) {
         if ($this->options['highlight_admin']) {
             if (is_super_admin($user->ID) || user_can($user->ID, 'administrator')) {
-                return '<span class="highlight-admin">%s</span>';
+                return '<span class="highlight-admin">'.$string.'</span>';
             } else if (AsgarosForumPermissions::isModerator($user->ID)) {
-                return '<span class="highlight-moderator">%s</span>';
+                return '<span class="highlight-moderator">'.$string.'</span>';
             }
         }
 
-        return '%s';
+        return $string;
     }
 
     function get_lastpost($lastpost_data, $context = 'forum', $compact = false) {

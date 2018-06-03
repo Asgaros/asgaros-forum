@@ -213,12 +213,12 @@ class AsgarosForumProfile {
 
     public function getProfileLink($userObject) {
         if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
-            return '%s';
+            return false;
         } else {
             $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID);
             $profileLink = apply_filters('asgarosforum_filter_profile_link', $profileLink, $userObject);
 
-            return '<a class="profile-link" href="'.$profileLink.'">%s</a>';
+            return $profileLink;
         }
     }
 
@@ -232,9 +232,8 @@ class AsgarosForumProfile {
 
                 // Get and build profile link.
                 $profileLink = $this->getProfileLink($currentUserObject);
-                $profileLink = sprintf($profileLink, __('My Profile', 'asgaros-forum'));
 
-                echo $profileLink;
+                echo '<a class="profile-link" href="'.$profileLink.'">'.__('My Profile', 'asgaros-forum').'</a>';
             }
         }
     }
