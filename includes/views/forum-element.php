@@ -25,7 +25,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         echo '<a class="forum-title" href="'.$this->get_link('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
 
         // Show the description of the forum when it is not empty.
-        $forum_description = esc_html(stripslashes($forum->description));
+        $forum_description = stripslashes($forum->description);
         if (!empty($forum_description)) {
             echo '<small class="forum-description">'.$forum_description.'</small>';
         }

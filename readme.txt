@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Broken profile URLs when usernames are numeric
 * Fixed: Broken URLs when using certain custom permalink structures
 * Fixed: Dont show last seen-status in profiles/memberslist when who is online-functionality is disabled
+* Changed: Allow HTML in forum descriptions
 = 1.9.0 =
 * Added: SEO-friendly URLs
 * Added: User option to disable mentioning notifications

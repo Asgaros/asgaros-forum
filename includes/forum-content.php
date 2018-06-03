@@ -382,6 +382,10 @@ class AsgarosForumContent {
     public function get_post($post_id) {
         return $this->asgarosforum->db->get_row("SELECT p1.*, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts FROM {$this->asgarosforum->tables->posts} AS p1 WHERE p1.id = {$post_id};");
     }
+
+    public function get_forum($forum_id) {
+        return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
+    }
 }
 
 ?>

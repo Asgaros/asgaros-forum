@@ -521,7 +521,9 @@ class AsgarosForum {
         }
 
         if ($this->current_view === 'forum' && $this->options['show_description_in_forum'] && !empty($this->current_description)) {
-            echo '<div class="main-description">'.esc_html(stripslashes($this->current_description)).'</div>';
+            $forum_object = $this->content->get_forum($this->current_forum);
+
+            echo '<div class="main-description">'.stripslashes($forum_object->description).'</div>';
         }
     }
 
