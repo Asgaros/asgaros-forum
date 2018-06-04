@@ -120,6 +120,8 @@ class AsgarosForumWidgets {
                         echo '<span class="post-link"><a href="'.self::$asgarosforum->get_link('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name), $widgetTitleLength)).'</a></span>';
                         echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->getUsername($element->author_id).'</b></span>';
                         echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).$count_answers_i18n_text.'</span>';
+
+                        do_action('asgarosforum_widget_recent_'.$widgetType.'_custom_content', $element->id);
                     echo '</div>';
                     echo '</div>';
                 }

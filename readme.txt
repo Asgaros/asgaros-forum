@@ -98,6 +98,8 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Broken URLs when using certain custom permalink structures
 * Fixed: Dont show last seen-status in profiles/memberslist when who is online-functionality is disabled
 * Changed: Allow HTML in forum descriptions
+* Added: asgarosforum_widget_recent_posts_custom_content hook
+* Added: asgarosforum_widget_recent_topics_custom_content hook
 = 1.9.0 =
 * Added: SEO-friendly URLs
 * Added: User option to disable mentioning notifications
