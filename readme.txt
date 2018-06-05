@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken seo-friendly URLs in combination with certain server protocol configurations
 = 1.9.1 =
 * Fixed: Broken usernames when URL contains certain special characters
 * Fixed: Broken profile URLs when usernames are numeric
