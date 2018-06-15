@@ -203,11 +203,13 @@ class AsgarosForumOnline {
         } else {
             $user_time_stamp = get_user_meta($user_id, 'asgarosforum_online_timestamp', true);
 
+            // Use registration date when there is no timestamp yet.
             if (!$user_time_stamp) {
-                return __('Never', 'asgaros-forum');
-            } else {
-                return sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($user_time_stamp), current_time('timestamp')));
+                $user_data = get_userdata($user_id);
+                $user_time_stamp = $user_data->user_registered;
             }
+
+            return sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($user_time_stamp), current_time('timestamp')));
         }
     }
 
