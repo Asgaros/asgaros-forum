@@ -107,6 +107,14 @@ class AsgarosForumContent {
             }
         }
 
+        // Cancel if the topic is closed and the user is not a moderator.
+        if ($this->get_action() === 'add_post') {
+            if ($this->asgarosforum->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) {
+                $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
+                return false;
+            }
+        }
+
         // Cancel if subject is empty.
         if (($this->get_action() === 'add_topic' || ($this->get_action() === 'edit_post' && $this->asgarosforum->is_first_post($this->asgarosforum->current_post))) && empty($this->data_subject)) {
             $this->asgarosforum->info = __('You must enter a subject.', 'asgaros-forum');
