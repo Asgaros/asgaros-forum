@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 4.9
 Requires PHP: 5.2
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,9 +93,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.9.3 =
 * Fixed: Users cannot post in closed topics anymore
 * Fixed: Users cannot create topics in closed forums anymore
-* Changed: Use registration date in last seen-status when user was not online yet
+* Changed: Show registration date in last seen-status when user was not online yet
 = 1.9.2 =
 * Fixed: Broken seo-friendly URLs in combination with certain server protocol configurations
 = 1.9.1 =
