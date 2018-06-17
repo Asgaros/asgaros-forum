@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Users cannot create topics in closed forums anymore
 * Changed: Use registration date in last seen-status when user was not online yet
 = 1.9.2 =
 * Fixed: Broken seo-friendly URLs in combination with certain server protocol configurations
