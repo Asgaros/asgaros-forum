@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.9.3 =
 * Fixed: Users cannot post in closed topics anymore
 * Fixed: Users cannot create topics in closed forums anymore

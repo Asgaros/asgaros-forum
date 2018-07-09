@@ -1013,6 +1013,8 @@
     cursor: pointer;
     outline: none; /* comp */
     color: inherit; /* comp */
+    float: none; /* comp */
+    width: auto; /* comp */
 }
 #af-wrapper blockquote:before {
     content: none; /* comp */
