@@ -272,19 +272,22 @@ class AsgarosForum {
                 }
             break;
             case 'profile':
-                $this->profile->setCurrentView();
-                break;
+            case 'history':
+                if (!$this->profile->functionalityEnabled()) {
+                    $this->current_view = 'overview';
+                }
+            break;
             case 'members':
                 // Go back to the overview when this functionality is not enabled.
                 if (!$this->memberslist->functionalityEnabled()) {
                     $this->current_view = 'overview';
                 }
-                break;
+            break;
             case 'activity':
                 if (!$this->activity->functionality_enabled()) {
                     $this->current_view = 'overview';
                 }
-                break;
+            break;
             default:
                 $this->current_view = 'overview';
             break;
@@ -421,7 +424,9 @@ class AsgarosForum {
             } else if ($this->current_view === 'subscriptions') {
                 $mainTitle = __('Subscriptions', 'asgaros-forum');
             } else if ($this->current_view === 'profile') {
-                $mainTitle = $this->profile->getCurrentTitle();
+                $mainTitle = $this->profile->get_profile_title();
+            } else if ($this->current_view === 'history') {
+                $mainTitle = $this->profile->get_history_title();
             } else if ($this->current_view === 'members') {
                 $mainTitle = __('Members', 'asgaros-forum');
             } else if ($this->current_view === 'activity') {
@@ -489,6 +494,9 @@ class AsgarosForum {
                     break;
                     case 'profile':
                         $this->profile->showProfile();
+                    break;
+                    case 'history':
+                        $this->profile->show_history();
                     break;
                     case 'members':
                         $this->memberslist->showMembersList();
@@ -989,7 +997,7 @@ class AsgarosForum {
             echo '<div id="forum-navigation">';
                 echo '<a href="'.$this->get_link('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
-                $this->profile->renderCurrentUsersProfileLink();
+                $this->profile->myProfileLink();
                 $this->memberslist->renderMembersListLink();
                 $this->notifications->show_subscription_overview_link();
                 $this->activity->show_activity_link();

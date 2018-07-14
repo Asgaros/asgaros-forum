@@ -52,7 +52,7 @@ class AsgarosForumShortcodes {
                     $this->asgarosforum->setParents($postID, 'post');
                 } else if (!empty($atts['topic']) && ctype_digit($atts['topic'])) {
                     $topicID = $atts['topic'];
-                    $allowedViews = array('movetopic', 'addpost', 'editpost', 'topic', 'profile');
+                    $allowedViews = array('movetopic', 'addpost', 'editpost', 'topic', 'profile', 'history');
 
                     // Ensure that we are in the correct element.
                     if ($this->asgarosforum->current_topic != $topicID) {
@@ -68,10 +68,10 @@ class AsgarosForumShortcodes {
                     $this->asgarosforum->breadcrumbs->breadcrumbs_level = 1;
                 } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
                     $forumID = $atts['forum'];
-                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'topic', 'search', 'subscriptions', 'profile', 'members');
+                    $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'topic', 'search', 'subscriptions', 'profile', 'members', 'history');
 
                     // Ensure that we are in the correct element.
-                    if ($this->asgarosforum->current_forum != $forumID && $this->asgarosforum->parent_forum != $forumID && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members') {
+                    if ($this->asgarosforum->current_forum != $forumID && $this->asgarosforum->parent_forum != $forumID && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members' && $this->asgarosforum->current_view != 'history') {
                         $this->asgarosforum->setParents($forumID, 'forum');
                         $this->asgarosforum->current_view = 'forum';
                     } else if (!in_array($this->asgarosforum->current_view, $allowedViews)) {
@@ -86,7 +86,7 @@ class AsgarosForumShortcodes {
                     $this->includeCategories = explode(',', $atts['category']);
 
                     // Ensure that we are in the correct element.
-                    if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members' && $this->asgarosforum->current_view != 'markallread') {
+                    if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members' && $this->asgarosforum->current_view != 'history' && $this->asgarosforum->current_view != 'markallread') {
                         $this->asgarosforum->current_category   = false;
                         $this->asgarosforum->parent_forum       = false;
                         $this->asgarosforum->current_forum      = false;

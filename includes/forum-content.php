@@ -399,6 +399,14 @@ class AsgarosForumContent {
         return $this->asgarosforum->db->get_row("SELECT p1.*, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts FROM {$this->asgarosforum->tables->posts} AS p1 WHERE p1.id = {$post_id};");
     }
 
+    public function get_posts_by_author($author_id, $limit = false, $start = 0, $end = 0) {
+        if ($limit) {
+            return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.author_id = %d AND p.parent_id = t.id ORDER BY p.id DESC LIMIT {$start}, {$end};", $author_id));
+        } else {
+            return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.author_id = %d AND p.parent_id = t.id ORDER BY p.id DESC;", $author_id));
+        }
+    }
+
     public function get_forum($forum_id) {
         return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
     }

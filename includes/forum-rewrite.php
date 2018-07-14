@@ -135,8 +135,8 @@ class AsgarosForumRewrite {
 
             // Set the current element id.
             if (!empty($parsed_url[1])) {
-                // If we have a numeric value, its already an idea. But this does not hold for usernames because they can be numeric as well.
-                if (is_numeric($parsed_url[1]) && $this->asgarosforum->current_view != 'profile') {
+                // If we have a numeric value, its already an id. But this does not hold for usernames because they can be numeric as well.
+                if (is_numeric($parsed_url[1]) && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'history') {
                     $this->asgarosforum->current_element = absint($parsed_url[1]);
                 } else {
                     $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
@@ -261,6 +261,7 @@ class AsgarosForumRewrite {
             $this->links['markallread']   = $this->links['home'].'/markallread/';
             $this->links['members']       = $this->links['home'].'/members/';
             $this->links['profile']       = $this->links['home'].'/profile/';
+            $this->links['history']       = $this->links['home'].'/history/';
         } else {
             $this->links['activity']      = add_query_arg(array('view' => 'activity'), $this->links['home']);
             $this->links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $this->links['home']);
@@ -274,6 +275,7 @@ class AsgarosForumRewrite {
             $this->links['markallread']   = add_query_arg(array('view' => 'markallread'), $this->links['home']);
             $this->links['members']       = add_query_arg(array('view' => 'members'), $this->links['home']);
             $this->links['profile']       = add_query_arg(array('view' => 'profile'), $this->links['home']);
+            $this->links['history']       = add_query_arg(array('view' => 'profile'), $this->links['history']);
         }
     }
 
@@ -328,6 +330,7 @@ class AsgarosForumRewrite {
 
                     break;
                 case 'profile':
+                case 'history':
                     $result = get_user_by('slug', $slug);
 
                     if ($result) {
@@ -369,6 +372,7 @@ class AsgarosForumRewrite {
 
                     break;
                 case 'profile':
+                case 'history':
                     $result = get_user_by('id', $id);
 
                     if ($result) {

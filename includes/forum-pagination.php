@@ -80,6 +80,12 @@ class AsgarosForumPagination {
             $count = $this->asgarosforum->activity->load_activity_data(true);
             $num_pages = ceil($count / 50);
             $select_url = 'activity';
+        } else if ($location === 'history') {
+            $user_id = $this->asgarosforum->current_element;
+            $count = $this->asgarosforum->profile->count_history_data($user_id);
+            $num_pages = ceil($count / 50);
+            $select_source = $sourceID;
+            $select_url = 'history';
         }
 
         // Only show pagination when there is more than one page.
