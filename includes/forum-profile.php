@@ -151,7 +151,7 @@ class AsgarosForumProfile {
                             echo '<div class="history-element">';
                                 echo '<div class="history-name">';
                                     $link = $this->asgarosforum->rewrite->get_post_link($post->id, $post->parent_id);
-                                    $text = strip_tags($post->text);
+                                    $text = esc_html(stripslashes(strip_tags($post->text)));
                                     $text = $this->asgarosforum->cut_string($text, 100);
 
                                     echo '<a class="history-title" href="'.$link.'">'.$text.'</a>';
