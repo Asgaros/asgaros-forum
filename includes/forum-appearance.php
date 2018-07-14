@@ -15,6 +15,7 @@ class AsgarosForumAppearance {
 	public $options_default = array(
 		'theme'                     => 'default',
 		'custom_color'              => '#2d89cc',
+		'custom_accent_color'		=> '#2468af',
         'custom_text_color'         => '#444444',
         'custom_background_color'	=> '#ffffff',
         'custom_border_color'       => '#eeeeee',
@@ -156,6 +157,7 @@ class AsgarosForumAppearance {
 					$custom_styles_url = add_query_arg(
 						array(
 							'color'				=> substr($this->options['custom_color'], 1),
+							'accent-color'		=> substr($this->options['custom_accent_color'], 1),
 							'text-color'		=> substr($this->options['custom_text_color'], 1),
 							'background-color'	=> substr($this->options['custom_background_color'], 1),
 							'border-color'		=> substr($this->options['custom_border_color'], 1),

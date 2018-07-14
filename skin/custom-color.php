@@ -25,17 +25,32 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 #af-wrapper input[type="radio"]:checked:before {
     background-color: <?php echo $color; ?> !important;
 }
-#af-wrapper .title-element,
-#af-wrapper .post-author-marker,
-#af-wrapper .forum-menu a,
-#af-wrapper input[type="submit"],
 #af-wrapper #forum-search,
-#af-wrapper #forum-header,
-#af-wrapper #forum-navigation a,
 #af-wrapper input[type="radio"]:focus,
 #af-wrapper input[type="checkbox"]:focus,
 #af-wrapper #profile-header {
 	border-color: <?php echo $color; ?> !important;
+}
+<?php
+}
+
+if (!empty($_GET['accent-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET['accent-color'])) {
+	$color = '#'.$_GET['accent-color'];
+?>
+#af-wrapper input[type="button"],
+#af-wrapper input[type="submit"],
+#af-wrapper .editor-row .cancel,
+#af-wrapper .editor-row .cancel-back,
+#af-wrapper .forum-menu a,
+#af-wrapper .title-element,
+#af-wrapper #forum-header,
+#af-wrapper #forum-navigation a,
+#af-wrapper #forum-navigation-mobile a,
+#af-wrapper .post-author-marker {
+	border-color: <?php echo $color; ?> !important;
+}
+#af-wrapper #profile-navigation a.active {
+	background-color: <?php echo $color; ?> !important;
 }
 <?php
 }

@@ -47,6 +47,10 @@ if (!defined('ABSPATH')) exit;
                                 <input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_color']); ?>" class="color-picker" name="custom_color" id="custom_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_color']; ?>">
                             </p>
                             <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                                <label for="custom_accent_color"><?php _e('Accent color:', 'asgaros-forum'); ?></label>
+                                <input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_accent_color']); ?>" class="color-picker" name="custom_accent_color" id="custom_accent_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_accent_color']; ?>">
+                            </p>
+                            <p class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
                                 <label for="custom_text_color"><?php _e('Text color:', 'asgaros-forum'); ?></label>
                                 <input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_text_color']; ?>">
                             </p>

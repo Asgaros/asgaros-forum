@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Post history of users
+* Added: Option to change accent color
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
 * Changed: Mobile theme improvements

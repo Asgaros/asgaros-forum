@@ -137,7 +137,7 @@
 #af-wrapper .forum-menu a {
     text-transform: none;
     background: #2d89cc;
-    border-color: #00689a;
+    border-color: #2468af;
     border-style: solid;
     border-width: 0px 0px 1px 0px;
     box-shadow: none;
@@ -561,7 +561,7 @@
     line-height: 31px;
     color: #fff;
     background-color: #2d89cc;
-    border-bottom: 1px solid #00689a;
+    border-bottom: 1px solid #2468af;
 }
 #af-wrapper .title-element-dark {
     background-color: #999;
@@ -579,7 +579,7 @@
     margin: 0;
     padding: 0;
     background-color: #2d89cc;
-    border-bottom: 1px solid #00689a;
+    border-bottom: 1px solid #2468af;
 }
 #af-wrapper #forum-navigation,
 #af-wrapper #forum-navigation-mobile {
@@ -592,7 +592,7 @@
 #af-wrapper #forum-navigation-mobile a {
     padding: 0 20px;
     color: #fff !important;
-    border-left: 1px solid #00689a;
+    border-left: 1px solid #2468af;
     line-height: 44px;
 }
 #af-wrapper #forum-navigation a:first-child,
@@ -878,7 +878,7 @@
 }
 #af-wrapper .post-author-marker {
     background-color: #2d89cc;
-    border-bottom: 1px solid #00689a;
+    border-bottom: 1px solid #2468af;
     margin: -8px -15px 8px -15px;
     padding: 0px 15px;
     color: #fff;
@@ -1215,7 +1215,7 @@
     display: inline-block;
 }
 #af-wrapper #profile-navigation a.active {
-    background-color: #00689a;
+    background-color: #2468af;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper #profile-navigation {
