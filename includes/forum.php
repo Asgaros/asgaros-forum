@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    var $version = '1.9.4';
+    var $version = '1.9.5';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
