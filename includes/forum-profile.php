@@ -110,6 +110,8 @@ class AsgarosForumProfile {
             } else {
                 echo '<a href="'.$history_link.'">'.__('Post History', 'asgaros-forum').'</a>';
             }
+
+            do_action('asgarosforum_custom_profile_menu');
         echo '</div>';
     }
 
