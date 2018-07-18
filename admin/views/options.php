@@ -158,10 +158,6 @@ if (!defined('ABSPATH')) exit;
                                 <label for="show_statistics"><?php _e('Show statistics', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
-                                <input type="checkbox" name="allow_signatures" id="allow_signatures" <?php checked(!empty($asgarosforum->options['allow_signatures'])); ?>>
-                                <label for="allow_signatures"><?php _e('Allow signatures', 'asgaros-forum'); ?></label>
-                            </p>
-                            <p>
                                 <input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>>
                                 <label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label>
                             </p>
@@ -312,6 +308,27 @@ if (!defined('ABSPATH')) exit;
                             <p class="reports-option" <?php if (!$reportsOption) { echo 'style="display: none;"'; } ?>>
                                 <input type="checkbox" name="reports_notifications" id="reports_notifications" <?php checked(!empty($asgarosforum->options['reports_notifications'])); ?>>
                                 <label for="reports_notifications"><?php _e('Notify site owner about new reports', 'asgaros-forum'); ?></label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="postbox">
+                        <h2 class="hndle dashicons-before dashicons-format-status"><?php _e('Signatures', 'asgaros-forum'); ?></h2>
+                        <div class="inside">
+                            <?php
+                            $signaturesOption = checked(!empty($asgarosforum->options['allow_signatures']), true, false);
+                            ?>
+                            <p>
+                                <input type="checkbox" name="allow_signatures" id="allow_signatures" class="show_hide_initiator" data-hide-class="signatures-option" <?php checked(!empty($asgarosforum->options['allow_signatures'])); ?>>
+                                <label for="allow_signatures"><?php _e('Enable signatures', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p class="signatures-option" <?php if (!$signaturesOption) { echo 'style="display: none;"'; } ?>>
+                                <input type="checkbox" name="signatures_html_allowed" id="signatures_html_allowed" <?php checked(!empty($asgarosforum->options['signatures_html_allowed'])); ?>>
+                                <label for="signatures_html_allowed"><?php _e('Allow HTML tags in signatures', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p class="signatures-option" <?php if (!$signaturesOption) { echo 'style="display: none;"'; } ?>>
+                                <label for="signatures_html_tags"><?php _e('Allowed HTML tags:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="signatures_html_tags" id="signatures_html_tags" value="<?php echo esc_html(stripslashes($asgarosforum->options['signatures_html_tags'])); ?>">
                             </p>
                         </div>
                     </div>

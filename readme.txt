@@ -94,6 +94,9 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to disable counting of topic views
+* Added: Option to allow HTML tags in signatures
+* Added: Option to define allowed HTML tags for signatures
+* Changed: Remove HTML tags from signatures completely when HTML tags are not allowed
 = 1.9.5 =
 * Added: asgarosforum_custom_profile_menu hook
 * Fixed: Broken post history view when SEO-friendly URLs are disabled

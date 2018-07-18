@@ -48,6 +48,8 @@ class AsgarosForum {
         'notification_sender_name'  => '',
         'notification_sender_mail'  => '',
         'allow_signatures'          => false,
+        'signatures_html_allowed'   => false,
+        'signatures_html_tags'      => '<br><a><i><b><u><s><img><strong>',
         'enable_seo_urls'           => true,
         'enable_mentioning'         => true,
         'enable_reactions'          => true,

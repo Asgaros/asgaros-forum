@@ -127,7 +127,18 @@ $user_data = get_userdata($post->author_id);
         <?php
         // Show signature.
         if ($this->current_view != 'post' && $this->options['allow_signatures']) {
-            $signature = trim(esc_html(get_user_meta($post->author_id, 'asgarosforum_signature', true)));
+            // Load signature.
+            $signature = get_user_meta($post->author_id, 'asgarosforum_signature', true);
+
+            // Prepare signature based on settings.
+            if ($this->options['signatures_html_allowed']) {
+                $signature = strip_tags($signature, $this->options['signatures_html_tags']);
+            } else {
+                $signature = esc_html(strip_tags($signature));
+            }
+
+            // Trim it.
+            $signature = trim($signature);
 
             if (!empty($signature)) {
                 echo '<div class="signature">'.$signature.'</div>';

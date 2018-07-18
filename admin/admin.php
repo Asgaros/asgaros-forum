@@ -54,7 +54,20 @@ class AsgarosForumAdmin {
         if ($asgarosforum->options['allow_signatures']) {
             $output .= '<tr>';
             $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
-            $output .= '<td><textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_the_author_meta('asgarosforum_signature', $user->ID).'</textarea></td>';
+            $output .= '<td>';
+            $output .= '<textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_the_author_meta('asgarosforum_signature', $user->ID).'</textarea>';
+
+            // Show info about allowed HTML tags.
+            if ($asgarosforum->options['signatures_html_allowed']) {
+                $output .= '<p class="description">';
+                $output .= __('You can use the following HTML tags in signatures:', 'asgaros-forum');
+                $output .= '&nbsp;<code>'.esc_html($asgarosforum->options['signatures_html_tags']).'</code>';
+                $output .= '</p>';
+            } else {
+                $output .= '<p class="description">'.__('HTML tags are not allowed in signatures.', 'asgaros-forum').'</p>';
+            }
+
+            $output .= '</td>';
             $output .= '</tr>';
         }
 
@@ -98,7 +111,11 @@ class AsgarosForumAdmin {
 
         if ($asgarosforum->options['allow_signatures']) {
             if (isset($_POST['asgarosforum_signature'])) {
-                update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post($_POST['asgarosforum_signature'])));
+                if ($asgarosforum->options['signatures_html_allowed']) {
+                    update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature'], $asgarosforum->options['signatures_html_tags']))));
+                } else {
+                    update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature']))));
+                }
             } else {
                 delete_user_meta($user_id, 'asgarosforum_signature');
             }
