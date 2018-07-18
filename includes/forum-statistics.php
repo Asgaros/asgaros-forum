@@ -25,7 +25,11 @@ class AsgarosForumStatistics {
                     echo '<div id="statistics-elements">';
                         self::renderStatisticsElement(__('Topics', 'asgaros-forum'), $data->topics, 'dashicons-before dashicons-editor-alignleft');
                         self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'dashicons-before dashicons-format-quote');
-                        self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'dashicons-before dashicons-visibility');
+
+                        if (self::$asgarosforum->options['count_topic_views']) {
+                            self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'dashicons-before dashicons-visibility');
+                        }
+
                         self::renderStatisticsElement(__('Users', 'asgaros-forum'), $data->users, 'dashicons-before dashicons-groups');
                         self::$asgarosforum->online->render_statistics_element();
                         do_action('asgarosforum_statistics_custom_element');
@@ -41,7 +45,13 @@ class AsgarosForumStatistics {
     public static function getData() {
         $queryTopics = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->topics;
         $queryPosts = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->posts;
-        $queryViews = 'SELECT SUM(views) FROM '.self::$asgarosforum->tables->topics;
+
+        $queryViews = '0';
+
+        if (self::$asgarosforum->options['count_topic_views']) {
+            $queryViews = 'SELECT SUM(views) FROM '.self::$asgarosforum->tables->topics;
+        }
+
         $data = self::$asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
         $data->users = self::$asgarosforum->countUsers();
         return $data;

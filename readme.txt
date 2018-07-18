@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to disable counting of topic views
 = 1.9.5 =
 * Added: asgarosforum_custom_profile_menu hook
 * Fixed: Broken post history view when SEO-friendly URLs are disabled

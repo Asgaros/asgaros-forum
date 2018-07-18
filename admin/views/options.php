@@ -146,6 +146,10 @@ if (!defined('ABSPATH')) exit;
                                 <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
+                                <input type="checkbox" name="count_topic_views" id="count_topic_views" <?php checked(!empty($asgarosforum->options['count_topic_views'])); ?>>
+                                <label for="count_topic_views"><?php _e('Count topic views', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
                                 <input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($asgarosforum->options['show_who_is_online'])); ?>>
                                 <label for="show_who_is_online"><?php _e('Show who is online', 'asgaros-forum'); ?></label>
                             </p>
