@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Broken post history view when SEO-friendly URLs are disabled
 = 1.9.4 =
 * Added: Post history of users
 * Added: Option to change accent color

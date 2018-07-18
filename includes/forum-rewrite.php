@@ -275,7 +275,7 @@ class AsgarosForumRewrite {
             $this->links['markallread']   = add_query_arg(array('view' => 'markallread'), $this->links['home']);
             $this->links['members']       = add_query_arg(array('view' => 'members'), $this->links['home']);
             $this->links['profile']       = add_query_arg(array('view' => 'profile'), $this->links['home']);
-            $this->links['history']       = add_query_arg(array('view' => 'profile'), $this->links['history']);
+            $this->links['history']       = add_query_arg(array('view' => 'history'), $this->links['home']);
         }
     }
 
