@@ -78,7 +78,10 @@ if (!empty($_GET['background-color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/'
 #af-wrapper .post-element,
 #af-wrapper .post-message,
 #af-wrapper .topic-sticky,
-#af-wrapper .topic-sticky .topic-poster {
+#af-wrapper .topic-sticky .topic-poster,
+#af-wrapper #profile-layer,
+#af-wrapper #profile-content,
+#af-wrapper #profile-header .background-contrast {
     background-color: <?php echo $background_color; ?> !important;
 }
 <?php
