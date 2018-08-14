@@ -102,6 +102,7 @@ class AsgarosForum {
     var $activity       = null;
     var $memberslist    = null;
     var $pagination     = null;
+    var $unread         = null;
 
     function __construct() {
         // Initialize database.
@@ -130,7 +131,6 @@ class AsgarosForum {
 
         new AsgarosForumCompatibility($this);
         new AsgarosForumPermissions($this);
-        new AsgarosForumUnread($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
@@ -152,6 +152,7 @@ class AsgarosForum {
         $this->activity         = new AsgarosForumActivity($this);
         $this->memberslist      = new AsgarosForumMembersList($this);
         $this->pagination       = new AsgarosForumPagination($this);
+        $this->unread           = new AsgarosForumUnread($this);
     }
 
     //======================================================================
@@ -242,7 +243,7 @@ class AsgarosForum {
         $this->rewrite->parse_url();
 
         // Prepare unread status.
-        AsgarosForumUnread::prepareUnreadStatus();
+        $this->unread->prepareUnreadStatus();
 
         // Update online status.
         $this->online->update_online_status();
@@ -312,7 +313,7 @@ class AsgarosForum {
         if (isset($_POST['submit_action'])) {
             $this->content->do_insertion();
         } else if ($this->current_view === 'markallread') {
-            AsgarosForumUnread::markAllRead();
+            $this->unread->markAllRead();
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
         } else if (isset($_GET['delete_topic'])) {
@@ -348,7 +349,7 @@ class AsgarosForum {
 
         // Mark visited topic as read.
         if ($this->current_view === 'topic' && $this->current_topic) {
-            AsgarosForumUnread::markTopicRead();
+            $this->unread->markTopicRead();
         }
 
         do_action('asgarosforum_prepare_'.$this->current_view);
@@ -565,7 +566,7 @@ class AsgarosForum {
 
     function render_topic_element($topic_object, $topic_type = 'topic-normal') {
         $lastpost_data = $this->get_lastpost_in_topic($topic_object->id);
-        $unread_status = AsgarosForumUnread::getStatusTopic($topic_object->id);
+        $unread_status = $this->unread->getStatusTopic($topic_object->id);
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';

@@ -24,7 +24,7 @@ if ($categories) {
     }
 
     if ($forumsAvailable) {
-        AsgarosForumUnread::showUnreadControls();
+        $this->unread->showUnreadControls();
     }
 
     AsgarosForumStatistics::showStatistics();
