@@ -357,22 +357,10 @@ class AsgarosForumNotifications {
     }
 
     public function get_mail_headers() {
+        $sender_name = wp_specialchars_decode(esc_html(stripslashes($this->asgarosforum->options['notification_sender_name'])), ENT_QUOTES);;
+        $sender_mail = wp_specialchars_decode(esc_html(stripslashes($this->asgarosforum->options['notification_sender_mail'])), ENT_QUOTES);;
+
         $header = array();
-        $sender_name = '';
-        $sender_mail = '';
-
-        if (empty($this->asgarosforum->options['notification_sender_name'])) {
-            $sender_name = get_bloginfo('name');
-        } else {
-            $sender_name = wp_specialchars_decode(esc_html(stripslashes($this->asgarosforum->options['notification_sender_name'])), ENT_QUOTES);
-        }
-
-        if (empty($this->asgarosforum->options['notification_sender_mail'])) {
-            $sender_mail = get_bloginfo('admin_email');
-        } else {
-            $sender_mail = wp_specialchars_decode(esc_html(stripslashes($this->asgarosforum->options['notification_sender_mail'])), ENT_QUOTES);
-        }
-
         $header[] = 'From: '.$sender_name.' <'.$sender_mail.'>';
 
         return $header;

@@ -192,16 +192,6 @@ if (!defined('ABSPATH')) exit;
                                 <input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>>
                                 <label for="allow_subscriptions"><?php _e('Allow subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>
                             </p>
-                            <?php
-                            // Set some default sender information.
-                            if (empty($asgarosforum->options['notification_sender_name'])) {
-                                $asgarosforum->options['notification_sender_name'] = get_bloginfo('name');
-                            }
-
-                            if (empty($asgarosforum->options['notification_sender_mail'])) {
-                                $asgarosforum->options['notification_sender_mail'] = get_bloginfo('admin_email');
-                            }
-                            ?>
                             <p>
                                 <label for="notification_sender_name"><?php _e('Sender name:', 'asgaros-forum'); ?></label>
                                 <input class="regular-text" type="text" name="notification_sender_name" id="notification_sender_name" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_name'])); ?>">

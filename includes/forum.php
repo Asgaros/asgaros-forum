@@ -162,6 +162,15 @@ class AsgarosForum {
     function loadOptions() {
         $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
+
+        // Ensure default values if some needed files got deleted.
+        if (empty($this->options['notification_sender_name'])) {
+            $this->options['notification_sender_name'] = get_bloginfo('name');
+        }
+
+        if (empty($this->options['notification_sender_mail'])) {
+            $this->options['notification_sender_mail'] = get_bloginfo('admin_email');
+        }
     }
 
     function saveOptions($options) {
