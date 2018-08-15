@@ -23,7 +23,7 @@ class AsgarosForumBreadCrumbs {
         if ($this->asgarosforum->options['enable_breadcrumbs'] && empty($this->asgarosforum->error)) {
             if ($this->breadcrumbs_level >= 4) {
                 $element_link = $this->asgarosforum->get_link('home');
-                $element_title = __('Forum', 'asgaros-forum');
+                $element_title = $this->asgarosforum->options['forum_title'];
                 $this->add_breadcrumb($element_link, $element_title, 1);
             }
 

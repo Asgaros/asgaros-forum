@@ -20,6 +20,10 @@ if (!defined('ABSPATH')) exit;
                         <h2 class="hndle dashicons-before dashicons-admin-settings"><?php _e('General', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
+                                <label for="forum_title"><?php _e('Forum title:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="forum_title" id="forum_title" value="<?php echo esc_html(stripslashes($asgarosforum->options['forum_title'])); ?>">
+                            </p>
+                            <p>
                                 <label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label>
                                 <?php
                                 // Set a post_status argument because of a core bug.

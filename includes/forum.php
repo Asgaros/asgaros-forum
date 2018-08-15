@@ -28,6 +28,7 @@ class AsgarosForum {
     var $parents_set = false;
     var $options = array();
     var $options_default = array(
+        'forum_title'               => '',
         'location'                  => 0,
         'posts_per_page'            => 10,
         'topics_per_page'           => 20,
@@ -164,6 +165,10 @@ class AsgarosForum {
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
 
         // Ensure default values if some needed files got deleted.
+        if (empty($this->options['forum_title'])) {
+            $this->options['forum_title'] = __('Forum', 'asgaros-forum');
+        }
+
         if (empty($this->options['notification_sender_name'])) {
             $this->options['notification_sender_name'] = get_bloginfo('name');
         }
@@ -416,7 +421,7 @@ class AsgarosForum {
         $mainTitle = false;
 
         if ($setDefaultTitle) {
-            $mainTitle = __('Overview', 'asgaros-forum');
+            $mainTitle = $this->options['forum_title'];
         }
 
         if (!$this->error && $this->current_view) {
@@ -536,9 +541,9 @@ class AsgarosForum {
 
         // Show lock symbol for closed topics.
         if ($this->current_view == 'topic' && $this->get_status('closed')) {
-            echo '<h1 class="main-title dashicons-before dashicons-lock">'.$mainTitle.'</h1>';
+            echo '<h1 class="main-title main-title-'.$this->current_view.' dashicons-before dashicons-lock">'.$mainTitle.'</h1>';
         } else {
-            echo '<h1 class="main-title">'.$mainTitle.'</h1>';
+            echo '<h1 class="main-title main-title-'.$this->current_view.'">'.$mainTitle.'</h1>';
         }
 
         if ($this->current_view === 'forum' && $this->options['show_description_in_forum'] && !empty($this->current_description)) {
