@@ -42,7 +42,7 @@ class AsgarosForumOnline {
 
                     // Delete cookie first.
                     unset($_COOKIE['asgarosforum_unique_id']);
-                    setcookie('asgarosforum_unique_id', '', time() - 3600);
+                    setcookie('asgarosforum_unique_id', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
 
                     // Remove him from online-guests list.
                     if (isset($this->online_guests[$unique_id])) {
@@ -75,7 +75,7 @@ class AsgarosForumOnline {
 
                 // For guests we need a cookie with a unique id first to ensure that we do not count him multiple times.
                 if (!isset($_COOKIE['asgarosforum_unique_id'])) {
-                    setcookie('asgarosforum_unique_id', $unique_id, 2147483647);
+                    setcookie('asgarosforum_unique_id', $unique_id, 2147483647, COOKIEPATH, COOKIE_DOMAIN);
                 } else {
                     $unique_id = $_COOKIE['asgarosforum_unique_id'];
                 }
