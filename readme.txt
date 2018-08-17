@@ -94,7 +94,9 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to change main forum title
+* Added: Unread indicator to activity feed
 * Fixed: Broken cookies when using SEO-friendly URLs
+* Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.9.6 =
 * Added: Option to disable counting of topic views

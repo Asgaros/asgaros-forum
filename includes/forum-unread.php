@@ -146,6 +146,29 @@ class AsgarosForumUnread {
         return $this->getStatus($lastpostData);
     }
 
+    public function get_post_status($post_id, $post_author, $post_date, $topic_id) {
+        // If post has been written before last read-marker: read
+        $date_post = strtotime($post_date);
+        $data_visit = strtotime($this->getLastVisit());
+
+        if ($date_post < $data_visit) {
+            return 'read';
+        }
+
+        // If post has been written from visitor: read
+        if ($this->userID && $post_author == $this->userID) {
+            return 'read';
+        }
+
+        // If the same or a newer post in this topic has already been read: read
+        if (isset($this->excludedItems[$topic_id]) && $this->excludedItems[$topic_id] >= $post_id) {
+            return 'read';
+        }
+
+        // In all other cases the post has not been read yet.
+        return 'unread';
+    }
+
     public function showUnreadControls() {
         echo '<div id="read-unread">';
             echo '<span class="indicator unread"></span>';

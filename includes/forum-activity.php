@@ -40,7 +40,7 @@ class AsgarosForumActivity {
 
                 if ($last_time != $current_time) {
                     $last_time = $current_time;
-                    
+
                     if ($first_group) {
                         $first_group = false;
                     } else {
@@ -53,17 +53,18 @@ class AsgarosForumActivity {
 
                 $name_author = $this->asgarosforum->getUsername($activity->author_id);
                 $name_topic = esc_html(stripslashes($activity->name));
+                $read_status = $this->asgarosforum->unread->get_post_status($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
 
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
-                    echo '<div class="activity-element dashicons-before dashicons-edit">';
+                    echo '<div class="activity-element dashicons-before dashicons-edit '.$read_status.'">';
                     echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$human_time_diff.'</i>';
                     echo '</div>';
                 } else {
                     $link = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
-                    echo '<div class="activity-element dashicons-before dashicons-admin-comments">';
+                    echo '<div class="activity-element dashicons-before dashicons-admin-comments '.$read_status.'">';
                     echo sprintf(__('%s answered in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$human_time_diff.'</i>';
                     echo '</div>';
                 }
