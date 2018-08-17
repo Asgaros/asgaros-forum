@@ -450,6 +450,8 @@ class AsgarosForumAdmin {
                 echo '<div class="sub-panel-right">';
                     echo '<a href="https://www.asgaros.de/support/" target="_blank" class="dashicons-before dashicons-admin-users">'.__('Official Support Forum', 'asgaros-forum').'</a>';
                     echo '&bull;';
+                    echo '<a href="https://www.asgaros.de/docs/" target="_blank" class="dashicons-before dashicons-book">'.__('Documentation', 'asgaros-forum').'</a>';
+                    echo '&bull;';
                     echo '<a href="https://www.paypal.me/asgaros" target="_blank" class="dashicons-before dashicons-heart">'.__('Donate', 'asgaros-forum').'</a>';
                 echo '</div>';
                 echo '<div class="clear"></div>';
