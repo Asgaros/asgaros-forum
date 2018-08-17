@@ -81,25 +81,6 @@ class AsgarosForumUnread {
         }
     }
 
-    public function getStatus($lastpostData) {
-        $status = 'read';
-
-        if ($lastpostData) {
-            $lastpostTime = $lastpostData->date;
-
-            if ($lastpostTime) {
-                $lp = strtotime($lastpostTime);
-                $lv = strtotime($this->getLastVisit());
-
-                if ($lp > $lv) {
-                    $status = 'unread';
-                }
-            }
-        }
-
-        return $status;
-    }
-
     public function getStatusForum($id, $topicsAvailable) {
         $lastpostData = null;
         $lastpostList = null;
@@ -130,28 +111,35 @@ class AsgarosForumUnread {
             }
         }
 
-        return $this->getStatus($lastpostData);
-    }
-
-    public function getStatusTopic($id) {
-        $lastpostData = $this->asgarosforum->get_lastpost_in_topic($id);
-
-        // Set empty lastpostData for loggedin user when he is the author of the last post or when topic already read.
         if ($lastpostData) {
-            if (($this->userID && $lastpostData->author_id == $this->userID) || (isset($this->excludedItems[$id]) && $this->excludedItems[$id] == $lastpostData->id)) {
-                $lastpostData = null;
+            $date_post = strtotime($lastpostData->date);
+            $date_visit = strtotime($this->getLastVisit());
+
+            if ($date_post > $date_visit) {
+                return 'unread';
             }
         }
 
-        return $this->getStatus($lastpostData);
+        return 'read';
+    }
+
+    public function getStatusTopic($topic_id) {
+        $lastpost = $this->asgarosforum->get_lastpost_in_topic($topic_id);
+
+        // Set empty lastpostData for loggedin user when he is the author of the last post or when topic already read.
+        if ($lastpost) {
+            return $this->get_post_status($lastpost->id, $lastpost->author_id, $lastpost->date, $topic_id);
+        }
+
+        return 'unread';
     }
 
     public function get_post_status($post_id, $post_author, $post_date, $topic_id) {
         // If post has been written before last read-marker: read
         $date_post = strtotime($post_date);
-        $data_visit = strtotime($this->getLastVisit());
+        $date_visit = strtotime($this->getLastVisit());
 
-        if ($date_post < $data_visit) {
+        if ($date_post < $date_visit) {
             return 'read';
         }
 
