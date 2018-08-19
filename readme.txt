@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to change main forum title
 * Added: Unread indicator to activity feed
 * Fixed: Broken cookies when using SEO-friendly URLs
+* Fixed: Display issues with some themes
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.9.6 =

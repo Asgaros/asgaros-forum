@@ -863,6 +863,7 @@
     padding: 15px;
     word-wrap: break-word;
     position: initial; /* comp */
+    float: none; /* comp */
     box-sizing: border-box;
 }
 @media screen and (max-width: 782px) {
