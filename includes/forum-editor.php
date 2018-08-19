@@ -24,6 +24,8 @@ class AsgarosForumEditor {
             if ($searchKey !== false) {
                 unset($buttons[$searchKey]);
             }
+
+			$buttons = apply_filters('asgarosforum_filter_editor_buttons', $buttons);
         }
 
 		return $buttons;
