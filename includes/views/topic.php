@@ -28,7 +28,3 @@ foreach ($posts as $post) {
     ?>
     <div class="clear"></div>
 </div>
-
-<?php
-$this->notifications->show_topic_subscription_link($this->current_topic);
-?>

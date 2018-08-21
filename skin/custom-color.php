@@ -7,8 +7,7 @@ if (!empty($_GET['color']) && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', '#'.$_GET
 ?>
 #af-wrapper a,
 #af-wrapper .unread:before,
-#af-wrapper #topic-subscription,
-#af-wrapper #forum-subscription,
+#af-wrapper #bottom-navigation,
 #af-wrapper .forum-post-menu a,
 #af-wrapper #forum-profile .display-name,
 #af-wrapper input[type="checkbox"]:checked:before {

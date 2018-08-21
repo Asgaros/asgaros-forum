@@ -1046,15 +1046,27 @@
     margin-bottom: 10px;
 }
 
-/* SUBSCRIPTIONS */
-#af-wrapper #topic-subscription,
-#af-wrapper #forum-subscription {
+/* BOTTOM NAVIGATION */
+#af-wrapper #bottom-navigation {
     display: block;
+    height: 20px;
+    line-height: 20px;
     color: #2d89cc;
 }
-#af-wrapper #topic-subscription a,
-#af-wrapper #forum-subscription a {
-    margin-left: 5px;
+#af-wrapper #bottom-navigation span {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    padding-right: 16px;
+}
+#af-wrapper #bottom-navigation span:before {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+#af-wrapper #bottom-navigation a {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
     font-size: 11px;
     font-style: italic;
 }

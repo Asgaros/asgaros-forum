@@ -10,64 +10,72 @@ class AsgarosForumNotifications {
         $this->asgarosforum = $object;
 
         add_action('asgarosforum_prepare_subscriptions', array($this, 'set_subscription_level'));
+        add_action('asgarosforum_bottom_navigation', array($this, 'show_subscription_navigation'), 10, 1);
+    }
+
+    function show_subscription_navigation($current_view) {
+        if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
+            switch($current_view) {
+                case 'topic':
+                    $this->show_topic_subscription_link($this->asgarosforum->current_topic);
+                break;
+                case 'forum':
+                    $this->show_forum_subscription_link($this->asgarosforum->current_forum);
+                break;
+            }
+        }
     }
 
     // Generates an (un)subscription link based on subscription status for topics.
     public function show_topic_subscription_link($element_id) {
-        // Check if this functionality is enabled and if the user is logged-in.
-        if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            echo '<div id="topic-subscription" class="dashicons-before dashicons-email-alt">';
+        echo '<span id="topic-subscription" class="dashicons-before dashicons-email-alt">';
 
-            $link = '';
-            $text = '';
-            $subscription_level = $this->get_subscription_level();
+        $link = '';
+        $text = '';
+        $subscription_level = $this->get_subscription_level();
 
-            if ($subscription_level == 3) {
-                $link = $this->asgarosforum->get_link('subscriptions');
-                $text = __('You are subscribed to <b>all</b> topics.', 'asgaros-forum');
+        if ($subscription_level == 3) {
+            $link = $this->asgarosforum->get_link('subscriptions');
+            $text = __('You are subscribed to <b>all</b> topics.', 'asgaros-forum');
+        } else {
+            if ($this->is_subscribed('topic', $element_id)) {
+                $link = $this->asgarosforum->get_link('topic', $element_id, array('unsubscribe_topic' => $element_id));
+                $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
             } else {
-                if ($this->is_subscribed('topic', $element_id)) {
-                    $link = $this->asgarosforum->get_link('topic', $element_id, array('unsubscribe_topic' => $element_id));
-                    $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
-                } else {
-                    $link = $this->asgarosforum->get_link('topic', $element_id, array('subscribe_topic' => $element_id));
-                    $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
-                }
+                $link = $this->asgarosforum->get_link('topic', $element_id, array('subscribe_topic' => $element_id));
+                $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
             }
-
-            echo '<a href="'.$link.'">'.$text.'</a>';
-
-            echo '</div>';
         }
+
+        echo '<a href="'.$link.'">'.$text.'</a>';
+
+        echo '</span>';
     }
 
     // Generates an (un)subscription link based on subscription status for forums.
     public function show_forum_subscription_link($element_id) {
-        // Check if this functionality is enabled and if the user is logged-in.
-        if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            echo '<div id="forum-subscription" class="dashicons-before dashicons-email-alt">';
+        echo '<span id="forum-subscription" class="dashicons-before dashicons-email-alt">';
 
-            $link = '';
-            $text = '';
-            $subscription_level = $this->get_subscription_level();
+        $link = '';
+        $text = '';
+        $subscription_level = $this->get_subscription_level();
 
-            if ($subscription_level > 1) {
-                $link = $this->asgarosforum->get_link('subscriptions');
-                $text = __('You are subscribed to <b>all</b> forums.', 'asgaros-forum');
+        if ($subscription_level > 1) {
+            $link = $this->asgarosforum->get_link('subscriptions');
+            $text = __('You are subscribed to <b>all</b> forums.', 'asgaros-forum');
+        } else {
+            if ($this->is_subscribed('forum', $element_id)) {
+                $link = $this->asgarosforum->get_link('forum', $element_id, array('unsubscribe_forum' => $element_id));
+                $text = __('<b>Unsubscribe</b> from this forum.', 'asgaros-forum');
             } else {
-                if ($this->is_subscribed('forum', $element_id)) {
-                    $link = $this->asgarosforum->get_link('forum', $element_id, array('unsubscribe_forum' => $element_id));
-                    $text = __('<b>Unsubscribe</b> from this forum.', 'asgaros-forum');
-                } else {
-                    $link = $this->asgarosforum->get_link('forum', $element_id, array('subscribe_forum' => $element_id));
-                    $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
-                }
+                $link = $this->asgarosforum->get_link('forum', $element_id, array('subscribe_forum' => $element_id));
+                $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
             }
-
-            echo '<a href="'.$link.'">'.$text.'</a>';
-
-            echo '</div>';
         }
+
+        echo '<a href="'.$link.'">'.$text.'</a>';
+
+        echo '</span>';
     }
 
     // Generates an subscription option in the editor based on subscription status.

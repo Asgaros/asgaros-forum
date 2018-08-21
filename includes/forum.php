@@ -526,6 +526,11 @@ class AsgarosForum {
                         $this->overview();
                     break;
                 }
+
+                // Action hook for optional bottom navigation elements.
+                echo '<div id="bottom-navigation">';
+                do_action('asgarosforum_bottom_navigation', $this->current_view);
+                echo '</div>';
             }
         }
 
