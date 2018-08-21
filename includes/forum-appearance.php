@@ -139,6 +139,8 @@ class AsgarosForumAppearance {
 			echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />'.PHP_EOL;
 			echo '<meta name="twitter:title" content="'.$currentTitle.'" />'.PHP_EOL;
 			echo '<meta name="twitter:description" content="'.$currentDescription.'" />'.PHP_EOL;
+
+			do_action('asgarosforum_wp_head');
 		}
 
 		echo '<!-- Asgaros Forum: END -->'.PHP_EOL;

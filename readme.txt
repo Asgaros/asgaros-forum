@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to change main forum title
 * Added: Unread indicator to activity feed
+* Added: asgarosforum_wp_head hook
 * Added: asgarosforum_filter_editor_buttons filter
 * Fixed: Broken cookies when using SEO-friendly URLs
 * Fixed: Display issues with some themes
