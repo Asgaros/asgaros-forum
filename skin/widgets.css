@@ -25,6 +25,7 @@
 .asgarosforum-widget .post-author,
 .asgarosforum-widget .post-date {
     display: block;
+    margin: 0; /* comp */
 }
 .asgarosforum-widget .highlight-admin,
 .asgarosforum-widget .highlight-admin a {
