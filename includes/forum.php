@@ -853,7 +853,7 @@ class AsgarosForum {
      */
     function highlight_username($user, $string) {
         if ($this->options['highlight_admin']) {
-            if (is_super_admin($user->ID) || user_can($user->ID, 'administrator')) {
+            if (AsgarosForumPermissions::isAdministrator($user->ID)) {
                 return '<span class="highlight-admin">'.$string.'</span>';
             } else if (AsgarosForumPermissions::isModerator($user->ID)) {
                 return '<span class="highlight-moderator">'.$string.'</span>';

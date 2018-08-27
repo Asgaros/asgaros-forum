@@ -30,14 +30,11 @@ class AsgarosForumPermissions {
             } else if (is_super_admin($userID) || user_can($userID, 'administrator')) {
                 // Always true for administrators
                 return true;
-            } else {
-                // Otherwise false ...
-                return false;
             }
-        } else {
-            // Otherwise false ...
-            return false;
         }
+
+        // Otherwise false ...
+        return false;
     }
 
     public static function isModerator($userID = false) {
@@ -54,14 +51,11 @@ class AsgarosForumPermissions {
             } else if (get_user_meta($userID, 'asgarosforum_moderator', true) == 1) {
                 // And true for moderators of course ...
                 return true;
-            } else {
-                // Otherwise false ...
-                return false;
             }
-        } else {
-            // Otherwise false ...
-            return false;
         }
+
+        // Otherwise false ...
+        return false;
     }
 
     public static function isBanned($userID = false) {
@@ -75,14 +69,11 @@ class AsgarosForumPermissions {
             } else if (get_user_meta($userID, 'asgarosforum_banned', true) == 1) {
                 // And true for banned users of course. Moderators can be banned too in this case.
                 return true;
-            } else {
-                // Otherwise false ...
-                return false;
             }
-        } else {
-            // Otherwise false ...
-            return false;
         }
+
+        // Otherwise false ...
+        return false;
     }
 
     public static function getForumRole($userID) {
