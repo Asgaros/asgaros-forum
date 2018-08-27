@@ -53,6 +53,7 @@ require('includes/forum-reports.php');
 require('includes/forum-reactions.php');
 require('includes/forum-mentioning.php');
 require('includes/forum-activity.php');
+require('includes/forum-feed.php');
 
 // Include widget files.
 require('includes/forum-widgets.php');

@@ -58,6 +58,7 @@ class AsgarosForum {
         'enable_profiles'           => true,
         'enable_memberslist'        => true,
         'enable_activity'           => false,
+        'enable_rss'                => false,
         'count_topic_views'         => true,
         'reports_enabled'           => true,
         'reports_notifications'     => true,
@@ -104,6 +105,7 @@ class AsgarosForum {
     var $memberslist    = null;
     var $pagination     = null;
     var $unread         = null;
+    var $feed           = null;
 
     function __construct() {
         // Initialize database.
@@ -154,6 +156,7 @@ class AsgarosForum {
         $this->memberslist      = new AsgarosForumMembersList($this);
         $this->pagination       = new AsgarosForumPagination($this);
         $this->unread           = new AsgarosForumUnread($this);
+        $this->feed             = new AsgarosForumFeed($this);
     }
 
     //======================================================================
@@ -780,6 +783,22 @@ class AsgarosForum {
         }
 
         return $string;
+    }
+
+    // TODO: Clean up the complete username logic ...
+
+    function get_plain_username($user_id) {
+        if ($user_id) {
+            $user = get_userdata($user_id);
+
+            if ($user) {
+                return $user->display_name;
+            } else {
+                return __('Deleted user', 'asgaros-forum');
+            }
+        } else {
+            return __('Guest', 'asgaros-forum');
+        }
     }
 
     /**

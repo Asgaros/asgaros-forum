@@ -150,6 +150,10 @@ if (!defined('ABSPATH')) exit;
                                 <label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
+                                <input type="checkbox" name="enable_rss" id="enable_rss" <?php checked(!empty($asgarosforum->options['enable_rss'])); ?>>
+                                <label for="enable_rss"><?php _e('Enable RSS Feeds', 'asgaros-forum'); ?></label>
+                            </p>
+                            <p>
                                 <input type="checkbox" name="count_topic_views" id="count_topic_views" <?php checked(!empty($asgarosforum->options['count_topic_views'])); ?>>
                                 <label for="count_topic_views"><?php _e('Count topic views', 'asgaros-forum'); ?></label>
                             </p>

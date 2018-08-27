@@ -42,6 +42,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Reporting & Banning
 * Easy Appearance Customization
 * Widgets
+* RSS Feeds
 * Mobile Theme
 * Theme Manager
 * Multilingualism
@@ -93,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: RSS feeds for topics and forums
 * Added: Option to change main forum title
 * Added: Unread indicator to activity feed
 * Added: asgarosforum_wp_head hook
