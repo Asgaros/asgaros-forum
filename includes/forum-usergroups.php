@@ -211,9 +211,15 @@ class AsgarosForumUserGroups {
     }
 
     // Returns all or specific user groups.
-    public static function getUserGroups($include = array()) {
+    public static function getUserGroups($include = array(), $visible_groups_only = false) {
+        $userGroups = false;
+
         // First load all terms.
-        $userGroups = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $include));
+        if ($visible_groups_only) {
+            $userGroups = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $include, 'meta_key' => 'usergroup-visibility', 'meta_value' => 'normal'));
+        } else {
+            $userGroups = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $include));
+        }
 
         // Now remove the categories so we only have user groups.
         $userGroups = array_filter($userGroups, array('AsgarosForumUserGroups', 'getUserGroupsArrayFilter'));

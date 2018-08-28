@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumMembersList {
     private $asgarosforum = null;
+    public $filter_role = 'all';
 
     public function __construct($object) {
         $this->asgarosforum = $object;
@@ -26,7 +27,43 @@ class AsgarosForumMembersList {
         }
     }
 
+    public function show_filters() {
+        if (!empty($_GET['filterrole'])) {
+            switch ($_GET['filterrole']) {
+                case 'all':
+                case 'normal':
+                case 'moderators':
+                case 'administrators':
+                    $this->filter_role = $_GET['filterrole'];
+                break;
+            }
+        }
+
+        echo '<div id="memberslist-filter">';
+            echo 'Roles:';
+            echo $this->render_role_option('all', 'All Users');
+            echo $this->render_role_option('normal', 'Normal Users');
+            echo $this->render_role_option('moderators', 'Moderators');
+            echo $this->render_role_option('administrators', 'Administrators');
+
+
+            print_r(AsgarosForumUserGroups::getUserGroups(array(), true));
+        echo '</div>';
+    }
+
+    public function render_role_option($role, $name) {
+        $output = '<a href="'.$this->asgarosforum->rewrite->get_link('members', false, array('filterrole' => $role)).'">'.$name.'</a>';
+
+        if ($role === $this->filter_role) {
+            echo '<b>'.$output.'</b>';
+        } else {
+            echo $output;
+        }
+    }
+
     public function showMembersList() {
+        //$this->show_filters();
+
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('members');
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
@@ -79,42 +116,82 @@ class AsgarosForumMembersList {
     }
 
     public function getMembers() {
-        // Get all existing users.
-        $allUsers = get_users(array('fields' => array('ID', 'display_name')));
+        $allUsers = false;
 
-        // Now get the amount of forum posts for all users.
-        $postsCounter = $this->asgarosforum->db->get_results("SELECT author_id, COUNT(id) AS counter FROM {$this->asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
-
-        // Change the structure of the results for better searchability.
-        $postsCounterSearchable = array();
-
-        foreach ($postsCounter as $postCounter) {
-            $postsCounterSearchable[$postCounter->author_id] = $postCounter->counter;
+        switch ($_GET['filterrole']) {
+            case 'all':
+                // Get all existing users.
+                $allUsers = get_users(array(
+                    'fields'        => array('ID', 'display_name')
+                ));
+            break;
+            case 'normal':
+                $allUsers = get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_moderator',
+                            'compare'   => 'NOT EXISTS'
+                        )
+                    ),
+                    'role__not_in'      => array('administrator')
+                ));
+            break;
+            case 'moderators':
+                $allUsers = get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_moderator',
+                            'compare'   => 'EXISTS'
+                        )
+                    ),
+                    'role__not_in'      => array('administrator')
+                ));
+            break;
+            case 'administrators':
+                $allUsers = get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'role'              => 'administrator'
+                ));
+            break;
         }
 
-        // Now add the numbers of posts to the users array when they are listed in the post counter.
-        foreach ($allUsers as $key => $user) {
-            if (isset($postsCounterSearchable[$user->ID])) {
-                $allUsers[$key]->forum_posts = $postsCounterSearchable[$user->ID];
-            } else {
-                $allUsers[$key]->forum_posts = 0;
+        if ($allUsers) {
+            // Now get the amount of forum posts for all users.
+            $postsCounter = $this->asgarosforum->db->get_results("SELECT author_id, COUNT(id) AS counter FROM {$this->asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
+
+            // Change the structure of the results for better searchability.
+            $postsCounterSearchable = array();
+
+            foreach ($postsCounter as $postCounter) {
+                $postsCounterSearchable[$postCounter->author_id] = $postCounter->counter;
             }
+
+            // Now add the numbers of posts to the users array when they are listed in the post counter.
+            foreach ($allUsers as $key => $user) {
+                if (isset($postsCounterSearchable[$user->ID])) {
+                    $allUsers[$key]->forum_posts = $postsCounterSearchable[$user->ID];
+                } else {
+                    $allUsers[$key]->forum_posts = 0;
+                }
+            }
+
+            // Obtain a list of columns for array_multisort().
+            $columnForumPosts = array();
+            $columnDisplayName = array();
+
+            foreach ($allUsers as $key => $user) {
+                $columnForumPosts[$key] = $user->forum_posts;
+                $columnDisplayName[$key] = $user->display_name;
+            }
+
+            // Ensure case insensitive sorting.
+            $columnDisplayName = array_map('strtolower', $columnDisplayName);
+
+            // Now sort the array based on the columns.
+            array_multisort($columnForumPosts, SORT_NUMERIC, SORT_DESC, $columnDisplayName, SORT_STRING, SORT_ASC, $allUsers);
         }
-
-        // Obtain a list of columns for array_multisort().
-        $columnForumPosts = array();
-        $columnDisplayName = array();
-
-        foreach ($allUsers as $key => $user) {
-            $columnForumPosts[$key] = $user->forum_posts;
-            $columnDisplayName[$key] = $user->display_name;
-        }
-
-        // Ensure case insensitive sorting.
-        $columnDisplayName = array_map('strtolower', $columnDisplayName);
-
-        // Now sort the array based on the columns.
-        array_multisort($columnForumPosts, SORT_NUMERIC, SORT_DESC, $columnDisplayName, SORT_STRING, SORT_ASC, $allUsers);
 
         return $allUsers;
     }
