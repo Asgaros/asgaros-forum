@@ -118,7 +118,7 @@ class AsgarosForumMembersList {
     public function getMembers() {
         $allUsers = false;
 
-        switch ($_GET['filterrole']) {
+        switch ($this->filter_role) {
             case 'all':
                 // Get all existing users.
                 $allUsers = get_users(array(
