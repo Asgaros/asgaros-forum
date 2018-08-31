@@ -97,6 +97,7 @@ You can find a list of available hooks and filters on this site:
 * Added: RSS feeds for topics and forums
 * Added: Option to change main forum title
 * Added: Unread indicator to activity feed
+* Added: Show location of search results
 * Added: asgarosforum_wp_head hook
 * Added: asgarosforum_bottom_navigation hook
 * Added: asgarosforum_filter_editor_buttons filter

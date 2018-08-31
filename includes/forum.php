@@ -494,7 +494,7 @@ class AsgarosForum {
 
                 switch ($this->current_view) {
                     case 'search':
-                        include('views/search.php');
+                        $this->search->show_search_results();
                     break;
                     case 'subscriptions':
                         $this->notifications->show_subscription_overview();
@@ -586,7 +586,7 @@ class AsgarosForum {
         require('views/forum.php');
     }
 
-    function render_topic_element($topic_object, $topic_type = 'topic-normal') {
+    function render_topic_element($topic_object, $topic_type = 'topic-normal', $show_topic_location = false) {
         $lastpost_data = $this->get_lastpost_in_topic($topic_object->id);
         $unread_status = $this->unread->getStatusTopic($topic_object->id);
         $topic_title = esc_html(stripslashes($topic_object->name));
@@ -597,8 +597,14 @@ class AsgarosForum {
                 echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
                 echo '<small>';
                 echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic_object->author_id);
+
+                if ($show_topic_location) {
+                    echo '&nbsp;&middot;&nbsp;'.__('In', 'asgaros-forum').'&nbsp;<a href="'.$this->rewrite->get_link('forum', $topic_object->forum_id).'">'.esc_html(stripslashes($topic_object->forum_name)).'</a>';
+                }
+
                 $topic_pagination = new AsgarosForumPagination($this);
                 $topic_pagination->renderTopicOverviewPagination($topic_object->id);
+
                 echo '</small>';
 
                 // Show topic stats.
