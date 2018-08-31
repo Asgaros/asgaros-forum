@@ -598,8 +598,13 @@ class AsgarosForum {
                 echo '<small>';
                 echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic_object->author_id);
 
+                // Show the name of the forum in which a topic is located in. This is currently only used for search results.
                 if ($show_topic_location) {
-                    echo '&nbsp;&middot;&nbsp;'.__('In', 'asgaros-forum').'&nbsp;<a href="'.$this->rewrite->get_link('forum', $topic_object->forum_id).'">'.esc_html(stripslashes($topic_object->forum_name)).'</a>';
+                    echo '&nbsp;&middot;&nbsp;';
+                    echo __('In', 'asgaros-forum').'&nbsp;';
+                    echo '<a href="'.$this->rewrite->get_link('forum', $topic_object->forum_id).'">';
+                    echo esc_html(stripslashes($topic_object->forum_name));
+                    echo '</a>';
                 }
 
                 $topic_pagination = new AsgarosForumPagination($this);
