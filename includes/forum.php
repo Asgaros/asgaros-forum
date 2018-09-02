@@ -790,7 +790,7 @@ class AsgarosForum {
 
     function cut_string($string, $length = 33) {
         if (strlen($string) > $length) {
-            return mb_substr($string, 0, $length, 'UTF-8') . ' &hellip;';
+            return mb_substr($string, 0, $length, 'UTF-8') . ' &#8230;';
         }
 
         return $string;
