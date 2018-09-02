@@ -64,10 +64,10 @@ class AsgarosForumFeed {
             echo '<channel>'.PHP_EOL;
 
             if ($this->asgarosforum->current_view === 'forum') {
-                echo '<title>'.$this->asgarosforum->current_forum_name.'</title>'.PHP_EOL;
+                echo '<title>'.esc_html(stripslashes($this->asgarosforum->current_forum_name)).'</title>'.PHP_EOL;
                 echo '<link>'.$this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum).'</link>'.PHP_EOL;
             } else if ($this->asgarosforum->current_view === 'topic') {
-                echo '<title>'.$this->asgarosforum->current_topic_name.'</title>'.PHP_EOL;
+                echo '<title>'.esc_html(stripslashes($this->asgarosforum->current_topic_name)).'</title>'.PHP_EOL;
                 echo '<link>'.$this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic).'</link>'.PHP_EOL;
             }
 
