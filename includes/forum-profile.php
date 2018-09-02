@@ -259,7 +259,18 @@ class AsgarosForumProfile {
 
                     // Show signature.
                     if ($this->asgarosforum->options['allow_signatures']) {
-                        $signature = trim(esc_html(get_user_meta($userData->ID, 'asgarosforum_signature', true)));
+                        // TODO: We can put this code in an own function because the logic is used twice (here and in posts).
+                        $signature = get_user_meta($userData->ID, 'asgarosforum_signature', true);
+
+                        // Prepare signature based on settings.
+                        if ($this->asgarosforum->options['signatures_html_allowed']) {
+                            $signature = strip_tags($signature, $this->asgarosforum->options['signatures_html_tags']);
+                        } else {
+                            $signature = esc_html(strip_tags($signature));
+                        }
+
+                        // Trim it.
+                        $signature = trim($signature);
 
                         if (!empty($signature)) {
                             $cellTitle = __('Signature:', 'asgaros-forum');

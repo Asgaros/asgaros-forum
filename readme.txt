@@ -103,6 +103,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_bottom_navigation hook
 * Added: asgarosforum_filter_editor_buttons filter
 * Fixed: Broken cookies when using SEO-friendly URLs
+* Fixed: Render allowed HTML-tags in signatures inside the profile
 * Fixed: Display issues with some themes
 * Changed: Minor design changes
 * Performance improvements and code optimizations
