@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Performance issues when the forum has a lot of posts/topics
 = 1.10.0 =
 * Added: RSS feeds for topics and forums
 * Added: Option to change main forum title

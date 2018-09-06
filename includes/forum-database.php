@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 20;
+    private $db_version = 21;
     private $tables;
 
     public function __construct() {
@@ -259,6 +259,11 @@ class AsgarosForumDatabase {
                         $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'dashicons-editor-justify', 1, 0);
                     }
                 }
+            }
+
+            // Add index to topics.parent_id for faster queries.
+            if ($database_version_installed < 21) {
+                $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD INDEX(parent_id);');
             }
 
             update_option('asgarosforum_db_version', $this->db_version);
