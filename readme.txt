@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Performance issues when the forum has a lot of posts/topics
+* Fixed: Wrong default values for dates in database
 = 1.10.0 =
 * Added: RSS feeds for topics and forums
 * Added: Option to change main forum title

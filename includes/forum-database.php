@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 21;
+    private $db_version = 23;
     private $tables;
 
     public function __construct() {
@@ -124,8 +124,8 @@ class AsgarosForumDatabase {
             id int(11) NOT NULL auto_increment,
             text longtext,
             parent_id int(11) NOT NULL default '0',
-            date datetime NOT NULL default '0000-00-00 00:00:00',
-            date_edit datetime NOT NULL default '0000-00-00 00:00:00',
+            date datetime NOT NULL default '1000-01-01 00:00:00',
+            date_edit datetime NOT NULL default '1000-01-01 00:00:00',
             author_id int(11) NOT NULL default '0',
             author_edit int(11) NOT NULL default '0',
             uploads longtext,
@@ -264,6 +264,16 @@ class AsgarosForumDatabase {
             // Add index to topics.parent_id for faster queries.
             if ($database_version_installed < 21) {
                 $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD INDEX(parent_id);');
+
+                update_option('asgarosforum_db_version', 21);
+            }
+
+            // Use valid default-values for dates.
+            if ($database_version_installed < 23) {
+                $this->db->query("UPDATE {$this->tables->posts} SET date = '1000-01-01 00:00:00' WHERE date = '0000-00-00 00:00:00';");
+                $this->db->query("UPDATE {$this->tables->posts} SET date_edit = '1000-01-01 00:00:00' WHERE date_edit = '0000-00-00 00:00:00';");
+
+                update_option('asgarosforum_db_version', 23);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

@@ -19,7 +19,7 @@ class AsgarosForumUnread {
         if ($this->userID) {
             // Create database entry when it does not exist.
             if (!get_user_meta($this->userID, 'asgarosforum_unread_cleared', true)) {
-                add_user_meta($this->userID, 'asgarosforum_unread_cleared', '0000-00-00 00:00:00');
+                add_user_meta($this->userID, 'asgarosforum_unread_cleared', '1000-01-01 00:00:00');
             }
 
             // Get IDs of excluded topics.
@@ -33,7 +33,7 @@ class AsgarosForumUnread {
             // Create a cookie when it does not exist.
             if (!isset($_COOKIE['asgarosforum_unread_cleared'])) {
                 // There is no cookie set so basically the forum has never been visited.
-                setcookie('asgarosforum_unread_cleared', '0000-00-00 00:00:00', 2147483647, COOKIEPATH, COOKIE_DOMAIN);
+                setcookie('asgarosforum_unread_cleared', '1000-01-01 00:00:00', 2147483647, COOKIEPATH, COOKIE_DOMAIN);
             }
 
             // Get IDs of excluded topics.
@@ -77,7 +77,7 @@ class AsgarosForumUnread {
         } else if (isset($_COOKIE['asgarosforum_unread_cleared'])) {
             return $_COOKIE['asgarosforum_unread_cleared'];
         } else {
-            return "0000-00-00 00:00:00";
+            return "1000-01-01 00:00:00";
         }
     }
 
