@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 23;
+    private $db_version = 24;
     private $tables;
 
     public function __construct() {
@@ -274,6 +274,13 @@ class AsgarosForumDatabase {
                 $this->db->query("UPDATE {$this->tables->posts} SET date_edit = '1000-01-01 00:00:00' WHERE date_edit = '0000-00-00 00:00:00';");
 
                 update_option('asgarosforum_db_version', 23);
+            }
+
+            // Add index to posts.date for faster queries.
+            if ($database_version_installed < 24) {
+                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(date);');
+
+                update_option('asgarosforum_db_version', 24);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);
