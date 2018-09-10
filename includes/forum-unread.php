@@ -82,41 +82,50 @@ class AsgarosForumUnread {
     }
 
     public function getStatusForum($id, $topicsAvailable) {
-        $lastpostData = null;
-        $lastpostList = null;
-
         // Only do the checks when there are topics available.
         if ($topicsAvailable) {
-            // Only ignore posts from the loggedin user because we cant determine if a post from a guest was created by the visiting guest.
+            // Prepare list with IDs of already visited topics.
+            $visited_topics = "0";
+
+            if (!empty($this->excludedItems)) {
+                $visited_topics = implode(',', array_keys($this->excludedItems));
+            }
+
+            // Try to find a post in a topic which has not been visited yet since last marking.
+            $sql = "";
+
+            // We need to use slightly different queries here because we cant determine if a post was created by the visiting guest.
             if ($this->userID) {
-                $sql = $this->asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id FROM ".$this->asgarosforum->tables->posts." AS p INNER JOIN ".$this->asgarosforum->tables->topics." AS t ON p.parent_id = t.id INNER JOIN ".$this->asgarosforum->tables->forums." AS f ON t.parent_id = f.id WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".$this->asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) AND p.author_id <> %d AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $this->userID, $id, $id, $this->getLastVisit());
-                $lastpostList = $this->asgarosforum->db->get_results($sql);
+                $sql = "SELECT p.id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$id} OR f.parent_forum = {$id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id NOT IN({$visited_topics}) AND p.author_id <> {$this->userID} AND p.date > '{$this->getLastVisit()}' LIMIT 1;";
             } else {
-                $sql = $this->asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id FROM ".$this->asgarosforum->tables->posts." AS p INNER JOIN ".$this->asgarosforum->tables->topics." AS t ON p.parent_id = t.id INNER JOIN ".$this->asgarosforum->tables->forums." AS f ON t.parent_id = f.id WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".$this->asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) AND (f.id = %d OR f.parent_forum = %d) AND p.date > '%s' ORDER BY p.id DESC;", $id, $id, $this->getLastVisit());
-                $lastpostList = $this->asgarosforum->db->get_results($sql);
+                $sql = "SELECT p.id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$id} OR f.parent_forum = {$id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id NOT IN({$visited_topics}) AND p.date > '{$this->getLastVisit()}' LIMIT 1;";
             }
 
-            foreach ($lastpostList as $key => $lastpostListItem) {
-                // This topic has not been opened yet, so it is actually the last post.
-                if (!isset($this->excludedItems[$lastpostListItem->parent_id])) {
-                    $lastpostData = $lastpostListItem;
-                    break;
-                }
+            $unread_check = $this->asgarosforum->db->get_results($sql);
 
-                // This topic has been opened, but there is already a newer post, so it is actually the last post.
-                if (isset($this->excludedItems[$lastpostListItem->parent_id]) && $lastpostListItem->id > $this->excludedItems[$lastpostListItem->parent_id]) {
-                    $lastpostData = $lastpostListItem;
-                    break;
-                }
-            }
-        }
-
-        if ($lastpostData) {
-            $date_post = strtotime($lastpostData->date);
-            $date_visit = strtotime($this->getLastVisit());
-
-            if ($date_post > $date_visit) {
+            if (!empty($unread_check)) {
                 return 'unread';
+            }
+
+            // Get last post of all topics which have been visited since last marking.
+            $sql = "";
+
+            // Again we need to use slightly different queries here because we cant determine if a post was created by the visiting guest.
+            if ($this->userID) {
+                $sql = "SELECT MAX(p.id) AS max_id, p.parent_id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$id} OR f.parent_forum = {$id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id IN({$visited_topics}) AND p.author_id <> {$this->userID} GROUP BY p.parent_id;";
+            } else {
+                $sql = "SELECT MAX(p.id) AS max_id, p.parent_id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$id} OR f.parent_forum = {$id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id IN({$visited_topics}) GROUP BY p.parent_id;";
+            }
+
+            $unread_check = $this->asgarosforum->db->get_results($sql);
+
+            if (!empty($unread_check)) {
+                // Check for every visited topic if it contains a newer post.
+                foreach ($unread_check as $key => $last_post) {
+                    if (isset($this->excludedItems[$last_post->parent_id]) && $last_post->max_id > $this->excludedItems[$last_post->parent_id]) {
+                        return 'unread';
+                    }
+                }
             }
         }
 
