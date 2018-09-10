@@ -93,7 +93,7 @@ class AsgarosForumMembersList {
                 echo '<div class="member-name">';
                     echo $this->asgarosforum->getUsername($element->ID);
                     echo '<small>';
-                        echo AsgarosForumPermissions::getForumRole($element->ID);
+                        echo $this->asgarosforum->permissions->getForumRole($element->ID);
                     echo '</small>';
                 echo '</div>';
 

@@ -69,7 +69,7 @@ class AsgarosForumContent {
         }
 
         // Cancel if the current user is banned.
-        if (AsgarosForumPermissions::isBanned('current')) {
+        if ($this->asgarosforum->permissions->isBanned('current')) {
             $this->asgarosforum->error = __('You are banned!', 'asgaros-forum');
             return false;
         }
@@ -91,9 +91,9 @@ class AsgarosForumContent {
 
         // Cancel if the current user is not allowed to edit that post.
         if ($this->get_action() === 'edit_post') {
-            $user_id = AsgarosForumPermissions::$currentUserID;
+            $user_id = $this->asgarosforum->permissions->currentUserID;
 
-            if (!AsgarosForumPermissions::can_edit_post($user_id, $this->asgarosforum->current_post)) {
+            if (!$this->asgarosforum->permissions->can_edit_post($user_id, $this->asgarosforum->current_post)) {
                 $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
                 return false;
             }
@@ -109,7 +109,7 @@ class AsgarosForumContent {
 
         // Cancel if the topic is closed and the user is not a moderator.
         if ($this->get_action() === 'add_post') {
-            if ($this->asgarosforum->get_status('closed') && !AsgarosForumPermissions::isModerator('current')) {
+            if ($this->asgarosforum->get_status('closed') && !$this->asgarosforum->permissions->isModerator('current')) {
                 $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
                 return false;
             }
@@ -151,7 +151,7 @@ class AsgarosForumContent {
     private function insert_data() {
         $redirect = '';
         $upload_list = $this->asgarosforum->uploads->get_upload_list();
-        $author_id = AsgarosForumPermissions::$currentUserID;
+        $author_id = $this->asgarosforum->permissions->currentUserID;
 
         if ($this->get_action() === 'add_topic') {
             // Create the topic.
@@ -168,7 +168,7 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic, false, '#postid-'.$this->asgarosforum->current_post));
 
             // Send notification about new topic.
-            $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, AsgarosForumPermissions::$currentUserID);
+            $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
         } else if ($this->get_action() === 'add_post') {
             // Create the post.
             $this->asgarosforum->current_post = $this->insert_post($this->asgarosforum->current_topic, $this->data_content, $author_id, $upload_list);
@@ -178,11 +178,11 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($this->asgarosforum->get_postlink($this->asgarosforum->current_topic, $this->asgarosforum->current_post));
 
             // Send notification about new post.
-            $this->asgarosforum->notifications->notify_about_new_post($this->data_content, $redirect, AsgarosForumPermissions::$currentUserID);
+            $this->asgarosforum->notifications->notify_about_new_post($this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
         } else if ($this->get_action() === 'edit_post') {
             $date = $this->asgarosforum->current_time();
             $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
-            $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('text' => $this->data_content, 'uploads' => maybe_serialize($upload_list), 'date_edit' => $date, 'author_edit' => AsgarosForumPermissions::$currentUserID), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
+            $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('text' => $this->data_content, 'uploads' => maybe_serialize($upload_list), 'date_edit' => $date, 'author_edit' => $this->asgarosforum->permissions->currentUserID), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
             if ($this->asgarosforum->is_first_post($this->asgarosforum->current_post) && !empty($this->data_subject)) {
                 $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('name' => $this->data_subject), array('id' => $this->asgarosforum->current_topic), array('%s'), array('%d'));
@@ -223,7 +223,7 @@ class AsgarosForumContent {
     public function insert_topic($forum_id, $name, $text, $author_id = false, $uploads = array()) {
         // Set the author ID.
         if (!$author_id) {
-            $author_id = AsgarosForumPermissions::$currentUserID;
+            $author_id = $this->asgarosforum->permissions->currentUserID;
         }
 
         // Get a slug for the new topic.
@@ -247,7 +247,7 @@ class AsgarosForumContent {
     public function insert_post($topic_id, $text, $author_id = false, $uploads = array()) {
         // Set the author ID.
         if (!$author_id) {
-            $author_id = AsgarosForumPermissions::$currentUserID;
+            $author_id = $this->asgarosforum->permissions->currentUserID;
         }
 
         // Get the current time.
@@ -363,7 +363,7 @@ class AsgarosForumContent {
     public function get_categories_filter() {
         $meta_query_filter = array('relation' => 'AND');
 
-        if (!AsgarosForumPermissions::isModerator('current')) {
+        if (!$this->asgarosforum->permissions->isModerator('current')) {
             $meta_query_filter[] = array(
                 'key'       => 'category_access',
                 'value'     => 'moderator',

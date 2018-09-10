@@ -319,7 +319,7 @@ class AsgarosForumUserGroups {
         $canAccess = true;
 
         // We only need to check the access when the user is not an administrator.
-        if (!AsgarosForumPermissions::isAdministrator($userID)) {
+        if (!self::$asgarosforum->permissions->isAdministrator($userID)) {
             // Get user groups IDs of a forum category first.
             $userGroupsIDsOfForumCategory = self::getUserGroupsIDsOfForumCategory($forumCategoryID);
 
@@ -468,7 +468,7 @@ class AsgarosForumUserGroups {
         $filteredCategories = $unfilteredCategories;
 
         // We only need to filter when the user is not an administrator and when there are categories to filter.
-        if (!AsgarosForumPermissions::isAdministrator('current') && !empty($filteredCategories) && !is_wp_error($filteredCategories)) {
+        if (!self::$asgarosforum->permissions->isAdministrator('current') && !empty($filteredCategories) && !is_wp_error($filteredCategories)) {
             foreach ($filteredCategories as $key => $forumCategory) {
                 $canAccess = self::canUserAccessForumCategory($user_ID, $forumCategory->term_id);
 

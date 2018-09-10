@@ -106,6 +106,7 @@ class AsgarosForum {
     var $pagination     = null;
     var $unread         = null;
     var $feed           = null;
+    var $permissions    = null;
 
     function __construct() {
         // Initialize database.
@@ -133,7 +134,6 @@ class AsgarosForum {
         }
 
         new AsgarosForumCompatibility($this);
-        new AsgarosForumPermissions($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumUserGroups($this);
         new AsgarosForumWidgets($this);
@@ -157,6 +157,7 @@ class AsgarosForum {
         $this->pagination       = new AsgarosForumPagination($this);
         $this->unread           = new AsgarosForumUnread($this);
         $this->feed             = new AsgarosForumFeed($this);
+        $this->permissions      = new AsgarosForumPermissions($this);
     }
 
     //======================================================================
@@ -389,7 +390,7 @@ class AsgarosForum {
                 return;
             }
 
-            if ($this->category_access_level === 'moderator' && !AsgarosForumPermissions::isModerator('current')) {
+            if ($this->category_access_level === 'moderator' && !$this->permissions->isModerator('current')) {
                 $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
                 return;
             }
@@ -670,7 +671,7 @@ class AsgarosForum {
     }
 
     function showMoveTopic() {
-        if (AsgarosForumPermissions::isModerator('current')) {
+        if ($this->permissions->isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->get_link('movetopic', $this->current_topic, array('move_topic' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
             $strOUT .= '<div class="content-element"><div class="notice">';
@@ -864,9 +865,9 @@ class AsgarosForum {
      */
     function highlight_username($user, $string) {
         if ($this->options['highlight_admin']) {
-            if (AsgarosForumPermissions::isAdministrator($user->ID)) {
+            if ($this->permissions->isAdministrator($user->ID)) {
                 return '<span class="highlight-admin">'.$string.'</span>';
-            } else if (AsgarosForumPermissions::isModerator($user->ID)) {
+            } else if ($this->permissions->isModerator($user->ID)) {
                 return '<span class="highlight-moderator">'.$string.'</span>';
             }
         }
@@ -947,7 +948,7 @@ class AsgarosForum {
         $menu = '';
 
         if ($this->forumIsOpen()) {
-            if ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
+            if ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
                 // New topic button.
                 $menu .= '<div class="forum-menu">';
                 $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt" href="'.$this->get_link('topic_add', $this->current_forum).'">';
@@ -965,14 +966,14 @@ class AsgarosForum {
     function showTopicMenu($showAllButtons = true) {
         $menu = '';
 
-        if (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
+        if ($this->permissions->isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
             // Reply button.
             $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt" href="'.$this->get_link('post_add', $this->current_topic).'">';
             $menu .= __('Reply', 'asgaros-forum');
             $menu .= '</a>';
         }
 
-        if (AsgarosForumPermissions::isModerator('current') && $showAllButtons) {
+        if ($this->permissions->isModerator('current') && $showAllButtons) {
             // Move button.
             $menu .= '<a class="dashicons-before dashicons-randomize" href="'.$this->get_link('movetopic', $this->current_topic).'">';
             $menu .= __('Move', 'asgaros-forum');
@@ -1018,7 +1019,7 @@ class AsgarosForum {
         $menu = '';
 
         if (is_user_logged_in()) {
-            if (AsgarosForumPermissions::isModerator('current') && ($counter > 1 || $this->current_page >= 1)) {
+            if ($this->permissions->isModerator('current') && ($counter > 1 || $this->current_page >= 1)) {
                 // Delete button.
                 $menu .= '<a class="dashicons-before dashicons-trash" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
                 $menu .= __('Delete', 'asgaros-forum');
@@ -1026,7 +1027,7 @@ class AsgarosForum {
             }
 
             $current_user_id = get_current_user_id();
-            if (AsgarosForumPermissions::can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
+            if ($this->permissions->can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
                 // Edit button.
                 $menu .= '<a class="dashicons-before dashicons-edit" href="'.$this->get_link('post_edit', $post_id, array('part' => ($this->current_page + 1))).'">';
                 $menu .= __('Edit', 'asgaros-forum');
@@ -1034,7 +1035,7 @@ class AsgarosForum {
             }
         }
 
-        if (AsgarosForumPermissions::isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !AsgarosForumPermissions::isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
+        if ($this->permissions->isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
             // Quote button.
             $menu .= '<a class="forum-editor-quote-button dashicons-before dashicons-editor-quote" data-value-id="'.$post_id.'" href="'.$this->get_link('post_add', $this->current_topic, array('quote' => $post_id)).'">';
             $menu .= __('Quote', 'asgaros-forum');
@@ -1093,7 +1094,7 @@ class AsgarosForum {
     }
 
     function delete_topic($topic_id, $admin_action = false) {
-        if (AsgarosForumPermissions::isModerator('current')) {
+        if ($this->permissions->isModerator('current')) {
             if ($topic_id) {
                 do_action('asgarosforum_before_delete_topic', $topic_id);
 
@@ -1122,7 +1123,7 @@ class AsgarosForum {
     function moveTopic() {
         $newForumID = $_POST['newForumID'];
 
-        if (AsgarosForumPermissions::isModerator('current') && $newForumID && $this->content->forum_exists($newForumID)) {
+        if ($this->permissions->isModerator('current') && $newForumID && $this->content->forum_exists($newForumID)) {
             $this->db->update($this->tables->topics, array('parent_id' => $newForumID), array('id' => $this->current_topic), array('%d'), array('%d'));
             wp_redirect(html_entity_decode($this->get_link('topic', $this->current_topic)));
             exit;
@@ -1132,7 +1133,7 @@ class AsgarosForum {
     function remove_post() {
         $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
 
-        if (AsgarosForumPermissions::isModerator('current') && $this->content->post_exists($post_id)) {
+        if ($this->permissions->isModerator('current') && $this->content->post_exists($post_id)) {
             do_action('asgarosforum_before_delete_post', $post_id);
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             $this->uploads->delete_post_files($post_id);
@@ -1161,7 +1162,7 @@ class AsgarosForum {
     }
 
     function change_status($property) {
-        if (AsgarosForumPermissions::isModerator('current')) {
+        if ($this->permissions->isModerator('current')) {
             $new_status = '';
 
             if ($property == 'sticky') {
@@ -1203,7 +1204,7 @@ class AsgarosForum {
 
     // Returns TRUE if the forum is opened or the user has at least moderator rights.
     function forumIsOpen() {
-        if (!AsgarosForumPermissions::isModerator('current')) {
+        if (!$this->permissions->isModerator('current')) {
             $closed = intval($this->db->get_var($this->db->prepare("SELECT closed FROM {$this->tables->forums} WHERE id = %d;", $this->current_forum)));
 
             if ($closed === 1) {

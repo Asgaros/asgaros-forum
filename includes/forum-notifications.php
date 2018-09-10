@@ -211,7 +211,7 @@ class AsgarosForumNotifications {
 
             // Remove banned users from mailing list.
             foreach ($topic_subscribers as $key => $subscriber) {
-                if (AsgarosForumPermissions::isBanned($subscriber->id)) {
+                if ($this->asgarosforum->permissions->isBanned($subscriber->id)) {
                     unset($topic_subscribers[$key]);
                 }
             }
@@ -219,7 +219,7 @@ class AsgarosForumNotifications {
             // Remove non-moderators from mailing list.
             if ($this->asgarosforum->category_access_level == 'moderator') {
                 foreach ($topic_subscribers as $key => $subscriber) {
-                    if (!AsgarosForumPermissions::isModerator($subscriber->id)) {
+                    if (!$this->asgarosforum->permissions->isModerator($subscriber->id)) {
                         unset($topic_subscribers[$key]);
                     }
                 }
@@ -298,7 +298,7 @@ class AsgarosForumNotifications {
 
                 // Remove banned users from mailing list.
                 foreach ($forum_subscribers as $key => $subscriber) {
-                    if (AsgarosForumPermissions::isBanned($subscriber->id)) {
+                    if ($this->asgarosforum->permissions->isBanned($subscriber->id)) {
                         unset($forum_subscribers[$key]);
                     }
                 }
@@ -306,7 +306,7 @@ class AsgarosForumNotifications {
                 // Remove non-moderators from mailing list.
                 if ($this->asgarosforum->category_access_level == 'moderator') {
                     foreach ($forum_subscribers as $key => $subscriber) {
-                        if (!AsgarosForumPermissions::isModerator($subscriber->id)) {
+                        if (!$this->asgarosforum->permissions->isModerator($subscriber->id)) {
                             unset($forum_subscribers[$key]);
                         }
                     }
@@ -516,7 +516,7 @@ class AsgarosForumNotifications {
             if (!$canAccess) {
                 unset($data[$key]);
             } else {
-                $canPermAccess = AsgarosForumPermissions::canUserAccessForumCategory($user_id, $item->category_id);
+                $canPermAccess = $this->asgarosforum->permissions->canUserAccessForumCategory($user_id, $item->category_id);
 
                 if (!$canPermAccess) {
                     unset($data[$key]);

@@ -39,7 +39,7 @@ $user_data = get_userdata($post->author_id);
             }
         }
 
-        if (AsgarosForumPermissions::isBanned($post->author_id)) {
+        if ($this->permissions->isBanned($post->author_id)) {
             echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
         }
 

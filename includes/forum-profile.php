@@ -87,7 +87,7 @@ class AsgarosForumProfile {
 
             echo '<div class="user-info">';
                 echo '<div class="profile-display-name">'.$user_data->display_name.'</div>';
-                echo '<div class="profile-forum-role">'.AsgarosForumPermissions::getForumRole($user_data->ID).'</div>';
+                echo '<div class="profile-forum-role">'.$this->asgarosforum->permissions->getForumRole($user_data->ID).'</div>';
             echo '</div>';
         echo '</div>';
     }

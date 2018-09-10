@@ -218,7 +218,7 @@ class AsgarosForumUploads {
 			// Dont show upload controls under certain conditions.
 			if (!is_user_logged_in() && $this->asgarosforum->options['upload_permission'] != 'everyone') {
 				return;
-			} else if (!AsgarosForumPermissions::isModerator('current') && $this->asgarosforum->options['upload_permission'] == 'moderator') {
+			} else if (!$this->asgarosforum->permissions->isModerator('current') && $this->asgarosforum->options['upload_permission'] == 'moderator') {
 				return;
 			}
 
