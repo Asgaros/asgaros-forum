@@ -110,10 +110,10 @@ class AsgarosForumAppearance {
 	}
 
 	public function set_header() {
-		echo '<!-- Asgaros Forum: BEGIN -->'.PHP_EOL;
-
 		// SEO stuff.
 		if ($this->asgarosforum->executePlugin) {
+			echo '<!-- Asgaros Forum: BEGIN -->'.PHP_EOL;
+
 			$currentLink = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
 			$currentTitle = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
 			$currentDescription = ($this->asgarosforum->current_description) ? $this->asgarosforum->current_description : $currentTitle;
@@ -141,9 +141,9 @@ class AsgarosForumAppearance {
 			echo '<meta name="twitter:description" content="'.$currentDescription.'" />'.PHP_EOL;
 
 			do_action('asgarosforum_wp_head');
-		}
 
-		echo '<!-- Asgaros Forum: END -->'.PHP_EOL;
+			echo '<!-- Asgaros Forum: END -->'.PHP_EOL;
+		}
 	}
 
 	public function add_css() {
