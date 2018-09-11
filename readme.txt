@@ -94,7 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Fixed: Performance issues when the forum has a lot of posts/topics
+* Fixed: Performance issues in unread-logic when a forum has a lot of posts/topics
 * Fixed: Wrong default values for dates in database
 * Performance improvements and code optimizations
 = 1.10.0 =
