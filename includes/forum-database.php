@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 24;
+    private $db_version = 25;
     private $tables;
 
     public function __construct() {
@@ -281,6 +281,13 @@ class AsgarosForumDatabase {
                 $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(date);');
 
                 update_option('asgarosforum_db_version', 24);
+            }
+
+            // Add index to forums.parent_id for faster queries.
+            if ($database_version_installed < 25) {
+                $this->db->query('ALTER TABLE '.$this->tables->forums.' ADD INDEX(parent_id);');
+
+                update_option('asgarosforum_db_version', 25);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);
