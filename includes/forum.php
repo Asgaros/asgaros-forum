@@ -133,6 +133,8 @@ class AsgarosForum {
             add_action('transition_post_status', array($this, 'createBlogTopic'), 10, 3);
         }
 
+        add_filter('oembed_dataparse', array($this, 'prevent_oembed_dataparse'), 10, 3);
+
         new AsgarosForumCompatibility($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumUserGroups($this);
@@ -1289,5 +1291,16 @@ class AsgarosForum {
     public function countUsers() {
         $users = count_users();
         return $users['total_users'];
+    }
+
+    // Prevents oembed dataparsing for links which points to the own forum.
+    function prevent_oembed_dataparse($return, $data, $url) {
+        $url_check = strpos($url, $this->rewrite->get_link('home'));
+
+        if ($url_check !== false) {
+            return $url;
+        }
+
+        return $return;
     }
 }

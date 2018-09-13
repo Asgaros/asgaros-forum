@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Performance issues in unread-logic when a forum has a lot of posts/topics
+* Fixed: Broken links in posts which points to other topics inside the own forum
 * Fixed: Wrong default values for dates in database
 * Performance improvements and code optimizations
 = 1.10.0 =
