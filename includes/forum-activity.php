@@ -105,12 +105,14 @@ class AsgarosForumActivity {
         if (empty($ids_categories)) {
             return false;
         } else {
+            $ids_categories = implode(',', $ids_categories);
+
             if ($count_all) {
-                return $this->asgarosforum->db->get_var("SELECT COUNT(p.id) FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN (".implode(',', $ids_categories)."));");
+                return $this->asgarosforum->db->get_var("SELECT COUNT(p.id) FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.id = p.parent_id AND f.id = t.parent_id AND f.parent_id IN ({$ids_categories})");
             } else {
                 $start = $this->asgarosforum->current_page * 50;
                 $end = 50;
-                return $this->asgarosforum->db->get_results("SELECT p.*, t.name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN (".implode(',', $ids_categories).")) ORDER BY p.id DESC LIMIT {$start}, {$end};");
+                return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$ids_categories})) ORDER BY p.id DESC LIMIT {$start}, {$end};");
             }
         }
     }
