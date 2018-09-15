@@ -234,7 +234,7 @@ class AsgarosForumUploads {
 
 				if ($this->asgarosforum->options['uploads_maximum_number'] == 0 || $uploadedFilesCounter < $this->asgarosforum->options['uploads_maximum_number']) {
 					$uploadedFilesCounter++;
-					echo '<input type="file" name="forumfile[]"><br />';
+					echo '<input type="file" name="forumfile[]"><br>';
 
 					if ($this->asgarosforum->options['uploads_maximum_number'] == 0 || $uploadedFilesCounter < $this->asgarosforum->options['uploads_maximum_number']) {
 						$flag = '';

@@ -701,7 +701,7 @@ class AsgarosForum {
                 }
             }
 
-            $strOUT .= '</select><br /><input type="submit" value="'.__('Move', 'asgaros-forum').'"></div></div></form>';
+            $strOUT .= '</select><br><input type="submit" value="'.__('Move', 'asgaros-forum').'"></div></div></form>';
 
             echo $strOUT;
         } else {

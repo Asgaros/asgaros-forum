@@ -78,7 +78,7 @@
 
         $('a#add_file_link').click(function() {
             // Insert new upload element.
-            $('<input type="file" name="forumfile[]" /><br />').insertBefore(this);
+            $('<input type="file" name="forumfile[]" /><br>').insertBefore(this);
 
             // Check if we can add more upload elements.
             checkUploadsMaximumNumber();
