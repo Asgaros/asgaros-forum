@@ -31,13 +31,19 @@ class AsgarosForumAdmin {
         if (current_user_can('manage_options')) {
             // ... and he edits a non-admin user.
             if (!user_can($user->ID, 'manage_options')) {
+                $role = $asgarosforum->permissions->get_forum_role($user->ID);
+
                 $output .= '<tr>';
-                $output .= '<th><label for="asgarosforum_moderator">'.__('Forum Moderator', 'asgaros-forum').'</label></th>';
-                $output .= '<td><input type="checkbox" name="asgarosforum_moderator" id="asgarosforum_moderator" value="1" '.checked(get_the_author_meta('asgarosforum_moderator', $user->ID), '1', false).'></td>';
-                $output .= '</tr>';
-                $output .= '<tr>';
-                $output .= '<th><label for="asgarosforum_banned">'.__('Banned User', 'asgaros-forum').'</label></th>';
-                $output .= '<td><input type="checkbox" name="asgarosforum_banned" id="asgarosforum_banned" value="1" '.checked(get_the_author_meta('asgarosforum_banned', $user->ID), '1', false).'></td>';
+                $output .= '<th><label for="asgarosforum_role">'.__('Forum Role', 'asgaros-forum').'</label></th>';
+                $output .= '<td>';
+
+                $output .= '<select name="asgarosforum_role" id="asgarosforum_role">';
+                $output .= '<option value="normal" '.selected($role, 'normal').'>'.__('Normal User', 'asgaros-forum').'</option>';
+                $output .= '<option value="moderator" '.selected($role, 'moderator').'>'.__('Moderator', 'asgaros-forum').'</option>';
+                $output .= '<option value="banned" '.selected($role, 'banned').'>'.__('Banned', 'asgaros-forum').'</option>';
+                $output .= '</select>';
+
+                $output .= '</td>';
                 $output .= '</tr>';
             }
 
@@ -85,16 +91,8 @@ class AsgarosForumAdmin {
 
         if (current_user_can('manage_options')) {
             if (!user_can($user_id, 'manage_options')) {
-                if (isset($_POST['asgarosforum_moderator'])) {
-                    update_user_meta($user_id, 'asgarosforum_moderator', wp_kses_post($_POST['asgarosforum_moderator']));
-                } else {
-                    delete_user_meta($user_id, 'asgarosforum_moderator');
-                }
-
-                if (isset($_POST['asgarosforum_banned'])) {
-                    update_user_meta($user_id, 'asgarosforum_banned', wp_kses_post($_POST['asgarosforum_banned']));
-                } else {
-                    delete_user_meta($user_id, 'asgarosforum_banned');
+                if (isset($_POST['asgarosforum_role'])) {
+                    $asgarosforum->permissions->set_forum_role($user_id, $_POST['asgarosforum_role']);
                 }
             }
 

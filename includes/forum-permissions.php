@@ -4,9 +4,6 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumPermissions {
     private $asgarosforum = null;
-    private $currentUserIsAdministrator;
-    private $currentUserIsModerator;
-    private $currentUserIsBanned;
     public $currentUserID;
 
     public function __construct($object) {
@@ -17,16 +14,13 @@ class AsgarosForumPermissions {
 
     public function initialize() {
         $this->currentUserID = get_current_user_id();
-        $this->currentUserIsAdministrator = $this->isAdministrator($this->currentUserID);
-        $this->currentUserIsModerator = $this->isModerator($this->currentUserID);
-        $this->currentUserIsBanned = $this->isBanned($this->currentUserID);
     }
 
     public function isAdministrator($userID = false) {
         if ($userID) {
             if ($userID === 'current') {
                 // Return for current user
-                return $this->currentUserIsAdministrator;
+                return $this->isAdministrator($this->currentUserID);
             } else if (is_super_admin($userID) || user_can($userID, 'administrator')) {
                 // Always true for administrators
                 return true;
@@ -41,14 +35,11 @@ class AsgarosForumPermissions {
         if ($userID) {
             if ($userID === 'current') {
                 // Return for current user
-                return $this->currentUserIsModerator;
+                return $this->isModerator($this->currentUserID);
             } else if ($this->isAdministrator($userID)) {
                 // Always true for administrators
                 return true;
-            } else if ($this->isBanned($userID)) {
-                // Always false for banned users
-                return false;
-            } else if (get_user_meta($userID, 'asgarosforum_moderator', true) == 1) {
+            } else if ($this->get_forum_role($userID) === 'moderator') {
                 // And true for moderators of course ...
                 return true;
             }
@@ -62,12 +53,12 @@ class AsgarosForumPermissions {
         if ($userID) {
             if ($userID === 'current') {
                 // Return for current user
-                return $this->currentUserIsBanned;
+                return $this->isBanned($this->currentUserID);
             } else if ($this->isAdministrator($userID)) {
                 // Always false for administrators
                 return false;
-            } else if (get_user_meta($userID, 'asgarosforum_banned', true) == 1) {
-                // And true for banned users of course. Moderators can be banned too in this case.
+            } else if ($this->get_forum_role($userID) === 'banned') {
+                // And true for banned users of course ...
                 return true;
             }
         }
@@ -88,6 +79,31 @@ class AsgarosForumPermissions {
         }
     }
 
+    public function get_forum_role($user_id) {
+        $role = get_user_meta($user_id, 'asgarosforum_role', true);
+
+        if (!empty($role)) {
+            return $role;
+        }
+
+        return 'normal';
+    }
+
+    public function set_forum_role($user_id, $role) {
+        switch ($role) {
+            case 'normal':
+                delete_user_meta($user_id, 'asgarosforum_role');
+            break;
+            case 'moderator':
+                update_user_meta($user_id, 'asgarosforum_role', 'moderator');
+            break;
+            case 'banned':
+                update_user_meta($user_id, 'asgarosforum_role', 'banned');
+            break;
+        }
+    }
+
+    // TODO: Possible data leak because $userID is not checked ...
     public function canUserAccessForumCategory($userID, $forumCategoryID) {
         $access_level = get_term_meta($forumCategoryID, 'category_access', true);
 

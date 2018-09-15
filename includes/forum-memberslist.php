@@ -130,7 +130,7 @@ class AsgarosForumMembersList {
                     'fields'            => array('ID', 'display_name'),
                     'meta_query'        => array(
                         array(
-                            'key'       => 'asgarosforum_moderator',
+                            'key'       => 'asgarosforum_role',
                             'compare'   => 'NOT EXISTS'
                         )
                     ),
@@ -142,8 +142,8 @@ class AsgarosForumMembersList {
                     'fields'            => array('ID', 'display_name'),
                     'meta_query'        => array(
                         array(
-                            'key'       => 'asgarosforum_moderator',
-                            'compare'   => 'EXISTS'
+                            'key'       => 'asgarosforum_role',
+                            'value'     => 'moderator'
                         )
                     ),
                     'role__not_in'      => array('administrator')

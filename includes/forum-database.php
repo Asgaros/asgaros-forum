@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 25;
+    private $db_version = 26;
     private $tables;
 
     public function __construct() {
@@ -288,6 +288,49 @@ class AsgarosForumDatabase {
                 $this->db->query('ALTER TABLE '.$this->tables->forums.' ADD INDEX(parent_id);');
 
                 update_option('asgarosforum_db_version', 25);
+            }
+
+            // Convert to new role system.
+            if ($database_version_installed < 26) {
+                // Convert moderators.
+                $get_moderators = get_users(array(
+                    'fields'            => array('ID'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_moderator',
+                            'compare'   => 'EXISTS'
+                        )
+                    )
+                ));
+
+                if (!empty($get_moderators)) {
+                    foreach ($get_moderators as $moderator) {
+                        $asgarosforum->permissions->set_forum_role($moderator->ID, 'moderator');
+                    }
+                }
+
+                delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
+
+                // Convert banned users.
+                $get_banned = get_users(array(
+                    'fields'            => array('ID'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_banned',
+                            'compare'   => 'EXISTS'
+                        )
+                    )
+                ));
+
+                if (!empty($get_banned)) {
+                    foreach ($get_banned as $banned) {
+                        $asgarosforum->permissions->set_forum_role($banned->ID, 'banned');
+                    }
+                }
+
+                delete_metadata('user', 0, 'asgarosforum_banned', '', true);
+
+                update_option('asgarosforum_db_version', 26);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

@@ -48,8 +48,7 @@ function deleteData() {
     delete_site_option('asgarosforum_db_version');
 
     // Delete user meta data
-    delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
-    delete_metadata('user', 0, 'asgarosforum_banned', '', true);
+    delete_metadata('user', 0, 'asgarosforum_role', '', true);
     delete_metadata('user', 0, 'asgarosforum_signature', '', true);
     delete_metadata('user', 0, 'asgarosforum_mention_notify', '', true);
     delete_metadata('user', 0, 'asgarosforum_subscription_topic', '', true);
@@ -93,5 +92,7 @@ function deleteData() {
 
     // Delete data which has been used in old versions of the plugin.
     delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
+    delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
+    delete_metadata('user', 0, 'asgarosforum_banned', '', true);
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_threads;");
 }
