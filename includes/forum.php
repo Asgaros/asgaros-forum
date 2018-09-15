@@ -989,7 +989,7 @@ class AsgarosForum {
             if ($this->get_status('sticky')) {
                 // Undo sticky button.
                 $menu .= '<a class="dashicons-before dashicons-sticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
-                $menu .= __('Undo Sticky', 'asgaros-forum');
+                $menu .= __('Unsticky', 'asgaros-forum');
                 $menu .= '</a>';
             } else {
                 // Sticky button.

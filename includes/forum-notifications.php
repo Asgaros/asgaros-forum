@@ -83,7 +83,6 @@ class AsgarosForumNotifications {
         // Check if this functionality is enabled and if the user is logged-in.
         if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
             echo '<div class="editor-row">';
-            echo '<span class="row-title">'.__('Subscription:', 'asgaros-forum').'</span>';
 
             $subscription_level = $this->get_subscription_level();
 
