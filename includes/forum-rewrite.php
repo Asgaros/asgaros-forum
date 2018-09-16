@@ -76,11 +76,14 @@ class AsgarosForumRewrite {
     function disable_front_page_redirect($requested_url, $do_redirect) {
         global $post;
 
-        if (get_option('show_on_front') === 'page') {
-            $front_page_id = get_option('page_on_front');
+        // Ensure that the post object is set.
+        if (isset($post)) {
+            if (get_option('show_on_front') === 'page') {
+                $front_page_id = get_option('page_on_front');
 
-            if ($front_page_id == $post->ID && $front_page_id == $this->asgarosforum->options['location']) {
-                $requested_url = false;
+                if ($front_page_id == $post->ID && $front_page_id == $this->asgarosforum->options['location']) {
+                    $requested_url = false;
+                }
             }
         }
 

@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Moderators can now ban users
 * Added: Its now possible to ban users from their profile
+* Fixed: Rare PHP-error in rewrite-logic when post-object is not set
 * Fixed: Performance issues in forums which consist of many topics
 * Fixed: Broken links in posts pointing to other forum topics
 * Fixed: Wrong default values for dates in database
