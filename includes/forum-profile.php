@@ -87,7 +87,15 @@ class AsgarosForumProfile {
 
             echo '<div class="user-info">';
                 echo '<div class="profile-display-name">'.$user_data->display_name.'</div>';
-                echo '<div class="profile-forum-role">'.$this->asgarosforum->permissions->getForumRole($user_data->ID).'</div>';
+
+                $role = $this->asgarosforum->permissions->getForumRole($user_data->ID);
+
+                // Special styling for banned users.
+                if ($this->asgarosforum->permissions->get_forum_role($user_data->ID) === 'banned') {
+                    $role = '<span class="banned">'.$role.'</span>';
+                }
+
+                echo '<div class="profile-forum-role">'.$role.'</div>';
             echo '</div>';
         echo '</div>';
     }
@@ -282,8 +290,23 @@ class AsgarosForumProfile {
 
                     do_action('asgarosforum_custom_profile_content', $userData);
 
-                    if ($userData->ID == get_current_user_id()) {
+                    $current_user_id = get_current_user_id();
+
+                    if ($userData->ID == $current_user_id) {
                         echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link"><span class="dashicons-before dashicons-edit">'.__('Edit Profile', 'asgaros-forum').'</span></a>';
+                    }
+
+                    // Check if the current user can ban this user.
+                    if ($this->asgarosforum->permissions->can_ban_user($current_user_id, $userData->ID)) {
+                        if ($this->asgarosforum->permissions->isBanned($userData->ID)) {
+                            $url = $this->getProfileLink($userData, array('unban_user' => $userData->ID));
+                            $nonce_url = wp_nonce_url($url, 'unban_user_'.$userData->ID);
+                            echo '<a class="banned" href="'.$nonce_url.'">'.__('Unban User', 'asgaros-forum').'</a>';
+                        } else {
+                            $url = $this->getProfileLink($userData, array('ban_user' => $userData->ID));
+                            $nonce_url = wp_nonce_url($url, 'ban_user_'.$userData->ID);
+                            echo '<a class="banned" href="'.$nonce_url.'">'.__('Ban User', 'asgaros-forum').'</a>';
+                        }
                     }
                 echo '</div>';
             }
@@ -313,11 +336,11 @@ class AsgarosForumProfile {
         echo '</div>';
     }
 
-    public function getProfileLink($userObject) {
+    public function getProfileLink($userObject, $additional_parameters = false) {
         if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
             return false;
         } else {
-            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID);
+            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID, $additional_parameters);
             $profileLink = apply_filters('asgarosforum_filter_profile_link', $profileLink, $userObject);
 
             return $profileLink;

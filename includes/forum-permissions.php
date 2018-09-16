@@ -10,6 +10,7 @@ class AsgarosForumPermissions {
         $this->asgarosforum = $object;
 
         add_action('init', array($this, 'initialize'));
+        add_action('asgarosforum_prepare_profile', array($this, 'change_ban_status'));
 	}
 
     public function initialize() {
@@ -152,6 +153,72 @@ class AsgarosForumPermissions {
             return true;
         }
     }
-}
 
-?>
+    // Check if a user can ban another user.
+    public function can_ban_user($user_id, $ban_id) {
+        if ($this->isAdministrator($user_id)) {
+            // Administrators cannot ban other administrators.
+            if ($this->isAdministrator($ban_id)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        if ($this->isModerator($user_id)) {
+            // Moderators cannot ban other administrators/moderators.
+            // Hint: This function also works for administrators because the
+            // moderator-check function also return TRUE for administrators.
+            if ($this->isModerator($ban_id)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Otherwise the user cannot ban.
+        return false;
+    }
+
+    public function ban_user($user_id, $ban_id) {
+        // Verify nonce first.
+        if (wp_verify_nonce($_REQUEST['_wpnonce'], 'ban_user_'.$ban_id)) {
+            // Check if the current user can ban another user.
+            if ($this->can_ban_user($user_id, $ban_id)) {
+                // Ensure that the user is not already banned.
+                if (!$this->isBanned($ban_id)) {
+                    $this->set_forum_role($ban_id, 'banned');
+                }
+            }
+        }
+    }
+
+    public function unban_user($user_id, $unban_id) {
+        // Verify nonce first.
+        if (wp_verify_nonce($_REQUEST['_wpnonce'], 'unban_user_'.$unban_id)) {
+            // Check if the current user can ban another user.
+            if ($this->can_ban_user($user_id, $unban_id)) {
+                // Ensure that the user is banned.
+                if ($this->isBanned($unban_id)) {
+                    $this->set_forum_role($unban_id, 'normal');
+                }
+            }
+        }
+    }
+
+    public function change_ban_status() {
+        if (!empty($_GET['ban_user'])) {
+            $user_id = get_current_user_id();
+            $ban_id = $_GET['ban_user'];
+
+            $this->ban_user($user_id, $ban_id);
+        }
+
+        if (!empty($_GET['unban_user'])) {
+            $user_id = get_current_user_id();
+            $unban_id = $_GET['unban_user'];
+
+            $this->unban_user($user_id, $unban_id);
+        }
+    }
+}
