@@ -256,6 +256,51 @@ class AsgarosForumPermissions {
         }
     }
 
+    /*
+    public function get_by_role($role) {
+        switch ($role) {
+            case 'moderator':
+                return get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_role',
+                            'value'     => 'moderator'
+                        )
+                    ),
+                    'role__not_in'      => array('administrator')
+                ));
+            break;
+            case 'administrator':
+                return get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_role',
+                            'value'     => 'administrator'
+                        )
+                    ),
+                    'role__not_in'      => array('administrator')
+                ));
+            break;
+            case 'banned':
+                return get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_role',
+                            'value'     => 'banned'
+                        )
+                    ),
+                    'role__not_in'      => array('administrator')
+                ));
+            break;
+        }
+
+        return false;
+    }
+    */
+
     // Users List in Administration.
     public function manage_users_columns($columns) {
         $columns['forum-user-role'] = __('Forum Role', 'asgaros-forum');
@@ -269,4 +314,26 @@ class AsgarosForumPermissions {
 
         return $output;
 	}
+
+    /*
+    public function views($views) {
+        $views['forum-user-view'] = __('Forum:', 'asgaros-forum').'&nbsp;';
+
+        $loopCounter = 0;
+
+        foreach ($usergroups as $term) {
+            $loopCounter++;
+            $cssClass = (!empty($_GET['forum-user-group']) && $_GET['forum-user-group'] == $term->term_id) ? 'class="current"' : '';
+            $usersCounter = self::countUsersOfUserGroup($term->term_id);
+
+            if ($loopCounter > 1) {
+                $views['forum-user-group'] .= '&nbsp;|&nbsp;';
+            }
+
+            $views['forum-user-group'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-group='.$term->term_id).'">'.$term->name.'</a> ('.$usersCounter.')';
+        }
+
+		return $views;
+	}
+    */
 }
