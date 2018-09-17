@@ -11,6 +11,10 @@ class AsgarosForumPermissions {
 
         add_action('init', array($this, 'initialize'));
         add_action('asgarosforum_prepare_profile', array($this, 'change_ban_status'));
+
+        // Users list in administration.
+        add_filter('manage_users_columns', array($this, 'manage_users_columns'));
+        add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
 	}
 
     public function initialize() {
@@ -251,4 +255,18 @@ class AsgarosForumPermissions {
             $this->unban_user($user_id, $unban_id);
         }
     }
+
+    // Users List in Administration.
+    public function manage_users_columns($columns) {
+        $columns['forum-user-role'] = __('Forum Role', 'asgaros-forum');
+        return $columns;
+  	}
+
+    public function manage_users_custom_column($output, $column_name, $user_id) {
+		if ($column_name === 'forum-user-role') {
+            $output .= $this->getForumRole($user_id);
+		}
+
+        return $output;
+	}
 }

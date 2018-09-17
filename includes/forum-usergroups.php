@@ -357,7 +357,7 @@ class AsgarosForumUserGroups {
 
     // Users List in Administration.
     public function manageUsersColumns($columns) {
-        $columns['forum-user-groups'] = __('Forum', 'asgaros-forum');
+        $columns['forum-user-groups'] = __('Forum User Groups', 'asgaros-forum');
         return $columns;
   	}
 
