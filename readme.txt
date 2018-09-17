@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Forum administrator role
 * Added: Moderators can now ban users
 * Added: Its now possible to ban users from their profile
 * Fixed: Rare PHP-error in rewrite-logic when post-object is not set

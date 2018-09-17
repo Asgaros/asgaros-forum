@@ -40,6 +40,7 @@ class AsgarosForumAdmin {
                 $output .= '<select name="asgarosforum_role" id="asgarosforum_role">';
                 $output .= '<option value="normal" '.selected($role, 'normal').'>'.__('Normal User', 'asgaros-forum').'</option>';
                 $output .= '<option value="moderator" '.selected($role, 'moderator').'>'.__('Moderator', 'asgaros-forum').'</option>';
+                $output .= '<option value="administrator" '.selected($role, 'administrator').'>'.__('Administrator', 'asgaros-forum').'</option>';
                 $output .= '<option value="banned" '.selected($role, 'banned').'>'.__('Banned', 'asgaros-forum').'</option>';
                 $output .= '</select>';
 
@@ -122,24 +123,26 @@ class AsgarosForumAdmin {
 
     // Add all required pages to the menu.
     function add_admin_pages() {
-        add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'structure_page'), 'dashicons-clipboard');
-        add_submenu_page('asgarosforum-structure', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'manage_options', 'asgarosforum-structure', array($this, 'structure_page'));
-        add_submenu_page('asgarosforum-structure', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'manage_options', 'asgarosforum-appearance', array($this, 'appearance_page'));
-        add_submenu_page('asgarosforum-structure', __('User Groups', 'asgaros-forum'), __('User Groups', 'asgaros-forum'), 'manage_options', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
+        if ($this->asgarosforum->permissions->isAdministrator('current')) {
+            add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'), 'dashicons-clipboard');
+            add_submenu_page('asgarosforum-structure', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'));
+            add_submenu_page('asgarosforum-structure', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'read', 'asgarosforum-appearance', array($this, 'appearance_page'));
+            add_submenu_page('asgarosforum-structure', __('User Groups', 'asgaros-forum'), __('User Groups', 'asgaros-forum'), 'read', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
 
-        if ($this->asgarosforum->options['reports_enabled']) {
-            // Add report counter to menu.
-            $label_reports = __('Reports', 'asgaros-forum');
-            $counter_reports = $this->asgarosforum->reports->count_reports();
+            if ($this->asgarosforum->options['reports_enabled']) {
+                // Add report counter to menu.
+                $label_reports = __('Reports', 'asgaros-forum');
+                $counter_reports = $this->asgarosforum->reports->count_reports();
 
-            if ($counter_reports > 0) {
-                $label_reports = sprintf(__('Reports %s', 'asgaros-forum'), '<span class="update-plugins count-'.$counter_reports.'"><span class="plugin-count">'.number_format_i18n($counter_reports).'</span></span>');
+                if ($counter_reports > 0) {
+                    $label_reports = sprintf(__('Reports %s', 'asgaros-forum'), '<span class="update-plugins count-'.$counter_reports.'"><span class="plugin-count">'.number_format_i18n($counter_reports).'</span></span>');
+                }
+
+                add_submenu_page('asgarosforum-structure', __('Reports', 'asgaros-forum'), $label_reports, 'read', 'asgarosforum-reports', array($this, 'reports_page'));
             }
 
-            add_submenu_page('asgarosforum-structure', __('Reports', 'asgaros-forum'), $label_reports, 'manage_options', 'asgarosforum-reports', array($this, 'reports_page'));
+            add_submenu_page('asgarosforum-structure', __('Settings', 'asgaros-forum'), __('Settings', 'asgaros-forum'), 'read', 'asgarosforum-options', array($this, 'options_page'));
         }
-
-        add_submenu_page('asgarosforum-structure', __('Settings', 'asgaros-forum'), __('Settings', 'asgaros-forum'), 'manage_options', 'asgarosforum-options', array($this, 'options_page'));
     }
 
     function options_page() {
@@ -179,8 +182,8 @@ class AsgarosForumAdmin {
     }
 
     function save_settings() {
-        // Only save changes when the user is an administrator.
-        if (current_user_can('manage_options')) {
+        // Only save changes when the user is an forum/site administrator.
+        if ($this->asgarosforum->permissions->isAdministrator('current')) {
             if (isset($_POST['af_options_submit'])) {
                 // Verify nonce first.
                 check_admin_referer('asgaros_forum_save_options');

@@ -17,13 +17,31 @@ class AsgarosForumPermissions {
         $this->currentUserID = get_current_user_id();
     }
 
+    public function isSiteAdministrator($user_id = false) {
+        if ($user_id) {
+            if ($user_id === 'current') {
+                // Return for current user
+                return $this->isSiteAdministrator($this->currentUserID);
+            } else if (is_super_admin($user_id) || user_can($user_id, 'administrator')) {
+                // Always true for site administrators
+                return true;
+            }
+        }
+
+        // Otherwise false ...
+        return false;
+    }
+
     public function isAdministrator($userID = false) {
         if ($userID) {
             if ($userID === 'current') {
                 // Return for current user
                 return $this->isAdministrator($this->currentUserID);
-            } else if (is_super_admin($userID) || user_can($userID, 'administrator')) {
-                // Always true for administrators
+            } else if ($this->isSiteAdministrator($userID)) {
+                // Always true for site administrators
+                return true;
+            } else if ($this->get_forum_role($userID) === 'administrator') {
+                // And true for forum administrators of course ...
                 return true;
             }
         }
@@ -38,7 +56,7 @@ class AsgarosForumPermissions {
                 // Return for current user
                 return $this->isModerator($this->currentUserID);
             } else if ($this->isAdministrator($userID)) {
-                // Always true for administrators
+                // Always true for (site) administrators
                 return true;
             } else if ($this->get_forum_role($userID) === 'moderator') {
                 // And true for moderators of course ...
@@ -55,8 +73,8 @@ class AsgarosForumPermissions {
             if ($userID === 'current') {
                 // Return for current user
                 return $this->isBanned($this->currentUserID);
-            } else if ($this->isAdministrator($userID)) {
-                // Always false for administrators
+            } else if ($this->isSiteAdministrator($userID)) {
+                // Ensure that site-administrators cannot get banned.
                 return false;
             } else if ($this->get_forum_role($userID) === 'banned') {
                 // And true for banned users of course ...
@@ -97,6 +115,9 @@ class AsgarosForumPermissions {
             break;
             case 'moderator':
                 update_user_meta($user_id, 'asgarosforum_role', 'moderator');
+            break;
+            case 'administrator':
+                update_user_meta($user_id, 'asgarosforum_role', 'administrator');
             break;
             case 'banned':
                 update_user_meta($user_id, 'asgarosforum_role', 'banned');
@@ -156,8 +177,18 @@ class AsgarosForumPermissions {
 
     // Check if a user can ban another user.
     public function can_ban_user($user_id, $ban_id) {
+        if ($this->isSiteAdministrator($user_id)) {
+            // Site administrators cannot ban other site administrators.
+            if ($this->isSiteAdministrator($ban_id)) {
+                return false;
+            }
+
+            return true;
+        }
+
+
         if ($this->isAdministrator($user_id)) {
-            // Administrators cannot ban other administrators.
+            // Administrators cannot ban other (site) administrators.
             if ($this->isAdministrator($ban_id)) {
                 return false;
             }
