@@ -125,11 +125,10 @@ class AsgarosForumPermissions {
         }
     }
 
-    // TODO: Possible data leak because $userID is not checked ...
     public function canUserAccessForumCategory($userID, $forumCategoryID) {
         $access_level = get_term_meta($forumCategoryID, 'category_access', true);
 
-        if ($access_level == 'moderator' && !$this->isModerator('current')) {
+        if ($access_level == 'moderator' && !$this->isModerator($userID)) {
             return false;
         }
 
