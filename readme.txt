@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Forum administrator role
+* Added: Show forum role in backend user overview
 * Added: Moderators can now ban users
 * Added: Its now possible to ban users from their profile
 * Fixed: Rare PHP-error in rewrite-logic when post-object is not set
