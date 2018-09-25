@@ -199,8 +199,8 @@
     height: 40px;
     font-size: 40px;
 }
-#af-structure .parentforum .forum-icon,
-#af-structure .subforum .forum-icon {
+#af-structure .forum-icon,
+#af-structure .usergroup-icon {
     display: block;
     float: left;
     margin-right: 8px;
@@ -222,8 +222,8 @@
     color: #888;
 }
 #af-structure .usergroup-color {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     border: 1px solid #000;
     float: left;
     display: block;

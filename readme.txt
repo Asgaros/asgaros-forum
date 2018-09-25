@@ -94,6 +94,9 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Show IDs of usergroups inside the administration area
+* Minor design changes
+* Performance improvements and code optimizations
 = 1.10.1 =
 * Added: Forum administrator role
 * Added: Show forum role in backend user overview
