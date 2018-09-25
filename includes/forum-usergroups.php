@@ -52,6 +52,7 @@ class AsgarosForumUserGroups {
     // FUNCTIONS FOR INSERTING CONTENT.
     //======================================================================
 
+    // Adds a new usergroup.
     public static function insertUserGroup($categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal', $usergroup_auto_add = 'no') {
         $userGroupName = trim($userGroupName);
         $userGroupColor = trim($userGroupColor);
@@ -97,12 +98,32 @@ class AsgarosForumUserGroups {
         }
     }
 
-    public static function insertUserGroupsOfUsers($userID, $userGroups) {
-        if (!empty($userGroups)) {
-            wp_set_object_terms($userID, $userGroups, self::$taxonomyName);
-            clean_object_term_cache($userID, self::$taxonomyName);
+    // Assign an user to all given usergroups. The user gets removed from usergroups which are not inside the array anymore.
+    public static function insertUserGroupsOfUsers($user_id, $usergroups) {
+        // Get all current usergroups of the user first which allows us to run specific hooks.
+        $current_usergroups = self::getUserGroupsOfUser($user_id, 'ids');
+
+        if (!empty($usergroups)) {
+            wp_set_object_terms($user_id, $usergroups, self::$taxonomyName);
+            clean_object_term_cache($user_id, self::$taxonomyName);
         } else {
-            self::deleteUserGroupsOfUser($userID);
+            self::deleteUserGroupsOfUser($user_id);
+        }
+
+        // Run hooks for adding the user to a specific group.
+        foreach ($usergroups as $usergroup) {
+            if (!in_array($usergroup, $current_usergroups)) {
+                echo 'asgarosforum_usergroup_'.$usergroup.'_add_user';
+                do_action('asgarosforum_usergroup_'.$usergroup.'_add_user', $user_id, $usergroup);
+            }
+        }
+
+        // Run hooks for removing the user from a specific group.
+        foreach ($current_usergroups as $usergroup) {
+            if (!in_array($usergroup, $usergroups)) {
+                echo 'asgarosforum_usergroup_'.$usergroup.'_remove_user';
+                do_action('asgarosforum_usergroup_'.$usergroup.'_remove_user', $user_id, $usergroup);
+            }
         }
     }
 

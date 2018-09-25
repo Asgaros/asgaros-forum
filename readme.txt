@@ -95,6 +95,8 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Show IDs of usergroups inside the administration area
+* Added: asgarosforum_usergroup_ID_add_user hook
+* Added: asgarosforum_usergroup_ID_remove_user hook
 * Minor design changes
 * Performance improvements and code optimizations
 = 1.10.1 =
