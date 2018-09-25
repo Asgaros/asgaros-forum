@@ -7,7 +7,8 @@ class AsgarosForum {
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
-    var $directory = '';
+    var $plugin_url = '';
+    var $plugin_path = '';
     var $date_format = '';
     var $time_format = '';
     var $error = false;
@@ -115,7 +116,8 @@ class AsgarosForum {
         $this->tables = $database->getTables();
         $this->db = $wpdb;
 
-        $this->directory = plugin_dir_url(dirname(__FILE__));
+        $this->plugin_url = plugin_dir_url(dirname(__FILE__));
+        $this->plugin_path = plugin_dir_path(dirname(__FILE__));
         $this->loadOptions();
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');
@@ -418,7 +420,7 @@ class AsgarosForum {
             return;
         }
 
-        wp_enqueue_script('asgarosforum-js', $this->directory.'js/script.js', array('jquery'), $this->version);
+        wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery'), $this->version);
         wp_enqueue_style('dashicons');
     }
 

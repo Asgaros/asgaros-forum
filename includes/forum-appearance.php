@@ -8,7 +8,6 @@ class AsgarosForumAppearance {
 	private $default_theme = 'default';
 	private $asgarosforum = null;
 	private $themes_root;		// Path to themes directory.
-	private $plugin_url;			// URL to plugin directory.
 	private $themes = array();	// Array of available themes.
 	private $current_theme;		// The current theme.
 	public $options = array();
@@ -31,7 +30,6 @@ class AsgarosForumAppearance {
 
 	public function initialize() {
 		$this->themes_root = trailingslashit(WP_CONTENT_DIR.'/'.$this->theme_path);
-		$this->plugin_url = $this->asgarosforum->directory;
 		$this->find_themes();
 		$this->load_options();
 
@@ -64,7 +62,7 @@ class AsgarosForumAppearance {
 		// Always ensure that the default theme is available.
 		$this->themes[$this->default_theme] = array(
 			'name'	=> __('Default Theme', 'asgaros-forum'),
-			'url'	=> $this->plugin_url.$this->skin_path
+			'url'	=> $this->asgarosforum->plugin_url.$this->skin_path
 		);
 
 		// Create themes directory if it doesnt exist.

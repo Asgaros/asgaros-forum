@@ -172,12 +172,12 @@ class AsgarosForumAdmin {
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
-        wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->directory.'admin/css/admin-common.css', array(), $asgarosforum->version);
+        wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->plugin_url.'admin/css/admin-common.css', array(), $asgarosforum->version);
 
         if (strstr($hook, 'asgarosforum') !== false) {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->directory.'admin/css/admin.css', array(), $asgarosforum->version);
+            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->plugin_url.'admin/css/admin.css', array(), $asgarosforum->version);
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->directory.'admin/js/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
+            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->plugin_url.'admin/js/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
         }
     }
 
@@ -443,7 +443,7 @@ class AsgarosForumAdmin {
         echo '<div id="asgaros-panel">';
             echo '<div class="header-panel">';
                 echo '<div class="sub-panel-left">';
-                    echo '<img src="'.$asgarosforum->directory.'admin/images/logo.png">';
+                    echo '<img src="'.$asgarosforum->plugin_url.'admin/images/logo.png">';
                 echo '</div>';
                 echo '<div class="sub-panel-left">';
                     echo '<h1>'.$title.'</h1>';
