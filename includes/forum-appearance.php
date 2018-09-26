@@ -152,23 +152,69 @@ class AsgarosForumAppearance {
 		if ($this->asgarosforum->executePlugin) {
 			wp_enqueue_style('af-style', $themeurl.'/style.css', array(), $this->asgarosforum->version);
 
-			if ($this->is_default_theme()) {
-				if ($this->options != $this->options_default) {
-					$custom_styles_url = add_query_arg(
-						array(
-							'color'				=> substr($this->options['custom_color'], 1),
-							'accent-color'		=> substr($this->options['custom_accent_color'], 1),
-							'text-color'		=> substr($this->options['custom_text_color'], 1),
-							'background-color'	=> substr($this->options['custom_background_color'], 1),
-							'border-color'		=> substr($this->options['custom_border_color'], 1),
-							'font'				=> $this->options['custom_font'],
-							'font-size'			=> $this->options['custom_font_size']
-						),
-						$themeurl.'/custom-color.php'
-					);
+			// Set path to custom CSS file.
+			$custom_css_path = $this->asgarosforum->plugin_path.'skin/custom.css';
 
-					wp_enqueue_style('af-custom-color', $custom_styles_url, array(), $this->asgarosforum->version);
+			// Only run custom CSS logic when we are in the default theme and the default appearance settings have been changed.
+			if ($this->is_default_theme() && $this->options != $this->options_default) {
+				// Load the custom CSS definitions with the adjusted values first.
+				$custom_css = $this->generate_custom_css();
+
+				// Only continue when our custom CSS is not empty.
+				if (!empty($custom_css)) {
+					// Flag to decide if we need to load the custom CSS inline.
+					$inline = false;
+
+					// Generate hash of the custom CSS.
+					$hash_new = md5($custom_css);
+
+					// Check if a custom CSS file exists.
+					if (file_exists($custom_css_path) && filesize($custom_css_path)) {
+						// Try to read the current custom CSS file.
+						$current_css = $this->asgarosforum->read_file($custom_css_path);
+
+						// If we were not able to read the file, we have to load the CSS inline.
+						if (!$current_css) {
+							$inline = true;
+						} else {
+							// Generate hash of the current CSS.
+							$hash_current = md5($current_css);
+
+							// If the hash values are different, we have to update our custom CSS file.
+							if ($hash_new != $hash_current) {
+								$file_check = $this->asgarosforum->create_file($custom_css_path, $custom_css);
+
+								// If we were not able to update the file, we have to load the CSS inline.
+								if (!$file_check) {
+									$inline = true;
+								}
+							}
+						}
+					} else {
+						// The file does not exists so try to create it.
+						$file_check = $this->asgarosforum->create_file($custom_css_path, $custom_css);
+
+						// If we were not able to create the file, we have to load the CSS inline.
+						if (!$file_check) {
+							$inline = true;
+						}
+					}
+
+					// Load CSS (inline or as a file).
+					if ($inline) {
+						// Remove special characters from inline CSS.
+						$custom_css = preg_replace('|[\r\n\t]+|', '', $custom_css);
+
+						// Load CSS inline.
+						wp_add_inline_style('af-style', $custom_css);
+					} else {
+						// Load CSS as file.
+						wp_enqueue_style('af-custom-color', $themeurl.'/custom.css', array(), $this->asgarosforum->version);
+					}
 				}
+			} else {
+				// Otherwise try to delete the custom CSS file.
+				$this->asgarosforum->delete_file($custom_css_path);
 			}
 		}
 	}
@@ -182,5 +228,133 @@ class AsgarosForumAppearance {
 		$mce_css .= $this->get_current_theme_url().'/editor.css?ver='.$this->asgarosforum->version;
 
 		return $mce_css;
+	}
+
+	// Generates the custom CSS based on the appearance settings.
+	public function generate_custom_css() {
+		$custom_css = '';
+
+		if ($this->options['custom_color'] != $this->options_default['custom_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_color'])) {
+			$custom_css .= '#af-wrapper a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .unread:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #bottom-navigation,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-post-menu a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-profile .display-name,'.PHP_EOL;
+			$custom_css .= '#af-wrapper input[type="checkbox"]:checked:before {'.PHP_EOL;
+				$custom_css .= 'color: '.$this->options['custom_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper input[type="submit"],'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-menu a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .title-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-author-marker,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-header,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-header .background-avatar,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-navigation,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #read-unread .unread,'.PHP_EOL;
+			$custom_css .= '#af-wrapper input[type="radio"]:checked:before {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper #forum-search,'.PHP_EOL;
+			$custom_css .= '#af-wrapper input[type="radio"]:focus,'.PHP_EOL;
+			$custom_css .= '#af-wrapper input[type="checkbox"]:focus,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-header {'.PHP_EOL;
+				$custom_css .= 'border-color: '.$this->options['custom_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_accent_color'] != $this->options_default['custom_accent_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_accent_color'])) {
+			$custom_css .= '#af-wrapper input[type="button"],'.PHP_EOL;
+			$custom_css .= '#af-wrapper input[type="submit"],'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-row .cancel,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-row .cancel-back,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-menu a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .title-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-header,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-navigation a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-navigation-mobile a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-author-marker {'.PHP_EOL;
+				$custom_css .= 'border-color: '.$this->options['custom_accent_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper #profile-navigation a.active {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_accent_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_text_color'] != $this->options_default['custom_text_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_text_color'])) {
+			$custom_css .= '#af-wrapper,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .main-title {'.PHP_EOL;
+			    $custom_css .= 'color: '.$this->options['custom_text_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper #read-unread .read {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_text_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_background_color'] != $this->options_default['custom_background_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color'])) {
+			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-element .odd,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #statistics-online-users,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-message,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-content,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-header .background-contrast {'.PHP_EOL;
+			    $custom_css .= 'background-color: '.$this->options['custom_background_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_border_color'] != $this->options_default['custom_border_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_border_color'])) {
+			$custom_css .= '#af-wrapper .forum,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .member,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-poster,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-poster,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .member-last-seen,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .subscription,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-post-header,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #statistics-body,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #statistics .statistics-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #statistics-online-users,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-row,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-row-subject,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .sticky-bottom,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-message,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-subforums,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .uploaded-file img,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .subscription-option,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-layer .pages-and-menu:first-of-type,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-content,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-content .profile-row,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .history-element {'.PHP_EOL;
+			    $custom_css .= 'border-color: '.$this->options['custom_border_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_font'] != $this->options_default['custom_font']) {
+			$custom_css .= '#af-wrapper {'.PHP_EOL;
+			    $custom_css .= 'font-family: '.$this->options['custom_font'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_font_size'] != $this->options_default['custom_font_size']) {
+			$custom_css .= '#af-wrapper {'.PHP_EOL;
+			    $custom_css .= 'font-size: '.$this->options['custom_font_size'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		return $custom_css;
 	}
 }

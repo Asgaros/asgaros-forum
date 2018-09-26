@@ -1305,4 +1305,66 @@ class AsgarosForum {
 
         return $return;
     }
+
+    public function create_file($path, $content) {
+        // Create binding for the file first.
+        $binding = @fopen($path, 'wb');
+
+        // Check if the binding could get created.
+        if ($binding) {
+            // Write the content to the file.
+            $writing = @fwrite($binding, $content);
+
+            // Close the file.
+            fclose($binding);
+
+            // Clear stat cache so we can set the correct permissions.
+            clearstatcache();
+
+            // Get information about the file.
+            $file_stats = @stat(dirname($path));
+
+            // Update the permissions of the file.
+            $file_permissions = $file_stats['mode'] & 0007777;
+    		$file_permissions = $file_permissions & 0000666;
+    		@chmod($path, $file_permissions);
+
+            // Clear stat cache again so PHP is aware of the new permissions.
+            clearstatcache();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function read_file($path) {
+        // Create binding for the file first.
+    	$binding = @fopen($path, 'r');
+
+        // Check if the binding could get created.
+    	if ($binding) {
+            // Ensure that the file is not empty.
+    		$file_size = @filesize($path);
+
+    		if (isset($file_size) && $file_size > 0) {
+                // Read the complete file.
+    			$file_data = fread($binding, $file_size);
+
+                // Close the file.
+    			fclose($binding);
+
+                // Return the file data.
+    			return $file_data;
+    		}
+    	}
+
+        return false;
+    }
+
+    public function delete_file($path) {
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
 }
