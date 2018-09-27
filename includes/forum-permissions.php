@@ -102,7 +102,7 @@ class AsgarosForumPermissions {
         } else if ($this->isBanned($userID)) {
             return __('Banned', 'asgaros-forum');
         } else {
-            return __('User', 'asgaros-forum');
+            return __('Normal', 'asgaros-forum');
         }
     }
 
@@ -372,7 +372,7 @@ class AsgarosForumPermissions {
         // Normal users.
         $users = $this->get_users_by_role('normal');
         $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'normal') ? 'class="current"' : '';
-        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=normal').'">'.__('Users', 'asgaros-forum').'</a> ('.count($users).')';
+        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=normal').'">'.__('Normal', 'asgaros-forum').'</a> ('.count($users).')';
 
         // Moderators.
         $users = $this->get_users_by_role('moderator');

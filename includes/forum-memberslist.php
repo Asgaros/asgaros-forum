@@ -42,7 +42,7 @@ class AsgarosForumMembersList {
         echo '<div id="memberslist-filter">';
             echo 'Roles:';
             echo $this->render_role_option('all', 'All Users');
-            echo $this->render_role_option('normal', 'Normal Users');
+            echo $this->render_role_option('normal', 'Normal');
             echo $this->render_role_option('moderators', 'Moderators');
             echo $this->render_role_option('administrators', 'Administrators');
 
