@@ -17,7 +17,7 @@ class AsgarosForumUserGroups {
         add_action('delete_user', array($this, 'delete_term_relationships'));
 
         // Filtering users list in administration by usergroup.
-		add_filter('views_users', array($this, 'views'));
+		add_filter('views_users', array($this, 'views'), 20);
         add_action('pre_user_query', array($this, 'user_query'));
 
 		// Bulk edit inside the users list.
