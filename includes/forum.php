@@ -27,6 +27,10 @@ class AsgarosForum {
     var $parent_forum_name = false;
     var $category_access_level = false;
     var $parents_set = false;
+
+    // We need this flag if want to prevent modifications of core queries in certain cases.
+    var $prevent_query_modifications = false;
+
     var $options = array();
     var $options_default = array(
         'forum_title'               => '',

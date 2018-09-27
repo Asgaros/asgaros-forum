@@ -15,6 +15,10 @@ class AsgarosForumPermissions {
         // Users list in administration.
         add_filter('manage_users_columns', array($this, 'manage_users_columns'));
         add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
+
+        // Filtering users list in administration by usergroup.
+		add_filter('views_users', array($this, 'permission_views'), 10);
+        add_action('pre_user_query', array($this, 'permission_user_query'));
 	}
 
     public function initialize() {
@@ -256,11 +260,27 @@ class AsgarosForumPermissions {
         }
     }
 
-    /*
-    public function get_by_role($role) {
+    public function get_users_by_role($role) {
+        $data = array();
+
+        // Ensure we dont run core query modifications for this function.
+        $this->asgarosforum->prevent_query_modifications = true;
+
         switch ($role) {
+            case 'normal':
+                $data = get_users(array(
+                    'fields'            => array('ID', 'display_name'),
+                    'meta_query'        => array(
+                        array(
+                            'key'       => 'asgarosforum_role',
+                            'compare'   => 'NOT EXISTS'
+                        )
+                    ),
+                    'role__not_in'      => array('administrator')
+                ));
+            break;
             case 'moderator':
-                return get_users(array(
+                $data = get_users(array(
                     'fields'            => array('ID', 'display_name'),
                     'meta_query'        => array(
                         array(
@@ -272,8 +292,23 @@ class AsgarosForumPermissions {
                 ));
             break;
             case 'administrator':
-                return get_users(array(
-                    'fields'            => array('ID', 'display_name'),
+                $admin_ids = array();
+
+                // Get site administrators first.
+                $users = get_users(array(
+                    'fields'            => array('ID'),
+                    'role'              => 'administrator'
+                ));
+
+                if (!empty($users)) {
+                    foreach ($users as $user) {
+                        $admin_ids[] = $user->ID;
+                    }
+                }
+
+                // Get forum administrators.
+                $users = get_users(array(
+                    'fields'            => array('ID'),
                     'meta_query'        => array(
                         array(
                             'key'       => 'asgarosforum_role',
@@ -282,9 +317,23 @@ class AsgarosForumPermissions {
                     ),
                     'role__not_in'      => array('administrator')
                 ));
+
+                if (!empty($users)) {
+                    foreach ($users as $user) {
+                        $admin_ids[] = $user->ID;
+                    }
+                }
+
+                // Only return data of administrators if we found some.
+                if (!empty($admin_ids)) {
+                    $data = get_users(array(
+                        'fields'            => array('ID', 'display_name'),
+                        'include'           => $admin_ids
+                    ));
+                }
             break;
             case 'banned':
-                return get_users(array(
+                $data = get_users(array(
                     'fields'            => array('ID', 'display_name'),
                     'meta_query'        => array(
                         array(
@@ -297,9 +346,11 @@ class AsgarosForumPermissions {
             break;
         }
 
-        return false;
+        // Reset settings for core query modifications.
+        $this->asgarosforum->prevent_query_modifications = false;
+
+        return $data;
     }
-    */
 
     // Users List in Administration.
     public function manage_users_columns($columns) {
@@ -315,25 +366,58 @@ class AsgarosForumPermissions {
         return $output;
 	}
 
-    /*
-    public function views($views) {
-        $views['forum-user-view'] = __('Forum:', 'asgaros-forum').'&nbsp;';
+    public function permission_views($views) {
+        $views['forum-user-role'] = '<b>'.__('Forum Roles:', 'asgaros-forum').'</b>&nbsp;';
 
-        $loopCounter = 0;
+        // Normal users.
+        $users = $this->get_users_by_role('normal');
+        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'normal') ? 'class="current"' : '';
+        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=normal').'">'.__('Users', 'asgaros-forum').'</a> ('.count($users).')';
 
-        foreach ($usergroups as $term) {
-            $loopCounter++;
-            $cssClass = (!empty($_GET['forum-user-group']) && $_GET['forum-user-group'] == $term->term_id) ? 'class="current"' : '';
-            $usersCounter = self::countUsersOfUserGroup($term->term_id);
+        // Moderators.
+        $users = $this->get_users_by_role('moderator');
+        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'moderator') ? 'class="current"' : '';
+        $views['forum-user-role'] .= '&nbsp;|&nbsp;';
+        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=moderator').'">'.__('Moderators', 'asgaros-forum').'</a> ('.count($users).')';
 
-            if ($loopCounter > 1) {
-                $views['forum-user-group'] .= '&nbsp;|&nbsp;';
-            }
+        // Administrators.
+        $users = $this->get_users_by_role('administrator');
+        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'administrator') ? 'class="current"' : '';
+        $views['forum-user-role'] .= '&nbsp;|&nbsp;';
+        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=administrator').'">'.__('Administrators', 'asgaros-forum').'</a> ('.count($users).')';
 
-            $views['forum-user-group'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-group='.$term->term_id).'">'.$term->name.'</a> ('.$usersCounter.')';
-        }
+        // Banned.
+        $users = $this->get_users_by_role('banned');
+        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'banned') ? 'class="current"' : '';
+        $views['forum-user-role'] .= '&nbsp;|&nbsp;';
+        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=banned').'">'.__('Banned', 'asgaros-forum').'</a> ('.count($users).')';
 
 		return $views;
 	}
-    */
+
+    public function permission_user_query($Query = '') {
+		global $pagenow, $wpdb;
+
+        if (!$this->asgarosforum->prevent_query_modifications) {
+            if ($pagenow == 'users.php') {
+                if (!empty($_GET['forum-user-role'])) {
+        			$role = $_GET['forum-user-role'];
+                    $users = $this->get_users_by_role($role);
+
+                    if (!empty($users)) {
+                        $user_ids = array();
+
+                        foreach ($users as $user) {
+                            $user_ids[] = $user->ID;
+                        }
+
+                        $ids = implode(',', wp_parse_id_list($user_ids));
+                        $Query->query_where .= " AND $wpdb->users.ID IN ($ids)";
+                    } else {
+                        $Query->query_where .= " AND $wpdb->users.ID IN (-1)";
+                    }
+        		}
+            }
+        }
+    }
 }

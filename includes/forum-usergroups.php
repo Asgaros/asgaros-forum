@@ -609,22 +609,24 @@ class AsgarosForumUserGroups {
     public function user_query($Query = '') {
 		global $pagenow, $wpdb;
 
-		if ($pagenow == 'users.php') {
-            if (!empty($_GET['forum-user-group'])) {
-    			$userGroupID = $_GET['forum-user-group'];
-    			$term = self::getUserGroup($userGroupID);
+        if (!self::$asgarosforum->prevent_query_modifications) {
+    		if ($pagenow == 'users.php') {
+                if (!empty($_GET['forum-user-group'])) {
+        			$userGroupID = $_GET['forum-user-group'];
+        			$term = self::getUserGroup($userGroupID);
 
-                if (!empty($term)) {
-        			$user_ids = self::getUsersOfUserGroup($term->term_id);
+                    if (!empty($term)) {
+            			$user_ids = self::getUsersOfUserGroup($term->term_id);
 
-                    if (!empty($user_ids)) {
-            			$ids = implode(',', wp_parse_id_list($user_ids));
-            			$Query->query_where .= " AND $wpdb->users.ID IN ($ids)";
-                    } else {
-                        $Query->query_where .= " AND $wpdb->users.ID IN (-1)";
+                        if (!empty($user_ids)) {
+                			$ids = implode(',', wp_parse_id_list($user_ids));
+                			$Query->query_where .= " AND $wpdb->users.ID IN ($ids)";
+                        } else {
+                            $Query->query_where .= " AND $wpdb->users.ID IN (-1)";
+                        }
                     }
-                }
-    		}
+        		}
+            }
         }
 	}
 
