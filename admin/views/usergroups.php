@@ -2,8 +2,8 @@
 
 <div class="wrap" id="af-structure">
     <?php
-    $title = __('User Groups', 'asgaros-forum');
-    $titleUpdated = __('User Groups updated.', 'asgaros-forum');
+    $title = __('Usergroups', 'asgaros-forum');
+    $titleUpdated = __('Usergroups updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
     ?>
 
@@ -30,7 +30,7 @@
                                         <td><input type="text" value="#444444" class="color-picker" name="usergroup_color" id="usergroup_color" data-default-color="#444444"></td>
                                     </tr>
                                     <tr>
-                                        <th><label for="usergroup_visibility"><?php _e('Hide user group:', 'asgaros-forum'); ?></label></th>
+                                        <th><label for="usergroup_visibility"><?php _e('Hide usergroup:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="checkbox" id="usergroup_visibility" name="usergroup_visibility"></td>
                                     </tr>
                                     <tr>
@@ -50,7 +50,7 @@
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_usergroup'); ?>
                                 <input type="hidden" name="usergroup-id" value="0">
-                                <p><?php _e('Are you sure you want to delete this user group?', 'asgaros-forum'); ?></p>
+                                <p><?php _e('Are you sure you want to delete this usergroup?', 'asgaros-forum'); ?></p>
 
                                 <p class="submit">
                                     <input type="submit" name="asgaros-forum-delete-usergroup" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
@@ -82,7 +82,7 @@
                             <form method="post">
                                 <?php wp_nonce_field('asgaros_forum_delete_usergroup_category'); ?>
                                 <input type="hidden" name="usergroup-category-id" value="0">
-                                <p><?php _e('Deleting this category will also permanently delete all user groups inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
+                                <p><?php _e('Deleting this category will also permanently delete all usergroups inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
 
                                 <p class="submit">
                                     <input type="submit" name="asgaros-forum-delete-usergroup-category" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
@@ -124,8 +124,8 @@
                                 }
                                 ?>
 
-                                <a href="#" class="usergroup-editor-link dashicons-before dashicons-plus padding-top" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Add User Group', 'asgaros-forum'); ?>">
-                                    <?php _e('Add User Group', 'asgaros-forum'); ?>
+                                <a href="#" class="usergroup-editor-link dashicons-before dashicons-plus padding-top" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Add Usergroup', 'asgaros-forum'); ?>">
+                                    <?php _e('Add Usergroup', 'asgaros-forum'); ?>
                                 </a>
                             </div>
                         </div>

@@ -177,13 +177,13 @@ class AsgarosForumDatabase {
                 $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(parent_id);');
             }
 
-            // Add existing user groups to a default user groups category and/or create an example user group.
+            // Add existing usergroups to a default usergroups category and/or create an example usergroup.
             if ($database_version_installed < 13) {
                 // Initialize taxonomy first.
                 AsgarosForumUserGroups::initializeTaxonomy();
 
                 // Create a new example category first.
-                $defaultCategoryName = __('Custom User Groups', 'asgaros-forum');
+                $defaultCategoryName = __('Custom Usergroups', 'asgaros-forum');
                 $defaultCategory = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
 
                 // Ensure that no error happened.
@@ -193,7 +193,7 @@ class AsgarosForumDatabase {
 
                     // When there is only one element, then it is the newly created category.
                     if (count($existingCategories) > 1) {
-                        // Move every existing user group into the new default category.
+                        // Move every existing usergroup into the new default category.
                         foreach ($existingCategories as $category) {
                             // But ensure to not move the new default category into it.
                             if ($category->term_id != $defaultCategory['term_id']) {
@@ -202,8 +202,8 @@ class AsgarosForumDatabase {
                             }
                         }
                     } else {
-                        // Add an example user group.
-                        $defaultUserGroupName = __('Example User Group', 'asgaros-forum');
+                        // Add an example usergroup.
+                        $defaultUserGroupName = __('Example Usergroup', 'asgaros-forum');
                         $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
                     }
                 }

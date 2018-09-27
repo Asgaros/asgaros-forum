@@ -209,11 +209,11 @@ class AsgarosForumProfile {
                         $this->renderProfileRow($cellTitle, $cellValue);
                     }
 
-                    // Show user groups.
+                    // Show usergroups.
                     $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'all', true);
 
                     if (!empty($userGroups)) {
-                        $cellTitle = __('User Groups:', 'asgaros-forum');
+                        $cellTitle = __('Usergroups:', 'asgaros-forum');
                         $cellValue = $userGroups;
 
                         $this->renderProfileRow($cellTitle, $cellValue, 'usergroups');

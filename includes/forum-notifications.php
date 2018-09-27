@@ -229,7 +229,7 @@ class AsgarosForumNotifications {
                 $this->add_to_mailing_list($subscriber->user_email);
             }
 
-            // Filter mailing list based on user groups configuration.
+            // Filter mailing list based on usergroups configuration.
             $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $this->asgarosforum->current_category);
 
             // Apply custom filters before sending.
@@ -316,7 +316,7 @@ class AsgarosForumNotifications {
                     $this->add_to_mailing_list($subscriber->user_email);
                 }
 
-                // Filter mailing list based on user groups configuration.
+                // Filter mailing list based on usergroups configuration.
                 $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $this->asgarosforum->current_category);
             }
 

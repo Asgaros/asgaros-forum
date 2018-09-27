@@ -70,9 +70,9 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
 
     function column_actions($item) {
         $columnHTML = '';
-        $columnHTML .= '<a href="#" class="usergroup-delete-link link-delete" data-value-id="'.$item['term_id'].'" data-value-editor-title="'.__('Delete User Group', 'asgaros-forum').'">'.__('Delete', 'asgaros-forum').'</a>';
+        $columnHTML .= '<a href="#" class="usergroup-delete-link link-delete" data-value-id="'.$item['term_id'].'" data-value-editor-title="'.__('Delete Usergroup', 'asgaros-forum').'">'.__('Delete', 'asgaros-forum').'</a>';
         $columnHTML .= ' &middot; ';
-        $columnHTML .= '<a href="#" class="usergroup-editor-link" data-value-id="'.$item['term_id'].'" data-value-category="'.$item['parent'].'" data-value-editor-title="'.__('Edit User Group', 'asgaros-forum').'">'.__('Edit', 'asgaros-forum').'</a>';
+        $columnHTML .= '<a href="#" class="usergroup-editor-link" data-value-id="'.$item['term_id'].'" data-value-category="'.$item['parent'].'" data-value-editor-title="'.__('Edit Usergroup', 'asgaros-forum').'">'.__('Edit', 'asgaros-forum').'</a>';
 
         return $columnHTML;
     }

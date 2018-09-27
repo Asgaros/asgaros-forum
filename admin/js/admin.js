@@ -215,7 +215,7 @@
             showEditorInstance('#forum-delete');
         });
 
-        // Delete user group dialog.
+        // Delete usergroup dialog.
         $('.usergroup-delete-link').click(function() {
             resetEditor();
 
@@ -226,7 +226,7 @@
             showEditorInstance('#usergroup-delete');
         });
 
-        // Delete user group category dialog.
+        // Delete usergroup category dialog.
         $('.usergroup-category-delete-link').click(function() {
             resetEditor();
 

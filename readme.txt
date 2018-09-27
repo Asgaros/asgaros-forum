@@ -36,7 +36,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Moderators
 * Statistics
 * Permissions
-* User Groups
+* Usergroups
 * Who Is Online
 * Guest Postings
 * Reporting & Banning
@@ -266,11 +266,11 @@ You can find a list of available hooks and filters on this site:
 = 1.6.6 =
 * Fixed: Do additional error checks during database upgrade to prevent some errors during an update
 = 1.6.5 =
-* Added: Categories for user groups
-* Fixed: Administrators didnt get notifications in some cases when using user groups
+* Added: Categories for usergroups
+* Fixed: Administrators didnt get notifications in some cases when using usergroups
 * Fixed: Hide topics and forums from subscription list when a user has no access to it
 * Fixed: Display issues with some themes
-* Changed: Show number of users for each user group in the user overview
+* Changed: Show number of users for each usergroup in the user overview
 * Changed: Minor design changes
 * Performance improvements and code optimizations
 = 1.6.4 =
@@ -283,7 +283,7 @@ You can find a list of available hooks and filters on this site:
 = 1.6.3 =
 * Added: Pagination in topic-overview
 * Added: Category name to breadcrumbs
-* Added: User groups to profile
+* Added: Usergroups to profile
 * Added: Biographical info to profile
 * Added: Signature to profile
 * Added: asgarosforum_filter_forum_menu filter
@@ -361,7 +361,7 @@ You can find a list of available hooks and filters on this site:
 = 1.5.1 =
 * Fixed: Fatal PHP error on some versions of PHP
 = 1.5.0 =
-* Added: User groups functionality
+* Added: Usergroups functionality
 * Added: Show newest member in overview
 * Added: Show names of online users in overview
 * Added: Show who edited a post

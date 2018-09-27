@@ -16,5 +16,6 @@
     padding-top: 0px;
 }
 li.forum-user-group {
+    display: block;
     white-space: normal;
 }

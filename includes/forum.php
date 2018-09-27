@@ -400,7 +400,7 @@ class AsgarosForum {
             }
         }
 
-        // Check user groups access.
+        // Check usergroups access.
         if (!AsgarosForumUserGroups::checkAccess($this->current_category)) {
             $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
             return;
