@@ -119,7 +119,7 @@ class AsgarosForumActivity {
 
     public function show_activity_link() {
         if ($this->functionality_enabled()) {
-            echo '<a href="'.$this->asgarosforum->get_link('activity').'">'.__('Activity', 'asgaros-forum').'</a>';
+            echo '<a class="activity-link" href="'.$this->asgarosforum->get_link('activity').'">'.__('Activity', 'asgaros-forum').'</a>';
         }
     }
 }

@@ -1058,7 +1058,7 @@ class AsgarosForum {
                 echo '<a class="dashicons-before dashicons-menu">'.__('Menu', 'asgaros-forum').'</a>';
             echo '</div>';
             echo '<div id="forum-navigation">';
-                echo '<a href="'.$this->get_link('home').'">'.__('Forum', 'asgaros-forum').'</a>';
+                echo '<a class="home-link" href="'.$this->get_link('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
                 $this->profile->myProfileLink();
                 $this->memberslist->renderMembersListLink();
@@ -1081,19 +1081,19 @@ class AsgarosForum {
 
     function showLogoutLink() {
         if (is_user_logged_in() && $this->options['show_logout_button']) {
-            echo '<a href="'.wp_logout_url($this->get_link('current', false, false, '', false)).'">'.__('Logout', 'asgaros-forum').'</a>';
+            echo '<a class="logout-link" href="'.wp_logout_url($this->get_link('current', false, false, '', false)).'">'.__('Logout', 'asgaros-forum').'</a>';
         }
     }
 
     function showLoginLink() {
         if (!is_user_logged_in() && $this->options['show_login_button']) {
-            echo '<a href="'.wp_login_url($this->get_link('current', false, false, '', false)).'">'.__('Login', 'asgaros-forum').'</a>';
+            echo '<a class="login-link" href="'.wp_login_url($this->get_link('current', false, false, '', false)).'">'.__('Login', 'asgaros-forum').'</a>';
         }
     }
 
     function showRegisterLink() {
         if (!is_user_logged_in() && get_option('users_can_register') && $this->options['show_register_button']) {
-            echo '<a href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
+            echo '<a class="register-link" href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
         }
     }
 
