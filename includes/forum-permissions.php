@@ -16,9 +16,14 @@ class AsgarosForumPermissions {
         add_filter('manage_users_columns', array($this, 'manage_users_columns'));
         add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
 
-        // Filtering users list in administration by usergroup.
+        // Filtering users list in administration by forum role.
 		add_filter('views_users', array($this, 'permission_views'), 10);
         add_action('pre_user_query', array($this, 'permission_user_query'));
+
+        // Bulk edit inside the users list.
+        add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 10);
+        add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
+        add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
 	}
 
     public function initialize() {
@@ -117,19 +122,22 @@ class AsgarosForumPermissions {
     }
 
     public function set_forum_role($user_id, $role) {
-        switch ($role) {
-            case 'normal':
-                delete_user_meta($user_id, 'asgarosforum_role');
-            break;
-            case 'moderator':
-                update_user_meta($user_id, 'asgarosforum_role', 'moderator');
-            break;
-            case 'administrator':
-                update_user_meta($user_id, 'asgarosforum_role', 'administrator');
-            break;
-            case 'banned':
-                update_user_meta($user_id, 'asgarosforum_role', 'banned');
-            break;
+        // Ensure that forum role cannot get changed for site administrators.
+        if (!$this->isSiteAdministrator($user_id)) {
+            switch ($role) {
+                case 'normal':
+                    delete_user_meta($user_id, 'asgarosforum_role');
+                break;
+                case 'moderator':
+                    update_user_meta($user_id, 'asgarosforum_role', 'moderator');
+                break;
+                case 'administrator':
+                    update_user_meta($user_id, 'asgarosforum_role', 'administrator');
+                break;
+                case 'banned':
+                    update_user_meta($user_id, 'asgarosforum_role', 'banned');
+                break;
+            }
         }
     }
 
@@ -418,6 +426,58 @@ class AsgarosForumPermissions {
                     }
         		}
             }
+        }
+    }
+
+    public function bulk_actions_users($bulk_actions) {
+        $bulk_actions['forum_role_assign_normal'] = __('Assign forum role:', 'asgaros-forum').' '.__('Normal', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_moderator'] = __('Assign forum role:', 'asgaros-forum').' '.__('Moderator', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_administrator'] = __('Assign forum role:', 'asgaros-forum').' '.__('Administrator', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_banned'] = __('Assign forum role:', 'asgaros-forum').' '.__('Banned', 'asgaros-forum');
+
+        return $bulk_actions;
+    }
+
+    public function handle_bulk_actions_users($redirect_to, $action, $user_ids) {
+        // Cancel when the user_ids array is empty.
+        if (empty($user_ids)) {
+            return $redirect_to;
+        }
+
+        // Check for a triggered bulk action first.
+        $role = false;
+
+        switch ($action) {
+            case 'forum_role_assign_normal':
+                $role = 'normal';
+            break;
+            case 'forum_role_assign_moderator':
+                $role = 'moderator';
+            break;
+            case 'forum_role_assign_administrator':
+                $role = 'administrator';
+            break;
+            case 'forum_role_assign_banned':
+                $role = 'banned';
+            break;
+        }
+
+        // Cancel when no bulk action found.
+        if (!$role) {
+            return $redirect_to;
+        }
+
+        foreach ($user_ids as $user_id) {
+            $this->set_forum_role($user_id, $role);
+        }
+
+        $redirect_to = add_query_arg('forum_role_assigned', 1, $redirect_to);
+        return $redirect_to;
+    }
+
+    public function bulk_actions_admin_notices() {
+        if (!empty($_REQUEST['forum_role_assigned'])) {
+            printf('<div class="updated"><p>'.__('Forum role assigned.', 'asgaros-forum').'</p></div>');
         }
     }
 }

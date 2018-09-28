@@ -21,7 +21,7 @@ class AsgarosForumUserGroups {
         add_action('pre_user_query', array($this, 'user_query'));
 
 		// Bulk edit inside the users list.
-        add_filter('bulk_actions-users', array($this, 'bulk_actions_users'));
+        add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 20);
         add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
         add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
 

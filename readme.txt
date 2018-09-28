@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Bulk actions for assignment of forum roles
 * Added: Possibility to filter users by their forum role in the backend user overview
 * Added: Show IDs of usergroups inside the administration area
 * Added: asgarosforum_usergroup_ID_add_user hook
