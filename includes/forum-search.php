@@ -6,7 +6,6 @@ class AsgarosForumSearch {
     private $asgarosforum = null;
     public $search_keywords_for_query = '';
     public $search_keywords_for_output = '';
-    public $search_keywords_for_url = '';
 
     public function __construct($object) {
 		$this->asgarosforum = $object;
@@ -19,7 +18,6 @@ class AsgarosForumSearch {
             $keywords = trim($_GET['keywords']);
             $this->search_keywords_for_query = esc_sql($keywords);
             $this->search_keywords_for_output = stripslashes(esc_html($keywords));
-            $this->search_keywords_for_url = urlencode(stripslashes($keywords));
         }
     }
 
