@@ -87,28 +87,33 @@ class AsgarosForumMembersList {
             $usergroups = AsgarosForumUserGroups::getUserGroups(array(), true);
 
             if (!empty($usergroups)) {
-                echo '<div id="roles-filter">';
+                $first_usergroup = true;
+                $usergroups_filter_output = '';
+
+                foreach ($usergroups as $usergroup) {
+                    $users_counter = AsgarosForumUserGroups::countUsersOfUserGroup($usergroup->term_id);
+
+                    // Only list usergroups with users in it.
+                    if ($users_counter > 0) {
+                        if ($first_usergroup) {
+                            $first_usergroup = false;
+                        } else {
+                            $usergroups_filter_output .= '&nbsp;&middot;&nbsp;';
+                        }
+
+                        $usergroups_filter_output .= $this->render_filter_option('group', $usergroup->term_id, $usergroup->name);
+                    }
+                }
+
+                if (!empty($usergroups_filter_output)) {
+                    echo '<div id="roles-filter">';
                     echo __('Usergroups:', 'asgaros-forum');
                     echo '&nbsp;';
-
-                    $first_usergroup = true;
-
-                    foreach ($usergroups as $usergroup) {
-                        $users_counter = AsgarosForumUserGroups::countUsersOfUserGroup($usergroup->term_id);
-
-                        // Only list usergroups with users in it.
-                        if ($users_counter > 0) {
-                            if ($first_usergroup) {
-                                $first_usergroup = false;
-                            } else {
-                                echo '&nbsp;&middot;&nbsp;';
-                            }
-
-                            echo $this->render_filter_option('group', $usergroup->term_id, $usergroup->name);
-                        }
-                    }
-                echo '</div>';
+                    echo $usergroups_filter_output;
+                    echo '</div>';
+                }
             }
+
         echo '</div>';
     }
 
@@ -116,10 +121,10 @@ class AsgarosForumMembersList {
         $output = '<a href="'.$this->asgarosforum->rewrite->get_link('members', false, array('filter_type' => $filter_type, 'filter_name' => $filter_name)).'">'.$title.'</a>';
 
         if ($filter_type === $this->filter_type && $filter_name == $this->filter_name) {
-            echo '<b>'.$output.'</b>';
-        } else {
-            echo $output;
+            return '<b>'.$output.'</b>';
         }
+
+        return $output;
     }
 
     public function showMembersList() {
