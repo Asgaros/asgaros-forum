@@ -74,14 +74,30 @@ class AsgarosForumMembersList {
                 echo __('Roles:', 'asgaros-forum');
                 echo '&nbsp;';
                 echo $this->render_filter_option('role', 'all', 'All Users');
-                echo '&nbsp;&middot;&nbsp;';
-                echo $this->render_filter_option('role', 'normal', 'Normal');
-                echo '&nbsp;&middot;&nbsp;';
-                echo $this->render_filter_option('role', 'moderator', 'Moderators');
-                echo '&nbsp;&middot;&nbsp;';
-                echo $this->render_filter_option('role', 'administrator', 'Administrators');
-                echo '&nbsp;&middot;&nbsp;';
-                echo $this->render_filter_option('role', 'banned', 'Banned');
+
+                $users = $this->asgarosforum->permissions->get_users_by_role('normal');
+
+                if (count($users) > 0) {
+                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'normal', __('Normal', 'asgaros-forum'));
+                }
+
+                $users = $this->asgarosforum->permissions->get_users_by_role('moderator');
+
+                if (count($users) > 0) {
+                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'moderator', __('Moderators', 'asgaros-forum'));
+                }
+
+                $users = $this->asgarosforum->permissions->get_users_by_role('administrator');
+
+                if (count($users) > 0) {
+                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'administrator', __('Administrators', 'asgaros-forum'));
+                }
+
+                $users = $this->asgarosforum->permissions->get_users_by_role('banned');
+
+                if (count($users) > 0) {
+                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'banned', __('Banned', 'asgaros-forum'));
+                }
             echo '</div>';
 
             $usergroups = AsgarosForumUserGroups::getUserGroups(array(), true);
