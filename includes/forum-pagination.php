@@ -66,7 +66,12 @@ class AsgarosForumPagination {
             $count = count($count);
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'members') {
-            $count = $this->asgarosforum->countUsers();
+            // Get the current filter for the memberslist first.
+            $filter = $this->asgarosforum->memberslist->get_filter();
+
+            // Now get and count the users based on the filter.
+            $count = count($this->asgarosforum->permissions->get_users_by_role($filter));
+
             $num_pages = ceil($count / $this->asgarosforum->options['members_per_page']);
         } else if ($location === 'activity') {
             $count = $this->asgarosforum->activity->load_activity_data(true);

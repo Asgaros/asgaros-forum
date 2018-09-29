@@ -8,6 +8,9 @@ class AsgarosForumMembersList {
 
     public function __construct($object) {
         $this->asgarosforum = $object;
+
+        // Set filter based on URL parameter.
+        $this->filter_role = $this->get_filter();
     }
 
     public function functionalityEnabled() {
@@ -16,6 +19,24 @@ class AsgarosForumMembersList {
         } else {
             return true;
         }
+    }
+
+    public function get_filter() {
+        if ($this->functionalityEnabled()) {
+            if (!empty($_GET['filter_role'])) {
+                switch ($_GET['filter_role']) {
+                    case 'all':
+                    case 'normal':
+                    case 'moderator':
+                    case 'administrator':
+                    case 'banned':
+                        return $_GET['filter_role'];
+                    break;
+                }
+            }
+        }
+
+        return 'all';
     }
 
     public function renderMembersListLink() {
@@ -28,31 +49,38 @@ class AsgarosForumMembersList {
     }
 
     public function show_filters() {
-        if (!empty($_GET['filterrole'])) {
-            switch ($_GET['filterrole']) {
-                case 'all':
-                case 'normal':
-                case 'moderators':
-                case 'administrators':
-                    $this->filter_role = $_GET['filterrole'];
-                break;
-            }
+        $filter_toggle_text = __('Show Filters', 'asgaros-forum');
+        $filter_toggle_class = 'dashicons-arrow-down-alt2';
+        $filter_toggle_hidden = 'style="display: none;"';
+
+        if (isset($_GET['filter_role'])) {
+            $filter_toggle_text = __('Hide Filters', 'asgaros-forum');
+            $filter_toggle_class = 'dashicons-arrow-up-alt2';
+            $filter_toggle_hidden = '';
         }
 
-        echo '<div id="memberslist-filter">';
-            echo 'Roles:';
-            echo $this->render_role_option('all', 'All Users');
-            echo $this->render_role_option('normal', 'Normal');
-            echo $this->render_role_option('moderators', 'Moderators');
-            echo $this->render_role_option('administrators', 'Administrators');
+        echo '<div class="title-element dashicons-before '.$filter_toggle_class.'" id="memberslist-filter-toggle">'.$filter_toggle_text.'</div>';
+        echo '<div id="memberslist-filter" data-value-show-filters="'.__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hidden.'>';
+            echo '<div id="roles-filter">';
+                echo 'Roles:';
+                echo '&nbsp;';
+                echo $this->render_role_option('all', 'All Users');
+                echo '&nbsp;&middot;&nbsp;';
+                echo $this->render_role_option('normal', 'Normal');
+                echo '&nbsp;&middot;&nbsp;';
+                echo $this->render_role_option('moderator', 'Moderators');
+                echo '&nbsp;&middot;&nbsp;';
+                echo $this->render_role_option('administrator', 'Administrators');
+                echo '&nbsp;&middot;&nbsp;';
+                echo $this->render_role_option('banned', 'Banned');
 
-
-            print_r(AsgarosForumUserGroups::getUserGroups(array(), true));
+                //print_r(AsgarosForumUserGroups::getUserGroups(array(), true));
+            echo '</div>';
         echo '</div>';
     }
 
     public function render_role_option($role, $name) {
-        $output = '<a href="'.$this->asgarosforum->rewrite->get_link('members', false, array('filterrole' => $role)).'">'.$name.'</a>';
+        $output = '<a href="'.$this->asgarosforum->rewrite->get_link('members', false, array('filter_role' => $role)).'">'.$name.'</a>';
 
         if ($role === $this->filter_role) {
             echo '<b>'.$output.'</b>';
@@ -62,52 +90,55 @@ class AsgarosForumMembersList {
     }
 
     public function showMembersList() {
-        //$this->show_filters();
-
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('members');
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
 
-        echo '<div class="title-element"></div>';
+        $this->show_filters();
+
         echo '<div class="content-element">';
 
         $showAvatars = get_option('show_avatars');
 
         $data = $this->getMembers();
 
-        $start = $this->asgarosforum->current_page * $this->asgarosforum->options['members_per_page'];
-        $end = $this->asgarosforum->options['members_per_page'];
+        if (empty($data)) {
+            echo '<div class="notice">'.__('No users found!', 'asgaros-forum').'</div>';
+        } else {
+            $start = $this->asgarosforum->current_page * $this->asgarosforum->options['members_per_page'];
+            $end = $this->asgarosforum->options['members_per_page'];
 
-        $dataSliced = array_slice($data, $start, $end);
+            $dataSliced = array_slice($data, $start, $end);
 
-        foreach ($dataSliced as $element) {
-            $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
+            foreach ($dataSliced as $element) {
+                $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
 
-            echo '<div class="member'.$userOnline.'">';
-                if ($showAvatars) {
-                    echo '<div class="member-avatar">';
-                    echo get_avatar($element->ID, 60);
+                echo '<div class="member'.$userOnline.'">';
+                    if ($showAvatars) {
+                        echo '<div class="member-avatar">';
+                        echo get_avatar($element->ID, 60);
+                        echo '</div>';
+                    }
+
+                    echo '<div class="member-name">';
+                        echo $this->asgarosforum->getUsername($element->ID);
+                        echo '<small>';
+                            echo $this->asgarosforum->permissions->getForumRole($element->ID);
+                        echo '</small>';
                     echo '</div>';
-                }
 
-                echo '<div class="member-name">';
-                    echo $this->asgarosforum->getUsername($element->ID);
-                    echo '<small>';
-                        echo $this->asgarosforum->permissions->getForumRole($element->ID);
-                    echo '</small>';
-                echo '</div>';
-
-                echo '<div class="member-posts">';
-                    $member_posts_i18n = number_format_i18n($element->forum_posts);
-                    echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
-                echo '</div>';
-
-                if ($this->asgarosforum->online->functionality_enabled) {
-                    echo '<div class="member-last-seen">';
-                        echo __('Last seen:', 'asgaros-forum').' <i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
+                    echo '<div class="member-posts">';
+                        $member_posts_i18n = number_format_i18n($element->forum_posts);
+                        echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
                     echo '</div>';
-                }
-            echo '</div>';
+
+                    if ($this->asgarosforum->online->functionality_enabled) {
+                        echo '<div class="member-last-seen">';
+                            echo __('Last seen:', 'asgaros-forum').' <i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
+                        echo '</div>';
+                    }
+                echo '</div>';
+            }
         }
 
         echo '</div>';
@@ -116,46 +147,7 @@ class AsgarosForumMembersList {
     }
 
     public function getMembers() {
-        $allUsers = false;
-
-        switch ($this->filter_role) {
-            case 'all':
-                // Get all existing users.
-                $allUsers = get_users(array(
-                    'fields'        => array('ID', 'display_name')
-                ));
-            break;
-            case 'normal':
-                $allUsers = get_users(array(
-                    'fields'            => array('ID', 'display_name'),
-                    'meta_query'        => array(
-                        array(
-                            'key'       => 'asgarosforum_role',
-                            'compare'   => 'NOT EXISTS'
-                        )
-                    ),
-                    'role__not_in'      => array('administrator')
-                ));
-            break;
-            case 'moderators':
-                $allUsers = get_users(array(
-                    'fields'            => array('ID', 'display_name'),
-                    'meta_query'        => array(
-                        array(
-                            'key'       => 'asgarosforum_role',
-                            'value'     => 'moderator'
-                        )
-                    ),
-                    'role__not_in'      => array('administrator')
-                ));
-            break;
-            case 'administrators':
-                $allUsers = get_users(array(
-                    'fields'            => array('ID', 'display_name'),
-                    'role'              => 'administrator'
-                ));
-            break;
-        }
+        $allUsers = $this->asgarosforum->permissions->get_users_by_role($this->filter_role);
 
         if ($allUsers) {
             // Now get the amount of forum posts for all users.

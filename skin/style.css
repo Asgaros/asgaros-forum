@@ -570,6 +570,7 @@
 }
 #af-wrapper .title-element:before {
     height: 31px;
+    width: 31px;
     line-height: 31px;
     padding-right: 5px;
 }
@@ -1370,6 +1371,16 @@
     font-size: smaller;
     padding-left: 10px;
     border-left: 1px solid #eee;
+}
+#af-wrapper #memberslist-filter {
+    background-color: #fff;
+    border-color: #eee;
+    border-style: solid;
+    border-width: 0px 1px 1px;
+    padding: 8px
+}
+#af-wrapper #memberslist-filter-toggle {
+    cursor: pointer;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .member-last-seen {

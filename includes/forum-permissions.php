@@ -275,6 +275,11 @@ class AsgarosForumPermissions {
         $this->asgarosforum->prevent_query_modifications = true;
 
         switch ($role) {
+            case 'all':
+                $data = get_users(array(
+                    'fields'            => array('ID', 'display_name')
+                ));
+            break;
             case 'normal':
                 $data = get_users(array(
                     'fields'            => array('ID', 'display_name'),

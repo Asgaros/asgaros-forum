@@ -152,5 +152,20 @@
         $('#af-wrapper #forum-search').click(function() {
             $('#af-wrapper #forum-search input[name=keywords]').focus();
         });
+
+        // Memberslist filter toggle.
+        $('#af-wrapper #memberslist-filter-toggle').click(function() {
+            $('#af-wrapper #memberslist-filter').slideToggle(200, function() {
+                var final_state = $(this).is(':hidden') ? 'hidden' : 'visible';
+
+                if (final_state === 'hidden') {
+                    $('#af-wrapper #memberslist-filter-toggle').attr('class', 'title-element dashicons-before dashicons-arrow-down-alt2');
+                    $('#af-wrapper #memberslist-filter-toggle').html($("#af-wrapper #memberslist-filter").attr('data-value-show-filters'));
+                } else {
+                    $('#af-wrapper #memberslist-filter-toggle').attr('class', 'title-element dashicons-before dashicons-arrow-up-alt2');
+                    $('#af-wrapper #memberslist-filter-toggle').html($("#af-wrapper #memberslist-filter").attr('data-value-hide-filters'));
+                }
+            });
+        });
     });
 })(jQuery);
