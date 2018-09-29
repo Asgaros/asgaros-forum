@@ -326,8 +326,22 @@ class AsgarosForumUserGroups {
     }
 
     // Returns all users of a usergroup.
-    public static function getUsersOfUserGroup($userGroupID) {
+    public static function get_ids_of_users_in_usergroup($userGroupID) {
         return get_objects_in_term($userGroupID, self::$taxonomyName);
+    }
+
+    public static function get_users_in_usergroup($usergroup_id) {
+        // Get IDs first.
+        $user_ids = self::get_ids_of_users_in_usergroup($usergroup_id);
+
+        if (!empty($user_ids)) {
+            return get_users(array(
+                'fields'    => array('ID', 'display_name'),
+                'include'   => $user_ids
+            ));
+        }
+
+        return false;
     }
 
     //======================================================================
@@ -369,7 +383,7 @@ class AsgarosForumUserGroups {
 
     // Counts the users of an usergroup.
     public static function countUsersOfUserGroup($userGroupID) {
-        return count(self::getUsersOfUserGroup($userGroupID));
+        return count(self::get_ids_of_users_in_usergroup($userGroupID));
     }
 
     //======================================================================
@@ -616,7 +630,7 @@ class AsgarosForumUserGroups {
         			$term = self::getUserGroup($userGroupID);
 
                     if (!empty($term)) {
-            			$user_ids = self::getUsersOfUserGroup($term->term_id);
+            			$user_ids = self::get_ids_of_users_in_usergroup($term->term_id);
 
                         if (!empty($user_ids)) {
                 			$ids = implode(',', wp_parse_id_list($user_ids));
