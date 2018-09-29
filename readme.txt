@@ -102,6 +102,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_usergroup_ID_remove_user hook
 * Fixed: Various problems when applying custom appearance-modifications on some server-configurations
 * Fixed: Hidden usergroup filters in user overview when there are many usergroups
+* Changed: Usergroup tags now link to its memberslist
 * Minor design changes
 * Performance improvements and code optimizations
 = 1.10.1 =
