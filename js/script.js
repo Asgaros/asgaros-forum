@@ -155,7 +155,7 @@
 
         // Memberslist filter toggle.
         $('#af-wrapper #memberslist-filter-toggle').click(function() {
-            $('#af-wrapper #memberslist-filter').slideToggle(200, function() {
+            $('#af-wrapper #memberslist-filter').slideToggle(0, function() {
                 var final_state = $(this).is(':hidden') ? 'hidden' : 'visible';
 
                 if (final_state === 'hidden') {

@@ -71,39 +71,39 @@ class AsgarosForumMembersList {
         echo '<div class="title-element dashicons-before '.$filter_toggle_class.'" id="memberslist-filter-toggle">'.$filter_toggle_text.'</div>';
         echo '<div id="memberslist-filter" data-value-show-filters="'.__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hidden.'>';
             echo '<div id="roles-filter">';
-                echo __('Roles:', 'asgaros-forum');
-                echo '&nbsp;';
-                echo $this->render_filter_option('role', 'all', 'All Users');
+                echo '<div class="filter-name">'.__('Roles:', 'asgaros-forum').'</div>';
+                echo '<div class="filter-options">';
+                    echo $this->render_filter_option('role', 'all', 'All Users');
 
-                $users = $this->asgarosforum->permissions->get_users_by_role('normal');
+                    $users = $this->asgarosforum->permissions->get_users_by_role('normal');
 
-                if (count($users) > 0) {
-                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'normal', __('Normal', 'asgaros-forum'));
-                }
+                    if (count($users) > 0) {
+                        echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'normal', __('Normal', 'asgaros-forum'));
+                    }
 
-                $users = $this->asgarosforum->permissions->get_users_by_role('moderator');
+                    $users = $this->asgarosforum->permissions->get_users_by_role('moderator');
 
-                if (count($users) > 0) {
-                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'moderator', __('Moderators', 'asgaros-forum'));
-                }
+                    if (count($users) > 0) {
+                        echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'moderator', __('Moderators', 'asgaros-forum'));
+                    }
 
-                $users = $this->asgarosforum->permissions->get_users_by_role('administrator');
+                    $users = $this->asgarosforum->permissions->get_users_by_role('administrator');
 
-                if (count($users) > 0) {
-                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'administrator', __('Administrators', 'asgaros-forum'));
-                }
+                    if (count($users) > 0) {
+                        echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'administrator', __('Administrators', 'asgaros-forum'));
+                    }
 
-                $users = $this->asgarosforum->permissions->get_users_by_role('banned');
+                    $users = $this->asgarosforum->permissions->get_users_by_role('banned');
 
-                if (count($users) > 0) {
-                    echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'banned', __('Banned', 'asgaros-forum'));
-                }
+                    if (count($users) > 0) {
+                        echo '&nbsp;&middot;&nbsp;'.$this->render_filter_option('role', 'banned', __('Banned', 'asgaros-forum'));
+                    }
+                echo '</div>';
             echo '</div>';
 
             $usergroups = AsgarosForumUserGroups::getUserGroups(array(), true);
 
             if (!empty($usergroups)) {
-                $first_usergroup = true;
                 $usergroups_filter_output = '';
 
                 foreach ($usergroups as $usergroup) {
@@ -111,21 +111,19 @@ class AsgarosForumMembersList {
 
                     // Only list usergroups with users in it.
                     if ($users_counter > 0) {
-                        if ($first_usergroup) {
-                            $first_usergroup = false;
-                        } else {
-                            $usergroups_filter_output .= '&nbsp;&middot;&nbsp;';
-                        }
+                        $font_weight = 'normal';
 
-                        $usergroups_filter_output .= $this->render_filter_option('group', $usergroup->term_id, $usergroup->name);
+                        if ($this->filter_type == 'group' && $this->filter_name == $usergroup->term_id) {
+                            $font_weight = 'bold';
+                        }
+                        $usergroups_filter_output .= AsgarosForumUserGroups::render_usergroup_tag($usergroup, $font_weight);
                     }
                 }
 
                 if (!empty($usergroups_filter_output)) {
-                    echo '<div id="roles-filter">';
-                    echo __('Usergroups:', 'asgaros-forum');
-                    echo '&nbsp;';
-                    echo $usergroups_filter_output;
+                    echo '<div id="usergroups-filter">';
+                        echo '<div class="filter-name">'.__('Usergroups:', 'asgaros-forum').'</div>';
+                        echo '<div class="filter-options">'.$usergroups_filter_output.'</div>';
                     echo '</div>';
                 }
             }

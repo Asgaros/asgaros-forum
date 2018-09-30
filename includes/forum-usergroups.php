@@ -579,16 +579,16 @@ class AsgarosForumUserGroups {
     }
 
     // Renders the tag for a usergroup which can be used inside profiles, posts and in the administration area.
-    public static function render_usergroup_tag($usergroup_object) {
+    public static function render_usergroup_tag($usergroup_object, $font_weight = 'normal') {
         $color = self::getUserGroupColor($usergroup_object->term_id);
 
         // If the memberslist is enabled and we are inside the front-end, we will
         // generate a link to the memberslist filtered by the selected usergroup.
         if (self::$asgarosforum->memberslist->functionalityEnabled() && !is_admin()) {
             $link = self::$asgarosforum->rewrite->get_link('members', false, array('filter_type' => 'group', 'filter_name' => $usergroup_object->term_id));
-            return '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.'; border-color: '.$color.';">'.$usergroup_object->name.'</a>';
+            return '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.'; border-color: '.$color.'; font-weight: '.$font_weight.';">'.$usergroup_object->name.'</a>';
         } else {
-            return '<span class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.'; border-color: '.$color.';">'.$usergroup_object->name.'</span>';
+            return '<span class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.'; border-color: '.$color.'; font-weight: '.$font_weight.';">'.$usergroup_object->name.'</span>';
         }
     }
 

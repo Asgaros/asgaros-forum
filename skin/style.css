@@ -1377,10 +1377,27 @@
     border-color: #eee;
     border-style: solid;
     border-width: 0px 1px 1px;
-    padding: 8px
+    padding: 8px 16px;
 }
 #af-wrapper #memberslist-filter-toggle {
     cursor: pointer;
+}
+#af-wrapper #roles-filter,
+#af-wrapper #usergroups-filter {
+    display: flex;
+    line-height: 30px;
+}
+#af-wrapper #roles-filter {
+    padding-bottom: 4px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 4px;
+}
+#af-wrapper .filter-name {
+    width: auto;
+    padding-right: 8px;
+}
+#af-wrapper .filter-options {
+    flex: 1;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .member-last-seen {
