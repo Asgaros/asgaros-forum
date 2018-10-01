@@ -584,7 +584,7 @@ class AsgarosForumUserGroups {
 
         // If the memberslist is enabled and we are inside the front-end, we will
         // generate a link to the memberslist filtered by the selected usergroup.
-        if (self::$asgarosforum->memberslist->functionalityEnabled() && !is_admin()) {
+        if (self::$asgarosforum->memberslist->functionality_enabled() && !is_admin()) {
             $link = self::$asgarosforum->rewrite->get_link('members', false, array('filter_type' => 'group', 'filter_name' => $usergroup_object->term_id));
             return '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.'; border-color: '.$color.'; font-weight: '.$font_weight.';">'.$usergroup_object->name.'</a>';
         } else {

@@ -309,7 +309,7 @@ class AsgarosForum {
             break;
             case 'members':
                 // Go back to the overview when this functionality is not enabled.
-                if (!$this->memberslist->functionalityEnabled()) {
+                if (!$this->memberslist->functionality_enabled()) {
                     $this->current_view = 'overview';
                 }
             break;
@@ -529,7 +529,7 @@ class AsgarosForum {
                         $this->profile->show_history();
                     break;
                     case 'members':
-                        $this->memberslist->showMembersList();
+                        $this->memberslist->show_memberslist();
                     break;
                     case 'activity':
                         $this->activity->show_activity();
@@ -1065,7 +1065,7 @@ class AsgarosForum {
                 echo '<a class="home-link" href="'.$this->get_link('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 
                 $this->profile->myProfileLink();
-                $this->memberslist->renderMembersListLink();
+                $this->memberslist->show_memberslist_link();
                 $this->notifications->show_subscription_overview_link();
                 $this->activity->show_activity_link();
 

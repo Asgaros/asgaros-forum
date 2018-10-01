@@ -11,10 +11,10 @@ class AsgarosForumMembersList {
         $this->asgarosforum = $object;
 
         // Set filter based on URL parameters.
-        $this->set_filter();
+        add_action('asgarosforum_prepare_members', array($this, 'set_filter'));
     }
 
-    public function functionalityEnabled() {
+    public function functionality_enabled() {
         if (!$this->asgarosforum->options['enable_memberslist'] || ($this->asgarosforum->options['memberslist_loggedin_only'] && !is_user_logged_in())) {
             return false;
         } else {
@@ -23,33 +23,29 @@ class AsgarosForumMembersList {
     }
 
     public function set_filter() {
-        if ($this->functionalityEnabled()) {
+        if ($this->functionality_enabled()) {
             if (!empty($_GET['filter_type']) && !empty($_GET['filter_name'])) {
-                switch ($_GET['filter_type']) {
-                    case 'role':
-                        switch ($_GET['filter_name']) {
-                            case 'all':
-                            case 'normal':
-                            case 'moderator':
-                            case 'administrator':
-                            case 'banned':
-                                $this->filter_type = 'role';
-                                $this->filter_name = $_GET['filter_name'];
-                            break;
-                        }
-                    break;
-
-                    case 'group':
-                        $this->filter_type = 'group';
-                        $this->filter_name = $_GET['filter_name'];
-                    break;
+                if ($_GET['filter_type'] === 'role') {
+                    switch ($_GET['filter_name']) {
+                        case 'all':
+                        case 'normal':
+                        case 'moderator':
+                        case 'administrator':
+                        case 'banned':
+                            $this->filter_type = 'role';
+                            $this->filter_name = $_GET['filter_name'];
+                        break;
+                    }
+                } else if ($_GET['filter_type'] === 'group') {
+                    $this->filter_type = 'group';
+                    $this->filter_name = $_GET['filter_name'];
                 }
             }
         }
     }
 
-    public function renderMembersListLink() {
-        if ($this->functionalityEnabled()) {
+    public function show_memberslist_link() {
+        if ($this->functionality_enabled()) {
             $membersLink = $this->asgarosforum->get_link('members');
             $membersLink = apply_filters('asgarosforum_filter_members_link', $membersLink);
 
@@ -59,17 +55,17 @@ class AsgarosForumMembersList {
 
     public function show_filters() {
         $filter_toggle_text = __('Show Filters', 'asgaros-forum');
-        $filter_toggle_class = 'dashicons-arrow-down-alt2';
-        $filter_toggle_hidden = 'style="display: none;"';
+        $filter_toggle_icon = 'dashicons-arrow-down-alt2';
+        $filter_toggle_hide = 'style="display: none;"';
 
         if (!empty($_GET['filter_type']) && !empty($_GET['filter_name'])) {
             $filter_toggle_text = __('Hide Filters', 'asgaros-forum');
-            $filter_toggle_class = 'dashicons-arrow-up-alt2';
-            $filter_toggle_hidden = '';
+            $filter_toggle_icon = 'dashicons-arrow-up-alt2';
+            $filter_toggle_hide = '';
         }
 
-        echo '<div class="title-element dashicons-before '.$filter_toggle_class.'" id="memberslist-filter-toggle">'.$filter_toggle_text.'</div>';
-        echo '<div id="memberslist-filter" data-value-show-filters="'.__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hidden.'>';
+        echo '<div class="title-element dashicons-before '.$filter_toggle_icon.'" id="memberslist-filter-toggle">'.$filter_toggle_text.'</div>';
+        echo '<div id="memberslist-filter" data-value-show-filters="'.__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hide.'>';
             echo '<div id="roles-filter">';
                 echo '<div class="filter-name">'.__('Roles:', 'asgaros-forum').'</div>';
                 echo '<div class="filter-options">';
@@ -141,7 +137,7 @@ class AsgarosForumMembersList {
         return $output;
     }
 
-    public function showMembersList() {
+    public function show_memberslist() {
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('members');
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
@@ -152,7 +148,7 @@ class AsgarosForumMembersList {
 
         $showAvatars = get_option('show_avatars');
 
-        $data = $this->getMembers();
+        $data = $this->get_members();
 
         if (empty($data)) {
             echo '<div class="notice">'.__('No users found!', 'asgaros-forum').'</div>';
@@ -208,7 +204,7 @@ class AsgarosForumMembersList {
         echo $paginationRendering;
     }
 
-    public function getMembers() {
+    public function get_members() {
         $allUsers = false;
 
         if ($this->filter_type === 'role') {
