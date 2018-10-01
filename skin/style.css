@@ -1344,8 +1344,6 @@
     display: table-cell;
     box-sizing: border-box;
     vertical-align: middle;
-}
-#af-wrapper .member div {
     padding: 8px;
 }
 #af-wrapper .member-avatar {
@@ -1362,21 +1360,21 @@
 #af-wrapper .member-posts {
     width: 100px;
     text-align: right;
-    padding-right: 10px;
+    padding-right: 16px;
     font-size: smaller;
 }
 #af-wrapper .member-last-seen {
-    width: 230px;
+    width: 200px;
     text-align: left;
     font-size: smaller;
-    padding-left: 10px;
+    padding-left: 16px;
     border-left: 1px solid #eee;
 }
 #af-wrapper #memberslist-filter {
     background-color: #fff;
     border-color: #eee;
     border-style: solid;
-    border-width: 0px 1px 1px;
+    border-width: 0px 1px 2px;
     padding: 8px 16px;
 }
 #af-wrapper #memberslist-filter-toggle {

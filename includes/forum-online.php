@@ -209,7 +209,7 @@ class AsgarosForumOnline {
                 $user_time_stamp = $user_data->user_registered;
             }
 
-            return sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($user_time_stamp), current_time('timestamp')));
+            return sprintf(__('Seen %s ago', 'asgaros-forum'), human_time_diff(strtotime($user_time_stamp), current_time('timestamp')));
         }
     }
 

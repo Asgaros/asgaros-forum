@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Role/Usergroup filters for memberslist
+* Added: Usergroups to memberslist
 * Added: Bulk actions for assignment of forum roles
 * Added: Possibility to filter users by their forum role in the backend user overview
 * Added: Show IDs of usergroups inside the administration area

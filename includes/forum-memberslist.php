@@ -174,9 +174,19 @@ class AsgarosForumMembersList {
 
                     echo '<div class="member-name">';
                         echo $this->asgarosforum->getUsername($element->ID);
-                        echo '<small>';
-                            echo $this->asgarosforum->permissions->getForumRole($element->ID);
-                        echo '</small>';
+                        echo '<small>'.$this->asgarosforum->permissions->getForumRole($element->ID).'</small>';
+
+                        $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($element->ID, 'all', true);
+
+                        if (!empty($usergroups)) {
+                            echo '<small>';
+
+                            foreach ($usergroups as $usergroup) {
+                                echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+                            }
+
+                            echo '</small>';
+                        }
                     echo '</div>';
 
                     echo '<div class="member-posts">';
@@ -186,7 +196,7 @@ class AsgarosForumMembersList {
 
                     if ($this->asgarosforum->online->functionality_enabled) {
                         echo '<div class="member-last-seen">';
-                            echo __('Last seen:', 'asgaros-forum').' <i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
+                            echo '<i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
                         echo '</div>';
                     }
                 echo '</div>';
