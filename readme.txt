@@ -94,16 +94,16 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Role/Usergroup filters for memberslist
-* Added: Usergroups to memberslist
-* Added: Bulk actions for assignment of forum roles
-* Added: Possibility to filter users by their forum role in the backend user overview
-* Added: Show IDs of usergroups inside the administration area
+* Added: Filters for roles and usergroups in memberslist
+* Added: Show usergroups in memberslist
+* Added: Bulk actions to assign roles
+* Added: Filter users by their role in the backend
 * Added: asgarosforum_usergroup_ID_add_user hook
 * Added: asgarosforum_usergroup_ID_remove_user hook
-* Fixed: Various problems when applying custom appearance-modifications on some server-configurations
-* Fixed: Hidden usergroup filters in user overview when there are many usergroups
-* Changed: Usergroup tags now link to its memberslist
+* Fixed: Various problems when applying custom appearance-modifications
+* Fixed: Hidden filters for usergroups in backend user-overview when there were many usergroups
+* Changed: Show IDs of usergroups in the backend
+* Changed: Usergroup-tags now link to memberslist
 * Minor design changes
 * Performance improvements and code optimizations
 = 1.10.1 =
