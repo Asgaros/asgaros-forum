@@ -104,6 +104,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Hidden filters for usergroups in backend user-overview when there were many usergroups
 * Changed: Show IDs of usergroups in the backend
 * Changed: Usergroup-tags now link to memberslist
+* Changed: Show username of receiver in mails
 * Minor design changes
 * Performance improvements and code optimizations
 = 1.10.1 =

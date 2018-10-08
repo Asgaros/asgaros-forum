@@ -71,12 +71,20 @@ class AsgarosForumReports {
             $author_name = $this->asgarosforum->getUsername($report['author_id']);
             $reporter = get_userdata($report['reporters']);
 
+            $replacements = array(
+                '###AUTHOR###'      => $author_name,
+                '###REPORTER###'    => $reporter->display_name,
+                '###LINK###'        => '<a href="'.$report['post_link'].'">'.$report['post_link'].'</a>',
+                '###TITLE###'       => $report['topic_name'],
+                '###CONTENT###'     => $report['post_text_raw']
+            );
+
             $notification_subject = __('New report', 'asgaros-forum');
-            $notification_message = sprintf(__('Hello,<br><br>There is a new report.<br><br>Topic:<br>%s<br><br>Post:<br>%s<br><br>Post Author:<br>%s<br><br>Reporter:<br>%s<br><br>Link to the post:<br><a href="%s">%s</a>', 'asgaros-forum'), $report['topic_name'], $report['post_text_raw'], $author_name, $reporter->display_name, $report['post_link'], $report['post_link']);
+            $notification_message = __('Hello ###USERNAME###,<br><br>There is a new report.<br><br>Topic:<br>###TITLE###<br><br>Post:<br>###CONTENT###<br><br>Post Author:<br>###AUTHOR###<br><br>Reporter:<br>###REPORTER###<br><br>Link:<br>###LINK###', 'asgaros-forum');
 
             $admin_mail = get_bloginfo('admin_email');
 
-            $this->asgarosforum->notifications->send_notifications($admin_mail, $notification_subject, $notification_message);
+            $this->asgarosforum->notifications->send_notifications($admin_mail, $notification_subject, $notification_message, $replacements);
         }
     }
 

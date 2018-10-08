@@ -74,12 +74,19 @@ class AsgarosForumMentioning {
                     $post_author_name = $this->asgarosforum->getUsername($post_author_id);
 
                     // Create mail content.
+                    $replacements = array(
+                        '###AUTHOR###'  => $post_author_name,
+                        '###LINK###'    => '<a href="'.$link.'">'.$link.'</a>',
+                        '###TITLE###'   => esc_html(stripslashes($topic->name)),
+                        '###CONTENT###' => wpautop(stripslashes($content))
+                    );
+
                     $notification_subject = __('You have been mentioned!', 'asgaros-forum');
-                    $notification_message = sprintf(__('Hello,<br><br>You have been mentioned in a forum post.<br><br>Topic:<br>%s<br><br>Mentioned by:<br>%s<br><br>Post:<br>%s<br><br>Link to the post:<br><a href="%s">%s</a>', 'asgaros-forum'), esc_html(stripslashes($topic->name)), $post_author_name, wpautop(stripslashes($content)), $link, $link);
-                    $notification_message = apply_filters('asgarosforum_filter_notify_mentioned_user_message', $notification_message, $topic, $post_author_name, $content, $link);
+                    $notification_message = __('Hello ###USERNAME###,<br><br>You have been mentioned in a forum-post.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');
+                    $notification_message = apply_filters('asgarosforum_filter_notify_mentioned_user_message', $notification_message, $replacements);
 
                     // Send the notifications.
-                    $this->asgarosforum->notifications->send_notifications($this->asgarosforum->notifications->mailing_list, $notification_subject, $notification_message);
+                    $this->asgarosforum->notifications->send_notifications($this->asgarosforum->notifications->mailing_list, $notification_subject, $notification_message, $replacements);
                 }
             }
         }

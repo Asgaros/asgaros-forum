@@ -171,12 +171,22 @@ class AsgarosForumNotifications {
     public function notify_about_new_post($answer_text, $answer_link, $answer_author) {
         // Check if this functionality is enabled
         if ($this->asgarosforum->options['allow_subscriptions']) {
-            $topic_name = $this->asgarosforum->current_topic_name;
+            $topic_name = esc_html(stripslashes($this->asgarosforum->current_topic_name));
             $author_name = $this->asgarosforum->getUsername($answer_author);
-            $notification_subject = sprintf(__('New answer: %s', 'asgaros-forum'), wp_specialchars_decode(esc_html(stripslashes($topic_name)), ENT_QUOTES));
-            $notification_message = sprintf(__('Hello,<br /><br />You received this message because there is a new answer in a forum-topic you have subscribed to:<br />%s<br /><br />Author:<br />%s<br /><br />Answer:<br />%s<br /><br />Link to the new answer:<br /><a href="%s">%s</a><br /><br />You can unsubscribe from this topic using the unsubscribe-link at the end of the topic as a logged-in user. Please dont answer to this mail!', 'asgaros-forum'), esc_html(stripslashes($topic_name)), $author_name, wpautop(stripslashes($answer_text)), $answer_link, $answer_link);
-            $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $topic_name, $answer_text, $answer_link, $author_name);
+            $notification_subject = sprintf(__('New answer: %s', 'asgaros-forum'), wp_specialchars_decode($topic_name, ENT_QUOTES));
 
+            // Prepare message-template.
+            $replacements = array(
+                '###AUTHOR###'  => $author_name,
+                '###LINK###'    => '<a href="'.$answer_link.'">'.$answer_link.'</a>',
+                '###TITLE###'   => $topic_name,
+                '###CONTENT###' => wpautop(stripslashes($answer_text))
+            );
+
+            $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new answer in a forum-topic you have subscribed to.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Answer:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
+            $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $replacements);
+
+            // Prepare mailing-list.
             $topic_subscribers = array();
 
             // Get topic subscribers.
@@ -236,7 +246,7 @@ class AsgarosForumNotifications {
             $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_post', $this->mailing_list);
 
             // Send notifications.
-            $this->send_notifications($this->mailing_list, $notification_subject, $notification_message);
+            $this->send_notifications($this->mailing_list, $notification_subject, $notification_message, $replacements);
         }
     }
 
@@ -244,11 +254,22 @@ class AsgarosForumNotifications {
     public function notify_about_new_topic($topic_name, $topic_text, $topic_link, $topic_author) {
         // Check if this functionality is enabled
         if ($this->asgarosforum->options['admin_subscriptions'] || $this->asgarosforum->options['allow_subscriptions']) {
+            $topic_name = esc_html(stripslashes($topic_name));
             $author_name = $this->asgarosforum->getUsername($topic_author);
-            $notification_subject = sprintf(__('New topic: %s', 'asgaros-forum'), wp_specialchars_decode(esc_html(stripslashes($topic_name)), ENT_QUOTES));
-            $notification_message = sprintf(__('Hello,<br /><br />You received this message because there is a new forum-topic:<br />%s<br /><br />Author:<br />%s<br /><br />Text:<br />%s<br /><br />Link to the new topic:<br /><a href="%s">%s</a>', 'asgaros-forum'), esc_html(stripslashes($topic_name)), $author_name, wpautop(stripslashes($topic_text)), $topic_link, $topic_link);
-            $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $topic_name, $topic_text, $topic_link, $author_name);
+            $notification_subject = sprintf(__('New topic: %s', 'asgaros-forum'), wp_specialchars_decode($topic_name, ENT_QUOTES));
 
+            // Prepare message-template.
+            $replacements = array(
+                '###AUTHOR###'  => $author_name,
+                '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
+                '###TITLE###'   => $topic_name,
+                '###CONTENT###' => wpautop(stripslashes($topic_text))
+            );
+
+            $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
+            $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $replacements);
+
+            // Prepare mailing-list.
             if ($this->asgarosforum->options['allow_subscriptions']) {
                 $forum_subscribers = array();
 
@@ -329,7 +350,7 @@ class AsgarosForumNotifications {
             $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_topic', $this->mailing_list);
 
             // Send notifications.
-            $this->send_notifications($this->mailing_list, $notification_subject, $notification_message);
+            $this->send_notifications($this->mailing_list, $notification_subject, $notification_message, $replacements);
         }
     }
 
@@ -340,17 +361,40 @@ class AsgarosForumNotifications {
         }
     }
 
-    public function send_notifications($mails, $subject, $message) {
+    // Apply all replacements in a message-template.
+    public function apply_replacements($mail, $message_template, $replacements = array()) {
+        // Replace username first.
+        $user = get_user_by('email', $mail);
+
+        $message_template = str_replace('###USERNAME###', $user->display_name, $message_template);
+
+        // Apply other replacements now.
+        foreach ($replacements as $key => $value) {
+            $message_template = str_replace($key, $value, $message_template);
+        }
+
+        return $message_template;
+    }
+
+    public function send_notifications($receivers, $subject, $message_template, $replacements = array()) {
+        // Create list of mails in array-format.
+        $mails = array();
+
+        if (is_array($receivers)) {
+            $mails = $receivers;
+        } else {
+            $mails[] = $receivers;
+        }
+
+        // Prepare header and send mails.
         add_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
 
         $mail_headers = $this->get_mail_headers();
 
-        if (is_array($mails)) {
-            foreach($mails as $mail) {
-                wp_mail($mail, $subject, $message, $mail_headers);
-            }
-        } else {
-            wp_mail($mails, $subject, $message, $mail_headers);
+        foreach($mails as $mail) {
+            $message = $this->apply_replacements($mail, $message_template, $replacements);
+
+            wp_mail($mail, $subject, $message, $mail_headers);
         }
 
         remove_filter('wp_mail_content_type', array($this, 'wpdocs_set_html_mail_content_type'));
