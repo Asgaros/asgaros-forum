@@ -298,9 +298,6 @@ class AsgarosForum {
         // Parse the URL.
         $this->rewrite->parse_url();
 
-        // Prepare unread status.
-        $this->unread->prepare_unread_status();
-
         // Update online status.
         $this->online->update_online_status();
 
@@ -370,8 +367,6 @@ class AsgarosForum {
 
         if (isset($_POST['submit_action'])) {
             $this->content->do_insertion();
-        } else if ($this->current_view === 'markallread') {
-            $this->unread->mark_all_read();
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
         } else if (isset($_GET['delete_topic'])) {
@@ -403,11 +398,6 @@ class AsgarosForum {
             $reporter_id = get_current_user_id();
 
             $this->reports->add_report($post_id, $reporter_id);
-        }
-
-        // Mark visited topic as read.
-        if ($this->current_view === 'topic' && $this->current_topic) {
-            $this->unread->mark_topic_read();
         }
 
         do_action('asgarosforum_prepare_'.$this->current_view);

@@ -9,6 +9,11 @@ class AsgarosForumUnread {
 
     public function __construct($object) {
         $this->asgarosforum = $object;
+
+        add_action('asgarosforum_prepare', array($this, 'prepare_unread_status'));
+
+        add_action('asgarosforum_prepare_markallread', array($this, 'mark_all_read'));
+        add_action('asgarosforum_prepare_topic', array($this, 'mark_topic_read'));
     }
 
     public function prepare_unread_status() {
@@ -62,12 +67,14 @@ class AsgarosForumUnread {
 
     // Marks a topic as read when an user opens it.
     public function mark_topic_read() {
-        $this->excluded_items[$this->asgarosforum->current_topic] = intval($this->asgarosforum->get_lastpost_in_topic($this->asgarosforum->current_topic)->id);
+        if ($this->asgarosforum->current_topic) {
+            $this->excluded_items[$this->asgarosforum->current_topic] = intval($this->asgarosforum->get_lastpost_in_topic($this->asgarosforum->current_topic)->id);
 
-        if ($this->user_id) {
-            update_user_meta($this->user_id, 'asgarosforum_unread_exclude', $this->excluded_items);
-        } else {
-            setcookie('asgarosforum_unread_exclude', maybe_serialize($this->excluded_items), 2147483647, COOKIEPATH, COOKIE_DOMAIN);
+            if ($this->user_id) {
+                update_user_meta($this->user_id, 'asgarosforum_unread_exclude', $this->excluded_items);
+            } else {
+                setcookie('asgarosforum_unread_exclude', maybe_serialize($this->excluded_items), 2147483647, COOKIEPATH, COOKIE_DOMAIN);
+            }
         }
     }
 
