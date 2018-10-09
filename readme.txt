@@ -99,6 +99,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Show usergroups in memberslist
 * Added: Bulk actions to assign roles
 * Added: Filter users by their role in the backend
+* Added: asgarosforum_prepare hook
 * Added: asgarosforum_usergroup_ID_add_user hook
 * Added: asgarosforum_usergroup_ID_remove_user hook
 * Fixed: Various problems when applying custom appearance-modifications

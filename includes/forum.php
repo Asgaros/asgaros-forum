@@ -304,6 +304,8 @@ class AsgarosForum {
         // Update online status.
         $this->online->update_online_status();
 
+        do_action('asgarosforum_prepare');
+
         switch ($this->current_view) {
             case 'forum':
             case 'addtopic':
