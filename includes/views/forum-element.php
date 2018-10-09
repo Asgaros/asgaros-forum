@@ -10,7 +10,7 @@ if ($forum->count_topics) {
 }
 
 // Get the read/unread status of a forum.
-$unread_status = $this->unread->getStatusForum($forum->id, $forum->count_topics);
+$unread_status = $this->unread->get_status_forum($forum->id, $forum->count_topics);
 
 // Format the element counters.
 $count_topics_i18n = number_format_i18n($forum->count_topics);

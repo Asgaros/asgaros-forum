@@ -210,7 +210,7 @@ class AsgarosForum {
         if (empty($this->options['mail_template_new_topic_message'])) {
             $this->options['mail_template_new_topic_message'] = __('Hello ###USERNAME###,<br><br>You received this message because there is a new forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
         }
-        
+
         if (empty($this->options['mail_template_mentioned_subject'])) {
             $this->options['mail_template_mentioned_subject'] = __('You have been mentioned!', 'asgaros-forum');
         }
@@ -299,7 +299,7 @@ class AsgarosForum {
         $this->rewrite->parse_url();
 
         // Prepare unread status.
-        $this->unread->prepareUnreadStatus();
+        $this->unread->prepare_unread_status();
 
         // Update online status.
         $this->online->update_online_status();
@@ -369,7 +369,7 @@ class AsgarosForum {
         if (isset($_POST['submit_action'])) {
             $this->content->do_insertion();
         } else if ($this->current_view === 'markallread') {
-            $this->unread->markAllRead();
+            $this->unread->mark_all_read();
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
         } else if (isset($_GET['delete_topic'])) {
@@ -405,7 +405,7 @@ class AsgarosForum {
 
         // Mark visited topic as read.
         if ($this->current_view === 'topic' && $this->current_topic) {
-            $this->unread->markTopicRead();
+            $this->unread->mark_topic_read();
         }
 
         do_action('asgarosforum_prepare_'.$this->current_view);
@@ -627,7 +627,7 @@ class AsgarosForum {
 
     function render_topic_element($topic_object, $topic_type = 'topic-normal', $show_topic_location = false) {
         $lastpost_data = $this->get_lastpost_in_topic($topic_object->id);
-        $unread_status = $this->unread->getStatusTopic($topic_object->id);
+        $unread_status = $this->unread->get_status_topic($topic_object->id);
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';

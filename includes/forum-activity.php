@@ -53,7 +53,7 @@ class AsgarosForumActivity {
 
                 $name_author = $this->asgarosforum->getUsername($activity->author_id);
                 $name_topic = esc_html(stripslashes($activity->name));
-                $read_status = $this->asgarosforum->unread->get_post_status($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
+                $read_status = $this->asgarosforum->unread->get_status_post($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
 
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
