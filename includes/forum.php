@@ -33,57 +33,63 @@ class AsgarosForum {
 
     var $options = array();
     var $options_default = array(
-        'forum_title'               => '',
-        'location'                  => 0,
-        'posts_per_page'            => 10,
-        'topics_per_page'           => 20,
-        'members_per_page'          => 25,
-        'minimalistic_editor'       => true,
-        'allow_shortcodes'          => false,
-        'allow_guest_postings'      => false,
-        'allowed_filetypes'         => 'jpg,jpeg,gif,png,bmp,pdf',
-        'allow_file_uploads'        => false,
-        'upload_permission'         => 'loggedin',
-        'hide_uploads_from_guests'  => false,
-        'hide_profiles_from_guests' => false,
-        'uploads_maximum_number'    => 5,
-        'uploads_maximum_size'      => 5,
-        'uploads_show_thumbnails'   => true,
-        'admin_subscriptions'       => false,
-        'allow_subscriptions'       => true,
-        'notification_sender_name'  => '',
-        'notification_sender_mail'  => '',
-        'allow_signatures'          => false,
-        'signatures_html_allowed'   => false,
-        'signatures_html_tags'      => '<br><a><i><b><u><s><img><strong>',
-        'enable_seo_urls'           => true,
-        'enable_mentioning'         => true,
-        'enable_reactions'          => true,
-        'enable_search'             => true,
-        'enable_profiles'           => true,
-        'enable_memberslist'        => true,
-        'enable_activity'           => false,
-        'enable_rss'                => false,
-        'count_topic_views'         => true,
-        'reports_enabled'           => true,
-        'reports_notifications'     => true,
-        'memberslist_loggedin_only' => false,
-        'show_login_button'         => true,
-        'show_logout_button'        => true,
-        'show_register_button'      => true,
-        'show_who_is_online'        => true,
-        'show_statistics'           => true,
-        'enable_breadcrumbs'        => true,
-        'breadcrumbs_show_category' => true,
-        'highlight_admin'           => true,
-        'highlight_authors'         => true,
-        'show_author_posts_counter' => true,
-        'show_edit_date'            => true,
-        'time_limit_edit_posts'     => 0,
-        'show_description_in_forum' => false,
-        'require_login'             => false,
-        'create_blog_topics'        => false,
-        'create_blog_topics_id'     => 0
+        'forum_title'                       => '',
+        'location'                          => 0,
+        'posts_per_page'                    => 10,
+        'topics_per_page'                   => 20,
+        'members_per_page'                  => 25,
+        'minimalistic_editor'               => true,
+        'allow_shortcodes'                  => false,
+        'allow_guest_postings'              => false,
+        'allowed_filetypes'                 => 'jpg,jpeg,gif,png,bmp,pdf',
+        'allow_file_uploads'                => false,
+        'upload_permission'                 => 'loggedin',
+        'hide_uploads_from_guests'          => false,
+        'hide_profiles_from_guests'         => false,
+        'uploads_maximum_number'            => 5,
+        'uploads_maximum_size'              => 5,
+        'uploads_show_thumbnails'           => true,
+        'admin_subscriptions'               => false,
+        'allow_subscriptions'               => true,
+        'notification_sender_name'          => '',
+        'notification_sender_mail'          => '',
+        'mail_template_new_post_subject'    => '',
+        'mail_template_new_post_message'    => '',
+        'mail_template_new_topic_subject'   => '',
+        'mail_template_new_topic_message'   => '',
+        'mail_template_mentioned_subject'   => '',
+        'mail_template_mentioned_message'   => '',
+        'allow_signatures'                  => false,
+        'signatures_html_allowed'           => false,
+        'signatures_html_tags'              => '<br><a><i><b><u><s><img><strong>',
+        'enable_seo_urls'                   => true,
+        'enable_mentioning'                 => true,
+        'enable_reactions'                  => true,
+        'enable_search'                     => true,
+        'enable_profiles'                   => true,
+        'enable_memberslist'                => true,
+        'enable_activity'                   => false,
+        'enable_rss'                        => false,
+        'count_topic_views'                 => true,
+        'reports_enabled'                   => true,
+        'reports_notifications'             => true,
+        'memberslist_loggedin_only'         => false,
+        'show_login_button'                 => true,
+        'show_logout_button'                => true,
+        'show_register_button'              => true,
+        'show_who_is_online'                => true,
+        'show_statistics'                   => true,
+        'enable_breadcrumbs'                => true,
+        'breadcrumbs_show_category'         => true,
+        'highlight_admin'                   => true,
+        'highlight_authors'                 => true,
+        'show_author_posts_counter'         => true,
+        'show_edit_date'                    => true,
+        'time_limit_edit_posts'             => 0,
+        'show_description_in_forum'         => false,
+        'require_login'                     => false,
+        'create_blog_topics'                => false,
+        'create_blog_topics_id'             => 0
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -187,6 +193,30 @@ class AsgarosForum {
 
         if (empty($this->options['notification_sender_mail'])) {
             $this->options['notification_sender_mail'] = get_bloginfo('admin_email');
+        }
+
+        if (empty($this->options['mail_template_new_post_subject'])) {
+            $this->options['mail_template_new_post_subject'] = __('New answer: ###TITLE###', 'asgaros-forum');
+        }
+
+        if (empty($this->options['mail_template_new_post_message'])) {
+            $this->options['mail_template_new_post_message'] = __('Hello ###USERNAME###,<br><br>You received this message because there is a new answer in a forum-topic you have subscribed to.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Answer:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
+        }
+
+        if (empty($this->options['mail_template_new_topic_subject'])) {
+            $this->options['mail_template_new_topic_subject'] = __('New topic: ###TITLE###', 'asgaros-forum');
+        }
+
+        if (empty($this->options['mail_template_new_topic_message'])) {
+            $this->options['mail_template_new_topic_message'] = __('Hello ###USERNAME###,<br><br>You received this message because there is a new forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
+        }
+        
+        if (empty($this->options['mail_template_mentioned_subject'])) {
+            $this->options['mail_template_mentioned_subject'] = __('You have been mentioned!', 'asgaros-forum');
+        }
+
+        if (empty($this->options['mail_template_mentioned_message'])) {
+            $this->options['mail_template_mentioned_message'] = __('Hello ###USERNAME###,<br><br>You have been mentioned in a forum-post.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');
         }
     }
 

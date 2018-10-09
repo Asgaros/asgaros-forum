@@ -138,10 +138,6 @@ if (!defined('ABSPATH')) exit;
                                 <label for="enable_activity"><?php _e('Enable Activity Feed', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
-                                <input type="checkbox" name="enable_mentioning" id="enable_mentioning" <?php checked(!empty($asgarosforum->options['enable_mentioning'])); ?>>
-                                <label for="enable_mentioning"><?php _e('Enable Mentioning', 'asgaros-forum'); ?></label>
-                            </p>
-                            <p>
                                 <input type="checkbox" name="enable_reactions" id="enable_reactions" <?php checked(!empty($asgarosforum->options['enable_reactions'])); ?>>
                                 <label for="enable_reactions"><?php _e('Enable reactions', 'asgaros-forum'); ?></label>
                             </p>
@@ -193,6 +189,14 @@ if (!defined('ABSPATH')) exit;
                         <h2 class="hndle dashicons-before dashicons-email-alt"><?php _e('Subscriptions', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <p>
+                                <label for="notification_sender_name"><?php _e('Sender name:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="notification_sender_name" id="notification_sender_name" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_name'])); ?>">
+                            </p>
+                            <p>
+                                <label for="notification_sender_mail"><?php _e('Sender mail:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="notification_sender_mail" id="notification_sender_mail" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_mail'])); ?>">
+                            </p>
+                            <p>
                                 <input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>>
                                 <label for="admin_subscriptions"><?php _e('Notify site owner about new topics', 'asgaros-forum'); ?></label>
                             </p>
@@ -201,12 +205,35 @@ if (!defined('ABSPATH')) exit;
                                 <label for="allow_subscriptions"><?php _e('Allow subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label>
                             </p>
                             <p>
-                                <label for="notification_sender_name"><?php _e('Sender name:', 'asgaros-forum'); ?></label>
-                                <input class="regular-text" type="text" name="notification_sender_name" id="notification_sender_name" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_name'])); ?>">
+                                <input type="checkbox" name="enable_mentioning" id="enable_mentioning" <?php checked(!empty($asgarosforum->options['enable_mentioning'])); ?>>
+                                <label for="enable_mentioning"><?php _e('Enable Mentioning', 'asgaros-forum'); ?></label>
+                            </p>
+                            <!-- New Post Notifications -->
+                            <p>
+                                <label for="mail_template_new_post_subject"><?php _e('New post notification subject:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="mail_template_new_post_subject" id="mail_template_new_post_subject" value="<?php echo esc_html(stripslashes($asgarosforum->options['mail_template_new_post_subject'])); ?>">
                             </p>
                             <p>
-                                <label for="notification_sender_mail"><?php _e('Sender mail:', 'asgaros-forum'); ?></label>
-                                <input class="regular-text" type="text" name="notification_sender_mail" id="notification_sender_mail" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_mail'])); ?>">
+                                <label for="mail_template_new_post_message"><?php _e('New post notification message:', 'asgaros-forum'); ?></label>
+                                <textarea class="large-text" rows="8" cols="80" type="text" name="mail_template_new_post_message" id="mail_template_new_post_message"><?php echo esc_html(stripslashes($asgarosforum->options['mail_template_new_post_message'])); ?></textarea>
+                            </p>
+                            <!-- New Topic Notifications -->
+                            <p>
+                                <label for="mail_template_new_topic_subject"><?php _e('New topic notification subject:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="mail_template_new_topic_subject" id="mail_template_new_topic_subject" value="<?php echo esc_html(stripslashes($asgarosforum->options['mail_template_new_topic_subject'])); ?>">
+                            </p>
+                            <p>
+                                <label for="mail_template_new_topic_message"><?php _e('New topic notification message:', 'asgaros-forum'); ?></label>
+                                <textarea class="large-text" rows="8" cols="80" type="text" name="mail_template_new_topic_message" id="mail_template_new_topic_message"><?php echo esc_html(stripslashes($asgarosforum->options['mail_template_new_topic_message'])); ?></textarea>
+                            </p>
+                            <!-- Mentioning Notifications -->
+                            <p>
+                                <label for="mail_template_mentioned_subject"><?php _e('Mentioning notification subject:', 'asgaros-forum'); ?></label>
+                                <input class="regular-text" type="text" name="mail_template_mentioned_subject" id="mail_template_mentioned_subject" value="<?php echo esc_html(stripslashes($asgarosforum->options['mail_template_mentioned_subject'])); ?>">
+                            </p>
+                            <p>
+                                <label for="mail_template_mentioned_message"><?php _e('Mentioning notification message:', 'asgaros-forum'); ?></label>
+                                <textarea class="large-text" rows="8" cols="80" type="text" name="mail_template_mentioned_message" id="mail_template_mentioned_message"><?php echo esc_html(stripslashes($asgarosforum->options['mail_template_mentioned_message'])); ?></textarea>
                             </p>
                         </div>
                     </div>

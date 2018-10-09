@@ -173,7 +173,10 @@ class AsgarosForumNotifications {
         if ($this->asgarosforum->options['allow_subscriptions']) {
             $topic_name = esc_html(stripslashes($this->asgarosforum->current_topic_name));
             $author_name = $this->asgarosforum->getUsername($answer_author);
-            $notification_subject = sprintf(__('New answer: %s', 'asgaros-forum'), wp_specialchars_decode($topic_name, ENT_QUOTES));
+
+            // Prepare subject.
+            $notification_subject = $this->asgarosforum->options['mail_template_new_post_subject'];
+            $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
 
             // Prepare message-template.
             $replacements = array(
@@ -183,7 +186,7 @@ class AsgarosForumNotifications {
                 '###CONTENT###' => wpautop(stripslashes($answer_text))
             );
 
-            $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new answer in a forum-topic you have subscribed to.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Answer:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
+            $notification_message = $this->asgarosforum->options['mail_template_new_post_message'];
             $notification_message = apply_filters('asgarosforum_filter_notify_topic_subscribers_message', $notification_message, $replacements);
 
             // Prepare mailing-list.
@@ -256,7 +259,10 @@ class AsgarosForumNotifications {
         if ($this->asgarosforum->options['admin_subscriptions'] || $this->asgarosforum->options['allow_subscriptions']) {
             $topic_name = esc_html(stripslashes($topic_name));
             $author_name = $this->asgarosforum->getUsername($topic_author);
-            $notification_subject = sprintf(__('New topic: %s', 'asgaros-forum'), wp_specialchars_decode($topic_name, ENT_QUOTES));
+
+            // Prepare subject.
+            $notification_subject = $this->asgarosforum->options['mail_template_new_topic_subject'];
+            $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
 
             // Prepare message-template.
             $replacements = array(
@@ -266,7 +272,7 @@ class AsgarosForumNotifications {
                 '###CONTENT###' => wpautop(stripslashes($topic_text))
             );
 
-            $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive these mails anymore you can unsubscribe via the subscription-area. Please dont answer to this mail!', 'asgaros-forum');
+            $notification_message = $this->asgarosforum->options['mail_template_new_topic_message'];
             $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $replacements);
 
             // Prepare mailing-list.

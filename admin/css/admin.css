@@ -74,6 +74,7 @@
 #af-options label {
     display: inline-block;
     min-width: 250px;
+    vertical-align: top;
 }
 #af-options .wp-picker-container label {
     min-width: initial;

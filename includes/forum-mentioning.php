@@ -81,8 +81,8 @@ class AsgarosForumMentioning {
                         '###CONTENT###' => wpautop(stripslashes($content))
                     );
 
-                    $notification_subject = __('You have been mentioned!', 'asgaros-forum');
-                    $notification_message = __('Hello ###USERNAME###,<br><br>You have been mentioned in a forum-post.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');
+                    $notification_subject = $this->asgarosforum->options['mail_template_mentioned_subject'];
+                    $notification_message = $this->asgarosforum->options['mail_template_mentioned_message'];
                     $notification_message = apply_filters('asgarosforum_filter_notify_mentioned_user_message', $notification_message, $replacements);
 
                     // Send the notifications.

@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Filters for roles and usergroups in memberslist
+* Added: Notification templates
 * Added: Show usergroups in memberslist
 * Added: Bulk actions to assign roles
 * Added: Filter users by their role in the backend
