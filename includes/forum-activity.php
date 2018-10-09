@@ -84,8 +84,7 @@ class AsgarosForumActivity {
     public function load_activity_data($count_all = false) {
         // Prepare lists and filters.
         $ids_categories = array();
-        $ids_categories_excluded = array();
-        $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', $ids_categories_excluded);
+        $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
         $meta_query_filter = $this->asgarosforum->content->get_categories_filter();
 
         // Get accessible categories first.

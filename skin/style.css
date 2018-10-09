@@ -489,6 +489,7 @@
 }
 #af-wrapper #read-unread span:before {
     height: 24px;
+    width: 24px;
     line-height: 24px;
 }
 #af-wrapper #read-unread .indicator {
