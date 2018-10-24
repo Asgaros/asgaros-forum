@@ -99,6 +99,8 @@ class AsgarosForumBreadCrumbs {
                 $this->add_breadcrumb($element_link, $element_title);
             }
 
+            do_action('asgarosforum_breadcrumbs_'.$this->asgarosforum->current_view);
+
             // Render breadcrumbs links.
             echo '<div id="forum-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
                 echo '<span class="dashicons-before dashicons-admin-home"></span>';
