@@ -11,6 +11,13 @@ class AsgarosForumNotifications {
 
         add_action('asgarosforum_prepare_subscriptions', array($this, 'set_subscription_level'));
         add_action('asgarosforum_bottom_navigation', array($this, 'show_subscription_navigation'), 10, 1);
+        add_action('asgarosforum_breadcrumbs_subscriptions', array($this, 'add_breadcrumbs'));
+    }
+
+    public function add_breadcrumbs() {
+        $element_link = $this->asgarosforum->get_link('subscriptions');
+        $element_title = __('Subscriptions', 'asgaros-forum');
+        $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
     function show_subscription_navigation($current_view) {

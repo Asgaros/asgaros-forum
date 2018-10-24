@@ -12,6 +12,8 @@ class AsgarosForumMembersList {
 
         // Set filter based on URL parameters.
         add_action('asgarosforum_prepare_members', array($this, 'set_filter'));
+
+        add_action('asgarosforum_breadcrumbs_members', array($this, 'add_breadcrumbs'));
     }
 
     public function functionality_enabled() {
@@ -20,6 +22,12 @@ class AsgarosForumMembersList {
         } else {
             return true;
         }
+    }
+
+    public function add_breadcrumbs() {
+        $element_link = $this->asgarosforum->get_link('members');
+        $element_title = __('Members', 'asgaros-forum');
+        $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
     public function set_filter() {

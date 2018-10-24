@@ -7,10 +7,18 @@ class AsgarosForumActivity {
 
     public function __construct($object) {
         $this->asgarosforum = $object;
+
+        add_action('asgarosforum_breadcrumbs_activity', array($this, 'add_breadcrumbs'));
     }
 
     public function functionality_enabled() {
         return $this->asgarosforum->options['enable_activity'];
+    }
+
+    public function add_breadcrumbs() {
+        $element_link = $this->asgarosforum->get_link('activity');
+        $element_title = __('Activity', 'asgaros-forum');
+        $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
     public function show_activity() {

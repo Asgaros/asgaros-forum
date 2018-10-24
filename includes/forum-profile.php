@@ -7,6 +7,9 @@ class AsgarosForumProfile {
 
     public function __construct($object) {
         $this->asgarosforum = $object;
+
+        add_action('asgarosforum_breadcrumbs_profile', array($this, 'add_breadcrumbs_profile'));
+        add_action('asgarosforum_breadcrumbs_history', array($this, 'add_breadcrumbs_history'));
     }
 
     // Checks if the profile functionality is enabled.
@@ -52,17 +55,15 @@ class AsgarosForumProfile {
     }
 
     // Sets the breadcrumbs.
-    public function set_profile_breadcrumbs() {
+    public function add_breadcrumbs_profile() {
         $elementLink = $this->asgarosforum->get_link('current');
         $elementTitle = __('Profile', 'asgaros-forum').$this->get_title_suffix();
-
         $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
     }
 
-    public function set_history_breadcrumbs() {
+    public function add_breadcrumbs_history() {
         $elementLink = $this->asgarosforum->get_link('current');
         $elementTitle = __('Post History', 'asgaros-forum').$this->get_title_suffix();
-
         $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
     }
 

@@ -77,26 +77,6 @@ class AsgarosForumBreadCrumbs {
                 $element_link = $this->asgarosforum->get_link('current');
                 $element_title = __('Move Topic', 'asgaros-forum');
                 $this->add_breadcrumb($element_link, $element_title);
-            } else if ($this->asgarosforum->current_view === 'search') {
-                $element_link = $this->asgarosforum->get_link('current');
-                $element_title = __('Search', 'asgaros-forum');
-                $this->add_breadcrumb($element_link, $element_title);
-            } else if ($this->asgarosforum->current_view === 'subscriptions') {
-                $element_link = $this->asgarosforum->get_link('current');
-                $element_title = __('Subscriptions', 'asgaros-forum');
-                $this->add_breadcrumb($element_link, $element_title);
-            } else if ($this->asgarosforum->current_view === 'profile') {
-                $this->asgarosforum->profile->set_profile_breadcrumbs();
-            } else if ($this->asgarosforum->current_view === 'history') {
-                $this->asgarosforum->profile->set_history_breadcrumbs();
-            } else if ($this->asgarosforum->current_view === 'members') {
-                $element_link = $this->asgarosforum->get_link('current');
-                $element_title = __('Members', 'asgaros-forum');
-                $this->add_breadcrumb($element_link, $element_title);
-            } else if ($this->asgarosforum->current_view === 'activity') {
-                $element_link = $this->asgarosforum->get_link('activity');
-                $element_title = __('Activity', 'asgaros-forum');
-                $this->add_breadcrumb($element_link, $element_title);
             }
 
             do_action('asgarosforum_breadcrumbs_'.$this->asgarosforum->current_view);
