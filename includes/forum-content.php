@@ -360,6 +360,30 @@ class AsgarosForumContent {
         return $categories;
     }
 
+    // TODO: Check function above. Can get combined somehow I guess ...
+    public function get_accessible_categories() {
+        // Prepare lists and filters.
+        $ids_categories = array();
+        $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
+        $meta_query_filter = $this->get_categories_filter();
+
+        // Get accessible categories first.
+        $categories_list = get_terms('asgarosforum-category', array(
+            'hide_empty'    => false,
+            'exclude'       => $ids_categories_excluded,
+            'meta_query'    => $meta_query_filter
+        ));
+
+        // Now filter them based on usergroups.
+        $categories_list = AsgarosForumUserGroups::filterCategories($categories_list);
+
+        foreach ($categories_list as $category) {
+            $ids_categories[] = $category->term_id;
+        }
+
+        return $ids_categories;
+    }
+
     public function get_categories_filter() {
         $meta_query_filter = array('relation' => 'AND');
 

@@ -53,24 +53,13 @@ class AsgarosForumWidgets {
         $locationSetUp = self::setUpLocation();
 
         if ($locationSetUp) {
-            // Build query for filtering elements first.
-            $categoriesIDs = array();
-            $excludeList = array();
-            $excludeList = apply_filters('asgarosforum_filter_get_categories', $excludeList);
-            $metaQueryFilter = self::$asgarosforum->content->get_categories_filter();
-            $categoriesList = get_terms('asgarosforum-category', array(
-                'hide_empty'    => false,
-                'exclude'       => $excludeList,
-                'meta_query'    => $metaQueryFilter
-            ));
+            $categoriesIDs = self::$asgarosforum->content->get_accessible_categories();
 
-            $categoriesList = AsgarosForumUserGroups::filterCategories($categoriesList);
+            $where = false;
 
-            foreach ($categoriesList as $category) {
-                $categoriesIDs[] = $category->term_id;
+            if (!empty($categoriesIDs)) {
+                $where = 'AND f.parent_id IN ('.implode(',', $categoriesIDs).')';
             }
-
-            $where = ($categoriesIDs) ? 'AND f.parent_id IN ('.implode(',', $categoriesIDs).')' : false;
 
             // Select the elements.
             $elements = null;

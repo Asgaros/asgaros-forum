@@ -90,24 +90,7 @@ class AsgarosForumActivity {
     }
 
     public function load_activity_data($count_all = false) {
-        // Prepare lists and filters.
-        $ids_categories = array();
-        $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
-        $meta_query_filter = $this->asgarosforum->content->get_categories_filter();
-
-        // Get accessible categories first.
-        $categories_list = get_terms('asgarosforum-category', array(
-            'hide_empty'    => false,
-            'exclude'       => $ids_categories_excluded,
-            'meta_query'    => $meta_query_filter
-        ));
-
-        // Now filter them based on usergroups.
-        $categories_list = AsgarosForumUserGroups::filterCategories($categories_list);
-
-        foreach ($categories_list as $category) {
-            $ids_categories[] = $category->term_id;
-        }
+        $ids_categories = $this->asgarosforum->content->get_accessible_categories();
 
         if (empty($ids_categories)) {
             return false;
