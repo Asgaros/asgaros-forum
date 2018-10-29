@@ -431,6 +431,16 @@ class AsgarosForumContent {
         }
     }
 
+    public function get_first_unread_post($topic_id) {
+        if (isset($this->asgarosforum->unread->excluded_items[$topic_id])) {
+            // If we have opened this topic already, we take the post with the next-higher ID.
+            return $this->asgarosforum->db->get_row("SELECT p.* FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = {$topic_id} AND p.id > {$this->asgarosforum->unread->excluded_items[$topic_id]} ORDER BY p.id ASC LIMIT 1;");
+        } else {
+            // If we havent opened it yet, we take the first post since last clearing-date.
+            return $this->asgarosforum->db->get_row("SELECT p.* FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = {$topic_id} AND p.date > '{$this->asgarosforum->unread->get_last_visit()}' ORDER BY p.id ASC LIMIT 1;");
+        }
+    }
+
     public function get_forum($forum_id) {
         return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
     }

@@ -317,6 +317,7 @@ class AsgarosForum {
                 $this->setParents($this->current_element, 'post');
             break;
             case 'markallread':
+            case 'unread':
             break;
             case 'subscriptions':
                 // Go back to the overview when this functionality is not enabled or the user is not logged-in.
@@ -483,6 +484,8 @@ class AsgarosForum {
                 $mainTitle = __('Members', 'asgaros-forum');
             } else if ($this->current_view === 'activity') {
                 $mainTitle = __('Activity', 'asgaros-forum');
+            } else if ($this->current_view === 'unread') {
+                $mainTitle = __('Unread Topics', 'asgaros-forum');
             }
         }
 
@@ -555,6 +558,9 @@ class AsgarosForum {
                     break;
                     case 'activity':
                         $this->activity->show_activity();
+                    break;
+                    case 'unread':
+                        $this->unread->show_unread_topics();
                     break;
                     default:
                         $this->overview();

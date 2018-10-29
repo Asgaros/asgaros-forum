@@ -349,16 +349,22 @@
 }
 #af-wrapper .forum,
 #af-wrapper .topic,
-#af-wrapper .member {
+#af-wrapper .member,
+#af-wrapper .unread-topic {
     display: table;
     width: 100%;
     min-height: 80px;
     border-bottom: 1px solid #eee;
     line-height: 20px;
 }
+#af-wrapper .unread-topic {
+    height: 40px;
+    min-height: 40px;
+}
 #af-wrapper .forum:last-child,
 #af-wrapper .topic:last-child,
-#af-wrapper .member:last-child {
+#af-wrapper .member:last-child,
+#af-wrapper .unread-topic:last-child {
     border-bottom-width: 0px;
 }
 #af-wrapper .topic-sticky,
@@ -379,6 +385,10 @@
 #af-wrapper .forum-status,
 #af-wrapper .topic-status {
     width: 80px;
+    text-align: center;
+}
+#af-wrapper .unread-topic .topic-status {
+    width: 48px;
     text-align: center;
 }
 #af-wrapper .forum-name,
@@ -1502,6 +1512,11 @@
     font-size: 40px;
     width: 40px;
     height: 40px;
+}
+#af-wrapper .unread-topic .topic-status:before {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
 }
 #af-wrapper .unread:before {
     color: #2D89CC;

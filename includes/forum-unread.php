@@ -5,15 +5,15 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumUnread {
     private $asgarosforum = null;
     private $user_id;
-    private $excluded_items = array();
+    public $excluded_items = array();
 
     public function __construct($object) {
         $this->asgarosforum = $object;
 
         add_action('asgarosforum_prepare', array($this, 'prepare_unread_status'));
-
         add_action('asgarosforum_prepare_markallread', array($this, 'mark_all_read'));
         add_action('asgarosforum_prepare_topic', array($this, 'mark_topic_read'));
+        add_action('asgarosforum_breadcrumbs_unread', array($this, 'add_breadcrumbs'));
     }
 
     public function prepare_unread_status() {
@@ -76,6 +76,12 @@ class AsgarosForumUnread {
                 setcookie('asgarosforum_unread_exclude', maybe_serialize($this->excluded_items), 2147483647, COOKIEPATH, COOKIE_DOMAIN);
             }
         }
+    }
+
+    public function add_breadcrumbs() {
+        $element_link = $this->asgarosforum->get_link('unread');
+        $element_title = __('Unread Topics', 'asgaros-forum');
+        $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
     public function get_last_visit() {
@@ -181,6 +187,8 @@ class AsgarosForumUnread {
             echo '<span class="indicator-label">'.__('Nothing new', 'asgaros-forum').'</span>';
             echo '<span class="dashicons-before dashicons-yes"></span>';
             echo '<span class="indicator-label"><a href="'.$this->asgarosforum->get_link('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a></span>';
+            echo '<span class="dashicons-before dashicons-backup"></span>';
+            echo '<span class="indicator-label"><a href="'.$this->asgarosforum->get_link('unread').'">'.__('Show Unread Topics', 'asgaros-forum').'</a></span>';
 
             echo '<div class="clear"></div>';
         echo '</div>';
@@ -188,11 +196,65 @@ class AsgarosForumUnread {
 
     // Renders a view with all unread topics.
     public function show_unread_topics() {
-        //
+        $pagination_rendering = $this->asgarosforum->pagination->renderPagination('unread');
+        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
+        echo $paginationRendering;
+
+        $unread_topics = $this->get_unread_topics();
+
+        echo '<div class="title-element"></div>';
+        echo '<div class="content-element">';
+
+        if (count($unread_topics) > 0) {
+            $page_elements = 50;
+            $page_start = $this->asgarosforum->current_page * $page_elements;
+            $data_sliced = array_slice($unread_topics, $page_start, $page_elements);
+
+            foreach ($data_sliced as $topic) {
+                $topic_title = esc_html(stripslashes($topic->name));
+
+                echo '<div class="unread-topic topic-normal">';
+                    echo '<div class="topic-status dashicons-before dashicons-'.$topic->status.' unread"></div>';
+                    echo '<div class="topic-name">';
+                        $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->id);
+                        $link = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
+
+                        echo '<a href="'.$link.'" title="'.$topic_title.'">'.$topic_title.'</a>';
+                    echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<div class="notice">'.__('There are no unread topics.', 'asgaros-forum').'</div>';
+        }
+
+        echo '</div>';
+
+        echo $paginationRendering;
     }
 
     // Get all unread topics.
     public function get_unread_topics() {
-        //
+        // Get accessible categories first.
+        $ids_categories = $this->asgarosforum->content->get_accessible_categories();
+
+        // Load potential unread topics.
+        $unread_topics = array();
+
+        if (!empty($ids_categories)) {
+            $ids_categories = implode(',', $ids_categories);
+
+            $unread_topics = $this->asgarosforum->db->get_results("SELECT MAX(p.id) AS max_id, t.id, t.name, t.status FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$ids_categories})) AND p.date > '{$this->get_last_visit()}' GROUP BY p.parent_id ORDER BY MAX(p.id) DESC;");
+        }
+
+        // Remove read topics from that list.
+        if (!empty($unread_topics) && !empty($this->excluded_items)) {
+            foreach ($unread_topics as $key => $topic) {
+                if (isset($this->excluded_items[$topic->id]) && $topic->max_id <= $this->excluded_items[$topic->id]) {
+                    unset($unread_topics[$key]);
+                }
+            }
+        }
+
+        return $unread_topics;
     }
 }

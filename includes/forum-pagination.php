@@ -83,6 +83,9 @@ class AsgarosForumPagination {
             $user_id = $this->asgarosforum->current_element;
             $count = $this->asgarosforum->profile->count_history_data($user_id);
             $num_pages = ceil($count / 50);
+        } else if ($location === 'unread') {
+            $count = count($this->asgarosforum->unread->get_unread_topics());
+            $num_pages = ceil($count / 50);
         }
 
         // Only show pagination when there is more than one page.

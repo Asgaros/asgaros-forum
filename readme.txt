@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: View for unread topics
 * Added: Filters for roles and usergroups in memberslist
 * Added: Notification templates
 * Added: Show usergroups in memberslist
