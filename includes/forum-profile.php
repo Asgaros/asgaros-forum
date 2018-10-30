@@ -341,7 +341,7 @@ class AsgarosForumProfile {
         if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
             return false;
         } else {
-            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID, $additional_parameters);
+            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID, $additional_parameters, '', false);
             $profileLink = apply_filters('asgarosforum_filter_profile_link', $profileLink, $userObject);
 
             return $profileLink;
