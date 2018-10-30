@@ -371,7 +371,7 @@ class AsgarosForumProfile {
                 // Get and build profile link.
                 $profileLink = $this->getProfileLink($currentUserObject);
 
-                echo '<a class="profile-link" href="'.$profileLink.'">'.__('My Profile', 'asgaros-forum').'</a>';
+                echo '<a class="profile-link" href="'.$profileLink.'">'.__('Profile', 'asgaros-forum').'</a>';
             }
         }
     }

@@ -53,7 +53,7 @@
             var quoteID = $(this).attr('data-value-id');
             var quoteContent = $('#post-quote-container-'+quoteID).html();
 
-            // At quote to the end of the editor.
+            // Add quote to the end of the editor.
             if (tinyMCE.activeEditor) {
                 tinyMCE.activeEditor.setContent(tinyMCE.activeEditor.getContent()+quoteContent);
             } else {
