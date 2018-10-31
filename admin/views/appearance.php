@@ -58,8 +58,12 @@ if (!defined('ABSPATH')) exit;
                                     <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_text_color']; ?>"></td>
                                 </tr>
                                 <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
-                                    <th><label for="custom_background_color"><?php _e('Background color:', 'asgaros-forum'); ?></label></th>
+                                    <th><label for="custom_background_color"><?php _e('Background color (First):', 'asgaros-forum'); ?></label></th>
                                     <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_background_color']; ?>"></td>
+                                </tr>
+                                <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                                    <th><label for="custom_background_color_alt"><?php _e('Background color (Second):', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_background_color_alt']); ?>" class="color-picker" name="custom_background_color_alt" id="custom_background_color_alt" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_background_color_alt']; ?>"></td>
                                 </tr>
                                 <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
                                     <th><label for="custom_border_color"><?php _e('Border color:', 'asgaros-forum'); ?></label></th>

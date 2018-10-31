@@ -99,6 +99,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Show usergroups in memberslist
 * Added: Bulk actions to assign roles
 * Added: Filter users by their role in the backend
+* Added: Option to change second background color
 * Added: asgarosforum_prepare hook
 * Added: asgarosforum_usergroup_ID_add_user hook
 * Added: asgarosforum_usergroup_ID_remove_user hook
@@ -113,6 +114,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Show username of receiver in mails
 * Minor design changes
 * Minor design changes in the administration area
+* Improvements when using custom appearance settings
 * Mobile theme improvements
 * Improve first-time installation-process
 * Performance improvements and code optimizations
