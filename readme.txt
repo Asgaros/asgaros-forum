@@ -113,6 +113,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Usergroup-tags now link to memberslist
 * Changed: Show username of receiver in mails
 * Minor design changes
+* Mobile theme improvements
 * Performance improvements and code optimizations
 = 1.10.1 =
 * Added: Forum administrator role

@@ -4,51 +4,74 @@ if (!defined('ABSPATH')) exit;
 
 $counter++;
 
+// Special CSS-class for first post-element in view.
+$first_post_element = ($counter == 1) ? 'first-post-element' : '';
 
+// Special CSS-class for highlighted posts.
 $highlightClass = '';
+
 if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
     $highlightClass = 'highlight-post';
 }
 
+// Special CSS-class for online users.
+$css_class_user_online = ($this->online->is_user_online($post->author_id)) ? 'user-online' : '';
+
 $user_data = get_userdata($post->author_id);
 
-?>
-<div class="post-element <?php echo $highlightClass; ?>" id="postid-<?php echo $post->id; ?>">
-    <div class="post-author<?php if ($this->online->is_user_online($post->author_id)) { echo ' user-online'; } ?>">
-        <?php
-        if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
-            echo '<small class="post-author-marker">'.__('Topic Author', 'asgaros-forum').'</small>';
-        }
-
+echo '<div class="post-element '.$highlightClass.' '.$first_post_element.'" id="postid-'.$post->id.'">';
+    echo '<div class="post-author '.$css_class_user_online.'">';
         if ($avatars_available) {
-            $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 100);
+            $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 120);
             echo get_avatar($post->author_id, $avatar_size);
         }
-        ?>
-        <strong><?php echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id); ?></strong>
-        <?php
 
-        // Condition for content which is only available for existing users.
+        echo '<div class="post-author-name-block">';
+
+        // Username.
+        echo '<span class="post-username">';
+        echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
+        echo '</span>';
+
+        // Mentioning name.
         if ($user_data != false) {
             $this->mentioning->render_nice_name($post->author_id);
+        }
+
+        echo '</div>';
+
+        if ($user_data != false) {
+            echo '<div class="post-author-meta-block">';
 
             // Show author posts counter if activated.
             if ($this->options['show_author_posts_counter']) {
                 $author_posts_i18n = number_format_i18n($post->author_posts);
                 echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
             }
-        }
 
-        if ($this->permissions->isBanned($post->author_id)) {
-            echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
-        }
+            // Show marker for topic-author.
+            if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
+                echo '<small class="topic-author">'.__('Topic Author', 'asgaros-forum').'</small>';
+            }
 
-        // Show usergroups of user.
-        $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id, 'all', true);
+            // Show marker for banned user.
+            if ($this->permissions->isBanned($post->author_id)) {
+                echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
+            }
 
-        if (!empty($usergroups)) {
-            foreach ($usergroups as $usergroup) {
-                echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+            echo '</div>';
+
+            // Show usergroups of user.
+            $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id, 'all', true);
+
+            if (!empty($usergroups)) {
+                echo '<div class="post-author-group-block">';
+
+                foreach ($usergroups as $usergroup) {
+                    echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+                }
+
+                echo '</div>';
             }
         }
 
