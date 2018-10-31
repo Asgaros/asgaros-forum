@@ -99,6 +99,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Show usergroups in memberslist
 * Added: Bulk actions to assign roles
 * Added: Filter users by their role in the backend
+* Added: Option to change link-color
 * Added: Option to change light text-color
 * Added: Option to change second background-color
 * Added: asgarosforum_prepare hook
