@@ -88,7 +88,6 @@ class AsgarosForum {
         'time_limit_edit_posts'             => 0,
         'show_description_in_forum'         => false,
         'require_login'                     => false,
-        'create_blog_topics'                => false,
         'create_blog_topics_id'             => 0
     );
     var $options_editor = array(
@@ -141,7 +140,7 @@ class AsgarosForum {
         add_filter('pre_get_document_title', array($this, 'change_pre_get_document_title'), 100);
 
         // Add hook when topics should get created for new blog posts.
-        if ($this->options['create_blog_topics']) {
+        if ($this->options['create_blog_topics_id'] != 0) {
             add_action('transition_post_status', array($this, 'createBlogTopic'), 10, 3);
         }
 
