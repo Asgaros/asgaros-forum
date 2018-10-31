@@ -323,7 +323,6 @@ class AsgarosForumAppearance {
 
 		if ($this->options['custom_background_color'] != $this->options_default['custom_background_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color'])) {
 			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .odd,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-message,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
@@ -337,12 +336,12 @@ class AsgarosForumAppearance {
 		if ($this->options['custom_background_color_alt'] != $this->options_default['custom_background_color_alt'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color_alt'])) {
 			$custom_css .= '#af-wrapper .content-element .forum:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .topic:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .editor-row:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .subscription:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .member:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .activity-element:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics-online-users,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-content {'.PHP_EOL;
@@ -351,6 +350,7 @@ class AsgarosForumAppearance {
 		}
 
 		if ($this->options['custom_border_color'] != $this->options_default['custom_border_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_border_color'])) {
+			$custom_css .= '#af-wrapper input,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .member,'.PHP_EOL;
@@ -359,6 +359,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .member-last-seen,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .subscription,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-post-header,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics-body,'.PHP_EOL;

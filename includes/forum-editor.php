@@ -153,7 +153,7 @@ class AsgarosForumEditor {
 			?>
             <form id="forum-editor-form" tabindex="-1" name="addform" method="post" action="<?php echo $actionURL; ?>" enctype="multipart/form-data"<?php if ($inOtherView && !isset($_POST['subject']) && !isset($_POST['message'])) { echo ' style="display: none;"'; } ?>>
                 <div class="title-element"><?php if ($inOtherView) { echo $editorTitle; } ?></div>
-                <div class="content-element">
+                <div class="editor-element">
                     <?php if ($editorView === 'addtopic' || ($editorView == 'editpost' && $this->asgarosforum->is_first_post($post->id))) { ?>
                         <div class="editor-row-subject">
                             <label for="subject"><?php _e('Subject:', 'asgaros-forum'); ?></label>

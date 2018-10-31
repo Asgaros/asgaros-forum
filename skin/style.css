@@ -77,7 +77,6 @@
 }
 #af-wrapper .content-element .forum:nth-child(even),
 #af-wrapper .content-element .topic:nth-child(even),
-#af-wrapper .content-element .editor-row:nth-child(even),
 #af-wrapper .content-element .subscription:nth-child(even),
 #af-wrapper .content-element .member:nth-child(even),
 #af-wrapper .content-element .activity-element:nth-child(even) {
@@ -115,10 +114,20 @@
     vertical-align: middle;
 }
 
+/* TinyMCE Adjustments */
+#af-wrapper .wp-editor-container {
+    border: none;
+}
+#af-wrapper .mce-top-part::before {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 /* INPUT ELEMENTS */
 #af-wrapper input {
     padding: 3px 6px;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
     color: #444;
     margin: 0;
     vertical-align: middle;
@@ -266,9 +275,9 @@
     font-size: 18px;
     margin: 1px 0 !important;
     box-sizing: border-box;
-    box-shadow: inset 0px 1px 4px #e0e0e0;
-    -moz-box-shadow: inset 0px 1px 4px #e0e0e0;
-    -webkit-box-shadow: inset 0px 1px 4px #e0e0e0;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 #af-wrapper .editor-row .row-title {
     display: block;
@@ -782,12 +791,16 @@
 }
 
 /* CONTENT WRAPPERS*/
-#af-wrapper .content-element {
+#af-wrapper .content-element,
+#af-wrapper .editor-element {
     margin-bottom: 15px;
     background-color: #fff;
     border-color: #eee;
     border-style: solid;
     border-width: 0px 1px 2px;
+}
+#af-wrapper .editor-element {
+    background-color: #fafafa;
 }
 #af-wrapper .content-element a:hover,
 #af-wrapper .post-element a:hover {
