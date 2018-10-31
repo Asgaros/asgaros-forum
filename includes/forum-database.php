@@ -14,7 +14,7 @@ class AsgarosForumDatabase {
         register_activation_hook(__FILE__, array($this, 'activatePlugin'));
         add_action('wpmu_new_blog', array($this, 'buildSubsite'), 10, 6);
         add_filter('wpmu_drop_tables', array($this, 'deleteSubsite'));
-        add_action('plugins_loaded', array($this, 'buildDatabase'));
+        add_action('wp_loaded', array($this, 'buildDatabase'));
 	}
 
     private function setTables() {
@@ -82,6 +82,22 @@ class AsgarosForumDatabase {
     }
 
     public function buildDatabase() {
+        // Ensure that we only run the installation/update logic when we are in the administration-area ...
+        if (!is_admin()) {
+            return;
+        }
+
+        // ... and that the current request is no AJAX request ...
+        if (wp_doing_ajax()) {
+            return;
+        }
+
+        // ... and that the current user is an administrator.
+        if (!current_user_can('activate_plugins')) {
+            return;
+        }
+
+        // Start the installation/update logic.
         global $asgarosforum;
 
         $database_version_installed = get_option('asgarosforum_db_version');
@@ -148,6 +164,28 @@ class AsgarosForumDatabase {
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 
             dbDelta($sql);
+
+            // First time installation instructions.
+            if ($database_version_installed == false) {
+                // Try to create a new page for the forum.
+                $page_id = wp_insert_post(
+                    array(
+                        'post_content'      => '[forum]',
+                        'post_title'        => 'Community',
+                        'post_status'       => 'publish',
+                        'post_type'         => 'page',
+                        'comment_status'    => 'closed',
+                        'ping_status'       => 'closed'
+                    )
+                );
+
+                // If the page could get created, save it in the forum-options.
+                if ($page_id && !is_wp_error($page_id)) {
+                    $asgarosforum->loadOptions();
+                    $asgarosforum->options['location'] = $page_id;
+                    $asgarosforum->saveOptions($asgarosforum->options);
+                }
+            }
 
             if ($database_version_installed < 5) {
                 // Because most of the WordPress users are using a MySQL version below 5.6,

@@ -15,9 +15,8 @@ Asgaros Forum is the best forum solution for WordPress! It comes with dozens of 
 Asgaros Forum is the perfect WordPress plugin if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and integrates perfectly into WordPress.
 
 = Installation =
-* Create a new page for your forum to display on
-* Add the shortcode [forum] to this page
-* Add the page to your menu so you can access your forum
+* A new page for your forum gets automatically created during the installation-process.
+* Add this page to your menu so your users can access your forum within your website.
 * Thats all!
 
 = Demo, Support & Documentation =
@@ -114,6 +113,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Show username of receiver in mails
 * Minor design changes
 * Mobile theme improvements
+* Improve first-time installation-process
 * Performance improvements and code optimizations
 = 1.10.1 =
 * Added: Forum administrator role
