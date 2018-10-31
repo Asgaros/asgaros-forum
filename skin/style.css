@@ -146,10 +146,10 @@
     display: inline-block;
     text-decoration: none;
     font-size: 13px;
-    line-height: 26px;
-    height: 28px;
+    line-height: 29px;
+    height: 30px;
     margin: 0;
-    padding: 0 8px 1px !important; /* comp */
+    padding: 0 12px !important; /* comp */
     cursor: pointer;
     -webkit-appearance: none;
     border-radius: 0;
@@ -353,13 +353,12 @@
 #af-wrapper .unread-topic {
     display: table;
     width: 100%;
-    min-height: 80px;
+    height: 80px;
     border-bottom: 1px solid #eee;
     line-height: 20px;
 }
 #af-wrapper .unread-topic {
     height: 40px;
-    min-height: 40px;
 }
 #af-wrapper .forum:last-child,
 #af-wrapper .topic:last-child,
@@ -456,8 +455,8 @@
     width: auto;
 }
 #af-wrapper .forum-menu a:before {
-    line-height: 26px;
-    height: 28px;
+    line-height: 29px;
+    height: 30px;
     font-size: 16px;
 }
 
@@ -501,6 +500,9 @@
     height: 24px;
     width: 24px;
     line-height: 24px;
+}
+#af-wrapper #read-unread span.dashicons-backup:before {
+    font-size: 16px;
 }
 #af-wrapper #read-unread .indicator {
     height: 12px;
@@ -567,10 +569,9 @@
 /* TITLE */
 #af-wrapper .title-element {
     display: block;
-    box-sizing: border-box;
-    padding: 0px 0px 0px 16px;
+    padding: 0px 0px 0px 20px;
     height: 32px;
-    line-height: 31px;
+    line-height: 32px;
     color: #fff;
     background-color: #2d89cc;
     border-bottom: 1px solid #2468af;
@@ -580,9 +581,9 @@
     border-bottom: 1px solid #767676;
 }
 #af-wrapper .title-element:before {
-    height: 31px;
-    width: 31px;
-    line-height: 31px;
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
     padding-right: 5px;
 }
 
@@ -592,28 +593,30 @@
     margin: 0;
     padding: 0;
     background-color: #2d89cc;
+    min-height: 48px;
     border-bottom: 1px solid #2468af;
 }
 #af-wrapper #forum-navigation,
 #af-wrapper #forum-navigation-mobile {
     display: block;
     float: left;
-    line-height: 44px;
+    line-height: 48px;
+    min-height: 48px;
     text-align: left; /* comp */
 }
 #af-wrapper #forum-navigation a,
 #af-wrapper #forum-navigation-mobile a {
-    padding: 0 20px;
+    padding: 0 24px;
     color: #fff !important;
     border-left: 1px solid #2468af;
-    line-height: 44px;
+    line-height: 48px;
 }
 #af-wrapper #forum-navigation a:first-child,
 #af-wrapper #forum-navigation-mobile a:first-child {
     border-left: none;
 }
 #af-wrapper #forum-navigation-mobile a:before {
-    line-height: 44px;
+    line-height: 48px;
     padding-right: 5px;
 }
 #af-wrapper #forum-navigation-mobile {
@@ -703,17 +706,17 @@
     font-size: 11px;
     padding: 0 8px;
     margin: 0; /* comp */
-    color: #666;
+    color: #888;
 }
 #af-wrapper #forum-breadcrumbs a,
 #af-wrapper #forum-breadcrumbs span {
     display: inline-block;
 }
 #af-wrapper #forum-breadcrumbs .dashicons-before {
-    padding: 0 5px 0 5px;
+    padding: 0;
 }
 #af-wrapper #forum-breadcrumbs a {
-    color: #666 !important;
+    color: #888 !important;
     background: none; /* comp */
     border: none; /* comp */
     padding: 0; /* comp */
@@ -723,15 +726,12 @@
 }
 #af-wrapper #forum-breadcrumbs span::before {
     line-height: 26px;
-    width: 18px;
-    height: 18px;
+    width: 28px;
+    height: 26px;
     font-size: 18px;
 }
 #af-wrapper #forum-breadcrumbs .separator:last-child {
     display: none;
-}
-#af-wrapper #forum-breadcrumbs .dashicons-admin-home {
-    padding: 0 8px 0 0;
 }
 
 /* SEARCH */
@@ -741,10 +741,10 @@
     box-sizing: border-box;
     background-color: #fff;
     color: #444;
-    line-height: 39px;
+    line-height: 43px;
     border: 3px solid #2d89cc;
     border-bottom-width: 2px;
-    height: 44px;
+    height: 48px;
     cursor: text;
 }
 #af-wrapper #forum-search form {
@@ -758,7 +758,7 @@
     background-color: inherit;
     width: 190px;
     height: initial; /* comp */
-    font-size: 12px;
+    font-size: 13px;
     line-height: normal;
     display: initial; /* comp */
     outline: none;
@@ -775,9 +775,9 @@
 }
 #af-wrapper #forum-search:before {
     padding: 0;
-    line-height: 39px;
+    line-height: 43px;
     width: 35px;
-    height: 39px;
+    height: 43px;
     font-size: 18px;
 }
 @media screen and (max-width: 782px) {
@@ -803,9 +803,9 @@
 #af-wrapper img.avatar {
     float: none;
     margin: 0;
-    border-radius: initial;
-    border: 1px solid #fff;
-    outline: 1px solid #ccc;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    outline: none;
     background-color: #fff;
     display: initial; /* comp */
 }
@@ -1150,7 +1150,7 @@
 /* USER ONLINE */
 #af-wrapper .user-online .avatar {
     box-shadow: 0px 0px 5px #82f338;
-    outline: 1px solid #82f338;
+    border: 1px solid #82f338;
 }
 
 /* PROFILE */
