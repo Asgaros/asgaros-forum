@@ -58,6 +58,10 @@ if (!defined('ABSPATH')) exit;
                                     <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_text_color']); ?>" class="color-picker" name="custom_text_color" id="custom_text_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_text_color']; ?>"></td>
                                 </tr>
                                 <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                                    <th><label for="custom_text_color_light"><?php _e('Text color light:', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_text_color_light']); ?>" class="color-picker" name="custom_text_color_light" id="custom_text_color_light" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_text_color_light']; ?>"></td>
+                                </tr>
+                                <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
                                     <th><label for="custom_background_color"><?php _e('Background color (First):', 'asgaros-forum'); ?></label></th>
                                     <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_background_color']); ?>" class="color-picker" name="custom_background_color" id="custom_background_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_background_color']; ?>"></td>
                                 </tr>

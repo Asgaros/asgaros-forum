@@ -67,7 +67,7 @@
 }
 #af-wrapper .main-title:before {
     line-height: 40px;
-    color: #aaa;
+    color: #888;
     height: 40px;
     padding-right: 4px;
 }
@@ -275,7 +275,7 @@
     font-size: 18px !important;
     margin: 2px 0 8px 0;
 }
-#af-wrapper .editor-row-uploads .upload-filetypes {
+#af-wrapper .editor-row-uploads .upload-hints {
     display: block;
     padding: 5px 0;
     color: #888;
@@ -817,7 +817,7 @@
 #af-wrapper .forum-post-date {
     float: left;
     font-style: italic;
-    color: #777;
+    color: #888;
     font-size: 11px;
     padding: 0 3px;
 }
@@ -942,7 +942,7 @@
     display: block;
     font-style: italic;
     font-size: 11px;
-    color: #999;
+    color: #888;
     text-align: right;
     padding: 10px 20px;
     position: absolute;
@@ -959,7 +959,7 @@
     }
 }
 #af-wrapper .post-footer a {
-    color: #999;
+    color: #888;
 }
 #af-wrapper .post-meta {
     position: static; /* comp */

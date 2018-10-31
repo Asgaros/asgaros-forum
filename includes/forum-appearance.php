@@ -16,6 +16,7 @@ class AsgarosForumAppearance {
 		'custom_color'              	=> '#2d89cc',
 		'custom_accent_color'			=> '#2468af',
         'custom_text_color'         	=> '#444444',
+		'custom_text_color_light'       => '#888888',
         'custom_background_color'		=> '#ffffff',
 		'custom_background_color_alt'	=> '#fafafa',
         'custom_border_color'       	=> '#eeeeee',
@@ -285,12 +286,32 @@ class AsgarosForumAppearance {
 
 		if ($this->options['custom_text_color'] != $this->options_default['custom_text_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_text_color'])) {
 			$custom_css .= '#af-wrapper,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-breadcrumbs a:hover,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .main-title {'.PHP_EOL;
 			    $custom_css .= 'color: '.$this->options['custom_text_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
 
 			$custom_css .= '#af-wrapper #read-unread .read {'.PHP_EOL;
 				$custom_css .= 'background-color: '.$this->options['custom_text_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_text_color_light'] != $this->options_default['custom_text_color_light'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_text_color_light'])) {
+			$custom_css .= '#af-wrapper .main-title:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .editor-row-uploads .upload-hints,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-stats,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-stats,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .subscription-option-description,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #forum-breadcrumbs a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-post-date,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-footer,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-footer a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
+			$custom_css .= '#af-wrapper span.mention-nice-name,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .activity-element:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .activity-time {'.PHP_EOL;
+			    $custom_css .= 'color: '.$this->options['custom_text_color_light'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
 		}
 
