@@ -4,23 +4,10 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumReports {
     private $asgarosforum = null;
-    private $reports = array();
+    private $current_user_reports = false;
 
     public function __construct($object) {
         $this->asgarosforum = $object;
-
-        add_action('init', array($this, 'initialize'));
-    }
-
-    public function initialize() {
-        if ($this->asgarosforum->options['reports_enabled']) {
-            // Load reports of the current user.
-            if (is_user_logged_in()) {
-                $reporter_id = get_current_user_id();
-
-                $this->reports[$reporter_id] = $this->get_reports_of_user($reporter_id);
-            }
-        }
     }
 
     public function render_report_button($post_id, $topic_id) {
@@ -57,8 +44,8 @@ class AsgarosForumReports {
                     // Send notification to site owner about new report.
                     $this->send_notification($post_id, $reporter_id);
 
-                    // Add the value also to the reports-array.
-                    $this->reports[$reporter_id][] = $post_id;
+                    // Add the value also to the reports array.
+                    $this->current_user_reports[] = $post_id;
                 }
             }
         }
@@ -93,12 +80,10 @@ class AsgarosForumReports {
     }
 
     public function report_exists($post_id, $reporter_id) {
-        // Load records of user first when they are not loaded yet.
-        if (!isset($this->reports[$reporter_id])) {
-            $this->reports[$reporter_id] = $this->get_reports_of_user($reporter_id);
-        }
+        // Load records of user first.
+        $user_reports = $this->get_reports_of_user($reporter_id);
 
-        if (in_array($post_id, $this->reports[$reporter_id])) {
+        if (in_array($post_id, $user_reports)) {
             return true;
         }
 
@@ -106,7 +91,11 @@ class AsgarosForumReports {
     }
 
     public function get_reports_of_user($reporter_id) {
-        return $this->asgarosforum->db->get_col($this->asgarosforum->db->prepare('SELECT post_id FROM '.$this->asgarosforum->tables->reports.' WHERE reporter_id = %d', $reporter_id));
+        if ($this->current_user_reports === false) {
+            $this->current_user_reports = $this->asgarosforum->db->get_col($this->asgarosforum->db->prepare('SELECT post_id FROM '.$this->asgarosforum->tables->reports.' WHERE reporter_id = %d', $reporter_id));
+        }
+
+        return $this->current_user_reports;
     }
 
     // Returns all reported posts with an array of reporting users.
