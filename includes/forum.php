@@ -643,8 +643,7 @@ class AsgarosForum {
                     echo '</a>';
                 }
 
-                $topic_pagination = new AsgarosForumPagination($this);
-                $topic_pagination->renderTopicOverviewPagination($topic_object->id);
+                $this->pagination->renderTopicOverviewPagination($topic_object->id, ($topic_object->answers + 1));
 
                 echo '</small>';
 

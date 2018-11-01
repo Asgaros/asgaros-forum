@@ -9,9 +9,8 @@ class AsgarosForumPagination {
         $this->asgarosforum = $object;
     }
 
-    public function renderTopicOverviewPagination($topicID) {
-        $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = %d;", $topicID));
-        $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
+    public function renderTopicOverviewPagination($topic_id, $topic_counter) {
+        $num_pages = ceil($topic_counter / $this->asgarosforum->options['posts_per_page']);
 
         // Only show pagination when there is more than one page.
         if ($num_pages > 1) {
@@ -19,23 +18,25 @@ class AsgarosForumPagination {
 
             if ($num_pages <= 5) {
                 for ($i = 1; $i <= $num_pages; $i++) {
-                    $link = $this->asgarosforum->get_link('topic', $topicID, array('part' => $i));
-
-                    echo '<a href="'.$link.'">'.number_format_i18n($i).'</a>';
+                    echo $this->page_link('topic', $topic_id, $i);
                 }
             } else {
                 for ($i = 1; $i <= 3; $i++) {
-                    $link = $this->asgarosforum->get_link('topic', $topicID, array('part' => $i));
-
-                    echo '<a href="'.$link.'">'.number_format_i18n($i).'</a>';
+                    echo $this->page_link('topic', $topic_id, $i);
                 }
 
-                $link = $this->asgarosforum->get_link('topic', $topicID, array('part' => $num_pages));
+                $link = $this->asgarosforum->get_link('topic', $topic_id, array('part' => $num_pages));
                 echo '&raquo;<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
             }
 
             echo '</div>';
         }
+    }
+
+    public function page_link($location, $id, $page) {
+        $link = $this->asgarosforum->get_link($location, $id, array('part' => $page));
+
+        return '<a href="'.$link.'">'.number_format_i18n($page).'</a>';
     }
 
     public function renderPagination($location, $sourceID = false) {
