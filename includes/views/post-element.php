@@ -5,84 +5,77 @@ if (!defined('ABSPATH')) exit;
 $counter++;
 
 // Special CSS-class for first post-element in view.
-$first_post_element = ($counter == 1) ? 'first-post-element' : '';
+$first_post_class = ($counter == 1) ? 'first-post' : '';
 
 // Special CSS-class for highlighted posts.
-$highlightClass = '';
+$highlight_class = '';
 
 if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
-    $highlightClass = 'highlight-post';
+    $highlight_class = 'highlight-post';
 }
 
 // Special CSS-class for online users.
-$css_class_user_online = ($this->online->is_user_online($post->author_id)) ? 'user-online' : '';
+$user_online_class = ($this->online->is_user_online($post->author_id)) ? 'user-online' : '';
 
 $user_data = get_userdata($post->author_id);
 
-echo '<div class="post-element '.$highlightClass.' '.$first_post_element.'" id="postid-'.$post->id.'">';
-    echo '<div class="post-author '.$css_class_user_online.'">';
+echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="postid-'.$post->id.'">';
+    echo '<div class="post-author '.$user_online_class.'">';
+        // Show avatar if activated.
         if ($avatars_available) {
             $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 120);
             echo get_avatar($post->author_id, $avatar_size);
         }
 
-        echo '<div class="post-author-name-block">';
+        echo '<div class="post-author-block-name">';
+            // Show username.
+            $username = apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
+            echo '<span class="post-username">'.$username.'</span>';
 
-        // Username.
-        echo '<span class="post-username">';
-        echo apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
-        echo '</span>';
-
-        // Mentioning name.
-        if ($user_data != false) {
-            $this->mentioning->render_nice_name($post->author_id);
-        }
-
+            // Mentioning name.
+            if ($user_data != false) {
+                $this->mentioning->render_nice_name($post->author_id);
+            }
         echo '</div>';
 
         if ($user_data != false) {
-            echo '<div class="post-author-meta-block">';
-
+            echo '<div class="post-author-block-meta">';
             // Show author posts counter if activated.
-            if ($this->options['show_author_posts_counter']) {
-                $author_posts_i18n = number_format_i18n($post->author_posts);
-                echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
-            }
+                if ($this->options['show_author_posts_counter']) {
+                    $author_posts_i18n = number_format_i18n($post->author_posts);
+                    echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
+                }
 
-            // Show marker for topic-author.
-            if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
-                echo '<small class="topic-author">'.__('Topic Author', 'asgaros-forum').'</small>';
-            }
+                // Show marker for topic-author.
+                if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
+                    echo '<small class="topic-author">'.__('Topic Author', 'asgaros-forum').'</small>';
+                }
 
-            // Show marker for banned user.
-            if ($this->permissions->isBanned($post->author_id)) {
-                echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
-            }
-
+                // Show marker for banned user.
+                if ($this->permissions->isBanned($post->author_id)) {
+                    echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
+                }
             echo '</div>';
 
-            // Show usergroups of user.
+            // Show groups of user.
             $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id, 'all', true);
 
             if (!empty($usergroups)) {
-                echo '<div class="post-author-group-block">';
-
-                foreach ($usergroups as $usergroup) {
-                    echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
-                }
-
+                echo '<div class="post-author-block-group">';
+                    foreach ($usergroups as $usergroup) {
+                        echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+                    }
                 echo '</div>';
             }
         }
 
         do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
-        ?>
-        <div class="clear"></div>
-    </div>
-    <div class="post-wrapper">
-        <div class="post-message">
-            <?php
 
+        echo '<div class="clear"></div>';
+    echo '</div>';
+
+    echo '<div class="post-wrapper">';
+        echo '<div class="post-message">';
             echo '<div class="forum-post-header">';
             echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
 

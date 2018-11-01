@@ -859,15 +859,17 @@
 #af-wrapper .forum-post-menu a.dashicons-trash:hover {
     color: red;
 }
+
+/* POST ELEMENT */
 #af-wrapper .post-element {
     display: table;
     width: 100%;
-    margin: 0; /* comp */
-    margin-bottom: 8px;
-    padding: 0; /* comp */
+    padding: 0px; /* comp */
+    margin: 0px 0px 8px 0px; /* comp */
     table-layout: fixed; /* IE */
-    border: 1px solid #eee;
-    border-bottom-width: 2px;
+    border-width: 1px 1px 2px 1px;
+    border-style: solid;
+    border-color: #eee;
     box-sizing: border-box;
     background-color: #fafafa;
 }
@@ -875,9 +877,11 @@
 #af-wrapper .post-element:after {
     content: none; /* comp */
 }
-#af-wrapper .first-post-element {
+#af-wrapper .first-post {
     border-top-width:  0px;
 }
+
+/* POST AUTHOR AREA */
 #af-wrapper .post-author {
     display: table-cell;
     text-align: center;
@@ -895,17 +899,17 @@
         min-height: 60px;
     }
 }
-#af-wrapper .post-author .post-author-name-block,
-#af-wrapper .post-author .post-author-meta-block,
-#af-wrapper .post-author .post-author-group-block {
+#af-wrapper .post-author .post-author-block-name,
+#af-wrapper .post-author .post-author-block-meta,
+#af-wrapper .post-author .post-author-block-group {
     padding-bottom: 8px;
 }
 @media screen and (max-width: 782px) {
-    #af-wrapper .post-author .post-author-name-block {
+    #af-wrapper .post-author .post-author-block-name {
         padding: 0px 45px;
     }
-    #af-wrapper .post-author .post-author-meta-block,
-    #af-wrapper .post-author .post-author-group-block {
+    #af-wrapper .post-author .post-author-block-meta,
+    #af-wrapper .post-author .post-author-block-group {
         display: none;
     }
 }
