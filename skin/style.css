@@ -70,6 +70,14 @@
     color: #888;
     height: 40px;
     padding-right: 4px;
+    margin: 0; /* comp */
+    display: inline; /* comp */
+    content: none; /* comp */
+    width: auto; /* comp */
+    background: none; /* comp */
+}
+#af-wrapper h1.dashicons-lock:before {
+    content: "\f160"; /* comp */
 }
 #af-wrapper .main-description {
     display: block;
@@ -815,6 +823,8 @@
     outline: none;
     background-color: #fff;
     display: initial; /* comp */
+    height: initial; /* comp */
+    width: initial; /* comp */
 }
 
 /* POST ELEMENT */
