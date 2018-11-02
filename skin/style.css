@@ -751,7 +751,7 @@
     cursor: text;
 }
 #af-wrapper #forum-search form {
-    display: initial;
+    display: inline;
 }
 #af-wrapper #forum-search input {
     vertical-align: inherit;

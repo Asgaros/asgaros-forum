@@ -70,8 +70,6 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
         }
 
         do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
-
-        echo '<div class="clear"></div>';
     echo '</div>';
 
     echo '<div class="post-wrapper">';
@@ -82,8 +80,6 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
             if ($this->current_view != 'post') {
                 echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
             }
-
-            echo '<div class="clear"></div>';
         echo '</div>';
 
         // Post message.
@@ -140,7 +136,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
                 }
             echo '</div>';
         echo '</div>';
-        
+
         // Show signature.
         if ($this->current_view != 'post' && $this->options['allow_signatures']) {
             // Load signature.
