@@ -1025,11 +1025,8 @@
     font-size: inherit; /* comp */
 }
 @media screen and (max-width: 440px) {
-    #af-wrapper .post-footer .post-reactions,
-    #af-wrapper .post-footer .post-meta {
-        display: block;
-        width: 100%;
-        text-align: center;
+    #af-wrapper .post-footer .post-edit-date {
+        display: none;
     }
 }
 

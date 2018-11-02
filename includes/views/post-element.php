@@ -116,6 +116,8 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
 
             echo '<div class="post-meta">';
                 if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
+                    echo '<span class="post-edit-date">';
+
                     // Show who edited a post (when the information exist in the database).
                     if ($post->author_edit) {
                         echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
@@ -126,6 +128,8 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
                     if ($this->current_view != 'post') {
                         echo '&nbsp;&middot;&nbsp;';
                     }
+
+                    echo '</span>';
                 }
 
                 if ($this->current_view != 'post') {
