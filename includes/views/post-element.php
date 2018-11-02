@@ -76,14 +76,15 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
 
     echo '<div class="post-wrapper">';
         echo '<div class="post-message">';
+            // Post header.
             echo '<div class="forum-post-header">';
-            echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
+                echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
 
-            if ($this->current_view != 'post') {
-                echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
-            }
+                if ($this->current_view != 'post') {
+                    echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
+                }
 
-            echo '<div class="clear"></div>';
+                echo '<div class="clear"></div>';
             echo '</div>';
 
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br></div>';
