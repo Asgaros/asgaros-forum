@@ -819,6 +819,10 @@
 
 /* POST ELEMENT */
 #af-wrapper .post-element {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     width: 100%;
     padding: 0px; /* comp */
@@ -897,7 +901,15 @@
 
 /* POST WRAPPER */
 #af-wrapper .post-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     flex-direction: column;
     vertical-align: top;
@@ -970,6 +982,10 @@
 
 /* POST MESSAGE */
 #af-wrapper .post-message {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     width: 100%;
     min-height: 150px;
@@ -1036,9 +1052,10 @@
     font-size: inherit;
     padding: 8px 10px 0;
     margin: 10px 0;
-    background: rgba(0, 0, 0, 0.025);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-left: 4px solid rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 4px solid rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
     cursor: pointer;
     outline: none; /* comp */
     color: inherit; /* comp */
@@ -1406,6 +1423,10 @@
 }
 #af-wrapper #roles-filter,
 #af-wrapper #usergroups-filter {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     line-height: 30px;
 }
@@ -1419,6 +1440,10 @@
     padding-right: 8px;
 }
 #af-wrapper .filter-options {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
     flex: 1;
 }
 @media screen and (max-width: 782px) {
