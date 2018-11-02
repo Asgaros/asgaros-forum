@@ -982,11 +982,11 @@
 
 /* POST MESSAGE */
 #af-wrapper .post-message {
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+    -webkit-box-flex: 1 auto;
+    -moz-box-flex: 1 auto;
+    -webkit-flex: 1 auto;
+    -ms-flex: 1 auto;
+    flex: 1 auto;
     width: 100%;
     min-height: 150px;
     box-sizing: border-box;
