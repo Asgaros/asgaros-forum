@@ -1427,10 +1427,10 @@
     display: flex;
     line-height: 30px;
 }
-#af-wrapper #roles-filter {
-    padding-bottom: 4px;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 4px;
+#af-wrapper #usergroups-filter {
+    padding-top: 4px;
+    border-top: 1px solid #eee;
+    margin-top: 4px;
 }
 #af-wrapper .filter-name {
     width: auto;
