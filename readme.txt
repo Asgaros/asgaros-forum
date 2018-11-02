@@ -109,6 +109,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Broken banning-functionality in frontend when using plain URL-structure
 * Fixed: Various problems when applying custom appearance-modifications
 * Fixed: Hidden filters for usergroups in backend user-overview when there were many usergroups
+* Fixed: Display issues with short posts
 * Fixed: Display issues with some themes
 * Changed: Dont group posts in "Recent Forum Posts" widget by topic
 * Changed: Show IDs of usergroups in the backend

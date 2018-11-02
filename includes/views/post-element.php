@@ -75,18 +75,19 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
     echo '</div>';
 
     echo '<div class="post-wrapper">';
+        // Post header.
+        echo '<div class="forum-post-header">';
+            echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
+
+            if ($this->current_view != 'post') {
+                echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
+            }
+
+            echo '<div class="clear"></div>';
+        echo '</div>';
+
+        // Post message.
         echo '<div class="post-message">';
-            // Post header.
-            echo '<div class="forum-post-header">';
-                echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
-
-                if ($this->current_view != 'post') {
-                    echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
-                }
-
-                echo '<div class="clear"></div>';
-            echo '</div>';
-
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br></div>';
             global $wp_embed;
             $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
@@ -111,37 +112,35 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
             $this->uploads->show_uploaded_files($post);
 
             do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
+        echo '</div>';
 
-            // Show post footer.
-            echo '<div class="post-footer">';
-                $this->reactions->render_reactions_area($post->id, $this->current_topic);
+        // Show post footer.
+        echo '<div class="post-footer">';
+            $this->reactions->render_reactions_area($post->id, $this->current_topic);
 
-                echo '<div class="post-meta">';
-                    if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
-                        // Show who edited a post (when the information exist in the database).
-                        if ($post->author_edit) {
-                            echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
-                        } else {
-                            echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
-                        }
-
-                        if ($this->current_view != 'post') {
-                            echo '&nbsp;&middot;&nbsp;';
-                        }
+            echo '<div class="post-meta">';
+                if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
+                    // Show who edited a post (when the information exist in the database).
+                    if ($post->author_edit) {
+                        echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                    } else {
+                        echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
                     }
 
                     if ($this->current_view != 'post') {
-                        // Show report button.
-                        $this->reports->render_report_button($post->id, $this->current_topic);
-
-                        echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+                        echo '&nbsp;&middot;&nbsp;';
                     }
-                echo '</div>';
-            echo '</div>';
-            ?>
-        </div>
+                }
 
-        <?php
+                if ($this->current_view != 'post') {
+                    // Show report button.
+                    $this->reports->render_report_button($post->id, $this->current_topic);
+
+                    echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+                }
+            echo '</div>';
+        echo '</div>';
+        
         // Show signature.
         if ($this->current_view != 'post' && $this->options['allow_signatures']) {
             // Load signature.

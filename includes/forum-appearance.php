@@ -324,7 +324,7 @@ class AsgarosForumAppearance {
 		if ($this->options['custom_background_color'] != $this->options_default['custom_background_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color'])) {
 			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .post-message,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-header .background-contrast,'.PHP_EOL;
@@ -370,7 +370,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .sticky-bottom,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .post-message,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-subforums,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .uploaded-file img,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .subscription-option,'.PHP_EOL;
