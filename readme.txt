@@ -3,7 +3,7 @@ Contributors: Asgaros
 Donate link: https://www.paypal.me/asgaros
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.7
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.2
 Stable tag: 1.10.1
 License: GPLv2 or later
@@ -121,6 +121,7 @@ You can find a list of available hooks and filters on this site:
 * Mobile theme improvements
 * Improve first-time installation-process
 * Performance improvements and code optimizations
+* Compatibility with WordPress 5.0
 = 1.10.1 =
 * Added: Forum administrator role
 * Added: Show forum role in backend user overview
