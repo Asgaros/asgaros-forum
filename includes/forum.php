@@ -1136,12 +1136,9 @@ class AsgarosForum {
                 // Delete uploads and reports.
                 $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
                 foreach ($posts as $post) {
-                    $this->uploads->delete_post_files($post);
-                    $this->reports->remove_report($post);
-                    $this->reactions->remove_all_reactions($post);
+                    $this->remove_post($post);
                 }
 
-                $this->db->delete($this->tables->posts, array('parent_id' => $topic_id), array('%d'));
                 $this->db->delete($this->tables->topics, array('id' => $topic_id), array('%d'));
                 $this->notifications->remove_all_topic_subscriptions($topic_id);
 
@@ -1168,10 +1165,10 @@ class AsgarosForum {
     function remove_post($post_id) {
         if ($this->permissions->isModerator('current') && $this->content->post_exists($post_id)) {
             do_action('asgarosforum_before_delete_post', $post_id);
-            $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             $this->uploads->delete_post_files($post_id);
             $this->reports->remove_report($post_id);
             $this->reactions->remove_all_reactions($post_id);
+            $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             do_action('asgarosforum_after_delete_post', $post_id);
         }
     }
