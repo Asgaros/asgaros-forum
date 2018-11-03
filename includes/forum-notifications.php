@@ -175,10 +175,10 @@ class AsgarosForumNotifications {
     }
 
     // TODO: This function generates tons of queries (especially the filtering). We need some improvements.
-    public function notify_about_new_post($answer_text, $answer_link, $answer_author) {
+    public function notify_about_new_post($answer_name, $answer_text, $answer_link, $answer_author) {
         // Check if this functionality is enabled
         if ($this->asgarosforum->options['allow_subscriptions']) {
-            $topic_name = esc_html(stripslashes($this->asgarosforum->current_topic_name));
+            $topic_name = esc_html(stripslashes($answer_name));
             $author_name = $this->asgarosforum->getUsername($answer_author);
 
             // Prepare subject.

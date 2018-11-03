@@ -121,6 +121,11 @@ class AsgarosForumContent {
             return false;
         }
 
+        // Ensure we have a subject.
+        if (empty($this->data_subject)) {
+            $this->data_subject = $this->get_topic_title($this->asgarosforum->current_topic);
+        }
+
         // Cancel if content is empty.
         if (empty($this->data_content)) {
             $this->asgarosforum->info = __('You must enter a message.', 'asgaros-forum');
@@ -178,7 +183,7 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($this->asgarosforum->get_postlink($this->asgarosforum->current_topic, $this->asgarosforum->current_post));
 
             // Send notification about new post.
-            $this->asgarosforum->notifications->notify_about_new_post($this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
+            $this->asgarosforum->notifications->notify_about_new_post($this->data_subject, $this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
         } else if ($this->get_action() === 'edit_post') {
             $date = $this->asgarosforum->current_time();
             $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
@@ -443,6 +448,10 @@ class AsgarosForumContent {
 
     public function get_forum($forum_id) {
         return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
+    }
+
+    public function get_topic_title($topic_id) {
+        return $this->db->get_var($this->db->prepare("SELECT name FROM {$this->tables->topics} WHERE id = %d;", $topic_id));
     }
 }
 
