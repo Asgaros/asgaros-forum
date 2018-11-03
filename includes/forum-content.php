@@ -451,7 +451,7 @@ class AsgarosForumContent {
     }
 
     public function get_topic_title($topic_id) {
-        return $this->asgarosforum->db->get_var("SELECT name FROM {$this->tables->topics} WHERE id = {$topic_id};");
+        return $this->asgarosforum->db->get_var("SELECT name FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
     }
 }
 
