@@ -113,7 +113,6 @@ class AsgarosForumUserGroups {
         // Run hooks for adding the user to a specific group.
         foreach ($usergroups as $usergroup) {
             if (!in_array($usergroup, $current_usergroups)) {
-                echo 'asgarosforum_usergroup_'.$usergroup.'_add_user';
                 do_action('asgarosforum_usergroup_'.$usergroup.'_add_user', $user_id, $usergroup);
             }
         }
@@ -121,7 +120,6 @@ class AsgarosForumUserGroups {
         // Run hooks for removing the user from a specific group.
         foreach ($current_usergroups as $usergroup) {
             if (!in_array($usergroup, $usergroups)) {
-                echo 'asgarosforum_usergroup_'.$usergroup.'_remove_user';
                 do_action('asgarosforum_usergroup_'.$usergroup.'_remove_user', $user_id, $usergroup);
             }
         }
