@@ -372,7 +372,8 @@ class AsgarosForum {
         } else if (isset($_GET['delete_topic'])) {
             $this->delete_topic($this->current_topic);
         } else if (isset($_GET['remove_post'])) {
-            $this->remove_post();
+            $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
+            $this->remove_post($post_id);
         } else if (isset($_GET['sticky_topic'])) {
             $this->change_status('sticky');
         } else if (isset($_GET['unsticky_topic'])) {
@@ -1164,9 +1165,7 @@ class AsgarosForum {
         }
     }
 
-    function remove_post() {
-        $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
-
+    function remove_post($post_id) {
         if ($this->permissions->isModerator('current') && $this->content->post_exists($post_id)) {
             do_action('asgarosforum_before_delete_post', $post_id);
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
