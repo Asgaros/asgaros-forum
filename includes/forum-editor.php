@@ -179,7 +179,6 @@ class AsgarosForumEditor {
                             echo '<input type="hidden" name="submit_action" value="add_post">';
                         } else if ($editorView === 'editpost') {
                             echo '<input type="hidden" name="submit_action" value="edit_post">';
-                            echo '<input type="hidden" name="part_id" value="'.($this->asgarosforum->current_page + 1).'">';
                         }
 
 						echo '<div class="left">';

@@ -180,7 +180,7 @@ class AsgarosForumContent {
 
             $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
 
-            $redirect = html_entity_decode($this->asgarosforum->get_postlink($this->asgarosforum->current_topic, $this->asgarosforum->current_post));
+            $redirect = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
 
             // Send notification about new post.
             $this->asgarosforum->notifications->notify_about_new_post($this->data_subject, $this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
@@ -193,7 +193,7 @@ class AsgarosForumContent {
                 $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('name' => $this->data_subject), array('id' => $this->asgarosforum->current_topic), array('%s'), array('%d'));
             }
 
-            $redirect = html_entity_decode($this->asgarosforum->get_postlink($this->asgarosforum->current_topic, $this->asgarosforum->current_post, $_POST['part_id']));
+            $redirect = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
         }
 
         $this->asgarosforum->notifications->update_topic_subscription_status($this->asgarosforum->current_topic);

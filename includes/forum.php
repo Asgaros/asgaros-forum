@@ -742,15 +742,6 @@ class AsgarosForum {
         }
     }
 
-    function get_postlink($topic_id, $post_id, $page = 0) {
-        if (!$page) {
-            $postNumber = $this->db->get_var($this->db->prepare("SELECT COUNT(*) FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
-            $page = ceil($postNumber / $this->options['posts_per_page']);
-        }
-
-        return $this->get_link('topic', $topic_id, array('part' => $page), '#postid-'.$post_id);
-    }
-
     function get_category_name($category_id) {
         $category = get_term($category_id, 'asgarosforum-category');
 

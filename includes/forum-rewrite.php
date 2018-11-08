@@ -225,6 +225,11 @@ class AsgarosForumRewrite {
 
         $additional_parameters['part'] = $post_page;
 
+        // Ensure that the page-parameter is only set when we are not at the first page.
+        if ($additional_parameters['part'] <= 1) {
+            unset($additional_parameters['part']);
+        }
+
         // Now create the link.
         $post_link = $this->get_link('topic', $topic_id, $additional_parameters, '#postid-'.$post_id);
 

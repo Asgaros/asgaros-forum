@@ -136,7 +136,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
                     // Show report button.
                     $this->reports->render_report_button($post->id, $this->current_topic);
 
-                    echo '<a href="'.$this->get_postlink($this->current_topic, $post->id, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
+                    echo '<a href="'.$this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
                 }
             echo '</div>';
         echo '</div>';
