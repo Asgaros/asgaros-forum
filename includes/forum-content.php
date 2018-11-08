@@ -198,7 +198,7 @@ class AsgarosForumContent {
 
         $this->asgarosforum->notifications->update_topic_subscription_status($this->asgarosforum->current_topic);
 
-        do_action('asgarosforum_after_'.$this->get_action().'_submit', $this->asgarosforum->current_post, $this->asgarosforum->current_topic, $this->data_subject, $this->data_content, $redirect);
+        do_action('asgarosforum_after_'.$this->get_action().'_submit', $this->asgarosforum->current_post, $this->asgarosforum->current_topic, $this->data_subject, $this->data_content, $redirect, $author_id);
 
         wp_redirect($redirect);
         exit;

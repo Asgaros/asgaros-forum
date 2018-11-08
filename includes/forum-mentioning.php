@@ -9,8 +9,8 @@ class AsgarosForumMentioning {
     public function __construct($object) {
         $this->asgarosforum = $object;
 
-        add_action('asgarosforum_after_add_topic_submit', array($this, 'mention_users'), 10, 5);
-        add_action('asgarosforum_after_add_post_submit', array($this, 'mention_users'), 10, 5);
+        add_action('asgarosforum_after_add_topic_submit', array($this, 'mention_users'), 10, 6);
+        add_action('asgarosforum_after_add_post_submit', array($this, 'mention_users'), 10, 6);
     }
 
     public function render_nice_name($user_id) {
@@ -50,7 +50,7 @@ class AsgarosForumMentioning {
         return true;
     }
 
-    public function mention_users($post_id, $topic_id, $subject, $content, $link) {
+    public function mention_users($post_id, $topic_id, $subject, $content, $link, $author_id) {
         if ($this->asgarosforum->options['enable_mentioning']) {
             $matches = array();
 
@@ -69,13 +69,12 @@ class AsgarosForumMentioning {
                     // Get topic object.
                     $topic = $this->asgarosforum->content->get_topic($topic_id);
 
-                    // Get post author information.
-                    $post_author_id = $this->asgarosforum->get_post_author($post_id);
-                    $post_author_name = $this->asgarosforum->getUsername($post_author_id);
+                    // Get author-username.
+                    $author_name = $this->asgarosforum->getUsername($author_id);
 
                     // Create mail content.
                     $replacements = array(
-                        '###AUTHOR###'  => $post_author_name,
+                        '###AUTHOR###'  => $author_name,
                         '###LINK###'    => '<a href="'.$link.'">'.$link.'</a>',
                         '###TITLE###'   => esc_html(stripslashes($topic->name)),
                         '###CONTENT###' => wpautop(stripslashes($content))
