@@ -1088,6 +1088,9 @@ class AsgarosForum {
             echo '<div id="forum-navigation-mobile">';
                 echo '<a class="dashicons-before dashicons-menu">'.__('Menu', 'asgaros-forum').'</a>';
             echo '</div>';
+
+            echo '<span class="screen-reader-text">'.__('Forum Navigation', 'asgaros-forum').'</span>';
+
             echo '<div id="forum-navigation">';
                 echo '<a class="home-link" href="'.$this->get_link('home').'">'.__('Forum', 'asgaros-forum').'</a>';
 

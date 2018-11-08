@@ -120,6 +120,7 @@ You can find a list of available hooks and filters on this site:
 * Improvements when using custom appearance settings
 * Mobile theme improvements
 * Improve first-time installation-process
+* Screen-reader accessibility improvements
 * Performance improvements and code optimizations
 * Compatibility with WordPress 5.0
 = 1.10.1 =

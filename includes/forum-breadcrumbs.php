@@ -83,7 +83,10 @@ class AsgarosForumBreadCrumbs {
 
             // Render breadcrumbs links.
             echo '<div id="forum-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
+                echo '<span class="screen-reader-text">'.__('Forum breadcrumbs - You are here:', 'asgaros-forum').'</span>';
+
                 echo '<span class="dashicons-before dashicons-admin-home"></span>';
+
                 foreach ($this->breadcrumbs_links as $element) {
                     $this->render_breadcrumb($element);
                 }

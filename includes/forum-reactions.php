@@ -58,6 +58,10 @@ class AsgarosForumReactions {
                     'down'  => 'add',
                     'up'    => 'add'
                 );
+                $screen_reader_text = array(
+                    'down'  => __('Click for thumbs down.', 'asgaros-forum'),
+                    'up'    => __('Click for thumbs up.', 'asgaros-forum')
+                );
 
                 if (is_user_logged_in()) {
                     $user_id = get_current_user_id();
@@ -71,7 +75,14 @@ class AsgarosForumReactions {
 
                 foreach ($this->reactions_list as $reaction) {
                     $counter = (isset($this->post_reactions[$post_id][$reaction])) ? number_format_i18n(count($this->post_reactions[$post_id][$reaction])) : 0;
-                    $output = '<span class="reaction '.$reaction.'"><span class="reaction-icon dashicons-before dashicons-thumbs-'.$reaction.' '.$active[$reaction].'"></span><span class="reaction-number">'.$counter.'</span></span>';
+
+                    $output = '';
+                    $output .= '<span class="reaction '.$reaction.'">';
+                    $output .= '<span class="reaction-icon dashicons-before dashicons-thumbs-'.$reaction.' '.$active[$reaction].'">';
+                    $output .= '<span class="screen-reader-text">'.$screen_reader_text[$reaction].'</span>';
+                    $output .= '</span>';
+                    $output .= '<span class="reaction-number">'.$counter.'</span>';
+                    $output .= '</span>';
 
                     if (is_user_logged_in()) {
                         $link = $this->asgarosforum->rewrite->get_link(

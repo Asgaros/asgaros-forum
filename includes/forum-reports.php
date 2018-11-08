@@ -21,7 +21,9 @@ class AsgarosForumReports {
                     $report_href = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
 
                     echo '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
-                        echo '<span class="report-link dashicons-before dashicons-warning"></span>';
+                        echo '<span class="report-link dashicons-before dashicons-warning">';
+                        echo '<span class="screen-reader-text">'.__('Click to report post.', 'asgaros-forum').'</span>';
+                        echo '</span>';
                     echo '</a>';
                 } else {
                     echo '<span class="report-exists dashicons-before dashicons-warning" title="'.__('You reported this post.', 'asgaros-forum').'"></span>';
