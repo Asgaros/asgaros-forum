@@ -106,6 +106,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_usergroup_ID_add_user hook
 * Added: asgarosforum_usergroup_ID_remove_user hook
 * Added: asgarosforum_breadcrumbs_{current_view} hooks
+* Fixed: Only show accessible posts in the post-history of profiles
 * Fixed: Broken forum-role selector in backend-profile
 * Fixed: Broken banning-functionality in frontend when using plain URL-structure
 * Fixed: Various problems when applying custom appearance-modifications

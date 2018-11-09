@@ -124,15 +124,34 @@ class AsgarosForumProfile {
         echo '</div>';
     }
 
-    public function count_history_data($user_id) {
-        return count($this->asgarosforum->content->get_posts_by_author($user_id));
+    public function count_post_history_by_user($user_id) {
+        return count($this->get_post_history_by_user($user_id));
     }
 
-    public function load_history_data($user_id) {
-        $start = $this->asgarosforum->current_page * 50;
-        $end = 50;
+    public function get_post_history_by_user($user_id, $limit = false) {
+        // Get accessible categories for the current user first.
+        $accessible_categories = $this->asgarosforum->content->get_accessible_categories();
 
-        return $this->asgarosforum->content->get_posts_by_author($user_id, true, $start, $end);
+        if (empty($accessible_categories)) {
+            // Cancel if the user cant access any categories.
+            return false;
+        } else {
+            // Now load history-data based for an user based on the categories which are accessible for the current user.
+            $accessible_categories = implode(',', $accessible_categories);
+
+            $query_limit = "";
+
+            if ($limit) {
+                $elements_maximum = 50;
+                $elements_start = $this->asgarosforum->current_page * $elements_maximum;
+
+                $query_limit = "LIMIT {$elements_start}, {$elements_maximum}";
+            }
+
+            $query = "SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.author_id = %d AND p.parent_id = t.id AND EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$accessible_categories})) ORDER BY p.id DESC {$query_limit};";
+
+            return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $user_id));
+        }
     }
 
     public function show_history() {
@@ -147,7 +166,7 @@ class AsgarosForumProfile {
                 $this->show_profile_navigation($userData);
 
                 echo '<div id="profile-layer">';
-                    $posts = $this->load_history_data($user_id);
+                    $posts = $this->get_post_history_by_user($user_id, true);
 
                     if (empty($posts)) {
                         _e('No posts made by this user.', 'asgaros-forum');
