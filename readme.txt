@@ -93,34 +93,34 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: View for unread topics
-* Added: Filters for roles and usergroups in memberslist
-* Added: Notification templates
-* Added: Show usergroups in memberslist
-* Added: Bulk actions to assign roles
-* Added: Filter users by their role in the backend
+* Added: New view to show unread topics
+* Added: Filter users in memberslist by their role/usergroup
+* Added: Mail-templates for notifications
+* Added: Show groups of user inside the memberslist
+* Added: Bulk-actions to assign roles
+* Added: Filter users in backend by their role
 * Added: Option to change link-color
 * Added: Option to change light text-color
 * Added: Option to change second background-color
 * Added: asgarosforum_prepare hook
-* Added: asgarosforum_usergroup_ID_add_user hook
-* Added: asgarosforum_usergroup_ID_remove_user hook
+* Added: asgarosforum_usergroup_{ID}_add_user hooks
+* Added: asgarosforum_usergroup_{ID}_remove_user hooks
 * Added: asgarosforum_breadcrumbs_{current_view} hooks
-* Fixed: Only show accessible posts in the post-history of profiles
+* Fixed: Only show accessible posts inside post-histories to the current user
 * Fixed: Broken forum-role selector in backend-profile
 * Fixed: Broken banning-functionality in frontend when using plain URL-structure
-* Fixed: Various problems when applying custom appearance-modifications
+* Fixed: Various problems which prevents the application of custom appearance-modifications
 * Fixed: Hidden filters for usergroups in backend user-overview when there were many usergroups
-* Fixed: Display issues
+* Fixed: A couple of display issues
 * Fixed: Display issues with some themes
-* Changed: Dont group posts in "Recent Forum Posts" widget by topic
+* Changed: Dont group posts in "Recent Forum Posts"-widget by topic
 * Changed: Show IDs of usergroups in the backend
-* Changed: Usergroup-tags now link to memberslist
-* Changed: Show username of receiver in mails
+* Changed: Usergroup-tags now link to memberslist showing all users of that group
+* Changed: Show username of notification-receiver in mail
 * Minor design changes
 * Minor design changes in the administration area
-* Improvements when using custom appearance settings
-* Mobile theme improvements
+* Improved application of custom appearance-settings
+* Mobile-theme improvements
 * Improve first-time installation-process
 * Screen-reader accessibility improvements
 * Performance improvements and code optimizations
