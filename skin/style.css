@@ -134,6 +134,10 @@
     margin: 0;
     vertical-align: middle;
 }
+#af-wrapper .uploaded-files-title {
+    display: block;
+    padding-bottom: 15px;
+}
 
 /* TinyMCE Adjustments */
 #af-wrapper .wp-editor-container {

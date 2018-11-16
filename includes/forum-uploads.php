@@ -175,7 +175,7 @@ class AsgarosForumUploads {
 				}
 
 				if (!empty($uploadedFiles)) {
-	                echo '<strong>'.__('Uploaded files:', 'asgaros-forum').'</strong>';
+	                echo '<strong class="uploaded-files-title">'.__('Uploaded files:', 'asgaros-forum').'</strong>';
 	                echo '<ul>'.$uploadedFiles.'</ul>';
 				}
 	        }
