@@ -840,8 +840,6 @@
     outline: none;
     background-color: #fff;
     display: initial; /* comp */
-    height: initial; /* comp */
-    width: initial; /* comp */
 }
 
 /* POST ELEMENT */
