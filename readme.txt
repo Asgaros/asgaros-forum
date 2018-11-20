@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 = 1.11.1 =
 * Fixed: Wrong avatar-sizes with certain themes and plugins
 = 1.11.0 =
