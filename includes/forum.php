@@ -223,7 +223,7 @@ class AsgarosForum {
         update_option('asgarosforum_options', $options);
 
         // Reload options after saving them.
-		$this->loadOptions();
+        $this->loadOptions();
     }
 
     //======================================================================
