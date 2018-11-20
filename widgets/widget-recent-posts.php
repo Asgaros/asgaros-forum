@@ -16,6 +16,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum posts', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 3;
         $show_avatar = isset($instance['show_avatar']) ? (bool)$instance['show_avatar'] : true;
+        $group_by_topic = isset($instance['group_by_topic']) ? (bool)$instance['group_by_topic'] : true;
 
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
@@ -31,6 +32,11 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.$this->get_field_id('show_avatar').'" name="'.$this->get_field_name('show_avatar').'" />';
 		echo '<label for="'.$this->get_field_id('show_avatar').'">'.__('Show avatars?', 'asgaros-forum').'</label>';
         echo '</p>';
+
+        echo '<p>';
+        echo '<input class="checkbox" type="checkbox" '.checked($group_by_topic, true, false).' id="'.$this->get_field_id('group_by_topic').'" name="'.$this->get_field_name('group_by_topic').'" />';
+		echo '<label for="'.$this->get_field_id('group_by_topic').'">'.__('Group posts by topic', 'asgaros-forum').'</label>';
+        echo '</p>';
 	}
 
     public function update($new_instance, $old_instance) {
@@ -38,6 +44,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['number'] = (int)$new_instance['number'];
         $instance['show_avatar'] = isset($new_instance['show_avatar']) ? (bool)$new_instance['show_avatar'] : false;
+        $instance['group_by_topic'] = isset($new_instance['group_by_topic']) ? (bool)$new_instance['group_by_topic'] : false;
 		return $instance;
 	}
 }

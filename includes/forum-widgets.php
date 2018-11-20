@@ -68,7 +68,15 @@ class AsgarosForumWidgets {
             // Dont show last posts/topics in widgets when user cant access any categories.
             if ($where) {
                 if ($widgetType === 'posts') {
-                    $elementIDs = self::$asgarosforum->db->get_col(self::$asgarosforum->db->prepare("SELECT p.id FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM ".self::$asgarosforum->tables->forums." AS f WHERE f.id = t.parent_id {$where}) ORDER BY p.id DESC LIMIT %d;", $numberOfItems));
+                    $group_by_topic = isset($instance['group_by_topic']) ? $instance['group_by_topic'] : true;
+
+                    $elementIDs = array();
+
+                    if ($group_by_topic) {
+                        $elementIDs = self::$asgarosforum->db->get_col(self::$asgarosforum->db->prepare("SELECT MAX(p.id) AS id FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM ".self::$asgarosforum->tables->forums." AS f WHERE f.id = t.parent_id {$where}) GROUP BY p.parent_id ORDER BY MAX(p.id) DESC LIMIT %d;", $numberOfItems));
+                    } else {
+                        $elementIDs = self::$asgarosforum->db->get_col(self::$asgarosforum->db->prepare("SELECT p.id FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM ".self::$asgarosforum->tables->forums." AS f WHERE f.id = t.parent_id {$where}) ORDER BY p.id DESC LIMIT %d;", $numberOfItems));
+                    }
 
                     // Select data if selectable elements exist.
                     if (!empty($elementIDs)) {

@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option for recent-posts-widget to group posts by topic
 * Added: asgarosforum_user_replacements filter
 * Fixed: It was not possible to use HTML-attributes in mail-templates
 * Fixed: Display issues with some themes
