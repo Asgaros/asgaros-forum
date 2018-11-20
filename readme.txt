@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_user_replacements filter
 * Fixed: It was not possible to use HTML-attributes in mail-templates
 * Fixed: Display issues with some themes
 = 1.11.1 =

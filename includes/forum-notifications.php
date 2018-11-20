@@ -381,6 +381,9 @@ class AsgarosForumNotifications {
 
         $message_template = str_replace('###USERNAME###', $user->display_name, $message_template);
 
+        // Filter for adding custom user-replacements.
+        $replacements = apply_filters('asgarosforum_user_replacements', $replacements, $user);
+
         // Apply other replacements now.
         foreach ($replacements as $key => $value) {
             $message_template = str_replace($key, $value, $message_template);
