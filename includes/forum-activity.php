@@ -98,7 +98,7 @@ class AsgarosForumActivity {
             $ids_categories = implode(',', $ids_categories);
 
             if ($count_all) {
-                return $this->asgarosforum->db->get_var("SELECT COUNT(p.id) FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.id = p.parent_id AND f.id = t.parent_id AND f.parent_id IN ({$ids_categories})");
+                return $this->asgarosforum->db->get_var("SELECT COUNT(p.id) FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->forums} AS f WHERE p.forum_id = f.id AND f.parent_id IN ({$ids_categories})");
             } else {
                 $start = $this->asgarosforum->current_page * 50;
                 $end = 50;
