@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option for recent-posts-widget to group posts by topic
 * Added: asgarosforum_user_replacements filter
+* Fixed: Rare PHP-error in unread-logic
 * Fixed: It was not possible to use HTML-attributes in mail-templates
 * Fixed: Display issues with some themes
 * Performance improvements and code optimizations
