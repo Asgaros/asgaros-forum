@@ -1177,13 +1177,42 @@ class AsgarosForum {
         return $this->cache['get_lastpost_in_topic'][$id];
     }
 
-    // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
-    function get_lastpost_in_forum($id) {
-        if (empty($this->cache['get_lastpost_in_forum'][$id])) {
-            return $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.id = (SELECT p_id_query.id FROM {$this->tables->posts} AS p_id_query INNER JOIN {$this->tables->topics} AS t_id_query ON p_id_query.parent_id = t_id_query.id INNER JOIN {$this->tables->forums} AS f_id_query ON t_id_query.parent_id = f_id_query.id WHERE f_id_query.id = %d OR f_id_query.parent_forum = %d ORDER BY p_id_query.id DESC LIMIT 1) AND t.id = p.parent_id;", $id, $id));
+    var $lastpost_forum_cache = false;
+
+    function prepare_lastpost_forum_cache() {
+        if ($this->lastpost_forum_cache === false) {
+            // Get all lastpost-elements of each forum first.
+            $lastpost_elements = $this->db->get_results("SELECT p.forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p GROUP BY p.forum_id;");
+
+            // Assign lastpost-ids for each forum.
+            if (!empty($lastpost_elements)) {
+                foreach ($lastpost_elements as $element) {
+                    $this->lastpost_forum_cache[$element->forum_id] = $element->id;
+                }
+            }
+
+            // Not get all subforums.
+            $subforums = $this->db->get_results("SELECT f.id, f.parent_forum FROM {$this->tables->forums} AS f WHERE f.parent_forum != 0;");
+
+            // Re-assign lastpost-ids for each forum when a subforum has a more recent post.
+            if (!empty($subforums)) {
+                foreach ($subforums as $subforum) {
+                    if ($this->lastpost_forum_cache[$subforum->id] > $this->lastpost_forum_cache[$subforum->parent_forum]) {
+                        $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
+                    }
+                }
+            }
+        }
+    }
+
+    function get_lastpost_in_forum($forum_id) {
+        $this->prepare_lastpost_forum_cache();
+
+        if (isset($this->lastpost_forum_cache[$forum_id])) {
+            return $this->db->get_row("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.id = ".$this->lastpost_forum_cache[$forum_id]." AND t.id = p.parent_id;");
         }
 
-        return $this->cache['get_lastpost_in_forum'][$id];
+        return false;
     }
 
     function change_status($property) {
