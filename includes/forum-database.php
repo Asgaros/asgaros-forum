@@ -82,21 +82,6 @@ class AsgarosForumDatabase {
     }
 
     public function buildDatabase() {
-        // Ensure that we only run the installation/update logic when we are in the administration-area ...
-        if (!is_admin()) {
-            return;
-        }
-
-        // ... and that the current request is no AJAX request ...
-        if (wp_doing_ajax()) {
-            return;
-        }
-
-        // ... and that the current user is an administrator.
-        if (!current_user_can('activate_plugins')) {
-            return;
-        }
-
         // Start the installation/update logic.
         global $asgarosforum;
 
