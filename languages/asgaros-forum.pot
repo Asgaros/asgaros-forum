@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-18 13:12+0000\n"
+"POT-Creation-Date: 2018-11-21 15:28+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: includes/forum-activity.php:39 includes/forum-profile.php:191 includes/forum-widgets.php:111 includes/forum.php:915 includes/forum.php:919 includes/forum.php:927
+#: includes/forum-activity.php:39 includes/forum-profile.php:191 includes/forum-widgets.php:119 includes/forum.php:915 includes/forum.php:919 includes/forum.php:927
 #, php-format
 msgid "%s ago"
 msgstr ""
@@ -175,23 +175,23 @@ msgstr ""
 msgid "You are not allowed to upload files with that file size."
 msgstr ""
 
-#: includes/forum-database.php:224
+#: includes/forum-database.php:225
 msgid "Custom Usergroups"
 msgstr ""
 
-#: includes/forum-database.php:244
+#: includes/forum-database.php:245
 msgid "Example Usergroup"
 msgstr ""
 
-#: includes/forum-database.php:286
+#: includes/forum-database.php:287
 msgid "Example Category"
 msgstr ""
 
-#: includes/forum-database.php:294
+#: includes/forum-database.php:295
 msgid "First Forum"
 msgstr ""
 
-#: includes/forum-database.php:295
+#: includes/forum-database.php:296
 msgid "My first forum."
 msgstr ""
 
@@ -263,7 +263,7 @@ msgid_plural "%s Posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum-notifications.php:19 includes/forum-notifications.php:435 includes/forum.php:478 admin/views/options.php:214
+#: includes/forum-notifications.php:19 includes/forum-notifications.php:438 includes/forum.php:478 admin/views/options.php:214
 msgid "Subscriptions"
 msgstr ""
 
@@ -291,59 +291,59 @@ msgstr ""
 msgid "<b>Subscribe</b> to this forum."
 msgstr ""
 
-#: includes/forum-notifications.php:448
+#: includes/forum-notifications.php:451
 msgid "Based on your settings you will automatically get notified about new topics as a site-owner."
 msgstr ""
 
-#: includes/forum-notifications.php:456
+#: includes/forum-notifications.php:459
 msgid "Subscription Settings"
 msgstr ""
 
-#: includes/forum-notifications.php:461
+#: includes/forum-notifications.php:464
 msgid "Individual Subscriptions"
 msgstr ""
 
-#: includes/forum-notifications.php:463
+#: includes/forum-notifications.php:466
 msgid "You get notified about activity in forums and topics you are subscribed to."
 msgstr ""
 
-#: includes/forum-notifications.php:467
+#: includes/forum-notifications.php:470
 msgid "New Topics"
 msgstr ""
 
-#: includes/forum-notifications.php:469
+#: includes/forum-notifications.php:472
 msgid "You get notified about all new topics."
 msgstr ""
 
-#: includes/forum-notifications.php:473
+#: includes/forum-notifications.php:476
 msgid "New Topics & Posts"
 msgstr ""
 
-#: includes/forum-notifications.php:475
+#: includes/forum-notifications.php:478
 msgid "You get notified about all new topics and posts."
 msgstr ""
 
-#: includes/forum-notifications.php:483
+#: includes/forum-notifications.php:486
 msgid "Notify about new posts in:"
 msgstr ""
 
-#: includes/forum-notifications.php:494
+#: includes/forum-notifications.php:497
 msgid "Notify about new topics in:"
 msgstr ""
 
-#: includes/forum-notifications.php:549
+#: includes/forum-notifications.php:552
 msgid "You get notified about <b>all</b> new topics."
 msgstr ""
 
-#: includes/forum-notifications.php:551
+#: includes/forum-notifications.php:554
 msgid "You get notified about <b>all</b> new posts."
 msgstr ""
 
-#: includes/forum-notifications.php:554
+#: includes/forum-notifications.php:557
 msgid "No subscriptions yet!"
 msgstr ""
 
-#: includes/forum-notifications.php:559
+#: includes/forum-notifications.php:562
 msgid "Unsubscribe"
 msgstr ""
 
@@ -631,22 +631,22 @@ msgstr ""
 msgid "Recent forum topics"
 msgstr ""
 
-#: includes/forum-widgets.php:106 includes/forum.php:654
+#: includes/forum-widgets.php:114 includes/forum.php:654
 #, php-format
 msgid "%s Answer"
 msgid_plural "%s Answers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum-widgets.php:110 includes/forum.php:914
+#: includes/forum-widgets.php:118 includes/forum.php:914
 msgid "by"
 msgstr ""
 
-#: includes/forum-widgets.php:120 includes/forum.php:930
+#: includes/forum-widgets.php:128 includes/forum.php:930
 msgid "No topics yet!"
 msgstr ""
 
-#: includes/forum-widgets.php:123 widgets/widget-search.php:42
+#: includes/forum-widgets.php:131 widgets/widget-search.php:42
 msgid "The forum has not been configured correctly."
 msgstr ""
 
@@ -794,15 +794,15 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: includes/forum.php:1251
+#: includes/forum.php:1281
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: includes/forum.php:1252
+#: includes/forum.php:1282
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: includes/forum.php:1253
+#: includes/forum.php:1283
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
@@ -814,16 +814,20 @@ msgstr ""
 msgid "Asgaros Forum: Recent Posts"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:21 widgets/widget-recent-topics.php:21 widgets/widget-search.php:52
+#: widgets/widget-recent-posts.php:22 widgets/widget-recent-topics.php:21 widgets/widget-search.php:52
 msgid "Title:"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:26 widgets/widget-recent-topics.php:26
+#: widgets/widget-recent-posts.php:27 widgets/widget-recent-topics.php:26
 msgid "Number of topics to show:"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:32 widgets/widget-recent-topics.php:32
+#: widgets/widget-recent-posts.php:33 widgets/widget-recent-topics.php:32
 msgid "Show avatars?"
+msgstr ""
+
+#: widgets/widget-recent-posts.php:38
+msgid "Group posts by topic"
 msgstr ""
 
 #: widgets/widget-recent-topics.php:7
