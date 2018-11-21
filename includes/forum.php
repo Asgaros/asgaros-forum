@@ -1341,7 +1341,7 @@ class AsgarosForum {
 
     // Returns the amount of users.
     public function countUsers() {
-        $users = count_users();
+        $users = count_users('memory');
         return $users['total_users'];
     }
 
