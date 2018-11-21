@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 26;
+    private $db_version = 28;
     private $tables;
 
     public function __construct() {
@@ -140,6 +140,7 @@ class AsgarosForumDatabase {
             id int(11) NOT NULL auto_increment,
             text longtext,
             parent_id int(11) NOT NULL default '0',
+            forum_id int(11) NOT NULL default '0',
             date datetime NOT NULL default '1000-01-01 00:00:00',
             date_edit datetime NOT NULL default '1000-01-01 00:00:00',
             author_id int(11) NOT NULL default '0',
@@ -369,6 +370,20 @@ class AsgarosForumDatabase {
                 delete_metadata('user', 0, 'asgarosforum_banned', '', true);
 
                 update_option('asgarosforum_db_version', 26);
+            }
+
+            // We need to save the forum_id in the posts-table to increase performance.
+            if ($database_version_installed < 27) {
+                $this->db->query("UPDATE {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id SET p.forum_id = t.parent_id;");
+
+                update_option('asgarosforum_db_version', 27);
+            }
+
+            // Add index to posts.forum_id for faster queries.
+            if ($database_version_installed < 28) {
+                $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id);");
+
+                update_option('asgarosforum_db_version', 28);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

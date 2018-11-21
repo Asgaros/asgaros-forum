@@ -1151,6 +1151,7 @@ class AsgarosForum {
 
         if ($this->permissions->isModerator('current') && $newForumID && $this->content->forum_exists($newForumID)) {
             $this->db->update($this->tables->topics, array('parent_id' => $newForumID), array('id' => $this->current_topic), array('%d'), array('%d'));
+            $this->db->update($this->tables->posts, array('forum_id' => $newForumID), array('parent_id' => $this->current_topic), array('%d'), array('%d'));
             wp_redirect(html_entity_decode($this->get_link('topic', $this->current_topic)));
             exit;
         }

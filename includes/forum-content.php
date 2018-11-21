@@ -176,7 +176,7 @@ class AsgarosForumContent {
             $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
         } else if ($this->get_action() === 'add_post') {
             // Create the post.
-            $this->asgarosforum->current_post = $this->insert_post($this->asgarosforum->current_topic, $this->data_content, $author_id, $upload_list);
+            $this->asgarosforum->current_post = $this->insert_post($this->asgarosforum->current_topic, $this->asgarosforum->current_forum, $this->data_content, $author_id, $upload_list);
 
             $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
 
@@ -242,14 +242,14 @@ class AsgarosForumContent {
         $inserted_ids->topic_id = $this->asgarosforum->db->insert_id;
 
         // Now create a post inside this topic and save its ID as well.
-        $inserted_ids->post_id = $this->insert_post($inserted_ids->topic_id, $text, $author_id, $uploads);
+        $inserted_ids->post_id = $this->insert_post($inserted_ids->topic_id, $forum_id, $text, $author_id, $uploads);
 
         // Return the IDs of the inserted content.
         return $inserted_ids;
     }
 
     // Inserts a new post.
-    public function insert_post($topic_id, $text, $author_id = false, $uploads = array()) {
+    public function insert_post($topic_id, $forum_id, $text, $author_id = false, $uploads = array()) {
         // Set the author ID.
         if (!$author_id) {
             $author_id = $this->asgarosforum->permissions->currentUserID;
@@ -259,7 +259,7 @@ class AsgarosForumContent {
         $date = $this->asgarosforum->current_time();
 
         // Insert the post.
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topic_id, 'date' => $date, 'author_id' => $author_id, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%s', '%d', '%s'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topic_id, 'forum_id' => $forum_id, 'date' => $date, 'author_id' => $author_id, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%d', '%s', '%d', '%s'));
 
         // Return the ID of the inserted post.
         return $this->asgarosforum->db->insert_id;
