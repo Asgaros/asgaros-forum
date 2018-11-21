@@ -97,6 +97,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_user_replacements filter
 * Fixed: It was not possible to use HTML-attributes in mail-templates
 * Fixed: Display issues with some themes
+* Performance improvements and code optimizations
 = 1.11.1 =
 * Fixed: Wrong avatar-sizes with certain themes and plugins
 = 1.11.0 =
