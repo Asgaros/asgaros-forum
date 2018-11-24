@@ -81,6 +81,10 @@ class AsgarosForumDatabase {
         return $tables;
     }
 
+    public function check_index($table_name, $index_name) {
+        return $this->db->get_results("SHOW INDEX FROM {$table_name} WHERE Key_name = '{$index_name}';");
+    }
+
     public function buildDatabase() {
         // Start the installation/update logic.
         global $asgarosforum;
@@ -193,12 +197,20 @@ class AsgarosForumDatabase {
 
             // Add index to posts.author_id to make countings faster.
             if ($database_version_installed < 11) {
-                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(author_id);');
+                if (!$this->check_index($this->tables->posts, 'author_id')) {
+                    $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(author_id);');
+                }
+
+                update_option('asgarosforum_db_version', 11);
             }
 
             // Add index to posts.parent_id for faster queries.
             if ($database_version_installed < 12) {
-                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(parent_id);');
+                if (!$this->check_index($this->tables->posts, 'parent_id')) {
+                    $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(parent_id);');
+                }
+
+                update_option('asgarosforum_db_version', 12);
             }
 
             // Add existing usergroups to a default usergroups category and/or create an example usergroup.
@@ -287,7 +299,9 @@ class AsgarosForumDatabase {
 
             // Add index to topics.parent_id for faster queries.
             if ($database_version_installed < 21) {
-                $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD INDEX(parent_id);');
+                if (!$this->check_index($this->tables->topics, 'parent_id')) {
+                    $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD INDEX(parent_id);');
+                }
 
                 update_option('asgarosforum_db_version', 21);
             }
@@ -302,14 +316,18 @@ class AsgarosForumDatabase {
 
             // Add index to posts.date for faster queries.
             if ($database_version_installed < 24) {
-                $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(date);');
+                if (!$this->check_index($this->tables->posts, 'date')) {
+                    $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(date);');
+                }
 
                 update_option('asgarosforum_db_version', 24);
             }
 
             // Add index to forums.parent_id for faster queries.
             if ($database_version_installed < 25) {
-                $this->db->query('ALTER TABLE '.$this->tables->forums.' ADD INDEX(parent_id);');
+                if (!$this->check_index($this->tables->forums, 'parent_id')) {
+                    $this->db->query('ALTER TABLE '.$this->tables->forums.' ADD INDEX(parent_id);');
+                }
 
                 update_option('asgarosforum_db_version', 25);
             }
@@ -366,14 +384,18 @@ class AsgarosForumDatabase {
 
             // Add index to posts.forum_id for faster queries.
             if ($database_version_installed < 28) {
-                $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id);");
+                if (!$this->check_index($this->tables->posts, 'forum_id')) {
+                    $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id);");
+                }
 
                 update_option('asgarosforum_db_version', 28);
             }
 
             // Add index to posts.(forum_id, id) for faster queries.
             if ($database_version_installed < 29) {
-                $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id, id);");
+                if (!$this->check_index($this->tables->posts, 'forum_id_2')) {
+                    $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id, id);");
+                }
 
                 update_option('asgarosforum_db_version', 29);
             }
