@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 5.0
 Requires PHP: 5.2
-Stable tag: 1.11.2
+Stable tag: 1.11.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.11.3 =
 * Fixed: Possible infinite-loop during database-updates
 * Fixed: Prevent creation of indexes if they already exist
 * Fixed: Possible PHP-errors in overview when there are empty forums/subforums
