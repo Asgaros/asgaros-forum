@@ -1191,12 +1191,23 @@ class AsgarosForum {
                 }
             }
 
-            // Not get all subforums.
+            // Now get all subforums.
             $subforums = $this->db->get_results("SELECT f.id, f.parent_forum FROM {$this->tables->forums} AS f WHERE f.parent_forum != 0;");
 
-            // Re-assign lastpost-ids for each forum when a subforum has a more recent post.
+            // Re-assign lastpost-ids for each forum based on the lastposts in its subforums.
             if (!empty($subforums)) {
                 foreach ($subforums as $subforum) {
+                    // Continue if the subforum has no posts.
+                    if (!isset($this->lastpost_forum_cache[$subforum->id])) {
+                        continue;
+                    }
+
+                    // Re-assign value when the parent-forum has no posts.
+                    if (!isset($this->lastpost_forum_cache[$subforum->parent_forum])) {
+                        $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
+                    }
+
+                    // Otherwise re-assign value when a subforum has a more recent post.
                     if ($this->lastpost_forum_cache[$subforum->id] > $this->lastpost_forum_cache[$subforum->parent_forum]) {
                         $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
                     }

@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Possible PHP-errors in overview when there are empty forums/subforums
 = 1.11.2 =
 * Added: Option for recent-posts-widget to group posts by topic
 * Added: asgarosforum_user_replacements filter
