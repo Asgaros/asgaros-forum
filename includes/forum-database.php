@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 29;
+    private $db_version = 30;
     private $tables;
 
     public function __construct() {
@@ -24,6 +24,7 @@ class AsgarosForumDatabase {
         $this->tables->posts        = $this->db->prefix.'forum_posts';
         $this->tables->reports      = $this->db->prefix.'forum_reports';
         $this->tables->reactions    = $this->db->prefix.'forum_reactions';
+        $this->tables->ads          = $this->db->prefix.'forum_ads';
     }
 
     public function getTables() {
@@ -75,6 +76,7 @@ class AsgarosForumDatabase {
         $tables[] = $this->db->prefix.'forum_posts';
         $tables[] = $this->db->prefix.'forum_reports';
         $tables[] = $this->db->prefix.'forum_reactions';
+        $tables[] = $this->db->prefix.'forum_ads';
 
         // Delete data which has been used in old versions of the plugin.
         $tables[] = $this->db->prefix.'forum_threads';
@@ -149,6 +151,15 @@ class AsgarosForumDatabase {
             user_id int(11) NOT NULL default '0',
             reaction varchar(20) NOT NULL default '',
             PRIMARY KEY  (post_id, user_id)
+            ) $charset_collate;";
+
+            $sql[] = "CREATE TABLE ".$this->tables->ads." (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255) NOT NULL default '',
+            code longtext,
+            active int(1) NOT NULL default '0',
+            locations longtext,
+            PRIMARY KEY  (id)
             ) $charset_collate;";
 
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');

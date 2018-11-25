@@ -34,6 +34,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Search
 * Moderators
 * Statistics
+* Ads Manager
 * Permissions
 * Usergroups
 * Who Is Online
@@ -93,6 +94,18 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Ads-manager
+* Added: asgarosforum_content_top hook
+* Added: asgarosforum_content_header hook
+* Added: asgarosforum_after_category hook
+* Added: asgarosforum_after_forum hook
+* Added: asgarosforum_after_topic hook
+* Added: asgarosforum_after_post hook
+* Added: asgarosforum_content_bottom hook
+* Added: asgarosforum_add_admin_submenu_page hook
+* Removed: asgarosforum_after_first_post hook
+* Minor design changes in the administration area
+* Performance improvements and code optimizations
 = 1.11.3 =
 * Fixed: Possible infinite-loop during database-updates
 * Fixed: Prevent creation of indexes if they already exist

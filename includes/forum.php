@@ -88,7 +88,12 @@ class AsgarosForum {
         'time_limit_edit_posts'             => 0,
         'show_description_in_forum'         => false,
         'require_login'                     => false,
-        'create_blog_topics_id'             => 0
+        'create_blog_topics_id'             => 0,
+        'enable_ads'                        => false,
+        'ads_frequency_categories'          => 2,
+        'ads_frequency_forums'              => 4,
+        'ads_frequency_topics'              => 8,
+        'ads_frequency_posts'               => 6
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -171,6 +176,7 @@ class AsgarosForum {
         $this->unread           = new AsgarosForumUnread($this);
         $this->feed             = new AsgarosForumFeed($this);
         $this->permissions      = new AsgarosForumPermissions($this);
+        $this->ads              = new AsgarosForumAds($this);
     }
 
     //======================================================================
@@ -506,11 +512,14 @@ class AsgarosForum {
         ob_start();
         echo '<div id="af-wrapper">';
 
+        do_action('asgarosforum_content_top');
         do_action('asgarosforum_'.$this->current_view.'_custom_content_top');
 
         // Show Header Area except for single posts.
         if ($this->current_view !== 'post') {
             $this->showHeader();
+
+            do_action('asgarosforum_content_header');
         }
 
         if (!empty($this->error)) {
@@ -574,6 +583,7 @@ class AsgarosForum {
             }
         }
 
+        do_action('asgarosforum_content_bottom');
         do_action('asgarosforum_'.$this->current_view.'_custom_content_bottom');
 
         echo '<div class="clear"></div>';
@@ -668,6 +678,8 @@ class AsgarosForum {
             do_action('asgarosforum_custom_topic_column', $topic_object->id);
             echo '<div class="topic-poster">'.$this->get_lastpost($lastpost_data, 'topic').'</div>';
         echo '</div>';
+
+        do_action('asgarosforum_after_topic');
     }
 
     function showTopic() {

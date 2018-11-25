@@ -61,3 +61,5 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
     do_action('asgarosforum_custom_forum_column', $forum->id);
     echo '<div class="forum-poster">'.$this->get_lastpost($lastpost_data).'</div>';
 echo '</div>';
+
+do_action('asgarosforum_after_forum');

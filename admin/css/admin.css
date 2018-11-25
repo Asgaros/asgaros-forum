@@ -109,6 +109,9 @@
 #af-options .postbox .dashicons-before:before {
     padding-right: 5px;
 }
+#af-options textarea {
+    width: 100%;
+}
 /* STRUCTURE/USERGROUPS */
 #af-structure .category-actions {
     float: right;
@@ -271,4 +274,14 @@
 }
 #af-structure .clear {
     clear: both;
+}
+#af-structure textarea {
+    width: 100%;
+}
+#af-structure #locations-editor th {
+    vertical-align: top;
+}
+#af-structure #locations-editor label {
+    display: block;
+    margin: 0px 0px 6px 0px;
 }

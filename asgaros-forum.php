@@ -54,6 +54,7 @@ require('includes/forum-reactions.php');
 require('includes/forum-mentioning.php');
 require('includes/forum-activity.php');
 require('includes/forum-feed.php');
+require('includes/forum-ads.php');
 
 // Include widget files.
 require('includes/forum-widgets.php');
@@ -66,6 +67,7 @@ require('admin/admin.php');
 require('admin/tables/admin-structure-table.php');
 require('admin/tables/admin-usergroups-table.php');
 require('admin/tables/admin-reports-table.php');
+require('admin/tables/admin-ads-table.php');
 
 $asgarosforum = new AsgarosForum();
 

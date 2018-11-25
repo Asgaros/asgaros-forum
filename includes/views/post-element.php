@@ -166,9 +166,5 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
 
 <?php
 
-// Hook for custom-stuff after first post.
-if ($counter == 1) {
-    do_action('asgarosforum_after_first_post');
-}
-
+do_action('asgarosforum_after_post');
 ?>

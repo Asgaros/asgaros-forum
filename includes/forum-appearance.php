@@ -384,6 +384,8 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #memberslist-filter,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .activity-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .ad-forum,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .ad-topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #usergroups-filter {'.PHP_EOL;
 			    $custom_css .= 'border-color: '.$this->options['custom_border_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;

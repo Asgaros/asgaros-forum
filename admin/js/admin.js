@@ -187,7 +187,46 @@
             setEditorTitle(this);
             showEditorInstance('#usergroup-editor');
             $('#usergroup-editor input[name=usergroup_name]').focus();
+        });
 
+        // Create/edit ad dialog.
+        $('.ad-editor-link').click(function() {
+            resetEditor();
+
+            var ad_id           = $(this).attr('data-value-id');
+            var ad_name         = '';
+            var ad_code         = '';
+            var ad_active       = '1';
+            var ad_locations    = '';
+
+            if (ad_id !== 'new') {
+                ad_name         = $('#ad_'+ad_id+'_name').val();
+                ad_code         = $('#ad_'+ad_id+'_code').val();
+                ad_active       = $('#ad_'+ad_id+'_active').val();
+                ad_locations    = $('#ad_'+ad_id+'_locations').val().split(',');
+            }
+
+            $('#ad-editor input[name=ad_id]').val(ad_id);
+            $('#ad-editor input[name=ad_name]').val(ad_name);
+            $('#ad-editor textarea[name=ad_code]').html(ad_code);
+
+            if (ad_active == '1') {
+                $('#ad-editor input[name=ad_active]').prop('checked', true);
+            } else {
+                $('#ad-editor input[name=ad_active]').prop('checked', false);
+            }
+
+            $('#ad-editor #locations-editor input[type=checkbox]').each(function() {
+                if (jQuery.inArray($(this).val(), ad_locations) != -1) {
+                    $(this).prop('checked', true);
+                } else {
+                    $(this).prop('checked', false);
+                }
+            });
+
+            setEditorTitle(this);
+            showEditorInstance('#ad-editor');
+            $('#ad-editor input[name=ad_name]').focus();
         });
 
         // Delete category dialog.
@@ -246,6 +285,17 @@
 
             setEditorTitle(this);
             showEditorInstance('#report-delete');
+        });
+
+        // Delete ad dialog.
+        $('.ad-delete-link').click(function() {
+            resetEditor();
+
+            var elementID = $(this).attr('data-value-id');
+            $('#ad-delete input[name=ad_id]').val(elementID);
+
+            setEditorTitle(this);
+            showEditorInstance('#ad-delete');
         });
 
         $('#editor-container .button-cancel').click(function() {

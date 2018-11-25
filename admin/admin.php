@@ -141,6 +141,12 @@ class AsgarosForumAdmin {
                 add_submenu_page('asgarosforum-structure', __('Reports', 'asgaros-forum'), $label_reports, 'read', 'asgarosforum-reports', array($this, 'reports_page'));
             }
 
+            if ($this->asgarosforum->options['enable_ads']) {
+                add_submenu_page('asgarosforum-structure', __('Ads', 'asgaros-forum'), __('Ads', 'asgaros-forum'), 'read', 'asgarosforum-ads', array($this, 'ads_page'));
+            }
+
+            do_action('asgarosforum_add_admin_submenu_page');
+
             add_submenu_page('asgarosforum-structure', __('Settings', 'asgaros-forum'), __('Settings', 'asgaros-forum'), 'read', 'asgarosforum-options', array($this, 'options_page'));
         }
     }
@@ -167,6 +173,10 @@ class AsgarosForumAdmin {
 
     function reports_page() {
         require('views/reports.php');
+    }
+
+    function ads_page() {
+        require('views/ads.php');
     }
 
     function enqueue_admin_scripts($hook) {
@@ -260,6 +270,26 @@ class AsgarosForumAdmin {
 
                 if (!empty($_POST['report-id']) && is_numeric($_POST['report-id'])) {
                     $this->asgarosforum->reports->remove_report($_POST['report-id']);
+                }
+            } else if (isset($_POST['af-create-edit-ad-submit'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_save_ad');
+
+                $ad_id          = $_POST['ad_id'];
+                $ad_name        = trim($_POST['ad_name']);
+                $ad_code        = trim($_POST['ad_code']);
+                $ad_active      = isset($_POST['ad_active']) ? 1 : 0;
+                $ad_locations   = isset($_POST['ad_locations']) ? implode(',', $_POST['ad_locations']) : '';
+
+                $this->asgarosforum->ads->save_ad($ad_id, $ad_name, $ad_code, $ad_active, $ad_locations);
+                $this->saved = true;
+            } else if (isset($_POST['asgaros-forum-delete-ad'])) {
+                // Verify nonce first.
+                check_admin_referer('asgaros_forum_delete_ad');
+
+                if (!empty($_POST['ad_id']) && is_numeric($_POST['ad_id'])) {
+                    $this->asgarosforum->ads->delete_ad($_POST['ad_id']);
+                    $this->saved = true;
                 }
             }
         }
