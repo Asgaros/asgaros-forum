@@ -101,14 +101,14 @@
         });
 
         // Disable submit-button after first submit
-        jQuery.fn.preventDoubleSubmission = function() {
+        $.fn.preventDoubleSubmission = function() {
             $(this).on('submit', function(e) {
-                var $form = $(this);
+                var form = $(this);
 
-                if ($form.data('submitted') === true) {
+                if (form.data('submitted') === true) {
                     e.preventDefault();
                 } else {
-                    $form.data('submitted', true);
+                    form.data('submitted', true);
                 }
             });
 
