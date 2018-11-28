@@ -423,6 +423,17 @@ class AsgarosForumContent {
         return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
     }
 
+    function get_topics($forum_id) {
+        $limit_end = $this->asgarosforum->options['topics_per_page'];
+        $limit_start = $this->asgarosforum->current_page * $limit_end;
+        $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $limit_start, $limit_end);
+
+        $order = apply_filters('asgarosforum_filter_get_threads_order', "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
+        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'normal%' ORDER BY {$order} {$limit};", $forum_id));
+        $results = apply_filters('asgarosforum_filter_get_threads', $results);
+        return $results;
+    }
+
     public function get_post($post_id) {
         return $this->asgarosforum->db->get_row("SELECT p1.*, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts FROM {$this->asgarosforum->tables->posts} AS p1 WHERE p1.id = {$post_id};");
     }

@@ -625,7 +625,7 @@ class AsgarosForum {
     }
 
     function showforum() {
-        $topics = $this->get_topics($this->current_forum);
+        $topics = $this->content->get_topics($this->current_forum);
         $sticky_topics = $this->content->get_sticky_topics($this->current_forum);
         $counter_normal = count($topics);
         $counter_total = $counter_normal + count($sticky_topics);
@@ -777,17 +777,6 @@ class AsgarosForum {
 
     function getSpecificForums($ids) {
         $results = $this->db->get_results("SELECT id, parent_id AS category_id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
-        return $results;
-    }
-
-    function get_topics($id) {
-        $start = $this->current_page * $this->options['topics_per_page'];
-        $end = $this->options['topics_per_page'];
-        $limit = $this->db->prepare("LIMIT %d, %d", $start, $end);
-
-        $order = apply_filters('asgarosforum_filter_get_threads_order', "(SELECT MAX(id) FROM {$this->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
-        $results = $this->db->get_results($this->db->prepare("SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$this->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'normal%' ORDER BY {$order} {$limit};", $id));
-        $results = apply_filters('asgarosforum_filter_get_threads', $results);
         return $results;
     }
 
