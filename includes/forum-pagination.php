@@ -26,7 +26,8 @@ class AsgarosForumPagination {
                 }
 
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array('part' => $num_pages));
-                echo '&raquo;<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
+                echo '<a>&raquo;</a>';
+                echo '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
             }
 
             echo '</div>';
@@ -92,7 +93,6 @@ class AsgarosForumPagination {
         // Only show pagination when there is more than one page.
         if ($num_pages > 1) {
             $out = '<div class="pages">';
-            $out .= __('Pages:', 'asgaros-forum');
 
             if ($num_pages <= 5) {
                 for ($i = 1; $i <= $num_pages; $i++) {
@@ -106,7 +106,8 @@ class AsgarosForumPagination {
             } else {
                 if ($current_page >= 3) {
                     $link = remove_query_arg('part', $select_url);
-                    $out .= '<a href="'.$link.'">'.__('First', 'asgaros-forum').'</a>&laquo;';
+                    $out .= '<a href="'.$link.'">'.__('First', 'asgaros-forum').'</a>';
+                    $out .= '<a>&laquo;</a>';
                 }
 
                 for ($i = 2; $i > 0; $i--) {
@@ -127,7 +128,8 @@ class AsgarosForumPagination {
 
                 if ($num_pages - $current_page >= 4) {
                     $link = add_query_arg('part', $num_pages, $select_url);
-                    $out .= '&raquo;<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
+                    $out .= '<a>&raquo;</a>';
+                    $out .= '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
                 }
             }
 

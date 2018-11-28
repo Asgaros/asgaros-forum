@@ -105,6 +105,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_add_admin_submenu_page hook
 * Fixed: Rare javascript-errors with some themes
 * Removed: asgarosforum_after_first_post hook
+* Minor design changes
 * Minor design changes in the administration area
 * Performance improvements and code optimizations
 = 1.11.3 =
