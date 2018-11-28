@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 31;
+    private $db_version = 36;
     private $tables;
 
     public function __construct() {
@@ -122,7 +122,8 @@ class AsgarosForumDatabase {
             parent_id int(11) NOT NULL default '0',
             views int(11) NOT NULL default '0',
             name varchar(255) NOT NULL default '',
-            status varchar(20) NOT NULL default 'normal_open',
+            sticky int(1) NOT NULL default '0',
+            closed int(1) NOT NULL default '0',
             approved int(1) NOT NULL default '1',
             slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
@@ -410,6 +411,27 @@ class AsgarosForumDatabase {
                 }
 
                 update_option('asgarosforum_db_version', 29);
+            }
+
+            // Save sticky-value in own field.
+            if ($database_version_installed < 33) {
+                $this->db->query("UPDATE {$this->tables->topics} SET sticky = 1 WHERE status LIKE 'sticky%';");
+
+                update_option('asgarosforum_db_version', 33);
+            }
+
+            // Save closed-value in own field.
+            if ($database_version_installed < 35) {
+                $this->db->query("UPDATE {$this->tables->topics} SET closed = 1 WHERE status LIKE '%closed';");
+
+                update_option('asgarosforum_db_version', 35);
+            }
+
+            // Drop old status-column.
+            if ($database_version_installed < 36) {
+                $this->db->query("ALTER TABLE {$this->tables->topics} DROP COLUMN status;");
+
+                update_option('asgarosforum_db_version', 36);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

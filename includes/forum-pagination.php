@@ -49,7 +49,7 @@ class AsgarosForumPagination {
             $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
         } else if ($location == $this->asgarosforum->tables->topics) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND status LIKE %s;", $sourceID, "normal%"));
+            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND sticky = 0;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'search') {
             $categories = $this->asgarosforum->content->get_categories();

@@ -1574,21 +1574,19 @@
 }
 
 /* ICONS */
-#af-wrapper .dashicons-normal_open:before {
+#af-wrapper .dashicons-topic-normal:before {
     content: "\f206";
 }
-#af-wrapper .dashicons-normal_closed:before {
+#af-wrapper .dashicons-topic-closed:before {
     content: "\f160";
 }
-#af-wrapper .dashicons-sticky_open:before,
-#af-wrapper .dashicons-sticky_closed:before {
+#af-wrapper .dashicons-topic-sticky:before {
     content: "\f109";
 }
 #af-wrapper .forum-dashicon:before,
-#af-wrapper .dashicons-normal_open:before,
-#af-wrapper .dashicons-normal_closed:before,
-#af-wrapper .dashicons-sticky_open:before,
-#af-wrapper .dashicons-sticky_closed:before {
+#af-wrapper .dashicons-topic-normal:before,
+#af-wrapper .dashicons-topic-closed:before,
+#af-wrapper .dashicons-topic-sticky:before {
     font-size: 40px;
     width: 40px;
     height: 40px;

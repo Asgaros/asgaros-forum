@@ -327,7 +327,7 @@ class AsgarosForumContent {
 
     public function get_sticky_topics($forum_id) {
         $order = apply_filters('asgarosforum_filter_get_sticky_topics_order', "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
-        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT t.*, (SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'sticky%' ORDER BY {$order};", $forum_id));
+        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT t.id, t.name, t.views, t.sticky, t.closed, (SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 1 ORDER BY {$order};", $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
         return $results;
     }
@@ -438,7 +438,7 @@ class AsgarosForumContent {
         $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
 
         // Build final query and get results.
-        $query = "SELECT t.id, t.name, t.views, t.status, ({$query_author}) AS author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'normal%' ORDER BY {$order} {$limit};";
+        $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, ({$query_author}) AS author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 0 ORDER BY {$order} {$limit};";
         $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
 

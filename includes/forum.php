@@ -639,7 +639,7 @@ class AsgarosForum {
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';
-            echo '<div class="topic-status dashicons-before dashicons-'.$topic_object->status.' '.$unread_status.'"></div>';
+            echo '<div class="topic-status dashicons-before '.$this->get_status_icon($topic_object->sticky, $topic_object->closed).' '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
                 echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
                 echo '<small>';
@@ -1229,42 +1229,45 @@ class AsgarosForum {
 
     function change_status($property) {
         if ($this->permissions->isModerator('current')) {
-            $new_status = '';
-
             if ($property == 'sticky') {
-                $new_status .= 'sticky_';
-                $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
+                $this->db->update($this->tables->topics, array('sticky' => 1), array('id' => $this->current_topic), array('%d'), array('%d'));
             } else if ($property == 'normal') {
-                $new_status .= 'normal_';
-                $new_status .= ($this->get_status('closed')) ? 'closed' : 'open';
+                $this->db->update($this->tables->topics, array('sticky' => 0), array('id' => $this->current_topic), array('%d'), array('%d'));
             } else if ($property == 'closed') {
-                $new_status .= ($this->get_status('sticky')) ? 'sticky_' : 'normal_';
-                $new_status .= 'closed';
+                $this->db->update($this->tables->topics, array('closed' => 1), array('id' => $this->current_topic), array('%d'), array('%d'));
             } else if ($property == 'open') {
-                $new_status .= ($this->get_status('sticky')) ? 'sticky_' : 'normal_';
-                $new_status .= 'open';
+                $this->db->update($this->tables->topics, array('closed' => 0), array('id' => $this->current_topic), array('%d'), array('%d'));
             }
-
-            $this->db->update($this->tables->topics, array('status' => $new_status), array('id' => $this->current_topic), array('%s'), array('%d'));
-
-            // Update cache
-            $this->cache['get_status'][$this->current_topic] = $new_status;
         }
     }
 
     function get_status($property) {
-        if (empty($this->cache['get_status'][$this->current_topic])) {
-            $this->cache['get_status'][$this->current_topic] = $this->db->get_var($this->db->prepare("SELECT status FROM {$this->tables->topics} WHERE id = %d;", $this->current_topic));
+        if ($property == 'sticky') {
+            $status = $this->db->get_var("SELECT sticky FROM {$this->tables->topics} WHERE id = {$this->current_topic};");
+
+            if ($status == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if ($property == 'closed') {
+            $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$this->current_topic};");
+
+            if ($status == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
+    }
 
-        $status = $this->cache['get_status'][$this->current_topic];
-
-        if ($property == 'sticky' && ($status == 'sticky_open' || $status == 'sticky_closed')) {
-            return true;
-        } else if ($property == 'closed' && ($status == 'normal_closed' || $status == 'sticky_closed')) {
-            return true;
+    function get_status_icon($sticky, $closed) {
+        if ($sticky == 1) {
+            return 'dashicons-topic-sticky';
+        } else if ($closed == 1) {
+            return 'dashicons-topic-closed';
         } else {
-            return false;
+            return 'dashicons-topic-normal';
         }
     }
 
