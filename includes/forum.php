@@ -684,7 +684,7 @@ class AsgarosForum {
 
     function showTopic() {
         // Create a unique slug for this topic if necessary.
-        $topic = $this->getTopic($this->current_topic);
+        $topic = $this->content->get_topic($this->current_topic);
 
         if (empty($topic->slug)) {
             $slug = $this->rewrite->create_unique_slug($topic->name, $this->tables->topics, 'topic');
@@ -1342,11 +1342,6 @@ class AsgarosForum {
 
         // Assign error message, because when this location is reached, no parents has been set.
         $this->error = $error[$contentType];
-    }
-
-    // Gets all data of a topic based on its ID.
-    public function getTopic($topicID) {
-        return $this->db->get_row($this->db->prepare("SELECT * FROM {$this->tables->topics} WHERE id = %d;", $topicID));
     }
 
     public function createBlogTopic($new_status, $old_status, $post) {

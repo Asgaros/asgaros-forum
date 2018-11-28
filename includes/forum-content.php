@@ -419,7 +419,6 @@ class AsgarosForumContent {
         return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
     }
 
-    // TODO: Remove redundant function in forum.php
     public function get_topic($topic_id) {
         return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
     }
