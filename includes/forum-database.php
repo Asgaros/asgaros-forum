@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 30;
+    private $db_version = 31;
     private $tables;
 
     public function __construct() {
@@ -123,6 +123,7 @@ class AsgarosForumDatabase {
             views int(11) NOT NULL default '0',
             name varchar(255) NOT NULL default '',
             status varchar(20) NOT NULL default 'normal_open',
+            approved int(1) NOT NULL default '1',
             slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
