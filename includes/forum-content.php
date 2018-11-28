@@ -424,13 +424,24 @@ class AsgarosForumContent {
     }
 
     function get_topics($forum_id) {
+        // Build query-part for pagination.
         $limit_end = $this->asgarosforum->options['topics_per_page'];
         $limit_start = $this->asgarosforum->current_page * $limit_end;
         $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $limit_start, $limit_end);
 
-        $order = apply_filters('asgarosforum_filter_get_threads_order', "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
-        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT t.id, t.name, t.views, t.status, (SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'normal%' ORDER BY {$order} {$limit};", $forum_id));
+        // Build query-part for ordering.
+        $order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC";
+        $order = apply_filters('asgarosforum_filter_get_threads_order', $order);
+
+        // Build additional sub-queries.
+        $query_author = "SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1";
+        $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
+
+        // Build final query and get results.
+        $query = "SELECT t.id, t.name, t.views, t.status, ({$query_author}) AS author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.status LIKE 'normal%' ORDER BY {$order} {$limit};";
+        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
+
         return $results;
     }
 
