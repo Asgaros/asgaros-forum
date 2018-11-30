@@ -67,39 +67,43 @@
     margin: 8px 0 0;
     background-color: #fafafa;
 }
-#af-options .inside {
+#af-options .inside,
+#af-structure #editor-container .inside {
     padding: 0;
     margin: 0;
 }
-#af-options table {
+#af-options table,
+#af-structure #editor-container table {
     width: 100%;
     border-collapse: collapse;
 }
-#af-options tr:nth-child(2n+1) {
+#af-options tr:nth-child(2n+1),
+#af-structure #editor-container tr:nth-child(2n+1) {
     background-color: #fff;
 }
-#af-options tr:nth-child(2n) {
+#af-options tr:nth-child(2n),
+#af-structure #editor-container tr:nth-child(2n) {
     background-color: #fafafa;
 }
 #af-options th {
     width: 35%;
 }
 #af-options th,
-#af-options td {
+#af-options td,
+#af-structure #editor-container th,
+#af-structure #editor-container td {
     text-align: left;
     padding: 8px 20px;
     font-weight: normal;
     border-bottom: 1px solid #eee;
     vertical-align: top;
 }
-#af-options td input {
+#af-options td input:not([class*="wp-color-picker"]):not([class*="wp-picker-default"]) {
     margin: 0px;
 }
-#af-options .wp-picker-container label {
-    min-width: initial;
-}
-#af-options .description {
-    color: #999;
+#af-options .description,
+#af-structure .description {
+    color: #666;
     display: block;
 }
 #af-options .postbox .dashicons-before:before {
@@ -269,4 +273,8 @@
 #af-structure #locations-editor label {
     display: block;
     margin: 0px 0px 6px 0px;
+}
+#af-structure #editor-container p.submit {
+    margin-left: 12px;
+    margin-right: 12px;
 }
