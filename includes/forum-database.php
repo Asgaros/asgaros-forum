@@ -188,6 +188,8 @@ class AsgarosForumDatabase {
                     $asgarosforum->options['location'] = $page_id;
                     $asgarosforum->saveOptions($asgarosforum->options);
                 }
+
+                update_option('asgarosforum_db_version', 1);
             }
 
             if ($database_version_installed < 5) {
@@ -196,6 +198,8 @@ class AsgarosForumDatabase {
                 // support FULLTEXT before MySQL version 5.6.
                 $this->db->query('ALTER TABLE '.$this->tables->posts.' ENGINE = MyISAM;');
                 $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD FULLTEXT (text);');
+
+                update_option('asgarosforum_db_version', 5);
             }
 
             // Create forum slugs.
@@ -206,6 +210,8 @@ class AsgarosForumDatabase {
                     $slug = $asgarosforum->rewrite->create_unique_slug($forum->name, $this->tables->forums, 'forum');
                     $this->db->update($this->tables->forums, array('slug' => $slug), array('id' => $forum->id), array('%s'), array('%d'));
                 }
+
+                update_option('asgarosforum_db_version', 6);
             }
 
             // Add index to posts.author_id to make countings faster.
@@ -256,6 +262,8 @@ class AsgarosForumDatabase {
                         $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
                     }
                 }
+
+                update_option('asgarosforum_db_version', 13);
             }
 
             // Move appearance settings into its own options-array.
@@ -273,6 +281,8 @@ class AsgarosForumDatabase {
                 // Save all options.
                 $asgarosforum->appearance->save_options($appearance_intersect);
                 $asgarosforum->saveOptions($options_cleaned);
+
+                update_option('asgarosforum_db_version', 14);
             }
 
             if ($database_version_installed < 19) {
@@ -281,6 +291,8 @@ class AsgarosForumDatabase {
                 // support FULLTEXT before MySQL version 5.6.
                 $this->db->query('ALTER TABLE '.$this->tables->topics.' ENGINE = MyISAM;');
                 $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD FULLTEXT (name);');
+
+                update_option('asgarosforum_db_version', 19);
             }
 
             // Create some default content.
@@ -308,6 +320,8 @@ class AsgarosForumDatabase {
                         $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'dashicons-editor-justify', 1, 0);
                     }
                 }
+
+                update_option('asgarosforum_db_version', 20);
             }
 
             // Add index to topics.parent_id for faster queries.
