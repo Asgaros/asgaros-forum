@@ -40,7 +40,7 @@ class AsgarosForumPagination {
         return '<a href="'.$link.'">'.number_format_i18n($page).'</a>';
     }
 
-    public function renderPagination($location, $sourceID = false) {
+    public function renderPagination($location, $sourceID = false, $element_counter = false) {
         $current_page = $this->asgarosforum->current_page;
         $num_pages = 0;
         $select_url = $this->asgarosforum->get_link('current', false, false, '', false);
@@ -86,8 +86,7 @@ class AsgarosForumPagination {
             $count = $this->asgarosforum->profile->count_post_history_by_user($user_id);
             $num_pages = ceil($count / 50);
         } else if ($location === 'unread') {
-            $count = count($this->asgarosforum->unread->get_unread_topics());
-            $num_pages = ceil($count / 50);
+            $num_pages = ceil($element_counter / 50);
         }
 
         // Only show pagination when there is more than one page.

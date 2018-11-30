@@ -194,16 +194,19 @@ class AsgarosForumUnread {
 
     // Renders a view with all unread topics.
     public function show_unread_topics() {
-        $pagination_rendering = $this->asgarosforum->pagination->renderPagination('unread');
+        // Load unread topics.
+        $unread_topics = $this->get_unread_topics();
+        $unread_topics_counter = count($unread_topics);
+
+        // Render pagination.
+        $pagination_rendering = $this->asgarosforum->pagination->renderPagination('unread', false, $unread_topics_counter);
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
-
-        $unread_topics = $this->get_unread_topics();
 
         echo '<div class="title-element"></div>';
         echo '<div class="content-element">';
 
-        if (count($unread_topics) > 0) {
+        if ($unread_topics_counter > 0) {
             $page_elements = 50;
             $page_start = $this->asgarosforum->current_page * $page_elements;
             $data_sliced = array_slice($unread_topics, $page_start, $page_elements);
