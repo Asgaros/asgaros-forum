@@ -22,7 +22,8 @@ class AsgarosForumAppearance {
 		'custom_background_color_alt'	=> '#fafafa',
         'custom_border_color'       	=> '#eeeeee',
 		'custom_font'					=> 'Verdana, Tahoma, sans-serif',
-		'custom_font_size'				=> '13px'
+		'custom_font_size'				=> '13px',
+		'custom_css'					=> ''
 	);
 
 	public function __construct($object) {
@@ -401,6 +402,10 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper {'.PHP_EOL;
 			    $custom_css .= 'font-size: '.$this->options['custom_font_size'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_css'] != $this->options_default['custom_css']) {
+			$custom_css .= $this->options['custom_css'];
 		}
 
 		return $custom_css;

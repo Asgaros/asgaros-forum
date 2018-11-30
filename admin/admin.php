@@ -334,7 +334,7 @@ class AsgarosForumAdmin {
 
         foreach ($asgarosforum->appearance->options_default as $k => $v) {
             if (isset($_POST[$k])) {
-                $tmp = esc_sql(stripslashes(trim($_POST[$k])));
+                $tmp = stripslashes(trim($_POST[$k]));
                 $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
             } else {
                 $saved_ops[$k] = $v;

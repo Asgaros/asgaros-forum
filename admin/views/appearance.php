@@ -77,6 +77,10 @@ if (!defined('ABSPATH')) exit;
                                     <th><label for="custom_border_color"><?php _e('Border color:', 'asgaros-forum'); ?></label></th>
                                     <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_border_color']); ?>" class="color-picker" name="custom_border_color" id="custom_border_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_border_color']; ?>"></td>
                                 </tr>
+                                <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                                    <th><label for="custom_css"><?php _e('Custom CSS:', 'asgaros-forum'); ?></label></th>
+                                    <td><textarea class="large-text" rows="8" cols="80" type="text" name="custom_css" id="custom_css"><?php echo esc_html(stripslashes($this->asgarosforum->appearance->options['custom_css'])); ?></textarea></td>
+                                </tr>
                             </table>
                         </div>
                     </div>
