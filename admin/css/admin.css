@@ -1,4 +1,3 @@
-/* PANEL */
 #asgaros-panel {
     position: relative;
     overflow: auto;
@@ -43,7 +42,8 @@
     vertical-align: top;
     line-height: 65px;
 }
-#asgaros-panel .dashicons-heart:before {
+#asgaros-panel .dashicons-heart:before,
+#af-structure .link-delete:hover {
     color: red;
 }
 #asgaros-panel h1 {
@@ -67,13 +67,9 @@
     margin: 8px 0 0;
     background-color: #fafafa;
 }
-/* OPTIONS */
 #af-options .inside {
     padding: 0;
     margin: 0;
-}
-#af-options .regular-text {
-    width: 100%;
 }
 #af-options table {
     width: 100%;
@@ -109,10 +105,6 @@
 #af-options .postbox .dashicons-before:before {
     padding-right: 5px;
 }
-#af-options textarea {
-    width: 100%;
-}
-/* STRUCTURE/USERGROUPS */
 #af-structure .category-actions {
     float: right;
     font-weight: normal;
@@ -137,9 +129,6 @@
 #af-structure .link-delete {
     color: #a00;
 }
-#af-structure .link-delete:hover {
-    color: red;
-}
 #af-structure .padding-top {
     padding-top: 10px;
 }
@@ -163,7 +152,8 @@
     font-style: italic;
     font-size: small;
 }
-#af-structure .parentforum {
+#af-structure .parentforum,
+#af-structure #usergroups-editor td label {
     display: block;
 }
 #af-structure .subforum {
@@ -186,9 +176,6 @@
     outline: 0;
     margin: 0 0 3px;
     background-color: #fff;
-}
-#af-structure #forum_description {
-    width: 100%;
 }
 #af-structure .delete-layer input[type="submit"] {
     background-color: #d54e21;
@@ -258,7 +245,8 @@
     box-sizing: border-box;
 }
 #af-structure #usergroups-editor th,
-#af-structure #usergroup-color-settings th {
+#af-structure #usergroup-color-settings th,
+#af-structure #locations-editor th {
     vertical-align: top;
 }
 #af-structure #usergroups-editor td .usergroup-category-name {
@@ -269,17 +257,14 @@
 #af-structure #usergroups-editor td .usergroup-category-name:first-of-type {
     padding-top: 0px;
 }
-#af-structure #usergroups-editor td label {
-    display: block;
-}
 #af-structure .clear {
     clear: both;
 }
-#af-structure textarea {
+#af-options textarea,
+#af-structure textarea,
+#af-structure #forum_description,
+#af-options .regular-text {
     width: 100%;
-}
-#af-structure #locations-editor th {
-    vertical-align: top;
 }
 #af-structure #locations-editor label {
     display: block;
