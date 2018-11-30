@@ -108,15 +108,12 @@ class AsgarosForumOnline {
         // Get list of online users.
         $this->online_users = get_users(
             array(
-                'fields'        => 'id',
+                'fields'        => 'ID',
+                'orderby'       => 'ID',
                 'meta_query'    => array(
                     'relation'  => 'AND',
                     array(
                         'key'       => 'asgarosforum_online',
-                        'compare'   => 'EXISTS'
-                    ),
-                    array(
-                        'key'       => 'asgarosforum_online_timestamp',
                         'compare'   => 'EXISTS'
                     ),
                     array(
