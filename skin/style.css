@@ -358,7 +358,8 @@
 /* OVERVIEW/FORUM */
 #af-wrapper .forum small,
 #af-wrapper .topic small,
-#af-wrapper .member small {
+#af-wrapper .member small,
+#af-wrapper .unread-topic small {
     display: block;
     font-style: normal; /* comp */
     letter-spacing: normal; /* comp */
