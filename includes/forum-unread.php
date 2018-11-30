@@ -192,6 +192,14 @@ class AsgarosForumUnread {
         echo '</div>';
     }
 
+    function show_unread_menu() {
+        echo '<div class="forum-menu">';
+        echo '<a class="dashicons-before dashicons-yes" href="'.$this->asgarosforum->get_link('markallread').'">';
+        echo __('Mark All Read', 'asgaros-forum');
+        echo '</a>';
+        echo '</div>';
+    }
+
     // Renders a view with all unread topics.
     public function show_unread_topics() {
         // Load unread topics.
@@ -200,8 +208,12 @@ class AsgarosForumUnread {
 
         // Render pagination.
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('unread', false, $unread_topics_counter);
-        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
-        echo $paginationRendering;
+
+        echo '<div class="pages-and-menu">';
+            echo $pagination_rendering;
+            $this->show_unread_menu();
+            echo '<div class="clear"></div>';
+        echo '</div>';
 
         echo '<div class="title-element"></div>';
         echo '<div class="content-element">';
@@ -230,7 +242,11 @@ class AsgarosForumUnread {
 
         echo '</div>';
 
-        echo $paginationRendering;
+        echo '<div class="pages-and-menu">';
+            echo $pagination_rendering;
+            $this->show_unread_menu();
+            echo '<div class="clear"></div>';
+        echo '</div>';
     }
 
     // Get all unread topics.
