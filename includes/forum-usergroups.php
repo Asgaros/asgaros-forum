@@ -473,7 +473,7 @@ class AsgarosForumUserGroups {
                             echo '</label>';
                         }
                     }
-                    echo '<p class="description">'.__('When usergroups are selected, only users of the selected usergroups will have access to the category.', 'asgaros-forum').'</p>';
+                    echo '<span class="description">'.__('When usergroups are selected, only users of the selected usergroups will have access to the category.', 'asgaros-forum').'</span>';
                 echo '</td>';
             echo '</tr>';
         }
