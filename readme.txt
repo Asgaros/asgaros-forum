@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.7
 Tested up to: 5.0
 Requires PHP: 5.2
-Stable tag: 1.11.3
+Stable tag: 1.12.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Search
 * Moderators
 * Statistics
-* Ads Manager
+* Ads Management
 * Permissions
 * Usergroups
 * Who Is Online
@@ -94,7 +94,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Ads-manager
+= 1.12.0 =
+* Added: Ads Management
 * Added: Option to add custom css
 * Added: Option to hide posts from logged-out users
 * Added: Mark all read-button to unread-view
