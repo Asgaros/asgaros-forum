@@ -112,8 +112,18 @@ if (!defined('ABSPATH')) exit;
                                 </tr>
 
                                 <tr>
-                                    <th><label for="require_login"><?php _e('Forum visible to logged in users only', 'asgaros-forum'); ?></label></th>
+                                    <th><label for="require_login"><?php _e('Hide forum from logged-out users', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="require_login" id="require_login" <?php checked(!empty($asgarosforum->options['require_login'])); ?>></td>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        <label for="require_login_posts"><?php _e('Hide posts from logged-out users', 'asgaros-forum'); ?></label>
+                                        <span class="description"><?php _e('Guests can see topics but need to log in to access the posts they contain.', 'asgaros-forum'); ?></span>
+                                    </th>
+                                    <td>
+                                        <input type="checkbox" name="require_login_posts" id="require_login_posts" <?php checked(!empty($asgarosforum->options['require_login_posts'])); ?>>
+                                    </td>
                                 </tr>
 
                                 <tr>

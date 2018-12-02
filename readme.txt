@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Ads-manager
 * Added: Option to add custom css
+* Added: Option to hide posts from logged-out users
 * Added: Mark all read-button to unread-view
 * Added: Show location of unread topics
 * Added: asgarosforum_content_top hook

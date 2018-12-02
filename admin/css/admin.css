@@ -96,7 +96,14 @@
     padding: 8px 20px;
     font-weight: normal;
     border-bottom: 1px solid #eee;
+}
+#af-options th,
+#af-structure #editor-container th {
     vertical-align: top;
+}
+#af-options td,
+#af-structure #editor-container td {
+    vertical-align: middle;
 }
 #af-options td input:not([class*="wp-color-picker"]):not([class*="wp-picker-default"]) {
     margin: 0px;
@@ -105,6 +112,7 @@
 #af-structure .description {
     color: #666;
     display: block;
+    padding-top: 8px;
 }
 #af-options .postbox .dashicons-before:before {
     padding-right: 5px;

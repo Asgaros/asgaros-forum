@@ -88,6 +88,7 @@ class AsgarosForum {
         'time_limit_edit_posts'             => 0,
         'show_description_in_forum'         => false,
         'require_login'                     => false,
+        'require_login_posts'               => false,
         'create_blog_topics_id'             => 0,
         'enable_ads'                        => false,
         'ads_frequency_categories'          => 2,
@@ -413,7 +414,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged in users have access to the forum.', 'asgaros-forum');
+            $this->error = __('Sorry, only logged-in users have access to the forum.', 'asgaros-forum');
             $this->error = apply_filters('asgarosforum_filter_error_message_require_login', $this->error);
             return;
         }
@@ -436,6 +437,12 @@ class AsgarosForum {
         // Check usergroups access.
         if (!AsgarosForumUserGroups::checkAccess($this->current_category)) {
             $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+            return;
+        }
+
+        // Check topic-access.
+        if ($this->current_view === 'topic' && $this->options['require_login_posts'] && !is_user_logged_in()) {
+            $this->error = __('Sorry, only logged-in users have access to this topic.', 'asgaros-forum');
             return;
         }
 
