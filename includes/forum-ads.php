@@ -110,7 +110,9 @@ class AsgarosForumAds {
     public function render_ads($position) {
         if (!empty($this->ads[$position])) {
             foreach ($this->ads[$position] as $ad) {
-                echo '<div class="ad ad-'.$position.'">'.stripslashes($ad).'</div>';
+                $ad = do_shortcode(stripslashes($ad));
+
+                echo '<div class="ad ad-'.$position.'">'.$ad.'</div>';
             }
         }
     }
