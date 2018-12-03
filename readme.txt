@@ -98,6 +98,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Only show accessible topics in unread-view
 * Fixed: Only show accessible topics in unread-view when using shortcode-parameters
 * Fixed: Only show accessible topics in post-history when using shortcode-parameters
+* Minor design changes
 * Performance improvements and code optimizations
 = 1.12.0 =
 * Added: Ads Management

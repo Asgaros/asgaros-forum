@@ -553,7 +553,7 @@ class AsgarosForum {
                         $this->showMoveTopic();
                     break;
                     case 'forum':
-                        $this->showforum();
+                        $this->show_forum();
                     break;
                     case 'topic':
                         $this->showTopic();
@@ -631,12 +631,7 @@ class AsgarosForum {
         require('views/post-element.php');
     }
 
-    function showforum() {
-        $topics = $this->content->get_topics($this->current_forum);
-        $sticky_topics = $this->content->get_sticky_topics($this->current_forum);
-        $counter_normal = count($topics);
-        $counter_total = $counter_normal + count($sticky_topics);
-
+    function show_forum() {
         require('views/forum.php');
     }
 

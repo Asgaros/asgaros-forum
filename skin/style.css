@@ -456,9 +456,6 @@
     margin-top: 3px;
     word-break: break-word;
 }
-#af-wrapper .sticky-bottom {
-    border-bottom: 1px solid #e1e4e8;
-}
 #af-wrapper .forum-lastpost-small,
 #af-wrapper .topic-lastpost-small {
     display: none !important;

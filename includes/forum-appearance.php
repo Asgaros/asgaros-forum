@@ -368,7 +368,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #statistics-online-users,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-row,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-row-subject,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .sticky-bottom,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
