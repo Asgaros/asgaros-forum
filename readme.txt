@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Allow activity-feed when using shortcode-parameters for categories
+* Fixed: Only show accessible topics in unread-view
 * Fixed: Only show accessible topics in unread-view when using shortcode-parameters
 * Fixed: Only show accessible topics in post-history when using shortcode-parameters
 * Performance improvements and code optimizations
