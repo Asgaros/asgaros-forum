@@ -342,7 +342,7 @@ class AsgarosForumContent {
             $meta_query_filter = $this->get_categories_filter();
 
             // Set include filter when extended shortcode is used.
-            if ($this->asgarosforum->shortcode->includeCategories) {
+            if (!empty($this->asgarosforum->shortcode->includeCategories)) {
                 $include = $this->asgarosforum->shortcode->includeCategories;
             }
         }
@@ -370,12 +370,14 @@ class AsgarosForumContent {
         // Prepare lists and filters.
         $ids_categories = array();
         $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
+        $ids_categories_included = $this->asgarosforum->shortcode->includeCategories;
         $meta_query_filter = $this->get_categories_filter();
 
         // Get accessible categories first.
         $categories_list = get_terms('asgarosforum-category', array(
             'hide_empty'    => false,
             'exclude'       => $ids_categories_excluded,
+            'include'       => $ids_categories_included,
             'meta_query'    => $meta_query_filter
         ));
 

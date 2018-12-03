@@ -6,7 +6,7 @@ class AsgarosForumShortcodes {
     private $asgarosforum = null;
     private $postObject = null;
     public $shortcodeSearchFilter = '';
-    public $includeCategories = false;
+    public $includeCategories = array();
 
     public function __construct($object) {
 		$this->asgarosforum = $object;
@@ -86,7 +86,7 @@ class AsgarosForumShortcodes {
                     $this->includeCategories = explode(',', $atts['category']);
 
                     // Ensure that we are in the correct element.
-                    if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members' && $this->asgarosforum->current_view != 'history' && $this->asgarosforum->current_view != 'markallread' && $this->asgarosforum->current_view != 'unread') {
+                    if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members' && $this->asgarosforum->current_view != 'history' && $this->asgarosforum->current_view != 'markallread' && $this->asgarosforum->current_view != 'unread' && $this->asgarosforum->current_view != 'activity') {
                         $this->asgarosforum->current_category   = false;
                         $this->asgarosforum->parent_forum       = false;
                         $this->asgarosforum->current_forum      = false;
