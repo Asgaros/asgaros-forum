@@ -26,8 +26,7 @@ class AsgarosForumPagination {
                 }
 
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array('part' => $num_pages));
-                echo '<a>&raquo;</a>';
-                echo '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
+                echo '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'&nbsp;&raquo;</a>';
             }
 
             echo '</div>';
@@ -105,8 +104,7 @@ class AsgarosForumPagination {
             } else {
                 if ($current_page >= 3) {
                     $link = remove_query_arg('part', $select_url);
-                    $out .= '<a href="'.$link.'">'.__('First', 'asgaros-forum').'</a>';
-                    $out .= '<a>&laquo;</a>';
+                    $out .= '<a href="'.$link.'">&laquo;&nbsp;'.__('First', 'asgaros-forum').'</a>';
                 }
 
                 for ($i = 2; $i > 0; $i--) {
@@ -127,8 +125,7 @@ class AsgarosForumPagination {
 
                 if ($num_pages - $current_page >= 4) {
                     $link = add_query_arg('part', $num_pages, $select_url);
-                    $out .= '<a>&raquo;</a>';
-                    $out .= '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'</a>';
+                    $out .= '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'&nbsp;&raquo;</a>';
                 }
             }
 
