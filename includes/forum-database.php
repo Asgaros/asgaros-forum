@@ -88,11 +88,16 @@ class AsgarosForumDatabase {
     }
 
     public function buildDatabase() {
-        // Start the installation/update logic.
         global $asgarosforum;
-
+        $first_time_installation = false;
         $database_version_installed = get_option('asgarosforum_db_version');
 
+        // Set flag when it its a first-time-installation.
+        if ($database_version_installed === false) {
+            $first_time_installation = true;
+        }
+
+        // Start the installation/update logic.
         if ($database_version_installed != $this->db_version) {
             // Rename old table.
             $renameTable = $this->db->get_results('SHOW TABLES LIKE "'.$this->db->prefix.'forum_threads";');
@@ -169,7 +174,7 @@ class AsgarosForumDatabase {
             dbDelta($sql);
 
             // First time installation instructions.
-            if ($database_version_installed == false) {
+            if ($first_time_installation) {
                 // Try to create a new page for the forum.
                 $page_id = wp_insert_post(
                     array(
@@ -203,7 +208,7 @@ class AsgarosForumDatabase {
             }
 
             // Create forum slugs.
-            if ($database_version_installed < 6) {
+            if ($database_version_installed < 6 && !$first_time_installation) {
                 $forums = $this->db->get_results("SELECT id, name FROM ".$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
 
                 foreach ($forums as $forum) {
@@ -267,7 +272,7 @@ class AsgarosForumDatabase {
             }
 
             // Move appearance settings into its own options-array.
-            if ($database_version_installed < 14) {
+            if ($database_version_installed < 14 && !$first_time_installation) {
                 // Ensure that all options are loaded first.
                 $asgarosforum->loadOptions();
                 $asgarosforum->appearance->load_options();
@@ -334,7 +339,7 @@ class AsgarosForumDatabase {
             }
 
             // Use valid default-values for dates.
-            if ($database_version_installed < 23) {
+            if ($database_version_installed < 23 && !$first_time_installation) {
                 $this->db->query("UPDATE {$this->tables->posts} SET date = '1000-01-01 00:00:00' WHERE date = '0000-00-00 00:00:00';");
                 $this->db->query("UPDATE {$this->tables->posts} SET date_edit = '1000-01-01 00:00:00' WHERE date_edit = '0000-00-00 00:00:00';");
 
@@ -360,7 +365,7 @@ class AsgarosForumDatabase {
             }
 
             // Convert to new role system.
-            if ($database_version_installed < 26) {
+            if ($database_version_installed < 26 && !$first_time_installation) {
                 // Convert moderators.
                 $get_moderators = get_users(array(
                     'fields'            => array('ID'),
@@ -403,7 +408,7 @@ class AsgarosForumDatabase {
             }
 
             // We need to save the forum_id in the posts-table to increase performance.
-            if ($database_version_installed < 27) {
+            if ($database_version_installed < 27 && !$first_time_installation) {
                 $this->db->query("UPDATE {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id SET p.forum_id = t.parent_id;");
 
                 update_option('asgarosforum_db_version', 27);
@@ -428,21 +433,21 @@ class AsgarosForumDatabase {
             }
 
             // Save sticky-value in own field.
-            if ($database_version_installed < 33) {
+            if ($database_version_installed < 33 && !$first_time_installation) {
                 $this->db->query("UPDATE {$this->tables->topics} SET sticky = 1 WHERE status LIKE 'sticky%';");
 
                 update_option('asgarosforum_db_version', 33);
             }
 
             // Save closed-value in own field.
-            if ($database_version_installed < 35) {
+            if ($database_version_installed < 35 && !$first_time_installation) {
                 $this->db->query("UPDATE {$this->tables->topics} SET closed = 1 WHERE status LIKE '%closed';");
 
                 update_option('asgarosforum_db_version', 35);
             }
 
             // Drop old status-column.
-            if ($database_version_installed < 36) {
+            if ($database_version_installed < 36 && !$first_time_installation) {
                 $this->db->query("ALTER TABLE {$this->tables->topics} DROP COLUMN status;");
 
                 update_option('asgarosforum_db_version', 36);

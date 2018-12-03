@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 1.12.0 =
 * Added: Ads Management
 * Added: Option to add custom css
