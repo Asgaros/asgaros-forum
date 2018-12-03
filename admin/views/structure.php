@@ -6,7 +6,7 @@
     $titleUpdated = __('Structure updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
 
-    $categories = $asgarosforum->content->get_categories();
+    $categories = $asgarosforum->content->get_categories(false);
     ?>
 
     <div id="hidden-data" style="display: none;">
