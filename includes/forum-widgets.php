@@ -53,7 +53,7 @@ class AsgarosForumWidgets {
         $locationSetUp = self::setUpLocation();
 
         if ($locationSetUp) {
-            $categoriesIDs = self::$asgarosforum->content->get_accessible_categories();
+            $categoriesIDs = self::$asgarosforum->content->get_categories_ids();
 
             $where = false;
 

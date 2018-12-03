@@ -259,7 +259,7 @@ class AsgarosForumUnread {
     // Get all unread topics.
     public function get_unread_topics() {
         // Get accessible categories first.
-        $ids_categories = $this->asgarosforum->content->get_accessible_categories();
+        $ids_categories = $this->asgarosforum->content->get_categories_ids();
 
         // Load potential unread topics.
         $unread_topics = array();

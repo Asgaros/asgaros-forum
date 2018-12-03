@@ -90,7 +90,7 @@ class AsgarosForumActivity {
     }
 
     public function load_activity_data($count_all = false) {
-        $ids_categories = $this->asgarosforum->content->get_accessible_categories();
+        $ids_categories = $this->asgarosforum->content->get_categories_ids();
 
         if (empty($ids_categories)) {
             return false;

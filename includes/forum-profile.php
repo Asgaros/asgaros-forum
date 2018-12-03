@@ -130,7 +130,7 @@ class AsgarosForumProfile {
 
     public function get_post_history_by_user($user_id, $limit = false) {
         // Get accessible categories for the current user first.
-        $accessible_categories = $this->asgarosforum->content->get_accessible_categories();
+        $accessible_categories = $this->asgarosforum->content->get_categories_ids();
 
         if (empty($accessible_categories)) {
             // Cancel if the user cant access any categories.

@@ -333,47 +333,16 @@ class AsgarosForumContent {
     }
 
     public function get_categories($enable_filtering = true) {
-        $filter = array();
-        $include = array();
+        $ids_categories_excluded = array();
+        $ids_categories_included = array();
         $meta_query_filter = array();
 
         if ($enable_filtering) {
-            $filter = apply_filters('asgarosforum_filter_get_categories', $filter);
+            $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
+            $ids_categories_included = $this->asgarosforum->shortcode->includeCategories;
             $meta_query_filter = $this->get_categories_filter();
-
-            // Set include filter when extended shortcode is used.
-            if (!empty($this->asgarosforum->shortcode->includeCategories)) {
-                $include = $this->asgarosforum->shortcode->includeCategories;
-            }
         }
 
-        $categories = get_terms('asgarosforum-category', array('hide_empty' => false, 'exclude' => $filter, 'include' => $include, 'meta_query' => $meta_query_filter));
-
-        // Filter categories by usergroups.
-        if ($enable_filtering) {
-            $categories = AsgarosForumUserGroups::filterCategories($categories);
-        }
-
-        // Get information about ordering.
-        foreach ($categories as $category) {
-            $category->order = get_term_meta($category->term_id, 'order', true);
-        }
-
-        // Sort the categories based on ordering information.
-        usort($categories, array($this, 'get_categories_compare'));
-
-        return $categories;
-    }
-
-    // TODO: Check function above. Can get combined somehow I guess ...
-    public function get_accessible_categories() {
-        // Prepare lists and filters.
-        $ids_categories = array();
-        $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
-        $ids_categories_included = $this->asgarosforum->shortcode->includeCategories;
-        $meta_query_filter = $this->get_categories_filter();
-
-        // Get accessible categories first.
         $categories_list = get_terms('asgarosforum-category', array(
             'hide_empty'    => false,
             'exclude'       => $ids_categories_excluded,
@@ -381,14 +350,31 @@ class AsgarosForumContent {
             'meta_query'    => $meta_query_filter
         ));
 
-        // Now filter them based on usergroups.
-        $categories_list = AsgarosForumUserGroups::filterCategories($categories_list);
-
-        foreach ($categories_list as $category) {
-            $ids_categories[] = $category->term_id;
+        // Filter categories by usergroups.
+        if ($enable_filtering) {
+            $categories_list = AsgarosForumUserGroups::filterCategories($categories_list);
         }
 
-        return $ids_categories;
+        // Get information about ordering.
+        foreach ($categories_list as $category) {
+            $category->order = get_term_meta($category->term_id, 'order', true);
+        }
+
+        // Sort the categories based on ordering information.
+        usort($categories_list, array($this, 'get_categories_compare'));
+
+        return $categories_list;
+    }
+
+    public function get_categories_ids() {
+        $categories = $this->get_categories(true);
+        $categories_ids = array();
+
+        foreach ($categories as $category) {
+            $categories_ids[] = $category->term_id;
+        }
+
+        return $categories_ids;
     }
 
     public function get_categories_filter() {
