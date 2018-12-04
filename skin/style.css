@@ -177,7 +177,7 @@
     line-height: 29px;
     height: 30px;
     margin: 0;
-    padding: 0 12px !important; /* comp */
+    padding: 0 8px !important; /* comp */
     cursor: pointer;
     -webkit-appearance: none;
     border-radius: 0;
@@ -482,9 +482,11 @@
     width: auto;
 }
 #af-wrapper .forum-menu a:before {
-    line-height: 29px;
     height: 30px;
-    font-size: 16px;
+    width: 14px;
+    font-size: 14px;
+    line-height: 30px;
+    padding-right: 4px;
 }
 
 /* NOTICE */
