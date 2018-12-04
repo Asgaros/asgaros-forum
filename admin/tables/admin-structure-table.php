@@ -27,7 +27,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
 
     function column_name($item) {
         $forumIcon = trim(esc_html(stripslashes($item['icon'])));
-        $forumIcon = (empty($forumIcon)) ? 'dashicons-editor-justify' : $forumIcon;
+        $forumIcon = (empty($forumIcon)) ? 'dashicons-format-chat' : $forumIcon;
 
         $columnHTML = '';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
@@ -44,7 +44,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         }
 
         $forum_icon = trim(esc_html(stripslashes($item['icon'])));
-        $forum_icon = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
+        $forum_icon = (empty($forum_icon)) ? 'dashicons-format-chat' : $forum_icon;
         $columnHTML .= '<span class="forum-icon dashicons-before '.$forum_icon.'"></span>';
         $columnHTML .= '<span class="make-bold">'.stripslashes($item['name']).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.$item['id'].')</span></span>';
         $columnHTML .= '<br>';

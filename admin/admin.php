@@ -390,7 +390,7 @@ class AsgarosForumAdmin {
         $forum_name         = trim($_POST['forum_name']);
         $forum_description  = trim($_POST['forum_description']);
         $forum_icon         = trim($_POST['forum_icon']);
-        $forum_icon         = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
+        $forum_icon         = (empty($forum_icon)) ? 'dashicons-format-chat' : $forum_icon;
         $forum_closed       = (isset($_POST['forum_closed'])) ? 1 : 0;
         $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
 

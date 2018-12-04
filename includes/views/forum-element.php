@@ -18,7 +18,7 @@ $count_posts_i18n = number_format_i18n($forum->count_posts);
 
 echo '<div class="forum" id="forum-'.$forum->id.'">';
     $forum_icon = trim(esc_html(stripslashes($forum->icon)));
-    $forum_icon = (empty($forum_icon)) ? 'dashicons-editor-justify' : $forum_icon;
+    $forum_icon = (empty($forum_icon)) ? 'dashicons-format-chat' : $forum_icon;
 
     echo '<div class="forum-status forum-dashicon dashicons-before '.$forum_icon.' '.$unread_status.'"></div>';
     echo '<div class="forum-name">';
