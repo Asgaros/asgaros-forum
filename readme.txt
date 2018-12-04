@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Ad code containing JavaScript could not be edited
 * Fixed: Allow activity-feed when using shortcode-parameters for categories
 * Fixed: Only show accessible topics in unread-view
 * Fixed: Only show accessible topics in unread-view when using shortcode-parameters

@@ -208,7 +208,7 @@
 
             $('#ad-editor input[name=ad_id]').val(ad_id);
             $('#ad-editor input[name=ad_name]').val(ad_name);
-            $('#ad-editor textarea[name=ad_code]').html(ad_code);
+            $('#ad-editor textarea[name=ad_code]').text(ad_code);
 
             if (ad_active == '1') {
                 $('#ad-editor input[name=ad_active]').prop('checked', true);
