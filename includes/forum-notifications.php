@@ -379,7 +379,12 @@ class AsgarosForumNotifications {
         // Replace username first.
         $user = get_user_by('email', $mail);
 
-        $message_template = str_replace('###USERNAME###', $user->display_name, $message_template);
+        // Only apply username-replacement when the user exists, other use a more general replacement.
+        if ($user) {
+            $message_template = str_replace('###USERNAME###', $user->display_name, $message_template);
+        } else {
+            $message_template = str_replace('###USERNAME###', __('User', 'asgaros-forum'), $message_template);
+        }
 
         // Filter for adding custom user-replacements.
         $replacements = apply_filters('asgarosforum_user_replacements', $replacements, $user);
