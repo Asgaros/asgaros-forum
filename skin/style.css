@@ -1499,11 +1499,17 @@
     height: 20px;
     line-height: 20px;
 }
+#af-wrapper .report-link {
+    color: #888;
+}
 
 /* REACTIONS */
 #af-wrapper .post-reactions {
     float: left;
     cursor: default;
+}
+#af-wrapper .post-reactions .reaction {
+    color: #888;
 }
 #af-wrapper .post-reactions .reaction-icon,
 #af-wrapper .post-reactions .reaction-icon:before,

@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Wrong stylings when using custom colors
 = 1.12.1 =
 * Fixed: Ad code containing JavaScript could not be edited
 * Fixed: Allow activity-feed when using shortcode-parameters for categories

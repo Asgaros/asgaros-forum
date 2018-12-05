@@ -267,8 +267,6 @@ class AsgarosForumAppearance {
 		if ($this->options['custom_accent_color'] != $this->options_default['custom_accent_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_accent_color'])) {
 			$custom_css .= '#af-wrapper input[type="button"],'.PHP_EOL;
 			$custom_css .= '#af-wrapper input[type="submit"],'.PHP_EOL;
-			$custom_css .= '#af-wrapper .editor-row .cancel,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .editor-row .cancel-back,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-menu a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .title-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-header,'.PHP_EOL;
@@ -308,6 +306,8 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
 			$custom_css .= '#af-wrapper span.mention-nice-name,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .activity-element:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .post-reactions .reaction,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-link,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .activity-time {'.PHP_EOL;
 			    $custom_css .= 'color: '.$this->options['custom_text_color_light'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
