@@ -116,6 +116,10 @@
                                         <td><input type="checkbox" id="forum_closed" name="forum_closed"></td>
                                     </tr>
                                     <tr>
+                                        <th><label for="forum_approval"><?php _e('Approval:', 'asgaros-forum'); ?></label></th>
+                                        <td><input type="checkbox" id="forum_approval" name="forum_approval"></td>
+                                    </tr>
+                                    <tr>
                                         <th><label for="forum_order"><?php _e('Order:', 'asgaros-forum'); ?></label></th>
                                         <td><input type="number" size="4" id="forum_order" name="forum_order" value="" min="1"></td>
                                     </tr>

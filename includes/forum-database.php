@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 36;
+    private $db_version = 37;
     private $tables;
 
     public function __construct() {
@@ -118,6 +118,7 @@ class AsgarosForumDatabase {
             icon varchar(255) NOT NULL default '',
             sort int(11) NOT NULL default '0',
             closed int(11) NOT NULL default '0',
+            approval int(11) NOT NULL default '0',
             slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
@@ -322,7 +323,7 @@ class AsgarosForumDatabase {
                         $default_forum_name = __('First Forum', 'asgaros-forum');
                         $default_forum_description = __('My first forum.', 'asgaros-forum');
 
-                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'dashicons-format-chat', 1, 0);
+                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'dashicons-format-chat', 1, 0, 0);
                     }
                 }
 
