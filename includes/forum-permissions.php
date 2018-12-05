@@ -485,4 +485,21 @@ class AsgarosForumPermissions {
             printf('<div class="updated"><p>'.__('Forum role assigned.', 'asgaros-forum').'</p></div>');
         }
     }
+
+    // Checks if a topic requires approval for a specific forum and user.
+    public function topic_requires_approval($forum_id, $user_id) {
+        // No approval needed if the user is at least an moderator.
+        if ($this->isModerator($user_id)) {
+            return false;
+        }
+
+        // Otherwise the approval depends on the forum-setting.
+        $approval = $this->asgarosforum->db->get_var("SELECT approval FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
+
+        if ($approval === '1') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

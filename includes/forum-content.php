@@ -234,8 +234,15 @@ class AsgarosForumContent {
         // Get a slug for the new topic.
         $topic_slug = $this->asgarosforum->rewrite->create_unique_slug($name, $this->asgarosforum->tables->topics, 'topic');
 
+        // Set the approval-status for the topic.
+        $approved = 1;
+
+        if ($this->asgarosforum->permissions->topic_requires_approval($forum_id, $author_id)) {
+            $approved = 0;
+        }
+
         // Insert the topic.
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->topics, array('name' => $name, 'parent_id' => $forum_id, 'slug' => $topic_slug), array('%s', '%d', '%s'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->topics, array('name' => $name, 'parent_id' => $forum_id, 'slug' => $topic_slug, 'approved' => $approved), array('%s', '%d', '%s', '%d'));
 
         // Save the ID of the new topic.
         $inserted_ids = new stdClass;
