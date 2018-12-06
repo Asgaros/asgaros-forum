@@ -22,7 +22,9 @@ class AsgarosForumApproval {
 
     // Approves a topic.
     public function approve_topic($topic_id) {
-        $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
+        if ($this->asgarosforum->permissions->isModerator('current')) {
+            $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
+        }
     }
 
     // Sends a notification about a new unapproved topic.
