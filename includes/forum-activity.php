@@ -66,14 +66,7 @@ class AsgarosForumActivity {
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
-
-                    // Set correct icon based on approved-status.
-                    if ($activity->approved == 1) {
-                        echo '<div class="activity-element dashicons-before dashicons-edit '.$read_status.'">';
-                    } else {
-                        echo '<div class="activity-element dashicons-before dashicons-editor-help read">';
-                    }
-
+                    echo '<div class="activity-element dashicons-before dashicons-edit '.$read_status.'">';
                     echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$human_time_diff.'</i>';
                     echo '</div>';
                 } else {
@@ -109,7 +102,7 @@ class AsgarosForumActivity {
             } else {
                 $start = $this->asgarosforum->current_page * 50;
                 $end = 50;
-                return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name, t.approved FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$ids_categories})) ORDER BY p.id DESC LIMIT {$start}, {$end};");
+                return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$ids_categories})) ORDER BY p.id DESC LIMIT {$start}, {$end};");
             }
         }
     }

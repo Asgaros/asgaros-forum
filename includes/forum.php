@@ -640,14 +640,7 @@ class AsgarosForum {
 
     function render_topic_element($topic_object, $topic_type = 'topic-normal', $show_topic_location = false) {
         $lastpost_data = $this->get_lastpost_in_topic($topic_object->id);
-
-        // Set proper unread-status - but only if the topic is approved.
-        $unread_status = 'read';
-
-        if ($topic_object->approved == 1) {
-            $unread_status = $this->unread->get_status_topic($topic_object->id);
-        }
-
+        $unread_status = $this->unread->get_status_topic($topic_object->id);
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';
@@ -1281,9 +1274,7 @@ class AsgarosForum {
     }
 
     function get_status_icon($topic_object) {
-        if ($topic_object->approved == 0) {
-            return 'dashicons-editor-help';
-        } else if ($topic_object->sticky == 1) {
+        if ($topic_object->sticky == 1) {
             return 'dashicons-topic-sticky';
         } else if ($topic_object->closed == 1) {
             return 'dashicons-topic-closed';
