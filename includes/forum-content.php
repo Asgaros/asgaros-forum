@@ -173,14 +173,14 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic, false, '#postid-'.$this->asgarosforum->current_post));
 
             // Only send notifications when the topic is approved. Otherwise notify the site-owner.
-            if ($this->is_approved($this->asgarosforum->current_topic)) {
+            if ($this->asgarosforum->approval->is_approved($this->asgarosforum->current_topic)) {
                 // Send notifications about new topic.
                 $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, $author_id);
 
                 // Send notifications about mentionings.
                 $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_topic, $this->data_content, $redirect, $author_id);
             } else {
-                $this->asgarosforum->notifications->notify_about_new_unapproved_topic($this->data_subject, $this->data_content, $redirect, $author_id);
+                $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->data_subject, $this->data_content, $redirect, $author_id);
             }
         } else if ($this->get_action() === 'add_post') {
             // Create the post.
@@ -248,7 +248,7 @@ class AsgarosForumContent {
         // Set the approval-status for the topic.
         $approved = 1;
 
-        if ($this->asgarosforum->permissions->topic_requires_approval($forum_id, $author_id)) {
+        if ($this->asgarosforum->approval->topic_requires_approval($forum_id, $author_id)) {
             $approved = 0;
         }
 
@@ -337,26 +337,6 @@ class AsgarosForumContent {
         }
 
         return false;
-    }
-
-    //======================================================================
-    // APPROVAL FUNCTIONS.
-    //======================================================================
-
-    // Checks if a topic is approved.
-    public function is_approved($topic_id) {
-        $approved = $this->asgarosforum->db->get_var("SELECT approved FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
-
-        if ($approved === '1') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // Approves a topic.
-    public function approve_topic($topic_id) {
-        $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
     }
 
     //======================================================================

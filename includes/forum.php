@@ -124,6 +124,8 @@ class AsgarosForum {
     var $unread         = null;
     var $feed           = null;
     var $permissions    = null;
+    var $ads            = null;
+    var $approval       = null;
 
     function __construct() {
         // Initialize database.
@@ -179,6 +181,7 @@ class AsgarosForum {
         $this->feed             = new AsgarosForumFeed($this);
         $this->permissions      = new AsgarosForumPermissions($this);
         $this->ads              = new AsgarosForumAds($this);
+        $this->approval         = new AsgarosForumApproval($this);
     }
 
     //======================================================================
@@ -391,7 +394,7 @@ class AsgarosForum {
         } else if (isset($_GET['close_topic'])) {
             $this->change_status('closed');
         } else if (isset($_GET['approve_topic'])) {
-            $this->content->approve_topic($this->current_topic);
+            $this->approval->approve_topic($this->current_topic);
         } else if (isset($_GET['subscribe_topic'])) {
             $topic_id = $_GET['subscribe_topic'];
             $this->notifications->subscribe_topic($topic_id);
@@ -1036,7 +1039,7 @@ class AsgarosForum {
             }
 
             // Approve button.
-            if (!$this->content->is_approved($this->current_topic)) {
+            if (!$this->approval->is_approved($this->current_topic)) {
                 $menu .= '<a class="dashicons-before dashicons-yes button-approve" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
                 $menu .= __('Approve', 'asgaros-forum');
                 $menu .= '</a>';
