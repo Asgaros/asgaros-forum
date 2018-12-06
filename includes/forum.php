@@ -389,6 +389,8 @@ class AsgarosForum {
             $this->change_status('open');
         } else if (isset($_GET['close_topic'])) {
             $this->change_status('closed');
+        } else if (isset($_GET['approve_topic'])) {
+            $this->content->approve_topic($this->current_topic);
         } else if (isset($_GET['subscribe_topic'])) {
             $topic_id = $_GET['subscribe_topic'];
             $this->notifications->subscribe_topic($topic_id);
@@ -1007,6 +1009,13 @@ class AsgarosForum {
             $menu .= '<a class="dashicons-before dashicons-randomize" href="'.$this->get_link('movetopic', $this->current_topic).'">';
             $menu .= __('Move', 'asgaros-forum');
             $menu .= '</a>';
+
+            // Approve button.
+            if (!$this->content->is_approved($this->current_topic)) {
+                $menu .= '<a class="dashicons-before dashicons-yes" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
+                $menu .= __('Approve', 'asgaros-forum');
+                $menu .= '</a>';
+            }
 
             // Delete button.
             $menu .= '<a class="dashicons-before dashicons-trash" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
