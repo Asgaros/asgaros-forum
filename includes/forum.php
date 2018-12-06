@@ -639,11 +639,18 @@ class AsgarosForum {
 
     function render_topic_element($topic_object, $topic_type = 'topic-normal', $show_topic_location = false) {
         $lastpost_data = $this->get_lastpost_in_topic($topic_object->id);
-        $unread_status = $this->unread->get_status_topic($topic_object->id);
+
+        // Set proper unread-status - but only if the topic is approved.
+        $unread_status = 'read';
+
+        if ($topic_object->approved == 1) {
+            $unread_status = $this->unread->get_status_topic($topic_object->id);
+        }
+
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';
-            echo '<div class="topic-status dashicons-before '.$this->get_status_icon($topic_object->sticky, $topic_object->closed).' '.$unread_status.'"></div>';
+            echo '<div class="topic-status dashicons-before '.$this->get_status_icon($topic_object).' '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
                 echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
                 echo '<small>';
@@ -982,7 +989,7 @@ class AsgarosForum {
             if ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
                 // New topic button.
                 $menu .= '<div class="forum-menu">';
-                $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt" href="'.$this->get_link('topic_add', $this->current_forum).'">';
+                $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt button-normal" href="'.$this->get_link('topic_add', $this->current_forum).'">';
                 $menu .= __('New Topic', 'asgaros-forum');
                 $menu .= '</a>';
                 $menu .= '</div>';
@@ -999,52 +1006,52 @@ class AsgarosForum {
 
         if ($this->permissions->isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
             // Reply button.
-            $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt" href="'.$this->get_link('post_add', $this->current_topic).'">';
+            $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt button-normal" href="'.$this->get_link('post_add', $this->current_topic).'">';
             $menu .= __('Reply', 'asgaros-forum');
             $menu .= '</a>';
         }
 
         if ($this->permissions->isModerator('current') && $showAllButtons) {
             // Move button.
-            $menu .= '<a class="dashicons-before dashicons-randomize" href="'.$this->get_link('movetopic', $this->current_topic).'">';
+            $menu .= '<a class="dashicons-before dashicons-randomize button-normal" href="'.$this->get_link('movetopic', $this->current_topic).'">';
             $menu .= __('Move', 'asgaros-forum');
-            $menu .= '</a>';
-
-            // Approve button.
-            if (!$this->content->is_approved($this->current_topic)) {
-                $menu .= '<a class="dashicons-before dashicons-yes" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
-                $menu .= __('Approve', 'asgaros-forum');
-                $menu .= '</a>';
-            }
-
-            // Delete button.
-            $menu .= '<a class="dashicons-before dashicons-trash" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
-            $menu .= __('Delete', 'asgaros-forum');
             $menu .= '</a>';
 
             if ($this->get_status('sticky')) {
                 // Undo sticky button.
-                $menu .= '<a class="dashicons-before dashicons-sticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
+                $menu .= '<a class="dashicons-before dashicons-sticky button-normal" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
                 $menu .= __('Unsticky', 'asgaros-forum');
                 $menu .= '</a>';
             } else {
                 // Sticky button.
-                $menu .= '<a class="dashicons-before dashicons-admin-post" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
+                $menu .= '<a class="dashicons-before dashicons-admin-post button-normal" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
                 $menu .= __('Sticky', 'asgaros-forum');
                 $menu .= '</a>';
             }
 
             if ($this->get_status('closed')) {
                 // Open button.
-                $menu .= '<a class="dashicons-before dashicons-unlock" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1)).'">';
+                $menu .= '<a class="dashicons-before dashicons-unlock button-normal" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1)).'">';
                 $menu .= __('Open', 'asgaros-forum');
                 $menu .= '</a>';
             } else {
                 // Close button.
-                $menu .= '<a class="dashicons-before dashicons-lock" href="'.$this->get_link('topic', $this->current_topic, array('close_topic' => 1)).'">';
+                $menu .= '<a class="dashicons-before dashicons-lock button-normal" href="'.$this->get_link('topic', $this->current_topic, array('close_topic' => 1)).'">';
                 $menu .= __('Close', 'asgaros-forum');
                 $menu .= '</a>';
             }
+
+            // Approve button.
+            if (!$this->content->is_approved($this->current_topic)) {
+                $menu .= '<a class="dashicons-before dashicons-yes button-approve" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
+                $menu .= __('Approve', 'asgaros-forum');
+                $menu .= '</a>';
+            }
+
+            // Delete button.
+            $menu .= '<a class="dashicons-before dashicons-trash button-delete" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
+            $menu .= __('Delete', 'asgaros-forum');
+            $menu .= '</a>';
         }
 
         $menu = (!empty($menu)) ? '<div class="forum-menu">'.$menu.'</div>' : $menu;
@@ -1272,10 +1279,12 @@ class AsgarosForum {
         }
     }
 
-    function get_status_icon($sticky, $closed) {
-        if ($sticky == 1) {
+    function get_status_icon($topic_object) {
+        if ($topic_object->approved == 0) {
+            return 'dashicons-editor-help';
+        } else if ($topic_object->sticky == 1) {
             return 'dashicons-topic-sticky';
-        } else if ($closed == 1) {
+        } else if ($topic_object->closed == 1) {
             return 'dashicons-topic-closed';
         } else {
             return 'dashicons-topic-normal';

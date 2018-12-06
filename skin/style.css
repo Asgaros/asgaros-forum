@@ -189,9 +189,15 @@
 #af-wrapper .editor-row .cancel,
 #af-wrapper .editor-row .cancel-back,
 #af-wrapper .editor-row .cancel:hover,
-#af-wrapper .editor-row .cancel-back:hover {
+#af-wrapper .editor-row .cancel-back:hover,
+#af-wrapper .forum-menu a.button-delete {
     background: #ff5454;
     border-color: #f91111;
+    text-decoration: none;
+}
+#af-wrapper .forum-menu a.button-approve {
+    background: #49863a;
+    border-color: #24501e;
     text-decoration: none;
 }
 #af-wrapper input[type="radio"],
@@ -1001,10 +1007,10 @@
     line-height: 30px;
 }
 #af-wrapper .forum-post-menu a.dashicons-trash {
-    color: #a00;
+    color: #a00 !important;
 }
 #af-wrapper .forum-post-menu a.dashicons-trash:hover {
-    color: red;
+    color: red !important;
 }
 @media screen and (max-width: 440px) {
     #af-wrapper .forum-post-header .forum-post-date,
@@ -1589,10 +1595,11 @@
 #af-wrapper .dashicons-topic-sticky:before {
     content: "\f109";
 }
-#af-wrapper .forum-dashicon:before,
-#af-wrapper .dashicons-topic-normal:before,
-#af-wrapper .dashicons-topic-closed:before,
-#af-wrapper .dashicons-topic-sticky:before {
+#af-wrapper .forum .forum-dashicon:before,
+#af-wrapper .topic .dashicons-topic-normal:before,
+#af-wrapper .topic .dashicons-topic-closed:before,
+#af-wrapper .topic .dashicons-topic-sticky:before,
+#af-wrapper .topic .dashicons-editor-help:before {
     font-size: 40px;
     width: 40px;
     height: 40px;
@@ -1607,4 +1614,8 @@
 }
 #af-wrapper .read:before {
     opacity: 0.5;
+}
+#af-wrapper .dashicons-editor-help:before {
+    color: #ff5454;
+    opacity: 1.0;
 }

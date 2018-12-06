@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: PHP-error in notifications-processing when a receiver-mail does not belong to a WordPress-user
 * Fixed: Wrong stylings when using custom colors
+* Minor design changes
 = 1.12.1 =
 * Fixed: Ad code containing JavaScript could not be edited
 * Fixed: Allow activity-feed when using shortcode-parameters for categories

@@ -194,7 +194,7 @@ class AsgarosForumUnread {
 
     function show_unread_menu() {
         echo '<div class="forum-menu">';
-        echo '<a class="dashicons-before dashicons-yes" href="'.$this->asgarosforum->get_link('markallread').'">';
+        echo '<a class="dashicons-before dashicons-yes button-normal" href="'.$this->asgarosforum->get_link('markallread').'">';
         echo __('Mark All Read', 'asgaros-forum');
         echo '</a>';
         echo '</div>';
@@ -226,8 +226,15 @@ class AsgarosForumUnread {
             foreach ($data_sliced as $topic) {
                 $topic_title = esc_html(stripslashes($topic->topic_name));
 
+                // Set proper unread-status - but only if the topic is approved.
+                $unread_status = 'read';
+
+                if ($topic->approved == 1) {
+                    $unread_status = 'unread';
+                }
+
                 echo '<div class="unread-topic topic-normal">';
-                    echo '<div class="topic-status dashicons-before '.$this->asgarosforum->get_status_icon($topic->sticky, $topic->closed).' unread"></div>';
+                    echo '<div class="topic-status dashicons-before '.$this->asgarosforum->get_status_icon($topic).' '.$unread_status.'"></div>';
                     echo '<div class="topic-name">';
                         $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->topic_id);
                         $link = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
@@ -267,7 +274,7 @@ class AsgarosForumUnread {
         if (!empty($ids_categories)) {
             $ids_categories = implode(',', $ids_categories);
 
-            $unread_topics = $this->asgarosforum->db->get_results("SELECT MAX(p.id) AS max_id, t.id AS topic_id, t.name AS topic_name, t.sticky, t.closed, f.id AS forum_id, f.name AS forum_name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE f.parent_id IN ({$ids_categories}) AND p.date > '{$this->get_last_visit()}' GROUP BY p.parent_id ORDER BY MAX(p.id) DESC;");
+            $unread_topics = $this->asgarosforum->db->get_results("SELECT MAX(p.id) AS max_id, t.id AS topic_id, t.name AS topic_name, t.sticky, t.closed, t.approved, f.id AS forum_id, f.name AS forum_name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE f.parent_id IN ({$ids_categories}) AND p.date > '{$this->get_last_visit()}' GROUP BY p.parent_id ORDER BY MAX(p.id) DESC;");
         }
 
         // Remove read topics from that list.
