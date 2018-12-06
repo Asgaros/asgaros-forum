@@ -172,8 +172,16 @@ class AsgarosForumContent {
             // Create redirect link.
             $redirect = html_entity_decode($this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic, false, '#postid-'.$this->asgarosforum->current_post));
 
-            // Send notification about new topic.
-            $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
+            // Only send notifications when the topic is approved. Otherwise notify the site-owner.
+            if ($this->is_approved($this->asgarosforum->current_topic)) {
+                // Send notifications about new topic.
+                $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, $author_id);
+
+                // Send notifications about mentionings.
+                $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_topic, $this->data_content, $redirect, $author_id);
+            } else {
+                $this->asgarosforum->notifications->notify_about_new_unapproved_topic($this->data_subject, $this->data_content, $redirect, $author_id);
+            }
         } else if ($this->get_action() === 'add_post') {
             // Create the post.
             $this->asgarosforum->current_post = $this->insert_post($this->asgarosforum->current_topic, $this->asgarosforum->current_forum, $this->data_content, $author_id, $upload_list);
@@ -182,8 +190,11 @@ class AsgarosForumContent {
 
             $redirect = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
 
-            // Send notification about new post.
-            $this->asgarosforum->notifications->notify_about_new_post($this->data_subject, $this->data_content, $redirect, $this->asgarosforum->permissions->currentUserID);
+            // Send notifications about new post.
+            $this->asgarosforum->notifications->notify_about_new_post($this->data_subject, $this->data_content, $redirect, $author_id);
+
+            // Send notifications about mentionings.
+            $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_topic, $this->data_content, $redirect, $author_id);
         } else if ($this->get_action() === 'edit_post') {
             $date = $this->asgarosforum->current_time();
             $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);

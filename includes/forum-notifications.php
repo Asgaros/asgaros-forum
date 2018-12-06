@@ -367,6 +367,27 @@ class AsgarosForumNotifications {
         }
     }
 
+    // Sends a notification about a new unapproved topic.
+    public function notify_about_new_unapproved_topic($topic_name, $topic_text, $topic_link, $topic_author) {
+        $topic_name = esc_html(stripslashes($topic_name));
+        $author_name = $this->asgarosforum->getUsername($topic_author);
+        $notification_subject = __('New unapproved topic', 'asgaros-forum');
+
+        // Prepare message-template.
+        $replacements = array(
+            '###AUTHOR###'  => $author_name,
+            '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
+            '###TITLE###'   => $topic_name,
+            '###CONTENT###' => wpautop(stripslashes($topic_text))
+        );
+
+        $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new unapproved forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');
+
+        $admin_mail = get_bloginfo('admin_email');
+
+        $this->asgarosforum->notifications->send_notifications($admin_mail, $notification_subject, $notification_message, $replacements);
+    }
+
     // Adds a mail to a mailing list. Ensures that this mail is not already included.
     public function add_to_mailing_list($mail) {
         if (!in_array($mail, $this->mailing_list)) {

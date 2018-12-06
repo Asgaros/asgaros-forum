@@ -8,9 +8,6 @@ class AsgarosForumMentioning {
 
     public function __construct($object) {
         $this->asgarosforum = $object;
-
-        add_action('asgarosforum_after_add_topic_submit', array($this, 'mention_users'), 10, 6);
-        add_action('asgarosforum_after_add_post_submit', array($this, 'mention_users'), 10, 6);
     }
 
     public function render_nice_name($user_id) {
@@ -50,7 +47,7 @@ class AsgarosForumMentioning {
         return true;
     }
 
-    public function mention_users($post_id, $topic_id, $subject, $content, $link, $author_id) {
+    public function mention_users($topic_id, $content, $link, $author_id) {
         if ($this->asgarosforum->options['enable_mentioning']) {
             $matches = array();
 
