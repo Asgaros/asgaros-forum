@@ -153,6 +153,19 @@ if (!defined('ABSPATH')) exit;
                                         <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <th>
+                                        <label for="approval_for"><?php _e('Approval needed for new topics from:', 'asgaros-forum'); ?></label>
+                                        <span class="description"><?php _e('This setting only affects forums that require approval for new topics.', 'asgaros-forum'); ?></span>
+                                    </th>
+                                    <td>
+                                        <select name="approval_for" id="approval_for">';
+                                            <option value="guests" <?php if ($asgarosforum->options['approval_for'] == 'guests') { echo 'selected="selected"'; } ?>><?php _e('Guests', 'asgaros-forum'); ?></option>
+                                            <option value="normal" <?php if ($asgarosforum->options['approval_for'] == 'normal') { echo 'selected="selected"'; } ?>><?php _e('Guests & Normal Users', 'asgaros-forum'); ?></option>
+                                        </select>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>

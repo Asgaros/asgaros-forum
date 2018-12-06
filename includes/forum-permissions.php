@@ -488,18 +488,28 @@ class AsgarosForumPermissions {
 
     // Checks if a topic requires approval for a specific forum and user.
     public function topic_requires_approval($forum_id, $user_id) {
-        // No approval needed if the user is at least an moderator.
+        // If the current user is at least a moderator, no approval is needed.
         if ($this->isModerator($user_id)) {
             return false;
         }
 
-        // Otherwise the approval depends on the forum-setting.
+        // Check if the forum requires approval for new topics.
         $approval = $this->asgarosforum->db->get_var("SELECT approval FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
 
+        // Additional checks if forum requires approval.
         if ($approval === '1') {
-            return true;
-        } else {
-            return false;
+            // If the current user is a guest, approval is needed for sure.
+            if (!is_user_logged_in()) {
+                return true;
+            }
+
+            // If approval is needed for normal users as well, approval is needed because we already know the current user is not even a moderator.
+            if ($this->asgarosforum->options['approval_for'] == 'normal') {
+                return true;
+            }
         }
+
+        // Otherwise no approval is needed.
+        return false;
     }
 }

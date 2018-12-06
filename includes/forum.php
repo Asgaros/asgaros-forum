@@ -94,7 +94,8 @@ class AsgarosForum {
         'ads_frequency_categories'          => 2,
         'ads_frequency_forums'              => 4,
         'ads_frequency_topics'              => 8,
-        'ads_frequency_posts'               => 6
+        'ads_frequency_posts'               => 6,
+        'approval_for'                      => 'guests'
     );
     var $options_editor = array(
         'media_buttons' => false,
