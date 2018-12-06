@@ -180,7 +180,7 @@ class AsgarosForumDatabase {
                 $page_id = wp_insert_post(
                     array(
                         'post_content'      => '[forum]',
-                        'post_title'        => 'Community',
+                        'post_title'        => 'Forum',
                         'post_status'       => 'publish',
                         'post_type'         => 'page',
                         'comment_status'    => 'closed',
