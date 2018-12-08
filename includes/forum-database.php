@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 37;
+    private $db_version = 38;
     private $tables;
 
     public function __construct() {
@@ -83,10 +83,6 @@ class AsgarosForumDatabase {
         return $tables;
     }
 
-    public function check_index($table_name, $index_name) {
-        return $this->db->get_results("SHOW INDEX FROM {$table_name} WHERE Key_name = '{$index_name}';");
-    }
-
     public function buildDatabase() {
         global $asgarosforum;
         $first_time_installation = false;
@@ -120,7 +116,8 @@ class AsgarosForumDatabase {
             closed int(11) NOT NULL default '0',
             approval int(11) NOT NULL default '0',
             slug varchar(255) NOT NULL default '',
-            PRIMARY KEY  (id)
+            PRIMARY KEY  (id),
+            KEY parent_id (parent_id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->topics." (
@@ -132,7 +129,8 @@ class AsgarosForumDatabase {
             closed int(1) NOT NULL default '0',
             approved int(1) NOT NULL default '1',
             slug varchar(255) NOT NULL default '',
-            PRIMARY KEY  (id)
+            PRIMARY KEY  (id),
+            KEY parent_id (parent_id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->posts." (
@@ -145,7 +143,12 @@ class AsgarosForumDatabase {
             author_id int(11) NOT NULL default '0',
             author_edit int(11) NOT NULL default '0',
             uploads longtext,
-            PRIMARY KEY  (id)
+            PRIMARY KEY  (id),
+            KEY parent_id (parent_id),
+            KEY author_id (author_id),
+            KEY date (date),
+            KEY forum_id (forum_id),
+            KEY forum_id_id (forum_id, id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->reports." (
@@ -218,24 +221,6 @@ class AsgarosForumDatabase {
                 }
 
                 update_option('asgarosforum_db_version', 6);
-            }
-
-            // Add index to posts.author_id to make countings faster.
-            if ($database_version_installed < 11) {
-                if (!$this->check_index($this->tables->posts, 'author_id')) {
-                    $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(author_id);');
-                }
-
-                update_option('asgarosforum_db_version', 11);
-            }
-
-            // Add index to posts.parent_id for faster queries.
-            if ($database_version_installed < 12) {
-                if (!$this->check_index($this->tables->posts, 'parent_id')) {
-                    $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(parent_id);');
-                }
-
-                update_option('asgarosforum_db_version', 12);
             }
 
             // Add existing usergroups to a default usergroups category and/or create an example usergroup.
@@ -330,39 +315,12 @@ class AsgarosForumDatabase {
                 update_option('asgarosforum_db_version', 20);
             }
 
-            // Add index to topics.parent_id for faster queries.
-            if ($database_version_installed < 21) {
-                if (!$this->check_index($this->tables->topics, 'parent_id')) {
-                    $this->db->query('ALTER TABLE '.$this->tables->topics.' ADD INDEX(parent_id);');
-                }
-
-                update_option('asgarosforum_db_version', 21);
-            }
-
             // Use valid default-values for dates.
             if ($database_version_installed < 23 && !$first_time_installation) {
                 $this->db->query("UPDATE {$this->tables->posts} SET date = '1000-01-01 00:00:00' WHERE date = '0000-00-00 00:00:00';");
                 $this->db->query("UPDATE {$this->tables->posts} SET date_edit = '1000-01-01 00:00:00' WHERE date_edit = '0000-00-00 00:00:00';");
 
                 update_option('asgarosforum_db_version', 23);
-            }
-
-            // Add index to posts.date for faster queries.
-            if ($database_version_installed < 24) {
-                if (!$this->check_index($this->tables->posts, 'date')) {
-                    $this->db->query('ALTER TABLE '.$this->tables->posts.' ADD INDEX(date);');
-                }
-
-                update_option('asgarosforum_db_version', 24);
-            }
-
-            // Add index to forums.parent_id for faster queries.
-            if ($database_version_installed < 25) {
-                if (!$this->check_index($this->tables->forums, 'parent_id')) {
-                    $this->db->query('ALTER TABLE '.$this->tables->forums.' ADD INDEX(parent_id);');
-                }
-
-                update_option('asgarosforum_db_version', 25);
             }
 
             // Convert to new role system.
@@ -413,24 +371,6 @@ class AsgarosForumDatabase {
                 $this->db->query("UPDATE {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id SET p.forum_id = t.parent_id;");
 
                 update_option('asgarosforum_db_version', 27);
-            }
-
-            // Add index to posts.forum_id for faster queries.
-            if ($database_version_installed < 28) {
-                if (!$this->check_index($this->tables->posts, 'forum_id')) {
-                    $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id);");
-                }
-
-                update_option('asgarosforum_db_version', 28);
-            }
-
-            // Add index to posts.(forum_id, id) for faster queries.
-            if ($database_version_installed < 29) {
-                if (!$this->check_index($this->tables->posts, 'forum_id_2')) {
-                    $this->db->query("ALTER TABLE {$this->tables->posts} ADD INDEX(forum_id, id);");
-                }
-
-                update_option('asgarosforum_db_version', 29);
             }
 
             // Save sticky-value in own field.
