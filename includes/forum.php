@@ -68,7 +68,6 @@ class AsgarosForum {
         'enable_search'                     => true,
         'enable_profiles'                   => true,
         'enable_memberslist'                => true,
-        'enable_activity'                   => true,
         'enable_rss'                        => false,
         'count_topic_views'                 => true,
         'reports_enabled'                   => true,
@@ -95,7 +94,9 @@ class AsgarosForum {
         'ads_frequency_forums'              => 4,
         'ads_frequency_topics'              => 8,
         'ads_frequency_posts'               => 6,
-        'approval_for'                      => 'guests'
+        'approval_for'                      => 'guests',
+        'enable_activity'                   => true,
+        'activity_days'                     => 14
     );
     var $options_editor = array(
         'media_buttons' => false,

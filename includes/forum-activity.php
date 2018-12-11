@@ -97,12 +97,18 @@ class AsgarosForumActivity {
         } else {
             $ids_categories = implode(',', $ids_categories);
 
+            // Calculate activity end-time.
+            $time_current = time();
+            $time_end = $time_current - (intval($this->asgarosforum->options['activity_days']) * 24 * 60 * 60);
+            $time_end = date('Y-m-d H:i:s', $time_end);
+
             if ($count_all) {
-                return $this->asgarosforum->db->get_var("SELECT COUNT(p.id) FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->forums} AS f WHERE p.forum_id = f.id AND f.parent_id IN ({$ids_categories})");
+                return $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, (SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.forum_id = f.id AND p.approved = 1 AND p.date > '{$time_end}';");
             } else {
                 $start = $this->asgarosforum->current_page * 50;
                 $end = 50;
-                return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) WHERE EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$ids_categories})) ORDER BY p.id DESC LIMIT {$start}, {$end};");
+
+                return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND p.forum_id = f.id AND p.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC LIMIT {$start}, {$end};");
             }
         }
     }

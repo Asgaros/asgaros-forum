@@ -179,10 +179,6 @@ if (!defined('ABSPATH')) exit;
                                     <td><input type="checkbox" name="enable_seo_urls" id="enable_seo_urls" <?php checked(!empty($asgarosforum->options['enable_seo_urls'])); ?>></td>
                                 </tr>
                                 <tr>
-                                    <th><label for="enable_activity"><?php _e('Enable Activity Feed', 'asgaros-forum'); ?></label></th>
-                                    <td><input type="checkbox" name="enable_activity" id="enable_activity" <?php checked(!empty($asgarosforum->options['enable_activity'])); ?>></td>
-                                </tr>
-                                <tr>
                                     <th><label for="enable_reactions"><?php _e('Enable reactions', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="enable_reactions" id="enable_reactions" <?php checked(!empty($asgarosforum->options['enable_reactions'])); ?>></td>
                                 </tr>
@@ -418,6 +414,25 @@ if (!defined('ABSPATH')) exit;
                                 <tr class="signatures-option" <?php if (!$signaturesOption) { echo 'style="display: none;"'; } ?>>
                                     <th><label for="signatures_html_tags"><?php _e('Allowed HTML tags:', 'asgaros-forum'); ?></label></th>
                                     <td><input class="regular-text" type="text" name="signatures_html_tags" id="signatures_html_tags" value="<?php echo esc_html(stripslashes($asgarosforum->options['signatures_html_tags'])); ?>"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="postbox">
+                        <h2 class="hndle dashicons-before dashicons-megaphone"><?php _e('Activity', 'asgaros-forum'); ?></h2>
+                        <div class="inside">
+                            <?php
+                            $activityOption = checked(!empty($asgarosforum->options['enable_activity']), true, false);
+                            ?>
+                            <table>
+                                <tr>
+                                    <th><label for="enable_activity"><?php _e('Enable Activity Feed', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="checkbox" name="enable_activity" id="enable_activity" class="show_hide_initiator" data-hide-class="activity-option" <?php checked(!empty($asgarosforum->options['enable_activity'])); ?>></td>
+                                </tr>
+                                <tr class="activity-option" <?php if (!$activityOption) { echo 'style="display: none;"'; } ?>>
+                                    <th><label for="activity_days"><?php _e('Days of activity to show:', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="number" name="activity_days" id="activity_days" value="<?php echo stripslashes($asgarosforum->options['activity_days']); ?>" size="3" min="1"></td>
                                 </tr>
                             </table>
                         </div>
