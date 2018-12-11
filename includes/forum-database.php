@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 38;
+    private $db_version = 39;
     private $tables;
 
     public function __construct() {
@@ -143,6 +143,7 @@ class AsgarosForumDatabase {
             author_id int(11) NOT NULL default '0',
             author_edit int(11) NOT NULL default '0',
             uploads longtext,
+            approved int(1) NOT NULL default '1',
             PRIMARY KEY  (id),
             KEY parent_id (parent_id),
             KEY author_id (author_id),

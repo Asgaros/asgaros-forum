@@ -1039,7 +1039,7 @@ class AsgarosForum {
             }
 
             // Approve button.
-            if (!$this->approval->is_approved($this->current_topic)) {
+            if (!$this->approval->is_topic_approved($this->current_topic)) {
                 $menu .= '<a class="dashicons-before dashicons-yes button-approve" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
                 $menu .= __('Approve', 'asgaros-forum');
                 $menu .= '</a>';
