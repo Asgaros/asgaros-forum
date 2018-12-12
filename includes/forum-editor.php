@@ -112,7 +112,8 @@ class AsgarosForumEditor {
 
             if ($editorView === 'addpost') {
                 if (!isset($_POST['message']) && isset($_GET['quote'])) {
-                    $quoteData = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare("SELECT text, author_id, date FROM ".$this->asgarosforum->tables->posts." WHERE id = %d;", absint($_GET['quote'])));
+					// We also select against the topic to ensure that we can only quote posts from the current topic.
+                    $quoteData = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare("SELECT text, author_id, date FROM ".$this->asgarosforum->tables->posts." WHERE id = %d AND parent_id = %d;", absint($_GET['quote']), $this->asgarosforum->current_topic));
 
                     if ($quoteData) {
                         $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->asgarosforum->getUsername($quoteData->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->asgarosforum->format_date($quoteData->date)).'</div>'.stripslashes($quoteData->text).'</blockquote><br>';

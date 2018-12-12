@@ -95,6 +95,8 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to define days of activity to show
+* Fixed: It is not longer possible to quote posts from other topics
+* Fixed: It is not longer possible to quote posts from inaccessible topics
 * Fixed: PHP-error in notifications-processing when a receiver-mail does not belong to a WordPress-user
 * Fixed: Wrong stylings when using custom colors
 * Minor design changes
