@@ -773,13 +773,67 @@ class AsgarosForum {
         }
     }
 
+    var $topic_counters_cache = false;
+    function get_topic_counters() {
+        // If the cache is not set yet, create it.
+        if ($this->topic_counters_cache === false) {
+            // Get all topic-counters of each forum first.
+            $topic_counters = $this->db->get_results("SELECT parent_id AS forum_id, COUNT(*) AS topic_counter FROM {$this->tables->topics} WHERE approved = 1 GROUP BY parent_id;");
+
+            // Assign topic-counter for each forum.
+            if (!empty($topic_counters)) {
+                foreach ($topic_counters as $counter) {
+                    $this->topic_counters_cache[$counter->forum_id] = $counter->topic_counter;
+                }
+            }
+
+            // Now get all subforums.
+            // TODO: We can cache this in an own function.
+            $subforums = $this->db->get_results("SELECT id, parent_forum FROM {$this->tables->forums} WHERE parent_forum != 0;");
+
+            // Re-assign topic-counter for each forum based on the topic-counters in its subforums.
+            if (!empty($subforums)) {
+                foreach ($subforums as $subforum) {
+                    // Continue if the subforum has no topics.
+                    if (!isset($this->topic_counters_cache[$subforum->id])) {
+                        continue;
+                    }
+
+                    // Re-assign value when the parent-forum has no topics.
+                    if (!isset($this->topic_counters_cache[$subforum->parent_forum])) {
+                        $this->topic_counters_cache[$subforum->parent_forum] = $this->topic_counters_cache[$subforum->id];
+                        continue;
+                    }
+
+                    // Otherwise add subforum-topics to the counter of the parent forum.
+                    $this->topic_counters_cache[$subforum->parent_forum] = ($this->topic_counters_cache[$subforum->parent_forum] + $this->topic_counters_cache[$subforum->id]);
+                }
+            }
+        }
+
+        return $this->topic_counters_cache;
+    }
+
+    function get_forum_topic_counter($forum_id) {
+        $counters = $this->get_topic_counters();
+
+        if (isset($counters[$forum_id])) {
+            return intval($counters[$forum_id]);
+        } else {
+            return 0;
+        }
+    }
+
     function get_forums($id = false, $parent_forum = 0, $compact = false, $output_type = OBJECT) {
         if ($id) {
+            $query_count_subforums = "SELECT COUNT(*) FROM {$this->tables->forums} WHERE parent_forum = f.id";
+
             // The compact mode only loads the fields in the forums-table and counts its existing subforums.
             if ($compact) {
-                return $this->db->get_results($this->db->prepare("SELECT f.*, (SELECT COUNT(*) FROM {$this->tables->forums} AS sub_f WHERE sub_f.parent_forum = f.id) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
+                return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
             } else {
-                return $this->db->get_results($this->db->prepare("SELECT f.*, (SELECT COUNT(*) FROM {$this->tables->topics} AS ct_t, {$this->tables->forums} AS ct_f WHERE ct_t.parent_id = ct_f.id AND (ct_f.id = f.id OR ct_f.parent_forum = f.id)) AS count_topics, (SELECT COUNT(*) FROM {$this->tables->posts} AS cp_p, {$this->tables->forums} AS cp_f WHERE cp_p.forum_id = cp_f.id AND (cp_f.id = f.id OR cp_f.parent_forum = f.id)) AS count_posts, (SELECT COUNT(*) FROM {$this->tables->forums} AS csf_f WHERE csf_f.parent_forum = f.id) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
+                $query_count_posts = "SELECT COUNT(*) FROM {$this->tables->posts} AS cpp, {$this->tables->forums} AS cpf WHERE cpp.forum_id = cpf.id AND (cpf.id = f.id OR cpf.parent_forum = f.id)";
+                return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_posts}) AS count_posts, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
             }
         }
     }
