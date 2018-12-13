@@ -1304,7 +1304,7 @@ class AsgarosForum {
     function prepare_lastpost_forum_cache() {
         if ($this->lastpost_forum_cache === false) {
             // Get all lastpost-elements of each forum first.
-            $lastpost_elements = $this->db->get_results("SELECT p.forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p GROUP BY p.forum_id;");
+            $lastpost_elements = $this->db->get_results("SELECT t.parent_id AS forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 
             // Assign lastpost-ids for each forum.
             if (!empty($lastpost_elements)) {

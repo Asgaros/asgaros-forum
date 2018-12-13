@@ -98,14 +98,14 @@ class AsgarosForumSearch {
 
             $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 
-            $match_name = "MATCH (search_name.name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
-            $match_text = "MATCH (search_text.text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $match_name = "MATCH (name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $match_text = "MATCH (text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
             $query_author = "SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1";
             $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
-            $query_match_name = "SELECT search_name.id AS topic_id, {$match_name} AS score_name, 0 AS score_text FROM {$this->asgarosforum->tables->topics} AS search_name WHERE MATCH (search_name.name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE) GROUP BY topic_id";
-            $query_match_text = "SELECT search_text.parent_id AS topic_id, 0 AS score_name, {$match_text} AS score_text FROM {$this->asgarosforum->tables->posts} AS search_text WHERE MATCH (search_text.text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE) GROUP BY topic_id";
+            $query_match_name = "SELECT id AS topic_id, {$match_name} AS score_name, 0 AS score_text FROM {$this->asgarosforum->tables->topics} WHERE {$match_name} GROUP BY topic_id";
+            $query_match_text = "SELECT parent_id AS topic_id, 0 AS score_name, {$match_text} AS score_text FROM {$this->asgarosforum->tables->posts} WHERE {$match_text} GROUP BY topic_id";
 
-            $query = "SELECT t.*, f.id AS forum_id, f.name AS forum_name, ({$query_author}) AS author_id, ({$query_answers}) AS answers, search_union.topic_id, SUM(search_union.score_name + search_union.score_text) AS score FROM ({$query_match_name} UNION {$query_match_text}) AS search_union, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE search_union.topic_id = t.id AND t.parent_id = f.id {$where} {$shortcodeSearchFilter} GROUP BY search_union.topic_id ORDER BY score DESC, search_union.topic_id DESC {$limit}";
+            $query = "SELECT t.*, f.id AS forum_id, f.name AS forum_name, ({$query_author}) AS author_id, ({$query_answers}) AS answers, su.topic_id, SUM(su.score_name + su.score_text) AS score FROM ({$query_match_name} UNION {$query_match_text}) AS su, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE su.topic_id = t.id AND t.parent_id = f.id AND t.approved = 1 {$where} {$shortcodeSearchFilter} GROUP BY su.topic_id ORDER BY score DESC, su.topic_id DESC {$limit}";
 
             $results = $this->asgarosforum->db->get_results($query);
 

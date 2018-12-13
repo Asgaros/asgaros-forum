@@ -48,7 +48,7 @@ class AsgarosForumPagination {
             $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
         } else if ($location == $this->asgarosforum->tables->topics) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND sticky = 0;", $sourceID));
+            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND approved = 1 AND sticky = 0;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'search') {
             $categories = $this->asgarosforum->content->get_categories();
@@ -61,10 +61,10 @@ class AsgarosForumPagination {
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
             $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 
-            $query_match_name = "SELECT search_name.id AS topic_id FROM {$this->asgarosforum->tables->topics} AS search_name WHERE MATCH (search_name.name) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
-            $query_match_text = "SELECT search_text.parent_id AS topic_id FROM {$this->asgarosforum->tables->posts} AS search_text WHERE MATCH (search_text.text) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
-            $count = $this->asgarosforum->db->get_col("SELECT search_union.topic_id FROM (({$query_match_name}) UNION ({$query_match_text})) AS search_union, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE search_union.topic_id = t.id AND t.parent_id = f.id {$where} {$shortcodeSearchFilter};");
-            $count = count($count);
+            $query_match_name = "SELECT id AS topic_id FROM {$this->asgarosforum->tables->topics} WHERE MATCH (name) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $query_match_text = "SELECT parent_id AS topic_id FROM {$this->asgarosforum->tables->posts} WHERE MATCH (text) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $count = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM (({$query_match_name}) UNION ({$query_match_text})) AS su, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE su.topic_id = t.id AND t.parent_id = f.id AND t.approved = 1 {$where} {$shortcodeSearchFilter};");
+            $count = intval($count);
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'members') {
             // Count the users based on the filter.

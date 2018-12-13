@@ -260,14 +260,14 @@ class AsgarosForumContent {
         $inserted_ids->topic_id = $this->asgarosforum->db->insert_id;
 
         // Now create a post inside this topic and save its ID as well.
-        $inserted_ids->post_id = $this->insert_post($inserted_ids->topic_id, $forum_id, $text, $author_id, $uploads, $approved);
+        $inserted_ids->post_id = $this->insert_post($inserted_ids->topic_id, $forum_id, $text, $author_id, $uploads);
 
         // Return the IDs of the inserted content.
         return $inserted_ids;
     }
 
     // Inserts a new post.
-    public function insert_post($topic_id, $forum_id, $text, $author_id = false, $uploads = array(), $approved = 1) {
+    public function insert_post($topic_id, $forum_id, $text, $author_id = false, $uploads = array()) {
         // Set the author ID.
         if (!$author_id) {
             $author_id = $this->asgarosforum->permissions->currentUserID;
@@ -277,7 +277,7 @@ class AsgarosForumContent {
         $date = $this->asgarosforum->current_time();
 
         // Insert the post.
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topic_id, 'forum_id' => $forum_id, 'date' => $date, 'author_id' => $author_id, 'uploads' => maybe_serialize($uploads), 'approved' => $approved), array('%s', '%d', '%d', '%s', '%d', '%s', '%d'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topic_id, 'forum_id' => $forum_id, 'date' => $date, 'author_id' => $author_id, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%d', '%s', '%d', '%s'));
 
         // Return the ID of the inserted post.
         return $this->asgarosforum->db->insert_id;
@@ -342,13 +342,6 @@ class AsgarosForumContent {
     //======================================================================
     // FUNCTIONS FOR GETTING CONTENT.
     //======================================================================
-
-    public function get_sticky_topics($forum_id) {
-        $order = apply_filters('asgarosforum_filter_get_sticky_topics_order', "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC");
-        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT t.id, t.name, t.views, t.sticky, t.closed, (SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1) AS author_id, (SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 1 ORDER BY {$order};", $forum_id));
-        $results = apply_filters('asgarosforum_filter_get_threads', $results);
-        return $results;
-    }
 
     public function get_categories($enable_filtering = true) {
         $ids_categories_excluded = array();
@@ -429,34 +422,12 @@ class AsgarosForumContent {
         return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
     }
 
-    function get_topics($forum_id) {
-        // Build query-part for pagination.
-        $limit_end = $this->asgarosforum->options['topics_per_page'];
-        $limit_start = $this->asgarosforum->current_page * $limit_end;
-        $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $limit_start, $limit_end);
-
-        // Build query-part for ordering.
-        $order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id) DESC";
-        $order = apply_filters('asgarosforum_filter_get_threads_order', $order);
-
-        // Build additional sub-queries.
-        $query_author = "SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1";
-        $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
-
-        // Build final query and get results.
-        $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, ({$query_author}) AS author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 0 ORDER BY {$order} {$limit};";
-        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
-        $results = apply_filters('asgarosforum_filter_get_threads', $results);
-
-        return $results;
-    }
-
     public function get_post($post_id) {
         return $this->asgarosforum->db->get_row("SELECT p1.*, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts FROM {$this->asgarosforum->tables->posts} AS p1 WHERE p1.id = {$post_id};");
     }
 
     public function get_posts_by_user($user_id) {
-        return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.author_id = %d AND p.parent_id = t.id ORDER BY p.id DESC;", $user_id));
+        return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare("SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.author_id = %d AND p.parent_id = t.id AND t.approved = 1 ORDER BY p.id DESC;", $user_id));
     }
 
     public function get_first_unread_post($topic_id) {
@@ -476,6 +447,34 @@ class AsgarosForumContent {
     public function get_topic_title($topic_id) {
         return $this->asgarosforum->db->get_var("SELECT name FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
     }
-}
 
-?>
+    public function get_sticky_topics($forum_id) {
+        return $this->get_topics($forum_id, 1);
+    }
+
+    function get_topics($forum_id, $sticky = 0) {
+        // Build query-part for pagination.
+        $limit = "";
+
+        if ($sticky === 0) {
+            $limit_end = $this->asgarosforum->options['topics_per_page'];
+            $limit_start = $this->asgarosforum->current_page * $limit_end;
+            $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $limit_start, $limit_end);
+        }
+
+        // Build query-part for ordering.
+        $order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) DESC";
+        $order = apply_filters('asgarosforum_filter_get_threads_order', $order);
+
+        // Build additional sub-queries.
+        $query_author = "SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id ORDER BY id ASC LIMIT 1";
+        $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
+
+        // Build final query and get results.
+        $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, ({$query_author}) AS author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = {$sticky} AND t.approved = 1 ORDER BY {$order} {$limit};";
+        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
+        $results = apply_filters('asgarosforum_filter_get_threads', $results);
+
+        return $results;
+    }
+}

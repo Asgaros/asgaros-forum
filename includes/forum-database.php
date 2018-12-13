@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 39;
+    private $db_version = 41;
     private $tables;
 
     public function __construct() {
@@ -143,13 +143,13 @@ class AsgarosForumDatabase {
             author_id int(11) NOT NULL default '0',
             author_edit int(11) NOT NULL default '0',
             uploads longtext,
-            approved int(1) NOT NULL default '1',
             PRIMARY KEY  (id),
             KEY parent_id (parent_id),
             KEY author_id (author_id),
             KEY date (date),
             KEY forum_id (forum_id),
-            KEY forum_id_id (forum_id, id)
+            KEY forum_id_id (forum_id, id),
+            KEY parent_id_id (parent_id, id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->reports." (

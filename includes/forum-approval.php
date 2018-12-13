@@ -23,11 +23,8 @@ class AsgarosForumApproval {
     // Approves a topic.
     public function approve_topic($topic_id) {
         if ($this->asgarosforum->permissions->isModerator('current')) {
-            // Approve topic ...
+            // Approve topic.
             $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
-
-            // ... and all posts in it.
-            $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('approved' => 1), array('parent_id' => $topic_id), array('%d'), array('%d'));
         }
     }
 
