@@ -7,7 +7,8 @@ $lastpost_data = false;
 // Get counters and format them.
 $count_topics = $this->get_forum_topic_counter($forum->id);
 $count_topics_i18n = number_format_i18n($count_topics);
-$count_posts_i18n = number_format_i18n($forum->count_posts);
+$count_posts = $this->get_forum_post_counter($forum->id);
+$count_posts_i18n = number_format_i18n($count_posts);
 
 // Only fetch lastpost data when there are topics in the forum.
 if ($count_topics) {
@@ -35,7 +36,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
         echo '<small class="forum-stats">';
             echo sprintf(_n('%s Topic', '%s Topics', $count_topics, 'asgaros-forum'), $count_topics_i18n);
             echo '&nbsp;&middot;&nbsp;';
-            echo sprintf(_n('%s Post', '%s Posts', $forum->count_posts, 'asgaros-forum'), $count_posts_i18n);
+            echo sprintf(_n('%s Post', '%s Posts', $count_posts, 'asgaros-forum'), $count_posts_i18n);
         echo '</small>';
 
         echo '<small class="forum-lastpost-small">';

@@ -824,16 +824,67 @@ class AsgarosForum {
         }
     }
 
+    var $post_counters_cache = false;
+    function get_post_counters() {
+        // If the cache is not set yet, create it.
+        if ($this->post_counters_cache === false) {
+            // Get all post-counters of each forum first.
+            $post_counters = $this->db->get_results("SELECT t.parent_id AS forum_id, COUNT(*) AS post_counter FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
+
+            // Assign post-counter for each forum.
+            if (!empty($post_counters)) {
+                foreach ($post_counters as $counter) {
+                    $this->post_counters_cache[$counter->forum_id] = $counter->post_counter;
+                }
+            }
+
+            // Now get all subforums.
+            // TODO: We can cache this in an own function.
+            $subforums = $this->db->get_results("SELECT id, parent_forum FROM {$this->tables->forums} WHERE parent_forum != 0;");
+
+            // Re-assign post-counter for each forum based on the post-counters in its subforums.
+            if (!empty($subforums)) {
+                foreach ($subforums as $subforum) {
+                    // Continue if the subforum has no posts.
+                    if (!isset($this->post_counters_cache[$subforum->id])) {
+                        continue;
+                    }
+
+                    // Re-assign value when the parent-forum has no posts.
+                    if (!isset($this->post_counters_cache[$subforum->parent_forum])) {
+                        $this->post_counters_cache[$subforum->parent_forum] = $this->post_counters_cache[$subforum->id];
+                        continue;
+                    }
+
+                    // Otherwise add subforum-posts to the counter of the parent forum.
+                    $this->post_counters_cache[$subforum->parent_forum] = ($this->post_counters_cache[$subforum->parent_forum] + $this->post_counters_cache[$subforum->id]);
+                }
+            }
+        }
+
+        return $this->post_counters_cache;
+    }
+
+    function get_forum_post_counter($forum_id) {
+        $counters = $this->get_post_counters();
+
+        if (isset($counters[$forum_id])) {
+            return intval($counters[$forum_id]);
+        } else {
+            return 0;
+        }
+    }
+
     function get_forums($id = false, $parent_forum = 0, $compact = false, $output_type = OBJECT) {
         if ($id) {
             $query_count_subforums = "SELECT COUNT(*) FROM {$this->tables->forums} WHERE parent_forum = f.id";
 
             // The compact mode only loads the fields in the forums-table and counts its existing subforums.
+            // TODO: We dont need this $compact variable anymore ...
             if ($compact) {
                 return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
             } else {
-                $query_count_posts = "SELECT COUNT(*) FROM {$this->tables->posts} AS cpp, {$this->tables->forums} AS cpf WHERE cpp.forum_id = cpf.id AND (cpf.id = f.id OR cpf.parent_forum = f.id)";
-                return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_posts}) AS count_posts, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d GROUP BY f.id ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
+                return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
             }
         }
     }
