@@ -58,14 +58,14 @@ if (!defined('ABSPATH')) exit;
 
                                         if ($categories) {
                                             foreach ($categories as $category) {
-                                                $forums = $asgarosforum->get_forums($category->term_id, 0, true);
+                                                $forums = $asgarosforum->get_forums($category->term_id, 0);
 
                                                 if ($forums) {
                                                     foreach ($forums as $forum) {
                                                         echo '<option value="'.$forum->id.'"'.($forum->id == $asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
 
                                                         if ($forum->count_subforums > 0) {
-                                                            $subforums = $asgarosforum->get_forums($category->term_id, $forum->id, true);
+                                                            $subforums = $asgarosforum->get_forums($category->term_id, $forum->id);
 
                                                             foreach ($subforums as $subforum) {
                                                                 echo '<option value="'.$subforum->id.'"'.($subforum->id == $asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';

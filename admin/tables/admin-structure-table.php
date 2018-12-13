@@ -126,7 +126,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
             $data[] = $forum;
 
             if ($forum['count_subforums'] > 0) {
-                $subforums = $asgarosforum->get_forums($forum['parent_id'], $forum['id'], true, ARRAY_A);
+                $subforums = $asgarosforum->get_forums($forum['parent_id'], $forum['id'], ARRAY_A);
 
                 if (!empty($subforums)) {
                     foreach ($subforums as $subforum) {

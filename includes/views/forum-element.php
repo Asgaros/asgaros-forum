@@ -48,7 +48,7 @@ echo '<div class="forum" id="forum-'.$forum->id.'">';
             echo '<small class="forum-subforums">';
             echo '<b>'.__('Subforums', 'asgaros-forum').':</b>&nbsp;';
 
-            $subforums = $this->get_forums($category->term_id, $forum->id, true);
+            $subforums = $this->get_forums($category->term_id, $forum->id);
             $subforumsFirstDone = false;
 
             foreach ($subforums as $subforum) {

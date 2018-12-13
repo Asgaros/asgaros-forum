@@ -737,14 +737,14 @@ class AsgarosForum {
 
             if ($categories) {
                 foreach ($categories as $category) {
-                    $forums = $this->get_forums($category->term_id, 0, true);
+                    $forums = $this->get_forums($category->term_id, 0);
 
                     if ($forums) {
                         foreach ($forums as $forum) {
                             $strOUT .= '<option value="'.$forum->id.'"'.($forum->id == $this->current_forum ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
 
                             if ($forum->count_subforums > 0) {
-                                $subforums = $this->get_forums($category->term_id, $forum->id, true);
+                                $subforums = $this->get_forums($category->term_id, $forum->id);
 
                                 foreach ($subforums as $subforum) {
                                     $strOUT .= '<option value="'.$subforum->id.'"'.($subforum->id == $this->current_forum ? ' selected="selected"' : '').'>&mdash; '.esc_html($subforum->name).'</option>';
@@ -875,17 +875,10 @@ class AsgarosForum {
         }
     }
 
-    function get_forums($id = false, $parent_forum = 0, $compact = false, $output_type = OBJECT) {
+    function get_forums($id = false, $parent_forum = 0, $output_type = OBJECT) {
         if ($id) {
             $query_count_subforums = "SELECT COUNT(*) FROM {$this->tables->forums} WHERE parent_forum = f.id";
-
-            // The compact mode only loads the fields in the forums-table and counts its existing subforums.
-            // TODO: We dont need this $compact variable anymore ...
-            if ($compact) {
-                return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
-            } else {
-                return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
-            }
+            return $this->db->get_results($this->db->prepare("SELECT f.*, ({$query_count_subforums}) AS count_subforums FROM {$this->tables->forums} AS f WHERE f.parent_id = %d AND f.parent_forum = %d ORDER BY f.sort ASC;", $id, $parent_forum), $output_type);
         }
     }
 
