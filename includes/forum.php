@@ -448,9 +448,11 @@ class AsgarosForum {
         }
 
         // Check topic-access.
-        if ($this->current_view === 'topic' && $this->options['require_login_posts'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged-in users have access to this topic.', 'asgaros-forum');
-            return;
+        if ($this->current_view === 'topic' || $this->current_view === 'addpost') {
+            if ($this->options['require_login_posts'] && !is_user_logged_in()) {
+                $this->error = __('Sorry, only logged-in users have access to this topic.', 'asgaros-forum');
+                return;
+            }
         }
 
         // Check custom access.
