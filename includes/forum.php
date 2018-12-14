@@ -447,10 +447,16 @@ class AsgarosForum {
             return;
         }
 
-        // Check topic-access.
         if ($this->current_view === 'topic' || $this->current_view === 'addpost') {
+            // Check topic-access.
             if ($this->options['require_login_posts'] && !is_user_logged_in()) {
                 $this->error = __('Sorry, only logged-in users have access to this topic.', 'asgaros-forum');
+                return;
+            }
+
+            // Check unapproved-topic access.
+            if (!$this->approval->is_topic_approved($this->current_topic) && !$this->permissions->isModerator('current')) {
+                $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
                 return;
             }
         }
