@@ -23,8 +23,20 @@ class AsgarosForumApproval {
     // Approves a topic.
     public function approve_topic($topic_id) {
         if ($this->asgarosforum->permissions->isModerator('current')) {
-            // Approve topic.
+            // Changes the status of the topic.
             $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
+
+            // Updates the timestamp of posts inside the topic.
+            $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('date' => $this->asgarosforum->current_time()), array('parent_id' => $topic_id), array('%s'), array('%d'));
+        }
+    }
+
+    // Returns all unapproved topics from all or a specific forum.
+    public function get_unapproved_topics($forum_id = 'all') {
+        if ($forum_id === 'all') {
+            return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0;");
+        } else {
+            return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {$forum_id};");
         }
     }
 

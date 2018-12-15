@@ -416,6 +416,19 @@ class AsgarosForumAdmin {
                     array('%d'),
                     array('%d')
                 );
+
+                // Approve all unapproved topics in a forum if the approval-function is off.
+                if ($forum_approval === 0) {
+                    // Get all unapproved topics from this forum.
+                    $unapproved_topics = $asgarosforum->approval->get_unapproved_topics($forum_id);
+
+                    // Approve those topics if found.
+                    if (!empty($unapproved_topics)) {
+                        foreach ($unapproved_topics as $topic) {
+                            $asgarosforum->approval->approve_topic($topic->id);
+                        }
+                    }
+                }
             }
 
             $this->saved = true;
