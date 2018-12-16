@@ -10,6 +10,7 @@ class AsgarosForumApproval {
     }
 
     // Checks if a topic is approved.
+    // TODO: Cache the result.
     public function is_topic_approved($topic_id) {
         $approved = $this->asgarosforum->db->get_var("SELECT approved FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
 

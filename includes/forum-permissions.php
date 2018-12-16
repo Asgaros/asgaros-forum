@@ -226,6 +226,30 @@ class AsgarosForumPermissions {
         return false;
     }
 
+    // Checks if an user can create a post.
+    public function can_create_post($user_id) {
+        // Moderators can always create a post.
+        if ($this->isModerator($user_id)) {
+            return true;
+        }
+
+        // Ensure that the topics is not closed.
+        if (!$this->asgarosforum->get_status('closed')) {
+            // If a logged-in user is not banned, he can create a post.
+            if (is_user_logged_in() && !$this->isBanned($user_id)) {
+                return true;
+            }
+
+            // A logged-out user can create a post if guest-postings is activated.
+            if (!is_user_logged_in() && $this->asgarosforum->options['allow_guest_postings']) {
+                return true;
+            }
+        }
+
+        // Otherwise its not possible to create a post.
+        return false;
+    }
+
     public function ban_user($user_id, $ban_id) {
         // Verify nonce first.
         if (wp_verify_nonce($_REQUEST['_wpnonce'], 'ban_user_'.$ban_id)) {

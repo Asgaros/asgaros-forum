@@ -110,36 +110,38 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
             do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
         echo '</div>';
 
-        // Show post footer.
-        echo '<div class="post-footer">';
-            $this->reactions->render_reactions_area($post->id, $this->current_topic);
+        // Show post footer when the topic is approved.
+        if ($this->approval->is_topic_approved($this->current_topic)) {
+            echo '<div class="post-footer">';
+                $this->reactions->render_reactions_area($post->id, $this->current_topic);
 
-            echo '<div class="post-meta">';
-                if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
-                    echo '<span class="post-edit-date">';
+                echo '<div class="post-meta">';
+                    if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
+                        echo '<span class="post-edit-date">';
 
-                    // Show who edited a post (when the information exist in the database).
-                    if ($post->author_edit) {
-                        echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
-                    } else {
-                        echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                        // Show who edited a post (when the information exist in the database).
+                        if ($post->author_edit) {
+                            echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                        } else {
+                            echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                        }
+
+                        if ($this->current_view != 'post') {
+                            echo '&nbsp;&middot;&nbsp;';
+                        }
+
+                        echo '</span>';
                     }
 
                     if ($this->current_view != 'post') {
-                        echo '&nbsp;&middot;&nbsp;';
+                        // Show report button.
+                        $this->reports->render_report_button($post->id, $this->current_topic);
+
+                        echo '<a href="'.$this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
                     }
-
-                    echo '</span>';
-                }
-
-                if ($this->current_view != 'post') {
-                    // Show report button.
-                    $this->reports->render_report_button($post->id, $this->current_topic);
-
-                    echo '<a href="'.$this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
-                }
+                echo '</div>';
             echo '</div>';
-        echo '</div>';
+        }
 
         // Show signature.
         if ($this->current_view != 'post' && $this->options['allow_signatures']) {
