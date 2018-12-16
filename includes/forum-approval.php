@@ -10,25 +10,32 @@ class AsgarosForumApproval {
     }
 
     // Checks if a topic is approved.
-    // TODO: Cache the result.
+    private $is_topic_approved_cache = array();
     public function is_topic_approved($topic_id) {
-        $approved = $this->asgarosforum->db->get_var("SELECT approved FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
+        if (!isset($this->is_topic_approved_cache[$topic_id])) {
+            $approved = $this->asgarosforum->db->get_var("SELECT approved FROM {$this->asgarosforum->tables->topics} WHERE id = {$topic_id};");
 
-        if ($approved === '1') {
-            return true;
-        } else {
-            return false;
+            if ($approved === '1') {
+                $this->is_topic_approved_cache[$topic_id] = true;
+            } else {
+                $this->is_topic_approved_cache[$topic_id] = false;
+            }
         }
+
+        return $this->is_topic_approved_cache[$topic_id];
     }
 
     // Approves a topic.
     public function approve_topic($topic_id) {
         if ($this->asgarosforum->permissions->isModerator('current')) {
-            // Changes the status of the topic.
+            // Change the status of the topic.
             $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
 
-            // Updates the timestamp of posts inside the topic.
+            // Update the timestamp of posts inside the topic.
             $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('date' => $this->asgarosforum->current_time()), array('parent_id' => $topic_id), array('%s'), array('%d'));
+
+            // Update the cache.
+            $this->is_topic_approved_cache[$topic_id] = true;
         }
     }
 
