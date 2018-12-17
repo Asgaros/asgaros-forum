@@ -58,9 +58,15 @@ class AsgarosForumApproval {
     }
 
     // Sends a notification about a new unapproved topic.
-    public function notify_about_new_unapproved_topic($topic_name, $topic_text, $topic_link, $topic_author) {
-        $topic_name = esc_html(stripslashes($topic_name));
-        $author_name = $this->asgarosforum->getUsername($topic_author);
+    public function notify_about_new_unapproved_topic($topic_id) {
+        // Load required data.
+        $post = $this->asgarosforum->content->get_first_post($topic_id);
+        $topic = $this->asgarosforum->content->get_topic($post->parent_id);
+
+        // Get more data.
+        $topic_link = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
+        $topic_name = esc_html(stripslashes($topic->name));
+        $author_name = $this->asgarosforum->getUsername($post->author_id);
         $notification_subject = __('New unapproved topic', 'asgaros-forum');
 
         // Prepare message-template.
@@ -68,7 +74,7 @@ class AsgarosForumApproval {
             '###AUTHOR###'  => $author_name,
             '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
             '###TITLE###'   => $topic_name,
-            '###CONTENT###' => wpautop(stripslashes($topic_text))
+            '###CONTENT###' => wpautop(stripslashes($post->text))
         );
 
         $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new unapproved forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');

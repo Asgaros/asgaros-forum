@@ -180,7 +180,7 @@ class AsgarosForumContent {
                 // Send notifications about mentionings.
                 $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
             } else {
-                $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->data_subject, $this->data_content, $redirect, $author_id);
+                $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->asgarosforum->current_topic);
             }
         } else if ($this->get_action() === 'add_post') {
             // Create the post.
