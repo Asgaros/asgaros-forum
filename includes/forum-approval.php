@@ -36,6 +36,15 @@ class AsgarosForumApproval {
 
             // Update the cache.
             $this->is_topic_approved_cache[$topic_id] = true;
+
+            // Get first post inside the topic.
+            $first_post = $this->asgarosforum->content->get_first_post($topic_id);
+
+            // Send notifications about new topic.
+            $this->asgarosforum->notifications->notify_about_new_topic($topic_id);
+
+            // Send notifications about mentionings.
+            $this->asgarosforum->mentioning->mention_users($first_post->id);
         }
     }
 
