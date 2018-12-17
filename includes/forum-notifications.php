@@ -261,110 +261,119 @@ class AsgarosForumNotifications {
     }
 
     // TODO: This function generates tons of queries (especially the filtering). We need some improvements.
-    public function notify_about_new_topic($topic_name, $topic_text, $topic_link, $topic_author) {
-        // Check if this functionality is enabled
-        if ($this->asgarosforum->options['admin_subscriptions'] || $this->asgarosforum->options['allow_subscriptions']) {
-            $topic_name = esc_html(stripslashes($topic_name));
-            $author_name = $this->asgarosforum->getUsername($topic_author);
+    public function notify_about_new_topic($topic_id) {
+        // Cancel when this functionality is not enabled.
+        if (!$this->asgarosforum->options['admin_subscriptions'] && !$this->asgarosforum->options['allow_subscriptions']) {
+            return false;
+        }
 
-            // Prepare subject.
-            $notification_subject = $this->asgarosforum->options['mail_template_new_topic_subject'];
-            $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
+        // Load required data.
+        $post = $this->asgarosforum->content->get_first_post($topic_id);
+        $topic = $this->asgarosforum->content->get_topic($post->parent_id);
+        $forum = $this->asgarosforum->content->get_forum($topic->parent_id);
 
-            // Prepare message-template.
-            $replacements = array(
-                '###AUTHOR###'  => $author_name,
-                '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
-                '###TITLE###'   => $topic_name,
-                '###CONTENT###' => wpautop(stripslashes($topic_text))
+        // Get more data.
+        $topic_link = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
+        $topic_name = esc_html(stripslashes($topic->name));
+        $author_name = $this->asgarosforum->getUsername($post->author_id);
+
+        // Prepare subject.
+        $notification_subject = $this->asgarosforum->options['mail_template_new_topic_subject'];
+        $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
+
+        // Prepare message-template.
+        $replacements = array(
+            '###AUTHOR###'  => $author_name,
+            '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
+            '###TITLE###'   => $topic_name,
+            '###CONTENT###' => wpautop(stripslashes($post->text))
+        );
+
+        $notification_message = $this->asgarosforum->options['mail_template_new_topic_message'];
+        $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $replacements);
+
+        // Prepare mailing-list.
+        if ($this->asgarosforum->options['allow_subscriptions']) {
+            $forum_subscribers = array();
+
+            // Get forum subscribers.
+            $forum_subscribers_query = array(
+                'fields'        => array('id', 'user_email'),
+                'exclude'       => array(get_current_user_id()),
+                'meta_key'      => 'asgarosforum_subscription_forum',
+                'meta_value'    => $topic->parent_id,
+                'meta_compare'  => '='
             );
 
-            $notification_message = $this->asgarosforum->options['mail_template_new_topic_message'];
-            $notification_message = apply_filters('asgarosforum_filter_notify_global_topic_subscribers_message', $notification_message, $replacements);
+            $get_users_result = get_users($forum_subscribers_query);
 
-            // Prepare mailing-list.
-            if ($this->asgarosforum->options['allow_subscriptions']) {
-                $forum_subscribers = array();
+            if (!empty($get_users_result)) {
+                $forum_subscribers = array_merge($forum_subscribers, $get_users_result);
+            }
 
-                // Get forum subscribers.
-                $forum_subscribers_query = array(
-                    'fields'        => array('id', 'user_email'),
-                    'exclude'       => array(get_current_user_id()),
-                    'meta_key'      => 'asgarosforum_subscription_forum',
-                    'meta_value'    => $this->asgarosforum->current_forum,
-                    'meta_compare'  => '='
-                );
+            // Get global post subscribers.
+            $forum_subscribers_query = array(
+                'fields'        => array('id', 'user_email'),
+                'exclude'       => array(get_current_user_id()),
+                'meta_key'      => 'asgarosforum_subscription_global_posts',
+                'meta_compare'  => 'EXISTS'
+            );
 
-                $get_users_result = get_users($forum_subscribers_query);
+            $get_users_result = get_users($forum_subscribers_query);
 
-                if (!empty($get_users_result)) {
-                    $forum_subscribers = array_merge($forum_subscribers, $get_users_result);
+            if (!empty($get_users_result)) {
+                $forum_subscribers = array_merge($forum_subscribers, $get_users_result);
+            }
+
+            // Get global topic subscribers.
+            $forum_subscribers_query = array(
+                'fields'        => array('id', 'user_email'),
+                'exclude'       => array(get_current_user_id()),
+                'meta_key'      => 'asgarosforum_subscription_global_topics',
+                'meta_compare'  => 'EXISTS'
+            );
+
+            $get_users_result = get_users($forum_subscribers_query);
+
+            if (!empty($get_users_result)) {
+                $forum_subscribers = array_merge($forum_subscribers, $get_users_result);
+            }
+
+            // Remove banned users from mailing list.
+            foreach ($forum_subscribers as $key => $subscriber) {
+                if ($this->asgarosforum->permissions->isBanned($subscriber->id)) {
+                    unset($forum_subscribers[$key]);
                 }
+            }
 
-                // Get global post subscribers.
-                $forum_subscribers_query = array(
-                    'fields'        => array('id', 'user_email'),
-                    'exclude'       => array(get_current_user_id()),
-                    'meta_key'      => 'asgarosforum_subscription_global_posts',
-                    'meta_compare'  => 'EXISTS'
-                );
-
-                $get_users_result = get_users($forum_subscribers_query);
-
-                if (!empty($get_users_result)) {
-                    $forum_subscribers = array_merge($forum_subscribers, $get_users_result);
-                }
-
-                // Get global topic subscribers.
-                $forum_subscribers_query = array(
-                    'fields'        => array('id', 'user_email'),
-                    'exclude'       => array(get_current_user_id()),
-                    'meta_key'      => 'asgarosforum_subscription_global_topics',
-                    'meta_compare'  => 'EXISTS'
-                );
-
-                $get_users_result = get_users($forum_subscribers_query);
-
-                if (!empty($get_users_result)) {
-                    $forum_subscribers = array_merge($forum_subscribers, $get_users_result);
-                }
-
-                // Remove banned users from mailing list.
+            // Remove non-moderators from mailing list.
+            if ($this->asgarosforum->category_access_level == 'moderator') {
                 foreach ($forum_subscribers as $key => $subscriber) {
-                    if ($this->asgarosforum->permissions->isBanned($subscriber->id)) {
+                    if (!$this->asgarosforum->permissions->isModerator($subscriber->id)) {
                         unset($forum_subscribers[$key]);
                     }
                 }
-
-                // Remove non-moderators from mailing list.
-                if ($this->asgarosforum->category_access_level == 'moderator') {
-                    foreach ($forum_subscribers as $key => $subscriber) {
-                        if (!$this->asgarosforum->permissions->isModerator($subscriber->id)) {
-                            unset($forum_subscribers[$key]);
-                        }
-                    }
-                }
-
-                // Generate mailing list.
-                foreach($forum_subscribers as $subscriber) {
-                    $this->add_to_mailing_list($subscriber->user_email);
-                }
-
-                // Filter mailing list based on usergroups configuration.
-                $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $this->asgarosforum->current_category);
             }
 
-            // Add site-owner to mailing list when option is enabled.
-            if ($this->asgarosforum->options['admin_subscriptions']) {
-                $this->add_to_mailing_list(get_bloginfo('admin_email'));
+            // Generate mailing list.
+            foreach($forum_subscribers as $subscriber) {
+                $this->add_to_mailing_list($subscriber->user_email);
             }
 
-            // Apply custom filters before sending.
-            $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_topic', $this->mailing_list);
-
-            // Send notifications.
-            $this->send_notifications($this->mailing_list, $notification_subject, $notification_message, $replacements);
+            // Filter mailing list based on usergroups configuration.
+            $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $forum->parent_id);
         }
+
+        // Add site-owner to mailing list when option is enabled.
+        if ($this->asgarosforum->options['admin_subscriptions']) {
+            $this->add_to_mailing_list(get_bloginfo('admin_email'));
+        }
+
+        // Apply custom filters before sending.
+        $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_topic', $this->mailing_list);
+
+        // Send notifications.
+        $this->send_notifications($this->mailing_list, $notification_subject, $notification_message, $replacements);
     }
 
     // Adds a mail to a mailing list. Ensures that this mail is not already included.

@@ -175,7 +175,7 @@ class AsgarosForumContent {
             // Only send notifications when the topic is approved. Otherwise notify the site-owner.
             if ($this->asgarosforum->approval->is_topic_approved($this->asgarosforum->current_topic)) {
                 // Send notifications about new topic.
-                $this->asgarosforum->notifications->notify_about_new_topic($this->data_subject, $this->data_content, $redirect, $author_id);
+                $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic);
 
                 // Send notifications about mentionings.
                 $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_topic, $this->data_content, $redirect, $author_id);
@@ -424,6 +424,10 @@ class AsgarosForumContent {
 
     public function get_post($post_id) {
         return $this->asgarosforum->db->get_row("SELECT p1.*, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} AS p2 WHERE p2.author_id = p1.author_id) AS author_posts FROM {$this->asgarosforum->tables->posts} AS p1 WHERE p1.id = {$post_id};");
+    }
+
+    public function get_first_post($topic_id) {
+        return $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->posts} WHERE parent_id = {$topic_id} ORDER BY id ASC LIMIT 1;");
     }
 
     public function get_posts_by_user($user_id) {

@@ -521,7 +521,7 @@ class AsgarosForumUserGroups {
     }
 
     // Makes sure that only users who have access to the forum category will receive mails.
-    public static function filterSubscriberMails($mails, $forumCategoryID) {
+    public static function filterSubscriberMails($mails, $category_id) {
         // Only filter when there are mails.
         if (!empty($mails)) {
             foreach ($mails as $key => $mail) {
@@ -529,7 +529,7 @@ class AsgarosForumUserGroups {
                 $userObject = get_user_by('email', $mail);
 
                 if (!empty($userObject)) {
-                    $canAccess = self::canUserAccessForumCategory($userObject->ID, $forumCategoryID);
+                    $canAccess = self::canUserAccessForumCategory($userObject->ID, $category_id);
 
                     // When the user cant access the usergroup, remove it from the mail list.
                     if (!$canAccess) {
