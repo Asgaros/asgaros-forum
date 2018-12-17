@@ -191,7 +191,7 @@ class AsgarosForumContent {
             $redirect = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
 
             // Send notifications about new post.
-            $this->asgarosforum->notifications->notify_about_new_post($this->data_subject, $this->data_content, $redirect, $author_id);
+            $this->asgarosforum->notifications->notify_about_new_post($this->asgarosforum->current_post);
 
             // Send notifications about mentionings.
             $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
