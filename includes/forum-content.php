@@ -178,7 +178,7 @@ class AsgarosForumContent {
                 $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic);
 
                 // Send notifications about mentionings.
-                $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_topic, $this->data_content, $redirect, $author_id);
+                $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
             } else {
                 $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->data_subject, $this->data_content, $redirect, $author_id);
             }
@@ -194,7 +194,7 @@ class AsgarosForumContent {
             $this->asgarosforum->notifications->notify_about_new_post($this->data_subject, $this->data_content, $redirect, $author_id);
 
             // Send notifications about mentionings.
-            $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_topic, $this->data_content, $redirect, $author_id);
+            $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
         } else if ($this->get_action() === 'edit_post') {
             $date = $this->asgarosforum->current_time();
             $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
