@@ -576,7 +576,7 @@ class AsgarosForum {
                     case 'addtopic':
                     case 'addpost':
                     case 'editpost':
-                        $this->editor->showEditor();
+                        $this->editor->showEditor($this->current_view);
                     break;
                     case 'profile':
                         $this->profile->showProfile();

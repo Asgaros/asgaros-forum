@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to define days of activity to show
+* Fixed: Height of editor to small in certain configurations
 * Fixed: It is not longer possible to quote posts from other topics
 * Fixed: It is not longer possible to quote posts from inaccessible topics
 * Fixed: It is not longer possible for guests to post when topics are inaccessible for guests
