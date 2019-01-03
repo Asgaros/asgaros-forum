@@ -368,6 +368,12 @@ class AsgarosForum {
                     $this->current_view = 'overview';
                 }
             break;
+            case 'unapproved':
+                // Ensure that the user is at least a moderator.
+                if (!$this->permissions->isModerator('current')) {
+                    $this->current_view = 'overview';
+                }
+            break;
             default:
                 $this->current_view = 'overview';
             break;
@@ -523,6 +529,8 @@ class AsgarosForum {
                 $mainTitle = __('Activity', 'asgaros-forum');
             } else if ($this->current_view === 'unread') {
                 $mainTitle = __('Unread Topics', 'asgaros-forum');
+            } else if ($this->current_view === 'unapproved') {
+                $mainTitle = __('Unapproved Topics', 'asgaros-forum');
             }
         }
 
@@ -537,6 +545,25 @@ class AsgarosForum {
         }
 
         return $someString;
+    }
+
+    // Shows all kind of notices in the upper area.
+    function show_notices() {
+        if (!empty($this->info)) {
+            echo '<div class="info">'.$this->info.'</div>';
+        }
+
+        // Shows an info-message when a new unapproved topic got created.
+        $this->approval->notice_for_topic_creator();
+
+        // Shows an info-message when there are unapproved topics.
+        $this->approval->notice_for_moderators();
+
+        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
+            $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'</div>';
+            $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
+            echo $loginMessage;
+        }
     }
 
     function forum() {
@@ -559,18 +586,7 @@ class AsgarosForum {
             if ($this->current_view === 'post') {
                 $this->showSinglePost();
             } else {
-                if (!empty($this->info)) {
-                    echo '<div class="info">'.$this->info.'</div>';
-                }
-
-                // Show an info-message when a new unapproved topic got created.
-                if (!empty($_GET['new_unapproved_topic'])) {
-                    echo '<div class="unapproved-info">';
-                        echo '<span class="dashicons-before dashicons-flag">'.__('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum').'</span>';
-                    echo '</div>';
-                }
-
-                $this->showLoginMessage();
+                $this->show_notices();
                 $this->showMainTitleAndDescription();
 
                 switch ($this->current_view) {
@@ -608,6 +624,9 @@ class AsgarosForum {
                     break;
                     case 'unread':
                         $this->unread->show_unread_topics();
+                    break;
+                    case 'unapproved':
+                        $this->approval->show_unapproved_topics();
                     break;
                     default:
                         $this->overview();
@@ -739,14 +758,6 @@ class AsgarosForum {
     public function incrementTopicViews() {
         if ($this->options['count_topic_views']) {
             $this->db->query($this->db->prepare("UPDATE {$this->tables->topics} SET views = views + 1 WHERE id = %d", $this->current_topic));
-        }
-    }
-
-    function showLoginMessage() {
-        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'</div>';
-            $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
-            echo $loginMessage;
         }
     }
 

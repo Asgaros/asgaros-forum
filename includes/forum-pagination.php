@@ -86,6 +86,8 @@ class AsgarosForumPagination {
             $num_pages = ceil($count / 50);
         } else if ($location === 'unread') {
             $num_pages = ceil($element_counter / 50);
+        } else if ($location === 'unapproved') {
+            $num_pages = ceil($element_counter / 50);
         }
 
         // Only show pagination when there is more than one page.

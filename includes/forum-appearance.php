@@ -356,6 +356,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .member,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .unread-topic,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .unapproved-topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .member-last-seen,'.PHP_EOL;

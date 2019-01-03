@@ -271,6 +271,7 @@ class AsgarosForumRewrite {
             $this->links['profile']       = $this->links['home'].'/profile/';
             $this->links['history']       = $this->links['home'].'/history/';
             $this->links['unread']        = $this->links['home'].'/unread/';
+            $this->links['unapproved']    = $this->links['home'].'/unapproved/';
         } else {
             $this->links['activity']      = add_query_arg(array('view' => 'activity'), $this->links['home']);
             $this->links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $this->links['home']);
@@ -286,6 +287,7 @@ class AsgarosForumRewrite {
             $this->links['profile']       = add_query_arg(array('view' => 'profile'), $this->links['home']);
             $this->links['history']       = add_query_arg(array('view' => 'history'), $this->links['home']);
             $this->links['unread']        = add_query_arg(array('view' => 'unread'), $this->links['home']);
+            $this->links['unapproved']    = add_query_arg(array('view' => 'unapproved'), $this->links['home']);
         }
     }
 
