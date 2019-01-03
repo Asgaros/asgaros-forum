@@ -190,7 +190,16 @@ class AsgarosForum {
     //======================================================================
 
     function loadOptions() {
-        $this->options = array_merge($this->options_default, get_option('asgarosforum_options', array()));
+        // Get current options.
+		$current_options = get_option('asgarosforum_options', array());
+
+		// Merge options if current options are present, otherwise use default-options.
+		if (!empty($current_options)) {
+			$this->options = array_merge($this->options_default, $current_options);
+		} else {
+			$this->options = $this->options_default;
+		}
+        
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
 
         // Ensure default values if some needed files got deleted.
