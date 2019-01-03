@@ -483,6 +483,9 @@ class AsgarosForumAdmin {
     function render_admin_header($title, $titleUpdated) {
         global $asgarosforum;
 
+        // Workaround to ensure that admin-notices are shown outside of our panel.
+        echo '<h1 id="asgaros-panel-notice-area"></h1>';
+
         echo '<div id="asgaros-panel">';
             echo '<div class="header-panel">';
                 echo '<div class="sub-panel-left">';

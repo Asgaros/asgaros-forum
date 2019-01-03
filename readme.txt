@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to define days of activity to show
+* Fixed: Display issues in the administration-area of Asgaros Forum when notices of WordPress or other plugins are shown
 * Fixed: Broken forum if settings could not get loaded from database
 * Fixed: Height of editor to small in certain configurations
 * Fixed: It is not longer possible to quote posts from other topics
