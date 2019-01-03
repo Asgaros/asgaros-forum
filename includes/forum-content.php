@@ -154,6 +154,7 @@ class AsgarosForumContent {
     }
 
     private function insert_data() {
+        $link = '';
         $redirect = '';
         $upload_list = $this->asgarosforum->uploads->get_upload_list();
         $author_id = $this->asgarosforum->permissions->currentUserID;
@@ -169,32 +170,44 @@ class AsgarosForumContent {
             // Upload files.
             $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
 
-            // Create redirect link.
-            $redirect = html_entity_decode($this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic, false, '#postid-'.$this->asgarosforum->current_post));
+            // Create link.
+            $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
 
-            // Only send notifications when the topic is approved. Otherwise notify the site-owner.
+            // Special instructions for un/approved topics.
             if ($this->asgarosforum->approval->is_topic_approved($this->asgarosforum->current_topic)) {
                 // Send notifications about new topic.
                 $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic);
 
                 // Send notifications about mentionings.
                 $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+
+                // Set redirect.
+                $redirect = $link;
             } else {
+                // Notify siteowner about new unapproved topic.
                 $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->asgarosforum->current_topic);
+
+                // Set redirect.
+                $redirect = $this->asgarosforum->rewrite->get_link('home', false, array('new_unapproved_topic' => 1));
             }
         } else if ($this->get_action() === 'add_post') {
             // Create the post.
             $this->asgarosforum->current_post = $this->insert_post($this->asgarosforum->current_topic, $this->asgarosforum->current_forum, $this->data_content, $author_id, $upload_list);
 
+            // Upload files.
             $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
-
-            $redirect = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
 
             // Send notifications about new post.
             $this->asgarosforum->notifications->notify_about_new_post($this->asgarosforum->current_post);
 
             // Send notifications about mentionings.
             $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+
+            // Create link.
+            $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+
+            // Set redirect.
+            $redirect = $link;
         } else if ($this->get_action() === 'edit_post') {
             $date = $this->asgarosforum->current_time();
             $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
@@ -204,12 +217,16 @@ class AsgarosForumContent {
                 $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('name' => $this->data_subject), array('id' => $this->asgarosforum->current_topic), array('%s'), array('%d'));
             }
 
-            $redirect = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+            // Create link.
+            $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+
+            // Set redirect.
+            $redirect = $link;
         }
 
         $this->asgarosforum->notifications->update_topic_subscription_status($this->asgarosforum->current_topic);
 
-        do_action('asgarosforum_after_'.$this->get_action().'_submit', $this->asgarosforum->current_post, $this->asgarosforum->current_topic, $this->data_subject, $this->data_content, $redirect, $author_id);
+        do_action('asgarosforum_after_'.$this->get_action().'_submit', $this->asgarosforum->current_post, $this->asgarosforum->current_topic, $this->data_subject, $this->data_content, $link, $author_id);
 
         wp_redirect($redirect);
         exit;

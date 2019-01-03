@@ -523,6 +523,23 @@
     background-color: #fbb;
     border: 1px solid #f77;
 }
+#af-wrapper .unapproved-info {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #006611;
+    margin: 16px 0px;
+    background-color: #81e493;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #006611;
+}
+#af-wrapper .unapproved-info span:before {
+    padding-right: 4px;
+}
+
 
 /* READ/UNREAD */
 #af-wrapper #read-unread {

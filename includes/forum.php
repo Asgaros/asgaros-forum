@@ -199,7 +199,7 @@ class AsgarosForum {
 		} else {
 			$this->options = $this->options_default;
 		}
-        
+
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
 
         // Ensure default values if some needed files got deleted.
@@ -561,6 +561,13 @@ class AsgarosForum {
             } else {
                 if (!empty($this->info)) {
                     echo '<div class="info">'.$this->info.'</div>';
+                }
+
+                // Show an info-message when a new unapproved topic got created.
+                if (!empty($_GET['new_unapproved_topic'])) {
+                    echo '<div class="unapproved-info">';
+                        echo '<span class="dashicons-before dashicons-flag">'.__('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum').'</span>';
+                    echo '</div>';
                 }
 
                 $this->showLoginMessage();
