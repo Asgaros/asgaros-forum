@@ -34,6 +34,16 @@ class AsgarosForumRewrite {
         }
     }
 
+    // TODO: Use this function for all redirects.
+    function redirect($location) {
+        if ($location === 'overview') {
+            $location = $this->get_link('home');
+        }
+
+        wp_redirect($location);
+        exit;
+    }
+
     // Generate all necessary rewrite rules.
     function add_rewrite_rules_array($rules) {
         // Get all pages with a shortcode first.

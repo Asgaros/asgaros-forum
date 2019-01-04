@@ -471,8 +471,7 @@ class AsgarosForum {
 
             // Check unapproved-topic access.
             if (!$this->approval->is_topic_approved($this->current_topic) && !$this->permissions->isModerator('current')) {
-                $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
-                return;
+                $this->rewrite->redirect('overview');
             }
         }
 
