@@ -144,6 +144,11 @@ class AsgarosForumApproval {
 
     // Shows an info-message when there are unapproved topics.
     public function notice_for_moderators() {
+        // Ensure that we are in the overview.
+        if ($this->asgarosforum->current_view !== 'overview') {
+            return;
+        }
+
         // Ensure that the current user is at least a moderator.
         if (!$this->asgarosforum->permissions->isModerator('current')) {
             return;
