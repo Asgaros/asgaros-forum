@@ -265,7 +265,7 @@ class AsgarosForumContent {
         // Set the approval-status for the topic.
         $approved = 1;
 
-        if ($this->asgarosforum->approval->topic_requires_approval($forum_id, $author_id)) {
+        if ($this->asgarosforum->approval->forum_requires_approval($forum_id, $author_id)) {
             $approved = 0;
         }
 

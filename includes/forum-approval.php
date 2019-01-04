@@ -97,8 +97,8 @@ class AsgarosForumApproval {
         $this->asgarosforum->notifications->send_notifications($admin_mail, $notification_subject, $notification_message, $replacements);
     }
 
-    // Checks if a topic requires approval for a specific forum and user.
-    public function topic_requires_approval($forum_id, $user_id) {
+    // Checks if a forum requires approval for a specific user.
+    public function forum_requires_approval($forum_id, $user_id) {
         // If the current user is at least a moderator, no approval is needed.
         if ($this->asgarosforum->permissions->isModerator($user_id)) {
             return false;
