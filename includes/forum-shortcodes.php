@@ -85,8 +85,10 @@ class AsgarosForumShortcodes {
                 } else if (!empty($atts['category'])) {
                     $this->includeCategories = explode(',', $atts['category']);
 
-                    // Ensure that we are in the correct element.
-                    if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && $this->asgarosforum->current_view != 'search' && $this->asgarosforum->current_view != 'subscriptions' && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'members' && $this->asgarosforum->current_view != 'history' && $this->asgarosforum->current_view != 'markallread' && $this->asgarosforum->current_view != 'unread' && $this->asgarosforum->current_view != 'activity') {
+                    $category_doesnt_matter_views = array('search', 'subscriptions', 'profile', 'members', 'history', 'markallread', 'unread', 'activity', 'unapproved');
+
+                    // Ensure that we are in the correct category or view, otherwise show overview.
+                    if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && !in_array($this->asgarosforum->current_view, $category_doesnt_matter_views)) {
                         $this->asgarosforum->current_category   = false;
                         $this->asgarosforum->parent_forum       = false;
                         $this->asgarosforum->current_forum      = false;
