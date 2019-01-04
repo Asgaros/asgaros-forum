@@ -64,10 +64,19 @@ class AsgarosForumApproval {
     // Returns all unapproved topics from all or a specific forum.
     public function get_unapproved_topics($forum_id = 'all') {
         if ($forum_id === 'all') {
-            return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 ORDER BY id DESC;");
+            // Get accessible categories first.
+            $ids_categories = $this->asgarosforum->content->get_categories_ids();
+
+            if (!empty($ids_categories)) {
+                $ids_categories = implode(',', $ids_categories);
+
+                return $this->asgarosforum->db->get_results("SELECT t.id, t.name FROM {$this->asgarosforum->tables->topics} AS t LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (t.parent_id = f.id) WHERE f.parent_id IN ({$ids_categories}) AND t.approved = 0 ORDER BY t.id ASC;");
+            }
         } else {
             return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {$forum_id} ORDER BY id DESC;");
         }
+
+        return false;
     }
 
     // Sends a notification about a new unapproved topic.
