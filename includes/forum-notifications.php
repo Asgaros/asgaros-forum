@@ -34,7 +34,12 @@ class AsgarosForumNotifications {
     }
 
     // Generates an (un)subscription link based on subscription status for topics.
-    public function show_topic_subscription_link($element_id) {
+    public function show_topic_subscription_link($topic_id) {
+        // Dont show the subscription-link when the topic is not approved.
+        if (!$this->asgarosforum->approval->is_topic_approved($topic_id)) {
+            return;
+        }
+
         echo '<span id="topic-subscription" class="dashicons-before dashicons-email-alt">';
 
         $link = '';
@@ -45,11 +50,11 @@ class AsgarosForumNotifications {
             $link = $this->asgarosforum->get_link('subscriptions');
             $text = __('You are subscribed to <b>all</b> topics.', 'asgaros-forum');
         } else {
-            if ($this->is_subscribed('topic', $element_id)) {
-                $link = $this->asgarosforum->get_link('topic', $element_id, array('unsubscribe_topic' => $element_id));
+            if ($this->is_subscribed('topic', $topic_id)) {
+                $link = $this->asgarosforum->get_link('topic', $topic_id, array('unsubscribe_topic' => $topic_id));
                 $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
             } else {
-                $link = $this->asgarosforum->get_link('topic', $element_id, array('subscribe_topic' => $element_id));
+                $link = $this->asgarosforum->get_link('topic', $topic_id, array('subscribe_topic' => $topic_id));
                 $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
             }
         }
@@ -87,6 +92,11 @@ class AsgarosForumNotifications {
 
     // Generates an subscription option in the editor based on subscription status.
     public function show_editor_subscription_option() {
+        // Dont show this option when this is a new topic and the forum requires approval.
+        if ($this->asgarosforum->current_topic === false && $this->asgarosforum->approval->forum_requires_approval($this->asgarosforum->current_forum, get_current_user_id())) {
+            return;
+        }
+
         // Check if this functionality is enabled and if the user is logged-in.
         if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
             echo '<div class="editor-row">';
@@ -119,6 +129,11 @@ class AsgarosForumNotifications {
 
     // Subscribes the current user to the current topic.
     public function subscribe_topic($topic_id) {
+        // Dont subscribe to a topic when it is not approved.
+        if (!$this->asgarosforum->approval->is_topic_approved($topic_id)) {
+            return;
+        }
+
         // Check first if this topic exists.
         if ($this->asgarosforum->content->topic_exists($topic_id)) {
             // Only subscribe user if he is not already subscribed for this topic.
