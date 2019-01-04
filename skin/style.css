@@ -733,10 +733,10 @@
 }
 #af-wrapper .subscription .unsubscribe-link {
     float: right;
-    color: #a00;
+    color: #a00 !important;
 }
 #af-wrapper .subscription .unsubscribe-link:hover {
-    color: red;
+    color: red !important;
 }
 #af-wrapper #subscription-settings {
     display: table;
