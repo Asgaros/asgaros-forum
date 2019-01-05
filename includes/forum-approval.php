@@ -44,9 +44,6 @@ class AsgarosForumApproval {
             // Change the status of the topic.
             $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('approved' => 1), array('id' => $topic_id), array('%d'), array('%d'));
 
-            // Update the timestamp of posts inside the topic.
-            $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('date' => $this->asgarosforum->current_time()), array('parent_id' => $topic_id), array('%s'), array('%d'));
-
             // Update the cache.
             $this->is_topic_approved_cache[$topic_id] = true;
 
