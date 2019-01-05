@@ -53,7 +53,7 @@ class AsgarosForumFeed {
     function render_feed() {
         if ($this->asgarosforum->options['enable_rss'] && !empty($_GET['showfeed'])) {
             // Abort feed creation when an error occured.
-            if (!empty($this->asgarosforum->error)) {
+            if ($this->asgarosforum->error !== false) {
                 return;
             }
 
