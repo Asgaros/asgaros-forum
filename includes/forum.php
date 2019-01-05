@@ -436,7 +436,7 @@ class AsgarosForum {
     function check_access() {
         // Check login access.
         if ($this->options['require_login'] && !is_user_logged_in()) {
-            $this->error = __('Sorry, only logged-in users have access to the forum.', 'asgaros-forum');
+            $this->error = __('Sorry, only logged-in users can access the forum.', 'asgaros-forum');
             $this->error = apply_filters('asgarosforum_filter_error_message_require_login', $this->error);
             return;
         }
@@ -446,26 +446,26 @@ class AsgarosForum {
 
         if ($this->category_access_level) {
             if ($this->category_access_level === 'loggedin' && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged in users have access to this category.', 'asgaros-forum');
+                $this->error = __('Sorry, only logged-in users can access this category.', 'asgaros-forum');
                 return;
             }
 
             if ($this->category_access_level === 'moderator' && !$this->permissions->isModerator('current')) {
-                $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+                $this->error = __('Sorry, you cannot access this area.', 'asgaros-forum');
                 return;
             }
         }
 
         // Check usergroups access.
         if (!AsgarosForumUserGroups::checkAccess($this->current_category)) {
-            $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+            $this->error = __('Sorry, you cannot access this area.', 'asgaros-forum');
             return;
         }
 
         if ($this->current_view === 'topic' || $this->current_view === 'addpost') {
             // Check topic-access.
             if ($this->options['require_login_posts'] && !is_user_logged_in()) {
-                $this->error = __('Sorry, only logged-in users have access to this topic.', 'asgaros-forum');
+                $this->error = __('Sorry, only logged-in users can access this topic.', 'asgaros-forum');
                 return;
             }
 
@@ -479,7 +479,7 @@ class AsgarosForum {
         $custom_access = apply_filters('asgarosforum_filter_check_access', true, $this->current_category);
 
         if (!$custom_access) {
-            $this->error = __('Sorry, you dont have access to this area.', 'asgaros-forum');
+            $this->error = __('Sorry, you cannot access this area.', 'asgaros-forum');
             return;
         }
     }
