@@ -32,6 +32,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Reactions
 * Uploads
 * Search
+* Approval
 * Moderators
 * Statistics
 * Ads Management
@@ -94,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Approval functionality
 * Added: Option to define days of activity to show
 * Fixed: Display issues in the administration-area of Asgaros Forum when notices of WordPress or other plugins are shown
 * Fixed: Broken forum if settings could not get loaded from database
