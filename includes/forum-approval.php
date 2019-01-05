@@ -67,7 +67,7 @@ class AsgarosForumApproval {
             if (!empty($ids_categories)) {
                 $ids_categories = implode(',', $ids_categories);
 
-                return $this->asgarosforum->db->get_results("SELECT t.id, t.name FROM {$this->asgarosforum->tables->topics} AS t LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (t.parent_id = f.id) WHERE f.parent_id IN ({$ids_categories}) AND t.approved = 0 ORDER BY t.id ASC;");
+                return $this->asgarosforum->db->get_results("SELECT t.id, t.name, f.name AS forum_name FROM {$this->asgarosforum->tables->topics} AS t LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (t.parent_id = f.id) WHERE f.parent_id IN ({$ids_categories}) AND t.approved = 0 ORDER BY t.id ASC;");
             }
         } else {
             return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {$forum_id} ORDER BY id DESC;");
@@ -133,7 +133,7 @@ class AsgarosForumApproval {
     // Shows an info-message when a new unapproved topic got created.
     public function notice_for_topic_creator() {
         if (!empty($_GET['new_unapproved_topic'])) {
-            echo '<div class="unapproved-notice unapproved-notice-topic-creator">';
+            echo '<div class="unapproved-notice">';
                 echo '<span class="dashicons-before dashicons-visibility">'.__('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum').'</span>';
             echo '</div>';
         }
@@ -159,7 +159,7 @@ class AsgarosForumApproval {
         $unapproved_topics = $this->get_unapproved_topics();
 
         if (!empty($unapproved_topics)) {
-            echo '<div class="unapproved-notice unapproved-notice-moderators">';
+            echo '<div class="unapproved-notice">';
                 echo '<span class="dashicons-before dashicons-visibility">';
                     echo '<a href="'.$this->asgarosforum->rewrite->get_link('unapproved').'">'.__('There are unapproved topics.', 'asgaros-forum').'</a>';
                 echo '</span>';
@@ -200,9 +200,19 @@ class AsgarosForumApproval {
                     echo '<div class="topic-name">';
                         echo '<a href="'.$this->asgarosforum->rewrite->get_link('topic', $topic->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
                         echo '<small>';
+
+                        // Author
                         echo __('By', 'asgaros-forum').'&nbsp;'.$this->asgarosforum->getUsername($first_post->author_id);
+
+                        // Creation time
                         echo '&nbsp;&middot;&nbsp;';
                         echo sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($first_post->date), current_time('timestamp')));
+
+                        // Location
+                        echo '&nbsp;&middot;&nbsp;';
+                        echo __('In', 'asgaros-forum').'&nbsp;';
+                        echo '<i>'.esc_html(stripslashes($topic->forum_name)).'</i>';
+
                         echo '</small>';
                     echo '</div>';
                 echo '</div>';
