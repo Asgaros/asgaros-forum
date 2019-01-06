@@ -116,9 +116,9 @@ class AsgarosForumAppearance {
 		if ($this->asgarosforum->executePlugin) {
 			echo '<!-- Asgaros Forum: BEGIN -->'.PHP_EOL;
 
-			$currentLink = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
-			$currentTitle = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
-			$currentDescription = ($this->asgarosforum->current_description) ? $this->asgarosforum->current_description : $currentTitle;
+			$link = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
+			$title = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
+			$description = ($this->asgarosforum->current_description && $this->asgarosforum->error === false) ? $this->asgarosforum->current_description : $title;
 
 			// Prevent indexing of some views or when there is an error.
 			$blocked_views_for_searchengines = array('addtopic', 'movetopic', 'addpost', 'editpost', 'search');
@@ -127,14 +127,14 @@ class AsgarosForumAppearance {
 				echo '<meta name="robots" content="noindex, follow" />'.PHP_EOL;
 			}
 
-			echo '<link rel="canonical" href="'.$currentLink.'" />'.PHP_EOL;
-			echo '<meta name="description" content="'.$currentDescription.'" />'.PHP_EOL;
-			echo '<meta property="og:url" content="'.$currentLink.'" />'.PHP_EOL;
-			echo '<meta property="og:title" content="'.$currentTitle.'" />'.PHP_EOL;
-			echo '<meta property="og:description" content="'.$currentDescription.'" />'.PHP_EOL;
+			echo '<link rel="canonical" href="'.$link.'" />'.PHP_EOL;
+			echo '<meta name="description" content="'.$description.'" />'.PHP_EOL;
+			echo '<meta property="og:url" content="'.$link.'" />'.PHP_EOL;
+			echo '<meta property="og:title" content="'.$title.'" />'.PHP_EOL;
+			echo '<meta property="og:description" content="'.$description.'" />'.PHP_EOL;
 			echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />'.PHP_EOL;
-			echo '<meta name="twitter:title" content="'.$currentTitle.'" />'.PHP_EOL;
-			echo '<meta name="twitter:description" content="'.$currentDescription.'" />'.PHP_EOL;
+			echo '<meta name="twitter:title" content="'.$title.'" />'.PHP_EOL;
+			echo '<meta name="twitter:description" content="'.$description.'" />'.PHP_EOL;
 
 			do_action('asgarosforum_wp_head');
 

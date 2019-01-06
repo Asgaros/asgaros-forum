@@ -104,6 +104,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: It is not longer possible to quote posts from inaccessible topics
 * Fixed: It is not longer possible for guests to post when topics are inaccessible for guests
 * Fixed: Search-engines cannot longer index inaccessible areas
+* Fixed: Dont leak content via meta-tags in inaccessible areas
 * Fixed: Performance issues in forums which consist of many topics
 * Fixed: PHP-error in notifications-processing when a receiver-mail does not belong to a WordPress-user
 * Fixed: Wrong stylings when using custom colors
