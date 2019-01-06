@@ -190,7 +190,7 @@ class AsgarosForumNotifications {
     }
 
     // TODO: This function generates tons of queries (especially the filtering). We need some improvements.
-    public function notify_about_new_post($post_id) {
+    public function notify_about_new_post($post_id, $ignore_list = false) {
         // Cancel if this functionality is not enabled.
         if (!$this->asgarosforum->options['allow_subscriptions']) {
             return false;
@@ -277,6 +277,11 @@ class AsgarosForumNotifications {
         // Filter mailing list based on usergroups configuration.
         $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $forum->parent_id);
 
+        // Remove receivers which are inside the ignore-list.
+        if ($ignore_list !== false) {
+            $this->mailing_list = array_diff($this->mailing_list, $ignore_list);
+        }
+
         // Apply custom filters before sending.
         $this->mailing_list = apply_filters('asgarosforum_subscriber_mails_new_post', $this->mailing_list);
 
@@ -285,7 +290,7 @@ class AsgarosForumNotifications {
     }
 
     // TODO: This function generates tons of queries (especially the filtering). We need some improvements.
-    public function notify_about_new_topic($topic_id) {
+    public function notify_about_new_topic($topic_id, $ignore_list = false) {
         // Cancel if this functionality is not enabled.
         if (!$this->asgarosforum->options['admin_subscriptions'] && !$this->asgarosforum->options['allow_subscriptions']) {
             return false;
@@ -391,6 +396,11 @@ class AsgarosForumNotifications {
         // Add site-owner to mailing list when option is enabled.
         if ($this->asgarosforum->options['admin_subscriptions']) {
             $this->add_to_mailing_list(get_bloginfo('admin_email'));
+        }
+
+        // Remove receivers which are inside the ignore-list.
+        if ($ignore_list !== false) {
+            $this->mailing_list = array_diff($this->mailing_list, $ignore_list);
         }
 
         // Apply custom filters before sending.

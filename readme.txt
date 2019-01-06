@@ -109,6 +109,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: PHP-error in notifications-processing when a receiver-mail does not belong to a WordPress-user
 * Fixed: Wrong stylings when using custom colors
 * Changed: Show all editor-buttons when the minimalistic editor is not used
+* Changed: Dont notify users about a new post or topic when they already receive a mail because they got mentioned
 * Minor design changes
 * Performance improvements and code optimizations
 = 1.12.1 =

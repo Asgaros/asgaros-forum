@@ -175,11 +175,11 @@ class AsgarosForumContent {
 
             // Special instructions for un/approved topics.
             if ($this->asgarosforum->approval->is_topic_approved($this->asgarosforum->current_topic)) {
-                // Send notifications about new topic.
-                $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic);
-
                 // Send notifications about mentionings.
-                $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+                $receivers = $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+
+                // Send notifications about new topic.
+                $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic, $receivers);
 
                 // Set redirect.
                 $redirect = $link;
@@ -197,11 +197,11 @@ class AsgarosForumContent {
             // Upload files.
             $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
 
-            // Send notifications about new post.
-            $this->asgarosforum->notifications->notify_about_new_post($this->asgarosforum->current_post);
-
             // Send notifications about mentionings.
-            $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+            $receivers = $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+
+            // Send notifications about new post.
+            $this->asgarosforum->notifications->notify_about_new_post($this->asgarosforum->current_post, $receivers);
 
             // Create link.
             $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));

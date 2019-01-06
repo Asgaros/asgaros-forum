@@ -53,6 +53,9 @@ class AsgarosForumMentioning {
             return false;
         }
 
+        // Return-variable which contains all receivers.
+        $receivers = false;
+
         // Load required data.
         $post = $this->asgarosforum->content->get_post($post_id);
         $topic = $this->asgarosforum->content->get_topic($post->parent_id);
@@ -71,6 +74,9 @@ class AsgarosForumMentioning {
             }
 
             if (!empty($this->asgarosforum->notifications->mailing_list)) {
+                // Set receivers-list.
+                $receivers = $this->asgarosforum->notifications->mailing_list;
+
                 // Get author-username.
                 $author_name = $this->asgarosforum->getUsername($post->author_id);
 
@@ -93,5 +99,8 @@ class AsgarosForumMentioning {
                 $this->asgarosforum->notifications->send_notifications($this->asgarosforum->notifications->mailing_list, $notification_subject, $notification_message, $replacements);
             }
         }
+
+        // Return all receivers.
+        return $receivers;
     }
 }
