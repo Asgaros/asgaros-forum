@@ -11,6 +11,7 @@ class AsgarosForumEditor {
 		add_filter('teeny_mce_buttons', array($this, 'custom_mce_buttons'), 9999, 2);
         add_filter('mce_buttons', array($this, 'custom_mce_buttons'), 9999, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
+		add_filter('tiny_mce_before_init', array($this, 'toggle_editor'));
 	}
 
 	public function custom_mce_buttons($buttons, $editor_id) {
@@ -25,6 +26,15 @@ class AsgarosForumEditor {
                 unset($buttons[$searchKey]);
             }
 
+			// Remove the toggle-button when we dont use the minimalistic editor.
+			if ($this->asgarosforum->options['minimalistic_editor'] === false) {
+				$searchKey = array_search('wp_adv', $buttons);
+
+				if ($searchKey !== false) {
+					unset($buttons[$searchKey]);
+				}
+			}
+
 			$buttons = apply_filters('asgarosforum_filter_editor_buttons', $buttons);
         }
 
@@ -38,6 +48,17 @@ class AsgarosForumEditor {
             return $args;
         }
     }
+
+	public function toggle_editor($args) {
+		if ($this->asgarosforum->executePlugin) {
+			// Toggle editor when we dont use the minimalistic editor.
+			if ($this->asgarosforum->options['minimalistic_editor'] === false) {
+				 $args['wordpress_adv_hidden'] = false;
+			}
+		}
+
+		return $args;
+	}
 
     // Check permissions before loading the editor.
     private function checkPermissions($editorView) {

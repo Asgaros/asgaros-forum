@@ -148,10 +148,6 @@
     -moz-box-shadow: none;
     box-shadow: none;
 }
-/* Required to fix a height-bug when teeny = false and advanced-buttons are not shown. */
-#af-wrapper #message_ifr {
-    height: 250px !important;
-}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
