@@ -120,17 +120,11 @@ class AsgarosForumAppearance {
 			$currentTitle = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
 			$currentDescription = ($this->asgarosforum->current_description) ? $this->asgarosforum->current_description : $currentTitle;
 
-			// Prevent indexing of some views.
-			switch ($this->asgarosforum->current_view) {
-				case 'addtopic':
-				case 'movetopic':
-				case 'addpost':
-				case 'editpost':
-				case 'search':
-					echo '<meta name="robots" content="noindex, follow" />'.PHP_EOL;
-				break;
-				default:
-				break;
+			// Prevent indexing of some views or when there is an error.
+			$blocked_views_for_searchengines = array('addtopic', 'movetopic', 'addpost', 'editpost', 'search');
+
+			if (in_array($this->asgarosforum->current_view, $blocked_views_for_searchengines) || $this->asgarosforum->error !== false) {
+				echo '<meta name="robots" content="noindex, follow" />'.PHP_EOL;
 			}
 
 			echo '<link rel="canonical" href="'.$currentLink.'" />'.PHP_EOL;

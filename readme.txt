@@ -95,7 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Approval functionality
+* Added: Approval functionality for topics
 * Added: Option to define days of activity to show
 * Fixed: Display issues in the administration-area of Asgaros Forum when notices of WordPress or other plugins are shown
 * Fixed: Broken forum if settings could not get loaded from database
@@ -103,6 +103,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: It is not longer possible to quote posts from other topics
 * Fixed: It is not longer possible to quote posts from inaccessible topics
 * Fixed: It is not longer possible for guests to post when topics are inaccessible for guests
+* Fixed: Search-engines cannot longer index inaccessible areas
 * Fixed: Performance issues in forums which consist of many topics
 * Fixed: PHP-error in notifications-processing when a receiver-mail does not belong to a WordPress-user
 * Fixed: Wrong stylings when using custom colors
