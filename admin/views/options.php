@@ -230,7 +230,7 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-email-alt"><?php _e('Subscriptions', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle dashicons-before dashicons-email-alt"><?php _e('Notifications', 'asgaros-forum'); ?></h2>
                         <div class="inside">
                             <table>
                                 <tr>
@@ -246,7 +246,10 @@ if (!defined('ABSPATH')) exit;
                                     <td><input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>></td>
                                 </tr>
                                 <tr>
-                                    <th><label for="allow_subscriptions"><?php _e('Allow subscriptions (for logged-in users only)', 'asgaros-forum'); ?></label></th>
+                                    <th><label for="allow_subscriptions">
+                                        <?php _e('Enable subscriptions', 'asgaros-forum'); ?></label>
+                                        <span class="description"><?php _e('The subscription-functionality is only available for logged-in users.', 'asgaros-forum'); ?></span>
+                                    </th>
                                     <td><input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>></td>
                                 </tr>
                                 <!-- New Post Notifications -->
