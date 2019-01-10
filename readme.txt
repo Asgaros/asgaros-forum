@@ -97,6 +97,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Approval functionality for topics
 * Added: Option to define days of activity to show
+* Added: Option to define receivers of administrative notifications
 * Fixed: Display issues in the administration-area of Asgaros Forum when notices of WordPress or other plugins are shown
 * Fixed: Broken forum if settings could not get loaded from database
 * Fixed: Height of editor to small in certain configurations

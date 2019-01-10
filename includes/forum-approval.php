@@ -98,9 +98,18 @@ class AsgarosForumApproval {
 
         $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new unapproved forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');
 
-        $admin_mail = get_bloginfo('admin_email');
+        // Get receivers of admin-notifications.
+        $receivers_admin_notifications = explode(',', $this->asgarosforum->options['receivers_admin_notifications']);
 
-        $this->asgarosforum->notifications->send_notifications($admin_mail, $notification_subject, $notification_message, $replacements);
+        // If found some, add them to the mailing-list.
+        if (!empty($receivers_admin_notifications)) {
+            foreach ($receivers_admin_notifications as $mail) {
+                $this->asgarosforum->notifications->add_to_mailing_list($mail);
+            }
+        }
+
+        // Send notifications about new unapproved topic.
+        $this->asgarosforum->notifications->send_notifications($this->asgarosforum->notifications->mailing_list, $notification_subject, $notification_message, $replacements);
     }
 
     // Checks if a forum requires approval for a specific user.

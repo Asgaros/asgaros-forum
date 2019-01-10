@@ -71,9 +71,18 @@ class AsgarosForumReports {
             $notification_subject = __('New report', 'asgaros-forum');
             $notification_message = __('Hello ###USERNAME###,<br><br>There is a new report.<br><br>Topic:<br>###TITLE###<br><br>Post:<br>###CONTENT###<br><br>Post Author:<br>###AUTHOR###<br><br>Reporter:<br>###REPORTER###<br><br>Link:<br>###LINK###', 'asgaros-forum');
 
-            $admin_mail = get_bloginfo('admin_email');
+            // Get receivers of admin-notifications.
+            $receivers_admin_notifications = explode(',', $this->asgarosforum->options['receivers_admin_notifications']);
 
-            $this->asgarosforum->notifications->send_notifications($admin_mail, $notification_subject, $notification_message, $replacements);
+            // If found some, add them to the mailing-list.
+            if (!empty($receivers_admin_notifications)) {
+                foreach ($receivers_admin_notifications as $mail) {
+                    $this->asgarosforum->notifications->add_to_mailing_list($mail);
+                }
+            }
+
+            // Send notifications about new report.
+            $this->asgarosforum->notifications->send_notifications($this->asgarosforum->notifications->mailing_list, $notification_subject, $notification_message, $replacements);
         }
     }
 

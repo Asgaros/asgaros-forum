@@ -53,6 +53,7 @@ class AsgarosForum {
         'allow_subscriptions'               => true,
         'notification_sender_name'          => '',
         'notification_sender_mail'          => '',
+        'receivers_admin_notifications'     => '',
         'mail_template_new_post_subject'    => '',
         'mail_template_new_post_message'    => '',
         'mail_template_new_topic_subject'   => '',
@@ -213,6 +214,10 @@ class AsgarosForum {
 
         if (empty($this->options['notification_sender_mail'])) {
             $this->options['notification_sender_mail'] = get_bloginfo('admin_email');
+        }
+
+        if (empty($this->options['receivers_admin_notifications'])) {
+            $this->options['receivers_admin_notifications'] = get_bloginfo('admin_email');
         }
 
         if (empty($this->options['mail_template_new_post_subject'])) {

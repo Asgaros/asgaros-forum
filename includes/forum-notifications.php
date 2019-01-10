@@ -393,9 +393,17 @@ class AsgarosForumNotifications {
             $this->mailing_list = AsgarosForumUserGroups::filterSubscriberMails($this->mailing_list, $forum->parent_id);
         }
 
-        // Add site-owner to mailing list when option is enabled.
+        // Add receivers of administrative notifications to the mailing list when the corresponding option is enabled.
         if ($this->asgarosforum->options['admin_subscriptions']) {
-            $this->add_to_mailing_list(get_bloginfo('admin_email'));
+            // Get receivers of admin-notifications.
+            $receivers_admin_notifications = explode(',', $this->asgarosforum->options['receivers_admin_notifications']);
+
+            // If found some, add them to the mailing-list.
+            if (!empty($receivers_admin_notifications)) {
+                foreach ($receivers_admin_notifications as $mail) {
+                    $this->add_to_mailing_list($mail);
+                }
+            }
         }
 
         // Remove receivers which are inside the ignore-list.
@@ -493,10 +501,15 @@ class AsgarosForumNotifications {
 
         // When site-owner notifications are enabled and we are the site owner, we need to print a notice.
         if ($this->asgarosforum->options['admin_subscriptions']) {
+            // Get data of current user.
             $current_user = wp_get_current_user();
+            $receivers_admin_notifications = explode(',', $this->asgarosforum->options['receivers_admin_notifications']);
 
-            if ($current_user->user_email == get_bloginfo('admin_email')) {
-                echo '<div class="info">'.__('Based on your settings you will automatically get notified about new topics as a site-owner.', 'asgaros-forum').'</div>';
+            // Check if the user is a receiver of administrative notifications.
+            if (!empty($receivers_admin_notifications)) {
+                if (in_array($current_user->user_email, $receivers_admin_notifications)) {
+                    echo '<div class="info">'.__('You will automatically get notified about new topics because you are a receiver of administrative notifications.', 'asgaros-forum').'</div>';
+                }
             }
         }
 

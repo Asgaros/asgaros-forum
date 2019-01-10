@@ -242,8 +242,11 @@ if (!defined('ABSPATH')) exit;
                                     <td><input class="regular-text" type="text" name="notification_sender_mail" id="notification_sender_mail" value="<?php echo esc_html(stripslashes($asgarosforum->options['notification_sender_mail'])); ?>"></td>
                                 </tr>
                                 <tr>
-                                    <th><label for="admin_subscriptions"><?php _e('Notify site owner about new topics', 'asgaros-forum'); ?></label></th>
-                                    <td><input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>></td>
+                                    <th>
+                                        <label for="receivers_admin_notifications"><?php _e('Receivers of administrative notifications:', 'asgaros-forum'); ?></label>
+                                        <span class="description"><?php _e('A comma-separated list of mail-addresses which can receive administrative notifications (new reports, unapproved topics, and more).', 'asgaros-forum'); ?></span>
+                                    </th>
+                                    <td><input class="regular-text" type="text" name="receivers_admin_notifications" id="receivers_admin_notifications" value="<?php echo esc_html(stripslashes($asgarosforum->options['receivers_admin_notifications'])); ?>"></td>
                                 </tr>
                                 <tr>
                                     <th><label for="allow_subscriptions">
@@ -251,6 +254,10 @@ if (!defined('ABSPATH')) exit;
                                         <span class="description"><?php _e('The subscription-functionality is only available for logged-in users.', 'asgaros-forum'); ?></span>
                                     </th>
                                     <td><input type="checkbox" name="allow_subscriptions" id="allow_subscriptions" <?php checked(!empty($asgarosforum->options['allow_subscriptions'])); ?>></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="admin_subscriptions"><?php _e('Notify receivers of administrative notifications about new topics', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="checkbox" name="admin_subscriptions" id="admin_subscriptions" <?php checked(!empty($asgarosforum->options['admin_subscriptions'])); ?>></td>
                                 </tr>
                                 <!-- New Post Notifications -->
                                 <tr>
@@ -392,7 +399,7 @@ if (!defined('ABSPATH')) exit;
                                     <td><input type="checkbox" name="reports_enabled" id="reports_enabled" class="show_hide_initiator" data-hide-class="reports-option" <?php checked(!empty($asgarosforum->options['reports_enabled'])); ?>></td>
                                 </tr>
                                 <tr class="reports-option" <?php if (!$reportsOption) { echo 'style="display: none;"'; } ?>>
-                                    <th><label for="reports_notifications"><?php _e('Notify site owner about new reports', 'asgaros-forum'); ?></label></th>
+                                    <th><label for="reports_notifications"><?php _e('Notify receivers of administrative notifications about new reports', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="reports_notifications" id="reports_notifications" <?php checked(!empty($asgarosforum->options['reports_notifications'])); ?>></td>
                                 </tr>
                             </table>
