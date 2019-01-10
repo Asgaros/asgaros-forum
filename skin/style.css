@@ -671,6 +671,7 @@
     line-height: 48px;
     min-height: 48px;
     text-align: left; /* comp */
+    width: 100%; /* comp */
 }
 #af-wrapper #forum-navigation a,
 #af-wrapper #forum-navigation-mobile a {
