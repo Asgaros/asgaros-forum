@@ -653,6 +653,7 @@
     width: 32px;
     line-height: 32px;
     padding-right: 5px;
+    display: inline-block; /* comp */
 }
 
 /* HEADER CONTAINER */
