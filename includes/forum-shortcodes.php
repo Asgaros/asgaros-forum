@@ -101,36 +101,27 @@ class AsgarosForumShortcodes {
         }
     }
 
-    // Removes specific shortcodes from a post based on the settings.
-    public function filter_shortcodes($tags_to_remove, $content) {
-        // Check if shortcodes are allowed inside of posts.
-        if ($this->asgarosforum->options['allow_shortcodes']) {
-            // If shortcodes are allowed, ensure that the forum-shortcodes are removed.
-            $tags_to_remove = array('forum', 'Forum');
-        } else {
-            // If shortcodes are not allowed, ensure that the spoiler-shortcode stays available.
-            $position = array_search('spoiler', $tags_to_remove);
-
-            if ($position !== false) {
-                unset($tags_to_remove[$position]);
-            }
-        }
-
-        // Apply custom shortcode-filters.
-        $tags_to_remove = apply_filters('asgarosforum_filter_post_shortcodes', $tags_to_remove);
-
-        return $tags_to_remove;
-    }
-
     // Renders shortcodes inside of a post.
     public function render_post_shortcodes($content) {
-        // Strip specific shortcodes from the content.
-        add_filter('strip_shortcodes_tagnames', array($this, 'filter_shortcodes'), 10, 2);
-        $content = strip_shortcodes($content);
-        remove_filter('strip_shortcodes_tagnames', array($this, 'filter_shortcodes'), 10, 2);
+        global $shortcode_tags;
+
+        // Do backup of original shortcode-tags.
+        $shortcode_tags_backup = $shortcode_tags;
+
+        // Ensure that the forum-shortcodes are removed.
+        unset($shortcode_tags['forum']);
+        unset($shortcode_tags['Forum']);
+
+        // If shortcodes are not allowed, ensure that the spoiler-shortcode still works.
+        if (!$this->asgarosforum->options['allow_shortcodes']) {
+            $shortcode_tags = array('spoiler' => $shortcode_tags_backup['spoiler']);
+        }
 
         // Render shortcodes.
         $content = do_shortcode($content);
+
+        // Restore original shortcode-tags.
+        $shortcode_tags = $shortcode_tags_backup;
 
         return $content;
     }
