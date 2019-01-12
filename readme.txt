@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Spoiler functionality
 * Added: Approval functionality for topics
 * Added: Option to define days of activity to show
 * Added: Option to define receivers of administrative notifications

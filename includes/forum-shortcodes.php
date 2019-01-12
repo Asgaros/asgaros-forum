@@ -101,12 +101,37 @@ class AsgarosForumShortcodes {
         }
     }
 
-    // Prevent the execution of specific shortcodes inside of posts.
-    function filterShortcodes($tags_to_remove, $content) {
-        $tags_to_remove = array();
-        $tags_to_remove[] = 'forum';
-        $tags_to_remove[] = 'Forum';
+    // Removes specific shortcodes from a post based on the settings.
+    public function filter_shortcodes($tags_to_remove, $content) {
+        // Check if shortcodes are allowed inside of posts.
+        if ($this->asgarosforum->options['allow_shortcodes']) {
+            // If shortcodes are allowed, ensure that the forum-shortcodes are removed.
+            $tags_to_remove = array('forum', 'Forum');
+        } else {
+            // If shortcodes are not allowed, ensure that the spoiler-shortcode stays available.
+            $position = array_search('spoiler', $tags_to_remove);
+
+            if ($position !== false) {
+                unset($tags_to_remove[$position]);
+            }
+        }
+
+        // Apply custom shortcode-filters.
         $tags_to_remove = apply_filters('asgarosforum_filter_post_shortcodes', $tags_to_remove);
+
         return $tags_to_remove;
+    }
+
+    // Renders shortcodes inside of a post.
+    public function render_post_shortcodes($content) {
+        // Strip specific shortcodes from the content.
+        add_filter('strip_shortcodes_tagnames', array($this, 'filter_shortcodes'), 10, 2);
+        $content = strip_shortcodes($content);
+        remove_filter('strip_shortcodes_tagnames', array($this, 'filter_shortcodes'), 10, 2);
+
+        // Render shortcodes.
+        $content = do_shortcode($content);
+
+        return $content;
     }
 }

@@ -92,6 +92,11 @@ if (!defined('ABSPATH')) exit;
                                 </tr>
 
                                 <tr>
+                                    <th><label for="hide_spoilers_from_guests"><?php _e('Hide spoilers from logged-out users', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="checkbox" name="hide_spoilers_from_guests" id="hide_spoilers_from_guests" <?php checked(!empty($asgarosforum->options['hide_spoilers_from_guests'])); ?>></td>
+                                </tr>
+
+                                <tr>
                                     <th><label for="highlight_admin"><?php _e('Highlight administrator/moderator names', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?>></td>
                                 </tr>

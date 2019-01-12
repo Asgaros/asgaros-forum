@@ -56,6 +56,7 @@ require('includes/forum-activity.php');
 require('includes/forum-feed.php');
 require('includes/forum-ads.php');
 require('includes/forum-approval.php');
+require('includes/forum-spoilers.php');
 
 // Include widget files.
 require('includes/forum-widgets.php');

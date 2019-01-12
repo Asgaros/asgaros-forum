@@ -46,6 +46,7 @@ class AsgarosForum {
         'upload_permission'                 => 'loggedin',
         'hide_uploads_from_guests'          => false,
         'hide_profiles_from_guests'         => false,
+        'hide_spoilers_from_guests'         => false,
         'uploads_maximum_number'            => 5,
         'uploads_maximum_size'              => 5,
         'uploads_show_thumbnails'           => true,
@@ -128,6 +129,7 @@ class AsgarosForum {
     var $permissions    = null;
     var $ads            = null;
     var $approval       = null;
+    var $spoilers       = null;
 
     function __construct() {
         // Initialize database.
@@ -184,6 +186,7 @@ class AsgarosForum {
         $this->permissions      = new AsgarosForumPermissions($this);
         $this->ads              = new AsgarosForumAds($this);
         $this->approval         = new AsgarosForumApproval($this);
+        $this->spoilers         = new AsgarosForumSpoilers($this);
     }
 
     //======================================================================

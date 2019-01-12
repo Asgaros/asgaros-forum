@@ -88,14 +88,8 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
             global $wp_embed;
             $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
 
-            if ($this->options['allow_shortcodes']) {
-                add_filter('strip_shortcodes_tagnames', array($this->shortcode, 'filterShortcodes'), 10, 2);
-                $post_content = strip_shortcodes($post_content);
-                remove_filter('strip_shortcodes_tagnames', array($this->shortcode, 'filterShortcodes'), 10, 2);
-
-                // Run shortcodes.
-                $post_content = do_shortcode($post_content);
-            }
+            // Render shortcodes.
+            $post_content = $this->shortcode->render_post_shortcodes($post_content);
 
             $post_content = $this->mentioning->nice_name_to_link($post_content);
 

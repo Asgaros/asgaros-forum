@@ -148,6 +148,10 @@
     -moz-box-shadow: none;
     box-shadow: none;
 }
+#af-wrapper .mce-i-spoiler::before {
+    font: normal 20px/1 dashicons;
+    content: "\f530";
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
@@ -1608,6 +1612,41 @@
 #af-wrapper .ad-forum,
 #af-wrapper .ad-topic {
     border-bottom: 1px solid #eee;
+}
+
+/* SPOILERS */
+#af-wrapper .spoiler {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+#af-wrapper .spoiler .spoiler-head {
+    display: block;
+    padding: 6px 8px;
+    cursor: pointer;
+    background-color: #fafafa;
+}
+#af-wrapper .spoiler .spoiler-body {
+    display: none;
+    padding: 6px 8px;
+    border-top: 1px solid #eee;
+}
+#af-wrapper .spoiler .spoiler-head span {
+    display: inline-block;
+    line-height: 20px;
+}
+#af-wrapper .spoiler .spoiler-head span:before {
+    display: inline-block;
+    line-height: 20px;
+    padding-right: 4px;
+}
+#af-wrapper .spoiler .closed span:before {
+    content: "+";
+}
+#af-wrapper .spoiler .opened span:before {
+    content: "-";
 }
 
 /* ICONS */
