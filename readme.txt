@@ -9,14 +9,14 @@ Stable tag: 1.13.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Asgaros Forum is the best forum solution for WordPress! It comes with dozens of features in a beautiful design and stays simple and fast.
+Asgaros Forum is the best forum-plugin for WordPress! It comes with dozens of features in a beautiful design and stays simple and fast.
 
 == Description ==
-Asgaros Forum is the perfect WordPress plugin if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and integrates perfectly into WordPress.
+Asgaros Forum is the perfect WordPress plugin if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and perfectly integrated into WordPress.
 
 = Installation =
-* A new page for your forum gets automatically created during the installation-process.
-* Add this page to your menu so your users can access your forum within your website.
+* A new forum-page is automatically created during the installation
+* Add this page to your menu so your users can access your forum
 * Thats all!
 
 = Demo, Support & Documentation =
