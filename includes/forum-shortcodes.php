@@ -117,6 +117,9 @@ class AsgarosForumShortcodes {
             $shortcode_tags = array('spoiler' => $shortcode_tags_backup['spoiler']);
         }
 
+        // Apply custom shortcodes.
+        $shortcode_tags = apply_filters('asgarosforum_filter_post_shortcodes', $shortcode_tags);
+
         // Render shortcodes.
         $content = do_shortcode($content);
 
