@@ -458,9 +458,11 @@
 #af-wrapper .topic-poster .dashicons-before:before {
     font-size: 12px;
     width: 16px;
-    height: 22px;
-    line-height: 22px;
+    height: 20px;
+    line-height: 20px;
     box-sizing: initial; /* comp */
+    color: #888;
+    padding-right: 2px;
 }
 #af-wrapper .forum .forum-title {
     display: block;

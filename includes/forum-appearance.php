@@ -302,6 +302,8 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .activity-element:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-reactions .reaction,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-link,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .forum-poster .dashicons-before:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-poster .dashicons-before:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .activity-time {'.PHP_EOL;
 			    $custom_css .= 'color: '.$this->options['custom_text_color_light'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
