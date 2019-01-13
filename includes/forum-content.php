@@ -473,6 +473,18 @@ class AsgarosForumContent {
         return $this->get_topics($forum_id, 1);
     }
 
+    // Returns all subforums.
+    var $get_all_subforums_cache = false;
+    public function get_all_subforums() {
+        if ($this->get_all_subforums_cache === false) {
+            $query = "SELECT * FROM {$this->asgarosforum->tables->forums} WHERE parent_forum != 0;";
+
+            $this->get_all_subforums_cache = $this->asgarosforum->db->get_results($query);
+        }
+
+        return $this->get_all_subforums_cache;
+    }
+
     function get_topics($forum_id, $sticky = 0) {
         // Build query-part for pagination.
         $limit = "";

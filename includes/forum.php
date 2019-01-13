@@ -830,8 +830,7 @@ class AsgarosForum {
             }
 
             // Now get all subforums.
-            // TODO: We can cache this in an own function.
-            $subforums = $this->db->get_results("SELECT id, parent_forum FROM {$this->tables->forums} WHERE parent_forum != 0;");
+            $subforums = $this->content->get_all_subforums();
 
             // Re-assign topic-counter for each forum based on the topic-counters in its subforums.
             if (!empty($subforums)) {
@@ -881,8 +880,7 @@ class AsgarosForum {
             }
 
             // Now get all subforums.
-            // TODO: We can cache this in an own function.
-            $subforums = $this->db->get_results("SELECT id, parent_forum FROM {$this->tables->forums} WHERE parent_forum != 0;");
+            $subforums = $this->content->get_all_subforums();
 
             // Re-assign post-counter for each forum based on the post-counters in its subforums.
             if (!empty($subforums)) {
@@ -1361,7 +1359,7 @@ class AsgarosForum {
             }
 
             // Now get all subforums.
-            $subforums = $this->db->get_results("SELECT f.id, f.parent_forum FROM {$this->tables->forums} AS f WHERE f.parent_forum != 0;");
+            $subforums = $this->content->get_all_subforums();
 
             // Re-assign lastpost-ids for each forum based on the lastposts in its subforums.
             if (!empty($subforums)) {
