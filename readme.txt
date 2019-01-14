@@ -96,8 +96,8 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 = 1.13.0 =
-* Added: Spoiler functionality
 * Added: Approval functionality for topics
+* Added: Spoiler functionality
 * Added: Option to define days of activity to show
 * Added: Option to define receivers of administrative notifications
 * Fixed: Display issues in the administration-area of Asgaros Forum when notices of WordPress or other plugins are shown
