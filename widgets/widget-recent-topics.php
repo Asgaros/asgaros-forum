@@ -16,6 +16,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum topics', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 3;
         $show_avatar = isset($instance['show_avatar']) ? (bool)$instance['show_avatar'] : true;
+        $show_excerpt = isset($instance['show_excerpt']) ? (bool)$instance['show_excerpt'] : true;
 
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
@@ -29,7 +30,12 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 
         echo '<p>';
         echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.$this->get_field_id('show_avatar').'" name="'.$this->get_field_name('show_avatar').'" />';
-		echo '<label for="'.$this->get_field_id('show_avatar').'">'.__('Show avatars?', 'asgaros-forum').'</label>';
+		echo '<label for="'.$this->get_field_id('show_avatar').'">'.__('Show avatars', 'asgaros-forum').'</label>';
+        echo '</p>';
+
+        echo '<p>';
+        echo '<input class="checkbox" type="checkbox" '.checked($show_excerpt, true, false).' id="'.$this->get_field_id('show_excerpt').'" name="'.$this->get_field_name('show_excerpt').'" />';
+		echo '<label for="'.$this->get_field_id('show_excerpt').'">'.__('Show excerpt', 'asgaros-forum').'</label>';
         echo '</p>';
 	}
 
@@ -38,6 +44,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['number'] = (int)$new_instance['number'];
         $instance['show_avatar'] = isset($new_instance['show_avatar']) ? (bool)$new_instance['show_avatar'] : false;
+        $instance['show_excerpt'] = isset($new_instance['show_excerpt']) ? (bool)$new_instance['show_excerpt'] : false;
 		return $instance;
 	}
 }

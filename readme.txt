@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to show excerpt in recent topics/posts widget
 = 1.13.0 =
 * Added: Approval functionality for topics
 * Added: Spoiler functionality

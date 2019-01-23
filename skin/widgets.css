@@ -23,9 +23,13 @@
 }
 .asgarosforum-widget .post-link,
 .asgarosforum-widget .post-author,
+.asgarosforum-widget .post-excerpt,
 .asgarosforum-widget .post-date {
     display: block;
     margin: 0; /* comp */
+}
+.asgarosforum-widget .post-excerpt {
+    margin: 5px 0px;
 }
 .asgarosforum-widget .highlight-admin,
 .asgarosforum-widget .highlight-admin a {

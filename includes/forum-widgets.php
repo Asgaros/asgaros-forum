@@ -80,16 +80,17 @@ class AsgarosForumWidgets {
 
                     // Select data if selectable elements exist.
                     if (!empty($elementIDs)) {
-                        $elements = self::$asgarosforum->db->get_results("SELECT p.id, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE p.id IN (".implode(',', $elementIDs).") ORDER BY p.id DESC;");
+                        $elements = self::$asgarosforum->db->get_results("SELECT p.id, p.text, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) WHERE p.id IN (".implode(',', $elementIDs).") ORDER BY p.id DESC;");
                     }
                 } else if ($widgetType === 'topics') {
-                    $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p.id, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".self::$asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) AND t.approved = 1 {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
+                    $elements = self::$asgarosforum->db->get_results(self::$asgarosforum->db->prepare("SELECT p.id, p.text, p.date, p.parent_id, p.author_id, t.name, (SELECT COUNT(*) FROM ".self::$asgarosforum->tables->posts." WHERE parent_id = p.parent_id) AS post_counter FROM ".self::$asgarosforum->tables->posts." AS p LEFT JOIN ".self::$asgarosforum->tables->topics." AS t ON (t.id = p.parent_id) LEFT JOIN ".self::$asgarosforum->tables->forums." AS f ON (f.id = t.parent_id) WHERE p.id IN (SELECT MAX(p_inner.id) FROM ".self::$asgarosforum->tables->posts." AS p_inner GROUP BY p_inner.parent_id) AND t.approved = 1 {$where} ORDER BY t.id DESC LIMIT %d;", $numberOfItems));
                 }
             }
 
             if ($elements) {
                 $avatars_available = get_option('show_avatars');
                 $show_avatar = isset($instance['show_avatar']) ? $instance['show_avatar'] : true;
+                $show_excerpt = isset($instance['show_excerpt']) ? $instance['show_excerpt'] : true;
                 $widgetTitleLength = apply_filters('asgarosforum_filter_widget_title_length', 33);
                 $widgetAvatarSize = apply_filters('asgarosforum_filter_widget_avatar_size', 30);
 
@@ -116,6 +117,16 @@ class AsgarosForumWidgets {
 
                         echo '<span class="post-link"><a href="'.self::$asgarosforum->get_link('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name), $widgetTitleLength)).'</a></span>';
                         echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->getUsername($element->author_id).'</b></span>';
+
+                        if ($show_excerpt) {
+                            $text = esc_html(stripslashes(strip_tags(strip_shortcodes($element->text))));
+                            $text = self::$asgarosforum->cut_string($text, 66);
+
+                            if (!empty($text)) {
+                                echo '<span class="post-excerpt">'.$text.'</span>';
+                            }
+                        }
+
                         echo '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).$count_answers_i18n_text.'</span>';
 
                         do_action('asgarosforum_widget_recent_'.$widgetType.'_custom_content', $element->id);
