@@ -16,7 +16,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum topics', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 3;
         $show_avatar = isset($instance['show_avatar']) ? (bool)$instance['show_avatar'] : true;
-        $show_excerpt = isset($instance['show_excerpt']) ? (bool)$instance['show_excerpt'] : true;
+        $show_excerpt = isset($instance['show_excerpt']) ? (bool)$instance['show_excerpt'] : false;
 
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';

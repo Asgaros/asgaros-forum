@@ -90,7 +90,7 @@ class AsgarosForumWidgets {
             if ($elements) {
                 $avatars_available = get_option('show_avatars');
                 $show_avatar = isset($instance['show_avatar']) ? $instance['show_avatar'] : true;
-                $show_excerpt = isset($instance['show_excerpt']) ? $instance['show_excerpt'] : true;
+                $show_excerpt = isset($instance['show_excerpt']) ? $instance['show_excerpt'] : false;
                 $widgetTitleLength = apply_filters('asgarosforum_filter_widget_title_length', 33);
                 $widgetAvatarSize = apply_filters('asgarosforum_filter_widget_avatar_size', 30);
 
@@ -115,7 +115,9 @@ class AsgarosForumWidgets {
                             $count_answers_i18n_text = ', '.sprintf(_n('%s Answer', '%s Answers', $answers, 'asgaros-forum'), $count_answers_i18n);
                         }
 
-                        echo '<span class="post-link"><a href="'.self::$asgarosforum->get_link('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id).'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name), $widgetTitleLength)).'</a></span>';
+                        $link = self::$asgarosforum->get_link('topic', $element->parent_id, array('part' => $pageNumber), '#postid-'.$element->id);
+
+                        echo '<span class="post-link"><a href="'.$link.'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html(self::$asgarosforum->cut_string(stripslashes($element->name), $widgetTitleLength)).'</a></span>';
                         echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->getUsername($element->author_id).'</b></span>';
 
                         if ($show_excerpt) {
@@ -123,7 +125,7 @@ class AsgarosForumWidgets {
                             $text = self::$asgarosforum->cut_string($text, 66);
 
                             if (!empty($text)) {
-                                echo '<span class="post-excerpt">'.$text.'</span>';
+                                echo '<span class="post-excerpt">'.$text.'&nbsp;<a class="post-read-more" href="'.$link.'">'.__('Read More', 'asgaros-forum').'</a></span>';
                             }
                         }
 

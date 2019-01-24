@@ -16,7 +16,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum posts', 'asgaros-forum');
         $number = isset($instance['number']) ? absint($instance['number']) : 3;
         $show_avatar = isset($instance['show_avatar']) ? (bool)$instance['show_avatar'] : true;
-        $show_excerpt = isset($instance['show_excerpt']) ? (bool)$instance['show_excerpt'] : true;
+        $show_excerpt = isset($instance['show_excerpt']) ? (bool)$instance['show_excerpt'] : false;
         $group_by_topic = isset($instance['group_by_topic']) ? (bool)$instance['group_by_topic'] : true;
 
 		echo '<p>';
