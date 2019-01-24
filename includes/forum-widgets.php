@@ -121,8 +121,10 @@ class AsgarosForumWidgets {
                         echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->getUsername($element->author_id).'</b></span>';
 
                         if ($show_excerpt) {
+                            $excerpt_length = apply_filters('asgarosforum_widget_excerpt_length', 66);
+
                             $text = esc_html(stripslashes(strip_tags(strip_shortcodes($element->text))));
-                            $text = self::$asgarosforum->cut_string($text, 66);
+                            $text = self::$asgarosforum->cut_string($text, $excerpt_length);
 
                             if (!empty($text)) {
                                 echo '<span class="post-excerpt">'.$text.'&nbsp;<a class="post-read-more" href="'.$link.'">'.__('Read More', 'asgaros-forum').'</a></span>';
