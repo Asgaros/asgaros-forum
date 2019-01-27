@@ -654,7 +654,8 @@
     background-color: #999;
     border-bottom: 1px solid #767676;
 }
-#af-wrapper .title-element:before {
+/* Using a chain-selector ensures that only elements with BOTH classes are getting selected. */
+#af-wrapper .title-element.dashicons-before:before {
     height: 32px;
     width: 32px;
     line-height: 32px;
