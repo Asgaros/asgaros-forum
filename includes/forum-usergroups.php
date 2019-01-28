@@ -702,7 +702,7 @@ class AsgarosForumUserGroups {
             } else if ($bulkActionFound[0] === 'remove') {
                 $searchKey = array_search($bulkActionFound[1], $groupsOfUser);
 
-                if (!$searchKey) {
+                if ($searchKey !== false) {
                     unset($groupsOfUser[$searchKey]);
                 }
             }
