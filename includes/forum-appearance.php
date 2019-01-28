@@ -332,7 +332,7 @@ class AsgarosForumAppearance {
 
 		if ($this->options['custom_background_color_alt'] != $this->options_default['custom_background_color_alt'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color_alt'])) {
 			$custom_css .= '#af-wrapper .content-element .forum:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .topic:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-element .topic-normal:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .subscription:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .member:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element .activity-element:nth-child(even),'.PHP_EOL;

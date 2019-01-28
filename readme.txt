@@ -98,6 +98,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to show excerpt in recent topics/posts widget
 * Added: asgarosforum_widget_excerpt_length filter
 * Fixed: In some cases usergroup could not get removed from user using bulk-actions
+* Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues with some themes
 = 1.13.0 =
 * Added: Approval functionality for topics
