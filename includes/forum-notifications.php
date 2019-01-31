@@ -518,24 +518,24 @@ class AsgarosForumNotifications {
 
         // Render subscription settings.
         echo '<div class="title-element title-element-dark dashicons-before dashicons-email-alt">'.__('Subscription Settings', 'asgaros-forum').'</div>';
-        echo '<div class="content-element">';
+        echo '<div id="subscriptions-panel" class="content-element">';
             echo '<form method="post" action="'.$this->asgarosforum->get_link('subscriptions').'">';
-                echo '<div id="subscription-settings">';
-                    echo '<label class="subscription-option">';
+                echo '<div class="action-panel">';
+                    echo '<label class="action-panel-option">';
                         echo '<input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum');
-                        echo '<span class="subscription-option-description">';
+                        echo '<span class="action-panel-description">';
                             _e('You get notified about activity in forums and topics you are subscribed to.', 'asgaros-forum');
                         echo '</span>';
                     echo '</label>';
-                    echo '<label class="subscription-option">';
+                    echo '<label class="action-panel-option">';
                         echo '<input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum');
-                        echo '<span class="subscription-option-description">';
+                        echo '<span class="action-panel-description">';
                             _e('You get notified about all new topics.', 'asgaros-forum');
                         echo '</span>';
                     echo '</label>';
-                    echo '<label class="subscription-option">';
+                    echo '<label class="action-panel-option">';
                         echo '<input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum');
-                        echo '<span class="subscription-option-description">';
+                        echo '<span class="action-panel-description">';
                             _e('You get notified about all new topics and posts.', 'asgaros-forum');
                         echo '</span>';
                     echo '</label>';

@@ -121,6 +121,59 @@
     word-wrap: normal !important;
 }
 
+/* PANELS */
+#af-wrapper .action-panel {
+    display: table;
+    width: 100%;
+}
+#af-wrapper .action-panel-option {
+    display: table-cell;
+    vertical-align: top;
+    text-align: center;
+    box-sizing: border-box;
+    border-right: 1px solid #eeeeee;
+    padding: 16px;
+    cursor: pointer;
+}
+@media screen and (max-width: 782px) {
+    #af-wrapper .action-panel-option {
+        width: 100%;
+        display: block;
+        border-right: none;
+        border-bottom: 1px solid #eeeeee;
+        text-align: left;
+    }
+}
+#af-wrapper .action-panel-option:last-child {
+    border: none;
+}
+#af-wrapper .action-panel-description {
+    color: #888;
+    display: block;
+    font-size: smaller !important;
+    font-style: italic;
+    padding-top: 8px;
+}
+#af-wrapper #sticky-panel {
+    display: none;
+}
+#af-wrapper #sticky-panel input {
+    display: none;
+}
+#af-wrapper #sticky-panel .action-panel-option {
+    width: 50%;
+}
+#af-wrapper #sticky-panel .action-panel-title {
+    line-height: 30px;
+}
+#af-wrapper #sticky-panel .action-panel-title:before {
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+}
+
 /* UPLOADS */
 #af-wrapper .uploaded-file {
     display: block;
@@ -735,38 +788,8 @@
 #af-wrapper .subscription .unsubscribe-link:hover {
     color: red !important;
 }
-#af-wrapper #subscription-settings {
-    display: table;
-    width: 100%;
-}
-#af-wrapper .subscription-option {
+#af-wrapper #subscriptions-panel .action-panel-option {
     width: 33%;
-    display: table-cell;
-    vertical-align: top;
-    text-align: center;
-    box-sizing: border-box;
-    border-right: 1px solid #eeeeee;
-    padding: 16px;
-    cursor: pointer;
-}
-@media screen and (max-width: 782px) {
-    #af-wrapper .subscription-option {
-        width: 100%;
-        display: block;
-        border-right: none;
-        border-bottom: 1px solid #eeeeee;
-        text-align: left;
-    }
-}
-#af-wrapper .subscription-option:last-child {
-    border: none;
-}
-#af-wrapper .subscription-option-description {
-    color: #888;
-    display: block;
-    font-size: smaller !important;
-    font-style: italic;
-    padding-top: 8px;
 }
 
 /* BREADCRUMBS */

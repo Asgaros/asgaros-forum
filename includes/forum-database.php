@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 42;
+    private $db_version = 43;
     private $tables;
 
     public function __construct() {
@@ -131,7 +131,8 @@ class AsgarosForumDatabase {
             slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id),
             KEY parent_id (parent_id),
-            KEY approved (approved)
+            KEY approved (approved),
+            KEY sticky (sticky)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->posts." (

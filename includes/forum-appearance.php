@@ -291,7 +291,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .editor-row-uploads .upload-hints,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-stats,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-stats,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .subscription-option-description,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .action-panel-description,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-post-date,'.PHP_EOL;
@@ -371,7 +371,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-subforums,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .uploaded-file img,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .subscription-option,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .action-panel-option,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;

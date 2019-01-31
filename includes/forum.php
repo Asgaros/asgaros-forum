@@ -409,10 +409,10 @@ class AsgarosForum {
         } else if (isset($_GET['remove_post'])) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
             $this->remove_post($post_id);
-        } else if (isset($_GET['sticky_topic'])) {
-            $this->change_status('sticky');
+        } else if (!empty($_POST['sticky_topic'])) {
+            $this->set_sticky($this->current_topic, intval($_POST['sticky_topic']));
         } else if (isset($_GET['unsticky_topic'])) {
-            $this->change_status('normal');
+            $this->set_sticky($this->current_topic, 0);
         } else if (isset($_GET['open_topic'])) {
             $this->change_status('open');
         } else if (isset($_GET['close_topic'])) {
@@ -1137,7 +1137,40 @@ class AsgarosForum {
         return $menu;
     }
 
-    function showTopicMenu($showAllButtons = true) {
+    public function render_sticky_panel() {
+        // Cancel if the current user is not at least a moderator.
+        if (!$this->permissions->isModerator('current')) {
+            return;
+        }
+
+        echo '<div id="sticky-panel">';
+            echo '<div class="title-element title-element-dark dashicons-before dashicons-admin-post">'.__('Select Sticky Mode:', 'asgaros-forum').'</div>';
+            echo '<div class="content-element">';
+                echo '<form method="post" action="'.$this->get_link('topic', $this->current_topic).'">';
+                    echo '<div class="action-panel">';
+                        echo '<label class="action-panel-option">';
+                            echo '<input type="radio" name="sticky_topic" value="1">';
+                            echo '<span class="action-panel-title dashicons-before dashicons-admin-post">'.__('Sticky', 'asgaros-forum').'</span>';
+                            echo '<span class="action-panel-description">';
+                                _e('The topic will be sticked to the current forum.', 'asgaros-forum');
+                            echo '</span>';
+                        echo '</label>';
+                        echo '<label class="action-panel-option">';
+                            echo '<input type="radio" name="sticky_topic" value="2">';
+                            echo '<span class="action-panel-title dashicons-before dashicons-admin-site">'.__('Global Sticky', 'asgaros-forum').'</span>';
+                            echo '<span class="action-panel-description">';
+                                _e('The topic will be sticked to all forums.', 'asgaros-forum');
+                            echo '</span>';
+                        echo '</label>';
+                    echo '</div>';
+                echo '</form>';
+            echo '</div>';
+        echo '</div>';
+
+
+    }
+
+    function show_topic_menu($show_all_buttons = true) {
         $menu = '';
 
         $current_user_id = get_current_user_id();
@@ -1151,7 +1184,7 @@ class AsgarosForum {
                 $menu .= '</a>';
             }
 
-            if ($this->permissions->isModerator('current') && $showAllButtons) {
+            if ($this->permissions->isModerator('current') && $show_all_buttons) {
                 // Move button.
                 $menu .= '<a class="dashicons-before dashicons-randomize button-normal" href="'.$this->get_link('movetopic', $this->current_topic).'">';
                 $menu .= __('Move', 'asgaros-forum');
@@ -1159,12 +1192,12 @@ class AsgarosForum {
 
                 if ($this->get_status('sticky')) {
                     // Undo sticky button.
-                    $menu .= '<a class="dashicons-before dashicons-sticky button-normal" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
+                    $menu .= '<a class="dashicons-before dashicons-sticky button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
                     $menu .= __('Unsticky', 'asgaros-forum');
                     $menu .= '</a>';
                 } else {
                     // Sticky button.
-                    $menu .= '<a class="dashicons-before dashicons-admin-post button-normal" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
+                    $menu .= '<a class="dashicons-before dashicons-admin-post button-normal topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
                     $menu .= __('Sticky', 'asgaros-forum');
                     $menu .= '</a>';
                 }
@@ -1182,7 +1215,7 @@ class AsgarosForum {
                 }
             }
         } else {
-            if ($this->permissions->isModerator('current') && $showAllButtons) {
+            if ($this->permissions->isModerator('current') && $show_all_buttons) {
                 // Approve button.
                 if (!$this->approval->is_topic_approved($this->current_topic)) {
                     $menu .= '<a class="dashicons-before dashicons-yes button-approve" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
@@ -1192,7 +1225,7 @@ class AsgarosForum {
             }
         }
 
-        if ($this->permissions->isModerator('current') && $showAllButtons) {
+        if ($this->permissions->isModerator('current') && $show_all_buttons) {
             // Delete button.
             $menu .= '<a class="dashicons-before dashicons-trash button-delete" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
             $menu .= __('Delete', 'asgaros-forum');
@@ -1395,11 +1428,7 @@ class AsgarosForum {
 
     function change_status($property) {
         if ($this->permissions->isModerator('current')) {
-            if ($property == 'sticky') {
-                $this->db->update($this->tables->topics, array('sticky' => 1), array('id' => $this->current_topic), array('%d'), array('%d'));
-            } else if ($property == 'normal') {
-                $this->db->update($this->tables->topics, array('sticky' => 0), array('id' => $this->current_topic), array('%d'), array('%d'));
-            } else if ($property == 'closed') {
+            if ($property == 'closed') {
                 $this->db->update($this->tables->topics, array('closed' => 1), array('id' => $this->current_topic), array('%d'), array('%d'));
             } else if ($property == 'open') {
                 $this->db->update($this->tables->topics, array('closed' => 0), array('id' => $this->current_topic), array('%d'), array('%d'));
@@ -1407,11 +1436,26 @@ class AsgarosForum {
         }
     }
 
+    function set_sticky($topic_id, $sticky_mode) {
+        if (!$this->permissions->isModerator('current')) {
+            return;
+        }
+
+        // Ensure that only correct values can get set.
+        switch ($sticky_mode) {
+            case 0:
+            case 1:
+            case 2:
+                $this->db->update($this->tables->topics, array('sticky' => $sticky_mode), array('id' => $topic_id), array('%d'), array('%d'));
+            break;
+        }
+    }
+
     function get_status($property) {
         if ($property == 'sticky') {
             $status = $this->db->get_var("SELECT sticky FROM {$this->tables->topics} WHERE id = {$this->current_topic};");
 
-            if ($status == 1) {
+            if (intval($status) > 0) {
                 return true;
             } else {
                 return false;
@@ -1428,7 +1472,7 @@ class AsgarosForum {
     }
 
     function get_status_icon($topic_object) {
-        if ($topic_object->sticky == 1) {
+        if ($topic_object->sticky > 0) {
             return 'dashicons-topic-sticky';
         } else if ($topic_object->closed == 1) {
             return 'dashicons-topic-closed';

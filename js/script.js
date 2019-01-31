@@ -1,5 +1,17 @@
 (function($) {
     $(document).ready(function() {
+        // Sticky panel.
+        $('#af-wrapper .topic-button-sticky').click(function(e) {
+            e.preventDefault();
+
+    		$('#af-wrapper #sticky-panel').toggle();
+    	});
+
+        // Automatic submit for sticky-mode.
+        $('#af-wrapper input[name=sticky_topic]').on('change', function() {
+            $(this).closest('form').submit();
+        });
+
         // Adds a new spoiler-button to the editor.
         $(document).on('tinymce-editor-setup', function(event, editor) {
             editor.settings.toolbar1 += ',spoiler';
