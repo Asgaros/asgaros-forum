@@ -39,7 +39,7 @@ class AsgarosForumAppearance {
 
 		add_filter('mce_css', array($this, 'add_editor_css'));
 		add_action('wp_enqueue_scripts', array($this, 'add_css'));
-		add_action('wp_head', array($this, 'set_header'));
+		add_action('wp_head', array($this, 'set_header'), 1);
 	}
 
 	public function load_options() {
