@@ -130,7 +130,7 @@ class AsgarosForumReports {
 
         $report = array(
             'post_id'       => $post_id,
-            'post_text'     => esc_html(stripslashes($post_object->text)),
+            'post_text'     => esc_html(stripslashes(strip_tags($post_object->text))),
             'post_text_raw' => wpautop(stripslashes($post_object->text)),
             'post_link'     => $post_link,
             'topic_name'    => esc_html(stripslashes($topic_object->name)),
