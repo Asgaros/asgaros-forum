@@ -1317,7 +1317,7 @@ class AsgarosForum {
     }
 
     function showRegisterLink() {
-        if (!is_user_logged_in() && get_option('users_can_register') && $this->options['show_register_button']) {
+        if (!is_user_logged_in() && $this->options['show_register_button']) {
             echo '<a class="register-link" href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
         }
     }

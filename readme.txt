@@ -101,6 +101,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: In some cases usergroup could not get removed from user using bulk-actions
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues with some themes
+* Changed: Show enabled register-link even when user registration is temporarily disabled
 * Improved compatibility with Yoast SEO
 = 1.13.0 =
 * Added: Approval functionality for topics
