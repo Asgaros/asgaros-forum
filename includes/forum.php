@@ -40,6 +40,7 @@ class AsgarosForum {
         'members_per_page'                  => 25,
         'minimalistic_editor'               => true,
         'allow_shortcodes'                  => false,
+        'embed_content'                     => true,
         'allow_guest_postings'              => false,
         'allowed_filetypes'                 => 'jpg,jpeg,gif,png,bmp,pdf',
         'allow_file_uploads'                => false,

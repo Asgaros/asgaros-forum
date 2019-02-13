@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Global stickies
+* Added: Option to disable automatic embedding of content in posts
 * Added: Option to show excerpt in recent topics/posts widget
 * Added: asgarosforum_widget_excerpt_length filter
 * Fixed: In some cases usergroup could not get removed from user using bulk-actions

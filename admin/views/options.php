@@ -92,6 +92,11 @@ if (!defined('ABSPATH')) exit;
                                 </tr>
 
                                 <tr>
+                                    <th><label for="embed_content"><?php _e('Automatically embed content in posts', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="checkbox" name="embed_content" id="embed_content" <?php checked(!empty($asgarosforum->options['embed_content'])); ?>></td>
+                                </tr>
+
+                                <tr>
                                     <th><label for="hide_spoilers_from_guests"><?php _e('Hide spoilers from logged-out users', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="hide_spoilers_from_guests" id="hide_spoilers_from_guests" <?php checked(!empty($asgarosforum->options['hide_spoilers_from_guests'])); ?>></td>
                                 </tr>

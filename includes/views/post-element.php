@@ -85,17 +85,28 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
         // Post message.
         echo '<div class="post-message">';
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br></div>';
-            global $wp_embed;
-            $post_content = wpautop($wp_embed->autoembed(stripslashes($post->text)));
+
+            $post_content = stripslashes($post->text);
+
+            // Automatically embed contents if enabled.
+            if ($this->options['embed_content']) {
+                global $wp_embed;
+                $post_content = $wp_embed->autoembed($post_content);
+            }
+
+            // Wrap paragraphs.
+            $post_content = wpautop($post_content);
 
             // Render shortcodes.
             $post_content = $this->shortcode->render_post_shortcodes($post_content);
 
+            // Create nicename-links.
             $post_content = $this->mentioning->nice_name_to_link($post_content);
 
             // This function has to be called at last to ensure that we dont break links to mentioned users.
             $post_content = make_clickable($post_content);
 
+            // Apply custom filters.
             $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
 
             echo $post_content;
