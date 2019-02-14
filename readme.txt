@@ -107,6 +107,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Dont show HTML tags in report preview
 * Changed: Show enabled register-link even when user registration is temporarily disabled
 * Improved compatibility with Yoast SEO
+* Performance improvements and code optimizations
 = 1.13.0 =
 * Added: Approval functionality for topics
 * Added: Spoiler functionality

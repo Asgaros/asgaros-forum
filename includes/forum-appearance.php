@@ -259,7 +259,6 @@ class AsgarosForumAppearance {
 		}
 
 		if ($this->options['custom_accent_color'] != $this->options_default['custom_accent_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_accent_color'])) {
-			$custom_css .= '#af-wrapper input[type="button"],'.PHP_EOL;
 			$custom_css .= '#af-wrapper input[type="submit"],'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-menu a.button-normal,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .title-element,'.PHP_EOL;

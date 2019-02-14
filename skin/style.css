@@ -42,11 +42,11 @@
 }
 #af-wrapper .highlight-admin,
 #af-wrapper .highlight-admin a {
-    color: #e00000 !important;
+    color: #e00000;
 }
 #af-wrapper .highlight-moderator,
 #af-wrapper .highlight-moderator a {
-    color: #099922 !important;
+    color: #099922;
 }
 #af-wrapper .banned {
     color: red;
@@ -215,7 +215,6 @@
     vertical-align: middle;
     font-family: inherit;
 }
-#af-wrapper input[type="button"],
 #af-wrapper input[type="submit"],
 #af-wrapper .editor-row .cancel,
 #af-wrapper .editor-row .cancel-back,
