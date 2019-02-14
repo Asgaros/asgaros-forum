@@ -129,18 +129,6 @@ class AsgarosForumAdmin {
             add_submenu_page('asgarosforum-structure', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'read', 'asgarosforum-appearance', array($this, 'appearance_page'));
             add_submenu_page('asgarosforum-structure', __('Usergroups', 'asgaros-forum'), __('Usergroups', 'asgaros-forum'), 'read', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
 
-            if ($this->asgarosforum->options['reports_enabled']) {
-                // Add report counter to menu.
-                $label_reports = __('Reports', 'asgaros-forum');
-                $counter_reports = $this->asgarosforum->reports->count_reports();
-
-                if ($counter_reports > 0) {
-                    $label_reports = sprintf(__('Reports %s', 'asgaros-forum'), '<span class="update-plugins count-'.$counter_reports.'"><span class="plugin-count">'.number_format_i18n($counter_reports).'</span></span>');
-                }
-
-                add_submenu_page('asgarosforum-structure', __('Reports', 'asgaros-forum'), $label_reports, 'read', 'asgarosforum-reports', array($this, 'reports_page'));
-            }
-
             if ($this->asgarosforum->options['enable_ads']) {
                 add_submenu_page('asgarosforum-structure', __('Ads', 'asgaros-forum'), __('Ads', 'asgaros-forum'), 'read', 'asgarosforum-ads', array($this, 'ads_page'));
             }
@@ -168,10 +156,6 @@ class AsgarosForumAdmin {
 
     function usergroups_page() {
         require('views/usergroups.php');
-    }
-
-    function reports_page() {
-        require('views/reports.php');
     }
 
     function ads_page() {
@@ -262,13 +246,6 @@ class AsgarosForumAdmin {
 
                 if (!empty($_POST['usergroup-category-id']) && is_numeric($_POST['usergroup-category-id'])) {
                     AsgarosForumUserGroups::deleteUserGroupCategory($_POST['usergroup-category-id']);
-                }
-            } else if (isset($_POST['asgaros-forum-delete-report'])) {
-                // Verify nonce first.
-                check_admin_referer('asgaros_forum_delete_report');
-
-                if (!empty($_POST['report-id']) && is_numeric($_POST['report-id'])) {
-                    $this->asgarosforum->reports->remove_report($_POST['report-id']);
                 }
             } else if (isset($_POST['af-create-edit-ad-submit'])) {
                 // Verify nonce first.

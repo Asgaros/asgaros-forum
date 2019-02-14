@@ -102,6 +102,8 @@ You can find a list of available hooks and filters on this site:
 * Fixed: In some cases usergroup could not get removed from user using bulk-actions
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues with some themes
+* Changed: Moderators have access to reports
+* Changed: Report management has been moved to the frontend
 * Changed: Dont show HTML tags in report preview
 * Changed: Show enabled register-link even when user registration is temporarily disabled
 * Improved compatibility with Yoast SEO

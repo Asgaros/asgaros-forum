@@ -85,7 +85,7 @@ class AsgarosForumShortcodes {
                 } else if (!empty($atts['category'])) {
                     $this->includeCategories = explode(',', $atts['category']);
 
-                    $category_doesnt_matter_views = array('search', 'subscriptions', 'profile', 'members', 'history', 'markallread', 'unread', 'activity', 'unapproved');
+                    $category_doesnt_matter_views = array('search', 'subscriptions', 'profile', 'members', 'history', 'markallread', 'unread', 'activity', 'unapproved', 'reports');
 
                     // Ensure that we are in the correct category or view, otherwise show overview.
                     if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && !in_array($this->asgarosforum->current_view, $category_doesnt_matter_views)) {

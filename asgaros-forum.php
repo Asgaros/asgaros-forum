@@ -68,7 +68,6 @@ require('widgets/widget-search.php');
 require('admin/admin.php');
 require('admin/tables/admin-structure-table.php');
 require('admin/tables/admin-usergroups-table.php');
-require('admin/tables/admin-reports-table.php');
 require('admin/tables/admin-ads-table.php');
 
 $asgarosforum = new AsgarosForum();

@@ -383,6 +383,12 @@ class AsgarosForum {
                     $this->current_view = 'overview';
                 }
             break;
+            case 'reports':
+                // Ensure that the user is at least a moderator.
+                if (!$this->permissions->isModerator('current')) {
+                    $this->current_view = 'overview';
+                }
+            break;
             default:
                 $this->current_view = 'overview';
             break;
@@ -437,6 +443,8 @@ class AsgarosForum {
             $reporter_id = get_current_user_id();
 
             $this->reports->add_report($post_id, $reporter_id);
+        } else if (!empty($_GET['report_delete']) && is_numeric($_GET['report_delete'])) {
+            $this->reports->remove_report($_GET['report_delete']);
         }
 
         do_action('asgarosforum_prepare_'.$this->current_view);
@@ -539,6 +547,8 @@ class AsgarosForum {
                 $mainTitle = __('Unread Topics', 'asgaros-forum');
             } else if ($this->current_view === 'unapproved') {
                 $mainTitle = __('Unapproved Topics', 'asgaros-forum');
+            } else if ($this->current_view === 'reports') {
+                $mainTitle = __('Reports', 'asgaros-forum');
             }
         }
 
@@ -566,6 +576,9 @@ class AsgarosForum {
 
         // Shows an info-message when there are unapproved topics.
         $this->approval->notice_for_moderators();
+
+        // Shows an info-message when there are new reports.
+        $this->reports->notice_for_moderators();
 
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
             $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'</div>';
@@ -635,6 +648,9 @@ class AsgarosForum {
                     break;
                     case 'unapproved':
                         $this->approval->show_unapproved_topics();
+                    break;
+                    case 'reports':
+                        $this->reports->show_reports();
                     break;
                     default:
                         $this->overview();

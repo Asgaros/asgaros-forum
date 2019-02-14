@@ -284,17 +284,6 @@
             showEditorInstance('#usergroup-category-delete');
         });
 
-        // Delete report dialog.
-        $('.report-delete-link').click(function() {
-            resetEditor();
-
-            var elementID = $(this).attr('data-value-id');
-            $('#report-delete input[name=report-id]').val(elementID);
-
-            setEditorTitle(this);
-            showEditorInstance('#report-delete');
-        });
-
         // Delete ad dialog.
         $('.ad-delete-link').click(function() {
             resetEditor();

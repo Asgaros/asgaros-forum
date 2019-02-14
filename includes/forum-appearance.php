@@ -304,6 +304,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .report-link,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-poster .dashicons-before:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-poster .dashicons-before:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-content:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .activity-time {'.PHP_EOL;
 			    $custom_css .= 'color: '.$this->options['custom_text_color_light'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
@@ -320,6 +321,7 @@ class AsgarosForumAppearance {
 
 		if ($this->options['custom_background_color'] != $this->options_default['custom_background_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color'])) {
 			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
@@ -342,6 +344,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #statistics-online-users,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .spoiler .spoiler-head,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-content,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-content {'.PHP_EOL;
 			    $custom_css .= 'background-color: '.$this->options['custom_background_color_alt'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
@@ -386,6 +389,10 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .ad-topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .spoiler,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .spoiler .spoiler-body,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-source,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-content,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .report-actions,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #usergroups-filter {'.PHP_EOL;
 			    $custom_css .= 'border-color: '.$this->options['custom_border_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;

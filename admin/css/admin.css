@@ -234,10 +234,6 @@
     float: left;
     margin-right: 8px;
 }
-#af-structure .column-author,
-#af-structure .column-reporters {
-    width: 125px;
-}
 #af-structure .column-status,
 #af-structure .column-sort,
 #af-structure .column-users {
