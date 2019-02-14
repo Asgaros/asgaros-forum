@@ -150,6 +150,10 @@ class AsgarosForumAppearance {
 		if ($this->asgarosforum->executePlugin) {
 			wp_enqueue_style('af-style', $themeurl.'/style.css', array(), $this->asgarosforum->version);
 
+			if (is_rtl()) {
+				wp_enqueue_style('af-rtl', $themeurl.'/rtl.css', array(), $this->asgarosforum->version);
+			}
+
 			// Set path to custom CSS file.
 			$custom_css_path = $this->asgarosforum->plugin_path.'skin/custom.css';
 

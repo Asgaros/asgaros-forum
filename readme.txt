@@ -106,6 +106,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Report management has been moved to the frontend
 * Changed: Dont show HTML tags in report preview
 * Changed: Show enabled register-link even when user registration is temporarily disabled
+* Improved RTL support
 * Improved compatibility with Yoast SEO
 * Performance improvements and code optimizations
 = 1.13.0 =
