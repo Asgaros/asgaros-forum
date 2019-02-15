@@ -1478,14 +1478,19 @@ class AsgarosForum {
         }
     }
 
+    private $is_topic_closed_cache = array();
     function is_topic_closed($topic_id) {
-        $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$topic_id};");
+        if (!isset($this->is_topic_closed_cache[$topic_id])) {
+            $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$topic_id};");
 
-        if (intval($status) === 1) {
-            return true;
-        } else {
-            return false;
+            if (intval($status) === 1) {
+                $this->is_topic_closed_cache[$topic_id] = true;
+            } else {
+                $this->is_topic_closed_cache[$topic_id] = false;
+            }
         }
+
+        return $this->is_topic_closed_cache[$topic_id];
     }
 
     function get_status_icon($topic_object) {
