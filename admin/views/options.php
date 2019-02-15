@@ -489,7 +489,7 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
 
-                    <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Settings', 'asgaros-forum'); ?>">
+                    <input type="submit" name="af_options_submit" class="button button-primary margin-bottom" value="<?php _e('Save Settings', 'asgaros-forum'); ?>">
                 </form>
 
             </div>

@@ -108,6 +108,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Show enabled register-link even when user registration is temporarily disabled
 * Improved RTL support
 * Improved compatibility with Yoast SEO
+* Minor design changes
 * Performance improvements and code optimizations
 = 1.13.0 =
 * Added: Approval functionality for topics

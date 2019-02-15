@@ -85,7 +85,7 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
 
-                    <input type="submit" name="af_appearance_submit" class="button button-primary" value="<?php _e('Save Appearance', 'asgaros-forum'); ?>">
+                    <input type="submit" name="af_appearance_submit" class="button button-primary margin-bottom" value="<?php _e('Save Appearance', 'asgaros-forum'); ?>">
                 </form>
 
             </div>
