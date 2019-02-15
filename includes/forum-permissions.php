@@ -292,7 +292,13 @@ class AsgarosForumPermissions {
         }
     }
 
+    private $get_users_by_role_cache = array();
     public function get_users_by_role($role) {
+        // Return cached value if available.
+        if (isset($this->get_users_by_role_cache[$role])) {
+            return $this->get_users_by_role_cache[$role];
+        }
+
         $data = array();
 
         // Ensure we dont run core query modifications for this function.
@@ -386,7 +392,9 @@ class AsgarosForumPermissions {
         // Reset settings for core query modifications.
         $this->asgarosforum->prevent_query_modifications = false;
 
-        return $data;
+        // Cache value and return it.
+        $this->get_users_by_role_cache[$role] = $data;
+        return $this->get_users_by_role_cache[$role];
     }
 
     // Users List in Administration.
