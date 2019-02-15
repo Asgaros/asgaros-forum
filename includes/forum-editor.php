@@ -96,7 +96,7 @@ class AsgarosForumEditor {
                 }
 
                 // Error when the topic is closed and the user is not a moderator.
-                if ($this->asgarosforum->get_status('closed') && !$this->asgarosforum->permissions->isModerator('current')) {
+                if ($this->asgarosforum->is_topic_closed($this->asgarosforum->current_topic) && !$this->asgarosforum->permissions->isModerator('current')) {
                     return false;
                     break;
                 }

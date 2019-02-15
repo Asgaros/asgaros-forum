@@ -109,7 +109,7 @@ class AsgarosForumContent {
 
         // Cancel if the topic is closed and the user is not a moderator.
         if ($this->get_action() === 'add_post') {
-            if ($this->asgarosforum->get_status('closed') && !$this->asgarosforum->permissions->isModerator('current')) {
+            if ($this->asgarosforum->is_topic_closed($this->asgarosforum->current_topic) && !$this->asgarosforum->permissions->isModerator('current')) {
                 $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
                 return false;
             }

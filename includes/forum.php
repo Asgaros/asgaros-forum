@@ -676,7 +676,7 @@ class AsgarosForum {
         $mainTitle = $this->getMainTitle();
 
         // Show lock symbol for closed topics.
-        if ($this->current_view == 'topic' && $this->get_status('closed')) {
+        if ($this->current_view == 'topic' && $this->is_topic_closed($this->current_topic)) {
             echo '<h1 class="main-title main-title-'.$this->current_view.' dashicons-before dashicons-lock">'.$mainTitle.'</h1>';
         } else {
             echo '<h1 class="main-title main-title-'.$this->current_view.'">'.$mainTitle.'</h1>';
@@ -1207,7 +1207,7 @@ class AsgarosForum {
                 $menu .= __('Move', 'asgaros-forum');
                 $menu .= '</a>';
 
-                if ($this->get_status('sticky')) {
+                if ($this->is_topic_sticky($this->current_topic)) {
                     // Undo sticky button.
                     $menu .= '<a class="dashicons-before dashicons-sticky button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
                     $menu .= __('Unsticky', 'asgaros-forum');
@@ -1219,7 +1219,7 @@ class AsgarosForum {
                     $menu .= '</a>';
                 }
 
-                if ($this->get_status('closed')) {
+                if ($this->is_topic_closed($this->current_topic)) {
                     // Open button.
                     $menu .= '<a class="dashicons-before dashicons-unlock button-normal" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1)).'">';
                     $menu .= __('Open', 'asgaros-forum');
@@ -1277,7 +1277,7 @@ class AsgarosForum {
                 }
             }
 
-            if ($this->permissions->isModerator('current') || (!$this->get_status('closed') && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
+            if ($this->permissions->isModerator('current') || (!$this->is_topic_closed($this->current_topic) && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
                 // Quote button.
                 $menu .= '<a class="forum-editor-quote-button dashicons-before dashicons-editor-quote" data-value-id="'.$post_id.'" href="'.$this->get_link('post_add', $this->current_topic, array('quote' => $post_id)).'">';
                 $menu .= __('Quote', 'asgaros-forum');
@@ -1468,23 +1468,23 @@ class AsgarosForum {
         }
     }
 
-    function get_status($property) {
-        if ($property == 'sticky') {
-            $status = $this->db->get_var("SELECT sticky FROM {$this->tables->topics} WHERE id = {$this->current_topic};");
+    function is_topic_sticky($topic_id) {
+        $status = $this->db->get_var("SELECT sticky FROM {$this->tables->topics} WHERE id = {$topic_id};");
 
-            if (intval($status) > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if ($property == 'closed') {
-            $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$this->current_topic};");
+        if (intval($status) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-            if ($status == 1) {
-                return true;
-            } else {
-                return false;
-            }
+    function is_topic_closed($topic_id) {
+        $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$topic_id};");
+
+        if (intval($status) === 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 
