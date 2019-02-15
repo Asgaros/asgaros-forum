@@ -434,6 +434,8 @@
     font-style: italic;
     width: 280px;
     text-align: center;
+    color: inherit; /* comp */
+    line-height: inherit; /* comp */
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .last-post-headline {
