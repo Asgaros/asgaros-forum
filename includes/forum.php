@@ -1123,8 +1123,8 @@ class AsgarosForum {
     }
 
     // Returns the topics created by a user.
-    function getTopicsByUser($userID) {
-        return $this->db->get_results("SELECT * FROM {$this->tables->posts} GROUP BY parent_id HAVING author_id = {$userID};");
+    function getTopicsByUser($user_id) {
+        return $this->db->get_results("SELECT id, author_id FROM {$this->tables->posts} WHERE id IN (SELECT MIN(id) FROM {$this->tables->posts} GROUP BY parent_id) AND author_id = {$user_id};");
     }
 
     function countPostsByUser($userID) {
