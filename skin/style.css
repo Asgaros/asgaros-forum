@@ -42,11 +42,11 @@
 }
 #af-wrapper .highlight-admin,
 #af-wrapper .highlight-admin a {
-    color: #e00000;
+    color: #e00000 !important;
 }
 #af-wrapper .highlight-moderator,
 #af-wrapper .highlight-moderator a {
-    color: #099922;
+    color: #099922 !important;
 }
 #af-wrapper .banned {
     color: red;
