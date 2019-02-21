@@ -3,7 +3,7 @@ Contributors: Asgaros
 Donate link: https://www.paypal.me/asgaros
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.8
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.2
 Stable tag: 1.13.0
 License: GPLv2 or later
@@ -110,6 +110,7 @@ You can find a list of available hooks and filters on this site:
 * Improved compatibility with Yoast SEO
 * Minor design changes
 * Performance improvements and code optimizations
+* Compatibility with WordPress 5.1
 = 1.13.0 =
 * Added: Approval functionality for topics
 * Added: Spoiler functionality
