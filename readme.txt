@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.8
 Tested up to: 5.1
 Requires PHP: 5.2
-Stable tag: 1.13.0
+Stable tag: 1.13.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.13.1 =
 * Added: Global stickies
 * Added: Option to disable automatic embedding of content in posts
 * Added: Option to show excerpt in recent topics/posts widget
