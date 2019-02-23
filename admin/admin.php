@@ -53,7 +53,7 @@ class AsgarosForumAdmin {
 
         if ($asgarosforum->options['enable_mentioning']) {
             $output .= '<tr>';
-            $output .= '<th><label for="asgarosforum_mention_notify">'.__('Notify me when I got mentioned', 'asgaros-forum').'</label></th>';
+            $output .= '<th><label for="asgarosforum_mention_notify">'.__('Notify me when I get mentioned', 'asgaros-forum').'</label></th>';
             $output .= '<td><input type="checkbox" name="asgarosforum_mention_notify" id="asgarosforum_mention_notify" value="1" '.checked($asgarosforum->mentioning->user_wants_notification($user->ID), true, false).'></td>';
             $output .= '</tr>';
         }
