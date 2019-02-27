@@ -748,11 +748,11 @@ class AsgarosForum {
 
                 // Show lastpost info.
                 echo '<small class="topic-lastpost-small">';
-                    echo $this->get_lastpost($lastpost_data, 'topic', true);
+                    echo $this->render_lastpost_in_topic($topic_object->id, true);
                 echo '</small>';
             echo '</div>';
             do_action('asgarosforum_custom_topic_column', $topic_object->id);
-            echo '<div class="topic-poster">'.$this->get_lastpost($lastpost_data, 'topic').'</div>';
+            echo '<div class="topic-poster">'.$this->render_lastpost_in_topic($topic_object->id).'</div>';
         echo '</div>';
 
         do_action('asgarosforum_after_topic');
@@ -1066,36 +1066,106 @@ class AsgarosForum {
         return $string;
     }
 
-    function get_lastpost($lastpost_data, $context = 'forum', $compact = false) {
-        $lastpost = false;
+    private $lastpost_forum_cache = false;
+    function lastpost_forum_cache() {
+        if ($this->lastpost_forum_cache === false) {
+            // Get all lastpost-elements of each forum first. Selection on topics is needed here because we only want posts of approved topics.
+            $lastpost_elements = $this->db->get_results("SELECT t.parent_id AS forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 
-        if ($lastpost_data) {
-            $lastpost_link = $this->rewrite->get_post_link($lastpost_data->id, $lastpost_data->parent_id);
-
-            if ($compact) {
-                if ($context === 'forum') {
-                    $lastpost = __('Last post in', 'asgaros-forum').'&nbsp;';
-                    $lastpost .= '<a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name), 34)).'</a>&nbsp;';
-                    $lastpost .= __('by', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost_data->author_id).',&nbsp;';
-                    $lastpost .= '<a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a>';
-                } else if ($context === 'topic') {
-                    $lastpost = __('Last post by', 'asgaros-forum').'&nbsp;';
-                    $lastpost .= $this->getUsername($lastpost_data->author_id).',&nbsp;';
-                    $lastpost .= '<a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a>';
+            // Assign lastpost-ids for each forum.
+            if (!empty($lastpost_elements)) {
+                foreach ($lastpost_elements as $element) {
+                    $this->lastpost_forum_cache[$element->forum_id] = $element->id;
                 }
-            } else {
-                if ($context === 'forum') {
-                    $lastpost = '<a href="'.$lastpost_link.'">'.esc_html($this->cut_string(stripslashes($lastpost_data->name), 34)).'</a><br>';
-                }
-
-                $lastpost .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost_data->author_id).'</span><br>';
-                $lastpost .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$lastpost_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost_data->date), current_time('timestamp'))).'</a></span>';
             }
-        } else if ($context === 'forum') {
-            $lastpost = __('No topics yet!', 'asgaros-forum');
+
+            // Now get all subforums.
+            $subforums = $this->content->get_all_subforums();
+
+            // Re-assign lastpost-ids for each forum based on the lastposts in its subforums.
+            if (!empty($subforums)) {
+                foreach ($subforums as $subforum) {
+                    // Continue if the subforum has no posts.
+                    if (!isset($this->lastpost_forum_cache[$subforum->id])) {
+                        continue;
+                    }
+
+                    // Re-assign value when the parent-forum has no posts.
+                    if (!isset($this->lastpost_forum_cache[$subforum->parent_forum])) {
+                        $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
+                    }
+
+                    // Otherwise re-assign value when a subforum has a more recent post.
+                    if ($this->lastpost_forum_cache[$subforum->id] > $this->lastpost_forum_cache[$subforum->parent_forum]) {
+                        $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
+                    }
+                }
+            }
+        }
+    }
+
+    private $get_lastpost_in_forum_cache = array();
+    function get_lastpost_in_forum($forum_id) {
+        if (!isset($this->get_lastpost_in_forum_cache[$forum_id])) {
+            $this->lastpost_forum_cache();
+
+            if (isset($this->lastpost_forum_cache[$forum_id])) {
+                $this->get_lastpost_in_forum_cache[$forum_id] = $this->db->get_row("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.id = ".$this->lastpost_forum_cache[$forum_id]." AND t.id = p.parent_id;");
+            } else {
+                $this->get_lastpost_in_forum_cache[$forum_id] = false;
+            }
         }
 
-        return $lastpost;
+        return $this->get_lastpost_in_forum_cache[$forum_id];
+    }
+
+    function render_lastpost_in_forum($forum_id, $compact = false) {
+        $lastpost = $this->get_lastpost_in_forum($forum_id);
+
+        if ($lastpost === false) {
+            return __('No topics yet!', 'asgaros-forum');
+        } else {
+            $output = '';
+            $post_link = $this->rewrite->get_post_link($lastpost->id, $lastpost->parent_id);
+
+            if ($compact === true) {
+                $output .= __('Last post in', 'asgaros-forum').'&nbsp;';
+                $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 34)).'</a>&nbsp;';
+                $output .= __('by', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost->author_id).',&nbsp;';
+                $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+            } else {
+                $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 34)).'</a><br>';
+                $output .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost->author_id).'</span><br>';
+                $output .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a></span>';
+            }
+
+            return $output;
+        }
+    }
+
+    function get_lastpost_in_topic($topic_id) {
+        if (empty($this->cache['get_lastpost_in_topic'][$topic_id])) {
+            $this->cache['get_lastpost_in_topic'][$topic_id] = $this->db->get_row("SELECT id, date, author_id, parent_id FROM {$this->tables->posts} WHERE parent_id = {$topic_id} ORDER BY id DESC LIMIT 1;");
+        }
+
+        return $this->cache['get_lastpost_in_topic'][$topic_id];
+    }
+
+    function render_lastpost_in_topic($topic_id, $compact = false) {
+        $lastpost = $this->get_lastpost_in_topic($topic_id);
+        $output = '';
+        $post_link = $this->rewrite->get_post_link($lastpost->id, $lastpost->parent_id);
+
+        if ($compact) {
+            $output .= __('Last post by', 'asgaros-forum').'&nbsp;';
+            $output .= $this->getUsername($lastpost->author_id).',&nbsp;';
+            $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+        } else {
+            $output .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost->author_id).'</span><br>';
+            $output .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a></span>';
+        }
+
+        return $output;
     }
 
     function get_topic_starter($topic_id) {
@@ -1383,64 +1453,6 @@ class AsgarosForum {
             $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
             do_action('asgarosforum_after_delete_post', $post_id);
         }
-    }
-
-    // TODO: Optimize sql-query same as widget-query. (http://stackoverflow.com/a/28090544/4919483)
-    function get_lastpost_in_topic($id) {
-        if (empty($this->cache['get_lastpost_in_topic'][$id])) {
-            $this->cache['get_lastpost_in_topic'][$id] = $this->db->get_row($this->db->prepare("SELECT p.id, p.date, p.author_id, p.parent_id FROM {$this->tables->posts} AS p INNER JOIN {$this->tables->topics} AS t ON p.parent_id = t.id WHERE p.parent_id = %d ORDER BY p.id DESC LIMIT 1;", $id));
-        }
-
-        return $this->cache['get_lastpost_in_topic'][$id];
-    }
-
-    var $lastpost_forum_cache = false;
-
-    function prepare_lastpost_forum_cache() {
-        if ($this->lastpost_forum_cache === false) {
-            // Get all lastpost-elements of each forum first.
-            $lastpost_elements = $this->db->get_results("SELECT t.parent_id AS forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
-
-            // Assign lastpost-ids for each forum.
-            if (!empty($lastpost_elements)) {
-                foreach ($lastpost_elements as $element) {
-                    $this->lastpost_forum_cache[$element->forum_id] = $element->id;
-                }
-            }
-
-            // Now get all subforums.
-            $subforums = $this->content->get_all_subforums();
-
-            // Re-assign lastpost-ids for each forum based on the lastposts in its subforums.
-            if (!empty($subforums)) {
-                foreach ($subforums as $subforum) {
-                    // Continue if the subforum has no posts.
-                    if (!isset($this->lastpost_forum_cache[$subforum->id])) {
-                        continue;
-                    }
-
-                    // Re-assign value when the parent-forum has no posts.
-                    if (!isset($this->lastpost_forum_cache[$subforum->parent_forum])) {
-                        $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
-                    }
-
-                    // Otherwise re-assign value when a subforum has a more recent post.
-                    if ($this->lastpost_forum_cache[$subforum->id] > $this->lastpost_forum_cache[$subforum->parent_forum]) {
-                        $this->lastpost_forum_cache[$subforum->parent_forum] = $this->lastpost_forum_cache[$subforum->id];
-                    }
-                }
-            }
-        }
-    }
-
-    function get_lastpost_in_forum($forum_id) {
-        $this->prepare_lastpost_forum_cache();
-
-        if (isset($this->lastpost_forum_cache[$forum_id])) {
-            return $this->db->get_row("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.id = ".$this->lastpost_forum_cache[$forum_id]." AND t.id = p.parent_id;");
-        }
-
-        return false;
     }
 
     function change_status($property) {
