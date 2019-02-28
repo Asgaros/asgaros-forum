@@ -1123,20 +1123,32 @@ class AsgarosForum {
         $lastpost = $this->get_lastpost_in_forum($forum_id);
 
         if ($lastpost === false) {
-            return __('No topics yet!', 'asgaros-forum');
+            return '<small class="no-topics">'.__('No topics yet!', 'asgaros-forum').'</small>';
         } else {
             $output = '';
             $post_link = $this->rewrite->get_post_link($lastpost->id, $lastpost->parent_id);
 
             if ($compact === true) {
-                $output .= __('Last post in', 'asgaros-forum').'&nbsp;';
-                $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 34)).'</a>&nbsp;';
-                $output .= __('by', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost->author_id).',&nbsp;';
+                $output .= __('Last post:', 'asgaros-forum');
+                $output .= '&nbsp;';
+                $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 34)).'</a>';
+                $output .= '&nbsp;&middot;&nbsp;';
                 $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+                $output .= '&nbsp;&middot;&nbsp;';
+                $output .= $this->getUsername($lastpost->author_id);
             } else {
-                $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 34)).'</a><br>';
-                $output .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost->author_id).'</span><br>';
-                $output .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a></span>';
+                // Avatar
+                $output .= '<div class="forum-poster-avatar">'.get_avatar($lastpost->author_id, 40).'</div>';
+
+                // Summary
+                $output .= '<div class="forum-poster-summary">';
+                $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 25)).'</a><br>';
+                $output .= '<small>';
+                $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+                $output .= '&nbsp;&middot;&nbsp;';
+                $output .= $this->getUsername($lastpost->author_id);
+                $output .= '</small>';
+                $output .= '</div>';
             }
 
             return $output;
@@ -1156,13 +1168,24 @@ class AsgarosForum {
         $output = '';
         $post_link = $this->rewrite->get_post_link($lastpost->id, $lastpost->parent_id);
 
-        if ($compact) {
-            $output .= __('Last post by', 'asgaros-forum').'&nbsp;';
-            $output .= $this->getUsername($lastpost->author_id).',&nbsp;';
+        if ($compact === true) {
+            $output .= __('Last post:', 'asgaros-forum');
+            $output .= '&nbsp;';
             $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+            $output .= '&nbsp;&middot;&nbsp;';
+            $output .= $this->getUsername($lastpost->author_id);
+
         } else {
-            $output .= '<span class="dashicons-before dashicons-admin-users">'.__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($lastpost->author_id).'</span><br>';
-            $output .= '<span class="dashicons-before dashicons-calendar-alt"><a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a></span>';
+            // Avatar
+            $output .= '<div class="topic-poster-avatar">'.get_avatar($lastpost->author_id, 40).'</div>';
+
+            // Summary
+            $output .= '<div class="forum-poster-summary">';
+            $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a><br>';
+            $output .= '<small>';
+            $output .= $this->getUsername($lastpost->author_id);
+            $output .= '</small>';
+            $output .= '</div>';
         }
 
         return $output;

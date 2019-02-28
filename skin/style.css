@@ -432,10 +432,11 @@
     float: right;
     font-weight: normal;
     font-style: italic;
-    width: 280px;
+    width: 300px;
     text-align: center;
     color: inherit; /* comp */
     line-height: inherit; /* comp */
+    margin-right: -20px;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .last-post-headline {
@@ -502,21 +503,25 @@
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
-    width: 280px;
+    width: 300px;
     text-align: left;
     border-left: 1px solid #eee;
-    font-size: smaller;
     padding: 8px 16px;
 }
-#af-wrapper .forum-poster .dashicons-before:before,
-#af-wrapper .topic-poster .dashicons-before:before {
-    font-size: 12px;
-    width: 16px;
-    height: 20px;
-    line-height: 20px;
-    box-sizing: initial; /* comp */
-    color: #888;
-    padding-right: 2px;
+#af-wrapper .forum-poster-avatar,
+#af-wrapper .topic-poster-avatar {
+    display: block;
+    float: left;
+    padding-right: 8px;
+}
+#af-wrapper .forum-poster-summary,
+#af-wrapper .topic-poster-summary {
+    display: block;
+    float: left;
+}
+#af-wrapper .forum-poster .no-topics {
+    display: block;
+    text-align: center;
 }
 #af-wrapper .forum .forum-title {
     display: block;
