@@ -95,7 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Design changes
+* New last post design
 * Performance improvements and code optimizations
 = 1.13.2 =
 * Fixed: Names of administrators/moderators not highlighted when using custom link-colors
