@@ -366,7 +366,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-post-header,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics-body,'.PHP_EOL;
-			$custom_css .= '#af-wrapper #statistics .statistics-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .statistics-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics-online-users,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-row,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-row-subject,'.PHP_EOL;
@@ -394,6 +394,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .report-source,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-content,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-actions,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #profile-content .profile-section-header,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #usergroups-filter {'.PHP_EOL;
 			    $custom_css .= 'border-color: '.$this->options['custom_border_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;

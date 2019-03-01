@@ -95,7 +95,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Received likes to profiles
 * New last post design
+* New profile activity design
+* Minor design changes
 * Performance improvements and code optimizations
 = 1.13.2 =
 * Fixed: Names of administrators/moderators not highlighted when using custom link-colors

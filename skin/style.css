@@ -1252,20 +1252,21 @@
     padding: 2px;
     box-sizing: initial; /* comp */
 }
-#af-wrapper #statistics .statistics-element {
+#af-wrapper .statistics-element {
     width: 165px;
     display: inline-block;
     margin: 10px 0;
     border-right: 1px solid #eee;
+    text-align: center;
 }
-#af-wrapper #statistics .statistics-element:last-child {
+#af-wrapper .statistics-element:last-child {
     border-right: none;
 }
-#af-wrapper #statistics .element-number {
+#af-wrapper .statistics-element .element-number {
     font-size: 16px;
     line-height: 30px;
 }
-#af-wrapper #statistics .element-number:before {
+#af-wrapper .statistics-element .element-number:before {
     font-size: 20px;
     width: 25px;
     height: 25px;
@@ -1273,11 +1274,11 @@
     padding: 0 5px 0 0;
 }
 @media screen and (max-width: 782px) {
-    #af-wrapper #statistics .statistics-element {
+    #af-wrapper .statistics-element {
         border: none;
     }
-    #af-wrapper #statistics .element-number,
-    #af-wrapper #statistics .element-name {
+    #af-wrapper .statistics-element .element-number,
+    #af-wrapper .statistics-element .element-name {
         display: inline-block;
         font-size: 12px;
         line-height: 30px;
@@ -1412,6 +1413,17 @@
     display: table-cell;
     font-style: italic;
 }
+#af-wrapper #profile-content .profile-section-header {
+    display: block;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 24px;
+    padding-bottom: 4px;
+}
+#af-wrapper #profile-content .profile-section-header:before {
+    padding-right: 4px;
+}
 @media screen and (max-width: 782px) {
     #af-wrapper #profile-content .profile-row {
         display: block;
@@ -1425,7 +1437,7 @@
 }
 #af-wrapper .edit-profile-link {
     display: block;
-    padding-top: 8px;
+    margin-top: 24px;
 }
 #af-wrapper .edit-profile-link span:before {
     font-size: 18px;

@@ -172,4 +172,8 @@ class AsgarosForumReactions {
         wp_redirect(html_entity_decode($redirect_link));
         exit;
     }
+
+    public function get_reactions_received($user_id, $reaction) {
+        return $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->reactions} AS r, {$this->asgarosforum->tables->posts} AS p WHERE r.post_id = p.id AND p.author_id = {$user_id} AND r.reaction = '{$reaction}';");
+    }
 }
