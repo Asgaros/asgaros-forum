@@ -261,23 +261,6 @@ class AsgarosForumProfile {
 
                     $this->renderProfileRow($cellTitle, $cellValue);
 
-                    echo '<div class="profile-section-header dashicons-before dashicons-id-alt">'.__('Member Activity', 'asgaros-forum').'</div>';
-
-                    echo '<div class="profile-section-content">';
-                        // Topics started.
-                        $count_topics = $this->asgarosforum->countTopicsByUser($userData->ID);
-                        AsgarosForumStatistics::renderStatisticsElement(__('Topics Started', 'asgaros-forum'), $count_topics, 'dashicons-editor-alignleft');
-
-                        // Replies created.
-                        $count_posts = $this->asgarosforum->countPostsByUser($userData->ID);
-                        $count_posts = $count_posts - $count_topics;
-                        AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'dashicons-format-quote');
-
-                        // Likes Received.
-                        $count_likes = $this->asgarosforum->reactions->get_reactions_received($userData->ID, 'up');
-                        AsgarosForumStatistics::renderStatisticsElement(__('Likes Received', 'asgaros-forum'), $count_likes, 'dashicons-thumbs-up');
-                    echo '</div>';
-
                     // Show biographical info.
                     if (!empty($userData->description)) {
                         $cellTitle = __('Biographical Info:', 'asgaros-forum');
@@ -308,6 +291,23 @@ class AsgarosForumProfile {
                             $this->renderProfileRow($cellTitle, $cellValue);
                         }
                     }
+
+                    echo '<div class="profile-section-header dashicons-before dashicons-id-alt">'.__('Member Activity', 'asgaros-forum').'</div>';
+
+                    echo '<div class="profile-section-content">';
+                        // Topics started.
+                        $count_topics = $this->asgarosforum->countTopicsByUser($userData->ID);
+                        AsgarosForumStatistics::renderStatisticsElement(__('Topics Started', 'asgaros-forum'), $count_topics, 'dashicons-editor-alignleft');
+
+                        // Replies created.
+                        $count_posts = $this->asgarosforum->countPostsByUser($userData->ID);
+                        $count_posts = $count_posts - $count_topics;
+                        AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'dashicons-format-quote');
+
+                        // Likes Received.
+                        $count_likes = $this->asgarosforum->reactions->get_reactions_received($userData->ID, 'up');
+                        AsgarosForumStatistics::renderStatisticsElement(__('Likes Received', 'asgaros-forum'), $count_likes, 'dashicons-thumbs-up');
+                    echo '</div>';
 
                     do_action('asgarosforum_custom_profile_content', $userData);
 
