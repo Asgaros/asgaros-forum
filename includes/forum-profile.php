@@ -261,7 +261,7 @@ class AsgarosForumProfile {
 
                     $this->renderProfileRow($cellTitle, $cellValue);
 
-                    echo '<div class="profile-section-header dashicons-before dashicons-id-alt">'.__('Activity', 'asgaros-forum').'</div>';
+                    echo '<div class="profile-section-header dashicons-before dashicons-id-alt">'.__('Member Activity', 'asgaros-forum').'</div>';
 
                     echo '<div class="profile-section-content">';
                         // Topics started.
