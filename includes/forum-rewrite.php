@@ -329,6 +329,16 @@ class AsgarosForumRewrite {
     // Converts a slug to an id.
     private $convert_slug_to_id_cache = array();
     function convert_slug_to_id($slug, $type) {
+        // Rename certain types to prevent duplicate queries.
+        switch ($type) {
+            case 'movetopic':
+                $type = 'topic';
+                break;
+            case 'history':
+                $type = 'profile';
+                break;
+        }
+
         // Check cache first.
         if (empty($this->convert_slug_to_id_cache[$type.'-'.$slug])) {
             // Set false as a default value in case it does not belong to an element.
@@ -337,7 +347,6 @@ class AsgarosForumRewrite {
             // Now try to determine an id.
             switch ($type) {
                 case 'topic':
-                case 'movetopic':
                     $result = $this->asgarosforum->db->get_var('SELECT id FROM '.$this->asgarosforum->tables->topics.' WHERE slug = "'.$slug.'";');
 
                     if ($result) {
@@ -354,7 +363,6 @@ class AsgarosForumRewrite {
 
                     break;
                 case 'profile':
-                case 'history':
                     $result = get_user_by('slug', $slug);
 
                     if ($result) {
@@ -371,6 +379,16 @@ class AsgarosForumRewrite {
     // Converts an id to a slug.
     private $convert_id_to_slug_cache = array();
     function convert_id_to_slug($id, $type) {
+        // Rename certain types to prevent duplicate queries.
+        switch ($type) {
+            case 'movetopic':
+                $type = 'topic';
+                break;
+            case 'history':
+                $type = 'profile';
+                break;
+        }
+
         // Check cache first.
         if (empty($this->convert_id_to_slug_cache[$type.'-'.$id])) {
             // Set the id as a default value in case we cant find a slug.
@@ -379,7 +397,6 @@ class AsgarosForumRewrite {
             // Now try to determine a slug.
             switch ($type) {
                 case 'topic':
-                case 'movetopic':
                     $result = $this->asgarosforum->db->get_var('SELECT slug FROM '.$this->asgarosforum->tables->topics.' WHERE id = '.$id.';');
 
                     if ($result) {
@@ -396,7 +413,6 @@ class AsgarosForumRewrite {
 
                     break;
                 case 'profile':
-                case 'history':
                     $result = get_user_by('id', $id);
 
                     if ($result) {
