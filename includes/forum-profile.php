@@ -305,8 +305,10 @@ class AsgarosForumProfile {
                         AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'dashicons-format-quote');
 
                         // Likes Received.
-                        $count_likes = $this->asgarosforum->reactions->get_reactions_received($userData->ID, 'up');
-                        AsgarosForumStatistics::renderStatisticsElement(__('Likes Received', 'asgaros-forum'), $count_likes, 'dashicons-thumbs-up');
+                        if ($this->asgarosforum->options['enable_reactions']) {
+                            $count_likes = $this->asgarosforum->reactions->get_reactions_received($userData->ID, 'up');
+                            AsgarosForumStatistics::renderStatisticsElement(__('Likes Received', 'asgaros-forum'), $count_likes, 'dashicons-thumbs-up');
+                        }
                     echo '</div>';
 
                     do_action('asgarosforum_custom_profile_content', $userData);
