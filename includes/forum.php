@@ -417,8 +417,14 @@ class AsgarosForum {
         } else if (isset($_GET['remove_post'])) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
             $this->remove_post($post_id);
-        } else if (!empty($_POST['sticky_topic'])) {
-            $this->set_sticky($this->current_topic, intval($_POST['sticky_topic']));
+        } else if (!empty($_POST['sticky_topic']) || isset($_GET['sticky_topic'])) {
+            $sticky_mode = 1;
+
+            if (!empty($_POST['sticky_topic'])) {
+                $sticky_mode = intval($_POST['sticky_topic']);
+            }
+
+            $this->set_sticky($this->current_topic, $sticky_mode);
         } else if (isset($_GET['unsticky_topic'])) {
             $this->set_sticky($this->current_topic, 0);
         } else if (isset($_GET['open_topic'])) {
