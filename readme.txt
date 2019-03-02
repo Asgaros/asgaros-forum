@@ -97,6 +97,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to disable avatars
 * Added: Received likes to profiles
+* Added: Functionality to reassign forum posts when deleting users
 * New last post design
 * New profile activity design
 * Minor design changes

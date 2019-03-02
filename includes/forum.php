@@ -161,6 +161,10 @@ class AsgarosForum {
 
         add_filter('oembed_dataparse', array($this, 'prevent_oembed_dataparse'), 10, 3);
 
+        // Deleting an user.
+        add_action('delete_user_form', array($this, 'delete_user_form_reassign'), 10, 2);
+        add_action('deleted_user', array($this, 'deleted_user_reassign'), 10, 2);
+
         new AsgarosForumCompatibility($this);
         new AsgarosForumStatistics($this);
         new AsgarosForumUserGroups($this);
@@ -1703,5 +1707,71 @@ class AsgarosForum {
         if (file_exists($path)) {
             unlink($path);
         }
+    }
+
+    public function delete_user_form_reassign($current_user, $userids) {
+        // Remove own ID from users which should get deleted.
+        $userids = array_diff($userids, array($current_user->ID));
+
+        // Cancel if there are no users to delete.
+        if (empty($userids)) {
+            return;
+        }
+
+        // Check if users have posts.
+        $users_have_content = false;
+
+		if ($this->db->get_var("SELECT ID FROM {$this->tables->posts} WHERE author_id IN(".implode(',', $userids).") LIMIT 1;")) {
+			$users_have_content = true;
+		}
+
+        // Cancel if users have no posts.
+        if ($users_have_content === false) {
+            return;
+        }
+
+        // Show reassign-options.
+        echo '<h2>'.__('Forum', 'asgaros-forum').'</h2>';
+
+        echo '<fieldset>';
+        echo '<p><legend>';
+
+        // Count users to delete.
+		$go_delete = count($userids);
+
+        if ($go_delete === 1) {
+            echo __('What should be done with forum posts owned by this user?', 'asgaros-forum');
+        } else {
+            echo __('What should be done with forum posts owned by these users?', 'asgaros-forum');
+        }
+        echo '</legend></p>';
+
+	    echo '<ul style="list-style: none;">';
+		echo '<li><input type="radio" id="forum_reassign0" name="forum_reassign" value="no" checked="checked" />';
+        echo '<label for="forum_reassign0">'.__('Do not reassign forum posts.', 'asgaros-forum').'</label></li>';
+
+		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes" />';
+		echo '<label for="forum_reassign1">'.__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
+        wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids, 'show' => 'display_name_with_login'));
+		echo '</li></ul></fieldset>';
+    }
+
+    public function deleted_user_reassign($id, $reassign) {
+
+        // Ensure that correct values are passed.
+        if (empty($_POST['forum_reassign'])) {
+            return;
+        }
+
+        if ($_POST['forum_reassign'] != 'yes') {
+            return;
+        }
+
+        if (empty($_POST['forum_reassign_user'])) {
+            return;
+        }
+
+        // Reassign forum posts.
+        $this->db->update($this->tables->posts, array('author_id' => $_POST['forum_reassign_user']), array('author_id' => $id), array('%d'), array('%d'));
     }
 }
