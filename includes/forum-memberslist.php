@@ -154,8 +154,6 @@ class AsgarosForumMembersList {
 
         echo '<div class="content-element">';
 
-        $showAvatars = get_option('show_avatars');
-
         $data = $this->get_members();
 
         if (empty($data)) {
@@ -170,9 +168,9 @@ class AsgarosForumMembersList {
                 $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
 
                 echo '<div class="member'.$userOnline.'">';
-                    if ($showAvatars) {
+                    if ($this->asgarosforum->options['enable_avatars']) {
                         echo '<div class="member-avatar">';
-                        echo get_avatar($element->ID, 60);
+                        echo get_avatar($element->ID, 60, '', '', array('force_display' => true));
                         echo '</div>';
                     }
 

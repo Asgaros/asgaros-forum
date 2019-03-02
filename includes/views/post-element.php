@@ -22,9 +22,9 @@ $user_data = get_userdata($post->author_id);
 echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="postid-'.$post->id.'">';
     echo '<div class="post-author '.$user_online_class.'">';
         // Show avatar if activated.
-        if ($avatars_available) {
+        if ($this->options['enable_avatars']) {
             $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 120);
-            echo get_avatar($post->author_id, $avatar_size);
+            echo get_avatar($post->author_id, $avatar_size, '', '', array('force_display' => true));
         }
 
         echo '<div class="post-author-block-name">';

@@ -185,6 +185,10 @@ if (!defined('ABSPATH')) exit;
                         <div class="inside">
                             <table>
                                 <tr>
+                                    <th><label for="enable_avatars"><?php _e('Enable Avatars', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="checkbox" name="enable_avatars" id="enable_avatars" <?php checked(!empty($asgarosforum->options['enable_avatars'])); ?>></td>
+                                </tr>
+                                <tr>
                                     <th><label for="enable_seo_urls"><?php _e('Enable SEO-friendly URLs', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="enable_seo_urls" id="enable_seo_urls" <?php checked(!empty($asgarosforum->options['enable_seo_urls'])); ?>></td>
                                 </tr>

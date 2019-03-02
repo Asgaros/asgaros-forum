@@ -69,11 +69,10 @@ class AsgarosForumProfile {
 
     public function show_profile_header($user_data) {
         $userOnline = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? ' class="user-online"' : '';
-        $showAvatars = get_option('show_avatars');
         $background_style = '';
 
         echo '<div id="profile-header"'.$userOnline.'>';
-            if ($showAvatars) {
+            if ($this->asgarosforum->options['enable_avatars']) {
                 $url = get_avatar_url($user_data->ID, 480);
                 $background_style = 'style="background-image: url(\''.$url.'\');"';
             }
@@ -82,8 +81,8 @@ class AsgarosForumProfile {
             echo '<div class="background-contrast"></div>';
 
             // Show avatar.
-            if ($showAvatars) {
-                echo get_avatar($user_data->ID, 160);
+            if ($this->asgarosforum->options['enable_avatars']) {
+                echo get_avatar($user_data->ID, 160, '', '', array('force_display' => true));
             }
 
             echo '<div class="user-info">';

@@ -88,7 +88,6 @@ class AsgarosForumWidgets {
             }
 
             if ($elements) {
-                $avatars_available = get_option('show_avatars');
                 $show_avatar = isset($instance['show_avatar']) ? $instance['show_avatar'] : true;
                 $show_excerpt = isset($instance['show_excerpt']) ? $instance['show_excerpt'] : false;
                 $widgetTitleLength = apply_filters('asgarosforum_filter_widget_title_length', 33);
@@ -102,8 +101,8 @@ class AsgarosForumWidgets {
                     echo '<div class="widget-element">';
 
                     // Add avatars
-                    if ($avatars_available && $show_avatar) {
-                        echo '<div class="widget-avatar">'.get_avatar($element->author_id, $widgetAvatarSize).'</div>';
+                    if ($show_avatar) {
+                        echo '<div class="widget-avatar">'.get_avatar($element->author_id, $widgetAvatarSize, '', '', array('force_display' => true)).'</div>';
                     }
 
                     echo '<div class="widget-content">';

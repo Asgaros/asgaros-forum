@@ -65,6 +65,7 @@ class AsgarosForum {
         'allow_signatures'                  => false,
         'signatures_html_allowed'           => false,
         'signatures_html_tags'              => '<br><a><i><b><u><s><img><strong>',
+        'enable_avatars'                    => true,
         'enable_seo_urls'                   => true,
         'enable_mentioning'                 => true,
         'enable_reactions'                  => true,
@@ -697,7 +698,6 @@ class AsgarosForum {
 
     function showSinglePost() {
         $counter = 0;
-        $avatars_available = get_option('show_avatars');
         $topicStarter = $this->get_topic_starter($this->current_topic);
         $post = $this->content->get_post($this->current_post);
 
@@ -1138,7 +1138,9 @@ class AsgarosForum {
                 $output .= $this->getUsername($lastpost->author_id);
             } else {
                 // Avatar
-                $output .= '<div class="forum-poster-avatar">'.get_avatar($lastpost->author_id, 40).'</div>';
+                if ($this->options['enable_avatars']) {
+                    $output .= '<div class="forum-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
+                }
 
                 // Summary
                 $output .= '<div class="forum-poster-summary">';
@@ -1177,7 +1179,9 @@ class AsgarosForum {
 
         } else {
             // Avatar
-            $output .= '<div class="topic-poster-avatar">'.get_avatar($lastpost->author_id, 40).'</div>';
+            if ($this->options['enable_avatars']) {
+                $output .= '<div class="topic-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
+            }
 
             // Summary
             $output .= '<div class="forum-poster-summary">';

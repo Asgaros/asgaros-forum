@@ -14,7 +14,6 @@ echo '</div>';
 echo '<div class="title-element"></div>';
 
 $counter = 0;
-$avatars_available = get_option('show_avatars');
 $topicStarter = $this->get_topic_starter($this->current_topic);
 foreach ($posts as $post) {
     require('post-element.php');
