@@ -178,7 +178,7 @@ class AsgarosForumEditor {
                         <div class="editor-row-subject">
                             <label for="subject"><?php _e('Subject:', 'asgaros-forum'); ?></label>
                             <span>
-                                <input type="text" id="subject" maxlength="255" name="subject" value="<?php echo esc_html(stripslashes($subject)); ?>">
+                                <input class="editor-subject-input" type="text" id="subject" maxlength="255" name="subject" value="<?php echo esc_html(stripslashes($subject)); ?>">
                             </span>
                         </div>
                     <?php

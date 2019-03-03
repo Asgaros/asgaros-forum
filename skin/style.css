@@ -356,7 +356,7 @@
     overflow: hidden;
     padding: 0 0 0 12px;
 }
-#af-wrapper .editor-row-subject input {
+#af-wrapper .editor-subject-input {
     width: 100%;
     line-height: 1.5em;
     font-size: 18px;
