@@ -132,6 +132,7 @@ class AsgarosForum {
     var $ads            = null;
     var $approval       = null;
     var $spoilers       = null;
+    var $polls          = null;
 
     function __construct() {
         // Initialize database.
@@ -193,6 +194,7 @@ class AsgarosForum {
         $this->ads              = new AsgarosForumAds($this);
         $this->approval         = new AsgarosForumApproval($this);
         $this->spoilers         = new AsgarosForumSpoilers($this);
+        $this->polls            = new AsgarosForumPolls($this);
     }
 
     //======================================================================
