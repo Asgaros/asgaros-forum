@@ -100,7 +100,8 @@ class AsgarosForum {
         'ads_frequency_posts'               => 6,
         'approval_for'                      => 'guests',
         'enable_activity'                   => true,
-        'activity_days'                     => 14
+        'activity_days'                     => 14,
+        'enable_polls'                      => true
     );
     var $options_editor = array(
         'media_buttons' => false,

@@ -493,6 +493,21 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
 
+                    <div class="postbox">
+                        <h2 class="hndle dashicons-before dashicons-chart-area"><?php _e('Polls', 'asgaros-forum'); ?></h2>
+                        <div class="inside">
+                            <?php
+                            $polls_option = checked(!empty($asgarosforum->options['enable_polls']), true, false);
+                            ?>
+                            <table>
+                                <tr>
+                                    <th><label for="enable_polls"><?php _e('Enable Polls', 'asgaros-forum'); ?></label></th>
+                                    <td><input type="checkbox" name="enable_polls" id="enable_polls" class="show_hide_initiator" data-hide-class="polls-option" <?php checked(!empty($asgarosforum->options['enable_polls'])); ?>></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
                     <input type="submit" name="af_options_submit" class="button button-primary margin-bottom" value="<?php _e('Save Settings', 'asgaros-forum'); ?>">
                 </form>
 
