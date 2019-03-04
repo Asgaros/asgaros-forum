@@ -197,5 +197,11 @@
                 }
             });
         });
+
+        // Polls form toggle.
+        $('#af-wrapper #poll-toggle').click(function() {
+            $('#af-wrapper #poll-form').slideToggle(0, function() {
+            });
+        });
     });
 })(jQuery);

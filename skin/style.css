@@ -373,6 +373,8 @@
 }
 #af-wrapper .editor-row .row-title {
     display: block;
+    height: 22px;
+    line-height: 22px;
     font-size: 18px !important;
     margin: 2px 0 8px 0;
 }
@@ -1811,4 +1813,31 @@
 #af-wrapper .dashicons-editor-help:before {
     color: #ff5454;
     opacity: 1.0;
+}
+
+/* POLLS */
+#af-wrapper #poll-form {
+    display: none;
+}
+#af-wrapper #poll-toggle {
+    cursor: pointer;
+}
+#af-wrapper #poll-toggle::before {
+    line-height: 22px;
+    height: 22px;
+    width: 22px;
+}
+#af-wrapper #poll-question input {
+    font-size: 16px;
+}
+#af-wrapper #poll-options {
+    border-color: #eee;
+    border-style: solid;
+    border-width: 1px 0px 1px 0px;
+    padding: 8px 0px;
+    margin: 8px 0px;
+}
+#af-wrapper #poll-options input {
+    font-size: 14px;
+    margin: 2px 0px;
 }
