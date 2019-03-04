@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 43;
+    private $db_version = 44;
     private $tables;
 
     public function __construct() {
@@ -19,12 +19,15 @@ class AsgarosForumDatabase {
 
     private function setTables() {
         $this->tables = new stdClass();
-        $this->tables->forums       = $this->db->prefix.'forum_forums';
-        $this->tables->topics       = $this->db->prefix.'forum_topics';
-        $this->tables->posts        = $this->db->prefix.'forum_posts';
-        $this->tables->reports      = $this->db->prefix.'forum_reports';
-        $this->tables->reactions    = $this->db->prefix.'forum_reactions';
-        $this->tables->ads          = $this->db->prefix.'forum_ads';
+        $this->tables->forums           = $this->db->prefix.'forum_forums';
+        $this->tables->topics           = $this->db->prefix.'forum_topics';
+        $this->tables->posts            = $this->db->prefix.'forum_posts';
+        $this->tables->reports          = $this->db->prefix.'forum_reports';
+        $this->tables->reactions        = $this->db->prefix.'forum_reactions';
+        $this->tables->ads              = $this->db->prefix.'forum_ads';
+        $this->tables->polls            = $this->db->prefix.'forum_polls';
+        $this->tables->polls_options    = $this->db->prefix.'forum_polls_options';
+        $this->tables->polls_votes      = $this->db->prefix.'forum_polls_votes';
     }
 
     public function getTables() {
@@ -77,6 +80,9 @@ class AsgarosForumDatabase {
         $tables[] = $this->db->prefix.'forum_reports';
         $tables[] = $this->db->prefix.'forum_reactions';
         $tables[] = $this->db->prefix.'forum_ads';
+        $tables[] = $this->db->prefix.'forum_polls';
+        $tables[] = $this->db->prefix.'forum_polls_options';
+        $tables[] = $this->db->prefix.'forum_polls_votes';
 
         // Delete data which has been used in old versions of the plugin.
         $tables[] = $this->db->prefix.'forum_threads';
@@ -174,6 +180,26 @@ class AsgarosForumDatabase {
             active int(1) NOT NULL default '0',
             locations longtext,
             PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql[] = "CREATE TABLE ".$this->tables->polls." (
+            id int(11) NOT NULL default '0',
+            title varchar(255) NOT NULL default '',
+            multiple int(1) NOT NULL default '0',
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql[] = "CREATE TABLE ".$this->tables->polls_options." (
+            id int(11) NOT NULL auto_increment,
+            poll_id int(11) NOT NULL default '0',
+            option varchar(255) NOT NULL default '',
+            PRIMARY KEY  (id)
+            ) $charset_collate;";
+
+            $sql[] = "CREATE TABLE ".$this->tables->polls_votes." (
+            option_id int(11) NOT NULL default '0',
+            user_id int(11) NOT NULL default '0',
+            PRIMARY KEY  (option_id, user_id)
             ) $charset_collate;";
 
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');
