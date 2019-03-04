@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Minor design changes
 = 1.13.3 =
 * Added: Option to disable avatars
 * Added: Show received likes in profiles

@@ -416,6 +416,13 @@
     display: block;
     margin-left: 110px;
 }
+#af-wrapper .editor-label {
+    display: block;
+}
+#af-wrapper .editor-label span,
+#af-wrapper .editor-label input {
+    vertical-align: middle;
+}
 
 /* OVERVIEW/FORUM */
 #af-wrapper .forum small,
