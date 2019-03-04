@@ -215,6 +215,10 @@
     vertical-align: middle;
     font-family: inherit;
 }
+#af-wrapper input::placeholder {
+    font-style: italic;
+    color: #888;
+}
 #af-wrapper input[type="submit"],
 #af-wrapper .editor-row .cancel,
 #af-wrapper .editor-row .cancel-back,
