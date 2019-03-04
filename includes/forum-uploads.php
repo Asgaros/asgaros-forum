@@ -227,7 +227,7 @@ class AsgarosForumUploads {
 
 				// Set maximum file size.
 				if ($this->asgarosforum->options['uploads_maximum_size'] != 0) {
-					echo '<input type="hidden" name="MAX_FILE_SIZE" value="'.(1024 * (1024 * $this->asgarosforum->options['uploads_maximum_size'])).'" />';
+					echo '<input type="hidden" name="MAX_FILE_SIZE" value="'.(1024 * (1024 * $this->asgarosforum->options['uploads_maximum_size'])).'">';
 				}
 
 				$flag = 'style="display: none;"';
