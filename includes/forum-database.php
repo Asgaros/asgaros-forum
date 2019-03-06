@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 44;
+    private $db_version = 45;
     private $tables;
 
     public function __construct() {
@@ -183,7 +183,8 @@ class AsgarosForumDatabase {
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->polls." (
-            id int(11) NOT NULL default '0',
+            id int(11) NOT NULL auto_increment,
+            topic_id int(11) NOT NULL default '0',
             title varchar(255) NOT NULL default '',
             multiple int(1) NOT NULL default '0',
             PRIMARY KEY  (id)
