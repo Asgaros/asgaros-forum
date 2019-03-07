@@ -23,7 +23,8 @@ class AsgarosForumPolls {
         }
 
         echo '<div class="editor-row">';
-            echo '<span id="poll-toggle" class="row-title dashicons-before dashicons-chart-pie">'.__('Add Poll', 'asgaros-forum').'</span>';
+            echo '<span id="poll-add" class="row-title poll-toggle dashicons-before dashicons-plus-alt">'.__('Add Poll', 'asgaros-forum').'</span>';
+            echo '<span id="poll-remove" class="row-title poll-toggle dashicons-before dashicons-trash">'.__('Remove Poll', 'asgaros-forum').'</span>';
 
             echo '<div id="poll-form">';
                 echo '<div id="poll-question">';

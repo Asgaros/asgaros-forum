@@ -198,10 +198,51 @@
             });
         });
 
-        // Polls form toggle.
-        $('#af-wrapper #poll-toggle').click(function() {
-            $('#af-wrapper #poll-form').slideToggle(0, function() {
-            });
+        // Polls form add.
+        $('#af-wrapper #poll-add').click(function() {
+            // Set buttons ...
+            $('#af-wrapper #poll-add').css('display', 'none');
+            $('#af-wrapper #poll-remove').css('display', 'block');
+
+            // Set form ...
+            $('#af-wrapper #poll-form').css('display', 'block');
         });
+
+        // Polls form remove.
+        $('#af-wrapper #poll-remove').click(function() {
+            // Set buttons ...
+            $('#af-wrapper #poll-add').css('display', 'block');
+            $('#af-wrapper #poll-remove').css('display', 'none');
+
+            // Set form ...
+            $('#af-wrapper #poll-form').css('display', 'none');
+
+            // Clear form elements.
+            clear_form_elements('#af-wrapper #poll-form');
+        });
+
+        // Clears all form-elements inside of a selected DOM-element.
+        function clear_form_elements(selector) {
+            $(selector).find(':input').each(function() {
+                switch(this.type) {
+                    case 'password':
+                    case 'text':
+                    case 'textarea':
+                    case 'file':
+                    case 'select-one':
+                    case 'select-multiple':
+                    case 'date':
+                    case 'number':
+                    case 'tel':
+                    case 'email':
+                        $(this).val('');
+                    break;
+                    case 'checkbox':
+                    case 'radio':
+                        this.checked = false;
+                    break;
+                }
+            });
+        }
     });
 })(jQuery);

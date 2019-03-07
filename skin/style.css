@@ -376,7 +376,7 @@
     height: 22px;
     line-height: 22px;
     font-size: 18px !important;
-    margin: 2px 0 8px 0;
+    margin: 2px 0 12px 0;
 }
 #af-wrapper .editor-row-uploads .upload-hints {
     display: block;
@@ -1819,13 +1819,17 @@
 #af-wrapper #poll-form {
     display: none;
 }
-#af-wrapper #poll-toggle {
+#af-wrapper .poll-toggle {
+    display: block;
     cursor: pointer;
 }
-#af-wrapper #poll-toggle::before {
+#af-wrapper .poll-toggle:before {
     line-height: 22px;
     height: 22px;
     width: 22px;
+}
+#af-wrapper #poll-remove {
+    display: none;
 }
 #af-wrapper #poll-question input {
     font-size: 16px;
