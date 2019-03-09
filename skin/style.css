@@ -270,7 +270,7 @@
 	cursor: pointer;
 	display: inline-block;
 	height: 16px;
-	margin: -4px 4px 0 0;
+	margin: 0 4px 0 0;
 	outline: 0;
 	padding: 0 !important;
 	text-align: center;
@@ -392,9 +392,6 @@
     border-radius: initial; /* comp */
     text-shadow: initial; /* comp */
     margin: 2px 0;
-}
-#af-wrapper .editor-row input[type="checkbox"] {
-    margin-top: 0 !important;
 }
 #af-wrapper .editor-row:last-child {
     border-bottom: none;
