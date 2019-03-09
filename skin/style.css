@@ -270,7 +270,7 @@
 	cursor: pointer;
 	display: inline-block;
 	height: 16px;
-	margin: 0 4px 0 0;
+	margin: 0 6px 0 0;
 	outline: 0;
 	padding: 0 !important;
 	text-align: center;
@@ -323,6 +323,7 @@
 #af-wrapper .checkbox-label span,
 #af-wrapper .checkbox-label input {
     vertical-align: middle;
+    cursor: pointer;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper input[type="radio"],
