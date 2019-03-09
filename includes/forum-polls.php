@@ -37,7 +37,7 @@ class AsgarosForumPolls {
                     echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('No', 'asgaros-forum').'" value="">';
                 echo '</div>';
 
-                echo '<label class="editor-label">';
+                echo '<label class="checkbox-label">';
                     echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
                 echo '</label>';
             echo '</div>';
@@ -110,5 +110,57 @@ class AsgarosForumPolls {
                 array('%d', '%s')
             );
         }
+    }
+
+    public function render_poll($topic_id) {
+        // Cancel if poll-functionality is disabled.
+        if (!$this->asgarosforum->options['enable_polls']) {
+            return;
+        }
+
+        // Get poll.
+        $poll = $this->get_poll($topic_id);
+
+        // Cancel if there is no poll.
+        if ($poll === false) {
+            return;
+        }
+
+        echo '<div id="poll-panel">';
+            echo '<div class="headline dashicons-before dashicons-chart-pie">'.esc_html(stripslashes($poll->title)).'</div>';
+
+            echo '<div class="options">';
+                foreach ($poll->options as $option) {
+                    echo '<div class="poll-option">';
+                    echo '<label class="checkbox-label">';
+                        if ($poll->multiple == 1) {
+                            echo '<input type="checkbox" name="poll-option[]"><span>'.$option->option.'</span>';
+                        } else {
+                            echo '<input type="radio" name="poll-option[]"><span>'.$option->option.'</span>';
+                        }
+                    echo '</label>';
+                    echo '</div>';
+                }
+            echo '</div>';
+
+            echo '<div class="actions">';
+                echo '<input type="submit" value="Vote">';
+            echo '</div>';
+        echo '</div>';
+    }
+
+    public function get_poll($topic_id) {
+        // Try to get the poll for the given topic first.
+        $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE topic_id = {$topic_id};");
+
+        // Cancel if there is no poll for the given topic.
+        if (!$poll) {
+            return false;
+        }
+
+        // Get options and votes for the poll.
+        $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.option, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id};");
+
+        return $poll;
     }
 }

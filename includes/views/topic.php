@@ -2,6 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
+$this->polls->render_poll($this->current_topic);
 $this->render_sticky_panel();
 
 echo '<div class="pages-and-menu">';
