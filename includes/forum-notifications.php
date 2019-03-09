@@ -107,7 +107,7 @@ class AsgarosForumNotifications {
                 $link = $this->asgarosforum->get_link('subscriptions');
                 echo '<a href="'.$link.'">'.__('You are subscribed to <b>all</b> topics.', 'asgaros-forum').'</a>';
             } else {
-                echo '<label class="editor-label">';
+                echo '<label class="checkbox-label">';
                     echo '<input type="checkbox" name="subscribe_checkbox" '.checked($this->is_subscribed('topic', $this->asgarosforum->current_topic), true, false).'><span>'.__('<b>Subscribe</b> to this topic.', 'asgaros-forum').'</span>';
                 echo '</label>';
             }

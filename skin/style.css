@@ -317,6 +317,13 @@
 	line-height: 16px;
 	background-color: #2d89cc;
 }
+#af-wrapper .checkbox-label {
+    display: block;
+}
+#af-wrapper .checkbox-label span,
+#af-wrapper .checkbox-label input {
+    vertical-align: middle;
+}
 @media screen and (max-width: 782px) {
     #af-wrapper input[type="radio"],
     #af-wrapper input[type="checkbox"] {
@@ -418,13 +425,6 @@
 #af-wrapper .editor-row .right {
     display: block;
     margin-left: 110px;
-}
-#af-wrapper .editor-label {
-    display: block;
-}
-#af-wrapper .editor-label span,
-#af-wrapper .editor-label input {
-    vertical-align: middle;
 }
 
 /* OVERVIEW/FORUM */
