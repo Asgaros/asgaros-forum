@@ -1849,22 +1849,23 @@
     padding: 8px 16px;
     margin-bottom: 15px;
 }
-#af-wrapper #poll-panel .headline {
+#af-wrapper #poll-panel #poll-headline {
     display: block;
     line-height: 32px;
     font-size: 16px;
     border-bottom: 1px solid #eee;
 }
-#af-wrapper #poll-panel .headline:before {
+#af-wrapper #poll-panel #poll-headline:before {
     height: 32px;
     line-height: 32px;
     padding-right: 4px;
 }
-#af-wrapper #poll-panel .options {
+#af-wrapper #poll-panel #poll-vote,
+#af-wrapper #poll-panel #poll-results {
     display: block;
     padding: 8px;
 }
-#af-wrapper #poll-panel .options label {
+#af-wrapper #poll-panel #poll-vote label {
     margin: 6px 0;
 }
 #af-wrapper #poll-panel .actions {
@@ -1874,4 +1875,35 @@
     width: auto;
     border-radius: 4px;
     padding: 0 16px !important;
+}
+#af-wrapper #poll-results .poll-result-row {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+}
+#af-wrapper #poll-results .poll-result-name {
+    display: block;
+    width: 100%;
+}
+#af-wrapper #poll-results .poll-result-numbers {
+    float: right;
+    text-align: right;
+    color: #888;
+    font-style: italic;
+}
+#af-wrapper #poll-results .poll-result-votes,
+#af-wrapper #poll-results .poll-result-percentage {
+    width: 75px;
+    display: inline-block;
+}
+#af-wrapper #poll-results .poll-result-bar {
+    display: block;
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+#af-wrapper #poll-results .poll-result-filling {
+    height: 20px;
 }
