@@ -1821,14 +1821,13 @@
 
 /* POLLS */
 #af-wrapper #poll-form {
-    display: none;
     padding: 8px 8px 8px 20px;
 }
-#af-wrapper .poll-toggle {
+#af-wrapper .add-poll {
     display: block;
     cursor: pointer;
 }
-#af-wrapper .poll-toggle:before {
+#af-wrapper .add-poll:before {
     line-height: 22px;
     height: 22px;
     width: 22px;
@@ -1904,6 +1903,7 @@
     padding: 8px;
 }
 #af-wrapper #poll-panel #poll-vote label {
+    display: block;
     margin: 6px 0;
 }
 #af-wrapper #poll-panel .actions {

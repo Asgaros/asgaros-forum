@@ -19,39 +19,50 @@ class AsgarosForumPolls {
             return;
         }
 
-        // Cancel if we are not in the addtopic editor-view.
-        if ($editor_view !== 'addtopic') {
+        // Set IDs.
+        $post_id = $this->asgarosforum->current_post;
+        $topic_id = $this->asgarosforum->current_topic;
+
+        // Cancel if we are not in the correct editor-views.
+        if ($editor_view !== 'addtopic' && !($editor_view === 'editpost' && $this->asgarosforum->is_first_post($post_id))) {
             return;
         }
 
         echo '<div class="editor-row">';
-            echo '<span class="row-title poll-toggle dashicons-before dashicons-chart-pie">';
+            echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
                 echo __('Add Poll', 'asgaros-forum');
             echo '</span>';
 
-            echo '<div id="poll-form">';
-                echo '<div id="poll-question">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="">';
-                echo '</div>';
+            // Display or hide poll-form based on view and poll-existence.
+            if ($this->has_poll($topic_id)) {
+                echo '<div id="poll-form" style="display: block;">';
+            } else {
+                echo '<div id="poll-form" style="display: none;">';
+            }
 
-                echo '<div id="poll-options">';
+            echo '<div id="poll-question">';
+                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="">';
+            echo '</div>';
+
+            echo '<div id="poll-options">';
+                $this->reder_poll_option_container();
+                $this->reder_poll_option_container();
+
+                echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
+
+                // Hidden container for new poll-options.
+                echo '<div id="poll-option-template" style="display: none;">';
                     $this->reder_poll_option_container();
-                    $this->reder_poll_option_container();
-
-                    echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
-
-                    // Hidden container for new poll-options.
-                    echo '<div id="poll-option-template" style="display: none;">';
-                        $this->reder_poll_option_container();
-                    echo '</div>';
                 echo '</div>';
+            echo '</div>';
 
-                echo '<div id="poll-settings">';
-                    echo '<label class="checkbox-label">';
-                        echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
-                    echo '</label>';
-                    echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
-                echo '</div>';
+            echo '<div id="poll-settings">';
+                echo '<label class="checkbox-label">';
+                    echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                echo '</label>';
+                echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
+            echo '</div>';
+
             echo '</div>';
         echo '</div>';
     }
@@ -290,12 +301,28 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    public function get_poll($topic_id) {
+    // Checks if a given topic has a poll.
+    public function has_poll($topic_id) {
+        // Cancel if topic_id is not set.
+        if (!$topic_id) {
+            return false;
+        }
+
         // Try to get the poll for the given topic first.
         $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE topic_id = {$topic_id};");
 
         // Cancel if there is no poll for the given topic.
         if (!$poll) {
+            return false;
+        }
+
+        // Otherwise return true.
+        return true;
+    }
+
+    public function get_poll($topic_id) {
+        // Cancel if there is no poll for the given topic.
+        if (!$this->has_poll($topic_id)) {
             return false;
         }
 

@@ -199,7 +199,7 @@
         });
 
         // Polls form add.
-        $('#af-wrapper .poll-toggle').click(function() {
+        $('#af-wrapper .add-poll').click(function() {
             $('#af-wrapper #poll-form').css('display', 'block');
         });
 
