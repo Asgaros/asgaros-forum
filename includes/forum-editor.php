@@ -190,7 +190,8 @@ class AsgarosForumEditor {
 
                     $this->asgarosforum->uploads->show_editor_upload_form($post);
                     $this->asgarosforum->notifications->show_editor_subscription_option();
-                    do_action('asgarosforum_editor_custom_content_bottom', $editor_view);
+                    do_action('asgarosforum_editor_custom_content_bottom');
+					do_action('asgarosforum_editor_'.$editor_view.'_bottom');
 
                     echo '<div class="editor-row">';
                         if ($editor_view === 'addtopic') {

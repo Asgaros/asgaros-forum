@@ -8,12 +8,16 @@ class AsgarosForumPolls {
     public function __construct($object) {
         $this->asgarosforum = $object;
 
-        add_action('asgarosforum_editor_custom_content_bottom', array($this, 'render_poll_form'), 10, 1);
-        add_action('asgarosforum_after_add_topic_submit', array($this, 'save_poll_form'), 10, 6);
+        add_action('asgarosforum_editor_addtopic_bottom', array($this, 'render_poll_form_addtopic'));
+        add_action('asgarosforum_editor_editpost_bottom', array($this, 'render_poll_form_editpost'));
+
+        add_action('asgarosforum_after_add_topic_submit', array($this, 'process_add_poll'), 10, 6);
+        add_action('asgarosforum_after_edit_post_submit', array($this, 'process_edit_poll'), 10, 6);
+
         add_action('asgarosforum_prepare_topic', array($this, 'save_vote'));
     }
 
-    public function render_poll_form($editor_view) {
+    public function render_poll_form_addtopic() {
         // Cancel if poll-functionality is disabled.
         if (!$this->asgarosforum->options['enable_polls']) {
             return;
@@ -23,8 +27,50 @@ class AsgarosForumPolls {
         $post_id = $this->asgarosforum->current_post;
         $topic_id = $this->asgarosforum->current_topic;
 
-        // Cancel if we are not in the correct editor-views.
-        if ($editor_view !== 'addtopic' && !($editor_view === 'editpost' && $this->asgarosforum->is_first_post($post_id))) {
+        echo '<div class="editor-row">';
+            echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
+                echo __('Add Poll', 'asgaros-forum');
+            echo '</span>';
+
+            echo '<div id="poll-form" style="display: none;">';
+                echo '<div id="poll-question">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="">';
+                echo '</div>';
+
+                echo '<div id="poll-options">';
+                    $this->reder_poll_option_container();
+                    $this->reder_poll_option_container();
+
+                    echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
+
+                    // Hidden container for new poll-options.
+                    echo '<div id="poll-option-template" style="display: none;">';
+                        $this->reder_poll_option_container();
+                    echo '</div>';
+                echo '</div>';
+
+                echo '<div id="poll-settings">';
+                    echo '<label class="checkbox-label">';
+                        echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                    echo '</label>';
+                    echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
+                echo '</div>';
+            echo '</div>';
+        echo '</div>';
+    }
+
+    public function render_poll_form_editpost() {
+        // Cancel if poll-functionality is disabled.
+        if (!$this->asgarosforum->options['enable_polls']) {
+            return;
+        }
+
+        // Set IDs.
+        $post_id = $this->asgarosforum->current_post;
+        $topic_id = $this->asgarosforum->current_topic;
+
+        // Cancel if this is not the first post.
+        if (!$this->asgarosforum->is_first_post($post_id)) {
             return;
         }
 
@@ -33,7 +79,7 @@ class AsgarosForumPolls {
                 echo __('Add Poll', 'asgaros-forum');
             echo '</span>';
 
-            // Display or hide poll-form based on view and poll-existence.
+            // Display form by default when this post (topic) has a poll.
             if ($this->has_poll($topic_id)) {
                 echo '<div id="poll-form" style="display: block;">';
             } else {
@@ -84,7 +130,7 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    public function save_poll_form($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
+    public function process_add_poll($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
         // Cancel if poll-functionality is disabled.
         if (!$this->asgarosforum->options['enable_polls']) {
             return;
@@ -150,6 +196,13 @@ class AsgarosForumPolls {
                 array('%d', '%s')
             );
         }
+    }
+
+    public function process_edit_poll($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
+        print_r('<pre>');
+        print_r($_POST);
+        print_r('</pre>');
+        die();
     }
 
     public function save_vote() {
@@ -321,8 +374,11 @@ class AsgarosForumPolls {
     }
 
     public function get_poll($topic_id) {
+        // Try to get the poll for the given topic first.
+        $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE topic_id = {$topic_id};");
+
         // Cancel if there is no poll for the given topic.
-        if (!$this->has_poll($topic_id)) {
+        if (!$poll) {
             return false;
         }
 
