@@ -317,9 +317,6 @@
 	line-height: 16px;
 	background-color: #2d89cc;
 }
-#af-wrapper .checkbox-label {
-    display: block;
-}
 #af-wrapper .checkbox-label span,
 #af-wrapper .checkbox-label input {
     vertical-align: middle;
@@ -1036,13 +1033,22 @@
     flex-direction: column;
     vertical-align: top;
     padding: 0;
-    word-break: break-word;
     box-sizing: border-box;
     background-color: #fff;
     border-width: 0px 0px 0px 1px;
     border-style: solid;
     border-color: #eee;
     padding: 0px 20px;
+    /* Necessary rules for breaking long works. This order and multiple definitions are required to support all browsers! */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .post-wrapper {
@@ -1816,9 +1822,7 @@
 /* POLLS */
 #af-wrapper #poll-form {
     display: none;
-    border: 2px solid #eeeeee;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 8px 8px 8px 20px;
 }
 #af-wrapper .poll-toggle {
     display: block;
@@ -1829,9 +1833,6 @@
     height: 22px;
     width: 22px;
 }
-#af-wrapper #poll-remove {
-    display: none;
-}
 #af-wrapper #poll-question input {
     font-size: 16px;
 }
@@ -1839,12 +1840,11 @@
     border-color: #eee;
     border-style: solid;
     border-width: 1px 0px 1px 0px;
-    padding: 8px 0px;
-    margin: 8px 0px;
+    padding: 12px 0px;
+    margin: 12px 0px;
 }
 #af-wrapper #poll-options input {
     font-size: 14px;
-    margin: 2px 0px;
 }
 #af-wrapper #poll-options .poll-option-container {
     display: flex;
@@ -1856,16 +1856,30 @@
     flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 8px;
 }
 #af-wrapper #poll-options .poll-option-input {
     flex-grow: 1;
     -webkit-flex-grow: 1;
 }
+#af-wrapper #poll-options .poll-option-add {
+    display: block;
+    padding: 10px 0;
+    cursor: pointer;
+}
 #af-wrapper #poll-options .poll-option-delete {
-    width: 40px;
-    text-align: center;
+    width: 20px;
     cursor: pointer;
     color: #e00000;
+    margin-left: 8px;
+}
+#af-wrapper #poll-settings {
+    display: block;
+}
+#af-wrapper #poll-settings .remove-poll {
+    color: #e00000;
+    float: right;
+    cursor: pointer;
 }
 #af-wrapper #poll-panel {
     border: 1px solid #eee;

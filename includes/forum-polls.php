@@ -25,42 +25,52 @@ class AsgarosForumPolls {
         }
 
         echo '<div class="editor-row">';
-            echo '<span class="row-title poll-toggle dashicons-before dashicons-chart-pie">'.__('Add Poll', 'asgaros-forum').'</span>';
+            echo '<span class="row-title poll-toggle dashicons-before dashicons-chart-pie">';
+                echo __('Add Poll', 'asgaros-forum');
+            echo '</span>';
 
             echo '<div id="poll-form">';
                 echo '<div id="poll-question">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here.', 'asgaros-forum').'" value="">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="">';
                 echo '</div>';
 
                 echo '<div id="poll-options">';
-                    echo '<div class="poll-option-container">';
-                        echo '<div class="poll-option-input">';
-                            echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="">';
-                        echo '</div>';
-                        echo '<div class="poll-option-delete">';
-                            echo '<span class="dashicons-before dashicons-trash"></span>';
-                        echo '</div>';
-                    echo '</div>';
+                    $this->reder_poll_option_container();
+                    $this->reder_poll_option_container();
 
-                    echo '<div class="poll-option-container">';
-                        echo '<div class="poll-option-input">';
-                            echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('Another answer ...', 'asgaros-forum').'" value="">';
-                        echo '</div>';
-                        echo '<div class="poll-option-delete">';
-                            echo '<span class="dashicons-before dashicons-trash"></span>';
-                        echo '</div>';
+                    echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
+
+                    // Hidden container for new poll-options.
+                    echo '<div id="poll-option-template" style="display: none;">';
+                        $this->reder_poll_option_container();
                     echo '</div>';
                 echo '</div>';
 
-                echo '<label class="checkbox-label">';
-                    echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
-                echo '</label>';
+                echo '<div id="poll-settings">';
+                    echo '<label class="checkbox-label">';
+                        echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                    echo '</label>';
+                    echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
+                echo '</div>';
             echo '</div>';
         echo '</div>';
     }
 
+    private $reder_poll_option_container_counter = 0;
     public function reder_poll_option_container() {
-        S
+        $this->reder_poll_option_container_counter++;
+
+        echo '<div class="poll-option-container">';
+            echo '<div class="poll-option-input">';
+                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="">';
+            echo '</div>';
+
+            if ($this->reder_poll_option_container_counter > 2) {
+                echo '<div class="poll-option-delete">';
+                    echo '<span class="dashicons-before dashicons-trash"></span>';
+                echo '</div>';
+            }
+        echo '</div>';
     }
 
     public function save_poll_form($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {

@@ -203,7 +203,19 @@
             $('#af-wrapper #poll-form').css('display', 'block');
         });
 
-        $('#af-wrapper .poll-option-delete').click(function() {
+        // Polls form remove.
+        $('#af-wrapper #poll-settings .remove-poll').click(function() {
+            $('#af-wrapper #poll-form').css('display', 'none');
+            clear_form_elements('#af-wrapper #poll-form');
+        });
+
+        $('#af-wrapper .poll-option-add').click(function() {
+            var content = $('#af-wrapper #poll-option-template').html();
+            $(content).insertBefore(this);
+        });
+
+        $(document).on('click', '#af-wrapper .poll-option-delete', function(event) {
+            event.preventDefault();
             $(this).parent().remove();
         });
 
