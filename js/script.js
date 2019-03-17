@@ -199,26 +199,12 @@
         });
 
         // Polls form add.
-        $('#af-wrapper #poll-add').click(function() {
-            // Set buttons ...
-            $('#af-wrapper #poll-add').css('display', 'none');
-            $('#af-wrapper #poll-remove').css('display', 'block');
-
-            // Set form ...
+        $('#af-wrapper .poll-toggle').click(function() {
             $('#af-wrapper #poll-form').css('display', 'block');
         });
 
-        // Polls form remove.
-        $('#af-wrapper #poll-remove').click(function() {
-            // Set buttons ...
-            $('#af-wrapper #poll-add').css('display', 'block');
-            $('#af-wrapper #poll-remove').css('display', 'none');
-
-            // Set form ...
-            $('#af-wrapper #poll-form').css('display', 'none');
-
-            // Clear form elements.
-            clear_form_elements('#af-wrapper #poll-form');
+        $('#af-wrapper .poll-option-delete').click(function() {
+            $(this).parent().remove();
         });
 
         // Clears all form-elements inside of a selected DOM-element.

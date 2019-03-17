@@ -1816,6 +1816,9 @@
 /* POLLS */
 #af-wrapper #poll-form {
     display: none;
+    border: 2px solid #eeeeee;
+    padding: 8px;
+    border-radius: 5px;
 }
 #af-wrapper .poll-toggle {
     display: block;
@@ -1842,6 +1845,27 @@
 #af-wrapper #poll-options input {
     font-size: 14px;
     margin: 2px 0px;
+}
+#af-wrapper #poll-options .poll-option-container {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-grow: 0;
+    -webkit-flex-grow: 0;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    align-items: center;
+}
+#af-wrapper #poll-options .poll-option-input {
+    flex-grow: 1;
+    -webkit-flex-grow: 1;
+}
+#af-wrapper #poll-options .poll-option-delete {
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+    color: #e00000;
 }
 #af-wrapper #poll-panel {
     border: 1px solid #eee;

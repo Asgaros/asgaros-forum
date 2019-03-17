@@ -25,17 +25,31 @@ class AsgarosForumPolls {
         }
 
         echo '<div class="editor-row">';
-            echo '<span id="poll-add" class="row-title poll-toggle dashicons-before dashicons-plus-alt">'.__('Add Poll', 'asgaros-forum').'</span>';
-            echo '<span id="poll-remove" class="row-title poll-toggle dashicons-before dashicons-trash">'.__('Remove Poll', 'asgaros-forum').'</span>';
+            echo '<span class="row-title poll-toggle dashicons-before dashicons-chart-pie">'.__('Add Poll', 'asgaros-forum').'</span>';
 
             echo '<div id="poll-form">';
                 echo '<div id="poll-question">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Will you enter a question here?', 'asgaros-forum').'" value="">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here.', 'asgaros-forum').'" value="">';
                 echo '</div>';
 
                 echo '<div id="poll-options">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('Yes', 'asgaros-forum').'" value="">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('No', 'asgaros-forum').'" value="">';
+                    echo '<div class="poll-option-container">';
+                        echo '<div class="poll-option-input">';
+                            echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="">';
+                        echo '</div>';
+                        echo '<div class="poll-option-delete">';
+                            echo '<span class="dashicons-before dashicons-trash"></span>';
+                        echo '</div>';
+                    echo '</div>';
+
+                    echo '<div class="poll-option-container">';
+                        echo '<div class="poll-option-input">';
+                            echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('Another answer ...', 'asgaros-forum').'" value="">';
+                        echo '</div>';
+                        echo '<div class="poll-option-delete">';
+                            echo '<span class="dashicons-before dashicons-trash"></span>';
+                        echo '</div>';
+                    echo '</div>';
                 echo '</div>';
 
                 echo '<label class="checkbox-label">';
@@ -43,6 +57,10 @@ class AsgarosForumPolls {
                 echo '</label>';
             echo '</div>';
         echo '</div>';
+    }
+
+    public function reder_poll_option_container() {
+        S
     }
 
     public function save_poll_form($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
