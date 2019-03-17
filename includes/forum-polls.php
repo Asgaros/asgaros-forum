@@ -228,21 +228,49 @@ class AsgarosForumPolls {
 
         echo '<div id="poll-panel">';
             echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
-                echo '<div class="headline dashicons-before dashicons-chart-pie">'.esc_html(stripslashes($poll->title)).'</div>';
+                echo '<div id="poll-headline" class="dashicons-before dashicons-chart-pie">'.esc_html(stripslashes($poll->title)).'</div>';
 
-                echo '<div class="options">';
-                    foreach ($poll->options as $option) {
-                        echo '<div class="poll-option">';
-                        echo '<label class="checkbox-label">';
+                // Get id of the current user.
+                $user_id = get_current_user_id();
+
+                // Show vote-panel when user can vote.
+                if ($this->can_vote($user_id, $poll->id)) {
+                    echo '<div id="poll-vote">';
+                        foreach ($poll->options as $option) {
+                            echo '<label class="checkbox-label">';
+
                             if ($poll->multiple == 1) {
                                 echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'"><span>'.$option->option.'</span>';
                             } else {
                                 echo '<input type="radio" name="poll-option[]" value="'.$option->id.'"><span>'.$option->option.'</span>';
                             }
-                        echo '</label>';
-                        echo '</div>';
-                    }
-                echo '</div>';
+
+                            echo '</label>';
+                        }
+                    echo '</div>';
+                } else {
+                    echo '<div id="poll-results">';
+                        foreach ($poll->options as $key => $option) {
+                            $percentage = ($option->votes / $poll->total_votes) * 100;
+                            $percentage_css = number_format($percentage, 2);
+
+                            echo '<div class="poll-result-row">';
+                                echo '<div class="poll-result-name">';
+                                    echo $option->option;
+                                    echo '<span class="poll-result-numbers">';
+                                        echo '<small class="poll-result-votes">'.number_format_i18n($option->votes).'</small>';
+                                        echo '<small class="poll-result-percentage">'.number_format_i18n($percentage, 2).'%</small>';
+                                    echo '</span>';
+                                echo '</div>';
+
+                                echo '<div class="poll-result-bar">';
+                                    echo '<div class="poll-result-filling" style="width: '.$percentage_css.'%; background-color: '.$this->get_bar_color().';"></div>';
+                                echo '</div>';
+
+                            echo '</div>';
+                        }
+                    echo '</div>';
+                }
 
                 echo '<div class="actions">';
                     echo '<input type="hidden" name="poll_action" value="vote">';
@@ -264,6 +292,29 @@ class AsgarosForumPolls {
         // Get options and votes for the poll.
         $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.option, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id};", 'OBJECT_K');
 
+        // Get total votes.
+        // TODO: Wront total votes value. Group by users.
+        $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_options} AS po, {$this->asgarosforum->tables->polls_votes} AS pv WHERE po.poll_id = {$poll->id} AND po.id = pv.option_id;");
+
         return $poll;
+    }
+
+    private $get_bar_color_counter = 0;
+    public function get_bar_color() {
+        $this->get_bar_color_counter++;
+
+        $colors = array();
+        $colors[] = '#4661EE';
+        $colors[] = '#EC5657';
+        $colors[] = '#1BCDD1';
+        $colors[] = '#8FAABB';
+        $colors[] = '#B08BEB';
+        $colors[] = '#3EA0DD';
+        $colors[] = '#F5A52A';
+        $colors[] = '#23BFAA';
+        $colors[] = '#FAA586';
+        $colors[] = '#EB8CC6';
+
+        return $colors[$this->get_bar_color_counter % 10];
     }
 }
