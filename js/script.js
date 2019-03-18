@@ -204,7 +204,7 @@
         });
 
         // Polls form remove.
-        $('#af-wrapper #poll-settings .remove-poll').click(function() {
+        $('#af-wrapper .remove-poll').click(function() {
             $('#af-wrapper #poll-form').css('display', 'none');
             clear_form_elements('#af-wrapper #poll-form');
         });

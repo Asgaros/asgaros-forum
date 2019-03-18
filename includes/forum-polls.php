@@ -8,8 +8,7 @@ class AsgarosForumPolls {
     public function __construct($object) {
         $this->asgarosforum = $object;
 
-        add_action('asgarosforum_editor_addtopic_bottom', array($this, 'render_poll_form_addtopic'));
-        add_action('asgarosforum_editor_editpost_bottom', array($this, 'render_poll_form_editpost'));
+        add_action('asgarosforum_editor_custom_content_bottom', array($this, 'editor_poll_form'), 10, 1);
 
         add_action('asgarosforum_after_add_topic_submit', array($this, 'process_add_poll'), 10, 6);
         add_action('asgarosforum_after_edit_post_submit', array($this, 'process_edit_poll'), 10, 6);
@@ -17,7 +16,7 @@ class AsgarosForumPolls {
         add_action('asgarosforum_prepare_topic', array($this, 'save_vote'));
     }
 
-    public function render_poll_form_addtopic() {
+    public function editor_poll_form($editor_view) {
         // Cancel if poll-functionality is disabled.
         if (!$this->asgarosforum->options['enable_polls']) {
             return;
@@ -27,6 +26,28 @@ class AsgarosForumPolls {
         $post_id = $this->asgarosforum->current_post;
         $topic_id = $this->asgarosforum->current_topic;
 
+        if ($editor_view === 'addtopic') {
+            $this->poll_form_add();
+        }
+
+        if ($editor_view === 'editpost') {
+            // Cancel if this is not the first post.
+            if (!$this->asgarosforum->is_first_post($post_id)) {
+                return;
+            }
+
+            // Try to get a poll.
+            $poll = $this->get_poll($topic_id);
+
+            if ($poll === false) {
+                $this->poll_form_add();
+            } else {
+                $this->poll_form_edit($poll);
+            }
+        }
+    }
+
+    public function poll_form_add() {
         echo '<div class="editor-row">';
             echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
                 echo __('Add Poll', 'asgaros-forum');
@@ -59,67 +80,49 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    public function render_poll_form_editpost() {
-        // Cancel if poll-functionality is disabled.
-        if (!$this->asgarosforum->options['enable_polls']) {
-            return;
-        }
-
-        // Set IDs.
-        $post_id = $this->asgarosforum->current_post;
-        $topic_id = $this->asgarosforum->current_topic;
-
-        // Cancel if this is not the first post.
-        if (!$this->asgarosforum->is_first_post($post_id)) {
-            return;
-        }
+    public function poll_form_edit($poll) {
+        print_r($poll);
 
         echo '<div class="editor-row">';
             echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
                 echo __('Add Poll', 'asgaros-forum');
             echo '</span>';
 
-            // Display form by default when this post (topic) has a poll.
-            if ($this->has_poll($topic_id)) {
-                echo '<div id="poll-form" style="display: block;">';
-            } else {
-                echo '<div id="poll-form" style="display: none;">';
-            }
-
-            echo '<div id="poll-question">';
-                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="">';
-            echo '</div>';
-
-            echo '<div id="poll-options">';
-                $this->reder_poll_option_container();
-                $this->reder_poll_option_container();
-
-                echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
-
-                // Hidden container for new poll-options.
-                echo '<div id="poll-option-template" style="display: none;">';
-                    $this->reder_poll_option_container();
+            echo '<div id="poll-form" style="display: block;">';
+                echo '<div id="poll-question">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="'.$poll->title.'">';
                 echo '</div>';
-            echo '</div>';
 
-            echo '<div id="poll-settings">';
-                echo '<label class="checkbox-label">';
-                    echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
-                echo '</label>';
-                echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
-            echo '</div>';
+                echo '<div id="poll-options">';
+                    foreach ($poll->options as $option) {
+                        $this->reder_poll_option_container($option->option);
+                    }
 
+                    echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
+
+                    // Hidden container for new poll-options.
+                    echo '<div id="poll-option-template" style="display: none;">';
+                        $this->reder_poll_option_container();
+                    echo '</div>';
+                echo '</div>';
+
+                echo '<div id="poll-settings">';
+                    echo '<label class="checkbox-label">';
+                        echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                    echo '</label>';
+                    echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
+                echo '</div>';
             echo '</div>';
         echo '</div>';
     }
 
     private $reder_poll_option_container_counter = 0;
-    public function reder_poll_option_container() {
+    public function reder_poll_option_container($option_title = '') {
         $this->reder_poll_option_container_counter++;
 
         echo '<div class="poll-option-container">';
             echo '<div class="poll-option-input">';
-                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="">';
+                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option_title.'">';
             echo '</div>';
 
             if ($this->reder_poll_option_container_counter > 2) {
