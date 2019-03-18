@@ -108,7 +108,7 @@ class AsgarosForumPolls {
 
                 echo '<div id="poll-settings">';
                     echo '<label class="checkbox-label">';
-                        echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                        echo '<input type="checkbox" name="poll-multiple" '.checked($poll->multiple, 1, false).'><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
                     echo '</label>';
                     echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
                 echo '</div>';
@@ -181,10 +181,15 @@ class AsgarosForumPolls {
             $poll_multiple = 1;
         }
 
+        // Add the poll.
+        $this->add_poll($topic_id, $poll_title, $poll_options, $poll_multiple);
+    }
+
+    public function add_poll($topic_id, $title, $options, $multiple) {
         // Insert poll.
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->polls,
-            array('topic_id' => $topic_id, 'title' => $poll_title, 'multiple' => $poll_multiple),
+            array('topic_id' => $topic_id, 'title' => $title, 'multiple' => $multiple),
             array('%d', '%s', '%d')
         );
 
@@ -192,7 +197,7 @@ class AsgarosForumPolls {
         $poll_id = $this->asgarosforum->db->insert_id;
 
         // Insert poll options.
-        foreach ($poll_options as $option) {
+        foreach ($options as $option) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_options,
                 array('poll_id' => $poll_id, 'option' => $option),
@@ -202,10 +207,85 @@ class AsgarosForumPolls {
     }
 
     public function process_edit_poll($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
+        // Cancel if poll-functionality is disabled.
+        if (!$this->asgarosforum->options['enable_polls']) {
+            return;
+        }
+
+        // Check if topic has a poll.
+        $has_poll = $this->has_poll($topic_id);
+
+        // Prepare variables.
+        $poll_valid = true;
+        $poll_title = '';
+        $poll_options = array();
+        $poll_multiple = 0;
+
+        // Cancel if no poll-title is set.
+        if (empty($_POST['poll-title'])) {
+            $poll_valid = false;
+        }
+
+        // Trim poll-title and remove tags.
+        $poll_title = trim(strip_tags($_POST['poll-title']));
+
+        // Cancel if poll-title is empty.
+        if (empty($poll_title)) {
+            $poll_valid = false;
+        }
+
+        // Cancel if no poll-options are set.
+        if (empty($_POST['poll-option'])) {
+            $poll_valid = false;
+        }
+
+        // Assign not-empty poll-options to array.
+        foreach ($_POST['poll-option'] as $option) {
+            $poll_option = trim(strip_tags($option));
+
+            if (!empty($poll_option)) {
+                $poll_options[] = $poll_option;
+            }
+        }
+
+        // Cancel if poll-options are empty.
+        if (empty($poll_options)) {
+            $poll_valid = false;
+        }
+
+        // Set multiple-option.
+        if (isset($_POST['poll-multiple'])) {
+            $poll_multiple = 1;
+        }
+
         print_r('<pre>');
         print_r($_POST);
         print_r('</pre>');
         die();
+
+        // If topic has a poll and a valid poll is given: Update poll.
+        if ($has_poll === true && $poll_valid === true) {
+            // Update poll.
+
+            // Terminate function.
+            return;
+        }
+
+        // If topic has a poll and no valid poll is given: Delete poll.
+        if ($has_poll === true && $poll_valid === false) {
+            // Delete poll.
+
+            // Terminate function.
+            return;
+        }
+
+        // If topic has no poll and a valid poll is given: Add poll.
+        if ($has_poll === false && $poll_valid === true) {
+            // Delete poll.
+
+            // Terminate function.
+            return;
+        }
     }
 
     public function save_vote() {
