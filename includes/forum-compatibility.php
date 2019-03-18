@@ -10,6 +10,7 @@ class AsgarosForumCompatibility {
 
         $this->compatibility_autoptimize();
         $this->compatibility_yoastseo();
+        $this->compatibility_rankmath();
     }
 
     // AUTOPTIMIZE
@@ -41,6 +42,18 @@ class AsgarosForumCompatibility {
                 $wpseo_front = WPSEO_Frontend::get_instance();
                 remove_action('wp_head', array($wpseo_front, 'head'), 1);
             }
+        }
+    }
+
+    // Rank Math
+    function compatibility_rankmath() {
+        add_action( 'wp_head', array( $this, 'comp_rankmath_head' ), 1 );
+    }
+
+    function comp_rankmath_head() {
+        if ($this->asgarosforum->executePlugin) {
+            remove_all_actions( 'rank_math/head' );
+            add_filter( 'rank_math/frontend/remove_credit_notice', '__return_true' );
         }
     }
 }
