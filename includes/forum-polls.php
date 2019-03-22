@@ -14,6 +14,7 @@ class AsgarosForumPolls {
         add_action('asgarosforum_after_edit_post_submit', array($this, 'process_edit_poll'), 10, 6);
 
         add_action('asgarosforum_prepare_topic', array($this, 'save_vote'));
+        add_action('asgarosforum_after_delete_topic', array($this, 'delete_poll'), 10, 1);
     }
 
     public function editor_poll_form($editor_view) {
@@ -203,6 +204,11 @@ class AsgarosForumPolls {
 
     public function delete_poll($topic_id) {
         $poll = $this->get_poll($topic_id);
+
+        // Cancel if this topic has no poll.
+        if ($poll === false) {
+            return;
+        }
 
         // Delete all existing poll-data.
         $this->asgarosforum->db->delete($this->asgarosforum->tables->polls, array('id' => $poll->id), array('%d'));
