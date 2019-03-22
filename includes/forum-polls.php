@@ -201,6 +201,15 @@ class AsgarosForumPolls {
         }
     }
 
+    public function delete_poll($topic_id) {
+        $poll = $this->get_poll($topic_id);
+
+        // Delete all existing poll-data.
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls, array('id' => $poll->id), array('%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_options, array('poll_id' => $poll->id), array('%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_votes, array('poll_id' => $poll->id), array('%d'));
+    }
+
     public function process_edit_poll($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
         // Cancel if poll-functionality is disabled.
         if (!$this->asgarosforum->options['enable_polls']) {
@@ -249,6 +258,10 @@ class AsgarosForumPolls {
             $poll_multiple = 1;
         }
 
+        print_r('<pre>');
+        print_r($poll);
+        print_r('</pre>');
+
         // If topic has a poll and a valid poll is given: Update poll.
         if ($has_poll === true && $poll_valid === true) {
             // Update poll.
@@ -260,6 +273,7 @@ class AsgarosForumPolls {
         // If topic has a poll and no valid poll is given: Delete poll.
         if ($has_poll === true && $poll_valid === false) {
             // Delete poll.
+            $this->delete_poll($topic_id);
 
             // Terminate function.
             return;
