@@ -324,15 +324,15 @@ class AsgarosForumPolls {
         foreach ($votes as $vote) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_votes,
-                array('option_id' => $vote, 'user_id' => $user_id),
-                array('%d', '%d')
+                array('poll_id' => $poll->id, 'option_id' => $vote, 'user_id' => $user_id),
+                array('%d', '%d', '%d')
             );
         }
     }
 
     // Checks if a given user voted for a specific poll.
     public function has_voted($user_id, $poll_id) {
-        $has_voted = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_options} AS po, {$this->asgarosforum->tables->polls_votes} AS pv WHERE po.poll_id = {$poll_id} AND po.id = pv.option_id AND pv.user_id = {$user_id};");
+        $has_voted = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll_id} AND user_id = {$user_id};");
 
         if ($has_voted > 0) {
             return true;
@@ -457,7 +457,7 @@ class AsgarosForumPolls {
 
         // Get total votes.
         // TODO: Wront total votes value. Group by users.
-        $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_options} AS po, {$this->asgarosforum->tables->polls_votes} AS pv WHERE po.poll_id = {$poll->id} AND po.id = pv.option_id;");
+        $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id};");
 
         return $poll;
     }
