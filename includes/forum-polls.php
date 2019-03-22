@@ -116,20 +116,15 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    private $reder_poll_option_container_counter = 0;
     public function reder_poll_option_container($option_title = '') {
-        $this->reder_poll_option_container_counter++;
-
         echo '<div class="poll-option-container">';
             echo '<div class="poll-option-input">';
                 echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option_title.'">';
             echo '</div>';
 
-            if ($this->reder_poll_option_container_counter > 2) {
-                echo '<div class="poll-option-delete">';
-                    echo '<span class="dashicons-before dashicons-trash"></span>';
-                echo '</div>';
-            }
+            echo '<div class="poll-option-delete">';
+                echo '<span class="dashicons-before dashicons-trash"></span>';
+            echo '</div>';
         echo '</div>';
     }
 
@@ -221,34 +216,30 @@ class AsgarosForumPolls {
         $poll_options = array();
         $poll_multiple = 0;
 
-        // Cancel if no poll-title is set.
-        if (empty($_POST['poll-title'])) {
-            $poll_valid = false;
+        // Try to set poll-title.
+        if (!empty($_POST['poll-title'])) {
+            // Trim poll-title and remove tags.
+            $poll_title = trim(strip_tags($_POST['poll-title']));
         }
 
-        // Trim poll-title and remove tags.
-        $poll_title = trim(strip_tags($_POST['poll-title']));
-
-        // Cancel if poll-title is empty.
+        // Validate poll-title.
         if (empty($poll_title)) {
             $poll_valid = false;
         }
 
-        // Cancel if no poll-options are set.
-        if (empty($_POST['poll-option'])) {
-            $poll_valid = false;
-        }
+        // Try to set poll-options.
+        if (!empty($_POST['poll-option'])) {
+            // Assign not-empty poll-options to array.
+            foreach ($_POST['poll-option'] as $option) {
+                $poll_option = trim(strip_tags($option));
 
-        // Assign not-empty poll-options to array.
-        foreach ($_POST['poll-option'] as $option) {
-            $poll_option = trim(strip_tags($option));
-
-            if (!empty($poll_option)) {
-                $poll_options[] = $poll_option;
+                if (!empty($poll_option)) {
+                    $poll_options[] = $poll_option;
+                }
             }
         }
 
-        // Cancel if poll-options are empty.
+        // Validate poll-options.
         if (empty($poll_options)) {
             $poll_valid = false;
         }
@@ -257,11 +248,6 @@ class AsgarosForumPolls {
         if (isset($_POST['poll-multiple'])) {
             $poll_multiple = 1;
         }
-
-        print_r('<pre>');
-        print_r($_POST);
-        print_r('</pre>');
-        die();
 
         // If topic has a poll and a valid poll is given: Update poll.
         if ($has_poll === true && $poll_valid === true) {
@@ -281,7 +267,8 @@ class AsgarosForumPolls {
 
         // If topic has no poll and a valid poll is given: Add poll.
         if ($has_poll === false && $poll_valid === true) {
-            // Delete poll.
+            // Add poll.
+            $this->add_poll($topic_id, $poll_title, $poll_options, $poll_multiple);
 
             // Terminate function.
             return;
