@@ -133,25 +133,33 @@ class AsgarosForumPolls {
         // Insert poll.
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->polls,
-            array('topic_id' => $topic_id, 'title' => $title, 'multiple' => $multiple),
+            array('id' => $topic_id, 'title' => $title, 'multiple' => $multiple),
             array('%d', '%s', '%d')
         );
-
-        // Get poll-id.
-        $poll_id = $this->asgarosforum->db->insert_id;
 
         // Insert poll options.
         foreach ($options as $option) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_options,
-                array('poll_id' => $poll_id, 'option' => $option),
+                array('poll_id' => $topic_id, 'option' => $option),
                 array('%d', '%s')
             );
         }
     }
 
-    public function delete_poll($topic_id) {
-        $poll = $this->get_poll($topic_id);
+    public function update_poll($poll_id, $title, $options, $multiple) {
+        // Update poll.
+        $this->asgarosforum->db->update(
+            $this->asgarosforum->tables->polls,
+            array('title' => $title, 'multiple' => $multiple),
+            array('id' => $poll_id),
+            array('%s', '%d'),
+            array('%d')
+        );
+    }
+
+    public function delete_poll($poll_id) {
+        $poll = $this->get_poll($poll_id);
 
         // Cancel if this topic has no poll.
         if ($poll === false) {
@@ -159,9 +167,9 @@ class AsgarosForumPolls {
         }
 
         // Delete all existing poll-data.
-        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls, array('id' => $poll->id), array('%d'));
-        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_options, array('poll_id' => $poll->id), array('%d'));
-        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_votes, array('poll_id' => $poll->id), array('%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls, array('id' => $poll_id), array('%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_options, array('poll_id' => $poll_id), array('%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_votes, array('poll_id' => $poll_id), array('%d'));
     }
 
     public function editor_poll_process($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
@@ -219,6 +227,7 @@ class AsgarosForumPolls {
         // If topic has a poll and a valid poll is given: Update poll.
         if ($has_poll === true && $poll_valid === true) {
             // Update poll.
+            $this->update_poll($topic_id, $poll_title, $poll_options, $poll_multiple);
 
             // Terminate function.
             return;
@@ -400,7 +409,7 @@ class AsgarosForumPolls {
         }
 
         // Try to get the poll for the given topic first.
-        $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE topic_id = {$topic_id};");
+        $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE id = {$topic_id};");
 
         // Cancel if there is no poll for the given topic.
         if (!$poll) {
@@ -413,7 +422,7 @@ class AsgarosForumPolls {
 
     public function get_poll($topic_id) {
         // Try to get the poll for the given topic first.
-        $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE topic_id = {$topic_id};");
+        $poll = $this->asgarosforum->db->get_row("SELECT * FROM {$this->asgarosforum->tables->polls} WHERE id = {$topic_id};");
 
         // Cancel if there is no poll for the given topic.
         if (!$poll) {
