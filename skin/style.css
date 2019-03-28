@@ -1125,6 +1125,7 @@
     width: 100%;
     min-height: 150px;
     box-sizing: border-box;
+    text-align: justify;
 }
 #af-wrapper .post-message p {
     margin: 0 0 20px;
