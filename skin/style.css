@@ -1953,3 +1953,8 @@
 #af-wrapper #poll-results .poll-result-filling {
     height: 20px;
 }
+#af-wrapper #poll-warning {
+    display: block;
+    color: #888;
+    text-align: justify;
+}

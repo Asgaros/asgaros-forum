@@ -9,10 +9,8 @@ class AsgarosForumPolls {
         $this->asgarosforum = $object;
 
         add_action('asgarosforum_editor_custom_content_bottom', array($this, 'editor_poll_form'), 10, 1);
-
         add_action('asgarosforum_after_add_topic_submit', array($this, 'editor_poll_process'), 10, 6);
         add_action('asgarosforum_after_edit_post_submit', array($this, 'editor_poll_process'), 10, 6);
-
         add_action('asgarosforum_prepare_topic', array($this, 'save_vote'));
         add_action('asgarosforum_after_delete_topic', array($this, 'delete_poll'), 10, 1);
     }
@@ -62,12 +60,17 @@ class AsgarosForumPolls {
                 echo '<div id="poll-options">';
                     $this->reder_poll_option_container();
                     $this->reder_poll_option_container();
+                    $this->reder_poll_option_container();
 
                     echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
 
                     // Hidden container for new poll-options.
                     echo '<div id="poll-option-template" style="display: none;">';
                         $this->reder_poll_option_container();
+                    echo '</div>';
+
+                    echo '<div id="poll-warning">';
+                        echo __('After creating a poll it will be no longer possible to add or remove answers. This ensures the integrity of existing votes. However, it will be still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you have to delete the existing poll and create a new one for this topic.', 'asgaros-forum');
                     echo '</div>';
                 echo '</div>';
 
@@ -96,7 +99,7 @@ class AsgarosForumPolls {
 
                 echo '<div id="poll-options">';
                     foreach ($poll->options as $option) {
-                        $this->reder_poll_option_container($option->option);
+                        $this->reder_poll_option_container($option->id, $option->option);
                     }
 
                     echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
@@ -117,10 +120,10 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    public function reder_poll_option_container($option_title = '') {
+    public function reder_poll_option_container($option_id = '', $option_title = '') {
         echo '<div class="poll-option-container">';
             echo '<div class="poll-option-input">';
-                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option_title.'">';
+                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option_id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option_title.'">';
             echo '</div>';
 
             echo '<div class="poll-option-delete">';
