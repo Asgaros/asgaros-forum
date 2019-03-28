@@ -181,6 +181,11 @@ class AsgarosForumPolls {
             return;
         }
 
+        // Cancel if this is not the first post.
+        if (!$this->asgarosforum->is_first_post($post_id)) {
+            return;
+        }
+
         // Check if topic has a poll.
         $has_poll = $this->has_poll($topic_id);
 
