@@ -522,6 +522,13 @@
     float: left;
     padding-right: 8px;
 }
+#af-wrapper .forum-poster-avatar img,
+#af-wrapper .topic-poster-avatar img {
+    height: 40px; /* comp */
+    width: 40px; /* comp */
+    margin: 0; /* comp */
+    padding: 0; /* comp */
+}
 #af-wrapper .forum-poster-summary,
 #af-wrapper .topic-poster-summary {
     display: block;
