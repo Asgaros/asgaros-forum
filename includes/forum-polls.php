@@ -10,8 +10,8 @@ class AsgarosForumPolls {
 
         add_action('asgarosforum_editor_custom_content_bottom', array($this, 'editor_poll_form'), 10, 1);
 
-        add_action('asgarosforum_after_add_topic_submit', array($this, 'process_add_poll'), 10, 6);
-        add_action('asgarosforum_after_edit_post_submit', array($this, 'process_edit_poll'), 10, 6);
+        add_action('asgarosforum_after_add_topic_submit', array($this, 'editor_poll_process'), 10, 6);
+        add_action('asgarosforum_after_edit_post_submit', array($this, 'editor_poll_process'), 10, 6);
 
         add_action('asgarosforum_prepare_topic', array($this, 'save_vote'));
         add_action('asgarosforum_after_delete_topic', array($this, 'delete_poll'), 10, 1);
@@ -129,58 +129,6 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    public function process_add_poll($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
-        // Cancel if poll-functionality is disabled.
-        if (!$this->asgarosforum->options['enable_polls']) {
-            return;
-        }
-
-        // Prepare variables.
-        $poll_title = '';
-        $poll_options = array();
-        $poll_multiple = 0;
-
-        // Cancel if no poll-title is set.
-        if (empty($_POST['poll-title'])) {
-            return;
-        }
-
-        // Trim poll-title and remove tags.
-        $poll_title = trim(strip_tags($_POST['poll-title']));
-
-        // Cancel if poll-title is empty.
-        if (empty($poll_title)) {
-            return;
-        }
-
-        // Cancel if no poll-options are set.
-        if (empty($_POST['poll-option'])) {
-            return;
-        }
-
-        // Assign not-empty poll-options to array.
-        foreach ($_POST['poll-option'] as $option) {
-            $poll_option = trim(strip_tags($option));
-
-            if (!empty($poll_option)) {
-                $poll_options[] = $poll_option;
-            }
-        }
-
-        // Cancel if poll-options are empty.
-        if (empty($poll_options)) {
-            return;
-        }
-
-        // Set multiple-option.
-        if (isset($_POST['poll-multiple'])) {
-            $poll_multiple = 1;
-        }
-
-        // Add the poll.
-        $this->add_poll($topic_id, $poll_title, $poll_options, $poll_multiple);
-    }
-
     public function add_poll($topic_id, $title, $options, $multiple) {
         // Insert poll.
         $this->asgarosforum->db->insert(
@@ -216,7 +164,7 @@ class AsgarosForumPolls {
         $this->asgarosforum->db->delete($this->asgarosforum->tables->polls_votes, array('poll_id' => $poll->id), array('%d'));
     }
 
-    public function process_edit_poll($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
+    public function editor_poll_process($post_id, $topic_id, $topic_subject, $topic_content, $topic_link, $author_id) {
         // Cancel if poll-functionality is disabled.
         if (!$this->asgarosforum->options['enable_polls']) {
             return;
