@@ -58,15 +58,15 @@ class AsgarosForumPolls {
                 echo '</div>';
 
                 echo '<div id="poll-options">';
-                    $this->reder_poll_option_container();
-                    $this->reder_poll_option_container();
-                    $this->reder_poll_option_container();
+                    $this->render_empty_poll_option_container();
+                    $this->render_empty_poll_option_container();
+                    $this->render_empty_poll_option_container();
 
                     echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
 
                     // Hidden container for new poll-options.
                     echo '<div id="poll-option-template" style="display: none;">';
-                        $this->reder_poll_option_container();
+                        $this->render_empty_poll_option_container();
                     echo '</div>';
 
                     echo '<div id="poll-warning">';
@@ -84,9 +84,19 @@ class AsgarosForumPolls {
         echo '</div>';
     }
 
-    public function poll_form_edit($poll) {
-        print_r($poll);
+    public function render_empty_poll_option_container() {
+        echo '<div class="poll-option-container">';
+            echo '<div class="poll-option-input">';
+                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="">';
+            echo '</div>';
 
+            echo '<div class="poll-option-delete">';
+                echo '<span class="dashicons-before dashicons-trash"></span>';
+            echo '</div>';
+        echo '</div>';
+    }
+
+    public function poll_form_edit($poll) {
         echo '<div class="editor-row">';
             echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
                 echo __('Add Poll', 'asgaros-forum');
@@ -99,14 +109,15 @@ class AsgarosForumPolls {
 
                 echo '<div id="poll-options">';
                     foreach ($poll->options as $option) {
-                        $this->reder_poll_option_container($option->id, $option->option);
+                        echo '<div class="poll-option-container">';
+                            echo '<div class="poll-option-input">';
+                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option->id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option->option.'">';
+                            echo '</div>';
+                        echo '</div>';
                     }
 
-                    echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
-
-                    // Hidden container for new poll-options.
-                    echo '<div id="poll-option-template" style="display: none;">';
-                        $this->reder_poll_option_container();
+                    echo '<div id="poll-warning">';
+                        echo __('To ensure the integrity of existing votes it is not possible to add or remove answers. However, it is still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you have to delete the existing poll and create a new one for this topic.', 'asgaros-forum');
                     echo '</div>';
                 echo '</div>';
 
@@ -116,18 +127,6 @@ class AsgarosForumPolls {
                     echo '</label>';
                     echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
                 echo '</div>';
-            echo '</div>';
-        echo '</div>';
-    }
-
-    public function reder_poll_option_container($option_id = '', $option_title = '') {
-        echo '<div class="poll-option-container">';
-            echo '<div class="poll-option-input">';
-                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option_id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option_title.'">';
-            echo '</div>';
-
-            echo '<div class="poll-option-delete">';
-                echo '<span class="dashicons-before dashicons-trash"></span>';
             echo '</div>';
         echo '</div>';
     }
@@ -159,6 +158,17 @@ class AsgarosForumPolls {
             array('%s', '%d'),
             array('%d')
         );
+
+        // Update options.
+        foreach ($options as $key => $value) {
+            $this->asgarosforum->db->update(
+                $this->asgarosforum->tables->polls_options,
+                array('option' => $value),
+                array('id' => $key, 'poll_id' => $poll_id),
+                array('%s'),
+                array('%d', '%d')
+            );
+        }
     }
 
     public function delete_poll($poll_id) {
@@ -209,11 +219,11 @@ class AsgarosForumPolls {
         // Try to set poll-options.
         if (!empty($_POST['poll-option'])) {
             // Assign not-empty poll-options to array.
-            foreach ($_POST['poll-option'] as $option) {
-                $poll_option = trim(strip_tags($option));
+            foreach ($_POST['poll-option'] as $key => $value) {
+                $poll_option = trim(strip_tags($value));
 
                 if (!empty($poll_option)) {
-                    $poll_options[] = $poll_option;
+                    $poll_options[$key] = $poll_option;
                 }
             }
         }
@@ -228,9 +238,14 @@ class AsgarosForumPolls {
             $poll_multiple = 1;
         }
 
-        print_r('<pre>');
-        print_r($poll);
-        print_r('</pre>');
+        // If topic has no poll and a valid poll is given: Add poll.
+        if ($has_poll === false && $poll_valid === true) {
+            // Add poll.
+            $this->add_poll($topic_id, $poll_title, $poll_options, $poll_multiple);
+
+            // Terminate function.
+            return;
+        }
 
         // If topic has a poll and a valid poll is given: Update poll.
         if ($has_poll === true && $poll_valid === true) {
@@ -245,15 +260,6 @@ class AsgarosForumPolls {
         if ($has_poll === true && $poll_valid === false) {
             // Delete poll.
             $this->delete_poll($topic_id);
-
-            // Terminate function.
-            return;
-        }
-
-        // If topic has no poll and a valid poll is given: Add poll.
-        if ($has_poll === false && $poll_valid === true) {
-            // Add poll.
-            $this->add_poll($topic_id, $poll_title, $poll_options, $poll_multiple);
 
             // Terminate function.
             return;
