@@ -143,7 +143,8 @@ class AsgarosForumApproval {
     public function notice_for_topic_creator() {
         if (!empty($_GET['new_unapproved_topic'])) {
             echo '<div class="unapproved-notice">';
-                echo '<span class="dashicons-before dashicons-visibility">'.__('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum').'</span>';
+                echo '<span class="notice-icon fas fa-eye"></span>';
+                echo __('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum');
             echo '</div>';
         }
     }
@@ -169,9 +170,8 @@ class AsgarosForumApproval {
 
         if (!empty($unapproved_topics)) {
             echo '<div class="unapproved-notice">';
-                echo '<span class="dashicons-before dashicons-visibility">';
-                    echo '<a href="'.$this->asgarosforum->rewrite->get_link('unapproved').'">'.__('There are unapproved topics.', 'asgaros-forum').'</a>';
-                echo '</span>';
+                echo '<span class="notice-icon fas fa-eye"></span>';
+                echo '<a href="'.$this->asgarosforum->rewrite->get_link('unapproved').'">'.__('There are unapproved topics.', 'asgaros-forum').'</a>';
             echo '</div>';
         }
     }
@@ -205,7 +205,7 @@ class AsgarosForumApproval {
                 $first_post = $this->asgarosforum->content->get_first_post($topic->id);
 
                 echo '<div class="unapproved-topic topic-normal">';
-                    echo '<div class="topic-status dashicons-before dashicons-visibility unread"></div>';
+                    echo '<div class="topic-status fas fa-eye unread"></div>';
                     echo '<div class="topic-name">';
                         echo '<a href="'.$this->asgarosforum->rewrite->get_link('topic', $topic->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
                         echo '<small>';

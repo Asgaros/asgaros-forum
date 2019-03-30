@@ -36,15 +36,13 @@ class AsgarosForumFeed {
             switch($current_view) {
                 case 'topic':
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
-                    echo '<span class="dashicons-before dashicons-rss">';
+                    echo '<span class="fas fa-rss"></span>';
                     echo '<a href="'.$link.'" target="_blank">'.__('RSS Feed', 'asgaros-forum').'</a>';
-                    echo '</span>';
                 break;
                 case 'forum':
                     $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
-                    echo '<span class="dashicons-before dashicons-rss">';
+                    echo '<span class="fas fa-rss"></span>';
                     echo '<a href="'.$link.'" target="_blank">'.__('RSS Feed', 'asgaros-forum').'</a>';
-                    echo '</span>';
                 break;
             }
         }

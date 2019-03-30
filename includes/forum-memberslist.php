@@ -63,16 +63,20 @@ class AsgarosForumMembersList {
 
     public function show_filters() {
         $filter_toggle_text = __('Show Filters', 'asgaros-forum');
-        $filter_toggle_icon = 'dashicons-arrow-down-alt2';
+        $filter_toggle_icon = 'fas fa-chevron-down';
         $filter_toggle_hide = 'style="display: none;"';
 
         if (!empty($_GET['filter_type']) && !empty($_GET['filter_name'])) {
             $filter_toggle_text = __('Hide Filters', 'asgaros-forum');
-            $filter_toggle_icon = 'dashicons-arrow-up-alt2';
+            $filter_toggle_icon = 'fas fa-chevron-up';
             $filter_toggle_hide = '';
         }
 
-        echo '<div class="title-element dashicons-before '.$filter_toggle_icon.'" id="memberslist-filter-toggle">'.$filter_toggle_text.'</div>';
+        echo '<div class="title-element" id="memberslist-filter-toggle">';
+            echo '<span class="title-element-icon '.$filter_toggle_icon.'"></span>';
+            echo '<span class="title-element-text">'.$filter_toggle_text.'</span>';
+        echo '</div>';
+
         echo '<div id="memberslist-filter" data-value-show-filters="'.__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hide.'>';
             echo '<div id="roles-filter">';
                 echo '<div class="filter-name">'.__('Roles:', 'asgaros-forum').'</div>';

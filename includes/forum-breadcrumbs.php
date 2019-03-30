@@ -93,8 +93,7 @@ class AsgarosForumBreadCrumbs {
         // Render breadcrumbs links.
         echo '<div id="forum-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">';
             echo '<span class="screen-reader-text">'.__('Forum breadcrumbs - You are here:', 'asgaros-forum').'</span>';
-
-            echo '<span class="dashicons-before dashicons-admin-home"></span>';
+            echo '<span class="breadcrumb-icon fas fa-home"></span>';
 
             foreach ($this->breadcrumbs_links as $element) {
                 $this->render_breadcrumb($element);
@@ -112,6 +111,6 @@ class AsgarosForumBreadCrumbs {
             }
         echo '</span>';
 
-        echo '<span class="dashicons-before dashicons-arrow-right-alt2 separator"></span>';
+        echo '<span class="breadcrumb-icon fas fa-chevron-right separator"></span>';
     }
 }

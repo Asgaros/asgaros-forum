@@ -189,11 +189,11 @@
                 var final_state = $(this).is(':hidden') ? 'hidden' : 'visible';
 
                 if (final_state === 'hidden') {
-                    $('#af-wrapper #memberslist-filter-toggle').attr('class', 'title-element dashicons-before dashicons-arrow-down-alt2');
-                    $('#af-wrapper #memberslist-filter-toggle').html($("#af-wrapper #memberslist-filter").attr('data-value-show-filters'));
+                    $('#af-wrapper #memberslist-filter-toggle .title-element-icon').attr('class', 'title-element-icon fas fa-chevron-down');
+                    $('#af-wrapper #memberslist-filter-toggle .title-element-text').html($("#af-wrapper #memberslist-filter").attr('data-value-show-filters'));
                 } else {
-                    $('#af-wrapper #memberslist-filter-toggle').attr('class', 'title-element dashicons-before dashicons-arrow-up-alt2');
-                    $('#af-wrapper #memberslist-filter-toggle').html($("#af-wrapper #memberslist-filter").attr('data-value-hide-filters'));
+                    $('#af-wrapper #memberslist-filter-toggle .title-element-icon').attr('class', 'title-element-icon fas fa-chevron-up');
+                    $('#af-wrapper #memberslist-filter-toggle .title-element-text').html($("#af-wrapper #memberslist-filter").attr('data-value-hide-filters'));
                 }
             });
         });

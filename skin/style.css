@@ -610,9 +610,9 @@
     align-items: center;
     justify-content: center;
 }
-#af-wrapper .unapproved-notice span:before,
+#af-wrapper .notice-icon:before,
 #af-wrapper .reports-notice span:before {
-    padding-right: 4px;
+    padding-right: 8px;
 }
 #af-wrapper .unapproved-notice {
     background-color: #81e493;
@@ -736,13 +736,8 @@
     background-color: #999;
     border-bottom: 1px solid #767676;
 }
-/* Using a chain-selector ensures that only elements with BOTH classes are getting selected. */
-#af-wrapper .title-element.dashicons-before:before {
-    height: 32px;
-    width: 32px;
-    line-height: 32px;
-    padding-right: 5px;
-    display: inline-block; /* comp */
+#af-wrapper .title-element-icon:before {
+    padding-right: 8px;
 }
 
 /* HEADER CONTAINER */
@@ -840,23 +835,17 @@
 #af-wrapper #forum-breadcrumbs span {
     display: inline-block;
 }
-#af-wrapper #forum-breadcrumbs .dashicons-before {
-    padding: 0;
-}
 #af-wrapper #forum-breadcrumbs a {
     color: #888 !important;
     background: none; /* comp */
     border: none; /* comp */
-    padding: 0; /* comp */
+    padding: 0 6px 0 0;
 }
 #af-wrapper #forum-breadcrumbs a:hover {
     color: #444 !important;
 }
-#af-wrapper #forum-breadcrumbs span::before {
-    line-height: 26px;
-    width: 28px;
-    height: 26px;
-    font-size: 18px;
+#af-wrapper #forum-breadcrumbs .breadcrumb-icon {
+    padding: 0 6px 0 0;
 }
 #af-wrapper #forum-breadcrumbs .separator:last-child {
     display: none;
@@ -1231,15 +1220,8 @@
     line-height: 20px;
     color: #2d89cc;
 }
-#af-wrapper #bottom-navigation span {
-    display: inline-block;
-    height: 20px;
-    line-height: 20px;
-    padding-right: 16px;
-}
 #af-wrapper #bottom-navigation span:before {
-    margin-right: 4px;
-    vertical-align: middle;
+    margin-right: 8px;
 }
 #af-wrapper #bottom-navigation a {
     display: inline-block;
@@ -1247,6 +1229,7 @@
     line-height: 20px;
     font-size: 11px;
     font-style: italic;
+    padding-right: 16px;
 }
 
 /* STATISTICS */
@@ -1647,10 +1630,7 @@
     padding: 0px 12px;
     border-bottom: 1px solid #eee;
 }
-#af-wrapper .activity-element:before {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
+#af-wrapper .activity-icon:before {
     color: #888;
     padding-right: 8px;
 }
@@ -1801,12 +1781,12 @@
 #af-wrapper .dashicons-topic-sticky:before {
     content: "\f109";
 }
-#af-wrapper .forum .forum-dashicon:before,
+#af-wrapper .forum .forum-status:before,
 #af-wrapper .topic .dashicons-topic-normal:before,
 #af-wrapper .topic .dashicons-topic-closed:before,
 #af-wrapper .topic .dashicons-topic-sticky:before,
 #af-wrapper .topic .dashicons-editor-help:before {
-    font-size: 40px;
+    font-size: 32px;
     width: 40px;
     height: 40px;
 }

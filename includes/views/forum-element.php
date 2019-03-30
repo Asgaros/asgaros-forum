@@ -13,9 +13,9 @@ $unread_status = $this->unread->get_status_forum($forum->id, $count_topics);
 
 echo '<div class="forum" id="forum-'.$forum->id.'">';
     $forum_icon = trim(esc_html(stripslashes($forum->icon)));
-    $forum_icon = (empty($forum_icon)) ? 'dashicons-format-chat' : $forum_icon;
+    $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
 
-    echo '<div class="forum-status forum-dashicon dashicons-before '.$forum_icon.' '.$unread_status.'"></div>';
+    echo '<div class="forum-status '.$forum_icon.' '.$unread_status.'"></div>';
     echo '<div class="forum-name">';
         echo '<a class="forum-title" href="'.$this->get_link('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
 

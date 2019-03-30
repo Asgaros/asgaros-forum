@@ -73,7 +73,7 @@
             var forum_parent_forum      = $(this).attr('data-value-parent-forum');
             var forum_name              = '';
             var forum_description       = '';
-            var forum_icon              = 'dashicons-format-chat';
+            var forum_icon              = 'fas fa-comments';
             var forum_closed            = '';
             var forum_approval          = '';
             var forum_order             = '1';

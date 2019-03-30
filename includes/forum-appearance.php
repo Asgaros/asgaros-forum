@@ -148,6 +148,7 @@ class AsgarosForumAppearance {
 		wp_enqueue_style('af-widgets', $themeurl.'/widgets.css', array(), $this->asgarosforum->version);
 
 		if ($this->asgarosforum->executePlugin) {
+			wp_enqueue_style('af-fontawesome', $this->asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $this->asgarosforum->version);
 			wp_enqueue_style('af-style', $themeurl.'/style.css', array(), $this->asgarosforum->version);
 
 			if (is_rtl()) {
@@ -302,7 +303,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .post-footer a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
 			$custom_css .= '#af-wrapper span.mention-nice-name,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .activity-element:before,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .activity-icon:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-reactions .reaction,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-link,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-content:before,'.PHP_EOL;

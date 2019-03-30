@@ -106,7 +106,7 @@
                                         <th><label for="forum_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label></th>
                                         <td>
                                             <input type="text" size="50" id="forum_icon" name="forum_icon" value="">
-                                            <a href="https://developer.wordpress.org/resource/dashicons/#editor-justify" target="_blank">
+                                            <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank">
                                                 <?php _e('List of available icons.', 'asgaros-forum'); ?>
                                             </a>
                                         </td>

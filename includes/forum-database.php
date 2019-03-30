@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 50;
+    private $db_version = 51;
     private $tables;
 
     public function __construct() {
@@ -338,7 +338,7 @@ class AsgarosForumDatabase {
                         $default_forum_name = __('First Forum', 'asgaros-forum');
                         $default_forum_description = __('My first forum.', 'asgaros-forum');
 
-                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'dashicons-format-chat', 1, 0, 0);
+                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'fas fa-comments', 1, 0, 0);
                     }
                 }
 
@@ -422,6 +422,13 @@ class AsgarosForumDatabase {
                 $this->db->query("ALTER TABLE {$this->tables->topics} DROP COLUMN status;");
 
                 update_option('asgarosforum_db_version', 36);
+            }
+
+            // Convert to new icons.
+            if ($database_version_installed < 51 && !$first_time_installation) {
+                $this->db->query("UPDATE {$this->tables->forums} SET icon = 'fas fa-comments';");
+
+                update_option('asgarosforum_db_version', 51);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);
