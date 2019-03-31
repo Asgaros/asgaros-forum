@@ -165,11 +165,10 @@ class AsgarosForumAdmin {
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
-        wp_enqueue_style('af-fontawesome', $asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $asgarosforum->version);
-        wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->plugin_url.'admin/css/admin-common.css', array(), $asgarosforum->version);
+        wp_enqueue_style('asgarosforum-fontawesome-css', $asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $asgarosforum->version);
+        wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->plugin_url.'admin/css/admin.css', array(), $asgarosforum->version);
 
         if (strstr($hook, 'asgarosforum') !== false) {
-            wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->plugin_url.'admin/css/admin.css', array(), $asgarosforum->version);
             wp_enqueue_style('wp-color-picker');
             wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->plugin_url.'admin/js/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
         }
