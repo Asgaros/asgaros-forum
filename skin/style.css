@@ -897,6 +897,7 @@
     outline: none;
     background-color: #fff;
     display: initial; /* comp */
+    box-shadow: none; /* comp */
 }
 
 /* POST ELEMENT */
