@@ -93,8 +93,11 @@
                     </div>
                 </div>
 
-                <a href="#" class="usergroup-category-editor-link dashicons-before dashicons-plus margin-bottom padding-top" data-value-id="new" data-value-editor-title="<?php _e('Add Category', 'asgaros-forum'); ?>">
-                    <?php _e('Add Category', 'asgaros-forum'); ?>
+                <a href="#" class="usergroup-category-editor-link add-element margin-bottom padding-top" data-value-id="new" data-value-editor-title="<?php _e('Add Category', 'asgaros-forum'); ?>">
+                    <?php
+                    echo '<span class="fas fa-plus"></span>';
+                    _e('Add Category', 'asgaros-forum');
+                    ?>
                 </a>
 
                 <?php
@@ -107,7 +110,8 @@
                         $usergroups = AsgarosForumUserGroups::getUserGroupsOfCategory($category->term_id);
                         ?>
                         <div class="postbox">
-                            <h2 class="hndle dashicons-before dashicons-groups">
+                            <h2 class="hndle">
+                                <span class="fas fa-users"></span>
                                 <?php echo stripslashes($category->name); ?>
                                 <span class="category-actions">
                                     <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
@@ -124,7 +128,8 @@
                                 }
                                 ?>
 
-                                <a href="#" class="usergroup-editor-link dashicons-before dashicons-plus padding-top" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Add Usergroup', 'asgaros-forum'); ?>">
+                                <a href="#" class="usergroup-editor-link add-element padding-top padding-top" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Add Usergroup', 'asgaros-forum'); ?>">
+                                    <span class="fas fa-plus"></span>
                                     <?php _e('Add Usergroup', 'asgaros-forum'); ?>
                                 </a>
                             </div>
@@ -132,7 +137,8 @@
                         <?php
                     }
 
-                    echo '<a href="#" class="usergroup-category-editor-link dashicons-before dashicons-plus margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+                    echo '<a href="#" class="usergroup-category-editor-link add-element margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+                        echo '<span class="fas fa-plus"></span>';
                         _e('Add Category', 'asgaros-forum');
                     echo '</a>';
                 }

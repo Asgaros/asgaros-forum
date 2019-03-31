@@ -32,20 +32,11 @@
     padding: 0 10px;
     line-height: 65px;
 }
-#asgaros-panel .dashicons-before:before {
+#asgaros-panel .asgaros-panel-icon:before {
     color: #82878c;
-    font: 400 20px/1 dashicons;
-    speak: none;
-    display: inline-block;
-    padding: 1px 4px 0 0;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-decoration: none!important;
-    vertical-align: top;
-    line-height: 65px;
+    padding-right: 8px;
 }
-#asgaros-panel .dashicons-heart:before,
+#asgaros-panel .donate-icon:before,
 #af-structure .link-delete:hover {
     color: red;
 }
@@ -117,9 +108,6 @@
     display: block;
     padding-top: 8px;
 }
-#af-options .postbox .dashicons-before:before {
-    padding-right: 5px;
-}
 #af-structure .category-actions {
     float: right;
     font-weight: normal;
@@ -134,9 +122,12 @@
 #af-structure .category-actions .action-edit:hover {
     color: #73d5f5 !important;
 }
-#af-structure a.dashicons-before {
+#af-structure a.add-element {
     font-size: 14px;
     display: inline-block;
+}
+#af-structure a.add-element span:before {
+    padding-right: 8px;
 }
 #af-structure a {
     text-decoration: none;
@@ -161,6 +152,10 @@
     background-color: #2d89cc;
     border-bottom: 1px solid #2468af;
     color: white;
+}
+#af-options .hndle span:before,
+#af-structure .hndle span:before {
+    padding-right: 8px;
 }
 #af-structure .element-id {
     color: silver;
@@ -233,7 +228,7 @@
 #af-structure .usergroup-icon {
     display: block;
     float: left;
-    margin-right: 8px;
+    padding-right: 16px;
 }
 #af-structure .column-status,
 #af-structure .column-sort,

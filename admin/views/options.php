@@ -17,7 +17,10 @@ if (!defined('ABSPATH')) exit;
                     <?php wp_nonce_field('asgaros_forum_save_options'); ?>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-admin-settings"><?php _e('General', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-sliders-h"></span>
+                            <?php _e('General', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <table>
                                 <tr>
@@ -181,7 +184,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-admin-plugins"><?php _e('Features', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-plug"></span>
+                            <?php _e('Features', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <table>
                                 <tr>
@@ -225,7 +231,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-location-alt"><?php _e('Breadcrumbs', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-map-marked"></span>
+                            <?php _e('Breadcrumbs', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $breadcrumbs_option = checked(!empty($asgarosforum->options['enable_breadcrumbs']), true, false);
@@ -244,7 +253,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-email-alt"><?php _e('Notifications', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-envelope"></span>
+                            <?php _e('Notifications', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <table>
                                 <tr>
@@ -309,7 +321,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-groups"><?php _e('Members List', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-users"></span>
+                            <?php _e('Members List', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $membersListOption = checked(!empty($asgarosforum->options['enable_memberslist']), true, false);
@@ -332,7 +347,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-admin-users"><?php _e('Profiles', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-user"></span>
+                            <?php _e('Profiles', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $profileOption = checked(!empty($asgarosforum->options['enable_profiles']), true, false);
@@ -351,7 +369,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-media-archive"><?php _e('Uploads', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-upload"></span>
+                            <?php _e('Uploads', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $uploadsOption = checked(!empty($asgarosforum->options['allow_file_uploads']), true, false);
@@ -402,7 +423,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-warning"><?php _e('Reports', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-exclamation-triangle"></span>
+                            <?php _e('Reports', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $reportsOption = checked(!empty($asgarosforum->options['reports_enabled']), true, false);
@@ -421,7 +445,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-format-status"><?php _e('Signatures', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-signature"></span>
+                            <?php _e('Signatures', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $signaturesOption = checked(!empty($asgarosforum->options['allow_signatures']), true, false);
@@ -444,7 +471,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-megaphone"><?php _e('Activity', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-bullhorn"></span>
+                            <?php _e('Activity', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $activityOption = checked(!empty($asgarosforum->options['enable_activity']), true, false);
@@ -463,7 +493,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-slides"><?php _e('Ads', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-ad"></span>
+                            <?php _e('Ads', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $adsOption = checked(!empty($asgarosforum->options['enable_ads']), true, false);
@@ -494,7 +527,10 @@ if (!defined('ABSPATH')) exit;
                     </div>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-chart-area"><?php _e('Polls', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <span class="fas fa-poll-h"></span>
+                            <?php _e('Polls', 'asgaros-forum'); ?>
+                        </h2>
                         <div class="inside">
                             <?php
                             $polls_option = checked(!empty($asgarosforum->options['enable_polls']), true, false);

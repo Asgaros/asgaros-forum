@@ -67,7 +67,8 @@
                 </div>
 
                 <div class="postbox">
-                    <h2 class="hndle dashicons-before dashicons-slides">
+                    <h2 class="hndle">
+                        <span class="fas fa-ad"></span>
                         <?php _e('Ads', 'asgaros-forum'); ?>
                     </h2>
                     <div class="inside">
@@ -79,11 +80,13 @@
                             $ads_table->prepare_items();
                             $ads_table->display();
                         }
-                        ?>
 
-                        <a href="#" class="ad-editor-link dashicons-before dashicons-plus padding-top" data-value-id="new" data-value-editor-title="<?php _e('New Ad', 'asgaros-forum'); ?>">
-                            <?php _e('New Ad', 'asgaros-forum'); ?>
-                        </a>
+                        echo '<a href="#" class="ad-editor-link add-element padding-top" data-value-id="new" data-value-editor-title="'.__('New Ad', 'asgaros-forum').'">';
+                            echo '<span class="fas fa-plus"></span>';
+                            echo __('New Ad', 'asgaros-forum');
+                        echo '</a>';
+
+                        ?>
                     </div>
                 </div>
             </div>

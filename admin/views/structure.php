@@ -161,8 +161,11 @@
                     </div>
                 </div>
 
-                <a href="#" class="category-editor-link dashicons-before dashicons-plus margin-bottom padding-top" data-value-id="new" data-value-editor-title="<?php _e('Add Category', 'asgaros-forum'); ?>">
-                    <?php _e('Add Category', 'asgaros-forum'); ?>
+                <a href="#" class="category-editor-link add-element margin-bottom padding-top" data-value-id="new" data-value-editor-title="<?php _e('Add Category', 'asgaros-forum'); ?>">
+                    <?php
+                    echo '<span class="fas fa-plus"></span>';
+                    _e('Add Category', 'asgaros-forum');
+                    ?>
                 </a>
 
                 <?php
@@ -179,7 +182,8 @@
                         $forums = $asgarosforum->get_forums($category->term_id, 0, ARRAY_A);
                         ?>
                         <div class="postbox">
-                            <h2 class="hndle dashicons-before dashicons-archive">
+                            <h2 class="hndle">
+                                <span class="fas fa-box"></span>
                                 <?php echo stripslashes($category->name); ?>&nbsp;
                                 <span class="element-id">
                                     <?php
@@ -215,15 +219,19 @@
                                     $structureTable->display();
                                 }
                                 ?>
-                                <a href="#" class="forum-editor-link dashicons-before dashicons-plus padding-top" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0" data-value-editor-title="<?php _e('Add Forum', 'asgaros-forum'); ?>">
-                                    <?php _e('Add Forum', 'asgaros-forum'); ?>
+                                <a href="#" class="forum-editor-link add-element padding-top" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0" data-value-editor-title="<?php _e('Add Forum', 'asgaros-forum'); ?>">
+                                    <?php
+                                    echo '<span class="fas fa-plus"></span>';
+                                    _e('Add Forum', 'asgaros-forum');
+                                    ?>
                                 </a>
                             </div>
                         </div>
                         <?php
                     }
 
-                    echo '<a href="#" class="category-editor-link dashicons-before dashicons-plus margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+                    echo '<a href="#" class="category-editor-link add-element margin-bottom" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+                        echo '<span class="fas fa-plus"></span>';
                         _e('Add Category', 'asgaros-forum');
                     echo '</a>';
                 }

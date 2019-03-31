@@ -124,7 +124,7 @@ class AsgarosForumAdmin {
     // Add all required pages to the menu.
     function add_admin_pages() {
         if ($this->asgarosforum->permissions->isAdministrator('current')) {
-            add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'), 'dashicons-clipboard');
+            add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'), 'none');
             add_submenu_page('asgarosforum-structure', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'));
             add_submenu_page('asgarosforum-structure', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'read', 'asgarosforum-appearance', array($this, 'appearance_page'));
             add_submenu_page('asgarosforum-structure', __('Usergroups', 'asgaros-forum'), __('Usergroups', 'asgaros-forum'), 'read', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
@@ -165,6 +165,7 @@ class AsgarosForumAdmin {
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
+        wp_enqueue_style('af-fontawesome', $asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $asgarosforum->version);
         wp_enqueue_style('asgarosforum-admin-common-css', $asgarosforum->plugin_url.'admin/css/admin-common.css', array(), $asgarosforum->version);
 
         if (strstr($hook, 'asgarosforum') !== false) {
@@ -472,11 +473,20 @@ class AsgarosForumAdmin {
                     echo '<h1>'.$title.'</h1>';
                 echo '</div>';
                 echo '<div class="sub-panel-right">';
-                    echo '<a href="https://www.asgaros.de/support/" target="_blank" class="dashicons-before dashicons-admin-users">'.__('Official Support Forum', 'asgaros-forum').'</a>';
+                    echo '<a href="https://www.asgaros.de/support/" target="_blank">';
+                        echo '<span class="asgaros-panel-icon fas fa-user"></span>';
+                        echo __('Official Support Forum', 'asgaros-forum');
+                    echo '</a>';
                     echo '&bull;';
-                    echo '<a href="https://www.asgaros.de/docs/" target="_blank" class="dashicons-before dashicons-book">'.__('Documentation', 'asgaros-forum').'</a>';
+                    echo '<a href="https://www.asgaros.de/docs/" target="_blank">';
+                        echo '<span class="asgaros-panel-icon fas fa-book"></span>';
+                        echo __('Documentation', 'asgaros-forum');
+                    echo '</a>';
                     echo '&bull;';
-                    echo '<a href="https://www.paypal.me/asgaros" target="_blank" class="dashicons-before dashicons-heart">'.__('Donate', 'asgaros-forum').'</a>';
+                    echo '<a href="https://www.paypal.me/asgaros" target="_blank">';
+                        echo '<span class="asgaros-panel-icon donate-icon fas fa-heart"></span>';
+                        echo __('Donate', 'asgaros-forum');
+                    echo '</a>';
                 echo '</div>';
                 echo '<div class="clear"></div>';
             echo '</div>';

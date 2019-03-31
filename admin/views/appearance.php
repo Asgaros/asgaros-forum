@@ -17,7 +17,12 @@ if (!defined('ABSPATH')) exit;
                     <?php wp_nonce_field('asgaros_forum_save_appearance'); ?>
 
                     <div class="postbox">
-                        <h2 class="hndle dashicons-before dashicons-admin-customizer"><?php _e('Appearance', 'asgaros-forum'); ?></h2>
+                        <h2 class="hndle">
+                            <?php
+                            echo '<span class="fas fa-paint-brush"></span>';
+                            _e('Appearance', 'asgaros-forum');
+                            ?>
+                        </h2>
                         <div class="inside">
                             <table>
                                 <?php

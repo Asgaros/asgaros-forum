@@ -20,3 +20,9 @@ li.forum-user-group {
     display: block;
     white-space: normal;
 }
+#toplevel_page_asgarosforum-structure .wp-menu-image:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 20px;
+    content: "\f086";
+}
