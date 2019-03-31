@@ -95,7 +95,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Use FontAwesome as icon-library
+* Added: FontAwesome icons
 * Fixed: Display issues with some themes
 * Improved compatibility with Rank Math SEO
 * Minor design changes
