@@ -185,8 +185,16 @@ class AsgarosForumUnread {
             echo '<span class="indicator-label">'.__('New posts', 'asgaros-forum').'</span>';
             echo '<span class="indicator read"></span>';
             echo '<span class="indicator-label">'.__('Nothing new', 'asgaros-forum').'</span>';
-            echo '<span class="indicator-label dashicons-before dashicons-yes"><a href="'.$this->asgarosforum->get_link('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a></span>';
-            echo '<span class="indicator-label dashicons-before dashicons-backup"><a href="'.$this->asgarosforum->get_link('unread').'">'.__('Show Unread Topics', 'asgaros-forum').'</a></span>';
+
+            echo '<span class="indicator-label">';
+                echo '<span class="fas fa-check"></span>';
+                echo '<a href="'.$this->asgarosforum->get_link('markallread').'">'.__('Mark All Read', 'asgaros-forum').'</a>';
+            echo '</span>';
+
+            echo '<span class="indicator-label">';
+                echo '<span class="fas fa-history"></span>';
+                echo '<a href="'.$this->asgarosforum->get_link('unread').'">'.__('Show Unread Topics', 'asgaros-forum').'</a>';
+            echo '</span>';
 
             echo '<div class="clear"></div>';
         echo '</div>';
@@ -194,9 +202,10 @@ class AsgarosForumUnread {
 
     function show_unread_menu() {
         echo '<div class="forum-menu">';
-        echo '<a class="dashicons-before dashicons-yes button-normal" href="'.$this->asgarosforum->get_link('markallread').'">';
-        echo __('Mark All Read', 'asgaros-forum');
-        echo '</a>';
+            echo '<a class="button-normal" href="'.$this->asgarosforum->get_link('markallread').'">';
+                echo '<span class="menu-icon fas fa-check"></span>';
+                echo __('Mark All Read', 'asgaros-forum');
+            echo '</a>';
         echo '</div>';
     }
 

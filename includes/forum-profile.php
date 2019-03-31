@@ -318,7 +318,10 @@ class AsgarosForumProfile {
                     $current_user_id = get_current_user_id();
 
                     if ($userData->ID == $current_user_id) {
-                        echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link"><span class="dashicons-before dashicons-edit">'.__('Edit Profile', 'asgaros-forum').'</span></a>';
+                        echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link">';
+                            echo '<span class="fas fa-pencil-alt"></span>';
+                            echo __('Edit Profile', 'asgaros-forum');
+                        echo '</a>';
                     }
 
                     // Check if the current user can ban this user.

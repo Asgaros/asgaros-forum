@@ -48,7 +48,8 @@ class AsgarosForumPolls {
 
     public function poll_form_add() {
         echo '<div class="editor-row">';
-            echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
+            echo '<span class="row-title add-poll">';
+                echo '<span class="editor-row-title-icon fas fa-poll-h"></span>';
                 echo __('Add Poll', 'asgaros-forum');
             echo '</span>';
 
@@ -91,14 +92,15 @@ class AsgarosForumPolls {
             echo '</div>';
 
             echo '<div class="poll-option-delete">';
-                echo '<span class="dashicons-before dashicons-trash"></span>';
+                echo '<span class="fas fa-trash-alt"></span>';
             echo '</div>';
         echo '</div>';
     }
 
     public function poll_form_edit($poll) {
         echo '<div class="editor-row">';
-            echo '<span class="row-title add-poll dashicons-before dashicons-chart-pie">';
+            echo '<span class="row-title add-poll">';
+                echo '<span class="editor-row-title-icon fas fa-poll-h"></span>';
                 echo __('Add Poll', 'asgaros-forum');
             echo '</span>';
 
@@ -363,7 +365,10 @@ class AsgarosForumPolls {
 
         echo '<div id="poll-panel">';
             echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
-                echo '<div id="poll-headline" class="dashicons-before dashicons-chart-pie">'.esc_html(stripslashes($poll->title)).'</div>';
+                echo '<div id="poll-headline">';
+                    echo '<span class="fas fa-poll-h"></span>';
+                    echo esc_html(stripslashes($poll->title));
+                echo '</div>';
 
                 // Get id of the current user.
                 $user_id = get_current_user_id();

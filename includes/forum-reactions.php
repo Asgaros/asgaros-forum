@@ -4,11 +4,22 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumReactions {
     private $asgarosforum = null;
-    private $reactions_list = array('down', 'up');
+    private $reactions_list = array();
     private $post_reactions = array();
 
     public function __construct($object) {
         $this->asgarosforum = $object;
+
+        // Build reactions-list.
+        $this->reactions_list['up'] = array(
+            'icon' => 'fas fa-thumbs-up',
+            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum')
+        );
+
+        $this->reactions_list['down'] = array(
+            'icon' => 'fas fa-thumbs-down',
+            'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum')
+        );
 
         add_action('asgarosforum_prepare_topic', array($this, 'prepare'));
         add_action('asgarosforum_prepare_post', array($this, 'prepare'));
@@ -58,10 +69,6 @@ class AsgarosForumReactions {
                     'down'  => 'add',
                     'up'    => 'add'
                 );
-                $screen_reader_text = array(
-                    'down'  => __('Click for thumbs down.', 'asgaros-forum'),
-                    'up'    => __('Click for thumbs up.', 'asgaros-forum')
-                );
 
                 if (is_user_logged_in()) {
                     $user_id = get_current_user_id();
@@ -73,15 +80,16 @@ class AsgarosForumReactions {
                     }
                 }
 
-                foreach ($this->reactions_list as $reaction) {
-                    $counter = (isset($this->post_reactions[$post_id][$reaction])) ? number_format_i18n(count($this->post_reactions[$post_id][$reaction])) : 0;
+                foreach ($this->reactions_list as $key => $reaction) {
+                    $counter = (isset($this->post_reactions[$post_id][$key])) ? number_format_i18n(count($this->post_reactions[$post_id][$key])) : 0;
 
                     $output = '';
-                    $output .= '<span class="reaction '.$reaction.'">';
-                    $output .= '<span class="reaction-icon dashicons-before dashicons-thumbs-'.$reaction.' '.$active[$reaction].'">';
-                    $output .= '<span class="screen-reader-text">'.$screen_reader_text[$reaction].'</span>';
-                    $output .= '</span>';
-                    $output .= '<span class="reaction-number">'.$counter.'</span>';
+                    $output .= '<span class="reaction '.$key.'">';
+                        $output .= '<span class="reaction-icon '.$reaction['icon'].' '.$active[$key].'">';
+                            $output .= '<span class="screen-reader-text">'.$reaction['screen_reader_text'].'</span>';
+                        $output .= '</span>';
+
+                        $output .= '<span class="reaction-number">'.$counter.'</span>';
                     $output .= '</span>';
 
                     if (is_user_logged_in()) {
@@ -90,8 +98,8 @@ class AsgarosForumReactions {
                             $topic_id,
                             array(
                                 'post'              => $post_id,
-                                'reaction'          => $reaction,
-                                'reaction_action'   => $action[$reaction],
+                                'reaction'          => $key,
+                                'reaction_action'   => $action[$key],
                                 'part'              => ($this->asgarosforum->current_page + 1)
                             ),
                             '#postid-'.$post_id
@@ -113,7 +121,7 @@ class AsgarosForumReactions {
             // ... and the user is logged in ...
             if (is_user_logged_in()) {
                 // ... and when it is a valid reaction ...
-                if (in_array($reaction, $this->reactions_list)) {
+                if (isset($this->reactions_list[$reaction])) {
                     $reaction_check = $this->reaction_exists($post_id, $user_id);
 
                     // ... and when there is not already a reaction from the user.

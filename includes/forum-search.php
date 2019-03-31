@@ -30,7 +30,9 @@ class AsgarosForumSearch {
 
     public function show_search_input() {
         if ($this->asgarosforum->options['enable_search']) {
-            echo '<div id="forum-search" class="dashicons-before dashicons-search">';
+            echo '<div id="forum-search">';
+            echo '<span class="search-icon fas fa-search"></span>';
+
             echo '<form method="get" action="'.$this->asgarosforum->get_link('search').'">';
 
             // Workaround for broken search when using plain permalink structure.
