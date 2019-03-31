@@ -412,7 +412,7 @@ class AsgarosForumPolls {
 
                         echo '<div class="poll-result-row">';
                             echo '<div class="poll-result-name">';
-                                echo $option->option;
+                                echo $option->option.':';
                                 echo '<span class="poll-result-numbers">';
                                     echo '<small class="poll-result-votes">'.number_format_i18n($option->votes).'</small>';
                                     echo '<small class="poll-result-percentage">'.number_format_i18n($percentage, 2).'%</small>';
