@@ -364,17 +364,17 @@ class AsgarosForumPolls {
         }
 
         echo '<div id="poll-panel">';
-            echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
-                echo '<div id="poll-headline">';
-                    echo '<span class="fas fa-poll-h"></span>';
-                    echo esc_html(stripslashes($poll->title));
-                echo '</div>';
+            echo '<div id="poll-headline">';
+                echo '<span class="fas fa-poll-h"></span>';
+                echo esc_html(stripslashes($poll->title));
+            echo '</div>';
 
-                // Get id of the current user.
-                $user_id = get_current_user_id();
+            // Get id of the current user.
+            $user_id = get_current_user_id();
 
-                // Show vote-panel when user can vote.
-                if ($this->can_vote($user_id, $poll->id)) {
+            // Show vote-panel when user can vote.
+            if ($this->can_vote($user_id, $poll->id)) {
+                echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
                     echo '<div id="poll-vote">';
                         foreach ($poll->options as $option) {
                             echo '<label class="checkbox-label">';
@@ -388,35 +388,35 @@ class AsgarosForumPolls {
                             echo '</label>';
                         }
                     echo '</div>';
-                } else {
-                    echo '<div id="poll-results">';
-                        foreach ($poll->options as $key => $option) {
-                            $percentage = ($option->votes / $poll->total_votes) * 100;
-                            $percentage_css = number_format($percentage, 2);
 
-                            echo '<div class="poll-result-row">';
-                                echo '<div class="poll-result-name">';
-                                    echo $option->option;
-                                    echo '<span class="poll-result-numbers">';
-                                        echo '<small class="poll-result-votes">'.number_format_i18n($option->votes).'</small>';
-                                        echo '<small class="poll-result-percentage">'.number_format_i18n($percentage, 2).'%</small>';
-                                    echo '</span>';
-                                echo '</div>';
-
-                                echo '<div class="poll-result-bar">';
-                                    echo '<div class="poll-result-filling" style="width: '.$percentage_css.'%; background-color: '.$this->get_bar_color().';"></div>';
-                                echo '</div>';
-
-                            echo '</div>';
-                        }
+                    echo '<div class="actions">';
+                        echo '<input type="hidden" name="poll_action" value="vote">';
+                        echo '<input type="submit" value="Vote">';
                     echo '</div>';
-                }
+                echo '</form>';
+            } else {
+                echo '<div id="poll-results">';
+                    foreach ($poll->options as $key => $option) {
+                        $percentage = ($option->votes / $poll->total_votes) * 100;
+                        $percentage_css = number_format($percentage, 2);
 
-                echo '<div class="actions">';
-                    echo '<input type="hidden" name="poll_action" value="vote">';
-                    echo '<input type="submit" value="Vote">';
+                        echo '<div class="poll-result-row">';
+                            echo '<div class="poll-result-name">';
+                                echo $option->option;
+                                echo '<span class="poll-result-numbers">';
+                                    echo '<small class="poll-result-votes">'.number_format_i18n($option->votes).'</small>';
+                                    echo '<small class="poll-result-percentage">'.number_format_i18n($percentage, 2).'%</small>';
+                                echo '</span>';
+                            echo '</div>';
+
+                            echo '<div class="poll-result-bar">';
+                                echo '<div class="poll-result-filling" style="width: '.$percentage_css.'%; background-color: '.$this->get_bar_color().';"></div>';
+                            echo '</div>';
+
+                        echo '</div>';
+                    }
                 echo '</div>';
-            echo '</form>';
+            }
         echo '</div>';
     }
 
