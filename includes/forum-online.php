@@ -132,7 +132,7 @@ class AsgarosForumOnline {
     public function render_statistics_element() {
         if ($this->functionality_enabled) {
             $counter = count($this->online_users) + count($this->online_guests);
-            AsgarosForumStatistics::renderStatisticsElement(__('Online', 'asgaros-forum'), $counter, 'dashicons-lightbulb');
+            AsgarosForumStatistics::renderStatisticsElement(__('Online', 'asgaros-forum'), $counter, 'fas fa-lightbulb');
         }
     }
 
@@ -143,9 +143,10 @@ class AsgarosForumOnline {
             $currently_online_guests = (!empty($this->online_guests)) ? $this->online_guests : false;
 
             echo '<div id="statistics-online-users">';
-            echo '<span class="dashicons-before dashicons-businessman">'.__('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i></span>';
+            echo '<span class="online-users-icon fas fa-user"></span>';
+            echo __('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i></span>';
             echo '&nbsp;&middot;&nbsp;';
-            echo '<span class="dashicons-before dashicons-groups">';
+            echo '<span class="online-users-icon fas fa-users"></span>';
 
             if ($currently_online_users || $currently_online_guests) {
                 echo __('Currently Online:', 'asgaros-forum').'&nbsp;<i>';
@@ -181,7 +182,6 @@ class AsgarosForumOnline {
                 echo '<i>'.__('Currently nobody is online.', 'asgaros-forum').'</i>';
             }
 
-            echo '</span>';
             echo '</div>';
         }
     }

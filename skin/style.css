@@ -610,8 +610,7 @@
     align-items: center;
     justify-content: center;
 }
-#af-wrapper .notice-icon:before,
-#af-wrapper .reports-notice span:before {
+#af-wrapper .notice-icon:before {
     padding-right: 8px;
 }
 #af-wrapper .unapproved-notice {
@@ -1253,12 +1252,8 @@
     border-top: 1px solid #eee;
     background-color: #fafafa;
 }
-#af-wrapper #statistics-online-users .dashicons-before:before {
-    font-size: 14px;
-    width: 14px;
-    height: 14px;
-    padding: 2px;
-    box-sizing: initial; /* comp */
+#af-wrapper #statistics-online-users .online-users-icon {
+    padding-right: 6px;
 }
 #af-wrapper .statistics-element {
     width: 165px;
@@ -1274,12 +1269,8 @@
     font-size: 16px;
     line-height: 30px;
 }
-#af-wrapper .statistics-element .element-number:before {
-    font-size: 20px;
-    width: 25px;
-    height: 25px;
-    line-height: 30px;
-    padding: 0 5px 0 0;
+#af-wrapper .statistics-element-icon {
+    padding-right: 8px;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .statistics-element {
@@ -1429,8 +1420,8 @@
     margin-top: 24px;
     padding-bottom: 4px;
 }
-#af-wrapper #profile-content .profile-section-header:before {
-    padding-right: 4px;
+#af-wrapper #profile-content .profile-section-header-icon {
+    padding-right: 8px;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper #profile-content .profile-row {
@@ -1689,19 +1680,8 @@
 }
 
 /* REPORTS */
-#af-wrapper .report-exists:before {
-    color: #ff0000;
-}
-#af-wrapper .report-link,
 #af-wrapper .report-exists {
-    padding: 0 !important;
-}
-#af-wrapper .report-link:before,
-#af-wrapper .report-exists:before {
-    font-size: 14px;
-    width: 14px;
-    height: 20px;
-    line-height: 20px;
+    color: #ff0000;
 }
 #af-wrapper .report-link {
     color: #888;
@@ -1758,16 +1738,13 @@
     color: #005C92;
     text-decoration: none;
 }
-#af-wrapper .report-actions a:before {
-    font-size: 16px;
-    width: 20px;
-    height: 30px;
-    line-height: 30px;
+#af-wrapper .report-actions a span:before {
+    padding-right: 4px;
 }
-#af-wrapper .report-actions a.dashicons-trash {
+#af-wrapper .report-actions .report-action-delete {
     color: #a00 !important;
 }
-#af-wrapper .report-actions a.dashicons-trash:hover {
+#af-wrapper .report-actions .report-action-delete:hover {
     color: red !important;
 }
 

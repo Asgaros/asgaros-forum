@@ -291,22 +291,25 @@ class AsgarosForumProfile {
                         }
                     }
 
-                    echo '<div class="profile-section-header dashicons-before dashicons-id-alt">'.__('Member Activity', 'asgaros-forum').'</div>';
+                    echo '<div class="profile-section-header">';
+                        echo '<span class="profile-section-header-icon fas fa-address-card"></span>';
+                        echo __('Member Activity', 'asgaros-forum');
+                    echo '</div>';
 
                     echo '<div class="profile-section-content">';
                         // Topics started.
                         $count_topics = $this->asgarosforum->countTopicsByUser($userData->ID);
-                        AsgarosForumStatistics::renderStatisticsElement(__('Topics Started', 'asgaros-forum'), $count_topics, 'dashicons-editor-alignleft');
+                        AsgarosForumStatistics::renderStatisticsElement(__('Topics Started', 'asgaros-forum'), $count_topics, 'fas fa-align-left');
 
                         // Replies created.
                         $count_posts = $this->asgarosforum->countPostsByUser($userData->ID);
                         $count_posts = $count_posts - $count_topics;
-                        AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'dashicons-format-quote');
+                        AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'fas fa-quote-left');
 
                         // Likes Received.
                         if ($this->asgarosforum->options['enable_reactions']) {
                             $count_likes = $this->asgarosforum->reactions->get_reactions_received($userData->ID, 'up');
-                            AsgarosForumStatistics::renderStatisticsElement(__('Likes Received', 'asgaros-forum'), $count_likes, 'dashicons-thumbs-up');
+                            AsgarosForumStatistics::renderStatisticsElement(__('Likes Received', 'asgaros-forum'), $count_likes, 'fas fa-thumbs-up');
                         }
                     echo '</div>';
 

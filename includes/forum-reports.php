@@ -29,12 +29,12 @@ class AsgarosForumReports {
                     $report_href = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
 
                     echo '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
-                        echo '<span class="report-link dashicons-before dashicons-warning">';
+                        echo '<span class="report-link fas fa-exclamation-triangle">';
                         echo '<span class="screen-reader-text">'.__('Click to report post.', 'asgaros-forum').'</span>';
                         echo '</span>';
                     echo '</a>';
                 } else {
-                    echo '<span class="report-exists dashicons-before dashicons-warning" title="'.__('You reported this post.', 'asgaros-forum').'"></span>';
+                    echo '<span class="report-exists fas fa-exclamation-triangle" title="'.__('You reported this post.', 'asgaros-forum').'"></span>';
                 }
 
                 echo '&nbsp;&middot;&nbsp;';
@@ -193,9 +193,8 @@ class AsgarosForumReports {
 
         if ($reports_counter > 0) {
             echo '<div class="reports-notice">';
-                echo '<span class="dashicons-before dashicons-warning">';
-                    echo '<a href="'.$this->asgarosforum->rewrite->get_link('reports').'">'.__('There are reports.', 'asgaros-forum').'</a>';
-                echo '</span>';
+                echo '<span class="notice-icon fas fa-exclamation-triangle"></span>';
+                echo '<a href="'.$this->asgarosforum->rewrite->get_link('reports').'">'.__('There are reports.', 'asgaros-forum').'</a>';
             echo '</div>';
         }
     }
@@ -246,8 +245,15 @@ class AsgarosForumReports {
                     echo '<div class="report-actions">';
                         $delete_link = $this->asgarosforum->rewrite->get_link('reports', false, array('report_delete' => $report['post_id']));
 
-                        echo '<a class="dashicons-before dashicons-trash" href="'.$delete_link.'">'.__('Delete Report', 'asgaros-forum').'</a>';
-                        echo '<a class="dashicons-before dashicons-visibility" href="'.$report['post_link'].'">'.__('Show Post', 'asgaros-forum').'</a>';
+                        echo '<a class="report-action-delete" href="'.$delete_link.'">';
+                            echo '<span class="fas fa-trash-alt"></span>';
+                            echo __('Delete Report', 'asgaros-forum');
+                        echo '</a>';
+
+                        echo '<a href="'.$report['post_link'].'">';
+                            echo '<span class="fas fa-eye"></span>';
+                            echo __('Show Post', 'asgaros-forum');
+                        echo '</a>';
                     echo '</div>';
                 echo '</div>';
             }

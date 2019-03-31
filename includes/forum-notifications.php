@@ -40,7 +40,7 @@ class AsgarosForumNotifications {
             return;
         }
 
-        echo '<span id="topic-subscription" class="dashicons-before dashicons-email-alt">';
+        echo '<span id="topic-subscription" class="fas fa-envelope"></span>';
 
         $link = '';
         $text = '';
@@ -60,13 +60,11 @@ class AsgarosForumNotifications {
         }
 
         echo '<a href="'.$link.'">'.$text.'</a>';
-
-        echo '</span>';
     }
 
     // Generates an (un)subscription link based on subscription status for forums.
     public function show_forum_subscription_link($element_id) {
-        echo '<span id="forum-subscription" class="dashicons-before dashicons-email-alt">';
+        echo '<span id="forum-subscription" class="fas fa-envelope"></span>';
 
         $link = '';
         $text = '';
@@ -86,8 +84,6 @@ class AsgarosForumNotifications {
         }
 
         echo '<a href="'.$link.'">'.$text.'</a>';
-
-        echo '</span>';
     }
 
     // Generates an subscription option in the editor based on subscription status.
@@ -519,7 +515,11 @@ class AsgarosForumNotifications {
         $subscription_level = $this->get_subscription_level();
 
         // Render subscription settings.
-        echo '<div class="title-element title-element-dark dashicons-before dashicons-email-alt">'.__('Subscription Settings', 'asgaros-forum').'</div>';
+        echo '<div class="title-element title-element-dark">';
+            echo '<span class="title-element-icon fas fa-envelope"></span>';
+            echo __('Subscription Settings', 'asgaros-forum');
+        echo '</div>';
+
         echo '<div id="subscriptions-panel" class="content-element">';
             echo '<form method="post" action="'.$this->asgarosforum->get_link('subscriptions').'">';
                 echo '<div class="action-panel">';
