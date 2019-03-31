@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: FontAwesome icons
+* Fixed: Wrong avatar-size in certain configurations
 * Fixed: Display issues with some themes
 * Improved compatibility with Rank Math SEO
 * Minor design changes

@@ -500,12 +500,10 @@
     float: left;
     padding-right: 8px;
 }
-#af-wrapper .forum-poster-avatar img,
-#af-wrapper .topic-poster-avatar img {
+#af-wrapper .forum-poster-avatar img.avatar,
+#af-wrapper .topic-poster-avatar img.avatar {
     height: 40px; /* comp */
     width: 40px; /* comp */
-    margin: 0; /* comp */
-    padding: 0; /* comp */
 }
 #af-wrapper .forum-poster-summary,
 #af-wrapper .topic-poster-summary {
@@ -891,13 +889,14 @@
 }
 #af-wrapper img.avatar {
     float: none;
-    margin: 0;
     border-radius: 50%;
     border: 1px solid #ccc;
     outline: none;
     background-color: #fff;
     display: initial; /* comp */
     box-shadow: none; /* comp */
+    margin: 0; /* comp */
+    padding: 0; /* comp */
 }
 
 /* POST ELEMENT */
@@ -961,6 +960,10 @@
     color: #2d89cc;
     font-style: italic;
 }
+#af-wrapper .post-author img.avatar {
+    height: 120px; /* comp */
+    width: 120px; /* comp */
+}
 @media screen and (max-width: 782px) {
     #af-wrapper .post-author {
         padding: 10px;
@@ -974,7 +977,7 @@
     #af-wrapper .post-author .post-author-block-group {
         display: none;
     }
-    #af-wrapper .post-element img.avatar {
+    #af-wrapper .post-author img.avatar {
         position: absolute;
         height: 40px;
         width: 40px;
@@ -1299,11 +1302,13 @@
     left: 0;
     bottom: 0;
 }
-#af-wrapper #profile-header .avatar {
+#af-wrapper #profile-header img.avatar {
     z-index: 3;
     position: absolute;
     top: 20px;
     left: 20px;
+    height: 160px; /* comp */
+    width: 160px; /* comp */
 }
 #af-wrapper #profile-header .user-info {
     z-index: 4;
@@ -1319,7 +1324,7 @@
     #af-wrapper #profile-header .background-avatar {
         height: 100px;
     }
-    #af-wrapper #profile-header .avatar {
+    #af-wrapper #profile-header img.avatar {
         height: 60px;
         width: 60px;
     }
@@ -1471,8 +1476,10 @@
     width: 80px;
     text-align: center;
 }
-#af-wrapper .member-avatar img {
+#af-wrapper .member-avatar img.avatar {
     vertical-align: middle;
+    height: 60px; /* comp */
+    width: 60px; /* comp */
 }
 #af-wrapper .member-name {
     width: auto;
