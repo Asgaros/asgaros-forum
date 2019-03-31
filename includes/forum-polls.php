@@ -21,6 +21,16 @@ class AsgarosForumPolls {
             return;
         }
 
+        // Cancel if user is not logged-in.
+        if (!is_user_logged_in()) {
+            return;
+        }
+
+        // Cancel if user has no permissions to create a poll.
+        if ($this->asgarosforum->options['polls_permission'] == 'moderator' && !$this->asgarosforum->permissions->isModerator('current')) {
+            return;
+        }
+
         // Set IDs.
         $post_id = $this->asgarosforum->current_post;
         $topic_id = $this->asgarosforum->current_topic;

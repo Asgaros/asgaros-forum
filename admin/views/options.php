@@ -540,6 +540,16 @@ if (!defined('ABSPATH')) exit;
                                     <th><label for="enable_polls"><?php _e('Enable Polls', 'asgaros-forum'); ?></label></th>
                                     <td><input type="checkbox" name="enable_polls" id="enable_polls" class="show_hide_initiator" data-hide-class="polls-option" <?php checked(!empty($asgarosforum->options['enable_polls'])); ?>></td>
                                 </tr>
+
+                                <tr class="polls-option" <?php if (!$polls_option) { echo 'style="display: none;"'; } ?>>
+                                    <th><label for="polls_permission"><?php _e('Who can create polls:', 'asgaros-forum'); ?></label></th>
+                                    <td>
+                                        <select name="polls_permission" id="polls_permission">';
+                                            <option value="loggedin" <?php if ($asgarosforum->options['polls_permission'] == 'loggedin') { echo 'selected="selected"'; } ?>><?php _e('Logged in users only', 'asgaros-forum'); ?></option>
+                                            <option value="moderator" <?php if ($asgarosforum->options['polls_permission'] == 'moderator') { echo 'selected="selected"'; } ?>><?php _e('Moderators only', 'asgaros-forum'); ?></option>
+                                        </select>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
