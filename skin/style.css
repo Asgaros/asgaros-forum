@@ -1848,6 +1848,12 @@
 #af-wrapper #poll-results .poll-result-filling {
     height: 20px;
 }
+#af-wrapper #poll-results .poll-result-total {
+    display: block;
+    text-align: right;
+    color: #888;
+    font-style: italic;
+}
 #af-wrapper #poll-warning {
     display: block;
     color: #888;

@@ -401,7 +401,7 @@ class AsgarosForumPolls {
 
                     echo '<div class="actions">';
                         echo '<input type="hidden" name="poll_action" value="vote">';
-                        echo '<input type="submit" value="Vote">';
+                        echo '<input type="submit" value="'.__('Vote', 'asgaros-forum').'">';
                     echo '</div>';
                 echo '</form>';
             } else {
@@ -414,7 +414,9 @@ class AsgarosForumPolls {
                             echo '<div class="poll-result-name">';
                                 echo $option->option.':';
                                 echo '<span class="poll-result-numbers">';
-                                    echo '<small class="poll-result-votes">'.number_format_i18n($option->votes).'</small>';
+                                    echo '<small class="poll-result-votes">';
+                                    echo sprintf(_n('%s Vote', '%s Votes', $option->votes, 'asgaros-forum'), number_format_i18n($option->votes));
+                                    echo '</small>';
                                     echo '<small class="poll-result-percentage">'.number_format_i18n($percentage, 2).'%</small>';
                                 echo '</span>';
                             echo '</div>';
@@ -425,6 +427,10 @@ class AsgarosForumPolls {
 
                         echo '</div>';
                     }
+
+                    echo '<div class="poll-result-total">';
+                        echo sprintf(_n('%s Participant', '%s Participants', $poll->total_participants, 'asgaros-forum'), number_format_i18n($poll->total_participants));
+                    echo '</div>';
                 echo '</div>';
             }
         echo '</div>';
@@ -462,8 +468,11 @@ class AsgarosForumPolls {
         $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.option, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id};", 'OBJECT_K');
 
         // Get total votes.
-        // TODO: Wront total votes value. Group by users.
         $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id};");
+
+        // Get total participants.
+        $participants = $this->asgarosforum->db->get_results("SELECT user_id, COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id} GROUP BY user_id;");
+        $poll->total_participants = count($participants);
 
         return $poll;
     }
