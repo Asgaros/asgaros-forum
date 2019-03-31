@@ -299,12 +299,12 @@ class AsgarosForumProfile {
                     echo '<div class="profile-section-content">';
                         // Topics started.
                         $count_topics = $this->asgarosforum->countTopicsByUser($userData->ID);
-                        AsgarosForumStatistics::renderStatisticsElement(__('Topics Started', 'asgaros-forum'), $count_topics, 'fas fa-align-left');
+                        AsgarosForumStatistics::renderStatisticsElement(__('Topics Started', 'asgaros-forum'), $count_topics, 'far fa-comments');
 
                         // Replies created.
                         $count_posts = $this->asgarosforum->countPostsByUser($userData->ID);
                         $count_posts = $count_posts - $count_topics;
-                        AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'fas fa-quote-left');
+                        AsgarosForumStatistics::renderStatisticsElement(__('Replies Created', 'asgaros-forum'), $count_posts, 'far fa-comment');
 
                         // Likes Received.
                         if ($this->asgarosforum->options['enable_reactions']) {

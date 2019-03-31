@@ -521,7 +521,6 @@ class AsgarosForum {
         }
 
         wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery'), $this->version);
-        wp_enqueue_style('dashicons');
     }
 
     // Gets the pages main title.
@@ -731,11 +730,18 @@ class AsgarosForum {
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="topic '.$topic_type.'">';
-            echo '<div class="topic-status dashicons-before '.$this->get_status_icon($topic_object).' '.$unread_status.'"></div>';
+            echo '<div class="topic-status far fa-comments '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
-                // Show special symbol if topic has a poll.
+                if ($this->is_topic_sticky($topic_object->id)) {
+                    echo '<span class="topic-icon fas fa-thumbtack"></span>';
+                }
+
+                if ($this->is_topic_closed($topic_object->id)) {
+                    echo '<span class="topic-icon fas fa-lock"></span>';
+                }
+
                 if ($this->polls->has_poll($topic_object->id)) {
-                    echo '<span class="topic-icon-poll fas fa-poll-h"></span>';
+                    echo '<span class="topic-icon fas fa-poll-h"></span>';
                 }
 
                 echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">';
@@ -1263,8 +1269,9 @@ class AsgarosForum {
             if ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
                 // New topic button.
                 $menu .= '<div class="forum-menu">';
-                $menu .= '<a class="forum-editor-button dashicons-before dashicons-plus-alt button-normal" href="'.$this->get_link('topic_add', $this->current_forum).'">';
-                $menu .= __('New Topic', 'asgaros-forum');
+                $menu .= '<a class="forum-editor-button button-normal" href="'.$this->get_link('topic_add', $this->current_forum).'">';
+                    $menu .= '<span class="menu-icon fas fa-plus-square"></span>';
+                    $menu .= __('New Topic', 'asgaros-forum');
                 $menu .= '</a>';
                 $menu .= '</div>';
             }
@@ -1282,20 +1289,29 @@ class AsgarosForum {
         }
 
         echo '<div id="sticky-panel">';
-            echo '<div class="title-element title-element-dark dashicons-before dashicons-admin-post">'.__('Select Sticky Mode:', 'asgaros-forum').'</div>';
+            echo '<div class="title-element title-element-dark">';
+                echo '<span class="title-element-icon fas fa-thumbtack"></span>';
+                echo __('Select Sticky Mode:', 'asgaros-forum');
+            echo '</div>';
             echo '<div class="content-element">';
                 echo '<form method="post" action="'.$this->get_link('topic', $this->current_topic).'">';
                     echo '<div class="action-panel">';
                         echo '<label class="action-panel-option">';
                             echo '<input type="radio" name="sticky_topic" value="1">';
-                            echo '<span class="action-panel-title dashicons-before dashicons-admin-post">'.__('Sticky', 'asgaros-forum').'</span>';
+                            echo '<span class="action-panel-title">';
+                                echo '<span class="action-panel-icon fas fa-thumbtack"></span>';
+                                echo __('Sticky', 'asgaros-forum');
+                            echo '</span>';
                             echo '<span class="action-panel-description">';
                                 _e('The topic will be sticked to the current forum.', 'asgaros-forum');
                             echo '</span>';
                         echo '</label>';
                         echo '<label class="action-panel-option">';
                             echo '<input type="radio" name="sticky_topic" value="2">';
-                            echo '<span class="action-panel-title dashicons-before dashicons-admin-site">'.__('Global Sticky', 'asgaros-forum').'</span>';
+                            echo '<span class="action-panel-title">';
+                                echo '<span class="action-panel-icon fas fa-globe-europe"></span>';
+                                echo __('Global Sticky', 'asgaros-forum');
+                            echo '</span>';
                             echo '<span class="action-panel-description">';
                                 _e('The topic will be sticked to all forums.', 'asgaros-forum');
                             echo '</span>';
@@ -1392,24 +1408,27 @@ class AsgarosForum {
             if (is_user_logged_in()) {
                 if ($this->permissions->isModerator('current') && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
-                    $menu .= '<a class="dashicons-before dashicons-trash" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
-                    $menu .= __('Delete', 'asgaros-forum');
+                    $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
+                        $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
+                        $menu .= __('Delete', 'asgaros-forum');
                     $menu .= '</a>';
                 }
 
                 $current_user_id = get_current_user_id();
                 if ($this->permissions->can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
                     // Edit button.
-                    $menu .= '<a class="dashicons-before dashicons-edit" href="'.$this->get_link('post_edit', $post_id, array('part' => ($this->current_page + 1))).'">';
-                    $menu .= __('Edit', 'asgaros-forum');
+                    $menu .= '<a href="'.$this->get_link('post_edit', $post_id, array('part' => ($this->current_page + 1))).'">';
+                        $menu .= '<span class="menu-icon fas fa-pencil-alt"></span>';
+                        $menu .= __('Edit', 'asgaros-forum');
                     $menu .= '</a>';
                 }
             }
 
             if ($this->permissions->isModerator('current') || (!$this->is_topic_closed($this->current_topic) && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
                 // Quote button.
-                $menu .= '<a class="forum-editor-quote-button dashicons-before dashicons-editor-quote" data-value-id="'.$post_id.'" href="'.$this->get_link('post_add', $this->current_topic, array('quote' => $post_id)).'">';
-                $menu .= __('Quote', 'asgaros-forum');
+                $menu .= '<a class="forum-editor-quote-button" data-value-id="'.$post_id.'" href="'.$this->get_link('post_add', $this->current_topic, array('quote' => $post_id)).'">';
+                    $menu .= '<span class="menu-icon fas fa-quote-left"></span>';
+                    $menu .= __('Quote', 'asgaros-forum');
                 $menu .= '</a>';
             }
         }
@@ -1423,7 +1442,10 @@ class AsgarosForum {
     function showHeader() {
         echo '<div id="forum-header">';
             echo '<div id="forum-navigation-mobile">';
-                echo '<a class="dashicons-before dashicons-menu">'.__('Menu', 'asgaros-forum').'</a>';
+                echo '<a>';
+                    echo '<span class="fas fa-bars"></span>';
+                    echo __('Menu', 'asgaros-forum');
+                echo '</a>';
             echo '</div>';
 
             echo '<span class="screen-reader-text">'.__('Forum Navigation', 'asgaros-forum').'</span>';
@@ -1562,16 +1584,6 @@ class AsgarosForum {
         }
 
         return $this->is_topic_closed_cache[$topic_id];
-    }
-
-    function get_status_icon($topic_object) {
-        if ($topic_object->sticky > 0) {
-            return 'dashicons-topic-sticky';
-        } else if ($topic_object->closed == 1) {
-            return 'dashicons-topic-closed';
-        } else {
-            return 'dashicons-topic-normal';
-        }
     }
 
     // Returns TRUE if the forum is opened or the user has at least moderator rights.

@@ -236,10 +236,22 @@ class AsgarosForumUnread {
                 $topic_title = esc_html(stripslashes($topic->topic_name));
 
                 echo '<div class="unread-topic topic-normal">';
-                    echo '<div class="topic-status dashicons-before '.$this->asgarosforum->get_status_icon($topic).' unread"></div>';
+                    echo '<div class="topic-status far fa-comments unread"></div>';
                     echo '<div class="topic-name">';
                         $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->topic_id);
                         $link = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
+
+                        if ($this->asgarosforum->is_topic_sticky($topic->topic_id)) {
+                            echo '<span class="topic-icon fas fa-thumbtack"></span>';
+                        }
+
+                        if ($this->asgarosforum->is_topic_closed($topic->topic_id)) {
+                            echo '<span class="topic-icon fas fa-lock"></span>';
+                        }
+
+                        if ($this->asgarosforum->polls->has_poll($topic->topic_id)) {
+                            echo '<span class="topic-icon fas fa-poll-h"></span>';
+                        }
 
                         echo '<a href="'.$link.'" title="'.$topic_title.'">'.$topic_title.'</a>';
 

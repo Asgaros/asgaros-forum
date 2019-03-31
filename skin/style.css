@@ -6,15 +6,6 @@
     line-height: 1.65;
     text-shadow: none; /* comp */
 }
-#af-wrapper [class^="dashicons-"],
-#af-wrapper [class*=" dashicons-"] {
-    padding: 0px;
-    border-radius: inherit; /* comp */
-    background: none; /* comp */
-    color: inherit; /* comp */
-    display: inline; /* comp */
-    position: initial; /* comp */
-}
 #af-wrapper a {
     color: #2d89cc;
     border: none;
@@ -28,10 +19,6 @@
 }
 #af-wrapper small {
     font-size: smaller;
-}
-#af-wrapper strong,
-#af-wrapper span {
-    font-size: inherit !important; /* comp */
 }
 #af-wrapper div {
     border-radius: 0; /* comp */
@@ -73,9 +60,6 @@
     display: inline; /* comp */
     width: auto; /* comp */
     background: none; /* comp */
-}
-#af-wrapper h1.dashicons-lock:before {
-    content: "\f160"; /* comp */
 }
 #af-wrapper .main-description {
     display: block;
@@ -162,14 +146,10 @@
     width: 50%;
 }
 #af-wrapper #sticky-panel .action-panel-title {
-    line-height: 30px;
+    font-size: 20px;
 }
-#af-wrapper #sticky-panel .action-panel-title:before {
-    height: 30px;
-    width: 30px;
-    font-size: 30px;
-    line-height: 30px;
-    margin-right: 5px;
+#af-wrapper #sticky-panel .action-panel-icon:before {
+    padding-right: 8px;
 }
 
 /* UPLOADS */
@@ -200,8 +180,8 @@
     box-shadow: none;
 }
 #af-wrapper .mce-i-spoiler::before {
-    font: normal 20px/1 dashicons;
-    content: "\f530";
+    font: 900 16px/1 "Font Awesome 5 Free";
+    content: "\f070";
 }
 
 /* INPUT ELEMENTS */
@@ -294,18 +274,18 @@
     float: left;
 	display: inline-block;
 	vertical-align: middle;
-	font: normal 21px/1 dashicons;
+	font: 900 12px/1 "Font Awesome 5 Free";
 	speak: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 #af-wrapper input[type="checkbox"]:checked:before {
-	content: "\f147";
-	margin: -3px 0 0 -4px;
+	content: "\f00c";
+	margin: 2px 0px 0px 1px;
 	color: #2d89cc;
 }
 #af-wrapper input[type="radio"]:checked:before {
-    content: "\2022";
+    content: "";
 	text-indent: -9999px;
 	border-radius: 50px;
 	font-size: 24px;
@@ -338,8 +318,8 @@
 		line-height: 16px;
 	}
     #af-wrapper input[type="checkbox"]:checked:before {
-        font: normal 30px/1 dashicons;
-		margin: -3px -5px;
+        font-size: 18px;
+        margin: 3px 0px 0px 2px;
     }
 }
 
@@ -570,7 +550,7 @@
     margin: 2px 0px 2px 2px;
     width: auto;
 }
-#af-wrapper .forum-menu .menu-icon {
+#af-wrapper .menu-icon {
     padding-right: 6px;
 }
 
@@ -757,9 +737,8 @@
 #af-wrapper #forum-navigation-mobile a:first-child {
     border-left: none;
 }
-#af-wrapper #forum-navigation-mobile a:before {
-    line-height: 48px;
-    padding-right: 5px;
+#af-wrapper #forum-navigation-mobile a span {
+    padding-right: 8px;
 }
 #af-wrapper #forum-navigation-mobile {
     display: none;
@@ -1072,16 +1051,10 @@
     color: #005C92;
     text-decoration: none;
 }
-#af-wrapper .forum-post-menu a:before {
-    font-size: 16px;
-    width: 20px;
-    height: 30px;
-    line-height: 30px;
-}
-#af-wrapper .forum-post-menu a.dashicons-trash {
+#af-wrapper .forum-post-menu a.delete-forum-post {
     color: #a00 !important;
 }
-#af-wrapper .forum-post-menu a.dashicons-trash:hover {
+#af-wrapper .forum-post-menu a.delete-forum-post:hover {
     color: red !important;
 }
 @media screen and (max-width: 440px) {
@@ -1697,13 +1670,14 @@
     border: 1px solid #eee;
 }
 #af-wrapper .report-content:before {
-    font-family: dashicons;
-    content: "\f205";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f10d";
     position: absolute;
     top: 0px;
     right: 100%;
     color: #888;
-    font-size: 30px;
+    font-size: 26px;
     line-height: 40px;
     height: 40px;
     width: 40px;
@@ -1733,20 +1707,8 @@
 }
 
 /* ICONS */
-#af-wrapper .dashicons-topic-normal:before {
-    content: "\f206";
-}
-#af-wrapper .dashicons-topic-closed:before {
-    content: "\f160";
-}
-#af-wrapper .dashicons-topic-sticky:before {
-    content: "\f109";
-}
 #af-wrapper .forum .forum-status:before,
-#af-wrapper .topic .dashicons-topic-normal:before,
-#af-wrapper .topic .dashicons-topic-closed:before,
-#af-wrapper .topic .dashicons-topic-sticky:before,
-#af-wrapper .topic .dashicons-editor-help:before {
+#af-wrapper .topic .topic-status:before {
     font-size: 32px;
     width: 40px;
     height: 40px;
@@ -1754,18 +1716,12 @@
 #af-wrapper .unread-topic .topic-status:before,
 #af-wrapper .unapproved-topic .topic-status:before {
     font-size: 20px;
-    width: 20px;
-    height: 20px;
 }
 #af-wrapper .unread:before {
     color: #2D89CC;
 }
 #af-wrapper .read:before {
     opacity: 0.5;
-}
-#af-wrapper .dashicons-editor-help:before {
-    color: #ff5454;
-    opacity: 1.0;
 }
 
 /* POLLS */
@@ -1898,8 +1854,7 @@
 }
 
 /* TOPIC ICONS */
-#af-wrapper .topic-icon-poll:before {
-    color: #bbb;
-    padding-right: 4px;
-    font-size: 16px;
+#af-wrapper .topic-icon:before {
+    color: #aaa;
+    padding-right: 6px;
 }

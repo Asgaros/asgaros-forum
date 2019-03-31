@@ -26,8 +26,8 @@ class AsgarosForumStatistics {
                 echo '</div>';
                 echo '<div id="statistics-body">';
                     echo '<div id="statistics-elements">';
-                        self::renderStatisticsElement(__('Topics', 'asgaros-forum'), $data->topics, 'fas fa-align-left');
-                        self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'fas fa-quote-left');
+                        self::renderStatisticsElement(__('Topics', 'asgaros-forum'), $data->topics, 'far fa-comments');
+                        self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'far fa-comment');
 
                         if (self::$asgarosforum->options['count_topic_views']) {
                             self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'fas fa-eye');
