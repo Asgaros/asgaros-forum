@@ -132,7 +132,7 @@ class AsgarosForumOnline {
     public function render_statistics_element() {
         if ($this->functionality_enabled) {
             $counter = count($this->online_users) + count($this->online_guests);
-            AsgarosForumStatistics::renderStatisticsElement(__('Online', 'asgaros-forum'), $counter, 'fas fa-lightbulb');
+            AsgarosForumStatistics::renderStatisticsElement(__('Online', 'asgaros-forum'), $counter, 'far fa-lightbulb');
         }
     }
 

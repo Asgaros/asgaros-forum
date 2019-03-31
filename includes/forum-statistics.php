@@ -30,10 +30,10 @@ class AsgarosForumStatistics {
                         self::renderStatisticsElement(__('Posts', 'asgaros-forum'), $data->posts, 'far fa-comment');
 
                         if (self::$asgarosforum->options['count_topic_views']) {
-                            self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'fas fa-eye');
+                            self::renderStatisticsElement(__('Views', 'asgaros-forum'), $data->views, 'far fa-eye');
                         }
 
-                        self::renderStatisticsElement(__('Users', 'asgaros-forum'), $data->users, 'fas fa-users');
+                        self::renderStatisticsElement(__('Users', 'asgaros-forum'), $data->users, 'far fa-user');
                         self::$asgarosforum->online->render_statistics_element();
                         do_action('asgarosforum_statistics_custom_element');
                     echo '</div>';
