@@ -413,12 +413,11 @@ class AsgarosForumPolls {
                         echo '<div class="poll-result-row">';
                             echo '<div class="poll-result-name">';
                                 echo $option->option.':';
-                                echo '<span class="poll-result-numbers">';
-                                    echo '<small class="poll-result-votes">';
+                                echo '<small class="poll-result-numbers">';
                                     echo sprintf(_n('%s Vote', '%s Votes', $option->votes, 'asgaros-forum'), number_format_i18n($option->votes));
-                                    echo '</small>';
-                                    echo '<small class="poll-result-percentage">'.number_format_i18n($percentage, 2).'%</small>';
-                                echo '</span>';
+                                    echo '&nbsp;&middot;&nbsp;';
+                                    echo number_format_i18n($percentage, 2).'%';
+                                echo '</small>';
                             echo '</div>';
 
                             echo '<div class="poll-result-bar">';

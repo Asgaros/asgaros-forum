@@ -1832,11 +1832,6 @@
     color: #888;
     font-style: italic;
 }
-#af-wrapper #poll-results .poll-result-votes,
-#af-wrapper #poll-results .poll-result-percentage {
-    width: 75px;
-    display: inline-block;
-}
 #af-wrapper #poll-results .poll-result-bar {
     display: block;
     width: 100%;
