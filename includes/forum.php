@@ -730,7 +730,15 @@ class AsgarosForum {
         echo '<div class="topic '.$topic_type.'">';
             echo '<div class="topic-status dashicons-before '.$this->get_status_icon($topic_object).' '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
-                echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
+                // Show special symbol if topic has a poll.
+                if ($this->polls->has_poll($topic_object->id)) {
+                    echo '<span class="topic-icon-poll fas fa-poll-h"></span>';
+                }
+
+                echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">';
+                echo $topic_title;
+                echo '</a>';
+
                 echo '<small>';
                 echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic_object->author_id);
 

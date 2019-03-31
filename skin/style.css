@@ -1915,3 +1915,10 @@
     color: #888;
     text-align: justify;
 }
+
+/* TOPIC ICONS */
+#af-wrapper .topic-icon-poll:before {
+    color: #bbb;
+    padding-right: 4px;
+    font-size: 16px;
+}
