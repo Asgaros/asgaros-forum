@@ -32,6 +32,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Reactions
 * Uploads
 * Search
+* Polls
 * Approval
 * Moderators
 * Statistics
@@ -95,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Poll functionality
 * Added: FontAwesome icons
 * Fixed: Wrong avatar-size in certain configurations
 * Fixed: Display issues with some themes
