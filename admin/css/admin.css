@@ -257,6 +257,8 @@ li.forum-user-group {
     display: block;
     float: left;
     padding-right: 16px;
+    width: 40px;
+    text-align: center;
 }
 #af-structure .column-status,
 #af-structure .column-sort,
