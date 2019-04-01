@@ -75,7 +75,8 @@ class AsgarosForumSearch {
                 $this->asgarosforum->render_topic_element($topic, 'topic-normal', true);
             }
         } else {
-            echo '<div class="notice">'.__('No results found for:', 'asgaros-forum').' <b>'.$this->search_keywords_for_output.'</b></div>';
+            $notice = __('No results found for:', 'asgaros-forum').'&nbsp;<b>'.$this->search_keywords_for_output.'</b>';
+            $this->asgarosforum->render_notice($notice);
         }
 
         echo '</div>';

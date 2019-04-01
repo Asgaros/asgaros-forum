@@ -117,7 +117,7 @@ class AsgarosForumContent {
 
         // Cancel if subject is empty.
         if (($this->get_action() === 'add_topic' || ($this->get_action() === 'edit_post' && $this->asgarosforum->is_first_post($this->asgarosforum->current_post))) && empty($this->data_subject)) {
-            $this->asgarosforum->info = __('You must enter a subject.', 'asgaros-forum');
+            $this->asgarosforum->add_notice(__('You must enter a subject.', 'asgaros-forum'));
             return false;
         }
 
@@ -128,19 +128,19 @@ class AsgarosForumContent {
 
         // Cancel if content is empty.
         if (empty($this->data_content)) {
-            $this->asgarosforum->info = __('You must enter a message.', 'asgaros-forum');
+            $this->asgarosforum->add_notice(__('You must enter a message.', 'asgaros-forum'));
             return false;
         }
 
         // Cancel when the file extension of uploads are not allowed.
         if (!$this->asgarosforum->uploads->check_uploads_extension()) {
-            $this->asgarosforum->info = __('You are not allowed to upload files with that file extension.', 'asgaros-forum');
+            $this->asgarosforum->add_notice(__('You are not allowed to upload files with that file extension.', 'asgaros-forum'));
             return false;
         }
 
         // Cancel when the file size of uploads is too big.
         if (!$this->asgarosforum->uploads->check_uploads_size()) {
-            $this->asgarosforum->info = __('You are not allowed to upload files with that file size.', 'asgaros-forum');
+            $this->asgarosforum->add_notice(__('You are not allowed to upload files with that file size.', 'asgaros-forum'));
             return false;
         }
 

@@ -12,7 +12,6 @@ class AsgarosForum {
     var $date_format = '';
     var $time_format = '';
     var $error = false;
-    var $info = false;
     var $current_description = false;
     var $current_category = false;
     var $current_forum = false;
@@ -514,6 +513,13 @@ class AsgarosForum {
             $this->error = __('Sorry, you cannot access this area.', 'asgaros-forum');
             return;
         }
+
+        // Add a login-notice if necessary.
+        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
+            $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
+            $notice = apply_filters('asgarosforum_filter_login_message', $notice);
+            $this->add_notice($notice);
+        }
     }
 
     function enqueue_front_scripts() {
@@ -579,25 +585,49 @@ class AsgarosForum {
         return $someString;
     }
 
-    // Shows all kind of notices in the upper area.
-    function show_notices() {
-        if (!empty($this->info)) {
-            echo '<div class="info">'.$this->info.'</div>';
+    // Holds all notices.
+    private $notices = array();
+
+    // Adds a new notice to the notices array.
+    function add_notice($notice_message, $notice_link = false, $notice_icon = false) {
+        $this->notices[] = array(
+            'message'   => $notice_message,
+            'link'      => $notice_link,
+            'icon'      => $notice_icon
+        );
+    }
+
+    // Renders a single given notice.
+    function render_notice($notice_message, $notice_link = false, $notice_icon = false, $in_panel = false) {
+        if ($in_panel) { echo '<div class="notices-panel">'; }
+
+        echo '<div class="notice">';
+
+        if ($notice_icon) {
+            echo '<span class="notice-icon '.$notice_icon.'"></span>';
         }
 
-        // Shows an info-message when a new unapproved topic got created.
-        $this->approval->notice_for_topic_creator();
+        if ($notice_link) { echo '<a href="'.$notice_link.'">'; }
 
-        // Shows an info-message when there are unapproved topics.
-        $this->approval->notice_for_moderators();
+        echo $notice_message;
 
-        // Shows an info-message when there are new reports.
-        $this->reports->notice_for_moderators();
+        if ($notice_link) { echo '</a>'; }
 
-        if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $loginMessage = '<div class="info">'.__('You need to log in to create posts and topics.', 'asgaros-forum').'</div>';
-            $loginMessage = apply_filters('asgarosforum_filter_login_message', $loginMessage);
-            echo $loginMessage;
+        echo '</div>';
+
+        if ($in_panel) { echo '</div>'; }
+    }
+
+    // Renders all existing notices.
+    function render_notices() {
+        if (!empty($this->notices)) {
+            echo '<div class="notices-panel">';
+
+            foreach ($this->notices as $notice) {
+                $this->render_notice($notice['message'], $notice['link'], $notice['icon']);
+            }
+
+            echo '</div>';
         }
     }
 
@@ -621,7 +651,7 @@ class AsgarosForum {
             if ($this->current_view === 'post') {
                 $this->showSinglePost();
             } else {
-                $this->show_notices();
+                $this->render_notices();
                 $this->showMainTitleAndDescription();
 
                 switch ($this->current_view) {
@@ -806,7 +836,7 @@ class AsgarosForum {
 
             require('views/topic.php');
         } else {
-            echo '<div class="notice">'.__('Sorry, but there are no posts.', 'asgaros-forum').'</div>';
+            $this->render_notice(__('Sorry, but there are no posts.', 'asgaros-forum'));
         }
     }
 
@@ -820,8 +850,8 @@ class AsgarosForum {
         if ($this->permissions->isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->get_link('movetopic', $this->current_topic, array('move_topic' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
-            $strOUT .= '<div class="content-element"><div class="notice">';
-            $strOUT .= '<select name="newForumID">';
+            $strOUT .= '<div class="content-element">';
+            $strOUT .= '<br><select name="newForumID">';
 
             $categories = $this->content->get_categories();
 
@@ -845,11 +875,11 @@ class AsgarosForum {
                 }
             }
 
-            $strOUT .= '</select><br><input type="submit" value="'.__('Move', 'asgaros-forum').'"></div></div></form>';
+            $strOUT .= '</select><br><input type="submit" value="'.__('Move', 'asgaros-forum').'"><br><br></div></form>';
 
             echo $strOUT;
         } else {
-            echo '<div class="notice">'.__('You are not allowed to move topics.', 'asgaros-forum').'</div>';
+            $this->render_notice(__('You are not allowed to move topics.', 'asgaros-forum'));
         }
     }
 

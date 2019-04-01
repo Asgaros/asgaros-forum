@@ -9,6 +9,8 @@ class AsgarosForumApproval {
         $this->asgarosforum = $object;
 
         add_action('asgarosforum_breadcrumbs_unapproved', array($this, 'add_breadcrumbs'));
+        add_action('asgarosforum_prepare_overview', array($this, 'notice_for_topic_creator'));
+        add_action('asgarosforum_prepare_overview', array($this, 'notice_for_moderators'));
     }
 
     public function add_breadcrumbs() {
@@ -142,37 +144,27 @@ class AsgarosForumApproval {
     // Shows an info-message when a new unapproved topic got created.
     public function notice_for_topic_creator() {
         if (!empty($_GET['new_unapproved_topic'])) {
-            echo '<div class="unapproved-notice">';
-                echo '<span class="notice-icon fas fa-eye"></span>';
-                echo __('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum');
-            echo '</div>';
+            $notice = __('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum');
+            $link = false;
+            $icon = 'fas fa-eye';
+            $this->asgarosforum->add_notice($notice, $link, $icon);
         }
     }
 
     // Shows an info-message when there are unapproved topics.
     public function notice_for_moderators() {
-        // Ensure that we are in the overview.
-        if ($this->asgarosforum->current_view !== 'overview') {
-            return;
-        }
-
         // Ensure that the current user is at least a moderator.
         if (!$this->asgarosforum->permissions->isModerator('current')) {
-            return;
-        }
-
-        // Ensure that we are not already inside the unapproved view.
-        if ($this->asgarosforum->current_view === 'unapproved') {
             return;
         }
 
         $unapproved_topics = $this->get_unapproved_topics();
 
         if (!empty($unapproved_topics)) {
-            echo '<div class="unapproved-notice">';
-                echo '<span class="notice-icon fas fa-eye"></span>';
-                echo '<a href="'.$this->asgarosforum->rewrite->get_link('unapproved').'">'.__('There are unapproved topics.', 'asgaros-forum').'</a>';
-            echo '</div>';
+            $notice = __('There are unapproved topics.', 'asgaros-forum');
+            $link = $this->asgarosforum->rewrite->get_link('unapproved');
+            $icon = 'fas fa-eye';
+            $this->asgarosforum->add_notice($notice, $link, $icon);
         }
     }
 
@@ -227,7 +219,7 @@ class AsgarosForumApproval {
                 echo '</div>';
             }
         } else {
-            echo '<div class="notice">'.__('There are no unapproved topics.', 'asgaros-forum').'</div>';
+            $this->asgarosforum->render_notice(__('There are no unapproved topics.', 'asgaros-forum'));
         }
 
         echo '</div>';

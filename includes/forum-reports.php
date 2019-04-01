@@ -10,6 +10,7 @@ class AsgarosForumReports {
         $this->asgarosforum = $object;
 
         add_action('asgarosforum_breadcrumbs_reports', array($this, 'add_breadcrumbs'));
+        add_action('asgarosforum_prepare_overview', array($this, 'register_notice'));
     }
 
     public function add_breadcrumbs() {
@@ -168,14 +169,9 @@ class AsgarosForumReports {
     }
 
     // Shows an info-message when there are new reports.
-    public function notice_for_moderators() {
+    public function register_notice() {
         // Ensure that this option is enabled.
         if (!$this->asgarosforum->options['reports_enabled']) {
-            return;
-        }
-
-        // Ensure that we are in the overview.
-        if ($this->asgarosforum->current_view !== 'overview') {
             return;
         }
 
@@ -184,18 +180,13 @@ class AsgarosForumReports {
             return;
         }
 
-        // Ensure that we are not already inside the reports view.
-        if ($this->asgarosforum->current_view === 'reports') {
-            return;
-        }
-
         $reports_counter = $this->count_reports();
 
         if ($reports_counter > 0) {
-            echo '<div class="reports-notice">';
-                echo '<span class="notice-icon fas fa-exclamation-triangle"></span>';
-                echo '<a href="'.$this->asgarosforum->rewrite->get_link('reports').'">'.__('There are reports.', 'asgaros-forum').'</a>';
-            echo '</div>';
+            $notice = __('There are reports.', 'asgaros-forum');
+            $link = $this->asgarosforum->rewrite->get_link('reports');
+            $icon = 'fas fa-exclamation-triangle';
+            $this->asgarosforum->add_notice($notice, $link, $icon);
         }
     }
 
@@ -205,7 +196,7 @@ class AsgarosForumReports {
         echo '<div class="title-element"></div>';
 
         if (empty($reports)) {
-            echo '<div class="notice">'.__('There are no reports.', 'asgaros-forum').'</div>';
+            $this->asgarosforum->render_notice(__('There are no reports.', 'asgaros-forum'));
         } else {
             foreach ($reports as $post_id => $reporter_ids) {
                 $report = $this->get_report($post_id, $reporter_ids);

@@ -66,6 +66,6 @@ if ($counter_total > 0) {
     echo '<div class="title-element"></div>';
 
     echo '<div class="content-element">';
-        echo '<div class="notice">'.__('There are no topics yet!', 'asgaros-forum').'</div>';
+        $this->render_notice(__('There are no topics yet!', 'asgaros-forum'));
     echo '</div>';
 }

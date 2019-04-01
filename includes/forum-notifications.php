@@ -506,7 +506,8 @@ class AsgarosForumNotifications {
             // Check if the user is a receiver of administrative notifications.
             if (!empty($receivers_admin_notifications)) {
                 if (in_array($current_user->user_email, $receivers_admin_notifications)) {
-                    echo '<div class="info">'.__('You will automatically get notified about new topics because you are a receiver of administrative notifications.', 'asgaros-forum').'</div>';
+                    $notice = __('You will automatically get notified about new topics because you are a receiver of administrative notifications.', 'asgaros-forum');
+                    $this->asgarosforum->render_notice($notice, false, false, true);
                 }
             }
         }
@@ -612,12 +613,12 @@ class AsgarosForumNotifications {
 
         if ($all) {
             if ($type == 'forum') {
-                echo '<div class="notice">'. __('You get notified about <b>all</b> new topics.', 'asgaros-forum').'</div>';
+                $this->asgarosforum->render_notice(__('You get notified about <b>all</b> new topics.', 'asgaros-forum'));
             } else if ($type == 'topic') {
-                echo '<div class="notice">'. __('You get notified about <b>all</b> new posts.', 'asgaros-forum').'</div>';
+                $this->asgarosforum->render_notice(__('You get notified about <b>all</b> new posts.', 'asgaros-forum'));
             }
         } else if (empty($data)) {
-            echo '<div class="notice">'.__('No subscriptions yet!', 'asgaros-forum').'</div>';
+            $this->asgarosforum->render_notice(__('No subscriptions yet!', 'asgaros-forum'));
         } else {
             foreach ($data as $item) {
                 echo '<div class="subscription">';

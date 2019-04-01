@@ -161,7 +161,7 @@ class AsgarosForumMembersList {
         $data = $this->get_members();
 
         if (empty($data)) {
-            echo '<div class="notice">'.__('No users found!', 'asgaros-forum').'</div>';
+            $this->asgarosforum->render_notice(__('No users found!', 'asgaros-forum'));
         } else {
             $start = $this->asgarosforum->current_page * $this->asgarosforum->options['members_per_page'];
             $end = $this->asgarosforum->options['members_per_page'];

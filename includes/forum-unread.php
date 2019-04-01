@@ -265,7 +265,7 @@ class AsgarosForumUnread {
                 echo '</div>';
             }
         } else {
-            echo '<div class="notice">'.__('There are no unread topics.', 'asgaros-forum').'</div>';
+            $this->asgarosforum->render_notice(__('There are no unread topics.', 'asgaros-forum'));
         }
 
         echo '</div>';

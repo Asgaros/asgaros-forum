@@ -8,7 +8,7 @@ if ($categories) {
     foreach ($categories as $category) {
         // Reset forums-counter for ads when we enter a new category.
         $this->ads->counter_forums = 0;
-        
+
         echo '<div class="title-element" id="forum-category-'.$category->term_id.'">';
             echo $category->name;
             echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
@@ -16,7 +16,7 @@ if ($categories) {
         echo '<div class="content-element">';
             $forums = $this->get_forums($category->term_id);
             if (empty($forums)) {
-                echo '<div class="notice">'.__('In this category are no forums yet!', 'asgaros-forum').'</div>';
+                $this->render_notice(__('In this category are no forums yet!', 'asgaros-forum'));
             } else {
                 foreach ($forums as $forum) {
                     $forumsAvailable = true;
@@ -34,5 +34,5 @@ if ($categories) {
 
     AsgarosForumStatistics::showStatistics();
 } else {
-    echo '<div class="notice">'.__('There are no categories yet!', 'asgaros-forum').'</div>';
+    $this->render_notice(__('There are no categories yet!', 'asgaros-forum'));
 }

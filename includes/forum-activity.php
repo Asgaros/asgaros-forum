@@ -88,7 +88,7 @@ class AsgarosForumActivity {
         } else {
             echo '<div class="title-element"></div>';
             echo '<div class="content-element">';
-            echo '<div class="notice">'.__('No activity yet!', 'asgaros-forum').'</div>';
+            $this->asgarosforum->render_notice(__('No activity yet!', 'asgaros-forum'));
             echo '</div>';
         }
 
