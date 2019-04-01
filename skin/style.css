@@ -52,6 +52,9 @@
     display: block;
     line-height: 40px;
 }
+#af-wrapper .main-title:before {
+    content: none; /* comp */
+}
 #af-wrapper .main-title .main-title-icon:before {
     font-size: 16px;
     color: #888;
