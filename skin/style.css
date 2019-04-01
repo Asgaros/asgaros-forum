@@ -554,10 +554,10 @@
 
 /* NOTICE */
 #af-wrapper .notices-panel {
-    background-color: #fffcd1;
-    border: 1px solid #eee;
+    background-color: #fffbbb;
+    border: 1px solid #ead643;
     border-radius: 4px;
-    color: #7b7500;
+    color: #827302;
     padding: 0 16px;
     margin: 15px 0;
 }
@@ -565,7 +565,7 @@
     display: block;
     text-align: center;
     padding: 12px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ead643;
 }
 #af-wrapper .notice:first-child {
     border-top: none;
@@ -574,7 +574,7 @@
     padding-right: 8px;
 }
 #af-wrapper .notice a {
-    color: #7b7500 !important;
+    color: #827302 !important;
 }
 #af-wrapper .error {
     background-color: #ffa8a8;
