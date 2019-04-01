@@ -59,10 +59,40 @@ class AsgarosForumMentioning {
         // Load required data.
         $post = $this->asgarosforum->content->get_post($post_id);
         $topic = $this->asgarosforum->content->get_topic($post->parent_id);
+        $text = stripslashes($post->text);
+
+        // Try to remove blockquotes to prevent unnecessary mentionings.
+        // This functionality requires the libxml-extension of PHP.
+        if (extension_loaded('libxml')) {
+            // Enable search.
+            $search = true;
+
+            // Load the HTML-document.
+            $document = new DOMDocument();
+            $document->loadHTML($text);
+
+            // A search will performed multiple times because otherwise nested
+            // blockquotes caused by multiple quotes can not get removed correctly.
+            do {
+                // Look for blockquotes inside of the HTML-document.
+                $elements = $document->getElementsByTagName('blockquote');
+
+                if ($elements->length === 0) {
+                    // Stop search when no blockquotes are found.
+                    $search = false;
+                } else {
+                    // Remove the first found blockquote from the HTML-document.
+                    $elements[0]->parentNode->removeChild($elements[0]);
+                }
+            } while ($search === true);
+
+            // Get the cleaned-up HTML-document.
+            $text = $document->saveHTML();
+        }
 
         // Find mentioned users in the post-text.
         $matches = array();
-        preg_match_all($this->regex_users, $post->text, $matches, PREG_SET_ORDER);
+        preg_match_all($this->regex_users, $text, $matches, PREG_SET_ORDER);
 
         if (!empty($matches)) {
             foreach ($matches as $match) {
