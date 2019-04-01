@@ -98,6 +98,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Poll functionality
 * Added: FontAwesome icons
+* Fixed: Broken post-layout when a post contains long links
 * Fixed: Wrong avatar-size in certain configurations
 * Fixed: Display issues with some themes
 * Improved compatibility with Rank Math SEO

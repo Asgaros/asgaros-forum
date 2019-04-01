@@ -983,22 +983,13 @@
     flex-direction: column;
     vertical-align: top;
     padding: 0;
+    word-break: break-word;
     box-sizing: border-box;
     background-color: #fff;
     border-width: 0px 0px 0px 1px;
     border-style: solid;
     border-color: #eee;
     padding: 0px 20px;
-    /* Necessary rules for breaking long works. This order and multiple definitions are required to support all browsers! */
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    -ms-word-break: break-all;
-    word-break: break-all;
-    word-break: break-word;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
 }
 @media screen and (max-width: 782px) {
     #af-wrapper .post-wrapper {
@@ -1062,7 +1053,18 @@
     width: 100%;
     min-height: 150px;
     box-sizing: border-box;
-    text-align: justify;
+}
+#af-wrapper .post-message a {
+    /* Necessary rules for breaking long works. This order and multiple definitions are required to support all browsers! */
+    overflow-wrap: break-word; /* comp */
+    word-wrap: break-word; /* comp */
+    -ms-word-break: break-all; /* comp */
+    word-break: break-all; /* comp */
+    word-break: break-word; /* comp */
+    -ms-hyphens: auto; /* comp */
+    -moz-hyphens: auto; /* comp */
+    -webkit-hyphens: auto; /* comp */
+    hyphens: auto; /* comp */
 }
 #af-wrapper .post-message p {
     margin: 0 0 20px;
