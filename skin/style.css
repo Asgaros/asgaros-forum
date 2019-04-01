@@ -561,14 +561,16 @@
     padding: 0 16px;
     margin: 15px 0;
 }
+#af-wrapper .notices-panel .notice {
+    border-top: 1px solid #ead643;
+}
+#af-wrapper .notices-panel .notice:first-child {
+    border-top: none;
+}
 #af-wrapper .notice {
     display: block;
     text-align: center;
     padding: 12px;
-    border-top: 1px solid #ead643;
-}
-#af-wrapper .notice:first-child {
-    border-top: none;
 }
 #af-wrapper .notice-icon:before {
     padding-right: 8px;
