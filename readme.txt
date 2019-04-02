@@ -104,6 +104,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Display issues with some themes
 * Improved compatibility with Rank Math SEO
 * Minor design changes
+* New design of the administration area
 * Performance improvements and code optimizations
 = 1.13.3 =
 * Added: Option to disable avatars

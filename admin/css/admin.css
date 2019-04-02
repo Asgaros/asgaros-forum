@@ -29,7 +29,7 @@ li.forum-user-group {
 #asgaros-panel {
     position: relative;
     overflow: auto;
-    margin: 16px 0;
+    margin: 24px 0;
     padding: 10px;
     border: 1px solid #e5e5e5;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
@@ -89,15 +89,12 @@ li.forum-user-group {
     margin: 8px 0 0;
     background-color: #fafafa;
 }
-#af-options .inside,
-#af-structure #editor-container .inside {
-    padding: 0;
-    margin: 0;
-}
 #af-options table,
 #af-structure #editor-container table {
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 16px;
 }
 #af-options tr:nth-child(2n+1),
 #af-structure #editor-container tr:nth-child(2n+1) {
@@ -117,7 +114,7 @@ li.forum-user-group {
     text-align: left;
     padding: 8px 20px;
     font-weight: normal;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e5e5;
 }
 #af-options th,
 #af-structure #editor-container th {
@@ -141,18 +138,10 @@ li.forum-user-group {
     font-weight: normal;
     font-size: 13px;
 }
-#af-structure .category-actions a {
-    color: white;
-}
-#af-structure .category-actions .action-delete:hover {
-    color: #ffb2b2 !important;
-}
-#af-structure .category-actions .action-edit:hover {
-    color: #73d5f5 !important;
-}
 #af-structure a.add-element {
     font-size: 14px;
     display: inline-block;
+    padding: 16px 0;
 }
 #af-structure a.add-element span:before {
     padding-right: 8px;
@@ -160,33 +149,16 @@ li.forum-user-group {
 #af-structure a {
     text-decoration: none;
 }
+#af-structure .category-actions .action-delete,
 #af-structure .link-delete {
     color: #a00;
-}
-#af-structure .padding-top {
-    padding-top: 10px;
-}
-#af-options .margin-bottom,
-#af-structure .margin-bottom {
-    margin-bottom: 20px;
 }
 #af-structure .tablenav,
 #af-structure tfoot {
     display: none;
 }
-#af-options .hndle,
-#af-structure .hndle {
-    cursor: default;
-    background-color: #2d89cc;
-    border-bottom: 1px solid #2468af;
-    color: white;
-}
-#af-options .hndle span:before,
-#af-structure .hndle span:before {
-    padding-right: 8px;
-}
 #af-structure .element-id {
-    color: silver;
+    color: #888;
     font-weight: normal;
     font-style: italic;
     font-size: small;
@@ -198,7 +170,7 @@ li.forum-user-group {
 #af-structure .subforum {
     display: block;
     margin-left: 16px;
-    border-left: 3px solid #ddd;
+    border-left: 2px solid #e5e5e5;
     padding-left: 4px
 }
 #af-structure th {
@@ -223,14 +195,8 @@ li.forum-user-group {
     text-shadow: none;
     box-shadow: none;
 }
-#af-structure .postbox .form-table th {
+#af-structure .settings-box .form-table th {
     min-width: 150px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-#af-structure .postbox .form-table td {
-    padding-top: 8px;
-    padding-bottom: 8px;
 }
 #af-structure .forum-description {
     font-style: italic;
@@ -247,12 +213,9 @@ li.forum-user-group {
 #af-structure .make-bold {
     font-weight: 600;
 }
-#af-structure .forum-icon:before {
-    width: 40px;
-    height: 40px;
-    font-size: 40px;
+#af-structure .forum-icon {
+    padding-right: 8px;
 }
-#af-structure .forum-icon,
 #af-structure .usergroup-icon {
     display: block;
     float: left;
@@ -310,4 +273,27 @@ li.forum-user-group {
 #af-structure #editor-container p {
     margin-left: 12px;
     margin-right: 12px;
+}
+.settings-box {
+    position: relative;
+    min-width: 255px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background: #fff;
+    margin: 0 0 20px 0;
+    padding: 0 16px;
+    outline: 0;
+    line-height: 1.4em;
+    font-size: 13px;
+}
+.settings-header {
+    display: block;
+    font-size: 22px;
+    padding: 16px 8px;
+    line-height: 30px;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0 0 16px 0;
+}
+.settings-header span {
+    padding-right: 8px;
 }
