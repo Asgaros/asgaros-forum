@@ -189,10 +189,6 @@ if (!defined('ABSPATH')) exit;
                     <td><input type="checkbox" name="enable_avatars" id="enable_avatars" <?php checked(!empty($asgarosforum->options['enable_avatars'])); ?>></td>
                 </tr>
                 <tr>
-                    <th><label for="enable_seo_urls"><?php _e('Enable SEO-friendly URLs', 'asgaros-forum'); ?></label></th>
-                    <td><input type="checkbox" name="enable_seo_urls" id="enable_seo_urls" <?php checked(!empty($asgarosforum->options['enable_seo_urls'])); ?>></td>
-                </tr>
-                <tr>
                     <th><label for="enable_reactions"><?php _e('Enable reactions', 'asgaros-forum'); ?></label></th>
                     <td><input type="checkbox" name="enable_reactions" id="enable_reactions" <?php checked(!empty($asgarosforum->options['enable_reactions'])); ?>></td>
                 </tr>
@@ -219,6 +215,46 @@ if (!defined('ABSPATH')) exit;
                 <tr>
                     <th><label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label></th>
                     <td><input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="settings-box">
+            <div class="settings-header">
+                <span class="fas fa-link"></span>
+                <?php _e('URLs', 'asgaros-forum'); ?>
+            </div>
+            <?php
+            $seo_option = checked(!empty($asgarosforum->options['enable_seo_urls']), true, false);
+            ?>
+            <table>
+                <tr>
+                    <th><label for="enable_seo_urls"><?php _e('Enable SEO-friendly URLs', 'asgaros-forum'); ?></label></th>
+                    <td><input type="checkbox" name="enable_seo_urls" id="enable_seo_urls" class="show_hide_initiator" data-hide-class="seo-option" <?php checked(!empty($asgarosforum->options['enable_seo_urls'])); ?>></td>
+                </tr>
+                <tr class="seo-option" <?php if (!$seo_option) { echo 'style="display: none;"'; } ?>>
+                    <th>
+                        <label for="seo_url_mode_content"><?php _e('URL mode for forums & topics:', 'asgaros-forum'); ?></label>
+                        <span class="description"><?php _e('Define if the slug or the ID should be used in URLs for forums and topics. This setting is useful if you encounter problems when your slugs include special characters.', 'asgaros-forum'); ?></span>
+                    </th>
+                    <td>
+                        <select name="seo_url_mode_content" id="seo_url_mode_content">';
+                            <option value="slug" <?php if ($asgarosforum->options['seo_url_mode_content'] == 'slug') { echo 'selected="selected"'; } ?>><?php _e('Slug', 'asgaros-forum'); ?></option>
+                            <option value="id" <?php if ($asgarosforum->options['seo_url_mode_content'] == 'id') { echo 'selected="selected"'; } ?>><?php _e('ID', 'asgaros-forum'); ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="seo-option" <?php if (!$seo_option) { echo 'style="display: none;"'; } ?>>
+                    <th>
+                        <label for="seo_url_mode_profile"><?php _e('URL mode for profiles:', 'asgaros-forum'); ?></label>
+                        <span class="description"><?php _e('Define if the slug or the ID should be used in URLs for profiles. This setting is useful if you want to hide the unique nicename of users from the public.', 'asgaros-forum'); ?></span>
+                    </th>
+                    <td>
+                        <select name="seo_url_mode_profile" id="seo_url_mode_profile">';
+                            <option value="slug" <?php if ($asgarosforum->options['seo_url_mode_profile'] == 'slug') { echo 'selected="selected"'; } ?>><?php _e('Slug', 'asgaros-forum'); ?></option>
+                            <option value="id" <?php if ($asgarosforum->options['seo_url_mode_profile'] == 'id') { echo 'selected="selected"'; } ?>><?php _e('ID', 'asgaros-forum'); ?></option>
+                        </select>
+                    </td>
                 </tr>
             </table>
         </div>

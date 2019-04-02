@@ -65,7 +65,6 @@ class AsgarosForum {
         'signatures_html_allowed'           => false,
         'signatures_html_tags'              => '<br><a><i><b><u><s><img><strong>',
         'enable_avatars'                    => true,
-        'enable_seo_urls'                   => true,
         'enable_mentioning'                 => true,
         'enable_reactions'                  => true,
         'enable_search'                     => true,
@@ -101,7 +100,10 @@ class AsgarosForum {
         'enable_activity'                   => true,
         'activity_days'                     => 14,
         'enable_polls'                      => true,
-        'polls_permission'                  => 'loggedin'
+        'polls_permission'                  => 'loggedin',
+        'enable_seo_urls'                   => true,
+        'seo_url_mode_content'              => 'slug',
+        'seo_url_mode_profile'              => 'slug'
     );
     var $options_editor = array(
         'media_buttons' => false,

@@ -148,9 +148,17 @@ class AsgarosForumRewrite {
 
             // Set the current element id.
             if (!empty($parsed_url[1])) {
-                // If we have a numeric value, its already an id. But this does not hold for usernames because they can be numeric as well.
-                if (is_numeric($parsed_url[1]) && $this->asgarosforum->current_view != 'profile' && $this->asgarosforum->current_view != 'history') {
+                // If we have a numeric value, its already an id.
+                if (is_numeric($parsed_url[1])) {
                     $this->asgarosforum->current_element = absint($parsed_url[1]);
+
+                    // But this does not hold for usernames because they can be numeric as well.
+                    if ($this->asgarosforum->current_view == 'profile' || $this->asgarosforum->current_view == 'history') {
+                        // Only make the conversion when slugs are used for profile-URLs.
+                        if ($this->asgarosforum->options['seo_url_mode_profile'] === 'slug') {
+                            $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
+                        }
+                    }
                 } else {
                     $this->asgarosforum->current_element = $this->convert_slug_to_id($parsed_url[1], $this->asgarosforum->current_view);
                 }
@@ -397,6 +405,11 @@ class AsgarosForumRewrite {
             // Now try to determine a slug.
             switch ($type) {
                 case 'topic':
+                    // Cancel if IDs should be used for content-URLs.
+                    if ($this->asgarosforum->options['seo_url_mode_content'] === 'id') {
+                        break;
+                    }
+
                     $result = $this->asgarosforum->db->get_var('SELECT slug FROM '.$this->asgarosforum->tables->topics.' WHERE id = '.$id.';');
 
                     if ($result) {
@@ -405,6 +418,11 @@ class AsgarosForumRewrite {
 
                     break;
                 case 'forum':
+                    // Cancel if IDs should be used for content-URLs.
+                    if ($this->asgarosforum->options['seo_url_mode_content'] === 'id') {
+                        break;
+                    }
+
                     $result = $this->asgarosforum->db->get_var('SELECT slug FROM '.$this->asgarosforum->tables->forums.' WHERE id = '.$id.';');
 
                     if ($result) {
@@ -413,6 +431,11 @@ class AsgarosForumRewrite {
 
                     break;
                 case 'profile':
+                    // Cancel if IDs should be used for profile-URLs.
+                    if ($this->asgarosforum->options['seo_url_mode_profile'] === 'id') {
+                        break;
+                    }
+
                     $result = get_user_by('id', $id);
 
                     if ($result) {
