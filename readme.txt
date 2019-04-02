@@ -24,7 +24,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * [Documentation](https://www.asgaros.de/docs/)
 
 = Features =
-* Simple Structure & Content Management
+* Simple Content Management
 * Profiles & Members List
 * Powerful Editor
 * Notifications
@@ -34,19 +34,16 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Search
 * Polls
 * Approval
-* Moderators
 * Statistics
-* Ads Management
-* Permissions
-* Usergroups
 * Who Is Online
+* Ads Management
 * Guest Postings
 * Reporting & Banning
-* Easy Appearance Customization
+* Moderators, Permissions & Usergroups
 * Widgets
 * RSS Feeds
-* Mobile Theme
-* Theme Manager
+* Easy Color Customization
+* Mobile Theme & Theme Manager
 * Multilingualism
 * Multiple Instances
 * Multisite Compatibility
@@ -62,16 +59,14 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Done!
 
 == Frequently Asked Questions ==
-= I cant see new posts/threads or modifications I made to the forum =
+= I cant see content or modifications I made to the forum =
 If you are using some third-party plugin for caching (WP Super Cache for example) and disable caching for the forum-page, everything should work fine again.
 = I cant upload my files =
 By default only files of the following filetype can be uploaded: jpg, jpeg, gif, png, bmp, pdf. You can modify the allowed filetypes inside the forum administration.
-= Where can I add moderators? =
-Moderators can be added via the user edit screen in the WordPress administration interface.
+= Where can I add moderators or ban users? =
+You can ban users or ad moderators via the user edit screen in the WordPress administration interface.
 = How can I show a specific post/topic/forum/category on a page? =
 You can extend the shortcodes with different parameters to show specific content only. For example: `[forum post="POSTID"]`, `[forum topic="TOPICID"]`, `[forum forum="FORUMID"]`, `[forum category="CATEGORYID"]` or `[forum category="CATEGORYID1,CATEGORYID2"]`.
-= Where can I ban users? =
-Users can be banned via the user edit screen in the WordPress administration interface.
 = How can I add a captcha to the editor for guests? =
 To extend your forum with a captcha you have to use one of the available third-party captcha-plugins for WordPress and extend your themes functions.php file with the checking-logic via the available hooks and filters by your own. For example you can use the plugin [Really Simple CAPTCHA](https://wordpress.org/plugins/really-simple-captcha/) and extend your themes functions.php file with this code:
 [https://gist.github.com/Asgaros/6d4b88b1f5013efb910d9fcd01284698](https://gist.github.com/Asgaros/6d4b88b1f5013efb910d9fcd01284698).
