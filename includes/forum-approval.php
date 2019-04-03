@@ -57,6 +57,8 @@ class AsgarosForumApproval {
 
             // Send notifications about new topic.
             $this->asgarosforum->notifications->notify_about_new_topic($topic_id, $receivers);
+
+            do_action('asgarosforum_after_topic_approve', $topic_id);
         }
     }
 

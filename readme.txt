@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 * Added: FontAwesome icons
 * Added: Option to change URL mode (slug, ID) for SEO-friendly URLs
 * Added: Option to disable spoiler-functionality
+* Added: asgarosforum_after_topic_approve hook
 * Fixed: Dont send notifications to users who got mentioned inside of quotes
 * Fixed: Broken post-layout when a post contains long links
 * Fixed: Wrong avatar-size in certain configurations
