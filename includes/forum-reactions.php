@@ -11,14 +11,14 @@ class AsgarosForumReactions {
         $this->asgarosforum = $object;
 
         // Build reactions-list.
-        $this->reactions_list['up'] = array(
-            'icon' => 'fas fa-thumbs-up',
-            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum')
-        );
-
         $this->reactions_list['down'] = array(
             'icon' => 'fas fa-thumbs-down',
             'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum')
+        );
+        
+        $this->reactions_list['up'] = array(
+            'icon' => 'fas fa-thumbs-up',
+            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum')
         );
 
         add_action('asgarosforum_prepare_topic', array($this, 'prepare'));
