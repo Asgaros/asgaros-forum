@@ -203,15 +203,15 @@ class AsgarosForumEditor {
 
 						echo '<div class="left">';
 						if ($inOtherView) {
-							echo '<a href="'.$actionURL.'" class="cancel">'.__('Cancel', 'asgaros-forum').'</a>';
+							echo '<a href="'.$actionURL.'" class="button button-red cancel">'.__('Cancel', 'asgaros-forum').'</a>';
 						} else {
 							if ($editor_view === 'editpost') {
 								$actionURL = $this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic);
 							}
-							echo '<a href="'.$actionURL.'" class="cancel-back">'.__('Cancel', 'asgaros-forum').'</a>';
+							echo '<a href="'.$actionURL.'" class="button button-red">'.__('Cancel', 'asgaros-forum').'</a>';
 						}
 						echo '</div>';
-	                    echo '<div class="right"><input type="submit" value="'.__('Submit', 'asgaros-forum').'"></div>';
+	                    echo '<div class="right"><input class="button button-normal" type="submit" value="'.__('Submit', 'asgaros-forum').'"></div>';
                     echo '</div>';
                 echo '</div>';
             echo '</form>';

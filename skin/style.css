@@ -200,13 +200,8 @@
     font-style: italic;
     color: #888;
 }
-#af-wrapper input[type="submit"],
-#af-wrapper .editor-row .cancel,
-#af-wrapper .editor-row .cancel-back,
-#af-wrapper .forum-menu a {
+#af-wrapper .button {
     text-transform: none;
-    background: #2d89cc;
-    border-color: #2468af;
     border-style: solid;
     border-width: 0px 0px 1px 0px;
     box-shadow: none;
@@ -224,22 +219,23 @@
     border-radius: 0;
     white-space: nowrap;
     box-sizing: border-box;
-    width: 100%;
+    width: auto;
     text-align: center;
 }
-#af-wrapper .editor-row .cancel,
-#af-wrapper .editor-row .cancel-back,
-#af-wrapper .editor-row .cancel:hover,
-#af-wrapper .editor-row .cancel-back:hover,
-#af-wrapper .forum-menu a.button-delete {
-    background: #ff5454;
-    border-color: #f91111;
+#af-wrapper .button:hover {
     text-decoration: none;
 }
-#af-wrapper .forum-menu a.button-approve {
+#af-wrapper .button-normal {
+    background: #2d89cc;
+    border-color: #2468af;
+}
+#af-wrapper .button-red {
+    background: #ff5454;
+    border-color: #f91111;
+}
+#af-wrapper .button-green {
     background: #49863a;
     border-color: #24501e;
-    text-decoration: none;
 }
 #af-wrapper input[type="radio"],
 #af-wrapper input[type="checkbox"] {
@@ -356,6 +352,9 @@
     -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
     text-transform: none; /* comp */
+}
+#af-wrapper .editor-row .button {
+    width: 100%;
 }
 #af-wrapper .editor-row .row-title {
     display: block;
@@ -549,7 +548,6 @@
 }
 #af-wrapper .forum-menu a {
     margin: 2px 0px 2px 2px;
-    width: auto;
 }
 #af-wrapper .menu-icon {
     padding-right: 6px;
@@ -1809,7 +1807,6 @@
     display: block;
 }
 #af-wrapper #poll-panel .actions input[type="submit"] {
-    width: auto;
     border-radius: 4px;
     padding: 0 16px !important;
 }

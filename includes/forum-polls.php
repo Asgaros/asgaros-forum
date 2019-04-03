@@ -401,7 +401,7 @@ class AsgarosForumPolls {
 
                     echo '<div class="actions">';
                         echo '<input type="hidden" name="poll_action" value="vote">';
-                        echo '<input type="submit" value="'.__('Vote', 'asgaros-forum').'">';
+                        echo '<input class="button button-normal" type="submit" value="'.__('Vote', 'asgaros-forum').'">';
                     echo '</div>';
                 echo '</form>';
             } else {

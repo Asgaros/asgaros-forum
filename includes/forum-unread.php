@@ -202,7 +202,7 @@ class AsgarosForumUnread {
 
     function show_unread_menu() {
         echo '<div class="forum-menu">';
-            echo '<a class="button-normal" href="'.$this->asgarosforum->get_link('markallread').'">';
+            echo '<a class="button button-normal" href="'.$this->asgarosforum->get_link('markallread').'">';
                 echo '<span class="menu-icon fas fa-check"></span>';
                 echo __('Mark All Read', 'asgaros-forum');
             echo '</a>';
