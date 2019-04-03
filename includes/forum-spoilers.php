@@ -12,7 +12,9 @@ class AsgarosForumSpoilers {
     }
 
     public function initialize() {
-        add_shortcode('spoiler', array($this, 'render_spoiler'));
+        if ($this->asgarosforum->options['enable_spoilers']) {
+            add_shortcode('spoiler', array($this, 'render_spoiler'));
+        }
     }
 
     public function render_spoiler($atts = false, $content = false) {

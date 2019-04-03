@@ -96,11 +96,6 @@ if (!defined('ABSPATH')) exit;
                 </tr>
 
                 <tr>
-                    <th><label for="hide_spoilers_from_guests"><?php _e('Hide spoilers from logged-out users', 'asgaros-forum'); ?></label></th>
-                    <td><input type="checkbox" name="hide_spoilers_from_guests" id="hide_spoilers_from_guests" <?php checked(!empty($asgarosforum->options['hide_spoilers_from_guests'])); ?>></td>
-                </tr>
-
-                <tr>
                     <th><label for="highlight_admin"><?php _e('Highlight administrator/moderator names', 'asgaros-forum'); ?></label></th>
                     <td><input type="checkbox" name="highlight_admin" id="highlight_admin" <?php checked(!empty($asgarosforum->options['highlight_admin'])); ?>></td>
                 </tr>
@@ -559,6 +554,26 @@ if (!defined('ABSPATH')) exit;
                             <option value="moderator" <?php if ($asgarosforum->options['polls_permission'] == 'moderator') { echo 'selected="selected"'; } ?>><?php _e('Moderators only', 'asgaros-forum'); ?></option>
                         </select>
                     </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="settings-box">
+            <div class="settings-header">
+                <span class="fas fa-eye-slash"></span>
+                <?php _e('Spoilers', 'asgaros-forum'); ?>
+            </div>
+            <?php
+            $spoilers_option = checked(!empty($asgarosforum->options['enable_spoilers']), true, false);
+            ?>
+            <table>
+                <tr>
+                    <th><label for="enable_spoilers"><?php _e('Enable spoilers', 'asgaros-forum'); ?></label></th>
+                    <td><input type="checkbox" name="enable_spoilers" id="enable_spoilers" class="show_hide_initiator" data-hide-class="spoilers-option" <?php checked(!empty($asgarosforum->options['enable_spoilers'])); ?>></td>
+                </tr>
+                <tr class="spoilers-option" <?php if (!$spoilers_option) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="hide_spoilers_from_guests"><?php _e('Hide spoilers from logged-out users', 'asgaros-forum'); ?></label></th>
+                    <td><input type="checkbox" name="hide_spoilers_from_guests" id="hide_spoilers_from_guests" <?php checked(!empty($asgarosforum->options['hide_spoilers_from_guests'])); ?>></td>
                 </tr>
             </table>
         </div>

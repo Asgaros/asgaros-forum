@@ -112,9 +112,14 @@ class AsgarosForumShortcodes {
         unset($shortcode_tags['forum']);
         unset($shortcode_tags['Forum']);
 
-        // If shortcodes are not allowed, ensure that the spoiler-shortcode still works.
+        // Remove all shortcodes if they are not allowed inside of posts ...
         if (!$this->asgarosforum->options['allow_shortcodes']) {
-            $shortcode_tags = array('spoiler' => $shortcode_tags_backup['spoiler']);
+            $shortcode_tags = array();
+
+            // ... but ensure that spoilers still stay available if activated.
+            if ($this->asgarosforum->options['enable_spoilers']) {
+                $shortcode_tags['spoiler'] = $shortcode_tags_backup['spoiler'];
+            }
         }
 
         // Apply custom shortcodes.

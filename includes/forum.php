@@ -46,7 +46,6 @@ class AsgarosForum {
         'upload_permission'                 => 'loggedin',
         'hide_uploads_from_guests'          => false,
         'hide_profiles_from_guests'         => false,
-        'hide_spoilers_from_guests'         => false,
         'uploads_maximum_number'            => 5,
         'uploads_maximum_size'              => 5,
         'uploads_show_thumbnails'           => true,
@@ -103,7 +102,9 @@ class AsgarosForum {
         'polls_permission'                  => 'loggedin',
         'enable_seo_urls'                   => true,
         'seo_url_mode_content'              => 'slug',
-        'seo_url_mode_profile'              => 'slug'
+        'seo_url_mode_profile'              => 'slug',
+        'enable_spoilers'                   => true,
+        'hide_spoilers_from_guests'         => false
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -530,6 +531,10 @@ class AsgarosForum {
         }
 
         wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery'), $this->version);
+
+        if ($this->options['enable_spoilers']) {
+            wp_enqueue_script('asgarosforum-js-spoilers', $this->plugin_url.'js/script-spoilers.js', array('jquery'), $this->version);
+        }
     }
 
     // Gets the pages main title.
