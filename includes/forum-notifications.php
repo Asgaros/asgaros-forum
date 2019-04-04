@@ -521,7 +521,7 @@ class AsgarosForumNotifications {
             echo __('Subscription Settings', 'asgaros-forum');
         echo '</div>';
 
-        echo '<div id="subscriptions-panel" class="content-element">';
+        echo '<div id="subscriptions-panel" class="content-container">';
             echo '<form method="post" action="'.$this->asgarosforum->get_link('subscriptions').'">';
                 echo '<div class="action-panel">';
                     echo '<label class="action-panel-option">';
@@ -609,7 +609,7 @@ class AsgarosForumNotifications {
     // Renders a list of a certain subscription type for the current user.
     public function render_subscriptions_list($title, $data, $type, $all = false) {
         echo '<div class="title-element">'.$title.'</div>';
-        echo '<div class="content-element">';
+        echo '<div class="content-container">';
 
         if ($all) {
             if ($type == 'forum') {

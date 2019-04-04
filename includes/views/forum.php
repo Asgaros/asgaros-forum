@@ -31,7 +31,7 @@ if (!empty($subforums)) {
         echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
     echo '</div>';
 
-    echo '<div class="content-element">';
+    echo '<div class="content-container">';
         foreach ($subforums as $forum) {
             require('forum-element.php');
         }
@@ -44,7 +44,7 @@ if ($counter_total > 0) {
         echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
     echo '</div>';
 
-    echo '<div class="content-element">';
+    echo '<div class="content-container">';
         // Show sticky topics.
         if ($topics_sticky && !$this->current_page) {
             foreach ($topics_sticky as $topic) {
@@ -65,7 +65,7 @@ if ($counter_total > 0) {
 } else {
     echo '<div class="title-element"></div>';
 
-    echo '<div class="content-element">';
+    echo '<div class="content-container">';
         $this->render_notice(__('There are no topics yet!', 'asgaros-forum'));
     echo '</div>';
 }

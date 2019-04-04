@@ -68,7 +68,7 @@ class AsgarosForumSearch {
             echo __('Search results:', 'asgaros-forum').' '.$this->search_keywords_for_output;
             echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
         echo '</div>';
-        echo '<div class="content-element">';
+        echo '<div class="content-container">';
 
         if ($results) {
             foreach ($results as $topic) {

@@ -13,7 +13,7 @@ if ($categories) {
             echo $category->name;
             echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
         echo '</div>';
-        echo '<div class="content-element">';
+        echo '<div class="content-container">';
             $forums = $this->get_forums($category->term_id);
             if (empty($forums)) {
                 $this->render_notice(__('In this category are no forums yet!', 'asgaros-forum'));

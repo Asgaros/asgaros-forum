@@ -68,11 +68,11 @@
     display: block;
     margin-bottom: 10px;
 }
-#af-wrapper .content-element .forum:nth-child(even),
-#af-wrapper .content-element .topic:nth-child(even),
-#af-wrapper .content-element .subscription:nth-child(even),
-#af-wrapper .content-element .member:nth-child(even),
-#af-wrapper .content-element .activity-element:nth-child(even) {
+#af-wrapper .content-container .forum:nth-child(even),
+#af-wrapper .content-container .topic:nth-child(even),
+#af-wrapper .content-container .subscription:nth-child(even),
+#af-wrapper .content-container .member:nth-child(even),
+#af-wrapper .content-container .activity-element:nth-child(even) {
     background-color: #fafafa;
 }
 #af-wrapper #forum-editor-form {
@@ -856,7 +856,7 @@
 }
 
 /* CONTENT WRAPPERS*/
-#af-wrapper .content-element,
+#af-wrapper .content-container,
 #af-wrapper .editor-element {
     margin-bottom: 15px;
     background-color: #fff;
@@ -867,7 +867,7 @@
 #af-wrapper .editor-element {
     background-color: #fafafa;
 }
-#af-wrapper .content-element a:hover,
+#af-wrapper .content-container a:hover,
 #af-wrapper .post-element a:hover {
     outline: none; /* comp */
     background-color: inherit; /* comp */

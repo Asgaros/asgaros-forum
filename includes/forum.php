@@ -857,7 +857,7 @@ class AsgarosForum {
         if ($this->permissions->isModerator('current')) {
             $strOUT = '<form method="post" action="'.$this->get_link('movetopic', $this->current_topic, array('move_topic' => 1)).'">';
             $strOUT .= '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
-            $strOUT .= '<div class="content-element">';
+            $strOUT .= '<div class="content-container">';
             $strOUT .= '<br><select name="newForumID">';
 
             $categories = $this->content->get_categories();
@@ -1331,7 +1331,7 @@ class AsgarosForum {
                 echo '<span class="title-element-icon fas fa-thumbtack"></span>';
                 echo __('Select Sticky Mode:', 'asgaros-forum');
             echo '</div>';
-            echo '<div class="content-element">';
+            echo '<div class="content-container">';
                 echo '<form method="post" action="'.$this->get_link('topic', $this->current_topic).'">';
                     echo '<div class="action-panel">';
                         echo '<label class="action-panel-option">';

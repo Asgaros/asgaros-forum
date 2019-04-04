@@ -321,7 +321,7 @@ class AsgarosForumAppearance {
 		}
 
 		if ($this->options['custom_background_color'] != $this->options_default['custom_background_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color'])) {
-			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
@@ -334,11 +334,11 @@ class AsgarosForumAppearance {
 		}
 
 		if ($this->options['custom_background_color_alt'] != $this->options_default['custom_background_color_alt'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color_alt'])) {
-			$custom_css .= '#af-wrapper .content-element .forum:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .topic-normal:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .subscription:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .member:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element .activity-element:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container .forum:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container .topic-normal:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container .subscription:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container .member:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container .activity-element:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-element,'.PHP_EOL;
@@ -363,7 +363,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .member-last-seen,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .subscription,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-element,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-container,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-post-header,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics-body,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .statistics-element,'.PHP_EOL;

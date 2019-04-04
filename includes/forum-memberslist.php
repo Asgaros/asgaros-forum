@@ -156,7 +156,7 @@ class AsgarosForumMembersList {
 
         $this->show_filters();
 
-        echo '<div class="content-element">';
+        echo '<div class="content-container">';
 
         $data = $this->get_members();
 

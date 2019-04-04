@@ -60,7 +60,7 @@ class AsgarosForumActivity {
                     }
 
                     echo '<div class="title-element">'.$current_time.'</div>';
-                    echo '<div class="content-element">';
+                    echo '<div class="content-container">';
                 }
 
                 $name_author = $this->asgarosforum->getUsername($activity->author_id);
@@ -87,7 +87,7 @@ class AsgarosForumActivity {
             echo '</div>';
         } else {
             echo '<div class="title-element"></div>';
-            echo '<div class="content-element">';
+            echo '<div class="content-container">';
             $this->asgarosforum->render_notice(__('No activity yet!', 'asgaros-forum'));
             echo '</div>';
         }

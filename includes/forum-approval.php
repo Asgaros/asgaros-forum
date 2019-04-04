@@ -187,7 +187,7 @@ class AsgarosForumApproval {
         }
 
         echo '<div class="title-element"></div>';
-        echo '<div class="content-element">';
+        echo '<div class="content-container">';
 
         if ($unapproved_topics_counter > 0) {
             $page_elements = 50;
