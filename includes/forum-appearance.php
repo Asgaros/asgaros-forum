@@ -338,7 +338,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .content-container .topic-normal:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-container .subscription:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-container .member:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-container .activity-element:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-element:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-element,'.PHP_EOL;
@@ -385,7 +385,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .history-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #memberslist-filter,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .activity-element,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .content-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .ad-forum,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .ad-topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .spoiler,'.PHP_EOL;
