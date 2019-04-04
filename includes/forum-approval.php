@@ -198,7 +198,7 @@ class AsgarosForumApproval {
                 $topic_title = esc_html(stripslashes($topic->name));
                 $first_post = $this->asgarosforum->content->get_first_post($topic->id);
 
-                echo '<div class="unapproved-topic topic-normal">';
+                echo '<div class="content-element unapproved-topic topic-normal">';
                     echo '<div class="topic-status fas fa-eye unread"></div>';
                     echo '<div class="topic-name">';
                         echo '<a href="'.$this->asgarosforum->rewrite->get_link('topic', $topic->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';

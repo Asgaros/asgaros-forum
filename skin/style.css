@@ -450,8 +450,7 @@
 #af-wrapper .forum:last-child,
 #af-wrapper .topic:last-child,
 #af-wrapper .member:last-child,
-#af-wrapper .unread-topic:last-child,
-#af-wrapper .unapproved-topic:last-child {
+#af-wrapper .unread-topic:last-child {
     border-bottom-width: 0px;
 }
 #af-wrapper .topic-sticky,
