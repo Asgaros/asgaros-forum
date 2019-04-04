@@ -70,8 +70,7 @@
 }
 #af-wrapper .content-element:nth-child(even),
 #af-wrapper .content-container .forum:nth-child(even),
-#af-wrapper .content-container .topic:nth-child(even),
-#af-wrapper .content-container .subscription:nth-child(even) {
+#af-wrapper .content-container .topic:nth-child(even) {
     background-color: #fafafa;
 }
 #af-wrapper #forum-editor-form {

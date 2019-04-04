@@ -621,7 +621,7 @@ class AsgarosForumNotifications {
             $this->asgarosforum->render_notice(__('No subscriptions yet!', 'asgaros-forum'));
         } else {
             foreach ($data as $item) {
-                echo '<div class="subscription">';
+                echo '<div class="content-element subscription">';
                     echo '<a href="'.$this->asgarosforum->get_link($type, $item->id).'" title="'.esc_html(stripslashes($item->name)).'">'.esc_html(stripslashes($item->name)).'</a>';
                     echo '<a class="unsubscribe-link" href="'.$this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.$type => $item->id)).'">'.__('Unsubscribe', 'asgaros-forum').'</a>';
                 echo '</div>';
