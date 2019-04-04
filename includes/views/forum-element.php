@@ -11,7 +11,7 @@ $count_posts_i18n = number_format_i18n($count_posts);
 // Get the read/unread status of a forum.
 $unread_status = $this->unread->get_status_forum($forum->id, $count_topics);
 
-echo '<div class="forum" id="forum-'.$forum->id.'">';
+echo '<div class="content-element forum" id="forum-'.$forum->id.'">';
     $forum_icon = trim(esc_html(stripslashes($forum->icon)));
     $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
 
