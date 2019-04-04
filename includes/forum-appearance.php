@@ -303,6 +303,10 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper span.mention-nice-name,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .activity-icon:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-reactions .reaction,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-results .poll-result-numbers,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-results .poll-result-total,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-warning,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-icon:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-link,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-content:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper input::placeholder,'.PHP_EOL;
@@ -326,6 +330,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-header .background-contrast,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-results .poll-result-bar,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #memberslist-filter {'.PHP_EOL;
 			    $custom_css .= 'background-color: '.$this->options['custom_background_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
@@ -342,6 +347,7 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .spoiler .spoiler-head,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .report-content,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-panel,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-content {'.PHP_EOL;
 			    $custom_css .= 'background-color: '.$this->options['custom_background_color_alt'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
@@ -385,6 +391,9 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .report-actions,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-content .profile-section-header,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #poll-options,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-panel,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-panel #poll-headline,'.PHP_EOL;
+			$custom_css .= '#af-wrapper #poll-results .poll-result-bar,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #usergroups-filter {'.PHP_EOL;
 			    $custom_css .= 'border-color: '.$this->options['custom_border_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
