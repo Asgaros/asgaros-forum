@@ -235,7 +235,7 @@ class AsgarosForumUnread {
             foreach ($data_sliced as $topic) {
                 $topic_title = esc_html(stripslashes($topic->topic_name));
 
-                echo '<div class="unread-topic topic-normal">';
+                echo '<div class="content-element unread-topic topic-normal">';
                     echo '<div class="topic-status far fa-comments unread"></div>';
                     echo '<div class="topic-name">';
                         $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->topic_id);

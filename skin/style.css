@@ -446,8 +446,7 @@
 }
 #af-wrapper .content-element:last-child,
 #af-wrapper .forum:last-child,
-#af-wrapper .topic:last-child,
-#af-wrapper .unread-topic:last-child {
+#af-wrapper .topic:last-child {
     border-bottom-width: 0px;
 }
 #af-wrapper .topic-sticky,
