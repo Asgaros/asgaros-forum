@@ -171,7 +171,7 @@ class AsgarosForumMembersList {
             foreach ($dataSliced as $element) {
                 $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
 
-                echo '<div class="member'.$userOnline.'">';
+                echo '<div class="content-element member'.$userOnline.'">';
                     if ($this->asgarosforum->options['enable_avatars']) {
                         echo '<div class="member-avatar">';
                         echo get_avatar($element->ID, 60, '', '', array('force_display' => true));

@@ -71,8 +71,7 @@
 #af-wrapper .content-element:nth-child(even),
 #af-wrapper .content-container .forum:nth-child(even),
 #af-wrapper .content-container .topic:nth-child(even),
-#af-wrapper .content-container .subscription:nth-child(even),
-#af-wrapper .content-container .member:nth-child(even) {
+#af-wrapper .content-container .subscription:nth-child(even) {
     background-color: #fafafa;
 }
 #af-wrapper #forum-editor-form {
@@ -449,7 +448,6 @@
 #af-wrapper .content-element:last-child,
 #af-wrapper .forum:last-child,
 #af-wrapper .topic:last-child,
-#af-wrapper .member:last-child,
 #af-wrapper .unread-topic:last-child {
     border-bottom-width: 0px;
 }

@@ -337,7 +337,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .content-container .forum:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-container .topic-normal:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-container .subscription:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-container .member:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
@@ -355,7 +354,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper input,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .member,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .unread-topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-poster,'.PHP_EOL;
