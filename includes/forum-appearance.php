@@ -325,8 +325,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .report-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #statistics,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-wrapper,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-header .background-contrast,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #memberslist-filter {'.PHP_EOL;
 			    $custom_css .= 'background-color: '.$this->options['custom_background_color'].' !important;'.PHP_EOL;
@@ -335,8 +333,9 @@ class AsgarosForumAppearance {
 
 		if ($this->options['custom_background_color_alt'] != $this->options_default['custom_background_color_alt'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_background_color_alt'])) {
 			$custom_css .= '#af-wrapper .content-container .forum:nth-child(even),'.PHP_EOL;
-			$custom_css .= '#af-wrapper .content-container .topic-normal:nth-child(even),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .content-element:nth-child(even),'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
+			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .editor-element,'.PHP_EOL;
@@ -352,7 +351,6 @@ class AsgarosForumAppearance {
 		if ($this->options['custom_border_color'] != $this->options_default['custom_border_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_border_color'])) {
 			$custom_css .= '#af-wrapper input,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .topic,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .member-last-seen,'.PHP_EOL;
@@ -370,7 +368,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .forum-subforums,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .uploaded-file img,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .action-panel-option,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .topic-sticky,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .topic-sticky .topic-poster,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-layer,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-layer .pages-and-menu:first-of-type,'.PHP_EOL;

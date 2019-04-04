@@ -767,7 +767,7 @@ class AsgarosForum {
         $unread_status = $this->unread->get_status_topic($topic_object->id);
         $topic_title = esc_html(stripslashes($topic_object->name));
 
-        echo '<div class="topic '.$topic_type.'">';
+        echo '<div class="content-element topic '.$topic_type.'">';
             echo '<div class="topic-status far fa-comments '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
