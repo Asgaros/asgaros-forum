@@ -97,7 +97,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to disable spoiler-functionality
 * Added: asgarosforum_after_topic_approve hook
 * Fixed: Dont send notifications to users who got mentioned inside of quotes
-* Fixed: Broken post-layout when a post contains long links
+* Fixed: Broken layout with certain links
 * Fixed: Wrong avatar-size in certain configurations
 * Fixed: Display issues with some themes
 * Improved compatibility with Rank Math SEO

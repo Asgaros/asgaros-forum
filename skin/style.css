@@ -517,6 +517,10 @@
     margin-top: 3px;
     word-break: break-word;
 }
+/* Require to fix a couple of line-breaking issues with sub-forums. */
+#af-wrapper .forum-subforums a {
+    display: inline-block;
+}
 #af-wrapper .forum-lastpost-small,
 #af-wrapper .topic-lastpost-small {
     display: none !important;
