@@ -70,6 +70,7 @@ class AsgarosForum {
         'enable_profiles'                   => true,
         'enable_memberslist'                => true,
         'enable_rss'                        => false,
+        'load_fontawesome'                  => true,
         'count_topic_views'                 => true,
         'reports_enabled'                   => true,
         'reports_notifications'             => true,

@@ -211,6 +211,13 @@ if (!defined('ABSPATH')) exit;
                     <th><label for="allow_guest_postings"><?php _e('Allow guest postings', 'asgaros-forum'); ?></label></th>
                     <td><input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($asgarosforum->options['allow_guest_postings'])); ?>></td>
                 </tr>
+                <tr>
+                    <th>
+                        <label for="load_fontawesome"><?php _e('Load Font Awesome icon library', 'asgaros-forum'); ?></label>
+                        <span class="description"><?php _e('You can disable loading the built-in Font Awesome icon library to reduce traffic if your theme or another plugin already includes this library.', 'asgaros-forum'); ?></span>
+                    </th>
+                    <td><input type="checkbox" name="load_fontawesome" id="load_fontawesome" <?php checked(!empty($asgarosforum->options['load_fontawesome'])); ?>></td>
+                </tr>
             </table>
         </div>
 
