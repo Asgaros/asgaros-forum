@@ -92,7 +92,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Poll functionality
-* Added: FontAwesome icons
+* Added: Font Awesome icons
 * Added: Option to change URL mode (slug, ID) for SEO-friendly URLs
 * Added: Option to disable spoiler-functionality
 * Added: asgarosforum_after_topic_approve hook
@@ -102,7 +102,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Display issues with some themes
 * Improved compatibility with Rank Math SEO
 * Minor design changes
-* New design of the administration area
+* Updated design for the administration area
 * Performance improvements and code optimizations
 = 1.13.3 =
 * Added: Option to disable avatars

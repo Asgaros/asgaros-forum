@@ -81,7 +81,7 @@ class AsgarosForumPolls {
                     echo '</div>';
 
                     echo '<div id="poll-warning">';
-                        echo __('After creating a poll it will be no longer possible to add or remove answers. This ensures the integrity of existing votes. However, it will be still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you have to delete the existing poll and create a new one for this topic.', 'asgaros-forum');
+                        echo __('After creating a poll it will be no longer possible to add or remove answers. This ensures the integrity of existing votes. However, it will be still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you must delete the existing poll and create a new one for this topic.', 'asgaros-forum');
                     echo '</div>';
                 echo '</div>';
 
@@ -129,7 +129,7 @@ class AsgarosForumPolls {
                     }
 
                     echo '<div id="poll-warning">';
-                        echo __('To ensure the integrity of existing votes it is not possible to add or remove answers. However, it is still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you have to delete the existing poll and create a new one for this topic.', 'asgaros-forum');
+                        echo __('To ensure the integrity of existing votes it is not possible to add or remove answers. However, it is still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you must delete the existing poll and create a new one for this topic.', 'asgaros-forum');
                     echo '</div>';
                 echo '</div>';
 
