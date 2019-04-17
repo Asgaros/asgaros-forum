@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 52;
+    private $db_version = 54;
     private $tables;
 
     public function __construct() {
@@ -192,7 +192,7 @@ class AsgarosForumDatabase {
             $sql[] = "CREATE TABLE ".$this->tables->polls_options." (
             id int(11) NOT NULL auto_increment,
             poll_id int(11) NOT NULL default '0',
-            answer varchar(255) NOT NULL default '',
+            title varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
@@ -429,6 +429,20 @@ class AsgarosForumDatabase {
                 $this->db->query("UPDATE {$this->tables->forums} SET icon = 'fas fa-comments';");
 
                 update_option('asgarosforum_db_version', 51);
+            }
+
+            // Fix database by moving data from column with reserved name.
+            if ($database_version_installed < 53 && !$first_time_installation) {
+                @$this->db->query("UPDATE {$this->tables->polls_options} SET `title` = `option`;");
+
+                update_option('asgarosforum_db_version', 53);
+            }
+
+            // Fix database by removing column with reserved name.
+            if ($database_version_installed < 54 && !$first_time_installation) {
+                @$this->db->query("ALTER TABLE {$this->tables->polls_options} DROP COLUMN `option`;");
+
+                update_option('asgarosforum_db_version', 54);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

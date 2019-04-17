@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Database error when creating table for poll-answers
 = 1.14.0 =
 * Added: Poll functionality
 * Added: Font Awesome icons

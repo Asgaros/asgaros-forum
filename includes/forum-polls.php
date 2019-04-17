@@ -123,7 +123,7 @@ class AsgarosForumPolls {
                     foreach ($poll->options as $option) {
                         echo '<div class="poll-option-container">';
                             echo '<div class="poll-option-input">';
-                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option->id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option->option.'">';
+                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option->id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option->title.'">';
                             echo '</div>';
                         echo '</div>';
                     }
@@ -155,7 +155,7 @@ class AsgarosForumPolls {
         foreach ($options as $option) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_options,
-                array('poll_id' => $topic_id, 'option' => $option),
+                array('poll_id' => $topic_id, 'title' => $option),
                 array('%d', '%s')
             );
         }
@@ -175,7 +175,7 @@ class AsgarosForumPolls {
         foreach ($options as $key => $value) {
             $this->asgarosforum->db->update(
                 $this->asgarosforum->tables->polls_options,
-                array('option' => $value),
+                array('title' => $value),
                 array('id' => $key, 'poll_id' => $poll_id),
                 array('%s'),
                 array('%d', '%d')
@@ -390,9 +390,9 @@ class AsgarosForumPolls {
                             echo '<label class="checkbox-label">';
 
                             if ($poll->multiple == 1) {
-                                echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'"><span>'.$option->option.'</span>';
+                                echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'"><span>'.$option->title.'</span>';
                             } else {
-                                echo '<input type="radio" name="poll-option[]" value="'.$option->id.'"><span>'.$option->option.'</span>';
+                                echo '<input type="radio" name="poll-option[]" value="'.$option->id.'"><span>'.$option->title.'</span>';
                             }
 
                             echo '</label>';
@@ -412,7 +412,7 @@ class AsgarosForumPolls {
 
                         echo '<div class="poll-result-row">';
                             echo '<div class="poll-result-name">';
-                                echo $option->option.':';
+                                echo $option->title.':';
                                 echo '<small class="poll-result-numbers">';
                                     echo sprintf(_n('%s Vote', '%s Votes', $option->votes, 'asgaros-forum'), number_format_i18n($option->votes));
                                     echo '&nbsp;&middot;&nbsp;';
@@ -464,7 +464,7 @@ class AsgarosForumPolls {
         }
 
         // Get options and votes for the poll.
-        $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.option, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id};", 'OBJECT_K');
+        $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.title, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id};", 'OBJECT_K');
 
         // Get total votes.
         $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id};");
