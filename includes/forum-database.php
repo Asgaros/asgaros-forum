@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 51;
+    private $db_version = 52;
     private $tables;
 
     public function __construct() {
@@ -112,29 +112,29 @@ class AsgarosForumDatabase {
             $sql = array();
 
             $sql[] = "CREATE TABLE ".$this->tables->forums." (
-            `id` int(11) NOT NULL auto_increment,
-            `name` varchar(255) NOT NULL default '',
-            `parent_id` int(11) NOT NULL default '0',
-            `parent_forum` int(11) NOT NULL default '0',
-            `description` varchar(255) NOT NULL default '',
-            `icon` varchar(255) NOT NULL default '',
-            `sort` int(11) NOT NULL default '0',
-            `closed` int(11) NOT NULL default '0',
-            `approval` int(11) NOT NULL default '0',
-            `slug` varchar(255) NOT NULL default '',
+            id int(11) NOT NULL auto_increment,
+            name varchar(255) NOT NULL default '',
+            parent_id int(11) NOT NULL default '0',
+            parent_forum int(11) NOT NULL default '0',
+            description varchar(255) NOT NULL default '',
+            icon varchar(255) NOT NULL default '',
+            sort int(11) NOT NULL default '0',
+            closed int(11) NOT NULL default '0',
+            approval int(11) NOT NULL default '0',
+            slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id),
             KEY parent_id (parent_id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->topics." (
-            `id` int(11) NOT NULL auto_increment,
-            `parent_id` int(11) NOT NULL default '0',
-            `views` int(11) NOT NULL default '0',
-            `name` varchar(255) NOT NULL default '',
-            `sticky` int(1) NOT NULL default '0',
-            `closed` int(1) NOT NULL default '0',
-            `approved` int(1) NOT NULL default '1',
-            `slug` varchar(255) NOT NULL default '',
+            id int(11) NOT NULL auto_increment,
+            parent_id int(11) NOT NULL default '0',
+            views int(11) NOT NULL default '0',
+            name varchar(255) NOT NULL default '',
+            sticky int(1) NOT NULL default '0',
+            closed int(1) NOT NULL default '0',
+            approved int(1) NOT NULL default '1',
+            slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id),
             KEY parent_id (parent_id),
             KEY approved (approved),
@@ -142,15 +142,15 @@ class AsgarosForumDatabase {
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->posts." (
-            `id` int(11) NOT NULL auto_increment,
-            `text` longtext,
-            `parent_id` int(11) NOT NULL default '0',
-            `forum_id` int(11) NOT NULL default '0',
-            `date` datetime NOT NULL default '1000-01-01 00:00:00',
-            `date_edit` datetime NOT NULL default '1000-01-01 00:00:00',
-            `author_id` int(11) NOT NULL default '0',
-            `author_edit` int(11) NOT NULL default '0',
-            `uploads` longtext,
+            id int(11) NOT NULL auto_increment,
+            text longtext,
+            parent_id int(11) NOT NULL default '0',
+            forum_id int(11) NOT NULL default '0',
+            date datetime NOT NULL default '1000-01-01 00:00:00',
+            date_edit datetime NOT NULL default '1000-01-01 00:00:00',
+            author_id int(11) NOT NULL default '0',
+            author_edit int(11) NOT NULL default '0',
+            uploads longtext,
             PRIMARY KEY  (id),
             KEY parent_id (parent_id),
             KEY author_id (author_id),
@@ -161,45 +161,45 @@ class AsgarosForumDatabase {
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->reports." (
-            `post_id` int(11) NOT NULL default '0',
-            `reporter_id` int(11) NOT NULL default '0',
+            post_id int(11) NOT NULL default '0',
+            reporter_id int(11) NOT NULL default '0',
             PRIMARY KEY  (post_id, reporter_id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->reactions." (
-            `post_id` int(11) NOT NULL default '0',
-            `user_id` int(11) NOT NULL default '0',
-            `reaction` varchar(20) NOT NULL default '',
+            post_id int(11) NOT NULL default '0',
+            user_id int(11) NOT NULL default '0',
+            reaction varchar(20) NOT NULL default '',
             PRIMARY KEY  (post_id, user_id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->ads." (
-            `id` int(11) NOT NULL auto_increment,
-            `name` varchar(255) NOT NULL default '',
-            `code` longtext,
-            `active` int(1) NOT NULL default '0',
-            `locations` longtext,
+            id int(11) NOT NULL auto_increment,
+            name varchar(255) NOT NULL default '',
+            code longtext,
+            active int(1) NOT NULL default '0',
+            locations longtext,
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->polls." (
-            `id` int(11) NOT NULL default '0',
-            `title` varchar(255) NOT NULL default '',
-            `multiple` int(1) NOT NULL default '0',
+            id int(11) NOT NULL default '0',
+            title varchar(255) NOT NULL default '',
+            multiple int(1) NOT NULL default '0',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->polls_options." (
-            `id` int(11) NOT NULL auto_increment,
-            `poll_id` int(11) NOT NULL default '0',
-            `option` varchar(255) NOT NULL default '',
+            id int(11) NOT NULL auto_increment,
+            poll_id int(11) NOT NULL default '0',
+            answer varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->polls_votes." (
-            `poll_id` int(11) NOT NULL default '0',
-            `option_id` int(11) NOT NULL default '0',
-            `user_id` int(11) NOT NULL default '0',
+            poll_id int(11) NOT NULL default '0',
+            option_id int(11) NOT NULL default '0',
+            user_id int(11) NOT NULL default '0',
             PRIMARY KEY  (poll_id, option_id, user_id)
             ) $charset_collate;";
 
