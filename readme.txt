@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.8
 Tested up to: 5.1
 Requires PHP: 5.2
-Stable tag: 1.14.1
+Stable tag: 1.14.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.14.2 =
 * Fixed: Load Font Awesome v4 compatibility library to fix display-issues with icons
 = 1.14.1 =
 * Fixed: Database error when creating table for poll-answers
