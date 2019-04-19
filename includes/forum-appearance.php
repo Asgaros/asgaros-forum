@@ -149,6 +149,10 @@ class AsgarosForumAppearance {
 			wp_enqueue_style('af-fontawesome', $this->asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $this->asgarosforum->version);
 		}
 
+		if ($this->asgarosforum->options['load_fontawesome_compat_v4']) {
+			wp_enqueue_style('af-fontawesome-compat-v4', $this->asgarosforum->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $this->asgarosforum->version);
+		}
+
 		wp_enqueue_style('af-widgets', $themeurl.'/widgets.css', array(), $this->asgarosforum->version);
 
 		if ($this->asgarosforum->executePlugin) {

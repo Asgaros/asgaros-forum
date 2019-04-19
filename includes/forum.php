@@ -71,6 +71,7 @@ class AsgarosForum {
         'enable_memberslist'                => true,
         'enable_rss'                        => false,
         'load_fontawesome'                  => true,
+        'load_fontawesome_compat_v4'        => true,
         'count_topic_views'                 => true,
         'reports_enabled'                   => true,
         'reports_notifications'             => true,

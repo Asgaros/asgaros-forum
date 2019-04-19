@@ -213,10 +213,17 @@ if (!defined('ABSPATH')) exit;
                 </tr>
                 <tr>
                     <th>
-                        <label for="load_fontawesome"><?php _e('Load Font Awesome icon library', 'asgaros-forum'); ?></label>
-                        <span class="description"><?php _e('You can disable loading the built-in Font Awesome icon library to reduce traffic if your theme or another plugin already includes this library.', 'asgaros-forum'); ?></span>
+                        <label for="load_fontawesome"><?php _e('Load Font Awesome v5 icon library', 'asgaros-forum'); ?></label>
+                        <span class="description"><?php _e('You can disable loading the built-in Font Awesome v5 icon library to reduce traffic if your theme or another plugin already loads this library.', 'asgaros-forum'); ?></span>
                     </th>
                     <td><input type="checkbox" name="load_fontawesome" id="load_fontawesome" <?php checked(!empty($asgarosforum->options['load_fontawesome'])); ?>></td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="load_fontawesome_compat_v4"><?php _e('Load Font Awesome v4 compatibility library', 'asgaros-forum'); ?></label>
+                        <span class="description"><?php _e('The Font Awesome v4 compatibility library is required, if your theme or another plugin uses the Font Awesome v4 icon library. If the Font Awesome v4 icon library is not used on your website, you can disable this option.', 'asgaros-forum'); ?></span>
+                    </th>
+                    <td><input type="checkbox" name="load_fontawesome_compat_v4" id="load_fontawesome_compat_v4" <?php checked(!empty($asgarosforum->options['load_fontawesome_compat_v4'])); ?>></td>
                 </tr>
             </table>
         </div>

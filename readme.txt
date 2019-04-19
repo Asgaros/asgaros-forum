@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Load Font Awesome v4 compatibility library to fix display-issues with icons
 = 1.14.1 =
 * Fixed: Database error when creating table for poll-answers
 = 1.14.0 =
