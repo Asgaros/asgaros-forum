@@ -773,15 +773,15 @@ class AsgarosForum {
             echo '<div class="topic-status far fa-comments '.$unread_status.'"></div>';
             echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-thumbtack"></span>';
+                    echo '<span class="topic-icon fas fa-thumbtack" title="'.__('This topic is sticked', 'asgaros-forum').'"></span>';
                 }
 
                 if ($this->is_topic_closed($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-lock"></span>';
+                    echo '<span class="topic-icon fas fa-lock" title="'.__('This topic is closed', 'asgaros-forum').'"></span>';
                 }
 
                 if ($this->polls->has_poll($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-poll-h"></span>';
+                    echo '<span class="topic-icon fas fa-poll-h" title="'.__('This topic contains a poll', 'asgaros-forum').'"></span>';
                 }
 
                 echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">';
