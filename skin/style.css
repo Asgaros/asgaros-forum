@@ -711,6 +711,9 @@
     color: #fff !important;
     border-left: 1px solid #2468af;
     line-height: 48px;
+    display: inline; /* comp */
+    margin: 0; /* comp */
+    text-align: left; /* comp */
 }
 #af-wrapper #forum-navigation a:first-child,
 #af-wrapper #forum-navigation-mobile a:first-child {
