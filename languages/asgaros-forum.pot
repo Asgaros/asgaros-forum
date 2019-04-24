@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 08:50+0000\n"
+"POT-Creation-Date: 2019-04-24 20:02+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -848,6 +848,18 @@ msgstr ""
 
 #: includes/forum.php:591
 msgid "Page"
+msgstr ""
+
+#: includes/forum.php:776
+msgid "This topic is sticked"
+msgstr ""
+
+#: includes/forum.php:780
+msgid "This topic is closed"
+msgstr ""
+
+#: includes/forum.php:784
+msgid "This topic contains a poll"
 msgstr ""
 
 #: includes/forum.php:815
