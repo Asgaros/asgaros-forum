@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with Font Awesome icons
 * Fixed: Display issues with some themes
 = 1.14.2 =
 * Fixed: Load Font Awesome v4 compatibility library to fix display-issues with icons

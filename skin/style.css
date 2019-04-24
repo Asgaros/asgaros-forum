@@ -1849,3 +1849,11 @@
     color: #aaa;
     padding-right: 6px;
 }
+
+/* FONT AWESOME */
+#af-wrapper .far {
+    font-weight: 400;
+}
+#af-wrapper .fas {
+    font-weight: 900;
+}
