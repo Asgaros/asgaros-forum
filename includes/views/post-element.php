@@ -84,9 +84,11 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
 
         // Post message.
         echo '<div class="post-message">';
-            echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop(stripslashes($post->text)).'</blockquote><br></div>';
+            // Initial escaping.
+            $post_content = $this->escape_script_tags($post->text);
+            $post_content = stripslashes($post_content);
 
-            $post_content = stripslashes($post->text);
+            echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
 
             // Automatically embed contents if enabled.
             if ($this->options['embed_content']) {

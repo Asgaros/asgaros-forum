@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Properly escape content of posts
 = 1.14.3 =
 * Added: Caption titles to topic-icons
 * Fixed: Display issues with Font Awesome icons
