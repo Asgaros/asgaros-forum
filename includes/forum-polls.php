@@ -116,14 +116,14 @@ class AsgarosForumPolls {
 
             echo '<div id="poll-form" style="display: block;">';
                 echo '<div id="poll-question">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="'.$poll->title.'">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="'.esc_html(stripslashes($poll->title)).'">';
                 echo '</div>';
 
                 echo '<div id="poll-options">';
                     foreach ($poll->options as $option) {
                         echo '<div class="poll-option-container">';
                             echo '<div class="poll-option-input">';
-                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option->id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.$option->title.'">';
+                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option->id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.esc_html(stripslashes($option->title)).'">';
                             echo '</div>';
                         echo '</div>';
                     }
@@ -390,9 +390,9 @@ class AsgarosForumPolls {
                             echo '<label class="checkbox-label">';
 
                             if ($poll->multiple == 1) {
-                                echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'"><span>'.$option->title.'</span>';
+                                echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'"><span>'.esc_html(stripslashes($option->title)).'</span>';
                             } else {
-                                echo '<input type="radio" name="poll-option[]" value="'.$option->id.'"><span>'.$option->title.'</span>';
+                                echo '<input type="radio" name="poll-option[]" value="'.$option->id.'"><span>'.esc_html(stripslashes($option->title)).'</span>';
                             }
 
                             echo '</label>';
@@ -412,7 +412,7 @@ class AsgarosForumPolls {
 
                         echo '<div class="poll-result-row">';
                             echo '<div class="poll-result-name">';
-                                echo $option->title.':';
+                                echo esc_html(stripslashes($option->title)).':';
                                 echo '<small class="poll-result-numbers">';
                                     echo sprintf(_n('%s Vote', '%s Votes', $option->votes, 'asgaros-forum'), number_format_i18n($option->votes));
                                     echo '&nbsp;&middot;&nbsp;';

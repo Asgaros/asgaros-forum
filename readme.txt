@@ -92,6 +92,8 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Properly escape content of posts
+* Fixed: Strip slashes inside of polls
+* Fixed: Escape HTML inside of polls
 = 1.14.3 =
 * Added: Caption titles to topic-icons
 * Fixed: Display issues with Font Awesome icons
