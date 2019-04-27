@@ -85,7 +85,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
         // Post message.
         echo '<div class="post-message">';
             // Initial escaping.
-            $post_content = $this->escape_script_tags($post->text);
+            $post_content = wp_kses($post->text, 'post');
             $post_content = stripslashes($post_content);
 
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
