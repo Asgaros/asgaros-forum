@@ -3,7 +3,7 @@ Contributors: Asgaros
 Donate link: https://www.paypal.me/asgaros
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.8
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5.2
 Stable tag: 1.14.3
 License: GPLv2 or later
@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Properly escape content of posts
 * Fixed: Strip slashes inside of polls
 * Fixed: Escape HTML inside of polls
+* Compatibility with WordPress 5.2
 = 1.14.3 =
 * Added: Caption titles to topic-icons
 * Fixed: Display issues with Font Awesome icons
