@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to define who can use signatures
 * Fixed: Properly escape content of posts
 * Fixed: Strip slashes inside of polls
 * Fixed: Escape HTML inside of polls

@@ -61,6 +61,7 @@ class AsgarosForum {
         'mail_template_mentioned_subject'   => '',
         'mail_template_mentioned_message'   => '',
         'allow_signatures'                  => false,
+        'signatures_permission'             => 'loggedin',
         'signatures_html_allowed'           => false,
         'signatures_html_tags'              => '<br><a><i><b><u><s><img><strong>',
         'enable_avatars'                    => true,

@@ -484,6 +484,15 @@ if (!defined('ABSPATH')) exit;
                     <td><input type="checkbox" name="allow_signatures" id="allow_signatures" class="show_hide_initiator" data-hide-class="signatures-option" <?php checked(!empty($asgarosforum->options['allow_signatures'])); ?>></td>
                 </tr>
                 <tr class="signatures-option" <?php if (!$signaturesOption) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="signatures_permission"><?php _e('Who can use signatures:', 'asgaros-forum'); ?></label></th>
+                    <td>
+                        <select name="signatures_permission" id="signatures_permission">';
+                            <option value="loggedin" <?php if ($asgarosforum->options['signatures_permission'] == 'loggedin') { echo 'selected="selected"'; } ?>><?php _e('Logged in users & Moderators', 'asgaros-forum'); ?></option>
+                            <option value="moderator" <?php if ($asgarosforum->options['signatures_permission'] == 'moderator') { echo 'selected="selected"'; } ?>><?php _e('Moderators only', 'asgaros-forum'); ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="signatures-option" <?php if (!$signaturesOption) { echo 'style="display: none;"'; } ?>>
                     <th><label for="signatures_html_allowed"><?php _e('Allow HTML tags in signatures', 'asgaros-forum'); ?></label></th>
                     <td><input type="checkbox" name="signatures_html_allowed" id="signatures_html_allowed" <?php checked(!empty($asgarosforum->options['signatures_html_allowed'])); ?>></td>
                 </tr>

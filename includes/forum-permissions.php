@@ -250,6 +250,27 @@ class AsgarosForumPermissions {
         return false;
     }
 
+    // Checks if an user can use a signature.
+    public function can_use_signature($user_id) {
+        // Disallow when user is banned.
+        if ($this->isBanned($user_id)) {
+            return false;
+        }
+
+        // Moderators can always use a signature.
+        if ($this->isModerator($user_id)) {
+            return true;
+        }
+
+        // Based on the settings, logged-in users can use a signature.
+        if ($this->asgarosforum->options['signatures_permission'] == 'loggedin') {
+            return true;
+        }
+
+        // Otherwise its not possible to use a signature.
+        return false;
+    }
+
     public function ban_user($user_id, $ban_id) {
         // Verify nonce first.
         if (wp_verify_nonce($_REQUEST['_wpnonce'], 'ban_user_'.$ban_id)) {
