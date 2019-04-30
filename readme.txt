@@ -92,6 +92,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Display issues with some themes
+* Minor design changes
 = 1.14.4 =
 * Added: Option to define who can use signatures
 * Fixed: Properly escape content of posts

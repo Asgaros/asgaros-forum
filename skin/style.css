@@ -416,7 +416,7 @@
     float: right;
     font-weight: normal;
     font-style: italic;
-    width: 300px;
+    width: 310px;
     text-align: center;
     color: inherit; /* comp */
     line-height: inherit; /* comp */
@@ -483,7 +483,7 @@
 }
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
-    width: 300px;
+    width: 310px;
     text-align: left;
     border-left: 1px solid #eee;
     padding: 8px 16px;
