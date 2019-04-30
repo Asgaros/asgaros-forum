@@ -63,9 +63,9 @@ if ($counter_total > 0) {
         echo '<div class="clear"></div>';
     echo '</div>';
 } else {
-    echo '<div class="title-element"></div>';
+    echo '<div class="title-element" id="title-element-forum-'.$this->current_forum.'"></div>';
 
-    echo '<div class="content-container">';
+    echo '<div class="content-container" id="content-container-forum-'.$this->current_forum.'">';
         $this->render_notice(__('There are no topics yet!', 'asgaros-forum'));
     echo '</div>';
 }
