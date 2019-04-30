@@ -714,6 +714,7 @@
     display: inline; /* comp */
     margin: 0; /* comp */
     text-align: left; /* comp */
+    position: static; /* comp */
 }
 #af-wrapper #forum-navigation a:first-child,
 #af-wrapper #forum-navigation-mobile a:first-child {
