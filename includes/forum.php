@@ -1849,4 +1849,54 @@ class AsgarosForum {
         // Reassign forum posts.
         $this->db->update($this->tables->posts, array('author_id' => $_POST['forum_reassign_user']), array('author_id' => $id), array('%d'), array('%d'));
     }
+
+    // Extract the first URL of an image from a given string.
+    public function extract_image_url($content) {
+    	$images = array();
+
+        // Check if content is given.
+        if ($content) {
+            // Try to find images.
+            preg_match_all('#https?://[^\s\'\"<>]+\.(?:jpg|jpeg|png|gif)#isu', $content, $found, PREG_SET_ORDER);
+
+            if (empty($found)) {
+                preg_match_all('#//[^\s\'\"<>]+\.(?:jpg|jpeg|png|gif)#isu', $content, $found, PREG_SET_ORDER);
+            }
+
+            if (empty($found)) {
+                preg_match_all('#https?://[^\s\'\"<>]+#isu', $content, $found, PREG_SET_ORDER);
+            }
+
+            if (empty($found)) {
+                preg_match_all('#//[^\s\'\"<>]+#isu', $content, $found, PREG_SET_ORDER);
+            }
+
+            // If images found, check extensions.
+            if (!empty($found)) {
+                foreach ($found as $match) {
+                    $extension = pathinfo($match[0], PATHINFO_EXTENSION);
+
+                    if ($extension) {
+                        $check = false;
+                        $extension = strtolower($extension);
+
+                    	if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'gif') {
+                    		$check = true;
+                    	}
+
+                        if ($check) {
+                            $images[] = $match[0];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+    	if (empty($images)) {
+            return false;
+        } else {
+            return $images[0];
+        }
+    }
 }

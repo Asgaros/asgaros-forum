@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Try to generate Open Graph image-tag for topics
 * Fixed: Display issues with some themes
 * Minor design changes
 = 1.14.4 =

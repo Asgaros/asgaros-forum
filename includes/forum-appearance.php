@@ -133,6 +133,20 @@ class AsgarosForumAppearance {
 			echo '<meta property="og:title" content="'.$title.'" />'.PHP_EOL;
 			echo '<meta property="og:description" content="'.$description.'" />'.PHP_EOL;
 			echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />'.PHP_EOL;
+
+			// Try to set og:image-tag.
+			if ($this->asgarosforum->current_view === 'topic') {
+				$first_post = $this->asgarosforum->content->get_first_post($this->asgarosforum->current_element);
+
+				if ($first_post) {
+					$image_url = $this->asgarosforum->extract_image_url($first_post->text);
+
+					if ($image_url) {
+						echo '<meta property="og:image" content="'.$image_url.'" />'.PHP_EOL;
+					}
+				}
+			}
+
 			echo '<meta name="twitter:title" content="'.$title.'" />'.PHP_EOL;
 			echo '<meta name="twitter:description" content="'.$description.'" />'.PHP_EOL;
 
