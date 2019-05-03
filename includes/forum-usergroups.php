@@ -53,30 +53,32 @@ class AsgarosForumUserGroups {
     //======================================================================
 
     // Adds a new usergroup.
-    public static function insertUserGroup($categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal', $usergroup_auto_add = 'no') {
-        $userGroupName = trim($userGroupName);
-        $userGroupColor = trim($userGroupColor);
-        $usergroup_visibility = trim($usergroup_visibility);
-        $usergroup_auto_add = trim($usergroup_auto_add);
+    public static function insertUserGroup($category_id, $name, $color = '#444444', $visibility = 'normal', $auto_add = 'no', $icon = '') {
+        $name = trim($name);
+        $color = trim($color);
+        $visibility = trim($visibility);
+        $auto_add = trim($auto_add);
+        $icon = trim($icon);
 
-        $status = wp_insert_term($userGroupName, self::$taxonomyName, array('parent' => $categoryID));
-
-        // Return possible error.
-        if (is_wp_error($status)) {
-            return $status;
-        }
-
-        $userGroupID = $status['term_id'];
-
-        $status = self::updateUserGroupColor($userGroupID, $userGroupColor);
+        $status = wp_insert_term($name, self::$taxonomyName, array('parent' => $category_id));
 
         // Return possible error.
         if (is_wp_error($status)) {
             return $status;
         }
 
-        $status = self::update_usergroup_visibility($userGroupID, $usergroup_visibility);
-        $status = self::update_usergroup_auto_add($userGroupID, $usergroup_auto_add);
+        $usergroup_id = $status['term_id'];
+
+        $status = self::updateUserGroupColor($usergroup_id, $color);
+
+        // Return possible error.
+        if (is_wp_error($status)) {
+            return $status;
+        }
+
+        $status = self::update_usergroup_visibility($usergroup_id, $visibility);
+        $status = self::update_usergroup_auto_add($usergroup_id, $auto_add);
+        $status = self::update_usergroup_icon($usergroup_id, $icon);
 
         return $status;
     }
@@ -129,28 +131,30 @@ class AsgarosForumUserGroups {
     // FUNCTIONS FOR UPDATING CONTENT.
     //======================================================================
 
-    public static function updateUserGroup($userGroupID, $categoryID, $userGroupName, $userGroupColor = '#444444', $usergroup_visibility = 'normal', $usergroup_auto_add = 'no') {
-        $userGroupName = trim($userGroupName);
-        $userGroupColor = trim($userGroupColor);
-        $usergroup_visibility = trim($usergroup_visibility);
-        $usergroup_auto_add = trim($usergroup_auto_add);
+    public static function updateUserGroup($usergroup_id, $category_id, $name, $color = '#444444', $visibility = 'normal', $auto_add = 'no', $icon = '') {
+        $name = trim($name);
+        $color = trim($color);
+        $visibility = trim($visibility);
+        $auto_add = trim($auto_add);
+        $icon = trim($icon);
 
-        $status = wp_update_term($userGroupID, self::$taxonomyName, array('parent' => $categoryID, 'name' => $userGroupName));
-
-        // Return possible error.
-        if (is_wp_error($status)) {
-            return $status;
-        }
-
-        $status = self::updateUserGroupColor($userGroupID, $userGroupColor);
+        $status = wp_update_term($usergroup_id, self::$taxonomyName, array('parent' => $category_id, 'name' => $name));
 
         // Return possible error.
         if (is_wp_error($status)) {
             return $status;
         }
 
-        $status = self::update_usergroup_visibility($userGroupID, $usergroup_visibility);
-        $status = self::update_usergroup_auto_add($userGroupID, $usergroup_auto_add);
+        $status = self::updateUserGroupColor($usergroup_id, $color);
+
+        // Return possible error.
+        if (is_wp_error($status)) {
+            return $status;
+        }
+
+        $status = self::update_usergroup_visibility($usergroup_id, $visibility);
+        $status = self::update_usergroup_auto_add($usergroup_id, $auto_add);
+        $status = self::update_usergroup_icon($usergroup_id, $icon);
 
         return $status;
     }
@@ -186,6 +190,14 @@ class AsgarosForumUserGroups {
         $usergroup_auto_add = (empty($usergroup_auto_add)) ? 'no' : $usergroup_auto_add;
 
         $status = update_term_meta($usergroup_id, 'usergroup-auto-add', $usergroup_auto_add);
+
+        return $status;
+    }
+
+    public static function update_usergroup_icon($usergroup_id, $icon) {
+        $icon = trim($icon);
+
+        $status = update_term_meta($usergroup_id, 'usergroup-icon', $icon);
 
         return $status;
     }
@@ -307,6 +319,17 @@ class AsgarosForumUserGroups {
         return get_term_meta($usergroup_id, 'usergroup-auto-add', true);
     }
 
+    // Returns the icon of an usergroup.
+    public static function get_usergroup_icon($usergroup_id) {
+        $icon = get_term_meta($usergroup_id, 'usergroup-icon', true);
+
+        if (empty($icon)) {
+            $icon = false;
+        }
+
+        return $icon;
+    }
+
     // Returns all usergroups of a specific forum category.
     public static function getUserGroupsOfForumCategory($forumCategoryID) {
         $userGroupsIDs = self::getUserGroupsIDsOfForumCategory($forumCategoryID);
@@ -401,7 +424,6 @@ class AsgarosForumUserGroups {
     		if (!empty($usergroups)) {
         		foreach ($usergroups as $usergroup) {
         			$link = add_query_arg(array('forum-user-group' => $usergroup->term_id), admin_url('users.php'));
-                    $color = self::getUserGroupColor($usergroup->term_id);
         			$output .= '<a href="'.$link.'" title="'.$usergroup->name.'">';
                     $output .= self::render_usergroup_tag($usergroup);
                     $output .= '</a>';
@@ -419,11 +441,12 @@ class AsgarosForumUserGroups {
         $usergroup_color        = $_POST['usergroup_color'];
         $usergroup_visibility   = (isset($_POST['usergroup_visibility'])) ? 'hidden' : 'normal';
         $usergroup_auto_add     = (isset($_POST['usergroup_auto_add'])) ? 'yes' : 'no';
+        $usergroup_icon         = $_POST['usergroup_icon'];
 
         if ($usergroup_id === 'new') {
-            return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add);
+            return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add, $usergroup_icon);
         } else {
-            return self::updateUserGroup($usergroup_id, $usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add);
+            return self::updateUserGroup($usergroup_id, $usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add, $usergroup_icon);
         }
     }
 
@@ -557,7 +580,6 @@ class AsgarosForumUserGroups {
                 $userGroups = self::getUserGroupsOfCategory($category->term_id);
 
                 foreach ($userGroups as $usergroup) {
-                    $color = self::getUserGroupColor($usergroup->term_id);
                     $is_user_in_usergroup = self::isUserInUserGroup($userID, $usergroup->term_id);
                     $label_id = self::$taxonomyName.'-'.$usergroup->term_id;
 
@@ -579,14 +601,34 @@ class AsgarosForumUserGroups {
     // Renders the tag for a usergroup which can be used inside profiles, posts and in the administration area.
     public static function render_usergroup_tag($usergroup_object, $font_weight = 'normal') {
         $color = self::getUserGroupColor($usergroup_object->term_id);
+        $icon = self::get_usergroup_icon($usergroup_object->term_id);
 
         // If the memberslist is enabled and we are inside the front-end, we will
         // generate a link to the memberslist filtered by the selected usergroup.
         if (self::$asgarosforum->memberslist->functionality_enabled() && !is_admin()) {
             $link = self::$asgarosforum->rewrite->get_link('members', false, array('filter_type' => 'group', 'filter_name' => $usergroup_object->term_id));
-            return '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">'.$usergroup_object->name.'</a>';
+
+            $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">';
+
+            if ($icon) {
+                $output .= '<i class="'.$icon.'"></i>';
+            }
+
+            $output .= $usergroup_object->name;
+            $output .= '</a>';
+
+            return $output;
         } else {
-            return '<span class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">'.$usergroup_object->name.'</span>';
+            $output = '<span class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">';
+
+            if ($icon) {
+                $output .= '<i class="'.$icon.'"></i>';
+            }
+
+            $output .= $usergroup_object->name;
+            $output .= '</span>';
+
+            return $output;
         }
     }
 

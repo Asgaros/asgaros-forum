@@ -1,11 +1,16 @@
 .af-usergroup-tag {
-    padding: 0 3px;
+    padding: 0 4px;
     border-radius: 3px;
     border-width: 1px;
     border-style: solid;
-    margin: 1px;
+    margin: 2px;
     display: inline-block;
-    line-height: 20px;
+    line-height: 18px;
+    font-size: smaller !important;
+}
+#af-structure .usergroup-name i,
+.af-usergroup-tag i {
+    padding-right: 4px;
 }
 .usergroups-editor .usergroup-category-name {
     display: block;
@@ -216,12 +221,14 @@ li.forum-user-group {
 #af-structure .forum-icon {
     padding-right: 8px;
 }
-#af-structure .usergroup-icon {
-    display: block;
-    float: left;
-    padding-right: 16px;
+#af-structure .usergroup-color {
     width: 40px;
-    text-align: center;
+    height: 40px;
+    border: 1px solid #000;
+    float: left;
+    display: block;
+    margin-right: 8px;
+    box-sizing: border-box;
 }
 #af-structure .column-status,
 #af-structure .column-sort,
@@ -231,18 +238,10 @@ li.forum-user-group {
 #af-structure .usergroup-name {
     font-weight: 600;
     line-height: 25px;
+    font-size: 14px;
 }
 #af-structure .usergroup-name .element-id {
     color: #888;
-}
-#af-structure .usergroup-color {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #000;
-    float: left;
-    display: block;
-    margin-right: 8px;
-    box-sizing: border-box;
 }
 #af-structure #usergroups-editor th,
 #af-structure #usergroup-color-settings th,

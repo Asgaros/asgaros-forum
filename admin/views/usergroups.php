@@ -25,6 +25,18 @@
                         <td><input type="text" value="#444444" class="color-picker" name="usergroup_color" id="usergroup_color" data-default-color="#444444"></td>
                     </tr>
                     <tr>
+                        <th>
+                            <label for="usergroup_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label>
+                            <span class="description"><?php _e('Set an optional icon for the usergroup.', 'asgaros-forum'); ?></span>
+                        </th>
+                        <td>
+                            <input type="text" id="usergroup_icon" name="usergroup_icon" value="" placeholder="fas fa-users">
+                            <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank">
+                                <?php _e('List of available icons.', 'asgaros-forum'); ?>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
                         <th><label for="usergroup_visibility"><?php _e('Hide usergroup:', 'asgaros-forum'); ?></label></th>
                         <td><input type="checkbox" id="usergroup_visibility" name="usergroup_visibility"></td>
                     </tr>

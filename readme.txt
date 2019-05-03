@@ -91,9 +91,11 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Try to generate Open Graph image-tag for topics
+* Added: Option to set icon for usergroup
+* Added: Generate Open Graph image-tag for topics
 * Fixed: Display issues with some themes
 * Minor design changes
+* Performance improvements and code optimizations
 = 1.14.4 =
 * Added: Option to define who can use signatures
 * Fixed: Properly escape content of posts

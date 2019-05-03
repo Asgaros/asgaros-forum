@@ -166,12 +166,14 @@
             var usergroup_color         = '#444444';
             var usergroup_visibility    = '';
             var usergroup_auto_add      = '';
+            var usergroup_icon          = '';
 
             if (usergroup_id !== 'new') {
                 usergroup_name          = $('#usergroup_'+usergroup_id+'_name').val();
                 usergroup_color         = $('#usergroup_'+usergroup_id+'_color').val();
                 usergroup_visibility    = $('#usergroup_'+usergroup_id+'_visibility').val();
                 usergroup_auto_add      = $('#usergroup_'+usergroup_id+'_auto_add').val();
+                usergroup_icon          = $('#usergroup_'+usergroup_id+'_icon').val();
             }
 
             $('#usergroup-editor input[name=usergroup_id]').val(usergroup_id);
@@ -191,6 +193,8 @@
             } else {
                 $('#usergroup-editor input[name=usergroup_auto_add]').prop('checked', false);
             }
+
+            $('#usergroup-editor input[name=usergroup_icon]').val(usergroup_icon);
 
             setEditorTitle(this);
             showEditorInstance('#usergroup-editor');

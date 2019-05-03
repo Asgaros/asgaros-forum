@@ -79,14 +79,17 @@
     min-height: 35px;
 }
 #af-wrapper .af-usergroup-tag {
-    padding: 0 3px;
+    padding: 0 4px;
     border-radius: 3px;
     border-width: 1px;
     border-style: solid;
     margin: 2px;
     display: inline-block;
-    line-height: 20px;
+    line-height: 18px;
     font-size: smaller !important;
+}
+#af-wrapper .af-usergroup-tag i {
+    padding-right: 4px;
 }
 /* Text meant only for screen readers. */
 #af-wrapper .screen-reader-text {
