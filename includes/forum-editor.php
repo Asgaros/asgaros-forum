@@ -164,7 +164,7 @@ class AsgarosForumEditor {
 			if ($editor_view == 'addpost') {
 				$actionURL = $this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic);
 			} else if ($editor_view == 'editpost') {
-				$actionURL = $this->asgarosforum->get_link('post_edit', $this->asgarosforum->current_post);
+				$actionURL = $this->asgarosforum->get_link('editpost', $this->asgarosforum->current_post);
 			} else if ($editor_view == 'addtopic') {
 				$actionURL = $this->asgarosforum->get_link('forum', $this->asgarosforum->current_forum);
 			}

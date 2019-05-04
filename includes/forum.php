@@ -1310,7 +1310,7 @@ class AsgarosForum {
             if ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
                 // New topic button.
                 $menu .= '<div class="forum-menu">';
-                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('topic_add', $this->current_forum).'">';
+                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addtopic', $this->current_forum).'">';
                     $menu .= '<span class="menu-icon fas fa-plus-square"></span>';
                     $menu .= __('New Topic', 'asgaros-forum');
                 $menu .= '</a>';
@@ -1374,7 +1374,7 @@ class AsgarosForum {
         if ($this->approval->is_topic_approved($this->current_topic)) {
             if ($this->permissions->can_create_post($current_user_id)) {
                 // Reply button.
-                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('post_add', $this->current_topic).'">';
+                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addpost', $this->current_topic).'">';
                     $menu .= '<span class="menu-icon fas fa-reply"></span>';
                     $menu .= __('Reply', 'asgaros-forum');
                 $menu .= '</a>';
@@ -1458,7 +1458,7 @@ class AsgarosForum {
                 $current_user_id = get_current_user_id();
                 if ($this->permissions->can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
                     // Edit button.
-                    $menu .= '<a href="'.$this->get_link('post_edit', $post_id, array('part' => ($this->current_page + 1))).'">';
+                    $menu .= '<a href="'.$this->get_link('editpost', $post_id, array('part' => ($this->current_page + 1))).'">';
                         $menu .= '<span class="menu-icon fas fa-pencil-alt"></span>';
                         $menu .= __('Edit', 'asgaros-forum');
                     $menu .= '</a>';
@@ -1467,7 +1467,7 @@ class AsgarosForum {
 
             if ($this->permissions->isModerator('current') || (!$this->is_topic_closed($this->current_topic) && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
                 // Quote button.
-                $menu .= '<a class="forum-editor-quote-button" data-value-id="'.$post_id.'" href="'.$this->get_link('post_add', $this->current_topic, array('quote' => $post_id)).'">';
+                $menu .= '<a class="forum-editor-quote-button" data-value-id="'.$post_id.'" href="'.$this->get_link('addpost', $this->current_topic, array('quote' => $post_id)).'">';
                     $menu .= '<span class="menu-icon fas fa-quote-left"></span>';
                     $menu .= __('Quote', 'asgaros-forum');
                 $menu .= '</a>';

@@ -284,10 +284,10 @@ class AsgarosForumRewrite {
             $this->links['search']        = $this->links['home'].'/search/';
             $this->links['forum']         = $this->links['home'].'/forum/';
             $this->links['topic']         = $this->links['home'].'/topic/';
-            $this->links['topic_add']     = $this->links['home'].'/addtopic/';
+            $this->links['addtopic']      = $this->links['home'].'/addtopic/';
             $this->links['movetopic']     = $this->links['home'].'/movetopic/';
-            $this->links['post_add']      = $this->links['home'].'/addpost/';
-            $this->links['post_edit']     = $this->links['home'].'/editpost/';
+            $this->links['addpost']       = $this->links['home'].'/addpost/';
+            $this->links['editpost']      = $this->links['home'].'/editpost/';
             $this->links['markallread']   = $this->links['home'].'/markallread/';
             $this->links['members']       = $this->links['home'].'/members/';
             $this->links['profile']       = $this->links['home'].'/profile/';
@@ -301,10 +301,10 @@ class AsgarosForumRewrite {
             $this->links['search']        = add_query_arg(array('view' => 'search'), $this->links['home']);
             $this->links['forum']         = add_query_arg(array('view' => 'forum'), $this->links['home']);
             $this->links['topic']         = add_query_arg(array('view' => 'topic'), $this->links['home']);
-            $this->links['topic_add']     = add_query_arg(array('view' => 'addtopic'), $this->links['home']);
+            $this->links['addtopic']      = add_query_arg(array('view' => 'addtopic'), $this->links['home']);
             $this->links['movetopic']     = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
-            $this->links['post_add']      = add_query_arg(array('view' => 'addpost'), $this->links['home']);
-            $this->links['post_edit']     = add_query_arg(array('view' => 'editpost'), $this->links['home']);
+            $this->links['addpost']       = add_query_arg(array('view' => 'addpost'), $this->links['home']);
+            $this->links['editpost']      = add_query_arg(array('view' => 'editpost'), $this->links['home']);
             $this->links['markallread']   = add_query_arg(array('view' => 'markallread'), $this->links['home']);
             $this->links['members']       = add_query_arg(array('view' => 'members'), $this->links['home']);
             $this->links['profile']       = add_query_arg(array('view' => 'profile'), $this->links['home']);
