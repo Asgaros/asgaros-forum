@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to set icon for usergroup
 * Added: Generate Open Graph image-tag for topics
+* Added: asgarosforum_seo_trailing_slash filter
 * Fixed: Display issues with some themes
 * Minor design changes
 * Performance improvements and code optimizations
