@@ -1,3 +1,8 @@
+// Prevent replacing Font Awesome icons with SVG icons.
+window.FontAwesomeConfig = {
+    autoReplaceSvg: false
+};
+
 (function($) {
     $(document).ready(function() {
         // Sticky panel.
