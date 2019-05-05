@@ -7,9 +7,13 @@ class AsgarosForumRewrite {
     public $use_permalinks = false;
     private $links = array();
     public $slug_cache = array();
+    private $view_mapping = array();
 
     function __construct($object) {
 		$this->asgarosforum = $object;
+
+        // Build view-mapping.
+        $this->build_view_mapping();
 
         // Check if permalinks are enabled.
         if ($this->asgarosforum->options['enable_seo_urls'] && get_option('permalink_structure')) {
@@ -19,6 +23,25 @@ class AsgarosForumRewrite {
             add_filter('redirect_canonical', array($this, 'disable_front_page_redirect'), 10, 2);
         }
 	}
+
+    private function build_view_mapping() {
+        $this->view_mapping['activity']      = $this->asgarosforum->options['view_name_activity'];
+        $this->view_mapping['subscriptions'] = $this->asgarosforum->options['view_name_subscriptions'];
+        $this->view_mapping['search']        = $this->asgarosforum->options['view_name_search'];
+        $this->view_mapping['forum']         = $this->asgarosforum->options['view_name_forum'];
+        $this->view_mapping['topic']         = $this->asgarosforum->options['view_name_topic'];
+        $this->view_mapping['addtopic']      = $this->asgarosforum->options['view_name_addtopic'];
+        $this->view_mapping['movetopic']     = $this->asgarosforum->options['view_name_movetopic'];
+        $this->view_mapping['addpost']       = $this->asgarosforum->options['view_name_addpost'];
+        $this->view_mapping['editpost']      = $this->asgarosforum->options['view_name_editpost'];
+        $this->view_mapping['markallread']   = $this->asgarosforum->options['view_name_markallread'];
+        $this->view_mapping['members']       = $this->asgarosforum->options['view_name_members'];
+        $this->view_mapping['profile']       = $this->asgarosforum->options['view_name_profile'];
+        $this->view_mapping['history']       = $this->asgarosforum->options['view_name_history'];
+        $this->view_mapping['unread']        = $this->asgarosforum->options['view_name_unread'];
+        $this->view_mapping['unapproved']    = $this->asgarosforum->options['view_name_unapproved'];
+        $this->view_mapping['reports']       = $this->asgarosforum->options['view_name_reports'];
+    }
 
     // Ensures that all rewrite rules exist.
     private function ensure_rewrite_rules() {
@@ -104,7 +127,13 @@ class AsgarosForumRewrite {
     function parse_url() {
         // Set the current view.
         if (!empty($_GET['view'])) {
-            $this->asgarosforum->current_view = esc_html($_GET['view']);
+            $key = array_search (esc_html($_GET['view']), $this->view_mapping);
+
+            if ($key == false) {
+                $this->asgarosforum->current_view = esc_html($_GET['view']);
+            } else {
+                $this->asgarosforum->current_view = $key;
+            }
         }
 
         // Set the current element id.
@@ -143,7 +172,13 @@ class AsgarosForumRewrite {
 
             // Set the current view.
             if (!empty($parsed_url[0])) {
-                $this->asgarosforum->current_view = esc_html($parsed_url[0]);
+                $key = array_search (esc_html($parsed_url[0]), $this->view_mapping);
+
+                if ($key == false) {
+                    $this->asgarosforum->current_view = esc_html($parsed_url[0]);
+                } else {
+                    $this->asgarosforum->current_view = $key;
+                }
             }
 
             // Set the current element id.
@@ -265,7 +300,7 @@ class AsgarosForumRewrite {
 
         // Set forum home and current link first. We need to use the internal _get_page_link function because
         // otherwise the generated links would not be correct when the forum is located on a static front page.
-        $this->links['home']    = untrailingslashit(_get_page_link($this->asgarosforum->options['location']));
+        $this->links['home'] = untrailingslashit(_get_page_link($this->asgarosforum->options['location']));
 
         // Build current link.
         $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
@@ -279,39 +314,13 @@ class AsgarosForumRewrite {
 
         // Set additional links based on global permalink-settings.
         if ($this->use_permalinks) {
-            $this->links['activity']      = $this->links['home'].'/activity/';
-            $this->links['subscriptions'] = $this->links['home'].'/subscriptions/';
-            $this->links['search']        = $this->links['home'].'/search/';
-            $this->links['forum']         = $this->links['home'].'/forum/';
-            $this->links['topic']         = $this->links['home'].'/topic/';
-            $this->links['addtopic']      = $this->links['home'].'/addtopic/';
-            $this->links['movetopic']     = $this->links['home'].'/movetopic/';
-            $this->links['addpost']       = $this->links['home'].'/addpost/';
-            $this->links['editpost']      = $this->links['home'].'/editpost/';
-            $this->links['markallread']   = $this->links['home'].'/markallread/';
-            $this->links['members']       = $this->links['home'].'/members/';
-            $this->links['profile']       = $this->links['home'].'/profile/';
-            $this->links['history']       = $this->links['home'].'/history/';
-            $this->links['unread']        = $this->links['home'].'/unread/';
-            $this->links['unapproved']    = $this->links['home'].'/unapproved/';
-            $this->links['reports']       = $this->links['home'].'/reports/';
+            foreach ($this->view_mapping as $key => $value) {
+                $this->links[$key] = $this->links['home'].'/'.$value.'/';
+            }
         } else {
-            $this->links['activity']      = add_query_arg(array('view' => 'activity'), $this->links['home']);
-            $this->links['subscriptions'] = add_query_arg(array('view' => 'subscriptions'), $this->links['home']);
-            $this->links['search']        = add_query_arg(array('view' => 'search'), $this->links['home']);
-            $this->links['forum']         = add_query_arg(array('view' => 'forum'), $this->links['home']);
-            $this->links['topic']         = add_query_arg(array('view' => 'topic'), $this->links['home']);
-            $this->links['addtopic']      = add_query_arg(array('view' => 'addtopic'), $this->links['home']);
-            $this->links['movetopic']     = add_query_arg(array('view' => 'movetopic'), $this->links['home']);
-            $this->links['addpost']       = add_query_arg(array('view' => 'addpost'), $this->links['home']);
-            $this->links['editpost']      = add_query_arg(array('view' => 'editpost'), $this->links['home']);
-            $this->links['markallread']   = add_query_arg(array('view' => 'markallread'), $this->links['home']);
-            $this->links['members']       = add_query_arg(array('view' => 'members'), $this->links['home']);
-            $this->links['profile']       = add_query_arg(array('view' => 'profile'), $this->links['home']);
-            $this->links['history']       = add_query_arg(array('view' => 'history'), $this->links['home']);
-            $this->links['unread']        = add_query_arg(array('view' => 'unread'), $this->links['home']);
-            $this->links['unapproved']    = add_query_arg(array('view' => 'unapproved'), $this->links['home']);
-            $this->links['reports']       = add_query_arg(array('view' => 'reports'), $this->links['home']);
+            foreach ($this->view_mapping as $key => $value) {
+                $this->links[$key] = add_query_arg(array('view' => $value), $this->links['home']);
+            }
         }
     }
 
