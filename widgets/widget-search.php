@@ -34,7 +34,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
                 }
 
                 echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'" value="'.$asgarosforum->search->search_keywords_for_output.'">';
-                echo '<button type="submit" class="fas fa-search"></button>';
+                echo '<button type="submit"><i class="fas fa-search"></i></button>';
             echo '</form>';
             echo '</div>';
         } else {

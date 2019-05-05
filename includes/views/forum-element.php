@@ -15,7 +15,7 @@ echo '<div class="content-element forum" id="forum-'.$forum->id.'">';
     $forum_icon = trim(esc_html(stripslashes($forum->icon)));
     $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
 
-    echo '<div class="forum-status '.$forum_icon.' '.$unread_status.'"></div>';
+    echo '<div class="forum-status '.$unread_status.'"><i class="'.$forum_icon.'"></i></div>';
     echo '<div class="forum-name">';
         echo '<a class="forum-title" href="'.$this->get_link('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
 

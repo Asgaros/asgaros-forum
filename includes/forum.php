@@ -787,7 +787,7 @@ class AsgarosForum {
         $topic_title = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="content-element topic '.$topic_type.'">';
-            echo '<div class="topic-status far fa-comments '.$unread_status.'"></div>';
+            echo '<div class="topic-status '.$unread_status.'"><i class="far fa-comments"></i></div>';
             echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
                     echo '<span class="topic-icon fas fa-thumbtack" title="'.__('This topic is sticked', 'asgaros-forum').'"></span>';

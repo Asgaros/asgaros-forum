@@ -1702,20 +1702,18 @@
 }
 
 /* ICONS */
-#af-wrapper .forum .forum-status:before,
-#af-wrapper .topic .topic-status:before {
+#af-wrapper .forum .forum-status,
+#af-wrapper .topic .topic-status {
     font-size: 32px;
-    width: 40px;
-    height: 40px;
 }
-#af-wrapper .unread-topic .topic-status:before,
-#af-wrapper .unapproved-topic .topic-status:before {
+#af-wrapper .unread-topic .topic-status,
+#af-wrapper .unapproved-topic .topic-status {
     font-size: 20px;
 }
-#af-wrapper .unread:before {
+#af-wrapper .unread {
     color: #2D89CC;
 }
-#af-wrapper .read:before {
+#af-wrapper .read {
     opacity: 0.5;
 }
 
