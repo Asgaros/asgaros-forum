@@ -265,6 +265,79 @@ if (!defined('ABSPATH')) exit;
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <th>
+                        <label><?php _e('URL-slugs for views:', 'asgaros-forum'); ?></label>
+                    </th>
+                    <td>
+                        <table>
+                            <tr>
+                                <th><label for="view_name_activity">activity:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_activity" id="view_name_activity" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_activity'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_subscriptions">subscriptions:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_subscriptions" id="view_name_subscriptions" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_subscriptions'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_search">search:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_search" id="view_name_search" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_search'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_forum">forum:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_forum" id="view_name_forum" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_forum'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_topic">topic:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_topic" id="view_name_topic" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_topic'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_addtopic">addtopic:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_addtopic" id="view_name_addtopic" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_addtopic'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_movetopic">movetopic:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_movetopic" id="view_name_movetopic" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_movetopic'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_addpost">addpost:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_addpost" id="view_name_addpost" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_addpost'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_editpost">editpost:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_editpost" id="view_name_editpost" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_editpost'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_markallread">markallread:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_markallread" id="view_name_markallread" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_markallread'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_members">members:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_members" id="view_name_members" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_members'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_profile">profile:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_profile" id="view_name_profile" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_profile'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_history">history:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_history" id="view_name_history" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_history'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_unread">unread:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_unread" id="view_name_unread" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_unread'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_unapproved">unapproved:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_unapproved" id="view_name_unapproved" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_unapproved'])); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><label for="view_name_reports">reports:</label></th>
+                                <td><input class="regular-text" type="text" name="view_name_reports" id="view_name_reports" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_reports'])); ?>"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
             </table>
         </div>
 

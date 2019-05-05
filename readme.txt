@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Options to change URL-slugs for views
 * Added: Option to set icon for usergroup
 * Added: Generate Open Graph image-tag for topics
 * Added: asgarosforum_seo_trailing_slash filter
