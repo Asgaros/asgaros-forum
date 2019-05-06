@@ -120,13 +120,27 @@ class AsgarosForumAppearance {
 			$title = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
 			$description = ($this->asgarosforum->current_description && $this->asgarosforum->error === false) ? $this->asgarosforum->current_description : $title;
 
-			// Prevent indexing of some views or when there is an error.
+			// Prevent indexing of some views, when there is an error or for other configurations.
+			$prevent_indexing = false;
 			$blocked_views_for_searchengines = array('addtopic', 'movetopic', 'addpost', 'editpost', 'search');
 
-			if (in_array($this->asgarosforum->current_view, $blocked_views_for_searchengines) || $this->asgarosforum->error !== false) {
+			if (in_array($this->asgarosforum->current_view, $blocked_views_for_searchengines)) {
+				$prevent_indexing = true;
+			}
+
+			if ($this->asgarosforum->error !== false) {
+				$prevent_indexing = true;
+			}
+
+			if ($this->asgarosforum->options['hide_profiles_from_guests']) {
+				$prevent_indexing = true;
+			}
+
+			if ($prevent_indexing) {
 				echo '<meta name="robots" content="noindex, follow" />'.PHP_EOL;
 			}
 
+			// Create meta-tags.
 			echo '<link rel="canonical" href="'.$link.'" />'.PHP_EOL;
 			echo '<meta name="description" content="'.$description.'" />'.PHP_EOL;
 			echo '<meta property="og:url" content="'.$link.'" />'.PHP_EOL;
