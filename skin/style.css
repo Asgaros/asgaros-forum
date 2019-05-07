@@ -398,10 +398,12 @@
     display: block;
     float: left;
     width: 100px;
+    margin: 0; /* comp */
 }
 #af-wrapper .editor-row .right {
     display: block;
-    margin-left: 110px;
+    float: none; /* comp */
+    margin: 0 0 0 110px;
 }
 
 /* OVERVIEW/FORUM */
