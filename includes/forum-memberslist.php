@@ -81,7 +81,7 @@ class AsgarosForumMembersList {
             echo '<div id="roles-filter">';
                 echo '<div class="filter-name">'.__('Roles:', 'asgaros-forum').'</div>';
                 echo '<div class="filter-options">';
-                    echo $this->render_filter_option('role', 'all', 'All Users');
+                    echo $this->render_filter_option('role', 'all', __('All Users', 'asgaros-forum'));
 
                     $users = $this->asgarosforum->permissions->get_users_by_role('normal');
 

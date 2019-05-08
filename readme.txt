@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Added missing translation strings
 = 1.14.7 =
 * Fixed: Search-engines could not index the forum if profiles were not accessible for guests
 = 1.14.6 =
