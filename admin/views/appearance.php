@@ -77,6 +77,14 @@ if (!defined('ABSPATH')) exit;
                     <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_border_color']); ?>" class="color-picker" name="custom_border_color" id="custom_border_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_border_color']; ?>"></td>
                 </tr>
                 <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="custom_read_indicator_color"><?php _e('Read indicator color:', 'asgaros-forum'); ?></label></th>
+                    <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_read_indicator_color']); ?>" class="color-picker" name="custom_read_indicator_color" id="custom_read_indicator_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_read_indicator_color']; ?>"></td>
+                </tr>
+                <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="custom_unread_indicator_color"><?php _e('Unread indicator color:', 'asgaros-forum'); ?></label></th>
+                    <td><input type="text" value="<?php echo stripslashes($this->asgarosforum->appearance->options['custom_unread_indicator_color']); ?>" class="color-picker" name="custom_unread_indicator_color" id="custom_unread_indicator_color" data-default-color="<?php echo $this->asgarosforum->appearance->options_default['custom_unread_indicator_color']; ?>"></td>
+                </tr>
+                <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
                     <th><label for="custom_css"><?php _e('Custom CSS:', 'asgaros-forum'); ?></label></th>
                     <td><textarea class="large-text" rows="8" cols="80" type="text" name="custom_css" id="custom_css"><?php echo esc_html(stripslashes($this->asgarosforum->appearance->options['custom_css'])); ?></textarea></td>
                 </tr>

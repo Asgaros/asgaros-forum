@@ -618,8 +618,7 @@
     background-color: #2d89cc;
 }
 #af-wrapper #read-unread .read {
-    background-color: #444;
-    opacity: 0.5;
+    background-color: #a2a2a2;
 }
 
 /* PAGEING */
@@ -1579,7 +1578,6 @@
     border-bottom: 1px solid #eee;
 }
 #af-wrapper .activity-icon:before {
-    color: #888;
     padding-right: 8px;
 }
 #af-wrapper .activity-time {
@@ -1713,10 +1711,10 @@
     font-size: 20px;
 }
 #af-wrapper .unread {
-    color: #2D89CC;
+    color: #2d89cc;
 }
 #af-wrapper .read {
-    opacity: 0.5;
+    color: #a2a2a2;
 }
 
 /* POLLS */

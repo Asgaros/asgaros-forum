@@ -91,6 +91,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to change the indicator color for read and unread items
+* Fixed: Wrong stylings when using custom colors
 = 1.14.5 =
 * Added: Options to change URL-slugs for views
 * Added: Option to set icon for usergroup

@@ -21,6 +21,8 @@ class AsgarosForumAppearance {
         'custom_background_color'		=> '#ffffff',
 		'custom_background_color_alt'	=> '#fafafa',
         'custom_border_color'       	=> '#eeeeee',
+		'custom_read_indicator_color'	=> '#a2a2a2',
+		'custom_unread_indicator_color'	=> '#2d89cc',
 		'custom_font'					=> 'Verdana, Tahoma, sans-serif',
 		'custom_font_size'				=> '13px',
 		'custom_css'					=> ''
@@ -273,7 +275,6 @@ class AsgarosForumAppearance {
 		$custom_css = '';
 
 		if ($this->options['custom_color'] != $this->options_default['custom_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_color'])) {
-			$custom_css .= '#af-wrapper .unread:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-profile .display-name,'.PHP_EOL;
 			$custom_css .= '#af-wrapper input[type="checkbox"]:checked:before {'.PHP_EOL;
 				$custom_css .= 'color: '.$this->options['custom_color'].' !important;'.PHP_EOL;
@@ -284,7 +285,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #forum-header,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-header .background-avatar,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-navigation,'.PHP_EOL;
-			$custom_css .= '#af-wrapper #read-unread .unread,'.PHP_EOL;
 			$custom_css .= '#af-wrapper input[type="radio"]:checked:before {'.PHP_EOL;
 				$custom_css .= 'background-color: '.$this->options['custom_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
@@ -317,10 +317,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .main-title {'.PHP_EOL;
 			    $custom_css .= 'color: '.$this->options['custom_text_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
-
-			$custom_css .= '#af-wrapper #read-unread .read {'.PHP_EOL;
-				$custom_css .= 'background-color: '.$this->options['custom_text_color'].' !important;'.PHP_EOL;
-			$custom_css .= '}'.PHP_EOL;
 		}
 
 		if ($this->options['custom_text_color_light'] != $this->options_default['custom_text_color_light'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_text_color_light'])) {
@@ -336,7 +332,6 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .post-footer a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
 			$custom_css .= '#af-wrapper span.mention-nice-name,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .activity-icon:before,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-reactions .reaction,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #poll-results .poll-result-numbers,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #poll-results .poll-result-total,'.PHP_EOL;
@@ -431,6 +426,26 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper #poll-results .poll-result-bar,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #usergroups-filter {'.PHP_EOL;
 			    $custom_css .= 'border-color: '.$this->options['custom_border_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_read_indicator_color'] != $this->options_default['custom_read_indicator_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_read_indicator_color'])) {
+			$custom_css .= '#af-wrapper .read {'.PHP_EOL;
+				$custom_css .= 'color: '.$this->options['custom_read_indicator_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper #read-unread .read {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_read_indicator_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+		}
+
+		if ($this->options['custom_unread_indicator_color'] != $this->options_default['custom_unread_indicator_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_unread_indicator_color'])) {
+			$custom_css .= '#af-wrapper .unread {'.PHP_EOL;
+				$custom_css .= 'color: '.$this->options['custom_unread_indicator_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper #read-unread .unread {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_unread_indicator_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
 		}
 
