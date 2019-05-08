@@ -134,7 +134,9 @@ class AsgarosForumAppearance {
 				$prevent_indexing = true;
 			}
 
-			if ($this->asgarosforum->options['hide_profiles_from_guests']) {
+			$profile_views = array('profile', 'history');
+
+			if ($this->asgarosforum->options['hide_profiles_from_guests'] && in_array($this->asgarosforum->current_view, $profile_views)) {
 				$prevent_indexing = true;
 			}
 

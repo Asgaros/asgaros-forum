@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Search-engines could not index the forum if profiles were not accessible for guests
 = 1.14.6 =
 * Added: Option to change the indicator color for read and unread items
 * Fixed: Wrong stylings when using custom colors
