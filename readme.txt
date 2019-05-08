@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.8
 Tested up to: 5.2
 Requires PHP: 5.2
-Stable tag: 1.14.6
+Stable tag: 1.14.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.14.7 =
 * Fixed: Search-engines could not index the forum if profiles were not accessible for guests
 = 1.14.6 =
 * Added: Option to change the indicator color for read and unread items
