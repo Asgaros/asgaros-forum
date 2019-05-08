@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-07 20:44+0000\n"
+"POT-Creation-Date: 2019-05-08 11:45+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: includes/forum-appearance.php:68
+#: includes/forum-appearance.php:70
 msgid "Default Theme"
 msgstr ""
 
@@ -1226,10 +1226,18 @@ msgid "Border color:"
 msgstr ""
 
 #: admin/views/appearance.php:80
+msgid "Read indicator color:"
+msgstr ""
+
+#: admin/views/appearance.php:84
+msgid "Unread indicator color:"
+msgstr ""
+
+#: admin/views/appearance.php:88
 msgid "Custom CSS:"
 msgstr ""
 
-#: admin/views/appearance.php:86
+#: admin/views/appearance.php:94
 msgid "Save Appearance"
 msgstr ""
 
