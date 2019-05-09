@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings
 * Changed: Select ad randomly if multiple ads are defined for a specific location
 = 1.14.7 =

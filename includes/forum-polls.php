@@ -407,8 +407,14 @@ class AsgarosForumPolls {
             } else {
                 echo '<div id="poll-results">';
                     foreach ($poll->options as $key => $option) {
-                        $percentage = ($option->votes / $poll->total_votes) * 100;
-                        $percentage_css = number_format($percentage, 2);
+                        $percentage = 0;
+                        $percentage_css = 0;
+
+                        // Only calculate percentage-values when there are votes.
+                        if ($poll->total_votes > 0) {
+                            $percentage = ($option->votes / $poll->total_votes) * 100;
+                            $percentage_css = number_format($percentage, 2);
+                        }
 
                         echo '<div class="poll-result-row">';
                             echo '<div class="poll-result-name">';
