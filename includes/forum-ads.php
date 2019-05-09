@@ -64,18 +64,18 @@ class AsgarosForumAds {
     }
 
     public function include_ads_top() {
-        $this->render_ads('top');
+        $this->render_ad('top');
     }
 
     public function include_ads_header() {
-        $this->render_ads('header');
+        $this->render_ad('header');
     }
 
     public function include_ads_category() {
         $this->counter_categories++;
 
         if (($this->counter_categories % $this->asgarosforum->options['ads_frequency_categories']) == 0) {
-            $this->render_ads('category');
+            $this->render_ad('category');
         }
     }
 
@@ -83,7 +83,7 @@ class AsgarosForumAds {
         $this->counter_forums++;
 
         if (($this->counter_forums % $this->asgarosforum->options['ads_frequency_forums']) == 0) {
-            $this->render_ads('forum');
+            $this->render_ad('forum');
         }
     }
 
@@ -91,7 +91,7 @@ class AsgarosForumAds {
         $this->counter_topics++;
 
         if (($this->counter_topics % $this->asgarosforum->options['ads_frequency_topics']) == 0) {
-            $this->render_ads('topic');
+            $this->render_ad('topic');
         }
     }
 
@@ -99,21 +99,32 @@ class AsgarosForumAds {
         $this->counter_posts++;
 
         if (($this->counter_posts % $this->asgarosforum->options['ads_frequency_posts']) == 0) {
-            $this->render_ads('post');
+            $this->render_ad('post');
         }
     }
 
     public function include_ads_bottom() {
-        $this->render_ads('bottom');
+        $this->render_ad('bottom');
     }
 
-    public function render_ads($position) {
+    public function render_ad($position) {
         if (!empty($this->ads[$position])) {
-            foreach ($this->ads[$position] as $ad) {
-                $ad = do_shortcode(stripslashes($ad));
+            // Set an initial ad.
+            $ad = $this->ads[$position][0];
 
-                echo '<div class="ad ad-'.$position.'">'.$ad.'</div>';
+            // Count ads.
+            $counter = count($this->ads[$position]);
+
+            // Select a random ad if necessary.
+            if ($counter > 1) {
+                $ad = $this->ads[$position][rand(0, ($counter - 1))];
             }
+
+            // Prepare ad.
+            $ad = do_shortcode(stripslashes($ad));
+
+            // Render ad.
+            echo '<div class="ad ad-'.$position.'">'.$ad.'</div>';
         }
     }
 
