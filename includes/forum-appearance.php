@@ -116,7 +116,7 @@ class AsgarosForumAppearance {
 	public function set_header() {
 		// SEO stuff.
 		if ($this->asgarosforum->executePlugin) {
-			echo '<!-- Asgaros Forum: BEGIN -->'.PHP_EOL;
+			echo '<!-- Asgaros Forum - SEO: BEGIN -->'.PHP_EOL;
 
 			$link = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
 			$title = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
@@ -170,7 +170,7 @@ class AsgarosForumAppearance {
 
 			do_action('asgarosforum_wp_head');
 
-			echo '<!-- Asgaros Forum: END -->'.PHP_EOL;
+			echo '<!-- Asgaros Forum - SEO: END -->'.PHP_EOL;
 		}
 	}
 
