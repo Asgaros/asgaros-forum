@@ -235,8 +235,24 @@ class AsgarosForumPermissions {
             return false;
         }
 
-        // Otherwise allow.
-        return true;
+        // Allow when there is no time limitation.
+        $time_limitation = $this->asgarosforum->options['time_limit_delete_posts'];
+
+        if ($time_limitation == 0) {
+            return true;
+        }
+
+        // Otherwise decision based on current time.
+        $date_creation = ($post_date) ? $post_date : $this->asgarosforum->get_post_date($post_id);
+        $date_creation = strtotime($date_creation);
+        $date_now = strtotime($this->asgarosforum->current_time());
+        $date_difference = $date_now - $date_creation;
+
+        if (($time_limitation * 60) < $date_difference) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     // Check if a user can ban another user.

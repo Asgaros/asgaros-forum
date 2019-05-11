@@ -92,6 +92,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to let users delete their own posts
+* Added: Option to set time limitation for deleting posts
 * Added: Option to disable post editing
 * Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings

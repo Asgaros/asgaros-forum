@@ -91,6 +91,7 @@ class AsgarosForum {
         'enable_edit_post'                  => true,
         'time_limit_edit_posts'             => 0,
         'enable_delete_post'                => false,
+        'time_limit_delete_posts'           => 3,
         'show_description_in_forum'         => false,
         'require_login'                     => false,
         'require_login_posts'               => false,

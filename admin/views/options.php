@@ -364,6 +364,14 @@ if (!defined('ABSPATH')) exit;
                 <?php
                 $delete_post_option = checked(!empty($asgarosforum->options['enable_delete_post']), true, false);
                 ?>
+
+                <tr class="delete-post-option" <?php if (!$delete_post_option) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="time_limit_delete_posts"><?php _e('Time limitation for deleting posts (in minutes):', 'asgaros-forum'); ?></label></th>
+                    <td>
+                        <input type="number" name="time_limit_delete_posts" id="time_limit_delete_posts" value="<?php echo stripslashes($asgarosforum->options['time_limit_delete_posts']); ?>" size="3" min="0">
+                        <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                    </td>
+                </tr>
             </table>
         </div>
 
