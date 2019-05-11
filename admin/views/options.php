@@ -340,7 +340,7 @@ if (!defined('ABSPATH')) exit;
             </div>
             <table>
                 <tr>
-                    <th><label for="enable_edit_post"><?php _e('Users can edit their posts', 'asgaros-forum'); ?></label></th>
+                    <th><label for="enable_edit_post"><?php _e('Users can edit their own posts', 'asgaros-forum'); ?></label></th>
                     <td><input type="checkbox" name="enable_edit_post" id="enable_edit_post" class="show_hide_initiator" data-hide-class="edit-post-option" <?php checked(!empty($asgarosforum->options['enable_edit_post'])); ?>></td>
                 </tr>
 
