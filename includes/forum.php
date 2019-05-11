@@ -88,6 +88,7 @@ class AsgarosForum {
         'highlight_authors'                 => true,
         'show_author_posts_counter'         => true,
         'show_edit_date'                    => true,
+        'enable_edit_post'                  => true,
         'time_limit_edit_posts'             => 0,
         'show_description_in_forum'         => false,
         'require_login'                     => false,

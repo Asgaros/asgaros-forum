@@ -151,14 +151,6 @@ if (!defined('ABSPATH')) exit;
                 </tr>
 
                 <tr>
-                    <th><label for="time_limit_edit_posts"><?php _e('Time limitation for editing posts (in minutes):', 'asgaros-forum'); ?></label></th>
-                    <td>
-                        <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo stripslashes($asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
-                        <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
-                    </td>
-                </tr>
-
-                <tr>
                     <th>
                         <label for="approval_for"><?php _e('Approval needed for new topics from:', 'asgaros-forum'); ?></label>
                         <span class="description"><?php _e('This setting only affects forums that require approval for new topics.', 'asgaros-forum'); ?></span>
@@ -336,6 +328,31 @@ if (!defined('ABSPATH')) exit;
                                 <td><input class="regular-text" type="text" name="view_name_reports" id="view_name_reports" value="<?php echo esc_html(stripslashes($asgarosforum->options['view_name_reports'])); ?>"></td>
                             </tr>
                         </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="settings-box">
+            <div class="settings-header">
+                <span class="fas fa-user-shield"></span>
+                <?php _e('Permissions', 'asgaros-forum'); ?>
+            </div>
+            <table>
+                <tr>
+                    <th><label for="enable_edit_post"><?php _e('Users can edit their posts', 'asgaros-forum'); ?></label></th>
+                    <td><input type="checkbox" name="enable_edit_post" id="enable_edit_post" class="show_hide_initiator" data-hide-class="edit-post-option" <?php checked(!empty($asgarosforum->options['enable_edit_post'])); ?>></td>
+                </tr>
+
+                <?php
+                $edit_post_option = checked(!empty($asgarosforum->options['enable_edit_post']), true, false);
+                ?>
+
+                <tr class="edit-post-option" <?php if (!$edit_post_option) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="time_limit_edit_posts"><?php _e('Time limitation for editing posts (in minutes):', 'asgaros-forum'); ?></label></th>
+                    <td>
+                        <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo stripslashes($asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
+                        <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                     </td>
                 </tr>
             </table>

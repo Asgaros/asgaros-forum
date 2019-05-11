@@ -163,6 +163,11 @@ class AsgarosForumPermissions {
             return true;
         }
 
+        // Disallow when post editing is disabled.
+        if (!$this->asgarosforum->options['enable_edit_post']) {
+            return false;
+        }
+
         // Disallow when user is not the author of a post.
         $author_id = ($author_id) ? $author_id : $this->asgarosforum->get_post_author($post_id);
 
