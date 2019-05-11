@@ -355,6 +355,15 @@ if (!defined('ABSPATH')) exit;
                         <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                     </td>
                 </tr>
+
+                <tr>
+                    <th><label for="enable_delete_post"><?php _e('Users can delete their own posts', 'asgaros-forum'); ?></label></th>
+                    <td><input type="checkbox" name="enable_delete_post" id="enable_delete_post" class="show_hide_initiator" data-hide-class="delete-post-option" <?php checked(!empty($asgarosforum->options['enable_delete_post'])); ?>></td>
+                </tr>
+
+                <?php
+                $delete_post_option = checked(!empty($asgarosforum->options['enable_delete_post']), true, false);
+                ?>
             </table>
         </div>
 

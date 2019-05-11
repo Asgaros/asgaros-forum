@@ -90,6 +90,7 @@ class AsgarosForum {
         'show_edit_date'                    => true,
         'enable_edit_post'                  => true,
         'time_limit_edit_posts'             => 0,
+        'enable_delete_post'                => false,
         'show_description_in_forum'         => false,
         'require_login'                     => false,
         'require_login_posts'               => false,
@@ -1464,7 +1465,9 @@ class AsgarosForum {
         // Only show post-menu when the topic is approved.
         if ($this->approval->is_topic_approved($this->current_topic)) {
             if (is_user_logged_in()) {
-                if ($this->permissions->isModerator('current') && ($counter > 1 || $this->current_page >= 1)) {
+                $current_user_id = get_current_user_id();
+
+                if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id) && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
                     $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
                         $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
@@ -1472,7 +1475,6 @@ class AsgarosForum {
                     $menu .= '</a>';
                 }
 
-                $current_user_id = get_current_user_id();
                 if ($this->permissions->can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
                     // Edit button.
                     $menu .= '<a href="'.$this->get_link('editpost', $post_id, array('part' => ($this->current_page + 1))).'">';
@@ -1572,7 +1574,7 @@ class AsgarosForum {
         // Delete posts.
         $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
         foreach ($posts as $post) {
-            $this->remove_post($post);
+            $this->remove_post($post, false);
         }
 
         // Delete topic.
@@ -1598,15 +1600,33 @@ class AsgarosForum {
         }
     }
 
-    function remove_post($post_id) {
-        if ($this->permissions->isModerator('current') && $this->content->post_exists($post_id)) {
-            do_action('asgarosforum_before_delete_post', $post_id);
-            $this->uploads->delete_post_files($post_id);
-            $this->reports->remove_report($post_id);
-            $this->reactions->remove_all_reactions($post_id);
-            $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
-            do_action('asgarosforum_after_delete_post', $post_id);
+    function remove_post($post_id, $permission_check = true) {
+        // Cancel if no post is given.
+        if (!$post_id) {
+            return false;
         }
+
+        // Cancel if post does not exist.
+        if (!$this->content->post_exists($post_id)) {
+            return false;
+        }
+
+        // Cancel if user cannot delete post.
+        if ($permission_check) {
+            $user_id = get_current_user_id();
+
+            if (!$this->permissions->can_delete_post($user_id, $post_id)) {
+                return false;
+            }
+        }
+
+        // Delete post.
+        do_action('asgarosforum_before_delete_post', $post_id);
+        $this->uploads->delete_post_files($post_id);
+        $this->reports->remove_report($post_id, false);
+        $this->reactions->remove_all_reactions($post_id);
+        $this->db->delete($this->tables->posts, array('id' => $post_id), array('%d'));
+        do_action('asgarosforum_after_delete_post', $post_id);
     }
 
     function change_status($property) {

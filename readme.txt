@@ -91,12 +91,14 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to let users delete their own posts
 * Added: Option to disable post editing
 * Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings
 * Changed: Select ad randomly if multiple ads are defined for a specific location
 * Changed: Minor restructuring of settings
 * Updated: Font Awesome version 5.8.2
+* Performance improvements and code optimizations
 = 1.14.7 =
 * Fixed: Search-engines could not index the forum if profiles were not accessible for guests
 = 1.14.6 =
