@@ -1468,7 +1468,7 @@ class AsgarosForum {
             if (is_user_logged_in()) {
                 $current_user_id = get_current_user_id();
 
-                if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id) && ($counter > 1 || $this->current_page >= 1)) {
+                if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id, $post_date) && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
                     $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
                         $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';

@@ -284,10 +284,8 @@ class AsgarosForumAdmin {
 
         foreach ($asgarosforum->options_default as $k => $v) {
             if (isset($_POST[$k])) {
-                if ($k === 'uploads_maximum_number' || $k === 'uploads_maximum_size') {
+                if (is_numeric($v)) {
                     $saved_ops[$k] = ((int)$_POST[$k] >= 0) ? (int)$_POST[$k] : $v;
-                } else if (is_numeric($v)) {
-                    $saved_ops[$k] = ((int)$_POST[$k] > 0) ? (int)$_POST[$k] : $v;
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = (bool)$_POST[$k];
                 } else if ($k === 'allowed_filetypes') {

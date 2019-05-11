@@ -212,7 +212,7 @@ class AsgarosForumPermissions {
     }
 
     // This function checks if a user can delete a specific post.
-    public function can_delete_post($user_id, $post_id, $author_id = false) {
+    public function can_delete_post($user_id, $post_id, $author_id = false, $post_date = false) {
         // Disallow when user is banned.
         if ($this->isBanned($user_id)) {
             return false;
