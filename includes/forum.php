@@ -1549,26 +1549,41 @@ class AsgarosForum {
     }
 
     function delete_topic($topic_id, $admin_action = false) {
-        if ($this->permissions->isModerator('current')) {
-            if ($topic_id) {
-                do_action('asgarosforum_before_delete_topic', $topic_id);
+        // Cancel when no topic is given.
+        if (!$topic_id) {
+            return false;
+        }
 
-                // Delete uploads and reports.
-                $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
-                foreach ($posts as $post) {
-                    $this->remove_post($post);
-                }
+        // Cancel when topic does not exist.
+        if (!$this->content->topic_exists($topic_id)) {
+            return false;
+        }
 
-                $this->db->delete($this->tables->topics, array('id' => $topic_id), array('%d'));
-                $this->notifications->remove_all_topic_subscriptions($topic_id);
+        // Cancel if user cannot delete topic.
+        $user_id = get_current_user_id();
 
-                do_action('asgarosforum_after_delete_topic', $topic_id);
+        if (!$this->permissions->can_delete_topic($user_id, $topic_id)) {
+            return false;
+        }
 
-                if (!$admin_action) {
-                    wp_redirect(html_entity_decode($this->get_link('forum', $this->current_forum)));
-                    exit;
-                }
-            }
+        // Continue ...
+        do_action('asgarosforum_before_delete_topic', $topic_id);
+
+        // Delete posts.
+        $posts = $this->db->get_col($this->db->prepare("SELECT id FROM {$this->tables->posts} WHERE parent_id = %d;", $topic_id));
+        foreach ($posts as $post) {
+            $this->remove_post($post);
+        }
+
+        // Delete topic.
+        $this->db->delete($this->tables->topics, array('id' => $topic_id), array('%d'));
+        $this->notifications->remove_all_topic_subscriptions($topic_id);
+
+        do_action('asgarosforum_after_delete_topic', $topic_id);
+
+        if (!$admin_action) {
+            wp_redirect(html_entity_decode($this->get_link('forum', $this->current_forum)));
+            exit;
         }
     }
 
