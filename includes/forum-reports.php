@@ -95,10 +95,12 @@ class AsgarosForumReports {
         }
     }
 
-    public function remove_report($post_id) {
-        // Ensure that the current user is at least a moderator.
-        if (!$this->asgarosforum->permissions->isModerator('current')) {
-            return;
+    public function remove_report($post_id, $permission_check = true) {
+        if ($permission_check) {
+            // Ensure that the current user is at least a moderator.
+            if (!$this->asgarosforum->permissions->isModerator('current')) {
+                return;
+            }
         }
 
         $this->asgarosforum->db->delete($this->asgarosforum->tables->reports, array('post_id' => $post_id), array('%d'));
