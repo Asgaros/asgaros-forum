@@ -91,6 +91,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to let users delete their own topics
+* Added: Option to set time limitation for deleting topics
 * Added: Option to let users delete their own posts
 * Added: Option to set time limitation for deleting posts
 * Added: Option to disable post editing

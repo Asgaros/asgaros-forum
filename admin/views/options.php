@@ -372,6 +372,23 @@ if (!defined('ABSPATH')) exit;
                         <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                     </td>
                 </tr>
+
+                <tr>
+                    <th><label for="enable_delete_topic"><?php _e('Users can delete their own topics', 'asgaros-forum'); ?></label></th>
+                    <td><input type="checkbox" name="enable_delete_topic" id="enable_delete_topic" class="show_hide_initiator" data-hide-class="delete-topic-option" <?php checked(!empty($asgarosforum->options['enable_delete_topic'])); ?>></td>
+                </tr>
+
+                <?php
+                $delete_topic_option = checked(!empty($asgarosforum->options['enable_delete_topic']), true, false);
+                ?>
+
+                <tr class="delete-topic-option" <?php if (!$delete_topic_option) { echo 'style="display: none;"'; } ?>>
+                    <th><label for="time_limit_delete_topics"><?php _e('Time limitation for deleting topics (in minutes):', 'asgaros-forum'); ?></label></th>
+                    <td>
+                        <input type="number" name="time_limit_delete_topics" id="time_limit_delete_topics" value="<?php echo stripslashes($asgarosforum->options['time_limit_delete_topics']); ?>" size="3" min="0">
+                        <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                    </td>
+                </tr>
             </table>
         </div>
 

@@ -447,7 +447,7 @@ class AsgarosForumAdmin {
 
         if (!empty($topics)) {
             foreach ($topics as $topic) {
-                $asgarosforum->delete_topic($topic, true);
+                $asgarosforum->delete_topic($topic, true, false);
             }
         }
 
