@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings
 * Changed: Select ad randomly if multiple ads are defined for a specific location
+* Minor design changes
 = 1.14.7 =
 * Fixed: Search-engines could not index the forum if profiles were not accessible for guests
 = 1.14.6 =

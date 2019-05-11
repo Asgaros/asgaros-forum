@@ -411,16 +411,27 @@ if (!defined('ABSPATH')) exit;
                     <th><label for="mail_template_new_topic_message"><?php _e('New topic notification message:', 'asgaros-forum'); ?></label></th>
                     <td><textarea class="large-text" rows="8" cols="80" type="text" name="mail_template_new_topic_message" id="mail_template_new_topic_message"><?php echo esc_html(stripslashes($asgarosforum->options['mail_template_new_topic_message'])); ?></textarea></td>
                 </tr>
-                <!-- Mentioning Notifications -->
+            </table>
+        </div>
+
+        <div class="settings-box">
+            <div class="settings-header">
+                <span class="fas fa-at"></span>
+                <?php _e('Mentioning', 'asgaros-forum'); ?>
+            </div>
+            <?php
+            $mentioning_option = checked(!empty($asgarosforum->options['enable_mentioning']), true, false);
+            ?>
+            <table>
                 <tr>
                     <th><label for="enable_mentioning"><?php _e('Enable Mentioning', 'asgaros-forum'); ?></label></th>
-                    <td><input type="checkbox" name="enable_mentioning" id="enable_mentioning" <?php checked(!empty($asgarosforum->options['enable_mentioning'])); ?>></td>
+                    <td><input type="checkbox" name="enable_mentioning" id="enable_mentioning" class="show_hide_initiator" data-hide-class="mentioning-option" <?php checked(!empty($asgarosforum->options['enable_mentioning'])); ?>></td>
                 </tr>
-                <tr>
+                <tr class="mentioning-option" <?php if (!$mentioning_option) { echo 'style="display: none;"'; } ?>>
                     <th><label for="mail_template_mentioned_subject"><?php _e('Mentioning notification subject:', 'asgaros-forum'); ?></label></th>
                     <td><input class="regular-text" type="text" name="mail_template_mentioned_subject" id="mail_template_mentioned_subject" value="<?php echo esc_html(stripslashes($asgarosforum->options['mail_template_mentioned_subject'])); ?>"></td>
                 </tr>
-                <tr>
+                <tr class="mentioning-option" <?php if (!$mentioning_option) { echo 'style="display: none;"'; } ?>>
                     <th><label for="mail_template_mentioned_message"><?php _e('Mentioning notification message:', 'asgaros-forum'); ?></label></th>
                     <td><textarea class="large-text" rows="8" cols="80" type="text" name="mail_template_mentioned_message" id="mail_template_mentioned_message"><?php echo esc_html(stripslashes($asgarosforum->options['mail_template_mentioned_message'])); ?></textarea></td>
                 </tr>
