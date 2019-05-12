@@ -22,20 +22,9 @@ echo '<div class="pages-and-menu">';
     echo '<div class="clear"></div>';
 echo '</div>';
 
-// Show sub-forums.
-$subforums = $this->get_forums($this->current_category, $this->current_forum);
-
-if (!empty($subforums)) {
-    echo '<div class="title-element">';
-        echo __('Subforums', 'asgaros-forum');
-        echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
-    echo '</div>';
-
-    echo '<div class="content-container">';
-        foreach ($subforums as $forum) {
-            require('forum-element.php');
-        }
-    echo '</div>';
+// Render subforums.
+if ($this->options['subforums_location'] == 'above' || $this->options['subforums_location'] == 'both') {
+    $this->render_subforums($this->current_category, $this->current_forum);
 }
 
 if ($counter_total > 0) {
@@ -68,4 +57,9 @@ if ($counter_total > 0) {
     echo '<div class="content-container" id="content-container-forum-'.$this->current_forum.'">';
         $this->render_notice(__('There are no topics yet!', 'asgaros-forum'));
     echo '</div>';
+}
+
+// Render subforums.
+if ($this->options['subforums_location'] == 'below' || $this->options['subforums_location'] == 'both') {
+    $this->render_subforums($this->current_category, $this->current_forum);
 }

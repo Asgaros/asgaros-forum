@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to let users delete their own posts
 * Added: Option to set time limitation for deleting posts
 * Added: Option to disable post editing
+* Added: Option to change location of subforums
 * Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings
 * Changed: Select ad randomly if multiple ads are defined for a specific location

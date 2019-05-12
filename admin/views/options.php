@@ -162,6 +162,19 @@ if (!defined('ABSPATH')) exit;
                         </select>
                     </td>
                 </tr>
+
+                <tr>
+                    <th>
+                        <label for="subforums_location"><?php _e('Location of subforums:', 'asgaros-forum'); ?></label>
+                    </th>
+                    <td>
+                        <select name="subforums_location" id="subforums_location">';
+                            <option value="above" <?php if ($asgarosforum->options['subforums_location'] == 'above') { echo 'selected="selected"'; } ?>><?php _e('Above Topics', 'asgaros-forum'); ?></option>
+                            <option value="below" <?php if ($asgarosforum->options['subforums_location'] == 'below') { echo 'selected="selected"'; } ?>><?php _e('Below Topics', 'asgaros-forum'); ?></option>
+                            <option value="both" <?php if ($asgarosforum->options['subforums_location'] == 'both') { echo 'selected="selected"'; } ?>><?php _e('Above & Below Topics', 'asgaros-forum'); ?></option>
+                        </select>
+                    </td>
+                </tr>
             </table>
         </div>
 

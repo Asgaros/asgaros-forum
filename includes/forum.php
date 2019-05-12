@@ -128,7 +128,8 @@ class AsgarosForum {
         'view_name_unapproved'              => 'unapproved',
         'view_name_reports'                 => 'reports',
         'enable_spoilers'                   => true,
-        'hide_spoilers_from_guests'         => false
+        'hide_spoilers_from_guests'         => false,
+        'subforums_location'                => 'above'
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -848,6 +849,24 @@ class AsgarosForum {
         echo '</div>';
 
         do_action('asgarosforum_after_topic');
+    }
+
+    // Renders all subforums inside of a category/forum combination.
+    function render_subforums($category_id, $forum_id) {
+        $subforums = $this->get_forums($category_id, $forum_id);
+
+        if (!empty($subforums)) {
+            echo '<div class="title-element">';
+                echo __('Subforums', 'asgaros-forum');
+                echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
+            echo '</div>';
+
+            echo '<div class="content-container">';
+                foreach ($subforums as $forum) {
+                    require('views/forum-element.php');
+                }
+            echo '</div>';
+        }
     }
 
     function showTopic() {
