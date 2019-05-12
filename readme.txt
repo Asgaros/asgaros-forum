@@ -101,8 +101,9 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Added missing translation strings
 * Fixed: Display issues with some themes
 * Changed: Select ad randomly if multiple ads are defined for a specific location
-* Changed: Minor restructuring of settings
+* Changed: Restructuring of settings
 * Updated: Font Awesome version 5.8.2
+* Minor design changes
 * Performance improvements and code optimizations
 = 1.14.7 =
 * Fixed: Search-engines could not index the forum if profiles were not accessible for guests

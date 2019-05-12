@@ -1,3 +1,100 @@
+/* TABS */
+#af-options #settings-wrapper {
+    position: relative;
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    border: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    background: none;
+    font-family: inherit;
+}
+#af-options #settings-tabs {
+    z-index: 2;
+    position: relative;
+    width: 159px;
+    float: left;
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    line-height: inherit;
+}
+#af-options #settings-tabs li {
+    background: none;
+    white-space: normal;
+    display: block;
+    margin:  0 10px;
+    padding: 20px 0 20px 10px;
+    text-decoration: none;
+    color: #666;
+    border-bottom: 1px solid #ddd;
+    word-break: break-word;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: none;
+    -webkit-transition: none;
+    float: none;
+    cursor: pointer;
+}
+#af-options #settings-tabs li i {
+    padding-right: 6px;
+}
+#af-options #settings-tabs li.active-tab,
+#af-options #settings-tabs li:hover {
+    width: 161px;
+    margin: -1px 0 0 0;
+    border-top: 1px solid #ddd;
+    padding: 20px 11px 20px 20px;
+    color: #000 !important;
+    background: #fff !important;
+}
+#af-options #settings-tabs li:last-child {
+    border-bottom: none;
+}
+#af-options #settings-wrapper #tab-content {
+    position: relative;
+    padding: 0px 10px 20px;
+    width: calc( 100% - 183px );
+    float: right;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #444;
+    min-height: 1000px;
+}
+@media only screen and (max-width: 1100px) {
+    #af-options #settings-tabs {
+        width: 59px;
+    }
+    #af-options #settings-tabs li {
+        margin: 0;
+        padding: 20px;
+        width: 60px;
+        height: 60px;
+    }
+    #af-options #settings-tabs li.active-tab,
+    #af-options #settings-tabs li:hover {
+        padding: 20px;
+        height: 61px;
+        width: 61px;
+    }
+    #af-options #settings-wrapper #tab-content {
+        width: calc( 100% - 83px );
+    }
+    #af-options #settings-tabs span {
+        display: none;
+    }
+}
+/* GENERAL */
 .af-usergroup-tag {
     padding: 0 4px;
     border-radius: 3px;
@@ -288,7 +385,7 @@ li.forum-user-group {
 .settings-header {
     display: block;
     font-size: 22px;
-    padding: 16px 8px;
+    padding: 14px 8px;
     line-height: 30px;
     border-bottom: 1px solid #e5e5e5;
     margin: 0 0 16px 0;
