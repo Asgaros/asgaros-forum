@@ -553,6 +553,9 @@
 #af-wrapper .menu-icon {
     padding-right: 6px;
 }
+#af-wrapper .menu-icon:after {
+    display: none; /* comp */
+}
 
 /* NOTICE */
 #af-wrapper .notices-panel {

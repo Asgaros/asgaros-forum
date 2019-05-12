@@ -99,6 +99,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to change location of subforums
 * Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings
+* Fixed: Display issues with some themes
 * Changed: Select ad randomly if multiple ads are defined for a specific location
 * Changed: Minor restructuring of settings
 * Updated: Font Awesome version 5.8.2
