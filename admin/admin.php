@@ -171,7 +171,8 @@ class AsgarosForumAdmin {
     function enqueue_admin_scripts($hook) {
         global $asgarosforum;
 
-        wp_enqueue_style('asgarosforum-fontawesome-css', $asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $asgarosforum->version);
+        wp_enqueue_style('asgarosforum-fontawesome', $asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $asgarosforum->version);
+        wp_enqueue_style('asgarosforum-fontawesome-compat-v4', $asgarosforum->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $asgarosforum->version);
         wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->plugin_url.'admin/css/admin.css', array(), $asgarosforum->version);
 
         if (strstr($hook, 'asgarosforum') !== false) {
