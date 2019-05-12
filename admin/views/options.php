@@ -102,8 +102,10 @@ if (!defined('ABSPATH')) exit;
                     $active_css = ($selected_tab == $key) ? 'class="active-tab"' : '';
 
                     echo '<li data-slug="'.$key.'" '.$active_css.'>';
+                    echo '<a href="#asgaros-panel">';
                     echo '<i class="'.$value['icon'].'"></i>';
                     echo '<span>'.$value['label'].'</span>';
+                    echo '</a>';
                     echo '</li>';
                 }
                 ?>

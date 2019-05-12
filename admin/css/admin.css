@@ -28,8 +28,13 @@
     line-height: inherit;
 }
 #af-options #settings-tabs li {
+    margin: 0;
+    padding: 0;
+    float: none;
     background: none;
     white-space: normal;
+}
+#af-options #settings-tabs li a {
     display: block;
     margin:  0 10px;
     padding: 20px 0 20px 10px;
@@ -44,13 +49,15 @@
     transition: none;
     -webkit-transition: none;
     float: none;
-    cursor: pointer;
 }
 #af-options #settings-tabs li i {
     padding-right: 6px;
 }
-#af-options #settings-tabs li.active-tab,
-#af-options #settings-tabs li:hover {
+#af-options #settings-tabs li.active-tab {
+    width: 161px;
+}
+#af-options #settings-tabs li.active-tab a,
+#af-options #settings-tabs li a:hover {
     width: 161px;
     margin: -1px 0 0 0;
     border-top: 1px solid #ddd;
@@ -58,7 +65,7 @@
     color: #000 !important;
     background: #fff !important;
 }
-#af-options #settings-tabs li:last-child {
+#af-options #settings-tabs li:last-child a {
     border-bottom: none;
 }
 #af-options #settings-wrapper #tab-content {
@@ -75,14 +82,14 @@
     #af-options #settings-tabs {
         width: 59px;
     }
-    #af-options #settings-tabs li {
+    #af-options #settings-tabs li a {
         margin: 0;
         padding: 20px;
         width: 60px;
         height: 60px;
     }
-    #af-options #settings-tabs li.active-tab,
-    #af-options #settings-tabs li:hover {
+    #af-options #settings-tabs li.active-tab a,
+    #af-options #settings-tabs li a:hover {
         padding: 20px;
         height: 61px;
         width: 61px;
