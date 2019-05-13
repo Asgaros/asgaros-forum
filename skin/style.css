@@ -555,6 +555,7 @@
 }
 #af-wrapper .menu-icon:after {
     display: none; /* comp */
+    content: none; /* comp */
 }
 
 /* NOTICE */
