@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to set time limitation for deleting posts
 * Added: Option to disable post editing
 * Added: Option to change location of subforums
+* Added: Warning when an user leaves a page with unsaved changes in the editor
 * Fixed: Division by zero warning when viewing the results of a poll without votes
 * Fixed: Added missing translation strings
 * Fixed: Display issues with some themes

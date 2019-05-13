@@ -45,7 +45,7 @@ window.FontAwesomeConfig = {
         });
 
         // Close editor.
-        $('.editor-row a.cancel').click(function(e) {
+        $('#af-wrapper .editor-row-submit a.cancel').click(function(e) {
             e.preventDefault();
 
             $('#forum-editor-form').slideToggle(400, function() {
@@ -53,6 +53,7 @@ window.FontAwesomeConfig = {
                 $('.editor-row-subject input').val('');
 
                 if (tinyMCE.activeEditor) {
+                    // Clear TinyMCE editor.
                     tinyMCE.activeEditor.setContent('');
                 } else {
                     $('textarea[id="message"]').val('');
@@ -205,6 +206,30 @@ window.FontAwesomeConfig = {
             event.preventDefault();
             $(this).parent().remove();
         });
+
+        // Warn user when he made changes inside the editor and leaves the page.
+        $(window).on('beforeunload', function() {
+            if (tinyMCE.activeEditor) {
+                if (tinyMCE.activeEditor.isDirty()) {
+                    return 'Are you sure you want to leave?';
+                }
+            }
+        });
+
+        // Avoid dirty-check when submitting/cancelling the editor.
+        $('#af-wrapper .editor-row-submit .button-red').on('click', function(e) {
+            editor_not_dirty();
+        });
+
+        $('#af-wrapper #forum-editor-form').on('submit', function(e) {
+            editor_not_dirty();
+        });
+
+        function editor_not_dirty() {
+            if (tinyMCE.activeEditor) {
+                tinyMCE.activeEditor.isNotDirty = true;
+            }
+        }
 
         // Clears all form-elements inside of a selected DOM-element.
         function clear_form_elements(selector) {

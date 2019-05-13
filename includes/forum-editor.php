@@ -192,7 +192,7 @@ class AsgarosForumEditor {
                     $this->asgarosforum->notifications->show_editor_subscription_option();
                     do_action('asgarosforum_editor_custom_content_bottom', $editor_view);
 
-                    echo '<div class="editor-row">';
+                    echo '<div class="editor-row editor-row-submit">';
                         if ($editor_view === 'addtopic') {
                             echo '<input type="hidden" name="submit_action" value="add_topic">';
                         } else if ($editor_view === 'addpost') {
