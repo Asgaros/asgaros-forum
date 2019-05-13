@@ -14,13 +14,8 @@ Asgaros Forum is the best forum-plugin for WordPress! It comes with dozens of fe
 == Description ==
 Asgaros Forum is the perfect WordPress plugin if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and perfectly integrated into WordPress.
 
-= Installation =
-* A new forum-page is automatically created during the installation
-* Add this page to your menu so your users can access your forum
-* Thats all!
-
-= Demo, Support & Documentation =
-* [Official Support Forum](https://www.asgaros.de/support/)
+= Support, Demo & Documentation =
+* [Support & Demo](https://www.asgaros.de/support/)
 * [Documentation](https://www.asgaros.de/docs/)
 
 = Features =
@@ -42,21 +37,25 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Moderators, Permissions & Usergroups
 * Widgets
 * RSS Feeds
-* Easy Color Customization
+* Easy Appearance Customization
 * Mobile Theme & Theme Manager
 * Multilingualism
 * Multiple Instances
 * Multisite Compatibility
 
+= Installation =
+* A new forum-page is automatically created during the installation
+* Add this page to your menu so your users can access your forum
+* Thats all!
+
 == Installation ==
-* Download `Asgaros Forum`.
-* Upload the plugin files to the `/wp-content/plugins/asgaros-forum` directory or install the plugin directly via the WordPress plugins screen.
-* Activate the plugin via the `Plugins` screen in WordPress.
-* Create a new page for your forum, add the `[forum]` shortcode to it and save the page.
-* Add this page to your sites menu so you can access it.
-* On the left side of the administration area you will find a new menu called `Forum`.
-* Configure your options and create the categories/forums there.
-* Done!
+* Download `Asgaros Forum`
+* Activate the plugin via the `Plugins` screen in WordPress
+* A new forum-page is automatically created during the installation
+* You can also add a forum to a page manually by adding the `[forum]` shortcode to it
+* Add this page to your menu so your users can access your forum
+* On the left side of the administration area you will find a new menu called `Forum` where you can change the settings and create new categories & forums
+* Thats all!
 
 == Frequently Asked Questions ==
 = I cant see content or modifications I made to the forum =
