@@ -780,6 +780,10 @@ if (!defined('ABSPATH')) exit;
                             <th><label for="activity_days"><?php _e('Days of activity to show:', 'asgaros-forum'); ?></label></th>
                             <td><input type="number" name="activity_days" id="activity_days" value="<?php echo stripslashes($asgarosforum->options['activity_days']); ?>" size="3" min="1"></td>
                         </tr>
+                        <tr class="activity-option" <?php if (!$activityOption) { echo 'style="display: none;"'; } ?>>
+                            <th><label for="activities_per_page"><?php _e('Activities per page:', 'asgaros-forum'); ?></label></th>
+                            <td><input type="number" name="activities_per_page" id="activities_per_page" value="<?php echo stripslashes($asgarosforum->options['activities_per_page']); ?>" size="3" min="1"></td>
+                        </tr>
                     </table>
                 </div>
 

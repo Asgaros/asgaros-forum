@@ -106,6 +106,7 @@ class AsgarosForum {
         'approval_for'                      => 'guests',
         'enable_activity'                   => true,
         'activity_days'                     => 14,
+        'activities_per_page'               => 50,
         'enable_polls'                      => true,
         'polls_permission'                  => 'loggedin',
         'enable_seo_urls'                   => true,
