@@ -36,6 +36,9 @@ class AsgarosForumReactions {
                 $reaction = (!empty($_GET['reaction'])) ? $_GET['reaction'] : '';
 
                 $this->reaction_change($post_id, $user_id, $reaction);
+                
+                // Redirect back to the topic.
+                $this->redirect($post_id);
             }
         }
     }
@@ -135,9 +138,6 @@ class AsgarosForumReactions {
                 }
             }
         }
-
-        // Redirect back to the topic.
-        $this->redirect($post_id);
     }
 
     public function add_reaction($post_id, $user_id, $reaction) {
