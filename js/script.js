@@ -5,6 +5,28 @@ window.FontAwesomeConfig = {
 
 (function($) {
     $(document).ready(function() {
+        // Handle click on reaction-icon.
+        $(document).on('click', '#af-wrapper .post-reactions a', function(e) {
+            e.preventDefault();
+
+            // Get relevant data first.
+            var post_id = $(this).attr('data-post-id');
+            var reaction = $(this).attr('data-reaction');
+
+            $.ajax({
+                url: wpApiSettings.root+'asgaros-forum/v1/reaction/'+post_id+'/'+reaction,
+                method: 'POST',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', wpApiSettings.nonce);
+                }
+            })
+            .done(function(response) {
+                if (response.status === true) {
+                    $('#af-wrapper #postid-'+post_id+' .post-reactions').html(response.data);
+                }
+            });
+        });
+
         // Sticky panel.
         $('#af-wrapper .topic-button-sticky').click(function(e) {
             e.preventDefault();

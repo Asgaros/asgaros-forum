@@ -120,7 +120,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
         // Show post footer when the topic is approved.
         if ($this->approval->is_topic_approved($this->current_topic)) {
             echo '<div class="post-footer">';
-                $this->reactions->render_reactions_area($post->id, $this->current_topic);
+                $this->reactions->render_reactions_area($post->id);
 
                 echo '<div class="post-meta">';
                     if ($this->options['show_edit_date'] && (strtotime($post->date_edit) > strtotime($post->date))) {
