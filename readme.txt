@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to define number of activities per page
+* Fixed: Display issues with some themes
 = 1.14.8 =
 * Added: Option to let users delete their own topics
 * Added: Option to set time limitation for deleting topics

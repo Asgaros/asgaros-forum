@@ -577,6 +577,8 @@
     display: block;
     text-align: center;
     padding: 12px;
+    background: none; /* comp */
+    border: none; /* comp */
 }
 #af-wrapper .notice-icon:before {
     padding-right: 8px;
