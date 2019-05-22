@@ -231,9 +231,11 @@ window.FontAwesomeConfig = {
 
         // Warn user when he made changes inside the editor and leaves the page.
         $(window).on('beforeunload', function() {
-            if (tinyMCE.activeEditor) {
-                if (tinyMCE.activeEditor.isDirty()) {
-                    return 'Are you sure you want to leave?';
+            if (typeof tinyMCE !== 'undefined') {
+                if (tinyMCE.activeEditor) {
+                    if (tinyMCE.activeEditor.isDirty()) {
+                        return 'Are you sure you want to leave?';
+                    }
                 }
             }
         });
@@ -248,8 +250,10 @@ window.FontAwesomeConfig = {
         });
 
         function editor_not_dirty() {
-            if (tinyMCE.activeEditor) {
-                tinyMCE.activeEditor.isNotDirty = true;
+            if (typeof tinyMCE !== 'undefined') {
+                if (tinyMCE.activeEditor) {
+                    tinyMCE.activeEditor.isNotDirty = true;
+                }
             }
         }
 
