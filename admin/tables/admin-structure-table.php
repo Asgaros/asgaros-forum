@@ -74,7 +74,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         if ($item['closed'] == 1) {
             $status = __('Closed', 'asgaros-forum');
         } else {
-            $status = __('Open', 'asgaros-forum');
+            $status = __('Opened', 'asgaros-forum');
         }
 
         // Check if forum needs approval.
