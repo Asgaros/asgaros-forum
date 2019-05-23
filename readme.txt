@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: JavaScript ReferenceError when leaving a page which does not contain an instance of the TinyMCE editor
 * Fixed: Display issues with some themes
 * Changed: Use AJAX for reactions to prevent reload of page
+* Improved compatibility with Toolset
 * Performance improvements and code optimizations
 = 1.14.8 =
 * Added: Option to let users delete their own topics
