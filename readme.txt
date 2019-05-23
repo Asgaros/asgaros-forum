@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to define number of activities per page
+* Added: asgarosforum_execution_check action
 * Fixed: JavaScript ReferenceError when leaving a page which does not contain an instance of the TinyMCE editor
 * Fixed: Display issues with some themes
 * Changed: Use AJAX for reactions to prevent reload of page

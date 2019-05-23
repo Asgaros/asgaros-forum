@@ -352,6 +352,8 @@ class AsgarosForum {
             $this->options['location'] = $post->ID;
         }
 
+        do_action('asgarosforum_execution_check');
+
         // Set all base links.
         if ($this->executePlugin || get_post($this->options['location'])) {
             $this->rewrite->set_links();
