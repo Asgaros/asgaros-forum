@@ -12,6 +12,7 @@ class AsgarosForumCompatibility {
         $this->compatibility_yoastseo();
         $this->compatibility_rankmathseo();
         $this->compatibility_toolset();
+        $this->compatibility_permalinkmanager();
     }
 
     // AUTOPTIMIZE
@@ -90,5 +91,15 @@ class AsgarosForumCompatibility {
                 $this->asgarosforum->options['location'] = $post->ID;
             }
         }
+    }
+
+    // PERMALINK MANAGER
+    function compatibility_permalinkmanager() {
+        add_action('asgarosforum_prepare', array($this, 'comp_permalinkmanager_asgarosforum_prepare'));
+    }
+
+    function comp_permalinkmanager_asgarosforum_prepare() {
+        global $wp_query;
+        $wp_query->query_vars['do_not_redirect'] = 1;
     }
 }
