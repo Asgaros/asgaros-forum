@@ -21,9 +21,17 @@ class AsgarosForumReactions {
             'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum')
         );
 
+        add_action('init', array($this, 'initialize'));
         add_action('asgarosforum_prepare_topic', array($this, 'prepare'));
         add_action('asgarosforum_prepare_post', array($this, 'prepare'));
         add_action('rest_api_init', array($this, 'initialize_routes'));
+    }
+
+    public function initialize() {
+        if ($this->asgarosforum->options['enable_reactions']) {
+            // Allow filtering of reactions.
+            $this->reactions_list = apply_filters('asgarosforum_reactions', $this->reactions_list);
+        }
     }
 
     public function prepare() {
