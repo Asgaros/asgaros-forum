@@ -24,14 +24,13 @@ class AsgarosForumAdmin {
 
     function user_profile_fields($user) {
         // TODO: get_the_author_meta can be removed. Use get_user_meta instead.
-        global $asgarosforum;
         $output = '';
 
         // Show settings only when current user is admin ...
         if (current_user_can('manage_options')) {
             // ... and he edits a non-admin user.
             if (!user_can($user->ID, 'manage_options')) {
-                $role = $asgarosforum->permissions->get_forum_role($user->ID);
+                $role = $this->asgarosforum->permissions->get_forum_role($user->ID);
 
                 $output .= '<tr>';
                 $output .= '<th><label for="asgarosforum_role">'.__('Forum Role', 'asgaros-forum').'</label></th>';
@@ -51,26 +50,26 @@ class AsgarosForumAdmin {
             $output .= AsgarosForumUserGroups::showUserProfileFields($user->ID);
         }
 
-        if ($asgarosforum->options['enable_mentioning']) {
+        if ($this->asgarosforum->options['enable_mentioning']) {
             $output .= '<tr>';
             $output .= '<th><label for="asgarosforum_mention_notify">'.__('Notify me when I get mentioned', 'asgaros-forum').'</label></th>';
-            $output .= '<td><input type="checkbox" name="asgarosforum_mention_notify" id="asgarosforum_mention_notify" value="1" '.checked($asgarosforum->mentioning->user_wants_notification($user->ID), true, false).'></td>';
+            $output .= '<td><input type="checkbox" name="asgarosforum_mention_notify" id="asgarosforum_mention_notify" value="1" '.checked($this->asgarosforum->mentioning->user_wants_notification($user->ID), true, false).'></td>';
             $output .= '</tr>';
         }
 
-        if ($asgarosforum->options['allow_signatures']) {
+        if ($this->asgarosforum->options['allow_signatures']) {
             // Ensure that the user has permission to use a signature.
-            if ($asgarosforum->permissions->can_use_signature($user->ID)) {
+            if ($this->asgarosforum->permissions->can_use_signature($user->ID)) {
                 $output .= '<tr>';
                 $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
                 $output .= '<td>';
                 $output .= '<textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_the_author_meta('asgarosforum_signature', $user->ID).'</textarea>';
 
                 // Show info about allowed HTML tags.
-                if ($asgarosforum->options['signatures_html_allowed']) {
+                if ($this->asgarosforum->options['signatures_html_allowed']) {
                     $output .= '<p class="description">';
                     $output .= __('You can use the following HTML tags in signatures:', 'asgaros-forum');
-                    $output .= '&nbsp;<code>'.esc_html($asgarosforum->options['signatures_html_tags']).'</code>';
+                    $output .= '&nbsp;<code>'.esc_html($this->asgarosforum->options['signatures_html_tags']).'</code>';
                     $output .= '</p>';
                 } else {
                     $output .= '<p class="description">'.__('HTML tags are not allowed in signatures.', 'asgaros-forum').'</p>';
@@ -90,20 +89,19 @@ class AsgarosForumAdmin {
     }
 
     function user_profile_fields_update($user_id) {
-        global $asgarosforum;
         $user_id = absint($user_id);
 
         if (current_user_can('manage_options')) {
             if (!user_can($user_id, 'manage_options')) {
                 if (isset($_POST['asgarosforum_role'])) {
-                    $asgarosforum->permissions->set_forum_role($user_id, $_POST['asgarosforum_role']);
+                    $this->asgarosforum->permissions->set_forum_role($user_id, $_POST['asgarosforum_role']);
                 }
             }
 
             AsgarosForumUserGroups::updateUserProfileFields($user_id);
         }
 
-        if ($asgarosforum->options['enable_mentioning']) {
+        if ($this->asgarosforum->options['enable_mentioning']) {
             if (isset($_POST['asgarosforum_mention_notify'])) {
                 update_user_meta($user_id, 'asgarosforum_mention_notify', 'yes');
             } else {
@@ -111,12 +109,12 @@ class AsgarosForumAdmin {
             }
         }
 
-        if ($asgarosforum->options['allow_signatures']) {
+        if ($this->asgarosforum->options['allow_signatures']) {
             // Ensure that the user has permission to use a signature.
-            if ($asgarosforum->permissions->can_use_signature($user_id)) {
+            if ($this->asgarosforum->permissions->can_use_signature($user_id)) {
                 if (isset($_POST['asgarosforum_signature'])) {
-                    if ($asgarosforum->options['signatures_html_allowed']) {
-                        update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature'], $asgarosforum->options['signatures_html_tags']))));
+                    if ($this->asgarosforum->options['signatures_html_allowed']) {
+                        update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature'], $this->asgarosforum->options['signatures_html_tags']))));
                     } else {
                         update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature']))));
                     }
@@ -169,15 +167,13 @@ class AsgarosForumAdmin {
     }
 
     function enqueue_admin_scripts($hook) {
-        global $asgarosforum;
-
-        wp_enqueue_style('asgarosforum-fontawesome', $asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $asgarosforum->version);
-        wp_enqueue_style('asgarosforum-fontawesome-compat-v4', $asgarosforum->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $asgarosforum->version);
-        wp_enqueue_style('asgarosforum-admin-css', $asgarosforum->plugin_url.'admin/css/admin.css', array(), $asgarosforum->version);
+        wp_enqueue_style('asgarosforum-fontawesome', $this->asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $this->asgarosforum->version);
+        wp_enqueue_style('asgarosforum-fontawesome-compat-v4', $this->asgarosforum->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $this->asgarosforum->version);
+        wp_enqueue_style('asgarosforum-admin-css', $this->asgarosforum->plugin_url.'admin/css/admin.css', array(), $this->asgarosforum->version);
 
         if (strstr($hook, 'asgarosforum') !== false) {
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $asgarosforum->plugin_url.'admin/js/admin.js', array('wp-color-picker'), $asgarosforum->version, true);
+            wp_enqueue_script('asgarosforum-admin-js', $this->asgarosforum->plugin_url.'admin/js/admin.js', array('wp-color-picker'), $this->asgarosforum->version, true);
         }
     }
 
@@ -280,10 +276,9 @@ class AsgarosForumAdmin {
 
     /* OPTIONS */
     function save_options() {
-        global $asgarosforum;
         $saved_ops = array();
 
-        foreach ($asgarosforum->options_default as $k => $v) {
+        foreach ($this->asgarosforum->options_default as $k => $v) {
             if (isset($_POST[$k])) {
                 if (is_numeric($v)) {
                     $saved_ops[$k] = ((int)$_POST[$k] >= 0) ? (int)$_POST[$k] : $v;
@@ -305,15 +300,14 @@ class AsgarosForumAdmin {
             }
         }
 
-        $asgarosforum->saveOptions($saved_ops);
+        $this->asgarosforum->saveOptions($saved_ops);
         $this->saved = true;
     }
 
     function save_appearance() {
-        global $asgarosforum;
         $saved_ops = array();
 
-        foreach ($asgarosforum->appearance->options_default as $k => $v) {
+        foreach ($this->asgarosforum->appearance->options_default as $k => $v) {
             if (isset($_POST[$k])) {
                 $tmp = stripslashes(trim($_POST[$k]));
                 $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
@@ -322,7 +316,7 @@ class AsgarosForumAdmin {
             }
         }
 
-        $asgarosforum->appearance->save_options($saved_ops);
+        $this->asgarosforum->appearance->save_options($saved_ops);
         $this->saved = true;
     }
 
