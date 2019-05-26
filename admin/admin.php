@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) exit;
 class AsgarosForumAdmin {
     var $saved = false;
     var $error = false;
-    // TODO: Remove globals
     private $asgarosforum = null;
 
     function __construct($object) {
@@ -144,13 +143,10 @@ class AsgarosForumAdmin {
     }
 
     function options_page() {
-        global $asgarosforum;
         require('views/options.php');
     }
 
     function structure_page() {
-        global $asgarosforum;
-
         require('views/structure.php');
     }
 
@@ -322,7 +318,6 @@ class AsgarosForumAdmin {
 
     /* STRUCTURE */
     function save_category() {
-        global $asgarosforum;
         $category_id        = $_POST['category_id'];
         $category_name      = trim($_POST['category_name']);
         $category_access    = trim($_POST['category_access']);
@@ -352,8 +347,6 @@ class AsgarosForumAdmin {
     }
 
     function save_forum() {
-        global $asgarosforum;
-
         // ID of the forum.
         $forum_id           = $_POST['forum_id'];
 
@@ -373,11 +366,11 @@ class AsgarosForumAdmin {
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
-                $asgarosforum->content->insert_forum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed, $forum_approval);
+                $this->asgarosforum->content->insert_forum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed, $forum_approval);
             } else {
                 // Update forum.
-                $asgarosforum->db->update(
-                    $asgarosforum->tables->forums,
+                $this->asgarosforum->db->update(
+                    $this->asgarosforum->tables->forums,
                     array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed, 'approval' => $forum_approval, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum),
                     array('id' => $forum_id),
                     array('%s', '%s', '%s', '%d', '%d', '%d', '%d'),
@@ -385,8 +378,8 @@ class AsgarosForumAdmin {
                 );
 
                 // Update category ids of sub-forums in case the forum got moved.
-                $asgarosforum->db->update(
-                    $asgarosforum->tables->forums,
+                $this->asgarosforum->db->update(
+                    $this->asgarosforum->tables->forums,
                     array('parent_id' => $forum_category),
                     array('parent_forum' => $forum_id),
                     array('%d'),
@@ -396,12 +389,12 @@ class AsgarosForumAdmin {
                 // Approve all unapproved topics in a forum if the approval-function is off.
                 if ($forum_approval === 0) {
                     // Get all unapproved topics from this forum.
-                    $unapproved_topics = $asgarosforum->approval->get_unapproved_topics($forum_id);
+                    $unapproved_topics = $this->asgarosforum->approval->get_unapproved_topics($forum_id);
 
                     // Approve those topics if found.
                     if (!empty($unapproved_topics)) {
                         foreach ($unapproved_topics as $topic) {
-                            $asgarosforum->approval->approve_topic($topic->id);
+                            $this->asgarosforum->approval->approve_topic($topic->id);
                         }
                     }
                 }
@@ -412,9 +405,7 @@ class AsgarosForumAdmin {
     }
 
     function delete_category($categoryID) {
-        global $asgarosforum;
-
-        $forums = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->tables->forums} WHERE parent_id = {$categoryID};");
+        $forums = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id = {$categoryID};");
 
         if (!empty($forums)) {
             foreach ($forums as $forum) {
@@ -426,10 +417,8 @@ class AsgarosForumAdmin {
     }
 
     function delete_forum($forum_id, $category_id) {
-        global $asgarosforum;
-
         // Delete all subforums first
-        $subforums = $asgarosforum->get_forums($category_id, $forum_id);
+        $subforums = $this->asgarosforum->get_forums($category_id, $forum_id);
 
         if (count($subforums) > 0) {
             foreach ($subforums as $subforum) {
@@ -438,34 +427,32 @@ class AsgarosForumAdmin {
         }
 
         // Delete all topics.
-        $topics = $asgarosforum->db->get_col("SELECT id FROM {$asgarosforum->tables->topics} WHERE parent_id = {$forum_id};");
+        $topics = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->topics} WHERE parent_id = {$forum_id};");
 
         if (!empty($topics)) {
             foreach ($topics as $topic) {
-                $asgarosforum->delete_topic($topic, true, false);
+                $this->asgarosforum->delete_topic($topic, true, false);
             }
         }
 
         // Delete subscriptions for this forum.
-        $asgarosforum->notifications->remove_all_forum_subscriptions($forum_id);
+        $this->asgarosforum->notifications->remove_all_forum_subscriptions($forum_id);
 
         // Last but not least delete the forum
-        $asgarosforum->db->delete($asgarosforum->tables->forums, array('id' => $forum_id), array('%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->forums, array('id' => $forum_id), array('%d'));
 
         $this->saved = true;
     }
 
     /* USERGROUPS */
     function render_admin_header($title, $titleUpdated) {
-        global $asgarosforum;
-
         // Workaround to ensure that admin-notices are shown outside of our panel.
         echo '<h1 id="asgaros-panel-notice-area"></h1>';
 
         echo '<div id="asgaros-panel">';
             echo '<div class="header-panel">';
                 echo '<div class="sub-panel-left">';
-                    echo '<img src="'.$asgarosforum->plugin_url.'admin/images/logo.png">';
+                    echo '<img src="'.$this->asgarosforum->plugin_url.'admin/images/logo.png">';
                 echo '</div>';
                 echo '<div class="sub-panel-left">';
                     echo '<h1>'.$title.'</h1>';
