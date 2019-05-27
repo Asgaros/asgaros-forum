@@ -22,7 +22,6 @@ class AsgarosForumAdmin {
     }
 
     function user_profile_fields($user) {
-        // TODO: get_the_author_meta can be removed. Use get_user_meta instead.
         $output = '';
 
         // Show settings only when current user is admin ...
@@ -62,7 +61,7 @@ class AsgarosForumAdmin {
                 $output .= '<tr>';
                 $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
                 $output .= '<td>';
-                $output .= '<textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_the_author_meta('asgarosforum_signature', $user->ID).'</textarea>';
+                $output .= '<textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_user_meta($user->ID, 'asgarosforum_signature', true).'</textarea>';
 
                 // Show info about allowed HTML tags.
                 if ($this->asgarosforum->options['signatures_html_allowed']) {
