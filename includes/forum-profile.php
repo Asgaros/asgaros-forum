@@ -269,29 +269,13 @@ class AsgarosForumProfile {
                     }
 
                     // Show signature.
-                    if ($this->asgarosforum->options['allow_signatures']) {
-                        // Ensure that the user has permission to use a signature.
-                        if ($this->asgarosforum->permissions->can_use_signature($userData->ID)) {
-                            // TODO: We can put this code in an own function because the logic is used twice (here and in posts).
-                            $signature = get_user_meta($userData->ID, 'asgarosforum_signature', true);
+                    $signature = $this->asgarosforum->get_signature($userData->ID);
 
-                            // Prepare signature based on settings.
-                            if ($this->asgarosforum->options['signatures_html_allowed']) {
-                                $signature = strip_tags($signature, $this->asgarosforum->options['signatures_html_tags']);
-                            } else {
-                                $signature = esc_html(strip_tags($signature));
-                            }
+                    if ($signature !== false) {
+                        $cellTitle = __('Signature:', 'asgaros-forum');
+                        $cellValue = $signature;
 
-                            // Trim it.
-                            $signature = trim($signature);
-
-                            if (!empty($signature)) {
-                                $cellTitle = __('Signature:', 'asgaros-forum');
-                                $cellValue = $signature;
-
-                                $this->renderProfileRow($cellTitle, $cellValue);
-                            }
-                        }
+                        $this->renderProfileRow($cellTitle, $cellValue);
                     }
 
                     echo '<div class="profile-section-header">';

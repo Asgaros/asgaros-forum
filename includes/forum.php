@@ -1104,7 +1104,6 @@ class AsgarosForum {
     }
 
     // TODO: Clean up the complete username logic ...
-
     function get_plain_username($user_id) {
         if ($user_id) {
             $user = get_userdata($user_id);
@@ -1978,5 +1977,38 @@ class AsgarosForum {
         } else {
             return $images[0];
         }
+    }
+
+    // Tries to get the signature for a given user.
+    public function get_signature($user_id) {
+        // Ensure signatures are enabled.
+        if (!$this->options['allow_signatures']) {
+            return false;
+        }
+
+        // Ensure that the user has the permission to use a signature.
+        if (!$this->permissions->can_use_signature($user_id)) {
+            return false;
+        }
+
+        // Try to get signature.
+        $signature = get_user_meta($user_id, 'asgarosforum_signature', true);
+
+        // Prepare signature based on settings.
+        if ($this->options['signatures_html_allowed']) {
+            $signature = strip_tags($signature, $this->options['signatures_html_tags']);
+        } else {
+            $signature = esc_html(strip_tags($signature));
+        }
+
+        // Trim it.
+        $signature = trim($signature);
+
+        // Ensure signature is not empty.
+        if (empty($signature)) {
+            return false;
+        }
+
+        return $signature;
     }
 }

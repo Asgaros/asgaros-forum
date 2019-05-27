@@ -151,25 +151,11 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
         }
 
         // Show signature.
-        if ($this->current_view != 'post' && $this->options['allow_signatures']) {
-            // Ensure that the user has permission to use a signature.
-            if ($this->permissions->can_use_signature($post->author_id)) {
-                // Load signature.
-                $signature = get_user_meta($post->author_id, 'asgarosforum_signature', true);
+        if ($this->current_view != 'post') {
+            $signature = $this->get_signature($post->author_id);
 
-                // Prepare signature based on settings.
-                if ($this->options['signatures_html_allowed']) {
-                    $signature = strip_tags($signature, $this->options['signatures_html_tags']);
-                } else {
-                    $signature = esc_html(strip_tags($signature));
-                }
-
-                // Trim it.
-                $signature = trim($signature);
-
-                if (!empty($signature)) {
-                    echo '<div class="signature">'.$signature.'</div>';
-                }
+            if ($signature !== false) {
+                echo '<div class="signature">'.$signature.'</div>';
             }
         }
         ?>
