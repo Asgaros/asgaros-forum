@@ -85,7 +85,9 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
         // Post message.
         echo '<div class="post-message">';
             // Initial escaping.
-            $post_content = wp_kses($post->text, 'post');
+            $allowed_html = wp_kses_allowed_html('post');
+            $allowed_html['iframe'] = array('width' => array(), 'height' => array(), 'src' => array(), 'frameborder' => array(), 'allowfullscreen' => array());
+            $post_content = wp_kses($post->text, $allowed_html);
             $post_content = stripslashes($post_content);
 
             echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
