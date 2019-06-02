@@ -178,7 +178,7 @@ class AsgarosForum {
         $this->time_format = get_option('time_format');
 
         add_action('wp', array($this, 'prepare'));
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_front_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_css_js'), 10);
 
         // Add filters for modifying the title of the page.
         add_filter('wp_title', array($this, 'change_wp_title'), 100, 3);
@@ -553,9 +553,27 @@ class AsgarosForum {
         }
     }
 
-    function enqueue_front_scripts() {
+    function enqueue_css_js() {
+        if ($this->options['load_fontawesome']) {
+			wp_enqueue_style('af-fontawesome', $this->plugin_url.'libs/fontawesome/css/all.min.css', array(), $this->version);
+		}
+
+		if ($this->options['load_fontawesome_compat_v4']) {
+			wp_enqueue_style('af-fontawesome-compat-v4', $this->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $this->version);
+		}
+
+        $themeurl = $this->appearance->get_current_theme_url();
+
+		wp_enqueue_style('af-widgets', $themeurl.'/widgets.css', array(), $this->version);
+
         if (!$this->executePlugin) {
             return;
+        }
+
+        wp_enqueue_style('af-style', $themeurl.'/style.css', array(), $this->version);
+
+        if (is_rtl()) {
+            wp_enqueue_style('af-rtl', $themeurl.'/rtl.css', array(), $this->version);
         }
 
         wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery', 'wp-api'), $this->version);

@@ -40,7 +40,7 @@ class AsgarosForumAppearance {
 		$this->load_options();
 
 		add_filter('mce_css', array($this, 'add_editor_css'));
-		add_action('wp_enqueue_scripts', array($this, 'add_css'));
+		add_action('wp_enqueue_scripts', array($this, 'add_css'), 20);
 		add_action('wp_head', array($this, 'set_header'), 1);
 	}
 
@@ -175,25 +175,7 @@ class AsgarosForumAppearance {
 	}
 
 	public function add_css() {
-		$themeurl = $this->get_current_theme_url();
-
-		if ($this->asgarosforum->options['load_fontawesome']) {
-			wp_enqueue_style('af-fontawesome', $this->asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $this->asgarosforum->version);
-		}
-
-		if ($this->asgarosforum->options['load_fontawesome_compat_v4']) {
-			wp_enqueue_style('af-fontawesome-compat-v4', $this->asgarosforum->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $this->asgarosforum->version);
-		}
-
-		wp_enqueue_style('af-widgets', $themeurl.'/widgets.css', array(), $this->asgarosforum->version);
-
 		if ($this->asgarosforum->executePlugin) {
-			wp_enqueue_style('af-style', $themeurl.'/style.css', array(), $this->asgarosforum->version);
-
-			if (is_rtl()) {
-				wp_enqueue_style('af-rtl', $themeurl.'/rtl.css', array(), $this->asgarosforum->version);
-			}
-
 			// Set path to custom CSS file.
 			$custom_css_path = $this->asgarosforum->plugin_path.'skin/custom.css';
 
@@ -251,7 +233,7 @@ class AsgarosForumAppearance {
 						wp_add_inline_style('af-style', $custom_css);
 					} else {
 						// Load CSS as file.
-						wp_enqueue_style('af-custom-color', $themeurl.'/custom.css', array(), $this->asgarosforum->version);
+						wp_enqueue_style('af-custom-color', $this->get_current_theme_url().'/custom.css', array(), $this->asgarosforum->version);
 					}
 				}
 			} else {
