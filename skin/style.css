@@ -1146,13 +1146,13 @@
     color: inherit; /* comp */
     float: none; /* comp */
     width: auto; /* comp */
+    position: static; /* comp */
 }
 #af-wrapper blockquote:before {
     content: none; /* comp */
 }
 #af-wrapper .post-message > blockquote {
     max-height: 250px;
-    position: relative;
     overflow: hidden;
 }
 #af-wrapper .post-message > blockquote:after {

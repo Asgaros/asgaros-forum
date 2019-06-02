@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 * Fixed: Correctly embed iframe-media
 = 1.14.9 =
 * Added: Option to define number of activities per page
