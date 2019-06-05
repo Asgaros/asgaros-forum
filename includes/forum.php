@@ -583,6 +583,8 @@ class AsgarosForum {
         if ($this->options['enable_spoilers']) {
             wp_enqueue_script('asgarosforum-js-spoilers', $this->plugin_url.'js/script-spoilers.js', array('jquery'), $this->version);
         }
+
+        do_action('asgarosforum_enqueue_css_js');
     }
 
     // Gets the pages main title.
