@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Suggestions for mentioning-functionality
 * Added: asgarosforum_enqueue_css_js action
 * Fixed: Display issues with some themes
 * Fixed: Correctly embed iframe-media
