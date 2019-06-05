@@ -66,6 +66,7 @@ class AsgarosForum {
         'signatures_html_tags'              => '<br><a><i><b><u><s><img><strong>',
         'enable_avatars'                    => true,
         'enable_mentioning'                 => true,
+        'enable_mentioning_suggestions'     => true,
         'enable_reactions'                  => true,
         'enable_search'                     => true,
         'enable_profiles'                   => true,

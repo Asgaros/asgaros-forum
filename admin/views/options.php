@@ -598,6 +598,10 @@ if (!defined('ABSPATH')) exit;
                             <td><input type="checkbox" name="enable_mentioning" id="enable_mentioning" class="show_hide_initiator" data-hide-class="mentioning-option" <?php checked(!empty($this->asgarosforum->options['enable_mentioning'])); ?>></td>
                         </tr>
                         <tr class="mentioning-option" <?php if (!$mentioning_option) { echo 'style="display: none;"'; } ?>>
+                            <th><label for="enable_mentioning_suggestions"><?php _e('Enable Suggestions', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="enable_mentioning_suggestions" id="enable_mentioning_suggestions" <?php checked(!empty($this->asgarosforum->options['enable_mentioning_suggestions'])); ?>></td>
+                        </tr>
+                        <tr class="mentioning-option" <?php if (!$mentioning_option) { echo 'style="display: none;"'; } ?>>
                             <th><label for="mail_template_mentioned_subject"><?php _e('Mentioning notification subject:', 'asgaros-forum'); ?></label></th>
                             <td><input class="regular-text" type="text" name="mail_template_mentioned_subject" id="mail_template_mentioned_subject" value="<?php echo esc_html(stripslashes($this->asgarosforum->options['mail_template_mentioned_subject'])); ?>"></td>
                         </tr>
