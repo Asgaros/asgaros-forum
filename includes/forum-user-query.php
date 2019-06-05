@@ -61,33 +61,36 @@ class AsgarosForumUserQuery {
 
 	// Constructor.
 	public function __construct($query = null) {
-		if (!empty($query)) {
-			// TODO: Check required arguments.
-			$this->query_vars = wp_parse_args($query, array(
-				'type'                => 'alphabetical',
-				'per_page'            => 0,
-				'page'                => 1,
-				'search_terms'        => false,
-				'include'             => false,
-				'exclude'             => false,
-				'user_ids'            => false,
-				'meta_key'            => false,
-				'meta_value'          => false,
-				'populate_extras'     => true,
-				'count_total'         => 'count_query'
-			));
-
-			// Get user ids. If the user_ids param is present, we skip the query.
-			// TODO: Check if necessary.
-			if ($this->query_vars['user_ids'] !== false) {
-				$this->user_ids = wp_parse_id_list($this->query_vars['user_ids']);
-			} else {
-				$this->prepare_user_ids_query();
-				$this->do_user_ids_query();
-			}
+		// Cancel if no query is given.
+		if (empty($query)) {
+			return;
 		}
 
-		// Bail if no user IDs were found.
+		// TODO: Check required arguments.
+		$this->query_vars = wp_parse_args($query, array(
+			'type'                => 'alphabetical',
+			'per_page'            => 0,
+			'page'                => 1,
+			'search_terms'        => false,
+			'include'             => false,
+			'exclude'             => false,
+			'user_ids'            => false,
+			'meta_key'            => false,
+			'meta_value'          => false,
+			'populate_extras'     => true,
+			'count_total'         => 'count_query'
+		));
+
+		// Get user ids. If the user_ids param is present, we skip the query.
+		// TODO: Check if necessary.
+		if ($this->query_vars['user_ids'] !== false) {
+			$this->user_ids = wp_parse_id_list($this->query_vars['user_ids']);
+		} else {
+			$this->prepare_user_ids_query();
+			$this->do_user_ids_query();
+		}
+
+		// Cancel if no user IDs were found.
 		if (empty($this->user_ids)) {
 			return;
 		}
@@ -103,16 +106,6 @@ class AsgarosForumUserQuery {
 	public function prepare_user_ids_query() {
 		global $wpdb;
 
-		// Default query variables used here.
-		$type         = '';
-		$per_page     = 0;
-		$page         = 1;
-		$include      = false;
-		$search_terms = false;
-		$exclude      = false;
-		$meta_key     = false;
-		$meta_value   = false;
-
 		extract($this->query_vars);
 
 		// Setup the main SQL query container.
@@ -127,16 +120,6 @@ class AsgarosForumUserQuery {
 		// Determines the sort order, which means it also determines where the
 		// user IDs are drawn from (the SELECT and WHERE statements).
 		switch ($type) {
-			// TODO: Maybe use for roles.
-			// 'popular' sorts by the 'total_friend_count' usermeta.
-			case 'popular' :
-				$this->uid_name		= 'user_id';
-				$this->uid_table	= $wpdb->usermeta;
-				$sql['select']		= "SELECT u.{$this->uid_name} as id FROM {$this->uid_table} u";
-				$sql['where'][]		= $wpdb->prepare("u.meta_key = %s", bp_get_user_meta_key('total_friend_count'));
-				$sql['orderby']		= "ORDER BY CONVERT(u.meta_value, SIGNED)";
-				$sql['order']		= "DESC";
-				break;
 			// 'alphabetical' sorts depend on the xprofile setup.
 			case 'alphabetical' :
 				$this->uid_name		= 'ID';
@@ -272,9 +255,6 @@ class AsgarosForumUserQuery {
 			// Relevant.
 			'fields'      => $fields,
 			'include'     => $this->user_ids,
-
-			// Overrides
-			'blog_id'     => 0, // BP does not require blog roles.
 			'count_total' => false // We already have a count.
 		));
 
@@ -330,40 +310,6 @@ class AsgarosForumUserQuery {
 
 		// TODO: More cleanup from here.
 		/////////////////////////////////////////////////
-
-		// Fetch usermeta data
-		// We want the three following pieces of info from usermeta:
-		// - friend count
-		// - latest update.
-		$total_friend_count_key = bp_get_user_meta_key( 'total_friend_count' );
-		$bp_latest_update_key   = bp_get_user_meta_key( 'bp_latest_update'   );
-
-		// Total_friend_count must be set for each user, even if its
-		// value is 0.
-		foreach ( $this->results as $uindex => $user ) {
-			$this->results[$uindex]->total_friend_count = 0;
-		}
-
-		// Create, prepare, and run the separate usermeta query.
-		$user_metas = $wpdb->get_results( $wpdb->prepare( "SELECT user_id, meta_key, meta_value FROM {$wpdb->usermeta} WHERE meta_key IN (%s,%s) AND user_id IN ({$user_ids_sql})", $total_friend_count_key, $bp_latest_update_key ) );
-
-		// The $members_template global expects the index key to be different
-		// from the meta_key in some cases, so we rejig things here.
-		foreach ( $user_metas as $user_meta ) {
-			switch ( $user_meta->meta_key ) {
-				case $total_friend_count_key :
-					$key = 'total_friend_count';
-					break;
-
-				case $bp_latest_update_key :
-					$key = 'latest_update';
-					break;
-			}
-
-			if ( isset( $this->results[ $user_meta->user_id ] ) ) {
-				$this->results[ $user_meta->user_id ]->{$key} = $user_meta->meta_value;
-			}
-		}
 
 		// When meta_key or meta_value have been passed to the query,
 		// fetch the resulting values for use in the template functions.
