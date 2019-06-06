@@ -56,7 +56,7 @@ class AsgarosForumStatistics {
         }
 
         $data = self::$asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
-        $data->users = self::$asgarosforum->countUsers();
+        $data->users = self::$asgarosforum->count_users();
         return $data;
     }
 

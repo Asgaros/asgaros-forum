@@ -1806,9 +1806,8 @@ class AsgarosForum {
     }
 
     // Returns the amount of users.
-    public function countUsers() {
-        $users = count_users('memory');
-        return $users['total_users'];
+    public function count_users() {
+        return $this->db->get_var("SELECT COUNT(u.ID) FROM {$this->db->users} u");
     }
 
     // Prevents oembed dataparsing for links which points to the own forum.
