@@ -1146,7 +1146,7 @@
     color: inherit; /* comp */
     float: none; /* comp */
     width: auto; /* comp */
-    position: static; /* comp */
+    left: 0; /* comp */
 }
 #af-wrapper blockquote:before {
     content: none; /* comp */
@@ -1154,6 +1154,7 @@
 #af-wrapper .post-message > blockquote {
     max-height: 250px;
     overflow: hidden;
+    position: relative;
 }
 #af-wrapper .post-message > blockquote:after {
     content: "";
