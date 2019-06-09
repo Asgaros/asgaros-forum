@@ -76,7 +76,6 @@ class AsgarosForumMentioning {
 
         $user_query = array(
             'fields'          => array('ID', 'user_nicename', 'display_name'),
-			'count_total'     => '',
 			'populate_extras' => false,
 			'type'            => 'alphabetical',
 			'page'            => 1,

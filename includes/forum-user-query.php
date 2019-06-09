@@ -41,8 +41,7 @@ class AsgarosForumUserQuery {
 			'user_ids'			=> false,
 			'meta_key'			=> false,
 			'meta_value'		=> false,
-			'populate_extras'	=> true,
-			'count_total'		=> 'count_query'
+			'populate_extras'	=> true
 		));
 
 		// Get user ids. If the user_ids param is present, we skip the query.
@@ -178,39 +177,19 @@ class AsgarosForumUserQuery {
 	public function do_user_ids_query() {
 		global $wpdb;
 
-		// If counting using SQL_CALC_FOUND_ROWS, set it up here.
-		if ($this->query_vars['count_total'] == 'sql_calc_found_rows') {
-			$this->uid_clauses['select'] = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $this->uid_clauses['select']);
-		}
-
 		// Get the specific user ids.
 		$this->user_ids = $wpdb->get_col("{$this->uid_clauses['select']} {$this->uid_clauses['where']} {$this->uid_clauses['orderby']} {$this->uid_clauses['order']} {$this->uid_clauses['limit']}");
-
-		// Get the total user count.
-		if ($this->query_vars['count_total'] == 'sql_calc_found_rows') {
-			$this->total_users = $wpdb->get_var("SELECT FOUND_ROWS()");
-		} else if ($this->query_vars['count_total'] == 'count_query') {
-			$count_select = preg_replace('/^SELECT.*?FROM (\S+) u/', "SELECT COUNT(u.ID) FROM $1 u", $this->uid_clauses['select']);
-			$this->total_users = $wpdb->get_var("{$count_select} {$this->uid_clauses['where']}");
-		}
 	}
 
 	// Use WP_User_Query() to pull data for the user IDs retrieved in the main query.
 	public function do_wp_user_query() {
 		$wp_user_query = new WP_User_Query(array(
-			// Relevant.
 			'fields'      => $this->query_vars['fields'],
 			'include'     => $this->user_ids,
-			'count_total' => false // We already have a count.
+			'count_total' => false
 		));
 
-		// We calculate total_users using a standalone query, except
-		// when a whitelist of user_ids is passed to the constructor.
-		// This clause covers the latter situation, and ensures that
-		// pagination works when querying by $user_ids.
-		if (empty($this->total_users)) {
-			$this->total_users = count($wp_user_query->results);
-		}
+		$this->total_users = count($wp_user_query->results);
 
 		// Reindex for easier matching.
 		$r = array();
