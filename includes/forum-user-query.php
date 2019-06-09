@@ -41,6 +41,7 @@ class AsgarosForumUserQuery {
 			'user_ids'			=> false,
 			'meta_key'			=> false,
 			'meta_value'		=> false,
+			'role'				=> false,
 			'populate_extras'	=> true
 		));
 
@@ -148,6 +149,18 @@ class AsgarosForumUserQuery {
 			if ($meta_value !== false) {
 				$meta_sql .= $wpdb->prepare(" AND meta_value = %s", $meta_value);
 			}
+
+			$found_user_ids = $wpdb->get_col($meta_sql);
+
+			if (!empty($found_user_ids)) {
+				$sql['where'][] = "u.ID IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
+			} else {
+				$sql['where'][] = '1 = 0';
+			}
+		}
+
+		if ($role !== false) {
+			$meta_sql = "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = 'wp_capabilities' AND meta_value LIKE '%\"{$role}\"%'";
 
 			$found_user_ids = $wpdb->get_col($meta_sql);
 
