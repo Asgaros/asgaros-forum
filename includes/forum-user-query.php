@@ -2,37 +2,6 @@
 
 if (!defined('ABSPATH')) exit;
 
-/**
- * @param array $query {
- *     Query arguments. All items are optional.
- *     @type string            $type                Determines sort order. Select from 'newest', 'active', 'online',
- *                                                  'random', 'popular', 'alphabetical'. Default: 'newest'.
- *     @type int               $per_page            Number of results to return. Default: 0 (no limit).
- *     @type int               $page                Page offset (together with $per_page). Default: 1.
- *     @type string|bool       $search_terms        Terms to search by. Search happens across xprofile fields. Requires
- *                                                  XProfile component. Default: false.
- *     @type array|string|bool $include             An array or comma-separated list of user IDs to which query should
- *                                                  be limited. Default: false.
- *     @type array|string|bool $exclude             An array or comma-separated list of user IDs that will be excluded
- *                                                  from query results. Default: false.
- *     @type array|string|bool $user_ids            An array or comma-separated list of IDs corresponding to the users
- *                                                  that should be returned. When this parameter is passed, it will
- *                                                  override all others; BP User objects will be constructed using these
- *                                                  IDs only. Default: false.
- *     @type string|bool       $meta_key            Limit results to users that have usermeta associated with this meta_key.
- *                                                  Usually used with $meta_value. Default: false.
- *     @type string|bool       $meta_value          When used with $meta_key, limits results to users whose usermeta value
- *                                                  associated with $meta_key matches $meta_value. Default: false.
- *     @type bool              $populate_extras     True if you want to fetch extra metadata
- *                                                  about returned users, such as total group and friend counts.
- *     @type string            $count_total         Determines how BP_User_Query will do a count of total users matching
- *                                                  the other filter criteria. Default value is 'count_query', which
- *                                                  does a separate SELECT COUNT query to determine the total.
- *                                                  'sql_count_found_rows' uses SQL_COUNT_FOUND_ROWS and
- *                                                  SELECT FOUND_ROWS(). Pass an empty string to skip the total user
- *                                                  count query.
- * }
- */
 class AsgarosForumUserQuery {
 	// TODO: Check required variables.
 	// Array of variables to query with.
@@ -50,12 +19,6 @@ class AsgarosForumUserQuery {
 	// SQL clauses for the user ID query.
 	public $uid_clauses = array();
 
-	// SQL table where the user ID is being fetched from.
-	public $uid_table = '';
-
-	// SQL database column name to order by.
-	public $uid_name = '';
-
 	// Standard response when the query should not return any rows.
 	protected $no_results = array('join' => '', 'where' => '0 = 1');
 
@@ -68,7 +31,7 @@ class AsgarosForumUserQuery {
 
 		// TODO: Check required arguments.
 		$this->query_vars = wp_parse_args($query, array(
-			'type'                => 'alphabetical',
+			'type'                => 'default',
 			'per_page'            => 0,
 			'page'                => 1,
 			'search_terms'        => false,
@@ -122,11 +85,9 @@ class AsgarosForumUserQuery {
 		switch ($type) {
 			// 'alphabetical' sorts depend on the xprofile setup.
 			case 'alphabetical' :
-				$this->uid_name		= 'ID';
-				$this->uid_table	= $wpdb->users;
-				$sql['select']		= "SELECT u.{$this->uid_name} as id FROM {$this->uid_table} u";
-				$sql['orderby']		= "ORDER BY u.display_name";
-				$sql['order']		= "ASC";
+				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
+				$sql['orderby'] = "ORDER BY u.display_name";
+				$sql['order'] = "ASC";
 
 				// To ensure that spam/deleted/non-activated users
 				// are filtered out, we add an appropriate sub-query.
@@ -136,13 +97,11 @@ class AsgarosForumUserQuery {
 					$user_status_filter = 'spam = 0 AND deleted = 0 AND user_status = 0';
 				}
 
-				$sql['where'][]		= "u.{$this->uid_name} IN ( SELECT ID FROM {$wpdb->users} WHERE {$user_status_filter} )";
+				$sql['where'][] = "u.ID IN ( SELECT ID FROM {$wpdb->users} WHERE {$user_status_filter} )";
 				break;
 			// Any other 'type' falls through.
 			default :
-				$this->uid_name		= 'ID';
-				$this->uid_table	= $wpdb->users;
-				$sql['select']		= "SELECT u.{$this->uid_name} as id FROM {$this->uid_table} u";
+				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
 				break;
 		}
 
@@ -154,13 +113,13 @@ class AsgarosForumUserQuery {
 			$sql['where'][] = $this->no_results['where'];
 		} else if (!empty($include_ids)) {
 			$include_ids = implode(',', wp_parse_id_list($include_ids));
-			$sql['where'][] = "u.{$this->uid_name} IN ({$include_ids})";
+			$sql['where'][] = "u.ID IN ({$include_ids})";
 		}
 
 		// 'exclude' - User ids to exclude from the results.
 		if ($exclude !== false) {
 			$exclude_ids = implode(',', wp_parse_id_list($exclude));
-			$sql['where'][] = "u.{$this->uid_name} NOT IN ({$exclude_ids})";
+			$sql['where'][] = "u.ID NOT IN ({$exclude_ids})";
 		}
 
 		// 'search_terms' searches user_login and user_nicename.
@@ -178,7 +137,7 @@ class AsgarosForumUserQuery {
 			));
 
 			$match_in_clause = empty($matched_user_ids) ? 'NULL' : implode(',', $matched_user_ids);
-			$sql['where']['search'] = "u.{$this->uid_name} IN ({$match_in_clause})";
+			$sql['where']['search'] = "u.ID IN ({$match_in_clause})";
 		}
 
 		// 'meta_key', 'meta_value' allow usermeta search.
@@ -193,7 +152,7 @@ class AsgarosForumUserQuery {
 			$found_user_ids = $wpdb->get_col($meta_sql);
 
 			if (!empty($found_user_ids)) {
-				$sql['where'][] = "u.{$this->uid_name} IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
+				$sql['where'][] = "u.ID IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
 			} else {
 				$sql['where'][] = '1 = 0';
 			}
@@ -214,14 +173,7 @@ class AsgarosForumUserQuery {
 		$this->uid_clauses['limit']   = $sql['limit'];
 	}
 
-	/**
-	 * Query for IDs of users that match the query parameters.
-	 *
-	 * Perform a database query to specifically get only user IDs, using
-	 * existing query variables set previously in the constructor.
-	 *
-	 * Also used to quickly perform user total counts.
-	 */
+	// Query for IDs of users that match the query parameters.
 	public function do_user_ids_query() {
 		global $wpdb;
 
@@ -237,7 +189,7 @@ class AsgarosForumUserQuery {
 		if ($this->query_vars['count_total'] == 'sql_calc_found_rows') {
 			$this->total_users = $wpdb->get_var("SELECT FOUND_ROWS()");
 		} else if ($this->query_vars['count_total'] == 'count_query') {
-			$count_select = preg_replace('/^SELECT.*?FROM (\S+) u/', "SELECT COUNT(u.{$this->uid_name}) FROM $1 u", $this->uid_clauses['select']);
+			$count_select = preg_replace('/^SELECT.*?FROM (\S+) u/', "SELECT COUNT(u.ID) FROM $1 u", $this->uid_clauses['select']);
 			$this->total_users = $wpdb->get_var("{$count_select} {$this->uid_clauses['where']}");
 		}
 	}
@@ -292,12 +244,6 @@ class AsgarosForumUserQuery {
 		// Bail if no users.
 		if (empty($this->user_ids) || empty($this->results)) {
 			return;
-		}
-
-		// In the case of the 'popular' sort type, we force
-		// populate_extras to true, because we need the friend counts.
-		if ($this->query_vars['type'] == 'popular') {
-			$this->query_vars['populate_extras'] = 1;
 		}
 
 		// Bail if the populate_extras flag is set to false.
