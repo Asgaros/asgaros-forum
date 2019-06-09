@@ -199,7 +199,8 @@ class AsgarosForumUserQuery {
 		$wp_user_query = new WP_User_Query(array(
 			'fields'      => $this->query_vars['fields'],
 			'include'     => $this->user_ids,
-			'count_total' => false
+			'count_total' => false,
+			'orderby' 	  => 'ID'
 		));
 
 		$this->total_users = count($wp_user_query->results);
