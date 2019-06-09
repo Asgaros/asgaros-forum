@@ -440,86 +440,44 @@ class AsgarosForumPermissions {
 
         switch ($role) {
             case 'all':
-                $data = get_users(array(
-                    'fields'            => array('ID', 'display_name')
-                ));
+                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name')));
+                $data = $query->results;
+            break;
+            case 'role':
+                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role'));
+                $data = $query->results;
+            break;
+            case 'siteadmin':
+                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'role' => 'administrator'));
+                $data = $query->results;
             break;
             case 'normal':
-                $data = get_users(array(
-                    'fields'            => array('ID', 'display_name'),
-                    'meta_query'        => array(
-                        array(
-                            'key'       => 'asgarosforum_role',
-                            'compare'   => 'NOT EXISTS'
-                        )
-                    ),
-                    'role__not_in'      => array('administrator')
-                ));
+                $users_all = $this->get_users_by_role('all');
+                $users_role = $this->get_users_by_role('role');
+                $users_siteadmin = $this->get_users_by_role('siteadmin');
+
+                $data = array_diff_key($users_all, $users_role, $users_siteadmin);
             break;
             case 'moderator':
-                $data = get_users(array(
-                    'fields'            => array('ID', 'display_name'),
-                    'meta_query'        => array(
-                        array(
-                            'key'       => 'asgarosforum_role',
-                            'value'     => 'moderator'
-                        )
-                    ),
-                    'role__not_in'      => array('administrator')
-                ));
+                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'moderator'));
+                $users_moderator = $query->results;
+                $users_siteadmin = $this->get_users_by_role('siteadmin');
+
+                $data = array_diff_key($users_moderator, $users_siteadmin);
             break;
             case 'administrator':
-                $admin_ids = array();
+                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'administrator'));
+                $users_administrator = $query->results;
+                $users_siteadmin = $this->get_users_by_role('siteadmin');
 
-                // Get site administrators first.
-                $users = get_users(array(
-                    'fields'            => array('ID'),
-                    'role'              => 'administrator'
-                ));
-
-                if (!empty($users)) {
-                    foreach ($users as $user) {
-                        $admin_ids[] = $user->ID;
-                    }
-                }
-
-                // Get forum administrators.
-                $users = get_users(array(
-                    'fields'            => array('ID'),
-                    'meta_query'        => array(
-                        array(
-                            'key'       => 'asgarosforum_role',
-                            'value'     => 'administrator'
-                        )
-                    ),
-                    'role__not_in'      => array('administrator')
-                ));
-
-                if (!empty($users)) {
-                    foreach ($users as $user) {
-                        $admin_ids[] = $user->ID;
-                    }
-                }
-
-                // Only return data of administrators if we found some.
-                if (!empty($admin_ids)) {
-                    $data = get_users(array(
-                        'fields'            => array('ID', 'display_name'),
-                        'include'           => $admin_ids
-                    ));
-                }
+                $data = array_unique(array_merge($users_administrator, $users_siteadmin));
             break;
             case 'banned':
-                $data = get_users(array(
-                    'fields'            => array('ID', 'display_name'),
-                    'meta_query'        => array(
-                        array(
-                            'key'       => 'asgarosforum_role',
-                            'value'     => 'banned'
-                        )
-                    ),
-                    'role__not_in'      => array('administrator')
-                ));
+                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'banned'));
+                $users_banned = $query->results;
+                $users_siteadmin = $this->get_users_by_role('siteadmin');
+
+                $data = array_diff_key($users_banned, $users_siteadmin);
             break;
         }
 
