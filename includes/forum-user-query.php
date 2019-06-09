@@ -31,17 +31,18 @@ class AsgarosForumUserQuery {
 
 		// TODO: Check required arguments.
 		$this->query_vars = wp_parse_args($query, array(
-			'type'                => 'default',
-			'per_page'            => 0,
-			'page'                => 1,
-			'search_terms'        => false,
-			'include'             => false,
-			'exclude'             => false,
-			'user_ids'            => false,
-			'meta_key'            => false,
-			'meta_value'          => false,
-			'populate_extras'     => true,
-			'count_total'         => 'count_query'
+			'fields'			=> array('ID'),
+			'type'				=> 'default',
+			'per_page'			=> 0,
+			'page'				=> 1,
+			'search_terms'		=> false,
+			'include'			=> false,
+			'exclude'			=> false,
+			'user_ids'			=> false,
+			'meta_key'			=> false,
+			'meta_value'		=> false,
+			'populate_extras'	=> true,
+			'count_total'		=> 'count_query'
 		));
 
 		// Get user ids. If the user_ids param is present, we skip the query.
@@ -196,16 +197,9 @@ class AsgarosForumUserQuery {
 
 	// Use WP_User_Query() to pull data for the user IDs retrieved in the main query.
 	public function do_wp_user_query() {
-		$fields = array('ID', 'user_login', 'user_nicename', 'user_email', 'user_url', 'user_registered', 'user_status', 'display_name');
-
-		if (is_multisite()) {
-			$fields[] = 'spam';
-			$fields[] = 'deleted';
-		}
-
 		$wp_user_query = new WP_User_Query(array(
 			// Relevant.
-			'fields'      => $fields,
+			'fields'      => $this->query_vars['fields'],
 			'include'     => $this->user_ids,
 			'count_total' => false // We already have a count.
 		));
@@ -228,7 +222,6 @@ class AsgarosForumUserQuery {
 		foreach ($this->user_ids as $key => $uid) {
 			if (isset($r[$uid])) {
 				$r[$uid]->ID = (int)$uid;
-				$r[$uid]->user_status = (int)$r[$uid]->user_status;
 				$this->results[$uid] = $r[$uid];
 			// Remove user ID from original user_ids property.
 			} else {
