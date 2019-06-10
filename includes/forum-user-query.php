@@ -42,7 +42,7 @@ class AsgarosForumUserQuery {
 			'meta_key'			=> false,
 			'meta_value'		=> false,
 			'role'				=> false,
-			'populate_extras'	=> true
+			'populate_extras'	=> false
 		));
 
 		// Get user ids. If the user_ids param is present, we skip the query.
