@@ -41,6 +41,7 @@ class AsgarosForumUserQuery {
 			'user_ids'			=> false,
 			'meta_key'			=> false,
 			'meta_value'		=> false,
+			'meta_compare'		=> '=',
 			'role'				=> false,
 			'populate_extras'	=> false
 		));
@@ -147,7 +148,7 @@ class AsgarosForumUserQuery {
 			$meta_sql = $wpdb->prepare("SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = %s", $meta_key);
 
 			if ($meta_value !== false) {
-				$meta_sql .= $wpdb->prepare(" AND meta_value = %s", $meta_value);
+				$meta_sql .= $wpdb->prepare(" AND meta_value {$meta_compare} %s", $meta_value);
 			}
 
 			$found_user_ids = $wpdb->get_col($meta_sql);
@@ -253,7 +254,7 @@ class AsgarosForumUserQuery {
 			);
 
 			if ( false !== $this->query_vars['meta_value'] ) {
-				$meta_sql['where'] .= $wpdb->prepare( " AND meta_value = %s", $this->query_vars['meta_value'] );
+				$meta_sql['where'] .= $wpdb->prepare( " AND meta_value {$this->query_vars['meta_compare']} %s", $this->query_vars['meta_value'] );
 			}
 
 			$metas = $wpdb->get_results( "{$meta_sql['select']} {$meta_sql['from']} {$meta_sql['where']}" );
