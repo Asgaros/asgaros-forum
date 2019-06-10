@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Display issues with some themes
 * Fixed: Correctly embed iframe-media
 * Updated: Font Awesome version 5.9.0
+* Extensive performance improvemetns in memberslist and online-logic
 * Performance improvements and code optimizations
 = 1.14.9 =
 * Added: Option to define number of activities per page
