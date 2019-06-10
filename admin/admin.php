@@ -467,7 +467,7 @@ class AsgarosForumAdmin {
                         echo __('Documentation', 'asgaros-forum');
                     echo '</a>';
                     echo '&bull;';
-                    echo '<a href="https://www.paypal.me/asgaros" target="_blank">';
+                    echo '<a href="https://www.asgaros.de/donate/" target="_blank">';
                         echo '<span class="asgaros-panel-icon donate-icon fas fa-heart"></span>';
                         echo __('Donate', 'asgaros-forum');
                     echo '</a>';

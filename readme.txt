@@ -1,6 +1,6 @@
 === Asgaros Forum ===
 Contributors: Asgaros
-Donate link: https://www.paypal.me/asgaros
+Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.8
 Tested up to: 5.2
