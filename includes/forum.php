@@ -110,6 +110,7 @@ class AsgarosForum {
         'activities_per_page'               => 50,
         'enable_polls'                      => true,
         'polls_permission'                  => 'loggedin',
+        'polls_results_visible'             => false,
         'enable_seo_urls'                   => true,
         'seo_url_mode_content'              => 'slug',
         'seo_url_mode_profile'              => 'slug',

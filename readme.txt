@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Suggestions for mentioning-functionality
+* Added: Option to define if poll-results are visible without vote
 * Added: asgarosforum_enqueue_css_js action
 * Fixed: Display issues with some themes
 * Fixed: Correctly embed iframe-media

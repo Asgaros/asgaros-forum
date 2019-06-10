@@ -1799,14 +1799,9 @@
 #af-wrapper #poll-panel #poll-headline span {
     padding-right: 8px;
 }
-#af-wrapper #poll-panel #poll-vote,
 #af-wrapper #poll-panel #poll-results {
     display: block;
     padding: 16px 0px;
-}
-#af-wrapper #poll-panel #poll-vote label {
-    display: block;
-    margin: 6px 0;
 }
 #af-wrapper #poll-panel .actions {
     display: block;
@@ -1822,6 +1817,7 @@
 }
 #af-wrapper #poll-results .poll-result-name {
     display: block;
+    margin: 6px 0;
     width: 100%;
 }
 #af-wrapper #poll-results .poll-result-numbers {

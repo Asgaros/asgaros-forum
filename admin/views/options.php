@@ -840,6 +840,11 @@ if (!defined('ABSPATH')) exit;
                         </tr>
 
                         <tr class="polls-option" <?php if (!$polls_option) { echo 'style="display: none;"'; } ?>>
+                            <th><label for="polls_results_visible"><?php _e('Results visible without vote', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="polls_results_visible" id="polls_results_visible" <?php checked(!empty($this->asgarosforum->options['polls_results_visible'])); ?>></td>
+                        </tr>
+
+                        <tr class="polls-option" <?php if (!$polls_option) { echo 'style="display: none;"'; } ?>>
                             <th><label for="polls_permission"><?php _e('Who can create polls:', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <select name="polls_permission" id="polls_permission">';

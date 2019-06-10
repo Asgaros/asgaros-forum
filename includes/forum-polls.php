@@ -373,71 +373,89 @@ class AsgarosForumPolls {
             return;
         }
 
+        // Get id of the current user.
+        $user_id = get_current_user_id();
+
+        // Check if the current user can vote.
+        $can_vote = $this->can_vote($user_id, $poll->id);
+
+        // Check if results are visible.
+        $can_see_results = $this->asgarosforum->options['polls_results_visible'];
+
+        if ($this->has_voted($user_id, $poll->id)) {
+            $can_see_results = true;
+        }
+
         echo '<div id="poll-panel">';
+        echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
             echo '<div id="poll-headline">';
                 echo '<span class="fas fa-poll-h"></span>';
                 echo esc_html(stripslashes($poll->title));
             echo '</div>';
 
-            // Get id of the current user.
-            $user_id = get_current_user_id();
+            // Show poll-results.
+            echo '<div id="poll-results">';
+                foreach ($poll->options as $key => $option) {
+                    $percentage = 0;
+                    $percentage_css = 0;
 
-            // Show vote-panel when user can vote.
-            if ($this->can_vote($user_id, $poll->id)) {
-                echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
-                    echo '<div id="poll-vote">';
-                        foreach ($poll->options as $option) {
-                            echo '<label class="checkbox-label">';
+                    // Only calculate percentage-values when there are votes.
+                    if ($poll->total_votes > 0) {
+                        $percentage = ($option->votes / $poll->total_votes) * 100;
+                        $percentage_css = number_format($percentage, 2);
+                    }
 
-                            if ($poll->multiple == 1) {
-                                echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'"><span>'.esc_html(stripslashes($option->title)).'</span>';
+                    echo '<div class="poll-result-row">';
+                        echo '<div class="poll-result-name">';
+
+                            // Render additional voting-elements based on can-vote status.
+                            if ($can_vote) {
+                                echo '<label class="checkbox-label">';
+
+                                if ($poll->multiple == 1) {
+                                    echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'">';
+                                } else {
+                                    echo '<input type="radio" name="poll-option[]" value="'.$option->id.'">';
+                                }
+
+                                echo '<span>'.esc_html(stripslashes($option->title)).'</span>';
+                                echo '</label>';
                             } else {
-                                echo '<input type="radio" name="poll-option[]" value="'.$option->id.'"><span>'.esc_html(stripslashes($option->title)).'</span>';
+                                echo esc_html(stripslashes($option->title));
                             }
 
-                            echo '</label>';
-                        }
-                    echo '</div>';
-
-                    echo '<div class="actions">';
-                        echo '<input type="hidden" name="poll_action" value="vote">';
-                        echo '<input class="button button-normal" type="submit" value="'.__('Vote', 'asgaros-forum').'">';
-                    echo '</div>';
-                echo '</form>';
-            } else {
-                echo '<div id="poll-results">';
-                    foreach ($poll->options as $key => $option) {
-                        $percentage = 0;
-                        $percentage_css = 0;
-
-                        // Only calculate percentage-values when there are votes.
-                        if ($poll->total_votes > 0) {
-                            $percentage = ($option->votes / $poll->total_votes) * 100;
-                            $percentage_css = number_format($percentage, 2);
-                        }
-
-                        echo '<div class="poll-result-row">';
-                            echo '<div class="poll-result-name">';
-                                echo esc_html(stripslashes($option->title)).':';
+                            if ($can_see_results) {
                                 echo '<small class="poll-result-numbers">';
                                     echo sprintf(_n('%s Vote', '%s Votes', $option->votes, 'asgaros-forum'), number_format_i18n($option->votes));
                                     echo '&nbsp;&middot;&nbsp;';
                                     echo number_format_i18n($percentage, 2).'%';
                                 echo '</small>';
-                            echo '</div>';
+                            }
+                        echo '</div>';
 
+                        if ($can_see_results) {
                             echo '<div class="poll-result-bar">';
                                 echo '<div class="poll-result-filling" style="width: '.$percentage_css.'%; background-color: '.$this->get_bar_color().';"></div>';
                             echo '</div>';
+                        }
+                    echo '</div>';
+                }
 
-                        echo '</div>';
-                    }
-
+                if ($can_see_results) {
                     echo '<div class="poll-result-total">';
                         echo sprintf(_n('%s Participant', '%s Participants', $poll->total_participants, 'asgaros-forum'), number_format_i18n($poll->total_participants));
                     echo '</div>';
-                echo '</div>';
-            }
+                }
+
+                // Show vote-panel when user can vote.
+                if ($can_vote) {
+                    echo '<div class="actions">';
+                        echo '<input type="hidden" name="poll_action" value="vote">';
+                        echo '<input class="button button-normal" type="submit" value="'.__('Vote', 'asgaros-forum').'">';
+                    echo '</div>';
+                }
+            echo '</div>';
+        echo '</form>';
         echo '</div>';
     }
 
