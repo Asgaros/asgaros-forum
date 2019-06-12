@@ -161,7 +161,9 @@ class AsgarosForumMentioning {
 
             // Load the HTML-document.
             $document = new DOMDocument();
+            libxml_use_internal_errors(true);
             $document->loadHTML($text);
+            libxml_clear_errors();
 
             // A search will performed multiple times because otherwise nested
             // blockquotes caused by multiple quotes can not get removed correctly.
