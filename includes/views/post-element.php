@@ -114,7 +114,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
             $post_content = apply_filters('asgarosforum_filter_post_content', $post_content, $post->id);
 
             echo $post_content;
-            $this->uploads->show_uploaded_files($post);
+            $this->uploads->show_uploaded_files($post->id, $post->uploads);
 
             do_action('asgarosforum_after_post_message', $post->author_id, $post->id);
         echo '</div>';

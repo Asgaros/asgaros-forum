@@ -148,38 +148,36 @@ class AsgarosForumUploads {
         return $links;
     }
 
-	public function show_uploaded_files($postObject) {
-		if ($postObject) {
-			$path = $this->upload_path.$postObject->id.'/';
-	        $url = $this->upload_url.$postObject->id.'/';
-	        $uploads = maybe_unserialize($postObject->uploads);
-	        $uploadedFiles = '';
+	public function show_uploaded_files($post_id, $post_uploads) {
+		$path = $this->upload_path.$post_id.'/';
+        $url = $this->upload_url.$post_id.'/';
+        $uploads = maybe_unserialize($post_uploads);
+        $uploadedFiles = '';
 
-	        if (!empty($uploads) && is_dir($path)) {
-				// Generate special message instead of file-list when hiding uploads for guests.
-				if (!is_user_logged_in() && $this->asgarosforum->options['hide_uploads_from_guests']) {
-					$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'</li>';
-				} else {
-					foreach ($uploads as $upload) {
-		                if (is_file($path.wp_basename($upload))) {
-							$file_extension = strtolower(pathinfo($path.wp_basename($upload), PATHINFO_EXTENSION));
-							$imageThumbnail = ($this->asgarosforum->options['uploads_show_thumbnails'] && $file_extension !== 'pdf') ? wp_get_image_editor($path.wp_basename($upload)) : false;
+        if (!empty($uploads) && is_dir($path)) {
+			// Generate special message instead of file-list when hiding uploads for guests.
+			if (!is_user_logged_in() && $this->asgarosforum->options['hide_uploads_from_guests']) {
+				$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'</li>';
+			} else {
+				foreach ($uploads as $upload) {
+	                if (is_file($path.wp_basename($upload))) {
+						$file_extension = strtolower(pathinfo($path.wp_basename($upload), PATHINFO_EXTENSION));
+						$imageThumbnail = ($this->asgarosforum->options['uploads_show_thumbnails'] && $file_extension !== 'pdf') ? wp_get_image_editor($path.wp_basename($upload)) : false;
 
-							if ($imageThumbnail && !is_wp_error($imageThumbnail)) {
-								$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank"><img class="resize" src="'.$url.utf8_uri_encode($upload).'" alt="'.$upload.'" /></a></li>';
-							} else {
-								$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a></li>';
-							}
-		                }
-		            }
-				}
+						if ($imageThumbnail && !is_wp_error($imageThumbnail)) {
+							$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank"><img class="resize" src="'.$url.utf8_uri_encode($upload).'" alt="'.$upload.'" /></a></li>';
+						} else {
+							$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a></li>';
+						}
+	                }
+	            }
+			}
 
-				if (!empty($uploadedFiles)) {
-	                echo '<strong class="uploaded-files-title">'.__('Uploaded files:', 'asgaros-forum').'</strong>';
-	                echo '<ul>'.$uploadedFiles.'</ul>';
-				}
-	        }
-		}
+			if (!empty($uploadedFiles)) {
+                echo '<strong class="uploaded-files-title">'.__('Uploaded files:', 'asgaros-forum').'</strong>';
+                echo '<ul>'.$uploadedFiles.'</ul>';
+			}
+        }
     }
 
 	public function show_editor_upload_form($postObject) {
