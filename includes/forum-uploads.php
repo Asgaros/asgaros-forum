@@ -153,6 +153,7 @@ class AsgarosForumUploads {
         $url = $this->upload_url.$post_id.'/';
         $uploads = maybe_unserialize($post_uploads);
         $uploadedFiles = '';
+		$output = '';
 
         if (!empty($uploads) && is_dir($path)) {
 			// Generate special message instead of file-list when hiding uploads for guests.
@@ -174,10 +175,12 @@ class AsgarosForumUploads {
 			}
 
 			if (!empty($uploadedFiles)) {
-                echo '<strong class="uploaded-files-title">'.__('Uploaded files:', 'asgaros-forum').'</strong>';
-                echo '<ul>'.$uploadedFiles.'</ul>';
+                $output .= '<strong class="uploaded-files-title">'.__('Uploaded files:', 'asgaros-forum').'</strong>';
+                $output .= '<ul>'.$uploadedFiles.'</ul>';
 			}
         }
+
+		return $output;
     }
 
 	public function show_editor_upload_form($postObject) {

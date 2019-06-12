@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Suggestions for mentioning-functionality
+* Added: Show uploaded files in notification-mails
 * Added: Option to define if poll-results are visible without vote
 * Added: asgarosforum_enqueue_css_js action
 * Fixed: PHP warnings during mentioning-processing when HTML 5 tags are used in posts

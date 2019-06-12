@@ -209,12 +209,16 @@ class AsgarosForumNotifications {
         $notification_subject = $this->asgarosforum->options['mail_template_new_post_subject'];
         $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
 
+        // Prepare message-content.
+        $message_content = wpautop(stripslashes($post->text));
+        $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
+
         // Prepare message-template.
         $replacements = array(
             '###AUTHOR###'  => $author_name,
             '###LINK###'    => '<a href="'.$post_link.'">'.$post_link.'</a>',
             '###TITLE###'   => $topic_name,
-            '###CONTENT###' => wpautop(stripslashes($post->text))
+            '###CONTENT###' => $message_content
         );
 
         $notification_message = $this->asgarosforum->options['mail_template_new_post_message'];
@@ -309,12 +313,16 @@ class AsgarosForumNotifications {
         $notification_subject = $this->asgarosforum->options['mail_template_new_topic_subject'];
         $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
 
+        // Prepare message-content.
+        $message_content = wpautop(stripslashes($post->text));
+        $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
+
         // Prepare message-template.
         $replacements = array(
             '###AUTHOR###'  => $author_name,
             '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
             '###TITLE###'   => $topic_name,
-            '###CONTENT###' => wpautop(stripslashes($post->text))
+            '###CONTENT###' => $message_content
         );
 
         $notification_message = $this->asgarosforum->options['mail_template_new_topic_message'];

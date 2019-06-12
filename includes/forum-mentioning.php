@@ -207,12 +207,16 @@ class AsgarosForumMentioning {
                 // Get post-link.
                 $post_link = $this->asgarosforum->rewrite->get_post_link($post_id, $topic->id);
 
+                // Prepare message-content.
+                $message_content = wpautop(stripslashes($post->text));
+                $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
+
                 // Create mail content.
                 $replacements = array(
                     '###AUTHOR###'  => $author_name,
                     '###LINK###'    => '<a href="'.$post_link.'">'.$post_link.'</a>',
                     '###TITLE###'   => esc_html(stripslashes($topic->name)),
-                    '###CONTENT###' => wpautop(stripslashes($post->text))
+                    '###CONTENT###' => $message_content
                 );
 
                 $notification_subject = $this->asgarosforum->options['mail_template_mentioned_subject'];

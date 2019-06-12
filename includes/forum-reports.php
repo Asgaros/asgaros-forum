@@ -151,10 +151,14 @@ class AsgarosForumReports {
         $topic_object   = $this->asgarosforum->content->get_topic($post_object->parent_id);
         $post_link      = $this->asgarosforum->rewrite->get_post_link($post_id, $topic_object->id, false, array('highlight_post' => $post_id));
 
+        // Prepare message-content.
+        $report_content = wpautop(stripslashes($post_object->text));
+        $report_content .= $this->asgarosforum->uploads->show_uploaded_files($post_object->id, $post_object->uploads);
+
         $report = array(
             'post_id'       => $post_id,
             'post_text'     => esc_html(stripslashes(strip_tags($post_object->text))),
-            'post_text_raw' => wpautop(stripslashes($post_object->text)),
+            'post_text_raw' => $report_content,
             'post_link'     => $post_link,
             'topic_name'    => esc_html(stripslashes($topic_object->name)),
             'author_id'     => $post_object->author_id,
