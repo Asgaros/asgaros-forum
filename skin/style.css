@@ -868,11 +868,12 @@
 /* CONTENT WRAPPERS*/
 #af-wrapper .content-container,
 #af-wrapper .editor-element {
-    margin-bottom: 15px;
     background-color: #fff;
     border-color: #eee;
     border-style: solid;
     border-width: 0px 1px 3px;
+    margin: 0 0 15px 0; /* comp */
+    max-width: none; /* comp */
 }
 #af-wrapper .editor-element {
     background-color: #fafafa;
