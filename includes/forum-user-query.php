@@ -241,31 +241,28 @@ class AsgarosForumUserQuery {
 		// Turn user ID's into a query-usable, comma separated value.
 		$user_ids_sql = implode(',', wp_parse_id_list($this->user_ids));
 
-		// TODO: More cleanup from here.
-		/////////////////////////////////////////////////
-
 		// When meta_key or meta_value have been passed to the query,
 		// fetch the resulting values for use in the template functions.
-		if ( ! empty( $this->query_vars['meta_key'] ) ) {
+		if (!empty($this->query_vars['meta_key'])) {
 			$meta_sql = array(
 				'select' => "SELECT user_id, meta_key, meta_value",
 				'from'   => "FROM $wpdb->usermeta",
-				'where'  => $wpdb->prepare( "WHERE meta_key = %s", $this->query_vars['meta_key'] )
+				'where'  => $wpdb->prepare("WHERE meta_key = %s", $this->query_vars['meta_key'])
 			);
 
-			if ( false !== $this->query_vars['meta_value'] ) {
-				$meta_sql['where'] .= $wpdb->prepare( " AND meta_value {$this->query_vars['meta_compare']} %s", $this->query_vars['meta_value'] );
+			if ($this->query_vars['meta_value'] !== false) {
+				$meta_sql['where'] .= $wpdb->prepare(" AND meta_value {$this->query_vars['meta_compare']} %s", $this->query_vars['meta_value']);
 			}
 
-			$metas = $wpdb->get_results( "{$meta_sql['select']} {$meta_sql['from']} {$meta_sql['where']}" );
+			$metas = $wpdb->get_results("{$meta_sql['select']} {$meta_sql['from']} {$meta_sql['where']}");
 
-			if ( ! empty( $metas ) ) {
-				foreach ( $metas as $meta ) {
-					if ( isset( $this->results[ $meta->user_id ] ) ) {
-						$this->results[ $meta->user_id ]->meta_key = $meta->meta_key;
+			if (!empty($metas)) {
+				foreach ($metas as $meta) {
+					if (isset($this->results[$meta->user_id])) {
+						$this->results[$meta->user_id]->meta_key = $meta->meta_key;
 
-						if ( ! empty( $meta->meta_value ) ) {
-							$this->results[ $meta->user_id ]->meta_value = $meta->meta_value;
+						if (!empty($meta->meta_value)) {
+							$this->results[$meta->user_id]->meta_value = $meta->meta_value;
 						}
 					}
 				}
