@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.8
 Tested up to: 5.2
 Requires PHP: 5.2
-Stable tag: 1.14.9
+Stable tag: 1.14.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.14.10 =
 * Added: Suggestions for mentioning-functionality
 * Added: Show uploaded files in notification-mails
 * Added: Option to define if poll-results are visible without vote
@@ -98,7 +99,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Display issues with some themes
 * Fixed: Correctly embed iframe-media
 * Updated: Font Awesome version 5.9.0
-* Extensive performance improvemetns in memberslist and online-logic
+* Extensive performance improvements in memberslist and online-logic
 * Performance improvements and code optimizations
 = 1.14.9 =
 * Added: Option to define number of activities per page
