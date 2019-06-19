@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.8
 Tested up to: 5.2
 Requires PHP: 5.2
-Stable tag: 1.14.10
+Stable tag: 1.14.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.14.11 =
 * Fixed: Fatal PHP error in memberslist
 = 1.14.10 =
 * Added: Suggestions for mentioning-functionality
