@@ -5,6 +5,15 @@ window.FontAwesomeConfig = {
 
 (function($) {
     $(document).ready(function() {
+        var editor = null;
+
+        if (wp && wp.codeEditor) {
+            if ($('textarea[data-code-editor-mode]').length) {
+                wp.codeEditor.defaultSettings.codemirror.mode = $('textarea[data-code-editor-mode]').attr('data-code-editor-mode');
+                var editor = wp.codeEditor.initialize($('textarea[data-code-editor-mode]'));
+            }
+        }
+
         // Settings-tabs toggle.
         $('#af-options #settings-tabs li').click(function() {
             // Get slug.
@@ -262,6 +271,15 @@ window.FontAwesomeConfig = {
 
             setEditorTitle(this);
             showEditorInstance('#ad-editor');
+
+            // Try to update CodeMirror content. The content must get updated
+            // after the editor-instance is visible again. Otherwise the refresh
+            // is not working.
+            if (editor) {
+                editor.codemirror.doc.setValue(ad_code);
+                editor.codemirror.refresh();
+            }
+
             $('#ad-editor input[name=ad_name]').focus();
         });
 

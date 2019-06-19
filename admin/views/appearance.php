@@ -86,7 +86,7 @@ if (!defined('ABSPATH')) exit;
                 </tr>
                 <tr class="custom-color-selector" <?php if (!$themesOption) { echo 'style="display: none;"'; } ?>>
                     <th><label for="custom_css"><?php _e('Custom CSS:', 'asgaros-forum'); ?></label></th>
-                    <td><textarea class="large-text" rows="8" cols="80" type="text" name="custom_css" id="custom_css"><?php echo esc_html(stripslashes($this->asgarosforum->appearance->options['custom_css'])); ?></textarea></td>
+                    <td><textarea class="large-text" data-code-editor-mode="css" rows="8" cols="80" type="text" name="custom_css" id="custom_css"><?php echo esc_html(stripslashes($this->asgarosforum->appearance->options['custom_css'])); ?></textarea></td>
                 </tr>
             </table>
         </div>

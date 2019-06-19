@@ -1,3 +1,7 @@
+/* CODE EDITOR */
+.CodeMirror {
+    border: 1px solid #ddd;
+}
 /* TABS */
 #af-options #settings-wrapper {
     position: relative;

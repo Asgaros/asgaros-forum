@@ -168,7 +168,8 @@ class AsgarosForumAdmin {
 
         if (strstr($hook, 'asgarosforum') !== false) {
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('asgarosforum-admin-js', $this->asgarosforum->plugin_url.'admin/js/admin.js', array('wp-color-picker'), $this->asgarosforum->version, true);
+            wp_enqueue_code_editor(array('type' => 'text/html'));
+            wp_enqueue_script('asgarosforum-admin-js', $this->asgarosforum->plugin_url.'admin/js/admin.js', array('jquery', 'wp-color-picker'), $this->asgarosforum->version, true);
         }
     }
 

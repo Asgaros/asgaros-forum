@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Code editor for custom-css and ad-code
 = 1.14.11 =
 * Fixed: Fatal PHP error in memberslist
 = 1.14.10 =
