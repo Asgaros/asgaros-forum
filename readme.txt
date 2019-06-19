@@ -2,7 +2,7 @@
 Contributors: Asgaros
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
-Requires at least: 4.8
+Requires at least: 4.9
 Tested up to: 5.2
 Requires PHP: 5.2
 Stable tag: 1.14.11
@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Code editor for custom-css and ad-code
+* The required minimum WordPress version is now 4.9
 = 1.14.11 =
 * Fixed: Fatal PHP error in memberslist
 = 1.14.10 =
@@ -220,7 +221,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Dont notify users about a new post or topic when they already receive a mail because they got mentioned
 * Minor design changes
 * Performance improvements and code optimizations
-* The required version of WordPress is 4.8
+* The required minimum WordPress version is now 4.8
 = 1.12.1 =
 * Fixed: Ad code containing JavaScript could not be edited
 * Fixed: Allow activity-feed when using shortcode-parameters for categories
