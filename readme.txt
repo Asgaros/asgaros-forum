@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Fatal PHP error in memberslist
 = 1.14.10 =
 * Added: Suggestions for mentioning-functionality
 * Added: Show uploaded files in notification-mails
