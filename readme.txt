@@ -93,6 +93,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Options to hide certain filters from memberslist
 * Added: Code editor for custom-css and ad-code
 * The required minimum WordPress version is now 4.9
+* Performance improvements and code optimizations
 = 1.14.11 =
 * Fixed: Fatal PHP error in memberslist
 = 1.14.10 =

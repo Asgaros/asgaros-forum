@@ -179,7 +179,7 @@ class AsgarosForum {
 
         $this->plugin_url = plugin_dir_url(dirname(__FILE__));
         $this->plugin_path = plugin_dir_path(dirname(__FILE__));
-        $this->loadOptions();
+        $this->load_options();
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');
 
@@ -237,17 +237,12 @@ class AsgarosForum {
     // FUNCTIONS FOR GETTING AND SETTING OPTIONS.
     //======================================================================
 
-    function loadOptions() {
-        // Get current options.
+    function load_options() {
+        // Get options and merge them with the default ones.
 		$current_options = get_option('asgarosforum_options', array());
+        $this->options = array_merge($this->options_default, $current_options);
 
-		// Merge options if current options are present, otherwise use default-options.
-		if (!empty($current_options)) {
-			$this->options = array_merge($this->options_default, $current_options);
-		} else {
-			$this->options = $this->options_default;
-		}
-
+        // Set certain options which are required for the editor.
         $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
 
         // Ensure default values if some needed files got deleted.
@@ -292,11 +287,11 @@ class AsgarosForum {
         }
     }
 
-    function saveOptions($options) {
+    function save_options($options) {
         update_option('asgarosforum_options', $options);
 
         // Reload options after saving them.
-        $this->loadOptions();
+        $this->load_options();
     }
 
     //======================================================================

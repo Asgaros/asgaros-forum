@@ -223,9 +223,9 @@ class AsgarosForumDatabase {
 
                 // If the page could get created, save it in the forum-options.
                 if ($page_id && !is_wp_error($page_id)) {
-                    $asgarosforum->loadOptions();
+                    $asgarosforum->load_options();
                     $asgarosforum->options['location'] = $page_id;
-                    $asgarosforum->saveOptions($asgarosforum->options);
+                    $asgarosforum->save_options($asgarosforum->options);
                 }
 
                 update_option('asgarosforum_db_version', 1);
@@ -290,7 +290,7 @@ class AsgarosForumDatabase {
             // Move appearance settings into its own options-array.
             if ($database_version_installed < 14 && !$first_time_installation) {
                 // Ensure that all options are loaded first.
-                $asgarosforum->loadOptions();
+                $asgarosforum->load_options();
                 $asgarosforum->appearance->load_options();
 
                 // Build the intersect.
@@ -301,7 +301,7 @@ class AsgarosForumDatabase {
 
                 // Save all options.
                 $asgarosforum->appearance->save_options($appearance_intersect);
-                $asgarosforum->saveOptions($options_cleaned);
+                $asgarosforum->save_options($options_cleaned);
 
                 update_option('asgarosforum_db_version', 14);
             }

@@ -296,7 +296,7 @@ class AsgarosForumAdmin {
             }
         }
 
-        $this->asgarosforum->saveOptions($saved_ops);
+        $this->asgarosforum->save_options($saved_ops);
         $this->saved = true;
     }
 
