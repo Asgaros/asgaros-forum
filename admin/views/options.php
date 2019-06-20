@@ -634,6 +634,29 @@ if (!defined('ABSPATH')) exit;
                             <th><label for="members_per_page"><?php _e('Members per page:', 'asgaros-forum'); ?></label></th>
                             <td><input type="number" name="members_per_page" id="members_per_page" value="<?php echo stripslashes($this->asgarosforum->options['members_per_page']); ?>" size="3" min="1"></td>
                         </tr>
+                        <tr class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
+                            <th><?php _e('Available filters', 'asgaros-forum'); ?></th>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <th><label for="memberslist_filter_normal"><?php _e('Normal', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="checkbox" name="memberslist_filter_normal" id="memberslist_filter_normal" <?php checked(!empty($this->asgarosforum->options['memberslist_filter_normal'])); ?>></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="memberslist_filter_moderator"><?php _e('Moderators', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="checkbox" name="memberslist_filter_moderator" id="memberslist_filter_moderator" <?php checked(!empty($this->asgarosforum->options['memberslist_filter_moderator'])); ?>></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="memberslist_filter_administrator"><?php _e('Administrators', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="checkbox" name="memberslist_filter_administrator" id="memberslist_filter_administrator" <?php checked(!empty($this->asgarosforum->options['memberslist_filter_administrator'])); ?>></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="memberslist_filter_banned"><?php _e('Banned', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="checkbox" name="memberslist_filter_banned" id="memberslist_filter_banned" <?php checked(!empty($this->asgarosforum->options['memberslist_filter_banned'])); ?>></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
