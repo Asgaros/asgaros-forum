@@ -29,12 +29,12 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
 		echo '</p>';
 
         echo '<p>';
-        echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.$this->get_field_id('show_avatar').'" name="'.$this->get_field_name('show_avatar').'" />';
+        echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.$this->get_field_id('show_avatar').'" name="'.$this->get_field_name('show_avatar').'">';
 		echo '<label for="'.$this->get_field_id('show_avatar').'">'.__('Show avatars', 'asgaros-forum').'</label>';
         echo '</p>';
 
         echo '<p>';
-        echo '<input class="checkbox" type="checkbox" '.checked($show_excerpt, true, false).' id="'.$this->get_field_id('show_excerpt').'" name="'.$this->get_field_name('show_excerpt').'" />';
+        echo '<input class="checkbox" type="checkbox" '.checked($show_excerpt, true, false).' id="'.$this->get_field_id('show_excerpt').'" name="'.$this->get_field_name('show_excerpt').'">';
 		echo '<label for="'.$this->get_field_id('show_excerpt').'">'.__('Show excerpt', 'asgaros-forum').'</label>';
         echo '</p>';
 	}

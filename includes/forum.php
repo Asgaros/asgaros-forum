@@ -1921,10 +1921,10 @@ class AsgarosForum {
         echo '</legend></p>';
 
 	    echo '<ul style="list-style: none;">';
-		echo '<li><input type="radio" id="forum_reassign0" name="forum_reassign" value="no" checked="checked" />';
+		echo '<li><input type="radio" id="forum_reassign0" name="forum_reassign" value="no" checked="checked">';
         echo '<label for="forum_reassign0">'.__('Do not reassign forum posts.', 'asgaros-forum').'</label></li>';
 
-		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes" />';
+		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes">';
 		echo '<label for="forum_reassign1">'.__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
         wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids, 'show' => 'display_name_with_login'));
 		echo '</li></ul></fieldset>';

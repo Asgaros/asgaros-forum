@@ -166,7 +166,7 @@ class AsgarosForumUploads {
 						$imageThumbnail = ($this->asgarosforum->options['uploads_show_thumbnails'] && $file_extension !== 'pdf') ? wp_get_image_editor($path.wp_basename($upload)) : false;
 
 						if ($imageThumbnail && !is_wp_error($imageThumbnail)) {
-							$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank"><img class="resize" src="'.$url.utf8_uri_encode($upload).'" alt="'.$upload.'" /></a></li>';
+							$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank"><img class="resize" src="'.$url.utf8_uri_encode($upload).'" alt="'.$upload.'"></a></li>';
 						} else {
 							$uploadedFiles .= '<li><a class="uploaded-file" href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a></li>';
 						}
