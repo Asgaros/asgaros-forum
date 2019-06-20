@@ -1363,30 +1363,6 @@ class AsgarosForum {
         return $this->db->get_var("SELECT COUNT(*) FROM {$this->tables->posts} WHERE author_id = {$userID};");
     }
 
-    /**
-     * Generating menus for forums, topics and posts.
-     */
-
-    function showForumMenu() {
-        $menu = '';
-
-        if ($this->forumIsOpen()) {
-            if ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
-                // New topic button.
-                $menu .= '<div class="forum-menu">';
-                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addtopic', $this->current_forum).'">';
-                    $menu .= '<span class="menu-icon fas fa-plus-square"></span>';
-                    $menu .= __('New Topic', 'asgaros-forum');
-                $menu .= '</a>';
-                $menu .= '</div>';
-            }
-        }
-
-        $menu = apply_filters('asgarosforum_filter_forum_menu', $menu);
-
-        return $menu;
-    }
-
     public function render_sticky_panel() {
         // Cancel if the current user is not at least a moderator.
         if (!$this->permissions->isModerator('current')) {
@@ -1425,10 +1401,30 @@ class AsgarosForum {
                 echo '</form>';
             echo '</div>';
         echo '</div>';
-
-
     }
 
+    // Generate forum menu.
+    function showForumMenu() {
+        $menu = '';
+
+        if ($this->forumIsOpen()) {
+            if ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])) {
+                // New topic button.
+                $menu .= '<div class="forum-menu">';
+                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addtopic', $this->current_forum).'">';
+                    $menu .= '<span class="menu-icon fas fa-plus-square"></span>';
+                    $menu .= __('New Topic', 'asgaros-forum');
+                $menu .= '</a>';
+                $menu .= '</div>';
+            }
+        }
+
+        $menu = apply_filters('asgarosforum_filter_forum_menu', $menu);
+
+        return $menu;
+    }
+
+    // Generate topic menu.
     function show_topic_menu($show_all_buttons = true) {
         $menu = '';
 
@@ -1505,6 +1501,7 @@ class AsgarosForum {
         return $menu;
     }
 
+    // Generate post menu.
     function show_post_menu($post_id, $author_id, $counter, $post_date) {
         $menu = '';
 
