@@ -784,7 +784,7 @@
     box-sizing: border-box;
     line-height: 26px;
     font-size: 11px;
-    padding: 0 4px;
+    padding: 0 8px;
     margin: 0; /* comp */
     color: #888;
 }
@@ -1554,6 +1554,14 @@
     font-weight: bold;
     font-style: italic;
     margin-right: 8px;
+}
+#af-wrapper .post-reactions a {
+    display: inline-block;
+}
+#af-wrapper .post-reactions a:hover {
+    transform: scale(1.3);
+    transform-origin: center;
+    transition: all 0.3s;
 }
 #af-wrapper .post-reactions a:hover .down,
 #af-wrapper .post-reactions .down .reaction-number,

@@ -250,14 +250,26 @@ class AsgarosForumUploads {
 	}
 
 	public function show_upload_restrictions() {
+		echo '<span class="upload-hints">';
+
 		if ($this->asgarosforum->options['uploads_maximum_number'] != 0) {
-			echo '<span class="upload-hints">'.__('Maximum files per post:', 'asgaros-forum').'&nbsp;<i>'.number_format_i18n(esc_html($this->asgarosforum->options['uploads_maximum_number'])).'</i></span>';
+			echo __('Maximum files:', 'asgaros-forum');
+			echo '&nbsp;';
+			echo number_format_i18n(esc_html($this->asgarosforum->options['uploads_maximum_number']));
+			echo '&nbsp;&middot;&nbsp;';
 		}
 
 		if ($this->asgarosforum->options['uploads_maximum_size'] != 0) {
-			echo '<span class="upload-hints">'.__('Maximum file size (in megabyte):', 'asgaros-forum').'&nbsp;<i>'.number_format_i18n(esc_html($this->asgarosforum->options['uploads_maximum_size'])).'</i></span>';
+			echo __('Maximum file size:', 'asgaros-forum');
+			echo '&nbsp;';
+			echo number_format_i18n(esc_html($this->asgarosforum->options['uploads_maximum_size'])).' MB';
+			echo '&nbsp;&middot;&nbsp;';
 		}
 
-		echo '<span class="upload-hints">'.__('Allowed filetypes:', 'asgaros-forum').'&nbsp;<i>'.esc_html($this->asgarosforum->options['allowed_filetypes']).'</i></span>';
+		echo __('Allowed file types:', 'asgaros-forum');
+		echo '&nbsp;';
+		echo esc_html($this->asgarosforum->options['allowed_filetypes']);
+
+		echo '</span>';
 	}
 }
