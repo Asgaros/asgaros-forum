@@ -782,13 +782,9 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
-    background-color: #fafafa;
     line-height: 26px;
-    border-color: #eee;
-    border-width: 1px;
-    border-style: none solid solid solid;
     font-size: 11px;
-    padding: 0 8px;
+    padding: 0 4px;
     margin: 0; /* comp */
     color: #888;
 }
