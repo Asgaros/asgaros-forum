@@ -21,24 +21,20 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 = Features =
 * Simple Content Management
 * Profiles & Members List
+* Notifications & Feeds
 * Powerful Editor
-* Notifications
 * SEO-friendly
 * Reactions
 * Uploads
 * Search
 * Polls
-* Approval
+* Widgets
 * Statistics
-* Who Is Online
 * Ads Management
 * Guest Postings
-* Reporting & Banning
+* Approval, Banning & Reporting
 * Moderators, Permissions & Usergroups
-* Widgets
-* RSS Feeds
-* Easy Appearance Customization
-* Mobile Theme & Theme Manager
+* Customizable Responsive Theme
 * Multilingualism
 * Multiple Instances
 * Multisite Compatibility
