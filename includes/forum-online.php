@@ -137,7 +137,7 @@ class AsgarosForumOnline {
 
             echo '<div id="statistics-online-users">';
             echo '<span class="online-users-icon fas fa-user"></span>';
-            echo __('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i></span>';
+            echo __('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i>';
             echo '&nbsp;&middot;&nbsp;';
             echo '<span class="online-users-icon fas fa-users"></span>';
 
