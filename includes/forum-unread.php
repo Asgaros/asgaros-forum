@@ -240,6 +240,7 @@ class AsgarosForumUnread {
                     echo '<div class="topic-name">';
                         $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->topic_id);
                         $link = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
+                        $human_time_diff = sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($first_unread_post->date), current_time('timestamp')));
 
                         if ($this->asgarosforum->is_topic_sticky($topic->topic_id)) {
                             echo '<span class="topic-icon fas fa-thumbtack"></span>';
@@ -260,6 +261,8 @@ class AsgarosForumUnread {
                         echo '<a href="'.$this->asgarosforum->rewrite->get_link('forum', $topic->forum_id).'">';
                         echo esc_html(stripslashes($topic->forum_name));
                         echo '</a>';
+                        echo '&nbsp;&middot;&nbsp;';
+                        echo '<i class="unread-time">'.$human_time_diff.'</i>';
                         echo '</small>';
                     echo '</div>';
                 echo '</div>';

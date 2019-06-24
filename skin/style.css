@@ -626,6 +626,9 @@
 #af-wrapper #read-unread .read {
     background-color: #a2a2a2;
 }
+#af-wrapper .unread-time {
+    color: #888;
+}
 
 /* PAGEING */
 #af-wrapper .pages-and-menu .pages {
