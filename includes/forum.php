@@ -1435,7 +1435,7 @@ class AsgarosForum {
             if ($this->permissions->can_create_post($current_user_id)) {
                 // Reply button.
                 $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addpost', $this->current_topic).'">';
-                    $menu .= '<span class="menu-icon fas fa-reply"></span>';
+                    $menu .= '<span class="menu-icon fas fa-comment-dots"></span>';
                     $menu .= __('Reply', 'asgaros-forum');
                 $menu .= '</a>';
             }

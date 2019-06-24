@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Options to hide certain filters from memberslist
 * Added: Code editor for custom-css and ad-code
+* Fixed: Display issues with Font Awesome icons
 * Minor design changes
 * Performance improvements and code optimizations
 * The required minimum WordPress version is now 4.9
