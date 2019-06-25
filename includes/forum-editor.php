@@ -8,38 +8,63 @@ class AsgarosForumEditor {
 	public function __construct($object) {
 		$this->asgarosforum = $object;
 
-		add_filter('teeny_mce_buttons', array($this, 'custom_mce_buttons'), 9999, 2);
-        add_filter('mce_buttons', array($this, 'custom_mce_buttons'), 9999, 2);
+        add_filter('mce_buttons', array($this, 'default_mce_buttons'), 11, 2);
+		add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
+		add_filter('mce_buttons_2', array($this, 'remove_mce_buttons'), 11, 2);
+		add_filter('mce_buttons_3', array($this, 'remove_mce_buttons'), 11, 2);
+		add_filter('mce_buttons_4', array($this, 'remove_mce_buttons'), 11, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
 		add_filter('tiny_mce_before_init', array($this, 'toggle_editor'));
 	}
 
-	public function custom_mce_buttons($buttons, $editor_id) {
+	// Set the default TinyMCE buttons.
+	public function default_mce_buttons($buttons, $editor_id) {
         if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
-			// Add image button.
-            $buttons[] = 'image';
-
-            // Remove the read-more button.
-            $searchKey = array_search('wp_more', $buttons);
-
-            if ($searchKey !== false) {
-                unset($buttons[$searchKey]);
-            }
-
-			// Remove the toggle-button when we dont use the minimalistic editor.
-			if ($this->asgarosforum->options['minimalistic_editor'] === false) {
-				$searchKey = array_search('wp_adv', $buttons);
-
-				if ($searchKey !== false) {
-					unset($buttons[$searchKey]);
-				}
-			}
+			// Build array of available buttons.
+			$buttons = array(
+				'bold',
+				'italic',
+				'underline',
+				'strikethrough',
+				'forecolor',
+				'bullist',
+				'numlist',
+				'outdent',
+				'indent',
+				'alignleft',
+				'aligncenter',
+				'alignright',
+				'pastetext',
+				'removeformat',
+				'undo',
+				'redo',
+				'blockquote',
+				'link'
+			);
 
 			$buttons = apply_filters('asgarosforum_filter_editor_buttons', $buttons);
         }
 
 		return $buttons;
     }
+
+	// Add custom TinyMCE buttons.
+	public function add_mce_buttons($buttons, $editor_id) {
+		if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
+			$buttons[] = 'image';
+		}
+
+		return $buttons;
+	}
+
+	// Remove TinyMCE buttons.
+	public function remove_mce_buttons($buttons, $editor_id) {
+		if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
+			$buttons = array();
+		}
+
+		return $buttons;
+	}
 
 	public function disable_captions($args) {
         if ($this->asgarosforum->executePlugin) {
@@ -51,10 +76,8 @@ class AsgarosForumEditor {
 
 	public function toggle_editor($args) {
 		if ($this->asgarosforum->executePlugin) {
-			// Toggle editor when we dont use the minimalistic editor.
-			if ($this->asgarosforum->options['minimalistic_editor'] === false) {
-				 $args['wordpress_adv_hidden'] = false;
-			}
+			// Ensure that the editor is toggled.
+			$args['wordpress_adv_hidden'] = false;
 		}
 
 		return $args;

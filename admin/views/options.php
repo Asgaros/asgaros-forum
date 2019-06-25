@@ -181,11 +181,6 @@ if (!defined('ABSPATH')) exit;
                         </tr>
 
                         <tr>
-                            <th><label for="minimalistic_editor"><?php _e('Use minimalistic editor', 'asgaros-forum'); ?></label></th>
-                            <td><input type="checkbox" name="minimalistic_editor" id="minimalistic_editor" <?php checked(!empty($this->asgarosforum->options['minimalistic_editor'])); ?>></td>
-                        </tr>
-
-                        <tr>
                             <th><label for="allow_shortcodes"><?php _e('Allow shortcodes in posts', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="allow_shortcodes" id="allow_shortcodes" <?php checked(!empty($this->asgarosforum->options['allow_shortcodes'])); ?>></td>
                         </tr>

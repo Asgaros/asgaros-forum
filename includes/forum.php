@@ -37,7 +37,6 @@ class AsgarosForum {
         'posts_per_page'                    => 10,
         'topics_per_page'                   => 20,
         'members_per_page'                  => 25,
-        'minimalistic_editor'               => true,
         'allow_shortcodes'                  => false,
         'embed_content'                     => true,
         'allow_guest_postings'              => false,
@@ -141,7 +140,7 @@ class AsgarosForum {
     var $options_editor = array(
         'media_buttons' => false,
         'editor_height' => 250,
-        'teeny'         => true,
+        'teeny'         => false,
         'quicktags'     => false
     );
     var $cache          = array();   // Used to store selected database queries.
@@ -241,9 +240,6 @@ class AsgarosForum {
         // Get options and merge them with the default ones.
 		$current_options = get_option('asgarosforum_options', array());
         $this->options = array_merge($this->options_default, $current_options);
-
-        // Set certain options which are required for the editor.
-        $this->options_editor['teeny'] = $this->options['minimalistic_editor'];
 
         // Ensure default values if some needed files got deleted.
         if (empty($this->options['forum_title'])) {

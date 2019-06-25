@@ -11,7 +11,6 @@ class AsgarosForumMentioning {
 
         add_action('asgarosforum_enqueue_css_js', array($this, 'enqueue_css_js'));
         add_filter('tiny_mce_before_init', array($this, 'add_mentioning_to_editor'));
-        add_filter('teeny_mce_before_init', array($this, 'add_mentioning_to_editor'));
         add_action('rest_api_init', array($this, 'initialize_routes'));
     }
 
