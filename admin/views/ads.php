@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <th><label for="ad_code"><?php _e('Code:', 'asgaros-forum'); ?></label></th>
-                        <td><textarea class="large-text" data-code-editor-mode="htmlmixed" rows="8" cols="80" type="text" name="ad_code" id="ad_code" required></textarea></td>
+                        <td><textarea class="large-text" data-code-editor-mode="htmlmixed" rows="8" cols="80" type="text" name="ad_code" id="ad_code"></textarea></td>
                     </tr>
                     <tr>
                         <th><label for="ad_active"><?php _e('Active:', 'asgaros-forum'); ?></label></th>

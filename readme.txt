@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Problems when saving ads
 * Changed: Default editor-buttons
 * Removed: Option for minimalistic editor
 = 1.14.12 =
