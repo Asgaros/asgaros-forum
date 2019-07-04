@@ -153,8 +153,8 @@ class AsgarosForumMentioning {
         $text = stripslashes($post->text);
 
         // Try to remove blockquotes to prevent unnecessary mentionings.
-        // This functionality requires the libxml-extension of PHP.
-        if (extension_loaded('libxml')) {
+        // This functionality requires the libxml and dom extensions of PHP.
+        if (extension_loaded('libxml') && extension_loaded('dom')) {
             // Enable search.
             $search = true;
 

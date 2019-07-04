@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Problems when saving ads
+* Fixed: Fatal PHP error when processing mentionings
 * Changed: Default editor-buttons
 * Removed: Option for minimalistic editor
 = 1.14.12 =
