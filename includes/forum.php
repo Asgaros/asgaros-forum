@@ -1112,8 +1112,20 @@ class AsgarosForum {
         }
     }
 
-    function cut_string($string, $length = 33) {
+    function cut_string($string, $length = 33, $at_next_space = false) {
+        // Only cut string if it is longer than defined.
         if (strlen($string) > $length) {
+            // Try to find position of next space if necessary.
+            if ($at_next_space) {
+                $space_position = strpos($string, ' ', $length);
+
+                if ($space_position) {
+                    $length = $space_position;
+                } else {
+                    return $string;
+                }
+            }
+
             return mb_substr($string, 0, $length, 'UTF-8') . ' &#8230;';
         }
 
@@ -1767,12 +1779,21 @@ class AsgarosForum {
 
             // When the element exists, set parents and exit function.
             if ($results) {
-                $this->current_description  = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $this->cut_string(str_replace(array("\r", "\n"), '', esc_html(strip_tags($results->current_description))), 155) : false;
-                $this->current_category     = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->current_category : false;
-                $this->parent_forum         = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->parent_forum : false;
-                $this->parent_forum_name    = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->parent_forum_name : false;
-                $this->current_forum        = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->current_forum : false;
-                $this->current_forum_name   = ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') ? $results->current_forum_name : false;
+                if ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') {
+                    // Generate description.
+                    $description = $results->current_description;
+                    $description = strip_tags($description);
+                    $description = esc_html($description);
+                    $description = str_replace(array("\r", "\n"), '', $description);
+                    $this->current_description = $this->cut_string($description, 155, true);
+
+                    $this->current_category = $results->current_category;
+                    $this->parent_forum = $results->parent_forum;
+                    $this->parent_forum_name = $results->parent_forum_name;
+                    $this->current_forum = $results->current_forum;
+                    $this->current_forum_name = $results->current_forum_name;
+                }
+
                 $this->current_topic        = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic : false;
                 $this->current_topic_name   = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic_name : false;
                 $this->current_post         = ($contentType === 'post') ? $results->current_post : false;
