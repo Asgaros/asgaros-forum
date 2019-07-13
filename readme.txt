@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Compatibility issues with certain editor plugins
 = 1.14.13 =
 * Fixed: Problems when saving ads
 * Fixed: Fatal PHP error when processing mentionings
