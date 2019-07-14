@@ -86,8 +86,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to define general forum description
 * Fixed: Dont cut meta-tag description in the middle of a word
 * Fixed: Compatibility issues with certain editor plugins
+* Performance improvements and code optimizations
 = 1.14.13 =
 * Fixed: Problems when saving ads
 * Fixed: Fatal PHP error when processing mentionings

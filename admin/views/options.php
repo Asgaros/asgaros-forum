@@ -125,6 +125,14 @@ if (!defined('ABSPATH')) exit;
                         </tr>
 
                         <tr>
+                            <th>
+                                <label for="forum_description"><?php _e('Forum description:', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php _e('The description is used for meta tags.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td><input class="regular-text" type="text" name="forum_description" id="forum_description" value="<?php echo esc_html(stripslashes($this->asgarosforum->options['forum_description'])); ?>"></td>
+                        </tr>
+
+                        <tr>
                             <th><label for="location"><?php _e('Forum location:', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <?php

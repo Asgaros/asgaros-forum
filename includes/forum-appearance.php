@@ -120,7 +120,16 @@ class AsgarosForumAppearance {
 
 			$link = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
 			$title = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
-			$description = ($this->asgarosforum->current_description && $this->asgarosforum->error === false) ? $this->asgarosforum->current_description : $title;
+
+			// By default use the page title as description.
+			$description = $title;
+
+			// In forum overview use the forum description if available.
+			if ($this->asgarosforum->current_view === 'overview' && !empty($this->asgarosforum->options['forum_description'])) {
+				$description = $this->asgarosforum->options['forum_description'];
+			} else if ($this->asgarosforum->current_description && $this->asgarosforum->error === false) {
+				$description = $this->asgarosforum->current_description;
+			}
 
 			// Prevent indexing of some views, when there is an error or for other configurations.
 			$prevent_indexing = false;
