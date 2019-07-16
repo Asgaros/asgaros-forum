@@ -360,20 +360,20 @@ class AsgarosForumAdmin {
         $forum_description  = trim($_POST['forum_description']);
         $forum_icon         = trim($_POST['forum_icon']);
         $forum_icon         = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
+        $forum_status       = $_POST['forum_status'];
         $forum_closed       = (isset($_POST['forum_closed'])) ? 1 : 0;
-        $forum_approval     = (isset($_POST['forum_approval'])) ? 1 : 0;
         $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
-                $this->asgarosforum->content->insert_forum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed, $forum_approval);
+                $this->asgarosforum->content->insert_forum($forum_category, $forum_name, $forum_description, $forum_parent_forum, $forum_icon, $forum_order, $forum_closed, $forum_status);
             } else {
                 // Update forum.
                 $this->asgarosforum->db->update(
                     $this->asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed, 'approval' => $forum_approval, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum),
+                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'closed' => $forum_closed, 'forum_status' => $forum_status, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum),
                     array('id' => $forum_id),
-                    array('%s', '%s', '%s', '%d', '%d', '%d', '%d'),
+                    array('%s', '%s', '%s', '%d', '%d', '%s', '%d', '%d'),
                     array('%d')
                 );
 
@@ -386,8 +386,8 @@ class AsgarosForumAdmin {
                     array('%d')
                 );
 
-                // Approve all unapproved topics in a forum if the approval-function is off.
-                if ($forum_approval === 0) {
+                // Approve all unapproved topics in a forum if its status is not set to approval.
+                if ($forum_status != 'approval') {
                     // Get all unapproved topics from this forum.
                     $unapproved_topics = $this->asgarosforum->approval->get_unapproved_topics($forum_id);
 

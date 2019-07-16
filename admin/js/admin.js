@@ -108,7 +108,7 @@ window.FontAwesomeConfig = {
             var forum_description       = '';
             var forum_icon              = 'fas fa-comments';
             var forum_closed            = '';
-            var forum_approval          = '';
+            var forum_status            = 'normal';
             var forum_order             = '1';
             var forum_count_subforums   = '0';
 
@@ -117,7 +117,7 @@ window.FontAwesomeConfig = {
                 forum_description       = $('#forum_'+forum_id+'_description').val();
                 forum_icon              = $('#forum_'+forum_id+'_icon').val();
                 forum_closed            = $('#forum_'+forum_id+'_closed').val();
-                forum_approval          = $('#forum_'+forum_id+'_approval').val();
+                forum_status            = $('#forum_'+forum_id+'_status').val();
                 forum_order             = $('#forum_'+forum_id+'_order').val();
                 forum_count_subforums   = $('#forum_'+forum_id+'_count_subforums').val();
             }
@@ -157,11 +157,11 @@ window.FontAwesomeConfig = {
                 $('#forum-editor input[name=forum_closed]').prop('checked', false);
             }
 
-            if (forum_approval == 1) {
-                $('#forum-editor input[name=forum_approval]').prop('checked', true);
-            } else {
-                $('#forum-editor input[name=forum_approval]').prop('checked', false);
-            }
+            $('#forum-editor select[name=forum_status] option').each(function() {
+                if ($(this).val() == forum_status) {
+                    $(this).prop('selected', true);
+                }
+            });
 
             $('#forum-editor input[name=forum_order]').val(forum_order);
 

@@ -128,10 +128,10 @@ class AsgarosForumApproval {
         }
 
         // Check if the forum requires approval for new topics.
-        $approval = $this->asgarosforum->db->get_var("SELECT approval FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
+        $status = $this->asgarosforum->db->get_var("SELECT forum_status FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
 
         // Additional checks if forum requires approval.
-        if ($approval === '1') {
+        if ($status == 'approval') {
             // If the current user is a guest, approval is needed for sure.
             if (!is_user_logged_in()) {
                 return true;
