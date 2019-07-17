@@ -20,7 +20,8 @@ if ($categories) {
             } else {
                 foreach ($forums as $forum) {
                     $forumsAvailable = true;
-                    require('forum-element.php');
+
+                    $this->render_forum_element($forum);
                 }
             }
         echo '</div>';
