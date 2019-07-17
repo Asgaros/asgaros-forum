@@ -1399,7 +1399,7 @@ class AsgarosForum {
     }
 
     function get_topic_starter($topic_id) {
-        return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->posts} WHERE parent_id = %d ORDER BY id ASC LIMIT 1;", $topic_id));
+        return $this->db->get_var($this->db->prepare("SELECT author_id FROM {$this->tables->topics} WHERE id = %d;", $topic_id));
     }
 
     function format_date($date, $full = true) {
@@ -1424,7 +1424,7 @@ class AsgarosForum {
 
     // Returns the topics created by a user.
     function countTopicsByUser($user_id) {
-        return $this->db->get_var("SELECT COUNT(*) FROM {$this->tables->posts} WHERE id IN (SELECT MIN(id) FROM {$this->tables->posts} GROUP BY parent_id) AND author_id = {$user_id};");
+        return $this->db->get_var("SELECT COUNT(*) FROM {$this->tables->topics} WHERE author_id = {$user_id};");
     }
 
     function countPostsByUser($userID) {
@@ -1966,10 +1966,14 @@ class AsgarosForum {
             return;
         }
 
-        // Check if users have posts.
+        // Check if users have posts or topics.
         $users_have_content = false;
 
 		if ($this->db->get_var("SELECT ID FROM {$this->tables->posts} WHERE author_id IN(".implode(',', $userids).") LIMIT 1;")) {
+			$users_have_content = true;
+		}
+
+        if ($this->db->get_var("SELECT ID FROM {$this->tables->topics} WHERE author_id IN(".implode(',', $userids).") LIMIT 1;")) {
 			$users_have_content = true;
 		}
 
@@ -2019,8 +2023,9 @@ class AsgarosForum {
             return;
         }
 
-        // Reassign forum posts.
+        // Reassign forum posts and topics.
         $this->db->update($this->tables->posts, array('author_id' => $_POST['forum_reassign_user']), array('author_id' => $id), array('%d'), array('%d'));
+        $this->db->update($this->tables->topics, array('author_id' => $_POST['forum_reassign_user']), array('author_id' => $id), array('%d'), array('%d'));
     }
 
     // Extract the first URL of an image from a given string.

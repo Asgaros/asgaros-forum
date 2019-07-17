@@ -81,9 +81,8 @@ class AsgarosForumFeed {
             if ($this->asgarosforum->current_view === 'forum') {
                 $query_post_content = "SELECT p.text FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1";
                 $query_post_date = "SELECT p.date FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1";
-                $query_post_author = "SELECT p.author_id FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1";
 
-                $feed_data = $this->asgarosforum->db->get_results("SELECT t.id, t.name, ({$query_post_content}) AS text, ({$query_post_date}) AS date, ({$query_post_author}) AS author_id FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = {$this->asgarosforum->current_forum} AND t.approved = 1 ORDER BY t.id DESC LIMIT 0, 50;");
+                $feed_data = $this->asgarosforum->db->get_results("SELECT t.id, t.name, ({$query_post_content}) AS text, ({$query_post_date}) AS date, t.author_id FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = {$this->asgarosforum->current_forum} AND t.approved = 1 ORDER BY t.id DESC LIMIT 0, 50;");
             } else if ($this->asgarosforum->current_view === 'topic') {
                 $feed_data = $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, t.name, p.date, p.text, p.author_id FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.parent_id = {$this->asgarosforum->current_topic} AND t.id = p.parent_id ORDER BY p.id DESC LIMIT 0, 50;");
             }
