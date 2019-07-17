@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 58;
+    private $db_version = 59;
     private $tables;
 
     public function __construct() {
@@ -119,7 +119,6 @@ class AsgarosForumDatabase {
             description varchar(255) NOT NULL default '',
             icon varchar(255) NOT NULL default '',
             sort int(11) NOT NULL default '0',
-            closed int(11) NOT NULL default '0',
             forum_status varchar(255) NOT NULL default 'normal',
             slug varchar(255) NOT NULL default '',
             PRIMARY KEY  (id),
@@ -338,7 +337,7 @@ class AsgarosForumDatabase {
                         $default_forum_name = __('First Forum', 'asgaros-forum');
                         $default_forum_description = __('My first forum.', 'asgaros-forum');
 
-                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'fas fa-comments', 1, 0, 'normal');
+                        $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'fas fa-comments', 1, 'normal');
                     }
                 }
 
@@ -445,12 +444,20 @@ class AsgarosForumDatabase {
                 update_option('asgarosforum_db_version', 54);
             }
 
-            // Convert approval status.
+            // Convert forum approval status.
             if ($database_version_installed < 58 && !$first_time_installation) {
                 @$this->db->query("UPDATE {$this->tables->forums} SET forum_status = 'approval' WHERE approval = 1;");
                 @$this->db->query("ALTER TABLE {$this->tables->forums} DROP COLUMN approval;");
 
                 update_option('asgarosforum_db_version', 58);
+            }
+
+            // Convert forum closed status.
+            if ($database_version_installed < 59 && !$first_time_installation) {
+                @$this->db->query("UPDATE {$this->tables->forums} SET forum_status = 'closed' WHERE closed = 1;");
+                @$this->db->query("ALTER TABLE {$this->tables->forums} DROP COLUMN closed;");
+
+                update_option('asgarosforum_db_version', 59);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);

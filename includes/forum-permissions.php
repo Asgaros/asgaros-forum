@@ -346,7 +346,7 @@ class AsgarosForumPermissions {
             return true;
         }
 
-        // Ensure that the topics is not closed.
+        // Ensure that the topic is not closed.
         if (!$this->asgarosforum->is_topic_closed($this->asgarosforum->current_topic)) {
             // If a logged-in user is not banned, he can create a post.
             if (is_user_logged_in() && !$this->isBanned($user_id)) {

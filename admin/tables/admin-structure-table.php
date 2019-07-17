@@ -33,7 +33,6 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_description" value="'.esc_html(stripslashes($item['description'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_icon" value="'.$forumIcon.'">';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_closed" value="'.esc_html(stripslashes($item['closed'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_status" value="'.esc_html(stripslashes($item['forum_status'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_order" value="'.esc_html(stripslashes($item['sort'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_count_subforums" value="'.esc_html(stripslashes($item['count_subforums'])).'">';
@@ -72,21 +71,13 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
             case 'normal':
                 return __('Normal', 'asgaros-forum');
             break;
+            case 'closed':
+                return __('Closed', 'asgaros-forum');
+            break;
             case 'approval':
                 return __('Approval', 'asgaros-forum');
             break;
         }
-
-        $status = '';
-
-        // Check if forum is opened or closed.
-        if ($item['closed'] == 1) {
-            $status = __('Closed', 'asgaros-forum');
-        } else {
-            $status = __('Opened', 'asgaros-forum');
-        }
-
-        return $status;
     }
 
     function column_actions($item) {

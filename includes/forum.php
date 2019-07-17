@@ -1736,9 +1736,9 @@ class AsgarosForum {
     // Returns TRUE if the forum is opened or the user has at least moderator rights.
     function forumIsOpen() {
         if (!$this->permissions->isModerator('current')) {
-            $closed = intval($this->db->get_var($this->db->prepare("SELECT closed FROM {$this->tables->forums} WHERE id = %d;", $this->current_forum)));
+            $status = $this->db->get_var($this->db->prepare("SELECT forum_status FROM {$this->tables->forums} WHERE id = %d;", $this->current_forum));
 
-            if ($closed === 1) {
+            if ($status == 'closed') {
                 return false;
             }
         }
