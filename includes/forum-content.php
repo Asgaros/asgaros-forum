@@ -270,7 +270,11 @@ class AsgarosForumContent {
         }
 
         // Insert the topic.
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->topics, array('name' => $name, 'parent_id' => $forum_id, 'slug' => $topic_slug, 'approved' => $approved), array('%s', '%d', '%s', '%d'));
+        $this->asgarosforum->db->insert(
+            $this->asgarosforum->tables->topics,
+            array('name' => $name, 'parent_id' => $forum_id, 'slug' => $topic_slug, 'approved' => $approved, 'author_id' => $author_id),
+            array('%s', '%d', '%s', '%d', '%d')
+        );
 
         // Save the ID of the new topic.
         $inserted_ids = new stdClass;

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 59;
+    private $db_version = 61;
     private $tables;
 
     public function __construct() {
@@ -128,6 +128,7 @@ class AsgarosForumDatabase {
             $sql[] = "CREATE TABLE ".$this->tables->topics." (
             id int(11) NOT NULL auto_increment,
             parent_id int(11) NOT NULL default '0',
+            author_id int(11) NOT NULL default '0',
             views int(11) NOT NULL default '0',
             name varchar(255) NOT NULL default '',
             sticky int(1) NOT NULL default '0',
@@ -458,6 +459,12 @@ class AsgarosForumDatabase {
                 @$this->db->query("ALTER TABLE {$this->tables->forums} DROP COLUMN closed;");
 
                 update_option('asgarosforum_db_version', 59);
+            }
+
+            if ($database_version_installed < 61 && !$first_time_installation) {
+                $this->db->query("UPDATE {$this->tables->topics} AS t SET t.author_id = (SELECT p.author_id FROM {$this->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1);");
+
+                update_option('asgarosforum_db_version', 61);
             }
 
             update_option('asgarosforum_db_version', $this->db_version);
