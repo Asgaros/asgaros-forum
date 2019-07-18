@@ -91,6 +91,11 @@ window.FontAwesomeConfig = {
 
             // Build quote.
             var quoteID = $(this).attr('data-value-id');
+
+            // Make quotes compatible with Enlighter.
+            $('#post-quote-container-'+quoteID+' .EnlighterJSWrapper').remove();
+            $('#post-quote-container-'+quoteID+' .EnlighterJSRAW').removeAttr('style');
+
             var quoteContent = $('#post-quote-container-'+quoteID).html();
 
             // Add quote to the end of the editor.
