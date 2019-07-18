@@ -705,17 +705,16 @@
 #af-wrapper #forum-header {
     display: block;
     margin: 0;
-    padding: 0;
+    padding: 2px;
+    border: none;
+    border-radius: 4px;
     background-color: #2d89cc;
-    min-height: 48px;
-    border-bottom: 1px solid #2468af;
+    min-height: 44px;
 }
 #af-wrapper #forum-navigation,
 #af-wrapper #forum-navigation-mobile {
     display: block;
     float: left;
-    line-height: 48px;
-    min-height: 48px;
     text-align: left; /* comp */
 }
 #af-wrapper #forum-navigation a,
@@ -723,7 +722,7 @@
     padding: 0 24px;
     color: #fff !important;
     border-left: 1px solid #2468af;
-    line-height: 48px;
+    line-height: 44px;
     display: inline; /* comp */
     margin: 0; /* comp */
     text-align: left; /* comp */
@@ -815,13 +814,15 @@
 #af-wrapper #forum-search {
     float: right;
     width: 238px;
+    height: 44px;
+    line-height: 44px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     background-color: #fff;
     color: #444;
-    line-height: 43px;
-    border: 3px solid #2d89cc;
-    border-bottom-width: 2px;
-    height: 48px;
+    border: none;
+    border-radius: 3px;
     cursor: text;
 }
 #af-wrapper #forum-search form {
@@ -852,9 +853,9 @@
 }
 #af-wrapper #forum-search .search-icon {
     padding: 0;
-    line-height: 43px;
     width: 35px;
-    height: 43px;
+    height: 44px;
+    line-height: 44px;
     text-align: center;
 }
 @media screen and (max-width: 782px) {

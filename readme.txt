@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Changed: Combined approval and closed options into a forum status option
 * Improved compatibility with Enlighter
+* Minor design changes
 * Performance improvements and code optimizations
 = 1.14.14 =
 * Added: Option to define general forum description
