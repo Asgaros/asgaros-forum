@@ -692,6 +692,7 @@
     color: #fff;
     background-color: #2d89cc;
     border-bottom: 1px solid #2468af;
+    border-radius: 4px 4px 0px 0px;
 }
 #af-wrapper .title-element-dark {
     background-color: #999;
