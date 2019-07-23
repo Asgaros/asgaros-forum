@@ -155,7 +155,7 @@
 }
 
 /* UPLOADS */
-#af-wrapper .uploaded-file {
+#af-wrapper .uploaded-file a {
     display: block;
     margin-bottom: 5px;
 }
