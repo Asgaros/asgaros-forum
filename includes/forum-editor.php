@@ -8,11 +8,11 @@ class AsgarosForumEditor {
 	public function __construct($object) {
 		$this->asgarosforum = $object;
 
-        add_filter('mce_buttons', array($this, 'default_mce_buttons'), 11, 2);
+        add_filter('mce_buttons', array($this, 'default_mce_buttons'), 1, 2);
 		add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
-		add_filter('mce_buttons_2', array($this, 'remove_mce_buttons'), 11, 2);
-		add_filter('mce_buttons_3', array($this, 'remove_mce_buttons'), 11, 2);
-		add_filter('mce_buttons_4', array($this, 'remove_mce_buttons'), 11, 2);
+		add_filter('mce_buttons_2', array($this, 'remove_mce_buttons'), 1, 2);
+		add_filter('mce_buttons_3', array($this, 'remove_mce_buttons'), 1, 2);
+		add_filter('mce_buttons_4', array($this, 'remove_mce_buttons'), 1, 2);
         add_filter('disable_captions', array($this, 'disable_captions'));
 		add_filter('tiny_mce_before_init', array($this, 'toggle_editor'));
 	}
