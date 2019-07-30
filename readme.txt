@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Compatibility issues with certain editor plugins
 * Fixed: Display issues with some themes
 * Changed: Combined approval and closed options into a forum status option
+* Updated: Font Awesome version 5.10.0
 * Improved compatibility with Enlighter
 * Minor design changes
 * Performance improvements and code optimizations
