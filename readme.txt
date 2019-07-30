@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Compatibility issues with certain editor plugins
+* Fixed: Display issues with some themes
 * Changed: Combined approval and closed options into a forum status option
 * Improved compatibility with Enlighter
 * Minor design changes
