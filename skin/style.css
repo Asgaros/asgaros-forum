@@ -23,6 +23,10 @@
 #af-wrapper div {
     border-radius: 0; /* comp */
 }
+#af-wrapper img {
+    border-radius: 0px; /* comp */
+    box-shadow: none; /* comp */
+}
 #af-wrapper .clear {
     clear: both;
     padding: 0; /* comp */
