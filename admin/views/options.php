@@ -11,82 +11,15 @@ if (!defined('ABSPATH')) exit;
     ?>
 
     <form method="post">
-        <?php wp_nonce_field('asgaros_forum_save_options'); ?>
-
         <?php
 
-        // Build array of available tabs.
-        $tabs = array(
-            'general' => array(
-                'label' => __('General', 'asgaros-forum'),
-                'icon' => 'fas fa-sliders-h'
-            ),
-            'features' => array(
-                'label' => __('Features', 'asgaros-forum'),
-                'icon' => 'fas fa-plug'
-            ),
-            'urls' => array(
-                'label' => __('URLs', 'asgaros-forum'),
-                'icon' => 'fas fa-link'
-            ),
-            'permissions' => array(
-                'label' => __('Permissions', 'asgaros-forum'),
-                'icon' => 'fas fa-user-shield'
-            ),
-            'breadcrumbs' => array(
-                'label' => __('Breadcrumbs', 'asgaros-forum'),
-                'icon' => 'fas fa-map-marked'
-            ),
-            'notifications' => array(
-                'label' => __('Notifications', 'asgaros-forum'),
-                'icon' => 'fas fa-envelope'
-            ),
-            'mentioning' => array(
-                'label' => __('Mentioning', 'asgaros-forum'),
-                'icon' => 'fas fa-at'
-            ),
-            'memberslist' => array(
-                'label' => __('Members List', 'asgaros-forum'),
-                'icon' => 'fas fa-users'
-            ),
-            'profiles' => array(
-                'label' => __('Profiles', 'asgaros-forum'),
-                'icon' => 'fas fa-user'
-            ),
-            'uploads' => array(
-                'label' => __('Uploads', 'asgaros-forum'),
-                'icon' => 'fas fa-upload'
-            ),
-            'reports' => array(
-                'label' => __('Reports', 'asgaros-forum'),
-                'icon' => 'fas fa-exclamation-triangle'
-            ),
-            'signatures' => array(
-                'label' => __('Signatures', 'asgaros-forum'),
-                'icon' => 'fas fa-signature'
-            ),
-            'activity' => array(
-                'label' => __('Activity', 'asgaros-forum'),
-                'icon' => 'fas fa-bullhorn'
-            ),
-            'ads' => array(
-                'label' => __('Ads', 'asgaros-forum'),
-                'icon' => 'fas fa-ad'
-            ),
-            'polls' => array(
-                'label' => __('Polls', 'asgaros-forum'),
-                'icon' => 'fas fa-poll-h'
-            ),
-            'spoilers' => array(
-                'label' => __('Spoilers', 'asgaros-forum'),
-                'icon' => 'fas fa-eye-slash'
-            )
-        );
+        // Render nonce-field.
+        wp_nonce_field('asgaros_forum_save_options');
 
         // Get selected tab.
         $selected_tab = 'general';
 
-        if (isset($_POST['selected_tab']) && isset($tabs[$_POST['selected_tab']])) {
+        if (isset($_POST['selected_tab']) && isset($this->option_views[$_POST['selected_tab']])) {
             $selected_tab = $_POST['selected_tab'];
         }
 
@@ -98,7 +31,7 @@ if (!defined('ABSPATH')) exit;
         <div id="settings-wrapper">
             <ul id="settings-tabs">
                 <?php
-                foreach ($tabs as $key => $value) {
+                foreach ($this->option_views as $key => $value) {
                     $active_css = ($selected_tab == $key) ? 'class="active-tab"' : '';
 
                     echo '<li data-slug="'.$key.'" '.$active_css.'>';
@@ -114,10 +47,7 @@ if (!defined('ABSPATH')) exit;
             <div id="tab-content">
                 <?php $display = ($selected_tab == 'general') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-general" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-sliders-h"></span>
-                        <?php _e('General', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('general'); ?>
                     <table>
                         <tr>
                             <th><label for="forum_title"><?php _e('Forum title:', 'asgaros-forum'); ?></label></th>
@@ -283,10 +213,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'features') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-features" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-plug"></span>
-                        <?php _e('Features', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('features'); ?>
                     <table>
                         <tr>
                             <th><label for="enable_avatars"><?php _e('Enable Avatars', 'asgaros-forum'); ?></label></th>
@@ -339,10 +266,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'urls') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-urls" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-link"></span>
-                        <?php _e('URLs', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('urls'); ?>
                     <?php
                     $seo_option = checked(!empty($this->asgarosforum->options['enable_seo_urls']), true, false);
                     ?>
@@ -453,10 +377,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'permissions') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-permissions" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-user-shield"></span>
-                        <?php _e('Permissions', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('permissions'); ?>
                     <table>
                         <tr>
                             <th><label for="enable_edit_post"><?php _e('Users can edit their own posts', 'asgaros-forum'); ?></label></th>
@@ -513,10 +434,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'breadcrumbs') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-breadcrumbs" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-map-marked"></span>
-                        <?php _e('Breadcrumbs', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('breadcrumbs'); ?>
                     <?php
                     $breadcrumbs_option = checked(!empty($this->asgarosforum->options['enable_breadcrumbs']), true, false);
                     ?>
@@ -534,10 +452,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'notifications') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-notifications" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-envelope"></span>
-                        <?php _e('Notifications', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('notifications'); ?>
                     <table>
                         <tr>
                             <th><label for="notification_sender_name"><?php _e('Sender name:', 'asgaros-forum'); ?></label></th>
@@ -588,10 +503,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'mentioning') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-mentioning" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-at"></span>
-                        <?php _e('Mentioning', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('mentioning'); ?>
                     <?php
                     $mentioning_option = checked(!empty($this->asgarosforum->options['enable_mentioning']), true, false);
                     ?>
@@ -617,10 +529,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'memberslist') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-memberslist" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-users"></span>
-                        <?php _e('Members List', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('memberslist'); ?>
                     <?php
                     $membersListOption = checked(!empty($this->asgarosforum->options['enable_memberslist']), true, false);
                     ?>
@@ -665,10 +574,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'profiles') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-profiles" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-user"></span>
-                        <?php _e('Profiles', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('profiles'); ?>
                     <?php
                     $profileOption = checked(!empty($this->asgarosforum->options['enable_profiles']), true, false);
                     ?>
@@ -686,10 +592,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'uploads') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-uploads" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-upload"></span>
-                        <?php _e('Uploads', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('uploads'); ?>
                     <?php
                     $uploadsOption = checked(!empty($this->asgarosforum->options['allow_file_uploads']), true, false);
                     ?>
@@ -739,10 +642,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'reports') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-reports" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-exclamation-triangle"></span>
-                        <?php _e('Reports', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('reports'); ?>
                     <?php
                     $reportsOption = checked(!empty($this->asgarosforum->options['reports_enabled']), true, false);
                     ?>
@@ -760,10 +660,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'signatures') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-signatures" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-signature"></span>
-                        <?php _e('Signatures', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('signatures'); ?>
                     <?php
                     $signaturesOption = checked(!empty($this->asgarosforum->options['allow_signatures']), true, false);
                     ?>
@@ -794,10 +691,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'activity') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-activity" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-bullhorn"></span>
-                        <?php _e('Activity', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('activity'); ?>
                     <?php
                     $activityOption = checked(!empty($this->asgarosforum->options['enable_activity']), true, false);
                     ?>
@@ -819,10 +713,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'ads') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-ads" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-ad"></span>
-                        <?php _e('Ads', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('ads'); ?>
                     <?php
                     $adsOption = checked(!empty($this->asgarosforum->options['enable_ads']), true, false);
                     ?>
@@ -852,10 +743,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'polls') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-polls" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-poll-h"></span>
-                        <?php _e('Polls', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('polls'); ?>
                     <?php
                     $polls_option = checked(!empty($this->asgarosforum->options['enable_polls']), true, false);
                     ?>
@@ -884,10 +772,7 @@ if (!defined('ABSPATH')) exit;
 
                 <?php $display = ($selected_tab == 'spoilers') ? 'block' : 'none'; ?>
                 <div class="tab" id="tab-spoilers" style="display: <?php echo $display; ?>;">
-                    <div class="settings-header">
-                        <span class="fas fa-eye-slash"></span>
-                        <?php _e('Spoilers', 'asgaros-forum'); ?>
-                    </div>
+                    <?php $this->render_options_header('spoilers'); ?>
                     <?php
                     $spoilers_option = checked(!empty($this->asgarosforum->options['enable_spoilers']), true, false);
                     ?>

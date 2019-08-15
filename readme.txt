@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 1.14.15 =
 * Fixed: Compatibility issues with certain editor plugins
 * Fixed: Display issues with some themes
