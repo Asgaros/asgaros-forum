@@ -91,6 +91,9 @@
 #af-wrapper .af-usergroup-tag i {
     padding-right: 4px;
 }
+#af-wrapper .reputation-badges {
+    color: #ffb900;
+}
 /* Text meant only for screen readers. */
 #af-wrapper .screen-reader-text {
     border: 0;

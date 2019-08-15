@@ -40,7 +40,10 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
 
         if ($user_data != false) {
             echo '<div class="post-author-block-meta">';
-            // Show author posts counter if activated.
+                // Show reputation badges.
+                $this->render_reputation_badges($post->author_posts);
+
+                // Show author posts counter if activated.
                 if ($this->options['show_author_posts_counter']) {
                     $author_posts_i18n = number_format_i18n($post->author_posts);
                     echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';

@@ -136,7 +136,13 @@ class AsgarosForum {
         'view_name_reports'                 => 'reports',
         'enable_spoilers'                   => true,
         'hide_spoilers_from_guests'         => false,
-        'subforums_location'                => 'above'
+        'subforums_location'                => 'above',
+        'enable_reputation'                 => true,
+        'reputation_level_1_posts'          => 10,
+        'reputation_level_2_posts'          => 25,
+        'reputation_level_3_posts'          => 100,
+        'reputation_level_4_posts'          => 250,
+        'reputation_level_5_posts'          => 1000
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -2109,5 +2115,28 @@ class AsgarosForum {
         }
 
         return $signature;
+    }
+
+    public function render_reputation_badges($number) {
+        if ($this->options['enable_reputation']) {
+            echo '<small class="reputation-badges">';
+
+            if ($number < $this->options['reputation_level_1_posts']) {
+                echo '<i class="far fa-star-half"></i>';
+            } else {
+                echo '<i class="fas fa-star"></i>';
+
+                // Add an additional star for every remaining level.
+                for ($i = 2; $i <= 5; $i++) {
+                    if ($number >= $this->options['reputation_level_'.$i.'_posts']) {
+                        echo '<i class="fas fa-star"></i>';
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            echo '</small>';
+        }
     }
 }

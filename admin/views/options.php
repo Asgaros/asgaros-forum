@@ -788,6 +788,49 @@ if (!defined('ABSPATH')) exit;
                     </table>
                 </div>
 
+                <?php $display = ($selected_tab == 'reputation') ? 'block' : 'none'; ?>
+                <div class="tab" id="tab-reputation" style="display: <?php echo $display; ?>;">
+                    <?php $this->render_options_header('reputation'); ?>
+                    <?php
+                    $reputation_option = checked(!empty($this->asgarosforum->options['enable_reputation']), true, false);
+                    ?>
+                    <table>
+                        <tr>
+                            <th><label for="enable_reputation"><?php _e('Enable Reputation', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="enable_reputation" id="enable_reputation" class="show_hide_initiator" data-hide-class="reputation-option" <?php checked(!empty($this->asgarosforum->options['enable_reputation'])); ?>></td>
+                        </tr>
+                        <tr class="reputation-option" <?php if (!$reputation_option) { echo 'style="display: none;"'; } ?>>
+                            <th>
+                                <label><?php _e('Minimum amount of posts:', 'asgaros-forum'); ?></label>
+                            </th>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <th><label for="reputation_level_1_posts"><?php _e('Level 1', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="number" name="reputation_level_1_posts" id="reputation_level_1_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_1_posts']); ?>" size="3" min="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="reputation_level_2_posts"><?php _e('Level 2', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="number" name="reputation_level_2_posts" id="reputation_level_2_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_2_posts']); ?>" size="3" min="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="reputation_level_3_posts"><?php _e('Level 3', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="number" name="reputation_level_3_posts" id="reputation_level_3_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_3_posts']); ?>" size="3" min="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="reputation_level_4_posts"><?php _e('Level 4', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="number" name="reputation_level_4_posts" id="reputation_level_4_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_4_posts']); ?>" size="3" min="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="reputation_level_5_posts"><?php _e('Level 5', 'asgaros-forum'); ?>:</label></th>
+                                        <td><input type="number" name="reputation_level_5_posts" id="reputation_level_5_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_5_posts']); ?>" size="3" min="1"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
                 <input type="submit" name="af_options_submit" class="button button-primary" value="<?php _e('Save Settings', 'asgaros-forum'); ?>">
             </div>
 
