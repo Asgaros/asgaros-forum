@@ -95,7 +95,11 @@ class AsgarosForumProfile {
                     $role = '<span class="banned">'.$role.'</span>';
                 }
 
-                echo '<div class="profile-forum-role">'.$role.'</div>';
+                echo '<div class="profile-forum-role">';
+                $count_posts = $this->asgarosforum->countPostsByUser($user_data->ID);
+                $this->asgarosforum->render_reputation_badges($count_posts);
+                echo $role;
+                echo '</div>';
             echo '</div>';
         echo '</div>';
     }
