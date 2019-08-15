@@ -94,6 +94,9 @@
 #af-wrapper .reputation-badges {
     color: #ffb900;
 }
+#af-wrapper .reputation-badges i {
+    margin-right: 2px;
+}
 #af-wrapper .profile-forum-role .reputation-badges {
     margin-right: 8px;
 }
