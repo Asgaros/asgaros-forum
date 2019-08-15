@@ -118,6 +118,8 @@ class AsgarosForum {
         'enable_seo_urls'                   => true,
         'seo_url_mode_content'              => 'slug',
         'seo_url_mode_profile'              => 'slug',
+        'custom_url_login'                  => '',
+        'custom_url_register'               => '',
         'view_name_activity'                => 'activity',
         'view_name_subscriptions'           => 'subscriptions',
         'view_name_search'                  => 'search',
@@ -1657,13 +1659,25 @@ class AsgarosForum {
 
     function showLoginLink() {
         if (!is_user_logged_in() && $this->options['show_login_button']) {
-            echo '<a class="login-link" href="'.wp_login_url($this->get_link('current', false, false, '', false)).'">'.__('Login', 'asgaros-forum').'</a>';
+            $login_url = wp_login_url($this->get_link('current', false, false, '', false));
+
+            if (!empty($this->options['custom_url_login'])) {
+                $login_url = $this->options['custom_url_login'];
+            }
+
+            echo '<a class="login-link" href="'.$login_url.'">'.__('Login', 'asgaros-forum').'</a>';
         }
     }
 
     function showRegisterLink() {
         if (!is_user_logged_in() && $this->options['show_register_button']) {
-            echo '<a class="register-link" href="'.wp_registration_url().'">'.__('Register', 'asgaros-forum').'</a>';
+            $register_url = wp_registration_url();
+
+            if (!empty($this->options['custom_url_register'])) {
+                $register_url = $this->options['custom_url_register'];
+            }
+
+            echo '<a class="register-link" href="'.$register_url.'">'.__('Register', 'asgaros-forum').'</a>';
         }
     }
 

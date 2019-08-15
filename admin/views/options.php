@@ -301,6 +301,20 @@ if (!defined('ABSPATH')) exit;
                         </tr>
                         <tr>
                             <th>
+                                <label for="custom_url_login"><?php _e('Custom Login URL', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php _e('You can use this option if you are using a custom login page.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td><input class="regular-text" type="text" name="custom_url_login" id="custom_url_login" value="<?php echo esc_html(stripslashes($this->asgarosforum->options['custom_url_login'])); ?>"></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="custom_url_register"><?php _e('Custom Register URL', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php _e('You can use this option if you are using a custom register page.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td><input class="regular-text" type="text" name="custom_url_register" id="custom_url_register" value="<?php echo esc_html(stripslashes($this->asgarosforum->options['custom_url_register'])); ?>"></td>
+                        </tr>
+                        <tr>
+                            <th>
                                 <label><?php _e('URL-slugs for views:', 'asgaros-forum'); ?></label>
                             </th>
                             <td>
