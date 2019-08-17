@@ -75,18 +75,23 @@ class AsgarosForumReactions {
 
         // Ensure user is logged-in.
         if (is_user_logged_in()) {
-            // Load reactions for the topic.
+            // Get post object.
             $post_object = $this->asgarosforum->content->get_post($data['post_id']);
-            $this->load_reactions($post_object->parent_id);
 
-            // Change reaction.
-            $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction']);
+            // Ensure that the current user is not the post-author.
+            if ($this->asgarosforum->get_post_author($post_object->id) != get_current_user_id()) {
+                // Load reactions.
+                $this->load_reactions($post_object->parent_id);
 
-            // Reload reactions.
-            $this->load_reactions($post_object->parent_id);
+                // Change reaction.
+                $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction']);
 
-            // Build updated reactions for posts.
-            $response['data'] = $this->render_reactions($data['post_id'], $post_object->author_id);
+                // Reload reactions.
+                $this->load_reactions($post_object->parent_id);
+
+                // Build updated reactions for posts.
+                $response['data'] = $this->render_reactions($data['post_id'], $post_object->author_id);
+            }
         }
 
         return new WP_REST_Response($response, 200);
