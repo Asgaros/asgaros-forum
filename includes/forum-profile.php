@@ -282,6 +282,8 @@ class AsgarosForumProfile {
                         $this->renderProfileRow($cellTitle, $cellValue);
                     }
 
+                    do_action('asgarosforum_profile_row', $userData);
+
                     echo '<div class="profile-section-header">';
                         echo '<span class="profile-section-header-icon fas fa-address-card"></span>';
                         echo __('Member Activity', 'asgaros-forum');
