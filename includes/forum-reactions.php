@@ -86,23 +86,23 @@ class AsgarosForumReactions {
             $this->load_reactions($post_object->parent_id);
 
             // Build updated reactions for posts.
-            $response['data'] = $this->render_reactions($data['post_id']);
+            $response['data'] = $this->render_reactions($data['post_id'], $post_object->author_id);
         }
 
         return new WP_REST_Response($response, 200);
     }
 
     // Renders reactions-area if the reactions-functionality is enabled.
-    public function render_reactions_area($post_id) {
+    public function render_reactions_area($post_id, $author_id) {
         if ($this->asgarosforum->options['enable_reactions']) {
             echo '<div class="post-reactions">';
-            echo $this->render_reactions($post_id);
+            echo $this->render_reactions($post_id, $author_id);
             echo '</div>';
         }
     }
 
     // Renders all reactions.
-    public function render_reactions($post_id) {
+    public function render_reactions($post_id, $author_id) {
         $reactions_output = '';
 
         // Load existing reaction of the current user.
@@ -124,9 +124,12 @@ class AsgarosForumReactions {
             $output .= '<span class="reaction-number">'.$counter.'</span>';
             $output .= '</span>';
 
-            // Wrap link around reaction if user is logged-in.
+            // Wrap link around reaction if user is logged-in ...
             if (is_user_logged_in()) {
-                $output = '<a data-post-id="'.$post_id.'" data-reaction="'.$key.'" href="#">'.$output.'</a>';
+                // ... and if the current user is not the post-author.
+                if ($this->asgarosforum->get_post_author($post_id) != get_current_user_id()) {
+                    $output = '<a data-post-id="'.$post_id.'" data-reaction="'.$key.'" href="#">'.$output.'</a>';
+                }
             }
 
             $reactions_output .= $output;
