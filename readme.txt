@@ -38,6 +38,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Multilingualism
 * Multiple Instances
 * Multisite Compatibility
+* myCRED Integration
 
 = Installation =
 * A new forum-page is automatically created during the installation
@@ -86,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: myCRED Integration
 * Added: Reputation system based on amount of posts
 * Added: Option to change login URL
 * Added: Option to change register URL

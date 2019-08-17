@@ -66,6 +66,9 @@ require('widgets/widget-recent-posts.php');
 require('widgets/widget-recent-topics.php');
 require('widgets/widget-search.php');
 
+// Include integration files.
+require('integrations/integration-mycred.php');
+
 // Include admin files.
 require('admin/admin.php');
 require('admin/tables/admin-structure-table.php');
