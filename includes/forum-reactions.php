@@ -187,6 +187,8 @@ class AsgarosForumReactions {
 
     public function add_reaction($post_id, $user_id, $reaction) {
         $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction), array('%d', '%d', '%s'));
+
+        do_action('asgarosforum_after_add_reaction', $post_id, $user_id, $reaction);
     }
 
     public function remove_reaction($post_id, $user_id, $reaction) {

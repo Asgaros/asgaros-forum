@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Reputation system based on amount of posts
 * Added: Option to change login URL
 * Added: Option to change register URL
+* Added: asgarosforum_after_add_reaction action
 * Fixed: Prevent that users react to their own posts
 * Fixed: Display issues with some themes
 * Updated: Font Awesome version 5.10.1
