@@ -193,10 +193,14 @@ class AsgarosForumReactions {
 
     public function remove_reaction($post_id, $user_id, $reaction) {
         $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction), array('%d', '%d', '%s'));
+
+        do_action('asgarosforum_after_remove_reaction', $post_id, $user_id, $reaction);
     }
 
     public function update_reaction($post_id, $user_id, $reaction) {
         $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array('reaction' => $reaction), array('post_id' => $post_id, 'user_id' => $user_id), array('%s'), array('%d', '%d'));
+
+        do_action('asgarosforum_after_update_reaction', $post_id, $user_id, $reaction);
     }
 
     // Removes all reactions from a specific post.
