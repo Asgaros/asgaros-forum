@@ -95,6 +95,8 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_after_add_reaction action
 * Added: asgarosforum_after_remove_reaction action
 * Added: asgarosforum_after_update_reaction action
+* Fixed: Missing users in suggestions if their display name contains special characters
+* Fixed: Missing users in suggestions if their display name is not equal to their unique name
 * Fixed: Prevent that users react to their own posts
 * Fixed: Display issues with some themes
 * Updated: Font Awesome version 5.10.1

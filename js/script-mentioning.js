@@ -12,6 +12,7 @@ window.asgaros = window.asgaros || {};
 			hideWithoutSuffix:	true,
 			insertTpl:			'@${ID}',
 			limit:				10,
+			searchKey:			'ID',
 			startWithSpace:		false,
 			suffix:				'',
 			callbacks: {
