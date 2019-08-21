@@ -87,7 +87,7 @@ if (!defined('ABSPATH')) exit;
                             <th><label for="create_blog_topics"><?php _e('Create topics for new blog posts in the following forum:', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <?php
-                                echo '<select name="create_blog_topics_id">';
+                                echo '<select name="create_blog_topics_id" id="create_blog_topics">';
 
                                 echo '<option value="0"'.(0 == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.__('Dont create topics', 'asgaros-forum').'</option>';
 
