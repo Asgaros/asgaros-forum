@@ -280,7 +280,7 @@ class AsgarosForumDatabase {
                     } else {
                         // Add an example usergroup.
                         $defaultUserGroupName = __('Example Usergroup', 'asgaros-forum');
-                        $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#2d89cc');
+                        $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#256db3');
                     }
                 }
 

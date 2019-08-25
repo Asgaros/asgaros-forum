@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Minor design changes
 * Performance improvements and code optimizations
 = 1.15.0 =
 * Added: myCRED Integration
