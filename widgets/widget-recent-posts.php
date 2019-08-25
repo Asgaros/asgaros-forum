@@ -9,7 +9,8 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
     }
 
     public function widget($args, $instance) {
-        AsgarosForumWidgets::showWidget($args, $instance, 'posts');
+        $default_title = __('Recent forum posts', 'asgaros-forum');
+        AsgarosForumWidgets::showWidget($args, $instance, 'posts', $default_title);
     }
 
     public function form($instance) {

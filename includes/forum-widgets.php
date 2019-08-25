@@ -35,16 +35,13 @@ class AsgarosForumWidgets {
         return $locationSetUp;
     }
 
-    public static function showWidget($args, $instance, $widgetType) {
+    public static function showWidget($args, $instance, $widgetType, $default_title) {
         $title = null;
+
         if ($instance['title']) {
             $title = $instance['title'];
         } else {
-            if ($widgetType === 'posts') {
-                $title = __('Recent forum posts', 'asgaros-forum');
-            } else if ($widgetType === 'topics') {
-                $title = __('Recent forum topics', 'asgaros-forum');
-            }
+            $title = $default_title;
         }
 
         echo $args['before_widget'];
@@ -91,6 +88,7 @@ class AsgarosForumWidgets {
                 $show_avatar = isset($instance['show_avatar']) ? $instance['show_avatar'] : true;
                 $show_excerpt = isset($instance['show_excerpt']) ? $instance['show_excerpt'] : false;
                 $widgetTitleLength = apply_filters('asgarosforum_filter_widget_title_length', 33);
+                $excerpt_length = apply_filters('asgarosforum_widget_excerpt_length', 66);
                 $widgetAvatarSize = apply_filters('asgarosforum_filter_widget_avatar_size', 30);
 
                 echo '<div class="asgarosforum-widget">';
@@ -120,8 +118,6 @@ class AsgarosForumWidgets {
                         echo '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.self::$asgarosforum->getUsername($element->author_id).'</b></span>';
 
                         if ($show_excerpt) {
-                            $excerpt_length = apply_filters('asgarosforum_widget_excerpt_length', 66);
-
                             $text = esc_html(stripslashes(strip_tags(strip_shortcodes($element->text))));
                             $text = self::$asgarosforum->cut_string($text, $excerpt_length);
 
