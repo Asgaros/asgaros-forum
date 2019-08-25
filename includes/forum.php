@@ -199,16 +199,16 @@ class AsgarosForum {
         add_filter('document_title_parts', array($this, 'change_document_title_parts'), 100);
         add_filter('pre_get_document_title', array($this, 'change_pre_get_document_title'), 100);
 
-        // Add hook when topics should get created for new blog posts.
-        if ($this->options['create_blog_topics_id'] != 0) {
-            add_action('transition_post_status', array($this, 'createBlogTopic'), 10, 3);
-        }
-
         add_filter('oembed_dataparse', array($this, 'prevent_oembed_dataparse'), 10, 3);
 
         // Deleting an user.
         add_action('delete_user_form', array($this, 'delete_user_form_reassign'), 10, 2);
         add_action('deleted_user', array($this, 'deleted_user_reassign'), 10, 2);
+
+        // Hooks for automatic topic creation.
+        add_action('transition_post_status', array($this, 'post_transition_update'), 10, 3);
+        add_action('load-post.php', array($this, 'add_topic_meta_box_setup'));
+        add_action('load-post-new.php', array($this, 'add_topic_meta_box_setup'));
 
         new AsgarosForumCompatibility($this);
         new AsgarosForumStatistics($this);
@@ -1886,19 +1886,6 @@ class AsgarosForum {
         $this->error = $error[$contentType];
     }
 
-    public function createBlogTopic($new_status, $old_status, $post) {
-        if ($post->post_type == 'post' && $new_status == 'publish' && $old_status != 'publish') {
-            $forumID = $this->options['create_blog_topics_id'];
-
-            $post_title = apply_filters('asgarosforum_filter_automatic_topic_title', $post->post_title, $post);
-            $post_content = apply_filters('asgarosforum_filter_automatic_topic_content', $post->post_content, $post);
-
-            if ($this->content->forum_exists($forumID)) {
-            	$this->content->insert_topic($forumID, $post_title, $post_content, $post->post_author);
-            }
-        }
-    }
-
     // Returns the amount of users.
     public function count_users() {
         return $this->db->get_var("SELECT COUNT(u.ID) FROM {$this->db->users} u");
@@ -2151,6 +2138,86 @@ class AsgarosForum {
             }
 
             echo '</small>';
+        }
+    }
+
+    /*******************************************/
+    /* Functions for automatic topic creation. */
+    /*******************************************/
+
+    public function post_transition_update($new_status, $old_status, $post) {
+        // Ensure that the required option is activated.
+        if ($this->options['create_blog_topics_id'] == 0) {
+            return;
+        }
+
+        if ($post->post_type == 'post' && $new_status == 'publish' && $old_status != 'publish') {
+            $forum_id = $this->options['create_blog_topics_id'];
+
+            $this->create_blog_topic($forum_id, $post);
+        }
+    }
+
+    public function create_blog_topic($forum_id, $post_object) {
+        if ($this->content->forum_exists($forum_id)) {
+            $post_title = apply_filters('asgarosforum_filter_automatic_topic_title', $post_object->post_title, $post_object);
+            $post_content = apply_filters('asgarosforum_filter_automatic_topic_content', $post_object->post_content, $post_object);
+
+            $this->content->insert_topic($forum_id, $post_title, $post_content, $post_object->post_author);
+        }
+    }
+
+    public function add_topic_meta_box_setup() {
+        add_action('add_meta_boxes', array($this, 'add_topic_meta_box'));
+        add_action('save_post', array($this, 'process_topic_meta_box'), 10, 2);
+    }
+
+    public function add_topic_meta_box() {
+        add_meta_box(
+            'asgaros-forum-topic-meta-box',
+            __('Create Forum Topic', 'asgaros-forum'),
+            array($this, 'add_topic_meta_box_content'),
+            array('post', 'page'),
+            'side',
+            'low'
+        );
+    }
+
+    public function add_topic_meta_box_content($post) {
+        echo '<select name="add_topic_in_forum" id="add_topic_in_forum">';
+        echo '<option value="0"></option>';
+
+        // Generate list of available forums.
+        $categories = $this->content->get_categories(false);
+
+        if ($categories) {
+            foreach ($categories as $category) {
+                $forums = $this->get_forums($category->term_id, 0);
+
+                if ($forums) {
+                    foreach ($forums as $forum) {
+                        echo '<option value="'.$forum->id.'">'.esc_html($forum->name).'</option>';
+
+                        if ($forum->count_subforums > 0) {
+                            $subforums = $this->get_forums($category->term_id, $forum->id);
+
+                            foreach ($subforums as $subforum) {
+                                echo '<option value="'.$subforum->id.'">--- '.esc_html($subforum->name).'</option>';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        echo '</select>';
+        echo '<br>';
+        echo '<label for="add_topic_in_forum">'.__('A topic is created in the selected forum when you save this document.', 'asgaros-forum').'</label>';
+    }
+
+    public function process_topic_meta_box($post_id, $post) {
+        if (isset($_POST['add_topic_in_forum']) && $_POST['add_topic_in_forum'] > 0) {
+            $this->create_blog_topic($_POST['add_topic_in_forum'], $post);
         }
     }
 }
