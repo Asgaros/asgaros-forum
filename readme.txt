@@ -87,7 +87,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Widget option to filter output by forums
 * Added: Meta box to create topics for WordPress pages and posts
+* Changed: asgarosforum_widget_recent_posts_custom_content is now a filter
+* Changed: asgarosforum_widget_recent_topics_custom_content is now a filter
 * Minor design changes
 * Performance improvements and code optimizations
 = 1.15.0 =
