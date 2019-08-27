@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-19 03:29+0000\n"
+"POT-Creation-Date: 2019-08-27 08:03+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -140,7 +140,7 @@ msgstr ""
 
 #: admin/admin.php:166 admin/admin.php:213 admin/admin.php:213
 #: includes/forum-ads.php:23 includes/forum.php:255 includes/forum.php:1633
-#: includes/forum.php:2006
+#: includes/forum.php:1993
 msgid "Forum"
 msgstr ""
 
@@ -183,8 +183,9 @@ msgstr[1] ""
 
 #: includes/forum-activity.php:43 includes/forum-approval.php:216
 #: includes/forum-profile.php:194 includes/forum-unread.php:243
-#: includes/forum-widgets.php:133 includes/forum.php:1347
-#: includes/forum.php:1360 includes/forum.php:1387 includes/forum.php:1399
+#: includes/forum.php:1347 includes/forum.php:1360 includes/forum.php:1387
+#: includes/forum.php:1399 widgets/widget-recent-posts.php:124
+#: widgets/widget-recent-topics.php:118
 #, php-format
 msgid "%s ago"
 msgstr ""
@@ -903,37 +904,6 @@ msgstr ""
 msgid "Usergroups assignments updated."
 msgstr ""
 
-#: includes/forum-widgets.php:44 widgets/widget-recent-posts.php:16
-msgid "Recent forum posts"
-msgstr ""
-
-#: includes/forum-widgets.php:46 widgets/widget-recent-topics.php:16
-msgid "Recent forum topics"
-msgstr ""
-
-#: includes/forum-widgets.php:114 includes/forum.php:922
-#, php-format
-msgid "%s Answer"
-msgid_plural "%s Answers"
-msgstr[0] ""
-msgstr[1] ""
-
-#: includes/forum-widgets.php:120
-msgid "by"
-msgstr ""
-
-#: includes/forum-widgets.php:129
-msgid "Read More"
-msgstr ""
-
-#: includes/forum-widgets.php:142 includes/forum.php:1337
-msgid "No topics yet!"
-msgstr ""
-
-#: includes/forum-widgets.php:145 widgets/widget-search.php:41
-msgid "The forum has not been configured correctly."
-msgstr ""
-
 #: includes/forum.php:271
 msgid "New answer: ###TITLE###"
 msgstr ""
@@ -1019,6 +989,13 @@ msgstr ""
 msgid "This topic contains a poll"
 msgstr ""
 
+#: includes/forum.php:922 widgets/widget-recent-topics.php:99
+#, php-format
+msgid "%s Answer"
+msgid_plural "%s Answers"
+msgstr[0] ""
+msgstr[1] ""
+
 #: includes/forum.php:927
 #, php-format
 msgid "%s View"
@@ -1049,6 +1026,14 @@ msgstr ""
 
 #: includes/forum.php:1214 includes/forum.php:1236
 msgid "Guest"
+msgstr ""
+
+#: includes/forum.php:1337 widgets/widget-recent-posts.php:29
+#: widgets/widget-recent-posts.php:41 widgets/widget-recent-posts.php:54
+#: widgets/widget-recent-posts.php:76 widgets/widget-recent-topics.php:29
+#: widgets/widget-recent-topics.php:41 widgets/widget-recent-topics.php:54
+#: widgets/widget-recent-topics.php:68
+msgid "No topics yet!"
 msgstr ""
 
 #: includes/forum.php:1343 includes/forum.php:1385
@@ -1140,20 +1125,28 @@ msgstr ""
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: includes/forum.php:2015
+#: includes/forum.php:2002
 msgid "What should be done with forum posts owned by this user?"
 msgstr ""
 
-#: includes/forum.php:2017
+#: includes/forum.php:2004
 msgid "What should be done with forum posts owned by these users?"
 msgstr ""
 
-#: includes/forum.php:2023
+#: includes/forum.php:2010
 msgid "Do not reassign forum posts."
 msgstr ""
 
-#: includes/forum.php:2026
+#: includes/forum.php:2013
 msgid "Reassign all forum posts to:"
+msgstr ""
+
+#: includes/forum.php:2178
+msgid "Create Forum Topic"
+msgstr ""
+
+#: includes/forum.php:2215
+msgid "A topic is created in the selected forum when you save this document."
 msgstr ""
 
 #: integrations/integration-mycred.php:10
@@ -1275,41 +1268,74 @@ msgstr ""
 msgid "Show ranks in posts and profiles"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:7
+#: widgets/widget-recent-posts.php:11
 msgid "Shows recent posts in Asgaros Forum."
 msgstr ""
 
-#: widgets/widget-recent-posts.php:8
+#: widgets/widget-recent-posts.php:12
 msgid "Asgaros Forum: Recent Posts"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:23 widgets/widget-recent-topics.php:22
+#: widgets/widget-recent-posts.php:20 widgets/widget-recent-topics.php:20
+#: widgets/widget-search.php:41
+msgid "The forum has not been configured correctly."
+msgstr ""
+
+#: widgets/widget-recent-posts.php:113 widgets/widget-recent-topics.php:107
+msgid "by"
+msgstr ""
+
+#: widgets/widget-recent-posts.php:120 widgets/widget-recent-topics.php:114
+msgid "Read More"
+msgstr ""
+
+#: widgets/widget-recent-posts.php:140
+msgid "Recent Forum Posts"
+msgstr ""
+
+#: widgets/widget-recent-posts.php:156
+msgid "Recent forum posts"
+msgstr ""
+
+#: widgets/widget-recent-posts.php:164 widgets/widget-recent-topics.php:157
 #: widgets/widget-search.php:51
 msgid "Title:"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:28 widgets/widget-recent-topics.php:27
+#: widgets/widget-recent-posts.php:169 widgets/widget-recent-topics.php:162
 msgid "Number of topics to show:"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:34 widgets/widget-recent-topics.php:33
+#: widgets/widget-recent-posts.php:175 widgets/widget-recent-topics.php:168
 msgid "Show avatars"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:39 widgets/widget-recent-topics.php:38
+#: widgets/widget-recent-posts.php:180 widgets/widget-recent-topics.php:173
 msgid "Show excerpt"
 msgstr ""
 
-#: widgets/widget-recent-posts.php:44
+#: widgets/widget-recent-posts.php:185
 msgid "Group posts by topic"
 msgstr ""
 
-#: widgets/widget-recent-topics.php:7
+#: widgets/widget-recent-posts.php:189 widgets/widget-recent-topics.php:177
+msgid "Forum filter:"
+msgstr ""
+
+#: widgets/widget-recent-topics.php:11
 msgid "Shows recent topics in Asgaros Forum."
 msgstr ""
 
-#: widgets/widget-recent-topics.php:8
+#: widgets/widget-recent-topics.php:12
 msgid "Asgaros Forum: Recent Topics"
+msgstr ""
+
+#: widgets/widget-recent-topics.php:134
+msgid "Recent Forum Topics"
+msgstr ""
+
+#: widgets/widget-recent-topics.php:150
+msgid "Recent forum topics"
 msgstr ""
 
 #: widgets/widget-search.php:7
