@@ -132,7 +132,7 @@ class AsgarosForumReactions {
             // Wrap link around reaction if user is logged-in ...
             if (is_user_logged_in()) {
                 // ... and if the current user is not the post-author.
-                if ($this->asgarosforum->get_post_author($post_id) != get_current_user_id()) {
+                if ($author_id != get_current_user_id()) {
                     $output = '<a data-post-id="'.$post_id.'" data-reaction="'.$key.'" href="#">'.$output.'</a>';
                 }
             }
