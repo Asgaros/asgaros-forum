@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Only show meta-box for creating topics when user can publish a page/post
 = 1.15.1 =
 * Added: Widget option to filter output by forums
 * Added: Meta box to create topics for WordPress pages and posts

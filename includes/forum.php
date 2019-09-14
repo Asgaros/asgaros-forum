@@ -2168,11 +2168,15 @@ class AsgarosForum {
     }
 
     public function add_topic_meta_box_setup() {
-        add_action('add_meta_boxes', array($this, 'add_topic_meta_box'));
+        add_action('add_meta_boxes', array($this, 'add_topic_meta_box'), 10, 2);
         add_action('save_post', array($this, 'process_topic_meta_box'), 10, 2);
     }
 
-    public function add_topic_meta_box() {
+    public function add_topic_meta_box($post_type, $post) {
+        if (!current_user_can('publish_post', $post->ID)) {
+            return;
+        }
+
         add_meta_box(
             'asgaros-forum-topic-meta-box',
             __('Create Forum Topic', 'asgaros-forum'),
@@ -2216,6 +2220,10 @@ class AsgarosForum {
     }
 
     public function process_topic_meta_box($post_id, $post) {
+        if (!current_user_can('publish_post', $post_id)) {
+            return;
+        }
+
         if (isset($_POST['add_topic_in_forum']) && $_POST['add_topic_in_forum'] > 0) {
             $this->create_blog_topic($_POST['add_topic_in_forum'], $post);
         }
