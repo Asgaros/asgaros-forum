@@ -303,6 +303,72 @@ class AsgarosForumPermissions {
         }
     }
 
+    // This function checks if a user can open a specific topic.
+    public function can_open_topic($user_id, $topic_id) {
+        // Disallow when user is not logged-in.
+        if (!is_user_logged_in()) {
+            return false;
+        }
+
+        // Disallow when user is banned.
+        if ($this->isBanned($user_id)) {
+            return false;
+        }
+
+        // Allow when user is moderator.
+        if ($this->isModerator($user_id)) {
+            return true;
+        }
+
+        // Disallow when opening topics is disabled.
+        if (!$this->asgarosforum->options['enable_open_topic']) {
+            return false;
+        }
+
+        // Allow when user is the author of the topic.
+        $author_id = $this->asgarosforum->get_topic_starter($topic_id);
+
+        if ($user_id == $author_id) {
+            return true;
+        }
+
+        // Otherwise disallow.
+        return false;
+    }
+
+    // This function checks if a user can close a specific topic.
+    public function can_close_topic($user_id, $topic_id) {
+        // Disallow when user is not logged-in.
+        if (!is_user_logged_in()) {
+            return false;
+        }
+
+        // Disallow when user is banned.
+        if ($this->isBanned($user_id)) {
+            return false;
+        }
+
+        // Allow when user is moderator.
+        if ($this->isModerator($user_id)) {
+            return true;
+        }
+
+        // Disallow when closing topics is disabled.
+        if (!$this->asgarosforum->options['enable_close_topic']) {
+            return false;
+        }
+
+        // Allow when user is the author of the topic.
+        $author_id = $this->asgarosforum->get_topic_starter($topic_id);
+
+        if ($user_id == $author_id) {
+            return true;
+        }
+
+        // Otherwise disallow.
+        return false;
+    }
+
     // Check if a user can ban another user.
     public function can_ban_user($user_id, $ban_id) {
         if ($this->isSiteAdministrator($user_id)) {

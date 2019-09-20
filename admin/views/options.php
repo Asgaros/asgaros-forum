@@ -443,6 +443,16 @@ if (!defined('ABSPATH')) exit;
                                 <span class="description"><?php _e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
+
+                        <tr>
+                            <th><label for="enable_open_topic"><?php _e('Users can open their own topics', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="enable_open_topic" id="enable_open_topic" <?php checked(!empty($this->asgarosforum->options['enable_open_topic'])); ?>></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="enable_close_topic"><?php _e('Users can close their own topics', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="enable_close_topic" id="enable_close_topic" <?php checked(!empty($this->asgarosforum->options['enable_close_topic'])); ?>></td>
+                        </tr>
                     </table>
                 </div>
 
