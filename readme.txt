@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to let users open their own topics
 * Added: Option to let users close their own topics
 * Fixed: Only show meta-box for creating topics when user can publish a page/post
+* Fixed: Errors in Google Search Console for breadcrumbs
 * Minor design changes
 = 1.15.1 =
 * Added: Widget option to filter output by forums
