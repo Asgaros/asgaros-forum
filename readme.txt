@@ -92,6 +92,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to let users close their own topics
 * Fixed: Only show meta-box for creating topics when user can publish a page/post
 * Fixed: Errors in Google Search Console for breadcrumbs
+* Updated: Font Awesome version 5.11.2
 * Minor design changes
 * Compatibility with WordPress 5.3
 = 1.15.1 =
