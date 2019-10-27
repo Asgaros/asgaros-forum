@@ -131,14 +131,19 @@ class AsgarosForumOnline {
 
     public function render_online_information() {
         if ($this->functionality_enabled) {
-            $newest_member = get_users(array('orderby' => 'ID', 'order' => 'DESC', 'number' => 1));
             $currently_online_users = (!empty($this->online_users)) ? get_users(array('include' => $this->online_users)) : false;
             $currently_online_guests = (!empty($this->online_guests)) ? $this->online_guests : false;
 
             echo '<div id="statistics-online-users">';
-            echo '<span class="online-users-icon fas fa-user"></span>';
-            echo __('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i>';
-            echo '&nbsp;&middot;&nbsp;';
+
+            if ($this->asgarosforum->options['show_newest_member']) {
+                $newest_member = get_users(array('orderby' => 'ID', 'order' => 'DESC', 'number' => 1));
+
+                echo '<span class="online-users-icon fas fa-user"></span>';
+                echo __('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i>';
+                echo '&nbsp;&middot;&nbsp;';
+            }
+
             echo '<span class="online-users-icon fas fa-users"></span>';
 
             if ($currently_online_users || $currently_online_guests) {

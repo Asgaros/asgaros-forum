@@ -240,6 +240,10 @@ if (!defined('ABSPATH')) exit;
                             <td><input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($this->asgarosforum->options['show_who_is_online'])); ?>></td>
                         </tr>
                         <tr>
+                            <th><label for="show_newest_member"><?php _e('Show newest member', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="show_newest_member" id="show_newest_member" <?php checked(!empty($this->asgarosforum->options['show_newest_member'])); ?>></td>
+                        </tr>
+                        <tr>
                             <th><label for="show_statistics"><?php _e('Show statistics', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($this->asgarosforum->options['show_statistics'])); ?>></td>
                         </tr>
