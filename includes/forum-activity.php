@@ -79,7 +79,7 @@ class AsgarosForumActivity {
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comment '.$read_status.'"></span>';
-                    echo sprintf(__('%s answered in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$human_time_diff.'</i>';
+                    echo sprintf(__('%s replied in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$human_time_diff.'</i>';
                     echo '</div>';
                 }
             }

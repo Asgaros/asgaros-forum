@@ -96,7 +96,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
                 if ($element->post_counter > 1) {
                     $answers = ($element->post_counter - 1);
                     $count_answers_i18n = number_format_i18n($answers);
-                    $count_answers_i18n_text = ', '.sprintf(_n('%s Answer', '%s Answers', $answers, 'asgaros-forum'), $count_answers_i18n);
+                    $count_answers_i18n_text = ', '.sprintf(_n('%s Reply', '%s Replies', $answers, 'asgaros-forum'), $count_answers_i18n);
                 }
 
                 // Generate link.

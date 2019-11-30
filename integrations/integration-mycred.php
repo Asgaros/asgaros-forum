@@ -393,7 +393,7 @@ function mycred_load_asgarosforum_hook() {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <div class="radio">
-                            <label for="<?php echo $this->field_id(array('new_post' => 'author')); ?>"><input type="checkbox" name="<?php echo $this->field_name(array('new_post' => 'author')); ?>" id="<?php echo $this->field_id(array('new_post' => 'author')); ?>" <?php checked($prefs['new_post']['author'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Topic authors can receive %_plural% for answering to their own topic.', 'asgaros-forum')); ?></label>
+                            <label for="<?php echo $this->field_id(array('new_post' => 'author')); ?>"><input type="checkbox" name="<?php echo $this->field_name(array('new_post' => 'author')); ?>" id="<?php echo $this->field_id(array('new_post' => 'author')); ?>" <?php checked($prefs['new_post']['author'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Topic authors can receive %_plural% for replying to their own topic.', 'asgaros-forum')); ?></label>
                         </div>
                     </div>
                 </div>
