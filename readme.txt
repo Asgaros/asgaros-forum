@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Misleading strings
 = 1.15.2 =
 * Added: Option to hide newest member
 * Added: Option to let users open their own topics
