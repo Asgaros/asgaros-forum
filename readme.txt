@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Misleading strings
+* Fixed: Allow line-breaks in biographical info of profile
 = 1.15.2 =
 * Added: Option to hide newest member
 * Added: Option to let users open their own topics

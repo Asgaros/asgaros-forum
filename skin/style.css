@@ -1386,6 +1386,9 @@
     padding-bottom: 8px;
     border-bottom: 1px solid #eee;
 }
+#af-wrapper #profile-content .profile-row p {
+    margin-top: 0px;
+}
 #af-wrapper #profile-content .profile-row div:first-child {
     margin-right: 5px;
     display: table-cell;

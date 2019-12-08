@@ -267,7 +267,7 @@ class AsgarosForumProfile {
                     // Show biographical info.
                     if (!empty($userData->description)) {
                         $cellTitle = __('Biographical Info:', 'asgaros-forum');
-                        $cellValue = trim(esc_html($userData->description));
+                        $cellValue = trim(wpautop(esc_html($userData->description)));
 
                         $this->renderProfileRow($cellTitle, $cellValue);
                     }
