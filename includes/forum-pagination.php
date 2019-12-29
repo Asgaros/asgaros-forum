@@ -81,7 +81,7 @@ class AsgarosForumPagination {
             $count = $this->asgarosforum->activity->load_activity_data(true);
             $num_pages = ceil($count / $this->asgarosforum->options['activities_per_page']);
         } else if ($location === 'history') {
-            $user_id = $this->asgarosforum->current_element;
+            if ($sourceID == false) { $user_id = $this->asgarosforum->current_element; } else { $user_id = $sourceID; };
             $count = $this->asgarosforum->profile->count_post_history_by_user($user_id);
             $num_pages = ceil($count / 50);
         } else if ($location === 'unread') {
