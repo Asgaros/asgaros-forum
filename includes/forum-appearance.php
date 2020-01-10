@@ -161,8 +161,9 @@ class AsgarosForumAppearance {
 			echo '<meta property="og:description" content="'.$description.'" />'.PHP_EOL;
 			echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />'.PHP_EOL;
 
-			// Try to set og:image-tag.
-			if ($this->asgarosforum->current_view === 'topic') {
+            // Try to set og:image-tag when we are in a topic. A check for the element-ID
+            // is required to prevent an error in case that this topic does not exist.
+			if ($this->asgarosforum->current_view === 'topic' && $this->asgarosforum->current_element) {
 				$first_post = $this->asgarosforum->content->get_first_post($this->asgarosforum->current_element);
 
 				if ($first_post) {
