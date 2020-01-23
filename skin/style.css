@@ -198,6 +198,9 @@
     font: 900 16px/1 "Font Awesome 5 Free";
     content: "\f070";
 }
+#af-wrapper .mce-btn button {
+    background-color: inherit; /* comp */
+}
 
 /* INPUT ELEMENTS */
 #af-wrapper input {
@@ -1100,6 +1103,7 @@
     margin: 0 0 20px;
     padding: 0px; /* comp */
     color: inherit; /* comp */
+    font-family: inherit; /* comp */
 }
 #af-wrapper .post-message ul {
     padding: 0px 15px 15px 15px !important; /* comp */
