@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Show number of forum-posts for every user in administration area
 * Fixed: Misleading strings
 * Fixed: Allow line-breaks in biographical info of profile
 * Fixed: SQL syntax error when opening a non-existent topic

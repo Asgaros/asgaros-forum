@@ -23,6 +23,10 @@ class AsgarosForumAdmin {
         add_action('show_user_profile', array($this, 'user_profile_fields'));
         add_action('edit_user_profile_update', array($this, 'user_profile_fields_update'));
         add_action('personal_options_update', array($this, 'user_profile_fields_update'));
+
+        // Users list in administration.
+        add_filter('manage_users_columns', array($this, 'manage_users_columns'));
+        add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
     }
 
     function set_option_views() {
@@ -567,4 +571,18 @@ class AsgarosForumAdmin {
 
         echo '</div>';
     }
+
+    // Users List in Administration.
+    public function manage_users_columns($columns) {
+        $columns['forum-user-posts'] = __('Forum Posts', 'asgaros-forum');
+        return $columns;
+  	}
+
+    public function manage_users_custom_column($output, $column_name, $user_id) {
+		if ($column_name === 'forum-user-posts') {
+            $output .= $this->asgarosforum->content->count_posts_by_user($user_id);
+		}
+
+        return $output;
+	}
 }

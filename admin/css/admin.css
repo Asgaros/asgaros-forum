@@ -405,3 +405,8 @@ li.forum-user-group {
 .settings-header span {
     padding-right: 8px;
 }
+/* USERS LIST */
+th.column-forum-user-posts,
+td.column-forum-user-posts {
+    text-align: center;
+}
