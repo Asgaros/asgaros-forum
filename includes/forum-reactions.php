@@ -84,7 +84,7 @@ class AsgarosForumReactions {
                 $this->load_reactions($post_object->parent_id);
 
                 // Change reaction.
-                $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction'], $this->asgarosforum->get_post_author($post_object->id));
+                $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction'], $post_object->author_id));
 
                 // Reload reactions.
                 $this->load_reactions($post_object->parent_id);
@@ -131,9 +131,12 @@ class AsgarosForumReactions {
 
             // Wrap link around reaction if user is logged-in ...
             if (is_user_logged_in()) {
-                // ... and if the current user is not the post-author.
+                // ... and if the current user is not the post-author ...
                 if ($author_id != get_current_user_id()) {
-                    $output = '<a data-post-id="'.$post_id.'" data-reaction="'.$key.'" href="#">'.$output.'</a>';
+                // ... and if the current user is not banned.
+                    if (!$this->asgarosforum->permissions->isBanned($user_id)) {
+                        $output = '<a data-post-id="'.$post_id.'" data-reaction="'.$key.'" href="#">'.$output.'</a>';
+                    }
                 }
             }
 
@@ -179,7 +182,7 @@ class AsgarosForumReactions {
 
         // Remove reaction when it is already set.
         if ($reaction_check === $reaction) {
-            $this->remove_reaction($post_id, $user_id, $reaction, $author);
+            $this->remove_reaction($post_id, $user_id, $reaction);
         }
 
         // Update reaction when it is different.
@@ -201,7 +204,7 @@ class AsgarosForumReactions {
 
     public function remove_reaction($post_id, $user_id, $reaction, $author) {
 
-        $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction, 'author' => $author), array('%d', '%d', '%s', '%d'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction), array('%d', '%d', '%s'));
 
         do_action('asgarosforum_after_remove_reaction', $post_id, $user_id, $reaction);
     }

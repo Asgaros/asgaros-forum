@@ -170,8 +170,8 @@ class AsgarosForumDatabase {
             post_id int(11) NOT NULL default '0',
             user_id int(11) NOT NULL default '0',
             reaction varchar(20) NOT NULL default '',
-			author int(11) NOT NULL default '0',
-			datestamp datetime NOT NULL default '1000-01-01 00:00:00',
+            author_id int(11) NOT NULL default '0',
+            datestamp datetime NOT NULL default '1000-01-01 00:00:00',
             PRIMARY KEY  (post_id, user_id)
             ) $charset_collate;";
 
@@ -471,7 +471,7 @@ class AsgarosForumDatabase {
 
             // Convert forum approval status.
             if ($database_version_installed < 63 && !$first_time_installation) {
-                @$this->db->query("ALTER TABLE {$this->tables->reactions} ADD COLUMN author INTEGER NOT NULL default '0';");
+                @$this->db->query("ALTER TABLE {$this->tables->reactions} ADD COLUMN author_id INTEGER NOT NULL default '0';");
                 @$this->db->query("ALTER TABLE {$this->tables->reactions} ADD COLUMN datestamp DATETIME NOT NULL default '1000-01-01 00:00:00';");
                 @$this->db->query("UPDATE {$this->tables->reactions} AS r SET r.author = (SELECT p.author_id FROM {$this->tables->posts} AS p WHERE r.post_id = p.id);");
 
