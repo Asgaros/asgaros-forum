@@ -84,7 +84,7 @@ class AsgarosForumReactions {
                 $this->load_reactions($post_object->parent_id);
 
                 // Change reaction.
-                $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction'], $post_object->author_id));
+                $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction'], $post_object->author_id);
 
                 // Reload reactions.
                 $this->load_reactions($post_object->parent_id);
