@@ -131,9 +131,10 @@ class AsgarosForumReactions {
 
             // Wrap link around reaction if user is logged-in ...
             if (is_user_logged_in()) {
+                $user_id = get_current_user_id();
                 // ... and if the current user is not the post-author ...
-                if ($author_id != get_current_user_id()) {
-                // ... and if the current user is not banned.
+                if ($author_id != $user_id) {
+                    // ... and if the current user is not banned.
                     if (!$this->asgarosforum->permissions->isBanned($user_id)) {
                         $output = '<a data-post-id="'.$post_id.'" data-reaction="'.$key.'" href="#">'.$output.'</a>';
                     }
@@ -146,7 +147,7 @@ class AsgarosForumReactions {
         return $reactions_output;
     }
 
-    public function reaction_change($post_id, $user_id, $reaction, $author = false) {
+    public function reaction_change($post_id, $user_id, $reaction, $author_id) {
         // Only add a reaction when the post exists ...
         if (!$this->asgarosforum->content->post_exists($post_id)) {
             return false;
@@ -177,7 +178,7 @@ class AsgarosForumReactions {
 
         // Add reaction when there is none.
         if ($reaction_check === false) {
-            $this->add_reaction($post_id, $user_id, $reaction, $author);
+            $this->add_reaction($post_id, $user_id, $reaction, $author_id);
         }
 
         // Remove reaction when it is already set.
@@ -187,33 +188,33 @@ class AsgarosForumReactions {
 
         // Update reaction when it is different.
         if ($reaction_check !== $reaction) {
-            $this->update_reaction($post_id, $user_id, $reaction, $author);
+            $this->update_reaction($post_id, $user_id, $reaction);
         }
 
         return true;
     }
 
-    public function add_reaction($post_id, $user_id, $reaction, $author) {
+    public function add_reaction($post_id, $user_id, $reaction, $author_id) {
 		// Get the current time.
         $date = $this->asgarosforum->current_time();
 
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction, 'author' => $author, 'datestamp' => $date), array('%d', '%d', '%s', '%d', '%s'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction, 'author_id' => $author_id, 'datestamp' => $date), array('%d', '%d', '%s', '%d', '%s'));
 
         do_action('asgarosforum_after_add_reaction', $post_id, $user_id, $reaction);
     }
 
-    public function remove_reaction($post_id, $user_id, $reaction, $author) {
+    public function remove_reaction($post_id, $user_id, $reaction) {
 
         $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction), array('%d', '%d', '%s'));
 
         do_action('asgarosforum_after_remove_reaction', $post_id, $user_id, $reaction);
     }
 
-    public function update_reaction($post_id, $user_id, $reaction, $author) {
+    public function update_reaction($post_id, $user_id, $reaction) {
 		// Get the current time.
         $date = $this->asgarosforum->current_time();
 
-        $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array('reaction' => $reaction), array('post_id' => $post_id, 'user_id' => $user_id, 'author' => $author, 'datestamp' => $date), array('%s'), array('%d', '%d', '%d', '%s'));
+        $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array('reaction' => $reaction, 'datestamp' => $date), array('post_id' => $post_id, 'user_id' => $user_id), array('%s', '%s'), array('%d', '%d'));
 
         do_action('asgarosforum_after_update_reaction', $post_id, $user_id, $reaction);
     }
