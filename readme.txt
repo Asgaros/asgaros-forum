@@ -92,6 +92,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Allow line-breaks in biographical info of profile
 * Fixed: SQL syntax error when opening a non-existent topic
 * Fixed: Display issues with some themes
+* Fixed: Display issues on mobile devices
 = 1.15.2 =
 * Added: Option to hide newest member
 * Added: Option to let users open their own topics

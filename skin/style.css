@@ -796,6 +796,11 @@
 #af-wrapper #subscriptions-panel .action-panel-option {
     width: 33%;
 }
+@media screen and (max-width: 782px) {
+    #af-wrapper #subscriptions-panel .action-panel-option {
+        width: 100%;
+    }
+}
 
 /* BREADCRUMBS */
 #af-wrapper #forum-breadcrumbs {
