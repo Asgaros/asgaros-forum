@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Misleading strings
 * Fixed: Display issues with some themes
 * Fixed: Display issues on mobile devices
+* Improved compatibility with Rank Math SEO
 * Performance improvements and code optimizations
 = 1.15.2 =
 * Added: Option to hide newest member
