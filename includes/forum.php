@@ -1185,10 +1185,10 @@ class AsgarosForum {
 
     function cut_string($string, $length = 33, $at_next_space = false) {
         // Only cut string if it is longer than defined.
-        if (strlen($string) > $length) {
+        if (mb_strlen($string, 'UTF-8') > $length) {
             // Try to find position of next space if necessary.
             if ($at_next_space) {
-                $space_position = strpos($string, ' ', $length);
+                $space_position = mb_strpos($string, ' ', $length, 'UTF-8');
 
                 if ($space_position) {
                     $length = $space_position;
@@ -1197,7 +1197,7 @@ class AsgarosForum {
                 }
             }
 
-            return mb_substr($string, 0, $length, 'UTF-8') . ' &#8230;';
+            return mb_substr($string, 0, $length, 'UTF-8').' &#8230;';
         }
 
         return $string;
