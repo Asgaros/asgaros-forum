@@ -3,7 +3,7 @@ Contributors: Asgaros
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.2
 Stable tag: 1.15.2
 License: GPLv2 or later
@@ -97,6 +97,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Display issues on mobile devices
 * Improved compatibility with Rank Math SEO
 * Performance improvements and code optimizations
+* Compatibility with WordPress 5.4
 = 1.15.2 =
 * Added: Option to hide newest member
 * Added: Option to let users open their own topics
