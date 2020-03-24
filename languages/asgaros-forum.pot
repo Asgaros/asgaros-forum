@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 18:24+0000\n"
+"POT-Creation-Date: 2020-03-24 02:05+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -24,154 +24,158 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: admin/admin.php:31
+#: admin/admin.php:35
 msgid "General"
 msgstr ""
 
-#: admin/admin.php:35
+#: admin/admin.php:39
 msgid "Features"
 msgstr ""
 
-#: admin/admin.php:39
+#: admin/admin.php:43
 msgid "URLs"
 msgstr ""
 
-#: admin/admin.php:43
+#: admin/admin.php:47
 msgid "Permissions"
 msgstr ""
 
-#: admin/admin.php:47
+#: admin/admin.php:51
 msgid "Breadcrumbs"
 msgstr ""
 
-#: admin/admin.php:51
+#: admin/admin.php:55
 msgid "Notifications"
 msgstr ""
 
-#: admin/admin.php:55
+#: admin/admin.php:59
 msgid "Mentioning"
 msgstr ""
 
-#: admin/admin.php:59
+#: admin/admin.php:63
 msgid "Members List"
 msgstr ""
 
-#: admin/admin.php:63
+#: admin/admin.php:67
 msgid "Profiles"
 msgstr ""
 
-#: admin/admin.php:67
+#: admin/admin.php:71
 msgid "Uploads"
 msgstr ""
 
-#: admin/admin.php:71 includes/forum-reports.php:18 includes/forum.php:636
+#: admin/admin.php:75 includes/forum-reports.php:18 includes/forum.php:636
 msgid "Reports"
 msgstr ""
 
-#: admin/admin.php:75
+#: admin/admin.php:79
 msgid "Signatures"
 msgstr ""
 
-#: admin/admin.php:79 includes/forum-activity.php:20
+#: admin/admin.php:83 includes/forum-activity.php:20
 #: includes/forum-activity.php:124 includes/forum.php:630
 msgid "Activity"
 msgstr ""
 
-#: admin/admin.php:83 admin/admin.php:219 admin/admin.php:219
+#: admin/admin.php:87 admin/admin.php:223 admin/admin.php:223
 #: admin/views/ads.php:5 admin/views/ads.php:66
 msgid "Ads"
 msgstr ""
 
-#: admin/admin.php:87
+#: admin/admin.php:91
 msgid "Polls"
 msgstr ""
 
-#: admin/admin.php:91
+#: admin/admin.php:95
 msgid "Spoilers"
 msgstr ""
 
-#: admin/admin.php:95
+#: admin/admin.php:99
 msgid "Reputation"
 msgstr ""
 
-#: admin/admin.php:118 includes/forum-permissions.php:560
+#: admin/admin.php:122 includes/forum-permissions.php:560
 msgid "Forum Role"
 msgstr ""
 
-#: admin/admin.php:122 includes/forum-memberslist.php:105
+#: admin/admin.php:126 includes/forum-memberslist.php:105
 #: includes/forum-permissions.php:110 includes/forum-permissions.php:578
 #: includes/forum-permissions.php:628 admin/tables/admin-structure-table.php:72
 #: admin/views/options.php:582 admin/views/structure.php:113
 msgid "Normal"
 msgstr ""
 
-#: admin/admin.php:123 includes/forum-permissions.php:106
+#: admin/admin.php:127 includes/forum-permissions.php:106
 #: includes/forum-permissions.php:629
 msgid "Moderator"
 msgstr ""
 
-#: admin/admin.php:124 includes/forum-permissions.php:104
+#: admin/admin.php:128 includes/forum-permissions.php:104
 #: includes/forum-permissions.php:630
 msgid "Administrator"
 msgstr ""
 
-#: admin/admin.php:125 includes/forum-memberslist.php:132
+#: admin/admin.php:129 includes/forum-memberslist.php:132
 #: includes/forum-permissions.php:108 includes/forum-permissions.php:596
 #: includes/forum-permissions.php:631 admin/views/options.php:594
 #: includes/views/post-element.php:59
 msgid "Banned"
 msgstr ""
 
-#: admin/admin.php:137
+#: admin/admin.php:141
 msgid "Notify me when I get mentioned"
 msgstr ""
 
-#: admin/admin.php:146
+#: admin/admin.php:150
 msgid "Signature"
 msgstr ""
 
-#: admin/admin.php:153
+#: admin/admin.php:157
 msgid "You can use the following HTML tags in signatures:"
 msgstr ""
 
-#: admin/admin.php:157
+#: admin/admin.php:161
 msgid "HTML tags are not allowed in signatures."
 msgstr ""
 
-#: admin/admin.php:166 admin/admin.php:213 admin/admin.php:213
+#: admin/admin.php:170 admin/admin.php:217 admin/admin.php:217
 #: includes/forum-ads.php:23 includes/forum.php:258 includes/forum.php:1642
 #: includes/forum.php:2010
 msgid "Forum"
 msgstr ""
 
-#: admin/admin.php:214 admin/views/structure.php:5
+#: admin/admin.php:218 admin/views/structure.php:5
 msgid "Structure"
 msgstr ""
 
-#: admin/admin.php:215 admin/views/appearance.php:8
+#: admin/admin.php:219 admin/views/appearance.php:8
 #: admin/views/appearance.php:19
 msgid "Appearance"
 msgstr ""
 
-#: admin/admin.php:216 includes/forum-usergroups.php:574
+#: admin/admin.php:220 includes/forum-usergroups.php:574
 #: admin/views/usergroups.php:5
 msgid "Usergroups"
 msgstr ""
 
-#: admin/admin.php:224 admin/views/options.php:8
+#: admin/admin.php:228 admin/views/options.php:8
 msgid "Settings"
 msgstr ""
 
-#: admin/admin.php:546
+#: admin/admin.php:550
 msgid "Official Support Forum"
 msgstr ""
 
-#: admin/admin.php:551
+#: admin/admin.php:555
 msgid "Documentation"
 msgstr ""
 
-#: admin/admin.php:556
+#: admin/admin.php:560
 msgid "Donate"
+msgstr ""
+
+#: admin/admin.php:577
+msgid "Forum Posts"
 msgstr ""
 
 #: includes/forum-activity.php:27
@@ -205,7 +209,7 @@ msgstr ""
 
 #: includes/forum-activity.php:82
 #, php-format
-msgid "%s answered in %s."
+msgid "%s replied in %s."
 msgstr ""
 
 #: includes/forum-activity.php:91
@@ -328,23 +332,23 @@ msgstr ""
 msgid "You are not allowed to upload files with that file size."
 msgstr ""
 
-#: includes/forum-database.php:262
+#: includes/forum-database.php:264
 msgid "Custom Usergroups"
 msgstr ""
 
-#: includes/forum-database.php:282
+#: includes/forum-database.php:284
 msgid "Example Usergroup"
 msgstr ""
 
-#: includes/forum-database.php:330
+#: includes/forum-database.php:332
 msgid "Example Category"
 msgstr ""
 
-#: includes/forum-database.php:338
+#: includes/forum-database.php:340
 msgid "First Forum"
 msgstr ""
 
-#: includes/forum-database.php:339
+#: includes/forum-database.php:341
 msgid "My first forum."
 msgstr ""
 
@@ -905,17 +909,17 @@ msgid "Usergroups assignments updated."
 msgstr ""
 
 #: includes/forum.php:274
-msgid "New answer: ###TITLE###"
+msgid "New reply: ###TITLE###"
 msgstr ""
 
 #: includes/forum.php:278
 msgid ""
 "Hello ###USERNAME###,<br><br>You received this message because there is a "
-"new answer in a forum-topic you have subscribed to.<br><br>Topic:<br>"
-"###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Answer:<br>"
-"###CONTENT###<br><br>Link:<br>###LINK###<br><br>If you dont want to receive "
-"these mails anymore you can unsubscribe via the subscription-area. Please "
-"dont answer to this mail!"
+"new reply in a forum-topic you have subscribed to.<br><br>Topic:<br>"
+"###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Reply:<br>###CONTENT###<br>"
+"<br>Link:<br>###LINK###<br><br>If you dont want to receive these mails "
+"anymore you can unsubscribe via the subscription-area. Please dont reply to "
+"this mail!"
 msgstr ""
 
 #: includes/forum.php:282
@@ -928,7 +932,7 @@ msgid ""
 "new forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>"
 "###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###<br><br>"
 "If you dont want to receive these mails anymore you can unsubscribe via the "
-"subscription-area. Please dont answer to this mail!"
+"subscription-area. Please dont reply to this mail!"
 msgstr ""
 
 #: includes/forum.php:290
@@ -991,8 +995,8 @@ msgstr ""
 
 #: includes/forum.php:925 widgets/widget-recent-topics.php:99
 #, php-format
-msgid "%s Answer"
-msgid_plural "%s Answers"
+msgid "%s Reply"
+msgid_plural "%s Replies"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1241,7 +1245,7 @@ msgid "New Post"
 msgstr ""
 
 #: integrations/integration-mycred.php:396
-msgid "Topic authors can receive %_plural% for answering to their own topic."
+msgid "Topic authors can receive %_plural% for replying to their own topic."
 msgstr ""
 
 #: integrations/integration-mycred.php:403
