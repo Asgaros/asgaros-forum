@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Fatal error when multibyte-extension is not installed
 = 1.15.3 =
 * Added: Show number of forum-posts for every user in administration area
 * Fixed: Prevent banned users from reacting to posts

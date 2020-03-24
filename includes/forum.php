@@ -1184,11 +1184,27 @@ class AsgarosForum {
     }
 
     function cut_string($string, $length = 33, $at_next_space = false) {
+        $string_length = 0;
+
+        // Get string-length first.
+        if (function_exists('mb_strlen')) {
+            $string_length = mb_strlen($string, 'UTF-8');
+        } else {
+            $string_length = strlen($string);
+        }
+
         // Only cut string if it is longer than defined.
-        if (mb_strlen($string, 'UTF-8') > $length) {
+        if ($string_length > $length) {
             // Try to find position of next space if necessary.
             if ($at_next_space) {
-                $space_position = mb_strpos($string, ' ', $length, 'UTF-8');
+                $space_position = false;
+
+                // Get position of space.
+                if (function_exists('mb_strpos')) {
+                    $space_position = mb_strpos($string, ' ', $length, 'UTF-8');
+                } else {
+                    $space_position = strpos($string, ' ', $length);
+                }   
 
                 if ($space_position) {
                     $length = $space_position;
@@ -1197,7 +1213,12 @@ class AsgarosForum {
                 }
             }
 
-            return mb_substr($string, 0, $length, 'UTF-8').' &#8230;';
+            // Return substring.
+            if (function_exists('mb_substr')) {
+                return mb_substr($string, 0, $length, 'UTF-8').' &#8230;';
+            } else {
+                return substr($string, 0, $length).' &#8230;';
+            }
         }
 
         return $string;
