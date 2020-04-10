@@ -579,7 +579,7 @@ if (!defined('ABSPATH')) exit;
                             <td>
                                 <table>
                                     <tr>
-                                        <th><label for="memberslist_filter_normal"><?php _e('Normal', 'asgaros-forum'); ?>:</label></th>
+                                        <th><label for="memberslist_filter_normal"><?php _e('Users', 'asgaros-forum'); ?>:</label></th>
                                         <td><input type="checkbox" name="memberslist_filter_normal" id="memberslist_filter_normal" <?php checked(!empty($this->asgarosforum->options['memberslist_filter_normal'])); ?>></td>
                                     </tr>
                                     <tr>

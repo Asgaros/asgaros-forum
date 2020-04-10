@@ -107,7 +107,7 @@ class AsgarosForumPermissions {
         } else if ($this->isBanned($userID)) {
             return __('Banned', 'asgaros-forum');
         } else {
-            return __('Normal', 'asgaros-forum');
+            return __('User', 'asgaros-forum');
         }
     }
 
@@ -575,7 +575,7 @@ class AsgarosForumPermissions {
         // Normal users.
         $users = $this->get_users_by_role('normal');
         $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'normal') ? 'class="current"' : '';
-        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=normal').'">'.__('Normal', 'asgaros-forum').'</a> ('.count($users).')';
+        $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=normal').'">'.__('Users', 'asgaros-forum').'</a> ('.count($users).')';
 
         // Moderators.
         $users = $this->get_users_by_role('moderator');
@@ -625,7 +625,7 @@ class AsgarosForumPermissions {
     }
 
     public function bulk_actions_users($bulk_actions) {
-        $bulk_actions['forum_role_assign_normal'] = __('Assign forum role:', 'asgaros-forum').' '.__('Normal', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_normal'] = __('Assign forum role:', 'asgaros-forum').' '.__('User', 'asgaros-forum');
         $bulk_actions['forum_role_assign_moderator'] = __('Assign forum role:', 'asgaros-forum').' '.__('Moderator', 'asgaros-forum');
         $bulk_actions['forum_role_assign_administrator'] = __('Assign forum role:', 'asgaros-forum').' '.__('Administrator', 'asgaros-forum');
         $bulk_actions['forum_role_assign_banned'] = __('Assign forum role:', 'asgaros-forum').' '.__('Banned', 'asgaros-forum');

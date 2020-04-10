@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Changed: Misleading strings
 = 1.15.4 =
 * Fixed: Fatal error when multibyte-extension is not installed
 = 1.15.3 =

@@ -123,7 +123,7 @@ class AsgarosForumAdmin {
                 $output .= '<td>';
 
                 $output .= '<select name="asgarosforum_role" id="asgarosforum_role">';
-                $output .= '<option value="normal" '.selected($role, 'normal', false).'>'.__('Normal', 'asgaros-forum').'</option>';
+                $output .= '<option value="normal" '.selected($role, 'normal', false).'>'.__('User', 'asgaros-forum').'</option>';
                 $output .= '<option value="moderator" '.selected($role, 'moderator', false).'>'.__('Moderator', 'asgaros-forum').'</option>';
                 $output .= '<option value="administrator" '.selected($role, 'administrator', false).'>'.__('Administrator', 'asgaros-forum').'</option>';
                 $output .= '<option value="banned" '.selected($role, 'banned', false).'>'.__('Banned', 'asgaros-forum').'</option>';

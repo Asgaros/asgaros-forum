@@ -102,7 +102,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'normal', __('Normal', 'asgaros-forum'));
+                            echo $this->render_filter_option('role', 'normal', __('Users', 'asgaros-forum'));
                         }
                     }
 
