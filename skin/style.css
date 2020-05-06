@@ -741,7 +741,7 @@
     color: #fff !important;
     border-left: 1px solid #054d98;
     line-height: 44px;
-    display: inline; /* comp */
+    display: inline-block; /* comp */
     margin: 0; /* comp */
     text-align: left; /* comp */
     position: static; /* comp */
