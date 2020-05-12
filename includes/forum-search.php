@@ -93,6 +93,11 @@ class AsgarosForumSearch {
                 $categoriesFilter[] = $category->term_id;
             }
 
+            // Do not execute a search-query when no categories are accessible.
+            if (empty($categoriesFilter)) {
+                return false;
+            }
+
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
 
             $start = $this->asgarosforum->current_page * $this->asgarosforum->options['topics_per_page'];
