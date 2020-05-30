@@ -731,8 +731,7 @@
 }
 #af-wrapper #forum-navigation,
 #af-wrapper #forum-navigation-mobile {
-    display: block;
-    float: left;
+    display: inline;
     text-align: left; /* comp */
 }
 #af-wrapper #forum-navigation a,
