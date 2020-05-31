@@ -2,15 +2,15 @@
 
 Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 
-##Actions
+## Actions
 
 
 
-##Filters
+## Filters
 
 - [Header Menu](#asgarosforum_filter_header_menu)
 
-###asgarosforum_filter_header_menu
+### asgarosforum_filter_header_menu
 
 #### Description
 Filter the header menu of asgaros forum.
