@@ -87,5 +87,5 @@ Names of the standard menu entries:
 
 #### Source
 
-[forum.php]{includes/forum.php}
+[forum.php](includes/forum.php)
 
