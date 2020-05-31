@@ -62,7 +62,13 @@ class AsgarosForumMembersList {
             $membersLink = $this->asgarosforum->get_link('members');
             $membersLink = apply_filters('asgarosforum_filter_members_link', $membersLink);
 
-            echo '<a class="members-link" href="'.$membersLink.'">'.__('Members', 'asgaros-forum').'</a>';
+            return array(
+                'menu_class'            =>  'members-link',
+                'menu_link_text'        =>  esc_html__('Members', 'asgaros-forum'),
+                'menu_url'              =>  $membersLink,
+                'menu_login_status'     =>  0,
+                'menu_new_tab'          => false,
+            );
         }
     }
 
