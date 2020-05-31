@@ -1,16 +1,16 @@
 # Available Hooks in Asgaros Forum
 
-Overview of [actions]{#actions} and [filters]{#filters} at asgaros forum.
+Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 
-## Actions (#actions)
+##Actions
 
 
 
-## Filters (#filters)
+##Filters
 
 - [Header Menu](#asgarosforum_filter_header_menu)
 
-### Filter Header Menu (#asgarosforum_filter_header_menu)
+###asgarosforum_filter_header_menu
 
 #### Description
 Filter the header menu of asgaros forum.
