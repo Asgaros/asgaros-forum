@@ -70,10 +70,16 @@ class AsgarosForumProfile {
     public function show_profile_header($user_data) {
         $userOnline = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? ' class="user-online"' : '';
         $background_style = '';
+        $user_id = $user_data->ID;
 
         echo '<div id="profile-header"'.$userOnline.'>';
             if ($this->asgarosforum->options['enable_avatars']) {
+
                 $url = get_avatar_url($user_data->ID, 480);
+
+                // Add filter for custom profile header
+                $url = apply_filters('asgarosforum_filter_profile_header_image', $url, $user_id);
+
                 $background_style = 'style="background-image: url(\''.$url.'\');"';
             }
 
