@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Custom classes for body tag
+* Added: asgarosforum_filter_profile_header_image filter
 * Fixed: Do not execute a search-query when no categories are accessible
 * Fixed: Minor display issues
 * Changed: Misleading strings

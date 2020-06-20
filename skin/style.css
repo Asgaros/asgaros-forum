@@ -857,7 +857,7 @@
     padding: 0;
     border: 0;
     background-color: inherit;
-    width: 190px;
+    width: calc(100% - 40px);;
     height: initial; /* comp */
     font-size: 13px;
     line-height: normal;
