@@ -601,8 +601,11 @@ class AsgarosForum {
     // Generate Classes for Body Tag
     function add_class_to_body($classes) {
 
-        $classes[] = 'asgaros-forum';
-        $classes[] = 'asgaros-forum-' . $this->current_view;
+        // Check if current view is set
+        if ($this->current_view){
+            $classes[] = 'asgaros-forum';
+            $classes[] = 'asgaros-forum-' . $this->current_view;
+        }
 
         return $classes;
     }
