@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Custom classes for body tag
 * Fixed: Do not execute a search-query when no categories are accessible
 * Fixed: Minor display issues
 * Changed: Misleading strings
