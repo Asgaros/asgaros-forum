@@ -16,6 +16,7 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 ### Support, Demo & Documentation
 * [Support & Demo](https://www.asgaros.de/support/)
 * [Documentation](https://www.asgaros.de/docs/)
+* [Available Hooks](hooks.md)
 
 ### Features
 * Simple Content Management
