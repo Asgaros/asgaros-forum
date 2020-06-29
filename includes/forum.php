@@ -197,8 +197,8 @@ class AsgarosForum {
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_css_js'), 10);
 
-        // add classes to body tag
-        add_filter( 'body_class', array($this, 'add_class_to_body'));
+        // Add certain classes to body-tag.
+        add_filter('body_class', array($this, 'add_body_classes'));
 
         // Add filters for modifying the title of the page.
         add_filter('wp_title', array($this, 'change_wp_title'), 100, 3);
@@ -598,13 +598,12 @@ class AsgarosForum {
         do_action('asgarosforum_enqueue_css_js');
     }
 
-    // Generate Classes for Body Tag
-    function add_class_to_body($classes) {
-
+    // Add certain classes to body-tag.
+    function add_body_classes($classes) {
         // Check if current view is set
-        if ($this->current_view){
+        if ($this->executePlugin){
             $classes[] = 'asgaros-forum';
-            $classes[] = 'asgaros-forum-' . $this->current_view;
+            $classes[] = 'asgaros-forum-'.$this->current_view;
         }
 
         return $classes;
