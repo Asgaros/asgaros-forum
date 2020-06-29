@@ -600,8 +600,7 @@ class AsgarosForum {
 
     // Add certain classes to body-tag.
     function add_body_classes($classes) {
-        // Check if current view is set
-        if ($this->executePlugin){
+        if ($this->executePlugin) {
             $classes[] = 'asgaros-forum';
             $classes[] = 'asgaros-forum-'.$this->current_view;
         }
