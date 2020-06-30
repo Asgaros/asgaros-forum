@@ -87,7 +87,9 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to change title-separator
 * Added: CSS view-class to body-classes
+* Added: asgarosforum_title_separator filter
 * Added: asgarosforum_filter_profile_header_image filter
 * Fixed: Do not execute a search-query when no categories are accessible
 * Fixed: Minor display issues
