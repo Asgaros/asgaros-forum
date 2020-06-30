@@ -94,6 +94,9 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Do not execute a search-query when no categories are accessible
 * Fixed: Minor display issues
 * Changed: Misleading strings
+* Improved compatibility with All In One SEO Pack
+* Improved compatibility with Rank Math SEO
+* Improved compatibility with Yoast SEO
 = 1.15.4 =
 * Fixed: Fatal error when multibyte-extension is not installed
 = 1.15.3 =
