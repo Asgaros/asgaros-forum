@@ -241,7 +241,7 @@ User ID of shown profile.
 ?>
 ```
 
-#### Usage
+#### Examples
 
 ```php
 <?php
