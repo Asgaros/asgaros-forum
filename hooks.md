@@ -171,6 +171,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_reactions
 - asgarosforum_widget_recent_posts_custom_content
 - asgarosforum_widget_recent_topics_custom_content
+- asgarosforum_title_separator
 
 ### asgarosforum_filter_login_message
 
@@ -294,3 +295,5 @@ User ID of shown profile.
 ### asgarosforum_widget_recent_posts_custom_content
 
 ### asgarosforum_widget_recent_topics_custom_content
+
+### asgarosforum_title_separator
