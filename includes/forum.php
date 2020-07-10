@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    var $version = '1.15.4';
+    var $version = '1.15.5';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
@@ -139,6 +139,7 @@ class AsgarosForum {
         'view_name_unread'                  => 'unread',
         'view_name_unapproved'              => 'unapproved',
         'view_name_reports'                 => 'reports',
+        'title_separator'                   => '-',
         'enable_spoilers'                   => true,
         'hide_spoilers_from_guests'         => false,
         'subforums_location'                => 'above',
@@ -197,10 +198,14 @@ class AsgarosForum {
         add_action('wp', array($this, 'prepare'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_css_js'), 10);
 
+        // Add certain classes to body-tag.
+        add_filter('body_class', array($this, 'add_body_classes'));
+
         // Add filters for modifying the title of the page.
         add_filter('wp_title', array($this, 'change_wp_title'), 100, 3);
         add_filter('document_title_parts', array($this, 'change_document_title_parts'), 100);
         add_filter('pre_get_document_title', array($this, 'change_pre_get_document_title'), 100);
+        add_filter('document_title_separator', array($this, 'change_document_title_separator'), 100);
 
         add_filter('oembed_dataparse', array($this, 'prevent_oembed_dataparse'), 10, 3);
 
@@ -253,7 +258,7 @@ class AsgarosForum {
 		$current_options = get_option('asgarosforum_options', array());
         $this->options = array_merge($this->options_default, $current_options);
 
-        // Ensure default values if some needed files got deleted.
+        // Ensure default values if some needed inputs got deleted.
         if (empty($this->options['forum_title'])) {
             $this->options['forum_title'] = __('Forum', 'asgaros-forum');
         }
@@ -293,6 +298,10 @@ class AsgarosForum {
         if (empty($this->options['mail_template_mentioned_message'])) {
             $this->options['mail_template_mentioned_message'] = __('Hello ###USERNAME###,<br><br>You have been mentioned in a forum-post.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');
         }
+
+        if (empty($this->options['title_separator'])) {
+            $this->options['title_separator'] = '-';
+        }
     }
 
     function save_options($options) {
@@ -324,12 +333,31 @@ class AsgarosForum {
         return $title;
     }
 
+    function change_document_title_separator($document_title_separator) {
+        if ($this->executePlugin) {
+            $document_title_separator = $this->get_title_separator();
+        }
+
+        return $document_title_separator;
+    }
+
+    function get_title_separator() {
+        // The default title-separator is based on the forum-settings.
+        $title_separator = $this->options['title_separator'];
+
+        // Allow other plugins to modify the title-separator.
+        $title_separator = apply_filters('asgarosforum_title_separator', $title_separator);
+
+        return $title_separator;
+    }
+
     function get_title($title) {
         if ($this->executePlugin) {
             $metaTitle = $this->getMetaTitle();
 
             if ($metaTitle) {
-                $title = $metaTitle.' - '.$title;
+                $title_separator = $this->get_title_separator();
+                $title = $metaTitle.' '.$title_separator.' '.$title;
             }
         }
 
@@ -344,13 +372,24 @@ class AsgarosForum {
         // Apply custom modifications.
         if (!$this->error && $this->current_view) {
             if ($this->current_view === 'forum' && $this->current_forum) {
-                $metaTitle = $this->addCurrentPageToString($metaTitle);
+                $metaTitle = $this->add_current_page_to_title($metaTitle);
             } else if ($this->current_view === 'topic' && $this->current_topic) {
-                $metaTitle = $this->addCurrentPageToString($metaTitle);
+                $metaTitle = $this->add_current_page_to_title($metaTitle);
             }
         }
 
         return $metaTitle;
+    }
+
+    // Adds the current page to a title.
+    function add_current_page_to_title($someString) {
+        if ($this->current_page > 0) {
+            $currentPage = $this->current_page + 1;
+            $title_separator = $this->get_title_separator();
+            $someString .= ' '.$title_separator.' '.__('Page', 'asgaros-forum').' '.$currentPage;
+        }
+
+        return $someString;
     }
 
     function prepare() {
@@ -595,6 +634,16 @@ class AsgarosForum {
         do_action('asgarosforum_enqueue_css_js');
     }
 
+    // Add certain classes to body-tag.
+    function add_body_classes($classes) {
+        if ($this->executePlugin) {
+            $classes[] = 'asgaros-forum';
+            $classes[] = 'asgaros-forum-'.$this->current_view;
+        }
+
+        return $classes;
+    }
+
     // Gets the pages main title.
     public function getMainTitle($setDefaultTitle = true) {
         $mainTitle = false;
@@ -638,16 +687,6 @@ class AsgarosForum {
         }
 
         return $mainTitle;
-    }
-
-    // Adds the current page to a string.
-    function addCurrentPageToString($someString) {
-        if ($this->current_page > 0) {
-            $currentPage = $this->current_page + 1;
-            $someString .= ' - '.__('Page', 'asgaros-forum').' '.$currentPage;
-        }
-
-        return $someString;
     }
 
     // Holds all notices.

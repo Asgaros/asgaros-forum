@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 02:05+0000\n"
+"POT-Creation-Date: 2020-06-30 01:45+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -33,7 +33,7 @@ msgid "Features"
 msgstr ""
 
 #: admin/admin.php:43
-msgid "URLs"
+msgid "URLs & SEO"
 msgstr ""
 
 #: admin/admin.php:47
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Uploads"
 msgstr ""
 
-#: admin/admin.php:75 includes/forum-reports.php:18 includes/forum.php:636
+#: admin/admin.php:75 includes/forum-reports.php:18 includes/forum.php:685
 msgid "Reports"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgid "Signatures"
 msgstr ""
 
 #: admin/admin.php:83 includes/forum-activity.php:20
-#: includes/forum-activity.php:124 includes/forum.php:630
+#: includes/forum-activity.php:124 includes/forum.php:679
 msgid "Activity"
 msgstr ""
 
@@ -98,11 +98,9 @@ msgstr ""
 msgid "Forum Role"
 msgstr ""
 
-#: admin/admin.php:126 includes/forum-memberslist.php:105
-#: includes/forum-permissions.php:110 includes/forum-permissions.php:578
-#: includes/forum-permissions.php:628 admin/tables/admin-structure-table.php:72
-#: admin/views/options.php:582 admin/views/structure.php:113
-msgid "Normal"
+#: admin/admin.php:126 includes/forum-notifications.php:444
+#: includes/forum-permissions.php:110 includes/forum-permissions.php:628
+msgid "User"
 msgstr ""
 
 #: admin/admin.php:127 includes/forum-permissions.php:106
@@ -117,7 +115,7 @@ msgstr ""
 
 #: admin/admin.php:129 includes/forum-memberslist.php:132
 #: includes/forum-permissions.php:108 includes/forum-permissions.php:596
-#: includes/forum-permissions.php:631 admin/views/options.php:594
+#: includes/forum-permissions.php:631 admin/views/options.php:601
 #: includes/views/post-element.php:59
 msgid "Banned"
 msgstr ""
@@ -139,8 +137,8 @@ msgid "HTML tags are not allowed in signatures."
 msgstr ""
 
 #: admin/admin.php:170 admin/admin.php:217 admin/admin.php:217
-#: includes/forum-ads.php:23 includes/forum.php:258 includes/forum.php:1642
-#: includes/forum.php:2010
+#: includes/forum-ads.php:23 includes/forum.php:263 includes/forum.php:1702
+#: includes/forum.php:2070
 msgid "Forum"
 msgstr ""
 
@@ -186,9 +184,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/forum-activity.php:43 includes/forum-approval.php:216
-#: includes/forum-profile.php:194 includes/forum-unread.php:243
-#: includes/forum.php:1350 includes/forum.php:1363 includes/forum.php:1390
-#: includes/forum.php:1402 widgets/widget-recent-posts.php:124
+#: includes/forum-profile.php:200 includes/forum-unread.php:243
+#: includes/forum.php:1410 includes/forum.php:1423 includes/forum.php:1450
+#: includes/forum.php:1462 widgets/widget-recent-posts.php:124
 #: widgets/widget-recent-topics.php:118
 #, php-format
 msgid "%s ago"
@@ -244,7 +242,7 @@ msgstr ""
 msgid "Default Theme"
 msgstr ""
 
-#: includes/forum-approval.php:18 includes/forum.php:634
+#: includes/forum-approval.php:18 includes/forum.php:683
 msgid "Unapproved Topics"
 msgstr ""
 
@@ -269,12 +267,12 @@ msgstr ""
 msgid "There are unapproved topics."
 msgstr ""
 
-#: includes/forum-approval.php:212 includes/forum.php:907
+#: includes/forum-approval.php:212 includes/forum.php:946
 msgid "By"
 msgstr ""
 
 #: includes/forum-approval.php:220 includes/forum-unread.php:260
-#: includes/forum.php:912
+#: includes/forum.php:951
 msgid "In"
 msgstr ""
 
@@ -282,22 +280,22 @@ msgstr ""
 msgid "There are no unapproved topics."
 msgstr ""
 
-#: includes/forum-breadcrumbs.php:75 includes/forum.php:614
+#: includes/forum-breadcrumbs.php:75 includes/forum.php:663
 msgid "Post Reply"
 msgstr ""
 
 #: includes/forum-breadcrumbs.php:79 includes/forum-editor.php:224
-#: includes/forum.php:612
+#: includes/forum.php:661
 msgid "Edit Post"
 msgstr ""
 
 #: includes/forum-breadcrumbs.php:83 includes/forum-editor.php:220
-#: includes/forum.php:616 includes/forum.php:1495
+#: includes/forum.php:665 includes/forum.php:1555
 #: integrations/integration-mycred.php:328
 msgid "New Topic"
 msgstr ""
 
-#: includes/forum-breadcrumbs.php:87 includes/forum.php:618
+#: includes/forum-breadcrumbs.php:87 includes/forum.php:667
 msgid "Move Topic"
 msgstr ""
 
@@ -387,7 +385,7 @@ msgid "RSS Feed"
 msgstr ""
 
 #: includes/forum-memberslist.php:29 includes/forum-memberslist.php:65
-#: includes/forum.php:628
+#: includes/forum.php:677
 msgid "Members"
 msgstr ""
 
@@ -407,17 +405,22 @@ msgstr ""
 msgid "All Users"
 msgstr ""
 
+#: includes/forum-memberslist.php:105 includes/forum-permissions.php:578
+#: includes/forum-statistics.php:30 admin/views/options.php:589
+msgid "Users"
+msgstr ""
+
 #: includes/forum-memberslist.php:114 includes/forum-permissions.php:584
-#: admin/views/options.php:586
+#: admin/views/options.php:593
 msgid "Moderators"
 msgstr ""
 
 #: includes/forum-memberslist.php:123 includes/forum-permissions.php:590
-#: admin/views/options.php:590
+#: admin/views/options.php:597
 msgid "Administrators"
 msgstr ""
 
-#: includes/forum-memberslist.php:157 includes/forum-profile.php:239
+#: includes/forum-memberslist.php:157 includes/forum-profile.php:245
 #: includes/forum-usergroups.php:469 includes/forum-usergroups.php:486
 msgid "Usergroups:"
 msgstr ""
@@ -426,7 +429,7 @@ msgstr ""
 msgid "No users found!"
 msgstr ""
 
-#: includes/forum-memberslist.php:224 includes/forum.php:851
+#: includes/forum-memberslist.php:224 includes/forum.php:890
 #: includes/views/post-element.php:49
 #, php-format
 msgid "%s Post"
@@ -435,7 +438,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/forum-notifications.php:20 includes/forum-notifications.php:501
-#: includes/forum.php:622
+#: includes/forum.php:671
 msgid "Subscriptions"
 msgstr ""
 
@@ -461,10 +464,6 @@ msgstr ""
 
 #: includes/forum-notifications.php:83
 msgid "<b>Subscribe</b> to this forum."
-msgstr ""
-
-#: includes/forum-notifications.php:444
-msgid "User"
 msgstr ""
 
 #: includes/forum-notifications.php:518
@@ -640,81 +639,81 @@ msgid "Vote"
 msgstr ""
 
 #: includes/forum-profile.php:35 includes/forum-profile.php:60
-#: includes/forum-profile.php:114 includes/forum-profile.php:116
-#: includes/forum-profile.php:394
+#: includes/forum-profile.php:120 includes/forum-profile.php:122
+#: includes/forum-profile.php:400
 msgid "Profile"
 msgstr ""
 
 #: includes/forum-profile.php:41 includes/forum-profile.php:66
-#: includes/forum-profile.php:121 includes/forum-profile.php:123
+#: includes/forum-profile.php:127 includes/forum-profile.php:129
 msgid "Post History"
 msgstr ""
 
-#: includes/forum-profile.php:166 includes/forum-profile.php:221
+#: includes/forum-profile.php:172 includes/forum-profile.php:227
 msgid "You need to login to have access to profiles."
 msgstr ""
 
-#: includes/forum-profile.php:175
+#: includes/forum-profile.php:181
 msgid "No posts made by this user."
 msgstr ""
 
-#: includes/forum-profile.php:196
+#: includes/forum-profile.php:202
 msgid "In:"
 msgstr ""
 
-#: includes/forum-profile.php:210 includes/forum-profile.php:335
+#: includes/forum-profile.php:216 includes/forum-profile.php:341
 msgid "This user does not exist."
 msgstr ""
 
-#: includes/forum-profile.php:229
+#: includes/forum-profile.php:235
 msgid "First Name:"
 msgstr ""
 
-#: includes/forum-profile.php:247
+#: includes/forum-profile.php:253
 msgid "Website:"
 msgstr ""
 
-#: includes/forum-profile.php:255
+#: includes/forum-profile.php:261
 msgid "Last seen:"
 msgstr ""
 
-#: includes/forum-profile.php:262
+#: includes/forum-profile.php:268
 msgid "Member Since:"
 msgstr ""
 
-#: includes/forum-profile.php:269
+#: includes/forum-profile.php:275
 msgid "Biographical Info:"
 msgstr ""
 
-#: includes/forum-profile.php:279
+#: includes/forum-profile.php:285
 msgid "Signature:"
 msgstr ""
 
-#: includes/forum-profile.php:289
+#: includes/forum-profile.php:295
 msgid "Member Activity"
 msgstr ""
 
-#: includes/forum-profile.php:295
+#: includes/forum-profile.php:301
 msgid "Topics Started"
 msgstr ""
 
-#: includes/forum-profile.php:300
+#: includes/forum-profile.php:306
 msgid "Replies Created"
 msgstr ""
 
-#: includes/forum-profile.php:305
+#: includes/forum-profile.php:311
 msgid "Likes Received"
 msgstr ""
 
-#: includes/forum-profile.php:316
+#: includes/forum-profile.php:322
 msgid "Edit Profile"
 msgstr ""
 
-#: includes/forum-profile.php:325
+#: includes/forum-profile.php:331
 msgid "Unban User"
 msgstr ""
 
-#: includes/forum-profile.php:329
+#: includes/forum-profile.php:335
 msgid "Ban User"
 msgstr ""
 
@@ -773,7 +772,7 @@ msgstr ""
 msgid "Show Post"
 msgstr ""
 
-#: includes/forum-search.php:27 includes/forum.php:620
+#: includes/forum-search.php:27 includes/forum.php:669
 msgid "Search"
 msgstr ""
 
@@ -785,7 +784,7 @@ msgstr ""
 msgid "Search results:"
 msgstr ""
 
-#: includes/forum-search.php:69 includes/forum.php:953
+#: includes/forum-search.php:69 includes/forum.php:992
 #: includes/views/forum.php:33 includes/views/overview.php:14
 msgid "Last post"
 msgstr ""
@@ -818,11 +817,7 @@ msgstr ""
 msgid "Views"
 msgstr ""
 
-#: includes/forum-statistics.php:30
-msgid "Users"
-msgstr ""
-
-#: includes/forum-unread.php:83 includes/forum.php:632
+#: includes/forum-unread.php:83 includes/forum.php:681
 msgid "Unread Topics"
 msgstr ""
 
@@ -854,8 +849,8 @@ msgstr ""
 msgid "Uploaded files:"
 msgstr ""
 
-#: includes/forum-uploads.php:205 includes/forum.php:1579
-#: includes/forum.php:1602 admin/tables/admin-ads-table.php:70
+#: includes/forum-uploads.php:205 includes/forum.php:1639
+#: includes/forum.php:1662 admin/tables/admin-ads-table.php:70
 #: admin/tables/admin-usergroups-table.php:78 admin/views/ads.php:56
 #: admin/views/structure.php:139 admin/views/structure.php:153
 #: admin/views/usergroups.php:63 admin/views/usergroups.php:95
@@ -908,11 +903,11 @@ msgstr ""
 msgid "Usergroups assignments updated."
 msgstr ""
 
-#: includes/forum.php:274
+#: includes/forum.php:279
 msgid "New reply: ###TITLE###"
 msgstr ""
 
-#: includes/forum.php:278
+#: includes/forum.php:283
 msgid ""
 "Hello ###USERNAME###,<br><br>You received this message because there is a "
 "new reply in a forum-topic you have subscribed to.<br><br>Topic:<br>"
@@ -922,11 +917,11 @@ msgid ""
 "this mail!"
 msgstr ""
 
-#: includes/forum.php:282
+#: includes/forum.php:287
 msgid "New topic: ###TITLE###"
 msgstr ""
 
-#: includes/forum.php:286
+#: includes/forum.php:291
 msgid ""
 "Hello ###USERNAME###,<br><br>You received this message because there is a "
 "new forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>"
@@ -935,104 +930,104 @@ msgid ""
 "subscription-area. Please dont reply to this mail!"
 msgstr ""
 
-#: includes/forum.php:290
+#: includes/forum.php:295
 msgid "You have been mentioned!"
 msgstr ""
 
-#: includes/forum.php:294
+#: includes/forum.php:299
 msgid ""
 "Hello ###USERNAME###,<br><br>You have been mentioned in a forum-post.<br><br>"
 "Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>"
 "###CONTENT###<br><br>Link:<br>###LINK###"
 msgstr ""
 
-#: includes/forum.php:510
-msgid "Sorry, only logged-in users can access the forum."
-msgstr ""
-
-#: includes/forum.php:520
-msgid "Sorry, only logged-in users can access this category."
-msgstr ""
-
-#: includes/forum.php:525 includes/forum.php:532 includes/forum.php:553
-msgid "Sorry, you cannot access this area."
-msgstr ""
-
-#: includes/forum.php:539
-msgid "Sorry, only logged-in users can access this topic."
-msgstr ""
-
-#: includes/forum.php:559
-msgid "You need to log in to create posts and topics."
-msgstr ""
-
-#: includes/forum.php:647
+#: includes/forum.php:389
 msgid "Page"
 msgstr ""
 
-#: includes/forum.php:849
+#: includes/forum.php:549
+msgid "Sorry, only logged-in users can access the forum."
+msgstr ""
+
+#: includes/forum.php:559
+msgid "Sorry, only logged-in users can access this category."
+msgstr ""
+
+#: includes/forum.php:564 includes/forum.php:571 includes/forum.php:592
+msgid "Sorry, you cannot access this area."
+msgstr ""
+
+#: includes/forum.php:578
+msgid "Sorry, only logged-in users can access this topic."
+msgstr ""
+
+#: includes/forum.php:598
+msgid "You need to log in to create posts and topics."
+msgstr ""
+
+#: includes/forum.php:888
 #, php-format
 msgid "%s Topic"
 msgid_plural "%s Topics"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum.php:861 includes/forum.php:952
+#: includes/forum.php:900 includes/forum.php:991
 msgid "Subforums"
 msgstr ""
 
-#: includes/forum.php:891
+#: includes/forum.php:930
 msgid "This topic is sticked"
 msgstr ""
 
-#: includes/forum.php:895
+#: includes/forum.php:934
 msgid "This topic is closed"
 msgstr ""
 
-#: includes/forum.php:899
+#: includes/forum.php:938
 msgid "This topic contains a poll"
 msgstr ""
 
-#: includes/forum.php:925 widgets/widget-recent-topics.php:99
+#: includes/forum.php:964 widgets/widget-recent-topics.php:99
 #, php-format
 msgid "%s Reply"
 msgid_plural "%s Replies"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum.php:930
+#: includes/forum.php:969
 #, php-format
 msgid "%s View"
 msgid_plural "%s Views"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/forum.php:981
+#: includes/forum.php:1020
 msgid "Sorry, but there are no posts."
 msgstr ""
 
-#: includes/forum.php:994
+#: includes/forum.php:1033
 #, php-format
 msgid "Move \"<strong>%s</strong>\" to new forum:"
 msgstr ""
 
-#: includes/forum.php:1020 includes/forum.php:1527
+#: includes/forum.php:1059 includes/forum.php:1587
 msgid "Move"
 msgstr ""
 
-#: includes/forum.php:1024
+#: includes/forum.php:1063
 msgid "You are not allowed to move topics."
 msgstr ""
 
-#: includes/forum.php:1214 includes/forum.php:1233
+#: includes/forum.php:1274 includes/forum.php:1293
 msgid "Deleted user"
 msgstr ""
 
-#: includes/forum.php:1217 includes/forum.php:1239
+#: includes/forum.php:1277 includes/forum.php:1299
 msgid "Guest"
 msgstr ""
 
-#: includes/forum.php:1340 widgets/widget-recent-posts.php:29
+#: includes/forum.php:1400 widgets/widget-recent-posts.php:29
 #: widgets/widget-recent-posts.php:41 widgets/widget-recent-posts.php:54
 #: widgets/widget-recent-posts.php:76 widgets/widget-recent-topics.php:29
 #: widgets/widget-recent-topics.php:41 widgets/widget-recent-topics.php:54
@@ -1040,116 +1035,116 @@ msgstr ""
 msgid "No topics yet!"
 msgstr ""
 
-#: includes/forum.php:1346 includes/forum.php:1388
+#: includes/forum.php:1406 includes/forum.php:1448
 msgid "Last post:"
 msgstr ""
 
-#: includes/forum.php:1454
+#: includes/forum.php:1514
 msgid "Select Sticky Mode:"
 msgstr ""
 
-#: includes/forum.php:1463 includes/forum.php:1540
+#: includes/forum.php:1523 includes/forum.php:1600
 msgid "Sticky"
 msgstr ""
 
-#: includes/forum.php:1466
+#: includes/forum.php:1526
 msgid "The topic will be sticked to the current forum."
 msgstr ""
 
-#: includes/forum.php:1473
+#: includes/forum.php:1533
 msgid "Global Sticky"
 msgstr ""
 
-#: includes/forum.php:1476
+#: includes/forum.php:1536
 msgid "The topic will be sticked to all forums."
 msgstr ""
 
-#: includes/forum.php:1518
+#: includes/forum.php:1578
 msgid "Reply"
 msgstr ""
 
-#: includes/forum.php:1534
+#: includes/forum.php:1594
 msgid "Unsticky"
 msgstr ""
 
-#: includes/forum.php:1550
+#: includes/forum.php:1610
 msgid "Open"
 msgstr ""
 
-#: includes/forum.php:1558
+#: includes/forum.php:1618
 msgid "Close"
 msgstr ""
 
-#: includes/forum.php:1569
+#: includes/forum.php:1629
 msgid "Approve"
 msgstr ""
 
-#: includes/forum.php:1577 includes/forum.php:1600
+#: includes/forum.php:1637 includes/forum.php:1660
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
-#: includes/forum.php:1610 admin/tables/admin-ads-table.php:72
+#: includes/forum.php:1670 admin/tables/admin-ads-table.php:72
 #: admin/tables/admin-usergroups-table.php:80
 msgid "Edit"
 msgstr ""
 
-#: includes/forum.php:1619
+#: includes/forum.php:1679
 msgid "Quote"
 msgstr ""
 
-#: includes/forum.php:1635
+#: includes/forum.php:1695
 msgid "Menu"
 msgstr ""
 
-#: includes/forum.php:1639
+#: includes/forum.php:1699
 msgid "Forum Navigation"
 msgstr ""
 
-#: includes/forum.php:1665
+#: includes/forum.php:1725
 msgid "Logout"
 msgstr ""
 
-#: includes/forum.php:1677
+#: includes/forum.php:1737
 msgid "Login"
 msgstr ""
 
-#: includes/forum.php:1689
+#: includes/forum.php:1749
 msgid "Register"
 msgstr ""
 
-#: includes/forum.php:1854
+#: includes/forum.php:1914
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: includes/forum.php:1855
+#: includes/forum.php:1915
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
-#: includes/forum.php:1856
+#: includes/forum.php:1916
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: includes/forum.php:2019
+#: includes/forum.php:2079
 msgid "What should be done with forum posts owned by this user?"
 msgstr ""
 
-#: includes/forum.php:2021
+#: includes/forum.php:2081
 msgid "What should be done with forum posts owned by these users?"
 msgstr ""
 
-#: includes/forum.php:2027
+#: includes/forum.php:2087
 msgid "Do not reassign forum posts."
 msgstr ""
 
-#: includes/forum.php:2030
+#: includes/forum.php:2090
 msgid "Reassign all forum posts to:"
 msgstr ""
 
-#: includes/forum.php:2199
+#: includes/forum.php:2259
 msgid "Create Forum Topic"
 msgstr ""
 
-#: includes/forum.php:2236
+#: includes/forum.php:2296
 msgid "A topic is created in the selected forum when you save this document."
 msgstr ""
 
@@ -1401,6 +1396,10 @@ msgstr ""
 
 #: admin/tables/admin-structure-table.php:57
 msgid "No description yet ..."
+msgstr ""
+
+#: admin/tables/admin-structure-table.php:72 admin/views/structure.php:113
+msgid "Normal"
 msgstr ""
 
 #: admin/tables/admin-structure-table.php:75 admin/views/structure.php:114
@@ -1796,291 +1795,302 @@ msgstr ""
 msgid "URL-slugs for views:"
 msgstr ""
 
-#: admin/views/options.php:401
+#: admin/views/options.php:395
+msgid "Title Separator"
+msgstr ""
+
+#: admin/views/options.php:396
+msgid ""
+"Allows you to define a custom title-separator for the forum. This setting is "
+"useful when different title-separators are shown in parts of the title - "
+"which is a common problem when using other SEO plugins."
+msgstr ""
+
+#: admin/views/options.php:408
 msgid "Users can edit their own posts"
 msgstr ""
 
-#: admin/views/options.php:410
+#: admin/views/options.php:417
 msgid "Time limitation for editing posts (in minutes):"
 msgstr ""
 
-#: admin/views/options.php:413 admin/views/options.php:430
-#: admin/views/options.php:447 admin/views/options.php:658
-#: admin/views/options.php:665
+#: admin/views/options.php:420 admin/views/options.php:437
+#: admin/views/options.php:454 admin/views/options.php:665
+#: admin/views/options.php:672
 msgid "(0 = No limitation)"
 msgstr ""
 
-#: admin/views/options.php:418
+#: admin/views/options.php:425
 msgid "Users can delete their own posts"
 msgstr ""
 
-#: admin/views/options.php:427
+#: admin/views/options.php:434
 msgid "Time limitation for deleting posts (in minutes):"
 msgstr ""
 
-#: admin/views/options.php:435
+#: admin/views/options.php:442
 msgid "Users can delete their own topics"
 msgstr ""
 
-#: admin/views/options.php:444
+#: admin/views/options.php:451
 msgid "Time limitation for deleting topics (in minutes):"
 msgstr ""
 
-#: admin/views/options.php:452
+#: admin/views/options.php:459
 msgid "Users can open their own topics"
 msgstr ""
 
-#: admin/views/options.php:457
+#: admin/views/options.php:464
 msgid "Users can close their own topics"
 msgstr ""
 
-#: admin/views/options.php:471
+#: admin/views/options.php:478
 msgid "Enable breadcrumbs"
 msgstr ""
 
-#: admin/views/options.php:475
+#: admin/views/options.php:482
 msgid "Show category name in breadcrumbs"
 msgstr ""
 
-#: admin/views/options.php:486
+#: admin/views/options.php:493
 msgid "Sender name:"
 msgstr ""
 
-#: admin/views/options.php:490
+#: admin/views/options.php:497
 msgid "Sender mail:"
 msgstr ""
 
-#: admin/views/options.php:495
+#: admin/views/options.php:502
 msgid "Receivers of administrative notifications:"
 msgstr ""
 
-#: admin/views/options.php:496
+#: admin/views/options.php:503
 msgid ""
 "A comma-separated list of mail-addresses which can receive administrative "
 "notifications (new reports, unapproved topics, and more)."
 msgstr ""
 
-#: admin/views/options.php:502
+#: admin/views/options.php:509
 msgid "Enable subscriptions"
 msgstr ""
 
-#: admin/views/options.php:503
+#: admin/views/options.php:510
 msgid "The subscription-functionality is only available for logged-in users."
 msgstr ""
 
-#: admin/views/options.php:508
+#: admin/views/options.php:515
 msgid "Notify receivers of administrative notifications about new topics"
 msgstr ""
 
-#: admin/views/options.php:513
+#: admin/views/options.php:520
 msgid "New post notification subject:"
 msgstr ""
 
-#: admin/views/options.php:517
+#: admin/views/options.php:524
 msgid "New post notification message:"
 msgstr ""
 
-#: admin/views/options.php:522
+#: admin/views/options.php:529
 msgid "New topic notification subject:"
 msgstr ""
 
-#: admin/views/options.php:526
+#: admin/views/options.php:533
 msgid "New topic notification message:"
 msgstr ""
 
-#: admin/views/options.php:540
+#: admin/views/options.php:547
 msgid "Enable Mentioning"
 msgstr ""
 
-#: admin/views/options.php:544
+#: admin/views/options.php:551
 msgid "Enable Suggestions"
 msgstr ""
 
-#: admin/views/options.php:548
+#: admin/views/options.php:555
 msgid "Mentioning notification subject:"
 msgstr ""
 
-#: admin/views/options.php:552
+#: admin/views/options.php:559
 msgid "Mentioning notification message:"
 msgstr ""
 
-#: admin/views/options.php:566
+#: admin/views/options.php:573
 msgid "Enable members list"
 msgstr ""
 
-#: admin/views/options.php:570
+#: admin/views/options.php:577
 msgid "Show members list to logged-in users only"
 msgstr ""
 
-#: admin/views/options.php:574
+#: admin/views/options.php:581
 msgid "Members per page:"
 msgstr ""
 
-#: admin/views/options.php:578
+#: admin/views/options.php:585
 msgid "Available filters"
 msgstr ""
 
-#: admin/views/options.php:611
+#: admin/views/options.php:618
 msgid "Enable profiles"
 msgstr ""
 
-#: admin/views/options.php:615
+#: admin/views/options.php:622
 msgid "Show profiles to logged-in users only"
 msgstr ""
 
-#: admin/views/options.php:629
+#: admin/views/options.php:636
 msgid "Allow uploads"
 msgstr ""
 
-#: admin/views/options.php:633
+#: admin/views/options.php:640
 msgid "Show thumbnails"
 msgstr ""
 
-#: admin/views/options.php:637
+#: admin/views/options.php:644
 msgid "Show uploaded files to logged-in users only"
 msgstr ""
 
-#: admin/views/options.php:641
+#: admin/views/options.php:648
 msgid "Who can upload files:"
 msgstr ""
 
-#: admin/views/options.php:644 admin/views/structure.php:58
+#: admin/views/options.php:651 admin/views/structure.php:58
 #: admin/views/structure.php:191
 msgid "Everyone"
 msgstr ""
 
-#: admin/views/options.php:645 admin/views/options.php:793
+#: admin/views/options.php:652 admin/views/options.php:800
 #: admin/views/structure.php:59 admin/views/structure.php:193
 msgid "Logged in users only"
 msgstr ""
 
-#: admin/views/options.php:646 admin/views/options.php:705
-#: admin/views/options.php:794 admin/views/structure.php:60
+#: admin/views/options.php:653 admin/views/options.php:712
+#: admin/views/options.php:801 admin/views/structure.php:60
 #: admin/views/structure.php:195
 msgid "Moderators only"
 msgstr ""
 
-#: admin/views/options.php:651
+#: admin/views/options.php:658
 msgid "Allowed filetypes:"
 msgstr ""
 
-#: admin/views/options.php:655
+#: admin/views/options.php:662
 msgid "Maximum files per post:"
 msgstr ""
 
-#: admin/views/options.php:662
+#: admin/views/options.php:669
 msgid "Maximum file size (in megabyte):"
 msgstr ""
 
-#: admin/views/options.php:679
+#: admin/views/options.php:686
 msgid "Enable reports"
 msgstr ""
 
-#: admin/views/options.php:683
+#: admin/views/options.php:690
 msgid "Notify receivers of administrative notifications about new reports"
 msgstr ""
 
-#: admin/views/options.php:697
+#: admin/views/options.php:704
 msgid "Enable signatures"
 msgstr ""
 
-#: admin/views/options.php:701
+#: admin/views/options.php:708
 msgid "Who can use signatures:"
 msgstr ""
 
-#: admin/views/options.php:704
+#: admin/views/options.php:711
 msgid "Logged in users & Moderators"
 msgstr ""
 
-#: admin/views/options.php:710
+#: admin/views/options.php:717
 msgid "Allow HTML tags in signatures"
 msgstr ""
 
-#: admin/views/options.php:714
+#: admin/views/options.php:721
 msgid "Allowed HTML tags:"
 msgstr ""
 
-#: admin/views/options.php:728
+#: admin/views/options.php:735
 msgid "Enable Activity Feed"
 msgstr ""
 
-#: admin/views/options.php:732
+#: admin/views/options.php:739
 msgid "Days of activity to show:"
 msgstr ""
 
-#: admin/views/options.php:736
+#: admin/views/options.php:743
 msgid "Activities per page:"
 msgstr ""
 
-#: admin/views/options.php:750
+#: admin/views/options.php:757
 msgid "Enable ads"
 msgstr ""
 
-#: admin/views/options.php:754
+#: admin/views/options.php:761
 msgid "Ad frequency for categories:"
 msgstr ""
 
-#: admin/views/options.php:758
+#: admin/views/options.php:765
 msgid "Ad frequency for forums:"
 msgstr ""
 
-#: admin/views/options.php:762
+#: admin/views/options.php:769
 msgid "Ad frequency for topics:"
 msgstr ""
 
-#: admin/views/options.php:766
+#: admin/views/options.php:773
 msgid "Ad frequency for posts:"
 msgstr ""
 
-#: admin/views/options.php:780
+#: admin/views/options.php:787
 msgid "Enable Polls"
 msgstr ""
 
-#: admin/views/options.php:785
+#: admin/views/options.php:792
 msgid "Results visible without vote"
 msgstr ""
 
-#: admin/views/options.php:790
+#: admin/views/options.php:797
 msgid "Who can create polls:"
 msgstr ""
 
-#: admin/views/options.php:809
+#: admin/views/options.php:816
 msgid "Enable spoilers"
 msgstr ""
 
-#: admin/views/options.php:813
+#: admin/views/options.php:820
 msgid "Hide spoilers from logged-out users"
 msgstr ""
 
-#: admin/views/options.php:827
+#: admin/views/options.php:834
 msgid "Enable Reputation"
 msgstr ""
 
-#: admin/views/options.php:832
+#: admin/views/options.php:839
 msgid "Minimum amount of posts:"
 msgstr ""
 
-#: admin/views/options.php:837
+#: admin/views/options.php:844
 msgid "Level 1"
 msgstr ""
 
-#: admin/views/options.php:841
+#: admin/views/options.php:848
 msgid "Level 2"
 msgstr ""
 
-#: admin/views/options.php:845
+#: admin/views/options.php:852
 msgid "Level 3"
 msgstr ""
 
-#: admin/views/options.php:849
+#: admin/views/options.php:856
 msgid "Level 4"
 msgstr ""
 
-#: admin/views/options.php:853
+#: admin/views/options.php:860
 msgid "Level 5"
 msgstr ""
 
-#: admin/views/options.php:862
+#: admin/views/options.php:869
 msgid "Save Settings"
 msgstr ""
 

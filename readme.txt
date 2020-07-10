@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.4
 Requires PHP: 5.2
-Stable tag: 1.15.4
+Stable tag: 1.15.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,11 +87,18 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_filter_header_menu Filter
+= 1.15.5 =
+* Added: Option to change title-separator
+* Added: CSS view-class to body-classes
+* Added: asgarosforum_title_separator filter
 * Added: asgarosforum_filter_profile_header_image filter
 * Fixed: Do not execute a search-query when no categories are accessible
 * Fixed: Minor display issues
 * Changed: Misleading strings
-* Added: asgarosforum_filter_header_menu Filter
+* Improved compatibility with All In One SEO Pack
+* Improved compatibility with Rank Math SEO
+* Improved compatibility with Yoast SEO
 = 1.15.4 =
 * Fixed: Fatal error when multibyte-extension is not installed
 = 1.15.3 =

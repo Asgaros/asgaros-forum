@@ -40,7 +40,7 @@ class AsgarosForumAdmin {
                 'icon' => 'fas fa-plug'
             ),
             'urls' => array(
-                'label' => __('URLs', 'asgaros-forum'),
+                'label' => __('URLs & SEO', 'asgaros-forum'),
                 'icon' => 'fas fa-link'
             ),
             'permissions' => array(
