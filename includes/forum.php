@@ -595,7 +595,39 @@ class AsgarosForum {
 
         // Add a login-notice if necessary.
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
+
+            $show_login = '';
+            $show_register = '';
+
+            // set login link
+            if ($this->options['show_login_button']) {
+                $login_url = wp_login_url($this->get_link('current', false, false, '', false));
+
+                if (!empty($this->options['custom_url_login'])) {
+                    $login_url = $this->options['custom_url_login'];
+                }
+
+                $show_login = '<li><a class="login-link" href="'.$login_url.'">'.__('Login', 'asgaros-forum').'</a></li>';
+            }
+
+            // Set register link
+            if ( $this->options['show_register_button']) {
+                $register_url = wp_registration_url();
+
+                if (!empty($this->options['custom_url_register'])) {
+                    $register_url = $this->options['custom_url_register'];
+                }
+
+                $show_register = '<li><a class="register-link" href="'.$register_url.'">'.__('Register', 'asgaros-forum').'</a></li>';
+            }
+
+
             $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
+
+            if ($show_login != '' || $show_register != ''){
+                $notice .= '<br><ul>' . $show_login . $show_register . '</ul>';
+            }
+
             $notice = apply_filters('asgarosforum_filter_login_message', $notice);
             $this->add_notice($notice);
         }
