@@ -61,12 +61,13 @@ class AsgarosForumMembersList {
         if ($this->functionality_enabled()) {
             $membersLink = $this->asgarosforum->get_link('members');
             $membersLink = apply_filters('asgarosforum_filter_members_link', $membersLink);
+            $loginStatus = $this->asgarosforum->options['memberslist_loggedin_only'] ? 1 : 0;
 
             return array(
                 'menu_class'            =>  'members-link',
                 'menu_link_text'        =>  esc_html__('Members', 'asgaros-forum'),
                 'menu_url'              =>  $membersLink,
-                'menu_login_status'     =>  0,
+                'menu_login_status'     =>  $loginStatus,
                 'menu_new_tab'          => false,
             );
         }

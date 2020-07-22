@@ -390,6 +390,8 @@ class AsgarosForumProfile {
         // First check if the user is logged in.
         if ($this->functionalityEnabled()) {
 
+            $profileLink = '';
+
             // Only continue if the current user is logged in.
             if (is_user_logged_in()) {
                 // Get current user.
@@ -397,9 +399,6 @@ class AsgarosForumProfile {
 
                 // Get and build profile link.
                 $profileLink = $this->getProfileLink($currentUserObject);
-
-            } else {
-                $profileLink = 'profile link';
             }
 
             return array(
