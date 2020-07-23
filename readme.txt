@@ -87,7 +87,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: asgarosforum_filter_header_menu Filter
+* Added: asgarosforum_filter_header_menu filter
+* Fixed: Display issues with some themes
 = 1.15.5 =
 * Added: Option to change title-separator
 * Added: CSS view-class to body-classes

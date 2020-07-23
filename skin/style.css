@@ -1113,6 +1113,7 @@
 #af-wrapper .post-message ul {
     padding: 0px 15px 15px 15px !important; /* comp */
     margin: 0;
+    list-style: initial; /* comp */
 }
 #af-wrapper .post-message img {
     max-width: 100% !important;
