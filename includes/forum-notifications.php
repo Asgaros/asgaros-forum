@@ -497,8 +497,18 @@ class AsgarosForumNotifications {
     }
 
     public function show_subscription_overview_link() {
-        if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            echo '<a class="subscriptions-link" href="'.$this->asgarosforum->get_link('subscriptions').'">'.__('Subscriptions', 'asgaros-forum').'</a>';
+        if ($this->asgarosforum->options['allow_subscriptions'] ) {
+
+            $subscription_link = $this->asgarosforum->get_link('subscriptions');
+
+            return array(
+                'menu_class'            =>  'subscriptions-link',
+                'menu_link_text'        =>  esc_html__('Subscriptions', 'asgaros-forum'),
+                'menu_url'              =>  $subscription_link,
+                'menu_login_status'     =>  1,
+                'menu_new_tab'          => false,
+            );
+
         }
     }
 
