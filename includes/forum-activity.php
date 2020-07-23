@@ -121,15 +121,14 @@ class AsgarosForumActivity {
 
     public function show_activity_link() {
         if ($this->functionality_enabled()) {
-
             $activity_link = $this->asgarosforum->get_link('activity');
 
             return array(
-                'menu_class'            =>  'activity-link',
-                'menu_link_text'        =>  esc_html__('Activity', 'asgaros-forum'),
-                'menu_url'              =>  $activity_link,
-                'menu_login_status'     =>  0,
-                'menu_new_tab'          => false,
+                'menu_class'        => 'activity-link',
+                'menu_link_text'    => esc_html__('Activity', 'asgaros-forum'),
+                'menu_url'          => $activity_link,
+                'menu_login_status' => 0,
+                'menu_new_tab'      => false
             );
         }
     }

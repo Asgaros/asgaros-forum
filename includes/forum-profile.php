@@ -399,16 +399,15 @@ class AsgarosForumProfile {
 
                 // Get and build profile link.
                 $profileLink = $this->getProfileLink($currentUserObject);
+
+                return array(
+                    'menu_class'        => 'profile-link',
+                    'menu_link_text'    => esc_html__('Profile', 'asgaros-forum'),
+                    'menu_url'          => $profileLink,
+                    'menu_login_status' => 1,
+                    'menu_new_tab'      => false
+                );
             }
-
-            return array(
-                'menu_class'            =>  'profile-link',
-                'menu_link_text'        =>  esc_html__('Profile', 'asgaros-forum'),
-                'menu_url'              =>  $profileLink,
-                'menu_login_status'     =>  1,
-                'menu_new_tab'          => false,
-            );
-
         }
     }
 }

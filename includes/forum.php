@@ -1699,40 +1699,35 @@ class AsgarosForum {
             echo '<span class="screen-reader-text">'.__('Forum Navigation', 'asgaros-forum').'</span>';
 
             echo '<div id="forum-navigation">';
+                /**
+                 * $menu_entries = array(
+                 *     array(
+                 *         'menu_class'         => 'HTML Class'
+                 *         'menu_link_text'     => 'Link Text',
+                 *         'menu_url'           => '/url',
+                 *         'menu_login_status'  => '0', (0 = all, 1 = only logged in, 2 = only logged out)
+                 *         'menu_new_tab'       => true (true = open in new tab, false = open in same tab)
+                 *     )
+                 * );
+                 */
 
-        /**
-             *
-             * $menu_entries = array(
-             *          array(
-             *                  'menu_class'        =>  'HTML Class'
-             *                  'menu_link_text'    =>  'Link Text',
-             *                  'menu_url'          =>  '/url',
-             *                  'menu_login_status' =>  '0',  (0 = all, 1 = only logged in, 2 = only logged out)
-             *                  'menu_new_tab'      =>  true (true = open in new tab, false = open in same tab
-             *          ),
-             *      );
-             */
+                $menu_entries = array();
+                $menu_entries['home'] = $this->homeLink();
+                $menu_entries['profile'] = $this->profile->myProfileLink();
+                $menu_entries['memberslist'] = $this->memberslist->show_memberslist_link();
+                $menu_entries['subscription'] = $this->notifications->show_subscription_overview_link();
+                $menu_entries['activity'] = $this->activity->show_activity_link();
+                $menu_entries['login'] = $this->showLoginLink();
+                $menu_entries['register'] = $this->showRegisterLink();
+                $menu_entries['logout'] = $this->showLogoutLink();
 
-            $menu_entries = array();
+                // Apply filter to menu entries
+                $menu_entries = apply_filters('asgarosforum_filter_header_menu', $menu_entries);
 
-            $menu_entries['home'] = $this->homeLink();
-            $menu_entries['profile'] = $this->profile->myProfileLink();
-            $menu_entries['memberslist'] = $this->memberslist->show_memberslist_link();
-            $menu_entries['subscription'] = $this->notifications->show_subscription_overview_link();
-            $menu_entries['activity'] = $this->activity->show_activity_link();
-            $menu_entries['login'] = $this->showLoginLink();
-            $menu_entries['register'] = $this->showRegisterLink();
-            $menu_entries['logout'] = $this->showLogoutLink();
-
-
-            // Apply filter to menu entries
-            $menu_entries = apply_filters('asgarosforum_filter_header_menu', $menu_entries);
-
-            $this->drawMenuEntries($menu_entries);
-
-
-            do_action('asgarosforum_custom_header_menu');
+                $this->drawMenuEntries($menu_entries);
+                do_action('asgarosforum_custom_header_menu');
             echo '</div>';
+
             $this->search->show_search_input();
 
             echo '<div class="clear"></div>';
@@ -1741,76 +1736,68 @@ class AsgarosForum {
         $this->breadcrumbs->show_breadcrumbs();
     }
 
-    function drawMenuEntries($menu_entries){
-
-        // Check if $menu_entries is not empty
+    function drawMenuEntries($menu_entries) {
+        // Ensure that menu-entries are not empty.
         if (empty($menu_entries) || !is_array($menu_entries)) return;
 
-
-        foreach ( $menu_entries as $menu_entry){
-
-            // Check menu entry
+        foreach ($menu_entries as $menu_entry) {
+            // Check menu entry.
             if (empty($menu_entry)) continue;
-            if (!isset($menu_entry['menu_new_tab'])) $menu_entry['menu_new_tab'] = false ;
-            if (!isset($menu_entry['menu_url'])) $menu_entry['menu_url'] = '/' ;
-            if (!isset($menu_entry['menu_login_status'])) $menu_entry['menu_login_status'] = 0 ;
-            if (!isset($menu_entry['menu_link_text'])) $menu_entry['menu_link_text'] = 'No link text set' ;
+            if (!isset($menu_entry['menu_new_tab'])) $menu_entry['menu_new_tab'] = false;
+            if (!isset($menu_entry['menu_url'])) $menu_entry['menu_url'] = '/';
+            if (!isset($menu_entry['menu_login_status'])) $menu_entry['menu_login_status'] = 0;
+            if (!isset($menu_entry['menu_link_text'])) $menu_entry['menu_link_text'] = __('Link Text Missing', 'asgaros-forum');
 
-            // Check login status
+            // Check login status.
             $login_status = is_user_logged_in();
             $menu_login_status = $menu_entry['menu_login_status'];
 
             if ($menu_login_status == 1 && ! $login_status) {
                 continue;
-            }elseif ($menu_login_status == 2 && $login_status) {
+            } else if ($menu_login_status == 2 && $login_status) {
                 continue;
             }
 
-            // Check if menu URL is a slug
+            // Check if menu-URL is a slug.
             $menu_url = $menu_entry['menu_url'];
+
             if ($menu_url[0] == '/') {
-                $menu_url = get_home_url() . $menu_url;
+                $menu_url = get_home_url().$menu_url;
             }
 
+            // Check menu class.
+            $menu_class = (isset($menu_entry['menu_class'])) ? 'class="'.$menu_entry['menu_class'].'"' : '';
 
-            // Check menu class
-            $menu_class = (isset($menu_entry['menu_class'])) ? ' class="'. $menu_entry['menu_class'] .'" ': '';
+            // Check if link has to open in a new tab.
+            $new_tab = ($menu_entry['menu_new_tab']) ? 'target="_blank"' : '';
 
-            // Check if link has to open in new tab
-            $new_tab = ($menu_entry['menu_new_tab']) ? ' target="_blank"' : '';
-
-            echo '<a ' . $menu_class . 'href="'. $menu_url .'" ' . $new_tab.'>'. $menu_entry['menu_link_text'] .'</a>';
-
+            echo '<a '.$menu_class.' href="'.$menu_url.'" '.$new_tab.'>'.$menu_entry['menu_link_text'].'</a>';
         }
-
     }
 
     function homeLink(){
-
         $home_url = $this->get_link('home');
 
         return array(
-            'menu_class'            =>  'home-link',
-            'menu_link_text'        =>  esc_html__('Forum', 'asgaros-forum'),
-            'menu_url'              =>  $home_url,
-            'menu_login_status'     =>  0,
-            'menu_new_tab'          => false,
+            'menu_class'        => 'home-link',
+            'menu_link_text'    => esc_html__('Forum', 'asgaros-forum'),
+            'menu_url'          => $home_url,
+            'menu_login_status' => 0,
+            'menu_new_tab'      => false
         );
-
     }
 
     function showLogoutLink() {
         if ($this->options['show_logout_button']) {
-
             $logout_url = wp_logout_url($this->get_link('current', false, false, '', false));
-            return array(
-                'menu_class'            =>  'logout-link',
-                'menu_link_text'        =>  esc_html__('Logout', 'asgaros-forum'),
-                'menu_url'              =>  $logout_url,
-                'menu_login_status'     =>  1,
-                'menu_new_tab'          => false,
-            );
 
+            return array(
+                'menu_class'        => 'logout-link',
+                'menu_link_text'    => esc_html__('Logout', 'asgaros-forum'),
+                'menu_url'          => $logout_url,
+                'menu_login_status' => 1,
+                'menu_new_tab'      => false
+            );
         }
     }
 
@@ -1823,13 +1810,12 @@ class AsgarosForum {
             }
 
             return array(
-                'menu_class'            =>  'login-link',
-                'menu_link_text'        =>  esc_html__('Login', 'asgaros-forum'),
-                'menu_url'              =>  $login_url,
-                'menu_login_status'     =>  2,
-                'menu_new_tab'          => false,
+                'menu_class'        => 'login-link',
+                'menu_link_text'    => esc_html__('Login', 'asgaros-forum'),
+                'menu_url'          => $login_url,
+                'menu_login_status' => 2,
+                'menu_new_tab'      => false
             );
-
         }
     }
 
@@ -1842,13 +1828,12 @@ class AsgarosForum {
             }
 
             return array(
-                'menu_class'            =>  'register-link',
-                'menu_link_text'        =>  esc_html__('Register', 'asgaros-forum'),
-                'menu_url'              =>  $register_url,
-                'menu_login_status'     =>  2,
-                'menu_new_tab'          => false,
+                'menu_class'        => 'register-link',
+                'menu_link_text'    => esc_html__('Register', 'asgaros-forum'),
+                'menu_url'          => $register_url,
+                'menu_login_status' => 2,
+                'menu_new_tab'      => false
             );
-
         }
     }
 
