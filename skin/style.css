@@ -745,7 +745,7 @@
     margin: 0; /* comp */
     text-align: left; /* comp */
     position: static; /* comp */
-    width: auto;
+    width: auto; /* comp */
 }
 #af-wrapper #forum-navigation a:first-child,
 #af-wrapper #forum-navigation-mobile a:first-child {
