@@ -156,7 +156,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_filter_error_message_require_login
 - asgarosforum_filter_user_groups_taxonomy_name
 - asgarosforum_filter_avatar_size
-- [Profile Header Image](#asgarosforum_filter_profile_header_image)
+- [asgarosforum_filter_profile_header_image](#asgarosforum_filter_profile_header_image)
 - asgarosforum_filter_profile_link
 - asgarosforum_filter_history_link
 - [asgarosforum_filter_header_menu](#asgarosforum_filter_header_menu)
