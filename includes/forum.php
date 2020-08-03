@@ -596,36 +596,24 @@ class AsgarosForum {
         // Add a login-notice if necessary.
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
 
-            $show_login = '';
-            $show_register = '';
+            $show_login = $this->showLoginLink();
+            $show_register = $this->showRegisterLink();
 
-            // set login link
-            if ($this->options['show_login_button']) {
-                $login_url = wp_login_url($this->get_link('current', false, false, '', false));
+            if ($show_login && $show_register){
+                $login_link = '<u><a class="'.$show_login['menu_class'].'" href="'.$show_login['menu_url'].'">'.
+                    $show_login['menu_link_text'] .'</a></u>';
+                $register_link = '<u><a class="'.$show_register['menu_class'].'" href="'.$show_register['menu_url'].'">'.
+                    $show_register['menu_link_text'] .'</a></u>';
 
-                if (!empty($this->options['custom_url_login'])) {
-                    $login_url = $this->options['custom_url_login'];
-                }
+                $notice = sprintf( esc_html__( 'Please %s or %s to create posts and topics.', 'asgaros-forum'), $login_link, $register_link);
 
-                $show_login = '<li><a class="login-link" href="'.$login_url.'">'.__('Login', 'asgaros-forum').'</a></li>';
-            }
+            } elseif ($show_login){
+                $login_link = '<u><a class="'.$show_login['menu_class'].'" href="'.$show_login['menu_url'].'">'.
+                    $show_login['menu_link_text'] .'</a></u>';
 
-            // Set register link
-            if ( $this->options['show_register_button']) {
-                $register_url = wp_registration_url();
-
-                if (!empty($this->options['custom_url_register'])) {
-                    $register_url = $this->options['custom_url_register'];
-                }
-
-                $show_register = '<li><a class="register-link" href="'.$register_url.'">'.__('Register', 'asgaros-forum').'</a></li>';
-            }
-
-
-            $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
-
-            if ($show_login != '' || $show_register != ''){
-                $notice .= '<br><ul>' . $show_login . $show_register . '</ul>';
+                $notice = sprintf( esc_html__( 'Please %s to create posts and topics.', 'asgaros-forum'), $login_link);
+            } else {
+                $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
             }
 
             $notice = apply_filters('asgarosforum_filter_login_message', $notice);
