@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 5.2
 Stable tag: 1.15.5
 License: GPLv2 or later
@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_filter_header_menu filter
 * Fixed: Display issues with some themes
 * Updated: Font Awesome version 5.14.0
+* Compatibility with WordPress 5.5
 = 1.15.5 =
 * Added: Option to change title-separator
 * Added: CSS view-class to body-classes
