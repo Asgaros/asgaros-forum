@@ -587,6 +587,11 @@
 #af-wrapper .notices-panel .notice {
     border-top: 1px solid #ead643;
 }
+
+#af-wrapper .notices-panel .notice ul{
+    width: fit-content;
+    margin: auto;
+}
 #af-wrapper .notices-panel .notice:first-child {
     border-top: none;
 }

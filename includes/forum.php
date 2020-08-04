@@ -595,7 +595,27 @@ class AsgarosForum {
 
         // Add a login-notice if necessary.
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
+
+            $show_login = $this->showLoginLink();
+            $show_register = $this->showRegisterLink();
+
+            if ($show_login && $show_register){
+                $login_link = '<u><a class="'.$show_login['menu_class'].'" href="'.$show_login['menu_url'].'">'.
+                    $show_login['menu_link_text'] .'</a></u>';
+                $register_link = '<u><a class="'.$show_register['menu_class'].'" href="'.$show_register['menu_url'].'">'.
+                    $show_register['menu_link_text'] .'</a></u>';
+
+                $notice = sprintf( esc_html__( 'Please %s or %s to create posts and topics.', 'asgaros-forum'), $login_link, $register_link);
+
+            } elseif ($show_login){
+                $login_link = '<u><a class="'.$show_login['menu_class'].'" href="'.$show_login['menu_url'].'">'.
+                    $show_login['menu_link_text'] .'</a></u>';
+
+                $notice = sprintf( esc_html__( 'Please %s to create posts and topics.', 'asgaros-forum'), $login_link);
+            } else {
+                $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
+            }
+
             $notice = apply_filters('asgarosforum_filter_login_message', $notice);
             $this->add_notice($notice);
         }
