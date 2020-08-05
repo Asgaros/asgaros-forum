@@ -2292,6 +2292,9 @@ class AsgarosForum {
         // Trim it.
         $signature = trim($signature);
 
+        // Allow filtering the signature.
+        $signature = apply_filters('asgarosforum_signature', $signature);
+
         // Ensure signature is not empty.
         if (empty($signature)) {
             return false;

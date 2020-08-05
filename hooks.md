@@ -174,6 +174,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_widget_recent_posts_custom_content
 - asgarosforum_widget_recent_topics_custom_content
 - asgarosforum_title_separator
+- asgarosforum_signature
 
 ### asgarosforum_filter_login_message
 
@@ -382,3 +383,5 @@ Names of the standard menu entries:
 ### asgarosforum_widget_recent_topics_custom_content
 
 ### asgarosforum_title_separator
+
+### asgarosforum_signature
