@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_signature filter
 * Added: asgarosforum_filter_header_menu filter
 * Fixed: Display issues with some themes
+* Fixed: Minor display issues
 * Updated: Font Awesome version 5.14.0
 * Compatibility with WordPress 5.5
 = 1.15.5 =
