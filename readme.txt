@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to hide "last seen" status from profiles and the members list
 * Added: Links to login/register notification
 * Added: asgarosforum_signature filter
 * Added: asgarosforum_filter_header_menu filter

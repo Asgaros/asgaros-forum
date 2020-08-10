@@ -257,7 +257,7 @@ class AsgarosForumProfile {
                     }
 
                     // Show last seen.
-                    if ($this->asgarosforum->online->functionality_enabled) {
+                    if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {
                         $cellTitle = __('Last seen:', 'asgaros-forum');
                         $cellValue = $this->asgarosforum->online->last_seen($userData->ID);
 

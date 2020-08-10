@@ -231,7 +231,7 @@ class AsgarosForumMembersList {
                         echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
                     echo '</div>';
 
-                    if ($this->asgarosforum->online->functionality_enabled) {
+                    if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {
                         echo '<div class="member-last-seen">';
                             echo '<i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
                         echo '</div>';

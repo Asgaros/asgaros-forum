@@ -86,6 +86,7 @@ class AsgarosForum {
         'show_logout_button'                => true,
         'show_register_button'              => true,
         'show_who_is_online'                => true,
+        'show_last_seen'                    => true,
         'show_newest_member'                => true,
         'show_statistics'                   => true,
         'enable_breadcrumbs'                => true,
