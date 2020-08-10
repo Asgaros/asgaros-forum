@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.5
 Requires PHP: 5.2
-Stable tag: 1.15.5
+Stable tag: 1.15.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.15.6 =
 * Added: Option to hide "last seen" status from profiles and the members list
 * Added: Links to login/register notification
 * Added: asgarosforum_signature filter
