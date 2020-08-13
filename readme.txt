@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: PHP warning during initialization of REST-routes
 = 1.15.6 =
 * Added: Option to hide "last seen" status from profiles and the members list
 * Added: Links to login/register notification
