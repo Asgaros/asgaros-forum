@@ -159,6 +159,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - [asgarosforum_filter_profile_header_image](#asgarosforum_filter_profile_header_image)
 - asgarosforum_filter_profile_link
 - asgarosforum_filter_history_link
+- [asgarosforum_filter_show_header](#asgarosforum_filter_show_header)
 - [asgarosforum_filter_header_menu](#asgarosforum_filter_header_menu)
 - asgarosforum_filter_forum_menu
 - asgarosforum_filter_topic_menu
@@ -272,6 +273,46 @@ User ID of shown profile.
 
 ### asgarosforum_filter_history_link
 
+### asgarosforum_filter_show_header
+
+#### Description
+Show or hide the forum header.
+
+#### Parameters
+
+##### $show_header
+Boolean value to show or hide header
+
+**true**: show header
+**false**: hide header
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_show_header', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Add filter to hide forum header for logged out users
+    add_filter ( 'asgarosforum_filter_show_header', 'hide_header');
+
+    // Function to hide header
+    function hide_header(){
+
+        return is_user_logged_in();
+    }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)
+
 ### asgarosforum_filter_header_menu
 
 #### Description
@@ -353,7 +394,6 @@ Names of the standard menu entries:
 #### Source
 
 [forum.php](includes/forum.php)
-
 
 ### asgarosforum_filter_forum_menu
 
