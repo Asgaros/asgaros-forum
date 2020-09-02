@@ -174,6 +174,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_widget_recent_posts_custom_content
 - asgarosforum_widget_recent_topics_custom_content
 - asgarosforum_title_separator
+- [asgarosforum_filter_profile_row](#asgarosforum_filter_profile_row)
 
 ### asgarosforum_filter_login_message
 
@@ -382,3 +383,78 @@ Names of the standard menu entries:
 ### asgarosforum_widget_recent_topics_custom_content
 
 ### asgarosforum_title_separator
+
+### asgarosforum_filter_profile_row
+
+#### Description
+Filters the rows in the Asgaros Forum Profile before they are getting rendered
+
+#### Parameters
+
+##### $profile_rows
+
+Array with profile rows as arrays:
+
+```php
+$profile_rows = array(
+      'name' => array(
+                    'title'     =>  'Title of profile row'
+                    'value'     =>  'Value of profile row',
+                    'type'     =>  '',  // optional type of profile row. 'usergroup' or ''
+                ),
+);
+```
+
+Names of the standard rows:
+
+| name         | Description          |
+|--------------|----------------------|
+| first_name   | First name of user   |
+| usergroup    | Group of user        |
+| website      | Website of user      |
+| last_seen    | Last seen of user    |
+| member_since | User is member since |
+| bio          | Excerpt of users bio |
+| signature    | Users signature      |
+
+
+##### $userData
+
+WP_User object of the profile to render
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_profile_row', 'function_name', 10, 2);
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Add filter to add custom profile row
+    add_filter ( 'asgarosforum_filter_profile_row', 'my_custom_profile_row', 10, 2);
+
+    // Function to customize the forum menu
+    function my_custom_profile_row( $profile_rows, $userData){
+
+        // Create new profile row
+        $profile_row = array(
+                          'title'    =>  'Last Name',
+                          'value'    =>  $userData->last_name,
+                      );
+
+
+        // Add row at beginning of the user profile
+        array_unshift( $profile_rows, $profile_row);
+
+        return $profile_rows;
+    }
+?>
+```
+
+#### Source
+
+[forum-profile.php](includes/forum-profile.php)

@@ -230,62 +230,87 @@ class AsgarosForumProfile {
                 $this->show_profile_navigation($userData);
 
                 echo '<div id="profile-content">';
+                    /**
+                     * Define array for profile rows
+                     *
+                     * $profile_rows = array (
+     *                          'name' =>   array(
+                     *                          'title'  =>   'title',
+                     *                          'value'  =>   'value',
+                     *                          'type'   =>   'type',  //optional parameter
+                     *                      ),
+                     *                 );
+                     */
+
+                    $profile_rows = array ();
+
                     // Show first name.
                     if (!empty($userData->first_name)) {
-                        $cellTitle = __('First Name:', 'asgaros-forum');
-                        $cellValue = $userData->first_name;
-
-                        $this->renderProfileRow($cellTitle, $cellValue);
+                        $profile_rows['first_name'] = array(
+                            'title' => __('First Name:', 'asgaros-forum'),
+                            'value' => $userData->first_name
+                        );
                     }
 
                     // Show usergroups.
                     $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'all', true);
 
                     if (!empty($userGroups)) {
-                        $cellTitle = __('Usergroups:', 'asgaros-forum');
-                        $cellValue = $userGroups;
-
-                        $this->renderProfileRow($cellTitle, $cellValue, 'usergroups');
+                        $profile_rows['usergroup'] = array(
+                            'title' => __('Usergroups:', 'asgaros-forum'),
+                            'value' => $userGroups,
+                            'type'  => 'usergroups'
+                        );
                     }
 
                     // Show website.
                     if (!empty($userData->user_url)) {
-                        $cellTitle = __('Website:', 'asgaros-forum');
-                        $cellValue = '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>';
-
-                        $this->renderProfileRow($cellTitle, $cellValue);
+                        $profile_rows['website'] = array(
+                            'title' => __('Website:', 'asgaros-forum'),
+                            'value' => '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>',
+                        );
                     }
 
                     // Show last seen.
                     if ($this->asgarosforum->online->functionality_enabled) {
-                        $cellTitle = __('Last seen:', 'asgaros-forum');
-                        $cellValue = $this->asgarosforum->online->last_seen($userData->ID);
-
-                        $this->renderProfileRow($cellTitle, $cellValue);
+                        $profile_rows['last_seen'] = array(
+                            'title' => __('Last seen:', 'asgaros-forum'),
+                            'value' => $this->asgarosforum->online->last_seen($userData->ID),
+                        );
                     }
 
                     // Show member since.
-                    $cellTitle = __('Member Since:', 'asgaros-forum');
-                    $cellValue = $this->asgarosforum->format_date($userData->user_registered, false);
-
-                    $this->renderProfileRow($cellTitle, $cellValue);
+                    $profile_rows['member_since'] = array(
+                        'title' => __('Member Since:', 'asgaros-forum'),
+                        'value' => $this->asgarosforum->format_date($userData->user_registered, false),
+                    );
 
                     // Show biographical info.
                     if (!empty($userData->description)) {
-                        $cellTitle = __('Biographical Info:', 'asgaros-forum');
-                        $cellValue = trim(wpautop(esc_html($userData->description)));
-
-                        $this->renderProfileRow($cellTitle, $cellValue);
+                        $profile_rows['bio'] = array(
+                            'title' => __('Biographical Info:', 'asgaros-forum'),
+                            'value' => trim(wpautop(esc_html($userData->description))),
+                        );
                     }
 
                     // Show signature.
                     $signature = $this->asgarosforum->get_signature($userData->ID);
 
                     if ($signature !== false) {
-                        $cellTitle = __('Signature:', 'asgaros-forum');
-                        $cellValue = $signature;
+                        $profile_rows['signature'] = array(
+                            'title' => __('Signature:', 'asgaros-forum'),
+                            'value' => $signature,
+                        );
+                    }
 
-                        $this->renderProfileRow($cellTitle, $cellValue);
+                    $profile_rows = apply_filters('asgarosforum_filter_profile_row', $profile_rows, $userData);
+
+                    foreach ($profile_rows as $profile_row){
+                        if (isset($profile_row['type'])){
+                            $this->renderProfileRow($profile_row['title'], $profile_row['value'], $profile_row['type']);
+                        } else {
+                            $this->renderProfileRow($profile_row['title'], $profile_row['value']);
+                        }
                     }
 
                     do_action('asgarosforum_profile_row', $userData);
