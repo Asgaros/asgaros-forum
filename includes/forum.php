@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    var $version = '1.15.5';
+    var $version = '1.15.7';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
@@ -86,6 +86,7 @@ class AsgarosForum {
         'show_logout_button'                => true,
         'show_register_button'              => true,
         'show_who_is_online'                => true,
+        'show_last_seen'                    => true,
         'show_newest_member'                => true,
         'show_statistics'                   => true,
         'enable_breadcrumbs'                => true,
@@ -595,8 +596,26 @@ class AsgarosForum {
 
         // Add a login-notice if necessary.
         if (!is_user_logged_in() && !$this->options['allow_guest_postings']) {
-            $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
+            $show_login = $this->showLoginLink();
+            $show_register = $this->showRegisterLink();
+
+            $notice = '';
+
+            if ($show_login) {
+                $login_link = '<u><a class="'.$show_login['menu_class'].'" href="'.$show_login['menu_url'].'">'.$show_login['menu_link_text'].'</a></u>';
+
+                if ($show_register) {
+                    $register_link = '<u><a class="'.$show_register['menu_class'].'" href="'.$show_register['menu_url'].'">'.$show_register['menu_link_text'].'</a></u>';
+                    $notice = sprintf(esc_html__('Please %s or %s to create posts and topics.', 'asgaros-forum'), $login_link, $register_link);
+                } else {
+                    $notice = sprintf(esc_html__('Please %s to create posts and topics.', 'asgaros-forum'), $login_link);
+                }
+            } else {
+                $notice = __('You need to log in to create posts and topics.', 'asgaros-forum');
+            }
+
             $notice = apply_filters('asgarosforum_filter_login_message', $notice);
+
             $this->add_notice($notice);
         }
     }
@@ -2273,6 +2292,9 @@ class AsgarosForum {
 
         // Trim it.
         $signature = trim($signature);
+
+        // Allow filtering the signature.
+        $signature = apply_filters('asgarosforum_signature', $signature);
 
         // Ensure signature is not empty.
         if (empty($signature)) {

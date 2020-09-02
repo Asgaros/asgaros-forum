@@ -175,6 +175,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_widget_recent_topics_custom_content
 - asgarosforum_title_separator
 - [asgarosforum_filter_profile_row](#asgarosforum_filter_profile_row)
+- asgarosforum_signature
 
 ### asgarosforum_filter_login_message
 
@@ -458,3 +459,5 @@ WP_User object of the profile to render
 #### Source
 
 [forum-profile.php](includes/forum-profile.php)
+
+### asgarosforum_signature

@@ -240,6 +240,13 @@ if (!defined('ABSPATH')) exit;
                             <td><input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($this->asgarosforum->options['show_who_is_online'])); ?>></td>
                         </tr>
                         <tr>
+                            <th>
+                                <label for="show_last_seen"><?php _e('Show "Last seen"', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php _e('Shows when a user got last seen inside of his profile and in the members list. This information is only gathered and shown when the "Who is Online" functionality is enabled.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td><input type="checkbox" name="show_last_seen" id="show_last_seen" <?php checked(!empty($this->asgarosforum->options['show_last_seen'])); ?>></td>
+                        </tr>
+                        <tr>
                             <th><label for="show_newest_member"><?php _e('Show newest member', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="show_newest_member" id="show_newest_member" <?php checked(!empty($this->asgarosforum->options['show_newest_member'])); ?>></td>
                         </tr>

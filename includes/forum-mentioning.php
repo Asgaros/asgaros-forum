@@ -62,10 +62,15 @@ class AsgarosForumMentioning {
             return;
         }
 
-        register_rest_route('asgaros-forum/v1', '/suggestions/mentioning/(?P<term>[a-zA-Z0-9-]+)', array(
-            'methods' => 'POST',
-            'callback' => array($this, 'mentioning_callback')
-        ));
+        register_rest_route(
+            'asgaros-forum/v1',
+            '/suggestions/mentioning/(?P<term>[a-zA-Z0-9-]+)',
+            array(
+                'methods' => 'POST',
+                'callback' => array($this, 'mentioning_callback'),
+                'permission_callback' => '__return_true'
+            )
+        );
     }
 
     public function mentioning_callback($data) {

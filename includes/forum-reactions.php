@@ -64,7 +64,15 @@ class AsgarosForumReactions {
 
     public function initialize_routes() {
         if ($this->asgarosforum->options['enable_reactions']) {
-            register_rest_route('asgaros-forum/v1', '/reaction/(?P<post_id>\d+)/(?P<reaction>[a-zA-Z0-9-]+)', array('methods' => 'POST', 'callback' => array($this, 'reaction_callback')));
+            register_rest_route(
+                'asgaros-forum/v1',
+                '/reaction/(?P<post_id>\d+)/(?P<reaction>[a-zA-Z0-9-]+)',
+                array(
+                    'methods' => 'POST',
+                    'callback' => array($this, 'reaction_callback'),
+                    'permission_callback' => '__return_true'
+                )
+            );
         }
     }
 

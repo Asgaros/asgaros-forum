@@ -3,9 +3,9 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 5.2
-Stable tag: 1.15.5
+Stable tag: 1.15.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,9 +88,17 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: asgarosforum_filter_profile_row
+= 1.15.7 =
+* Fixed: PHP warning during initialization of REST-routes
+= 1.15.6 =
+* Added: Option to hide "last seen" status from profiles and the members list
+* Added: Links to login/register notification
+* Added: asgarosforum_signature filter
 * Added: asgarosforum_filter_header_menu filter
 * Fixed: Display issues with some themes
+* Fixed: Minor display issues
 * Updated: Font Awesome version 5.14.0
+* Compatibility with WordPress 5.5
 = 1.15.5 =
 * Added: Option to change title-separator
 * Added: CSS view-class to body-classes
