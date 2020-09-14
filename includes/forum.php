@@ -1440,7 +1440,7 @@ class AsgarosForum {
                 $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 25)).'</a><br>';
                 $output .= '<small>';
                 $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
-                $output .= '&nbsp;&middot;&nbsp;';
+                $output .= '<span>&nbsp;&middot;&nbsp;</span>';
                 $output .= $this->getUsername($lastpost->author_id);
                 $output .= '</small>';
                 $output .= '</div>';
