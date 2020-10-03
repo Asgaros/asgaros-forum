@@ -288,6 +288,7 @@ Make some action after the content header
 - asgarosforum_widget_recent_topics_custom_content
 - asgarosforum_title_separator
 - asgarosforum_signature
+- [asgarosforum_filter_meta_post_type](#asgarosforum_filter_meta_post_type)
 
 ### asgarosforum_filter_login_message
 
@@ -498,3 +499,46 @@ Names of the standard menu entries:
 ### asgarosforum_title_separator
 
 ### asgarosforum_signature
+
+### asgarosforum_filter_meta_post_type
+
+#### Description
+Add the metabox to a custom post type
+
+#### Parameters
+
+##### $post_types
+
+Array with post types
+
+```php
+$menu_entries = array('post', 'page');
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_meta_post_type', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+
+   add_filter('asgarosforum_filter_meta_post_type', 'add_post_type');
+
+   // Add custom post type to the list of post types
+   function add_post_type ($post_types){
+       $post_types[] = 'custom_post_type';
+
+       return $post_types;
+   }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)

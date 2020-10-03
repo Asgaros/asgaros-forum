@@ -2363,11 +2363,13 @@ class AsgarosForum {
             return;
         }
 
+        $post_types = apply_filters('asgarosforum_filter_meta_post_type', array('post', 'page'));
+
         add_meta_box(
             'asgaros-forum-topic-meta-box',
             __('Create Forum Topic', 'asgaros-forum'),
             array($this, 'add_topic_meta_box_content'),
-            array('post', 'page'),
+            $post_types,
             'side',
             'low'
         );
