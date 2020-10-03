@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: asgarosforum_filter_meta_post_type filter
 * Fixed: Broken TinyMCE-editor in the administration-area
+* Performance improvements and code optimizations
 = 1.15.7 =
 * Fixed: PHP warning during initialization of REST-routes
 = 1.15.6 =
