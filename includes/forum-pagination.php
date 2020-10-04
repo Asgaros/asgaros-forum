@@ -26,7 +26,7 @@ class AsgarosForumPagination {
                 }
 
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array('part' => $num_pages));
-                echo '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'&nbsp;&raquo;</a>';
+                echo '<a href="'.$link.'">'._x('Last', 'Last topic', 'asgaros-forum').'&nbsp;&raquo;</a>';
             }
 
             echo '</div>';
@@ -127,7 +127,7 @@ class AsgarosForumPagination {
 
                 if ($num_pages - $current_page >= 4) {
                     $link = add_query_arg('part', $num_pages, $select_url);
-                    $out .= '<a href="'.$link.'">'.__('Last', 'asgaros-forum').'&nbsp;&raquo;</a>';
+                    $out .= '<a href="'.$link.'">'._x('Last', 'Last Page', 'asgaros-forum').'&nbsp;&raquo;</a>';
                 }
             }
 
