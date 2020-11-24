@@ -174,7 +174,7 @@ class AsgarosForumUserQuery {
 
 		// 'per_page', 'page' - handles LIMIT.
 		if (!empty($per_page) && !empty($page)) {
-			$sql['limit'] = $wpdb->prepare("LIMIT %d, %d", intval(($page - 1)*$per_page), intval($per_page));
+			$sql['limit'] = $wpdb->prepare("LIMIT %d, %d", (int) (($page - 1)*$per_page), (int) $per_page);
 		} else {
 			$sql['limit'] = '';
 		}

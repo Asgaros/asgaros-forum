@@ -508,7 +508,7 @@ class AsgarosForum {
             $sticky_mode = 1;
 
             if (!empty($_POST['sticky_topic'])) {
-                $sticky_mode = intval($_POST['sticky_topic']);
+                $sticky_mode = (int) $_POST['sticky_topic'];
             }
 
             $this->set_sticky($this->current_topic, $sticky_mode);
@@ -1137,7 +1137,7 @@ class AsgarosForum {
         $counters = $this->get_topic_counters();
 
         if (isset($counters[$forum_id])) {
-            return intval($counters[$forum_id]);
+            return (int) $counters[$forum_id];
         } else {
             return 0;
         }
@@ -1187,7 +1187,7 @@ class AsgarosForum {
         $counters = $this->get_post_counters();
 
         if (isset($counters[$forum_id])) {
-            return intval($counters[$forum_id]);
+            return (int) $counters[$forum_id];
         } else {
             return 0;
         }
@@ -1973,7 +1973,7 @@ class AsgarosForum {
     function is_topic_sticky($topic_id) {
         $status = $this->db->get_var("SELECT sticky FROM {$this->tables->topics} WHERE id = {$topic_id};");
 
-        if (intval($status) > 0) {
+        if ((int) $status > 0) {
             return true;
         } else {
             return false;
@@ -1985,7 +1985,7 @@ class AsgarosForum {
         if (!isset($this->is_topic_closed_cache[$topic_id])) {
             $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$topic_id};");
 
-            if (intval($status) === 1) {
+            if ((int) $status === 1) {
                 $this->is_topic_closed_cache[$topic_id] = true;
             } else {
                 $this->is_topic_closed_cache[$topic_id] = false;
