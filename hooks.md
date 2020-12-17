@@ -9,7 +9,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_after_add_post_submit
 - asgarosforum_after_edit_post_submit
 - asgarosforum_after_topic_approve
-- asgarosforum_{current_view}_custom_content_top
+- [asgarosforum_{current_view}_custom_content_top](#asgarosforum_current_view_custom_content_top)
 - asgarosforum_{current_view}_custom_content_bottom
 - asgarosforum_editor_custom_content_bottom
 - asgarosforum_statistics_custom_element
@@ -31,8 +31,8 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_usergroup_{ID}_remove_user
 - asgarosforum_prepare
 - asgarosforum_breadcrumbs_{current_view}
-- asgarosforum_content_top
-- asgarosforum_content_header
+- [asgarosforum_content_top](#asgarosforum_content_top)
+- [asgarosforum_content_header](#asgarosforum_content_header)
 - asgarosforum_after_category
 - asgarosforum_after_forum
 - asgarosforum_after_topic
@@ -59,6 +59,59 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 ### asgarosforum_after_topic_approve
 
 ### asgarosforum_{current_view}_custom_content_top
+
+#### Description
+Make some action on top of asgaros forum for a specific view. The code will be executed before the header.
+
+Available Views:
+
+| view_name    | Description                             |
+|--------------|-----------------------------------------|
+| overview     | Overview page of all forums             |
+| forum        | Page with a single forum                |
+| topic        | Page with a single topic                |
+| post         | Only used in the single post shortcode  |
+| editpost     | Edit a post                             |
+| addpost      | Add a post                              |
+| addtopic     | Add a topic                             |
+| movetopic    | Move a topic                            |
+| search       | Page with results of search             |
+| subscription | Overview of all subscriptions of a user |
+| profile      | Page with profile of Asgaros Forum      |
+| history      | Page with users history in profile      |
+| members      | Page with list of members               |
+| activity     | Activity page of Forum                  |
+| unread       | Page with unread posts                  |
+| unapproved   | Page with unapproved posts/topics       |
+| reports      | page with reported posts/topics         |
+
+
+#### Usage
+
+```php
+<?php
+   add_action('asgarosforum_{current_view}_custom_content_top', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Add action to print message on top of the memberslist
+     add_action('asgarosforum_members_custom_content_top', 'add_welcome_message');
+
+    // Print welcome message
+    function add_welcome_message(){
+
+        echo '<h2>Welcome to the List of all Members</h2>';
+    }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)
 
 ### asgarosforum_{current_view}_custom_content_bottom
 
@@ -104,7 +157,67 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 
 ### asgarosforum_content_top
 
+#### Description
+Make some action on top of asgaros forum. The code will be executed before the header.
+
+#### Usage
+
+```php
+<?php
+   add_action('asgarosforum_post_custom_content_top', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Add action to print message on top of the forum
+     add_action('asgarosforum_post_custom_content_top', 'add_welcome_message');
+
+    // Print welcome message
+    function add_welcome_message(){
+
+        echo '<h2>Welcome to our Forum</h2>';
+    }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)
+
 ### asgarosforum_content_header
+
+#### Description
+Make some action after the content header
+
+#### Usage
+
+```php
+<?php
+   add_action('asgarosforum_content_header', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Add action to print information after header
+     add_action('asgarosforum_content_header', 'add_information');
+
+    // Print information
+    function add_information(){
+
+        echo '<div class="forum-notification">Please read the forum rules before creating a topic.</div>';
+    }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)
 
 ### asgarosforum_after_category
 
@@ -176,6 +289,7 @@ Overview of [actions](#actions) and [filters](#filters) at asgaros forum.
 - asgarosforum_title_separator
 - [asgarosforum_filter_profile_row](#asgarosforum_filter_profile_row)
 - asgarosforum_signature
+- [asgarosforum_filter_meta_post_type](#asgarosforum_filter_meta_post_type)
 
 ### asgarosforum_filter_login_message
 
@@ -461,3 +575,46 @@ WP_User object of the profile to render
 [forum-profile.php](includes/forum-profile.php)
 
 ### asgarosforum_signature
+
+### asgarosforum_filter_meta_post_type
+
+#### Description
+Add the metabox to a custom post type
+
+#### Parameters
+
+##### $post_types
+
+Array with post types
+
+```php
+$menu_entries = array('post', 'page');
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_meta_post_type', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+
+   add_filter('asgarosforum_filter_meta_post_type', 'add_post_type');
+
+   // Add custom post type to the list of post types
+   function add_post_type ($post_types){
+       $post_types[] = 'custom_post_type';
+
+       return $post_types;
+   }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)

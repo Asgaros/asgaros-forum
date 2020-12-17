@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    var $version = '1.15.7';
+    var $version = '1.15.8';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
@@ -508,7 +508,7 @@ class AsgarosForum {
             $sticky_mode = 1;
 
             if (!empty($_POST['sticky_topic'])) {
-                $sticky_mode = intval($_POST['sticky_topic']);
+                $sticky_mode = (int) $_POST['sticky_topic'];
             }
 
             $this->set_sticky($this->current_topic, $sticky_mode);
@@ -1137,7 +1137,7 @@ class AsgarosForum {
         $counters = $this->get_topic_counters();
 
         if (isset($counters[$forum_id])) {
-            return intval($counters[$forum_id]);
+            return (int) $counters[$forum_id];
         } else {
             return 0;
         }
@@ -1187,7 +1187,7 @@ class AsgarosForum {
         $counters = $this->get_post_counters();
 
         if (isset($counters[$forum_id])) {
-            return intval($counters[$forum_id]);
+            return (int) $counters[$forum_id];
         } else {
             return 0;
         }
@@ -1440,7 +1440,7 @@ class AsgarosForum {
                 $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 25)).'</a><br>';
                 $output .= '<small>';
                 $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
-                $output .= '&nbsp;&middot;&nbsp;';
+                $output .= '<span>&nbsp;&middot;&nbsp;</span>';
                 $output .= $this->getUsername($lastpost->author_id);
                 $output .= '</small>';
                 $output .= '</div>';
@@ -1973,7 +1973,7 @@ class AsgarosForum {
     function is_topic_sticky($topic_id) {
         $status = $this->db->get_var("SELECT sticky FROM {$this->tables->topics} WHERE id = {$topic_id};");
 
-        if (intval($status) > 0) {
+        if ((int) $status > 0) {
             return true;
         } else {
             return false;
@@ -1985,7 +1985,7 @@ class AsgarosForum {
         if (!isset($this->is_topic_closed_cache[$topic_id])) {
             $status = $this->db->get_var("SELECT closed FROM {$this->tables->topics} WHERE id = {$topic_id};");
 
-            if (intval($status) === 1) {
+            if ((int) $status === 1) {
                 $this->is_topic_closed_cache[$topic_id] = true;
             } else {
                 $this->is_topic_closed_cache[$topic_id] = false;
@@ -2363,11 +2363,13 @@ class AsgarosForum {
             return;
         }
 
+        $post_types = apply_filters('asgarosforum_filter_meta_post_type', array('post', 'page'));
+
         add_meta_box(
             'asgaros-forum-topic-meta-box',
             __('Create Forum Topic', 'asgaros-forum'),
             array($this, 'add_topic_meta_box_content'),
-            array('post', 'page'),
+            $post_types,
             'side',
             'low'
         );

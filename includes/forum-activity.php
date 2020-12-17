@@ -22,7 +22,7 @@ class AsgarosForumActivity {
     }
 
     public function show_activity() {
-        $activity_days = intval($this->asgarosforum->options['activity_days']);
+        $activity_days = (int) $this->asgarosforum->options['activity_days'];
         $activity_days_i18n = number_format_i18n($activity_days);
         echo '<div class="main-description">'.sprintf(_n('Activity in the last day.', 'Activity in the last %s days.', $activity_days, 'asgaros-forum'), $activity_days_i18n).'</div>';
 
@@ -105,7 +105,7 @@ class AsgarosForumActivity {
 
             // Calculate activity end-time.
             $time_current = time();
-            $time_end = $time_current - (intval($this->asgarosforum->options['activity_days']) * 24 * 60 * 60);
+            $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
             $time_end = date('Y-m-d H:i:s', $time_end);
 
             if ($count_all) {

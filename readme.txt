@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.5
 Requires PHP: 5.2
-Stable tag: 1.15.7
+Stable tag: 1.15.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,7 +87,13 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+
 * Added: asgarosforum_filter_profile_row
+* Performance improvements and code optimizations
+= 1.15.8 =
+* Added: asgarosforum_filter_meta_post_type filter
+* Fixed: Broken TinyMCE-editor in the administration-area
+* Performance improvements and code optimizations
 = 1.15.7 =
 * Fixed: PHP warning during initialization of REST-routes
 = 1.15.6 =

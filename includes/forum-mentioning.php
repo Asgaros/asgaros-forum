@@ -36,6 +36,11 @@ class AsgarosForumMentioning {
 
     // TinyMCE callback for mentionings.
     public function add_mentioning_to_editor($settings) {
+        // Cancel if the current page-request is inside of the administration-area.
+        if (is_admin()) {
+            return $settings;
+        }
+        
         // Cancel if mentioning functionality is disabled.
         if (!$this->asgarosforum->options['enable_mentioning']) {
             return $settings;
