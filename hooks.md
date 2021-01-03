@@ -289,6 +289,7 @@ Make some action after the content header
 - asgarosforum_title_separator
 - asgarosforum_signature
 - [asgarosforum_filter_meta_post_type](#asgarosforum_filter_meta_post_type)
+- [asgarosforum_filter_upload_folder](#asgarosforum_filter_upload_folder)
 
 ### asgarosforum_filter_login_message
 
@@ -542,3 +543,43 @@ $menu_entries = array('post', 'page');
 #### Source
 
 [forum.php](includes/forum.php)
+
+### asgarosforum_filter_upload_folder
+
+#### Description
+Change the folder for image uploads.
+
+#### Parameters
+
+##### $upload_folder
+String with the current name of the upload folder.
+
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_upload_folder', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+
+   add_filter('asgarosforum_filter_upload_folder', 'change_upload_folder');
+
+   // Add custom post type to the list of post types
+   function change_upload_folder ($upload_folder){
+       
+       $upload_folder = 'new_upload_folder';
+
+       return $upload_folder;
+   }
+?>
+```
+
+#### Source
+
+[forum-uploads.php](includes/forum-uploads.php)
