@@ -743,7 +743,7 @@ class AsgarosForum {
         do_action('asgarosforum_'.$this->current_view.'_custom_content_top');
 
         // Show Header Area except for single posts.
-        if ($this->current_view !== 'post' && apply_filters('asgaros_filter_show_header', true)) {
+        if ($this->current_view !== 'post' && apply_filters('asgarosforum_filter_show_header', true)) {
             $this->showHeader();
 
             do_action('asgarosforum_content_header');
