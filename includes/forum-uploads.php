@@ -16,9 +16,10 @@ class AsgarosForumUploads {
 	}
 
 	public function initialize() {
+		$this->upload_folder = apply_filters('asgarosforum_filter_upload_folder', $this->upload_folder);
 		$upload_dir = wp_upload_dir();
-        $this->upload_path = $upload_dir['basedir'].'/'.$this->upload_folder.'/';
-        $this->upload_url = $upload_dir['baseurl'].'/'.$this->upload_folder.'/';
+		$this->upload_path = $upload_dir['basedir'].'/'.$this->upload_folder.'/';
+		$this->upload_url = $upload_dir['baseurl'].'/'.$this->upload_folder.'/';
 		$this->upload_allowed_filetypes = explode(',', $this->asgarosforum->options['allowed_filetypes']);
 	}
 
