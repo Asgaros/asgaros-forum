@@ -87,8 +87,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: compatibility to AIOSEO (Version 4.0.0)
 * Performance improvements and code optimizations
+* Improved compatibility with All In One SEO Pack
 = 1.15.8 =
 * Added: asgarosforum_filter_meta_post_type filter
 * Fixed: Broken TinyMCE-editor in the administration-area
