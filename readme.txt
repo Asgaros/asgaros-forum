@@ -87,7 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Add asgarosforum_filter_upload_folder
+* Added: asgarosforum_filter_upload_folder filter
 * Performance improvements and code optimizations
 = 1.15.8 =
 * Added: asgarosforum_filter_meta_post_type filter
