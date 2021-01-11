@@ -27,7 +27,7 @@ class AsgarosForumUserGroups {
     public function initialize() {
         self::initializeTaxonomy();
 
-        if(self::$asgarosforum->permissions->isAdministrator(get_current_user_id())) {
+        if (self::$asgarosforum->permissions->isAdministrator(get_current_user_id())) {
             // Bulk edit inside the users list.
             add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 20);
             add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
