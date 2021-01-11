@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_filter_show_header filter
 * Added: asgarosforum_filter_upload_folder filter
 * Fixed: Show bulk-actions for user-roles/groups to administrators only
+* Fixed: Added missing context for some translation strings
 * Performance improvements and code optimizations
 * Improved compatibility with All In One SEO Pack
 = 1.15.8 =
