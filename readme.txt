@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: asgarosforum_filter_upload_folder filter
 * Performance improvements and code optimizations
 * Improved compatibility with All In One SEO Pack
 = 1.15.8 =
