@@ -25,7 +25,7 @@ class AsgarosForumPermissions {
     public function initialize() {
         $this->currentUserID = get_current_user_id();
 
-        if($this->isAdministrator($this->currentUserID)){
+        if ($this->isAdministrator($this->currentUserID)) {
             // Bulk edit inside the users list.
             add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 10);
             add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
