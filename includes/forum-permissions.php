@@ -17,17 +17,20 @@ class AsgarosForumPermissions {
         add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
 
         // Filtering users list in administration by forum role.
-		add_filter('views_users', array($this, 'permission_views'), 10);
+        add_filter('views_users', array($this, 'permission_views'), 10);
         add_action('pre_user_query', array($this, 'permission_user_query'));
 
-        // Bulk edit inside the users list.
-        add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 10);
-        add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
-        add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
 	}
 
     public function initialize() {
         $this->currentUserID = get_current_user_id();
+
+        if ($this->isAdministrator($this->currentUserID)) {
+            // Bulk edit inside the users list.
+            add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 10);
+            add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
+            add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
+        }
     }
 
     public function isSiteAdministrator($user_id = false) {

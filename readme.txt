@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: asgarosforum_filter_upload_folder filter
+* Fixed: Show bulk-actions for user-roles/groups to administrators only
 * Performance improvements and code optimizations
 * Improved compatibility with All In One SEO Pack
 = 1.15.8 =
