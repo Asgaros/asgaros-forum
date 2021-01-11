@@ -135,7 +135,14 @@ class AsgarosForumCompatibility {
 
     // ALL IN ONE SEO PACK
     function compatibility_allinoneseopack() {
-        add_filter('aiosp_disable', array($this, 'comp_allinoneseopack_aiosp_disable'), 10);
+        // Check version
+        if (defined('AIOSEO_VERSION')) {
+            // Version >= 4.0.0
+            add_filter('aioseo_disable', array($this, 'comp_allinoneseopack_aiosp_disable'), 10);
+        } else if (defined('AIOSEOP_VERSION')) {
+            // Older version
+            add_filter('aiosp_disable', array($this, 'comp_allinoneseopack_aiosp_disable'), 10);
+        }
     }
 
     function comp_allinoneseopack_aiosp_disable($disabled) {
