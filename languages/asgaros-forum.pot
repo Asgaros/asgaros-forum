@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-10 07:49+0000\n"
+"POT-Creation-Date: 2021-01-12 06:55+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -94,28 +94,28 @@ msgstr ""
 msgid "Reputation"
 msgstr ""
 
-#: admin/admin.php:122 includes/forum-permissions.php:560
+#: admin/admin.php:122 includes/forum-permissions.php:563
 msgid "Forum Role"
 msgstr ""
 
 #: admin/admin.php:126 includes/forum-notifications.php:444
-#: includes/forum-permissions.php:110 includes/forum-permissions.php:628
+#: includes/forum-permissions.php:113 includes/forum-permissions.php:631
 msgid "User"
 msgstr ""
 
-#: admin/admin.php:127 includes/forum-permissions.php:106
-#: includes/forum-permissions.php:629
+#: admin/admin.php:127 includes/forum-permissions.php:109
+#: includes/forum-permissions.php:632
 msgid "Moderator"
 msgstr ""
 
-#: admin/admin.php:128 includes/forum-permissions.php:104
-#: includes/forum-permissions.php:630
+#: admin/admin.php:128 includes/forum-permissions.php:107
+#: includes/forum-permissions.php:633
 msgid "Administrator"
 msgstr ""
 
 #: admin/admin.php:129 includes/forum-memberslist.php:139
-#: includes/forum-permissions.php:108 includes/forum-permissions.php:596
-#: includes/forum-permissions.php:631 admin/views/options.php:608
+#: includes/forum-permissions.php:111 includes/forum-permissions.php:599
+#: includes/forum-permissions.php:634 admin/views/options.php:608
 #: includes/views/post-element.php:59
 msgid "Banned"
 msgstr ""
@@ -151,7 +151,7 @@ msgstr ""
 msgid "Appearance"
 msgstr ""
 
-#: admin/admin.php:220 includes/forum-usergroups.php:574
+#: admin/admin.php:220 includes/forum-usergroups.php:576
 #: admin/views/usergroups.php:5
 msgid "Usergroups"
 msgstr ""
@@ -405,23 +405,23 @@ msgstr ""
 msgid "All Users"
 msgstr ""
 
-#: includes/forum-memberslist.php:112 includes/forum-permissions.php:578
+#: includes/forum-memberslist.php:112 includes/forum-permissions.php:581
 #: includes/forum-statistics.php:30 admin/views/options.php:596
 msgid "Users"
 msgstr ""
 
-#: includes/forum-memberslist.php:121 includes/forum-permissions.php:584
+#: includes/forum-memberslist.php:121 includes/forum-permissions.php:587
 #: admin/views/options.php:600
 msgid "Moderators"
 msgstr ""
 
-#: includes/forum-memberslist.php:130 includes/forum-permissions.php:590
+#: includes/forum-memberslist.php:130 includes/forum-permissions.php:593
 #: admin/views/options.php:604
 msgid "Administrators"
 msgstr ""
 
 #: includes/forum-memberslist.php:164 includes/forum-profile.php:245
-#: includes/forum-usergroups.php:469 includes/forum-usergroups.php:486
+#: includes/forum-usergroups.php:471 includes/forum-usergroups.php:488
 msgid "Usergroups:"
 msgstr ""
 
@@ -557,7 +557,8 @@ msgstr ""
 msgid "Seen %s ago"
 msgstr ""
 
-#: includes/forum-pagination.php:29 includes/forum-pagination.php:130
+#: includes/forum-pagination.php:29
+msgctxt "Last topic"
 msgid "Last"
 msgstr ""
 
@@ -565,16 +566,21 @@ msgstr ""
 msgid "First"
 msgstr ""
 
-#: includes/forum-permissions.php:573
+#: includes/forum-pagination.php:130
+msgctxt "Last Page"
+msgid "Last"
+msgstr ""
+
+#: includes/forum-permissions.php:576
 msgid "Forum Roles:"
 msgstr ""
 
-#: includes/forum-permissions.php:628 includes/forum-permissions.php:629
-#: includes/forum-permissions.php:630 includes/forum-permissions.php:631
+#: includes/forum-permissions.php:631 includes/forum-permissions.php:632
+#: includes/forum-permissions.php:633 includes/forum-permissions.php:634
 msgid "Assign forum role:"
 msgstr ""
 
-#: includes/forum-permissions.php:675
+#: includes/forum-permissions.php:678
 msgid "Forum role assigned."
 msgstr ""
 
@@ -841,15 +847,15 @@ msgstr ""
 msgid "There are no unread topics."
 msgstr ""
 
-#: includes/forum-uploads.php:161
+#: includes/forum-uploads.php:162
 msgid "You need to login to have access to uploads."
 msgstr ""
 
-#: includes/forum-uploads.php:182 includes/forum-uploads.php:213
+#: includes/forum-uploads.php:183 includes/forum-uploads.php:214
 msgid "Uploaded files:"
 msgstr ""
 
-#: includes/forum-uploads.php:205 includes/forum.php:1658
+#: includes/forum-uploads.php:206 includes/forum.php:1658
 #: includes/forum.php:1681 admin/tables/admin-ads-table.php:70
 #: admin/tables/admin-usergroups-table.php:78 admin/views/ads.php:56
 #: admin/views/structure.php:139 admin/views/structure.php:153
@@ -857,49 +863,49 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: includes/forum-uploads.php:231
+#: includes/forum-uploads.php:232
 msgid "Upload Files:"
 msgstr ""
 
-#: includes/forum-uploads.php:249
+#: includes/forum-uploads.php:250
 msgid "Add another file ..."
 msgstr ""
 
-#: includes/forum-uploads.php:260
+#: includes/forum-uploads.php:261
 msgid "Maximum files:"
 msgstr ""
 
-#: includes/forum-uploads.php:267
+#: includes/forum-uploads.php:268
 msgid "Maximum file size:"
 msgstr ""
 
-#: includes/forum-uploads.php:273
+#: includes/forum-uploads.php:274
 msgid "Allowed file types:"
 msgstr ""
 
-#: includes/forum-usergroups.php:416
+#: includes/forum-usergroups.php:418
 msgid "Forum Usergroups"
 msgstr ""
 
-#: includes/forum-usergroups.php:499
+#: includes/forum-usergroups.php:501
 msgid ""
 "When usergroups are selected, only users of the selected usergroups will "
 "have access to the category."
 msgstr ""
 
-#: includes/forum-usergroups.php:645
+#: includes/forum-usergroups.php:647
 msgid "Forum Usergroups:"
 msgstr ""
 
-#: includes/forum-usergroups.php:699
+#: includes/forum-usergroups.php:701
 msgid "Add to"
 msgstr ""
 
-#: includes/forum-usergroups.php:703
+#: includes/forum-usergroups.php:705
 msgid "Remove from"
 msgstr ""
 
-#: includes/forum-usergroups.php:761
+#: includes/forum-usergroups.php:763
 msgid "Usergroups assignments updated."
 msgstr ""
 
@@ -1154,11 +1160,11 @@ msgstr ""
 msgid "Reassign all forum posts to:"
 msgstr ""
 
-#: includes/forum.php:2368
+#: includes/forum.php:2370
 msgid "Create Forum Topic"
 msgstr ""
 
-#: includes/forum.php:2405
+#: includes/forum.php:2407
 msgid "A topic is created in the selected forum when you save this document."
 msgstr ""
 
