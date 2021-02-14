@@ -539,7 +539,7 @@ class AsgarosForumPermissions {
                 $users_administrator = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
 
-                $data = array_unique(array_merge($users_administrator, $users_siteadmin), SORT_REGULAR);
+                $data = array_unique(($users_administrator + $users_siteadmin), SORT_REGULAR);
             break;
             case 'banned':
                 $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'banned'));
