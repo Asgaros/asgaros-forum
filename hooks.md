@@ -247,7 +247,7 @@ Make some action after the content header
 ## Filters
 
 - asgarosforum_filter_login_message
-- asgarosforum_filter_post_username
+- [asgarosforum_filter_post_username](#asgarosforum_filter_post_username)
 - asgarosforum_filter_post_content
 - asgarosforum_filter_post_shortcodes
 - asgarosforum_filter_editor_settings
@@ -296,6 +296,44 @@ Make some action after the content header
 ### asgarosforum_filter_login_message
 
 ### asgarosforum_filter_post_username
+
+#### Description
+Change Username in a post. You can also use it to add some further information after the username
+
+#### Usage
+
+```php
+<?php
+   add_filter('asgarosforum_filter_post_username', 'function_name', 10, 2);
+?>
+```
+
+#### Examples
+
+```php
+<?php
+   // Add filter to customize username
+   add_filter('asgarosforum_filter_post_username', 'add_custom_value', 10, 2);
+
+   function add_custom_value($username, $user_id){
+      // Get meta data of user
+      $user_meta=get_userdata($user_id);
+      
+      // Get user roles of user and create string
+      $user_roles= implode(', ', $user_meta->roles) . " ";
+     
+      // Add user role to username
+      $username = $username . $user_roles;
+      
+      // Return string to render
+      return $username;
+   }
+?>
+```
+
+#### Source
+
+[post-element.php](includes/post-element.php)
 
 ### asgarosforum_filter_post_content
 
