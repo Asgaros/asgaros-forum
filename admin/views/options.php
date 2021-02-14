@@ -208,6 +208,19 @@ if (!defined('ABSPATH')) exit;
                                 </select>
                             </td>
                         </tr>
+
+                        <tr>
+                            <th>
+                                <label for="activity_timestamp_format"><?php _e('Format for activity-timestamps:', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php _e('Defines if activity-timestamps are shown in its relative or actual format.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td>
+                                <select name="activity_timestamp_format" id="activity_timestamp_format">';
+                                    <option value="relative" <?php if ($this->asgarosforum->options['activity_timestamp_format'] == 'relative') { echo 'selected="selected"'; } ?>><?php _e('Relative', 'asgaros-forum'); ?></option>
+                                    <option value="actual" <?php if ($this->asgarosforum->options['activity_timestamp_format'] == 'actual') { echo 'selected="selected"'; } ?>><?php _e('Actual', 'asgaros-forum'); ?></option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 

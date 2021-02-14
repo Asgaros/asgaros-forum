@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to change format for activity-timestamps
 = 1.15.9 =
 * Added: asgarosforum_filter_show_header filter
 * Added: asgarosforum_filter_upload_folder filter

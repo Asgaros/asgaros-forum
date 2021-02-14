@@ -213,7 +213,7 @@ class AsgarosForumApproval {
 
                         // Creation time
                         echo '&nbsp;&middot;&nbsp;';
-                        echo sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($first_post->date), current_time('timestamp')));
+                        echo $this->asgarosforum->get_activity_timestamp($first_post->date);
 
                         // Location
                         echo '&nbsp;&middot;&nbsp;';

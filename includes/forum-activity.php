@@ -40,7 +40,7 @@ class AsgarosForumActivity {
 
             foreach ($data as $activity) {
                 $current_time = date($this->asgarosforum->date_format, strtotime($activity->date));
-                $human_time_diff = sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($activity->date), current_time('timestamp')));
+                $human_time_diff = $this->asgarosforum->get_activity_timestamp($activity->date, 'relative');
 
                 if ($current_time == $date_today) {
                     $current_time = __('Today', 'asgaros-forum');
@@ -72,14 +72,14 @@ class AsgarosForumActivity {
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comments '.$read_status.'"></span>';
-                    echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$human_time_diff.'</i>';
+                    echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.$this->asgarosforum->get_activity_timestamp($activity->date).'</i>';
                     echo '</div>';
                 } else {
                     $link = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comment '.$read_status.'"></span>';
-                    echo sprintf(__('%s replied in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$human_time_diff.'</i>';
+                    echo sprintf(__('%s replied in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.$this->asgarosforum->get_activity_timestamp($activity->date).'</i>';
                     echo '</div>';
                 }
             }

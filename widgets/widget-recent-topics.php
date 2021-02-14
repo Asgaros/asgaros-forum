@@ -115,7 +115,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
                     }
                 }
 
-                $output .= '<span class="post-date">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($element->date), current_time('timestamp'))).$count_answers_i18n_text.'</span>';
+                $output .= '<span class="post-date">'.$this->asgarosforum->get_activity_timestamp($element->date).$count_answers_i18n_text.'</span>';
 
                 $custom_content = apply_filters('asgarosforum_widget_recent_topics_custom_content', '', $element->id);
                 $output .= $custom_content;
