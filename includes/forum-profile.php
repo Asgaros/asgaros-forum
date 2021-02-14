@@ -230,23 +230,12 @@ class AsgarosForumProfile {
                 $this->show_profile_navigation($userData);
 
                 echo '<div id="profile-content">';
-                    /**
-                     * Define array for profile rows
-                     *
-                     * $profile_rows = array (
-     *                          'name' =>   array(
-                     *                          'title'  =>   'title',
-                     *                          'value'  =>   'value',
-                     *                          'type'   =>   'type',  //optional parameter
-                     *                      ),
-                     *                 );
-                     */
-
-                    $profile_rows = array ();
+                    // Defines an array for profile rows.
+                    $profileRows = array ();
 
                     // Show first name.
                     if (!empty($userData->first_name)) {
-                        $profile_rows['first_name'] = array(
+                        $profileRows['first_name'] = array(
                             'title' => __('First Name:', 'asgaros-forum'),
                             'value' => $userData->first_name
                         );
@@ -256,7 +245,7 @@ class AsgarosForumProfile {
                     $userGroups = AsgarosForumUserGroups::getUserGroupsOfUser($userData->ID, 'all', true);
 
                     if (!empty($userGroups)) {
-                        $profile_rows['usergroup'] = array(
+                        $profileRows['usergroup'] = array(
                             'title' => __('Usergroups:', 'asgaros-forum'),
                             'value' => $userGroups,
                             'type'  => 'usergroups'
@@ -265,7 +254,7 @@ class AsgarosForumProfile {
 
                     // Show website.
                     if (!empty($userData->user_url)) {
-                        $profile_rows['website'] = array(
+                        $profileRows['website'] = array(
                             'title' => __('Website:', 'asgaros-forum'),
                             'value' => '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>',
                         );
@@ -273,21 +262,21 @@ class AsgarosForumProfile {
 
                     // Show last seen.
                     if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {
-                        $profile_rows['last_seen'] = array(
+                        $profileRows['last_seen'] = array(
                             'title' => __('Last seen:', 'asgaros-forum'),
                             'value' => $this->asgarosforum->online->last_seen($userData->ID),
                         );
                     }
 
                     // Show member since.
-                    $profile_rows['member_since'] = array(
+                    $profileRows['member_since'] = array(
                         'title' => __('Member Since:', 'asgaros-forum'),
                         'value' => $this->asgarosforum->format_date($userData->user_registered, false),
                     );
 
                     // Show biographical info.
                     if (!empty($userData->description)) {
-                        $profile_rows['bio'] = array(
+                        $profileRows['bio'] = array(
                             'title' => __('Biographical Info:', 'asgaros-forum'),
                             'value' => trim(wpautop(esc_html($userData->description))),
                         );
@@ -297,19 +286,19 @@ class AsgarosForumProfile {
                     $signature = $this->asgarosforum->get_signature($userData->ID);
 
                     if ($signature !== false) {
-                        $profile_rows['signature'] = array(
+                        $profileRows['signature'] = array(
                             'title' => __('Signature:', 'asgaros-forum'),
                             'value' => $signature,
                         );
                     }
 
-                    $profile_rows = apply_filters('asgarosforum_filter_profile_row', $profile_rows, $userData);
+                    $profileRows = apply_filters('asgarosforum_filter_profile_row', $profileRows, $userData);
 
-                    foreach ($profile_rows as $profile_row){
-                        if (isset($profile_row['type'])){
-                            $this->renderProfileRow($profile_row['title'], $profile_row['value'], $profile_row['type']);
+                    foreach ($profileRows as $profileRow){
+                        if (!empty($profileRow['type'])){
+                            $this->renderProfileRow($profileRow['title'], $profileRow['value'], $profileRow['type']);
                         } else {
-                            $this->renderProfileRow($profile_row['title'], $profile_row['value']);
+                            $this->renderProfileRow($profileRow['title'], $profileRow['value']);
                         }
                     }
 
