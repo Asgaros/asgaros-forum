@@ -3,9 +3,9 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.2
-Stable tag: 1.15.8
+Stable tag: 1.15.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,9 +87,16 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-
-* Added: asgarosforum_filter_profile_row
+* Added: Option to change format for activity-timestamps
+* Added: asgarosforum_filter_profile_row filter
+= 1.15.9 =
+* Added: asgarosforum_filter_show_header filter
+* Added: asgarosforum_filter_upload_folder filter
+* Fixed: Show bulk-actions for user-roles/groups to administrators only
+* Fixed: Added missing context for some translation strings
 * Performance improvements and code optimizations
+* Improved compatibility with All In One SEO Pack
+* Compatibility with WordPress 5.6
 = 1.15.8 =
 * Added: asgarosforum_filter_meta_post_type filter
 * Fixed: Broken TinyMCE-editor in the administration-area

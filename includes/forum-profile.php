@@ -197,7 +197,7 @@ class AsgarosForumProfile {
 
                                     $topic_link = $this->asgarosforum->rewrite->get_link('topic', $post->parent_id);
                                     $topic_name = esc_html(stripslashes($post->name));
-                                    $topic_time = sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($post->date), current_time('timestamp')));
+                                    $topic_time = $this->asgarosforum->get_activity_timestamp($post->date);
 
                                     echo '<span class="history-topic">'.__('In:', 'asgaros-forum').' <a href="'.$topic_link.'">'.$topic_name.'</a></span>';
                                 echo '</div>';

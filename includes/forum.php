@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    var $version = '1.15.8';
+    var $version = '1.15.9';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
@@ -149,7 +149,8 @@ class AsgarosForum {
         'reputation_level_2_posts'          => 25,
         'reputation_level_3_posts'          => 100,
         'reputation_level_4_posts'          => 250,
-        'reputation_level_5_posts'          => 1000
+        'reputation_level_5_posts'          => 1000,
+        'activity_timestamp_format'         => 'relative',
     );
     var $options_editor = array(
         'media_buttons' => false,
@@ -762,7 +763,7 @@ class AsgarosForum {
         do_action('asgarosforum_'.$this->current_view.'_custom_content_top');
 
         // Show Header Area except for single posts.
-        if ($this->current_view !== 'post') {
+        if ($this->current_view !== 'post' && apply_filters('asgarosforum_filter_show_header', true)) {
             $this->showHeader();
 
             do_action('asgarosforum_content_header');
@@ -1426,7 +1427,7 @@ class AsgarosForum {
                 $output .= '&nbsp;';
                 $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 34)).'</a>';
                 $output .= '&nbsp;&middot;&nbsp;';
-                $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+                $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a>';
                 $output .= '&nbsp;&middot;&nbsp;';
                 $output .= $this->getUsername($lastpost->author_id);
             } else {
@@ -1439,7 +1440,7 @@ class AsgarosForum {
                 $output .= '<div class="forum-poster-summary">';
                 $output .= '<a href="'.$post_link.'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 25)).'</a><br>';
                 $output .= '<small>';
-                $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+                $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a>';
                 $output .= '<span>&nbsp;&middot;&nbsp;</span>';
                 $output .= $this->getUsername($lastpost->author_id);
                 $output .= '</small>';
@@ -1466,7 +1467,7 @@ class AsgarosForum {
         if ($compact === true) {
             $output .= __('Last post:', 'asgaros-forum');
             $output .= '&nbsp;';
-            $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a>';
+            $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a>';
             $output .= '&nbsp;&middot;&nbsp;';
             $output .= $this->getUsername($lastpost->author_id);
 
@@ -1478,7 +1479,7 @@ class AsgarosForum {
 
             // Summary
             $output .= '<div class="forum-poster-summary">';
-            $output .= '<a href="'.$post_link.'">'.sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($lastpost->date), current_time('timestamp'))).'</a><br>';
+            $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a><br>';
             $output .= '<small>';
             $output .= $this->getUsername($lastpost->author_id);
             $output .= '</small>';
@@ -1502,6 +1503,20 @@ class AsgarosForum {
 
     function current_time() {
         return current_time('Y-m-d H:i:s');
+    }
+
+    // Returns the timestamp of an activity based on the settings (relative or actual timestamp).
+    function get_activity_timestamp($timestamp, $force = false) {
+        $timestamp_mode = ($force === false) ? $this->options['activity_timestamp_format'] : $force;
+
+        switch ($timestamp_mode) {
+            case 'relative':
+                return sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($timestamp), current_time('timestamp')));
+            break;
+            case 'actual':
+                return $this->format_date($timestamp, true);
+            break;
+        }
     }
 
     function get_post_author($post_id) {

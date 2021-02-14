@@ -272,6 +272,7 @@ Make some action after the content header
 - [asgarosforum_filter_profile_header_image](#asgarosforum_filter_profile_header_image)
 - asgarosforum_filter_profile_link
 - asgarosforum_filter_history_link
+- [asgarosforum_filter_show_header](#asgarosforum_filter_show_header)
 - [asgarosforum_filter_header_menu](#asgarosforum_filter_header_menu)
 - asgarosforum_filter_forum_menu
 - asgarosforum_filter_topic_menu
@@ -290,6 +291,7 @@ Make some action after the content header
 - [asgarosforum_filter_profile_row](#asgarosforum_filter_profile_row)
 - asgarosforum_signature
 - [asgarosforum_filter_meta_post_type](#asgarosforum_filter_meta_post_type)
+- [asgarosforum_filter_upload_folder](#asgarosforum_filter_upload_folder)
 
 ### asgarosforum_filter_login_message
 
@@ -388,6 +390,46 @@ User ID of shown profile.
 
 ### asgarosforum_filter_history_link
 
+### asgarosforum_filter_show_header
+
+#### Description
+Show or hide the forum header.
+
+#### Parameters
+
+##### $show_header
+Boolean value to show or hide header
+
+**true**: show header
+**false**: hide header
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_show_header', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Add filter to hide forum header for logged out users
+    add_filter ( 'asgarosforum_filter_show_header', 'hide_header');
+
+    // Function to hide header
+    function hide_header(){
+
+        return is_user_logged_in();
+    }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)
+
 ### asgarosforum_filter_header_menu
 
 #### Description
@@ -469,7 +511,6 @@ Names of the standard menu entries:
 #### Source
 
 [forum.php](includes/forum.php)
-
 
 ### asgarosforum_filter_forum_menu
 
@@ -618,3 +659,43 @@ $menu_entries = array('post', 'page');
 #### Source
 
 [forum.php](includes/forum.php)
+
+### asgarosforum_filter_upload_folder
+
+#### Description
+Change the folder for image uploads.
+
+#### Parameters
+
+##### $upload_folder
+String with the current name of the upload folder.
+
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_upload_folder', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+
+   add_filter('asgarosforum_filter_upload_folder', 'change_upload_folder');
+
+   // Add custom post type to the list of post types
+   function change_upload_folder ($upload_folder){
+       
+       $upload_folder = 'new_upload_folder';
+
+       return $upload_folder;
+   }
+?>
+```
+
+#### Source
+
+[forum-uploads.php](includes/forum-uploads.php)

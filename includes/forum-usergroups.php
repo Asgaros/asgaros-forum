@@ -20,17 +20,19 @@ class AsgarosForumUserGroups {
 		add_filter('views_users', array($this, 'views'), 20);
         add_action('pre_user_query', array($this, 'user_query'));
 
-		// Bulk edit inside the users list.
-        add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 20);
-        add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
-        add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
-
-        // Certain actions when a new user registers.
+		// Certain actions when a new user registers.
         add_action('user_register', array($this, 'add_new_user_to_usergroups'), 10, 1);
     }
 
     public function initialize() {
         self::initializeTaxonomy();
+
+        if (self::$asgarosforum->permissions->isAdministrator(get_current_user_id())) {
+            // Bulk edit inside the users list.
+            add_filter('bulk_actions-users', array($this, 'bulk_actions_users'), 20);
+            add_filter('handle_bulk_actions-users', array($this, 'handle_bulk_actions_users'), 10, 3);
+            add_action('admin_notices', array($this, 'bulk_actions_admin_notices'));
+        }
     }
 
     public static function initializeTaxonomy() {
