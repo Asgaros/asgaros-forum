@@ -1048,10 +1048,13 @@
 }
 #af-wrapper .forum-post-date {
     float: left;
+    padding: 0 3px;
+}
+#af-wrapper .forum-post-date,
+#af-wrapper .forum-post-date a {
     font-style: italic;
     color: #888;
     font-size: 11px;
-    padding: 0 3px;
 }
 #af-wrapper .forum-post-menu {
     float: right;

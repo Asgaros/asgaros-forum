@@ -20,6 +20,8 @@ class AsgarosForumReports {
     }
 
     public function render_report_button($post_id, $topic_id) {
+        $output = '';
+
         if ($this->asgarosforum->options['reports_enabled']) {
             // Only show a report button when the user is logged-in.
             if (is_user_logged_in()) {
@@ -29,18 +31,18 @@ class AsgarosForumReports {
                     $report_message = __('Are you sure that you want to report this post?', 'asgaros-forum');
                     $report_href = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1)), '#postid-'.$post_id);
 
-                    echo '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
-                        echo '<span class="report-link fas fa-exclamation-triangle">';
-                        echo '<span class="screen-reader-text">'.__('Click to report post.', 'asgaros-forum').'</span>';
-                        echo '</span>';
-                    echo '</a>';
+                    $output .= '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
+                    $output .= '<span class="report-link fas fa-exclamation-triangle">';
+                    $output .= '<span class="screen-reader-text">'.__('Click to report post.', 'asgaros-forum').'</span>';
+                    $output .= '</span>';
+                    $output .= '</a>';
                 } else {
-                    echo '<span class="report-exists fas fa-exclamation-triangle" title="'.__('You reported this post.', 'asgaros-forum').'"></span>';
+                    $output .= '<a href="#"><span class="report-exists fas fa-exclamation-triangle" title="'.__('You reported this post.', 'asgaros-forum').'"></span></a>';
                 }
-
-                echo '&nbsp;&middot;&nbsp;';
             }
         }
+
+        return $output;
     }
 
     public function add_report($post_id, $reporter_id) {

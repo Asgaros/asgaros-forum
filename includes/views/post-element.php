@@ -78,7 +78,14 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
     echo '<div class="post-wrapper">';
         // Post header.
         echo '<div class="forum-post-header">';
-            echo '<div class="forum-post-date">'.$this->format_date($post->date).'</div>';
+            echo '<div class="forum-post-date">';
+                // Show post counter.
+                if ($this->current_view != 'post') {
+                    echo '<a href="'.$this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a> &middot; ';
+                }
+
+                echo $this->format_date($post->date);
+            echo '</div>';
 
             if ($this->current_view != 'post') {
                 echo $this->show_post_menu($post->id, $post->author_id, $counter, $post->date);
@@ -138,18 +145,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
                             echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
                         }
 
-                        if ($this->current_view != 'post') {
-                            echo '&nbsp;&middot;&nbsp;';
-                        }
-
                         echo '</span>';
-                    }
-
-                    if ($this->current_view != 'post') {
-                        // Show report button.
-                        $this->reports->render_report_button($post->id, $this->current_topic);
-
-                        echo '<a href="'.$this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a>';
                     }
                 echo '</div>';
             echo '</div>';

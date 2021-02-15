@@ -1715,6 +1715,9 @@ class AsgarosForum {
             }
         }
 
+        // Show report button.
+        $menu .= $this->reports->render_report_button($post_id, $this->current_topic);
+        
         $menu = (!empty($menu)) ? '<div class="forum-post-menu">'.$menu.'</div>' : $menu;
         $menu = apply_filters('asgarosforum_filter_post_menu', $menu);
 
