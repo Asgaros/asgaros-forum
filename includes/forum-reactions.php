@@ -98,7 +98,8 @@ class AsgarosForumReactions {
                 $this->load_reactions($post_object->parent_id);
 
                 // Build updated reactions for posts.
-                $response['data'] = $this->render_reactions($data['post_id'], $post_object->author_id);
+                $response['data']['reactions'] = $this->render_reactions($data['post_id'], $post_object->author_id);
+                $response['data']['summary'] = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($data['post_id']) : '';
             }
         }
 
@@ -153,6 +154,67 @@ class AsgarosForumReactions {
         }
 
         return $reactions_output;
+    }
+
+    // Renders reactions-summary-area if the reactions-functionality is enabled.
+    public function render_reactions_summary_area($post_id) {
+        if ($this->asgarosforum->options['enable_reactions'] && $this->asgarosforum->options['reactions_show_names']) {
+            echo '<div class="post-reactions-summary">';
+            echo $this->render_reactions_summary($post_id);
+            echo '</div>';
+        }
+    }
+
+    // Renders a summary of given reactions.
+    public function render_reactions_summary($post_id) {
+        $output = '';
+
+        // Build arrays with names.
+        $reaction_names = array();
+        $reaction_names_grouped = array();
+
+        foreach ($this->reactions_list as $key => $reaction) {
+            if (!empty($this->post_reactions[$post_id][$key])) {
+                $reaction_names_grouped[$key] = array();
+
+                foreach ($this->post_reactions[$post_id][$key] as $userId) {
+                    $reaction_names[] = $this->asgarosforum->get_plain_username($userId);
+                    $reaction_names_grouped[$key][] = $this->asgarosforum->get_plain_username($userId);
+                }
+            }
+        }
+
+        // Render summary and details.
+        if (!empty($reaction_names)) {
+            $output .= '<div class="reaction-names">';
+
+            if (count($reaction_names) === 1) {
+                $output .= sprintf(__('%s has reacted to this post.', 'asgaros-forum'), $reaction_names[0]);
+            } else if (count($reaction_names) === 2) {
+                $output .= sprintf(__('%s and %s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1]);
+            } else if (count($reaction_names) === 3) {
+                $output .= sprintf(__('%s, %s and %s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], $reaction_names[2]);
+            } else {
+                $output .= sprintf(__('%s, %s and %s other users have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], count($reaction_names) - 2);
+            }
+
+            $output .= '</div>';
+
+            // Render details-container.
+            $output .= '<div class="temporary-modal-container">';
+            $output .= '<div class="asgarosforum-reaction-details">';
+            
+            foreach ($reaction_names_grouped as $reaction_name => $reaction_users) {
+                foreach ($reaction_users as $reaction_user) {
+                    $output .= '<span><i class="'.$this->reactions_list[$reaction_name]['icon'].'"></i>'.$reaction_user.'</span>';
+                }
+            }
+
+            $output .= '</div>';
+            $output .= '</div>';
+        }
+
+        return $output;
     }
 
     public function reaction_change($post_id, $user_id, $reaction, $author_id) {

@@ -22,9 +22,17 @@ window.FontAwesomeConfig = {
             })
             .done(function(response) {
                 if (response.status === true) {
-                    $('#af-wrapper #postid-'+post_id+' .post-reactions').html(response.data);
+                    $('#af-wrapper #postid-'+post_id+' .post-reactions').html(response.data.reactions);
+                    $('#af-wrapper #postid-'+post_id+' .post-reactions-summary').html(response.data.summary);
                 }
             });
+        });
+
+        $(document).on('click', '#af-wrapper .post-reactions-summary', function(e) {
+            e.preventDefault();
+
+            var modal_content = $(this).find('.temporary-modal-container').html();
+            show_modal(modal_content);
         });
 
         // Sticky panel.
@@ -285,5 +293,23 @@ window.FontAwesomeConfig = {
                 }
             });
         }
+
+        // Creates a Modal.
+        function show_modal(modal_content) {
+            var modalHTML = '';
+            modalHTML += '<div class="modal-layer">';
+            modalHTML += '<div class="modal-content">';
+            modalHTML += modal_content;
+            modalHTML += '</div>';
+            modalHTML += '</div>';
+
+            $('#af-wrapper').append(modalHTML);
+        }
+
+        $(document).on('click', '#af-wrapper .modal-layer', function(e) {
+            e.preventDefault();
+
+            $(this).remove();
+        });
     });
 })(jQuery);

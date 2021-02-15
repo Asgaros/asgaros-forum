@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: Option to show usernames in reactions
 * Added: Option to change format for activity-timestamps
 * Added: asgarosforum_filter_profile_row filter
 * Changed: Moved post-counter and report-button to the top

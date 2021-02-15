@@ -1609,6 +1609,67 @@
 #af-wrapper .post-reactions .up .reaction-active {
     color: rgba(0, 128, 0, 0.75);
 }
+#af-wrapper .post-reactions-summary .reaction-names {
+    border: 1px solid #eee;
+    display: block;
+    border-left: 3px solid #eee;
+    padding: 3px 6px;
+    margin: 8px 0;
+    background-color: #fafafa;
+    font-size: 12px;
+    cursor: pointer;
+}
+.asgarosforum-reaction-details span {
+    display: block;
+    line-height: 30px;
+    border-bottom: 1px solid #eee;
+}
+.asgarosforum-reaction-details i {
+    padding-right: 8px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+/* MODALS */
+#af-wrapper .temporary-modal-container {
+    display: none;
+}
+#af-wrapper .modal-layer {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    outline: 0;
+    visibility: visible;
+    z-index: 99999;
+    cursor: pointer;
+}
+#af-wrapper .modal-content {
+    width: 400px;
+    background-color: white;
+    max-height: 400px;
+    padding: 16px;
+    overflow-y: scroll;
+    position: relative;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#af-wrapper .modal-content::-webkit-scrollbar {
+    width: 10px;
+}
+#af-wrapper .modal-content::-webkit-scrollbar-thumb {
+    background-color: #e3e3e3;
+}
+#af-wrapper .modal-content::-webkit-scrollbar-track {
+    width: 10px;
+    border-left: 3px solid #fff;
+    background-color: #f2f2f2;
+}
 
 /* MENTIONING */
 #af-wrapper span.mention-nice-name {

@@ -237,6 +237,13 @@ if (!defined('ABSPATH')) exit;
                             <td><input type="checkbox" name="enable_reactions" id="enable_reactions" <?php checked(!empty($this->asgarosforum->options['enable_reactions'])); ?>></td>
                         </tr>
                         <tr>
+                            <th>
+                                <label for="reactions_show_names"><?php _e('Show usernames in reactions', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php _e('If enabled, the names of users who have reacted to a post are shown.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td><input type="checkbox" name="reactions_show_names" id="reactions_show_names" <?php checked(!empty($this->asgarosforum->options['reactions_show_names'])); ?>></td>
+                        </tr>
+                        <tr>
                             <th><label for="enable_search"><?php _e('Enable search functionality', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="enable_search" id="enable_search" <?php checked(!empty($this->asgarosforum->options['enable_search'])); ?>></td>
                         </tr>

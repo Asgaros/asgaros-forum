@@ -149,6 +149,8 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
                     }
                 echo '</div>';
             echo '</div>';
+
+            $this->reactions->render_reactions_summary_area($post->id);
         }
 
         // Show signature.

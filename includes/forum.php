@@ -68,6 +68,7 @@ class AsgarosForum {
         'enable_mentioning'                 => true,
         'enable_mentioning_suggestions'     => true,
         'enable_reactions'                  => true,
+        'reactions_show_names'              => true,
         'enable_search'                     => true,
         'enable_profiles'                   => true,
         'enable_memberslist'                => true,
