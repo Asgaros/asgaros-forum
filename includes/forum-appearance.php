@@ -319,7 +319,8 @@ class AsgarosForumAppearance {
 			$custom_css .= '#af-wrapper .action-panel-description,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-breadcrumbs a,'.PHP_EOL;
-			$custom_css .= '#af-wrapper .forum-post-date,'.PHP_EOL;
+            $custom_css .= '#af-wrapper .forum-post-date,'.PHP_EOL;
+            $custom_css .= '#af-wrapper .forum-post-date a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-footer,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .post-footer a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .signature,'.PHP_EOL;
