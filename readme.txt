@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to hide site-admins in memberslist
 * Added: Option to change format for activity-timestamps
 * Added: asgarosforum_filter_profile_row filter
+* Fixed: Make it possible to delete empty topics
 * Fixed: Errors when a topic is empty due to problems during post-creation
 * Fixed: Display issues with some themes
 * Changed: Moved post-counter and report-button to the top

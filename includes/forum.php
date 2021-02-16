@@ -1036,9 +1036,50 @@ class AsgarosForum {
 
         if ($posts) {
             $this->incrementTopicViews();
+            $this->polls->render_poll($this->current_topic);
+            $this->render_sticky_panel();
 
-            require('views/topic.php');
+            echo '<div class="pages-and-menu">';
+                $paginationRendering = $this->pagination->renderPagination($this->tables->posts, $this->current_topic);
+                echo $paginationRendering;
+                echo $this->show_topic_menu();
+                echo '<div class="clear"></div>';
+            echo '</div>';
+
+            echo '<div class="title-element"></div>';
+
+            $counter = 0;
+            $topicStarter = $this->get_topic_starter($this->current_topic);
+            foreach ($posts as $post) {
+                require('views/post-element.php');
+            }
+            $this->editor->showEditor('addpost', true);
+
+            echo '<div class="pages-and-menu">';
+                echo $paginationRendering;
+                echo $this->show_topic_menu(false);
+                echo '<div class="clear"></div>';
+            echo '</div>';
         } else {
+            // Render delete-button for empty topics.
+            $current_user_id = get_current_user_id();
+            $menu = '';
+
+            if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic)) {
+                $menu .= '<a class="button button-red" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
+                    $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
+                    $menu .= __('Delete', 'asgaros-forum');
+                $menu .= '</a>';
+            }
+
+            $menu = (!empty($menu)) ? '<div class="forum-menu">'.$menu.'</div>' : $menu;
+
+            echo '<div class="pages-and-menu">';
+                echo $menu;
+                echo '<div class="clear"></div>';
+            echo '</div>';
+
+            // Show notice that this topic has no posts.
             $this->render_notice(__('Sorry, but there are no posts.', 'asgaros-forum'));
         }
     }
