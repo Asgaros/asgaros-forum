@@ -1462,32 +1462,35 @@ class AsgarosForum {
     }
 
     function render_lastpost_in_topic($topic_id, $compact = false) {
-        $lastpost = $this->get_lastpost_in_topic($topic_id);
         $output = '';
-        $post_link = $this->rewrite->get_post_link($lastpost->id, $lastpost->parent_id);
+        $lastpost = $this->get_lastpost_in_topic($topic_id);
 
-        if ($compact === true) {
-            $output .= __('Last post:', 'asgaros-forum');
-            $output .= '&nbsp;';
-            $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a>';
-            $output .= '&nbsp;&middot;&nbsp;';
-            $output .= $this->getUsername($lastpost->author_id);
+        // Ensure that a lastpost exists. This is a required check in case a topic is empty due to problems during post-creation.
+        if (!empty($lastpost)) {
+            $post_link = $this->rewrite->get_post_link($lastpost->id, $lastpost->parent_id);
 
-        } else {
-            // Avatar
-            if ($this->options['enable_avatars']) {
-                $output .= '<div class="topic-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
+            if ($compact === true) {
+                $output .= __('Last post:', 'asgaros-forum');
+                $output .= '&nbsp;';
+                $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a>';
+                $output .= '&nbsp;&middot;&nbsp;';
+                $output .= $this->getUsername($lastpost->author_id);
+            } else {
+                // Avatar
+                if ($this->options['enable_avatars']) {
+                    $output .= '<div class="topic-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
+                }
+
+                // Summary
+                $output .= '<div class="forum-poster-summary">';
+                $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a><br>';
+                $output .= '<small>';
+                $output .= $this->getUsername($lastpost->author_id);
+                $output .= '</small>';
+                $output .= '</div>';
             }
-
-            // Summary
-            $output .= '<div class="forum-poster-summary">';
-            $output .= '<a href="'.$post_link.'">'.$this->get_activity_timestamp($lastpost->date).'</a><br>';
-            $output .= '<small>';
-            $output .= $this->getUsername($lastpost->author_id);
-            $output .= '</small>';
-            $output .= '</div>';
         }
-
+        
         return $output;
     }
 

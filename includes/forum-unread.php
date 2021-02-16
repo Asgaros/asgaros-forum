@@ -68,12 +68,17 @@ class AsgarosForumUnread {
     // Marks a topic as read when an user opens it.
     public function mark_topic_read() {
         if ($this->asgarosforum->current_topic) {
-            $this->excluded_items[$this->asgarosforum->current_topic] = (int) $this->asgarosforum->get_lastpost_in_topic($this->asgarosforum->current_topic)->id;
+            $lastpost = $this->asgarosforum->get_lastpost_in_topic($this->asgarosforum->current_topic);
 
-            if ($this->user_id) {
-                update_user_meta($this->user_id, 'asgarosforum_unread_exclude', $this->excluded_items);
-            } else {
-                setcookie('asgarosforum_unread_exclude', maybe_serialize($this->excluded_items), 2147483647, COOKIEPATH, COOKIE_DOMAIN);
+            // Ensure that a lastpost exists. This is a required check in case a topic is empty due to problems during post-creation.
+            if (!empty($lastpost)) {
+                $this->excluded_items[$this->asgarosforum->current_topic] = (int) $lastpost->id;
+
+                if ($this->user_id) {
+                    update_user_meta($this->user_id, 'asgarosforum_unread_exclude', $this->excluded_items);
+                } else {
+                    setcookie('asgarosforum_unread_exclude', maybe_serialize($this->excluded_items), 2147483647, COOKIEPATH, COOKIE_DOMAIN);
+                }
             }
         }
     }
