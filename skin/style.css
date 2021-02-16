@@ -1001,6 +1001,8 @@
         position: absolute;
         height: 40px;
         width: 40px;
+        min-height: 40px; /* comp */
+        min-width: 40px; /* comp */
         left: 10px;
         top: 10px;
     }

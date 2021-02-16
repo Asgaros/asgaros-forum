@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to hide site-admins in memberslist
 * Added: Option to change format for activity-timestamps
 * Added: asgarosforum_filter_profile_row filter
+* Fixed: Display issues with some themes
 * Changed: Moved post-counter and report-button to the top
 * Performance improvements and code optimizations
 = 1.15.9 =
