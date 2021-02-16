@@ -6,13 +6,13 @@ class AsgarosForumMembersList {
     private $asgarosforum = null;
     public $filter_type = 'role';
     public $filter_name = 'all';
+    public $memberslist = array();
 
     public function __construct($object) {
         $this->asgarosforum = $object;
 
         // Set filter based on URL parameters.
-        add_action('asgarosforum_prepare_members', array($this, 'set_filter'));
-
+        add_action('asgarosforum_prepare_members', array($this, 'load_members'));
         add_action('asgarosforum_breadcrumbs_members', array($this, 'add_breadcrumbs'));
     }
 
@@ -30,7 +30,7 @@ class AsgarosForumMembersList {
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
-    public function set_filter() {
+    public function load_members() {
         if ($this->functionality_enabled()) {
             if (!empty($_GET['filter_type']) && !empty($_GET['filter_name'])) {
                 if ($_GET['filter_type'] === 'role') {
@@ -54,6 +54,8 @@ class AsgarosForumMembersList {
                     $this->filter_name = $_GET['filter_name'];
                 }
             }
+
+            $this->memberslist = $this->get_members();
         }
     }
 
@@ -124,6 +126,7 @@ class AsgarosForumMembersList {
 
                     if ($this->is_filter_available('administrator')) {
                         $users = $this->asgarosforum->permissions->get_users_by_role('administrator');
+                        $users = $this->maybe_filter_siteadmins($users);
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
@@ -189,7 +192,7 @@ class AsgarosForumMembersList {
 
         echo '<div class="content-container">';
 
-        $data = $this->get_members();
+        $data = $this->memberslist;
 
         if (empty($data)) {
             $this->asgarosforum->render_notice(__('No users found!', 'asgaros-forum'));
@@ -270,6 +273,8 @@ class AsgarosForumMembersList {
             $allUsers = AsgarosForumUserGroups::get_users_in_usergroup($this->filter_name);
         }
 
+        $allUsers = $this->maybe_filter_siteadmins($allUsers);
+
         if ($allUsers) {
             // Now get the amount of forum posts for all users.
             $postsCounter = $this->asgarosforum->db->get_results("SELECT author_id, COUNT(id) AS counter FROM {$this->asgarosforum->tables->posts} GROUP BY author_id ORDER BY COUNT(id) DESC;");
@@ -307,5 +312,14 @@ class AsgarosForumMembersList {
         }
 
         return $allUsers;
+    }
+
+    public function maybe_filter_siteadmins($users) {
+        if ($this->asgarosforum->options['memberslist_filter_siteadmins'] && $users) {
+            $siteAdmins = $this->asgarosforum->permissions->get_users_by_role('siteadmin');
+            $users = array_diff_key($users, $siteAdmins);
+        }
+
+        return $users;
     }
 }

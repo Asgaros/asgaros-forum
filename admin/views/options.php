@@ -605,6 +605,10 @@ if (!defined('ABSPATH')) exit;
                             <td><input type="checkbox" name="memberslist_loggedin_only" id="memberslist_loggedin_only" <?php checked(!empty($this->asgarosforum->options['memberslist_loggedin_only'])); ?>></td>
                         </tr>
                         <tr class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
+                            <th><label for="memberslist_filter_siteadmins"><?php _e('Hide site-admins in memberslist', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="memberslist_filter_siteadmins" id="memberslist_filter_siteadmins" <?php checked(!empty($this->asgarosforum->options['memberslist_filter_siteadmins'])); ?>></td>
+                        </tr>
+                        <tr class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
                             <th><label for="members_per_page"><?php _e('Members per page:', 'asgaros-forum'); ?></label></th>
                             <td><input type="number" name="members_per_page" id="members_per_page" value="<?php echo stripslashes($this->asgarosforum->options['members_per_page']); ?>" size="3" min="1"></td>
                         </tr>

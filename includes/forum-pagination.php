@@ -67,15 +67,7 @@ class AsgarosForumPagination {
             $count = (int) $count;
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'members') {
-            // Count the users based on the filter.
-            $count = 0;
-
-            if ($this->asgarosforum->memberslist->filter_type === 'role') {
-                $count = count($this->asgarosforum->permissions->get_users_by_role($this->asgarosforum->memberslist->filter_name));
-            } else if ($this->asgarosforum->memberslist->filter_type === 'group') {
-                $count = AsgarosForumUserGroups::countUsersOfUserGroup($this->asgarosforum->memberslist->filter_name);
-            }
-
+            $count = count($this->asgarosforum->memberslist->memberslist);
             $num_pages = ceil($count / $this->asgarosforum->options['members_per_page']);
         } else if ($location === 'activity') {
             $count = $this->asgarosforum->activity->load_activity_data(true);

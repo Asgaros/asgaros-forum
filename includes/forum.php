@@ -83,6 +83,7 @@ class AsgarosForum {
         'reports_enabled'                   => true,
         'reports_notifications'             => true,
         'memberslist_loggedin_only'         => false,
+        'memberslist_filter_siteadmins'     => false,
         'show_login_button'                 => true,
         'show_logout_button'                => true,
         'show_register_button'              => true,

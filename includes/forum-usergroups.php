@@ -358,10 +358,12 @@ class AsgarosForumUserGroups {
         $user_ids = self::get_ids_of_users_in_usergroup($usergroup_id);
 
         if (!empty($user_ids)) {
-            return get_users(array(
+            $query = new AsgarosForumUserQuery(array(
                 'fields'    => array('ID', 'display_name'),
                 'include'   => $user_ids
             ));
+
+            return $query->results;
         }
 
         return false;

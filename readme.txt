@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option to show usernames in reactions
+* Added: Option to hide site-admins in memberslist
 * Added: Option to change format for activity-timestamps
 * Added: asgarosforum_filter_profile_row filter
 * Changed: Moved post-counter and report-button to the top
