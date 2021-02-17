@@ -18,10 +18,21 @@ class AsgarosForumSpoilers {
     }
 
     public function render_spoiler($atts = false, $content = false) {
-        $output = '';
+        // Set title-attribute.
+        $atts = shortcode_atts(
+            array(
+                'title' => __('Spoiler', 'asgaros-forum')
+            ),
+            $atts,
+            'spoiler'
+        );
 
+        $atts['title'] = (!empty($atts['title'])) ? $atts['title'] : __('Spoiler', 'asgaros-forum');
+
+        // Generate output.
+        $output = '';
         $output .= '<div class="spoiler">';
-    	$output .= '<div class="spoiler-head closed"><span>'.__('Spoiler', 'asgaros-forum').'</span></div>';
+    	$output .= '<div class="spoiler-head closed"><span>'.$atts['title'].'</span></div>';
     	$output .= '<div class="spoiler-body">';
 
         // Hide spoiler if the current user is not logged-in (based on the settings).

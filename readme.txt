@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Added: title-attribute to spoiler-shortcode
 = 1.15.10 =
 * Added: Option to show usernames in reactions
 * Added: Option to hide site-admins in memberslist

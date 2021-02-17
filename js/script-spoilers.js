@@ -8,7 +8,7 @@
                 icon: 'spoiler',
                 tooltip: 'Spoiler',
                 onclick: function() {
-                    editor.insertContent("[spoiler][/spoiler]");
+                    editor.insertContent('[spoiler title=""][/spoiler]');
                 }
             });
         });
