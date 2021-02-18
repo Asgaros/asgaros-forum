@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: title-attribute to spoiler-shortcode
+* Added: asgarosforum_filter_forum_status_options filter
 = 1.15.10 =
 * Added: Option to show usernames in reactions
 * Added: Option to hide site-admins in memberslist

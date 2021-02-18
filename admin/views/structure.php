@@ -110,9 +110,31 @@
                         <th><label for="forum_status"><?php _e('Status:', 'asgaros-forum'); ?></label></th>
                         <td>
                             <select name="forum_status" id="forum_status">
-                                <option value="normal"><?php _e('Normal', 'asgaros-forum'); ?></option>
-                                <option value="closed"><?php _e('Closed', 'asgaros-forum'); ?></option>
-                                <option value="approval"><?php _e('Approval', 'asgaros-forum'); ?></option>
+                                <?php
+
+                                // Available options for forum-status.
+                                $forum_status_options = array(
+                                    array(
+                                        'name'  => __('Normal', 'asgaros-forum'),
+                                        'value' => 'normal'
+                                    ),
+                                    array(
+                                        'name'  => __('Closed', 'asgaros-forum'),
+                                        'value' => 'closed'
+                                    ),
+                                    array(
+                                        'name'  => __('Approval', 'asgaros-forum'),
+                                        'value' => 'approval'
+                                    )
+                                );
+
+                                $forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);
+
+                                foreach ($forum_status_options as $forum_status_option) {
+                                    echo '<option value="'.$forum_status_option['value'].'">'.$forum_status_option['name'].'</option>';
+                                }
+
+                                ?>
                             </select>
                         </td>
                     </tr>
