@@ -6,6 +6,15 @@
     line-height: 1.65;
     text-shadow: none; /* comp */
 }
+/* Ensures that <pre> and <code> tags doesnt break the layout. */
+#af-wrapper pre,
+#af-wrapper code {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
 #af-wrapper a {
     color: #256db3;
     border: none;
