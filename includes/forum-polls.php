@@ -488,7 +488,7 @@ class AsgarosForumPolls {
         }
 
         // Get options and votes for the poll.
-        $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.title, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id};", 'OBJECT_K');
+        $poll->options = $this->asgarosforum->db->get_results("SELECT po.id, po.title, (SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} AS pv WHERE pv.option_id = po.id) AS votes FROM {$this->asgarosforum->tables->polls_options} AS po WHERE po.poll_id = {$poll->id} ORDER BY po.id ASC;", 'OBJECT_K');
 
         // Get total votes.
         $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id};");
