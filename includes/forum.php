@@ -771,6 +771,8 @@ class AsgarosForum {
             do_action('asgarosforum_content_header');
         }
 
+        $this->error = apply_filters('asgarosforum_filter_error', $this->error);
+
         if (!empty($this->error)) {
             echo '<div class="error">'.$this->error.'</div>';
         } else {

@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: title-attribute to spoiler-shortcode
+* Added: asgarosforum_filter_error filter
 * Added: asgarosforum_filter_forum_status_options filter
 * Fixed: pre and code-tags were breaking the layout
 * Fixed: Answer-options in polls were ordered randomly on some server-configurations
