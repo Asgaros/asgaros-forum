@@ -58,6 +58,7 @@ function mycred_load_asgarosforum_hook() {
                     'received_like' => array(
                         'creds'     => 1,
                         'log'       => __('%plural% for received forum post like', 'asgaros-forum'),
+                        'limit'     => '0/x'
                     ),
                     'received_dislike'   => array(
                         'creds'     => -1,
@@ -272,6 +273,9 @@ function mycred_load_asgarosforum_hook() {
                 return;
             }
 
+            if ($this->over_hook_limit('received_like', 'received_like', $user_id)) {
+                return;
+            }
             $this->core->add_creds(
                 'received_like',
                 $user_id,
@@ -323,6 +327,11 @@ function mycred_load_asgarosforum_hook() {
             if (!isset($prefs['new_post']['limit'])) {
                 $prefs['new_post']['limit'] = '0/x';
             }
+
+            if (!isset($prefs['received_like']['limit'])) {
+                $prefs['received_like']['limit'] = '0/x';
+            }
+
             ?>
             <div class="hook-instance">
             <h3><?php _e('New Topic', 'asgaros-forum'); ?></h3>
@@ -433,6 +442,12 @@ function mycred_load_asgarosforum_hook() {
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="<?php echo $this->field_id(array('received_like', 'limit')); ?>"><?php _e('Limit', 'asgaros-forum'); ?></label>
+                        <?php echo $this->hook_limit_setting($this->field_name(array('received_like', 'limit')), $this->field_id(array('received_like', 'limit')), $prefs['received_like']['limit']); ?>
+                    </div>
+                </div>
             </div>
             </div>
             <div class="hook-instance">
@@ -494,6 +509,17 @@ function mycred_load_asgarosforum_hook() {
 
                 $data['new_post']['limit'] = $limit.'/'.$data['new_post']['limit_by'];
                 unset($data['new_post']['limit_by']);
+            }
+
+            if (isset($data['received_like']['limit']) && isset($data['received_like']['limit_by'])) {
+                $limit = sanitize_text_field($data['received_like']['limit']);
+
+                if ($limit == '') {
+                    $limit = 0;
+                }
+
+                $data['received_like']['limit'] = $limit.'/'.$data['received_like']['limit_by'];
+                unset($data['received_like']['limit_by']);
             }
 
             $data['new_post']['author'] = (isset($data['new_post']['author'])) ? 1 : 0;
