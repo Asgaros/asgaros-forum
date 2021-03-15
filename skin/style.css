@@ -1134,6 +1134,10 @@
     height: auto !important;
 }
 
+#af-wrapper .post-message p:empty:before {
+    content: none;
+}
+
 /* POST FOOTER */
 #af-wrapper .post-footer {
     width: 100%;
