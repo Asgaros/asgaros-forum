@@ -160,36 +160,76 @@ class AsgarosForumContent {
         $author_id = $this->asgarosforum->permissions->currentUserID;
 
         if ($this->get_action() === 'add_topic') {
-            // Create the topic.
-            $inserted_ids = $this->insert_topic($this->asgarosforum->current_forum, $this->data_subject, $this->data_content, $author_id, $upload_list);
 
-            // Assign the inserted IDs.
-            $this->asgarosforum->current_topic = $inserted_ids->topic_id;
-            $this->asgarosforum->current_post = $inserted_ids->post_id;
+            $add_topic = array(
+                'forum'         => $this->asgarosforum->current_forum,
+                'subject'       => $this->data_subject,
+                'content'       => $this->data_content,
+                'author'        => $author_id,
+                'upload_list'   => $upload_list,
+                'warning'       => null,
+                'error'         => null,
+                'redirect'      => null,
+                'add_topic'     => true,
+            );
 
-            // Upload files.
-            $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
+            // apply filter to change topic content
+            $add_topic = apply_filters('asgarosforum_filter_before_topic_submit', $add_topic);
 
-            // Create link.
-            $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+            // Check if add topic is being cancelled
+            if ($add_topic['add_topic']) {
+                // Create the topic.
+                $inserted_ids = $this->insert_topic($add_topic['forum'], $add_topic['subject'], $add_topic['content'], $add_topic['author'], $add_topic['upload_list']);
 
-            // Special instructions for un/approved topics.
-            if ($this->asgarosforum->approval->is_topic_approved($this->asgarosforum->current_topic)) {
-                // Send notifications about mentionings.
-                $receivers = $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+                // Assign the inserted IDs.
+                $this->asgarosforum->current_topic = $inserted_ids->topic_id;
+                $this->asgarosforum->current_post = $inserted_ids->post_id;
 
-                // Send notifications about new topic.
-                $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic, $receivers);
+                // Upload files.
+                $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $add_topic['upload_list']);
 
-                // Set redirect.
-                $redirect = $link;
+                // Create link.
+                $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+
+                // Special instructions for un/approved topics.
+                if ($this->asgarosforum->approval->is_topic_approved($this->asgarosforum->current_topic)) {
+                    // Send notifications about mentionings.
+                    $receivers = $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+
+                    // Send notifications about new topic.
+                    $this->asgarosforum->notifications->notify_about_new_topic($this->asgarosforum->current_topic, $receivers);
+
+                } else {
+                    // Notify siteowner about new unapproved topic.
+                    $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->asgarosforum->current_topic);
+
+                    // Set link for redirection.
+                    $link = $this->asgarosforum->rewrite->get_link('home', false, array('new_unapproved_topic' => 1));
+                }
+
+                $_POST['message'] = '';
+                $_POST['subject'] = '';
+
             } else {
-                // Notify siteowner about new unapproved topic.
-                $this->asgarosforum->approval->notify_about_new_unapproved_topic($this->asgarosforum->current_topic);
-
-                // Set redirect.
-                $redirect = $this->asgarosforum->rewrite->get_link('home', false, array('new_unapproved_topic' => 1));
+                $link = $this->asgarosforum->rewrite->get_link('home');
             }
+
+            // Add error message and stop redirecting
+            if ($add_topic['error']){
+                $this->asgarosforum->error = $add_topic['error'];
+                return;
+            }
+
+            // Add warning and stop redirecting
+            if ($add_topic['warning']){
+                $this->asgarosforum->add_notice($add_topic['warning']);
+                return;
+            }
+
+            // Set redirect.
+            $redirect = $add_topic['redirect'] ?: $link;
+
+
         } else if ($this->get_action() === 'add_post') {
 
             $add_post = array(

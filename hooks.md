@@ -263,6 +263,7 @@ Make some action after the content header
 - asgarosforum_filter_subject_before_insert
 - asgarosforum_filter_content_before_insert
 - [asgarosforum_filter_before_post_submit](#asgarosforum_filter_before_post_submit)
+- [asgarosforum_filter_before_topic_submit](#asgarosforum_filter_before_topic_submit)
 - asgarosforum_filter_widget_title_length
 - asgarosforum_widget_excerpt_length
 - asgarosforum_subscriber_mails_new_post
@@ -415,6 +416,65 @@ $add_post = array(
         }
         
         return $add_post;
+    }
+?>
+```
+
+#### Source
+
+[forum-content.php](includes/forum-content.php)
+
+### asgarosforum_filter_before_topic_submit
+
+#### Description
+Adjust a topic before it is being submitted or cancel the submission.
+
+#### Parameters
+
+##### $add_topic
+
+Array with all information of the topic:
+
+```php
+$add_topic = array(
+                'forum'         => $this->asgarosforum->current_forum, // forum id
+                'subject'       => $this->data_subject, // subject of topic
+                'content'       => $this->data_content, // content of the topic
+                'author'        => $author_id, // author id
+                'upload_list'   => $upload_list, // list of files to upload
+                'warning'       => null,  // String to output as warning
+                'error'         => null, // String to output as error
+                'redirect'      => null, // URL to redirect
+                'add_topic'      => true, // Boolean if topic will be added
+            );
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_before_topic_submit', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Reject topic if content is too short
+    add_filter ( 'asgarosforum_filter_before_topic_submit', 'reject_long_posts');
+
+    function reject_long_posts( $add_topic){
+
+        // Check lenght of content
+        if (strlen($add_topic['content']) < 50){
+            // Set error message
+            $add_topic['error'] = "Your post is too short!!";
+            // Dump the submitted topic
+            $add_topic['add_topic'] = false;
+        }
+        
+        return $add_topic;
     }
 ?>
 ```
