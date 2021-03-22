@@ -286,16 +286,48 @@ class AsgarosForumContent {
             // Set redirect.
             $redirect = $add_post['redirect'] ?: $link;
         } else if ($this->get_action() === 'edit_post') {
-            $date = $this->asgarosforum->current_time();
-            $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
-            $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('text' => $this->data_content, 'uploads' => maybe_serialize($upload_list), 'date_edit' => $date, 'author_edit' => $this->asgarosforum->permissions->currentUserID), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
-            if ($this->asgarosforum->is_first_post($this->asgarosforum->current_post) && !empty($this->data_subject)) {
-                $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('name' => $this->data_subject), array('id' => $this->asgarosforum->current_topic), array('%s'), array('%d'));
+            $edit_post = array(
+                'subject'       => $this->data_subject,
+                'content'       => $this->data_content,
+                'editor'        => $this->asgarosforum->permissions->currentUserID,
+                'upload_list'   => $upload_list,
+                'warning'       => null,
+                'error'         => null,
+                'redirect'      => null,
+                'edit_post'      => true,
+            );
+
+            // apply filter to change post content
+            $edit_post = apply_filters('asgarosforum_filter_before_edit_post_submit', $edit_post);
+
+            // Check if edit post if cancelled
+            if ($edit_post['edit_post']){
+                $date = $this->asgarosforum->current_time();
+                $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $edit_post['upload_list']);
+                $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('text' => $edit_post['content'], 'uploads' => maybe_serialize($upload_list), 'date_edit' => $date, 'author_edit' => $edit_post['editor']), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
+
+                if ($this->asgarosforum->is_first_post($this->asgarosforum->current_post) && !empty($edit_post['subject'])) {
+                    $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('name' => $edit_post['subject']), array('id' => $this->asgarosforum->current_topic), array('%s'), array('%d'));
+                }
+
+                // Create link.
+                $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+            }else{
+                $link = $this->asgarosforum->rewrite->get_link('home');
             }
 
-            // Create link.
-            $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+            // Add error message and stop redirecting
+            if ($edit_post['error']){
+                $this->asgarosforum->error = $edit_post['error'];
+                return;
+            }
+
+            // Add warning and stop redirecting
+            if ($edit_post['warning']){
+                $this->asgarosforum->add_notice($edit_post['warning']);
+                return;
+            }
 
             // Set redirect.
             $redirect = $link;

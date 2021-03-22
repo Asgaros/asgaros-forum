@@ -263,6 +263,7 @@ Make some action after the content header
 - asgarosforum_filter_subject_before_insert
 - asgarosforum_filter_content_before_insert
 - [asgarosforum_filter_before_post_submit](#asgarosforum_filter_before_post_submit)
+- [asgarosforum_filter_before_edit_post_submit](#asgarosforum_filter_before_edit_post_submit)
 - [asgarosforum_filter_before_topic_submit](#asgarosforum_filter_before_topic_submit)
 - asgarosforum_filter_widget_title_length
 - asgarosforum_widget_excerpt_length
@@ -416,6 +417,64 @@ $add_post = array(
         }
         
         return $add_post;
+    }
+?>
+```
+
+#### Source
+
+[forum-content.php](includes/forum-content.php)
+
+### asgarosforum_filter_before_edit_post_submit
+
+#### Description
+Adjust an edited post before it is being submitted or cancel the submission.
+
+#### Parameters
+
+##### $edit_post
+
+Array with all information of the post:
+
+```php
+$edit_post = array(
+                'subject'       => $this->data_content, // subject of the topic
+                'content'       => $this->data_content, // content of the post
+                'editor'        => $this->asgarosforum->permissions->currentUserID,, // editor id
+                'upload_list'   => $upload_list, // list of files to upload
+                'warning'       => null,  // String to output as warning
+                'error'         => null, // String to output as error
+                'redirect'      => null, // URL to redirect
+                'edit_post'      => true, // Boolean if post will be added
+            );
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_before_edit_post_submit', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Reject post if content is too long
+    add_filter ( 'asgarosforum_filter_before_edit_post_submit', 'reject_long_posts');
+
+    function reject_long_posts( $edit_post){
+
+        // Check lenght of content
+        if (strlen($edit_post['content']) > 1000){
+            // Set error message
+            $edit_post['error'] = "Your post is too long!!";
+            // Dump the submitted post
+            $edit_post['edit_post'] = false;
+        }
+        
+        return $edit_post;
     }
 ?>
 ```
