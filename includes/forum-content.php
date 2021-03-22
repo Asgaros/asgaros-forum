@@ -191,23 +191,60 @@ class AsgarosForumContent {
                 $redirect = $this->asgarosforum->rewrite->get_link('home', false, array('new_unapproved_topic' => 1));
             }
         } else if ($this->get_action() === 'add_post') {
-            // Create the post.
-            $this->asgarosforum->current_post = $this->insert_post($this->asgarosforum->current_topic, $this->asgarosforum->current_forum, $this->data_content, $author_id, $upload_list);
 
-            // Upload files.
-            $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
+            $add_post = array(
+                'topic'         => $this->asgarosforum->current_topic,
+                'forum'         => $this->asgarosforum->current_forum,
+                'content'       => $this->data_content,
+                'author'        => $author_id,
+                'upload_list'   => $upload_list,
+                'warning'       => null,
+                'error'         => null,
+                'redirect'      => null,
+                'add_post'      => true,
+            );
 
-            // Send notifications about mentionings.
-            $receivers = $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+            // apply filter to change post content
+            $add_post = apply_filters('asgarosforum_filter_before_post_submit', $add_post);
 
-            // Send notifications about new post.
-            $this->asgarosforum->notifications->notify_about_new_post($this->asgarosforum->current_post, $receivers);
+            // Check if add post is canceled
+            if ($add_post['add_post']){
+                // Create the post.
+                $this->asgarosforum->current_post = $this->insert_post($add_post['topic'], $add_post['forum'], $add_post['content'], $add_post['author'], $add_post['upload_list']);
 
-            // Create link.
-            $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
+                // Upload files.
+                $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $add_post['upload_list']);
+
+                // Send notifications about mentionings.
+                $receivers = $this->asgarosforum->mentioning->mention_users($this->asgarosforum->current_post);
+
+                // Send notifications about new post.
+                $this->asgarosforum->notifications->notify_about_new_post($this->asgarosforum->current_post, $receivers);
+
+                // Create link.
+                $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $add_post['topic']));
+
+                // unset message to prevent duplicate posts
+                $_POST['message'] = '';
+            } else {
+                // Create link.
+                $link = html_entity_decode($this->asgarosforum->rewrite->get_link('topic', $add_post['topic']));
+            }
+
+            // Add error message and stop redirecting
+            if ($add_post['error']){
+                $this->asgarosforum->error = $add_post['error'];
+                return;
+            }
+
+            // Add warning and stop redirecting
+            if ($add_post['warning']){
+                $this->asgarosforum->add_notice($add_post['warning']);
+                return;
+            }
 
             // Set redirect.
-            $redirect = $link;
+            $redirect = $add_post['redirect'] ?: $link;
         } else if ($this->get_action() === 'edit_post') {
             $date = $this->asgarosforum->current_time();
             $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $upload_list);
