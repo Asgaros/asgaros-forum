@@ -403,7 +403,7 @@ $add_post = array(
 
 ```php
 <?php
-    // Reject post if content is too short
+    // Reject post if content is too long
     add_filter ( 'asgarosforum_filter_before_post_submit', 'reject_long_posts');
 
     function reject_long_posts( $add_post){
