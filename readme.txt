@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: title-attribute to spoiler-shortcode
 * Added: asgarosforum_filter_error filter
 * Added: asgarosforum_filter_forum_status_options filter
+* Fixed: Hide empty paragraphs for topics created via WordPress posts
 * Fixed: pre and code-tags were breaking the layout
 * Fixed: Answer-options in polls were ordered randomly on some server-configurations
 = 1.15.10 =
