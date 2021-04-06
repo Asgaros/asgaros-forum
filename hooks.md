@@ -246,6 +246,7 @@ Make some action after the content header
 
 ## Filters
 
+- [asgarosforum_filter_username](#asgarosforum_filter_username)
 - asgarosforum_filter_login_message
 - [asgarosforum_filter_post_username](#asgarosforum_filter_post_username)
 - asgarosforum_filter_post_content
