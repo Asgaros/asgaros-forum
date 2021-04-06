@@ -293,6 +293,54 @@ Make some action after the content header
 - [asgarosforum_filter_meta_post_type](#asgarosforum_filter_meta_post_type)
 - [asgarosforum_filter_upload_folder](#asgarosforum_filter_upload_folder)
 
+### asgarosforum_filter_username
+
+#### Description
+Change the username to a custom name. 
+
+#### Parameters
+
+##### $user_name
+Username that will be shown in forum.
+
+##### $user_object
+User Object of User.
+
+#### Usage
+
+```php
+<?php
+   add_filter('asgarosforum_filter_username', 'function_name', 10, 2);
+?>
+```
+
+#### Examples
+
+```php
+<?php
+   // Add filter to customize username
+   add_filter('asgarosforum_filter_username', 'show_first_name', 10, 2);
+
+   function show_first_name($username, $user_object){
+   
+      // get first name of user
+      $new_username = $user_object->first_name;
+      
+      // Set default name if user didn't set a first name
+      if (empty($new_username)){
+        $new_username = $username;
+      }
+      
+      return $new_username;
+   }
+?>
+```
+
+#### Source
+
+[forum.php](includes/forum.php)
+[forum-profile.php](includes/forum-profile.php)
+
 ### asgarosforum_filter_login_message
 
 ### asgarosforum_filter_post_username
