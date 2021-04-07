@@ -48,7 +48,8 @@ class AsgarosForumProfile {
         $userData = $this->get_user_data($this->asgarosforum->current_element);
 
         if ($userData) {
-            $suffix = ': '.$userData->display_name;
+            $user_name = apply_filters('asgarosforum_filter_username', $userData->display_name, $userData);
+            $suffix = ': '.$user_name;
         }
 
         return $suffix;
@@ -92,7 +93,9 @@ class AsgarosForumProfile {
             }
 
             echo '<div class="user-info">';
-                echo '<div class="profile-display-name">'.$user_data->display_name.'</div>';
+
+                $user_name = apply_filters('asgarosforum_filter_username', $user_data->display_name, $user_data);
+                echo '<div class="profile-display-name">'.$user_name.'</div>';
 
                 $role = $this->asgarosforum->permissions->getForumRole($user_id);
 
