@@ -49,7 +49,7 @@ class AsgarosForumProfile {
 
         if ($userData) {
             $user_name = apply_filters('asgarosforum_filter_username', $userData->display_name, $userData);
-            $suffix = ': '. $user_name;
+            $suffix = ': '.$user_name;
         }
 
         return $suffix;
