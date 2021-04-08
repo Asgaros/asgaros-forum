@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Hide empty paragraphs for topics created via WordPress posts
 * Fixed: pre and code-tags were breaking the layout
 * Fixed: Answer-options in polls were ordered randomly on some server-configurations
+* Fixed: Added missing translation strings
 = 1.15.10 =
 * Added: Option to show usernames in reactions
 * Added: Option to hide site-admins in memberslist
