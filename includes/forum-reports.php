@@ -214,7 +214,7 @@ class AsgarosForumReports {
                     $post_author = $this->asgarosforum->getUsername($report['author_id']);
 
                     echo '<div class="report-source">';
-                        echo sprintf('Posted in %s by %s', $post_link, $post_author);
+                        echo sprintf(__('Posted in %s by %s', 'asgaros-forum'), $post_link, $post_author);
                         echo '&nbsp;&middot;&nbsp;';
                         echo __('Reported by:', 'asgaros-forum').'&nbsp;';
 
