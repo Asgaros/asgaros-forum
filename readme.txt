@@ -96,6 +96,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: pre and code-tags were breaking the layout
 * Fixed: Answer-options in polls were ordered randomly on some server-configurations
 * Fixed: Added missing translation strings
+* Updated: Font Awesome version 5.15.3
 * Compatibility with WordPress 5.7
 = 1.15.10 =
 * Added: Option to show usernames in reactions
