@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to limit the number of awarded points for likes in MyCred integration
 * Added: title-attribute to spoiler-shortcode
+* Added: asgarosforum_filter_username filter
 * Added: asgarosforum_filter_error filter
 * Added: asgarosforum_filter_forum_status_options filter
 * Fixed: Hide empty paragraphs for topics created via WordPress posts
