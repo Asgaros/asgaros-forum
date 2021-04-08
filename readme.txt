@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.2
 Stable tag: 1.15.10
 License: GPLv2 or later
@@ -95,6 +95,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: pre and code-tags were breaking the layout
 * Fixed: Answer-options in polls were ordered randomly on some server-configurations
 * Fixed: Added missing translation strings
+* Compatibility with WordPress 5.7
 = 1.15.10 =
 * Added: Option to show usernames in reactions
 * Added: Option to hide site-admins in memberslist
