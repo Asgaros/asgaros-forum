@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    var $version = '1.15.10';
+    var $version = '1.15.11';
     var $executePlugin = false;
     var $db = null;
     var $tables = null;
@@ -1369,7 +1369,9 @@ class AsgarosForum {
      * Renders a username.
      */
     function renderUsername($userObject, $custom_name = false) {
-        $user_name = $userObject->display_name;
+
+        // Add filter to change username
+        $user_name = apply_filters('asgarosforum_filter_username', $userObject->display_name, $userObject);
 
         if ($custom_name) {
             $user_name = $custom_name;

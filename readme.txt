@@ -3,9 +3,9 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.2
-Stable tag: 1.15.10
+Stable tag: 1.15.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,14 +87,19 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
-* Added: Compatibility with Sassy Social Share
+* Improved compatibility with Sassy Social Share
+= 1.15.11 =
 * Added: Option to limit the number of awarded points for likes in MyCred integration
 * Added: title-attribute to spoiler-shortcode
+* Added: asgarosforum_filter_username filter
 * Added: asgarosforum_filter_error filter
 * Added: asgarosforum_filter_forum_status_options filter
 * Fixed: Hide empty paragraphs for topics created via WordPress posts
 * Fixed: pre and code-tags were breaking the layout
 * Fixed: Answer-options in polls were ordered randomly on some server-configurations
+* Fixed: Added missing translation strings
+* Updated: Font Awesome version 5.15.3
+* Compatibility with WordPress 5.7
 = 1.15.10 =
 * Added: Option to show usernames in reactions
 * Added: Option to hide site-admins in memberslist
