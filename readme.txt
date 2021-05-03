@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Improved compatibility with Sassy Social Share
 = 1.15.11 =
 * Added: Option to limit the number of awarded points for likes in MyCred integration
 * Added: title-attribute to spoiler-shortcode
