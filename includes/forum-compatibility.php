@@ -14,7 +14,7 @@ class AsgarosForumCompatibility {
         $this->compatibility_toolset();
         $this->compatibility_permalinkmanager();
         $this->compatibility_allinoneseopack();
-        $this->compatibility_social_share();
+        $this->compatibility_sassysocialshare();
     }
 
     // AUTOPTIMIZE
@@ -154,23 +154,20 @@ class AsgarosForumCompatibility {
         return $disabled;
     }
 
-    // Compatibility for social share plugins
-    function compatibility_social_share(){
-
-        // Sassy Social Share
-        add_filter('heateor_sss_target_share_url_filter', array($this, 'comp_social_share_url'));
-
+    // SASSY SOCIAL SHARE
+    function compatibility_sassysocialshare() {
+        add_filter('heateor_sss_target_share_url_filter', array($this, 'comp_sassysocialshare_url'));
     }
 
-    function comp_social_share_url ($post_url){
-        $forum_id = $this->asgarosforum->current_forum;
-        $topic_id = $this->asgarosforum->current_topic;
-        if ($forum_id && $topic_id){
-            $post_url = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
-        } else if ($forum_id){
-            $post_url = $this->asgarosforum->rewrite->get_link('forum', $forum_id);
+    function comp_sassysocialshare_url($post_url) {
+        if ($this->asgarosforum->current_topic) {
+            return $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic);
         }
+        
+        if ($this->asgarosforum->current_forum) {
+            return $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum);
+        }
+
         return $post_url;
     }
-
 }
