@@ -758,6 +758,11 @@ class AsgarosForum {
     }
 
     function forum() {
+
+        // Deactivate caching
+        if (!defined('DONOTCACHEPAGE')){
+            define('DONOTCACHEPAGE', true);
+        }
         ob_start();
         echo '<div id="af-wrapper">';
 
