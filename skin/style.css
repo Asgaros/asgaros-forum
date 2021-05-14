@@ -306,11 +306,11 @@
 	content: "\f00c";
 	margin: 2px 0px 0px 1px;
 	color: #256db3;
-	border-left: none !important; /* comp */
-  	border-bottom: none !important; /* comp */
-  	width: auto !important; /* comp */
-  	height: auto !important; /* comp */
-  	transform: none !important; /* comp */ 
+	border-left: none; /* comp */
+  	border-bottom: none; /* comp */
+  	width: auto; /* comp */
+  	height: auto; /* comp */
+  	transform: none; /* comp */
 
 }
 #af-wrapper input[type="radio"]:checked:before {
