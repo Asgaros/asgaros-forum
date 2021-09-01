@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Display issues with some themes
 * Improved compatibility with Sassy Social Share
 * Compatibility with WordPress 5.8
 = 1.15.11 =
