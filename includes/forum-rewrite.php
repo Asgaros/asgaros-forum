@@ -70,7 +70,7 @@ class AsgarosForumRewrite {
     // Generate all necessary rewrite rules.
     function add_rewrite_rules_array($rules) {
         // Get all pages with a shortcode first.
-        $page_ids = $this->asgarosforum->db->get_col('SELECT ID FROM '.$this->asgarosforum->db->prefix.'posts WHERE post_type = "page" AND (post_content LIKE "%[forum%" OR post_content LIKE "%[Forum%");');
+        $page_ids = $this->asgarosforum->db->get_col('SELECT ID FROM '.$this->asgarosforum->db->prefix.'posts WHERE post_type = "page" AND (post_content LIKE "%[forum%" OR post_content LIKE "%[Forum%") AND post_status <> "trash";');
 
         if (!empty($page_ids)) {
             foreach ($page_ids as $page_id) {
