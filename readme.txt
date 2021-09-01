@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.2
 Stable tag: 1.15.11
 License: GPLv2 or later
@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Improved compatibility with Sassy Social Share
+* Compatibility with WordPress 5.8
 = 1.15.11 =
 * Added: Option to limit the number of awarded points for likes in MyCred integration
 * Added: title-attribute to spoiler-shortcode
