@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Warning in permalink-logic when a deleted post contains the forum-shortcode
 * Fixed: Display issues with some themes
 * Improved compatibility with Sassy Social Share
 * Compatibility with WordPress 5.8
