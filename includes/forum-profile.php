@@ -166,17 +166,8 @@ class AsgarosForumProfile {
         }
     }
 
-    public function show_history() {
-        $user_id = $this->asgarosforum->current_element;
-        $userData = $this->get_user_data($user_id);
-
-        if ($userData) {
-            if ($this->hideProfileLink()) {
-                _e('You need to login to have access to profiles.', 'asgaros-forum');
-            } else {
-                $this->show_profile_header($userData);
-                $this->show_profile_navigation($userData);
-
+    public function show_user_history($user_id) {
+        // Shows the history of user posts in the table-like format
                 echo '<div id="profile-layer">';
                     $posts = $this->get_post_history_by_user($user_id, true);
 
@@ -214,6 +205,21 @@ class AsgarosForumProfile {
                         }
                     }
                 echo '</div>';
+
+    }
+
+    public function show_history() {
+        $user_id = $this->asgarosforum->current_element;
+        $userData = $this->get_user_data($user_id);
+
+        if ($userData) {
+            if ($this->hideProfileLink()) {
+                _e('You need to login to have access to profiles.', 'asgaros-forum');
+            } else {
+                $this->show_profile_header($userData);
+                $this->show_profile_navigation($userData);
+
+                $this->show_user_history($user_id);
             }
         } else {
             _e('This user does not exist.', 'asgaros-forum');
