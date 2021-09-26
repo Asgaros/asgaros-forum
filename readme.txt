@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.8
 Requires PHP: 5.2
-Stable tag: 1.15.11
+Stable tag: 1.15.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+= 1.15.12 =
+* Added: asgarosforum_filter_before_post_submit filter
+* Added: asgarosforum_filter_before_edit_post_submit filter
+* Added: asgarosforum_filter_before_topic_submit filter
 * Fixed: Warning in permalink-logic when a deleted post contains the forum-shortcode
 * Fixed: Display issues with some themes
 * Improved compatibility with Sassy Social Share
