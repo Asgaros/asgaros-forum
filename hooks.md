@@ -263,6 +263,9 @@ Make some action after the content header
 - asgarosforum_filter_insert_custom_validation
 - asgarosforum_filter_subject_before_insert
 - asgarosforum_filter_content_before_insert
+- [asgarosforum_filter_before_post_submit](#asgarosforum_filter_before_post_submit)
+- [asgarosforum_filter_before_edit_post_submit](#asgarosforum_filter_before_edit_post_submit)
+- [asgarosforum_filter_before_topic_submit](#asgarosforum_filter_before_topic_submit)
 - asgarosforum_filter_widget_title_length
 - asgarosforum_widget_excerpt_length
 - asgarosforum_subscriber_mails_new_post
@@ -411,6 +414,182 @@ Change Username in a post. You can also use it to add some further information a
 ### asgarosforum_filter_subject_before_insert
 
 ### asgarosforum_filter_content_before_insert
+
+### asgarosforum_filter_before_post_submit
+
+#### Description
+Adjust a post before it is being submitted or cancel the submission.
+
+#### Parameters
+
+##### $add_post
+
+Array with all information of the post:
+
+```php
+$add_post = array(
+                'topic'         => $this->asgarosforum->current_topic, // topic id
+                'forum'         => $this->asgarosforum->current_forum, // forum id
+                'content'       => $this->data_content, // content of the post
+                'author'        => $author_id, // author id
+                'upload_list'   => $upload_list, // list of files to upload
+                'warning'       => null,  // String to output as warning
+                'error'         => null, // String to output as error
+                'redirect'      => null, // URL to redirect
+                'add_post'      => true, // Boolean if post will be added
+            );
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_before_post_submit', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Reject post if content is too long
+    add_filter ( 'asgarosforum_filter_before_post_submit', 'reject_long_posts');
+
+    function reject_long_posts( $add_post){
+
+        // Check lenght of content
+        if (strlen($add_post['content']) > 1000){
+            // Set error message
+            $add_post['error'] = "Your post is too long!!";
+            // Dump the submitted post
+            $add_post['add_post'] = false;
+        }
+        
+        return $add_post;
+    }
+?>
+```
+
+#### Source
+
+[forum-content.php](includes/forum-content.php)
+
+### asgarosforum_filter_before_edit_post_submit
+
+#### Description
+Adjust an edited post before it is being submitted or cancel the submission.
+
+#### Parameters
+
+##### $edit_post
+
+Array with all information of the post:
+
+```php
+$edit_post = array(
+                'subject'       => $this->data_content, // subject of the topic
+                'content'       => $this->data_content, // content of the post
+                'editor'        => $this->asgarosforum->permissions->currentUserID,, // editor id
+                'upload_list'   => $upload_list, // list of files to upload
+                'warning'       => null,  // String to output as warning
+                'error'         => null, // String to output as error
+                'redirect'      => null, // URL to redirect
+                'edit_post'      => true, // Boolean if post will be added
+            );
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_before_edit_post_submit', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Reject post if content is too long
+    add_filter ( 'asgarosforum_filter_before_edit_post_submit', 'reject_long_posts');
+
+    function reject_long_posts( $edit_post){
+
+        // Check lenght of content
+        if (strlen($edit_post['content']) > 1000){
+            // Set error message
+            $edit_post['error'] = "Your post is too long!!";
+            // Dump the submitted post
+            $edit_post['edit_post'] = false;
+        }
+        
+        return $edit_post;
+    }
+?>
+```
+
+#### Source
+
+[forum-content.php](includes/forum-content.php)
+
+### asgarosforum_filter_before_topic_submit
+
+#### Description
+Adjust a topic before it is being submitted or cancel the submission.
+
+#### Parameters
+
+##### $add_topic
+
+Array with all information of the topic:
+
+```php
+$add_topic = array(
+                'forum'         => $this->asgarosforum->current_forum, // forum id
+                'subject'       => $this->data_subject, // subject of topic
+                'content'       => $this->data_content, // content of the topic
+                'author'        => $author_id, // author id
+                'upload_list'   => $upload_list, // list of files to upload
+                'warning'       => null,  // String to output as warning
+                'error'         => null, // String to output as error
+                'redirect'      => null, // URL to redirect
+                'add_topic'      => true, // Boolean if topic will be added
+            );
+```
+
+#### Usage
+
+```php
+<?php
+    add_filter ( 'asgarosforum_filter_before_topic_submit', 'function_name');
+?>
+```
+
+#### Examples
+
+```php
+<?php
+    // Reject topic if content is too short
+    add_filter ( 'asgarosforum_filter_before_topic_submit', 'reject_long_posts');
+
+    function reject_long_posts( $add_topic){
+
+        // Check lenght of content
+        if (strlen($add_topic['content']) < 50){
+            // Set error message
+            $add_topic['error'] = "Your post is too short!!";
+            // Dump the submitted topic
+            $add_topic['add_topic'] = false;
+        }
+        
+        return $add_topic;
+    }
+?>
+```
+
+#### Source
+
+[forum-content.php](includes/forum-content.php)
 
 ### asgarosforum_filter_widget_title_length
 
