@@ -524,16 +524,16 @@ class AsgarosForum {
         } else if (isset($_GET['approve_topic'])) {
             $this->approval->approve_topic($this->current_topic);
         } else if (isset($_GET['subscribe_topic'])) {
-            $topic_id = $_GET['subscribe_topic'];
+            $topic_id = (!empty($_GET['subscribe_topic'])) ? absint($_GET['subscribe_topic']) : 0;
             $this->notifications->subscribe_topic($topic_id);
         } else if (isset($_GET['unsubscribe_topic'])) {
-            $topic_id = $_GET['unsubscribe_topic'];
+            $topic_id = (!empty($_GET['unsubscribe_topic'])) ? absint($_GET['unsubscribe_topic']) : 0;
             $this->notifications->unsubscribe_topic($topic_id);
         } else if (isset($_GET['subscribe_forum'])) {
-            $forum_id = $_GET['subscribe_forum'];
+            $forum_id = (!empty($_GET['subscribe_forum'])) ? absint($_GET['subscribe_forum']) : 0;
             $this->notifications->subscribe_forum($forum_id);
         } else if (isset($_GET['unsubscribe_forum'])) {
-            $forum_id = $_GET['unsubscribe_forum'];
+            $forum_id = (!empty($_GET['unsubscribe_forum'])) ? absint($_GET['unsubscribe_forum']) : 0;
             $this->notifications->unsubscribe_forum($forum_id);
         } else if (isset($_GET['report_add'])) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;

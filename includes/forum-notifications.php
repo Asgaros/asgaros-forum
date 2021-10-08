@@ -128,13 +128,13 @@ class AsgarosForumNotifications {
 
     // Subscribes the current user to the current topic.
     public function subscribe_topic($topic_id) {
-        // Dont subscribe to a topic when it is not approved.
-        if (!$this->asgarosforum->approval->is_topic_approved($topic_id)) {
-            return;
-        }
-
         // Check first if this topic exists.
         if ($this->asgarosforum->content->topic_exists($topic_id)) {
+            // Dont subscribe to a topic when it is not approved.
+            if (!$this->asgarosforum->approval->is_topic_approved($topic_id)) {
+                return;
+            }
+            
             // Only subscribe user if he is not already subscribed for this topic.
             if (!$this->is_subscribed('topic', $topic_id)) {
                 add_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic', $topic_id);

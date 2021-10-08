@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Multiple Unauthenticated SQL Injection vulnerabilities in the subscription-logic
 = 1.15.12 =
 * Added: asgarosforum_filter_before_post_submit filter
 * Added: asgarosforum_filter_before_edit_post_submit filter
