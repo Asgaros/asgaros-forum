@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options.
 
 == Changelog ==
+* Fixed: Escape forum-name properly in backend
 = 1.15.13 =
 * Fixed: Multiple Unauthenticated SQL Injection vulnerabilities in the subscription-logic
 = 1.15.12 =

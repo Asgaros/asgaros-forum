@@ -49,7 +49,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
         $columnHTML .= '<span class="forum-icon '.$forum_icon.'"></span>';
 
-        $columnHTML .= stripslashes($item['name']).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.$item['id'].')</span></span>';
+        $columnHTML .= esc_html(stripslashes($item['name'])).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.$item['id'].')</span></span>';
         $columnHTML .= '<br>';
         $columnHTML .= '<span class="forum-description">';
 
