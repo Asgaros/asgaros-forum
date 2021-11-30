@@ -541,7 +541,7 @@ class AsgarosForum {
 
             $this->reports->add_report($post_id, $reporter_id);
         } else if (!empty($_GET['report_delete']) && is_numeric($_GET['report_delete'])) {
-            $this->reports->remove_report($_GET['report_delete']);
+            $this->reports->remove_report(sanitize_key($_GET['report_delete']));
         }
 
         do_action('asgarosforum_prepare_'.$this->current_view);
@@ -1966,7 +1966,7 @@ class AsgarosForum {
     }
 
     function moveTopic() {
-        $newForumID = $_POST['newForumID'];
+        $newForumID = sanitize_key($_POST['newForumID']);
 
         if ($this->permissions->isModerator('current') && $newForumID && $this->content->forum_exists($newForumID)) {
             $this->db->update($this->tables->topics, array('parent_id' => $newForumID), array('id' => $this->current_topic), array('%d'), array('%d'));
@@ -2267,7 +2267,6 @@ class AsgarosForum {
     }
 
     public function deleted_user_reassign($id, $reassign) {
-
         // Ensure that correct values are passed.
         if (empty($_POST['forum_reassign'])) {
             return;
@@ -2282,8 +2281,9 @@ class AsgarosForum {
         }
 
         // Reassign forum posts and topics.
-        $this->db->update($this->tables->posts, array('author_id' => $_POST['forum_reassign_user']), array('author_id' => $id), array('%d'), array('%d'));
-        $this->db->update($this->tables->topics, array('author_id' => $_POST['forum_reassign_user']), array('author_id' => $id), array('%d'), array('%d'));
+        $author_id = sanitize_key($_POST['forum_reassign_user']);
+        $this->db->update($this->tables->posts, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
+        $this->db->update($this->tables->topics, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
     }
 
     // Extract the first URL of an image from a given string.

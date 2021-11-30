@@ -16,7 +16,7 @@ class AsgarosForumSearch {
 
     public function initialize() {
         if (!empty($_GET['keywords'])) {
-            $keywords = trim($_GET['keywords']);
+            $keywords = sanitize_text_field($_GET['keywords']);
             $this->search_keywords_for_query = esc_sql($keywords);
             $this->search_keywords_for_output = stripslashes(esc_html($keywords));
         }

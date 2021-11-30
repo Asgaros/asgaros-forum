@@ -33,8 +33,11 @@ class AsgarosForumMembersList {
     public function load_members() {
         if ($this->functionality_enabled()) {
             if (!empty($_GET['filter_type']) && !empty($_GET['filter_name'])) {
-                if ($_GET['filter_type'] === 'role') {
-                    switch ($_GET['filter_name']) {
+                $input_filter_type = sanitize_key($_GET['filter_type']);
+                $input_filter_name = sanitize_key($_GET['filter_name']);
+
+                if ($input_filter_type === 'role') {
+                    switch ($input_filter_name) {
                         case 'all':
                         case 'normal':
                         case 'moderator':
@@ -44,14 +47,14 @@ class AsgarosForumMembersList {
                             $this->filter_name = 'all';
 
                             // Ensure that the filter is available.
-                            if ($this->is_filter_available($_GET['filter_name'])) {
-                                $this->filter_name = $_GET['filter_name'];
+                            if ($this->is_filter_available($input_filter_name)) {
+                                $this->filter_name = $input_filter_name;
                             }
                         break;
                     }
-                } else if ($_GET['filter_type'] === 'group') {
+                } else if ($input_filter_type === 'group') {
                     $this->filter_type = 'group';
-                    $this->filter_name = $_GET['filter_name'];
+                    $this->filter_name = $input_filter_name;
                 }
             }
 

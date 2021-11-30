@@ -369,10 +369,10 @@ class AsgarosForumAdmin {
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = (bool)$_POST[$k];
                 } else if ($k === 'allowed_filetypes') {
-                    $tmp = stripslashes(strtolower(trim($_POST[$k])));
+                    $tmp = strtolower(sanitize_text_field($_POST[$k]));
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 } else {
-                    $tmp = stripslashes(trim($_POST[$k]));
+                    $tmp = sanitize_text_field($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 }
             } else {

@@ -38,7 +38,7 @@ class AsgarosForumOnline {
             if ($this->current_user_id) {
                 // Clean guest-counter data for logged-in user.
                 if (isset($_COOKIE['asgarosforum_unique_id'])) {
-                    $unique_id = $_COOKIE['asgarosforum_unique_id'];
+                    $unique_id = sanitize_key($_COOKIE['asgarosforum_unique_id']);
 
                     // Delete cookie first.
                     unset($_COOKIE['asgarosforum_unique_id']);
@@ -77,7 +77,7 @@ class AsgarosForumOnline {
                 if (!isset($_COOKIE['asgarosforum_unique_id'])) {
                     setcookie('asgarosforum_unique_id', $unique_id, 2147483647, COOKIEPATH, COOKIE_DOMAIN);
                 } else {
-                    $unique_id = $_COOKIE['asgarosforum_unique_id'];
+                    $unique_id = sanitize_key($_COOKIE['asgarosforum_unique_id']);
                 }
 
                 // Add the user to the online list when he is not already included.
