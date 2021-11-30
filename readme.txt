@@ -79,12 +79,12 @@ You can find a list of available hooks and filters on this site:
 [https://www.asgaros.de/support/?view=thread&id=407](https://www.asgaros.de/support/?view=thread&id=407).
 
 == Screenshots ==
-1. The forum overview.
-2. The thread overview.
-3. The thread view.
-4. Creating a new thread.
-5. Manage forums in the administration area.
-6. Manage general options.
+1. The forum overview
+2. The topic overview
+3. The topic view
+4. Creating a new topic
+5. Manage forums in the administration area
+6. Manage general options
 
 == Changelog ==
 * Fixed: Add missing sanitizing for input data
