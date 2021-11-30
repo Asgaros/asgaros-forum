@@ -127,10 +127,11 @@ class AsgarosForumRewrite {
     function parse_url() {
         // Set the current view.
         if (!empty($_GET['view'])) {
-            $key = array_search (esc_html($_GET['view']), $this->view_mapping);
+            $view = sanitize_key($_GET['view']);
+            $key = array_search($view, $this->view_mapping);
 
             if ($key == false) {
-                $this->asgarosforum->current_view = esc_html($_GET['view']);
+                $this->asgarosforum->current_view = $view;
             } else {
                 $this->asgarosforum->current_view = $key;
             }

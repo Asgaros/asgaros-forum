@@ -42,13 +42,13 @@ class AsgarosForumSearch {
 
             // Workaround for broken search in posts when using plain permalink structure.
             if (!empty($_GET['p'])) {
-                $value = esc_html(trim($_GET['p']));
+                $value = sanitize_key($_GET['p']);
                 echo '<input name="p" type="hidden" value="'.$value.'">';
             }
 
             // Workaround for broken search in pages when using plain permalink structure.
             if (!empty($_GET['page_id'])) {
-                $value = esc_html(trim($_GET['page_id']));
+                $value = sanitize_key($_GET['page_id']);
                 echo '<input name="page_id" type="hidden" value="'.$value.'">';
             }
 
