@@ -93,7 +93,6 @@ class AsgarosForumProfile {
             }
 
             echo '<div class="user-info">';
-
                 $user_name = apply_filters('asgarosforum_filter_username', $user_data->display_name, $user_data);
                 echo '<div class="profile-display-name">'.$user_name.'</div>';
 
@@ -120,9 +119,9 @@ class AsgarosForumProfile {
 
             // Profile link.
             if ($this->asgarosforum->current_view === 'profile') {
-                echo '<a class="active" href="'.$profile_link.'">'.__('Profile', 'asgaros-forum').'</a>';
+                echo '<a class="active" href="'.esc_url($profile_link).'">'.__('Profile', 'asgaros-forum').'</a>';
             } else {
-                echo '<a href="'.$profile_link.'">'.__('Profile', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($profile_link).'">'.__('Profile', 'asgaros-forum').'</a>';
             }
 
             // Subscriptions link.
@@ -196,13 +195,13 @@ class AsgarosForumProfile {
                                     $text = esc_html(stripslashes(strip_tags($post->text)));
                                     $text = $this->asgarosforum->cut_string($text, 100);
 
-                                    echo '<a class="history-title" href="'.$link.'">'.$text.'</a>';
+                                    echo '<a class="history-title" href="'.esc_url($link).'">'.$text.'</a>';
 
                                     $topic_link = $this->asgarosforum->rewrite->get_link('topic', $post->parent_id);
                                     $topic_name = esc_html(stripslashes($post->name));
                                     $topic_time = $this->asgarosforum->get_activity_timestamp($post->date);
 
-                                    echo '<span class="history-topic">'.__('In:', 'asgaros-forum').' <a href="'.$topic_link.'">'.$topic_name.'</a></span>';
+                                    echo '<span class="history-topic">'.__('In:', 'asgaros-forum').' <a href="'.esc_url($topic_link).'">'.$topic_name.'</a></span>';
                                 echo '</div>';
 
                                 echo '<div class="history-time">'.$topic_time.'</div>';

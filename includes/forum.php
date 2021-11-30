@@ -730,10 +730,10 @@ class AsgarosForum {
         echo '<div class="notice">';
 
         if ($notice_icon) {
-            echo '<span class="notice-icon '.$notice_icon.'"></span>';
+            echo '<span class="notice-icon '.esc_attr($notice_icon).'"></span>';
         }
 
-        if ($notice_link) { echo '<a href="'.$notice_link.'">'; }
+        if ($notice_link) { echo '<a href="'.esc_url($notice_link).'">'; }
 
         echo $notice_message;
 
@@ -947,8 +947,8 @@ class AsgarosForum {
         $unread_status = $this->unread->get_status_topic($topic_object->id);
         $topic_title = esc_html(stripslashes($topic_object->name));
 
-        echo '<div class="content-element topic '.$topic_type.'">';
-            echo '<div class="topic-status '.$unread_status.'"><i class="far fa-comments"></i></div>';
+        echo '<div class="content-element topic '.esc_attr($topic_type).'">';
+            echo '<div class="topic-status '.esc_attr($unread_status).'"><i class="far fa-comments"></i></div>';
             echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
                     echo '<span class="topic-icon fas fa-thumbtack" title="'.__('This topic is sticked', 'asgaros-forum').'"></span>';

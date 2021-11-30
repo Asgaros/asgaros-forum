@@ -171,8 +171,8 @@ class AsgarosForumOnline {
                     }
 
                     $guests_counter = count($currently_online_guests);
-
-                    echo sprintf(_n('%s Guest', '%s Guests', $guests_counter, 'asgaros-forum'), number_format_i18n($guests_counter));
+                    $guests_counter_output = sprintf(_n('%s Guest', '%s Guests', $guests_counter, 'asgaros-forum'), number_format_i18n($guests_counter));
+                    echo esc_html($guests_counter_output);
                 }
 
                 echo '</i>';
