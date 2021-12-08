@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Prevent cross-site request forgery when creating or editing posts and topics
 * Fixed: Add missing sanitizing for input data
 * Fixed: Use sanitizing instead of escaping functions for input data
 * Fixed: Add missing escaping for output data

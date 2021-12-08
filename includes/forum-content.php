@@ -86,6 +86,14 @@ class AsgarosForumContent {
             return false;
         }
 
+        // Verify the corresponding nonce.
+        $nonce = $_REQUEST['_wpnonce'];
+
+        if (!wp_verify_nonce($nonce, 'asgaros_forum_'.$this->get_action())) {
+            $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
+            return false;
+        }
+
         // Set the data.
         $this->set_data();
 
@@ -160,7 +168,6 @@ class AsgarosForumContent {
         $author_id = $this->asgarosforum->permissions->currentUserID;
 
         if ($this->get_action() === 'add_topic') {
-
             $add_topic = array(
                 'forum'         => $this->asgarosforum->current_forum,
                 'subject'       => $this->data_subject,

@@ -259,10 +259,13 @@ class AsgarosForumEditor {
                     echo '<div class="editor-row editor-row-submit">';
                         if ($editor_view === 'addtopic') {
                             echo '<input type="hidden" name="submit_action" value="add_topic">';
+                            wp_nonce_field('asgaros_forum_add_topic');
                         } else if ($editor_view === 'addpost') {
                             echo '<input type="hidden" name="submit_action" value="add_post">';
+                            wp_nonce_field('asgaros_forum_add_post');
                         } else if ($editor_view === 'editpost') {
                             echo '<input type="hidden" name="submit_action" value="edit_post">';
+                            wp_nonce_field('asgaros_forum_edit_post');
                         }
 
 						echo '<div class="left">';
