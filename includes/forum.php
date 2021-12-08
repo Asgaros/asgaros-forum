@@ -502,9 +502,9 @@ class AsgarosForum {
             $this->content->do_insertion();
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
-        } else if (isset($_GET['delete_topic'])) {
+        } else if (isset($_GET['delete_topic']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'asgaros_forum_delete_topic')) {
             $this->delete_topic($this->current_topic);
-        } else if (isset($_GET['remove_post'])) {
+        } else if (isset($_GET['remove_post']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'asgaros_forum_delete_post')) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
             $this->remove_post($post_id);
         } else if (!empty($_POST['sticky_topic']) || isset($_GET['sticky_topic'])) {
@@ -1068,7 +1068,8 @@ class AsgarosForum {
             $menu = '';
 
             if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic)) {
-                $menu .= '<a class="button button-red" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
+                $delete_topic_link = $this->get_link('topic', $this->current_topic, array('delete_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic')));
+                $menu .= '<a class="button button-red" href="'.$delete_topic_link.'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
                     $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
                     $menu .= __('Delete', 'asgaros-forum');
                 $menu .= '</a>';
@@ -1718,7 +1719,9 @@ class AsgarosForum {
 
         if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic) && $show_all_buttons) {
             // Delete button.
-            $menu .= '<a class="button button-red" href="'.$this->get_link('topic', $this->current_topic, array('delete_topic' => 1)).'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
+            $delete_topic_link = $this->get_link('topic', $this->current_topic, array('delete_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic')));
+
+            $menu .= '<a class="button button-red" href="'.$delete_topic_link.'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
                 $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
                 $menu .= __('Delete', 'asgaros-forum');
             $menu .= '</a>';
@@ -1741,7 +1744,9 @@ class AsgarosForum {
 
                 if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id, $post_date) && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
-                    $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1)).'">';
+                    $delete_post_link = $this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_delete_post')));
+                    
+                    $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$delete_post_link.'">';
                         $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
                         $menu .= __('Delete', 'asgaros-forum');
                     $menu .= '</a>';
