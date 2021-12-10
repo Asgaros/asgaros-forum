@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: SQL injection vulnerability in the approval-functionality
 * Fixed: Prevent cross-site request forgery when creating, editing or deleting posts and topics
 * Fixed: Add missing sanitizing for input data
 * Fixed: Use sanitizing instead of escaping functions for input data

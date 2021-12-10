@@ -74,7 +74,12 @@ class AsgarosForumApproval {
                 return $this->asgarosforum->db->get_results("SELECT t.id, t.name, f.name AS forum_name FROM {$this->asgarosforum->tables->topics} AS t LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (t.parent_id = f.id) WHERE f.parent_id IN ({$ids_categories}) AND t.approved = 0 ORDER BY t.id ASC;");
             }
         } else {
-            return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {$forum_id} ORDER BY id DESC;");
+            // Ensure forum-ID is an integer.
+            $forum_id = absint($forum_id);
+
+            if ($forum_id) {
+                return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {absint($forum_id)} ORDER BY id DESC;");
+            }
         }
 
         return false;
