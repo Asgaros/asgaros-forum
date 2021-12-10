@@ -78,7 +78,7 @@ class AsgarosForumApproval {
             $forum_id = absint($forum_id);
 
             if ($forum_id) {
-                return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {absint($forum_id)} ORDER BY id DESC;");
+                return $this->asgarosforum->db->get_results("SELECT * FROM {$this->asgarosforum->tables->topics} WHERE approved = 0 AND parent_id = {$forum_id} ORDER BY id DESC;");
             }
         }
 
