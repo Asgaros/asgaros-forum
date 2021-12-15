@@ -19,7 +19,7 @@ class AsgarosForumCompatibility {
 
     // AUTOPTIMIZE
     function compatibility_autoptimize() {
-        add_filter('autoptimize_filter_js_exclude', array($this, 'comp_autoptimize_filter_js_exclude'), 10 , 1);
+        add_filter('autoptimize_filter_js_exclude', array($this, 'comp_autoptimize_filter_js_exclude'), 10, 1);
     }
 
     function comp_autoptimize_filter_js_exclude($exclude) {
