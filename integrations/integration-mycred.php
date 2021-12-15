@@ -19,14 +19,14 @@ function mycred_setup_asgarosforum_hook($installed) {
     $installed['hook_asgarosforum'] = array(
         'title'       => __('Asgaros Forum', 'asgaros-forum'),
         'description' => __('Awards %_plural% for Asgaros Forum actions.', 'asgaros-forum'),
-        'callback'    => array('myCRED_AsgarosForum')
+        'callback'    => array('MyCRED_AsgarosForum')
     );
 
     return $installed;
 }
 
 function mycred_load_asgarosforum_hook() {
-    class myCRED_AsgarosForum extends myCRED_Hook {
+    class MyCRED_AsgarosForum extends myCRED_Hook {
         private $asgarosforum = null;
 
         public function __construct($hook_prefs, $type = MYCRED_DEFAULT_TYPE_KEY) {
