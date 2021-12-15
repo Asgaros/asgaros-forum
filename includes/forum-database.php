@@ -480,5 +480,3 @@ class AsgarosForumDatabase {
         }
     }
 }
-
-?>
