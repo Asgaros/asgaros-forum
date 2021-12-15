@@ -615,7 +615,7 @@ class AsgarosForumContent {
     }
 
     // Returns all subforums.
-    var $get_all_subforums_cache = false;
+    private $get_all_subforums_cache = false;
     public function get_all_subforums() {
         if ($this->get_all_subforums_cache === false) {
             $query = "SELECT * FROM {$this->asgarosforum->tables->forums} WHERE parent_forum != 0;";
@@ -626,7 +626,7 @@ class AsgarosForumContent {
         return $this->get_all_subforums_cache;
     }
 
-    function get_topics($forum_id) {
+    public function get_topics($forum_id) {
         // Build query-part for pagination.
         $limit_end = $this->asgarosforum->options['topics_per_page'];
         $limit_start = $this->asgarosforum->current_page * $limit_end;

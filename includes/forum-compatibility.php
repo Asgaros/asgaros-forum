@@ -18,21 +18,21 @@ class AsgarosForumCompatibility {
     }
 
     // AUTOPTIMIZE
-    function compatibility_autoptimize() {
+    public function compatibility_autoptimize() {
         add_filter('autoptimize_filter_js_exclude', array($this, 'comp_autoptimize_filter_js_exclude'), 10, 1);
     }
 
-    function comp_autoptimize_filter_js_exclude($exclude) {
+    public function comp_autoptimize_filter_js_exclude($exclude) {
         return $exclude.', wp-includes/js/tinymce';
     }
 
     // YOASTSEO
-    function compatibility_yoastseo() {
+    public function compatibility_yoastseo() {
         add_action('template_redirect', array($this, 'comp_yoastseo_template_redirect'));
         add_filter('asgarosforum_title_separator', array($this, 'comp_yoastseo_asgarosforum_title_separator'));
     }
 
-    function comp_yoastseo_template_redirect() {
+    public function comp_yoastseo_template_redirect() {
         if ($this->asgarosforum->executePlugin) {
             // Old API.
             global $wpseo_front;
@@ -56,7 +56,7 @@ class AsgarosForumCompatibility {
         }
     }
 
-    function comp_yoastseo_asgarosforum_title_separator($title_separator) {
+    public function comp_yoastseo_asgarosforum_title_separator($title_separator) {
         if ($this->asgarosforum->executePlugin) {
             if (class_exists('\WPSEO_Utils')) {
                 $title_separator = \WPSEO_Utils::get_title_separator();
@@ -67,12 +67,12 @@ class AsgarosForumCompatibility {
     }
 
     // RANK MATH SEO
-    function compatibility_rankmathseo() {
+    public function compatibility_rankmathseo() {
         add_action('template_redirect', array($this, 'comp_rankmathseo_template_redirect'));
         add_filter('asgarosforum_title_separator', array($this, 'comp_rankmathseo_asgarosforum_title_separator'));
     }
 
-    function comp_rankmathseo_template_redirect() {
+    public function comp_rankmathseo_template_redirect() {
         if ($this->asgarosforum->executePlugin) {
             remove_all_actions('rank_math/head');
             add_filter('rank_math/frontend/remove_credit_notice', '__return_true');
@@ -80,7 +80,7 @@ class AsgarosForumCompatibility {
         }
     }
 
-    function comp_rankmathseo_asgarosforum_title_separator($title_separator) {
+    public function comp_rankmathseo_asgarosforum_title_separator($title_separator) {
         if ($this->asgarosforum->executePlugin) {
             if (class_exists('\RankMath\Helper')) {
                 $title_separator = \RankMath\Helper::get_settings('titles.title_separator');
@@ -91,11 +91,11 @@ class AsgarosForumCompatibility {
     }
 
     // TOOLSET
-    function compatibility_toolset() {
+    public function compatibility_toolset() {
         add_action('asgarosforum_execution_check', array($this, 'comp_toolset_asgarosforum_execution_check'));
     }
 
-    function comp_toolset_asgarosforum_execution_check() {
+    public function comp_toolset_asgarosforum_execution_check() {
         global $post;
 
         // Ensure that Toolset is active.
@@ -125,17 +125,17 @@ class AsgarosForumCompatibility {
     }
 
     // PERMALINK MANAGER
-    function compatibility_permalinkmanager() {
+    public function compatibility_permalinkmanager() {
         add_action('asgarosforum_prepare', array($this, 'comp_permalinkmanager_asgarosforum_prepare'));
     }
 
-    function comp_permalinkmanager_asgarosforum_prepare() {
+    public function comp_permalinkmanager_asgarosforum_prepare() {
         global $wp_query;
         $wp_query->query_vars['do_not_redirect'] = 1;
     }
 
     // ALL IN ONE SEO PACK
-    function compatibility_allinoneseopack() {
+    public function compatibility_allinoneseopack() {
         // Check version
         if (defined('AIOSEO_VERSION')) {
             // Version >= 4.0.0
@@ -146,7 +146,7 @@ class AsgarosForumCompatibility {
         }
     }
 
-    function comp_allinoneseopack_aiosp_disable($disabled) {
+    public function comp_allinoneseopack_aiosp_disable($disabled) {
         if ($this->asgarosforum->executePlugin) {
             $disabled = true;
         }
@@ -155,11 +155,11 @@ class AsgarosForumCompatibility {
     }
 
     // SASSY SOCIAL SHARE
-    function compatibility_sassysocialshare() {
+    public function compatibility_sassysocialshare() {
         add_filter('heateor_sss_target_share_url_filter', array($this, 'comp_sassysocialshare_url'));
     }
 
-    function comp_sassysocialshare_url($post_url) {
+    public function comp_sassysocialshare_url($post_url) {
         if ($this->asgarosforum->current_topic) {
             return $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic);
         }

@@ -7,9 +7,9 @@ if (!class_exists('WP_List_Table')){
 }
 
 class AsgarosForumAdminTableAds extends WP_List_Table {
-    var $table_data = array();
+    public $table_data = array();
 
-    function __construct($table_data) {
+    public function __construct($table_data) {
         $this->table_data = $table_data;
 
         parent::__construct(
@@ -21,7 +21,7 @@ class AsgarosForumAdminTableAds extends WP_List_Table {
         );
     }
 
-    function column_name($item) {
+    public function column_name($item) {
         $columnHTML = '';
         $columnHTML .= '<input type="hidden" id="ad_'.$item['id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="ad_'.$item['id'].'_code" value="'.esc_html(stripslashes($item['code'])).'">';
@@ -33,7 +33,7 @@ class AsgarosForumAdminTableAds extends WP_List_Table {
         return $columnHTML;
     }
 
-    function column_status($item) {
+    public function column_status($item) {
         if ($item['active'] == '1') {
             return __('Active', 'asgaros-forum');
         } else {
@@ -41,7 +41,7 @@ class AsgarosForumAdminTableAds extends WP_List_Table {
         }
     }
 
-    function column_locations($item) {
+    public function column_locations($item) {
         global $asgarosforum;
 
         $first = true;
@@ -65,7 +65,7 @@ class AsgarosForumAdminTableAds extends WP_List_Table {
         return $columnHTML;
     }
 
-    function column_actions($item) {
+    public function column_actions($item) {
         $columnHTML = '';
         $columnHTML .= '<a href="#" class="ad-delete-link link-delete" data-value-id="'.$item['id'].'" data-value-editor-title="'.__('Delete Ad', 'asgaros-forum').'">'.__('Delete', 'asgaros-forum').'</a>';
         $columnHTML .= ' &middot; ';
@@ -74,7 +74,7 @@ class AsgarosForumAdminTableAds extends WP_List_Table {
         return $columnHTML;
     }
 
-    function get_columns() {
+    public function get_columns() {
         $columns = array(
             'name'      => __('Name:', 'asgaros-forum'),
             'status'    => __('Status:', 'asgaros-forum'),
@@ -85,7 +85,7 @@ class AsgarosForumAdminTableAds extends WP_List_Table {
         return $columns;
     }
 
-    function prepare_items() {
+    public function prepare_items() {
         $columns = $this->get_columns();
         $this->_column_headers = array($columns);
 

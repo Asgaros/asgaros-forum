@@ -21,7 +21,7 @@ class AsgarosForumNotifications {
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
-    function show_subscription_navigation($current_view) {
+    public function show_subscription_navigation($current_view) {
         if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
             switch($current_view) {
                 case 'topic':

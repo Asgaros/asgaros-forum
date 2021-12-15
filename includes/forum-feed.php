@@ -14,7 +14,7 @@ class AsgarosForumFeed {
         add_action('asgarosforum_prepare_forum', array($this, 'render_feed'));
     }
 
-    function add_feed_link() {
+    public function add_feed_link() {
         if ($this->asgarosforum->options['enable_rss']) {
             switch($this->asgarosforum->current_view) {
                 case 'topic':
@@ -31,7 +31,7 @@ class AsgarosForumFeed {
         }
     }
 
-    function show_feed_navigation($current_view) {
+    public function show_feed_navigation($current_view) {
         if ($this->asgarosforum->options['enable_rss']) {
             switch($current_view) {
                 case 'topic':
@@ -48,7 +48,7 @@ class AsgarosForumFeed {
         }
     }
 
-    function render_feed() {
+    public function render_feed() {
         if ($this->asgarosforum->options['enable_rss'] && !empty($_GET['showfeed'])) {
             // Abort feed creation when an error occured.
             if ($this->asgarosforum->error !== false) {

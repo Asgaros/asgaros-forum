@@ -9,7 +9,7 @@ class AsgarosForumRewrite {
     public $slug_cache = array();
     private $view_mapping = array();
 
-    function __construct($object) {
+    public function __construct($object) {
 		$this->asgarosforum = $object;
 
         // Build view-mapping.
@@ -58,7 +58,7 @@ class AsgarosForumRewrite {
     }
 
     // TODO: Use this function for all redirects.
-    function redirect($location) {
+    public function redirect($location) {
         if ($location === 'overview') {
             $location = $this->get_link('home');
         }
@@ -68,7 +68,7 @@ class AsgarosForumRewrite {
     }
 
     // Generate all necessary rewrite rules.
-    function add_rewrite_rules_array($rules) {
+    public function add_rewrite_rules_array($rules) {
         // Get all pages with a shortcode first.
         $page_ids = $this->asgarosforum->db->get_col('SELECT ID FROM '.$this->asgarosforum->db->prefix.'posts WHERE post_type = "page" AND (post_content LIKE "%[forum%" OR post_content LIKE "%[Forum%") AND post_status <> "trash";');
 
@@ -106,7 +106,7 @@ class AsgarosForumRewrite {
     }
 
     // Disable canonical redirect for the static front page when the forum is located on it. Otherwise the rewrite rules would not work.
-    function disable_front_page_redirect($requested_url, $do_redirect) {
+    public function disable_front_page_redirect($requested_url, $do_redirect) {
         global $post;
 
         // Ensure that the post object is set.
@@ -124,7 +124,7 @@ class AsgarosForumRewrite {
     }
 
     // Tries to parse the url and set the corresponding values.
-    function parse_url() {
+    public function parse_url() {
         // Set the current view.
         if (!empty($_GET['view'])) {
             $view = sanitize_key($_GET['view']);
@@ -203,7 +203,7 @@ class AsgarosForumRewrite {
     }
 
     // Do a 301 redirect if necessary.
-    function maybe_301_redirect() {
+    public function maybe_301_redirect() {
         // When permalinks are enabled and view/id are already set, an old URL was used.
         // In this case we have to do a 301 redirect to point to the updated location.
         // This is necessary to prevent multiple links pointing to the same content in
@@ -223,7 +223,7 @@ class AsgarosForumRewrite {
     }
 
     // Builds and returns a requested link.
-    function get_link($type, $element_id = false, $additional_parameters = false, $appendix = '', $escape_url = true) {
+    public function get_link($type, $element_id = false, $additional_parameters = false, $appendix = '', $escape_url = true) {
         // Make function available while using the REST-API.
 	    if (empty($this->links)) {
             $this->set_links();
@@ -266,7 +266,7 @@ class AsgarosForumRewrite {
     }
 
     private $cache_get_post_link_ids = array();
-    function get_post_link($post_id, $topic_id = false, $post_page = false, $additional_parameters = array()) {
+    public function get_post_link($post_id, $topic_id = false, $post_page = false, $additional_parameters = array()) {
         // Get the topic ID when we dont know it yet.
         if (!$topic_id) {
             $topic_id = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT parent_id FROM {$this->asgarosforum->tables->posts} WHERE id = %d;", $post_id));
@@ -299,7 +299,7 @@ class AsgarosForumRewrite {
         return $post_link;
     }
 
-    function set_links() {
+    public function set_links() {
         global $wp;
 
         $this->ensure_rewrite_rules();
@@ -330,7 +330,7 @@ class AsgarosForumRewrite {
         }
     }
 
-    function create_unique_slug($name, $location, $type) {
+    public function create_unique_slug($name, $location, $type) {
         // Cache all existing slugs if not already done.
         if (empty($this->slug_cache[$type])) {
             $this->slug_cache[$type] = $this->asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug <> '';");
@@ -355,7 +355,7 @@ class AsgarosForumRewrite {
 
     // Converts a slug to an id.
     private $convert_slug_to_id_cache = array();
-    function convert_slug_to_id($slug, $type) {
+    public function convert_slug_to_id($slug, $type) {
         // Rename certain types to prevent duplicate queries.
         switch ($type) {
             case 'movetopic':
@@ -405,7 +405,7 @@ class AsgarosForumRewrite {
 
     // Converts an id to a slug.
     private $convert_id_to_slug_cache = array();
-    function convert_id_to_slug($id, $type) {
+    public function convert_id_to_slug($id, $type) {
         // Rename certain types to prevent duplicate queries.
         switch ($type) {
             case 'movetopic':

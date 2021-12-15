@@ -7,9 +7,9 @@ if (!class_exists('WP_List_Table')){
 }
 
 class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
-    var $table_data = array();
+    public $table_data = array();
 
-    function __construct($table_data) {
+    public function __construct($table_data) {
         $this->table_data = $table_data;
 
         parent::__construct(
@@ -21,11 +21,11 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         );
     }
 
-    function column_default($item, $column_name) {
+    public function column_default($item, $column_name) {
         return $item[$column_name];
     }
 
-    function column_name($item) {
+    public function column_name($item) {
         $forumIcon = trim(esc_html(stripslashes($item['icon'])));
         $forumIcon = (empty($forumIcon)) ? 'fas fa-comments' : $forumIcon;
 
@@ -65,7 +65,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         return $columnHTML;
     }
 
-    function column_status($item) {
+    public function column_status($item) {
         switch ($item['forum_status']) {
             case 'normal':
                 return __('Normal', 'asgaros-forum');
@@ -79,7 +79,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         }
     }
 
-    function column_actions($item) {
+    public function column_actions($item) {
         $actionHTML = '';
         $actionHTML .= '<a href="#" class="forum-delete-link link-delete" data-value-id="'.$item['id'].'" data-value-category="'.$item['parent_id'].'" data-value-editor-title="'.__('Delete Forum', 'asgaros-forum').'">';
         $actionHTML .= __('Delete Forum', 'asgaros-forum');
@@ -99,7 +99,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         return $actionHTML;
     }
 
-    function get_columns() {
+    public function get_columns() {
         $columns = array(
             'name'      => __('Name:', 'asgaros-forum'),
             'status'    => __('Status:', 'asgaros-forum'),
@@ -110,7 +110,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         return $columns;
     }
 
-    function prepare_items() {
+    public function prepare_items() {
         global $asgarosforum;
 
         $columns = $this->get_columns();

@@ -4,11 +4,11 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumAdmin {
     private $asgarosforum = null;
-    var $saved = false;
-    var $error = false;
-    var $option_views = false;
+    public $saved = false;
+    public $error = false;
+    public $option_views = false;
 
-    function __construct($object) {
+    public function __construct($object) {
         $this->asgarosforum = $object;
 
         // Set the views for the available options.
@@ -29,7 +29,7 @@ class AsgarosForumAdmin {
         add_action('manage_users_custom_column', array($this, 'manage_users_custom_column'), 10, 3);
     }
 
-    function set_option_views() {
+    public function set_option_views() {
         $this->option_views = array(
             'general' => array(
                 'label' => __('General', 'asgaros-forum'),
@@ -102,14 +102,14 @@ class AsgarosForumAdmin {
         );
     }
 
-    function render_options_header($option) {
+    public function render_options_header($option) {
         echo '<div class="settings-header">';
             echo '<span class="'.esc_attr($this->option_views[$option]['icon']).'"></span>';
             echo esc_html($this->option_views[$option]['label']);
         echo '</div>';
     }
 
-    function user_profile_fields($user) {
+    public function user_profile_fields($user) {
         $output = '';
 
         // Show settings only when current user is admin ...
@@ -174,7 +174,7 @@ class AsgarosForumAdmin {
         }
     }
 
-    function user_profile_fields_update($user_id) {
+    public function user_profile_fields_update($user_id) {
         $user_id = absint($user_id);
 
         if (current_user_can('manage_options')) {
@@ -212,7 +212,7 @@ class AsgarosForumAdmin {
     }
 
     // Add all required pages to the menu.
-    function add_admin_pages() {
+    public function add_admin_pages() {
         if ($this->asgarosforum->permissions->isAdministrator('current')) {
             add_menu_page(__('Forum', 'asgaros-forum'), __('Forum', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'), 'none');
             add_submenu_page('asgarosforum-structure', __('Structure', 'asgaros-forum'), __('Structure', 'asgaros-forum'), 'read', 'asgarosforum-structure', array($this, 'structure_page'));
@@ -229,27 +229,27 @@ class AsgarosForumAdmin {
         }
     }
 
-    function options_page() {
+    public function options_page() {
         require('views/options.php');
     }
 
-    function structure_page() {
+    public function structure_page() {
         require('views/structure.php');
     }
 
-    function appearance_page() {
+    public function appearance_page() {
         require('views/appearance.php');
     }
 
-    function usergroups_page() {
+    public function usergroups_page() {
         require('views/usergroups.php');
     }
 
-    function ads_page() {
+    public function ads_page() {
         require('views/ads.php');
     }
 
-    function enqueue_admin_scripts($hook) {
+    public function enqueue_admin_scripts($hook) {
         wp_enqueue_style('asgarosforum-fontawesome', $this->asgarosforum->plugin_url.'libs/fontawesome/css/all.min.css', array(), $this->asgarosforum->version);
         wp_enqueue_style('asgarosforum-fontawesome-compat-v4', $this->asgarosforum->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $this->asgarosforum->version);
         wp_enqueue_style('asgarosforum-admin-css', $this->asgarosforum->plugin_url.'admin/css/admin.css', array(), $this->asgarosforum->version);
@@ -261,7 +261,7 @@ class AsgarosForumAdmin {
         }
     }
 
-    function save_settings() {
+    public function save_settings() {
         // Only save changes when the user is an forum/site administrator.
         if ($this->asgarosforum->permissions->isAdministrator('current')) {
             if (isset($_POST['af_options_submit'])) {
@@ -359,7 +359,7 @@ class AsgarosForumAdmin {
     }
 
     /* OPTIONS */
-    function save_options() {
+    public function save_options() {
         $saved_ops = array();
 
         foreach ($this->asgarosforum->options_default as $k => $v) {
@@ -388,7 +388,7 @@ class AsgarosForumAdmin {
         $this->saved = true;
     }
 
-    function save_appearance() {
+    public function save_appearance() {
         $saved_ops = array();
 
         foreach ($this->asgarosforum->appearance->options_default as $k => $v) {
@@ -405,7 +405,7 @@ class AsgarosForumAdmin {
     }
 
     /* STRUCTURE */
-    function save_category() {
+    public function save_category() {
         $category_id        = $_POST['category_id'];
         $category_name      = trim($_POST['category_name']);
         $category_access    = trim($_POST['category_access']);
@@ -434,7 +434,7 @@ class AsgarosForumAdmin {
         }
     }
 
-    function save_forum() {
+    public function save_forum() {
         // ID of the forum.
         $forum_id           = $_POST['forum_id'];
 
@@ -491,7 +491,7 @@ class AsgarosForumAdmin {
         }
     }
 
-    function delete_category($categoryID) {
+    public function delete_category($categoryID) {
         $forums = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id = {$categoryID};");
 
         if (!empty($forums)) {
@@ -503,7 +503,7 @@ class AsgarosForumAdmin {
         wp_delete_term($categoryID, 'asgarosforum-category');
     }
 
-    function delete_forum($forum_id, $category_id) {
+    public function delete_forum($forum_id, $category_id) {
         // Delete all subforums first
         $subforums = $this->asgarosforum->get_forums($category_id, $forum_id);
 
@@ -532,7 +532,7 @@ class AsgarosForumAdmin {
     }
 
     /* USERGROUPS */
-    function render_admin_header($title, $titleUpdated) {
+    public function render_admin_header($title, $titleUpdated) {
         // Workaround to ensure that admin-notices are shown outside of our panel.
         echo '<h1 id="asgaros-panel-notice-area"></h1>';
 
