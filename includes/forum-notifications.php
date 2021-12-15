@@ -667,5 +667,3 @@ class AsgarosForumNotifications {
         return $data;
     }
 }
-
-?>
