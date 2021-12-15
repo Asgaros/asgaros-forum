@@ -21,14 +21,17 @@ if (!defined('ABSPATH')) exit;
             <table>
                 <?php
                 $themes = $this->asgarosforum->appearance->get_themes();
-                if (count($themes) > 1) { ?>
+                if (count($themes) > 1) {
+				?>
                     <tr>
                         <th><label for="theme"><?php _e('Theme', 'asgaros-forum'); ?>:</label></th>
                         <td>
                             <select name="theme" id="theme">
-                                <?php foreach ($themes as $k => $v) {
+                                <?php
+								foreach ($themes as $k => $v) {
                                     echo '<option value="'.$k.'" '.selected($k, $this->asgarosforum->appearance->get_current_theme(), false).'>'.$v['name'].'</option>';
-                                } ?>
+                                }
+								?>
                             </select>
                         </td>
                     </tr>
