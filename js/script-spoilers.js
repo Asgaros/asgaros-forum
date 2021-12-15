@@ -16,6 +16,6 @@
         // Toggles a clicked spoiler.
         $('#af-wrapper .spoiler .spoiler-head').click(function() {
     		$(this).toggleClass('closed').toggleClass('opened').next().toggle();
-    	});    
+    	});
     });
 })(jQuery);

@@ -52,7 +52,6 @@ class AsgarosForumEditor {
 			'wp_more'
 		);
 
-
         if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
 			// Build array of available buttons.
 			$forum_buttons = array(

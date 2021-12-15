@@ -292,7 +292,6 @@ class AsgarosForumPolls {
         // Ensure that there is a poll.
         $poll = $this->get_poll($this->asgarosforum->current_topic);
 
-
         if ($poll === false) {
             return;
         }

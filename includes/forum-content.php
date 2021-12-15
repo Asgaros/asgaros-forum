@@ -236,7 +236,6 @@ class AsgarosForumContent {
             // Set redirect.
             $redirect = $add_topic['redirect'] ?: $link;
 
-
         } else if ($this->get_action() === 'add_post') {
 
             $add_post = array(

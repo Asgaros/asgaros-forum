@@ -203,7 +203,7 @@ class AsgarosForumReactions {
             // Render details-container.
             $output .= '<div class="temporary-modal-container">';
             $output .= '<div class="asgarosforum-reaction-details">';
-            
+
             foreach ($reaction_names_grouped as $reaction_name => $reaction_users) {
                 foreach ($reaction_users as $reaction_user) {
                     $output .= '<span><i class="'.$this->reactions_list[$reaction_name]['icon'].'"></i>'.$reaction_user.'</span>';

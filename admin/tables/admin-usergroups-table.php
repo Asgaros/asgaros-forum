@@ -35,7 +35,6 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_auto_add" value="'.esc_html(stripslashes($item['auto_add'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_icon" value="'.esc_html(stripslashes($item['icon'])).'">';
 
-
         $columnHTML .= '<div class="usergroup-color" style="background-color: '.$item['color'].';"></div>';
         $columnHTML .= '<a class="usergroup-name" href="'.admin_url('users.php?forum-user-group='.$item['term_id']).'" style="color: '.$item['color'].';">';
 

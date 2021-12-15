@@ -383,7 +383,6 @@ class AsgarosForumPermissions {
             return true;
         }
 
-
         if ($this->isAdministrator($user_id)) {
             // Administrators cannot ban other (site) administrators.
             if ($this->isAdministrator($ban_id)) {

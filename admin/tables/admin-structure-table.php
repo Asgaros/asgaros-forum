@@ -43,7 +43,6 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
             $columnHTML .= '<div class="parentforum">';
         }
 
-
         $columnHTML .= '<span class="make-bold">';
         $forum_icon = trim(esc_html(stripslashes($item['icon'])));
         $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;

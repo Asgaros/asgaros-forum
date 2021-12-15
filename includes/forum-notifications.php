@@ -134,7 +134,7 @@ class AsgarosForumNotifications {
             if (!$this->asgarosforum->approval->is_topic_approved($topic_id)) {
                 return;
             }
-            
+
             // Only subscribe user if he is not already subscribed for this topic.
             if (!$this->is_subscribed('topic', $topic_id)) {
                 add_user_meta(get_current_user_id(), 'asgarosforum_subscription_topic', $topic_id);

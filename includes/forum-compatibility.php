@@ -163,7 +163,7 @@ class AsgarosForumCompatibility {
         if ($this->asgarosforum->current_topic) {
             return $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic);
         }
-        
+
         if ($this->asgarosforum->current_forum) {
             return $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum);
         }

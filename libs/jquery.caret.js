@@ -432,5 +432,4 @@ $.fn.caret.Utils = Utils;
 
 $.fn.caret.apis = methods;
 
-
 }));

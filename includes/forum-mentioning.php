@@ -40,7 +40,7 @@ class AsgarosForumMentioning {
         if (is_admin()) {
             return $settings;
         }
-        
+
         // Cancel if mentioning functionality is disabled.
         if (!$this->asgarosforum->options['enable_mentioning']) {
             return $settings;

@@ -1309,7 +1309,7 @@ class AsgarosForum {
                     $space_position = mb_strpos($string, ' ', $length, 'UTF-8');
                 } else {
                     $space_position = strpos($string, ' ', $length);
-                }   
+                }
 
                 if ($space_position) {
                     $length = $space_position;
@@ -1536,7 +1536,7 @@ class AsgarosForum {
                 $output .= '</div>';
             }
         }
-        
+
         return $output;
     }
 
@@ -1745,7 +1745,7 @@ class AsgarosForum {
                 if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id, $post_date) && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
                     $delete_post_link = $this->get_link('topic', $this->current_topic, array('post' => $post_id, 'remove_post' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_delete_post')));
-                    
+
                     $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$delete_post_link.'">';
                         $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
                         $menu .= __('Delete', 'asgaros-forum');
@@ -1772,7 +1772,7 @@ class AsgarosForum {
 
         // Show report button.
         $menu .= $this->reports->render_report_button($post_id, $this->current_topic);
-        
+
         $menu = (!empty($menu)) ? '<div class="forum-post-menu">'.$menu.'</div>' : $menu;
         $menu = apply_filters('asgarosforum_filter_post_menu', $menu);
 

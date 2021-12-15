@@ -228,7 +228,7 @@ class AsgarosForumRewrite {
 	    if (empty($this->links)) {
             $this->set_links();
         }
-	    
+
 	    // Only generate a link when that type is available.
         if (isset($this->links[$type])) {
             // Initialize the base-link.
