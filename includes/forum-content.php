@@ -343,7 +343,7 @@ class AsgarosForumContent {
 
         do_action('asgarosforum_after_'.$this->get_action().'_submit', $this->asgarosforum->current_post, $this->asgarosforum->current_topic, $this->data_subject, $this->data_content, $link, $author_id);
 
-        wp_redirect($redirect);
+        wp_safe_redirect($redirect);
         exit;
     }
 

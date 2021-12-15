@@ -63,7 +63,7 @@ class AsgarosForumRewrite {
             $location = $this->get_link('home');
         }
 
-        wp_redirect($location);
+        wp_safe_redirect($location);
         exit;
     }
 
@@ -217,7 +217,7 @@ class AsgarosForumRewrite {
 
             $redirect_link = html_entity_decode($redirect_link);
 
-            wp_redirect($redirect_link, 301);
+            wp_safe_redirect($redirect_link, 301);
             exit;
         }
     }
