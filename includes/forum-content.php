@@ -392,7 +392,7 @@ class AsgarosForumContent {
         );
 
         // Save the ID of the new topic.
-        $inserted_ids = new stdClass;
+        $inserted_ids = new stdClass();
         $inserted_ids->topic_id = $this->asgarosforum->db->insert_id;
 
         // Now create a post inside this topic and save its ID as well.
