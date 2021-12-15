@@ -1383,7 +1383,7 @@ class AsgarosForum {
         $profileLink = $this->profile->getProfileLink($userObject);
 
         if ($profileLink) {
-            $renderedUserName = '<a class="profile-link" href="'.$profileLink.'">'.$user_name.'</a>';;
+            $renderedUserName = '<a class="profile-link" href="'.$profileLink.'">'.$user_name.'</a>';
         } else {
             $renderedUserName = $user_name;
         }
