@@ -2,22 +2,22 @@
 #af-wrapper .topic-name,
 #af-wrapper .forum-poster,
 #af-wrapper .topic-poster {
-    text-align: right;
+	text-align: right;
 }
 #af-wrapper .last-post-headline {
-    float: left;
+	float: left;
 }
 #af-wrapper #forum-search {
-    float: left;
+	float: left;
 }
 #af-wrapper #forum-navigation,
 #af-wrapper #forum-navigation-mobile {
-    float: right;
+	float: right;
 }
 #af-wrapper #read-unread span {
-    float: right;
+	float: right;
 }
 #af-wrapper #read-unread .indicator-label {
-    margin-right: 0px;
-    margin-left: 16px;
+	margin-right: 0px;
+	margin-left: 16px;
 }
