@@ -71,7 +71,7 @@ class AsgarosForumFeed {
 
             echo '<description>'.$this->asgarosforum->current_description.'</description>'.PHP_EOL;
             echo '<language>'.get_bloginfo('language').'</language>'.PHP_EOL;
-            echo '<lastBuildDate>'.mysql2date('D, d M Y H:i:s +0000', date('Y-m-d H:i:s'), false).'</lastBuildDate>'.PHP_EOL;
+            echo '<lastBuildDate>'.mysql2date('D, d M Y H:i:s +0000', gmdate('Y-m-d H:i:s'), false).'</lastBuildDate>'.PHP_EOL;
             echo '<generator>Asgaros Forum</generator>'.PHP_EOL;
             echo '<ttl>60</ttl>'.PHP_EOL;
             echo '<atom:link href="'.$this->asgarosforum->rewrite->get_link('current').'" rel="self" type="application/rss+xml" />'.PHP_EOL;

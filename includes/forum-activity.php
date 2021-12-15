@@ -33,13 +33,13 @@ class AsgarosForumActivity {
         $data = $this->load_activity_data();
 
         if (!empty($data)) {
-            $date_today = date($this->asgarosforum->date_format);
-            $date_yesterday = date($this->asgarosforum->date_format, strtotime('-1 days'));
+            $date_today = gmdate($this->asgarosforum->date_format);
+            $date_yesterday = gmdate($this->asgarosforum->date_format, strtotime('-1 days'));
             $last_time = false;
             $first_group = true;
 
             foreach ($data as $activity) {
-                $current_time = date($this->asgarosforum->date_format, strtotime($activity->date));
+                $current_time = gmdate($this->asgarosforum->date_format, strtotime($activity->date));
                 $human_time_diff = $this->asgarosforum->get_activity_timestamp($activity->date, 'relative');
 
                 if ($current_time == $date_today) {
@@ -106,7 +106,7 @@ class AsgarosForumActivity {
             // Calculate activity end-time.
             $time_current = time();
             $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
-            $time_end = date('Y-m-d H:i:s', $time_end);
+            $time_end = gmdate('Y-m-d H:i:s', $time_end);
 
             if ($count_all) {
                 return $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}';");

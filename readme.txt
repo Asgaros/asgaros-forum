@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Display and calculation-issues related to time and timezones
 = 1.15.15 =
 * Fixed: SQL injection vulnerability in the approval-functionality
 * Fixed: Prevent cross-site request forgery when creating, editing or deleting posts and topics
