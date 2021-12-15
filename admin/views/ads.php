@@ -16,23 +16,23 @@
 
                 <table class="form-table">
                     <tr>
-                        <th><label for="ad_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="ad_name"><?php esc_html_e('Name:', 'asgaros-forum'); ?></label></th>
                         <td><input class="element-name" type="text" size="100" maxlength="200" name="ad_name" id="ad_name" value="" required></td>
                     </tr>
                     <tr>
-                        <th><label for="ad_code"><?php _e('Code:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="ad_code"><?php esc_html_e('Code:', 'asgaros-forum'); ?></label></th>
                         <td><textarea class="large-text" data-code-editor-mode="htmlmixed" rows="8" cols="80" type="text" name="ad_code" id="ad_code"></textarea></td>
                     </tr>
                     <tr>
-                        <th><label for="ad_active"><?php _e('Active:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="ad_active"><?php esc_html_e('Active:', 'asgaros-forum'); ?></label></th>
                         <td><input type="checkbox" id="ad_active" name="ad_active"></td>
                     </tr>
                     <tr id="locations-editor">
-                        <th><label><?php _e('Location:', 'asgaros-forum'); ?></label></th>
+                        <th><label><?php esc_html_e('Location:', 'asgaros-forum'); ?></label></th>
                         <td>
                             <?php
                             foreach ($this->asgarosforum->ads->locations as $key => $value) {
-                                echo '<label><input type="checkbox" name="ad_locations[]" value="'.$key.'">'.$value.'</label>';
+                                echo '<label><input type="checkbox" name="ad_locations[]" value="'.esc_attr($key).'">'.esc_html($value).'</label>';
                             }
                             ?>
                         </td>
@@ -40,8 +40,8 @@
                 </table>
 
                 <p class="submit">
-                    <input type="submit" name="af-create-edit-ad-submit" value="<?php _e('Save', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="af-create-edit-ad-submit" value="<?php esc_attr_e('Save', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -50,11 +50,11 @@
             <form method="post">
                 <?php wp_nonce_field('asgaros_forum_delete_ad'); ?>
                 <input type="hidden" name="ad_id" value="0">
-                <p><?php _e('Are you sure you want to delete this ad?', 'asgaros-forum'); ?></p>
+                <p><?php esc_html_e('Are you sure you want to delete this ad?', 'asgaros-forum'); ?></p>
 
                 <p class="submit">
-                    <input type="submit" name="asgaros-forum-delete-ad" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="asgaros-forum-delete-ad" value="<?php esc_attr_e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -63,7 +63,7 @@
     <div class="settings-box">
         <div class="settings-header">
             <span class="fas fa-ad"></span>
-            <?php _e('Ads', 'asgaros-forum'); ?>
+            <?php esc_html_e('Ads', 'asgaros-forum'); ?>
         </div>
         <?php
         $ads = $this->asgarosforum->ads->get_ads();
@@ -74,9 +74,9 @@
             $ads_table->display();
         }
 
-        echo '<a href="#" class="ad-editor-link add-element" data-value-id="new" data-value-editor-title="'.__('New Ad', 'asgaros-forum').'">';
+        echo '<a href="#" class="ad-editor-link add-element" data-value-id="new" data-value-editor-title="'.esc_attr__('New Ad', 'asgaros-forum').'">';
             echo '<span class="fas fa-plus"></span>';
-            echo __('New Ad', 'asgaros-forum');
+            echo esc_html__('New Ad', 'asgaros-forum');
         echo '</a>';
 
         ?>

@@ -735,7 +735,7 @@ class AsgarosForum {
 
         if ($notice_link) { echo '<a href="'.esc_url($notice_link).'">'; }
 
-        echo $notice_message;
+        echo esc_html($notice_message);
 
         if ($notice_link) { echo '</a>'; }
 
@@ -847,20 +847,20 @@ class AsgarosForum {
     function showMainTitleAndDescription() {
         $mainTitle = $this->getMainTitle();
 
-        echo '<h1 class="main-title main-title-'.$this->current_view.'">';
+        echo '<h1 class="main-title main-title-'.esc_attr($this->current_view).'">';
 
         // Show lock symbol for closed topics.
         if ($this->current_view == 'topic' && $this->is_topic_closed($this->current_topic)) {
             echo '<span class="main-title-icon fas fa-lock"></span>';
         }
 
-        echo $mainTitle;
+        echo esc_html($mainTitle);
         echo '</h1>';
 
         if ($this->current_view === 'forum' && $this->options['show_description_in_forum'] && !empty($this->current_description)) {
             $forum_object = $this->content->get_forum($this->current_forum);
 
-            echo '<div class="main-description">'.stripslashes($forum_object->description).'</div>';
+            echo '<div class="main-description">'.esc_html(stripslashes($forum_object->description)).'</div>';
         }
     }
 
@@ -893,18 +893,18 @@ class AsgarosForum {
         // Get the read/unread status of a forum.
         $unread_status = $this->unread->get_status_forum($forum->id, $count_topics);
 
-        echo '<div class="content-element forum" id="forum-'.$forum->id.'">';
+        echo '<div class="content-element forum" id="forum-'.esc_attr($forum->id).'">';
             $forum_icon = trim(esc_html(stripslashes($forum->icon)));
             $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
 
-            echo '<div class="forum-status '.$unread_status.'"><i class="'.$forum_icon.'"></i></div>';
+            echo '<div class="forum-status '.esc_attr($unread_status).'"><i class="'.esc_attr($forum_icon).'"></i></div>';
             echo '<div class="forum-name">';
                 echo '<a class="forum-title" href="'.$this->get_link('forum', $forum->id).'">'.esc_html(stripslashes($forum->name)).'</a>';
 
                 // Show the description of the forum when it is not empty.
                 $forum_description = stripslashes($forum->description);
                 if (!empty($forum_description)) {
-                    echo '<small class="forum-description">'.$forum_description.'</small>';
+                    echo '<small class="forum-description">'.esc_html($forum_description).'</small>';
                 }
 
                 // Show forum stats.
@@ -921,7 +921,7 @@ class AsgarosForum {
                 // Show subforums.
                 if ($forum->count_subforums > 0) {
                     echo '<small class="forum-subforums">';
-                    echo '<b>'.__('Subforums', 'asgaros-forum').':</b>&nbsp;';
+                    echo '<b>'.esc_html__('Subforums', 'asgaros-forum').':</b>&nbsp;';
 
                     $subforums = $this->get_forums($forum->parent_id, $forum->id);
                     $subforumsFirstDone = false;
@@ -951,19 +951,19 @@ class AsgarosForum {
             echo '<div class="topic-status '.esc_attr($unread_status).'"><i class="far fa-comments"></i></div>';
             echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-thumbtack" title="'.__('This topic is sticked', 'asgaros-forum').'"></span>';
+                    echo '<span class="topic-icon fas fa-thumbtack" title="'.esc_attr__('This topic is sticked', 'asgaros-forum').'"></span>';
                 }
 
                 if ($this->is_topic_closed($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-lock" title="'.__('This topic is closed', 'asgaros-forum').'"></span>';
+                    echo '<span class="topic-icon fas fa-lock" title="'.esc_attr__('This topic is closed', 'asgaros-forum').'"></span>';
                 }
 
                 if ($this->polls->has_poll($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-poll-h" title="'.__('This topic contains a poll', 'asgaros-forum').'"></span>';
+                    echo '<span class="topic-icon fas fa-poll-h" title="'.esc_attr__('This topic contains a poll', 'asgaros-forum').'"></span>';
                 }
 
-                echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.$topic_title.'">';
-                echo $topic_title;
+                echo '<a href="'.$this->get_link('topic', $topic_object->id).'" title="'.esc_attr($topic_title).'">';
+                echo esc_html($topic_title);
                 echo '</a>';
 
                 echo '<small>';
@@ -972,7 +972,7 @@ class AsgarosForum {
                 // Show the name of the forum in which a topic is located in. This is currently only used for search results.
                 if ($show_topic_location) {
                     echo '&nbsp;&middot;&nbsp;';
-                    echo __('In', 'asgaros-forum').'&nbsp;';
+                    echo esc_html__('In', 'asgaros-forum').'&nbsp;';
                     echo '<a href="'.$this->rewrite->get_link('forum', $topic_object->forum_id).'">';
                     echo esc_html(stripslashes($topic_object->forum_name));
                     echo '</a>';
@@ -1012,8 +1012,8 @@ class AsgarosForum {
 
         if (!empty($subforums)) {
             echo '<div class="title-element">';
-                echo __('Subforums', 'asgaros-forum');
-                echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
+                echo esc_html__('Subforums', 'asgaros-forum');
+                echo '<span class="last-post-headline">'.esc_html__('Last post', 'asgaros-forum').'</span>';
             echo '</div>';
 
             echo '<div class="content-container">';
@@ -1596,7 +1596,7 @@ class AsgarosForum {
         echo '<div id="sticky-panel">';
             echo '<div class="title-element title-element-dark">';
                 echo '<span class="title-element-icon fas fa-thumbtack"></span>';
-                echo __('Select Sticky Mode:', 'asgaros-forum');
+                echo esc_html__('Select Sticky Mode:', 'asgaros-forum');
             echo '</div>';
             echo '<div class="content-container">';
                 echo '<form method="post" action="'.$this->get_link('topic', $this->current_topic).'">';
@@ -1605,20 +1605,20 @@ class AsgarosForum {
                             echo '<input type="radio" name="sticky_topic" value="1">';
                             echo '<span class="action-panel-title">';
                                 echo '<span class="action-panel-icon fas fa-thumbtack"></span>';
-                                echo __('Sticky', 'asgaros-forum');
+                                echo esc_html__('Sticky', 'asgaros-forum');
                             echo '</span>';
                             echo '<span class="action-panel-description">';
-                                _e('The topic will be sticked to the current forum.', 'asgaros-forum');
+                                esc_html_e('The topic will be sticked to the current forum.', 'asgaros-forum');
                             echo '</span>';
                         echo '</label>';
                         echo '<label class="action-panel-option">';
                             echo '<input type="radio" name="sticky_topic" value="2">';
                             echo '<span class="action-panel-title">';
                                 echo '<span class="action-panel-icon fas fa-globe-europe"></span>';
-                                echo __('Global Sticky', 'asgaros-forum');
+                                echo esc_html__('Global Sticky', 'asgaros-forum');
                             echo '</span>';
                             echo '<span class="action-panel-description">';
-                                _e('The topic will be sticked to all forums.', 'asgaros-forum');
+                                esc_html_e('The topic will be sticked to all forums.', 'asgaros-forum');
                             echo '</span>';
                         echo '</label>';
                     echo '</div>';
@@ -1784,11 +1784,11 @@ class AsgarosForum {
             echo '<div id="forum-navigation-mobile">';
                 echo '<a>';
                     echo '<span class="fas fa-bars"></span>';
-                    echo __('Menu', 'asgaros-forum');
+                    echo esc_html__('Menu', 'asgaros-forum');
                 echo '</a>';
             echo '</div>';
 
-            echo '<span class="screen-reader-text">'.__('Forum Navigation', 'asgaros-forum').'</span>';
+            echo '<span class="screen-reader-text">'.esc_html__('Forum Navigation', 'asgaros-forum').'</span>';
 
             echo '<div id="forum-navigation">';
                 /**
@@ -1863,7 +1863,7 @@ class AsgarosForum {
             // Check if link has to open in a new tab.
             $new_tab = ($menu_entry['menu_new_tab']) ? 'target="_blank"' : '';
 
-            echo '<a '.$menu_class.' href="'.$menu_url.'" '.$new_tab.'>'.$menu_entry['menu_link_text'].'</a>';
+            echo '<a '.esc_attr($menu_class).' href="'.$menu_url.'" '.$new_tab.'>'.esc_html($menu_entry['menu_link_text']).'</a>';
         }
     }
 
@@ -2246,7 +2246,7 @@ class AsgarosForum {
         }
 
         // Show reassign-options.
-        echo '<h2>'.__('Forum', 'asgaros-forum').'</h2>';
+        echo '<h2>'.esc_html__('Forum', 'asgaros-forum').'</h2>';
 
         echo '<fieldset>';
         echo '<p><legend>';
@@ -2255,18 +2255,18 @@ class AsgarosForum {
 		$go_delete = count($userids);
 
         if ($go_delete === 1) {
-            echo __('What should be done with forum posts owned by this user?', 'asgaros-forum');
+            echo esc_html__('What should be done with forum posts owned by this user?', 'asgaros-forum');
         } else {
-            echo __('What should be done with forum posts owned by these users?', 'asgaros-forum');
+            echo esc_html__('What should be done with forum posts owned by these users?', 'asgaros-forum');
         }
         echo '</legend></p>';
 
 	    echo '<ul style="list-style: none;">';
 		echo '<li><input type="radio" id="forum_reassign0" name="forum_reassign" value="no" checked="checked">';
-        echo '<label for="forum_reassign0">'.__('Do not reassign forum posts.', 'asgaros-forum').'</label></li>';
+        echo '<label for="forum_reassign0">'.esc_html__('Do not reassign forum posts.', 'asgaros-forum').'</label></li>';
 
 		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes">';
-		echo '<label for="forum_reassign1">'.__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
+		echo '<label for="forum_reassign1">'.esc_html__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
         wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids, 'show' => 'display_name_with_login'));
 		echo '</li></ul></fieldset>';
     }
@@ -2461,13 +2461,13 @@ class AsgarosForum {
 
                 if ($forums) {
                     foreach ($forums as $forum) {
-                        echo '<option value="'.$forum->id.'">'.esc_html($forum->name).'</option>';
+                        echo '<option value="'.esc_attr($forum->id).'">'.esc_html($forum->name).'</option>';
 
                         if ($forum->count_subforums > 0) {
                             $subforums = $this->get_forums($category->term_id, $forum->id);
 
                             foreach ($subforums as $subforum) {
-                                echo '<option value="'.$subforum->id.'">--- '.esc_html($subforum->name).'</option>';
+                                echo '<option value="'.esc_attr($subforum->id).'">--- '.esc_html($subforum->name).'</option>';
                             }
                         }
                     }
@@ -2477,7 +2477,7 @@ class AsgarosForum {
 
         echo '</select>';
         echo '<br>';
-        echo '<label for="add_topic_in_forum">'.__('A topic is created in the selected forum when you save this document.', 'asgaros-forum').'</label>';
+        echo '<label for="add_topic_in_forum">'.esc_html__('A topic is created in the selected forum when you save this document.', 'asgaros-forum').'</label>';
     }
 
     public function process_topic_meta_box($post_id, $post) {

@@ -104,8 +104,8 @@ class AsgarosForumAdmin {
 
     function render_options_header($option) {
         echo '<div class="settings-header">';
-            echo '<span class="'.$this->option_views[$option]['icon'].'"></span>';
-            echo $this->option_views[$option]['label'];
+            echo '<span class="'.esc_attr($this->option_views[$option]['icon']).'"></span>';
+            echo esc_html($this->option_views[$option]['label']);
         echo '</div>';
     }
 
@@ -167,7 +167,7 @@ class AsgarosForumAdmin {
         }
 
         if (!empty($output)) {
-            echo '<h2>'.__('Forum', 'asgaros-forum').'</h2>';
+            echo '<h2>'.esc_html__('Forum', 'asgaros-forum').'</h2>';
             echo '<table class="form-table">';
             echo $output;
             echo '</table>';
@@ -539,34 +539,34 @@ class AsgarosForumAdmin {
         echo '<div id="asgaros-panel">';
             echo '<div class="header-panel">';
                 echo '<div class="sub-panel-left">';
-                    echo '<img src="'.$this->asgarosforum->plugin_url.'admin/images/logo.png">';
+                    echo '<img src="'.esc_url($this->asgarosforum->plugin_url.'admin/images/logo.png').'">';
                 echo '</div>';
                 echo '<div class="sub-panel-left">';
-                    echo '<h1>'.$title.'</h1>';
+                    echo '<h1>'.esc_html($title).'</h1>';
                 echo '</div>';
                 echo '<div class="sub-panel-right">';
                     echo '<a href="https://www.asgaros.de/support/" target="_blank">';
                         echo '<span class="asgaros-panel-icon fas fa-user"></span>';
-                        echo __('Official Support Forum', 'asgaros-forum');
+                        echo esc_html__('Official Support Forum', 'asgaros-forum');
                     echo '</a>';
                     echo '&bull;';
                     echo '<a href="https://www.asgaros.de/docs/" target="_blank">';
                         echo '<span class="asgaros-panel-icon fas fa-book"></span>';
-                        echo __('Documentation', 'asgaros-forum');
+                        echo esc_html__('Documentation', 'asgaros-forum');
                     echo '</a>';
                     echo '&bull;';
                     echo '<a href="https://www.asgaros.de/donate/" target="_blank">';
                         echo '<span class="asgaros-panel-icon donate-icon fas fa-heart"></span>';
-                        echo __('Donate', 'asgaros-forum');
+                        echo esc_html__('Donate', 'asgaros-forum');
                     echo '</a>';
                 echo '</div>';
                 echo '<div class="clear"></div>';
             echo '</div>';
 
             if ($this->error) {
-                echo '<div class="error-panel"><p>'.$this->error.'</p></div>';
+                echo '<div class="error-panel"><p>'.esc_html($this->error).'</p></div>';
             } else if ($this->saved) {
-                echo '<div class="updated-panel"><p>'.$titleUpdated.'</p></div>';
+                echo '<div class="updated-panel"><p>'.esc_html($titleUpdated).'</p></div>';
             }
 
         echo '</div>';
