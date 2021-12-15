@@ -43,6 +43,7 @@ function mycred_load_asgarosforum_hook() {
                     ),
                     'delete_topic'  => array(
                         'creds'     => -1,
+						/* translators: singular label of point-type for deduction when deleting forum topic */
                         'log'       => __('%singular% deduction for deleted forum topic', 'asgaros-forum')
                     ),
                     'new_post'      => array(
@@ -53,6 +54,7 @@ function mycred_load_asgarosforum_hook() {
                     ),
                     'delete_post'   => array(
                         'creds'     => -1,
+						/* translators: singular label of point-type for deduction when deleting forum post */
                         'log'       => __('%singular% deduction for deleted forum post', 'asgaros-forum')
                     ),
                     'received_like' => array(
@@ -62,6 +64,7 @@ function mycred_load_asgarosforum_hook() {
                     ),
                     'received_dislike'   => array(
                         'creds'     => -1,
+						/* translators: singular label of point-type for deduction when receiving forum post dislike */
                         'log'       => __('%singular% deduction for received forum post dislike', 'asgaros-forum')
                     ),
                     'show_points'   => 0,
