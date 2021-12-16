@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.8
 Requires PHP: 5.2
-Stable tag: 1.15.15
+Stable tag: 1.15.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 1.15.16 =
 * Fixed: Display and calculation-issues related to time and timezones
 * Fixed: Ensure safe local redirects within the forum
 * Fixed: Add missing sanitizing for input data
