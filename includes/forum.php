@@ -502,9 +502,9 @@ class AsgarosForum {
             $this->content->do_insertion();
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
-        } else if (isset($_GET['delete_topic']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'asgaros_forum_delete_topic')) {
+        } else if (isset($_GET['delete_topic']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_topic')) {
             $this->delete_topic($this->current_topic);
-        } else if (isset($_GET['remove_post']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'asgaros_forum_delete_post')) {
+        } else if (isset($_GET['remove_post']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_post')) {
             $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
             $this->remove_post($post_id);
         } else if (!empty($_POST['sticky_topic']) || isset($_GET['sticky_topic'])) {
@@ -2485,8 +2485,10 @@ class AsgarosForum {
             return;
         }
 
-        if (isset($_POST['add_topic_in_forum']) && $_POST['add_topic_in_forum'] > 0) {
-            $this->create_blog_topic($_POST['add_topic_in_forum'], $post);
+		$forum_id = !empty($_POST['add_topic_in_forum']) ? sanitize_key($_POST['add_topic_in_forum']) : 0;
+
+        if ($forum_id > 0) {
+            $this->create_blog_topic($forum_id, $post);
         }
     }
 }

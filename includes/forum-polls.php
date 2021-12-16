@@ -220,7 +220,7 @@ class AsgarosForumPolls {
         // Try to set poll-title.
         if (!empty($_POST['poll-title'])) {
             // Trim poll-title and remove tags.
-            $poll_title = trim(strip_tags($_POST['poll-title']));
+            $poll_title = sanitize_text_field($_POST['poll-title']);
         }
 
         // Validate poll-title.

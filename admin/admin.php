@@ -180,7 +180,7 @@ class AsgarosForumAdmin {
         if (current_user_can('manage_options')) {
             if (!user_can($user_id, 'manage_options')) {
                 if (isset($_POST['asgarosforum_role'])) {
-                    $this->asgarosforum->permissions->set_forum_role($user_id, $_POST['asgarosforum_role']);
+                    $this->asgarosforum->permissions->set_forum_role($user_id, sanitize_key($_POST['asgarosforum_role']));
                 }
             }
 
@@ -284,7 +284,7 @@ class AsgarosForumAdmin {
                 check_admin_referer('asgaros_forum_delete_forum');
 
                 if (!empty($_POST['forum-id']) && is_numeric($_POST['forum-id']) && !empty($_POST['forum-category']) && is_numeric($_POST['forum-category'])) {
-                    $this->delete_forum($_POST['forum-id'], $_POST['forum-category']);
+                    $this->delete_forum(sanitize_key($_POST['forum-id']), sanitize_key($_POST['forum-category']));
                 }
             } else if (isset($_POST['af-create-edit-category-submit'])) {
                 // Verify nonce first.
@@ -296,7 +296,7 @@ class AsgarosForumAdmin {
                 check_admin_referer('asgaros_forum_delete_category');
 
                 if (!empty($_POST['category-id']) && is_numeric($_POST['category-id'])) {
-                    $this->delete_category($_POST['category-id']);
+                    $this->delete_category(sanitize_key($_POST['category-id']));
                 }
             } else if (isset($_POST['af-create-edit-usergroup-category-submit'])) {
                 // Verify nonce first.
@@ -325,21 +325,21 @@ class AsgarosForumAdmin {
                 check_admin_referer('asgaros_forum_delete_usergroup');
 
                 if (!empty($_POST['usergroup-id']) && is_numeric($_POST['usergroup-id'])) {
-                    AsgarosForumUserGroups::deleteUserGroup($_POST['usergroup-id']);
+                    AsgarosForumUserGroups::deleteUserGroup(sanitize_key($_POST['usergroup-id']));
                 }
             } else if (isset($_POST['asgaros-forum-delete-usergroup-category'])) {
                 // Verify nonce first.
                 check_admin_referer('asgaros_forum_delete_usergroup_category');
 
                 if (!empty($_POST['usergroup-category-id']) && is_numeric($_POST['usergroup-category-id'])) {
-                    AsgarosForumUserGroups::deleteUserGroupCategory($_POST['usergroup-category-id']);
+                    AsgarosForumUserGroups::deleteUserGroupCategory(sanitize_key($_POST['usergroup-category-id']));
                 }
             } else if (isset($_POST['af-create-edit-ad-submit'])) {
                 // Verify nonce first.
                 check_admin_referer('asgaros_forum_save_ad');
 
-                $ad_id          = $_POST['ad_id'];
-                $ad_name        = trim($_POST['ad_name']);
+                $ad_id          = sanitize_key($_POST['ad_id']);
+                $ad_name        = sanitize_text_field($_POST['ad_name']);
                 $ad_code        = trim($_POST['ad_code']);
                 $ad_active      = isset($_POST['ad_active']) ? 1 : 0;
                 $ad_locations   = isset($_POST['ad_locations']) ? implode(',', $_POST['ad_locations']) : '';
@@ -351,7 +351,7 @@ class AsgarosForumAdmin {
                 check_admin_referer('asgaros_forum_delete_ad');
 
                 if (!empty($_POST['ad_id']) && is_numeric($_POST['ad_id'])) {
-                    $this->asgarosforum->ads->delete_ad($_POST['ad_id']);
+                    $this->asgarosforum->ads->delete_ad(sanitize_key($_POST['ad_id']));
                     $this->saved = true;
                 }
             }
@@ -406,10 +406,10 @@ class AsgarosForumAdmin {
 
     /* STRUCTURE */
     public function save_category() {
-        $category_id        = $_POST['category_id'];
-        $category_name      = trim($_POST['category_name']);
-        $category_access    = trim($_POST['category_access']);
-        $category_order     = (is_numeric($_POST['category_order'])) ? $_POST['category_order'] : 1;
+        $category_id        = sanitize_key($_POST['category_id']);
+        $category_name      = sanitize_text_field($_POST['category_name']);
+        $category_access    = sanitize_key($_POST['category_access']);
+        $category_order     = (is_numeric($_POST['category_order'])) ? sanitize_key($_POST['category_order']) : 1;
 
         if (!empty($category_name)) {
             if ($category_id === 'new') {
@@ -436,20 +436,20 @@ class AsgarosForumAdmin {
 
     public function save_forum() {
         // ID of the forum.
-        $forum_id           = $_POST['forum_id'];
+        $forum_id           = sanitize_key($_POST['forum_id']);
 
         // Determine parent IDs.
-        $parent_ids          = explode('_', $_POST['forum_parent']);
+        $parent_ids          = explode('_', sanitize_key($_POST['forum_parent']));
         $forum_category     = $parent_ids[0];
         $forum_parent_forum = $parent_ids[1];
 
         // Additional data.
-        $forum_name         = trim($_POST['forum_name']);
-        $forum_description  = trim($_POST['forum_description']);
-        $forum_icon         = trim($_POST['forum_icon']);
+        $forum_name         = sanitize_text_field($_POST['forum_name']);
+        $forum_description  = sanitize_text_field($_POST['forum_description']);
+        $forum_icon         = sanitize_key($_POST['forum_icon']);
         $forum_icon         = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
         $forum_status       = $_POST['forum_status'];
-        $forum_order        = (is_numeric($_POST['forum_order'])) ? $_POST['forum_order'] : 0;
+        $forum_order        = (is_numeric($_POST['forum_order'])) ? sanitize_key($_POST['forum_order']) : 0;
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {

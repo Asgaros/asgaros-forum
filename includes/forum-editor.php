@@ -189,7 +189,7 @@ class AsgarosForumEditor {
 			$this->asgarosforum->render_notice(__('You are not allowed to do this.', 'asgaros-forum'));
         } else {
             $post = false;
-            $subject = (isset($_POST['subject'])) ? trim($_POST['subject']) : '';
+            $subject = (isset($_POST['subject'])) ? sanitize_text_field($_POST['subject']) : '';
             $message = (isset($_POST['message'])) ? trim($_POST['message']) : '';
 
             if ($editor_view === 'addpost') {

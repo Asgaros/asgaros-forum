@@ -455,8 +455,8 @@ class AsgarosForumUserGroups {
     }
 
     public static function saveUserGroupCategory() {
-        $category_id    = $_POST['usergroup_category_id'];
-        $category_name  = $_POST['usergroup_category_name'];
+        $category_id    = sanitize_key($_POST['usergroup_category_id']);
+        $category_name  = sanitize_text_field($_POST['usergroup_category_name']);
 
         if ($category_id === 'new') {
             return self::insertUserGroupCategory($category_name);
@@ -677,7 +677,7 @@ class AsgarosForumUserGroups {
         if (!self::$asgarosforum->prevent_query_modifications) {
     		if ($pagenow == 'users.php') {
                 if (!empty($_GET['forum-user-group'])) {
-        			$userGroupID = $_GET['forum-user-group'];
+        			$userGroupID = sanitize_key($_GET['forum-user-group']);
         			$term = self::getUserGroup($userGroupID);
 
                     if (!empty($term)) {

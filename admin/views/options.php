@@ -19,8 +19,9 @@ if (!defined('ABSPATH')) exit;
         // Get selected tab.
         $selected_tab = 'general';
 
-        if (isset($_POST['selected_tab']) && isset($this->option_views[$_POST['selected_tab']])) {
-            $selected_tab = $_POST['selected_tab'];
+		// Parse selected tab in URL.
+        if (!empty($_POST['selected_tab']) && isset($this->option_views[$_POST['selected_tab']])) {
+            $selected_tab = sanitize_key($_POST['selected_tab']);
         }
 
         // Generate hidden input for selected tab.

@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Display and calculation-issues related to time and timezones
 * Fixed: Ensure safe local redirects within the forum
+* Fixed: Add missing sanitizing for input data
 * Fixed: Add missing escaping for output data
 * Changed: Added some clarifying comments for translators
 * Performance improvements and code optimizations
