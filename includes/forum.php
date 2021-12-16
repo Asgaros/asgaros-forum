@@ -867,7 +867,7 @@ class AsgarosForum {
     public function overview() {
         $categories = $this->content->get_categories();
 
-        require('views/overview.php');
+        require 'views/overview.php';
     }
 
     public function showSinglePost() {
@@ -876,11 +876,11 @@ class AsgarosForum {
         $post = $this->content->get_post($this->current_post);
 
         echo '<div class="title-element"></div>';
-        require('views/post-element.php');
+        require 'views/post-element.php';
     }
 
     public function show_forum() {
-        require('views/forum.php');
+        require 'views/forum.php';
     }
 
     public function render_forum_element($forum) {
@@ -1053,7 +1053,7 @@ class AsgarosForum {
             $counter = 0;
             $topicStarter = $this->get_topic_starter($this->current_topic);
             foreach ($posts as $post) {
-                require('views/post-element.php');
+                require 'views/post-element.php';
             }
             $this->editor->showEditor('addpost', true);
 

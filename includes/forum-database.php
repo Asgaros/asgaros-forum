@@ -60,7 +60,7 @@ class AsgarosForumDatabase {
     // Create tables for a new subsite in a multisite installation.
     public function buildSubsite($blog_id, $user_id, $domain, $path, $site_id, $meta) {
         if (!function_exists('is_plugin_active_for_network')) {
-            require_once(ABSPATH.'/wp-admin/includes/plugin.php');
+            require_once ABSPATH.'/wp-admin/includes/plugin.php';
         }
 
         if (is_plugin_active_for_network('asgaros-forum/asgaros-forum.php')) {
@@ -205,7 +205,7 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (poll_id, option_id, user_id)
             ) $charset_collate;";
 
-            require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+            require_once ABSPATH.'wp-admin/includes/upgrade.php';
 
             dbDelta($sql);
 

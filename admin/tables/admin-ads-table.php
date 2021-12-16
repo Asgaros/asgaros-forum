@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 if (!class_exists('WP_List_Table')){
-    require_once(ABSPATH.'wp-admin/includes/class-wp-list-table.php');
+    require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
 }
 
 class AsgarosForumAdminTableAds extends WP_List_Table {

@@ -230,23 +230,23 @@ class AsgarosForumAdmin {
     }
 
     public function options_page() {
-        require('views/options.php');
+        require 'views/options.php';
     }
 
     public function structure_page() {
-        require('views/structure.php');
+        require 'views/structure.php';
     }
 
     public function appearance_page() {
-        require('views/appearance.php');
+        require 'views/appearance.php';
     }
 
     public function usergroups_page() {
-        require('views/usergroups.php');
+        require 'views/usergroups.php';
     }
 
     public function ads_page() {
-        require('views/ads.php');
+        require 'views/ads.php';
     }
 
     public function enqueue_admin_scripts($hook) {

@@ -29,51 +29,51 @@
 if (!defined('ABSPATH')) exit;
 
 // Include Asgaros Forum core files.
-require('includes/forum.php');
-require('includes/forum-database.php');
-require('includes/forum-compatibility.php');
-require('includes/forum-rewrite.php');
-require('includes/forum-permissions.php');
-require('includes/forum-content.php');
-require('includes/forum-notifications.php');
-require('includes/forum-appearance.php');
-require('includes/forum-unread.php');
-require('includes/forum-uploads.php');
-require('includes/forum-search.php');
-require('includes/forum-statistics.php');
-require('includes/forum-breadcrumbs.php');
-require('includes/forum-editor.php');
-require('includes/forum-shortcodes.php');
-require('includes/forum-pagination.php');
-require('includes/forum-online.php');
-require('includes/forum-usergroups.php');
-require('includes/forum-profile.php');
-require('includes/forum-memberslist.php');
-require('includes/forum-reports.php');
-require('includes/forum-reactions.php');
-require('includes/forum-mentioning.php');
-require('includes/forum-activity.php');
-require('includes/forum-feed.php');
-require('includes/forum-ads.php');
-require('includes/forum-approval.php');
-require('includes/forum-spoilers.php');
-require('includes/forum-polls.php');
-require('includes/forum-user-query.php');
+require 'includes/forum.php';
+require 'includes/forum-database.php';
+require 'includes/forum-compatibility.php';
+require 'includes/forum-rewrite.php';
+require 'includes/forum-permissions.php';
+require 'includes/forum-content.php';
+require 'includes/forum-notifications.php';
+require 'includes/forum-appearance.php';
+require 'includes/forum-unread.php';
+require 'includes/forum-uploads.php';
+require 'includes/forum-search.php';
+require 'includes/forum-statistics.php';
+require 'includes/forum-breadcrumbs.php';
+require 'includes/forum-editor.php';
+require 'includes/forum-shortcodes.php';
+require 'includes/forum-pagination.php';
+require 'includes/forum-online.php';
+require 'includes/forum-usergroups.php';
+require 'includes/forum-profile.php';
+require 'includes/forum-memberslist.php';
+require 'includes/forum-reports.php';
+require 'includes/forum-reactions.php';
+require 'includes/forum-mentioning.php';
+require 'includes/forum-activity.php';
+require 'includes/forum-feed.php';
+require 'includes/forum-ads.php';
+require 'includes/forum-approval.php';
+require 'includes/forum-spoilers.php';
+require 'includes/forum-polls.php';
+require 'includes/forum-user-query.php';
 
 // Include widget files.
-require('includes/forum-widgets.php');
-require('widgets/widget-recent-posts.php');
-require('widgets/widget-recent-topics.php');
-require('widgets/widget-search.php');
+require 'includes/forum-widgets.php';
+require 'widgets/widget-recent-posts.php';
+require 'widgets/widget-recent-topics.php';
+require 'widgets/widget-search.php';
 
 // Include integration files.
-require('integrations/integration-mycred.php');
+require 'integrations/integration-mycred.php';
 
 // Include admin files.
-require('admin/admin.php');
-require('admin/tables/admin-structure-table.php');
-require('admin/tables/admin-usergroups-table.php');
-require('admin/tables/admin-ads-table.php');
+require 'admin/admin.php';
+require 'admin/tables/admin-structure-table.php';
+require 'admin/tables/admin-usergroups-table.php';
+require 'admin/tables/admin-ads-table.php';
 
 $asgarosforum = new AsgarosForum();
 
