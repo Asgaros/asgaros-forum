@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Add missing sanitizing for input data
 = 1.15.16 =
 * Fixed: Display and calculation-issues related to time and timezones
 * Fixed: Ensure safe local redirects within the forum

@@ -202,7 +202,7 @@ class AsgarosForumAdmin {
                     if ($this->asgarosforum->options['signatures_html_allowed']) {
                         update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature'], $this->asgarosforum->options['signatures_html_tags']))));
                     } else {
-                        update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature']))));
+                        update_user_meta($user_id, 'asgarosforum_signature', trim(sanitize_textarea_field($_POST['asgarosforum_signature'])));
                     }
                 } else {
                     delete_user_meta($user_id, 'asgarosforum_signature');
