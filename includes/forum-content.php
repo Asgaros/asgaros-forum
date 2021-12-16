@@ -543,7 +543,7 @@ class AsgarosForumContent {
             );
         }
 
-        if (sizeof($meta_query_filter) > 1) {
+        if (count($meta_query_filter) > 1) {
             return $meta_query_filter;
         } else {
             return array();
