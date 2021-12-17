@@ -503,10 +503,18 @@ class AsgarosForum {
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
         } else if (isset($_GET['delete_topic']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_topic')) {
-            $this->delete_topic($this->current_topic);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_topic')) {
+					$this->delete_topic($this->current_topic);
+				}
+			}
         } else if (isset($_GET['remove_post']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_post')) {
-            $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
-            $this->remove_post($post_id);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_post')) {
+					$post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
+            		$this->remove_post($post_id);
+				}
+			}
         } else if (!empty($_POST['sticky_topic']) || isset($_GET['sticky_topic'])) {
             $sticky_mode = 1;
 
