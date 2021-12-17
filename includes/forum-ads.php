@@ -117,7 +117,7 @@ class AsgarosForumAds {
 
             // Select a random ad if necessary.
             if ($counter > 1) {
-                $ad = $this->ads[$position][rand(0, ($counter - 1))];
+                $ad = $this->ads[$position][wp_rand(0, ($counter - 1))];
             }
 
             // Prepare ad.
