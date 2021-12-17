@@ -654,11 +654,11 @@ class AsgarosForum {
             wp_enqueue_style('af-rtl', $themeurl.'/rtl.css', array(), $this->version);
         }
 
-        wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery', 'wp-api'), $this->version);
+        wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery', 'wp-api'), $this->version, false);
         wp_localize_script('wp-api', 'wpApiSettings', array('root' => esc_url_raw(rest_url()), 'nonce' => wp_create_nonce('wp_rest')));
 
         if ($this->options['enable_spoilers']) {
-            wp_enqueue_script('asgarosforum-js-spoilers', $this->plugin_url.'js/script-spoilers.js', array('jquery'), $this->version);
+            wp_enqueue_script('asgarosforum-js-spoilers', $this->plugin_url.'js/script-spoilers.js', array('jquery'), $this->version, false);
         }
 
         do_action('asgarosforum_enqueue_css_js');
