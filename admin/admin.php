@@ -200,9 +200,24 @@ class AsgarosForumAdmin {
             if ($this->asgarosforum->permissions->can_use_signature($user_id)) {
                 if (isset($_POST['asgarosforum_signature'])) {
                     if ($this->asgarosforum->options['signatures_html_allowed']) {
-                        update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses_post(strip_tags($_POST['asgarosforum_signature'], $this->asgarosforum->options['signatures_html_tags']))));
+						// Parse signature before saving.
+						$allowed_signature_html_tags = array();
+
+						if (!empty($this->asgarosforum->options['signatures_html_tags'])) {
+							$tags = $this->asgarosforum->options['signatures_html_tags'];
+							$tags = str_replace('><', ',', $tags);
+							$tags = str_replace('<', '', $tags);
+							$tags = str_replace('>', '', $tags);
+							$tags = explode(',', $tags);
+
+							foreach ($tags as $tag) {
+								$allowed_signature_html_tags[$tag] = array();
+							}
+						}
+
+                        update_user_meta($user_id, 'asgarosforum_signature', trim(wp_kses($_POST['asgarosforum_signature'], $allowed_signature_html_tags)));
                     } else {
-                        update_user_meta($user_id, 'asgarosforum_signature', trim(sanitize_textarea_field($_POST['asgarosforum_signature'])));
+                        update_user_meta($user_id, 'asgarosforum_signature', sanitize_textarea_field($_POST['asgarosforum_signature']));
                     }
                 } else {
                     delete_user_meta($user_id, 'asgarosforum_signature');
@@ -342,7 +357,7 @@ class AsgarosForumAdmin {
                 $ad_name        = sanitize_text_field($_POST['ad_name']);
                 $ad_code        = trim($_POST['ad_code']);
                 $ad_active      = isset($_POST['ad_active']) ? 1 : 0;
-                $ad_locations   = isset($_POST['ad_locations']) ? implode(',', $_POST['ad_locations']) : '';
+				$ad_locations   = isset($_POST['ad_locations']) ? implode(',', array_map('sanitize_key', $_POST['ad_locations'])) : '';
 
                 $this->asgarosforum->ads->save_ad($ad_id, $ad_name, $ad_code, $ad_active, $ad_locations);
                 $this->saved = true;
@@ -393,7 +408,7 @@ class AsgarosForumAdmin {
 
         foreach ($this->asgarosforum->appearance->options_default as $k => $v) {
             if (isset($_POST[$k])) {
-                $tmp = stripslashes(trim($_POST[$k]));
+				$tmp = sanitize_text_field($_POST[$k]);
                 $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
             } else {
                 $saved_ops[$k] = $v;
