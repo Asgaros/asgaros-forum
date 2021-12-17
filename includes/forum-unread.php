@@ -43,7 +43,7 @@ class AsgarosForumUnread {
 
             // Get IDs of excluded topics.
             if (isset($_COOKIE['asgarosforum_unread_exclude'])) {
-                $this->excluded_items = maybe_unserialize($_COOKIE['asgarosforum_unread_exclude']);
+                $this->excluded_items = maybe_unserialize(sanitize_text_field($_COOKIE['asgarosforum_unread_exclude']));
             }
         }
     }
@@ -93,7 +93,7 @@ class AsgarosForumUnread {
         if ($this->user_id) {
             return get_user_meta($this->user_id, 'asgarosforum_unread_cleared', true);
         } else if (isset($_COOKIE['asgarosforum_unread_cleared'])) {
-            return $_COOKIE['asgarosforum_unread_cleared'];
+            return sanitize_text_field($_COOKIE['asgarosforum_unread_cleared']);
         } else {
             return "1000-01-01 00:00:00";
         }
