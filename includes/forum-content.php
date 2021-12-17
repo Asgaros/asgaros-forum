@@ -234,7 +234,7 @@ class AsgarosForumContent {
             }
 
             // Set redirect.
-            $redirect = $add_topic['redirect'] ?: $link;
+            $redirect = $add_topic['redirect'] ? $add_topic['redirect'] : $link;
 
         } else if ($this->get_action() === 'add_post') {
 
@@ -290,7 +290,7 @@ class AsgarosForumContent {
             }
 
             // Set redirect.
-            $redirect = $add_post['redirect'] ?: $link;
+            $redirect = $add_post['redirect'] ? $add_post['redirect'] : $link;
         } else if ($this->get_action() === 'edit_post') {
 
             $edit_post = array(
