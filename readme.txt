@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Add missing sanitizing for input data
+* Fixed: Broken output due to wrong escape-functions
 = 1.15.16 =
 * Fixed: Display and calculation-issues related to time and timezones
 * Fixed: Ensure safe local redirects within the forum

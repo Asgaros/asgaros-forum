@@ -735,7 +735,7 @@ class AsgarosForum {
 
         if ($notice_link) { echo '<a href="'.esc_url($notice_link).'">'; }
 
-        echo esc_html($notice_message);
+        echo wp_kses_post($notice_message);
 
         if ($notice_link) { echo '</a>'; }
 
