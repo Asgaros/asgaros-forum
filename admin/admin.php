@@ -386,7 +386,10 @@ class AsgarosForumAdmin {
                 } else if ($k === 'allowed_filetypes') {
                     $tmp = strtolower(sanitize_text_field($_POST[$k]));
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
-                } else {
+				} else if ($k === 'signatures_html_tags') {
+					$tmp = wp_kses_post($_POST[$k]);
+                    $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
+				} else {
                     $tmp = sanitize_text_field($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 }
