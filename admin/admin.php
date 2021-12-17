@@ -446,7 +446,7 @@ class AsgarosForumAdmin {
         // Additional data.
         $forum_name         = sanitize_text_field($_POST['forum_name']);
         $forum_description  = sanitize_text_field($_POST['forum_description']);
-        $forum_icon         = sanitize_key($_POST['forum_icon']);
+        $forum_icon         = sanitize_text_field($_POST['forum_icon']);
         $forum_icon         = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
         $forum_status       = sanitize_key($_POST['forum_status']);
         $forum_order        = (is_numeric($_POST['forum_order'])) ? sanitize_key($_POST['forum_order']) : 0;
