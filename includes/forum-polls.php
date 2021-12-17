@@ -230,8 +230,10 @@ class AsgarosForumPolls {
 
         // Try to set poll-options.
         if (!empty($_POST['poll-option'])) {
+			$available_poll_options = array_map('sanitize_text_field', $_POST['poll-option']);
+
             // Assign not-empty poll-options to array.
-            foreach ($_POST['poll-option'] as $key => $value) {
+            foreach ($available_poll_options as $key => $value) {
                 $poll_option = trim(strip_tags($value));
 
                 if (!empty($poll_option)) {
@@ -304,7 +306,7 @@ class AsgarosForumPolls {
         }
 
         // Ensure that an option got selected.
-        $votes = (!empty($_POST['poll-option'])) ? $_POST['poll-option'] : false;
+        $votes = (!empty($_POST['poll-option'])) ? array_map('sanitize_key', $_POST['poll-option']) : false;
 
         if ($votes === false) {
             return;

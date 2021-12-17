@@ -171,7 +171,7 @@ class AsgarosForumNotifications {
 
     // Update the subscription-status for a topic based on the editor-checkbox.
     public function update_topic_subscription_status($topic_id) {
-        if (isset($_POST['subscribe_checkbox']) && $_POST['subscribe_checkbox']) {
+		if (isset($_POST['subscribe_checkbox']) && sanitize_key($_POST['subscribe_checkbox'])) {
             $this->subscribe_topic($topic_id);
         } else {
             $this->unsubscribe_topic($topic_id);

@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Add missing sanitizing for input data
 * Fixed: Warnings related to the currently implemented security-improvements
 = 1.15.17 =
 * Fixed: Add missing sanitizing for input data
