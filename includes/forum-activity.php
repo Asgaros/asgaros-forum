@@ -24,7 +24,12 @@ class AsgarosForumActivity {
     public function show_activity() {
         $activity_days = (int) $this->asgarosforum->options['activity_days'];
         $activity_days_i18n = number_format_i18n($activity_days);
-        echo '<div class="main-description">'.sprintf(_n('Activity in the last day.', 'Activity in the last %s days.', $activity_days, 'asgaros-forum'), $activity_days_i18n).'</div>';
+
+		$activity_days_singular = __('Activity in the last day.', 'asgaros-forum');
+		$activity_days_plural = sprintf(__('Activity in the last %s days.', 'asgaros-forum'), $activity_days_i18n);
+		$activity_days_string = ($activity_days === 1) ? $activity_days_singular : $activity_days_plural;
+
+        echo '<div class="main-description">'.sprintf($activity_days_string, $activity_days_i18n).'</div>';
 
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('activity');
         $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
