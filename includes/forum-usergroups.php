@@ -93,10 +93,10 @@ class AsgarosForumUserGroups {
         return $status;
     }
 
-    public static function insertUserGroupsOfForumCategory($forumCategoryID, $userGroups) {
-        // Only insert usergroups to a forum category when there are some. Otherwise delete them all.
-        if (!empty($userGroups)) {
-            update_term_meta($forumCategoryID, 'usergroups', $userGroups);
+    public static function insertUserGroupsOfForumCategory($forumCategoryID, $user_group_ids) {
+        // Only assign usergroup-IDs to a forum category when there are some. Otherwise delete them all.
+        if (!empty($user_group_ids)) {
+            update_term_meta($forumCategoryID, 'usergroups', $user_group_ids);
         } else {
             self::deleteUserGroupsOfForumCategory($forumCategoryID);
         }
@@ -518,9 +518,13 @@ class AsgarosForumUserGroups {
     }
 
     public static function saveUserGroupsOfForumCategory($forumCategoryID) {
-        $userGroups = isset($_POST['category_usergroups']) ? $_POST['category_usergroups'] : '';
+		$user_group_ids = array();
 
-        self::insertUserGroupsOfForumCategory($forumCategoryID, $userGroups);
+		if (!empty($_POST['category_usergroups'])) {
+			$user_group_ids = array_map('sanitize_key', $_POST['category_usergroups']);
+		}
+
+        self::insertUserGroupsOfForumCategory($forumCategoryID, $user_group_ids);
     }
 
     public static function filterCategories($unfilteredCategories) {

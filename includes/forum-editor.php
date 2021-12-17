@@ -190,7 +190,7 @@ class AsgarosForumEditor {
         } else {
             $post = false;
             $subject = (isset($_POST['subject'])) ? sanitize_text_field($_POST['subject']) : '';
-            $message = (isset($_POST['message'])) ? trim($_POST['message']) : '';
+            $message = (isset($_POST['message'])) ? wp_kses_post($_POST['message']) : '';
 
             if ($editor_view === 'addpost') {
                 if (!isset($_POST['message']) && isset($_GET['quote'])) {

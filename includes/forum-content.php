@@ -52,7 +52,7 @@ class AsgarosForumContent {
         }
 
         if (isset($_POST['message'])) {
-            $this->data_content = apply_filters('asgarosforum_filter_content_before_insert', trim($_POST['message']));
+            $this->data_content = apply_filters('asgarosforum_filter_content_before_insert', wp_kses_post($_POST['message']));
         }
     }
 

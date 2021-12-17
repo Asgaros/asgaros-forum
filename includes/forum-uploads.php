@@ -40,12 +40,16 @@ class AsgarosForumUploads {
 	// Check if its allowed to upload files with those extensions.
 	public function check_uploads_extension() {
 		if ($this->asgarosforum->options['allow_file_uploads'] && !empty($_FILES['forumfile'])) {
-			foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
-				if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
-					$file_extension = strtolower(pathinfo($_FILES['forumfile']['name'][$index], PATHINFO_EXTENSION));
+			if (!empty($_FILES['forumfile']['name'])) {
+				$file_names = array_map('sanitize_file_name', $_FILES['forumfile']['name']);
 
-					if (!in_array($file_extension, $this->upload_allowed_filetypes)) {
-						return false;
+				foreach ($file_names as $index => $tmpName) {
+					if (empty($_FILES['forumfile']['error'][$index]) && !empty($file_names[$index])) {
+						$file_extension = strtolower(pathinfo($file_names[$index], PATHINFO_EXTENSION));
+
+						if (!in_array($file_extension, $this->upload_allowed_filetypes)) {
+							return false;
+						}
 					}
 				}
 			}
@@ -57,14 +61,18 @@ class AsgarosForumUploads {
 	// Check if its allowed to upload files with those sizes.
 	public function check_uploads_size() {
 		if ($this->asgarosforum->options['allow_file_uploads'] && !empty($_FILES['forumfile'])) {
-			foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
-				if (!empty($_FILES['forumfile']['error'][$index]) && $_FILES['forumfile']['error'][$index] == 2) {
-					return false;
-				} else if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
-					$maximumFileSize = (1024 * (1024 * $this->asgarosforum->options['uploads_maximum_size']));
+			if (!empty($_FILES['forumfile']['name'])) {
+				$file_names = array_map('sanitize_file_name', $_FILES['forumfile']['name']);
 
-					if ($maximumFileSize != 0 && $_FILES['forumfile']['size'][$index] > $maximumFileSize) {
+				foreach ($file_names as $index => $tmpName) {
+					if (!empty($_FILES['forumfile']['error'][$index]) && $_FILES['forumfile']['error'][$index] == 2) {
 						return false;
+					} else if (empty($_FILES['forumfile']['error'][$index]) && !empty($file_names[$index])) {
+						$maximumFileSize = (1024 * (1024 * $this->asgarosforum->options['uploads_maximum_size']));
+
+						if ($maximumFileSize != 0 && $_FILES['forumfile']['size'][$index] > $maximumFileSize) {
+							return false;
+						}
 					}
 				}
 			}
@@ -78,15 +86,19 @@ class AsgarosForumUploads {
 		$files = array();
 
 		if ($this->asgarosforum->options['allow_file_uploads'] && !empty($_FILES['forumfile'])) {
-            foreach ($_FILES['forumfile']['name'] as $index => $tmpName) {
-                if (empty($_FILES['forumfile']['error'][$index]) && !empty($_FILES['forumfile']['name'][$index])) {
-					$name = sanitize_file_name(stripslashes($_FILES['forumfile']['name'][$index]));
+			if (!empty($_FILES['forumfile']['name'])) {
+				$file_names = array_map('sanitize_file_name', $_FILES['forumfile']['name']);
 
-			        if (!empty($name)) {
-						$files[$index] = $name;
+				foreach ($file_names as $index => $tmpName) {
+					if (empty($_FILES['forumfile']['error'][$index]) && !empty($file_names[$index])) {
+						$name = $file_names[$index];
+
+						if (!empty($name)) {
+							$files[$index] = $name;
+						}
 					}
-                }
-            }
+				}
+			}
         }
 
 		return $files;
@@ -116,7 +128,9 @@ class AsgarosForumUploads {
 		if (is_dir($path)) {
 	        // Register existing files.
 	        if (!empty($_POST['existingfile'])) {
-	            foreach ($_POST['existingfile'] as $file) {
+				$existing_files = array_map('sanitize_file_name', $_POST['existingfile']);
+
+	            foreach ($existing_files as $file) {
 	                if (is_file($path.wp_basename($file))) {
 	                    $links[] = $file;
 	                }
@@ -125,7 +139,9 @@ class AsgarosForumUploads {
 
 	        // Remove deleted files.
 	        if (!empty($_POST['deletefile'])) {
-	            foreach ($_POST['deletefile'] as $file) {
+				$deleted_files = array_map('sanitize_file_name', $_POST['deletefile']);
+
+	            foreach ($deleted_files as $file) {
 	                if (is_file($path.wp_basename($file))) {
 	                    unlink($path.wp_basename($file));
 	                }
@@ -134,8 +150,10 @@ class AsgarosForumUploads {
 
 			// Upload new files.
 	        if (!empty($files)) {
+				$temporary_file_paths = array_map('sanitize_text_field', $_FILES['forumfile']['tmp_name']);
+
 	            foreach($files as $index => $name) {
-	                move_uploaded_file($_FILES['forumfile']['tmp_name'][$index], $path.$name);
+	                move_uploaded_file($temporary_file_paths[$index], $path.$name);
 	                $links[] = $name;
 	            }
 	        }
