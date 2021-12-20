@@ -17,38 +17,38 @@
 
                 <table class="form-table">
                     <tr>
-                        <th><label for="usergroup_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="usergroup_name"><?php esc_html_e('Name:', 'asgaros-forum'); ?></label></th>
                         <td><input class="element-name" type="text" size="100" maxlength="200" name="usergroup_name" id="usergroup_name" value="" required></td>
                     </tr>
                     <tr id="usergroup-color-settings">
-                        <th><label for="usergroup_color"><?php _e('Color:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="usergroup_color"><?php esc_html_e('Color:', 'asgaros-forum'); ?></label></th>
                         <td><input type="text" value="#444444" class="color-picker" name="usergroup_color" id="usergroup_color" data-default-color="#444444"></td>
                     </tr>
                     <tr>
                         <th>
-                            <label for="usergroup_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label>
-                            <span class="description"><?php _e('Set an optional icon for the usergroup.', 'asgaros-forum'); ?></span>
+                            <label for="usergroup_icon"><?php esc_html_e('Icon:', 'asgaros-forum'); ?></label>
+                            <span class="description"><?php esc_html_e('Set an optional icon for the usergroup.', 'asgaros-forum'); ?></span>
                         </th>
                         <td>
                             <input type="text" id="usergroup_icon" name="usergroup_icon" value="" placeholder="fas fa-users">
                             <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank">
-                                <?php _e('List of available icons.', 'asgaros-forum'); ?>
+                                <?php esc_html_e('List of available icons.', 'asgaros-forum'); ?>
                             </a>
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="usergroup_visibility"><?php _e('Hide usergroup:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="usergroup_visibility"><?php esc_html_e('Hide usergroup:', 'asgaros-forum'); ?></label></th>
                         <td><input type="checkbox" id="usergroup_visibility" name="usergroup_visibility"></td>
                     </tr>
                     <tr>
-                        <th><label for="usergroup_auto_add"><?php _e('Add new users automatically:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="usergroup_auto_add"><?php esc_html_e('Add new users automatically:', 'asgaros-forum'); ?></label></th>
                         <td><input type="checkbox" id="usergroup_auto_add" name="usergroup_auto_add"></td>
                     </tr>
                 </table>
 
                 <p class="submit">
-                    <input type="submit" name="af-create-edit-usergroup-submit" value="<?php _e('Save', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="af-create-edit-usergroup-submit" value="<?php esc_attr_e('Save', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -57,11 +57,11 @@
             <form method="post">
                 <?php wp_nonce_field('asgaros_forum_delete_usergroup'); ?>
                 <input type="hidden" name="usergroup-id" value="0">
-                <p><?php _e('Are you sure you want to delete this usergroup?', 'asgaros-forum'); ?></p>
+                <p><?php esc_html_e('Are you sure you want to delete this usergroup?', 'asgaros-forum'); ?></p>
 
                 <p class="submit">
-                    <input type="submit" name="asgaros-forum-delete-usergroup" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="asgaros-forum-delete-usergroup" value="<?php esc_attr_e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -73,14 +73,14 @@
 
                 <table class="form-table">
                     <tr>
-                        <th><label for="usergroup_category_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="usergroup_category_name"><?php esc_html_e('Name:', 'asgaros-forum'); ?></label></th>
                         <td><input class="element-name" type="text" size="100" maxlength="200" name="usergroup_category_name" id="usergroup_category_name" value="" required></td>
                     </tr>
                 </table>
 
                 <p class="submit">
-                    <input type="submit" name="af-create-edit-usergroup-category-submit" value="<?php _e('Save', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="af-create-edit-usergroup-category-submit" value="<?php esc_attr_e('Save', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -89,20 +89,20 @@
             <form method="post">
                 <?php wp_nonce_field('asgaros_forum_delete_usergroup_category'); ?>
                 <input type="hidden" name="usergroup-category-id" value="0">
-                <p><?php _e('Deleting this category will also permanently delete all usergroups inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
+                <p><?php esc_html_e('Deleting this category will also permanently delete all usergroups inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
 
                 <p class="submit">
-                    <input type="submit" name="asgaros-forum-delete-usergroup-category" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="asgaros-forum-delete-usergroup-category" value="<?php esc_attr_e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
     </div>
 
-    <a href="#" class="usergroup-category-editor-link add-element" data-value-id="new" data-value-editor-title="<?php _e('Add Category', 'asgaros-forum'); ?>">
+    <a href="#" class="usergroup-category-editor-link add-element" data-value-id="new" data-value-editor-title="<?php esc_attr_e('Add Category', 'asgaros-forum'); ?>">
         <?php
         echo '<span class="fas fa-plus"></span>';
-        _e('Add Category', 'asgaros-forum');
+        esc_html_e('Add Category', 'asgaros-forum');
         ?>
     </a>
 
@@ -120,9 +120,9 @@
                     <span class="fas fa-users"></span>
                     <?php echo stripslashes($category->name); ?>
                     <span class="category-actions">
-                        <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Delete Category', 'asgaros-forum'); ?>"><?php esc_html_e('Delete Category', 'asgaros-forum'); ?></a>
                         &middot;
-                        <a href="#" class="usergroup-category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="usergroup-category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Edit Category', 'asgaros-forum'); ?>"><?php esc_html_e('Edit Category', 'asgaros-forum'); ?></a>
                     </span>
                 </div>
                 <?php
@@ -133,9 +133,9 @@
                 }
                 ?>
 
-                <a href="#" class="usergroup-editor-link add-element" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Add Usergroup', 'asgaros-forum'); ?>">
+                <a href="#" class="usergroup-editor-link add-element" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Add Usergroup', 'asgaros-forum'); ?>">
                     <span class="fas fa-plus"></span>
-                    <?php _e('Add Usergroup', 'asgaros-forum'); ?>
+                    <?php esc_html_e('Add Usergroup', 'asgaros-forum'); ?>
                 </a>
             </div>
             <?php
@@ -143,7 +143,7 @@
 
         echo '<a href="#" class="usergroup-category-editor-link add-element" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
             echo '<span class="fas fa-plus"></span>';
-            _e('Add Category', 'asgaros-forum');
+            esc_html_e('Add Category', 'asgaros-forum');
         echo '</a>';
     }
     ?>

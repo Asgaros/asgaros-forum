@@ -40,7 +40,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 			echo '</form>';
 			echo '</div>';
 		} else {
-			_e('The forum has not been configured correctly.', 'asgaros-forum');
+			esc_html_e('The forum has not been configured correctly.', 'asgaros-forum');
 		}
 
 		echo $args['after_widget'];

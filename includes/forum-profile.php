@@ -171,7 +171,7 @@ class AsgarosForumProfile {
 
         if ($userData) {
             if ($this->hideProfileLink()) {
-                _e('You need to login to have access to profiles.', 'asgaros-forum');
+                esc_html_e('You need to login to have access to profiles.', 'asgaros-forum');
             } else {
                 $this->show_profile_header($userData);
                 $this->show_profile_navigation($userData);
@@ -180,7 +180,7 @@ class AsgarosForumProfile {
                     $posts = $this->get_post_history_by_user($user_id, true);
 
                     if (empty($posts)) {
-                        _e('No posts made by this user.', 'asgaros-forum');
+                        esc_html_e('No posts made by this user.', 'asgaros-forum');
                     } else {
                         $pagination = $this->asgarosforum->pagination->renderPagination('history', $user_id);
 
@@ -215,7 +215,7 @@ class AsgarosForumProfile {
                 echo '</div>';
             }
         } else {
-            _e('This user does not exist.', 'asgaros-forum');
+            esc_html_e('This user does not exist.', 'asgaros-forum');
         }
     }
 
@@ -226,7 +226,7 @@ class AsgarosForumProfile {
 
         if ($userData) {
             if ($this->hideProfileLink()) {
-                _e('You need to login to have access to profiles.', 'asgaros-forum');
+                esc_html_e('You need to login to have access to profiles.', 'asgaros-forum');
             } else {
                 $this->show_profile_header($userData);
                 $this->show_profile_navigation($userData);
@@ -354,7 +354,7 @@ class AsgarosForumProfile {
                 echo '</div>';
             }
         } else {
-            _e('This user does not exist.', 'asgaros-forum');
+            esc_html_e('This user does not exist.', 'asgaros-forum');
         }
     }
 

@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Add missing sanitizing for input data
+* Fixed: Add missing escaping for output data
 * Fixed: Warnings related to the currently implemented security-improvements
 * Fixed: Forum-icons could not get saved correctly
 * Fixed: Correctly save allowed html-tags for signatures in forum-settings

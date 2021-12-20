@@ -337,7 +337,7 @@ function mycred_load_asgarosforum_hook() {
 
             ?>
             <div class="hook-instance">
-            <h3><?php _e('New Topic', 'asgaros-forum'); ?></h3>
+            <h3><?php esc_html_e('New Topic', 'asgaros-forum'); ?></h3>
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
@@ -347,21 +347,21 @@ function mycred_load_asgarosforum_hook() {
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_topic', 'limit')); ?>"><?php _e('Limit', 'asgaros-forum'); ?></label>
+                        <label for="<?php echo $this->field_id(array('new_topic', 'limit')); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
                         <?php echo $this->hook_limit_setting($this->field_name(array('new_topic', 'limit')), $this->field_id(array('new_topic', 'limit')), $prefs['new_topic']['limit']); ?>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_topic', 'log')); ?>"><?php _e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('new_topic', 'log')); ?>" id="<?php echo $this->field_id(array('new_topic', 'log')); ?>" placeholder="<?php _e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_topic']['log']); ?>" class="form-control">
+                        <label for="<?php echo $this->field_id(array('new_topic', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo $this->field_name(array('new_topic', 'log')); ?>" id="<?php echo $this->field_id(array('new_topic', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_topic']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
             </div>
             </div>
             <div class="hook-instance">
-            <h3><?php _e('Deleted Topic', 'asgaros-forum'); ?></h3>
+            <h3><?php esc_html_e('Deleted Topic', 'asgaros-forum'); ?></h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
@@ -371,15 +371,15 @@ function mycred_load_asgarosforum_hook() {
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('delete_topic', 'log')); ?>"><?php _e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('delete_topic', 'log')); ?>" id="<?php echo $this->field_id(array('delete_topic', 'log')); ?>" placeholder="<?php _e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_topic']['log']); ?>" class="form-control">
+                        <label for="<?php echo $this->field_id(array('delete_topic', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo $this->field_name(array('delete_topic', 'log')); ?>" id="<?php echo $this->field_id(array('delete_topic', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_topic']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
             </div>
             </div>
             <div class="hook-instance">
-            <h3><?php _e('New Post', 'asgaros-forum'); ?></h3>
+            <h3><?php esc_html_e('New Post', 'asgaros-forum'); ?></h3>
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
@@ -389,14 +389,14 @@ function mycred_load_asgarosforum_hook() {
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_post', 'limit')); ?>"><?php _e('Limit', 'asgaros-forum'); ?></label>
+                        <label for="<?php echo $this->field_id(array('new_post', 'limit')); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
                         <?php echo $this->hook_limit_setting($this->field_name(array('new_post', 'limit')), $this->field_id(array('new_post', 'limit')), $prefs['new_post']['limit']); ?>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_post', 'log')); ?>"><?php _e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('new_post', 'log')); ?>" id="<?php echo $this->field_id(array('new_post', 'log')); ?>" placeholder="<?php _e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_post']['log']); ?>" class="form-control">
+                        <label for="<?php echo $this->field_id(array('new_post', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo $this->field_name(array('new_post', 'log')); ?>" id="<?php echo $this->field_id(array('new_post', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_post']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
@@ -412,7 +412,7 @@ function mycred_load_asgarosforum_hook() {
             </div>
             </div>
             <div class="hook-instance">
-            <h3><?php _e('Deleted Post', 'asgaros-forum'); ?></h3>
+            <h3><?php esc_html_e('Deleted Post', 'asgaros-forum'); ?></h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
@@ -422,15 +422,15 @@ function mycred_load_asgarosforum_hook() {
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('delete_post', 'log')); ?>"><?php _e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('delete_post', 'log')); ?>" id="<?php echo $this->field_id(array('delete_post', 'log')); ?>" placeholder="<?php _e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_post']['log']); ?>" class="form-control">
+                        <label for="<?php echo $this->field_id(array('delete_post', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo $this->field_name(array('delete_post', 'log')); ?>" id="<?php echo $this->field_id(array('delete_post', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_post']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
             </div>
             </div>
             <div class="hook-instance">
-            <h3><?php _e('Received Like', 'asgaros-forum'); ?></h3>
+            <h3><?php esc_html_e('Received Like', 'asgaros-forum'); ?></h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
@@ -440,21 +440,21 @@ function mycred_load_asgarosforum_hook() {
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_like', 'log')); ?>"><?php _e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('received_like', 'log')); ?>" id="<?php echo $this->field_id(array('received_like', 'log')); ?>" placeholder="<?php _e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_like']['log']); ?>" class="form-control">
+                        <label for="<?php echo $this->field_id(array('received_like', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo $this->field_name(array('received_like', 'log')); ?>" id="<?php echo $this->field_id(array('received_like', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_like']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_like', 'limit')); ?>"><?php _e('Limit', 'asgaros-forum'); ?></label>
+                        <label for="<?php echo $this->field_id(array('received_like', 'limit')); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
                         <?php echo $this->hook_limit_setting($this->field_name(array('received_like', 'limit')), $this->field_id(array('received_like', 'limit')), $prefs['received_like']['limit']); ?>
                     </div>
                 </div>
             </div>
             </div>
             <div class="hook-instance">
-            <h3><?php _e('Received Dislike', 'asgaros-forum'); ?></h3>
+            <h3><?php esc_html_e('Received Dislike', 'asgaros-forum'); ?></h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
@@ -464,8 +464,8 @@ function mycred_load_asgarosforum_hook() {
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_dislike', 'log')); ?>"><?php _e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('received_dislike', 'log')); ?>" id="<?php echo $this->field_id(array('received_dislike', 'log')); ?>" placeholder="<?php _e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_dislike']['log']); ?>" class="form-control">
+                        <label for="<?php echo $this->field_id(array('received_dislike', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo $this->field_name(array('received_dislike', 'log')); ?>" id="<?php echo $this->field_id(array('received_dislike', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_dislike']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>

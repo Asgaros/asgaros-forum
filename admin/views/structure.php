@@ -48,29 +48,29 @@
 
                 <table class="form-table">
                     <tr>
-                        <th><label for="category_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="category_name"><?php esc_html_e('Name:', 'asgaros-forum'); ?></label></th>
                         <td><input class="element-name" type="text" size="100" maxlength="200" name="category_name" id="category_name" value="" required></td>
                     </tr>
                     <tr>
-                        <th><label for="category_access"><?php _e('Access:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="category_access"><?php esc_html_e('Access:', 'asgaros-forum'); ?></label></th>
                         <td>
                             <select name="category_access" id="category_access">
-                                <option value="everyone"><?php _e('Everyone', 'asgaros-forum'); ?></option>
-                                <option value="loggedin"><?php _e('Logged in users only', 'asgaros-forum'); ?></option>
-                                <option value="moderator"><?php _e('Moderators only', 'asgaros-forum'); ?></option>
+                                <option value="everyone"><?php esc_html_e('Everyone', 'asgaros-forum'); ?></option>
+                                <option value="loggedin"><?php esc_html_e('Logged in users only', 'asgaros-forum'); ?></option>
+                                <option value="moderator"><?php esc_html_e('Moderators only', 'asgaros-forum'); ?></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="category_order"><?php _e('Order:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="category_order"><?php esc_html_e('Order:', 'asgaros-forum'); ?></label></th>
                         <td><input type="number" size="4" id="category_order" name="category_order" value="" min="1"></td>
                     </tr>
                     <?php AsgarosForumUserGroups::renderCategoryEditorFields(); ?>
                 </table>
 
                 <p class="submit">
-                    <input type="submit" name="af-create-edit-category-submit" value="<?php _e('Save', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="af-create-edit-category-submit" value="<?php esc_attr_e('Save', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -84,30 +84,30 @@
 
                 <table class="form-table">
                     <tr>
-                        <th><label for="forum_name"><?php _e('Name:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="forum_name"><?php esc_html_e('Name:', 'asgaros-forum'); ?></label></th>
                         <td><input class="element-name" type="text" size="100" maxlength="255" name="forum_name" id="forum_name" value="" required></td>
                     </tr>
                     <tr>
-                        <th><label for="forum_description"><?php _e('Description:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="forum_description"><?php esc_html_e('Description:', 'asgaros-forum'); ?></label></th>
                         <td><input type="text" size="100" maxlength="255" id="forum_description" name="forum_description" value=""></td>
                     </tr>
                     <tr>
-                        <th><label for="forum_parent"><?php _e('Parent:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="forum_parent"><?php esc_html_e('Parent:', 'asgaros-forum'); ?></label></th>
                         <td>
                             <select name="forum_parent" id="forum_parent"></select>
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="forum_icon"><?php _e('Icon:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="forum_icon"><?php esc_html_e('Icon:', 'asgaros-forum'); ?></label></th>
                         <td>
                             <input type="text" size="50" id="forum_icon" name="forum_icon" value="">
                             <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank">
-                                <?php _e('List of available icons.', 'asgaros-forum'); ?>
+                                <?php esc_html_e('List of available icons.', 'asgaros-forum'); ?>
                             </a>
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="forum_status"><?php _e('Status:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="forum_status"><?php esc_html_e('Status:', 'asgaros-forum'); ?></label></th>
                         <td>
                             <select name="forum_status" id="forum_status">
                                 <?php
@@ -139,14 +139,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="forum_order"><?php _e('Order:', 'asgaros-forum'); ?></label></th>
+                        <th><label for="forum_order"><?php esc_html_e('Order:', 'asgaros-forum'); ?></label></th>
                         <td><input type="number" size="4" id="forum_order" name="forum_order" value="" min="1"></td>
                     </tr>
                 </table>
 
                 <p class="submit">
-                    <input type="submit" name="af-create-edit-forum-submit" value="<?php _e('Save', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="af-create-edit-forum-submit" value="<?php esc_attr_e('Save', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -155,11 +155,11 @@
             <form method="post">
                 <?php wp_nonce_field('asgaros_forum_delete_category'); ?>
                 <input type="hidden" name="category-id" value="0">
-                <p><?php _e('Deleting this category will also permanently delete all forums, sub-forums, topics and posts inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
+                <p><?php esc_html_e('Deleting this category will also permanently delete all forums, sub-forums, topics and posts inside it. Are you sure you want to delete this category?', 'asgaros-forum'); ?></p>
 
                 <p class="submit">
-                    <input type="submit" name="asgaros-forum-delete-category" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="asgaros-forum-delete-category" value="<?php esc_attr_e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
@@ -169,20 +169,20 @@
                 <?php wp_nonce_field('asgaros_forum_delete_forum'); ?>
                 <input type="hidden" name="forum-id" value="0">
                 <input type="hidden" name="forum-category" value="0">
-                <p><?php _e('Deleting this forum will also permanently delete all sub-forums, topics and posts inside it. Are you sure you want to delete this forum?', 'asgaros-forum'); ?></p>
+                <p><?php esc_html_e('Deleting this forum will also permanently delete all sub-forums, topics and posts inside it. Are you sure you want to delete this forum?', 'asgaros-forum'); ?></p>
 
                 <p class="submit">
-                    <input type="submit" name="asgaros-forum-delete-forum" value="<?php _e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
-                    <a class="button-cancel button button-secondary"><?php _e('Cancel', 'asgaros-forum'); ?></a>
+                    <input type="submit" name="asgaros-forum-delete-forum" value="<?php esc_attr_e('Delete', 'asgaros-forum'); ?>" class="button button-primary">
+                    <a class="button-cancel button button-secondary"><?php esc_html_e('Cancel', 'asgaros-forum'); ?></a>
                 </p>
             </form>
         </div>
     </div>
 
-    <a href="#" class="category-editor-link add-element" data-value-id="new" data-value-editor-title="<?php _e('Add Category', 'asgaros-forum'); ?>">
+    <a href="#" class="category-editor-link add-element" data-value-id="new" data-value-editor-title="<?php esc_attr_e('Add Category', 'asgaros-forum'); ?>">
         <?php
         echo '<span class="fas fa-plus"></span>';
-        _e('Add Category', 'asgaros-forum');
+        esc_html_e('Add Category', 'asgaros-forum');
         ?>
     </a>
 
@@ -210,11 +210,11 @@
                         echo ' &middot; ';
                         echo __('Access:', 'asgaros-forum').' ';
                         if ($access === 'everyone') {
-                            _e('Everyone', 'asgaros-forum');
+                            esc_html_e('Everyone', 'asgaros-forum');
                         } else if ($access === 'loggedin') {
-                            _e('Logged in users only', 'asgaros-forum');
+                            esc_html_e('Logged in users only', 'asgaros-forum');
                         } else if ($access === 'moderator') {
-                            _e('Moderators only', 'asgaros-forum');
+                            esc_html_e('Moderators only', 'asgaros-forum');
                         }
                         echo ' &middot; ';
                         echo __('Order:', 'asgaros-forum').' '.$order;
@@ -224,9 +224,9 @@
                         ?>
                     </span>
                     <span class="category-actions">
-                        <a href="#" class="category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Delete Category', 'asgaros-forum'); ?>"><?php _e('Delete Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Delete Category', 'asgaros-forum'); ?>"><?php esc_html_e('Delete Category', 'asgaros-forum'); ?></a>
                         &middot;
-                        <a href="#" class="category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php _e('Edit Category', 'asgaros-forum'); ?>"><?php _e('Edit Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Edit Category', 'asgaros-forum'); ?>"><?php esc_html_e('Edit Category', 'asgaros-forum'); ?></a>
                     </span>
                 </div>
                 <?php
@@ -236,10 +236,10 @@
                     $structureTable->display();
                 }
                 ?>
-                <a href="#" class="forum-editor-link add-element" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0" data-value-editor-title="<?php _e('Add Forum', 'asgaros-forum'); ?>">
+                <a href="#" class="forum-editor-link add-element" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0" data-value-editor-title="<?php esc_attr_e('Add Forum', 'asgaros-forum'); ?>">
                     <?php
                     echo '<span class="fas fa-plus"></span>';
-                    _e('Add Forum', 'asgaros-forum');
+                    esc_html_e('Add Forum', 'asgaros-forum');
                     ?>
                 </a>
             </div>
@@ -248,7 +248,7 @@
 
         echo '<a href="#" class="category-editor-link add-element" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
             echo '<span class="fas fa-plus"></span>';
-            _e('Add Category', 'asgaros-forum');
+            esc_html_e('Add Category', 'asgaros-forum');
         echo '</a>';
     }
     ?>
