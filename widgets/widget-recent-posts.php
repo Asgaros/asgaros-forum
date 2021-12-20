@@ -161,33 +161,33 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $forum_filter = isset($instance['forum_filter']) ? $instance['forum_filter'] : array();
 
 		echo '<p>';
-		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
-		echo '<input class="widefat" id="'.$this->get_field_id('title').'" name="'.$this->get_field_name('title').'" type="text" value="'.$title.'">';
+		echo '<label for="'.esc_attr($this->get_field_id('title')).'">'.esc_html__('Title:', 'asgaros-forum').'</label>';
+		echo '<input class="widefat" id="'.esc_attr($this->get_field_id('title')).'" name="'.esc_attr($this->get_field_name('title')).'" type="text" value="'.esc_attr($title).'">';
 		echo '</p>';
 
         echo '<p>';
-		echo '<label for="'.$this->get_field_id('number').'">'.__('Number of topics to show:', 'asgaros-forum').'</label>&nbsp;';
-		echo '<input class="tiny-text" id="'.$this->get_field_id('number').'" name="'.$this->get_field_name('number').'" type="number" step="1" min="1" value="'.$number.'" size="3">';
+		echo '<label for="'.esc_attr($this->get_field_id('number')).'">'.esc_html__('Number of topics to show:', 'asgaros-forum').'</label>&nbsp;';
+		echo '<input class="tiny-text" id="'.esc_attr($this->get_field_id('number')).'" name="'.esc_attr($this->get_field_name('number')).'" type="number" step="1" min="1" value="'.esc_attr($number).'" size="3">';
 		echo '</p>';
 
         echo '<p>';
-        echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.$this->get_field_id('show_avatar').'" name="'.$this->get_field_name('show_avatar').'">';
-		echo '<label for="'.$this->get_field_id('show_avatar').'">'.__('Show avatars', 'asgaros-forum').'</label>';
+        echo '<input class="checkbox" type="checkbox" '.checked($show_avatar, true, false).' id="'.esc_attr($this->get_field_id('show_avatar')).'" name="'.esc_attr($this->get_field_name('show_avatar')).'">';
+		echo '<label for="'.esc_attr($this->get_field_id('show_avatar')).'">'.esc_html__('Show avatars', 'asgaros-forum').'</label>';
         echo '</p>';
 
         echo '<p>';
-        echo '<input class="checkbox" type="checkbox" '.checked($show_excerpt, true, false).' id="'.$this->get_field_id('show_excerpt').'" name="'.$this->get_field_name('show_excerpt').'">';
-		echo '<label for="'.$this->get_field_id('show_excerpt').'">'.__('Show excerpt', 'asgaros-forum').'</label>';
+        echo '<input class="checkbox" type="checkbox" '.checked($show_excerpt, true, false).' id="'.esc_attr($this->get_field_id('show_excerpt')).'" name="'.esc_attr($this->get_field_name('show_excerpt')).'">';
+		echo '<label for="'.esc_attr($this->get_field_id('show_excerpt')).'">'.esc_html__('Show excerpt', 'asgaros-forum').'</label>';
         echo '</p>';
 
         echo '<p>';
-        echo '<input class="checkbox" type="checkbox" '.checked($group_by_topic, true, false).' id="'.$this->get_field_id('group_by_topic').'" name="'.$this->get_field_name('group_by_topic').'">';
-		echo '<label for="'.$this->get_field_id('group_by_topic').'">'.__('Group posts by topic', 'asgaros-forum').'</label>';
+        echo '<input class="checkbox" type="checkbox" '.checked($group_by_topic, true, false).' id="'.esc_attr($this->get_field_id('group_by_topic')).'" name="'.esc_attr($this->get_field_name('group_by_topic')).'">';
+		echo '<label for="'.esc_attr($this->get_field_id('group_by_topic')).'">'.esc_html__('Group posts by topic', 'asgaros-forum').'</label>';
         echo '</p>';
 
         echo '<p>';
-        echo '<label for="'.$this->get_field_id('forum_filter').'">'.__('Forum filter:', 'asgaros-forum').'</label>';
-        echo '<select name="'.$this->get_field_name('forum_filter').'[]" id="'.$this->get_field_id('forum_filter').'" class="widefat" size="6" multiple>';
+        echo '<label for="'.esc_attr($this->get_field_id('forum_filter')).'">'.esc_html__('Forum filter:', 'asgaros-forum').'</label>';
+        echo '<select name="'.esc_attr($this->get_field_name('forum_filter')).'[]" id="'.esc_attr($this->get_field_id('forum_filter')).'" class="widefat" size="6" multiple>';
 
         // Generate list of available forums.
         $categories = $this->asgarosforum->content->get_categories(false);
@@ -197,13 +197,13 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
                 $forums = $this->asgarosforum->get_forums($category->term_id, 0);
 
                 if ($forums) {
-                    echo '<option disabled="disabled">'.$category->name.':</option>';
+                    echo '<option disabled="disabled">'.esc_html($category->name).':</option>';
 
                     foreach ($forums as $forum) {
                         if (in_array($forum->id, $forum_filter)) {
-                            echo '<option value="'.$forum->id.'" selected="selected">- '.esc_html($forum->name).'</option>';
+                            echo '<option value="'.esc_attr($forum->id).'" selected="selected">- '.esc_html($forum->name).'</option>';
                         } else {
-                            echo '<option value="'.$forum->id.'">- '.esc_html($forum->name).'</option>';
+                            echo '<option value="'.esc_attr($forum->id).'">- '.esc_html($forum->name).'</option>';
                         }
 
                         if ($forum->count_subforums > 0) {
@@ -211,9 +211,9 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 
                             foreach ($subforums as $subforum) {
                                 if (in_array($subforum->id, $forum_filter)) {
-                                    echo '<option value="'.$subforum->id.'" selected="selected">-- '.esc_html($subforum->name).'</option>';
+                                    echo '<option value="'.esc_attr($subforum->id).'" selected="selected">-- '.esc_html($subforum->name).'</option>';
                                 } else {
-                                    echo '<option value="'.$subforum->id.'">-- '.esc_html($subforum->name).'</option>';
+                                    echo '<option value="'.esc_attr($subforum->id).'">-- '.esc_html($subforum->name).'</option>';
                                 }
                             }
                         }

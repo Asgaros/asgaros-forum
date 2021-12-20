@@ -92,7 +92,7 @@ class AsgarosForumBreadCrumbs {
 
         // Render breadcrumbs links.
         echo '<div id="forum-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
-            echo '<span class="screen-reader-text">'.__('Forum breadcrumbs - You are here:', 'asgaros-forum').'</span>';
+            echo '<span class="screen-reader-text">'.esc_html__('Forum breadcrumbs - You are here:', 'asgaros-forum').'</span>';
             echo '<span class="breadcrumb-icon fas fa-home"></span>';
 
             foreach ($this->breadcrumbs_links as $element) {
@@ -105,10 +105,10 @@ class AsgarosForumBreadCrumbs {
         $this->breadcrumb_position++;
 
         echo '<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
-            echo '<a itemprop="item" href="'.$element['link'].'" title="'.$element['title'].'">';
-                echo '<span itemprop="name">'.$element['title'].'</span>';
+            echo '<a itemprop="item" href="'.$element['link'].'" title="'.esc_attr($element['title']).'">';
+                echo '<span itemprop="name">'.esc_html($element['title']).'</span>';
             echo '</a>';
-            echo '<meta itemprop="position" content="'.$this->breadcrumb_position.'">';
+            echo '<meta itemprop="position" content="'.esc_attr($this->breadcrumb_position).'">';
         echo '</span>';
 
         echo '<span class="breadcrumb-icon fas fa-chevron-right separator"></span>';

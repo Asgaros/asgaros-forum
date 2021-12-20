@@ -19,8 +19,8 @@ $user_online_class = ($this->online->is_user_online($post->author_id)) ? 'user-o
 
 $user_data = get_userdata($post->author_id);
 
-echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="postid-'.$post->id.'">';
-    echo '<div class="post-author '.$user_online_class.'">';
+echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_post_class).'" id="postid-'.esc_attr($post->id).'">';
+    echo '<div class="post-author '.esc_attr($user_online_class).'">';
         // Show avatar if activated.
         if ($this->options['enable_avatars']) {
             $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 120);
@@ -51,12 +51,12 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
 
                 // Show marker for topic-author.
                 if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
-                    echo '<small class="topic-author">'.__('Topic Author', 'asgaros-forum').'</small>';
+                    echo '<small class="topic-author">'.esc_html__('Topic Author', 'asgaros-forum').'</small>';
                 }
 
                 // Show marker for banned user.
                 if ($this->permissions->isBanned($post->author_id)) {
-                    echo '<small class="banned">'.__('Banned', 'asgaros-forum').'</small>';
+                    echo '<small class="banned">'.esc_html__('Banned', 'asgaros-forum').'</small>';
                 }
             echo '</div>';
 
@@ -100,7 +100,7 @@ echo '<div class="post-element '.$highlight_class.' '.$first_post_class.'" id="p
             $post_content = wp_kses($post->text, $allowed_html);
             $post_content = stripslashes($post_content);
 
-            echo '<div id="post-quote-container-'.$post->id.'" style="display: none;"><blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
+            echo '<div id="post-quote-container-'.esc_attr($post->id).'" style="display: none;"><blockquote><div class="quotetitle">'.esc_html__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
 
             // Automatically embed contents if enabled.
             if ($this->options['embed_content']) {

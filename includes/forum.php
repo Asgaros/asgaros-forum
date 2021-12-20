@@ -968,7 +968,7 @@ class AsgarosForum {
                 echo '</a>';
 
                 echo '<small>';
-                echo __('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic_object->author_id);
+                echo esc_html__('By', 'asgaros-forum').'&nbsp;'.$this->getUsername($topic_object->author_id);
 
                 // Show the name of the forum in which a topic is located in. This is currently only used for search results.
                 if ($show_topic_location) {

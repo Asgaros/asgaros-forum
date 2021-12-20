@@ -155,11 +155,11 @@ class AsgarosForumAppearance {
 
 			// Create meta-tags.
 			echo '<link rel="canonical" href="'.$link.'" />'.PHP_EOL;
-			echo '<meta name="description" content="'.$description.'" />'.PHP_EOL;
+			echo '<meta name="description" content="'.esc_attr($description).'" />'.PHP_EOL;
 			echo '<meta property="og:url" content="'.$link.'" />'.PHP_EOL;
-			echo '<meta property="og:title" content="'.$title.'" />'.PHP_EOL;
-			echo '<meta property="og:description" content="'.$description.'" />'.PHP_EOL;
-			echo '<meta property="og:site_name" content="'.get_bloginfo('name').'" />'.PHP_EOL;
+			echo '<meta property="og:title" content="'.esc_attr($title).'" />'.PHP_EOL;
+			echo '<meta property="og:description" content="'.esc_attr($description).'" />'.PHP_EOL;
+			echo '<meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'" />'.PHP_EOL;
 
             // Try to set og:image-tag when we are in a topic. A check for the element-ID
             // is required to prevent an error in case that this topic does not exist.
@@ -175,8 +175,8 @@ class AsgarosForumAppearance {
 				}
 			}
 
-			echo '<meta name="twitter:title" content="'.$title.'" />'.PHP_EOL;
-			echo '<meta name="twitter:description" content="'.$description.'" />'.PHP_EOL;
+			echo '<meta name="twitter:title" content="'.esc_attr($title).'" />'.PHP_EOL;
+			echo '<meta name="twitter:description" content="'.esc_attr($description).'" />'.PHP_EOL;
 
 			do_action('asgarosforum_wp_head');
 

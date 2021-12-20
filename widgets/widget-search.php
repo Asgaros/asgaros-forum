@@ -31,10 +31,10 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 			// Workaround for broken search in posts/pages when using plain permalink structure.
 			if (!$asgarosforum->rewrite->use_permalinks) {
 				echo '<input name="view" type="hidden" value="search">';
-				echo '<input name="page_id" type="hidden" value="'.$asgarosforum->options['location'].'">';
+				echo '<input name="page_id" type="hidden" value="'.esc_attr($asgarosforum->options['location']).'">';
 			}
 
-			echo '<input name="keywords" type="search" placeholder="'.__('Search ...', 'asgaros-forum').'" value="'.$asgarosforum->search->search_keywords_for_output.'">';
+			echo '<input name="keywords" type="search" placeholder="'.esc_attr__('Search ...', 'asgaros-forum').'" value="'.esc_attr($asgarosforum->search->search_keywords_for_output).'">';
 			echo '<button type="submit"><i class="fas fa-search"></i></button>';
 
 			echo '</form>';
@@ -47,11 +47,11 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 	}
 
 	public function form($instance) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Forum Search', 'asgaros-forum');
+		$title = isset($instance['title']) ? $instance['title'] : __('Forum Search', 'asgaros-forum');
 
 		echo '<p>';
-		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'asgaros-forum').'</label>';
-		echo '<input class="widefat" id="'.$this->get_field_id('title').'" name="'.$this->get_field_name('title').'" type="text" value="'.$title.'">';
+		echo '<label for="'.esc_attr($this->get_field_id('title')).'">'.esc_html__('Title:', 'asgaros-forum').'</label>';
+		echo '<input class="widefat" id="'.esc_attr($this->get_field_id('title')).'" name="'.esc_attr($this->get_field_name('title')).'" type="text" value="'.esc_attr($title).'">';
 		echo '</p>';
 	}
 

@@ -60,12 +60,12 @@ class AsgarosForumPolls {
         echo '<div class="editor-row">';
             echo '<span class="row-title add-poll">';
                 echo '<span class="editor-row-title-icon fas fa-poll-h"></span>';
-                echo __('Add Poll', 'asgaros-forum');
+                echo esc_html__('Add Poll', 'asgaros-forum');
             echo '</span>';
 
             echo '<div id="poll-form" style="display: none;">';
                 echo '<div id="poll-question">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.esc_html__('Enter your question here', 'asgaros-forum').'" value="">';
                 echo '</div>';
 
                 echo '<div id="poll-options">';
@@ -73,7 +73,7 @@ class AsgarosForumPolls {
                     $this->render_empty_poll_option_container();
                     $this->render_empty_poll_option_container();
 
-                    echo '<a class="poll-option-add">'.__('Add another answer', 'asgaros-forum').'</a>';
+                    echo '<a class="poll-option-add">'.esc_html__('Add another answer', 'asgaros-forum').'</a>';
 
                     // Hidden container for new poll-options.
                     echo '<div id="poll-option-template" style="display: none;">';
@@ -81,15 +81,15 @@ class AsgarosForumPolls {
                     echo '</div>';
 
                     echo '<div id="poll-warning">';
-                        echo __('After creating a poll it will be no longer possible to add or remove answers. This ensures the integrity of existing votes. However, it will be still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you must delete the existing poll and create a new one for this topic.', 'asgaros-forum');
+                        echo esc_html__('After creating a poll it will be no longer possible to add or remove answers. This ensures the integrity of existing votes. However, it will be still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you must delete the existing poll and create a new one for this topic.', 'asgaros-forum');
                     echo '</div>';
                 echo '</div>';
 
                 echo '<div id="poll-settings">';
                     echo '<label class="checkbox-label">';
-                        echo '<input type="checkbox" name="poll-multiple"><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                        echo '<input type="checkbox" name="poll-multiple"><span>'.esc_html__('Allow multiple answers', 'asgaros-forum').'</span>';
                     echo '</label>';
-                    echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
+                    echo '<span class="remove-poll">'.esc_html__('Remove Poll', 'asgaros-forum').'</span>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
@@ -98,7 +98,7 @@ class AsgarosForumPolls {
     public function render_empty_poll_option_container() {
         echo '<div class="poll-option-container">';
             echo '<div class="poll-option-input">';
-                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="">';
+                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option[]" placeholder="'.esc_attr__('An answer ...', 'asgaros-forum').'" value="">';
             echo '</div>';
 
             echo '<div class="poll-option-delete">';
@@ -111,33 +111,33 @@ class AsgarosForumPolls {
         echo '<div class="editor-row">';
             echo '<span class="row-title add-poll">';
                 echo '<span class="editor-row-title-icon fas fa-poll-h"></span>';
-                echo __('Add Poll', 'asgaros-forum');
+                echo esc_html__('Add Poll', 'asgaros-forum');
             echo '</span>';
 
             echo '<div id="poll-form" style="display: block;">';
                 echo '<div id="poll-question">';
-                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.__('Enter your question here', 'asgaros-forum').'" value="'.esc_html(stripslashes($poll->title)).'">';
+                    echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-title" placeholder="'.esc_attr__('Enter your question here', 'asgaros-forum').'" value="'.esc_html(stripslashes($poll->title)).'">';
                 echo '</div>';
 
                 echo '<div id="poll-options">';
                     foreach ($poll->options as $option) {
                         echo '<div class="poll-option-container">';
                             echo '<div class="poll-option-input">';
-                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.$option->id.']" placeholder="'.__('An answer ...', 'asgaros-forum').'" value="'.esc_html(stripslashes($option->title)).'">';
+                                echo '<input class="editor-subject-input" type="text" maxlength="255" name="poll-option['.esc_attr($option->id).']" placeholder="'.esc_attr__('An answer ...', 'asgaros-forum').'" value="'.esc_html(stripslashes($option->title)).'">';
                             echo '</div>';
                         echo '</div>';
                     }
 
                     echo '<div id="poll-warning">';
-                        echo __('To ensure the integrity of existing votes it is not possible to add or remove answers. However, it is still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you must delete the existing poll and create a new one for this topic.', 'asgaros-forum');
+                        echo esc_html__('To ensure the integrity of existing votes it is not possible to add or remove answers. However, it is still possible to make text-changes to existing answers and to poll-settings. If major changes for a poll are required, you must delete the existing poll and create a new one for this topic.', 'asgaros-forum');
                     echo '</div>';
                 echo '</div>';
 
                 echo '<div id="poll-settings">';
                     echo '<label class="checkbox-label">';
-                        echo '<input type="checkbox" name="poll-multiple" '.checked($poll->multiple, 1, false).'><span>'.__('Allow multiple answers', 'asgaros-forum').'</span>';
+                        echo '<input type="checkbox" name="poll-multiple" '.checked($poll->multiple, 1, false).'><span>'.esc_html__('Allow multiple answers', 'asgaros-forum').'</span>';
                     echo '</label>';
-                    echo '<span class="remove-poll">'.__('Remove Poll', 'asgaros-forum').'</span>';
+                    echo '<span class="remove-poll">'.esc_html__('Remove Poll', 'asgaros-forum').'</span>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
@@ -414,9 +414,9 @@ class AsgarosForumPolls {
                                 echo '<label class="checkbox-label">';
 
                                 if ($poll->multiple == 1) {
-                                    echo '<input type="checkbox" name="poll-option[]" value="'.$option->id.'">';
+                                    echo '<input type="checkbox" name="poll-option[]" value="'.esc_attr($option->id).'">';
                                 } else {
-                                    echo '<input type="radio" name="poll-option[]" value="'.$option->id.'">';
+                                    echo '<input type="radio" name="poll-option[]" value="'.esc_attr($option->id).'">';
                                 }
 
                                 echo '<span>'.esc_html(stripslashes($option->title)).'</span>';
@@ -436,7 +436,7 @@ class AsgarosForumPolls {
 
                         if ($can_see_results) {
                             echo '<div class="poll-result-bar">';
-                                echo '<div class="poll-result-filling" style="width: '.$percentage_css.'%; background-color: '.$this->get_bar_color().';"></div>';
+                                echo '<div class="poll-result-filling" style="width: '.esc_attr($percentage_css).'%; background-color: '.$this->get_bar_color().';"></div>';
                             echo '</div>';
                         }
                     echo '</div>';
@@ -452,7 +452,7 @@ class AsgarosForumPolls {
                 if ($can_vote) {
                     echo '<div class="actions">';
                         echo '<input type="hidden" name="poll_action" value="vote">';
-                        echo '<input class="button button-normal" type="submit" value="'.__('Vote', 'asgaros-forum').'">';
+                        echo '<input class="button button-normal" type="submit" value="'.esc_attr__('Vote', 'asgaros-forum').'">';
                     echo '</div>';
                 }
             echo '</div>';

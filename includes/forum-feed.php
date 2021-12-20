@@ -37,12 +37,12 @@ class AsgarosForumFeed {
                 case 'topic':
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
-                    echo '<a href="'.$link.'" target="_blank">'.__('RSS Feed', 'asgaros-forum').'</a>';
+                    echo '<a href="'.$link.'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
                 break;
                 case 'forum':
                     $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
-                    echo '<a href="'.$link.'" target="_blank">'.__('RSS Feed', 'asgaros-forum').'</a>';
+                    echo '<a href="'.$link.'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
                 break;
             }
         }

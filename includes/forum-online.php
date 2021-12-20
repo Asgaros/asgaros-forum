@@ -140,14 +140,14 @@ class AsgarosForumOnline {
                 $newest_member = get_users(array('orderby' => 'ID', 'order' => 'DESC', 'number' => 1));
 
                 echo '<span class="online-users-icon fas fa-user"></span>';
-                echo __('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i>';
+                echo esc_html__('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i>';
                 echo '&nbsp;&middot;&nbsp;';
             }
 
             echo '<span class="online-users-icon fas fa-users"></span>';
 
             if ($currently_online_users || $currently_online_guests) {
-                echo __('Currently Online:', 'asgaros-forum').'&nbsp;<i>';
+                echo esc_html__('Currently Online:', 'asgaros-forum').'&nbsp;<i>';
 
                 $loop_counter = 0;
 
@@ -177,7 +177,7 @@ class AsgarosForumOnline {
 
                 echo '</i>';
             } else {
-                echo '<i>'.__('Currently nobody is online.', 'asgaros-forum').'</i>';
+                echo '<i>'.esc_html__('Currently nobody is online.', 'asgaros-forum').'</i>';
             }
 
             echo '</div>';

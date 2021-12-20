@@ -229,7 +229,7 @@ class AsgarosForumUploads {
 
 				if (!empty($uploadedFiles)) {
 	                echo '<div class="editor-row">';
-	                	echo '<span class="row-title">'.__('Uploaded files:', 'asgaros-forum').'</span>';
+	                	echo '<span class="row-title">'.esc_html__('Uploaded files:', 'asgaros-forum').'</span>';
 	                	echo '<div class="files-to-delete"></div>';
 	                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
 	                echo '</div>';
@@ -247,11 +247,11 @@ class AsgarosForumUploads {
 			}
 
 			echo '<div class="editor-row editor-row-uploads">';
-				echo '<span class="row-title">'.__('Upload Files:', 'asgaros-forum').'</span>';
+				echo '<span class="row-title">'.esc_html__('Upload Files:', 'asgaros-forum').'</span>';
 
 				// Set maximum file size.
 				if ($this->asgarosforum->options['uploads_maximum_size'] != 0) {
-					echo '<input type="hidden" name="MAX_FILE_SIZE" value="'.(1024 * (1024 * $this->asgarosforum->options['uploads_maximum_size'])).'">';
+					echo '<input type="hidden" name="MAX_FILE_SIZE" value="'.(1024 * (1024 * absint($this->asgarosforum->options['uploads_maximum_size']))).'">';
 				}
 
 				$flag = 'style="display: none;"';
@@ -265,7 +265,7 @@ class AsgarosForumUploads {
 					}
 				}
 
-				echo '<a id="add_file_link" data-maximum-number="'.$this->asgarosforum->options['uploads_maximum_number'].'" '.$flag.'>'.__('Add another file ...', 'asgaros-forum').'</a>';
+				echo '<a id="add_file_link" data-maximum-number="'.$this->asgarosforum->options['uploads_maximum_number'].'" '.$flag.'>'.esc_html__('Add another file ...', 'asgaros-forum').'</a>';
 
 				$this->show_upload_restrictions();
 			echo '</div>';
@@ -289,7 +289,7 @@ class AsgarosForumUploads {
 			echo '&nbsp;&middot;&nbsp;';
 		}
 
-		echo __('Allowed file types:', 'asgaros-forum');
+		echo esc_html__('Allowed file types:', 'asgaros-forum');
 		echo '&nbsp;';
 		echo esc_html($this->asgarosforum->options['allowed_filetypes']);
 

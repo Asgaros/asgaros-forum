@@ -210,11 +210,11 @@ class AsgarosForumApproval {
                 echo '<div class="content-element unapproved-topic topic-normal">';
                     echo '<div class="topic-status fas fa-eye unread"></div>';
                     echo '<div class="topic-name">';
-                        echo '<a href="'.$this->asgarosforum->rewrite->get_link('topic', $topic->id).'" title="'.$topic_title.'">'.$topic_title.'</a>';
+                        echo '<a href="'.$this->asgarosforum->rewrite->get_link('topic', $topic->id).'" title="'.esc_attr($topic_title).'">'.esc_html($topic_title).'</a>';
                         echo '<small>';
 
                         // Author
-                        echo __('By', 'asgaros-forum').'&nbsp;'.$this->asgarosforum->getUsername($first_post->author_id);
+                        echo esc_html__('By', 'asgaros-forum').'&nbsp;'.$this->asgarosforum->getUsername($first_post->author_id);
 
                         // Creation time
                         echo '&nbsp;&middot;&nbsp;';
@@ -222,7 +222,7 @@ class AsgarosForumApproval {
 
                         // Location
                         echo '&nbsp;&middot;&nbsp;';
-                        echo __('In', 'asgaros-forum').'&nbsp;';
+                        echo esc_html__('In', 'asgaros-forum').'&nbsp;';
                         echo '<i>'.esc_html(stripslashes($topic->forum_name)).'</i>';
 
                         echo '</small>';

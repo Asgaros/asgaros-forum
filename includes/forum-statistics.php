@@ -16,7 +16,7 @@ class AsgarosForumStatistics {
             echo '<div id="statistics">';
                 echo '<div class="title-element title-element-dark">';
                     echo '<span class="title-element-icon fas fa-chart-pie"></span>';
-                    echo __('Statistics', 'asgaros-forum');
+                    echo esc_html__('Statistics', 'asgaros-forum');
                 echo '</div>';
                 echo '<div id="statistics-body">';
                     echo '<div id="statistics-elements">';
@@ -57,10 +57,10 @@ class AsgarosForumStatistics {
     public static function renderStatisticsElement($title, $data, $iconClass) {
         echo '<div class="statistics-element">';
             echo '<div class="element-number">';
-                echo '<span class="statistics-element-icon '.$iconClass.'"></span>';
+                echo '<span class="statistics-element-icon '.esc_attr($iconClass).'"></span>';
                 echo number_format_i18n($data);
             echo '</div>';
-            echo '<div class="element-name">'.$title.'</div>';
+            echo '<div class="element-name">'.esc_html($title).'</div>';
         echo '</div>';
     }
 }

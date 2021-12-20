@@ -6,9 +6,9 @@ if ($categories) {
     $forumsAvailable = false;
 
     foreach ($categories as $category) {
-        echo '<div class="title-element" id="forum-category-'.$category->term_id.'">';
-            echo $category->name;
-            echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
+        echo '<div class="title-element" id="forum-category-'.esc_attr($category->term_id).'">';
+            echo esc_html($category->name);
+            echo '<span class="last-post-headline">'.esc_html__('Last post', 'asgaros-forum').'</span>';
         echo '</div>';
         echo '<div class="content-container">';
             $forums = $this->get_forums($category->term_id);

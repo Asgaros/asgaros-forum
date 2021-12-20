@@ -111,18 +111,18 @@
 
     if (!empty($userGroupsCategories)) {
         foreach ($userGroupsCategories as $category) {
-            echo '<input type="hidden" id="usergroup_category_'.$category->term_id.'_name" value="'.esc_html(stripslashes($category->name)).'">';
+            echo '<input type="hidden" id="usergroup_category_'.esc_attr($category->term_id).'_name" value="'.esc_html(stripslashes($category->name)).'">';
 
             $usergroups = AsgarosForumUserGroups::getUserGroupsOfCategory($category->term_id);
             ?>
             <div class="settings-box">
                 <div class="settings-header">
                     <span class="fas fa-users"></span>
-                    <?php echo stripslashes($category->name); ?>
+                    <?php echo esc_html($category->name); ?>
                     <span class="category-actions">
-                        <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Delete Category', 'asgaros-forum'); ?>"><?php esc_html_e('Delete Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="usergroup-category-delete-link action-delete" data-value-id="<?php echo esc_attr($category->term_id); ?>" data-value-editor-title="<?php esc_attr_e('Delete Category', 'asgaros-forum'); ?>"><?php esc_html_e('Delete Category', 'asgaros-forum'); ?></a>
                         &middot;
-                        <a href="#" class="usergroup-category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Edit Category', 'asgaros-forum'); ?>"><?php esc_html_e('Edit Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="usergroup-category-editor-link action-edit" data-value-id="<?php echo esc_attr($category->term_id); ?>" data-value-editor-title="<?php esc_attr_e('Edit Category', 'asgaros-forum'); ?>"><?php esc_html_e('Edit Category', 'asgaros-forum'); ?></a>
                     </span>
                 </div>
                 <?php
@@ -133,7 +133,7 @@
                 }
                 ?>
 
-                <a href="#" class="usergroup-editor-link add-element" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Add Usergroup', 'asgaros-forum'); ?>">
+                <a href="#" class="usergroup-editor-link add-element" data-value-id="new" data-value-category="<?php echo esc_attr($category->term_id); ?>" data-value-editor-title="<?php esc_attr_e('Add Usergroup', 'asgaros-forum'); ?>">
                     <span class="fas fa-plus"></span>
                     <?php esc_html_e('Add Usergroup', 'asgaros-forum'); ?>
                 </a>
@@ -141,7 +141,7 @@
             <?php
         }
 
-        echo '<a href="#" class="usergroup-category-editor-link add-element" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+        echo '<a href="#" class="usergroup-category-editor-link add-element" data-value-id="new" data-value-editor-title="'.esc_attr__('Add Category', 'asgaros-forum').'">';
             echo '<span class="fas fa-plus"></span>';
             esc_html_e('Add Category', 'asgaros-forum');
         echo '</a>';

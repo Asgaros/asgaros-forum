@@ -28,12 +28,12 @@ if ($this->options['subforums_location'] == 'above' || $this->options['subforums
 }
 
 if ($counter_total > 0) {
-    echo '<div class="title-element" id="title-element-forum-'.$this->current_forum.'">';
-        echo __('Topics', 'asgaros-forum');
-        echo '<span class="last-post-headline">'.__('Last post', 'asgaros-forum').'</span>';
+    echo '<div class="title-element" id="title-element-forum-'.esc_attr($this->current_forum).'">';
+        echo esc_html__('Topics', 'asgaros-forum');
+        echo '<span class="last-post-headline">'.esc_html__('Last post', 'asgaros-forum').'</span>';
     echo '</div>';
 
-    echo '<div class="content-container" id="content-container-forum-'.$this->current_forum.'">';
+    echo '<div class="content-container" id="content-container-forum-'.esc_attr($this->current_forum).'">';
         // Show sticky topics.
         if ($topics_sticky && !$this->current_page) {
             foreach ($topics_sticky as $topic) {
@@ -52,9 +52,9 @@ if ($counter_total > 0) {
         echo '<div class="clear"></div>';
     echo '</div>';
 } else {
-    echo '<div class="title-element" id="title-element-forum-'.$this->current_forum.'"></div>';
+    echo '<div class="title-element" id="title-element-forum-'.esc_attr($this->current_forum).'"></div>';
 
-    echo '<div class="content-container" id="content-container-forum-'.$this->current_forum.'">';
+    echo '<div class="content-container" id="content-container-forum-'.esc_attr($this->current_forum).'">';
         $this->render_notice(__('There are no topics yet!', 'asgaros-forum'));
     echo '</div>';
 }

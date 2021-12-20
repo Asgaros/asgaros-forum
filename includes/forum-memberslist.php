@@ -99,22 +99,22 @@ class AsgarosForumMembersList {
         }
 
         echo '<div class="title-element" id="memberslist-filter-toggle">';
-            echo '<span class="title-element-icon '.$filter_toggle_icon.'"></span>';
-            echo '<span class="title-element-text">'.$filter_toggle_text.'</span>';
+            echo '<span class="title-element-icon '.esc_attr($filter_toggle_icon).'"></span>';
+            echo '<span class="title-element-text">'.esc_attr($filter_toggle_text).'</span>';
         echo '</div>';
 
-        echo '<div id="memberslist-filter" data-value-show-filters="'.__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hide.'>';
+        echo '<div id="memberslist-filter" data-value-show-filters="'.esc_attr__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.esc_attr__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hide.'>';
             echo '<div id="roles-filter">';
-                echo '<div class="filter-name">'.__('Roles:', 'asgaros-forum').'</div>';
+                echo '<div class="filter-name">'.esc_html__('Roles:', 'asgaros-forum').'</div>';
                 echo '<div class="filter-options">';
-                    echo $this->render_filter_option('role', 'all', __('All Users', 'asgaros-forum'));
+                    echo $this->render_filter_option('role', 'all', esc_html__('All Users', 'asgaros-forum'));
 
                     if ($this->is_filter_available('normal')) {
                         $users = $this->asgarosforum->permissions->get_users_by_role('normal');
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'normal', __('Users', 'asgaros-forum'));
+                            echo $this->render_filter_option('role', 'normal', esc_html__('Users', 'asgaros-forum'));
                         }
                     }
 
@@ -123,7 +123,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'moderator', __('Moderators', 'asgaros-forum'));
+                            echo $this->render_filter_option('role', 'moderator', esc_html__('Moderators', 'asgaros-forum'));
                         }
                     }
 
@@ -133,7 +133,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'administrator', __('Administrators', 'asgaros-forum'));
+                            echo $this->render_filter_option('role', 'administrator', esc_html__('Administrators', 'asgaros-forum'));
                         }
                     }
 
@@ -142,7 +142,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'banned', __('Banned', 'asgaros-forum'));
+                            echo $this->render_filter_option('role', 'banned', esc_html__('Banned', 'asgaros-forum'));
                         }
                     }
                 echo '</div>';
@@ -167,7 +167,7 @@ class AsgarosForumMembersList {
 
                 if (!empty($usergroups_filter_output)) {
                     echo '<div id="usergroups-filter">';
-                        echo '<div class="filter-name">'.__('Usergroups:', 'asgaros-forum').'</div>';
+                        echo '<div class="filter-name">'.esc_html__('Usergroups:', 'asgaros-forum').'</div>';
                         echo '<div class="filter-options">'.$usergroups_filter_output.'</div>';
                     echo '</div>';
                 }

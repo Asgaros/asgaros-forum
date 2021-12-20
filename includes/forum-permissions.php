@@ -674,7 +674,7 @@ class AsgarosForumPermissions {
 
     public function bulk_actions_admin_notices() {
         if (!empty($_REQUEST['forum_role_assigned'])) {
-            printf('<div class="updated"><p>'.__('Forum role assigned.', 'asgaros-forum').'</p></div>');
+            printf('<div class="updated"><p>'.esc_html__('Forum role assigned.', 'asgaros-forum').'</p></div>');
         }
     }
 }

@@ -144,7 +144,7 @@ function mycred_load_asgarosforum_hook() {
 
         public function show_badges_profile($user_data) {
             echo '<div class="profile-row">';
-                echo '<div>'.__('Badges:', 'asgaros-forum').'</div>';
+                echo '<div>'.esc_html__('Badges:', 'asgaros-forum').'</div>';
                 echo '<div>';
                 mycred_display_users_badges($user_data->ID);
                 echo '</div>';
@@ -341,20 +341,20 @@ function mycred_load_asgarosforum_hook() {
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_topic', 'creds')); ?>"><?php echo $this->core->plural(); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('new_topic', 'creds')); ?>" id="<?php echo $this->field_id(array('new_topic', 'creds')); ?>" value="<?php echo $this->core->number($prefs['new_topic']['creds']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('new_topic', 'creds'))); ?>"><?php echo esc_html($this->core->plural()); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('new_topic', 'creds'))); ?>" id="<?php echo esc_attr($this->field_id(array('new_topic', 'creds'))); ?>" value="<?php echo esc_attr($this->core->number($prefs['new_topic']['creds'])); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_topic', 'limit')); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
+                        <label for="<?php echo esc_attr($this->field_id(array('new_topic', 'limit'))); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
                         <?php echo $this->hook_limit_setting($this->field_name(array('new_topic', 'limit')), $this->field_id(array('new_topic', 'limit')), $prefs['new_topic']['limit']); ?>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_topic', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('new_topic', 'log')); ?>" id="<?php echo $this->field_id(array('new_topic', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_topic']['log']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('new_topic', 'log'))); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('new_topic', 'log'))); ?>" id="<?php echo esc_attr($this->field_id(array('new_topic', 'log'))); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_topic']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
@@ -365,14 +365,14 @@ function mycred_load_asgarosforum_hook() {
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('delete_topic', 'creds')); ?>"><?php echo $this->core->plural(); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('delete_topic', 'creds')); ?>" id="<?php echo $this->field_id(array('delete_topic', 'creds')); ?>" value="<?php echo $this->core->number($prefs['delete_topic']['creds']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('delete_topic', 'creds'))); ?>"><?php echo esc_html($this->core->plural()); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('delete_topic', 'creds'))); ?>" id="<?php echo esc_attr($this->field_id(array('delete_topic', 'creds'))); ?>" value="<?php echo esc_attr($this->core->number($prefs['delete_topic']['creds'])); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('delete_topic', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('delete_topic', 'log')); ?>" id="<?php echo $this->field_id(array('delete_topic', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_topic']['log']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('delete_topic', 'log'))); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('delete_topic', 'log'))); ?>" id="<?php echo esc_attr($this->field_id(array('delete_topic', 'log'))); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_topic']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
@@ -383,20 +383,20 @@ function mycred_load_asgarosforum_hook() {
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_post', 'creds')); ?>"><?php echo $this->core->plural(); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('new_post', 'creds')); ?>" id="<?php echo $this->field_id(array('new_post', 'creds')); ?>" value="<?php echo $this->core->number($prefs['new_post']['creds']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('new_post', 'creds'))); ?>"><?php echo esc_html($this->core->plural()); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('new_post', 'creds'))); ?>" id="<?php echo esc_attr($this->field_id(array('new_post', 'creds'))); ?>" value="<?php echo esc_attr($this->core->number($prefs['new_post']['creds'])); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_post', 'limit')); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
+                        <label for="<?php echo esc_attr($this->field_id(array('new_post', 'limit'))); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
                         <?php echo $this->hook_limit_setting($this->field_name(array('new_post', 'limit')), $this->field_id(array('new_post', 'limit')), $prefs['new_post']['limit']); ?>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('new_post', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('new_post', 'log')); ?>" id="<?php echo $this->field_id(array('new_post', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_post']['log']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('new_post', 'log'))); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('new_post', 'log'))); ?>" id="<?php echo esc_attr($this->field_id(array('new_post', 'log'))); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['new_post']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
@@ -405,7 +405,7 @@ function mycred_load_asgarosforum_hook() {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <div class="radio">
-                            <label for="<?php echo $this->field_id(array('new_post' => 'author')); ?>"><input type="checkbox" name="<?php echo $this->field_name(array('new_post' => 'author')); ?>" id="<?php echo $this->field_id(array('new_post' => 'author')); ?>" <?php checked($prefs['new_post']['author'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Topic authors can receive %_plural% for replying to their own topic.', 'asgaros-forum')); ?></label>
+                            <label for="<?php echo esc_attr($this->field_id(array('new_post' => 'author'))); ?>"><input type="checkbox" name="<?php echo esc_attr($this->field_name(array('new_post' => 'author'))); ?>" id="<?php echo esc_attr($this->field_id(array('new_post' => 'author'))); ?>" <?php checked($prefs['new_post']['author'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Topic authors can receive %_plural% for replying to their own topic.', 'asgaros-forum')); ?></label>
                         </div>
                     </div>
                 </div>
@@ -416,14 +416,14 @@ function mycred_load_asgarosforum_hook() {
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('delete_post', 'creds')); ?>"><?php echo $this->core->plural(); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('delete_post', 'creds')); ?>" id="<?php echo $this->field_id(array('delete_post', 'creds')); ?>" value="<?php echo $this->core->number($prefs['delete_post']['creds']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('delete_post', 'creds'))); ?>"><?php echo esc_html($this->core->plural()); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('delete_post', 'creds'))); ?>" id="<?php echo esc_attr($this->field_id(array('delete_post', 'creds'))); ?>" value="<?php echo esc_attr($this->core->number($prefs['delete_post']['creds'])); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('delete_post', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('delete_post', 'log')); ?>" id="<?php echo $this->field_id(array('delete_post', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_post']['log']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('delete_post', 'log'))); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('delete_post', 'log'))); ?>" id="<?php echo esc_attr($this->field_id(array('delete_post', 'log'))); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['delete_post']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
@@ -434,20 +434,20 @@ function mycred_load_asgarosforum_hook() {
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_like', 'creds')); ?>"><?php echo $this->core->plural(); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('received_like', 'creds')); ?>" id="<?php echo $this->field_id(array('received_like', 'creds')); ?>" value="<?php echo $this->core->number($prefs['received_like']['creds']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('received_like', 'creds'))); ?>"><?php echo esc_html($this->core->plural()); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('received_like', 'creds'))); ?>" id="<?php echo esc_attr($this->field_id(array('received_like', 'creds'))); ?>" value="<?php echo esc_attr($this->core->number($prefs['received_like']['creds'])); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_like', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('received_like', 'log')); ?>" id="<?php echo $this->field_id(array('received_like', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_like']['log']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('received_like', 'log'))); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('received_like', 'log'))); ?>" id="<?php echo esc_attr($this->field_id(array('received_like', 'log'))); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_like']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_like', 'limit')); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
+                        <label for="<?php echo esc_attr($this->field_id(array('received_like', 'limit'))); ?>"><?php esc_html_e('Limit', 'asgaros-forum'); ?></label>
                         <?php echo $this->hook_limit_setting($this->field_name(array('received_like', 'limit')), $this->field_id(array('received_like', 'limit')), $prefs['received_like']['limit']); ?>
                     </div>
                 </div>
@@ -458,14 +458,14 @@ function mycred_load_asgarosforum_hook() {
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_dislike', 'creds')); ?>"><?php echo $this->core->plural(); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('received_dislike', 'creds')); ?>" id="<?php echo $this->field_id(array('received_dislike', 'creds')); ?>" value="<?php echo $this->core->number($prefs['received_dislike']['creds']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('received_dislike', 'creds'))); ?>"><?php echo esc_html($this->core->plural()); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('received_dislike', 'creds'))); ?>" id="<?php echo esc_attr($this->field_id(array('received_dislike', 'creds'))); ?>" value="<?php echo esc_attr($this->core->number($prefs['received_dislike']['creds'])); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="<?php echo $this->field_id(array('received_dislike', 'log')); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
-                        <input type="text" name="<?php echo $this->field_name(array('received_dislike', 'log')); ?>" id="<?php echo $this->field_id(array('received_dislike', 'log')); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_dislike']['log']); ?>" class="form-control">
+                        <label for="<?php echo esc_attr($this->field_id(array('received_dislike', 'log'))); ?>"><?php esc_html_e('Log template', 'asgaros-forum'); ?></label>
+                        <input type="text" name="<?php echo esc_attr($this->field_name(array('received_dislike', 'log'))); ?>" id="<?php echo esc_attr($this->field_id(array('received_dislike', 'log'))); ?>" placeholder="<?php esc_attr_e('required', 'asgaros-forum'); ?>" value="<?php echo esc_attr($prefs['received_dislike']['log']); ?>" class="form-control">
                         <span class="description"><?php echo $this->available_template_tags(array('general')); ?></span>
                     </div>
                 </div>
@@ -476,13 +476,13 @@ function mycred_load_asgarosforum_hook() {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <div class="radio">
-                            <label for="<?php echo $this->field_id('show_points'); ?>"><input type="checkbox" name="<?php echo $this->field_name('show_points'); ?>" id="<?php echo $this->field_id('show_points'); ?>" <?php checked($prefs['show_points'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Show %_plural% in posts and profiles', 'asgaros-forum')); ?></label>
+                            <label for="<?php echo esc_attr($this->field_id('show_points')); ?>"><input type="checkbox" name="<?php echo esc_attr($this->field_name('show_points')); ?>" id="<?php echo esc_attr($this->field_id('show_points')); ?>" <?php checked($prefs['show_points'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Show %_plural% in posts and profiles', 'asgaros-forum')); ?></label>
                         </div>
                         <div class="radio">
-                            <label for="<?php echo $this->field_id('show_badges'); ?>"><input type="checkbox" name="<?php echo $this->field_name('show_badges'); ?>" id="<?php echo $this->field_id('show_badges'); ?>" <?php checked($prefs['show_badges'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Show badges in posts and profiles', 'asgaros-forum')); ?></label>
+                            <label for="<?php echo esc_attr($this->field_id('show_badges')); ?>"><input type="checkbox" name="<?php echo esc_attr($this->field_name('show_badges')); ?>" id="<?php echo esc_attr($this->field_id('show_badges')); ?>" <?php checked($prefs['show_badges'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Show badges in posts and profiles', 'asgaros-forum')); ?></label>
                         </div>
                         <div class="radio">
-                            <label for="<?php echo $this->field_id('show_ranks'); ?>"><input type="checkbox" name="<?php echo $this->field_name('show_ranks'); ?>" id="<?php echo $this->field_id('show_ranks'); ?>" <?php checked($prefs['show_ranks'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Show ranks in posts and profiles', 'asgaros-forum')); ?></label>
+                            <label for="<?php echo esc_attr($this->field_id('show_ranks')); ?>"><input type="checkbox" name="<?php echo esc_attr($this->field_name('show_ranks')); ?>" id="<?php echo esc_attr($this->field_id('show_ranks')); ?>" <?php checked($prefs['show_ranks'], 1); ?> value="1"> <?php echo $this->core->template_tags_general(__('Show ranks in posts and profiles', 'asgaros-forum')); ?></label>
                         </div>
                     </div>
                 </div>

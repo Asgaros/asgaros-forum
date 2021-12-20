@@ -216,7 +216,7 @@ class AsgarosForumReports {
                     echo '<div class="report-source">';
                         echo sprintf(__('Posted in %s by %s', 'asgaros-forum'), $post_link, $post_author);
                         echo '&nbsp;&middot;&nbsp;';
-                        echo __('Reported by:', 'asgaros-forum').'&nbsp;';
+                        echo esc_html__('Reported by:', 'asgaros-forum').'&nbsp;';
 
                         $first_reporter = true;
 
@@ -246,12 +246,12 @@ class AsgarosForumReports {
 
                         echo '<a class="report-action-delete" href="'.$delete_link.'">';
                             echo '<span class="fas fa-trash-alt"></span>';
-                            echo __('Delete Report', 'asgaros-forum');
+                            echo esc_html__('Delete Report', 'asgaros-forum');
                         echo '</a>';
 
                         echo '<a href="'.$report['post_link'].'">';
                             echo '<span class="fas fa-eye"></span>';
-                            echo __('Show Post', 'asgaros-forum');
+                            echo esc_html__('Show Post', 'asgaros-forum');
                         echo '</a>';
                     echo '</div>';
                 echo '</div>';

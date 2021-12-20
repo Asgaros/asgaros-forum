@@ -14,7 +14,7 @@
             <?php
             if ($categories) {
                 foreach ($categories as $category) {
-                    echo '<option value="'.$category->term_id.'_0">'.$category->name.'</option>';
+                    echo '<option value="'.esc_attr($category->term_id).'_0">'.esc_html($category->name).'</option>';
                 }
             }
             ?>
@@ -24,13 +24,13 @@
             <?php
             if ($categories) {
                 foreach ($categories as $category) {
-                    echo '<option value="'.$category->term_id.'_0">'.$category->name.'</option>';
+                    echo '<option value="'.esc_attr($category->term_id).'_0">'.esc_html($category->name).'</option>';
 
                     $forums = $this->asgarosforum->get_forums($category->term_id, 0);
 
                     if ($forums) {
                         foreach ($forums as $forum) {
-                            echo '<option value="'.$category->term_id.'_'.$forum->id.'">&mdash; '.esc_html($forum->name).'</option>';
+                            echo '<option value="'.esc_attr($category->term_id).'_'.esc_attr($forum->id).'">&mdash; '.esc_html($forum->name).'</option>';
                         }
                     }
                 }
@@ -131,7 +131,7 @@
                                 $forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);
 
                                 foreach ($forum_status_options as $forum_status_option) {
-                                    echo '<option value="'.$forum_status_option['value'].'">'.$forum_status_option['name'].'</option>';
+                                    echo '<option value="'.esc_attr($forum_status_option['value']).'">'.esc_html($forum_status_option['name']).'</option>';
                                 }
 
                                 ?>
@@ -192,9 +192,9 @@
             $term_meta = get_term_meta($category->term_id);
             $access = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
             $order = (!empty($term_meta['order'][0])) ? $term_meta['order'][0] : 1;
-            echo '<input type="hidden" id="category_'.$category->term_id.'_name" value="'.esc_html(stripslashes($category->name)).'">';
-            echo '<input type="hidden" id="category_'.$category->term_id.'_access" value="'.$access.'">';
-            echo '<input type="hidden" id="category_'.$category->term_id.'_order" value="'.$order.'">';
+            echo '<input type="hidden" id="category_'.esc_attr($category->term_id).'_name" value="'.esc_html(stripslashes($category->name)).'">';
+            echo '<input type="hidden" id="category_'.esc_attr($category->term_id).'_access" value="'.esc_attr($access).'">';
+            echo '<input type="hidden" id="category_'.esc_attr($category->term_id).'_order" value="'.esc_attr($order).'">';
             AsgarosForumUserGroups::renderHiddenFields($category->term_id);
 
             $forums = $this->asgarosforum->get_forums($category->term_id, 0, ARRAY_A);
@@ -202,13 +202,13 @@
             <div class="settings-box">
                 <div class="settings-header">
                     <span class="fas fa-box"></span>
-                    <?php echo stripslashes($category->name); ?>&nbsp;
+                    <?php echo esc_html($category->name); ?>&nbsp;
                     <span class="element-id">
                         <?php
                         echo '(';
-                        echo __('ID', 'asgaros-forum').': '.$category->term_id;
+                        echo esc_html__('ID', 'asgaros-forum').': '.esc_html($category->term_id);
                         echo ' &middot; ';
-                        echo __('Access:', 'asgaros-forum').' ';
+                        echo esc_html__('Access:', 'asgaros-forum').' ';
                         if ($access === 'everyone') {
                             esc_html_e('Everyone', 'asgaros-forum');
                         } else if ($access === 'loggedin') {
@@ -217,16 +217,16 @@
                             esc_html_e('Moderators only', 'asgaros-forum');
                         }
                         echo ' &middot; ';
-                        echo __('Order:', 'asgaros-forum').' '.$order;
+                        echo esc_html__('Order:', 'asgaros-forum').' '.esc_html($order);
                         AsgarosForumUserGroups::renderUserGroupsInCategory($category->term_id);
                         do_action('asgarosforum_admin_show_custom_category_data', $category->term_id);
                         echo ')';
                         ?>
                     </span>
                     <span class="category-actions">
-                        <a href="#" class="category-delete-link action-delete" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Delete Category', 'asgaros-forum'); ?>"><?php esc_html_e('Delete Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="category-delete-link action-delete" data-value-id="<?php echo esc_attr($category->term_id); ?>" data-value-editor-title="<?php esc_attr_e('Delete Category', 'asgaros-forum'); ?>"><?php esc_html_e('Delete Category', 'asgaros-forum'); ?></a>
                         &middot;
-                        <a href="#" class="category-editor-link action-edit" data-value-id="<?php echo $category->term_id; ?>" data-value-editor-title="<?php esc_attr_e('Edit Category', 'asgaros-forum'); ?>"><?php esc_html_e('Edit Category', 'asgaros-forum'); ?></a>
+                        <a href="#" class="category-editor-link action-edit" data-value-id="<?php echo esc_attr($category->term_id); ?>" data-value-editor-title="<?php esc_attr_e('Edit Category', 'asgaros-forum'); ?>"><?php esc_html_e('Edit Category', 'asgaros-forum'); ?></a>
                     </span>
                 </div>
                 <?php
@@ -236,7 +236,7 @@
                     $structureTable->display();
                 }
                 ?>
-                <a href="#" class="forum-editor-link add-element" data-value-id="new" data-value-category="<?php echo $category->term_id; ?>" data-value-parent-forum="0" data-value-editor-title="<?php esc_attr_e('Add Forum', 'asgaros-forum'); ?>">
+                <a href="#" class="forum-editor-link add-element" data-value-id="new" data-value-category="<?php echo esc_attr($category->term_id); ?>" data-value-parent-forum="0" data-value-editor-title="<?php esc_attr_e('Add Forum', 'asgaros-forum'); ?>">
                     <?php
                     echo '<span class="fas fa-plus"></span>';
                     esc_html_e('Add Forum', 'asgaros-forum');
@@ -246,7 +246,7 @@
             <?php
         }
 
-        echo '<a href="#" class="category-editor-link add-element" data-value-id="new" data-value-editor-title="'.__('Add Category', 'asgaros-forum').'">';
+        echo '<a href="#" class="category-editor-link add-element" data-value-id="new" data-value-editor-title="'.esc_html__('Add Category', 'asgaros-forum').'">';
             echo '<span class="fas fa-plus"></span>';
             esc_html_e('Add Category', 'asgaros-forum');
         echo '</a>';

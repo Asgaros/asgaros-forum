@@ -119,16 +119,16 @@ class AsgarosForumProfile {
 
             // Profile link.
             if ($this->asgarosforum->current_view === 'profile') {
-                echo '<a class="active" href="'.esc_url($profile_link).'">'.__('Profile', 'asgaros-forum').'</a>';
+                echo '<a class="active" href="'.esc_url($profile_link).'">'.esc_html__('Profile', 'asgaros-forum').'</a>';
             } else {
-                echo '<a href="'.esc_url($profile_link).'">'.__('Profile', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($profile_link).'">'.esc_html__('Profile', 'asgaros-forum').'</a>';
             }
 
             // Subscriptions link.
             if ($this->asgarosforum->current_view === 'history') {
-                echo '<a class="active" href="'.$history_link.'">'.__('Post History', 'asgaros-forum').'</a>';
+                echo '<a class="active" href="'.esc_url($history_link).'">'.esc_html__('Post History', 'asgaros-forum').'</a>';
             } else {
-                echo '<a href="'.$history_link.'">'.__('Post History', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($history_link).'">'.esc_html__('Post History', 'asgaros-forum').'</a>';
             }
 
             do_action('asgarosforum_custom_profile_menu');
@@ -201,7 +201,7 @@ class AsgarosForumProfile {
                                     $topic_name = esc_html(stripslashes($post->name));
                                     $topic_time = $this->asgarosforum->get_activity_timestamp($post->date);
 
-                                    echo '<span class="history-topic">'.__('In:', 'asgaros-forum').' <a href="'.esc_url($topic_link).'">'.$topic_name.'</a></span>';
+                                    echo '<span class="history-topic">'.esc_html__('In:', 'asgaros-forum').' <a href="'.esc_url($topic_link).'">'.$topic_name.'</a></span>';
                                 echo '</div>';
 
                                 echo '<div class="history-time">'.$topic_time.'</div>';
@@ -308,7 +308,7 @@ class AsgarosForumProfile {
 
                     echo '<div class="profile-section-header">';
                         echo '<span class="profile-section-header-icon fas fa-address-card"></span>';
-                        echo __('Member Activity', 'asgaros-forum');
+                        echo esc_html__('Member Activity', 'asgaros-forum');
                     echo '</div>';
 
                     echo '<div class="profile-section-content">';
@@ -335,7 +335,7 @@ class AsgarosForumProfile {
                     if ($userData->ID == $current_user_id) {
                         echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link">';
                             echo '<span class="fas fa-pencil-alt"></span>';
-                            echo __('Edit Profile', 'asgaros-forum');
+                            echo esc_html__('Edit Profile', 'asgaros-forum');
                         echo '</a>';
                     }
 
@@ -344,11 +344,11 @@ class AsgarosForumProfile {
                         if ($this->asgarosforum->permissions->isBanned($userData->ID)) {
                             $url = $this->getProfileLink($userData, array('unban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'unban_user_'.$userData->ID);
-                            echo '<a class="banned" href="'.$nonce_url.'">'.__('Unban User', 'asgaros-forum').'</a>';
+                            echo '<a class="banned" href="'.$nonce_url.'">'.esc_html__('Unban User', 'asgaros-forum').'</a>';
                         } else {
                             $url = $this->getProfileLink($userData, array('ban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'ban_user_'.$userData->ID);
-                            echo '<a class="banned" href="'.$nonce_url.'">'.__('Ban User', 'asgaros-forum').'</a>';
+                            echo '<a class="banned" href="'.$nonce_url.'">'.esc_html__('Ban User', 'asgaros-forum').'</a>';
                         }
                     }
                 echo '</div>';
@@ -360,7 +360,7 @@ class AsgarosForumProfile {
 
     public function renderProfileRow($cellTitle, $cellValue, $type = '') {
         echo '<div class="profile-row">';
-            echo '<div>'.$cellTitle.'</div>';
+            echo '<div>'.esc_html($cellTitle).'</div>';
             echo '<div>';
 
             if (is_array($cellValue)) {

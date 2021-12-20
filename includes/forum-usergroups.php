@@ -470,14 +470,14 @@ class AsgarosForumUserGroups {
         $userGroupsOfForumCategory = self::getUserGroupsOfForumCategory($categoryID);
 
         if (!empty($userGroupsOfForumCategory)) {
-            echo ' &middot; '.__('Usergroups:', 'asgaros-forum').' ';
+            echo ' &middot; '.esc_html__('Usergroups:', 'asgaros-forum').' ';
 
             foreach ($userGroupsOfForumCategory as $key => $userGroup) {
                 if ($key > 0) {
                     echo ', ';
                 }
 
-                echo $userGroup->name;
+                echo esc_html($userGroup->name);
             }
         }
     }
@@ -487,20 +487,20 @@ class AsgarosForumUserGroups {
 
         if (!empty($userGroupCategories)) {
             echo '<tr id="usergroups-editor">';
-                echo '<th><label>'.__('Usergroups:', 'asgaros-forum').'</label></th>';
+                echo '<th><label>'.esc_html__('Usergroups:', 'asgaros-forum').'</label></th>';
                 echo '<td>';
                     foreach ($userGroupCategories as $category) {
-                        echo '<span class="usergroup-category-name">'.$category->name.':</span>';
+                        echo '<span class="usergroup-category-name">'.esc_html($category->name).':</span>';
 
                         $userGroups = self::getUserGroupsOfCategory($category->term_id);
 
                         foreach ($userGroups as $usergroup) {
-                            echo '<label><input type="checkbox" name="category_usergroups[]" value="'.$usergroup->term_id.'">';
+                            echo '<label><input type="checkbox" name="category_usergroups[]" value="'.esc_attr($usergroup->term_id).'">';
                             echo self::render_usergroup_tag($usergroup);
                             echo '</label>';
                         }
                     }
-                    echo '<span class="description">'.__('When usergroups are selected, only users of the selected usergroups will have access to the category.', 'asgaros-forum').'</span>';
+                    echo '<span class="description">'.esc_html__('When usergroups are selected, only users of the selected usergroups will have access to the category.', 'asgaros-forum').'</span>';
                 echo '</td>';
             echo '</tr>';
         }
@@ -514,7 +514,7 @@ class AsgarosForumUserGroups {
             $userGroupsOfForumCategoryString = implode(',', $userGroupsIDsOfForumCategory);
         }
 
-        echo '<input type="hidden" id="category_'.$categoryID.'_usergroups" value="'.$userGroupsOfForumCategoryString.'">';
+        echo '<input type="hidden" id="category_'.esc_attr($categoryID).'_usergroups" value="'.esc_attr($userGroupsOfForumCategoryString).'">';
     }
 
     public static function saveUserGroupsOfForumCategory($forumCategoryID) {
@@ -766,7 +766,7 @@ class AsgarosForumUserGroups {
 
     public function bulk_actions_admin_notices() {
         if (!empty($_REQUEST['forum_user_groups_assigned'])) {
-            printf('<div class="updated"><p>'.__('Usergroups assignments updated.', 'asgaros-forum').'</p></div>');
+            printf('<div class="updated"><p>'.esc_html__('Usergroups assignments updated.', 'asgaros-forum').'</p></div>');
         }
     }
 

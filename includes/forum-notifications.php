@@ -535,26 +535,26 @@ class AsgarosForumNotifications {
         // Render subscription settings.
         echo '<div class="title-element title-element-dark">';
             echo '<span class="title-element-icon fas fa-envelope"></span>';
-            echo __('Subscription Settings', 'asgaros-forum');
+            echo esc_html__('Subscription Settings', 'asgaros-forum');
         echo '</div>';
 
         echo '<div id="subscriptions-panel" class="content-container">';
             echo '<form method="post" action="'.$this->asgarosforum->get_link('subscriptions').'">';
                 echo '<div class="action-panel">';
                     echo '<label class="action-panel-option">';
-                        echo '<input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.__('Individual Subscriptions', 'asgaros-forum');
+                        echo '<input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.esc_html__('Individual Subscriptions', 'asgaros-forum');
                         echo '<span class="action-panel-description">';
                             esc_html_e('You get notified about activity in forums and topics you are subscribed to.', 'asgaros-forum');
                         echo '</span>';
                     echo '</label>';
                     echo '<label class="action-panel-option">';
-                        echo '<input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.__('New Topics', 'asgaros-forum');
+                        echo '<input type="radio" name="subscription_level" value="2" '.checked($subscription_level, 2, false).'>'.esc_html__('New Topics', 'asgaros-forum');
                         echo '<span class="action-panel-description">';
 							esc_html_e('You get notified about all new topics.', 'asgaros-forum');
                         echo '</span>';
                     echo '</label>';
                     echo '<label class="action-panel-option">';
-                        echo '<input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.__('New Topics & Posts', 'asgaros-forum');
+                        echo '<input type="radio" name="subscription_level" value="3" '.checked($subscription_level, 3, false).'>'.esc_html__('New Topics & Posts', 'asgaros-forum');
                         echo '<span class="action-panel-description">';
 							esc_html_e('You get notified about all new topics and posts.', 'asgaros-forum');
                         echo '</span>';
@@ -639,8 +639,8 @@ class AsgarosForumNotifications {
         } else {
             foreach ($data as $item) {
                 echo '<div class="content-element subscription">';
-                    echo '<a href="'.$this->asgarosforum->get_link($type, $item->id).'" title="'.esc_html(stripslashes($item->name)).'">'.esc_html(stripslashes($item->name)).'</a>';
-                    echo '<a class="unsubscribe-link" href="'.$this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.$type => $item->id)).'">'.__('Unsubscribe', 'asgaros-forum').'</a>';
+                    echo '<a href="'.$this->asgarosforum->get_link($type, $item->id).'" title="'.esc_html($item->name).'">'.esc_html($item->name).'</a>';
+                    echo '<a class="unsubscribe-link" href="'.$this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.$type => $item->id)).'">'.esc_html__('Unsubscribe', 'asgaros-forum').'</a>';
                 echo '</div>';
             }
         }

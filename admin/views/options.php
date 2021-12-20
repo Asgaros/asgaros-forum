@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) exit;
         }
 
         // Generate hidden input for selected tab.
-        echo '<input type="hidden" name="selected_tab" value="'.$selected_tab.'">';
+        echo '<input type="hidden" name="selected_tab" value="'.esc_attr($selected_tab).'">';
 
         ?>
 
@@ -35,10 +35,10 @@ if (!defined('ABSPATH')) exit;
                 foreach ($this->option_views as $key => $value) {
                     $active_css = ($selected_tab == $key) ? 'class="active-tab"' : '';
 
-                    echo '<li data-slug="'.$key.'" '.$active_css.'>';
+                    echo '<li data-slug="'.esc_attr($key).'" '.$active_css.'>';
                     echo '<a href="#asgaros-panel">';
-                    echo '<i class="'.$value['icon'].'"></i>';
-                    echo '<span>'.$value['label'].'</span>';
+                    echo '<i class="'.esc_attr($value['icon']).'"></i>';
+                    echo '<span>'.esc_html($value['label']).'</span>';
                     echo '</a>';
                     echo '</li>';
                 }
@@ -47,7 +47,7 @@ if (!defined('ABSPATH')) exit;
 
             <div id="tab-content">
                 <?php $display = ($selected_tab == 'general') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-general" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-general" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('general'); ?>
                     <table>
                         <tr>
@@ -69,19 +69,19 @@ if (!defined('ABSPATH')) exit;
                                 <?php
                                 // Set a post_status argument because of a core bug. See: https://core.trac.wordpress.org/ticket/8592
                                 wp_dropdown_pages(array('selected' => esc_attr($this->asgarosforum->options['location']), 'name' => 'location', 'id' => 'location', 'post_status' => array('publish', 'pending', 'draft', 'private')));
-                                echo '<span class="description">'.__('Page which contains the [forum]-shortcode.', 'asgaros-forum').'</span>';
+                                echo '<span class="description">'.esc_html__('Page which contains the [forum]-shortcode.', 'asgaros-forum').'</span>';
                                 ?>
                             </td>
                         </tr>
 
                         <tr>
                             <th><label for="posts_per_page"><?php esc_html_e('Replies to show per page:', 'asgaros-forum'); ?></label></th>
-                            <td><input type="number" name="posts_per_page" id="posts_per_page" value="<?php echo stripslashes($this->asgarosforum->options['posts_per_page']); ?>" size="3" min="1"></td>
+                            <td><input type="number" name="posts_per_page" id="posts_per_page" value="<?php echo absint($this->asgarosforum->options['posts_per_page']); ?>" size="3" min="1"></td>
                         </tr>
 
                         <tr>
                             <th><label for="topics_per_page"><?php esc_html_e('Topics to show per page:', 'asgaros-forum'); ?></label></th>
-                            <td><input type="number" name="topics_per_page" id="topics_per_page" value="<?php echo stripslashes($this->asgarosforum->options['topics_per_page']); ?>" size="3" min="1"></td>
+                            <td><input type="number" name="topics_per_page" id="topics_per_page" value="<?php echo absint($this->asgarosforum->options['topics_per_page']); ?>" size="3" min="1"></td>
                         </tr>
 
                         <tr>
@@ -90,7 +90,7 @@ if (!defined('ABSPATH')) exit;
                                 <?php
                                 echo '<select name="create_blog_topics_id" id="create_blog_topics">';
 
-                                echo '<option value="0"'.(0 == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.__('Dont create topics', 'asgaros-forum').'</option>';
+                                echo '<option value="0"'.(0 == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.esc_html__('Dont create topics', 'asgaros-forum').'</option>';
 
                                 $categories = $this->asgarosforum->content->get_categories(false);
 
@@ -100,13 +100,13 @@ if (!defined('ABSPATH')) exit;
 
                                         if ($forums) {
                                             foreach ($forums as $forum) {
-                                                echo '<option value="'.$forum->id.'"'.($forum->id == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
+                                                echo '<option value="'.esc_attr($forum->id).'"'.($forum->id == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>'.esc_html($forum->name).'</option>';
 
                                                 if ($forum->count_subforums > 0) {
                                                     $subforums = $this->asgarosforum->get_forums($category->term_id, $forum->id);
 
                                                     foreach ($subforums as $subforum) {
-                                                        echo '<option value="'.$subforum->id.'"'.($subforum->id == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';
+                                                        echo '<option value="'.esc_attr($subforum->id).'"'.($subforum->id == $this->asgarosforum->options['create_blog_topics_id'] ? ' selected="selected"' : '').'>--- '.esc_html($subforum->name).'</option>';
                                                     }
                                                 }
                                             }
@@ -226,7 +226,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'features') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-features" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-features" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('features'); ?>
                     <table>
                         <tr>
@@ -297,7 +297,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'urls') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-urls" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-urls" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('urls'); ?>
                     <?php
                     $seo_option = checked(!empty($this->asgarosforum->options['enable_seo_urls']), true, false);
@@ -429,7 +429,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'permissions') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-permissions" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-permissions" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('permissions'); ?>
                     <table>
                         <tr>
@@ -444,7 +444,7 @@ if (!defined('ABSPATH')) exit;
                         <tr class="edit-post-option" <?php if (!$edit_post_option) { echo 'style="display: none;"'; } ?>>
                             <th><label for="time_limit_edit_posts"><?php esc_html_e('Time limitation for editing posts (in minutes):', 'asgaros-forum'); ?></label></th>
                             <td>
-                                <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo stripslashes($this->asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
+                                <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo absint($this->asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
                                 <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
@@ -461,7 +461,7 @@ if (!defined('ABSPATH')) exit;
                         <tr class="delete-post-option" <?php if (!$delete_post_option) { echo 'style="display: none;"'; } ?>>
                             <th><label for="time_limit_delete_posts"><?php esc_html_e('Time limitation for deleting posts (in minutes):', 'asgaros-forum'); ?></label></th>
                             <td>
-                                <input type="number" name="time_limit_delete_posts" id="time_limit_delete_posts" value="<?php echo stripslashes($this->asgarosforum->options['time_limit_delete_posts']); ?>" size="3" min="0">
+                                <input type="number" name="time_limit_delete_posts" id="time_limit_delete_posts" value="<?php echo absint($this->asgarosforum->options['time_limit_delete_posts']); ?>" size="3" min="0">
                                 <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
@@ -478,7 +478,7 @@ if (!defined('ABSPATH')) exit;
                         <tr class="delete-topic-option" <?php if (!$delete_topic_option) { echo 'style="display: none;"'; } ?>>
                             <th><label for="time_limit_delete_topics"><?php esc_html_e('Time limitation for deleting topics (in minutes):', 'asgaros-forum'); ?></label></th>
                             <td>
-                                <input type="number" name="time_limit_delete_topics" id="time_limit_delete_topics" value="<?php echo stripslashes($this->asgarosforum->options['time_limit_delete_topics']); ?>" size="3" min="0">
+                                <input type="number" name="time_limit_delete_topics" id="time_limit_delete_topics" value="<?php echo absint($this->asgarosforum->options['time_limit_delete_topics']); ?>" size="3" min="0">
                                 <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
@@ -496,7 +496,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'breadcrumbs') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-breadcrumbs" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-breadcrumbs" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('breadcrumbs'); ?>
                     <?php
                     $breadcrumbs_option = checked(!empty($this->asgarosforum->options['enable_breadcrumbs']), true, false);
@@ -514,7 +514,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'notifications') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-notifications" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-notifications" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('notifications'); ?>
                     <table>
                         <tr>
@@ -565,7 +565,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'mentioning') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-mentioning" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-mentioning" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('mentioning'); ?>
                     <?php
                     $mentioning_option = checked(!empty($this->asgarosforum->options['enable_mentioning']), true, false);
@@ -591,7 +591,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'memberslist') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-memberslist" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-memberslist" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('memberslist'); ?>
                     <?php
                     $membersListOption = checked(!empty($this->asgarosforum->options['enable_memberslist']), true, false);
@@ -611,7 +611,7 @@ if (!defined('ABSPATH')) exit;
                         </tr>
                         <tr class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
                             <th><label for="members_per_page"><?php esc_html_e('Members per page:', 'asgaros-forum'); ?></label></th>
-                            <td><input type="number" name="members_per_page" id="members_per_page" value="<?php echo stripslashes($this->asgarosforum->options['members_per_page']); ?>" size="3" min="1"></td>
+                            <td><input type="number" name="members_per_page" id="members_per_page" value="<?php echo absint($this->asgarosforum->options['members_per_page']); ?>" size="3" min="1"></td>
                         </tr>
                         <tr class="memberslist-option" <?php if (!$membersListOption) { echo 'style="display: none;"'; } ?>>
                             <th><?php esc_html_e('Available filters', 'asgaros-forum'); ?></th>
@@ -640,7 +640,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'profiles') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-profiles" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-profiles" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('profiles'); ?>
                     <?php
                     $profileOption = checked(!empty($this->asgarosforum->options['enable_profiles']), true, false);
@@ -658,7 +658,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'uploads') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-uploads" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-uploads" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('uploads'); ?>
                     <?php
                     $uploadsOption = checked(!empty($this->asgarosforum->options['allow_file_uploads']), true, false);
@@ -693,14 +693,14 @@ if (!defined('ABSPATH')) exit;
                         <tr class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
                             <th><label for="uploads_maximum_number"><?php esc_html_e('Maximum files per post:', 'asgaros-forum'); ?></label></th>
                             <td>
-                                <input type="number" name="uploads_maximum_number" id="uploads_maximum_number" value="<?php echo stripslashes($this->asgarosforum->options['uploads_maximum_number']); ?>" size="3" min="0">
+                                <input type="number" name="uploads_maximum_number" id="uploads_maximum_number" value="<?php echo absint($this->asgarosforum->options['uploads_maximum_number']); ?>" size="3" min="0">
                                 <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
                         <tr class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
                             <th><label for="uploads_maximum_size"><?php esc_html_e('Maximum file size (in megabyte):', 'asgaros-forum'); ?></label></th>
                             <td>
-                                <input type="number" name="uploads_maximum_size" id="uploads_maximum_size" value="<?php echo stripslashes($this->asgarosforum->options['uploads_maximum_size']); ?>" size="3" min="0">
+                                <input type="number" name="uploads_maximum_size" id="uploads_maximum_size" value="<?php echo absint($this->asgarosforum->options['uploads_maximum_size']); ?>" size="3" min="0">
                                 <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
@@ -708,7 +708,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'reports') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-reports" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-reports" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('reports'); ?>
                     <?php
                     $reportsOption = checked(!empty($this->asgarosforum->options['reports_enabled']), true, false);
@@ -726,7 +726,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'signatures') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-signatures" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-signatures" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('signatures'); ?>
                     <?php
                     $signaturesOption = checked(!empty($this->asgarosforum->options['allow_signatures']), true, false);
@@ -757,7 +757,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'activity') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-activity" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-activity" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('activity'); ?>
                     <?php
                     $activityOption = checked(!empty($this->asgarosforum->options['enable_activity']), true, false);
@@ -769,17 +769,17 @@ if (!defined('ABSPATH')) exit;
                         </tr>
                         <tr class="activity-option" <?php if (!$activityOption) { echo 'style="display: none;"'; } ?>>
                             <th><label for="activity_days"><?php esc_html_e('Days of activity to show:', 'asgaros-forum'); ?></label></th>
-                            <td><input type="number" name="activity_days" id="activity_days" value="<?php echo stripslashes($this->asgarosforum->options['activity_days']); ?>" size="3" min="1"></td>
+                            <td><input type="number" name="activity_days" id="activity_days" value="<?php echo absint($this->asgarosforum->options['activity_days']); ?>" size="3" min="1"></td>
                         </tr>
                         <tr class="activity-option" <?php if (!$activityOption) { echo 'style="display: none;"'; } ?>>
                             <th><label for="activities_per_page"><?php esc_html_e('Activities per page:', 'asgaros-forum'); ?></label></th>
-                            <td><input type="number" name="activities_per_page" id="activities_per_page" value="<?php echo stripslashes($this->asgarosforum->options['activities_per_page']); ?>" size="3" min="1"></td>
+                            <td><input type="number" name="activities_per_page" id="activities_per_page" value="<?php echo absint($this->asgarosforum->options['activities_per_page']); ?>" size="3" min="1"></td>
                         </tr>
                     </table>
                 </div>
 
                 <?php $display = ($selected_tab == 'polls') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-polls" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-polls" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('polls'); ?>
                     <?php
                     $polls_option = checked(!empty($this->asgarosforum->options['enable_polls']), true, false);
@@ -808,7 +808,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'spoilers') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-spoilers" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-spoilers" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('spoilers'); ?>
                     <?php
                     $spoilers_option = checked(!empty($this->asgarosforum->options['enable_spoilers']), true, false);
@@ -826,7 +826,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
 
                 <?php $display = ($selected_tab == 'reputation') ? 'block' : 'none'; ?>
-                <div class="tab" id="tab-reputation" style="display: <?php echo $display; ?>;">
+                <div class="tab" id="tab-reputation" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('reputation'); ?>
                     <?php
                     $reputation_option = checked(!empty($this->asgarosforum->options['enable_reputation']), true, false);
@@ -844,23 +844,23 @@ if (!defined('ABSPATH')) exit;
                                 <table>
                                     <tr>
                                         <th><label for="reputation_level_1_posts"><?php esc_html_e('Level 1', 'asgaros-forum'); ?>:</label></th>
-                                        <td><input type="number" name="reputation_level_1_posts" id="reputation_level_1_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_1_posts']); ?>" size="3" min="1"></td>
+                                        <td><input type="number" name="reputation_level_1_posts" id="reputation_level_1_posts" value="<?php echo absint($this->asgarosforum->options['reputation_level_1_posts']); ?>" size="3" min="1"></td>
                                     </tr>
                                     <tr>
                                         <th><label for="reputation_level_2_posts"><?php esc_html_e('Level 2', 'asgaros-forum'); ?>:</label></th>
-                                        <td><input type="number" name="reputation_level_2_posts" id="reputation_level_2_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_2_posts']); ?>" size="3" min="1"></td>
+                                        <td><input type="number" name="reputation_level_2_posts" id="reputation_level_2_posts" value="<?php echo absint($this->asgarosforum->options['reputation_level_2_posts']); ?>" size="3" min="1"></td>
                                     </tr>
                                     <tr>
                                         <th><label for="reputation_level_3_posts"><?php esc_html_e('Level 3', 'asgaros-forum'); ?>:</label></th>
-                                        <td><input type="number" name="reputation_level_3_posts" id="reputation_level_3_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_3_posts']); ?>" size="3" min="1"></td>
+                                        <td><input type="number" name="reputation_level_3_posts" id="reputation_level_3_posts" value="<?php echo absint($this->asgarosforum->options['reputation_level_3_posts']); ?>" size="3" min="1"></td>
                                     </tr>
                                     <tr>
                                         <th><label for="reputation_level_4_posts"><?php esc_html_e('Level 4', 'asgaros-forum'); ?>:</label></th>
-                                        <td><input type="number" name="reputation_level_4_posts" id="reputation_level_4_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_4_posts']); ?>" size="3" min="1"></td>
+                                        <td><input type="number" name="reputation_level_4_posts" id="reputation_level_4_posts" value="<?php echo absint($this->asgarosforum->options['reputation_level_4_posts']); ?>" size="3" min="1"></td>
                                     </tr>
                                     <tr>
                                         <th><label for="reputation_level_5_posts"><?php esc_html_e('Level 5', 'asgaros-forum'); ?>:</label></th>
-                                        <td><input type="number" name="reputation_level_5_posts" id="reputation_level_5_posts" value="<?php echo stripslashes($this->asgarosforum->options['reputation_level_5_posts']); ?>" size="3" min="1"></td>
+                                        <td><input type="number" name="reputation_level_5_posts" id="reputation_level_5_posts" value="<?php echo absint($this->asgarosforum->options['reputation_level_5_posts']); ?>" size="3" min="1"></td>
                                     </tr>
                                 </table>
                             </td>
