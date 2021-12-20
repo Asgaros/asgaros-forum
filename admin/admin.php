@@ -83,10 +83,6 @@ class AsgarosForumAdmin {
                 'label' => __('Activity', 'asgaros-forum'),
                 'icon' => 'fas fa-bullhorn'
             ),
-            'ads' => array(
-                'label' => __('Ads', 'asgaros-forum'),
-                'icon' => 'fas fa-ad'
-            ),
             'polls' => array(
                 'label' => __('Polls', 'asgaros-forum'),
                 'icon' => 'fas fa-poll-h'
@@ -234,10 +230,6 @@ class AsgarosForumAdmin {
             add_submenu_page('asgarosforum-structure', __('Appearance', 'asgaros-forum'), __('Appearance', 'asgaros-forum'), 'read', 'asgarosforum-appearance', array($this, 'appearance_page'));
             add_submenu_page('asgarosforum-structure', __('Usergroups', 'asgaros-forum'), __('Usergroups', 'asgaros-forum'), 'read', 'asgarosforum-usergroups', array($this, 'usergroups_page'));
 
-            if ($this->asgarosforum->options['enable_ads']) {
-                add_submenu_page('asgarosforum-structure', __('Ads', 'asgaros-forum'), __('Ads', 'asgaros-forum'), 'read', 'asgarosforum-ads', array($this, 'ads_page'));
-            }
-
             do_action('asgarosforum_add_admin_submenu_page');
 
             add_submenu_page('asgarosforum-structure', __('Settings', 'asgaros-forum'), __('Settings', 'asgaros-forum'), 'read', 'asgarosforum-options', array($this, 'options_page'));
@@ -258,10 +250,6 @@ class AsgarosForumAdmin {
 
     public function usergroups_page() {
         require 'views/usergroups.php';
-    }
-
-    public function ads_page() {
-        require 'views/ads.php';
     }
 
     public function enqueue_admin_scripts($hook) {
@@ -348,26 +336,6 @@ class AsgarosForumAdmin {
 
                 if (!empty($_POST['usergroup-category-id']) && is_numeric($_POST['usergroup-category-id'])) {
                     AsgarosForumUserGroups::deleteUserGroupCategory(sanitize_key($_POST['usergroup-category-id']));
-                }
-            } else if (isset($_POST['af-create-edit-ad-submit'])) {
-                // Verify nonce first.
-                check_admin_referer('asgaros_forum_save_ad');
-
-                $ad_id          = sanitize_key($_POST['ad_id']);
-                $ad_name        = sanitize_text_field($_POST['ad_name']);
-                $ad_code        = trim($_POST['ad_code']);
-                $ad_active      = isset($_POST['ad_active']) ? 1 : 0;
-				$ad_locations   = isset($_POST['ad_locations']) ? implode(',', array_map('sanitize_key', $_POST['ad_locations'])) : '';
-
-                $this->asgarosforum->ads->save_ad($ad_id, $ad_name, $ad_code, $ad_active, $ad_locations);
-                $this->saved = true;
-            } else if (isset($_POST['asgaros-forum-delete-ad'])) {
-                // Verify nonce first.
-                check_admin_referer('asgaros_forum_delete_ad');
-
-                if (!empty($_POST['ad_id']) && is_numeric($_POST['ad_id'])) {
-                    $this->asgarosforum->ads->delete_ad(sanitize_key($_POST['ad_id']));
-                    $this->saved = true;
                 }
             }
         }

@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Warnings related to the currently implemented security-improvements
 * Fixed: Forum-icons could not get saved correctly
 * Fixed: Correctly save allowed html-tags for signatures in forum-settings
+* Removed: [Advertising functionality](https://www.asgaros.de/support/topic/removal-of-advertising-functionality/)
 * Performance improvements and code optimizations
 = 1.15.17 =
 * Fixed: Add missing sanitizing for input data

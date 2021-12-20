@@ -30,7 +30,6 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Polls
 * Widgets
 * Statistics
-* Ads Management
 * Guest Postings
 * Approval, Banning & Reporting
 * Moderators, Permissions & Usergroups

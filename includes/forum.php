@@ -109,11 +109,6 @@ class AsgarosForum {
         'require_login'                     => false,
         'require_login_posts'               => false,
         'create_blog_topics_id'             => 0,
-        'enable_ads'                        => true,
-        'ads_frequency_categories'          => 2,
-        'ads_frequency_forums'              => 4,
-        'ads_frequency_topics'              => 8,
-        'ads_frequency_posts'               => 6,
         'approval_for'                      => 'guests',
         'enable_activity'                   => true,
         'activity_days'                     => 14,
@@ -181,7 +176,6 @@ class AsgarosForum {
     public $unread         = null;
     public $feed           = null;
     public $permissions    = null;
-    public $ads            = null;
     public $approval       = null;
     public $spoilers       = null;
     public $polls          = null;
@@ -247,7 +241,6 @@ class AsgarosForum {
         $this->unread           = new AsgarosForumUnread($this);
         $this->feed             = new AsgarosForumFeed($this);
         $this->permissions      = new AsgarosForumPermissions($this);
-        $this->ads              = new AsgarosForumAds($this);
         $this->approval         = new AsgarosForumApproval($this);
         $this->spoilers         = new AsgarosForumSpoilers($this);
         $this->polls            = new AsgarosForumPolls($this);

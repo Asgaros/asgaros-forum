@@ -1715,17 +1715,6 @@
 	font-size: smaller;
 }
 
-/* ADS */
-#af-wrapper .ad {
-	display: block;
-	text-align: center;
-	padding: 10px 0px;
-}
-#af-wrapper .ad-forum,
-#af-wrapper .ad-topic {
-	border-bottom: 1px solid #eee;
-}
-
 /* SPOILERS */
 #af-wrapper .spoiler {
 	display: block;

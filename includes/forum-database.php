@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumDatabase {
     private $db;
-    private $db_version = 63;
+    private $db_version = 64;
     private $tables;
 
     public function __construct() {
@@ -24,7 +24,6 @@ class AsgarosForumDatabase {
         $this->tables->posts            = $this->db->prefix.'forum_posts';
         $this->tables->reports          = $this->db->prefix.'forum_reports';
         $this->tables->reactions        = $this->db->prefix.'forum_reactions';
-        $this->tables->ads              = $this->db->prefix.'forum_ads';
         $this->tables->polls            = $this->db->prefix.'forum_polls';
         $this->tables->polls_options    = $this->db->prefix.'forum_polls_options';
         $this->tables->polls_votes      = $this->db->prefix.'forum_polls_votes';
@@ -79,7 +78,6 @@ class AsgarosForumDatabase {
         $tables[] = $this->db->prefix.'forum_posts';
         $tables[] = $this->db->prefix.'forum_reports';
         $tables[] = $this->db->prefix.'forum_reactions';
-        $tables[] = $this->db->prefix.'forum_ads';
         $tables[] = $this->db->prefix.'forum_polls';
         $tables[] = $this->db->prefix.'forum_polls_options';
         $tables[] = $this->db->prefix.'forum_polls_votes';
@@ -173,15 +171,6 @@ class AsgarosForumDatabase {
             author_id int(11) NOT NULL default '0',
             datestamp datetime NOT NULL default '1000-01-01 00:00:00',
             PRIMARY KEY  (post_id, user_id)
-            ) $charset_collate;";
-
-            $sql[] = "CREATE TABLE ".$this->tables->ads." (
-            id int(11) NOT NULL auto_increment,
-            name varchar(255) NOT NULL default '',
-            code longtext,
-            active int(1) NOT NULL default '0',
-            locations longtext,
-            PRIMARY KEY  (id)
             ) $charset_collate;";
 
             $sql[] = "CREATE TABLE ".$this->tables->polls." (
