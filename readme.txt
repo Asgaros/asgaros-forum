@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.8
 Requires PHP: 5.2
-Stable tag: 1.15.17
+Stable tag: 1.15.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 1.15.18 =
 * Fixed: Add missing sanitizing for input data
 * Fixed: Add missing escaping for output data
 * Fixed: Warnings related to the currently implemented security-improvements
