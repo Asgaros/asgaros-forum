@@ -94,19 +94,21 @@ class AsgarosForumProfile {
 
             echo '<div class="user-info">';
                 $user_name = apply_filters('asgarosforum_filter_username', $user_data->display_name, $user_data);
-                echo '<div class="profile-display-name">'.$user_name.'</div>';
-
-                $role = $this->asgarosforum->permissions->getForumRole($user_id);
-
-                // Special styling for banned users.
-                if ($this->asgarosforum->permissions->get_forum_role($user_id) === 'banned') {
-                    $role = '<span class="banned">'.$role.'</span>';
-                }
+                echo '<div class="profile-display-name">'.esc_html($user_name).'</div>';
 
                 echo '<div class="profile-forum-role">';
                 $count_posts = $this->asgarosforum->countPostsByUser($user_id);
                 $this->asgarosforum->render_reputation_badges($count_posts);
-                echo $role;
+
+				$role = $this->asgarosforum->permissions->getForumRole($user_id);
+
+                // Special styling for banned users.
+                if ($this->asgarosforum->permissions->get_forum_role($user_id) === 'banned') {
+                    echo '<span class="banned">'.esc_html($role).'</span>';
+                } else {
+					echo esc_html($role);
+				}
+
                 echo '</div>';
             echo '</div>';
         echo '</div>';
@@ -192,19 +194,20 @@ class AsgarosForumProfile {
                             echo '<div class="history-element">';
                                 echo '<div class="history-name">';
                                     $link = $this->asgarosforum->rewrite->get_post_link($post->id, $post->parent_id);
-                                    $text = esc_html(stripslashes(strip_tags($post->text)));
-                                    $text = $this->asgarosforum->cut_string($text, 100);
 
-                                    echo '<a class="history-title" href="'.esc_url($link).'">'.$text.'</a>';
+                                    echo '<a class="history-title" href="'.esc_url($link).'">';
+									echo esc_html($this->asgarosforum->cut_string(esc_html(stripslashes(strip_tags($post->text))), 100));
+									echo '</a>';
 
                                     $topic_link = $this->asgarosforum->rewrite->get_link('topic', $post->parent_id);
-                                    $topic_name = esc_html(stripslashes($post->name));
                                     $topic_time = $this->asgarosforum->get_activity_timestamp($post->date);
 
-                                    echo '<span class="history-topic">'.esc_html__('In:', 'asgaros-forum').' <a href="'.esc_url($topic_link).'">'.$topic_name.'</a></span>';
+                                    echo '<span class="history-topic">'.esc_html__('In:', 'asgaros-forum').' <a href="'.esc_url($topic_link).'">';
+									echo esc_html(stripslashes($post->name));
+									echo '</a></span>';
                                 echo '</div>';
 
-                                echo '<div class="history-time">'.$topic_time.'</div>';
+                                echo '<div class="history-time">'.esc_html($topic_time).'</div>';
                             echo '</div>';
                         }
 
@@ -333,7 +336,7 @@ class AsgarosForumProfile {
                     $current_user_id = get_current_user_id();
 
                     if ($userData->ID == $current_user_id) {
-                        echo '<a href="'.get_edit_profile_url().'" class="edit-profile-link">';
+                        echo '<a href="'.esc_url(get_edit_profile_url()).'" class="edit-profile-link">';
                             echo '<span class="fas fa-pencil-alt"></span>';
                             echo esc_html__('Edit Profile', 'asgaros-forum');
                         echo '</a>';
@@ -344,11 +347,11 @@ class AsgarosForumProfile {
                         if ($this->asgarosforum->permissions->isBanned($userData->ID)) {
                             $url = $this->getProfileLink($userData, array('unban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'unban_user_'.$userData->ID);
-                            echo '<a class="banned" href="'.$nonce_url.'">'.esc_html__('Unban User', 'asgaros-forum').'</a>';
+                            echo '<a class="banned" href="'.esc_url($nonce_url).'">'.esc_html__('Unban User', 'asgaros-forum').'</a>';
                         } else {
                             $url = $this->getProfileLink($userData, array('ban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'ban_user_'.$userData->ID);
-                            echo '<a class="banned" href="'.$nonce_url.'">'.esc_html__('Ban User', 'asgaros-forum').'</a>';
+                            echo '<a class="banned" href="'.esc_url($nonce_url).'">'.esc_html__('Ban User', 'asgaros-forum').'</a>';
                         }
                     }
                 echo '</div>';

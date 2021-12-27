@@ -20,12 +20,12 @@ class AsgarosForumFeed {
                 case 'topic':
                     $title = $this->asgarosforum->current_topic_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
-                    echo '<link rel="alternate" type="application/rss+xml" title="'.$title.'" href="'.$link.'" />'.PHP_EOL;
+                    echo '<link rel="alternate" type="application/rss+xml" title="'.esc_attr($title).'" href="'.esc_url($link).'" />'.PHP_EOL;
                 break;
                 case 'forum':
                     $title = $this->asgarosforum->current_forum_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
                     $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
-                    echo '<link rel="alternate" type="application/rss+xml" title="'.$title.'" href="'.$link.'" />'.PHP_EOL;
+                    echo '<link rel="alternate" type="application/rss+xml" title="'.esc_attr($title).'" href="'.esc_url($link).'" />'.PHP_EOL;
                 break;
             }
         }
@@ -37,12 +37,12 @@ class AsgarosForumFeed {
                 case 'topic':
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
-                    echo '<a href="'.$link.'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
+                    echo '<a href="'.esc_url($link).'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
                 break;
                 case 'forum':
                     $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
-                    echo '<a href="'.$link.'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
+                    echo '<a href="'.esc_url($link).'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
                 break;
             }
         }
@@ -57,24 +57,24 @@ class AsgarosForumFeed {
 
             header('Content-Type: '.feed_content_type('rss2').'; charset='.get_option('blog_charset'), true);
 
-            echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?>'.PHP_EOL;
+            echo '<?xml version="1.0" encoding="'.esc_attr(get_option('blog_charset')).'"?>'.PHP_EOL;
             echo '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">'.PHP_EOL;
             echo '<channel>'.PHP_EOL;
 
             if ($this->asgarosforum->current_view === 'forum') {
                 echo '<title>'.esc_html(stripslashes($this->asgarosforum->current_forum_name)).'</title>'.PHP_EOL;
-                echo '<link>'.$this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum).'</link>'.PHP_EOL;
+                echo '<link>'.esc_url($this->asgarosforum->rewrite->get_link('forum', absint($this->asgarosforum->current_forum))).'</link>'.PHP_EOL;
             } else if ($this->asgarosforum->current_view === 'topic') {
                 echo '<title>'.esc_html(stripslashes($this->asgarosforum->current_topic_name)).'</title>'.PHP_EOL;
-                echo '<link>'.$this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic).'</link>'.PHP_EOL;
+                echo '<link>'.esc_url($this->asgarosforum->rewrite->get_link('topic', absint($this->asgarosforum->current_topic))).'</link>'.PHP_EOL;
             }
 
-            echo '<description>'.$this->asgarosforum->current_description.'</description>'.PHP_EOL;
-            echo '<language>'.get_bloginfo('language').'</language>'.PHP_EOL;
-            echo '<lastBuildDate>'.mysql2date('D, d M Y H:i:s +0000', gmdate('Y-m-d H:i:s'), false).'</lastBuildDate>'.PHP_EOL;
+            echo '<description>'.esc_html($this->asgarosforum->current_description).'</description>'.PHP_EOL;
+            echo '<language>'.esc_html(get_bloginfo('language')).'</language>'.PHP_EOL;
+            echo '<lastBuildDate>'.esc_html(mysql2date('D, d M Y H:i:s +0000', gmdate('Y-m-d H:i:s'), false)).'</lastBuildDate>'.PHP_EOL;
             echo '<generator>Asgaros Forum</generator>'.PHP_EOL;
             echo '<ttl>60</ttl>'.PHP_EOL;
-            echo '<atom:link href="'.$this->asgarosforum->rewrite->get_link('current').'" rel="self" type="application/rss+xml" />'.PHP_EOL;
+            echo '<atom:link href="'.esc_url($this->asgarosforum->rewrite->get_link('current')).'" rel="self" type="application/rss+xml" />'.PHP_EOL;
 
             $feed_data = false;
 
@@ -93,19 +93,19 @@ class AsgarosForumFeed {
                         echo '<title>'.esc_html(stripslashes($element->name)).'</title>'.PHP_EOL;
 
                         if ($this->asgarosforum->current_view === 'forum') {
-                            echo '<link>'.$this->asgarosforum->rewrite->get_link('topic', $element->id).'</link>'.PHP_EOL;
+                            echo '<link>'.esc_url($this->asgarosforum->rewrite->get_link('topic', absint($element->id))).'</link>'.PHP_EOL;
                         } else if ($this->asgarosforum->current_view === 'topic') {
-                            echo '<link>'.$this->asgarosforum->rewrite->get_post_link($element->id, $element->parent_id).'</link>'.PHP_EOL;
+                            echo '<link>'.esc_url($this->asgarosforum->rewrite->get_post_link($element->id, absint($element->parent_id))).'</link>'.PHP_EOL;
                         }
 
-                        echo '<pubDate>'.mysql2date('D, d M Y H:i:s +0000', $element->date, false).'</pubDate>'.PHP_EOL;
+                        echo '<pubDate>'.esc_html(mysql2date('D, d M Y H:i:s +0000', $element->date, false)).'</pubDate>'.PHP_EOL;
                         echo '<description><![CDATA['.esc_html(strip_tags($element->text)).']]></description>'.PHP_EOL;
-                        echo '<dc:creator>'.$this->asgarosforum->get_plain_username($element->author_id).'</dc:creator>'.PHP_EOL;
+                        echo '<dc:creator>'.esc_html($this->asgarosforum->get_plain_username($element->author_id)).'</dc:creator>'.PHP_EOL;
 
                         if ($this->asgarosforum->current_view === 'forum') {
-                            echo '<guid isPermaLink="true">'.$this->asgarosforum->rewrite->get_link('topic', $element->id).'</guid>'.PHP_EOL;
+                            echo '<guid isPermaLink="true">'.esc_url($this->asgarosforum->rewrite->get_link('topic', absint($element->id))).'</guid>'.PHP_EOL;
                         } else if ($this->asgarosforum->current_view === 'topic') {
-                            echo '<guid isPermaLink="true">'.$this->asgarosforum->rewrite->get_post_link($element->id, $element->parent_id).'</guid>'.PHP_EOL;
+                            echo '<guid isPermaLink="true">'.esc_url($this->asgarosforum->rewrite->get_post_link($element->id, $element->parent_id)).'</guid>'.PHP_EOL;
                         }
                     echo '</item>'.PHP_EOL;
                 }

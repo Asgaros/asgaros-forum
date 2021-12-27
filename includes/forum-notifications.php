@@ -60,7 +60,7 @@ class AsgarosForumNotifications {
             }
         }
 
-        echo '<a href="'.$link.'">'.$text.'</a>';
+        echo '<a href="'.esc_url($link).'">'.wp_kses_post($text).'</a>';
     }
 
     // Generates an (un)subscription link based on subscription status for forums.
@@ -84,7 +84,7 @@ class AsgarosForumNotifications {
             }
         }
 
-        echo '<a href="'.$link.'">'.$text.'</a>';
+        echo '<a href="'.esc_url($link).'">'.wp_kses_post($text).'</a>';
     }
 
     // Generates an subscription option in the editor based on subscription status.
@@ -102,10 +102,10 @@ class AsgarosForumNotifications {
 
             if ($subscription_level == 3) {
                 $link = $this->asgarosforum->get_link('subscriptions');
-                echo '<a href="'.$link.'">'.__('You are subscribed to <b>all</b> topics.', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($link).'">'.wp_kses_post(__('You are subscribed to <b>all</b> topics.', 'asgaros-forum')).'</a>';
             } else {
                 echo '<label class="checkbox-label">';
-                    echo '<input type="checkbox" name="subscribe_checkbox" '.checked($this->is_subscribed('topic', $this->asgarosforum->current_topic), true, false).'><span>'.__('<b>Subscribe</b> to this topic.', 'asgaros-forum').'</span>';
+                    echo '<input type="checkbox" name="subscribe_checkbox" '.checked($this->is_subscribed('topic', $this->asgarosforum->current_topic), true, false).'><span>'.wp_kses_post(__('<b>Subscribe</b> to this topic.', 'asgaros-forum')).'</span>';
                 echo '</label>';
             }
 
@@ -539,7 +539,7 @@ class AsgarosForumNotifications {
         echo '</div>';
 
         echo '<div id="subscriptions-panel" class="content-container">';
-            echo '<form method="post" action="'.$this->asgarosforum->get_link('subscriptions').'">';
+            echo '<form method="post" action="'.esc_url($this->asgarosforum->get_link('subscriptions')).'">';
                 echo '<div class="action-panel">';
                     echo '<label class="action-panel-option">';
                         echo '<input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.esc_html__('Individual Subscriptions', 'asgaros-forum');
@@ -625,7 +625,7 @@ class AsgarosForumNotifications {
 
     // Renders a list of a certain subscription type for the current user.
     public function render_subscriptions_list($title, $data, $type, $all = false) {
-        echo '<div class="title-element">'.$title.'</div>';
+        echo '<div class="title-element">'.esc_html($title).'</div>';
         echo '<div class="content-container">';
 
         if ($all) {
@@ -639,8 +639,8 @@ class AsgarosForumNotifications {
         } else {
             foreach ($data as $item) {
                 echo '<div class="content-element subscription">';
-                    echo '<a href="'.$this->asgarosforum->get_link($type, $item->id).'" title="'.esc_html($item->name).'">'.esc_html($item->name).'</a>';
-                    echo '<a class="unsubscribe-link" href="'.$this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.$type => $item->id)).'">'.esc_html__('Unsubscribe', 'asgaros-forum').'</a>';
+                    echo '<a href="'.esc_url($this->asgarosforum->get_link($type, absint($item->id))).'" title="'.esc_html($item->name).'">'.esc_html($item->name).'</a>';
+                    echo '<a class="unsubscribe-link" href="'.esc_url($this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.esc_attr($type) => $item->id))).'">'.esc_html__('Unsubscribe', 'asgaros-forum').'</a>';
                 echo '</div>';
             }
         }
