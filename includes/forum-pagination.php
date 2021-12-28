@@ -18,25 +18,25 @@ class AsgarosForumPagination {
 
             if ($num_pages <= 5) {
                 for ($i = 1; $i <= $num_pages; $i++) {
-                    echo $this->page_link('topic', $topic_id, $i);
+                    $this->render_page_link('topic', $topic_id, $i);
                 }
             } else {
                 for ($i = 1; $i <= 3; $i++) {
-                    echo $this->page_link('topic', $topic_id, $i);
+                    $this->render_page_link('topic', $topic_id, $i);
                 }
 
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array('part' => $num_pages));
-                echo '<a href="'.$link.'">'._x('Last', 'Last topic', 'asgaros-forum').'&nbsp;&raquo;</a>';
+                echo '<a href="'.esc_url($link).'">'.esc_html(_x('Last', 'Last topic', 'asgaros-forum')).'&nbsp;&raquo;</a>';
             }
 
             echo '</div>';
         }
     }
 
-    public function page_link($location, $id, $page) {
+    public function render_page_link($location, $id, $page) {
         $link = $this->asgarosforum->get_link($location, $id, array('part' => $page));
 
-        return '<a href="'.$link.'">'.number_format_i18n($page).'</a>';
+        echo '<a href="'.esc_url($link).'">'.esc_html(number_format_i18n($page)).'</a>';
     }
 
     public function renderPagination($location, $sourceID = false, $element_counter = false) {

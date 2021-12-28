@@ -244,12 +244,12 @@ class AsgarosForumReports {
                     echo '<div class="report-actions">';
                         $delete_link = $this->asgarosforum->rewrite->get_link('reports', false, array('report_delete' => $report['post_id']));
 
-                        echo '<a class="report-action-delete" href="'.$delete_link.'">';
+                        echo '<a class="report-action-delete" href="'.esc_url($delete_link).'">';
                             echo '<span class="fas fa-trash-alt"></span>';
                             echo esc_html__('Delete Report', 'asgaros-forum');
                         echo '</a>';
 
-                        echo '<a href="'.$report['post_link'].'">';
+                        echo '<a href="'.esc_url($report['post_link']).'">';
                             echo '<span class="fas fa-eye"></span>';
                             echo esc_html__('Show Post', 'asgaros-forum');
                         echo '</a>';

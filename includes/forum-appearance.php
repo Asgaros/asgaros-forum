@@ -154,9 +154,9 @@ class AsgarosForumAppearance {
 			}
 
 			// Create meta-tags.
-			echo '<link rel="canonical" href="'.$link.'" />'.PHP_EOL;
+			echo '<link rel="canonical" href="'.esc_url($link).'" />'.PHP_EOL;
 			echo '<meta name="description" content="'.esc_attr($description).'" />'.PHP_EOL;
-			echo '<meta property="og:url" content="'.$link.'" />'.PHP_EOL;
+			echo '<meta property="og:url" content="'.esc_url($link).'" />'.PHP_EOL;
 			echo '<meta property="og:title" content="'.esc_attr($title).'" />'.PHP_EOL;
 			echo '<meta property="og:description" content="'.esc_attr($description).'" />'.PHP_EOL;
 			echo '<meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'" />'.PHP_EOL;
@@ -170,7 +170,7 @@ class AsgarosForumAppearance {
 					$image_url = $this->asgarosforum->extract_image_url($first_post->text);
 
 					if ($image_url) {
-						echo '<meta property="og:image" content="'.$image_url.'" />'.PHP_EOL;
+						echo '<meta property="og:image" content="'.esc_url($image_url).'" />'.PHP_EOL;
 					}
 				}
 			}

@@ -193,12 +193,12 @@ class AsgarosForumUnread {
 
             echo '<span class="indicator-label">';
                 echo '<span class="fas fa-check"></span>';
-                echo '<a href="'.$this->asgarosforum->get_link('markallread').'">'.esc_html__('Mark All Read', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($this->asgarosforum->get_link('markallread')).'">'.esc_html__('Mark All Read', 'asgaros-forum').'</a>';
             echo '</span>';
 
             echo '<span class="indicator-label">';
                 echo '<span class="fas fa-history"></span>';
-                echo '<a href="'.$this->asgarosforum->get_link('unread').'">'.esc_html__('Show Unread Topics', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($this->asgarosforum->get_link('unread')).'">'.esc_html__('Show Unread Topics', 'asgaros-forum').'</a>';
             echo '</span>';
 
             echo '<div class="clear"></div>';
@@ -207,7 +207,7 @@ class AsgarosForumUnread {
 
     public function show_unread_menu() {
         echo '<div class="forum-menu">';
-            echo '<a class="button button-normal" href="'.$this->asgarosforum->get_link('markallread').'">';
+            echo '<a class="button button-normal" href="'.esc_url($this->asgarosforum->get_link('markallread')).'">';
                 echo '<span class="menu-icon fas fa-check"></span>';
                 echo esc_html__('Mark All Read', 'asgaros-forum');
             echo '</a>';
@@ -259,15 +259,15 @@ class AsgarosForumUnread {
                             echo '<span class="topic-icon fas fa-poll-h"></span>';
                         }
 
-                        echo '<a href="'.$link.'" title="'.esc_attr($topic_title).'">'.esc_html($topic_title).'</a>';
+                        echo '<a href="'.esc_url($link).'" title="'.esc_attr($topic_title).'">'.esc_html($topic_title).'</a>';
 
                         echo '<small>';
                         echo esc_html__('In', 'asgaros-forum').'&nbsp;';
-                        echo '<a href="'.$this->asgarosforum->rewrite->get_link('forum', $topic->forum_id).'">';
+                        echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('forum', $topic->forum_id)).'">';
                         echo esc_html(stripslashes($topic->forum_name));
                         echo '</a>';
                         echo '&nbsp;&middot;&nbsp;';
-                        echo '<i class="unread-time">'.$human_time_diff.'</i>';
+                        echo '<i class="unread-time">'.esc_html($human_time_diff).'</i>';
                         echo '</small>';
                     echo '</div>';
                 echo '</div>';

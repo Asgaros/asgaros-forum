@@ -46,7 +46,7 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
                 // Show author posts counter if activated.
                 if ($this->options['show_author_posts_counter']) {
                     $author_posts_i18n = number_format_i18n($post->author_posts);
-                    echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', $post->author_posts, 'asgaros-forum'), $author_posts_i18n).'</small>';
+                    echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', absint($post->author_posts), 'asgaros-forum'), esc_html($author_posts_i18n)).'</small>';
                 }
 
                 // Show marker for topic-author.
@@ -81,10 +81,10 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
             echo '<div class="forum-post-date">';
                 // Show post counter.
                 if ($this->current_view != 'post') {
-                    echo '<a href="'.$this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1)).'">#'.(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a> &middot; ';
+                    echo '<a href="'.esc_url($this->rewrite->get_post_link($post->id, $this->current_topic, ($this->current_page + 1))).'">#'.absint(($this->options['posts_per_page'] * $this->current_page) + $counter).'</a> &middot; ';
                 }
 
-                echo $this->format_date($post->date);
+                echo esc_html($this->format_date($post->date));
             echo '</div>';
 
             if ($this->current_view != 'post') {

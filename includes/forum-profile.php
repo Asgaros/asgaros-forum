@@ -69,11 +69,11 @@ class AsgarosForumProfile {
     }
 
     public function show_profile_header($user_data) {
-        $userOnline = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? ' class="user-online"' : '';
+        $userOnline = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? 'user-online' : 'user-offline';
         $background_style = '';
         $user_id = $user_data->ID;
 
-        echo '<div id="profile-header"'.$userOnline.'>';
+        echo '<div id="profile-header" class="'.esc_attr($userOnline).'">';
             if ($this->asgarosforum->options['enable_avatars']) {
 
                 $url = get_avatar_url($user_id, 480);
@@ -84,7 +84,7 @@ class AsgarosForumProfile {
                 $background_style = 'style="background-image: url(\''.$url.'\');"';
             }
 
-            echo '<div class="background-avatar" '.$background_style.'></div>';
+            echo '<div class="background-avatar" '.wp_kses_post($background_style).'></div>';
             echo '<div class="background-contrast"></div>';
 
             // Show avatar.
@@ -369,13 +369,13 @@ class AsgarosForumProfile {
             if (is_array($cellValue)) {
                 foreach ($cellValue as $value) {
                     if ($type == 'usergroups') {
-                        echo AsgarosForumUserGroups::render_usergroup_tag($value);
+                        echo wp_kses_post(AsgarosForumUserGroups::render_usergroup_tag($value));
                     } else {
-                        echo $value.'<br>';
+                        echo wp_kses_post($value).'<br>';
                     }
                 }
             } else {
-                echo $cellValue;
+                echo wp_kses_post($cellValue);
             }
 
             echo '</div>';

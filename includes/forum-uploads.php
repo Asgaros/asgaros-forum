@@ -265,7 +265,7 @@ class AsgarosForumUploads {
 					}
 				}
 
-				echo '<a id="add_file_link" data-maximum-number="'.$this->asgarosforum->options['uploads_maximum_number'].'" '.$flag.'>'.esc_html__('Add another file ...', 'asgaros-forum').'</a>';
+				echo '<a id="add_file_link" data-maximum-number="'.esc_attr($this->asgarosforum->options['uploads_maximum_number']).'" '.$flag.'>'.esc_html__('Add another file ...', 'asgaros-forum').'</a>';
 
 				$this->show_upload_restrictions();
 			echo '</div>';
@@ -276,16 +276,16 @@ class AsgarosForumUploads {
 		echo '<span class="upload-hints">';
 
 		if ($this->asgarosforum->options['uploads_maximum_number'] != 0) {
-			echo __('Maximum files:', 'asgaros-forum');
+			echo esc_html__('Maximum files:', 'asgaros-forum');
 			echo '&nbsp;';
-			echo number_format_i18n(esc_html($this->asgarosforum->options['uploads_maximum_number']));
+			echo number_format_i18n(esc_html(absint($this->asgarosforum->options['uploads_maximum_number'])));
 			echo '&nbsp;&middot;&nbsp;';
 		}
 
 		if ($this->asgarosforum->options['uploads_maximum_size'] != 0) {
-			echo __('Maximum file size:', 'asgaros-forum');
+			echo esc_html__('Maximum file size:', 'asgaros-forum');
 			echo '&nbsp;';
-			echo number_format_i18n(esc_html($this->asgarosforum->options['uploads_maximum_size'])).' MB';
+			echo number_format_i18n(esc_html(absint($this->asgarosforum->options['uploads_maximum_size']))).' MB';
 			echo '&nbsp;&middot;&nbsp;';
 		}
 

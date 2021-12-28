@@ -210,7 +210,7 @@ class AsgarosForumApproval {
                 echo '<div class="content-element unapproved-topic topic-normal">';
                     echo '<div class="topic-status fas fa-eye unread"></div>';
                     echo '<div class="topic-name">';
-                        echo '<a href="'.$this->asgarosforum->rewrite->get_link('topic', $topic->id).'" title="'.esc_attr($topic_title).'">'.esc_html($topic_title).'</a>';
+                        echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('topic', $topic->id)).'" title="'.esc_attr($topic_title).'">'.esc_html($topic_title).'</a>';
                         echo '<small>';
 
                         // Author
@@ -218,7 +218,7 @@ class AsgarosForumApproval {
 
                         // Creation time
                         echo '&nbsp;&middot;&nbsp;';
-                        echo $this->asgarosforum->get_activity_timestamp($first_post->date);
+                        echo esc_html($this->asgarosforum->get_activity_timestamp($first_post->date));
 
                         // Location
                         echo '&nbsp;&middot;&nbsp;';

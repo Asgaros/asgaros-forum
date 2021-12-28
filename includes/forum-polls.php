@@ -388,7 +388,7 @@ class AsgarosForumPolls {
         }
 
         echo '<div id="poll-panel">';
-        echo '<form method="post" action="'.$this->asgarosforum->get_link('topic', $topic_id).'">';
+        echo '<form method="post" action="'.esc_url($this->asgarosforum->get_link('topic', $topic_id)).'">';
             echo '<div id="poll-headline">';
                 echo '<span class="fas fa-poll-h"></span>';
                 echo esc_html(stripslashes($poll->title));
@@ -427,16 +427,16 @@ class AsgarosForumPolls {
 
                             if ($can_see_results) {
                                 echo '<small class="poll-result-numbers">';
-                                    echo sprintf(_n('%s Vote', '%s Votes', $option->votes, 'asgaros-forum'), number_format_i18n($option->votes));
+                                    echo sprintf(_n('%s Vote', '%s Votes', absint($option->votes), 'asgaros-forum'), esc_html(number_format_i18n($option->votes)));
                                     echo '&nbsp;&middot;&nbsp;';
-                                    echo number_format_i18n($percentage, 2).'%';
+                                    echo esc_html(number_format_i18n($percentage, 2)).'%';
                                 echo '</small>';
                             }
                         echo '</div>';
 
                         if ($can_see_results) {
                             echo '<div class="poll-result-bar">';
-                                echo '<div class="poll-result-filling" style="width: '.esc_attr($percentage_css).'%; background-color: '.$this->get_bar_color().';"></div>';
+                                echo '<div class="poll-result-filling" style="width: '.esc_attr($percentage_css).'%; background-color: '.esc_html($this->get_bar_color()).';"></div>';
                             echo '</div>';
                         }
                     echo '</div>';
@@ -444,7 +444,7 @@ class AsgarosForumPolls {
 
                 if ($can_see_results) {
                     echo '<div class="poll-result-total">';
-                        echo sprintf(_n('%s Participant', '%s Participants', $poll->total_participants, 'asgaros-forum'), number_format_i18n($poll->total_participants));
+                        echo sprintf(_n('%s Participant', '%s Participants', absint($poll->total_participants), 'asgaros-forum'), esc_html(number_format_i18n($poll->total_participants)));
                     echo '</div>';
                 }
 

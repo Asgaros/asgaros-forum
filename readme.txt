@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Add missing escaping for output data
 = 1.15.19 =
 * Fixed: Add missing escaping for output data
 = 1.15.18 =

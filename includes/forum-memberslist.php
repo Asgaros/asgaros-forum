@@ -90,12 +90,12 @@ class AsgarosForumMembersList {
 
         $filter_toggle_text = __('Show Filters', 'asgaros-forum');
         $filter_toggle_icon = 'fas fa-chevron-down';
-        $filter_toggle_hide = 'style="display: none;"';
+        $filter_toggle_hide = 'none';
 
         if (!empty($_GET['filter_type']) && !empty($_GET['filter_name'])) {
             $filter_toggle_text = __('Hide Filters', 'asgaros-forum');
             $filter_toggle_icon = 'fas fa-chevron-up';
-            $filter_toggle_hide = '';
+            $filter_toggle_hide = 'block';
         }
 
         echo '<div class="title-element" id="memberslist-filter-toggle">';
@@ -103,18 +103,18 @@ class AsgarosForumMembersList {
             echo '<span class="title-element-text">'.esc_attr($filter_toggle_text).'</span>';
         echo '</div>';
 
-        echo '<div id="memberslist-filter" data-value-show-filters="'.esc_attr__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.esc_attr__('Hide Filters', 'asgaros-forum').'" '.$filter_toggle_hide.'>';
+        echo '<div id="memberslist-filter" data-value-show-filters="'.esc_attr__('Show Filters', 'asgaros-forum').'" data-value-hide-filters="'.esc_attr__('Hide Filters', 'asgaros-forum').'" style="display: '.esc_attr($filter_toggle_hide).';">';
             echo '<div id="roles-filter">';
                 echo '<div class="filter-name">'.esc_html__('Roles:', 'asgaros-forum').'</div>';
                 echo '<div class="filter-options">';
-                    echo $this->render_filter_option('role', 'all', esc_html__('All Users', 'asgaros-forum'));
+                    $this->render_filter_option('role', 'all', esc_html__('All Users', 'asgaros-forum'));
 
                     if ($this->is_filter_available('normal')) {
                         $users = $this->asgarosforum->permissions->get_users_by_role('normal');
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'normal', esc_html__('Users', 'asgaros-forum'));
+                            $this->render_filter_option('role', 'normal', esc_html__('Users', 'asgaros-forum'));
                         }
                     }
 
@@ -123,7 +123,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'moderator', esc_html__('Moderators', 'asgaros-forum'));
+                            $this->render_filter_option('role', 'moderator', esc_html__('Moderators', 'asgaros-forum'));
                         }
                     }
 
@@ -133,7 +133,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'administrator', esc_html__('Administrators', 'asgaros-forum'));
+                            $this->render_filter_option('role', 'administrator', esc_html__('Administrators', 'asgaros-forum'));
                         }
                     }
 
@@ -142,7 +142,7 @@ class AsgarosForumMembersList {
 
                         if (count($users) > 0) {
                             echo '&nbsp;&middot;&nbsp;';
-                            echo $this->render_filter_option('role', 'banned', esc_html__('Banned', 'asgaros-forum'));
+                            $this->render_filter_option('role', 'banned', esc_html__('Banned', 'asgaros-forum'));
                         }
                     }
                 echo '</div>';
@@ -177,13 +177,15 @@ class AsgarosForumMembersList {
     }
 
     public function render_filter_option($filter_type, $filter_name, $title) {
-        $output = '<a href="'.$this->asgarosforum->rewrite->get_link('members', false, array('filter_type' => $filter_type, 'filter_name' => $filter_name)).'">'.$title.'</a>';
-
         if ($filter_type === $this->filter_type && $filter_name == $this->filter_name) {
-            return '<b>'.$output.'</b>';
+            echo '<b>';
         }
 
-        return $output;
+		echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('members', false, array('filter_type' => $filter_type, 'filter_name' => $filter_name))).'">'.esc_html($title).'</a>';
+
+		if ($filter_type === $this->filter_type && $filter_name == $this->filter_name) {
+            echo '</b>';
+        }
     }
 
     public function show_memberslist() {
@@ -206,9 +208,9 @@ class AsgarosForumMembersList {
             $dataSliced = array_slice($data, $start, $end);
 
             foreach ($dataSliced as $element) {
-                $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? ' user-online' : '';
+                $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? 'user-online' : 'user-offline';
 
-                echo '<div class="content-element member'.$userOnline.'">';
+                echo '<div class="content-element member '.esc_attr($userOnline).'">';
                     if ($this->asgarosforum->options['enable_avatars']) {
                         echo '<div class="member-avatar">';
                         echo get_avatar($element->ID, 60, '', '', array('force_display' => true));
@@ -234,12 +236,12 @@ class AsgarosForumMembersList {
 
                     echo '<div class="member-posts">';
                         $member_posts_i18n = number_format_i18n($element->forum_posts);
-                        echo sprintf(_n('%s Post', '%s Posts', $element->forum_posts, 'asgaros-forum'), $member_posts_i18n);
+                        echo sprintf(_n('%s Post', '%s Posts', absint($element->forum_posts), 'asgaros-forum'), esc_html($member_posts_i18n));
                     echo '</div>';
 
                     if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {
                         echo '<div class="member-last-seen">';
-                            echo '<i>'.$this->asgarosforum->online->last_seen($element->ID).'</i>';
+                            echo '<i>'.esc_html($this->asgarosforum->online->last_seen($element->ID)).'</i>';
                         echo '</div>';
                     }
                 echo '</div>';

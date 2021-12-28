@@ -33,7 +33,7 @@ class AsgarosForumSearch {
             echo '<div id="forum-search">';
             echo '<span class="search-icon fas fa-search"></span>';
 
-            echo '<form method="get" action="'.$this->asgarosforum->get_link('search').'">';
+            echo '<form method="get" action="'.esc_url($this->asgarosforum->get_link('search')).'">';
 
             // Workaround for broken search when using plain permalink structure.
             if (!$this->asgarosforum->rewrite->use_permalinks) {

@@ -58,7 +58,7 @@ class AsgarosForumStatistics {
         echo '<div class="statistics-element">';
             echo '<div class="element-number">';
                 echo '<span class="statistics-element-icon '.esc_attr($iconClass).'"></span>';
-                echo number_format_i18n($data);
+                echo esc_html(number_format_i18n($data));
             echo '</div>';
             echo '<div class="element-name">'.esc_html($title).'</div>';
         echo '</div>';
