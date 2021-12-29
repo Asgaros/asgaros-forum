@@ -698,9 +698,14 @@ if (!defined('ABSPATH')) exit;
                             </td>
                         </tr>
                         <tr class="uploads-option" <?php if (!$uploadsOption) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="uploads_maximum_size"><?php esc_html_e('Maximum file size (in megabyte):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="uploads_maximum_size"><?php esc_html_e('Maximum file size:', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="uploads_maximum_size" id="uploads_maximum_size" value="<?php echo absint($this->asgarosforum->options['uploads_maximum_size']); ?>" size="3" min="0">
+								<select name="uploads_maximum_size_unit" id="uploads_maximum_size_unit">';
+                                    <option value="KB" <?php if ($this->asgarosforum->options['uploads_maximum_size_unit'] === 'KB') { echo 'selected="selected"'; } ?>><?php esc_html_e('Kilobyte', 'asgaros-forum'); ?></option>
+                                    <option value="MB" <?php if ($this->asgarosforum->options['uploads_maximum_size_unit'] === 'MB') { echo 'selected="selected"'; } ?>><?php esc_html_e('Megabyte', 'asgaros-forum'); ?></option>
+                                    <option value="GB" <?php if ($this->asgarosforum->options['uploads_maximum_size_unit'] === 'GB') { echo 'selected="selected"'; } ?>><?php esc_html_e('Gigabyte', 'asgaros-forum'); ?></option>
+                                </select>
                                 <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>

@@ -48,6 +48,7 @@ class AsgarosForum {
         'hide_profiles_from_guests'         => false,
         'uploads_maximum_number'            => 5,
         'uploads_maximum_size'              => 5,
+		'uploads_maximum_size_unit'			=> 'MB',
         'uploads_show_thumbnails'           => true,
         'admin_subscriptions'               => false,
         'allow_subscriptions'               => true,

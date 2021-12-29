@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Added: Option to define units for maximum file-size of uploads
 = 1.15.20 =
 * Fixed: Broken links when URLs contain special characters
 * Fixed: Add missing escaping for output data
