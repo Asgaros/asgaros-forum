@@ -156,11 +156,11 @@ class AsgarosForumOnline {
 					if ($this->asgarosforum->options['statistics_show_online_usernames']) {
 						foreach ($currently_online_users as $online_user) {
 							$loop_counter++;
-	
+
 							if ($loop_counter > 1) {
 								echo ', ';
 							}
-	
+
 							echo $this->asgarosforum->renderUsername($online_user);
 						}
 					} else {
