@@ -31,19 +31,19 @@ class AsgarosForumUserQuery {
 
 		// TODO: Check required arguments.
 		$this->query_vars = wp_parse_args($query, array(
-			'fields'			=> array('ID'),
-			'type'				=> 'default',
-			'per_page'			=> 0,
-			'page'				=> 1,
-			'search_terms'		=> false,
-			'include'			=> false,
-			'exclude'			=> false,
-			'user_ids'			=> false,
-			'meta_key'			=> false,
-			'meta_value'		=> false,
-			'meta_compare'		=> '=',
-			'role'				=> false,
-			'populate_extras'	=> false
+			'fields'            => array('ID'),
+			'type'              => 'default',
+			'per_page'          => 0,
+			'page'              => 1,
+			'search_terms'      => false,
+			'include'           => false,
+			'exclude'           => false,
+			'user_ids'          => false,
+			'meta_key'          => false,
+			'meta_value'        => false,
+			'meta_compare'      => '=',
+			'role'              => false,
+			'populate_extras'   => false
 		));
 
 		// Get user ids. If the user_ids param is present, we skip the query.
@@ -201,7 +201,7 @@ class AsgarosForumUserQuery {
 			'fields'      => $this->query_vars['fields'],
 			'include'     => $this->user_ids,
 			'count_total' => false,
-			'orderby' 	  => 'ID'
+			'orderby'     => 'ID'
 		));
 
 		$this->total_users = count($wp_user_query->results);

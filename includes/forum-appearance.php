@@ -7,25 +7,25 @@ class AsgarosForumAppearance {
 	private $skin_path = 'skin';
 	private $default_theme = 'default';
 	private $asgarosforum = null;
-	private $themes_root;		// Path to themes directory.
-	private $themes = array();	// Array of available themes.
-	private $current_theme;		// The current theme.
+	private $themes_root;       // Path to themes directory.
+	private $themes = array();  // Array of available themes.
+	private $current_theme;     // The current theme.
 	public $options = array();
 	public $options_default = array(
-		'theme'                     	=> 'default',
-		'custom_color'              	=> '#256db3',
-		'custom_accent_color'			=> '#054d98',
-        'custom_text_color'         	=> '#444444',
+		'theme'                         => 'default',
+		'custom_color'                  => '#256db3',
+		'custom_accent_color'           => '#054d98',
+        'custom_text_color'             => '#444444',
 		'custom_text_color_light'       => '#888888',
-		'custom_link_color'         	=> '#256db3',
-        'custom_background_color'		=> '#ffffff',
-		'custom_background_color_alt'	=> '#fafafa',
-        'custom_border_color'       	=> '#eeeeee',
-		'custom_read_indicator_color'	=> '#a2a2a2',
-		'custom_unread_indicator_color'	=> '#256db3',
-		'custom_font'					=> 'Verdana, Tahoma, sans-serif',
-		'custom_font_size'				=> '13px',
-		'custom_css'					=> ''
+		'custom_link_color'             => '#256db3',
+        'custom_background_color'       => '#ffffff',
+		'custom_background_color_alt'   => '#fafafa',
+        'custom_border_color'           => '#eeeeee',
+		'custom_read_indicator_color'   => '#a2a2a2',
+		'custom_unread_indicator_color' => '#256db3',
+		'custom_font'                   => 'Verdana, Tahoma, sans-serif',
+		'custom_font_size'              => '13px',
+		'custom_css'                    => ''
 	);
 
 	public function __construct($object) {
@@ -67,8 +67,8 @@ class AsgarosForumAppearance {
 	private function find_themes() {
 		// Always ensure that the default theme is available.
 		$this->themes[$this->default_theme] = array(
-			'name'	=> __('Default Theme', 'asgaros-forum'),
-			'url'	=> $this->asgarosforum->plugin_url.$this->skin_path
+			'name'  => __('Default Theme', 'asgaros-forum'),
+			'url'   => $this->asgarosforum->plugin_url.$this->skin_path
 		);
 
 		// Create themes directory if it doesnt exist.
@@ -84,8 +84,8 @@ class AsgarosForumAppearance {
 					if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/widgets.css')) {
 						$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
 						$this->themes[$trimmed] = array(
-							'name'	=> $trimmed,
-							'url'	=> content_url($this->theme_path.'/'.$trimmed)
+							'name'  => $trimmed,
+							'url'   => content_url($this->theme_path.'/'.$trimmed)
 						);
 					}
 				}
