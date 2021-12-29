@@ -309,14 +309,14 @@ class AsgarosForumRewrite {
         $this->links['home'] = untrailingslashit(_get_page_link($this->asgarosforum->options['location']));
 
         // Build current link.
-        $protocol = strtolower(sanitize_text_field($_SERVER['SERVER_PROTOCOL']));
+        $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
         $protocol = substr($protocol, 0, strpos($protocol, '/'));
 
         if (is_ssl()) {
             $protocol .= 's';
         }
 
-        $this->links['current'] = $protocol.'://'.sanitize_text_field($_SERVER['HTTP_HOST']).sanitize_text_field($_SERVER['REQUEST_URI']);
+        $this->links['current'] = $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
         // Set additional links based on global permalink-settings.
         if ($this->use_permalinks) {
