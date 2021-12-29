@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
 * Changed: Move settings related to statistics to own section
 * Updated: Font Awesome version 5.15.4

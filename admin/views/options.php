@@ -865,6 +865,10 @@ if (!defined('ABSPATH')) exit;
 							<th><label for="show_newest_member"><?php esc_html_e('Show newest member', 'asgaros-forum'); ?></label></th>
 							<td><input type="checkbox" name="show_newest_member" id="show_newest_member" <?php checked(!empty($this->asgarosforum->options['show_newest_member'])); ?>></td>
                         </tr>
+						<tr class="statistics-option" <?php if (!$statistics_option) { echo 'style="display: none;"'; } ?>>
+							<th><label for="statistics_show_online_usernames"><?php esc_html_e('Show names of online users in statistics', 'asgaros-forum'); ?></label></th>
+							<td><input type="checkbox" name="statistics_show_online_usernames" id="statistics_show_online_usernames" <?php checked(!empty($this->asgarosforum->options['statistics_show_online_usernames'])); ?>></td>
+                        </tr>
 						<tr>
 							<th><label for="show_who_is_online"><?php esc_html_e('Show who is online', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($this->asgarosforum->options['show_who_is_online'])); ?>></td>

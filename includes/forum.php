@@ -92,6 +92,7 @@ class AsgarosForum {
         'show_last_seen'                    => true,
         'show_newest_member'                => true,
         'show_statistics'                   => true,
+		'statistics_show_online_usernames'	=> true,
         'enable_breadcrumbs'                => true,
         'breadcrumbs_show_category'         => true,
         'highlight_admin'                   => true,
