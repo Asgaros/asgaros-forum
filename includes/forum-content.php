@@ -319,7 +319,7 @@ class AsgarosForumContent {
 
                 // Create link.
                 $link = html_entity_decode($this->asgarosforum->rewrite->get_post_link($this->asgarosforum->current_post, $this->asgarosforum->current_topic));
-            }else{
+            }else {
                 $link = $this->asgarosforum->rewrite->get_link('home');
             }
 

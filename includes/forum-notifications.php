@@ -23,7 +23,7 @@ class AsgarosForumNotifications {
 
     public function show_subscription_navigation($current_view) {
         if ($this->asgarosforum->options['allow_subscriptions'] && is_user_logged_in()) {
-            switch($current_view) {
+            switch ($current_view) {
                 case 'topic':
                     $this->show_topic_subscription_link($this->asgarosforum->current_topic);
                 break;
@@ -273,7 +273,7 @@ class AsgarosForumNotifications {
         }
 
         // Generate mailing list.
-        foreach($topic_subscribers as $subscriber) {
+        foreach ($topic_subscribers as $subscriber) {
             $this->add_to_mailing_list($subscriber->user_email);
         }
 
@@ -392,7 +392,7 @@ class AsgarosForumNotifications {
             }
 
             // Generate mailing list.
-            foreach($forum_subscribers as $subscriber) {
+            foreach ($forum_subscribers as $subscriber) {
                 $this->add_to_mailing_list($subscriber->user_email);
             }
 
@@ -470,7 +470,7 @@ class AsgarosForumNotifications {
 
         $mail_headers = $this->get_mail_headers();
 
-        foreach($mails as $mail) {
+        foreach ($mails as $mail) {
             $message = $this->apply_replacements($mail, $message_template, $replacements);
 
             wp_mail($mail, $subject, $message, $mail_headers);

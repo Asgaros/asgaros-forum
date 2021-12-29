@@ -152,7 +152,7 @@ class AsgarosForumUploads {
 	        if (!empty($files)) {
 				$temporary_file_paths = array_map('sanitize_text_field', $_FILES['forumfile']['tmp_name']);
 
-	            foreach($files as $index => $name) {
+	            foreach ($files as $index => $name) {
 	                move_uploaded_file($temporary_file_paths[$index], $path.$name);
 	                $links[] = $name;
 	            }

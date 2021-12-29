@@ -16,7 +16,7 @@ class AsgarosForumFeed {
 
     public function add_feed_link() {
         if ($this->asgarosforum->options['enable_rss']) {
-            switch($this->asgarosforum->current_view) {
+            switch ($this->asgarosforum->current_view) {
                 case 'topic':
                     $title = $this->asgarosforum->current_topic_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
@@ -33,7 +33,7 @@ class AsgarosForumFeed {
 
     public function show_feed_navigation($current_view) {
         if ($this->asgarosforum->options['enable_rss']) {
-            switch($current_view) {
+            switch ($current_view) {
                 case 'topic':
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
