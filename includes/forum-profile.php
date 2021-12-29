@@ -236,7 +236,7 @@ class AsgarosForumProfile {
 
                 echo '<div id="profile-content">';
                     // Defines an array for profile rows.
-                    $profileRows = array ();
+                    $profileRows = array();
 
                     // Show first name.
                     if (!empty($userData->first_name)) {
