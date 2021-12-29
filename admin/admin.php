@@ -94,6 +94,10 @@ class AsgarosForumAdmin {
             'reputation' => array(
                 'label' => __('Reputation', 'asgaros-forum'),
                 'icon' => 'fas fa-medal'
+            ),
+            'statistics' => array(
+                'label' => __('Statistics', 'asgaros-forum'),
+                'icon' => 'fas fa-chart-pie'
             )
         );
     }

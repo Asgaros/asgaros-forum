@@ -253,29 +253,6 @@ if (!defined('ABSPATH')) exit;
                             <td><input type="checkbox" name="enable_rss" id="enable_rss" <?php checked(!empty($this->asgarosforum->options['enable_rss'])); ?>></td>
                         </tr>
                         <tr>
-                            <th><label for="count_topic_views"><?php esc_html_e('Count topic views', 'asgaros-forum'); ?></label></th>
-                            <td><input type="checkbox" name="count_topic_views" id="count_topic_views" <?php checked(!empty($this->asgarosforum->options['count_topic_views'])); ?>></td>
-                        </tr>
-                        <tr>
-                            <th><label for="show_who_is_online"><?php esc_html_e('Show who is online', 'asgaros-forum'); ?></label></th>
-                            <td><input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($this->asgarosforum->options['show_who_is_online'])); ?>></td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label for="show_last_seen"><?php esc_html_e('Show "Last seen"', 'asgaros-forum'); ?></label>
-                                <span class="description"><?php esc_html_e('Shows when a user got last seen inside of his profile and in the members list. This information is only gathered and shown when the "Who is Online" functionality is enabled.', 'asgaros-forum'); ?></span>
-                            </th>
-                            <td><input type="checkbox" name="show_last_seen" id="show_last_seen" <?php checked(!empty($this->asgarosforum->options['show_last_seen'])); ?>></td>
-                        </tr>
-                        <tr>
-                            <th><label for="show_newest_member"><?php esc_html_e('Show newest member', 'asgaros-forum'); ?></label></th>
-                            <td><input type="checkbox" name="show_newest_member" id="show_newest_member" <?php checked(!empty($this->asgarosforum->options['show_newest_member'])); ?>></td>
-                        </tr>
-                        <tr>
-                            <th><label for="show_statistics"><?php esc_html_e('Show statistics', 'asgaros-forum'); ?></label></th>
-                            <td><input type="checkbox" name="show_statistics" id="show_statistics" <?php checked(!empty($this->asgarosforum->options['show_statistics'])); ?>></td>
-                        </tr>
-                        <tr>
                             <th><label for="allow_guest_postings"><?php esc_html_e('Allow guest postings', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="allow_guest_postings" id="allow_guest_postings" <?php checked(!empty($this->asgarosforum->options['allow_guest_postings'])); ?>></td>
                         </tr>
@@ -870,6 +847,39 @@ if (!defined('ABSPATH')) exit;
                                 </table>
                             </td>
                         </tr>
+                    </table>
+                </div>
+
+				<?php $display = ($selected_tab == 'statistics') ? 'block' : 'none'; ?>
+                <div class="tab" id="tab-statistics" style="display: <?php echo esc_attr($display); ?>;">
+                    <?php $this->render_options_header('statistics'); ?>
+                    <?php
+                    $statistics_option = checked(!empty($this->asgarosforum->options['show_statistics']), true, false);
+                    ?>
+                    <table>
+                        <tr>
+                            <th><label for="show_statistics"><?php esc_html_e('Show statistics', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="show_statistics" id="show_statistics" class="show_hide_initiator" data-hide-class="statistics-option" <?php checked(!empty($this->asgarosforum->options['show_statistics'])); ?>></td>
+                        </tr>
+                        <tr class="statistics-option" <?php if (!$statistics_option) { echo 'style="display: none;"'; } ?>>
+							<th><label for="show_newest_member"><?php esc_html_e('Show newest member', 'asgaros-forum'); ?></label></th>
+							<td><input type="checkbox" name="show_newest_member" id="show_newest_member" <?php checked(!empty($this->asgarosforum->options['show_newest_member'])); ?>></td>
+                        </tr>
+						<tr>
+							<th><label for="show_who_is_online"><?php esc_html_e('Show who is online', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="show_who_is_online" id="show_who_is_online" <?php checked(!empty($this->asgarosforum->options['show_who_is_online'])); ?>></td>
+						</tr>
+						<tr>
+							<th>
+                            	<label for="show_last_seen"><?php esc_html_e('Show "Last seen"', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php esc_html_e('Shows when a user got last seen inside of his profile and in the members list. This information is only gathered and shown when the "Who is Online" functionality is enabled.', 'asgaros-forum'); ?></span>
+                            </th>
+                            <td><input type="checkbox" name="show_last_seen" id="show_last_seen" <?php checked(!empty($this->asgarosforum->options['show_last_seen'])); ?>></td>
+						</tr>
+						<tr>
+							<th><label for="count_topic_views"><?php esc_html_e('Count topic views', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="count_topic_views" id="count_topic_views" <?php checked(!empty($this->asgarosforum->options['count_topic_views'])); ?>></td>
+						</tr>
                     </table>
                 </div>
 
