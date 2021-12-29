@@ -497,13 +497,13 @@ class AsgarosForum {
             $this->content->do_insertion();
         } else if (isset($_GET['move_topic'])) {
             $this->moveTopic();
-        } else if (isset($_GET['delete_topic']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_topic')) {
+        } else if (isset($_GET['delete_topic'])) {
 			if (!empty($_REQUEST['_wpnonce'])) {
 				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_topic')) {
 					$this->delete_topic($this->current_topic);
 				}
 			}
-        } else if (isset($_GET['remove_post']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_post')) {
+        } else if (isset($_GET['remove_post'])) {
 			if (!empty($_REQUEST['_wpnonce'])) {
 				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_post')) {
 					$post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
@@ -1969,11 +1969,16 @@ class AsgarosForum {
     }
 
     public function moveTopic() {
-        $newForumID = sanitize_key($_POST['newForumID']);
+		// Ensure forum-ID is set.
+		if (empty($_POST['newForumID'])) {
+			return;
+		}
 
-        if ($this->permissions->isModerator('current') && $newForumID && $this->content->forum_exists($newForumID)) {
-            $this->db->update($this->tables->topics, array('parent_id' => $newForumID), array('id' => $this->current_topic), array('%d'), array('%d'));
-            $this->db->update($this->tables->posts, array('forum_id' => $newForumID), array('parent_id' => $this->current_topic), array('%d'), array('%d'));
+        $new_forum_id = sanitize_key($_POST['newForumID']);
+
+        if ($this->permissions->isModerator('current') && $new_forum_id && $this->content->forum_exists($new_forum_id)) {
+            $this->db->update($this->tables->topics, array('parent_id' => $new_forum_id), array('id' => $this->current_topic), array('%d'), array('%d'));
+            $this->db->update($this->tables->posts, array('forum_id' => $new_forum_id), array('parent_id' => $this->current_topic), array('%d'), array('%d'));
             wp_safe_redirect(html_entity_decode($this->get_link('topic', $this->current_topic)));
             exit;
         }

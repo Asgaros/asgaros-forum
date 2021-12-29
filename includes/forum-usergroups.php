@@ -439,13 +439,32 @@ class AsgarosForumUserGroups {
 	}
 
     public static function saveUserGroup() {
-        $usergroup_id           = sanitize_key($_POST['usergroup_id']);
-        $usergroup_name         = sanitize_text_field($_POST['usergroup_name']);
-        $usergroup_category     = sanitize_key($_POST['usergroup_category']);
-        $usergroup_color        = sanitize_hex_color($_POST['usergroup_color']);
-        $usergroup_visibility   = (isset($_POST['usergroup_visibility'])) ? 'hidden' : 'normal';
-        $usergroup_auto_add     = (isset($_POST['usergroup_auto_add'])) ? 'yes' : 'no';
-        $usergroup_icon         = sanitize_key($_POST['usergroup_icon']);
+		// Ensure usergroup-ID is set.
+		if (empty($_POST['usergroup_id'])) {
+			return;
+		}
+
+        $usergroup_id = sanitize_key($_POST['usergroup_id']);
+
+		// Ensure usergroup-name is set.
+		if (empty($_POST['usergroup_name'])) {
+			return;
+		}
+
+		$usergroup_name = sanitize_text_field($_POST['usergroup_name']);
+
+		// Ensure usergroup-category is set.
+		if (empty($_POST['usergroup_category'])) {
+			return;
+		}
+
+        $usergroup_category = sanitize_key($_POST['usergroup_category']);
+
+		// Set other values.
+		$usergroup_color = sanitize_hex_color($_POST['usergroup_color']);
+        $usergroup_visibility = (isset($_POST['usergroup_visibility'])) ? 'hidden' : 'normal';
+        $usergroup_auto_add = (isset($_POST['usergroup_auto_add'])) ? 'yes' : 'no';
+        $usergroup_icon = sanitize_key($_POST['usergroup_icon']);
 
         if ($usergroup_id === 'new') {
             return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add, $usergroup_icon);

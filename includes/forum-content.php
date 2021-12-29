@@ -39,7 +39,7 @@ class AsgarosForumContent {
 
     private function get_action() {
         // If no action is set, try to determine one.
-        if (!$this->action && ($_POST['submit_action'] === 'add_topic' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
+        if (!$this->action && !empty($_POST['submit_action']) && ($_POST['submit_action'] === 'add_topic' || $_POST['submit_action'] === 'add_post' || $_POST['submit_action'] === 'edit_post')) {
             $this->action = sanitize_key($_POST['submit_action']);
         }
 
@@ -87,9 +87,7 @@ class AsgarosForumContent {
         }
 
         // Verify the corresponding nonce.
-        $nonce = sanitize_key($_REQUEST['_wpnonce']);
-
-        if (!wp_verify_nonce($nonce, 'asgaros_forum_'.$this->get_action())) {
+        if (empty($_REQUEST['_wpnonce']) || !wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_'.$this->get_action())) {
             $this->asgarosforum->error = __('You are not allowed to do this.', 'asgaros-forum');
             return false;
         }

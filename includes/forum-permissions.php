@@ -454,7 +454,7 @@ class AsgarosForumPermissions {
 
     public function ban_user($user_id, $ban_id) {
         // Verify nonce first.
-        if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'ban_user_'.$ban_id)) {
+        if (!empty($_REQUEST['_wpnonce']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'ban_user_'.$ban_id)) {
             // Check if the current user can ban another user.
             if ($this->can_ban_user($user_id, $ban_id)) {
                 // Ensure that the user is not already banned.
@@ -467,7 +467,7 @@ class AsgarosForumPermissions {
 
     public function unban_user($user_id, $unban_id) {
         // Verify nonce first.
-        if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'unban_user_'.$unban_id)) {
+        if (!empty($_REQUEST['_wpnonce']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'unban_user_'.$unban_id)) {
             // Check if the current user can ban another user.
             if ($this->can_ban_user($user_id, $unban_id)) {
                 // Ensure that the user is banned.
