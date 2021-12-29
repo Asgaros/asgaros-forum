@@ -222,13 +222,13 @@ class AsgarosForumContent {
             }
 
             // Add error message and stop redirecting
-            if ($add_topic['error']){
+            if ($add_topic['error']) {
                 $this->asgarosforum->error = $add_topic['error'];
                 return;
             }
 
             // Add warning and stop redirecting
-            if ($add_topic['warning']){
+            if ($add_topic['warning']) {
                 $this->asgarosforum->add_notice($add_topic['warning']);
                 return;
             }
@@ -254,7 +254,7 @@ class AsgarosForumContent {
             $add_post = apply_filters('asgarosforum_filter_before_post_submit', $add_post);
 
             // Check if add post is canceled
-            if ($add_post['add_post']){
+            if ($add_post['add_post']) {
                 // Create the post.
                 $this->asgarosforum->current_post = $this->insert_post($add_post['topic'], $add_post['forum'], $add_post['content'], $add_post['author'], $add_post['upload_list']);
 
@@ -278,13 +278,13 @@ class AsgarosForumContent {
             }
 
             // Add error message and stop redirecting
-            if ($add_post['error']){
+            if ($add_post['error']) {
                 $this->asgarosforum->error = $add_post['error'];
                 return;
             }
 
             // Add warning and stop redirecting
-            if ($add_post['warning']){
+            if ($add_post['warning']) {
                 $this->asgarosforum->add_notice($add_post['warning']);
                 return;
             }
@@ -308,7 +308,7 @@ class AsgarosForumContent {
             $edit_post = apply_filters('asgarosforum_filter_before_edit_post_submit', $edit_post);
 
             // Check if edit post if cancelled
-            if ($edit_post['edit_post']){
+            if ($edit_post['edit_post']) {
                 $date = $this->asgarosforum->current_time();
                 $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $edit_post['upload_list']);
                 $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('text' => $edit_post['content'], 'uploads' => maybe_serialize($upload_list), 'date_edit' => $date, 'author_edit' => $edit_post['editor']), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
@@ -324,13 +324,13 @@ class AsgarosForumContent {
             }
 
             // Add error message and stop redirecting
-            if ($edit_post['error']){
+            if ($edit_post['error']) {
                 $this->asgarosforum->error = $edit_post['error'];
                 return;
             }
 
             // Add warning and stop redirecting
-            if ($edit_post['warning']){
+            if ($edit_post['warning']) {
                 $this->asgarosforum->add_notice($edit_post['warning']);
                 return;
             }

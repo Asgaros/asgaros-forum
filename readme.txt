@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
 * Changed: Move settings related to statistics to own section
+* Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
 = 1.15.20 =
 * Fixed: Broken links when URLs contain special characters
