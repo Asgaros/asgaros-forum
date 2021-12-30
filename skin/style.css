@@ -675,6 +675,7 @@
 	margin: 0;
 	padding: 0;
 	text-align: center;
+	align-items: stretch;
 }
 #af-wrapper .pages a,
 #af-wrapper .pages strong {
