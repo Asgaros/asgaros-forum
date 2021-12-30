@@ -26,7 +26,7 @@ class AsgarosForumPagination {
                 }
 
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array('part' => $num_pages));
-                echo '<a href="'.esc_url($link).'">'.esc_html(_x('Last', 'Last topic', 'asgaros-forum')).'&nbsp;&raquo;</a>';
+                echo '<a href="'.esc_url($link).'">'.esc_html(_x('Last', 'Last topic', 'asgaros-forum')).' <i class="fas fa-fast-forward"></i></a>';
             }
 
             echo '</div>';
@@ -85,43 +85,31 @@ class AsgarosForumPagination {
         // Only show pagination when there is more than one page.
         if ($num_pages > 1) {
             $out = '<div class="pages">';
+			// First page
+			if ($current_page >= 2) {
+				$link = remove_query_arg('part', $select_url);
+				$out .= '<a href="'.$link.'"><i class="fas fa-fast-backward"></i></a>';
+			}
 
-            if ($num_pages <= 5) {
-                for ($i = 1; $i <= $num_pages; $i++) {
-                    if ($i == ($current_page + 1)) {
-                        $out .= '<strong>'.number_format_i18n($i).'</strong>';
-                    } else {
-                        $link = add_query_arg('part', $i, $select_url);
-                        $out .= '<a href="'.$link.'">'.number_format_i18n($i).'</a>';
-                    }
-                }
-            } else {
-                if ($current_page >= 3) {
-                    $link = remove_query_arg('part', $select_url);
-                    $out .= '<a href="'.$link.'">&laquo;&nbsp;'.__('First', 'asgaros-forum').'</a>';
-                }
+			// Previous page
+			if ($current_page >= 1) {
+				$link = add_query_arg('part', ($current_page + 1) - 1, $select_url);
+				$out .= '<a href="'.$link.'"><i class="fas fa-step-backward"></i> '.__('Previous', 'asgaros-forum').'</a>';
+			}
 
-                for ($i = 2; $i > 0; $i--) {
-                    if ((($current_page + 1) - $i) > 0) {
-                        $link = add_query_arg('part', (($current_page + 1) - $i), $select_url);
-                        $out .= '<a href="'.$link.'">'.number_format_i18n(($current_page + 1) - $i).'</a>';
-                    }
-                }
+			$out .= '<strong>'.sprintf(__('Page %s of %s', 'asgaros-forum'), number_format_i18n($current_page + 1), number_format_i18n($num_pages)).'</strong>';
 
-                $out .= '<strong>'.number_format_i18n($current_page + 1).'</strong>';
+			// Next page
+			if (($current_page + 1) < $num_pages) {
+				$link = add_query_arg('part', ($current_page + 1) + 1, $select_url);
+				$out .= '<a href="'.$link.'">'.__('Next', 'asgaros-forum').' <i class="fas fa-step-forward"></i></a>';
+			}
 
-                for ($i = 1; $i <= 2; $i++) {
-                    if ((($current_page + 1) + $i) <= $num_pages) {
-                        $link = add_query_arg('part', (($current_page + 1) + $i), $select_url);
-                        $out .= '<a href="'.$link.'">'.number_format_i18n(($current_page + 1) + $i).'</a>';
-                    }
-                }
-
-                if ($num_pages - $current_page >= 4) {
-                    $link = add_query_arg('part', $num_pages, $select_url);
-                    $out .= '<a href="'.$link.'">'._x('Last', 'Last Page', 'asgaros-forum').'&nbsp;&raquo;</a>';
-                }
-            }
+			// Last page
+			if (($current_page + 1) < ($num_pages - 1)) {
+				$link = add_query_arg('part', $num_pages, $select_url);
+				$out .= '<a href="'.$link.'"><i class="fas fa-fast-forward"></i></a>';
+			}
 
             $out .= '</div>';
             return $out;
