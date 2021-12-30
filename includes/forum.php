@@ -889,6 +889,8 @@ class AsgarosForum {
     }
 
     public function render_forum_element($forum) {
+		$overwrite_rendering = apply_filters('asgarosforum_overwrite_forum_element_rendering', false);
+
         // Get counters and format them.
         $count_topics = $this->get_forum_topic_counter($forum->id);
         $count_topics_i18n = number_format_i18n($count_topics);

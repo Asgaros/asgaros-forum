@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 * Revised pagination
 * Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
+* Added: asgarosforum_overwrite_forum_element_rendering filter
 * Fixed: Send notifications for forum-subscribers when there is a new blog-post-topic
 * Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
 * Changed: Move settings related to statistics to own section
