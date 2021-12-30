@@ -2422,10 +2422,20 @@ class AsgarosForum {
 
     public function create_blog_topic($forum_id, $post_object) {
         if ($this->content->forum_exists($forum_id)) {
+			// Prepare title and content
             $post_title = apply_filters('asgarosforum_filter_automatic_topic_title', $post_object->post_title, $post_object);
             $post_content = apply_filters('asgarosforum_filter_automatic_topic_content', $post_object->post_content, $post_object);
 
-            $this->content->insert_topic($forum_id, $post_title, $post_content, $post_object->post_author);
+			// Create the new topic
+            $ids = $this->content->insert_topic($forum_id, $post_title, $post_content, $post_object->post_author);
+
+			if ($this->approval->is_topic_approved($ids->topic_id)) {
+				// Send notifications about new topic.
+				$this->notifications->notify_about_new_topic($ids->topic_id);
+			} else {
+				// Notify siteowner about new unapproved topic.
+				$this->approval->notify_about_new_unapproved_topic($ids->topic_id);
+			}
         }
     }
 

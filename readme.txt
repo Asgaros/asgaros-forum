@@ -90,6 +90,8 @@ You can find a list of available hooks and filters on this site:
 * Revised pagination
 * Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
+* Fixed: Send notifications for forum-subscribers when there is a new blog-post-topic
+* Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
 * Changed: Move settings related to statistics to own section
 * Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
