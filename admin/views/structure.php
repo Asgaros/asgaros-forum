@@ -114,24 +114,15 @@
 
                                 // Available options for forum-status.
                                 $forum_status_options = array(
-                                    array(
-                                        'name'  => __('Normal', 'asgaros-forum'),
-                                        'value' => 'normal'
-                                    ),
-                                    array(
-                                        'name'  => __('Closed', 'asgaros-forum'),
-                                        'value' => 'closed'
-                                    ),
-                                    array(
-                                        'name'  => __('Approval', 'asgaros-forum'),
-                                        'value' => 'approval'
-                                    )
+									'normal'	=> __('Normal', 'asgaros-forum'),
+									'closed'	=> __('Closed', 'asgaros-forum'),
+									'approval'	=> __('Approval', 'asgaros-forum'),
                                 );
 
                                 $forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);
 
-                                foreach ($forum_status_options as $forum_status_option) {
-                                    echo '<option value="'.esc_attr($forum_status_option['value']).'">'.esc_html($forum_status_option['name']).'</option>';
+                                foreach ($forum_status_options as $key => $value) {
+                                    echo '<option value="'.esc_attr($key).'">'.esc_html($value).'</option>';
                                 }
 
                                 ?>

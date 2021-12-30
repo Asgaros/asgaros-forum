@@ -57,6 +57,7 @@ require 'includes/forum-feed.php';
 require 'includes/forum-approval.php';
 require 'includes/forum-spoilers.php';
 require 'includes/forum-polls.php';
+require 'includes/forum-private.php';
 require 'includes/forum-user-query.php';
 
 // Include widget files.

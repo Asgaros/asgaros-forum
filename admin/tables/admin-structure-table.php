@@ -66,17 +66,18 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
     }
 
     public function column_status($item) {
-        switch ($item['forum_status']) {
-            case 'normal':
-                return __('Normal', 'asgaros-forum');
-            break;
-            case 'closed':
-                return __('Closed', 'asgaros-forum');
-            break;
-            case 'approval':
-                return __('Approval', 'asgaros-forum');
-            break;
-        }
+		// Available options for forum-status.
+		$forum_status_options = array(
+			'normal'	=> __('Normal', 'asgaros-forum'),
+			'closed'	=> __('Closed', 'asgaros-forum'),
+			'approval'	=> __('Approval', 'asgaros-forum'),
+		);
+
+		$forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);
+
+		if (!empty($forum_status_options[$item['forum_status']])) {
+			return $forum_status_options[$item['forum_status']];
+		}
     }
 
     public function column_actions($item) {
