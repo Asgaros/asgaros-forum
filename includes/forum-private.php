@@ -28,13 +28,22 @@ class AsgarosForumPrivate {
 			return $topic_counters;
 		}
 
+		// Get counts for own topics in all forums.
+		$query = "SELECT `parent_id` AS `forum_id`, COUNT(*) AS `topic_counter` FROM {$this->asgarosforum->tables->topics} WHERE `author_id` = %d AND `approved` = 1 GROUP BY `parent_id`;";
+		$query = $this->asgarosforum->db->prepare($query, get_current_user_id());
+		$results = $this->asgarosforum->db->get_results($query);
+
+		// Prepare array for further processing.
+		$own_topics = array();
+
+		foreach ($results as $result) {
+			$own_topics[$result->forum_id] = $result->topic_counter;
+		}
+
 		// Overwrite topic-counters for private forums.
 		foreach ($topic_counters as $key => $topic_counter) {
 			if ($this->is_private_forum($topic_counter->forum_id)) {
-				$query = "SELECT COUNT(*) FROM {$this->asgarosforum->tables->topics} WHERE `parent_id` = %d AND `author_id` = %d AND `approved` = 1;";
-				$query = $this->asgarosforum->db->prepare($query, $topic_counter->forum_id, get_current_user_id());
-				
-				$topic_counters[$key]->topic_counter = $this->asgarosforum->db->get_var($query);
+				$topic_counters[$key]->topic_counter = isset($own_topics[$topic_counter->forum_id]) ? $own_topics[$topic_counter->forum_id] : 0;
 			}
 		}
 
@@ -45,12 +54,17 @@ class AsgarosForumPrivate {
 
 	public function is_private_forum($forum_id) {
 		if (!isset($this->cache_is_private_forum[$forum_id])) {
-			$this->cache_is_private_forum[$forum_id] = false;
+			// Get private-status of all forums.
+			$query = "SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums};";
+			$results = $this->asgarosforum->db->get_results($query);
 
-			$forum_status = $this->asgarosforum->db->get_var("SELECT forum_status FROM {$this->asgarosforum->tables->forums} WHERE id = {$forum_id};");
-		
-			if ($forum_status === 'private') {
-				$this->cache_is_private_forum[$forum_id] = true;
+			// Set private-status for all forums.
+			foreach ($results as $result) {
+				if ($result->forum_status === 'private') {
+					$this->cache_is_private_forum[$result->id] = true;
+				} else {
+					$this->cache_is_private_forum[$result->id] = false;
+				}
 			}
 		}
 
