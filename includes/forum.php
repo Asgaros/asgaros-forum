@@ -1152,17 +1152,17 @@ class AsgarosForum {
         }
     }
 
-    public $topic_counters_cache = false;
-    public function get_topic_counters() {
+    public $topic_counter_cache = false;
+    public function get_topic_counts() {
         // If the cache is not set yet, create it.
-        if ($this->topic_counters_cache === false) {
+        if ($this->topic_counter_cache === false) {
             // Get all topic-counters of each forum first.
             $topic_counters = $this->db->get_results("SELECT parent_id AS forum_id, COUNT(*) AS topic_counter FROM {$this->tables->topics} WHERE approved = 1 GROUP BY parent_id;");
 
             // Assign topic-counter for each forum.
             if (!empty($topic_counters)) {
                 foreach ($topic_counters as $counter) {
-                    $this->topic_counters_cache[$counter->forum_id] = $counter->topic_counter;
+                    $this->topic_counter_cache[$counter->forum_id] = $counter->topic_counter;
                 }
             }
 
@@ -1173,27 +1173,29 @@ class AsgarosForum {
             if (!empty($subforums)) {
                 foreach ($subforums as $subforum) {
                     // Continue if the subforum has no topics.
-                    if (!isset($this->topic_counters_cache[$subforum->id])) {
+                    if (!isset($this->topic_counter_cache[$subforum->id])) {
                         continue;
                     }
 
                     // Re-assign value when the parent-forum has no topics.
-                    if (!isset($this->topic_counters_cache[$subforum->parent_forum])) {
-                        $this->topic_counters_cache[$subforum->parent_forum] = $this->topic_counters_cache[$subforum->id];
+                    if (!isset($this->topic_counter_cache[$subforum->parent_forum])) {
+                        $this->topic_counter_cache[$subforum->parent_forum] = $this->topic_counter_cache[$subforum->id];
                         continue;
                     }
 
                     // Otherwise add subforum-topics to the counter of the parent forum.
-                    $this->topic_counters_cache[$subforum->parent_forum] = ($this->topic_counters_cache[$subforum->parent_forum] + $this->topic_counters_cache[$subforum->id]);
+                    $this->topic_counter_cache[$subforum->parent_forum] = ($this->topic_counter_cache[$subforum->parent_forum] + $this->topic_counter_cache[$subforum->id]);
                 }
             }
+
+			$this->topic_counter_cache = apply_filters('asgarosforum_overwrite_topic_counter_cache', $this->topic_counter_cache);
         }
 
-        return $this->topic_counters_cache;
+        return $this->topic_counter_cache;
     }
 
     public function get_forum_topic_counter($forum_id) {
-        $counters = $this->get_topic_counters();
+        $counters = $this->get_topic_counts();
 
         if (isset($counters[$forum_id])) {
             return (int) $counters[$forum_id];
