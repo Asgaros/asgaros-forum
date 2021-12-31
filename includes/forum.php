@@ -1158,6 +1158,7 @@ class AsgarosForum {
         if ($this->topic_counter_cache === false) {
             // Get all topic-counters of each forum first.
             $topic_counters = $this->db->get_results("SELECT parent_id AS forum_id, COUNT(*) AS topic_counter FROM {$this->tables->topics} WHERE approved = 1 GROUP BY parent_id;");
+			$topic_counters = apply_filters('asgarosforum_overwrite_topic_counter_cache', $topic_counters);
 
             // Assign topic-counter for each forum.
             if (!empty($topic_counters)) {
@@ -1187,8 +1188,6 @@ class AsgarosForum {
                     $this->topic_counter_cache[$subforum->parent_forum] = ($this->topic_counter_cache[$subforum->parent_forum] + $this->topic_counter_cache[$subforum->id]);
                 }
             }
-
-			$this->topic_counter_cache = apply_filters('asgarosforum_overwrite_topic_counter_cache', $this->topic_counter_cache);
         }
 
         return $this->topic_counter_cache;
