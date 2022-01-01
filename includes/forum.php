@@ -1209,6 +1209,7 @@ class AsgarosForum {
         if ($this->post_counters_cache === false) {
             // Get all post-counters of each forum first.
             $post_counters = $this->db->get_results("SELECT t.parent_id AS forum_id, COUNT(*) AS post_counter FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
+			$post_counters = apply_filters('asgarosforum_overwrite_post_counter_cache', $post_counters);
 
             // Assign post-counter for each forum.
             if (!empty($post_counters)) {
