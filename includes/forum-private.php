@@ -13,6 +13,7 @@ class AsgarosForumPrivate {
 
 	public function initialize() {
         add_filter('asgarosforum_filter_forum_status_options', array($this, 'add_forum_status_option'), 10, 1);
+		add_filter('asgarosforum_overwrite_post_counter_cache', array($this, 'overwrite_post_counter_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_topic_counter_cache', array($this, 'overwrite_topic_counter_cache'), 10, 1);
     }
 
@@ -20,6 +21,34 @@ class AsgarosForumPrivate {
 		$forum_status_options['private'] = __('Private', 'asgaros-forum');
 
 		return $forum_status_options;
+	}
+
+	public function overwrite_post_counter_cache($post_counters) {
+		// Skip the overwriting-process if the current user is at least a moderator.
+		if ($this->asgarosforum->permissions->isModerator('current')) {
+			return $post_counters;
+		}
+
+		// Get counts for posts in own topics in all forums.
+		$query = "SELECT t.`parent_id` AS `forum_id`, COUNT(*) AS `post_counter` FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.`parent_id` = t.`id` AND t.`author_id` = %d AND t.`approved` = 1 GROUP BY t.`parent_id`;";
+		$query = $this->asgarosforum->db->prepare($query, get_current_user_id());
+		$results = $this->asgarosforum->db->get_results($query);
+
+		// Prepare array for further processing.
+		$own_topics_posts = array();
+
+		foreach ($results as $result) {
+			$own_topics_posts[$result->forum_id] = $result->post_counter;
+		}
+
+		// Overwrite post-counters for private forums.
+		foreach ($post_counters as $key => $post_counter) {
+			if ($this->is_private_forum($post_counter->forum_id)) {
+				$post_counters[$key]->post_counter = isset($own_topics_posts[$post_counter->forum_id]) ? $own_topics_posts[$post_counter->forum_id] : 0;
+			}
+		}
+
+		return $post_counters;
 	}
 
 	public function overwrite_topic_counter_cache($topic_counters) {
