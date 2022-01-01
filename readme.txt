@@ -91,9 +91,10 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
 * Added: asgarosforum_render_custom_forum_element action
-* Added: asgarosforum_render_custom_forum_element_decision filter
+* Added: asgarosforum_overwrite_forum_status filter
 * Added: asgarosforum_overwrite_post_counter_cache filter
 * Added: asgarosforum_overwrite_topic_counter_cache filter
+* Added: asgarosforum_render_custom_forum_element_decision filter
 * Fixed: Send notifications for forum-subscribers when there is a new blog-post-topic
 * Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
 * Changed: Move settings related to statistics to own section
