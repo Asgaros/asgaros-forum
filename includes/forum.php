@@ -1261,6 +1261,10 @@ class AsgarosForum {
         }
     }
 
+	public function get_subforums($forum_id, $output_type = OBJECT) {
+        return $this->db->get_results($this->db->prepare("SELECT * FROM {$this->tables->forums} WHERE parent_forum = %d ORDER BY sort ASC;", $forum_id), $output_type);
+    }
+
     public function getSpecificForums($ids) {
         $results = $this->db->get_results("SELECT id, parent_id AS category_id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
         return $results;
