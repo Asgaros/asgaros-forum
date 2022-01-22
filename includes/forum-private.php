@@ -98,18 +98,6 @@ class AsgarosForumPrivate {
 			return 'read';
 		}
 
-		return $forum_status;
-
-
-
-
-
-		// Try to find a post of an own topic inside a private (sub-)forum which has not been visited yet since last marking.
-
-		// normal logic for nornal topics for guests
-		
-
-
 		// Prepare list with IDs of already visited topics.
 		$visited_topics = "0";
 
