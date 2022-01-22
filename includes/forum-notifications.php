@@ -203,6 +203,7 @@ class AsgarosForumNotifications {
         // Get more data.
         $post_link = $this->asgarosforum->rewrite->get_post_link($post_id, $topic->id);
         $topic_name = esc_html(stripslashes($topic->name));
+        $forum_name = esc_html(stripslashes($forum->name));
         $author_name = $this->asgarosforum->getUsername($post->author_id);
 
         // Prepare subject.
@@ -218,6 +219,7 @@ class AsgarosForumNotifications {
             '###AUTHOR###'  => $author_name,
             '###LINK###'    => '<a href="'.$post_link.'">'.$post_link.'</a>',
             '###TITLE###'   => $topic_name,
+            '###FORUM###'   => $forum_name,
             '###CONTENT###' => $message_content
         );
 
@@ -307,6 +309,7 @@ class AsgarosForumNotifications {
         // Get more data.
         $topic_link = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
         $topic_name = esc_html(stripslashes($topic->name));
+        $forum_name = esc_html(stripslashes($forum->name));
         $author_name = $this->asgarosforum->getUsername($post->author_id);
 
         // Prepare subject.
@@ -322,6 +325,7 @@ class AsgarosForumNotifications {
             '###AUTHOR###'  => $author_name,
             '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
             '###TITLE###'   => $topic_name,
+            '###FORUM###'   => $forum_name,
             '###CONTENT###' => $message_content
         );
 
