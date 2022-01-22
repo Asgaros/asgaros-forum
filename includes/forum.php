@@ -281,7 +281,7 @@ class AsgarosForum {
         }
 
         if (empty($this->options['mail_template_new_post_message'])) {
-            $this->options['mail_template_new_post_message'] = __('Hello ###USERNAME###, <br><br>There is a new reply in a forum topic you are subscribed to on <a href="' . site_url() . '">' . $blogname . '</a>. <br><br>Forum and Topic:  ###FORUM###, ###TITLE### <br><br>Author:  ###AUTHOR###<br><br> Reply:  ###CONTENT### Visit the reply: <br>###LINK### <br><br>If you don\'t wish to receive notification emails, please unsubscribe in Forum page > Forum menu > Subscriptions.  There you can edit your global subscription option and unsubscribe to individual fora and topics. <br><br>Please don\'t reply to this email.', 'asgaros-forum');
+            $this->options['mail_template_new_post_message'] = __('Hello ###USERNAME###,<br><br>There is a new reply in a forum topic you are subscribed to on <a href="' . site_url() . '">' . get_bloginfo( 'name' ) . '</a>.<br><br>Forum and Topic: ###FORUM###, ###TITLE###<br><br>Author: ###AUTHOR###<br><br>Reply: ###CONTENT### Visit the reply:<br>###LINK###<br><br>If you don\'t wish to receive notification emails, please unsubscribe in Forum Page > Forum Menu > Subscriptions. There you can edit your global subscription option and unsubscribe from individual forums and topics.<br><br>Please don\'t reply to this email.', 'asgaros-forum');
         }
 
         if (empty($this->options['mail_template_new_topic_subject'])) {
@@ -289,7 +289,7 @@ class AsgarosForum {
         }
 
         if (empty($this->options['mail_template_new_topic_message'])) {
-            $this->options['mail_template_new_topic_message'] = __('Hello ###USERNAME###, <br><br>There is a new topic in a forum you are subscribed to on <a href="' . site_url() . '">' . $blogname . '</a>. <br><br>Forum and Topic:  ###FORUM###, ###TITLE### <br><br>Author:  ###AUTHOR### <br><br>Content Text: ###CONTENT### <br>Visit the topic: <br>###LINK### <br><br>You will not receive notice of any replies to this topic unless you (a) globally subscribe to all "New Topics & Posts", or (b) subscribe to this topic. <br><br>If you don\'t wish to receive these emails, please unsubscribe in Forum page > Forum menu > Subscriptions.  There you can edit your global subscription option and unsubscribe to individual fora and topics. <br><br>Please don\'t reply to this email.', 'asgaros-forum');
+            $this->options['mail_template_new_topic_message'] = __('Hello ###USERNAME###,<br><br>There is a new topic in a forum you are subscribed to on <a href="' . site_url() . '">' . get_bloginfo( 'name' ) . '</a>.<br><br>Forum and Topic: ###FORUM###, ###TITLE###<br><br>Author: ###AUTHOR###<br><br>Content: ###CONTENT### <br>Visit the topic:<br>###LINK###<br><br>You will not receive notifications of any replies to this topic unless you globally subscribe to all "New Topics & Posts", or subscribe to this topic.<br><br>If you don\'t wish to receive these notification emails, please unsubscribe in Forum Page > Forum Menu > Subscriptions. There you can edit your global subscription option and unsubscribe from individual forums and topics.<br><br>Please don\'t reply to this email.', 'asgaros-forum');
         }
 
         if (empty($this->options['mail_template_mentioned_subject'])) {

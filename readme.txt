@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 * Revised pagination
 * Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
+* Added: Forum name to notifications
 * Added: asgarosforum_render_custom_forum_element action
 * Added: asgarosforum_overwrite_forum_status filter
 * Added: asgarosforum_overwrite_post_counter_cache filter
@@ -100,6 +101,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
 * Fixed: HTML from message-templates got removed after saving them
 * Changed: Move settings related to statistics to its own section
+* Changed: Improve instructions in notifications-template
 * Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
 = 1.15.20 =
