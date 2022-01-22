@@ -1439,6 +1439,8 @@ class AsgarosForum {
                 }
             }
 
+			$lastpost_elements = apply_filters('asgarosforum_overwrite_lastpost_forum_cache', $lastpost_elements);
+
             // Now get all subforums.
             $subforums = $this->content->get_all_subforums();
 
