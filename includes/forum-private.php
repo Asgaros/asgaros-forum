@@ -12,12 +12,10 @@ class AsgarosForumPrivate {
     }
 
 	public function initialize() {
-		return;
-		
-        add_filter('asgarosforum_filter_forum_status_options', array($this, 'add_forum_status_option'), 10, 1);
+		add_filter('asgarosforum_filter_forum_status_options', array($this, 'add_forum_status_option'), 10, 1);
 		add_filter('asgarosforum_overwrite_post_counter_cache', array($this, 'overwrite_post_counter_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_topic_counter_cache', array($this, 'overwrite_topic_counter_cache'), 10, 1);
-		add_filter('asgarosforum_overwrite_forum_status', array($this, 'overwrite_forum_status'), 10, 3);
+		add_filter('asgarosforum_overwrite_forum_status', array($this, 'overwrite_forum_status'), 10, 2);
     }
 
 	public function add_forum_status_option($forum_status_options) {
@@ -82,10 +80,10 @@ class AsgarosForumPrivate {
 		return $topic_counters;
 	}
 
-	public function overwrite_forum_status($forum_status, $forum_id, $topic_counter) {
+	public function overwrite_forum_status($forum_status, $forum_id) {
 		// Skip the overwriting-process if the current user is at least a moderator.
 		if ($this->asgarosforum->permissions->isModerator('current')) {
-			//return $forum_status;
+			return $forum_status;
 		}
 
 		// Skip the overwriting-process if the current forum is not a private forum.
@@ -93,61 +91,54 @@ class AsgarosForumPrivate {
 			return $forum_status;
 		}
 
-		// Only do the checks when there are topics available.
-        if ($topic_counter) {
+		// Guests cannot access private-topics, so the forum is marked as read.
+		$user_id = get_current_user_id();
+
+		if ($user_id === 0) {
+			return 'read';
+		}
+
+		return $forum_status;
 
 
 
-            // Try to find a post of an own topic inside a private (sub-)forum which has not been visited yet since last marking.
-
-			// normal logic for nornal topics for guests
-            
 
 
-			// Prepare list with IDs of already visited topics.
-            $visited_topics = "0";
+		// Try to find a post of an own topic inside a private (sub-)forum which has not been visited yet since last marking.
 
-            if (!empty($this->excluded_items) && !is_string($this->excluded_items)) {
-                $visited_topics = implode(',', array_keys($this->excluded_items));
-            }
+		// normal logic for nornal topics for guests
+		
 
-            // Try to find a post in a topic which has not been visited yet since last marking.
-            $sql = "";
 
-            // We need to use slightly different queries here because we cant determine if a post was created by the visiting guest.
-            if ($this->user_id) {
-                $sql = "SELECT p.id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$forum_id} OR f.parent_forum = {$forum_id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id NOT IN({$visited_topics}) AND p.date > '{$this->get_last_visit()}' AND t.approved = 1 AND p.author_id <> {$this->user_id} LIMIT 1;";
-            } else {
-                $sql = "SELECT p.id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$forum_id} OR f.parent_forum = {$forum_id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id NOT IN({$visited_topics}) AND p.date > '{$this->get_last_visit()}' AND t.approved = 1 LIMIT 1;";
-            }
+		// Prepare list with IDs of already visited topics.
+		$visited_topics = "0";
 
-            $unread_check = $this->asgarosforum->db->get_results($sql);
+		if (!empty($this->asgarosforum->unread->excluded_items) && !is_string($this->asgarosforum->unread->excluded_items)) {
+			$visited_topics = implode(',', array_keys($this->asgarosforum->unread->excluded_items));
+		}
 
-            if (!empty($unread_check)) {
-                return 'unread';
-            }
+		// Try to find a post in an own topic which has not been visited yet since last marking.
+		$sql = "SELECT p.id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE f.id = {$forum_id} AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id NOT IN({$visited_topics}) AND p.date > '{$this->asgarosforum->unread->get_last_visit()}' AND t.author_id = {$user_id} AND p.author_id <> {$user_id} LIMIT 1;";
 
-            // Get last post of all topics which have been visited since last marking.
-            $sql = "";
+		$unread_check = $this->asgarosforum->db->get_results($sql);
 
-            // Again we need to use slightly different queries here because we cant determine if a post was created by the visiting guest.
-            if ($this->user_id) {
-                $sql = "SELECT MAX(p.id) AS max_id, p.parent_id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$forum_id} OR f.parent_forum = {$forum_id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id IN({$visited_topics}) AND t.approved = 1 AND p.author_id <> {$this->user_id} GROUP BY p.parent_id;";
-            } else {
-                $sql = "SELECT MAX(p.id) AS max_id, p.parent_id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE (f.id = {$forum_id} OR f.parent_forum = {$forum_id}) AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id IN({$visited_topics}) AND t.approved = 1 GROUP BY p.parent_id;";
-            }
+		if (!empty($unread_check)) {
+			return 'unread';
+		}
 
-            $unread_check = $this->asgarosforum->db->get_results($sql);
+		// Get last post of all topics which have been visited since last marking.
+		$sql = "SELECT MAX(p.id) AS max_id, p.parent_id FROM {$this->asgarosforum->tables->forums} AS f, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->posts} AS p WHERE f.id = {$forum_id} AND t.parent_id = f.id AND p.parent_id = t.id AND p.parent_id IN({$visited_topics}) AND t.author_id = {$user_id} AND p.author_id <> {$user_id} GROUP BY p.parent_id;";
 
-            if (!empty($unread_check)) {
-                // Check for every visited topic if it contains a newer post.
-                foreach ($unread_check as $key => $last_post) {
-                    if (isset($this->excluded_items[$last_post->parent_id]) && $last_post->max_id > $this->excluded_items[$last_post->parent_id]) {
-                        return 'unread';
-                    }
-                }
-            }
-        }
+		$unread_check = $this->asgarosforum->db->get_results($sql);
+
+		if (!empty($unread_check)) {
+			// Check for every visited topic if it contains a newer post.
+			foreach ($unread_check as $key => $last_post) {
+				if (isset($this->asgarosforum->unread->excluded_items[$last_post->parent_id]) && $last_post->max_id > $this->asgarosforum->unread->excluded_items[$last_post->parent_id]) {
+					return 'unread';
+				}
+			}
+		}
 
         return 'read';
 	}
