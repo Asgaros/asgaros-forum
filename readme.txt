@@ -103,6 +103,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: HTML from message-templates got removed after saving them
 * Changed: Move settings related to statistics to its own section
 * Changed: Improve instructions in notifications-template
+* Changed: Improved multiple strings for better clarifications
 * Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
 = 1.15.20 =

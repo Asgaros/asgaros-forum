@@ -964,7 +964,7 @@ class AsgarosForum {
             echo '<div class="topic-status '.esc_attr($unread_status).'"><i class="far fa-comments"></i></div>';
             echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
-                    echo '<span class="topic-icon fas fa-thumbtack" title="'.esc_attr__('This topic is sticked', 'asgaros-forum').'"></span>';
+                    echo '<span class="topic-icon fas fa-thumbtack" title="'.esc_attr__('This topic is pinned', 'asgaros-forum').'"></span>';
                 }
 
                 if ($this->is_topic_closed($topic_object->id)) {
@@ -1622,7 +1622,7 @@ class AsgarosForum {
                                 echo esc_html__('Sticky', 'asgaros-forum');
                             echo '</span>';
                             echo '<span class="action-panel-description">';
-                                esc_html_e('The topic will be sticked to the current forum.', 'asgaros-forum');
+                                esc_html_e('The topic will be pinned to the current forum.', 'asgaros-forum');
                             echo '</span>';
                         echo '</label>';
                         echo '<label class="action-panel-option">';
@@ -1632,7 +1632,7 @@ class AsgarosForum {
                                 echo esc_html__('Global Sticky', 'asgaros-forum');
                             echo '</span>';
                             echo '<span class="action-panel-description">';
-                                esc_html_e('The topic will be sticked to all forums.', 'asgaros-forum');
+                                esc_html_e('The topic will be pinned to all forums.', 'asgaros-forum');
                             echo '</span>';
                         echo '</label>';
                     echo '</div>';
