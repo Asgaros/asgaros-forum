@@ -624,11 +624,9 @@ class AsgarosForumContent {
         return $this->get_all_subforums_cache;
     }
 
-    public function get_topics($forum_id) {
+    public function get_topics($forum_id, $topic_offset, $number_of_topics) {
         // Build query-part for pagination.
-        $limit_end = $this->asgarosforum->options['topics_per_page'];
-        $limit_start = $this->asgarosforum->current_page * $limit_end;
-        $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $limit_start, $limit_end);
+        $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $topic_offset, $number_of_topics);
 
         // Build query-part for ordering.
         $order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) DESC";
