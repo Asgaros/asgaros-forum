@@ -601,12 +601,12 @@ class AsgarosForumContent {
         $order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) DESC";
         $order = apply_filters('asgarosforum_filter_get_threads_order', $order);
 
-        // Build additional sub-queries.
+        // Build query for calculating answers.
         $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
 
         // Build final query and get results.
         $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.parent_id = f.id AND f.parent_id IN ({$ids_categories}) AND t.approved = 1 AND ((t.sticky = 2) OR (t.parent_id = %d AND t.sticky = 1)) ORDER BY ".$order.";";
-        $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
+		$results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
 
         return $results;
@@ -632,11 +632,28 @@ class AsgarosForumContent {
         $order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) DESC";
         $order = apply_filters('asgarosforum_filter_get_threads_order', $order);
 
-        // Build additional sub-queries.
+        // Build query for calculating answers.
         $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
 
         // Build final query and get results.
         $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 0 AND t.approved = 1 ORDER BY {$order} {$limit};";
+
+		// Maybe overwrite final query if we have a private forum.
+		if ($this->asgarosforum->private->is_private_forum($forum_id)) {
+			// Overwrite final query if the current user is not at least a moderator.
+			if (!$this->asgarosforum->permissions->isModerator('current')) {
+				$user_id = get_current_user_id();
+
+				if ($user_id === 0) {
+					// Do not return any results if the current user is a guest.
+					$query = "SELECT * FROM {$this->asgarosforum->tables->topics} WHERE parent_id = %d AND id = -1;";
+				} else {
+					// Only return own topics for all other users.
+					$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 0 AND t.author_id = {$user_id} ORDER BY {$order} {$limit};";
+				}
+			}
+		}
+
         $results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
 
