@@ -606,6 +606,12 @@ class AsgarosForumContent {
 
         // Build final query and get results.
         $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.parent_id = f.id AND f.parent_id IN ({$ids_categories}) AND t.approved = 1 AND ((t.sticky = 2) OR (t.parent_id = %d AND t.sticky = 1)) ORDER BY ".$order.";";
+		
+		// Do not show any stickies in private forums.
+		if ($this->asgarosforum->private->is_private_forum($forum_id)) {
+			$query = "SELECT * FROM {$this->asgarosforum->tables->topics} WHERE parent_id = %d AND id = -1;";
+		}
+		
 		$results = $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $forum_id));
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
 
@@ -641,7 +647,9 @@ class AsgarosForumContent {
 		// Maybe overwrite final query if we have a private forum.
 		if ($this->asgarosforum->private->is_private_forum($forum_id)) {
 			// Overwrite final query if the current user is not at least a moderator.
-			if (!$this->asgarosforum->permissions->isModerator('current')) {
+			if ($this->asgarosforum->permissions->isModerator('current')) {
+				$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d ORDER BY {$order} {$limit};";
+			} else {
 				$user_id = get_current_user_id();
 
 				if ($user_id === 0) {
@@ -649,7 +657,7 @@ class AsgarosForumContent {
 					$query = "SELECT * FROM {$this->asgarosforum->tables->topics} WHERE parent_id = %d AND id = -1;";
 				} else {
 					// Only return own topics for all other users.
-					$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.sticky = 0 AND t.author_id = {$user_id} ORDER BY {$order} {$limit};";
+					$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.author_id = {$user_id} ORDER BY {$order} {$limit};";
 				}
 			}
 		}
