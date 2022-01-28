@@ -646,7 +646,7 @@ class AsgarosForumContent {
 
 		// Maybe overwrite final query if we have a private forum.
 		if ($this->asgarosforum->private->is_private_forum($forum_id)) {
-			// Overwrite final query if the current user is not at least a moderator.
+			// Show all topics (included sticky topics) to moderators as normal topics.
 			if ($this->asgarosforum->permissions->isModerator('current')) {
 				$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d ORDER BY {$order} {$limit};";
 			} else {
