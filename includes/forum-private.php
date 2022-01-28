@@ -84,7 +84,7 @@ class AsgarosForumPrivate {
 	public function overwrite_lastpost_forum_cache($last_posts) {
 		// Skip the overwriting-process if the current user is at least a moderator.
 		if ($this->asgarosforum->permissions->isModerator('current')) {
-			//return $last_posts;
+			return $last_posts;
 		}
 
 		// Get last post for own topics in all forums.
