@@ -15,6 +15,7 @@ class AsgarosForumPrivate {
 		add_filter('asgarosforum_filter_forum_status_options', array($this, 'add_forum_status_option'), 10, 1);
 		add_filter('asgarosforum_overwrite_post_counter_cache', array($this, 'overwrite_post_counter_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_topic_counter_cache', array($this, 'overwrite_topic_counter_cache'), 10, 1);
+		add_filter('asgarosforum_overwrite_lastpost_forum_cache', array($this, 'overwrite_lastpost_forum_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_forum_status', array($this, 'overwrite_forum_status'), 10, 2);
     }
 
@@ -78,6 +79,42 @@ class AsgarosForumPrivate {
 		}
 
 		return $topic_counters;
+	}
+
+	public function overwrite_lastpost_forum_cache($last_posts) {
+		// Skip the overwriting-process if the current user is at least a moderator.
+		if ($this->asgarosforum->permissions->isModerator('current')) {
+			return $last_posts;
+		}
+
+		// Get last post for own topics in all forums.
+		$query = "SELECT t.`parent_id` AS `forum_id`, MAX(p.`id`) AS `id` FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.`parent_id` = t.`id` AND t.`author_id` = %d AND t.`approved` = 1 GROUP BY t.`parent_id`;";
+		$query = $this->asgarosforum->db->prepare($query, get_current_user_id());
+		$results = $this->asgarosforum->db->get_results($query);
+
+		// Prepare array for further processing.
+		$own_topics = array();
+
+		foreach ($results as $result) {
+			$own_topics[$result->forum_id] = $result->id;
+		}
+
+		// Overwrite last post for private forums.
+		foreach ($last_posts as $forum_id => $last_post) {
+			if ($this->is_private_forum($forum_id)) {
+				if (get_current_user_id() === 0) {
+					// Remove array-element if current user is a guest.
+					unset($last_posts[$forum_id]);
+				} elseif (!isset($own_topics[$forum_id])) {
+					// Remove array-element if there is no last post in this forum for any topic of the current user.
+					unset($last_posts[$forum_id]);
+				} else {
+					$last_posts[$forum_id] = $own_topics[$forum_id];
+				}
+			}
+		}
+
+		return $last_posts;
 	}
 
 	public function overwrite_forum_status($forum_status, $forum_id) {

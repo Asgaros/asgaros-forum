@@ -97,11 +97,13 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_overwrite_topic_counter_cache filter
 * Added: asgarosforum_overwrite_lastpost_forum_cache filter
 * Added: asgarosforum_render_custom_forum_element_decision filter
+* Fixed: Usergroup icons could not get saved correctly
 * Fixed: Send notifications for forum-subscribers when there is a new blog-post-topic
 * Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
 * Fixed: HTML from message-templates got removed after saving them
 * Changed: Move settings related to statistics to its own section
 * Changed: Improve instructions in notifications-template
+* Changed: Improved multiple strings for better clarifications
 * Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
 = 1.15.20 =

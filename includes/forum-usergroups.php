@@ -464,7 +464,7 @@ class AsgarosForumUserGroups {
 		$usergroup_color = sanitize_hex_color($_POST['usergroup_color']);
         $usergroup_visibility = (isset($_POST['usergroup_visibility'])) ? 'hidden' : 'normal';
         $usergroup_auto_add = (isset($_POST['usergroup_auto_add'])) ? 'yes' : 'no';
-        $usergroup_icon = sanitize_key($_POST['usergroup_icon']);
+        $usergroup_icon = sanitize_text_field($_POST['usergroup_icon']);
 
         if ($usergroup_id === 'new') {
             return self::insertUserGroup($usergroup_category, $usergroup_name, $usergroup_color, $usergroup_visibility, $usergroup_auto_add, $usergroup_icon);
