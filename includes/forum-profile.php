@@ -435,7 +435,9 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 					_e( 'You can add or change your profile picture at <a href="https://en.gravatar.com/">Gravatar</a>.', 'asgarosforum' ) ?></p>
                     </li>
 
-                 	<li class="profile-row"><h4>Forum</h4></li>
+                 	<?php if ($this->asgarosforum->options['enable_mentioning'] || $this->asgarosforum->options['allow_signatures'] ) {
+                 		echo '<li class="profile-row"><h4>Forum</h4></li>'; 
+                 	} ?> 
                  	
                 	<!-- Mention notification? (wp_usermeta) -->
                 	<?php if ($this->asgarosforum->options['enable_mentioning']) { ?>
