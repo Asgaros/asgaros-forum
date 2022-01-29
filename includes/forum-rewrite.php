@@ -38,6 +38,7 @@ class AsgarosForumRewrite {
         $this->view_mapping['members']       = $this->asgarosforum->options['view_name_members'];
         $this->view_mapping['profile']       = $this->asgarosforum->options['view_name_profile'];
         $this->view_mapping['history']       = $this->asgarosforum->options['view_name_history'];
+        $this->view_mapping['edit']          = $this->asgarosforum->options['view_name_edit'];
         $this->view_mapping['unread']        = $this->asgarosforum->options['view_name_unread'];
         $this->view_mapping['unapproved']    = $this->asgarosforum->options['view_name_unapproved'];
         $this->view_mapping['reports']       = $this->asgarosforum->options['view_name_reports'];
@@ -364,6 +365,9 @@ class AsgarosForumRewrite {
             case 'history':
                 $type = 'profile';
                 break;
+            case 'edit':
+                $type = 'profile';
+                break;
         }
 
         // Check cache first.
@@ -414,6 +418,9 @@ class AsgarosForumRewrite {
             case 'history':
                 $type = 'profile';
                 break;
+            case 'edit':
+            	$type =  'profile';
+            	break;   
         }
 
         // Check cache first.

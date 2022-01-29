@@ -381,6 +381,10 @@ if (!defined('ABSPATH')) exit;
                                         <td><input class="regular-text" type="text" name="view_name_history" id="view_name_history" value="<?php echo esc_attr(stripslashes($this->asgarosforum->options['view_name_history'])); ?>"></td>
                                     </tr>
                                     <tr>
+                                        <th><label for="view_name_edit">editprofile:</label></th>
+                                        <td><input class="regular-text" type="text" name="view_name_edit" id="view_name_edit" value="<?php echo esc_attr(stripslashes($this->asgarosforum->options['view_name_edit'])); ?>"></td>
+                                    </tr>
+                                    <tr>
                                         <th><label for="view_name_unread">unread:</label></th>
                                         <td><input class="regular-text" type="text" name="view_name_unread" id="view_name_unread" value="<?php echo esc_attr(stripslashes($this->asgarosforum->options['view_name_unread'])); ?>"></td>
                                     </tr>
