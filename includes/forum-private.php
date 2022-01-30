@@ -8,7 +8,7 @@ class AsgarosForumPrivate {
     public function __construct($object) {
         $this->asgarosforum = $object;
 
-		add_action('init', array($this, 'initialize'));
+		//add_action('init', array($this, 'initialize'));
     }
 
 	public function initialize() {

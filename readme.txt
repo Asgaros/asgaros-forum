@@ -110,6 +110,7 @@ You can find a list of available hooks and filters on this site:
 * Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
 * Compatibility with WordPress 5.9
+* Compatibility with PHP 8.1
 = 1.15.20 =
 * Fixed: Broken links when URLs contain special characters
 * Fixed: Add missing escaping for output data

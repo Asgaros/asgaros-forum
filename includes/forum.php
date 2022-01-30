@@ -1158,10 +1158,13 @@ class AsgarosForum {
         }
     }
 
-    public $topic_counter_cache = false;
+    public $topic_counter_cache = null;
     public function get_topic_counts() {
         // If the cache is not set yet, create it.
-        if ($this->topic_counter_cache === false) {
+        if ($this->topic_counter_cache === null) {
+			// Initialize array.
+			$this->topic_counter_cache = array();
+
             // Get all topic-counters of each forum first.
             $topic_counters = $this->db->get_results("SELECT parent_id AS forum_id, COUNT(*) AS topic_counter FROM {$this->tables->topics} WHERE approved = 1 GROUP BY parent_id;");
 			$topic_counters = apply_filters('asgarosforum_overwrite_topic_counter_cache', $topic_counters);
@@ -1209,10 +1212,13 @@ class AsgarosForum {
         }
     }
 
-    public $post_counters_cache = false;
+    public $post_counters_cache = null;
     public function get_post_counters() {
         // If the cache is not set yet, create it.
-        if ($this->post_counters_cache === false) {
+        if ($this->post_counters_cache === null) {
+			// Initialize array.
+			$this->post_counters_cache = array();
+
             // Get all post-counters of each forum first.
             $post_counters = $this->db->get_results("SELECT t.parent_id AS forum_id, COUNT(*) AS post_counter FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 			$post_counters = apply_filters('asgarosforum_overwrite_post_counter_cache', $post_counters);
@@ -1432,9 +1438,12 @@ class AsgarosForum {
         return $string;
     }
 
-    private $lastpost_forum_cache = false;
+    private $lastpost_forum_cache = null;
     public function lastpost_forum_cache() {
-        if ($this->lastpost_forum_cache === false) {
+        if ($this->lastpost_forum_cache === null) {
+			// Initialize array.
+			$this->lastpost_forum_cache = array();
+			
             // Get all lastpost-elements of each forum first. Selection on topics is needed here because we only want posts of approved topics.
             $lastpost_elements = $this->db->get_results("SELECT t.parent_id AS forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 
