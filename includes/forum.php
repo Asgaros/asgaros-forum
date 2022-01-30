@@ -1443,7 +1443,7 @@ class AsgarosForum {
         if ($this->lastpost_forum_cache === null) {
 			// Initialize array.
 			$this->lastpost_forum_cache = array();
-			
+
             // Get all lastpost-elements of each forum first. Selection on topics is needed here because we only want posts of approved topics.
             $lastpost_elements = $this->db->get_results("SELECT t.parent_id AS forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 
