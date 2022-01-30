@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.8
+Tested up to: 5.9
 Requires PHP: 5.2
 Stable tag: 1.15.20
 License: GPLv2 or later
@@ -109,6 +109,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Improved multiple strings for better clarifications
 * Performance improvements and code optimizations
 * Updated: Font Awesome version 5.15.4
+* Compatibility with WordPress 5.9
 = 1.15.20 =
 * Fixed: Broken links when URLs contain special characters
 * Fixed: Add missing escaping for output data
