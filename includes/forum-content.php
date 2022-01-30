@@ -608,7 +608,7 @@ class AsgarosForumContent {
         $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.parent_id = f.id AND f.parent_id IN ({$ids_categories}) AND t.approved = 1 AND ((t.sticky = 2) OR (t.parent_id = %d AND t.sticky = 1)) ORDER BY ".$query_order.";";
 		$query = $this->asgarosforum->db->prepare($query, $forum_id);
 		$query = apply_filters('asgarosforum_overwrite_get_sticky_topics_query', $query, $forum_id, $query_answers, $query_order);
-		
+
 		$results = $this->asgarosforum->db->get_results($query);
         $results = apply_filters('asgarosforum_filter_get_threads', $results);
 

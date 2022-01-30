@@ -181,7 +181,7 @@ class AsgarosForum {
     public $approval       = null;
     public $spoilers       = null;
     public $polls          = null;
-	public $private		   = null;
+	public $private        = null;
 
     public function __construct() {
         // Initialize database.
@@ -247,7 +247,7 @@ class AsgarosForum {
         $this->approval         = new AsgarosForumApproval($this);
         $this->spoilers         = new AsgarosForumSpoilers($this);
         $this->polls            = new AsgarosForumPolls($this);
-		$this->private			= new AsgarosForumPrivate($this);
+		$this->private          = new AsgarosForumPrivate($this);
     }
 
     //======================================================================
@@ -899,49 +899,49 @@ class AsgarosForum {
 			$count_topics_i18n = number_format_i18n($count_topics);
 			$count_posts = $this->get_forum_post_counter($forum->id);
 			$count_posts_i18n = number_format_i18n($count_posts);
-	
+
 			// Get the read/unread status of a forum.
 			$unread_status = $this->unread->get_status_forum($forum->id, $count_topics);
-	
+
 			echo '<div class="content-element forum" id="forum-'.esc_attr($forum->id).'">';
 				$forum_icon = trim(esc_html(stripslashes($forum->icon)));
 				$forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
-	
+
 				echo '<div class="forum-status '.esc_attr($unread_status).'"><i class="'.esc_attr($forum_icon).'"></i></div>';
 				echo '<div class="forum-name">';
 					echo '<a class="forum-title" href="'.esc_url($this->get_link('forum', absint($forum->id))).'">'.esc_html(stripslashes($forum->name)).'</a>';
-	
+
 					// Show the description of the forum when it is not empty.
 					$forum_description = stripslashes($forum->description);
 					if (!empty($forum_description)) {
 						echo '<small class="forum-description">'.esc_html($forum_description).'</small>';
 					}
-	
+
 					// Show forum stats.
 					echo '<small class="forum-stats">';
 						echo sprintf(_n('%s Topic', '%s Topics', absint($count_topics), 'asgaros-forum'), esc_html($count_topics_i18n));
 						echo '&nbsp;&middot;&nbsp;';
 						echo sprintf(_n('%s Post', '%s Posts', absint($count_posts), 'asgaros-forum'), esc_html($count_posts_i18n));
 					echo '</small>';
-	
+
 					echo '<small class="forum-lastpost-small">';
 						$this->render_lastpost_in_forum($forum->id, true);
 					echo '</small>';
-	
+
 					// Show subforums.
 					if ($forum->count_subforums > 0) {
 						echo '<small class="forum-subforums">';
 						echo '<b>'.esc_html__('Subforums', 'asgaros-forum').':</b>&nbsp;';
-	
+
 						$subforums = $this->get_forums($forum->parent_id, $forum->id);
 						$subforumsFirstDone = false;
-	
+
 						foreach ($subforums as $subforum) {
 							echo ($subforumsFirstDone) ? '&nbsp;&middot;&nbsp;' : '';
 							echo '<a href="'.esc_url($this->get_link('forum', absint($subforum->id))).'">'.esc_html(stripslashes($subforum->name)).'</a>';
 							$subforumsFirstDone = true;
 						}
-	
+
 						echo '</small>';
 					}
 				echo '</div>';
