@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 5.9
 Requires PHP: 5.2
-Stable tag: 1.15.20
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.0.0 =
 * Revised pagination
 * Added: Option to hide names of online users in statistics
 * Added: Option to define units for maximum file-size of uploads
@@ -101,7 +102,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_render_custom_forum_element_decision filter
 * Fixed: SQL injection vulnerability in the reaction-functionality
 * Fixed: Usergroup icons could not get saved correctly
-* Fixed: Send notifications for forum-subscribers when there is a new blog-post-topic
+* Fixed: Send notifications to forum-subscribers when there is a new blog-post-topic
 * Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
 * Fixed: HTML from message-templates got removed after saving them
 * Changed: Move settings related to statistics to its own section
