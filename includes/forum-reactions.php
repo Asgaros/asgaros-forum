@@ -83,23 +83,25 @@ class AsgarosForumReactions {
 
         // Ensure user is logged-in.
         if (is_user_logged_in()) {
-            // Get post object.
-            $post_object = $this->asgarosforum->content->get_post($data['post_id']);
+			$post_id = absint($data['post_id']);
 
-            // Ensure that the current user is not the post-author.
-            if ($this->asgarosforum->get_post_author($post_object->id) != get_current_user_id()) {
+            // Get post object.
+            $post_object = $this->asgarosforum->content->get_post($post_id);
+
+            // Ensure that the post exists and that the current user is not the post-author.
+            if ($post_object && $this->asgarosforum->get_post_author($post_object->id) != get_current_user_id()) {
                 // Load reactions.
                 $this->load_reactions($post_object->parent_id);
 
                 // Change reaction.
-                $response['status'] = $this->reaction_change($data['post_id'], get_current_user_id(), $data['reaction'], $post_object->author_id);
+                $response['status'] = $this->reaction_change($post_id, get_current_user_id(), $data['reaction'], $post_object->author_id);
 
                 // Reload reactions.
                 $this->load_reactions($post_object->parent_id);
 
                 // Build updated reactions for posts.
-                $response['data']['reactions'] = $this->render_reactions($data['post_id'], $post_object->author_id);
-                $response['data']['summary'] = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($data['post_id']) : '';
+                $response['data']['reactions'] = $this->render_reactions($post_id, $post_object->author_id);
+                $response['data']['summary'] = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($post_id) : '';
             }
         }
 

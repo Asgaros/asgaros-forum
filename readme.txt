@@ -99,6 +99,7 @@ You can find a list of available hooks and filters on this site:
 * Added: asgarosforum_overwrite_get_topics_query filter
 * Added: asgarosforum_overwrite_get_sticky_topics_query filter
 * Added: asgarosforum_render_custom_forum_element_decision filter
+* Fixed: SQL injection vulnerability in the reaction-functionality
 * Fixed: Usergroup icons could not get saved correctly
 * Fixed: Send notifications for forum-subscribers when there is a new blog-post-topic
 * Fixed: Send notification to siteowner when there is a new unapproved blog-post-topic
