@@ -114,9 +114,9 @@
 
                                 // Available options for forum-status.
                                 $forum_status_options = array(
-									'normal'	=> __('Normal', 'asgaros-forum'),
-									'closed'	=> __('Closed', 'asgaros-forum'),
-									'approval'	=> __('Approval', 'asgaros-forum'),
+									'normal'    => __('Normal', 'asgaros-forum'),
+									'closed'    => __('Closed', 'asgaros-forum'),
+									'approval'  => __('Approval', 'asgaros-forum'),
                                 );
 
                                 $forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);

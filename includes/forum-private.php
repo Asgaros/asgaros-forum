@@ -8,7 +8,7 @@ class AsgarosForumPrivate {
     public function __construct($object) {
         $this->asgarosforum = $object;
 
-		add_action('init', array($this, 'initialize'));
+		//add_action('init', array($this, 'initialize'));
     }
 
 	public function initialize() {
@@ -17,7 +17,30 @@ class AsgarosForumPrivate {
 		add_filter('asgarosforum_overwrite_topic_counter_cache', array($this, 'overwrite_topic_counter_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_lastpost_forum_cache', array($this, 'overwrite_lastpost_forum_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_forum_status', array($this, 'overwrite_forum_status'), 10, 2);
+		add_filter('asgarosforum_overwrite_get_topics_query', array($this, 'overwrite_get_topics_query'), 10, 5);
+		add_filter('asgarosforum_overwrite_get_sticky_topics_query', array($this, 'overwrite_get_sticky_topics_query'), 10, 4);
     }
+
+	private $cache_is_private_forum = array();
+
+	public function is_private_forum($forum_id) {
+		if (!isset($this->cache_is_private_forum[$forum_id])) {
+			// Get private-status of all forums.
+			$query = "SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums};";
+			$results = $this->asgarosforum->db->get_results($query);
+
+			// Set private-status for all forums.
+			foreach ($results as $result) {
+				if ($result->forum_status === 'private') {
+					$this->cache_is_private_forum[$result->id] = true;
+				} else {
+					$this->cache_is_private_forum[$result->id] = false;
+				}
+			}
+		}
+
+		return $this->cache_is_private_forum[$forum_id];
+	}
 
 	public function add_forum_status_option($forum_status_options) {
 		$forum_status_options['private'] = __('Private', 'asgaros-forum');
@@ -168,24 +191,43 @@ class AsgarosForumPrivate {
         return 'read';
 	}
 
-	private $cache_is_private_forum = array();
+	public function overwrite_get_topics_query($query, $forum_id, $query_answers, $query_order, $query_limit) {
+		// Skip the overwriting-process if the current forum is not a private forum.
+		if (!$this->is_private_forum($forum_id)) {
+			return $query;
+		}
 
-	public function is_private_forum($forum_id) {
-		if (!isset($this->cache_is_private_forum[$forum_id])) {
-			// Get private-status of all forums.
-			$query = "SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums};";
-			$results = $this->asgarosforum->db->get_results($query);
+		// Show all topics (included sticky topics) to moderators as normal topics.
+		if ($this->asgarosforum->permissions->isModerator('current')) {
+			$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d ORDER BY {$query_order} {$query_limit};";
+			$query = $this->asgarosforum->db->prepare($query, $forum_id);
+		} else {
+			$user_id = get_current_user_id();
 
-			// Set private-status for all forums.
-			foreach ($results as $result) {
-				if ($result->forum_status === 'private') {
-					$this->cache_is_private_forum[$result->id] = true;
-				} else {
-					$this->cache_is_private_forum[$result->id] = false;
-				}
+			if ($user_id === 0) {
+				// Do not return any results if the current user is a guest.
+				$query = "SELECT * FROM {$this->asgarosforum->tables->topics} WHERE parent_id = %d AND id = -1;";
+				$query = $this->asgarosforum->db->prepare($query, $forum_id);
+			} else {
+				// Only return own topics for all other users.
+				$query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = %d AND t.author_id = {$user_id} ORDER BY {$query_order} {$query_limit};";
+				$query = $this->asgarosforum->db->prepare($query, $forum_id);
 			}
 		}
 
-		return $this->cache_is_private_forum[$forum_id];
+		return $query;
+	}
+
+	public function overwrite_get_sticky_topics_query($query, $forum_id, $query_answers, $query_order) {
+		// Skip the overwriting-process if the current forum is not a private forum.
+		if (!$this->is_private_forum($forum_id)) {
+			return $query;
+		}
+
+		// Do not show any stickies in private forums.
+		$query = "SELECT * FROM {$this->asgarosforum->tables->topics} WHERE parent_id = %d AND id = -1;";
+		$query = $this->asgarosforum->db->prepare($query, $forum_id);
+
+		return $query;
 	}
 }

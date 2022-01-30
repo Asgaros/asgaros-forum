@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    public $version = '1.15.20';
+    public $version = '2.0.0';
     public $executePlugin = false;
     public $db = null;
     public $tables = null;
@@ -182,7 +182,7 @@ class AsgarosForum {
     public $approval       = null;
     public $spoilers       = null;
     public $polls          = null;
-	public $private		   = null;
+	public $private        = null;
 
     public function __construct() {
         // Initialize database.
@@ -248,7 +248,7 @@ class AsgarosForum {
         $this->approval         = new AsgarosForumApproval($this);
         $this->spoilers         = new AsgarosForumSpoilers($this);
         $this->polls            = new AsgarosForumPolls($this);
-		$this->private			= new AsgarosForumPrivate($this);
+		$this->private          = new AsgarosForumPrivate($this);
     }
 
     //======================================================================
@@ -282,7 +282,10 @@ class AsgarosForum {
         }
 
         if (empty($this->options['mail_template_new_post_message'])) {
-            $this->options['mail_template_new_post_message'] = __('Hello ###USERNAME###,<br><br>There is a new reply in a forum topic you are subscribed to on <a href="' . site_url() . '">' . get_bloginfo( 'name' ) . '</a>.<br><br>Forum and Topic: ###FORUM###, ###TITLE###<br><br>Author: ###AUTHOR###<br><br>Reply: ###CONTENT### Visit the reply:<br>###LINK###<br><br>If you don\'t wish to receive notification emails, please unsubscribe in Forum Page > Forum Menu > Subscriptions. There you can edit your global subscription option and unsubscribe from individual forums and topics.<br><br>Please don\'t reply to this email.', 'asgaros-forum');
+			$site_link = '<a href="' . site_url() . '">' . get_bloginfo( 'name' ) . '</a>';
+			$message = sprintf(__('Hello ###USERNAME###,<br><br>There is a new reply in a forum topic you are subscribed to on %s.<br><br>Forum and Topic: ###FORUM###, ###TITLE###<br><br>Author: ###AUTHOR###<br><br>Reply: ###CONTENT### Visit the reply:<br>###LINK###<br><br>If you don\'t wish to receive notification emails, please unsubscribe in Forum Page > Forum Menu > Subscriptions. There you can edit your global subscription option and unsubscribe from individual forums and topics.<br><br>Please don\'t reply to this email.', 'asgaros-forum'), $site_link);
+
+            $this->options['mail_template_new_post_message'] = $message;
         }
 
         if (empty($this->options['mail_template_new_topic_subject'])) {
@@ -290,7 +293,10 @@ class AsgarosForum {
         }
 
         if (empty($this->options['mail_template_new_topic_message'])) {
-            $this->options['mail_template_new_topic_message'] = __('Hello ###USERNAME###,<br><br>There is a new topic in a forum you are subscribed to on <a href="' . site_url() . '">' . get_bloginfo( 'name' ) . '</a>.<br><br>Forum and Topic: ###FORUM###, ###TITLE###<br><br>Author: ###AUTHOR###<br><br>Content: ###CONTENT### <br>Visit the topic:<br>###LINK###<br><br>You will not receive notifications of any replies to this topic unless you globally subscribe to all "New Topics & Posts", or subscribe to this topic.<br><br>If you don\'t wish to receive these notification emails, please unsubscribe in Forum Page > Forum Menu > Subscriptions. There you can edit your global subscription option and unsubscribe from individual forums and topics.<br><br>Please don\'t reply to this email.', 'asgaros-forum');
+			$site_link = '<a href="' . site_url() . '">' . get_bloginfo( 'name' ) . '</a>';
+			$message = sprintf(__('Hello ###USERNAME###,<br><br>There is a new topic in a forum you are subscribed to on %s.<br><br>Forum and Topic: ###FORUM###, ###TITLE###<br><br>Author: ###AUTHOR###<br><br>Content: ###CONTENT### <br>Visit the topic:<br>###LINK###<br><br>You will not receive notifications of any replies to this topic unless you globally subscribe to all "New Topics & Posts", or subscribe to this topic.<br><br>If you don\'t wish to receive these notification emails, please unsubscribe in Forum Page > Forum Menu > Subscriptions. There you can edit your global subscription option and unsubscribe from individual forums and topics.<br><br>Please don\'t reply to this email.', 'asgaros-forum'), $site_link);
+
+			$this->options['mail_template_new_topic_message'] = $message;
         }
 
         if (empty($this->options['mail_template_mentioned_subject'])) {
@@ -906,49 +912,49 @@ class AsgarosForum {
 			$count_topics_i18n = number_format_i18n($count_topics);
 			$count_posts = $this->get_forum_post_counter($forum->id);
 			$count_posts_i18n = number_format_i18n($count_posts);
-	
+
 			// Get the read/unread status of a forum.
 			$unread_status = $this->unread->get_status_forum($forum->id, $count_topics);
-	
+
 			echo '<div class="content-element forum" id="forum-'.esc_attr($forum->id).'">';
 				$forum_icon = trim(esc_html(stripslashes($forum->icon)));
 				$forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
-	
+
 				echo '<div class="forum-status '.esc_attr($unread_status).'"><i class="'.esc_attr($forum_icon).'"></i></div>';
 				echo '<div class="forum-name">';
 					echo '<a class="forum-title" href="'.esc_url($this->get_link('forum', absint($forum->id))).'">'.esc_html(stripslashes($forum->name)).'</a>';
-	
+
 					// Show the description of the forum when it is not empty.
 					$forum_description = stripslashes($forum->description);
 					if (!empty($forum_description)) {
 						echo '<small class="forum-description">'.esc_html($forum_description).'</small>';
 					}
-	
+
 					// Show forum stats.
 					echo '<small class="forum-stats">';
 						echo sprintf(_n('%s Topic', '%s Topics', absint($count_topics), 'asgaros-forum'), esc_html($count_topics_i18n));
 						echo '&nbsp;&middot;&nbsp;';
 						echo sprintf(_n('%s Post', '%s Posts', absint($count_posts), 'asgaros-forum'), esc_html($count_posts_i18n));
 					echo '</small>';
-	
+
 					echo '<small class="forum-lastpost-small">';
 						$this->render_lastpost_in_forum($forum->id, true);
 					echo '</small>';
-	
+
 					// Show subforums.
 					if ($forum->count_subforums > 0) {
 						echo '<small class="forum-subforums">';
 						echo '<b>'.esc_html__('Subforums', 'asgaros-forum').':</b>&nbsp;';
-	
+
 						$subforums = $this->get_forums($forum->parent_id, $forum->id);
 						$subforumsFirstDone = false;
-	
+
 						foreach ($subforums as $subforum) {
 							echo ($subforumsFirstDone) ? '&nbsp;&middot;&nbsp;' : '';
 							echo '<a href="'.esc_url($this->get_link('forum', absint($subforum->id))).'">'.esc_html(stripslashes($subforum->name)).'</a>';
 							$subforumsFirstDone = true;
 						}
-	
+
 						echo '</small>';
 					}
 				echo '</div>';
@@ -1159,10 +1165,13 @@ class AsgarosForum {
         }
     }
 
-    public $topic_counter_cache = false;
+    public $topic_counter_cache = null;
     public function get_topic_counts() {
         // If the cache is not set yet, create it.
-        if ($this->topic_counter_cache === false) {
+        if ($this->topic_counter_cache === null) {
+			// Initialize array.
+			$this->topic_counter_cache = array();
+
             // Get all topic-counters of each forum first.
             $topic_counters = $this->db->get_results("SELECT parent_id AS forum_id, COUNT(*) AS topic_counter FROM {$this->tables->topics} WHERE approved = 1 GROUP BY parent_id;");
 			$topic_counters = apply_filters('asgarosforum_overwrite_topic_counter_cache', $topic_counters);
@@ -1210,10 +1219,13 @@ class AsgarosForum {
         }
     }
 
-    public $post_counters_cache = false;
+    public $post_counters_cache = null;
     public function get_post_counters() {
         // If the cache is not set yet, create it.
-        if ($this->post_counters_cache === false) {
+        if ($this->post_counters_cache === null) {
+			// Initialize array.
+			$this->post_counters_cache = array();
+
             // Get all post-counters of each forum first.
             $post_counters = $this->db->get_results("SELECT t.parent_id AS forum_id, COUNT(*) AS post_counter FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 			$post_counters = apply_filters('asgarosforum_overwrite_post_counter_cache', $post_counters);
@@ -1433,9 +1445,12 @@ class AsgarosForum {
         return $string;
     }
 
-    private $lastpost_forum_cache = false;
+    private $lastpost_forum_cache = null;
     public function lastpost_forum_cache() {
-        if ($this->lastpost_forum_cache === false) {
+        if ($this->lastpost_forum_cache === null) {
+			// Initialize array.
+			$this->lastpost_forum_cache = array();
+
             // Get all lastpost-elements of each forum first. Selection on topics is needed here because we only want posts of approved topics.
             $lastpost_elements = $this->db->get_results("SELECT t.parent_id AS forum_id, MAX(p.id) AS id FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.parent_id = t.id AND t.approved = 1 GROUP BY t.parent_id;");
 

@@ -100,7 +100,7 @@ class AsgarosForumActivity {
         echo $paginationRendering;
     }
 
-    public function load_activity_data($count_all = false) {
+    public function load_activity_data() {
         $ids_categories = $this->asgarosforum->content->get_categories_ids();
 
         if (empty($ids_categories)) {
@@ -113,14 +113,29 @@ class AsgarosForumActivity {
             $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
             $time_end = gmdate('Y-m-d H:i:s', $time_end);
 
-            if ($count_all) {
-                return $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}';");
-            } else {
-                $start = $this->asgarosforum->current_page * $this->asgarosforum->options['activities_per_page'];
-                $end = $this->asgarosforum->options['activities_per_page'];
+			// Build query-part for pagination.
+			$number_of_topics = $this->asgarosforum->options['activities_per_page'];
+			$topic_offset = $this->asgarosforum->current_page * $number_of_topics;
+			$query_limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $topic_offset, $number_of_topics);
 
-                return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT id FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC LIMIT {$start}, {$end};");
-            }
+			return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC {$query_limit};");
+        }
+    }
+
+	public function count_activity_data() {
+        $ids_categories = $this->asgarosforum->content->get_categories_ids();
+
+        if (empty($ids_categories)) {
+            return 0;
+        } else {
+            $ids_categories = implode(',', $ids_categories);
+
+            // Calculate activity end-time.
+            $time_current = time();
+            $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
+            $time_end = gmdate('Y-m-d H:i:s', $time_end);
+
+            return $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}';");
         }
     }
 
