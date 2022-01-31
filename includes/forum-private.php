@@ -230,8 +230,4 @@ class AsgarosForumPrivate {
 
 		return $query;
 	}
-
-	// TODO: Logic for activity filtering is not included here yet because the entire section probably requires refactoring ...
-
-	// TODO: Logic for unread filtering is not included here yet because the entire section probably requires refactoring ...
 }
