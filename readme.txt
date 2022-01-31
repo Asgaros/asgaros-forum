@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Improved compatibility with Yoast SEO
 = 2.0.0 =
 * Revised pagination
 * Added: Option to hide names of online users in statistics
