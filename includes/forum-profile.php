@@ -350,8 +350,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 			<?php _e('You must be logged in to edit your profile.', 'asgaros-forum'); ?>
 		</p>
     <?php else : ?>
-    
-<!-- <?php echo '<pre>' . var_dump( the_permalink() ) . '</pre><hr />'; ?> -->
 
 		<form method="post">
                 <ul id="profile-content" class="af-edit-profile">
