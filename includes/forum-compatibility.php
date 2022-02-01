@@ -58,7 +58,11 @@ class AsgarosForumCompatibility {
 
     public function comp_yoastseo_asgarosforum_title_separator($title_separator) {
         if ($this->asgarosforum->executePlugin) {
-            if (class_exists('\WPSEO_Utils')) {
+            if (function_exists('YoastSEO') && method_exists('\Yoast\WP\SEO\Helpers\Options_Helper', 'get_title_separator')) {
+				// YoastSEO >= 15.2
+				$title_separator = YoastSEO()->helpers->options->get_title_separator();
+			} elseif (class_exists('\WPSEO_Utils') && method_exists('WPSEO_Utils', 'get_title_separator')) {
+				// YoastSEO < 15.2
                 $title_separator = \WPSEO_Utils::get_title_separator();
             }
         }

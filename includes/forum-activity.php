@@ -101,12 +101,12 @@ class AsgarosForumActivity {
     }
 
     public function load_activity_data() {
-        $ids_categories = $this->asgarosforum->content->get_categories_ids();
+        $accessible_categories = $this->asgarosforum->content->get_categories_ids();
 
-        if (empty($ids_categories)) {
+        if (empty($accessible_categories)) {
             return false;
         } else {
-            $ids_categories = implode(',', $ids_categories);
+            $accessible_categories = implode(',', $accessible_categories);
 
             // Calculate activity end-time.
             $time_current = time();
@@ -118,24 +118,52 @@ class AsgarosForumActivity {
 			$topic_offset = $this->asgarosforum->current_page * $number_of_topics;
 			$query_limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $topic_offset, $number_of_topics);
 
-			return $this->asgarosforum->db->get_results("SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC {$query_limit};");
+			// Build final query and get results.
+			$query = '';
+
+			if ($this->asgarosforum->permissions->isModerator('current')) {
+				// Full data if the user is at least a moderator.
+				$query = "SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$accessible_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC {$query_limit};";
+			} elseif (get_current_user_id() === 0) {
+				// Hide topics of private forums from guests.
+				$query = "SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$accessible_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND f.forum_status <> 'private' AND t.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC {$query_limit};";
+			} else {
+				// For everyone else only include data from topics of private forums if they got created by the current user.
+				$query = "SELECT p.id, p.parent_id, p.date, p.author_id, t.name FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$accessible_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND (f.forum_status <> 'private' OR (f.forum_status = 'private' AND t.author_id = ".get_current_user_id().")) AND t.approved = 1 AND p.date > '{$time_end}' ORDER BY p.id DESC {$query_limit};";
+			}
+
+			return $this->asgarosforum->db->get_results($query);
         }
     }
 
 	public function count_activity_data() {
-        $ids_categories = $this->asgarosforum->content->get_categories_ids();
+        $accessible_categories = $this->asgarosforum->content->get_categories_ids();
 
-        if (empty($ids_categories)) {
+        if (empty($accessible_categories)) {
             return 0;
         } else {
-            $ids_categories = implode(',', $ids_categories);
+            $accessible_categories = implode(',', $accessible_categories);
 
             // Calculate activity end-time.
             $time_current = time();
             $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
             $time_end = gmdate('Y-m-d H:i:s', $time_end);
 
-            return $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$ids_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}';");
+			// Build final query and get results.
+			$query = '';
+
+			if ($this->asgarosforum->permissions->isModerator('current')) {
+				// Full data if the user is at least a moderator.
+				$query = "SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$accessible_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND t.approved = 1 AND p.date > '{$time_end}';";
+			} elseif (get_current_user_id() === 0) {
+				// Hide topics of private forums from guests.
+				$query = "SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$accessible_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND f.forum_status <> 'private' AND t.approved = 1 AND p.date > '{$time_end}';";
+			} else {
+				// For everyone else only include data from topics of private forums if they got created by the current user.
+				$query = "SELECT COUNT(*) FROM {$this->asgarosforum->tables->posts} p, {$this->asgarosforum->tables->topics} t, (SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums} WHERE parent_id IN ({$accessible_categories})) f WHERE p.parent_id = t.id AND t.parent_id = f.id AND (f.forum_status <> 'private' OR (f.forum_status = 'private' AND t.author_id = ".get_current_user_id().")) AND t.approved = 1 AND p.date > '{$time_end}';";
+			}
+
+            return $this->asgarosforum->db->get_var($query);
         }
     }
 

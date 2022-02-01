@@ -1708,19 +1708,21 @@ class AsgarosForum {
                         $menu .= __('Move', 'asgaros-forum');
                     $menu .= '</a>';
 
-                    if ($this->is_topic_sticky($this->current_topic)) {
-                        // Undo sticky button.
-                        $menu .= '<a class="button button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
-                            $menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
-                            $menu .= __('Unsticky', 'asgaros-forum');
-                        $menu .= '</a>';
-                    } else {
-                        // Sticky button.
-                        $menu .= '<a class="button button-normal topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
-                            $menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
-                            $menu .= __('Sticky', 'asgaros-forum');
-                        $menu .= '</a>';
-                    }
+					if ($this->permissions->can_pin_topic($current_user_id, $this->current_topic)) {
+						if ($this->is_topic_sticky($this->current_topic)) {
+							// Undo sticky button.
+							$menu .= '<a class="button button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
+								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
+								$menu .= __('Unsticky', 'asgaros-forum');
+							$menu .= '</a>';
+						} else {
+							// Sticky button.
+							$menu .= '<a class="button button-normal topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
+								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
+								$menu .= __('Sticky', 'asgaros-forum');
+							$menu .= '</a>';
+						}
+					}
                 }
 
                 if ($this->is_topic_closed($this->current_topic)) {
@@ -2070,9 +2072,10 @@ class AsgarosForum {
     }
 
     public function set_sticky($topic_id, $sticky_mode) {
-        if (!$this->permissions->isModerator('current')) {
-            return;
-        }
+		// Ensure that the user is able to pin topics.
+		if (!$this->permissions->can_pin_topic(get_current_user_id(), $this->current_topic)) {
+			return;
+		}
 
         // Ensure that only correct values can get set.
         switch ($sticky_mode) {
