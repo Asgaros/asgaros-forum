@@ -43,7 +43,7 @@ class AsgarosForumProfile {
         return $currentTitle;
     }
 
-    public function get_edit_title() {
+    public function get_editprofile_title() {
         $currentTitle = __('Edit Profile', 'asgaros-forum').$this->get_title_suffix();
 
         return $currentTitle;
@@ -124,7 +124,7 @@ class AsgarosForumProfile {
         echo '<div id="profile-navigation">';
             $profile_link = $this->getProfileLink($user_data);
             $history_link = $this->get_history_link($user_data);
-			$edit_link = $this->get_edit_link($user_data); 
+			$edit_link = $this->get_editprofile_link($user_data); 
 
             // Profile link.
             if ($this->asgarosforum->current_view === 'profile') {
@@ -143,7 +143,7 @@ class AsgarosForumProfile {
             // Add Edit Profile tab, if user_data belong to current user
             $current_user_id = get_current_user_id();
 			if ($user_data->ID == $current_user_id) {
-				if ($this->asgarosforum->current_view === 'edit') {
+				if ($this->asgarosforum->current_view === 'editprofile') {
 					echo '<a class="active" href="'.esc_url($edit_link).'">'.esc_html__('Edit Profile', 'asgaros-forum').'</a>';
 				} else {
 					echo '<a href="'.esc_url($edit_link).'">'.esc_html__('Edit Profile', 'asgaros-forum').'</a>';
@@ -152,6 +152,7 @@ class AsgarosForumProfile {
 
             do_action('asgarosforum_custom_profile_menu');
         echo '</div>';
+
     }
 
     public function count_post_history_by_user($user_id) {
@@ -334,6 +335,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 			wp_update_user( array( 'ID' => $user_id, 'user_pass' => esc_attr( $_POST['pass1'] ) ) );
 		if ( !$email_exists )
 			wp_update_user( array ('ID' => $user_id, 'user_email' => esc_attr( $_POST['email'] )));
+
 		echo '<script>location.reload();</script>';
   	} else {
   		echo '<p class="error">' . implode("<br />", $error) . '</p>';
@@ -348,7 +350,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 			<?php _e('You must be logged in to edit your profile.', 'asgaros-forum'); ?>
 		</p>
     <?php else : ?>
-		<form id="update_user" name="update_user" method="post" action="" />
+    
+<!-- <?php echo '<pre>' . var_dump( the_permalink() ) . '</pre><hr />'; ?> -->
+
+		<form method="post">
                 <ul id="profile-content" class="af-edit-profile">
                 
                 	<li class="profile-row"><h4>Name</h4></li>
@@ -482,7 +487,6 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 
                 	<!-- Update/submit button -->
                     <li class="profile-row form-submit">
-						<input type="hidden" name="title" value="update_user" />
 						<input type="hidden" name="description" value="update_user" />
 						<input type="hidden" name="action" value="update-user" />
 						<input type="submit" value="<?php _e('Update Profile', 'asgaros-forums'); ?>" class="submit button" name="submit" />    
@@ -500,11 +504,11 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
             <?php
 			endif; // !is_user_logged_in()
 
-            }
-        } else {
+            }   // end if hideProfileLink() ... else
+        } else {   // if $userData
             esc_html_e('This user does not exist.', 'asgaros-forum');
-        }
-    }
+        }   // end if $userData
+    }   // end showEditProfile()
 /*
  *
  *  Show a profile
@@ -687,14 +691,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
 
 	// Link for editing own profile
-    public function get_edit_link($userObject) {
+    public function get_editprofile_link($userObject) {
         if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
             return false;
         } else {
-            $editLink = $this->asgarosforum->get_link('edit', $userObject->ID);
-// Not sure if a new filter is needed here
-//          $editLink = apply_filters('asgarosforum_filter_edit_link', $editLink, $userObject);
-
+            $editLink = $this->asgarosforum->get_link('editprofile', $userObject->ID);
+// Not sure if a new filter is wanted here
+//          $editLink = apply_filters('asgarosforum_filter_editprofile_link', $editLink, $userObject);
             return $editLink;
         }
     }
