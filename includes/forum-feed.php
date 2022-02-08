@@ -14,8 +14,21 @@ class AsgarosForumFeed {
         add_action('asgarosforum_prepare_forum', array($this, 'render_feed'));
     }
 
+	public function is_feed_enabled() {
+		$is_feed_enabled = false;
+
+		// Return false, if the functionality is disabled.
+		if ($this->asgarosforum->options['enable_rss'] === true) {
+			$is_feed_enabled = true;
+		}
+
+		$is_feed_enabled = apply_filters('asgarosforum_overwrite_is_feed_enabled', $is_feed_enabled);
+
+		return $is_feed_enabled;
+	}
+
     public function add_feed_link() {
-        if ($this->asgarosforum->options['enable_rss']) {
+        if ($this->is_feed_enabled()) {
             switch ($this->asgarosforum->current_view) {
                 case 'topic':
                     $title = $this->asgarosforum->current_topic_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
@@ -32,7 +45,7 @@ class AsgarosForumFeed {
     }
 
     public function show_feed_navigation($current_view) {
-        if ($this->asgarosforum->options['enable_rss']) {
+        if ($this->is_feed_enabled()) {
             switch ($current_view) {
                 case 'topic':
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
@@ -49,7 +62,7 @@ class AsgarosForumFeed {
     }
 
     public function render_feed() {
-        if ($this->asgarosforum->options['enable_rss'] && !empty($_GET['showfeed'])) {
+        if ($this->is_feed_enabled() && !empty($_GET['showfeed'])) {
             // Abort feed creation when an error occured.
             if ($this->asgarosforum->error !== false) {
                 return;
