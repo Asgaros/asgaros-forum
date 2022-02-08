@@ -152,6 +152,7 @@ class AsgarosForumProfile {
             // Now load history-data based for an user based on the categories which are accessible for the current user.
             $accessible_categories = implode(',', $accessible_categories);
 
+			$query = "";
             $query_limit = "";
 
             if ($limit) {
@@ -161,9 +162,15 @@ class AsgarosForumProfile {
                 $query_limit = "LIMIT {$elements_start}, {$elements_maximum}";
             }
 
-            $query = "SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.author_id = %d AND p.parent_id = t.id AND EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$accessible_categories})) AND t.approved = 1 ORDER BY p.id DESC {$query_limit};";
-
-            return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $user_id));
+			if ($this->asgarosforum->permissions->isModerator('current') || $user_id === get_current_user_id()) {
+				// Full data if the user is at least a moderator or the current profile belongs to the current user.
+            	$query = "SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.parent_id = t.id AND p.author_id = %d AND EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$accessible_categories})) AND t.approved = 1 ORDER BY p.id DESC {$query_limit};";
+			} else {
+				// Hide topics of private forums from everyone else.
+            	$query = "SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND f.forum_status <> 'private' AND p.author_id = %d AND EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$accessible_categories})) AND t.approved = 1 ORDER BY p.id DESC {$query_limit};";
+			}
+			
+			return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $user_id));
         }
     }
 
