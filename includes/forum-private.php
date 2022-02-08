@@ -19,6 +19,7 @@ class AsgarosForumPrivate {
 		add_filter('asgarosforum_overwrite_forum_status', array($this, 'overwrite_forum_status'), 10, 2);
 		add_filter('asgarosforum_overwrite_get_topics_query', array($this, 'overwrite_get_topics_query'), 10, 5);
 		add_filter('asgarosforum_overwrite_get_sticky_topics_query', array($this, 'overwrite_get_sticky_topics_query'), 10, 4);
+		add_filter('asgarosforum_overwrite_is_feed_enabled', array($this, 'overwrite_is_feed_enabled'), 10, 1);
     }
 
 	private $cache_is_private_forum = array();
@@ -229,5 +230,16 @@ class AsgarosForumPrivate {
 		$query = $this->asgarosforum->db->prepare($query, $forum_id);
 
 		return $query;
+	}
+
+	public function overwrite_is_feed_enabled($is_feed_enabled) {
+		// Disable feeds in private forums.
+		$forum_id = $this->asgarosforum->current_forum;
+
+		if ($forum_id && $this->is_private_forum($forum_id)) {
+			$is_feed_enabled = false;
+		}
+
+		return $is_feed_enabled;
 	}
 }
