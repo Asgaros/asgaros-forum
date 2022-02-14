@@ -483,6 +483,10 @@ class AsgarosForum {
                     $this->current_view = 'overview';
                 }
             break;
+	        case apply_filters('asgarosforum_custom_page_'.$this->current_view.'_switch','custom'):
+	        	// Allow for custom view
+		        $this->current_view = apply_filters('asgarosforum_custom_page_'.$this->current_view.'_switch','custom');
+		        break;
             default:
                 $this->current_view = 'overview';
             break;
@@ -719,7 +723,7 @@ class AsgarosForum {
             }
         }
 
-        return $mainTitle;
+	    return apply_filters('asgarosforum_mainTitle', $mainTitle, $this);// Filter the main page title
     }
 
     // Holds all notices.
@@ -835,6 +839,10 @@ class AsgarosForum {
                     case 'reports':
                         $this->reports->show_reports();
                     break;
+	                case apply_filters('asgarosforum_custom_page_'.$this->current_view.'_switch','custom'):
+	                	// render the custom page
+		                do_action('asgarosforum_custom_page_'.$this->current_view.'_content',$this);
+	                break;
                     default:
                         $this->overview();
                     break;
