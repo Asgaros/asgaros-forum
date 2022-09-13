@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Added: Functionality to delete forum posts and topics when deleting users
 * Added: asgarosforum_overwrite_is_feed_enabled filter
 * Improved compatibility with Yoast SEO
 = 2.0.0 =

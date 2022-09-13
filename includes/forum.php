@@ -2299,13 +2299,22 @@ class AsgarosForum {
         echo '</legend></p>';
 
 	    echo '<ul style="list-style: none;">';
+
+		// No reassign
 		echo '<li><input type="radio" id="forum_reassign0" name="forum_reassign" value="no" checked="checked">';
         echo '<label for="forum_reassign0">'.esc_html__('Do not reassign forum posts.', 'asgaros-forum').'</label></li>';
 
+		// Reassign
 		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes">';
 		echo '<label for="forum_reassign1">'.esc_html__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
         wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids, 'show' => 'display_name_with_login'));
-		echo '</li></ul></fieldset>';
+		echo '</li>';
+
+		// Delete
+		echo '<li><input type="radio" id="forum_reassign2" name="forum_reassign" value="delete">';
+        echo '<label for="forum_reassign2">'.esc_html__('Delete all forum posts and topics owned by this user.', 'asgaros-forum').'</label></li>';
+		
+		echo '</ul></fieldset>';
     }
 
     public function deleted_user_reassign($id, $reassign) {
@@ -2314,18 +2323,41 @@ class AsgarosForum {
             return;
         }
 
-        if ($_POST['forum_reassign'] != 'yes') {
-            return;
+		if (!in_array($_POST['forum_reassign'], array('no', 'yes', 'delete'))) {
+			return;
+		}
+
+		// Reassign forum posts and topics.
+        if ($_POST['forum_reassign'] == 'yes') {
+            if (empty($_POST['forum_reassign_user'])) {
+				return;
+			}
+			
+			$author_id = sanitize_key($_POST['forum_reassign_user']);
+			$this->db->update($this->tables->posts, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
+			$this->db->update($this->tables->topics, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
         }
 
-        if (empty($_POST['forum_reassign_user'])) {
-            return;
-        }
+		// Delete forum posts and topics.
+		if ($_POST['forum_reassign'] == 'delete') {
+			// First delete topics ...
+			$topics = $this->db->get_col("SELECT id FROM {$this->tables->topics} WHERE author_id = {$id};");
 
-        // Reassign forum posts and topics.
-        $author_id = sanitize_key($_POST['forum_reassign_user']);
-        $this->db->update($this->tables->posts, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
-        $this->db->update($this->tables->topics, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
+			if (!empty($topics)) {
+				foreach ($topics as $topic) {
+					$this->delete_topic($topic, true, false);
+				}
+			}
+
+			// Then delete posts ...
+			$posts = $this->db->get_col("SELECT id FROM {$this->tables->posts} WHERE author_id = {$id};");
+
+			if (!empty($posts)) {
+				foreach ($posts as $post) {
+					$this->remove_post($post, false);
+				}
+			}
+        }
     }
 
     // Extract the first URL of an image from a given string.
