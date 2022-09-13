@@ -12,6 +12,7 @@ class AsgarosForumPrivate {
     }
 
 	public function initialize() {
+		/*
 		add_filter('asgarosforum_filter_forum_status_options', array($this, 'add_forum_status_option'), 10, 1);
 		add_filter('asgarosforum_overwrite_post_counter_cache', array($this, 'overwrite_post_counter_cache'), 10, 1);
 		add_filter('asgarosforum_overwrite_topic_counter_cache', array($this, 'overwrite_topic_counter_cache'), 10, 1);
@@ -20,6 +21,7 @@ class AsgarosForumPrivate {
 		add_filter('asgarosforum_overwrite_get_topics_query', array($this, 'overwrite_get_topics_query'), 10, 5);
 		add_filter('asgarosforum_overwrite_get_sticky_topics_query', array($this, 'overwrite_get_sticky_topics_query'), 10, 4);
 		add_filter('asgarosforum_overwrite_is_feed_enabled', array($this, 'overwrite_is_feed_enabled'), 10, 1);
+		*/
     }
 
 	private $cache_is_private_forum = array();
