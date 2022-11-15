@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.2
 Stable tag: 2.1.0
 License: GPLv2 or later
@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 = 2.2.0 =
 * Fixed: Multiple Cross-Site Request Forgery vulnerabilities
+* Compatibility with WordPress 6.1
 = 2.1.0 =
 * Added: Functionality to delete forum posts and topics when deleting users
 * Added: asgarosforum_overwrite_is_feed_enabled filter
