@@ -86,6 +86,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.2.0 =
+* Fixed: Multiple Cross-Site Request Forgery vulnerabilities
 = 2.1.0 =
 * Added: Functionality to delete forum posts and topics when deleting users
 * Added: asgarosforum_overwrite_is_feed_enabled filter
