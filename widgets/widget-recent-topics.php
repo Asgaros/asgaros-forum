@@ -139,12 +139,12 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
         }
 
         // Generate final output.
-        echo $args['before_widget'];
-        echo $args['before_title'];
-        echo $title;
-        echo $args['after_title'];
-        echo $output;
-        echo $args['after_widget'];
+        echo wp_kses_post($args['before_widget']);
+        echo wp_kses_post($args['before_title']);
+        echo esc_html($title);
+        echo wp_kses_post($args['after_title']);
+        echo wp_kses_post($output);
+        echo wp_kses_post($args['after_widget']);
     }
 
     public function form($instance) {

@@ -52,10 +52,10 @@ class AsgarosForumNotifications {
             $text = __('You are subscribed to <b>all</b> topics.', 'asgaros-forum');
         } else {
             if ($this->is_subscribed('topic', $topic_id)) {
-                $link = $this->asgarosforum->get_link('topic', $topic_id, array('unsubscribe_topic' => $topic_id));
+                $link = $this->asgarosforum->get_link('topic', $topic_id, array('unsubscribe_topic' => $topic_id, '_wpnonce' => wp_create_nonce('asgaros_forum_unsubscribe_topic')));
                 $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
             } else {
-                $link = $this->asgarosforum->get_link('topic', $topic_id, array('subscribe_topic' => $topic_id));
+                $link = $this->asgarosforum->get_link('topic', $topic_id, array('subscribe_topic' => $topic_id, '_wpnonce' => wp_create_nonce('asgaros_forum_subscribe_topic')));
                 $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
             }
         }
@@ -76,10 +76,10 @@ class AsgarosForumNotifications {
             $text = __('You are subscribed to <b>all</b> forums.', 'asgaros-forum');
         } else {
             if ($this->is_subscribed('forum', $element_id)) {
-                $link = $this->asgarosforum->get_link('forum', $element_id, array('unsubscribe_forum' => $element_id));
+                $link = $this->asgarosforum->get_link('forum', $element_id, array('unsubscribe_forum' => $element_id, '_wpnonce' => wp_create_nonce('asgaros_forum_unsubscribe_forum')));
                 $text = __('<b>Unsubscribe</b> from this forum.', 'asgaros-forum');
             } else {
-                $link = $this->asgarosforum->get_link('forum', $element_id, array('subscribe_forum' => $element_id));
+                $link = $this->asgarosforum->get_link('forum', $element_id, array('subscribe_forum' => $element_id, '_wpnonce' => wp_create_nonce('asgaros_forum_subscribe_forum')));
                 $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
             }
         }

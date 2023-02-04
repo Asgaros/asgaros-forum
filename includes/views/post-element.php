@@ -30,7 +30,7 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
         echo '<div class="post-author-block-name">';
             // Show username.
             $username = apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
-            echo '<span class="post-username">'.$username.'</span>';
+            echo '<span class="post-username">'.wp_kses_post($username).'</span>';
 
             // Mentioning name.
             if ($user_data != false) {
@@ -158,7 +158,7 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
             $signature = $this->get_signature($post->author_id);
 
             if ($signature !== false) {
-                echo '<div class="signature">'.$signature.'</div>';
+                echo '<div class="signature">'.wp_kses_post($signature).'</div>';
             }
         }
         ?>

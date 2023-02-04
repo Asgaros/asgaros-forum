@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asgaros Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-30 12:44+0000\n"
+"POT-Creation-Date: 2022-09-13 03:43+0000\n"
 "POT-Revision-Date: Thu Jul 27 2017 00:27:28 GMT+0200 (Mitteleuropäische "
 "Sommerzeit)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -174,7 +174,7 @@ msgstr ""
 msgid "A search form for Asgaros Forum."
 msgstr ""
 
-#: includes/forum.php:2524
+#: includes/forum.php:2559
 msgid "A topic is created in the selected forum when you save this document."
 msgstr ""
 
@@ -204,7 +204,7 @@ msgid "Activities per page:"
 msgstr ""
 
 #: admin/admin.php:83 includes/forum-activity.php:20
-#: includes/forum-activity.php:148 includes/forum.php:712
+#: includes/forum-activity.php:176 includes/forum.php:712
 msgid "Activity"
 msgstr ""
 
@@ -263,11 +263,11 @@ msgid "Add Usergroup"
 msgstr ""
 
 #: admin/admin.php:128 includes/forum-permissions.php:107
-#: includes/forum-permissions.php:632
+#: includes/forum-permissions.php:660
 msgid "Administrator"
 msgstr ""
 
-#: includes/forum-memberslist.php:136 includes/forum-permissions.php:592
+#: includes/forum-memberslist.php:136 includes/forum-permissions.php:620
 #: admin/views/options.php:606
 msgid "Administrators"
 msgstr ""
@@ -345,7 +345,7 @@ msgstr ""
 msgid "Approval needed for new topics from:"
 msgstr ""
 
-#: includes/forum.php:1743
+#: includes/forum.php:1745
 msgid "Approve"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Are you sure you want to delete this usergroup?"
 msgstr ""
 
-#: includes/forum.php:1095 includes/forum.php:1753 includes/forum.php:1778
+#: includes/forum.php:1095 includes/forum.php:1755 includes/forum.php:1780
 msgid "Are you sure you want to remove this?"
 msgstr ""
 
@@ -384,8 +384,8 @@ msgstr ""
 msgid "Asgaros Forum: Search"
 msgstr ""
 
-#: includes/forum-permissions.php:630 includes/forum-permissions.php:631
-#: includes/forum-permissions.php:632 includes/forum-permissions.php:633
+#: includes/forum-permissions.php:658 includes/forum-permissions.php:659
+#: includes/forum-permissions.php:660 includes/forum-permissions.php:661
 msgid "Assign forum role:"
 msgstr ""
 
@@ -417,13 +417,13 @@ msgstr ""
 msgid "Badges:"
 msgstr ""
 
-#: includes/forum-profile.php:354
+#: includes/forum-profile.php:361
 msgid "Ban User"
 msgstr ""
 
 #: admin/admin.php:129 includes/forum-memberslist.php:145
-#: includes/forum-permissions.php:111 includes/forum-permissions.php:598
-#: includes/forum-permissions.php:633 admin/views/options.php:610
+#: includes/forum-permissions.php:111 includes/forum-permissions.php:626
+#: includes/forum-permissions.php:661 admin/views/options.php:610
 #: includes/views/post-element.php:59
 msgid "Banned"
 msgstr ""
@@ -432,7 +432,7 @@ msgstr ""
 msgid "Below Topics"
 msgstr ""
 
-#: includes/forum-profile.php:285
+#: includes/forum-profile.php:292
 msgid "Biographical Info:"
 msgstr ""
 
@@ -472,7 +472,7 @@ msgstr ""
 msgid "Click to report post."
 msgstr ""
 
-#: includes/forum.php:1732
+#: includes/forum.php:1734
 msgid "Close"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Count topic views"
 msgstr ""
 
-#: includes/forum.php:2487
+#: includes/forum.php:2522
 msgid "Create Forum Topic"
 msgstr ""
 
@@ -552,11 +552,15 @@ msgid ""
 msgstr ""
 
 #: includes/forum-uploads.php:224 includes/forum.php:1097
-#: includes/forum.php:1755 includes/forum.php:1780
+#: includes/forum.php:1757 includes/forum.php:1782
 #: admin/tables/admin-usergroups-table.php:77 admin/views/structure.php:152
 #: admin/views/structure.php:166 admin/views/usergroups.php:63
 #: admin/views/usergroups.php:95
 msgid "Delete"
+msgstr ""
+
+#: includes/forum.php:2315
+msgid "Delete all forum posts and topics owned by this user."
 msgstr ""
 
 #: admin/views/structure.php:218 admin/views/usergroups.php:123
@@ -611,7 +615,7 @@ msgstr ""
 msgid "Description:"
 msgstr ""
 
-#: includes/forum.php:2300
+#: includes/forum.php:2305
 msgid "Do not reassign forum posts."
 msgstr ""
 
@@ -627,7 +631,7 @@ msgstr ""
 msgid "Dont create topics"
 msgstr ""
 
-#: includes/forum.php:1788 admin/tables/admin-usergroups-table.php:79
+#: includes/forum.php:1790 admin/tables/admin-usergroups-table.php:79
 msgid "Edit"
 msgstr ""
 
@@ -646,7 +650,7 @@ msgstr ""
 msgid "Edit Post"
 msgstr ""
 
-#: includes/forum-profile.php:341
+#: includes/forum-profile.php:348
 msgid "Edit Profile"
 msgstr ""
 
@@ -747,7 +751,7 @@ msgstr ""
 msgid "First Forum"
 msgstr ""
 
-#: includes/forum-profile.php:244
+#: includes/forum-profile.php:251
 msgid "First Name:"
 msgstr ""
 
@@ -764,7 +768,7 @@ msgid "Format for activity-timestamps:"
 msgstr ""
 
 #: admin/admin.php:170 admin/admin.php:232 admin/admin.php:232
-#: includes/forum.php:264 includes/forum.php:1904 includes/forum.php:2283
+#: includes/forum.php:264 includes/forum.php:1906 includes/forum.php:2286
 msgid "Forum"
 msgstr ""
 
@@ -788,7 +792,7 @@ msgstr ""
 msgid "Forum location:"
 msgstr ""
 
-#: includes/forum.php:1820
+#: includes/forum.php:1822
 msgid "Forum Navigation"
 msgstr ""
 
@@ -800,15 +804,15 @@ msgstr ""
 msgid "Forum Posts (Asgaros Forum)"
 msgstr ""
 
-#: admin/admin.php:122 includes/forum-permissions.php:562
+#: admin/admin.php:122 includes/forum-permissions.php:590
 msgid "Forum Role"
 msgstr ""
 
-#: includes/forum-permissions.php:677
+#: includes/forum-permissions.php:705
 msgid "Forum role assigned."
 msgstr ""
 
-#: includes/forum-permissions.php:575
+#: includes/forum-permissions.php:603
 msgid "Forum Roles:"
 msgstr ""
 
@@ -981,7 +985,7 @@ msgstr ""
 msgid "In this category are no forums yet!"
 msgstr ""
 
-#: includes/forum-profile.php:205
+#: includes/forum-profile.php:212
 msgid "In:"
 msgstr ""
 
@@ -1012,7 +1016,7 @@ msgstr ""
 msgid "Last post:"
 msgstr ""
 
-#: includes/forum-profile.php:271
+#: includes/forum-profile.php:278
 msgid "Last seen:"
 msgstr ""
 
@@ -1041,7 +1045,7 @@ msgstr ""
 msgid "Level 5"
 msgstr ""
 
-#: includes/forum-profile.php:330
+#: includes/forum-profile.php:337
 msgid "Likes Received"
 msgstr ""
 
@@ -1055,7 +1059,7 @@ msgstr ""
 msgid "Link color:"
 msgstr ""
 
-#: includes/forum.php:1870
+#: includes/forum.php:1872
 msgid "Link Text Missing"
 msgstr ""
 
@@ -1093,11 +1097,11 @@ msgstr ""
 msgid "Logged in users only"
 msgstr ""
 
-#: includes/forum.php:1935
+#: includes/forum.php:1937
 msgid "Login"
 msgstr ""
 
-#: includes/forum.php:1917
+#: includes/forum.php:1919
 msgid "Logout"
 msgstr ""
 
@@ -1121,11 +1125,11 @@ msgstr ""
 msgid "Megabyte"
 msgstr ""
 
-#: includes/forum-profile.php:314
+#: includes/forum-profile.php:321
 msgid "Member Activity"
 msgstr ""
 
-#: includes/forum-profile.php:278
+#: includes/forum-profile.php:285
 msgid "Member Since:"
 msgstr ""
 
@@ -1154,7 +1158,7 @@ msgstr ""
 msgid "Mentioning notification subject:"
 msgstr ""
 
-#: includes/forum.php:1816
+#: includes/forum.php:1818
 msgid "Menu"
 msgstr ""
 
@@ -1163,11 +1167,11 @@ msgid "Minimum amount of posts:"
 msgstr ""
 
 #: admin/admin.php:127 includes/forum-permissions.php:109
-#: includes/forum-permissions.php:631
+#: includes/forum-permissions.php:659
 msgid "Moderator"
 msgstr ""
 
-#: includes/forum-memberslist.php:126 includes/forum-permissions.php:586
+#: includes/forum-memberslist.php:126 includes/forum-permissions.php:614
 #: admin/views/options.php:602
 msgid "Moderators"
 msgstr ""
@@ -1281,7 +1285,7 @@ msgstr ""
 msgid "No description yet ..."
 msgstr ""
 
-#: includes/forum-profile.php:185
+#: includes/forum-profile.php:192
 msgid "No posts made by this user."
 msgstr ""
 
@@ -1354,7 +1358,7 @@ msgstr ""
 msgid "Online"
 msgstr ""
 
-#: includes/forum.php:1724
+#: includes/forum.php:1726
 msgid "Open"
 msgstr ""
 
@@ -1424,13 +1428,13 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: includes/forum-private.php:46
+#: includes/forum-private.php:49
 msgid "Private"
 msgstr ""
 
 #: includes/forum-profile.php:35 includes/forum-profile.php:61
 #: includes/forum-profile.php:124 includes/forum-profile.php:126
-#: includes/forum-profile.php:424
+#: includes/forum-profile.php:431
 msgid "Profile"
 msgstr ""
 
@@ -1438,7 +1442,7 @@ msgstr ""
 msgid "Profiles"
 msgstr ""
 
-#: includes/forum.php:1797
+#: includes/forum.php:1799
 msgid "Quote"
 msgstr ""
 
@@ -1458,7 +1462,7 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: includes/forum.php:2303
+#: includes/forum.php:2309
 msgid "Reassign all forum posts to:"
 msgstr ""
 
@@ -1498,7 +1502,7 @@ msgstr ""
 msgid "Recent forum topics"
 msgstr ""
 
-#: includes/forum.php:1953
+#: includes/forum.php:1955
 msgid "Register"
 msgstr ""
 
@@ -1514,7 +1518,7 @@ msgstr ""
 msgid "Remove Poll"
 msgstr ""
 
-#: includes/forum-profile.php:325
+#: includes/forum-profile.php:332
 msgid "Replies Created"
 msgstr ""
 
@@ -1559,7 +1563,7 @@ msgstr ""
 msgid "Roles:"
 msgstr ""
 
-#: includes/forum-feed.php:40 includes/forum-feed.php:45
+#: includes/forum-feed.php:53 includes/forum-feed.php:58
 msgid "RSS Feed"
 msgstr ""
 
@@ -1736,7 +1740,7 @@ msgstr ""
 msgid "Signature"
 msgstr ""
 
-#: includes/forum-profile.php:295
+#: includes/forum-profile.php:302
 msgid "Signature:"
 msgstr ""
 
@@ -1768,15 +1772,15 @@ msgstr ""
 msgid "Sorry, only logged-in users can see spoilers."
 msgstr ""
 
-#: includes/forum.php:2129
+#: includes/forum.php:2132
 msgid "Sorry, this forum does not exist."
 msgstr ""
 
-#: includes/forum.php:2127
+#: includes/forum.php:2130
 msgid "Sorry, this post does not exist."
 msgstr ""
 
-#: includes/forum.php:2128
+#: includes/forum.php:2131
 msgid "Sorry, this topic does not exist."
 msgstr ""
 
@@ -1800,7 +1804,7 @@ msgstr ""
 msgid "Status:"
 msgstr ""
 
-#: includes/forum.php:1637 includes/forum.php:1714
+#: includes/forum.php:1637 includes/forum.php:1715
 msgid "Sticky"
 msgstr ""
 
@@ -1923,7 +1927,7 @@ msgstr ""
 msgid "This topic is pinned"
 msgstr ""
 
-#: includes/forum-profile.php:221 includes/forum-profile.php:360
+#: includes/forum-profile.php:228 includes/forum-profile.php:367
 msgid "This user does not exist."
 msgstr ""
 
@@ -1977,7 +1981,7 @@ msgstr ""
 msgid "Topics"
 msgstr ""
 
-#: includes/forum-profile.php:320
+#: includes/forum-profile.php:327
 msgid "Topics Started"
 msgstr ""
 
@@ -1989,7 +1993,7 @@ msgstr ""
 msgid "Unapproved Topics"
 msgstr ""
 
-#: includes/forum-profile.php:350
+#: includes/forum-profile.php:357
 msgid "Unban User"
 msgstr ""
 
@@ -2001,7 +2005,7 @@ msgstr ""
 msgid "Unread Topics"
 msgstr ""
 
-#: includes/forum.php:1708
+#: includes/forum.php:1709
 msgid "Unsticky"
 msgstr ""
 
@@ -2038,7 +2042,7 @@ msgid "URLs & SEO"
 msgstr ""
 
 #: admin/admin.php:126 includes/forum-notifications.php:448
-#: includes/forum-permissions.php:113 includes/forum-permissions.php:630
+#: includes/forum-permissions.php:113 includes/forum-permissions.php:658
 msgid "User"
 msgstr ""
 
@@ -2055,12 +2059,12 @@ msgstr ""
 msgid "Usergroups updated."
 msgstr ""
 
-#: includes/forum-memberslist.php:170 includes/forum-profile.php:254
+#: includes/forum-memberslist.php:170 includes/forum-profile.php:261
 #: includes/forum-usergroups.php:492 includes/forum-usergroups.php:509
 msgid "Usergroups:"
 msgstr ""
 
-#: includes/forum-memberslist.php:117 includes/forum-permissions.php:580
+#: includes/forum-memberslist.php:117 includes/forum-permissions.php:608
 #: includes/forum-statistics.php:30 admin/views/options.php:598
 msgid "Users"
 msgstr ""
@@ -2101,15 +2105,15 @@ msgstr ""
 msgid "Vote"
 msgstr ""
 
-#: includes/forum-profile.php:263
+#: includes/forum-profile.php:270
 msgid "Website:"
 msgstr ""
 
-#: includes/forum.php:2294
+#: includes/forum.php:2297
 msgid "What should be done with forum posts owned by these users?"
 msgstr ""
 
-#: includes/forum.php:2292
+#: includes/forum.php:2295
 msgid "What should be done with forum posts owned by this user?"
 msgstr ""
 
@@ -2225,7 +2229,7 @@ msgstr ""
 msgid "You need to log in to create posts and topics."
 msgstr ""
 
-#: includes/forum-profile.php:176 includes/forum-profile.php:232
+#: includes/forum-profile.php:183 includes/forum-profile.php:239
 msgid "You need to login to have access to profiles."
 msgstr ""
 

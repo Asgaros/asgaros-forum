@@ -109,8 +109,13 @@ class AsgarosForumAdmin {
         echo '</div>';
     }
 
+	public function has_user_profile_fields($user_id) {
+		return false;
+	}
+
     public function user_profile_fields($user) {
-        $output = '';
+		echo '<h2>'.esc_html__('Forum', 'asgaros-forum').'</h2>';
+		echo '<table class="form-table">';
 
         // Show settings only when current user is admin ...
         if (current_user_can('manage_options')) {
@@ -118,60 +123,57 @@ class AsgarosForumAdmin {
             if (!user_can($user->ID, 'manage_options')) {
                 $role = $this->asgarosforum->permissions->get_forum_role($user->ID);
 
-                $output .= '<tr>';
-                $output .= '<th><label for="asgarosforum_role">'.__('Forum Role', 'asgaros-forum').'</label></th>';
-                $output .= '<td>';
+                echo '<tr>';
+                echo '<th><label for="asgarosforum_role">'.esc_html__('Forum Role', 'asgaros-forum').'</label></th>';
+                echo '<td>';
 
-                $output .= '<select name="asgarosforum_role" id="asgarosforum_role">';
-                $output .= '<option value="normal" '.selected($role, 'normal', false).'>'.__('User', 'asgaros-forum').'</option>';
-                $output .= '<option value="moderator" '.selected($role, 'moderator', false).'>'.__('Moderator', 'asgaros-forum').'</option>';
-                $output .= '<option value="administrator" '.selected($role, 'administrator', false).'>'.__('Administrator', 'asgaros-forum').'</option>';
-                $output .= '<option value="banned" '.selected($role, 'banned', false).'>'.__('Banned', 'asgaros-forum').'</option>';
-                $output .= '</select>';
+                echo '<select name="asgarosforum_role" id="asgarosforum_role">';
+                echo '<option value="normal" '.selected($role, 'normal', false).'>'.esc_html__('User', 'asgaros-forum').'</option>';
+                echo '<option value="moderator" '.selected($role, 'moderator', false).'>'.esc_html__('Moderator', 'asgaros-forum').'</option>';
+                echo '<option value="administrator" '.selected($role, 'administrator', false).'>'.esc_html__('Administrator', 'asgaros-forum').'</option>';
+                echo '<option value="banned" '.selected($role, 'banned', false).'>'.esc_html__('Banned', 'asgaros-forum').'</option>';
+                echo '</select>';
 
-                $output .= '</td>';
-                $output .= '</tr>';
+                echo '</td>';
+                echo '</tr>';
             }
 
-            $output .= AsgarosForumUserGroups::showUserProfileFields($user->ID);
+            echo AsgarosForumUserGroups::showUserProfileFields($user->ID);
         }
 
         if ($this->asgarosforum->options['enable_mentioning']) {
-            $output .= '<tr>';
-            $output .= '<th><label for="asgarosforum_mention_notify">'.__('Notify me when I get mentioned', 'asgaros-forum').'</label></th>';
-            $output .= '<td><input type="checkbox" name="asgarosforum_mention_notify" id="asgarosforum_mention_notify" value="1" '.checked($this->asgarosforum->mentioning->user_wants_notification($user->ID), true, false).'></td>';
-            $output .= '</tr>';
+            echo '<tr>';
+            echo '<th><label for="asgarosforum_mention_notify">'.esc_html__('Notify me when I get mentioned', 'asgaros-forum').'</label></th>';
+            echo '<td><input type="checkbox" name="asgarosforum_mention_notify" id="asgarosforum_mention_notify" value="1" '.checked($this->asgarosforum->mentioning->user_wants_notification($user->ID), true, false).'></td>';
+            echo '</tr>';
         }
 
         if ($this->asgarosforum->options['allow_signatures']) {
             // Ensure that the user has permission to use a signature.
             if ($this->asgarosforum->permissions->can_use_signature($user->ID)) {
-                $output .= '<tr>';
-                $output .= '<th><label for="asgarosforum_signature">'.__('Signature', 'asgaros-forum').'</label></th>';
-                $output .= '<td>';
-                $output .= '<textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">'.get_user_meta($user->ID, 'asgarosforum_signature', true).'</textarea>';
+                echo '<tr>';
+                echo '<th><label for="asgarosforum_signature">'.esc_html__('Signature', 'asgaros-forum').'</label></th>';
+                echo '<td>';
+                echo '<textarea rows="5" cols="30" name="asgarosforum_signature" id="asgarosforum_signature">';
+				echo wp_kses_post(get_user_meta($user->ID, 'asgarosforum_signature', true));
+				echo '</textarea>';
 
                 // Show info about allowed HTML tags.
                 if ($this->asgarosforum->options['signatures_html_allowed']) {
-                    $output .= '<p class="description">';
-                    $output .= __('You can use the following HTML tags in signatures:', 'asgaros-forum');
-                    $output .= '&nbsp;<code>'.esc_html($this->asgarosforum->options['signatures_html_tags']).'</code>';
-                    $output .= '</p>';
+                    echo '<p class="description">';
+                    echo esc_html__('You can use the following HTML tags in signatures:', 'asgaros-forum');
+                    echo '&nbsp;<code>'.esc_html($this->asgarosforum->options['signatures_html_tags']).'</code>';
+                    echo '</p>';
                 } else {
-                    $output .= '<p class="description">'.__('HTML tags are not allowed in signatures.', 'asgaros-forum').'</p>';
+                    echo '<p class="description">'.esc_html__('HTML tags are not allowed in signatures.', 'asgaros-forum').'</p>';
                 }
 
-                $output .= '</td>';
-                $output .= '</tr>';
+                echo '</td>';
+                echo '</tr>';
             }
         }
 
-        if (!empty($output)) {
-            echo '<h2>'.esc_html__('Forum', 'asgaros-forum').'</h2>';
-            echo '<table class="form-table">';
-            echo $output;
-            echo '</table>';
-        }
+        echo '</table>';
     }
 
     public function user_profile_fields_update($user_id) {

@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForum {
-    public $version = '2.0.0';
+    public $version = '2.2.1';
     public $executePlugin = false;
     public $db = null;
     public $tables = null;
@@ -521,40 +521,84 @@ class AsgarosForum {
 				}
 			}
         } else if (!empty($_POST['sticky_topic']) || isset($_GET['sticky_topic'])) {
-            $sticky_mode = 1;
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_sticky_topic')) {
+					$sticky_mode = 1;
 
-            if (!empty($_POST['sticky_topic'])) {
-                $sticky_mode = (int) $_POST['sticky_topic'];
-            }
+					if (!empty($_POST['sticky_topic'])) {
+						$sticky_mode = (int) $_POST['sticky_topic'];
+					}
 
-            $this->set_sticky($this->current_topic, $sticky_mode);
+					$this->set_sticky($this->current_topic, $sticky_mode);
+				}
+			}
         } else if (isset($_GET['unsticky_topic'])) {
-            $this->set_sticky($this->current_topic, 0);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_unsticky_topic')) {
+            		$this->set_sticky($this->current_topic, 0);
+				}
+			}
         } else if (isset($_GET['open_topic'])) {
-            $this->change_status('open');
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_open_topic')) {
+            		$this->change_status('open');
+				}
+			}
         } else if (isset($_GET['close_topic'])) {
-            $this->change_status('closed');
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_close_topic')) {
+            		$this->change_status('closed');
+				}
+			}
         } else if (isset($_GET['approve_topic'])) {
-            $this->approval->approve_topic($this->current_topic);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_approve_topic')) {
+            		$this->approval->approve_topic($this->current_topic);
+				}
+			}
         } else if (isset($_GET['subscribe_topic'])) {
-            $topic_id = (!empty($_GET['subscribe_topic'])) ? absint($_GET['subscribe_topic']) : 0;
-            $this->notifications->subscribe_topic($topic_id);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_subscribe_topic')) {
+            		$topic_id = (!empty($_GET['subscribe_topic'])) ? absint($_GET['subscribe_topic']) : 0;
+            		$this->notifications->subscribe_topic($topic_id);
+				}
+			}
         } else if (isset($_GET['unsubscribe_topic'])) {
-            $topic_id = (!empty($_GET['unsubscribe_topic'])) ? absint($_GET['unsubscribe_topic']) : 0;
-            $this->notifications->unsubscribe_topic($topic_id);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_unsubscribe_topic')) {
+            		$topic_id = (!empty($_GET['unsubscribe_topic'])) ? absint($_GET['unsubscribe_topic']) : 0;
+            		$this->notifications->unsubscribe_topic($topic_id);
+				}
+			}
         } else if (isset($_GET['subscribe_forum'])) {
-            $forum_id = (!empty($_GET['subscribe_forum'])) ? absint($_GET['subscribe_forum']) : 0;
-            $this->notifications->subscribe_forum($forum_id);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_subscribe_forum')) {
+					$forum_id = (!empty($_GET['subscribe_forum'])) ? absint($_GET['subscribe_forum']) : 0;
+					$this->notifications->subscribe_forum($forum_id);
+				}
+			}
         } else if (isset($_GET['unsubscribe_forum'])) {
-            $forum_id = (!empty($_GET['unsubscribe_forum'])) ? absint($_GET['unsubscribe_forum']) : 0;
-            $this->notifications->unsubscribe_forum($forum_id);
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_unsubscribe_forum')) {
+					$forum_id = (!empty($_GET['unsubscribe_forum'])) ? absint($_GET['unsubscribe_forum']) : 0;
+					$this->notifications->unsubscribe_forum($forum_id);
+				}
+			}
         } else if (isset($_GET['report_add'])) {
-            $post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
-            $reporter_id = get_current_user_id();
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_report_add')) {
+					$post_id = (!empty($_GET['post'])) ? absint($_GET['post']) : 0;
+					$reporter_id = get_current_user_id();
 
-            $this->reports->add_report($post_id, $reporter_id);
+					$this->reports->add_report($post_id, $reporter_id);
+				}
+			}
         } else if (!empty($_GET['report_delete']) && is_numeric($_GET['report_delete'])) {
-            $this->reports->remove_report(sanitize_key($_GET['report_delete']));
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_report_delete')) {
+					$this->reports->remove_report(sanitize_key($_GET['report_delete']));
+				}
+			}
         }
 
         do_action('asgarosforum_prepare_'.$this->current_view);
@@ -1635,7 +1679,7 @@ class AsgarosForum {
                 echo esc_html__('Select Sticky Mode:', 'asgaros-forum');
             echo '</div>';
             echo '<div class="content-container">';
-                echo '<form method="post" action="'.esc_url($this->get_link('topic', absint($this->current_topic))).'">';
+                echo '<form method="post" action="'.esc_url($this->get_link('topic', absint($this->current_topic), array('_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic')))).'">';
                     echo '<div class="action-panel">';
                         echo '<label class="action-panel-option">';
                             echo '<input type="radio" name="sticky_topic" value="1">';
@@ -1711,13 +1755,13 @@ class AsgarosForum {
 					if ($this->permissions->can_pin_topic($current_user_id, $this->current_topic)) {
 						if ($this->is_topic_sticky($this->current_topic)) {
 							// Undo sticky button.
-							$menu .= '<a class="button button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1)).'">';
+							$menu .= '<a class="button button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_unsticky_topic'))).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Unsticky', 'asgaros-forum');
 							$menu .= '</a>';
 						} else {
 							// Sticky button.
-							$menu .= '<a class="button button-normal topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1)).'">';
+							$menu .= '<a class="button button-normal topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic'))).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Sticky', 'asgaros-forum');
 							$menu .= '</a>';
@@ -1728,7 +1772,7 @@ class AsgarosForum {
                 if ($this->is_topic_closed($this->current_topic)) {
                     // Open button.
                     if ($this->permissions->can_open_topic($current_user_id, $this->current_topic)) {
-                        $menu .= '<a class="button button-normal" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1)).'">';
+                        $menu .= '<a class="button button-normal" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_open_topic'))).'">';
                             $menu .= '<span class="menu-icon fas fa-unlock"></span>';
                             $menu .= __('Open', 'asgaros-forum');
                         $menu .= '</a>';
@@ -1736,7 +1780,7 @@ class AsgarosForum {
                 } else {
                     // Close button.
                     if ($this->permissions->can_close_topic($current_user_id, $this->current_topic)) {
-                        $menu .= '<a class="button button-normal" href="'.$this->get_link('topic', $this->current_topic, array('close_topic' => 1)).'">';
+                        $menu .= '<a class="button button-normal" href="'.$this->get_link('topic', $this->current_topic, array('close_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_close_topic'))).'">';
                             $menu .= '<span class="menu-icon fas fa-lock"></span>';
                             $menu .= __('Close', 'asgaros-forum');
                         $menu .= '</a>';
@@ -1747,7 +1791,7 @@ class AsgarosForum {
             if ($this->permissions->isModerator('current') && $show_all_buttons) {
                 // Approve button.
                 if (!$this->approval->is_topic_approved($this->current_topic)) {
-                    $menu .= '<a class="button button-green" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1)).'">';
+                    $menu .= '<a class="button button-green" href="'.$this->get_link('topic', $this->current_topic, array('approve_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_approve_topic'))).'">';
                         $menu .= '<span class="menu-icon fas fa-check"></span>';
                         $menu .= __('Approve', 'asgaros-forum');
                     $menu .= '</a>';
@@ -2306,13 +2350,22 @@ class AsgarosForum {
         echo '</legend></p>';
 
 	    echo '<ul style="list-style: none;">';
+
+		// No reassign
 		echo '<li><input type="radio" id="forum_reassign0" name="forum_reassign" value="no" checked="checked">';
         echo '<label for="forum_reassign0">'.esc_html__('Do not reassign forum posts.', 'asgaros-forum').'</label></li>';
 
+		// Reassign
 		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes">';
 		echo '<label for="forum_reassign1">'.esc_html__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
         wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids, 'show' => 'display_name_with_login'));
-		echo '</li></ul></fieldset>';
+		echo '</li>';
+
+		// Delete
+		echo '<li><input type="radio" id="forum_reassign2" name="forum_reassign" value="delete">';
+        echo '<label for="forum_reassign2">'.esc_html__('Delete all forum posts and topics owned by this user.', 'asgaros-forum').'</label></li>';
+		
+		echo '</ul></fieldset>';
     }
 
     public function deleted_user_reassign($id, $reassign) {
@@ -2321,18 +2374,41 @@ class AsgarosForum {
             return;
         }
 
-        if ($_POST['forum_reassign'] != 'yes') {
-            return;
+		if (!in_array($_POST['forum_reassign'], array('no', 'yes', 'delete'))) {
+			return;
+		}
+
+		// Reassign forum posts and topics.
+        if ($_POST['forum_reassign'] == 'yes') {
+            if (empty($_POST['forum_reassign_user'])) {
+				return;
+			}
+			
+			$author_id = sanitize_key($_POST['forum_reassign_user']);
+			$this->db->update($this->tables->posts, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
+			$this->db->update($this->tables->topics, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
         }
 
-        if (empty($_POST['forum_reassign_user'])) {
-            return;
-        }
+		// Delete forum posts and topics.
+		if ($_POST['forum_reassign'] == 'delete') {
+			// First delete topics ...
+			$topics = $this->db->get_col("SELECT id FROM {$this->tables->topics} WHERE author_id = {$id};");
 
-        // Reassign forum posts and topics.
-        $author_id = sanitize_key($_POST['forum_reassign_user']);
-        $this->db->update($this->tables->posts, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
-        $this->db->update($this->tables->topics, array('author_id' => $author_id), array('author_id' => $id), array('%d'), array('%d'));
+			if (!empty($topics)) {
+				foreach ($topics as $topic) {
+					$this->delete_topic($topic, true, false);
+				}
+			}
+
+			// Then delete posts ...
+			$posts = $this->db->get_col("SELECT id FROM {$this->tables->posts} WHERE author_id = {$id};");
+
+			if (!empty($posts)) {
+				foreach ($posts as $post) {
+					$this->remove_post($post, false);
+				}
+			}
+        }
     }
 
     // Extract the first URL of an image from a given string.

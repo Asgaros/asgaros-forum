@@ -33,9 +33,15 @@ if (!defined('ABSPATH')) exit;
             <ul id="settings-tabs">
                 <?php
                 foreach ($this->option_views as $key => $value) {
-                    $active_css = ($selected_tab == $key) ? 'class="active-tab"' : '';
+                    // Set active-tab class based on state.
+                    echo '<li data-slug="'.esc_attr($key).'"';
 
-                    echo '<li data-slug="'.esc_attr($key).'" '.$active_css.'>';
+					if ($selected_tab == $key) {
+						echo ' class="active-tab"';
+					}
+
+					echo '>';
+
                     echo '<a href="#asgaros-panel">';
                     echo '<i class="'.esc_attr($value['icon']).'"></i>';
                     echo '<span>'.esc_html($value['label']).'</span>';

@@ -3,9 +3,9 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 5.9
+Tested up to: 6.1
 Requires PHP: 5.2
-Stable tag: 2.0.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,7 +30,6 @@ Asgaros Forum is the perfect WordPress plugin if you want to extend your website
 * Polls
 * Widgets
 * Statistics
-* Ads Management
 * Guest Postings
 * Approval, Banning & Reporting
 * Moderators, Permissions & Usergroups
@@ -87,7 +86,16 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.2.1 =
+* Fixed: Add missing escaping for output data
+= 2.2.0 =
+* Fixed: Multiple Cross-Site Request Forgery vulnerabilities
+* Compatibility with WordPress 6.1
+= 2.1.0 =
+* Added: Functionality to delete forum posts and topics when deleting users
+* Added: asgarosforum_overwrite_is_feed_enabled filter
 * Improved compatibility with Yoast SEO
+* Compatibility with WordPress 6.0
 = 2.0.0 =
 * Revised pagination
 * Added: Option to hide names of online users in statistics
