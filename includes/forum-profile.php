@@ -342,7 +342,11 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 			wp_update_user( array( 'ID' => $user_id, 'user_pass' => esc_attr( $_POST['pass1'] ) ) );
 		if ( !$email_exists )
 			wp_update_user( array ('ID' => $user_id, 'user_email' => esc_attr( $_POST['email'] )));
-
+	
+	# I had added following command to reload after saving edits
+	# because display name was not getting updated if not default.
+	# Reloading the page fixed that, but then later it just goes
+	# into a reload loop.  So deleting.  Display name issue not serious.	
 		echo '<script>location.reload();</script>';
   	} else {
   		echo '<p class="error">' . implode("<br />", $error) . '</p>';
