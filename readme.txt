@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 2.2.1 =
 * Fixed: Add missing escaping for output data
 = 2.2.0 =

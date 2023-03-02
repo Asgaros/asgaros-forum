@@ -195,8 +195,8 @@ class AsgarosForumProfile {
     public function show_history() {
         $user_id = $this->asgarosforum->current_element;
 
-        // If no user is selected in slug, use own user
-        if(!$user_id) {
+		// If no user ID is given but the current user is logged in, then use the ID of the current logged in user.
+        if (!$user_id && is_user_logged_in()) {
             $user_id = get_current_user_id();
         }
 
@@ -531,8 +531,14 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
  *
  */
     // Shows the profile of a user.
-    public function showProfile() {
+    public function show_profile() {
         $user_id = $this->asgarosforum->current_element;
+
+		// If no user ID is given but the current user is logged in, then use the ID of the current logged in user.
+        if (!$user_id && is_user_logged_in()) {
+            $user_id = get_current_user_id();
+        }
+
         $userData = $this->get_user_data($user_id);
 
         if ($userData) {
