@@ -859,7 +859,7 @@ class AsgarosForum {
                         $this->editor->showEditor($this->current_view);
                     break;
                     case 'profile':
-                        $this->profile->showProfile();
+                        $this->profile->show_profile();
                     break;
                     case 'history':
                         $this->profile->show_history();
