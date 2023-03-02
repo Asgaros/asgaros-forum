@@ -176,6 +176,12 @@ class AsgarosForumProfile {
 
     public function show_history() {
         $user_id = $this->asgarosforum->current_element;
+
+        // If no user is selected in slug, use own user
+        if(!$user_id) {
+            $user_id = get_current_user_id();
+        }
+
         $userData = $this->get_user_data($user_id);
 
         if ($userData) {
