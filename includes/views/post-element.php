@@ -105,7 +105,7 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
             // Automatically embed contents if enabled.
             if ($this->options['embed_content']) {
                 global $wp_embed;
-                $post_content = $wp_embed->autoembed($post_content);
+                $post_content = $wp_embed->run_shortcode($post_content);
             }
 
             // Wrap paragraphs.
