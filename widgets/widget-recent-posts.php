@@ -136,20 +136,22 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
     }
 
     public function widget_output($args, $instance, $output) {
-        // Generate title.
-        $title = __('Recent Forum Posts', 'asgaros-forum');
+		extract($args);
 
-        if ($instance['title']) {
-            $title = $instance['title'];
+        // Generate title.
+        $title = apply_filters('widget_title', $instance['title']);
+
+        if (empty($title)) {
+            $title = __('Recent Forum Posts', 'asgaros-forum');
         }
 
         // Generate final output.
-        echo wp_kses_post($args['before_widget']);
-        echo wp_kses_post($args['before_title']);
+        echo $before_widget;
+        echo $before_title;
         echo esc_html($title);
-        echo wp_kses_post($args['after_title']);
+        echo $after_title;
         echo wp_kses_post($output);
-        echo wp_kses_post($args['after_widget']);
+        echo $after_widget;
     }
 
     public function form($instance) {

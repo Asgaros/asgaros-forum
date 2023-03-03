@@ -86,7 +86,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
-* Fixed: Shortcodes for embedding were not working in some cases
+* Fixed: Embedding shortcodes broken under certain conditions
+* Fixed: Rare rendering issues for widgets
 * Performance improvements and code optimizations
 = 2.2.1 =
 * Fixed: Add missing escaping for output data
