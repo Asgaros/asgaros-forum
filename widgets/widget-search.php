@@ -10,18 +10,19 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 
 	public function widget($args, $instance) {
 		global $asgarosforum;
-		$title = null;
+		extract($args);
 
-		if ($instance['title']) {
-			$title = $instance['title'];
-		} else {
+		// Generate title.
+		$title = apply_filters('widget_title', $instance['title']);
+
+		if (empty($title)) {
 			$title = __('Forum Search', 'asgaros-forum');
 		}
 
-		echo wp_kses_post($args['before_widget']);
-		echo wp_kses_post($args['before_title']);
+		echo $before_widget;
+		echo $before_title;
 		echo esc_html($title);
-		echo wp_kses_post($args['after_title']);
+		echo $after_title;
 
 		$locationSetUp = AsgarosForumWidgets::setUpLocation();
 
@@ -45,7 +46,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 			esc_html_e('The forum has not been configured correctly.', 'asgaros-forum');
 		}
 
-		echo wp_kses_post($args['after_widget']);
+		echo $after_widget;
 	}
 
 	public function form($instance) {
