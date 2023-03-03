@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Embedding shortcodes broken under certain conditions
 * Fixed: Rare rendering issues for widgets
+* Fixed: Add missing escaping for output data
 * Performance improvements and code optimizations
 = 2.2.1 =
 * Fixed: Add missing escaping for output data

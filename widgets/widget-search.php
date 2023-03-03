@@ -29,7 +29,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 		if ($locationSetUp) {
 			// TODO: Rewrite code so can use input-generation of search class.
 			echo '<div class="asgarosforum-widget-search">';
-			echo '<form method="get" action="'.$asgarosforum->get_link('search').'">';
+			echo '<form method="get" action="'.esc_url($asgarosforum->get_link('search')).'">';
 
 			// Workaround for broken search in posts/pages when using plain permalink structure.
 			if (!$asgarosforum->rewrite->use_permalinks) {
