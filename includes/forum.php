@@ -504,7 +504,11 @@ class AsgarosForum {
         if (isset($_POST['submit_action'])) {
             $this->content->do_insertion();
         } else if (isset($_GET['move_topic'])) {
-            $this->moveTopic();
+			if (!empty($_REQUEST['_wpnonce'])) {
+				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_move_topic')) {
+            		$this->moveTopic();
+				}
+			}
         } else if (isset($_GET['delete_topic'])) {
 			if (!empty($_REQUEST['_wpnonce'])) {
 				if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_delete_topic')) {
@@ -1159,7 +1163,7 @@ class AsgarosForum {
 
     public function showMoveTopic() {
         if ($this->permissions->isModerator('current')) {
-            echo '<form method="post" action="'.esc_url($this->get_link('movetopic', absint($this->current_topic), array('move_topic' => 1))).'">';
+            echo '<form method="post" action="'.esc_url($this->get_link('movetopic', absint($this->current_topic), array('move_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_move_topic')))).'">';
             echo '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
             echo '<div class="content-container">';
             echo '<br><select name="newForumID">';
