@@ -1002,7 +1002,7 @@
 #af-wrapper .post-author .profile-link {
 	text-decoration: none;
 }
-#af-wrapper .post-author a,
+#af-wrapper .post-author a.profile-link,
 #af-wrapper .post-author span,
 #af-wrapper .post-author small {
 	display: block;
@@ -1020,22 +1020,35 @@
 		padding: 10px;
 		width: 100%;
 		min-height: 60px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 	}
-	#af-wrapper .post-author .post-author-block-name {
-		padding: 0px 45px;
+	#af-wrapper .post-author-block-avatar {
+		display: flex;
 	}
-	#af-wrapper .post-author .post-author-block-meta,
+	#af-wrapper .post-author-blocks {
+		flex: 1;
+	}
+	#af-wrapper .post-author .post-author-block-name .profile-link,
+	#af-wrapper .post-author .post-author-block-name .mention-nice-name {
+		display: inline;
+	}
+	#af-wrapper .post-author .post-author-block-name .mention-nice-name {
+		margin-left: 8px;
+	}
+	#af-wrapper .post-author .post-author-block-name,
 	#af-wrapper .post-author .post-author-block-group {
+		padding: 0px;
+	}
+	#af-wrapper .post-author .post-author-block-meta {
 		display: none;
 	}
 	#af-wrapper .post-author img.avatar {
-		position: absolute;
 		height: 40px;
 		width: 40px;
 		min-height: 40px; /* comp */
 		min-width: 40px; /* comp */
-		left: 10px;
-		top: 10px;
 	}
 }
 
