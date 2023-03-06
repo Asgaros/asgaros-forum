@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Broken automatic embedding
 = 2.3.0 =
 * Fixed: Embedding shortcodes broken under certain conditions
 * Fixed: Rare rendering issues for widgets

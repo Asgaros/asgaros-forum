@@ -102,10 +102,16 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
 
             echo '<div id="post-quote-container-'.esc_attr($post->id).'" style="display: none;"><blockquote><div class="quotetitle">'.esc_html__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
 
+            // Apply embedding-shortcodes if shortcodes are allowed.
+			if ($this->options['allow_shortcodes']) {
+				global $wp_embed;
+				$post_content = $wp_embed->run_shortcode($post_content);
+			}
+
             // Automatically embed contents if enabled.
             if ($this->options['embed_content']) {
                 global $wp_embed;
-                $post_content = $wp_embed->run_shortcode($post_content);
+				$post_content = $wp_embed->autoembed($post_content);
             }
 
             // Wrap paragraphs.
