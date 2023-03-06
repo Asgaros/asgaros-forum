@@ -1454,10 +1454,9 @@ class AsgarosForum {
     /**
      * Renders a username.
      */
-    public function renderUsername($userObject, $custom_name = false) {
-
+    public function renderUsername($user, $custom_name = false) {
         // Add filter to change username
-        $user_name = apply_filters('asgarosforum_filter_username', $userObject->display_name, $userObject);
+        $user_name = apply_filters('asgarosforum_filter_username', $user->display_name, $user);
 
         if ($custom_name) {
             $user_name = $custom_name;
@@ -1465,32 +1464,28 @@ class AsgarosForum {
 
         $renderedUserName = $user_name;
 
-        $profileLink = $this->profile->getProfileLink($userObject);
+		// Generate profile link.
+        $profile_link = $this->profile->getProfileLink($user);
 
-        if ($profileLink) {
-            $renderedUserName = '<a class="profile-link" href="'.$profileLink.'">'.$user_name.'</a>';
-        } else {
-            $renderedUserName = $user_name;
-        }
+		if ($profile_link === false) {
+			$profile_link = '#';
+		}
 
-        $renderedUserName = $this->highlight_username($userObject, $renderedUserName);
+		// Highlight the usernames of administrators/moderators.
+		$username_highlight = 'highlight-default';
 
-        return $renderedUserName;
-    }
-
-    /**
-     * Highlights a username when he is an administrator/moderator.
-     */
-    public function highlight_username($user, $string) {
-        if ($this->options['highlight_admin']) {
+		if ($this->options['highlight_admin']) {
             if ($this->permissions->isAdministrator($user->ID)) {
-                return '<span class="highlight-admin">'.$string.'</span>';
+                $username_highlight = "highlight-admin";
             } else if ($this->permissions->isModerator($user->ID)) {
-                return '<span class="highlight-moderator">'.$string.'</span>';
+                $username_highlight = "highlight-moderator";
             }
         }
 
-        return $string;
+		// Generate output.
+        $renderedUserName = '<a class="profile-link '.$username_highlight.'" href="'.$profile_link.'">'.$user_name.'</a>';
+
+        return $renderedUserName;
     }
 
     private $lastpost_forum_cache = null;
