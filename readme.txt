@@ -86,6 +86,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Minor design changes
+* Performance improvements and code optimizations
 = 2.3.1 =
 * Fixed: Broken automatic embedding
 = 2.3.0 =

@@ -40,13 +40,17 @@
 	clear: both;
 	padding: 0; /* comp */
 }
-#af-wrapper .highlight-admin,
-#af-wrapper .highlight-admin a {
-	color: #e00000 !important;
+#af-wrapper a.highlight-admin {
+	color: #e00000;
 }
-#af-wrapper .highlight-moderator,
-#af-wrapper .highlight-moderator a {
-	color: #099922 !important;
+#af-wrapper a.highlight-admin:hover {
+	color: #b00000;
+}
+#af-wrapper a.highlight-moderator {
+	color: #099922;
+}
+#af-wrapper a.highlight-moderator:hover {
+	color: #096922;
 }
 #af-wrapper .banned {
 	color: red;
@@ -990,13 +994,17 @@
 #af-wrapper .post-author .post-author-block-group {
 	padding-bottom: 8px;
 }
+#af-wrapper .post-author .post-author-block-name {
+	font-weight: bold;
+	line-height: 24px;
+}
+#af-wrapper .post-author .profile-link {
+	text-decoration: none;
+}
+#af-wrapper .post-author a,
 #af-wrapper .post-author span,
 #af-wrapper .post-author small {
 	display: block;
-}
-#af-wrapper .post-author .post-username {
-	font-weight: bold;
-	line-height: 24px;
 }
 #af-wrapper .post-author .topic-author {
 	color: #256db3;
@@ -1704,6 +1712,8 @@
 	color: #888;
 	font-size: 12px !important;
 	font-family: "Courier New";
+	font-weight: 400;
+	line-height: initial;
 }
 
 /* ACTIVITY */
