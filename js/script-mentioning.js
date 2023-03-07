@@ -33,7 +33,10 @@ window.asgaros = window.asgaros || {};
 					// If no matches available, do a request.
 					$.ajax({
 		                url: wpApiSettings.root+'asgaros-forum/v1/suggestions/mentioning/'+query,
-		                method: 'POST'
+		                method: 'POST',
+						data: {
+							topicid: wpApiSettings.topicid
+						}
 		            })
 					.done(function(response) {
 		                if (response.status === true) {

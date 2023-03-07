@@ -82,18 +82,52 @@ class AsgarosForumMentioning {
         // Build response-array.
         $response = array();
         $response['status'] = false;
+		$response['data'] = array();
+		$user_ids = array();
 
+		// Get moderators.
+		$moderators = $this->asgarosforum->permissions->get_users_by_role('moderator');
+
+		if (!empty($moderators)) {
+			foreach ($moderators as $user) {
+				$user_ids[$user->ID] = $user->ID;
+			}
+		}
+
+		// Get administrators.
+		$administrators = $this->asgarosforum->permissions->get_users_by_role('administrator');
+
+		if (!empty($administrators)) {
+			foreach ($administrators as $user) {
+				$user_ids[$user->ID] = $user->ID;
+			}
+		}
+
+		// Get participants of topic.
+		$topic_id = absint($data['topicid']);
+
+		if ($topic_id > 0) {
+			$participants = $this->asgarosforum->db->get_col($this->asgarosforum->db->prepare("SELECT author_id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = %d GROUP BY author_id;", $topic_id));
+
+			if (!empty($participants)) {
+				foreach ($participants as $user) {
+					$user_ids[$user] = $user;
+				}
+			}
+		}
+
+		// Query users.
         $user_query = array(
             'fields'          => array('ID', 'user_nicename', 'display_name'),
 			'populate_extras' => false,
 			'type'            => 'alphabetical',
 			'page'            => 1,
 			'per_page'        => 10,
-			'search_terms'    => $data['term']
+			'search_terms'    => $data['term'],
+			'include'         => $user_ids,
 		);
 
         $user_query = new AsgarosForumUserQuery($user_query);
-		$response['data'] = array();
 
 		foreach ($user_query->results as $user) {
 			$result          = new stdClass();

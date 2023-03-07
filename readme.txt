@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Show groups in mobile view
+* Changed: Only contain moderators, administrators and topic participants in suggestions for mentioning-functionality
 * Minor design changes
 * Performance improvements and code optimizations
 = 2.3.1 =
