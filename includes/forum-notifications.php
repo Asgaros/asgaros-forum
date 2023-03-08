@@ -644,7 +644,7 @@ class AsgarosForumNotifications {
             foreach ($data as $item) {
                 echo '<div class="content-element subscription">';
                     echo '<a href="'.esc_url($this->asgarosforum->get_link($type, absint($item->id))).'" title="'.esc_html($item->name).'">'.esc_html($item->name).'</a>';
-                    echo '<a class="unsubscribe-link" href="'.esc_url($this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.esc_attr($type) => $item->id))).'">'.esc_html__('Unsubscribe', 'asgaros-forum').'</a>';
+                    echo '<a class="unsubscribe-link" href="'.esc_url($this->asgarosforum->get_link('subscriptions', false, array('unsubscribe_'.esc_attr($type) => $item->id, '_wpnonce' => wp_create_nonce('asgaros_forum_unsubscribe_'.esc_attr($type))))).'">'.esc_html__('Unsubscribe', 'asgaros-forum').'</a>';
                 echo '</div>';
             }
         }

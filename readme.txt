@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: It was not possible to unsubscribe from topics/forums in the subscriptions area
 * Fixed: Show groups in mobile view
 * Changed: Only contain moderators, administrators and topic participants in suggestions for mentioning-functionality
 * Minor design changes
