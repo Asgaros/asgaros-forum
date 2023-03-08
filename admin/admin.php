@@ -213,7 +213,14 @@ class AsgarosForumAdmin {
 							$tags = explode(',', $tags);
 
 							foreach ($tags as $tag) {
-								$allowed_signature_html_tags[$tag] = array();
+								// Allow attributes for links if present.
+								if ($tag === 'a') {
+									$allowed_signature_html_tags[$tag] = array(
+										'href' => array(),
+									);
+								} else {
+									$allowed_signature_html_tags[$tag] = array();
+								}
 							}
 						}
 
