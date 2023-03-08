@@ -89,6 +89,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: It was not possible to unsubscribe from topics/forums in the subscriptions area
 * Fixed: Don't remove href-attribute if links are allowed in signatures
 * Fixed: Show groups in mobile view
+* Fixed: Display issues with some themes
 * Changed: Only contain moderators, administrators and topic participants in suggestions for mentioning-functionality
 * Minor design changes
 * Performance improvements and code optimizations
