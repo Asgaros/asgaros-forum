@@ -741,7 +741,7 @@ class AsgarosForum {
         $mainTitle = false;
 
         if ($setDefaultTitle) {
-            $mainTitle = $this->options['forum_title'];
+            $mainTitle = stripslashes($this->options['forum_title']);
         }
 
         if (!$this->error && $this->current_view) {
