@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 6.1
 Requires PHP: 5.2
-Stable tag: 2.3.1
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,15 +86,16 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.4.0 =
 * Fixed: It was not possible to unsubscribe from topics/forums in the subscriptions area
 * Fixed: Don't remove href-attribute if links are allowed in signatures
 * Fixed: Remove slashes from some outputs
 * Fixed: Show groups in mobile view
 * Fixed: Display issues with some themes
-* Changed: Only contain moderators, administrators and topic participants in suggestions for mentioning-functionality
+* Changed: Only show moderators, administrators and topic participants in suggestions for mentioning-functionality
 * Minor design changes
 * Performance improvements and code optimizations
-* Updated: Font Awesome version 6.3.0
+* Updated: Font Awesome to version 6.3.0
 = 2.3.1 =
 * Fixed: Broken automatic embedding
 = 2.3.0 =
