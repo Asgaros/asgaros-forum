@@ -94,6 +94,7 @@ You can find a list of available hooks and filters on this site:
 * Changed: Only contain moderators, administrators and topic participants in suggestions for mentioning-functionality
 * Minor design changes
 * Performance improvements and code optimizations
+* Updated: Font Awesome version 6.3.0
 = 2.3.1 =
 * Fixed: Broken automatic embedding
 = 2.3.0 =
