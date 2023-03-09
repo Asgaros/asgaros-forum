@@ -264,8 +264,8 @@ if (!defined('ABSPATH')) exit;
                         </tr>
                         <tr>
                             <th>
-                                <label for="load_fontawesome"><?php esc_html_e('Load Font Awesome v5 icon library', 'asgaros-forum'); ?></label>
-                                <span class="description"><?php esc_html_e('You can disable loading the built-in Font Awesome v5 icon library to reduce traffic if your theme or another plugin already loads this library.', 'asgaros-forum'); ?></span>
+                                <label for="load_fontawesome"><?php esc_html_e('Load Font Awesome v6 icon library', 'asgaros-forum'); ?></label>
+                                <span class="description"><?php esc_html_e('You can disable loading the built-in Font Awesome v6 icon library to reduce traffic if your theme or another plugin already loads this library.', 'asgaros-forum'); ?></span>
                             </th>
                             <td><input type="checkbox" name="load_fontawesome" id="load_fontawesome" <?php checked(!empty($this->asgarosforum->options['load_fontawesome'])); ?>></td>
                         </tr>
