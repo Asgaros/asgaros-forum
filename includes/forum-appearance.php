@@ -125,8 +125,10 @@ class AsgarosForumAppearance {
 			$description = $title;
 
 			// In forum overview use the forum description if available.
-			if ($this->asgarosforum->current_view === 'overview' && !empty($this->asgarosforum->options['forum_description'])) {
-				$description = $this->asgarosforum->options['forum_description'];
+			$forum_description = stripslashes($this->asgarosforum->options['forum_description']);
+
+			if ($this->asgarosforum->current_view === 'overview' && !empty($forum_description)) {
+				$description = $forum_description;
 			} else if ($this->asgarosforum->current_description && $this->asgarosforum->error === false) {
 				$description = $this->asgarosforum->current_description;
 			}
