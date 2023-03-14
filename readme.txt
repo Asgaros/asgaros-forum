@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Wrong stylings when using custom colors
 = 2.4.0 =
 * Fixed: It was not possible to unsubscribe from topics/forums in the subscriptions area
 * Fixed: Don't remove href-attribute if links are allowed in signatures

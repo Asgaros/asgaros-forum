@@ -41,16 +41,16 @@
 	padding: 0; /* comp */
 }
 #af-wrapper a.highlight-admin {
-	color: #e00000;
+	color: #e00000 !important; /* !important required to support custom colors */
 }
 #af-wrapper a.highlight-admin:hover {
-	color: #b00000;
+	color: #b00000 !important; /* !important required to support custom colors */
 }
 #af-wrapper a.highlight-moderator {
-	color: #099922;
+	color: #099922 !important; /* !important required to support custom colors */
 }
 #af-wrapper a.highlight-moderator:hover {
-	color: #096922;
+	color: #096922 !important; /* !important required to support custom colors */
 }
 #af-wrapper .banned {
 	color: red;
