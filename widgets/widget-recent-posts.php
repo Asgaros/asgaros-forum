@@ -60,7 +60,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $available_forums = implode(',', $available_forums);
 
         // Try to get forum posts.
-        $number = ($instance['number']) ? absint($instance['number']) : 3;
+        $number = empty($instance['number']) ? 3 : absint($instance['number']);
         $group = isset($instance['group_by_topic']) ? $instance['group_by_topic'] : true;
 
         $post_ids = array();
@@ -139,7 +139,8 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
 		extract($args);
 
         // Generate title.
-        $title = apply_filters('widget_title', $instance['title']);
+        $title = empty($instance['title']) ? '' : $instance['title'];
+		$title = apply_filters('widget_title', $title);
 
         if (empty($title)) {
             $title = __('Recent Forum Posts', 'asgaros-forum');

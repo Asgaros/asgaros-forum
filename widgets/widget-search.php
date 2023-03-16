@@ -13,7 +13,8 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 		extract($args);
 
 		// Generate title.
-		$title = apply_filters('widget_title', $instance['title']);
+		$title = empty($instance['title']) ? '' : $instance['title'];
+		$title = apply_filters('widget_title', $title);
 
 		if (empty($title)) {
 			$title = __('Forum Search', 'asgaros-forum');
