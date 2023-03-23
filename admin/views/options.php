@@ -415,6 +415,14 @@ if (!defined('ABSPATH')) exit;
                 <div class="tab" id="tab-permissions" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('permissions'); ?>
                     <table>
+						<tr>
+                            <th><label for="minimum_time_between_posts"><?php esc_html_e('Minimum time between new posts (in seconds):', 'asgaros-forum'); ?></label></th>
+                            <td>
+                                <input type="number" name="minimum_time_between_posts" id="minimum_time_between_posts" value="<?php echo absint($this->asgarosforum->options['minimum_time_between_posts']); ?>" size="3" min="0">
+                                <span class="description"><?php esc_html_e('(0 = No minimum time)', 'asgaros-forum'); ?></span>
+                            </td>
+                        </tr>
+
                         <tr>
                             <th><label for="enable_edit_post"><?php esc_html_e('Users can edit their own posts', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="enable_edit_post" id="enable_edit_post" class="show_hide_initiator" data-hide-class="edit-post-option" <?php checked(!empty($this->asgarosforum->options['enable_edit_post'])); ?>></td>

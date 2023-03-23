@@ -99,6 +99,7 @@ class AsgarosForum {
         'highlight_authors'                 => true,
         'show_author_posts_counter'         => true,
         'show_edit_date'                    => true,
+		'minimum_time_between_posts'		=> 30,
         'enable_edit_post'                  => true,
         'time_limit_edit_posts'             => 0,
         'enable_delete_post'                => false,

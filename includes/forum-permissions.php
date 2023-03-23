@@ -154,6 +154,34 @@ class AsgarosForumPermissions {
         return true;
     }
 
+	// This function checks if the minimum time between new posts for a user has passed.
+	public function check_minimum_time($user_id) {
+		// Allow when there is no minimum time between posts.
+        $time_limitation = $this->asgarosforum->options['minimum_time_between_posts'];
+
+        if ($time_limitation == 0) {
+            return true;
+        }
+
+		// Allow when the current user didn't post yet.
+		$date_creation = $this->asgarosforum->db->get_var("SELECT `date` FROM {$this->asgarosforum->tables->posts} WHERE author_id = {$user_id} ORDER BY id DESC LIMIT 1;");
+
+		if ($date_creation === null) {
+			return true;
+		}
+
+        // Otherwise decision based on current time.
+        $date_creation = strtotime($date_creation);
+        $date_now = strtotime($this->asgarosforum->current_time());
+        $date_difference = $date_now - $date_creation;
+
+        if ($time_limitation < $date_difference) {
+            return true;
+        } else {
+            return false;
+        }
+	}
+
     // This function checks if a user can edit a specified post. Optional parameters for author_id and post_date available to reduce database queries.
     public function can_edit_post($user_id, $post_id, $author_id = false, $post_date = false) {
         // Disallow when user is not logged-in.

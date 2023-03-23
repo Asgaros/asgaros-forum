@@ -150,6 +150,16 @@ class AsgarosForumContent {
             return false;
         }
 
+		// Cancel when the minimum time between posts didn't pass yet.
+		if ($this->get_action() === 'add_post' || $this->get_action() === 'add_topic') {
+			$user_id = $this->asgarosforum->permissions->currentUserID;
+
+            if (!$this->asgarosforum->permissions->check_minimum_time($user_id)) {
+                $this->asgarosforum->add_notice(__("The minimum time between new posts didn't pass yet.", "asgaros-forum"));
+                return false;
+            }
+		}
+
         // Do custom insert validation checks.
         $custom_check = apply_filters('asgarosforum_filter_insert_custom_validation', true);
         if (!$custom_check) {
