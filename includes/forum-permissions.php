@@ -196,7 +196,7 @@ class AsgarosForumPermissions {
         $date_now = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
-        if (($time_limitation * 60) < $date_difference) {
+        if ($time_limitation < $date_difference) {
             return false;
         } else {
             return true;
@@ -250,7 +250,7 @@ class AsgarosForumPermissions {
         $date_now = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
-        if (($time_limitation * 60) < $date_difference) {
+        if ($time_limitation < $date_difference) {
             return false;
         } else {
             return true;
@@ -299,7 +299,7 @@ class AsgarosForumPermissions {
         $date_now = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
-        if (($time_limitation * 60) < $date_difference) {
+        if ($time_limitation < $date_difference) {
             return false;
         } else {
             return true;

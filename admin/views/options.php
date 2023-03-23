@@ -425,10 +425,10 @@ if (!defined('ABSPATH')) exit;
                         ?>
 
                         <tr class="edit-post-option" <?php if (!$edit_post_option) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="time_limit_edit_posts"><?php esc_html_e('Time limitation for editing posts (in minutes):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="time_limit_edit_posts"><?php esc_html_e('Time limit for editing posts (in seconds):', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo absint($this->asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
-                                <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                                <span class="description"><?php esc_html_e('(0 = No limit)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
 
@@ -442,10 +442,10 @@ if (!defined('ABSPATH')) exit;
                         ?>
 
                         <tr class="delete-post-option" <?php if (!$delete_post_option) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="time_limit_delete_posts"><?php esc_html_e('Time limitation for deleting posts (in minutes):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="time_limit_delete_posts"><?php esc_html_e('Time limit for deleting posts (in seconds):', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="time_limit_delete_posts" id="time_limit_delete_posts" value="<?php echo absint($this->asgarosforum->options['time_limit_delete_posts']); ?>" size="3" min="0">
-                                <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                                <span class="description"><?php esc_html_e('(0 = No limit)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
 
@@ -459,10 +459,10 @@ if (!defined('ABSPATH')) exit;
                         ?>
 
                         <tr class="delete-topic-option" <?php if (!$delete_topic_option) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="time_limit_delete_topics"><?php esc_html_e('Time limitation for deleting topics (in minutes):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="time_limit_delete_topics"><?php esc_html_e('Time limit for deleting topics (in seconds):', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="time_limit_delete_topics" id="time_limit_delete_topics" value="<?php echo absint($this->asgarosforum->options['time_limit_delete_topics']); ?>" size="3" min="0">
-                                <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                                <span class="description"><?php esc_html_e('(0 = No limit)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
 
