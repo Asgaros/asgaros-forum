@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Added: Option to define minimum time between new posts
 * Changed: Time limit for editing/deleting topics/posts from minutes to seconds
+* Minor design changes
 = 2.4.1 =
 * Fixed: Multiple warnings in widgets
 * Fixed: Wrong stylings when using custom colors
