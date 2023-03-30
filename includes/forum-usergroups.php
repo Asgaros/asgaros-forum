@@ -635,7 +635,7 @@ class AsgarosForumUserGroups {
         if (self::$asgarosforum->memberslist->functionality_enabled() && !is_admin()) {
             $link = self::$asgarosforum->rewrite->get_link('members', false, array('filter_type' => 'group', 'filter_name' => $usergroup_object->term_id));
 
-            $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">';
+            $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; background-color: '.$color.'40 !important; font-weight: '.$font_weight.' !important;">';
 
             if ($icon) {
                 $output .= '<i class="'.$icon.'"></i>';

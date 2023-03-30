@@ -224,13 +224,13 @@ class AsgarosForumMembersList {
                         $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($element->ID, 'all', true);
 
                         if (!empty($usergroups)) {
-                            echo '<small>';
+                            echo '<span class="member-usergroups">';
 
                             foreach ($usergroups as $usergroup) {
                                 echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
                             }
 
-                            echo '</small>';
+                            echo '</span>';
                         }
                     echo '</div>';
 

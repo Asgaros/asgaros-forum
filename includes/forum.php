@@ -944,7 +944,6 @@ class AsgarosForum {
         $topicStarter = $this->get_topic_starter($this->current_topic);
         $post = $this->content->get_post($this->current_post);
 
-        echo '<div class="title-element"></div>';
         require 'views/post-element.php';
     }
 
@@ -1126,8 +1125,6 @@ class AsgarosForum {
                 echo $this->show_topic_menu();
                 echo '<div class="clear"></div>';
             echo '</div>';
-
-            echo '<div class="title-element"></div>';
 
             $counter = 0;
             $topicStarter = $this->get_topic_starter($this->current_topic);
@@ -1942,12 +1939,12 @@ class AsgarosForum {
             }
 
             // Check menu class.
-            $menu_class = (isset($menu_entry['menu_class'])) ? 'class="'.$menu_entry['menu_class'].'"' : '';
+            $menu_class = (isset($menu_entry['menu_class'])) ? $menu_entry['menu_class'] : 'default-link';
 
             // Check if link has to open in a new tab.
             $new_tab = ($menu_entry['menu_new_tab']) ? '_blank' : '_self';
 
-            echo '<a '.esc_attr($menu_class).' href="'.esc_url($menu_url).'" target="'.esc_attr($new_tab).'">'.esc_html($menu_entry['menu_link_text']).'</a>';
+            echo '<a class="'.esc_attr($menu_class).'" href="'.esc_url($menu_url).'" target="'.esc_attr($new_tab).'">'.esc_html($menu_entry['menu_link_text']).'</a>';
         }
     }
 
@@ -2360,7 +2357,7 @@ class AsgarosForum {
 		// Reassign
 		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes">';
 		echo '<label for="forum_reassign1">'.esc_html__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
-        wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids, 'show' => 'display_name_with_login'));
+        wp_dropdown_users(array('name' => 'forum_reassign_user', 'exclude' => $userids));
 		echo '</li>';
 
 		// Delete
@@ -2501,7 +2498,7 @@ class AsgarosForum {
 
     public function render_reputation_badges($number) {
         if ($this->options['enable_reputation']) {
-            echo '<small class="reputation-badges">';
+            echo '<span class="reputation-badges">';
 
             if ($number < $this->options['reputation_level_1_posts']) {
                 echo '<i class="far fa-star-half"></i>';
@@ -2518,7 +2515,7 @@ class AsgarosForum {
                 }
             }
 
-            echo '</small>';
+            echo '</span>';
         }
     }
 

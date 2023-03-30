@@ -104,7 +104,7 @@ class AsgarosForumProfile {
 
                 // Special styling for banned users.
                 if ($this->asgarosforum->permissions->get_forum_role($user_id) === 'banned') {
-                    echo '<span class="banned">'.esc_html($role).'</span>';
+                    echo '<span class="af-usergroup-tag banned"><i class="fa-solid fa-ban"></i>'.esc_html($role).'</span>';
                 } else {
 					echo esc_html($role);
 				}
@@ -366,11 +366,11 @@ class AsgarosForumProfile {
                         if ($this->asgarosforum->permissions->isBanned($userData->ID)) {
                             $url = $this->getProfileLink($userData, array('unban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'unban_user_'.$userData->ID);
-                            echo '<a class="banned" href="'.esc_url($nonce_url).'">'.esc_html__('Unban User', 'asgaros-forum').'</a>';
+                            echo '<a class="danger-link" href="'.esc_url($nonce_url).'">'.esc_html__('Unban User', 'asgaros-forum').'</a>';
                         } else {
                             $url = $this->getProfileLink($userData, array('ban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'ban_user_'.$userData->ID);
-                            echo '<a class="banned" href="'.esc_url($nonce_url).'">'.esc_html__('Ban User', 'asgaros-forum').'</a>';
+                            echo '<a class="danger-link" href="'.esc_url($nonce_url).'">'.esc_html__('Ban User', 'asgaros-forum').'</a>';
                         }
                     }
                 echo '</div>';
@@ -380,10 +380,10 @@ class AsgarosForumProfile {
         }
     }
 
-    public function renderProfileRow($cellTitle, $cellValue, $type = '') {
-        echo '<div class="profile-row">';
-            echo '<div>'.esc_html($cellTitle).'</div>';
-            echo '<div>';
+    public function renderProfileRow($cellTitle, $cellValue, $type = 'default') {
+        echo '<div class="profile-row profile-row-'.esc_attr($type).'">';
+            echo '<div class="profile-row-title">'.esc_html($cellTitle).'</div>';
+            echo '<div class="profile-row-value">';
 
             if (is_array($cellValue)) {
                 foreach ($cellValue as $value) {
