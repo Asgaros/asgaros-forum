@@ -237,21 +237,18 @@
 }
 #af-wrapper .button {
 	text-transform: none;
-	border-style: solid;
-	border-width: 0px 0px 1px 0px;
+	border: none;
 	box-shadow: none;
-	color: #fff !important;
 	text-shadow: none;
 	display: inline-block;
 	text-decoration: none;
 	font-size: 13px;
-	line-height: 29px;
-	height: 30px;
+	line-height: 32px;
 	margin: 0;
-	padding: 0 8px !important; /* comp */
+	padding: 0 12px; /* comp */
 	cursor: pointer;
 	-webkit-appearance: none;
-	border-radius: 0;
+	border-radius: 0.25rem;
 	white-space: nowrap;
 	box-sizing: border-box;
 	width: auto;
@@ -261,16 +258,32 @@
 	text-decoration: none;
 }
 #af-wrapper .button-normal {
+	color: #fff;
 	background: #256db3;
-	border-color: #054d98;
+}
+#af-wrapper .button-normal:hover {
+	background: #054d98;
 }
 #af-wrapper .button-red {
+	color: #fff;
 	background: #ff5454;
-	border-color: #f91111;
+}
+#af-wrapper .button-red:hover {
+	background: #f91111;
 }
 #af-wrapper .button-green {
+	color: #fff;
 	background: #49863a;
-	border-color: #24501e;
+}
+#af-wrapper .button-green:hover {
+	background: #24501e;
+}
+#af-wrapper .button-neutral {
+	color: #fff;
+	background: #256db3B0;
+}
+#af-wrapper .button-neutral:hover {
+	background: #054d98B0;
 }
 #af-wrapper input[type="radio"],
 #af-wrapper input[type="checkbox"] {
@@ -585,10 +598,10 @@
 /* MENU */
 #af-wrapper .forum-menu {
 	float: right;
-	margin-bottom: 8px;
-}
-#af-wrapper .forum-menu a {
-	margin: 2px 0px 2px 2px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
 }
 #af-wrapper .menu-icon {
 	padding-right: 6px;

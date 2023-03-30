@@ -1733,20 +1733,22 @@ class AsgarosForum {
 
         $current_user_id = get_current_user_id();
 
+		if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic) && $show_all_buttons) {
+            // Delete button.
+            $delete_topic_link = $this->get_link('topic', $this->current_topic, array('delete_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic')));
+
+            $menu .= '<a class="button button-red" href="'.$delete_topic_link.'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
+                $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
+                $menu .= __('Delete', 'asgaros-forum');
+            $menu .= '</a>';
+        }
+
         // Show reply and certain moderation-buttons only for approved topics.
         if ($this->approval->is_topic_approved($this->current_topic)) {
-            if ($this->permissions->can_create_post($current_user_id)) {
-                // Reply button.
-                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addpost', $this->current_topic).'">';
-                    $menu .= '<span class="menu-icon fas fa-comment-dots"></span>';
-                    $menu .= __('Reply', 'asgaros-forum');
-                $menu .= '</a>';
-            }
-
             if ($show_all_buttons) {
                 if ($this->permissions->isModerator('current')) {
                     // Move button.
-                    $menu .= '<a class="button button-normal" href="'.$this->get_link('movetopic', $this->current_topic).'">';
+                    $menu .= '<a class="button button-neutral" href="'.$this->get_link('movetopic', $this->current_topic).'">';
                         $menu .= '<span class="menu-icon fas fa-random"></span>';
                         $menu .= __('Move', 'asgaros-forum');
                     $menu .= '</a>';
@@ -1754,13 +1756,13 @@ class AsgarosForum {
 					if ($this->permissions->can_pin_topic($current_user_id, $this->current_topic)) {
 						if ($this->is_topic_sticky($this->current_topic)) {
 							// Undo sticky button.
-							$menu .= '<a class="button button-normal topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_unsticky_topic'))).'">';
+							$menu .= '<a class="button button-neutral topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array('unsticky_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_unsticky_topic'))).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Unsticky', 'asgaros-forum');
 							$menu .= '</a>';
 						} else {
 							// Sticky button.
-							$menu .= '<a class="button button-normal topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic'))).'">';
+							$menu .= '<a class="button button-neutral topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array('sticky_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic'))).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Sticky', 'asgaros-forum');
 							$menu .= '</a>';
@@ -1771,7 +1773,7 @@ class AsgarosForum {
                 if ($this->is_topic_closed($this->current_topic)) {
                     // Open button.
                     if ($this->permissions->can_open_topic($current_user_id, $this->current_topic)) {
-                        $menu .= '<a class="button button-normal" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_open_topic'))).'">';
+                        $menu .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array('open_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_open_topic'))).'">';
                             $menu .= '<span class="menu-icon fas fa-unlock"></span>';
                             $menu .= __('Open', 'asgaros-forum');
                         $menu .= '</a>';
@@ -1779,12 +1781,20 @@ class AsgarosForum {
                 } else {
                     // Close button.
                     if ($this->permissions->can_close_topic($current_user_id, $this->current_topic)) {
-                        $menu .= '<a class="button button-normal" href="'.$this->get_link('topic', $this->current_topic, array('close_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_close_topic'))).'">';
+                        $menu .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array('close_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_close_topic'))).'">';
                             $menu .= '<span class="menu-icon fas fa-lock"></span>';
                             $menu .= __('Close', 'asgaros-forum');
                         $menu .= '</a>';
                     }
                 }
+            }
+
+			if ($this->permissions->can_create_post($current_user_id)) {
+                // Reply button.
+                $menu .= '<a class="button button-normal forum-editor-button" href="'.$this->get_link('addpost', $this->current_topic).'">';
+                    $menu .= '<span class="menu-icon fas fa-comment-dots"></span>';
+                    $menu .= __('Reply', 'asgaros-forum');
+                $menu .= '</a>';
             }
         } else {
             if ($this->permissions->isModerator('current') && $show_all_buttons) {
@@ -1796,16 +1806,6 @@ class AsgarosForum {
                     $menu .= '</a>';
                 }
             }
-        }
-
-        if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic) && $show_all_buttons) {
-            // Delete button.
-            $delete_topic_link = $this->get_link('topic', $this->current_topic, array('delete_topic' => 1, '_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic')));
-
-            $menu .= '<a class="button button-red" href="'.$delete_topic_link.'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
-                $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
-                $menu .= __('Delete', 'asgaros-forum');
-            $menu .= '</a>';
         }
 
         $menu = (!empty($menu)) ? '<div class="forum-menu">'.$menu.'</div>' : $menu;

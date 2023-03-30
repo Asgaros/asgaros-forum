@@ -91,6 +91,7 @@ You can find a list of available hooks and filters on this site:
 * Added: Option to define minimum time between new posts
 * Changed: Time limit for editing/deleting topics/posts from minutes to seconds
 * Minor design changes
+* Improved mobile design
 * Performance improvements and code optimizations
 = 2.4.1 =
 * Fixed: Multiple warnings in widgets
@@ -517,7 +518,7 @@ You can find a list of available hooks and filters on this site:
 * Minor design changes
 * Minor design changes in the administration area
 * Improved application of custom appearance-settings
-* Mobile-theme improvements
+* Improved mobile design
 * Improve first-time installation-process
 * Screen-reader accessibility improvements
 * Performance improvements and code optimizations

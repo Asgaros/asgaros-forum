@@ -286,6 +286,10 @@ class AsgarosForumAppearance {
 				$custom_css .= 'background-color: '.$this->options['custom_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
 
+			$custom_css .= '#af-wrapper .button-neutral {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_color'].'B0 !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
 			$custom_css .= '#af-wrapper .post-author .topic-author {'.PHP_EOL;
 				$custom_css .= 'background-color: '.$this->options['custom_color'].'40 !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
@@ -298,15 +302,19 @@ class AsgarosForumAppearance {
 		}
 
 		if ($this->options['custom_accent_color'] != $this->options_default['custom_accent_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_accent_color'])) {
-			$custom_css .= '#af-wrapper .button-normal,'.PHP_EOL;
 			$custom_css .= '#af-wrapper .title-element,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-navigation a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #forum-navigation-mobile a {'.PHP_EOL;
 				$custom_css .= 'border-color: '.$this->options['custom_accent_color'].' !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
 
+			$custom_css .= '#af-wrapper .button-normal:hover,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #profile-navigation a.active {'.PHP_EOL;
 				$custom_css .= 'background-color: '.$this->options['custom_accent_color'].' !important;'.PHP_EOL;
+			$custom_css .= '}'.PHP_EOL;
+
+			$custom_css .= '#af-wrapper .button-neutral:hover {'.PHP_EOL;
+				$custom_css .= 'background-color: '.$this->options['custom_accent_color'].'B0 !important;'.PHP_EOL;
 			$custom_css .= '}'.PHP_EOL;
 		}
 
