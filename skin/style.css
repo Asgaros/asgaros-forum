@@ -601,6 +601,7 @@
     margin-bottom: 8px;
     display: flex;
     flex-direction: row;
+	flex-wrap: wrap;
     gap: 3px;
 }
 #af-wrapper .menu-icon {
