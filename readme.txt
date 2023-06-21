@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Wrong stylings when using custom colors
 = 2.5.0 =
 * Revised topic view
 * Fixed: Wrong HTML output in forum navigation

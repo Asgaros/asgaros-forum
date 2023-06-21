@@ -355,7 +355,7 @@ class AsgarosForumAppearance {
 		}
 
 		if ($this->options['custom_link_color'] != $this->options_default['custom_link_color'] && preg_match('/#([a-fA-F0-9]{3}){1,2}\b/', $this->options['custom_link_color'])) {
-			$custom_css .= '#af-wrapper a,'.PHP_EOL;
+			$custom_css .= '#af-wrapper a:not(a.button),'.PHP_EOL;
 			$custom_css .= '#af-wrapper .forum-post-menu a,'.PHP_EOL;
 			$custom_css .= '#af-wrapper #bottom-navigation {'.PHP_EOL;
 			    $custom_css .= 'color: '.$this->options['custom_link_color'].' !important;'.PHP_EOL;
