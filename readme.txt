@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 6.2
 Requires PHP: 5.2
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.5.1 =
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues on mobile navigation
 * Fixed: Potential error in title generation
