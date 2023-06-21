@@ -327,9 +327,11 @@ class AsgarosForum {
         return $this->get_title($title);
     }
 
-    public function change_document_title_parts($title) {
-        $title['title'] = $this->get_title($title['title']);
-        return $title;
+    public function change_document_title_parts($titleParts) {
+		$title = empty($titleParts['title']) ? '' : $titleParts['title'];
+
+        $titleParts['title'] = $this->get_title($title);
+        return $titleParts;
     }
 
     public function change_pre_get_document_title($title) {
@@ -364,8 +366,12 @@ class AsgarosForum {
             $metaTitle = $this->getMetaTitle();
 
             if ($metaTitle) {
-                $title_separator = $this->get_title_separator();
-                $title = $metaTitle.' '.$title_separator.' '.$title;
+				if (empty($title)) {
+					$title = $metaTitle;
+				} else {
+					$title_separator = $this->get_title_separator();
+                	$title = $metaTitle.' '.$title_separator.' '.$title;
+				}
             }
         }
 

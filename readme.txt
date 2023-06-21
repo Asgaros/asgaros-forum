@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues on mobile navigation
+* Fixed: Potential error in title generation
 = 2.5.0 =
 * Revised topic view
 * Fixed: Wrong HTML output in forum navigation
