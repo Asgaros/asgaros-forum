@@ -1039,6 +1039,7 @@
 }
 #af-wrapper .post-author .post-author-block-group {
 	align-items: center;
+	flex-wrap: wrap;
 }
 #af-wrapper .post-author .topic-author {
 	color: #256db3;

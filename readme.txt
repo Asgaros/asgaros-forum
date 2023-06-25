@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Minor display issues
 = 2.5.1 =
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues on mobile navigation
