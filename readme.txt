@@ -87,6 +87,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Fixed: Minor display issues
+* Fixed: Wrong stylings when using custom colors
 = 2.5.1 =
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues on mobile navigation
