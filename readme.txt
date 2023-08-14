@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 5.2
 Stable tag: 2.5.1
 License: GPLv2 or later
@@ -88,6 +88,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: Minor display issues
 * Fixed: Wrong stylings when using custom colors
+* Compatibility with WordPress 6.3
 = 2.5.1 =
 * Fixed: Wrong stylings when using custom colors
 * Fixed: Display issues on mobile navigation
