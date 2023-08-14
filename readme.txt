@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Improved compatibility with WP-Sweep
 = 2.6.0 =
 * Fixed: Minor display issues
 * Fixed: Wrong stylings when using custom colors
