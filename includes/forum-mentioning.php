@@ -25,13 +25,11 @@ class AsgarosForumMentioning {
             return;
         }
 
-        $themeurl = $this->asgarosforum->appearance->get_current_theme_url();
-
         wp_enqueue_script('jquery-caret', $this->asgarosforum->plugin_url.'libs/jquery.caret.js', array('jquery'), $this->asgarosforum->version, true);
         wp_enqueue_script('jquery-atwho', $this->asgarosforum->plugin_url.'libs/jquery.atwho.js', array('jquery', 'jquery-caret'), $this->asgarosforum->version, true);
         wp_enqueue_script('asgarosforum-js-mentioning', $this->asgarosforum->plugin_url.'js/script-mentioning.js', array('jquery', 'jquery-atwho', 'wp-api'), $this->asgarosforum->version, true);
 
-        wp_enqueue_style('asgarosforum-css-mentioning', $themeurl.'/style-mentioning.css', array(), $this->asgarosforum->version);
+        wp_enqueue_style('asgarosforum-css-mentioning', $this->asgarosforum->plugin_url.'skin/style-mentioning.css', array(), $this->asgarosforum->version);
     }
 
     // TinyMCE callback for mentionings.

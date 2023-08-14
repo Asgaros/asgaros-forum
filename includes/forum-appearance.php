@@ -3,16 +3,9 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumAppearance {
-	private $theme_path = 'themes-asgarosforum';
-	private $skin_path = 'skin';
-	private $default_theme = 'default';
 	private $asgarosforum = null;
-	private $themes_root;       // Path to themes directory.
-	private $themes = array();  // Array of available themes.
-	private $current_theme;     // The current theme.
 	public $options = array();
 	public $options_default = array(
-		'theme'                         => 'default',
 		'custom_color'                  => '#256db3',
 		'custom_accent_color'           => '#054d98',
         'custom_text_color'             => '#444444',
@@ -35,8 +28,6 @@ class AsgarosForumAppearance {
 	}
 
 	public function initialize() {
-		$this->themes_root = trailingslashit(WP_CONTENT_DIR.'/'.$this->theme_path);
-		$this->find_themes();
 		$this->load_options();
 
 		add_filter('mce_css', array($this, 'add_editor_css'));
@@ -47,13 +38,6 @@ class AsgarosForumAppearance {
 	public function load_options() {
 		// Load options.
 		$this->options = array_merge($this->options_default, get_option('asgarosforum_appearance', array()));
-
-		// Set the used theme.
-		if (empty($this->themes[$this->options['theme']])) {
-			$this->current_theme = $this->default_theme;
-		} else {
-			$this->current_theme = $this->options['theme'];
-		}
 	}
 
 	public function save_options($options) {
@@ -61,56 +45,6 @@ class AsgarosForumAppearance {
 
 		// Reload options after saving them.
 		$this->load_options();
-	}
-
-	// Find available themes.
-	private function find_themes() {
-		// Always ensure that the default theme is available.
-		$this->themes[$this->default_theme] = array(
-			'name'  => __('Default Theme', 'asgaros-forum'),
-			'url'   => $this->asgarosforum->plugin_url.$this->skin_path
-		);
-
-		// Create themes directory if it doesnt exist.
-		if (!is_dir($this->themes_root)) {
-			wp_mkdir_p($this->themes_root);
-		} else {
-			// Check the themes directory for more themes.
-			$themes = glob($this->themes_root.'*');
-
-			if (is_array($themes) && !empty($themes)) {
-				foreach ($themes as $themepath) {
-					// Ensure that only themes appears which contains all necessary files.
-					if (is_dir($themepath) && is_file($themepath.'/style.css') && is_file($themepath.'/widgets.css')) {
-						$trimmed = preg_filter('/^.*\//', '', $themepath, 1);
-						$this->themes[$trimmed] = array(
-							'name'  => $trimmed,
-							'url'   => content_url($this->theme_path.'/'.$trimmed)
-						);
-					}
-				}
-			}
-		}
-	}
-
-	// Get all available themes.
-	public function get_themes() {
-		return $this->themes;
-	}
-
-	// Get the current theme.
-	public function get_current_theme() {
-		return $this->current_theme;
-	}
-
-	// Returns the URL to the path of the selected theme.
-	public function get_current_theme_url() {
-		return $this->themes[$this->get_current_theme()]['url'];
-	}
-
-	// Check if current theme is the default theme.
-	public function is_default_theme() {
-		return ($this->get_current_theme() === $this->default_theme) ? true : false;
 	}
 
 	public function set_header() {
@@ -191,8 +125,8 @@ class AsgarosForumAppearance {
 			// Set path to custom CSS file.
 			$custom_css_path = $this->asgarosforum->plugin_path.'skin/custom.css';
 
-			// Only run custom CSS logic when we are in the default theme and the default appearance settings have been changed.
-			if ($this->is_default_theme() && $this->options != $this->options_default) {
+			// Only run custom CSS logic when the default appearance settings have been changed.
+			if ($this->options != $this->options_default) {
 				// Load the custom CSS definitions with the adjusted values first.
 				$custom_css = $this->generate_custom_css();
 
@@ -245,7 +179,7 @@ class AsgarosForumAppearance {
 						wp_add_inline_style('af-style', $custom_css);
 					} else {
 						// Load CSS as file.
-						wp_enqueue_style('af-custom-color', $this->get_current_theme_url().'/custom.css', array(), $this->asgarosforum->version);
+						wp_enqueue_style('af-custom-color', $this->asgarosforum->plugin_url.'skin/custom.css', array(), $this->asgarosforum->version);
 					}
 				}
 			} else {
@@ -261,7 +195,7 @@ class AsgarosForumAppearance {
 			$mce_css .= ',';
 		}
 
-		$mce_css .= $this->get_current_theme_url().'/editor.css?ver='.$this->asgarosforum->version;
+		$mce_css .= $this->asgarosforum->plugin_url.'skin/editor.css?ver='.$this->asgarosforum->version;
 
 		return $mce_css;
 	}

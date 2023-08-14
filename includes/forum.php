@@ -698,18 +698,16 @@ class AsgarosForum {
 			wp_enqueue_style('af-fontawesome-compat-v4', $this->plugin_url.'libs/fontawesome/css/v4-shims.min.css', array(), $this->version);
 		}
 
-        $themeurl = $this->appearance->get_current_theme_url();
-
-		wp_enqueue_style('af-widgets', $themeurl.'/widgets.css', array(), $this->version);
+		wp_enqueue_style('af-widgets', $this->plugin_url.'skin/widgets.css', array(), $this->version);
 
         if (!$this->executePlugin) {
             return;
         }
 
-        wp_enqueue_style('af-style', $themeurl.'/style.css', array(), $this->version);
+        wp_enqueue_style('af-style', $this->plugin_url.'skin/style.css', array(), $this->version);
 
         if (is_rtl()) {
-            wp_enqueue_style('af-rtl', $themeurl.'/rtl.css', array(), $this->version);
+            wp_enqueue_style('af-rtl', $this->plugin_url.'skin/rtl.css', array(), $this->version);
         }
 
         wp_enqueue_script('asgarosforum-js', $this->plugin_url.'js/script.js', array('jquery', 'wp-api'), $this->version, false);

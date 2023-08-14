@@ -36,15 +36,6 @@ window.FontAwesomeConfig = {
         // Adding color picker
         $('.color-picker').wpColorPicker();
 
-        // Show/hide color pickers
-        $('select[name="theme"]').change(function() {
-            if ($('select[name="theme"]').val() === 'default') {
-                $('#af-options .custom-color-selector').show();
-            } else {
-                $('#af-options .custom-color-selector').hide();
-            }
-        });
-
         // Show/hide options.
         $('.show_hide_initiator').change(function() {
             var hideClass = $(this).attr('data-hide-class');

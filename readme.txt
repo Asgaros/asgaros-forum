@@ -71,8 +71,6 @@ You can help to translate Asgaros Forum on this site:
 Please only use this site and dont send me your own .po/.mo files because it is hard to maintain if I get multiple translation-files for a language.
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
-= How can I add my own theme? =
-You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have the following files: `style.css`, `widgets.css` and `editor.css`.
 = Which hooks and filters are available? =
 You can find a list of available hooks and filters on this site:
 [https://www.asgaros.de/support/?view=thread&id=407](https://www.asgaros.de/support/?view=thread&id=407).
@@ -87,6 +85,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Improved compatibility with WP-Sweep
+* Removed: Themes functionality
 = 2.6.0 =
 * Fixed: Minor display issues
 * Fixed: Wrong stylings when using custom colors
