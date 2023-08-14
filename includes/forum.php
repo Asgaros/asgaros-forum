@@ -975,10 +975,15 @@ class AsgarosForum {
 			echo '<div class="content-element forum" id="forum-'.esc_attr($forum->id).'">';
 				$forum_icon = trim(esc_html(stripslashes($forum->icon)));
 				$forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
+                $forum_link = $this->get_link('forum', absint($forum->id));
 
-				echo '<div class="forum-status '.esc_attr($unread_status).'"><i class="'.esc_attr($forum_icon).'"></i></div>';
+				echo '<div class="forum-status '.esc_attr($unread_status).'">';
+                    echo '<i class="'.esc_attr($forum_icon).'"></i>';
+                echo '</div>';
 				echo '<div class="forum-name">';
-					echo '<a class="forum-title" href="'.esc_url($this->get_link('forum', absint($forum->id))).'">'.esc_html(stripslashes($forum->name)).'</a>';
+					echo '<a class="forum-title" href="'.esc_url($forum_link).'">';
+                        echo esc_html(stripslashes($forum->name));
+                    echo '</a>';
 
 					// Show the description of the forum when it is not empty.
 					$forum_description = stripslashes($forum->description);
