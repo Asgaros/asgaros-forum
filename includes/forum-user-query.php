@@ -20,7 +20,10 @@ class AsgarosForumUserQuery {
 	public $uid_clauses = array();
 
 	// Standard response when the query should not return any rows.
-	protected $no_results = array('join' => '', 'where' => '0 = 1');
+	protected $no_results = array(
+		'join' => '',
+		'where' => '0 = 1'
+	);
 
 	// Constructor.
 	public function __construct($query = null) {

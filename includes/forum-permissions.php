@@ -568,11 +568,17 @@ class AsgarosForumPermissions {
                 $data = $query->results;
             break;
             case 'role':
-                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role'));
+                $query = new AsgarosForumUserQuery(array(
+					'fields' => array('ID', 'display_name'),
+					'meta_key' => 'asgarosforum_role'
+				));
                 $data = $query->results;
             break;
             case 'siteadmin':
-                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'role' => 'administrator'));
+                $query = new AsgarosForumUserQuery(array(
+					'fields' => array('ID', 'display_name'),
+					'role' => 'administrator'
+				));
                 $data = $query->results;
             break;
             case 'normal':
@@ -583,21 +589,33 @@ class AsgarosForumPermissions {
                 $data = array_diff_key($users_all, $users_role, $users_siteadmin);
             break;
             case 'moderator':
-                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'moderator'));
+                $query = new AsgarosForumUserQuery(array(
+					'fields' => array('ID', 'display_name'),
+					'meta_key' => 'asgarosforum_role',
+					'meta_value' => 'moderator'
+				));
                 $users_moderator = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
 
                 $data = array_diff_key($users_moderator, $users_siteadmin);
             break;
             case 'administrator':
-                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'administrator'));
+                $query = new AsgarosForumUserQuery(array(
+					'fields' => array('ID', 'display_name'),
+					'meta_key' => 'asgarosforum_role',
+					'meta_value' => 'administrator'
+				));
                 $users_administrator = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
 
                 $data = array_unique(($users_administrator + $users_siteadmin), SORT_REGULAR);
             break;
             case 'banned':
-                $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name'), 'meta_key' => 'asgarosforum_role', 'meta_value' => 'banned'));
+                $query = new AsgarosForumUserQuery(array(
+					'fields' => array('ID', 'display_name'),
+					'meta_key' => 'asgarosforum_role',
+					'meta_value' => 'banned'
+				));
                 $users_banned = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
 

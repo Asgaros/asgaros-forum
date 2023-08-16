@@ -29,7 +29,12 @@ class AsgarosForumReports {
 
                 if (!$this->report_exists($post_id, $reporter_id)) {
                     $report_message = __('Are you sure that you want to report this post?', 'asgaros-forum');
-                    $report_href = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array('post' => $post_id, 'report_add' => 1, 'part' => ($this->asgarosforum->current_page + 1), '_wpnonce' => wp_create_nonce('asgaros_forum_report_add')), '#postid-'.$post_id);
+                    $report_href = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array(
+						'post' => $post_id,
+						'report_add' => 1,
+						'part' => ($this->asgarosforum->current_page + 1),
+						'_wpnonce' => wp_create_nonce('asgaros_forum_report_add')
+					), '#postid-'.$post_id);
 
                     $output .= '<a href="'.$report_href.'" title="'.__('Report Post', 'asgaros-forum').'" onclick="return confirm(\''.$report_message.'\');">';
                     $output .= '<span class="report-link fas fa-exclamation-triangle">';
@@ -52,7 +57,10 @@ class AsgarosForumReports {
             if (is_user_logged_in()) {
                 // ... and when there is not already a report from the user.
                 if (!$this->report_exists($post_id, $reporter_id)) {
-                    $this->asgarosforum->db->insert($this->asgarosforum->tables->reports, array('post_id' => $post_id, 'reporter_id' => $reporter_id), array('%d', '%d'));
+                    $this->asgarosforum->db->insert($this->asgarosforum->tables->reports, array(
+						'post_id' => $post_id,
+						'reporter_id' => $reporter_id
+					), array('%d', '%d'));
 
                     // Send notification to site owner about new report.
                     $this->send_notification($post_id, $reporter_id);
@@ -242,7 +250,10 @@ class AsgarosForumReports {
                     echo '</div>';
 
                     echo '<div class="report-actions">';
-                        $delete_link = $this->asgarosforum->rewrite->get_link('reports', false, array('report_delete' => $report['post_id'], '_wpnonce' => wp_create_nonce('asgaros_forum_report_delete')));
+                        $delete_link = $this->asgarosforum->rewrite->get_link('reports', false, array(
+							'report_delete' => $report['post_id'],
+							'_wpnonce' => wp_create_nonce('asgaros_forum_report_delete')
+						));
 
                         echo '<a class="report-action-delete" href="'.esc_url($delete_link).'">';
                             echo '<span class="fas fa-trash-alt"></span>';

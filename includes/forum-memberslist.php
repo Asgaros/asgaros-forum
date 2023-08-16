@@ -181,7 +181,10 @@ class AsgarosForumMembersList {
             echo '<b>';
         }
 
-		echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('members', false, array('filter_type' => $filter_type, 'filter_name' => $filter_name))).'">'.esc_html($title).'</a>';
+		echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('members', false, array(
+			'filter_type' => $filter_type,
+			'filter_name' => $filter_name
+		))).'">'.esc_html($title).'</a>';
 
 		if ($filter_type === $this->filter_type && $filter_name == $this->filter_name) {
             echo '</b>';

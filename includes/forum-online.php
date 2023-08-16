@@ -109,7 +109,11 @@ class AsgarosForumOnline {
         $query = new AsgarosForumUserQuery(array('meta_key' => 'asgarosforum_online'));
         $results_flag = $query->results;
 
-        $query = new AsgarosForumUserQuery(array('meta_key' => 'asgarosforum_online_timestamp', 'meta_value' => $minimum_check_time, 'meta_compare' => '>='));
+        $query = new AsgarosForumUserQuery(array(
+			'meta_key' => 'asgarosforum_online_timestamp',
+			'meta_value' => $minimum_check_time,
+			'meta_compare' => '>='
+		));
         $results_stamp = $query->results;
 
         // Do an intersection by the keys of both arrays so we have all users with an online-flag and a valid timestamp.
@@ -137,7 +141,11 @@ class AsgarosForumOnline {
             echo '<div id="statistics-online-users">';
 
             if ($this->asgarosforum->options['show_newest_member']) {
-                $newest_member = get_users(array('orderby' => 'ID', 'order' => 'DESC', 'number' => 1));
+                $newest_member = get_users(array(
+					'orderby' => 'ID',
+					'order' => 'DESC',
+					'number' => 1
+				));
 
                 echo '<span class="online-users-icon fas fa-user"></span>';
                 echo esc_html__('Newest Member:', 'asgaros-forum').'&nbsp;<i>'.$this->asgarosforum->renderUsername($newest_member[0]).'</i>';

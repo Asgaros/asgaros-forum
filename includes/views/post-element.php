@@ -108,7 +108,13 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
         echo '<div class="post-message">';
             // Initial escaping.
             $allowed_html = wp_kses_allowed_html('post');
-            $allowed_html['iframe'] = array('width' => array(), 'height' => array(), 'src' => array(), 'frameborder' => array(), 'allowfullscreen' => array());
+            $allowed_html['iframe'] = array(
+				'width' => array(),
+				'height' => array(),
+				'src' => array(),
+				'frameborder' => array(),
+				'allowfullscreen' => array()
+			);
             $post_content = wp_kses($post->text, $allowed_html);
             $post_content = stripslashes($post_content);
 

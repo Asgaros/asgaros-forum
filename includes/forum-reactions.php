@@ -270,14 +270,24 @@ class AsgarosForumReactions {
 		// Get the current time.
         $date = $this->asgarosforum->current_time();
 
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction, 'author_id' => $author_id, 'datestamp' => $date), array('%d', '%d', '%s', '%d', '%s'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array(
+			'post_id' => $post_id,
+			'user_id' => $user_id,
+			'reaction' => $reaction,
+			'author_id' => $author_id,
+			'datestamp' => $date
+		), array('%d', '%d', '%s', '%d', '%s'));
 
         do_action('asgarosforum_after_add_reaction', $post_id, $user_id, $reaction);
     }
 
     public function remove_reaction($post_id, $user_id, $reaction) {
 
-        $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction), array('%d', '%d', '%s'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array(
+			'post_id' => $post_id,
+			'user_id' => $user_id,
+			'reaction' => $reaction
+		), array('%d', '%d', '%s'));
 
         do_action('asgarosforum_after_remove_reaction', $post_id, $user_id, $reaction);
     }
@@ -286,7 +296,13 @@ class AsgarosForumReactions {
 		// Get the current time.
         $date = $this->asgarosforum->current_time();
 
-        $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array('reaction' => $reaction, 'datestamp' => $date), array('post_id' => $post_id, 'user_id' => $user_id), array('%s', '%s'), array('%d', '%d'));
+        $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array(
+			'reaction' => $reaction,
+			'datestamp' => $date
+		), array(
+			'post_id' => $post_id,
+			'user_id' => $user_id
+		), array('%s', '%s'), array('%d', '%d'));
 
         do_action('asgarosforum_after_update_reaction', $post_id, $user_id, $reaction);
     }

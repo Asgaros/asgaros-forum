@@ -147,7 +147,11 @@ class AsgarosForumPolls {
         // Insert poll.
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->polls,
-            array('id' => $topic_id, 'title' => $title, 'multiple' => $multiple),
+            array(
+				'id' => $topic_id,
+				'title' => $title,
+				'multiple' => $multiple
+			),
             array('%d', '%s', '%d')
         );
 
@@ -155,7 +159,10 @@ class AsgarosForumPolls {
         foreach ($options as $option) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_options,
-                array('poll_id' => $topic_id, 'title' => $option),
+                array(
+					'poll_id' => $topic_id,
+					'title' => $option
+				),
                 array('%d', '%s')
             );
         }
@@ -165,7 +172,10 @@ class AsgarosForumPolls {
         // Update poll.
         $this->asgarosforum->db->update(
             $this->asgarosforum->tables->polls,
-            array('title' => $title, 'multiple' => $multiple),
+            array(
+				'title' => $title,
+				'multiple' => $multiple
+			),
             array('id' => $poll_id),
             array('%s', '%d'),
             array('%d')
@@ -176,7 +186,10 @@ class AsgarosForumPolls {
             $this->asgarosforum->db->update(
                 $this->asgarosforum->tables->polls_options,
                 array('title' => $value),
-                array('id' => $key, 'poll_id' => $poll_id),
+                array(
+					'id' => $key,
+					'poll_id' => $poll_id
+				),
                 array('%s'),
                 array('%d', '%d')
             );
@@ -328,7 +341,11 @@ class AsgarosForumPolls {
         foreach ($votes as $vote) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_votes,
-                array('poll_id' => $poll->id, 'option_id' => $vote, 'user_id' => $user_id),
+                array(
+					'poll_id' => $poll->id,
+					'option_id' => $vote,
+					'user_id' => $user_id
+				),
                 array('%d', '%d', '%d')
             );
         }

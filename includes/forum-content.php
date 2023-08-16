@@ -319,7 +319,12 @@ class AsgarosForumContent {
             if ($edit_post['edit_post']) {
                 $date = $this->asgarosforum->current_time();
                 $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $edit_post['upload_list']);
-                $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array('text' => $edit_post['content'], 'uploads' => maybe_serialize($upload_list), 'date_edit' => $date, 'author_edit' => $edit_post['editor']), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
+                $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array(
+					'text' => $edit_post['content'],
+					'uploads' => maybe_serialize($upload_list),
+					'date_edit' => $date,
+					'author_edit' => $edit_post['editor']
+				), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
                 if ($this->asgarosforum->is_first_post($this->asgarosforum->current_post) && !empty($edit_post['subject'])) {
                     $this->asgarosforum->db->update($this->asgarosforum->tables->topics, array('name' => $edit_post['subject']), array('id' => $this->asgarosforum->current_topic), array('%s'), array('%d'));
@@ -367,7 +372,16 @@ class AsgarosForumContent {
         // Insert the forum.
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->forums,
-            array('name' => $name, 'parent_id' => $category_id, 'parent_forum' => $parent_forum, 'description' => $description, 'icon' => $icon, 'sort' => $order, 'forum_status' => $status, 'slug' => $forum_slug),
+            array(
+				'name' => $name,
+				'parent_id' => $category_id,
+				'parent_forum' => $parent_forum,
+				'description' => $description,
+				'icon' => $icon,
+				'sort' => $order,
+				'forum_status' => $status,
+				'slug' => $forum_slug
+			),
             array('%s', '%d', '%d', '%s', '%s', '%d', '%s', '%s')
         );
 
@@ -395,7 +409,13 @@ class AsgarosForumContent {
         // Insert the topic.
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->topics,
-            array('name' => $name, 'parent_id' => $forum_id, 'slug' => $topic_slug, 'approved' => $approved, 'author_id' => $author_id),
+            array(
+				'name' => $name,
+				'parent_id' => $forum_id,
+				'slug' => $topic_slug,
+				'approved' => $approved,
+				'author_id' => $author_id
+			),
             array('%s', '%d', '%s', '%d', '%d')
         );
 
@@ -421,7 +441,14 @@ class AsgarosForumContent {
         $date = $this->asgarosforum->current_time();
 
         // Insert the post.
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array('text' => $text, 'parent_id' => $topic_id, 'forum_id' => $forum_id, 'date' => $date, 'author_id' => $author_id, 'uploads' => maybe_serialize($uploads)), array('%s', '%d', '%d', '%s', '%d', '%s'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array(
+			'text' => $text,
+			'parent_id' => $topic_id,
+			'forum_id' => $forum_id,
+			'date' => $date,
+			'author_id' => $author_id,
+			'uploads' => maybe_serialize($uploads)
+		), array('%s', '%d', '%d', '%s', '%d', '%s'));
 
         // Return the ID of the inserted post.
         return $this->asgarosforum->db->insert_id;

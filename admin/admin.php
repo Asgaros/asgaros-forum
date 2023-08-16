@@ -457,7 +457,15 @@ class AsgarosForumAdmin {
                 // Update forum.
                 $this->asgarosforum->db->update(
                     $this->asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'forum_status' => $forum_status, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum),
+                    array(
+						'name' => $forum_name,
+						'description' => $forum_description,
+						'icon' => $forum_icon,
+						'sort' => $forum_order,
+						'forum_status' => $forum_status,
+						'parent_id' => $forum_category,
+						'parent_forum' => $forum_parent_forum
+					),
                     array('id' => $forum_id),
                     array('%s', '%s', '%s', '%d', '%s', '%d', '%d'),
                     array('%d')

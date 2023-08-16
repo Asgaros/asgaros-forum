@@ -140,7 +140,10 @@ class AsgarosForumUserGroups {
         $auto_add = trim($auto_add);
         $icon = trim($icon);
 
-        $status = wp_update_term($usergroup_id, self::$taxonomyName, array('parent' => $category_id, 'name' => $name));
+        $status = wp_update_term($usergroup_id, self::$taxonomyName, array(
+			'parent' => $category_id,
+			'name' => $name
+		));
 
         // Return possible error.
         if (is_wp_error($status)) {
@@ -249,9 +252,17 @@ class AsgarosForumUserGroups {
 
         // First load all terms.
         if ($visible_groups_only) {
-            $userGroups = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $include, 'meta_key' => 'usergroup-visibility', 'meta_value' => 'normal'));
+            $userGroups = get_terms(self::$taxonomyName, array(
+				'hide_empty' => false,
+				'include' => $include,
+				'meta_key' => 'usergroup-visibility',
+				'meta_value' => 'normal'
+			));
         } else {
-            $userGroups = get_terms(self::$taxonomyName, array('hide_empty' => false, 'include' => $include));
+            $userGroups = get_terms(self::$taxonomyName, array(
+				'hide_empty' => false,
+				'include' => $include
+			));
         }
 
         // Now remove the categories so we only have usergroups.
@@ -267,12 +278,18 @@ class AsgarosForumUserGroups {
 
     // Returns all usergroups of a specific category.
     public static function getUserGroupsOfCategory($categoryID) {
-        return get_terms(self::$taxonomyName, array('hide_empty' => false, 'parent' => $categoryID));
+        return get_terms(self::$taxonomyName, array(
+			'hide_empty' => false,
+			'parent' => $categoryID
+		));
     }
 
     // Returns all usergroups categories.
     public static function getUserGroupCategories($hide_empty = false) {
-        $userGroupCategories = get_terms(self::$taxonomyName, array('hide_empty' => false, 'parent' => 0));
+        $userGroupCategories = get_terms(self::$taxonomyName, array(
+			'hide_empty' => false,
+			'parent' => 0
+		));
 
         // Hide categories without usergroups.
         if ($hide_empty) {
@@ -633,7 +650,10 @@ class AsgarosForumUserGroups {
         // If the memberslist is enabled and we are inside the front-end, we will
         // generate a link to the memberslist filtered by the selected usergroup.
         if (self::$asgarosforum->memberslist->functionality_enabled() && !is_admin()) {
-            $link = self::$asgarosforum->rewrite->get_link('members', false, array('filter_type' => 'group', 'filter_name' => $usergroup_object->term_id));
+            $link = self::$asgarosforum->rewrite->get_link('members', false, array(
+				'filter_type' => 'group',
+				'filter_name' => $usergroup_object->term_id
+			));
 
             $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; background-color: '.$color.'40 !important; font-weight: '.$font_weight.' !important;">';
 
