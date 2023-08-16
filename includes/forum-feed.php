@@ -34,12 +34,12 @@ class AsgarosForumFeed {
                     $title = $this->asgarosforum->current_topic_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
                     echo '<link rel="alternate" type="application/rss+xml" title="'.esc_attr($title).'" href="'.esc_url($link).'" />'.PHP_EOL;
-                break;
+                    break;
                 case 'forum':
                     $title = $this->asgarosforum->current_forum_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
                     $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
                     echo '<link rel="alternate" type="application/rss+xml" title="'.esc_attr($title).'" href="'.esc_url($link).'" />'.PHP_EOL;
-                break;
+                    break;
             }
         }
     }
@@ -51,12 +51,12 @@ class AsgarosForumFeed {
                     $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
                     echo '<a href="'.esc_url($link).'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
-                break;
+                    break;
                 case 'forum':
                     $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
                     echo '<span class="fas fa-rss"></span>';
                     echo '<a href="'.esc_url($link).'" target="_blank">'.esc_html__('RSS Feed', 'asgaros-forum').'</a>';
-                break;
+                    break;
             }
         }
     }

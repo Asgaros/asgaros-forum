@@ -50,7 +50,7 @@ class AsgarosForumMembersList {
                             if ($this->is_filter_available($input_filter_name)) {
                                 $this->filter_name = $input_filter_name;
                             }
-                        break;
+                            break;
                     }
                 } else if ($input_filter_type === 'group') {
                     $this->filter_type = 'group';

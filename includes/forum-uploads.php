@@ -308,13 +308,13 @@ class AsgarosForumUploads {
 			switch ($unit) {
 				case 'KB':
 					$size = $size * 1024;
-				break;
+				    break;
 				case 'MB':
 					$size = $size * 1024 * 1024;
-				break;
+				    break;
 				case 'GB':
 					$size = $size * 1024 * 1024 * 1024;
-				break;
+				    break;
 			}
 		}
 

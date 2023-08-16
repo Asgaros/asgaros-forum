@@ -437,62 +437,62 @@ class AsgarosForum {
             case 'forum':
             case 'addtopic':
                 $this->setParents($this->current_element, 'forum');
-            break;
+                break;
             case 'movetopic':
             case 'topic':
             case 'addpost':
                 $this->setParents($this->current_element, 'topic');
-            break;
+                break;
             case 'editpost':
                 $this->setParents($this->current_element, 'post');
-            break;
+                break;
             case 'markallread':
             case 'unread':
-            break;
+                break;
             case 'subscriptions':
                 // Go back to the overview when this functionality is not enabled or the user is not logged-in.
                 if (!$this->options['allow_subscriptions'] || !is_user_logged_in()) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             case 'search':
                 // Go back to the overview when this functionality is not enabled.
                 if (!$this->options['enable_search']) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             case 'profile':
             case 'history':
                 if (!$this->profile->functionalityEnabled()) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             case 'members':
                 // Go back to the overview when this functionality is not enabled.
                 if (!$this->memberslist->functionality_enabled()) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             case 'activity':
                 if (!$this->activity->functionality_enabled()) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             case 'unapproved':
                 // Ensure that the user is at least a moderator.
                 if (!$this->permissions->isModerator('current')) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             case 'reports':
                 // Ensure that the user is at least a moderator.
                 if (!$this->permissions->isModerator('current')) {
                     $this->current_view = 'overview';
                 }
-            break;
+                break;
             default:
                 $this->current_view = 'overview';
-            break;
+                break;
         }
 
         $this->shortcode->handleAttributes();
@@ -858,48 +858,48 @@ class AsgarosForum {
                 switch ($this->current_view) {
                     case 'search':
                         $this->search->show_search_results();
-                    break;
+                        break;
                     case 'subscriptions':
                         $this->notifications->show_subscription_overview();
-                    break;
+                        break;
                     case 'movetopic':
                         $this->showMoveTopic();
-                    break;
+                        break;
                     case 'forum':
                         $this->show_forum();
-                    break;
+                        break;
                     case 'topic':
                         $this->showTopic();
-                    break;
+                        break;
                     case 'addtopic':
                     case 'addpost':
                     case 'editpost':
                         $this->editor->showEditor($this->current_view);
-                    break;
+                        break;
                     case 'profile':
                         $this->profile->show_profile();
-                    break;
+                        break;
                     case 'history':
                         $this->profile->show_history();
-                    break;
+                        break;
                     case 'members':
                         $this->memberslist->show_memberslist();
-                    break;
+                        break;
                     case 'activity':
                         $this->activity->show_activity();
-                    break;
+                        break;
                     case 'unread':
                         $this->unread->show_unread_topics();
-                    break;
+                        break;
                     case 'unapproved':
                         $this->approval->show_unapproved_topics();
-                    break;
+                        break;
                     case 'reports':
                         $this->reports->show_reports();
-                    break;
+                        break;
                     default:
                         $this->overview();
-                    break;
+                        break;
                 }
 
                 // Action hook for optional bottom navigation elements.
@@ -2163,7 +2163,7 @@ class AsgarosForum {
             case 1:
             case 2:
                 $this->db->update($this->tables->topics, array('sticky' => $sticky_mode), array('id' => $topic_id), array('%d'), array('%d'));
-            break;
+                break;
         }
     }
 
@@ -2226,13 +2226,13 @@ class AsgarosForum {
             switch ($contentType) {
                 case 'post':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.name AS current_forum_name, f.parent_forum AS parent_forum, pf.name AS parent_forum_name, t.id AS current_topic, t.name AS current_topic_name, p.id AS current_post, p.text AS current_description FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->forums} AS pf ON (pf.id = f.parent_forum) LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) LEFT JOIN {$this->tables->posts} AS p ON (t.id = p.parent_id) WHERE p.id = {$id};";
-                break;
+                    break;
                 case 'topic':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.name AS current_forum_name, f.parent_forum AS parent_forum, pf.name AS parent_forum_name, t.id AS current_topic, t.name AS current_topic_name, (SELECT td.text FROM {$this->tables->posts} AS td WHERE td.parent_id = t.id ORDER BY td.id ASC LIMIT 1) AS current_description FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->forums} AS pf ON (pf.id = f.parent_forum) LEFT JOIN {$this->tables->topics} AS t ON (f.id = t.parent_id) WHERE t.id = {$id};";
-                break;
+                    break;
                 case 'forum':
                     $query = "SELECT f.parent_id AS current_category, f.id AS current_forum, f.name AS current_forum_name, f.parent_forum AS parent_forum, pf.name AS parent_forum_name, f.description AS current_description FROM {$this->tables->forums} AS f LEFT JOIN {$this->tables->forums} AS pf ON (pf.id = f.parent_forum) WHERE f.id = {$id};";
-                break;
+                    break;
             }
 
             $results = $this->db->get_row($query);

@@ -26,10 +26,10 @@ class AsgarosForumNotifications {
             switch ($current_view) {
                 case 'topic':
                     $this->show_topic_subscription_link($this->asgarosforum->current_topic);
-                break;
+                    break;
                 case 'forum':
                     $this->show_forum_subscription_link($this->asgarosforum->current_forum);
-                break;
+                    break;
             }
         }
     }

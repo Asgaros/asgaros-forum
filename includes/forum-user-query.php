@@ -89,7 +89,7 @@ class AsgarosForumUserQuery {
 		// user IDs are drawn from (the SELECT and WHERE statements).
 		switch ($type) {
 			// 'alphabetical' sorts depend on the xprofile setup.
-			case 'alphabetical' :
+			case 'alphabetical':
 				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
 				$sql['orderby'] = 'ORDER BY u.display_name';
 				$sql['order'] = 'ASC';
@@ -105,7 +105,7 @@ class AsgarosForumUserQuery {
 				$sql['where'][] = "u.ID IN ( SELECT ID FROM {$wpdb->users} WHERE {$user_status_filter} )";
 				break;
 			// Any other 'type' falls through.
-			default :
+			default:
 				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
 				break;
 		}
