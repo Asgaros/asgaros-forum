@@ -149,7 +149,7 @@ class AsgarosForumRewrite {
 
         // Fallback for old view-name.
         if ($this->asgarosforum->current_view == 'thread') {
-             $this->asgarosforum->current_view = 'topic';
+            $this->asgarosforum->current_view = 'topic';
         }
 
         // Try to set current elements based on permalinks.
