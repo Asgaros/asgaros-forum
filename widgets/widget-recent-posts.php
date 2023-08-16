@@ -139,9 +139,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
     }
 
     public function widget_output($args, $instance, $output) {
-		extract($args);
-
-        // Generate title.
+		// Generate title.
         $title = empty($instance['title']) ? '' : $instance['title'];
 		$title = apply_filters('widget_title', $title);
 
@@ -150,12 +148,12 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         }
 
         // Generate final output.
-        echo $before_widget;
-        echo $before_title;
+        echo $args['before_widget'];
+        echo $args['before_title'];
         echo esc_html($title);
-        echo $after_title;
+        echo $args['after_title'];
         echo wp_kses_post($output);
-        echo $after_widget;
+        echo $args['after_widget'];
     }
 
     public function form($instance) {
