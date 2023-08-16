@@ -171,7 +171,7 @@ class AsgarosForumProfile {
 				// Hide topics of private forums from everyone else.
             	$query = "SELECT p.id, p.text, p.date, p.parent_id, t.name FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE p.parent_id = t.id AND t.parent_id = f.id AND f.forum_status <> 'private' AND p.author_id = %d AND EXISTS (SELECT f.id FROM {$this->asgarosforum->tables->forums} AS f WHERE f.id = t.parent_id AND f.parent_id IN ({$accessible_categories})) AND t.approved = 1 ORDER BY p.id DESC {$query_limit};";
 			}
-			
+
 			return $this->asgarosforum->db->get_results($this->asgarosforum->db->prepare($query, $user_id));
         }
     }

@@ -203,7 +203,7 @@ class AsgarosForumCompatibility {
         );
 
         $term_ids = array_merge($term_ids, $usergroup_term_ids, $category_term_ids);
-        
+
         return $term_ids;
     }
 }
