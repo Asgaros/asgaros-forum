@@ -220,7 +220,7 @@ class AsgarosForumUserQuery {
 		// Match up to the user ids from the main query.
 		foreach ($this->user_ids as $key => $uid) {
 			if (isset($r[$uid])) {
-				$r[$uid]->ID         = (int)$uid;
+				$r[$uid]->ID         = (int) $uid;
 				$this->results[$uid] = $r[$uid];
 			// Remove user ID from original user_ids property.
 			} else {
@@ -239,7 +239,7 @@ class AsgarosForumUserQuery {
 		}
 
 		// Bail if the populate_extras flag is set to false.
-		if (!(bool)$this->query_vars['populate_extras']) {
+		if (!(bool) $this->query_vars['populate_extras']) {
 			return;
 		}
 

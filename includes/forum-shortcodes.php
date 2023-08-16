@@ -46,7 +46,7 @@ class AsgarosForumShortcodes {
 
             if (!empty($atts)) {
                 // Normalize attribute keys.
-                $atts = array_change_key_case((array)$atts, CASE_LOWER);
+                $atts = array_change_key_case((array) $atts, CASE_LOWER);
 
                 if (!empty($atts['post']) && ctype_digit($atts['post'])) {
                     $postID                           = $atts['post'];

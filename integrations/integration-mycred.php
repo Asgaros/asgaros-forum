@@ -220,7 +220,7 @@ function mycred_load_asgarosforum_hook() {
                 return;
             }
 
-            if ((bool)$this->prefs['new_post']['author'] === false && $this->asgarosforum->get_topic_starter($topic_id) == $author_id) {
+            if ((bool) $this->prefs['new_post']['author'] === false && $this->asgarosforum->get_topic_starter($topic_id) == $author_id) {
                 return;
             }
 

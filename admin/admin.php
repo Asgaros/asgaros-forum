@@ -363,9 +363,9 @@ class AsgarosForumAdmin {
         foreach ($this->asgarosforum->options_default as $k => $v) {
             if (isset($_POST[$k])) {
                 if (is_numeric($v)) {
-                    $saved_ops[$k] = ((int)$_POST[$k] >= 0) ? (int)$_POST[$k] : $v;
+                    $saved_ops[$k] = ((int) $_POST[$k] >= 0) ? (int) $_POST[$k] : $v;
                 } else if (is_bool($v)) {
-                    $saved_ops[$k] = (bool)$_POST[$k];
+                    $saved_ops[$k] = (bool) $_POST[$k];
                 } else if ($k === 'allowed_filetypes') {
                     $tmp           = strtolower(sanitize_text_field($_POST[$k]));
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;

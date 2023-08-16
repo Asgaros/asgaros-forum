@@ -156,8 +156,8 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
     public function form($instance) {
         $title        = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent forum topics', 'asgaros-forum');
         $number       = isset($instance['number']) ? absint($instance['number']) : 3;
-        $show_avatar  = isset($instance['show_avatar']) ? (bool)$instance['show_avatar'] : true;
-        $show_excerpt = isset($instance['show_excerpt']) ? (bool)$instance['show_excerpt'] : false;
+        $show_avatar  = isset($instance['show_avatar']) ? (bool) $instance['show_avatar'] : true;
+        $show_excerpt = isset($instance['show_excerpt']) ? (bool) $instance['show_excerpt'] : false;
         $forum_filter = isset($instance['forum_filter']) ? $instance['forum_filter'] : array();
 
 		echo '<p>';
@@ -224,9 +224,9 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
     public function update($new_instance, $old_instance) {
         $instance                 = array();
 		$instance['title']        = sanitize_text_field($new_instance['title']);
-		$instance['number']       = (int)$new_instance['number'];
-        $instance['show_avatar']  = isset($new_instance['show_avatar']) ? (bool)$new_instance['show_avatar'] : false;
-        $instance['show_excerpt'] = isset($new_instance['show_excerpt']) ? (bool)$new_instance['show_excerpt'] : false;
+		$instance['number']       = (int) $new_instance['number'];
+        $instance['show_avatar']  = isset($new_instance['show_avatar']) ? (bool) $new_instance['show_avatar'] : false;
+        $instance['show_excerpt'] = isset($new_instance['show_excerpt']) ? (bool) $new_instance['show_excerpt'] : false;
         $instance['forum_filter'] = isset($new_instance['forum_filter']) ? $new_instance['forum_filter'] : array();
 		return $instance;
 	}

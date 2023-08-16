@@ -101,7 +101,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
         $data = array();
 
         foreach ($this->table_data as $usergroup) {
-            $usergroup               = (array)$usergroup; // Convert object to array.
+            $usergroup               = (array) $usergroup; // Convert object to array.
             $usergroup['color']      = AsgarosForumUserGroups::getUserGroupColor($usergroup['term_id']);
             $usergroup['visibility'] = AsgarosForumUserGroups::get_usergroup_visibility($usergroup['term_id']);
             $usergroup['auto_add']   = AsgarosForumUserGroups::get_usergroup_auto_add($usergroup['term_id']);
