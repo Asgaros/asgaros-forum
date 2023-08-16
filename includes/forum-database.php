@@ -37,7 +37,7 @@ class AsgarosForumDatabase {
         if (function_exists('is_multisite') && is_multisite()) {
             // Check if it is a network activation. If so, run the database-creation for each id.
             if ($networkwide) {
-                $old_blog =  $this->db->blogid;
+                $old_blog = $this->db->blogid;
 
                 // Get all blog ids
                 $blogids = $this->db->get_col('SELECT blog_id FROM '.$this->db->blogs);

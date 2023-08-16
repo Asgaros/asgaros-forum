@@ -6,7 +6,7 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 
 if (function_exists('is_multisite') && is_multisite()) {
     global $wpdb;
-    $old_blog =  $wpdb->blogid;
+    $old_blog = $wpdb->blogid;
 
     // Get all blog ids
     $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
