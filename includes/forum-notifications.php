@@ -54,13 +54,13 @@ class AsgarosForumNotifications {
             if ($this->is_subscribed('topic', $topic_id)) {
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array(
 					'unsubscribe_topic' => $topic_id,
-					'_wpnonce' => wp_create_nonce('asgaros_forum_unsubscribe_topic'),
+					'_wpnonce'          => wp_create_nonce('asgaros_forum_unsubscribe_topic'),
 				));
                 $text = __('<b>Unsubscribe</b> from this topic.', 'asgaros-forum');
             } else {
                 $link = $this->asgarosforum->get_link('topic', $topic_id, array(
 					'subscribe_topic' => $topic_id,
-					'_wpnonce' => wp_create_nonce('asgaros_forum_subscribe_topic'),
+					'_wpnonce'        => wp_create_nonce('asgaros_forum_subscribe_topic'),
 				));
                 $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
             }
@@ -84,13 +84,13 @@ class AsgarosForumNotifications {
             if ($this->is_subscribed('forum', $element_id)) {
                 $link = $this->asgarosforum->get_link('forum', $element_id, array(
 					'unsubscribe_forum' => $element_id,
-					'_wpnonce' => wp_create_nonce('asgaros_forum_unsubscribe_forum'),
+					'_wpnonce'          => wp_create_nonce('asgaros_forum_unsubscribe_forum'),
 				));
                 $text = __('<b>Unsubscribe</b> from this forum.', 'asgaros-forum');
             } else {
                 $link = $this->asgarosforum->get_link('forum', $element_id, array(
 					'subscribe_forum' => $element_id,
-					'_wpnonce' => wp_create_nonce('asgaros_forum_subscribe_forum'),
+					'_wpnonce'        => wp_create_nonce('asgaros_forum_subscribe_forum'),
 				));
                 $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
             }
@@ -243,11 +243,11 @@ class AsgarosForumNotifications {
 
         // Get topic subscribers.
         $topic_subscribers_query = array(
-            'fields'        => array('id', 'user_email'),
-            'exclude'       => array(get_current_user_id()),
-            'meta_key'      => 'asgarosforum_subscription_topic',
-            'meta_value'    => $topic->id,
-            'meta_compare'  => '=',
+            'fields'       => array('id', 'user_email'),
+            'exclude'      => array(get_current_user_id()),
+            'meta_key'     => 'asgarosforum_subscription_topic',
+            'meta_value'   => $topic->id,
+            'meta_compare' => '=',
         );
 
         $get_users_result = get_users($topic_subscribers_query);
@@ -258,10 +258,10 @@ class AsgarosForumNotifications {
 
         // Get global post subscribers.
         $topic_subscribers_query = array(
-            'fields'        => array('id', 'user_email'),
-            'exclude'       => array(get_current_user_id()),
-            'meta_key'      => 'asgarosforum_subscription_global_posts',
-            'meta_compare'  => 'EXISTS',
+            'fields'       => array('id', 'user_email'),
+            'exclude'      => array(get_current_user_id()),
+            'meta_key'     => 'asgarosforum_subscription_global_posts',
+            'meta_compare' => 'EXISTS',
         );
 
         $get_users_result = get_users($topic_subscribers_query);
@@ -350,11 +350,11 @@ class AsgarosForumNotifications {
 
             // Get forum subscribers.
             $forum_subscribers_query = array(
-                'fields'        => array('id', 'user_email'),
-                'exclude'       => array(get_current_user_id()),
-                'meta_key'      => 'asgarosforum_subscription_forum',
-                'meta_value'    => $topic->parent_id,
-                'meta_compare'  => '=',
+                'fields'       => array('id', 'user_email'),
+                'exclude'      => array(get_current_user_id()),
+                'meta_key'     => 'asgarosforum_subscription_forum',
+                'meta_value'   => $topic->parent_id,
+                'meta_compare' => '=',
             );
 
             $get_users_result = get_users($forum_subscribers_query);
@@ -365,10 +365,10 @@ class AsgarosForumNotifications {
 
             // Get global post subscribers.
             $forum_subscribers_query = array(
-                'fields'        => array('id', 'user_email'),
-                'exclude'       => array(get_current_user_id()),
-                'meta_key'      => 'asgarosforum_subscription_global_posts',
-                'meta_compare'  => 'EXISTS',
+                'fields'       => array('id', 'user_email'),
+                'exclude'      => array(get_current_user_id()),
+                'meta_key'     => 'asgarosforum_subscription_global_posts',
+                'meta_compare' => 'EXISTS',
             );
 
             $get_users_result = get_users($forum_subscribers_query);
@@ -379,10 +379,10 @@ class AsgarosForumNotifications {
 
             // Get global topic subscribers.
             $forum_subscribers_query = array(
-                'fields'        => array('id', 'user_email'),
-                'exclude'       => array(get_current_user_id()),
-                'meta_key'      => 'asgarosforum_subscription_global_topics',
-                'meta_compare'  => 'EXISTS',
+                'fields'       => array('id', 'user_email'),
+                'exclude'      => array(get_current_user_id()),
+                'meta_key'     => 'asgarosforum_subscription_global_topics',
+                'meta_compare' => 'EXISTS',
             );
 
             $get_users_result = get_users($forum_subscribers_query);
@@ -658,7 +658,7 @@ class AsgarosForumNotifications {
                     echo '<a href="'.esc_url($this->asgarosforum->get_link($type, absint($item->id))).'" title="'.esc_html($item->name).'">'.esc_html($item->name).'</a>';
                     echo '<a class="unsubscribe-link" href="'.esc_url($this->asgarosforum->get_link('subscriptions', false, array(
 						'unsubscribe_'.esc_attr($type) => $item->id,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_unsubscribe_'.esc_attr($type)),
+						'_wpnonce'                     => wp_create_nonce('asgaros_forum_unsubscribe_'.esc_attr($type)),
 					))).'">'.esc_html__('Unsubscribe', 'asgaros-forum').'</a>';
                 echo '</div>';
             }

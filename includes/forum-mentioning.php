@@ -69,8 +69,8 @@ class AsgarosForumMentioning {
             'asgaros-forum/v1',
             '/suggestions/mentioning/(?P<term>[a-zA-Z0-9-]+)',
             array(
-                'methods' => 'POST',
-                'callback' => array($this, 'mentioning_callback'),
+                'methods'             => 'POST',
+                'callback'            => array($this, 'mentioning_callback'),
                 'permission_callback' => '__return_true',
             )
         );

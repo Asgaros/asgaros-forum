@@ -31,73 +31,73 @@ class AsgarosForumAdmin {
 
     public function set_option_views() {
         $this->option_views = array(
-            'general' => array(
+            'general'       => array(
                 'label' => __('General', 'asgaros-forum'),
-                'icon' => 'fas fa-sliders-h',
+                'icon'  => 'fas fa-sliders-h',
             ),
-            'features' => array(
+            'features'      => array(
                 'label' => __('Features', 'asgaros-forum'),
-                'icon' => 'fas fa-plug',
+                'icon'  => 'fas fa-plug',
             ),
-            'urls' => array(
+            'urls'          => array(
                 'label' => __('URLs & SEO', 'asgaros-forum'),
-                'icon' => 'fas fa-link',
+                'icon'  => 'fas fa-link',
             ),
-            'permissions' => array(
+            'permissions'   => array(
                 'label' => __('Permissions', 'asgaros-forum'),
-                'icon' => 'fas fa-user-shield',
+                'icon'  => 'fas fa-user-shield',
             ),
-            'breadcrumbs' => array(
+            'breadcrumbs'   => array(
                 'label' => __('Breadcrumbs', 'asgaros-forum'),
-                'icon' => 'fas fa-map-marked',
+                'icon'  => 'fas fa-map-marked',
             ),
             'notifications' => array(
                 'label' => __('Notifications', 'asgaros-forum'),
-                'icon' => 'fas fa-envelope',
+                'icon'  => 'fas fa-envelope',
             ),
-            'mentioning' => array(
+            'mentioning'    => array(
                 'label' => __('Mentioning', 'asgaros-forum'),
-                'icon' => 'fas fa-at',
+                'icon'  => 'fas fa-at',
             ),
-            'memberslist' => array(
+            'memberslist'   => array(
                 'label' => __('Members List', 'asgaros-forum'),
-                'icon' => 'fas fa-users',
+                'icon'  => 'fas fa-users',
             ),
-            'profiles' => array(
+            'profiles'      => array(
                 'label' => __('Profiles', 'asgaros-forum'),
-                'icon' => 'fas fa-user',
+                'icon'  => 'fas fa-user',
             ),
-            'uploads' => array(
+            'uploads'       => array(
                 'label' => __('Uploads', 'asgaros-forum'),
-                'icon' => 'fas fa-upload',
+                'icon'  => 'fas fa-upload',
             ),
-            'reports' => array(
+            'reports'       => array(
                 'label' => __('Reports', 'asgaros-forum'),
-                'icon' => 'fas fa-exclamation-triangle',
+                'icon'  => 'fas fa-exclamation-triangle',
             ),
-            'signatures' => array(
+            'signatures'    => array(
                 'label' => __('Signatures', 'asgaros-forum'),
-                'icon' => 'fas fa-signature',
+                'icon'  => 'fas fa-signature',
             ),
-            'activity' => array(
+            'activity'      => array(
                 'label' => __('Activity', 'asgaros-forum'),
-                'icon' => 'fas fa-bullhorn',
+                'icon'  => 'fas fa-bullhorn',
             ),
-            'polls' => array(
+            'polls'         => array(
                 'label' => __('Polls', 'asgaros-forum'),
-                'icon' => 'fas fa-poll-h',
+                'icon'  => 'fas fa-poll-h',
             ),
-            'spoilers' => array(
+            'spoilers'      => array(
                 'label' => __('Spoilers', 'asgaros-forum'),
-                'icon' => 'fas fa-eye-slash',
+                'icon'  => 'fas fa-eye-slash',
             ),
-            'reputation' => array(
+            'reputation'    => array(
                 'label' => __('Reputation', 'asgaros-forum'),
-                'icon' => 'fas fa-medal',
+                'icon'  => 'fas fa-medal',
             ),
-            'statistics' => array(
+            'statistics'    => array(
                 'label' => __('Statistics', 'asgaros-forum'),
-                'icon' => 'fas fa-chart-pie',
+                'icon'  => 'fas fa-chart-pie',
             ),
         );
     }
@@ -458,12 +458,12 @@ class AsgarosForumAdmin {
                 $this->asgarosforum->db->update(
                     $this->asgarosforum->tables->forums,
                     array(
-						'name' => $forum_name,
-						'description' => $forum_description,
-						'icon' => $forum_icon,
-						'sort' => $forum_order,
+						'name'         => $forum_name,
+						'description'  => $forum_description,
+						'icon'         => $forum_icon,
+						'sort'         => $forum_order,
 						'forum_status' => $forum_status,
-						'parent_id' => $forum_category,
+						'parent_id'    => $forum_category,
 						'parent_forum' => $forum_parent_forum,
 					),
                     array('id' => $forum_id),

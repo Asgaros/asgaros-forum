@@ -41,9 +41,9 @@ class AsgarosForumUserGroups {
 			self::$taxonomyName,
 			null,
 			array(
-				'public'        => false,
-                'hierarchical'  => true,
-				'rewrite'       => false,
+				'public'       => false,
+                'hierarchical' => true,
+				'rewrite'      => false,
 			)
 		);
 
@@ -142,7 +142,7 @@ class AsgarosForumUserGroups {
 
         $status = wp_update_term($usergroup_id, self::$taxonomyName, array(
 			'parent' => $category_id,
-			'name' => $name,
+			'name'   => $name,
 		));
 
         // Return possible error.
@@ -254,14 +254,14 @@ class AsgarosForumUserGroups {
         if ($visible_groups_only) {
             $userGroups = get_terms(self::$taxonomyName, array(
 				'hide_empty' => false,
-				'include' => $include,
-				'meta_key' => 'usergroup-visibility',
+				'include'    => $include,
+				'meta_key'   => 'usergroup-visibility',
 				'meta_value' => 'normal',
 			));
         } else {
             $userGroups = get_terms(self::$taxonomyName, array(
 				'hide_empty' => false,
-				'include' => $include,
+				'include'    => $include,
 			));
         }
 
@@ -280,7 +280,7 @@ class AsgarosForumUserGroups {
     public static function getUserGroupsOfCategory($categoryID) {
         return get_terms(self::$taxonomyName, array(
 			'hide_empty' => false,
-			'parent' => $categoryID,
+			'parent'     => $categoryID,
 		));
     }
 
@@ -288,7 +288,7 @@ class AsgarosForumUserGroups {
     public static function getUserGroupCategories($hide_empty = false) {
         $userGroupCategories = get_terms(self::$taxonomyName, array(
 			'hide_empty' => false,
-			'parent' => 0,
+			'parent'     => 0,
 		));
 
         // Hide categories without usergroups.
@@ -376,8 +376,8 @@ class AsgarosForumUserGroups {
 
         if (!empty($user_ids)) {
             $query = new AsgarosForumUserQuery(array(
-                'fields'    => array('ID', 'display_name'),
-                'include'   => $user_ids,
+                'fields'  => array('ID', 'display_name'),
+                'include' => $user_ids,
             ));
 
             return $query->results;

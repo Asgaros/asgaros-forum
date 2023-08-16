@@ -25,8 +25,8 @@ class AsgarosForumContent {
 			self::$taxonomy_name,
 			null,
 			array(
-				'public'        => false,
-				'rewrite'       => false,
+				'public'  => false,
+				'rewrite' => false,
 			)
 		);
     }
@@ -177,15 +177,15 @@ class AsgarosForumContent {
 
         if ($this->get_action() === 'add_topic') {
             $add_topic = array(
-                'forum'         => $this->asgarosforum->current_forum,
-                'subject'       => $this->data_subject,
-                'content'       => $this->data_content,
-                'author'        => $author_id,
-                'upload_list'   => $upload_list,
-                'warning'       => null,
-                'error'         => null,
-                'redirect'      => null,
-                'add_topic'     => true,
+                'forum'       => $this->asgarosforum->current_forum,
+                'subject'     => $this->data_subject,
+                'content'     => $this->data_content,
+                'author'      => $author_id,
+                'upload_list' => $upload_list,
+                'warning'     => null,
+                'error'       => null,
+                'redirect'    => null,
+                'add_topic'   => true,
             );
 
             // apply filter to change topic content
@@ -247,15 +247,15 @@ class AsgarosForumContent {
         } else if ($this->get_action() === 'add_post') {
 
             $add_post = array(
-                'topic'         => $this->asgarosforum->current_topic,
-                'forum'         => $this->asgarosforum->current_forum,
-                'content'       => $this->data_content,
-                'author'        => $author_id,
-                'upload_list'   => $upload_list,
-                'warning'       => null,
-                'error'         => null,
-                'redirect'      => null,
-                'add_post'      => true,
+                'topic'       => $this->asgarosforum->current_topic,
+                'forum'       => $this->asgarosforum->current_forum,
+                'content'     => $this->data_content,
+                'author'      => $author_id,
+                'upload_list' => $upload_list,
+                'warning'     => null,
+                'error'       => null,
+                'redirect'    => null,
+                'add_post'    => true,
             );
 
             // apply filter to change post content
@@ -302,14 +302,14 @@ class AsgarosForumContent {
         } else if ($this->get_action() === 'edit_post') {
 
             $edit_post = array(
-                'subject'       => $this->data_subject,
-                'content'       => $this->data_content,
-                'editor'        => $this->asgarosforum->permissions->currentUserID,
-                'upload_list'   => $upload_list,
-                'warning'       => null,
-                'error'         => null,
-                'redirect'      => null,
-                'edit_post'      => true,
+                'subject'     => $this->data_subject,
+                'content'     => $this->data_content,
+                'editor'      => $this->asgarosforum->permissions->currentUserID,
+                'upload_list' => $upload_list,
+                'warning'     => null,
+                'error'       => null,
+                'redirect'    => null,
+                'edit_post'   => true,
             );
 
             // apply filter to change post content
@@ -320,9 +320,9 @@ class AsgarosForumContent {
                 $date = $this->asgarosforum->current_time();
                 $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $edit_post['upload_list']);
                 $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array(
-					'text' => $edit_post['content'],
-					'uploads' => maybe_serialize($upload_list),
-					'date_edit' => $date,
+					'text'        => $edit_post['content'],
+					'uploads'     => maybe_serialize($upload_list),
+					'date_edit'   => $date,
 					'author_edit' => $edit_post['editor'],
 				), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
@@ -373,14 +373,14 @@ class AsgarosForumContent {
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->forums,
             array(
-				'name' => $name,
-				'parent_id' => $category_id,
+				'name'         => $name,
+				'parent_id'    => $category_id,
 				'parent_forum' => $parent_forum,
-				'description' => $description,
-				'icon' => $icon,
-				'sort' => $order,
+				'description'  => $description,
+				'icon'         => $icon,
+				'sort'         => $order,
 				'forum_status' => $status,
-				'slug' => $forum_slug,
+				'slug'         => $forum_slug,
 			),
             array('%s', '%d', '%d', '%s', '%s', '%d', '%s', '%s')
         );
@@ -410,10 +410,10 @@ class AsgarosForumContent {
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->topics,
             array(
-				'name' => $name,
+				'name'      => $name,
 				'parent_id' => $forum_id,
-				'slug' => $topic_slug,
-				'approved' => $approved,
+				'slug'      => $topic_slug,
+				'approved'  => $approved,
 				'author_id' => $author_id,
 			),
             array('%s', '%d', '%s', '%d', '%d')
@@ -442,12 +442,12 @@ class AsgarosForumContent {
 
         // Insert the post.
         $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array(
-			'text' => $text,
+			'text'      => $text,
 			'parent_id' => $topic_id,
-			'forum_id' => $forum_id,
-			'date' => $date,
+			'forum_id'  => $forum_id,
+			'date'      => $date,
 			'author_id' => $author_id,
-			'uploads' => maybe_serialize($uploads),
+			'uploads'   => maybe_serialize($uploads),
 		), array('%s', '%d', '%d', '%s', '%d', '%s'));
 
         // Return the ID of the inserted post.
@@ -526,10 +526,10 @@ class AsgarosForumContent {
         }
 
         $categories_list = get_terms('asgarosforum-category', array(
-            'hide_empty'    => false,
-            'exclude'       => $ids_categories_excluded,
-            'include'       => $ids_categories_included,
-            'meta_query'    => $meta_query_filter,
+            'hide_empty' => false,
+            'exclude'    => $ids_categories_excluded,
+            'include'    => $ids_categories_included,
+            'meta_query' => $meta_query_filter,
         ));
 
         // Filter categories by usergroups.
@@ -564,17 +564,17 @@ class AsgarosForumContent {
 
         if (!$this->asgarosforum->permissions->isModerator('current')) {
             $meta_query_filter[] = array(
-                'key'       => 'category_access',
-                'value'     => 'moderator',
-                'compare'   => 'NOT LIKE',
+                'key'     => 'category_access',
+                'value'   => 'moderator',
+                'compare' => 'NOT LIKE',
             );
         }
 
         if (!is_user_logged_in()) {
             $meta_query_filter[] = array(
-                'key'       => 'category_access',
-                'value'     => 'loggedin',
-                'compare'   => 'NOT LIKE',
+                'key'     => 'category_access',
+                'value'   => 'loggedin',
+                'compare' => 'NOT LIKE',
             );
         }
 

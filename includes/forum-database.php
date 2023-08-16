@@ -203,12 +203,12 @@ class AsgarosForumDatabase {
                 // Try to create a new page for the forum.
                 $page_id = wp_insert_post(
                     array(
-                        'post_content'      => '[forum]',
-                        'post_title'        => 'Forum',
-                        'post_status'       => 'publish',
-                        'post_type'         => 'page',
-                        'comment_status'    => 'closed',
-                        'ping_status'       => 'closed',
+                        'post_content'   => '[forum]',
+                        'post_title'     => 'Forum',
+                        'post_status'    => 'publish',
+                        'post_type'      => 'page',
+                        'comment_status' => 'closed',
+                        'ping_status'    => 'closed',
                     )
                 );
 
@@ -348,11 +348,11 @@ class AsgarosForumDatabase {
             if ($database_version_installed < 26 && !$first_time_installation) {
                 // Convert moderators.
                 $get_moderators = get_users(array(
-                    'fields'            => array('ID'),
-                    'meta_query'        => array(
+                    'fields'     => array('ID'),
+                    'meta_query' => array(
                         array(
-                            'key'       => 'asgarosforum_moderator',
-                            'compare'   => 'EXISTS',
+                            'key'     => 'asgarosforum_moderator',
+                            'compare' => 'EXISTS',
                         ),
                     ),
                 ));
@@ -367,11 +367,11 @@ class AsgarosForumDatabase {
 
                 // Convert banned users.
                 $get_banned = get_users(array(
-                    'fields'            => array('ID'),
-                    'meta_query'        => array(
+                    'fields'     => array('ID'),
+                    'meta_query' => array(
                         array(
-                            'key'       => 'asgarosforum_banned',
-                            'compare'   => 'EXISTS',
+                            'key'     => 'asgarosforum_banned',
+                            'compare' => 'EXISTS',
                         ),
                     ),
                 ));

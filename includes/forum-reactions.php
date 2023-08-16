@@ -12,12 +12,12 @@ class AsgarosForumReactions {
 
         // Build reactions-list.
         $this->reactions_list['down'] = array(
-            'icon' => 'fas fa-thumbs-down',
+            'icon'               => 'fas fa-thumbs-down',
             'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum'),
         );
 
         $this->reactions_list['up'] = array(
-            'icon' => 'fas fa-thumbs-up',
+            'icon'               => 'fas fa-thumbs-up',
             'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum'),
         );
 
@@ -68,8 +68,8 @@ class AsgarosForumReactions {
                 'asgaros-forum/v1',
                 '/reaction/(?P<post_id>\d+)/(?P<reaction>[a-zA-Z0-9-]+)',
                 array(
-                    'methods' => 'POST',
-                    'callback' => array($this, 'reaction_callback'),
+                    'methods'             => 'POST',
+                    'callback'            => array($this, 'reaction_callback'),
                     'permission_callback' => '__return_true',
                 )
             );
@@ -271,9 +271,9 @@ class AsgarosForumReactions {
         $date = $this->asgarosforum->current_time();
 
         $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array(
-			'post_id' => $post_id,
-			'user_id' => $user_id,
-			'reaction' => $reaction,
+			'post_id'   => $post_id,
+			'user_id'   => $user_id,
+			'reaction'  => $reaction,
 			'author_id' => $author_id,
 			'datestamp' => $date,
 		), array('%d', '%d', '%s', '%d', '%s'));
@@ -284,8 +284,8 @@ class AsgarosForumReactions {
     public function remove_reaction($post_id, $user_id, $reaction) {
 
         $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array(
-			'post_id' => $post_id,
-			'user_id' => $user_id,
+			'post_id'  => $post_id,
+			'user_id'  => $user_id,
 			'reaction' => $reaction,
 		), array('%d', '%d', '%s'));
 
@@ -297,7 +297,7 @@ class AsgarosForumReactions {
         $date = $this->asgarosforum->current_time();
 
         $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array(
-			'reaction' => $reaction,
+			'reaction'  => $reaction,
 			'datestamp' => $date,
 		), array(
 			'post_id' => $post_id,

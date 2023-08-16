@@ -14,9 +14,9 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
 
         parent::__construct(
             array(
-                'singular'  => 'forum',
-                'plural'    => 'forums',
-                'ajax'      => false,
+                'singular' => 'forum',
+                'plural'   => 'forums',
+                'ajax'     => false,
             )
         );
     }
@@ -68,9 +68,9 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
     public function column_status($item) {
 		// Available options for forum-status.
 		$forum_status_options = array(
-			'normal'    => __('Normal', 'asgaros-forum'),
-			'closed'    => __('Closed', 'asgaros-forum'),
-			'approval'  => __('Approval', 'asgaros-forum'),
+			'normal'   => __('Normal', 'asgaros-forum'),
+			'closed'   => __('Closed', 'asgaros-forum'),
+			'approval' => __('Approval', 'asgaros-forum'),
 		);
 
 		$forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);
@@ -102,10 +102,10 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
 
     public function get_columns() {
         $columns = array(
-            'name'      => __('Name:', 'asgaros-forum'),
-            'status'    => __('Status:', 'asgaros-forum'),
-            'sort'      => __('Order:', 'asgaros-forum'),
-            'actions'   => __('Actions:', 'asgaros-forum'),
+            'name'    => __('Name:', 'asgaros-forum'),
+            'status'  => __('Status:', 'asgaros-forum'),
+            'sort'    => __('Order:', 'asgaros-forum'),
+            'actions' => __('Actions:', 'asgaros-forum'),
         );
 
         return $columns;

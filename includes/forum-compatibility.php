@@ -186,8 +186,8 @@ class AsgarosForumCompatibility {
         $usergroup_term_ids = get_terms(
             'asgarosforum-usergroup',
             array(
-                'hide_empty'    => false,
-                'fields'        => 'ids',
+                'hide_empty' => false,
+                'fields'     => 'ids',
             ),
         );
 
@@ -195,8 +195,8 @@ class AsgarosForumCompatibility {
         $category_term_ids = get_terms(
             'asgarosforum-category',
             array(
-                'hide_empty'    => false,
-                'fields'        => 'ids',
+                'hide_empty' => false,
+                'fields'     => 'ids',
             ),
         );
 

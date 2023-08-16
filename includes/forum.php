@@ -32,125 +32,125 @@ class AsgarosForum {
 
     public $options = array();
     public $options_default = array(
-        'forum_title'                       => '',
-        'forum_description'                 => '',
-        'location'                          => 0,
-        'posts_per_page'                    => 10,
-        'topics_per_page'                   => 20,
-        'members_per_page'                  => 25,
-        'allow_shortcodes'                  => false,
-        'embed_content'                     => true,
-        'allow_guest_postings'              => false,
-        'allowed_filetypes'                 => 'jpg,jpeg,gif,png,bmp,pdf',
-        'allow_file_uploads'                => false,
-        'upload_permission'                 => 'loggedin',
-        'hide_uploads_from_guests'          => false,
-        'hide_profiles_from_guests'         => false,
-        'uploads_maximum_number'            => 5,
-        'uploads_maximum_size'              => 5,
-		'uploads_maximum_size_unit'         => 'MB',
-        'uploads_show_thumbnails'           => true,
-        'admin_subscriptions'               => false,
-        'allow_subscriptions'               => true,
-        'notification_sender_name'          => '',
-        'notification_sender_mail'          => '',
-        'receivers_admin_notifications'     => '',
-        'mail_template_new_post_subject'    => '',
-        'mail_template_new_post_message'    => '',
-        'mail_template_new_topic_subject'   => '',
-        'mail_template_new_topic_message'   => '',
-        'mail_template_mentioned_subject'   => '',
-        'mail_template_mentioned_message'   => '',
-        'allow_signatures'                  => false,
-        'signatures_permission'             => 'loggedin',
-        'signatures_html_allowed'           => false,
-        'signatures_html_tags'              => '<br><a><i><b><u><s><img><strong>',
-        'enable_avatars'                    => true,
-        'enable_mentioning'                 => true,
-        'enable_mentioning_suggestions'     => true,
-        'enable_reactions'                  => true,
-        'reactions_show_names'              => true,
-        'enable_search'                     => true,
-        'enable_profiles'                   => true,
-        'enable_memberslist'                => true,
-        'memberslist_filter_normal'         => true,
-        'memberslist_filter_moderator'      => true,
-        'memberslist_filter_administrator'  => true,
-        'memberslist_filter_banned'         => true,
-        'enable_rss'                        => false,
-        'load_fontawesome'                  => true,
-        'load_fontawesome_compat_v4'        => true,
-        'count_topic_views'                 => true,
-        'reports_enabled'                   => true,
-        'reports_notifications'             => true,
-        'memberslist_loggedin_only'         => false,
-        'memberslist_filter_siteadmins'     => false,
-        'show_login_button'                 => true,
-        'show_logout_button'                => true,
-        'show_register_button'              => true,
-        'show_who_is_online'                => true,
-        'show_last_seen'                    => true,
-        'show_newest_member'                => true,
-        'show_statistics'                   => true,
-		'statistics_show_online_usernames'  => true,
-        'enable_breadcrumbs'                => true,
-        'breadcrumbs_show_category'         => true,
-        'highlight_admin'                   => true,
-        'highlight_authors'                 => true,
-        'show_author_posts_counter'         => true,
-        'show_edit_date'                    => true,
-		'minimum_time_between_posts'        => 30,
-        'enable_edit_post'                  => true,
-        'time_limit_edit_posts'             => 0,
-        'enable_delete_post'                => false,
-        'time_limit_delete_posts'           => 180,
-        'enable_delete_topic'               => false,
-        'time_limit_delete_topics'          => 180,
-        'enable_open_topic'                 => false,
-        'enable_close_topic'                => false,
-        'show_description_in_forum'         => false,
-        'require_login'                     => false,
-        'require_login_posts'               => false,
-        'create_blog_topics_id'             => 0,
-        'approval_for'                      => 'guests',
-        'enable_activity'                   => true,
-        'activity_days'                     => 14,
-        'activities_per_page'               => 50,
-        'enable_polls'                      => true,
-        'polls_permission'                  => 'loggedin',
-        'polls_results_visible'             => false,
-        'enable_seo_urls'                   => true,
-        'seo_url_mode_content'              => 'slug',
-        'seo_url_mode_profile'              => 'slug',
-        'custom_url_login'                  => '',
-        'custom_url_register'               => '',
-        'view_name_activity'                => 'activity',
-        'view_name_subscriptions'           => 'subscriptions',
-        'view_name_search'                  => 'search',
-        'view_name_forum'                   => 'forum',
-        'view_name_topic'                   => 'topic',
-        'view_name_addtopic'                => 'addtopic',
-        'view_name_movetopic'               => 'movetopic',
-        'view_name_addpost'                 => 'addpost',
-        'view_name_editpost'                => 'editpost',
-        'view_name_markallread'             => 'markallread',
-        'view_name_members'                 => 'members',
-        'view_name_profile'                 => 'profile',
-        'view_name_history'                 => 'history',
-        'view_name_unread'                  => 'unread',
-        'view_name_unapproved'              => 'unapproved',
-        'view_name_reports'                 => 'reports',
-        'title_separator'                   => '-',
-        'enable_spoilers'                   => true,
-        'hide_spoilers_from_guests'         => false,
-        'subforums_location'                => 'above',
-        'enable_reputation'                 => true,
-        'reputation_level_1_posts'          => 10,
-        'reputation_level_2_posts'          => 25,
-        'reputation_level_3_posts'          => 100,
-        'reputation_level_4_posts'          => 250,
-        'reputation_level_5_posts'          => 1000,
-        'activity_timestamp_format'         => 'relative',
+        'forum_title'                      => '',
+        'forum_description'                => '',
+        'location'                         => 0,
+        'posts_per_page'                   => 10,
+        'topics_per_page'                  => 20,
+        'members_per_page'                 => 25,
+        'allow_shortcodes'                 => false,
+        'embed_content'                    => true,
+        'allow_guest_postings'             => false,
+        'allowed_filetypes'                => 'jpg,jpeg,gif,png,bmp,pdf',
+        'allow_file_uploads'               => false,
+        'upload_permission'                => 'loggedin',
+        'hide_uploads_from_guests'         => false,
+        'hide_profiles_from_guests'        => false,
+        'uploads_maximum_number'           => 5,
+        'uploads_maximum_size'             => 5,
+		'uploads_maximum_size_unit'        => 'MB',
+        'uploads_show_thumbnails'          => true,
+        'admin_subscriptions'              => false,
+        'allow_subscriptions'              => true,
+        'notification_sender_name'         => '',
+        'notification_sender_mail'         => '',
+        'receivers_admin_notifications'    => '',
+        'mail_template_new_post_subject'   => '',
+        'mail_template_new_post_message'   => '',
+        'mail_template_new_topic_subject'  => '',
+        'mail_template_new_topic_message'  => '',
+        'mail_template_mentioned_subject'  => '',
+        'mail_template_mentioned_message'  => '',
+        'allow_signatures'                 => false,
+        'signatures_permission'            => 'loggedin',
+        'signatures_html_allowed'          => false,
+        'signatures_html_tags'             => '<br><a><i><b><u><s><img><strong>',
+        'enable_avatars'                   => true,
+        'enable_mentioning'                => true,
+        'enable_mentioning_suggestions'    => true,
+        'enable_reactions'                 => true,
+        'reactions_show_names'             => true,
+        'enable_search'                    => true,
+        'enable_profiles'                  => true,
+        'enable_memberslist'               => true,
+        'memberslist_filter_normal'        => true,
+        'memberslist_filter_moderator'     => true,
+        'memberslist_filter_administrator' => true,
+        'memberslist_filter_banned'        => true,
+        'enable_rss'                       => false,
+        'load_fontawesome'                 => true,
+        'load_fontawesome_compat_v4'       => true,
+        'count_topic_views'                => true,
+        'reports_enabled'                  => true,
+        'reports_notifications'            => true,
+        'memberslist_loggedin_only'        => false,
+        'memberslist_filter_siteadmins'    => false,
+        'show_login_button'                => true,
+        'show_logout_button'               => true,
+        'show_register_button'             => true,
+        'show_who_is_online'               => true,
+        'show_last_seen'                   => true,
+        'show_newest_member'               => true,
+        'show_statistics'                  => true,
+		'statistics_show_online_usernames' => true,
+        'enable_breadcrumbs'               => true,
+        'breadcrumbs_show_category'        => true,
+        'highlight_admin'                  => true,
+        'highlight_authors'                => true,
+        'show_author_posts_counter'        => true,
+        'show_edit_date'                   => true,
+		'minimum_time_between_posts'       => 30,
+        'enable_edit_post'                 => true,
+        'time_limit_edit_posts'            => 0,
+        'enable_delete_post'               => false,
+        'time_limit_delete_posts'          => 180,
+        'enable_delete_topic'              => false,
+        'time_limit_delete_topics'         => 180,
+        'enable_open_topic'                => false,
+        'enable_close_topic'               => false,
+        'show_description_in_forum'        => false,
+        'require_login'                    => false,
+        'require_login_posts'              => false,
+        'create_blog_topics_id'            => 0,
+        'approval_for'                     => 'guests',
+        'enable_activity'                  => true,
+        'activity_days'                    => 14,
+        'activities_per_page'              => 50,
+        'enable_polls'                     => true,
+        'polls_permission'                 => 'loggedin',
+        'polls_results_visible'            => false,
+        'enable_seo_urls'                  => true,
+        'seo_url_mode_content'             => 'slug',
+        'seo_url_mode_profile'             => 'slug',
+        'custom_url_login'                 => '',
+        'custom_url_register'              => '',
+        'view_name_activity'               => 'activity',
+        'view_name_subscriptions'          => 'subscriptions',
+        'view_name_search'                 => 'search',
+        'view_name_forum'                  => 'forum',
+        'view_name_topic'                  => 'topic',
+        'view_name_addtopic'               => 'addtopic',
+        'view_name_movetopic'              => 'movetopic',
+        'view_name_addpost'                => 'addpost',
+        'view_name_editpost'               => 'editpost',
+        'view_name_markallread'            => 'markallread',
+        'view_name_members'                => 'members',
+        'view_name_profile'                => 'profile',
+        'view_name_history'                => 'history',
+        'view_name_unread'                 => 'unread',
+        'view_name_unapproved'             => 'unapproved',
+        'view_name_reports'                => 'reports',
+        'title_separator'                  => '-',
+        'enable_spoilers'                  => true,
+        'hide_spoilers_from_guests'        => false,
+        'subforums_location'               => 'above',
+        'enable_reputation'                => true,
+        'reputation_level_1_posts'         => 10,
+        'reputation_level_2_posts'         => 25,
+        'reputation_level_3_posts'         => 100,
+        'reputation_level_4_posts'         => 250,
+        'reputation_level_5_posts'         => 1000,
+        'activity_timestamp_format'        => 'relative',
     );
     public $options_editor = array(
         'media_buttons' => false,
@@ -716,8 +716,8 @@ class AsgarosForum {
 			'wp-api',
 			'wpApiSettings',
 			array(
-				'root' => esc_url_raw(rest_url()),
-				'nonce' => wp_create_nonce('wp_rest'),
+				'root'    => esc_url_raw(rest_url()),
+				'nonce'   => wp_create_nonce('wp_rest'),
 				'topicid' => absint($this->current_topic),
 			)
 		);
@@ -790,9 +790,9 @@ class AsgarosForum {
     // Adds a new notice to the notices array.
     public function add_notice($notice_message, $notice_link = false, $notice_icon = false) {
         $this->notices[] = array(
-            'message'   => $notice_message,
-            'link'      => $notice_link,
-            'icon'      => $notice_icon,
+            'message' => $notice_message,
+            'link'    => $notice_link,
+            'icon'    => $notice_icon,
         );
     }
 
@@ -1155,7 +1155,7 @@ class AsgarosForum {
 				if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic)) {
 					$delete_topic_link = $this->get_link('topic', $this->current_topic, array(
 						'delete_topic' => 1,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic'),
+						'_wpnonce'     => wp_create_nonce('asgaros_forum_delete_topic'),
 					));
 
 					echo '<div class="forum-menu">';
@@ -1184,7 +1184,7 @@ class AsgarosForum {
         if ($this->permissions->isModerator('current')) {
             echo '<form method="post" action="'.esc_url($this->get_link('movetopic', absint($this->current_topic), array(
 				'move_topic' => 1,
-				'_wpnonce' => wp_create_nonce('asgaros_forum_move_topic'),
+				'_wpnonce'   => wp_create_nonce('asgaros_forum_move_topic'),
 			))).'">';
             echo '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
             echo '<div class="content-container">';
@@ -1752,7 +1752,7 @@ class AsgarosForum {
             // Delete button.
             $delete_topic_link = $this->get_link('topic', $this->current_topic, array(
 				'delete_topic' => 1,
-				'_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic'),
+				'_wpnonce'     => wp_create_nonce('asgaros_forum_delete_topic'),
 			));
 
             $menu .= '<a class="button button-red" href="'.$delete_topic_link.'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
@@ -1776,7 +1776,7 @@ class AsgarosForum {
 							// Undo sticky button.
 							$menu .= '<a class="button button-neutral topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array(
 								'unsticky_topic' => 1,
-								'_wpnonce' => wp_create_nonce('asgaros_forum_unsticky_topic'),
+								'_wpnonce'       => wp_create_nonce('asgaros_forum_unsticky_topic'),
 							)).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Unsticky', 'asgaros-forum');
@@ -1785,7 +1785,7 @@ class AsgarosForum {
 							// Sticky button.
 							$menu .= '<a class="button button-neutral topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array(
 								'sticky_topic' => 1,
-								'_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic'),
+								'_wpnonce'     => wp_create_nonce('asgaros_forum_sticky_topic'),
 							)).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Sticky', 'asgaros-forum');
@@ -1799,7 +1799,7 @@ class AsgarosForum {
                     if ($this->permissions->can_open_topic($current_user_id, $this->current_topic)) {
                         $menu .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array(
 							'open_topic' => 1,
-							'_wpnonce' => wp_create_nonce('asgaros_forum_open_topic'),
+							'_wpnonce'   => wp_create_nonce('asgaros_forum_open_topic'),
 						)).'">';
                             $menu .= '<span class="menu-icon fas fa-unlock"></span>';
                             $menu .= __('Open', 'asgaros-forum');
@@ -1810,7 +1810,7 @@ class AsgarosForum {
                     if ($this->permissions->can_close_topic($current_user_id, $this->current_topic)) {
                         $menu .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array(
 							'close_topic' => 1,
-							'_wpnonce' => wp_create_nonce('asgaros_forum_close_topic'),
+							'_wpnonce'    => wp_create_nonce('asgaros_forum_close_topic'),
 						)).'">';
                             $menu .= '<span class="menu-icon fas fa-lock"></span>';
                             $menu .= __('Close', 'asgaros-forum');
@@ -1832,7 +1832,7 @@ class AsgarosForum {
                 if (!$this->approval->is_topic_approved($this->current_topic)) {
                     $menu .= '<a class="button button-green" href="'.$this->get_link('topic', $this->current_topic, array(
 						'approve_topic' => 1,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_approve_topic'),
+						'_wpnonce'      => wp_create_nonce('asgaros_forum_approve_topic'),
 					)).'">';
                         $menu .= '<span class="menu-icon fas fa-check"></span>';
                         $menu .= __('Approve', 'asgaros-forum');
@@ -1859,9 +1859,9 @@ class AsgarosForum {
                 if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id, $post_date) && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
                     $delete_post_link = $this->get_link('topic', $this->current_topic, array(
-						'post' => $post_id,
+						'post'        => $post_id,
 						'remove_post' => 1,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_delete_post'),
+						'_wpnonce'    => wp_create_nonce('asgaros_forum_delete_post'),
 					));
 
                     $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$delete_post_link.'">';
@@ -2395,7 +2395,7 @@ class AsgarosForum {
 		echo '<li><input type="radio" id="forum_reassign1" name="forum_reassign" value="yes">';
 		echo '<label for="forum_reassign1">'.esc_html__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
         wp_dropdown_users(array(
-			'name' => 'forum_reassign_user',
+			'name'    => 'forum_reassign_user',
 			'exclude' => $userids,
 		));
 		echo '</li>';
