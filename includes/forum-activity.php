@@ -176,7 +176,7 @@ class AsgarosForumActivity {
                 'menu_link_text'    => esc_html__('Activity', 'asgaros-forum'),
                 'menu_url'          => $activity_link,
                 'menu_login_status' => 0,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }

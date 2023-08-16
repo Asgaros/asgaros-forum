@@ -6,7 +6,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'asgarosforumsearch_widget',
-			'description' => __('A search form for Asgaros Forum.', 'asgaros-forum')
+			'description' => __('A search form for Asgaros Forum.', 'asgaros-forum'),
 		);
 		parent::__construct('asgarosforumsearch_widget', __('Asgaros Forum: Search', 'asgaros-forum'), $widget_ops);
 	}

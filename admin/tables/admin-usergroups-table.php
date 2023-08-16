@@ -16,7 +16,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
             array(
                 'singular'  => 'usergroup',
                 'plural'    => 'usergroups',
-                'ajax'      => false
+                'ajax'      => false,
             )
         );
     }
@@ -86,7 +86,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
             'name'          => __('Name:', 'asgaros-forum'),
             'visibility'    => __('Visibility:', 'asgaros-forum'),
             'auto_add'      => __('Automatically Add:', 'asgaros-forum'),
-            'actions'       => __('Actions:', 'asgaros-forum')
+            'actions'       => __('Actions:', 'asgaros-forum'),
         );
 
         return $columns;

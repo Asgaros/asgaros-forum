@@ -208,7 +208,7 @@ class AsgarosForumDatabase {
                         'post_status'       => 'publish',
                         'post_type'         => 'page',
                         'comment_status'    => 'closed',
-                        'ping_status'       => 'closed'
+                        'ping_status'       => 'closed',
                     )
                 );
 
@@ -352,9 +352,9 @@ class AsgarosForumDatabase {
                     'meta_query'        => array(
                         array(
                             'key'       => 'asgarosforum_moderator',
-                            'compare'   => 'EXISTS'
-                        )
-                    )
+                            'compare'   => 'EXISTS',
+                        ),
+                    ),
                 ));
 
                 if (!empty($get_moderators)) {
@@ -371,9 +371,9 @@ class AsgarosForumDatabase {
                     'meta_query'        => array(
                         array(
                             'key'       => 'asgarosforum_banned',
-                            'compare'   => 'EXISTS'
-                        )
-                    )
+                            'compare'   => 'EXISTS',
+                        ),
+                    ),
                 ));
 
                 if (!empty($get_banned)) {

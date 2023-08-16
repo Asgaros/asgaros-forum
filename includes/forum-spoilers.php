@@ -21,7 +21,7 @@ class AsgarosForumSpoilers {
         // Set title-attribute.
         $atts = shortcode_atts(
             array(
-                'title' => __('Spoiler', 'asgaros-forum')
+                'title' => __('Spoiler', 'asgaros-forum'),
             ),
             $atts,
             'spoiler'

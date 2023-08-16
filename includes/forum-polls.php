@@ -150,7 +150,7 @@ class AsgarosForumPolls {
             array(
 				'id' => $topic_id,
 				'title' => $title,
-				'multiple' => $multiple
+				'multiple' => $multiple,
 			),
             array('%d', '%s', '%d')
         );
@@ -161,7 +161,7 @@ class AsgarosForumPolls {
                 $this->asgarosforum->tables->polls_options,
                 array(
 					'poll_id' => $topic_id,
-					'title' => $option
+					'title' => $option,
 				),
                 array('%d', '%s')
             );
@@ -174,7 +174,7 @@ class AsgarosForumPolls {
             $this->asgarosforum->tables->polls,
             array(
 				'title' => $title,
-				'multiple' => $multiple
+				'multiple' => $multiple,
 			),
             array('id' => $poll_id),
             array('%s', '%d'),
@@ -188,7 +188,7 @@ class AsgarosForumPolls {
                 array('title' => $value),
                 array(
 					'id' => $key,
-					'poll_id' => $poll_id
+					'poll_id' => $poll_id,
 				),
                 array('%s'),
                 array('%d', '%d')
@@ -344,7 +344,7 @@ class AsgarosForumPolls {
                 array(
 					'poll_id' => $poll->id,
 					'option_id' => $vote,
-					'user_id' => $user_id
+					'user_id' => $user_id,
 				),
                 array('%d', '%d', '%d')
             );

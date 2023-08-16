@@ -261,7 +261,7 @@ class AsgarosForumProfile {
                     if (!empty($userData->first_name)) {
                         $profileRows['first_name'] = array(
                             'title' => __('First Name:', 'asgaros-forum'),
-                            'value' => $userData->first_name
+                            'value' => $userData->first_name,
                         );
                     }
 
@@ -272,7 +272,7 @@ class AsgarosForumProfile {
                         $profileRows['usergroup'] = array(
                             'title' => __('Usergroups:', 'asgaros-forum'),
                             'value' => $userGroups,
-                            'type'  => 'usergroups'
+                            'type'  => 'usergroups',
                         );
                     }
 
@@ -443,7 +443,7 @@ class AsgarosForumProfile {
                     'menu_link_text'    => esc_html__('Profile', 'asgaros-forum'),
                     'menu_url'          => $profileLink,
                     'menu_login_status' => 1,
-                    'menu_new_tab'      => false
+                    'menu_new_tab'      => false,
                 );
             }
         }

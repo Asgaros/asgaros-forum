@@ -26,7 +26,7 @@ class AsgarosForumContent {
 			null,
 			array(
 				'public'        => false,
-				'rewrite'       => false
+				'rewrite'       => false,
 			)
 		);
     }
@@ -323,7 +323,7 @@ class AsgarosForumContent {
 					'text' => $edit_post['content'],
 					'uploads' => maybe_serialize($upload_list),
 					'date_edit' => $date,
-					'author_edit' => $edit_post['editor']
+					'author_edit' => $edit_post['editor'],
 				), array('id' => $this->asgarosforum->current_post), array('%s', '%s', '%s', '%d'), array('%d'));
 
                 if ($this->asgarosforum->is_first_post($this->asgarosforum->current_post) && !empty($edit_post['subject'])) {
@@ -380,7 +380,7 @@ class AsgarosForumContent {
 				'icon' => $icon,
 				'sort' => $order,
 				'forum_status' => $status,
-				'slug' => $forum_slug
+				'slug' => $forum_slug,
 			),
             array('%s', '%d', '%d', '%s', '%s', '%d', '%s', '%s')
         );
@@ -414,7 +414,7 @@ class AsgarosForumContent {
 				'parent_id' => $forum_id,
 				'slug' => $topic_slug,
 				'approved' => $approved,
-				'author_id' => $author_id
+				'author_id' => $author_id,
 			),
             array('%s', '%d', '%s', '%d', '%d')
         );
@@ -447,7 +447,7 @@ class AsgarosForumContent {
 			'forum_id' => $forum_id,
 			'date' => $date,
 			'author_id' => $author_id,
-			'uploads' => maybe_serialize($uploads)
+			'uploads' => maybe_serialize($uploads),
 		), array('%s', '%d', '%d', '%s', '%d', '%s'));
 
         // Return the ID of the inserted post.
@@ -529,7 +529,7 @@ class AsgarosForumContent {
             'hide_empty'    => false,
             'exclude'       => $ids_categories_excluded,
             'include'       => $ids_categories_included,
-            'meta_query'    => $meta_query_filter
+            'meta_query'    => $meta_query_filter,
         ));
 
         // Filter categories by usergroups.
@@ -566,7 +566,7 @@ class AsgarosForumContent {
             $meta_query_filter[] = array(
                 'key'       => 'category_access',
                 'value'     => 'moderator',
-                'compare'   => 'NOT LIKE'
+                'compare'   => 'NOT LIKE',
             );
         }
 
@@ -574,7 +574,7 @@ class AsgarosForumContent {
             $meta_query_filter[] = array(
                 'key'       => 'category_access',
                 'value'     => 'loggedin',
-                'compare'   => 'NOT LIKE'
+                'compare'   => 'NOT LIKE',
             );
         }
 

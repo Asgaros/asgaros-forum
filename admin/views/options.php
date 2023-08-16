@@ -78,7 +78,7 @@ if (!defined('ABSPATH')) exit;
 									'selected' => esc_attr($this->asgarosforum->options['location']),
 									'name' => 'location',
 									'id' => 'location',
-									'post_status' => array('publish', 'pending', 'draft', 'private')
+									'post_status' => array('publish', 'pending', 'draft', 'private'),
 								));
                                 echo '<span class="description">'.esc_html__('Page which contains the [forum]-shortcode.', 'asgaros-forum').'</span>';
                                 ?>

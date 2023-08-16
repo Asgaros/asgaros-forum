@@ -18,7 +18,7 @@ class AsgarosForumAppearance {
 		'custom_unread_indicator_color' => '#256db3',
 		'custom_font'                   => 'Verdana, Tahoma, sans-serif',
 		'custom_font_size'              => '13px',
-		'custom_css'                    => ''
+		'custom_css'                    => '',
 	);
 
 	public function __construct($object) {

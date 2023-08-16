@@ -73,7 +73,7 @@ class AsgarosForumMembersList {
                 'menu_link_text'    => esc_html__('Members', 'asgaros-forum'),
                 'menu_url'          => $membersLink,
                 'menu_login_status' => $loginStatus,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }
@@ -183,7 +183,7 @@ class AsgarosForumMembersList {
 
 		echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('members', false, array(
 			'filter_type' => $filter_type,
-			'filter_name' => $filter_name
+			'filter_name' => $filter_name,
 		))).'">'.esc_html($title).'</a>';
 
 		if ($filter_type === $this->filter_type && $filter_name == $this->filter_name) {

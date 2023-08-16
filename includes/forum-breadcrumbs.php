@@ -15,7 +15,7 @@ class AsgarosForumBreadCrumbs {
     public function add_breadcrumb($link, $title) {
         $this->breadcrumbs_links[] = array(
             'link'      => $link,
-            'title'     => $title
+            'title'     => $title,
         );
     }
 

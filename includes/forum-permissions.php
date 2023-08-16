@@ -570,14 +570,14 @@ class AsgarosForumPermissions {
             case 'role':
                 $query = new AsgarosForumUserQuery(array(
 					'fields' => array('ID', 'display_name'),
-					'meta_key' => 'asgarosforum_role'
+					'meta_key' => 'asgarosforum_role',
 				));
                 $data = $query->results;
             break;
             case 'siteadmin':
                 $query = new AsgarosForumUserQuery(array(
 					'fields' => array('ID', 'display_name'),
-					'role' => 'administrator'
+					'role' => 'administrator',
 				));
                 $data = $query->results;
             break;
@@ -592,7 +592,7 @@ class AsgarosForumPermissions {
                 $query = new AsgarosForumUserQuery(array(
 					'fields' => array('ID', 'display_name'),
 					'meta_key' => 'asgarosforum_role',
-					'meta_value' => 'moderator'
+					'meta_value' => 'moderator',
 				));
                 $users_moderator = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
@@ -603,7 +603,7 @@ class AsgarosForumPermissions {
                 $query = new AsgarosForumUserQuery(array(
 					'fields' => array('ID', 'display_name'),
 					'meta_key' => 'asgarosforum_role',
-					'meta_value' => 'administrator'
+					'meta_value' => 'administrator',
 				));
                 $users_administrator = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
@@ -614,7 +614,7 @@ class AsgarosForumPermissions {
                 $query = new AsgarosForumUserQuery(array(
 					'fields' => array('ID', 'display_name'),
 					'meta_key' => 'asgarosforum_role',
-					'meta_value' => 'banned'
+					'meta_value' => 'banned',
 				));
                 $users_banned = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');

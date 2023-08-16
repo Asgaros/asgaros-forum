@@ -112,7 +112,7 @@ class AsgarosForumOnline {
         $query = new AsgarosForumUserQuery(array(
 			'meta_key' => 'asgarosforum_online_timestamp',
 			'meta_value' => $minimum_check_time,
-			'meta_compare' => '>='
+			'meta_compare' => '>=',
 		));
         $results_stamp = $query->results;
 
@@ -144,7 +144,7 @@ class AsgarosForumOnline {
                 $newest_member = get_users(array(
 					'orderby' => 'ID',
 					'order' => 'DESC',
-					'number' => 1
+					'number' => 1,
 				));
 
                 echo '<span class="online-users-icon fas fa-user"></span>';

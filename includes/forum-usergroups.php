@@ -43,7 +43,7 @@ class AsgarosForumUserGroups {
 			array(
 				'public'        => false,
                 'hierarchical'  => true,
-				'rewrite'       => false
+				'rewrite'       => false,
 			)
 		);
 
@@ -142,7 +142,7 @@ class AsgarosForumUserGroups {
 
         $status = wp_update_term($usergroup_id, self::$taxonomyName, array(
 			'parent' => $category_id,
-			'name' => $name
+			'name' => $name,
 		));
 
         // Return possible error.
@@ -256,12 +256,12 @@ class AsgarosForumUserGroups {
 				'hide_empty' => false,
 				'include' => $include,
 				'meta_key' => 'usergroup-visibility',
-				'meta_value' => 'normal'
+				'meta_value' => 'normal',
 			));
         } else {
             $userGroups = get_terms(self::$taxonomyName, array(
 				'hide_empty' => false,
-				'include' => $include
+				'include' => $include,
 			));
         }
 
@@ -280,7 +280,7 @@ class AsgarosForumUserGroups {
     public static function getUserGroupsOfCategory($categoryID) {
         return get_terms(self::$taxonomyName, array(
 			'hide_empty' => false,
-			'parent' => $categoryID
+			'parent' => $categoryID,
 		));
     }
 
@@ -288,7 +288,7 @@ class AsgarosForumUserGroups {
     public static function getUserGroupCategories($hide_empty = false) {
         $userGroupCategories = get_terms(self::$taxonomyName, array(
 			'hide_empty' => false,
-			'parent' => 0
+			'parent' => 0,
 		));
 
         // Hide categories without usergroups.
@@ -377,7 +377,7 @@ class AsgarosForumUserGroups {
         if (!empty($user_ids)) {
             $query = new AsgarosForumUserQuery(array(
                 'fields'    => array('ID', 'display_name'),
-                'include'   => $user_ids
+                'include'   => $user_ids,
             ));
 
             return $query->results;
@@ -652,7 +652,7 @@ class AsgarosForumUserGroups {
         if (self::$asgarosforum->memberslist->functionality_enabled() && !is_admin()) {
             $link = self::$asgarosforum->rewrite->get_link('members', false, array(
 				'filter_type' => 'group',
-				'filter_name' => $usergroup_object->term_id
+				'filter_name' => $usergroup_object->term_id,
 			));
 
             $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; background-color: '.$color.'40 !important; font-weight: '.$font_weight.' !important;">';

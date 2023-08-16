@@ -16,7 +16,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
             array(
                 'singular'  => 'forum',
                 'plural'    => 'forums',
-                'ajax'      => false
+                'ajax'      => false,
             )
         );
     }
@@ -105,7 +105,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
             'name'      => __('Name:', 'asgaros-forum'),
             'status'    => __('Status:', 'asgaros-forum'),
             'sort'      => __('Order:', 'asgaros-forum'),
-            'actions'   => __('Actions:', 'asgaros-forum')
+            'actions'   => __('Actions:', 'asgaros-forum'),
         );
 
         return $columns;

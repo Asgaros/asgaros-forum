@@ -22,7 +22,7 @@ class AsgarosForumUserQuery {
 	// Standard response when the query should not return any rows.
 	protected $no_results = array(
 		'join' => '',
-		'where' => '0 = 1'
+		'where' => '0 = 1',
 	);
 
 	// Constructor.
@@ -46,7 +46,7 @@ class AsgarosForumUserQuery {
 			'meta_value'        => false,
 			'meta_compare'      => '=',
 			'role'              => false,
-			'populate_extras'   => false
+			'populate_extras'   => false,
 		));
 
 		// Get user ids. If the user_ids param is present, we skip the query.
@@ -82,7 +82,7 @@ class AsgarosForumUserQuery {
 			'where'   => array('1=1'),
 			'orderby' => '',
 			'order'   => '',
-			'limit'   => ''
+			'limit'   => '',
 		);
 
 		// Determines the sort order, which means it also determines where the
@@ -204,7 +204,7 @@ class AsgarosForumUserQuery {
 			'fields'      => $this->query_vars['fields'],
 			'include'     => $this->user_ids,
 			'count_total' => false,
-			'orderby'     => 'ID'
+			'orderby'     => 'ID',
 		));
 
 		$this->total_users = count($wp_user_query->results);
@@ -250,7 +250,7 @@ class AsgarosForumUserQuery {
 			$meta_sql = array(
 				'select' => "SELECT user_id, meta_key, meta_value",
 				'from'   => "FROM $wpdb->usermeta",
-				'where'  => $wpdb->prepare("WHERE meta_key = %s", $this->query_vars['meta_key'])
+				'where'  => $wpdb->prepare("WHERE meta_key = %s", $this->query_vars['meta_key']),
 			);
 
 			if ($this->query_vars['meta_value'] !== false) {

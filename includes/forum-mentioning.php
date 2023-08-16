@@ -71,7 +71,7 @@ class AsgarosForumMentioning {
             array(
                 'methods' => 'POST',
                 'callback' => array($this, 'mentioning_callback'),
-                'permission_callback' => '__return_true'
+                'permission_callback' => '__return_true',
             )
         );
     }
@@ -257,7 +257,7 @@ class AsgarosForumMentioning {
                     '###AUTHOR###'  => $author_name,
                     '###LINK###'    => '<a href="'.$post_link.'">'.$post_link.'</a>',
                     '###TITLE###'   => esc_html(stripslashes($topic->name)),
-                    '###CONTENT###' => $message_content
+                    '###CONTENT###' => $message_content,
                 );
 
                 $notification_subject = $this->asgarosforum->options['mail_template_mentioned_subject'];

@@ -19,7 +19,7 @@ function mycred_setup_asgarosforum_hook($installed) {
     $installed['hook_asgarosforum'] = array(
         'title'       => __('Asgaros Forum', 'asgaros-forum'),
         'description' => __('Awards %_plural% for Asgaros Forum actions.', 'asgaros-forum'),
-        'callback'    => array('MyCRED_AsgarosForum')
+        'callback'    => array('MyCRED_AsgarosForum'),
     );
 
     return $installed;
@@ -39,38 +39,38 @@ function mycred_load_asgarosforum_hook() {
                     'new_topic'     => array(
                         'creds'     => 1,
                         'log'       => __('%plural% for new forum topic', 'asgaros-forum'),
-                        'limit'     => '0/x'
+                        'limit'     => '0/x',
                     ),
                     'delete_topic'  => array(
                         'creds'     => -1,
 						/* translators: singular label of point-type for deduction when deleting forum topic */
-                        'log'       => __('%singular% deduction for deleted forum topic', 'asgaros-forum')
+                        'log'       => __('%singular% deduction for deleted forum topic', 'asgaros-forum'),
                     ),
                     'new_post'      => array(
                         'creds'     => 1,
                         'log'       => __('%plural% for new forum post', 'asgaros-forum'),
                         'author'    => 0,
-                        'limit'     => '0/x'
+                        'limit'     => '0/x',
                     ),
                     'delete_post'   => array(
                         'creds'     => -1,
 						/* translators: singular label of point-type for deduction when deleting forum post */
-                        'log'       => __('%singular% deduction for deleted forum post', 'asgaros-forum')
+                        'log'       => __('%singular% deduction for deleted forum post', 'asgaros-forum'),
                     ),
                     'received_like' => array(
                         'creds'     => 1,
                         'log'       => __('%plural% for received forum post like', 'asgaros-forum'),
-                        'limit'     => '0/x'
+                        'limit'     => '0/x',
                     ),
                     'received_dislike'   => array(
                         'creds'     => -1,
 						/* translators: singular label of point-type for deduction when receiving forum post dislike */
-                        'log'       => __('%singular% deduction for received forum post dislike', 'asgaros-forum')
+                        'log'       => __('%singular% deduction for received forum post dislike', 'asgaros-forum'),
                     ),
                     'show_points'   => 0,
                     'show_badges'   => 0,
-                    'show_ranks'    => 0
-                )
+                    'show_ranks'    => 0,
+                ),
             ), $hook_prefs, $type);
         }
 

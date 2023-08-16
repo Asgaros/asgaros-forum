@@ -13,12 +13,12 @@ class AsgarosForumReactions {
         // Build reactions-list.
         $this->reactions_list['down'] = array(
             'icon' => 'fas fa-thumbs-down',
-            'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum')
+            'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum'),
         );
 
         $this->reactions_list['up'] = array(
             'icon' => 'fas fa-thumbs-up',
-            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum')
+            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum'),
         );
 
         add_action('init', array($this, 'initialize'));
@@ -70,7 +70,7 @@ class AsgarosForumReactions {
                 array(
                     'methods' => 'POST',
                     'callback' => array($this, 'reaction_callback'),
-                    'permission_callback' => '__return_true'
+                    'permission_callback' => '__return_true',
                 )
             );
         }
@@ -275,7 +275,7 @@ class AsgarosForumReactions {
 			'user_id' => $user_id,
 			'reaction' => $reaction,
 			'author_id' => $author_id,
-			'datestamp' => $date
+			'datestamp' => $date,
 		), array('%d', '%d', '%s', '%d', '%s'));
 
         do_action('asgarosforum_after_add_reaction', $post_id, $user_id, $reaction);
@@ -286,7 +286,7 @@ class AsgarosForumReactions {
         $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array(
 			'post_id' => $post_id,
 			'user_id' => $user_id,
-			'reaction' => $reaction
+			'reaction' => $reaction,
 		), array('%d', '%d', '%s'));
 
         do_action('asgarosforum_after_remove_reaction', $post_id, $user_id, $reaction);
@@ -298,10 +298,10 @@ class AsgarosForumReactions {
 
         $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array(
 			'reaction' => $reaction,
-			'datestamp' => $date
+			'datestamp' => $date,
 		), array(
 			'post_id' => $post_id,
-			'user_id' => $user_id
+			'user_id' => $user_id,
 		), array('%s', '%s'), array('%d', '%d'));
 
         do_action('asgarosforum_after_update_reaction', $post_id, $user_id, $reaction);

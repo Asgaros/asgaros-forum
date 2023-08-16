@@ -49,7 +49,7 @@ class AsgarosForumEditor {
 			'wp_add_media',
 			'wp_adv',
 			'wp_help',
-			'wp_more'
+			'wp_more',
 		);
 
         if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
@@ -72,7 +72,7 @@ class AsgarosForumEditor {
 				'undo',
 				'redo',
 				'blockquote',
-				'link'
+				'link',
 			);
 
 			// Find non-default editor buttons.

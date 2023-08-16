@@ -10,7 +10,7 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
         $this->asgarosforum = $asgarosforum;
         $widget_ops = array(
 			'classname' => 'asgarosforumrecentposts_widget',
-			'description' => __('Shows recent posts in Asgaros Forum.', 'asgaros-forum')
+			'description' => __('Shows recent posts in Asgaros Forum.', 'asgaros-forum'),
 		);
 		parent::__construct('asgarosforumrecentposts_widget', __('Asgaros Forum: Recent Posts', 'asgaros-forum'), $widget_ops);
     }

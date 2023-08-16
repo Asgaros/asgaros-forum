@@ -106,7 +106,7 @@ class AsgarosForumApproval {
             '###AUTHOR###'  => $author_name,
             '###LINK###'    => '<a href="'.$topic_link.'">'.$topic_link.'</a>',
             '###TITLE###'   => $topic_name,
-            '###CONTENT###' => $message_content
+            '###CONTENT###' => $message_content,
         );
 
         $notification_message = __('Hello ###USERNAME###,<br><br>You received this message because there is a new unapproved forum-topic.<br><br>Topic:<br>###TITLE###<br><br>Author:<br>###AUTHOR###<br><br>Text:<br>###CONTENT###<br><br>Link:<br>###LINK###', 'asgaros-forum');

@@ -156,7 +156,7 @@ class AsgarosForum {
         'media_buttons' => false,
         'editor_height' => 250,
         'teeny'         => false,
-        'quicktags'     => false
+        'quicktags'     => false,
     );
     public $cache          = array();   // Used to store selected database queries.
     public $rewrite        = null;
@@ -792,7 +792,7 @@ class AsgarosForum {
         $this->notices[] = array(
             'message'   => $notice_message,
             'link'      => $notice_link,
-            'icon'      => $notice_icon
+            'icon'      => $notice_icon,
         );
     }
 
@@ -1155,7 +1155,7 @@ class AsgarosForum {
 				if ($this->permissions->can_delete_topic($current_user_id, $this->current_topic)) {
 					$delete_topic_link = $this->get_link('topic', $this->current_topic, array(
 						'delete_topic' => 1,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic')
+						'_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic'),
 					));
 
 					echo '<div class="forum-menu">';
@@ -1184,7 +1184,7 @@ class AsgarosForum {
         if ($this->permissions->isModerator('current')) {
             echo '<form method="post" action="'.esc_url($this->get_link('movetopic', absint($this->current_topic), array(
 				'move_topic' => 1,
-				'_wpnonce' => wp_create_nonce('asgaros_forum_move_topic')
+				'_wpnonce' => wp_create_nonce('asgaros_forum_move_topic'),
 			))).'">';
             echo '<div class="title-element">'.sprintf(__('Move "<strong>%s</strong>" to new forum:', 'asgaros-forum'), esc_html(stripslashes($this->current_topic_name))).'</div>';
             echo '<div class="content-container">';
@@ -1752,7 +1752,7 @@ class AsgarosForum {
             // Delete button.
             $delete_topic_link = $this->get_link('topic', $this->current_topic, array(
 				'delete_topic' => 1,
-				'_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic')
+				'_wpnonce' => wp_create_nonce('asgaros_forum_delete_topic'),
 			));
 
             $menu .= '<a class="button button-red" href="'.$delete_topic_link.'" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');">';
@@ -1776,7 +1776,7 @@ class AsgarosForum {
 							// Undo sticky button.
 							$menu .= '<a class="button button-neutral topic-button-unsticky" href="'.$this->get_link('topic', $this->current_topic, array(
 								'unsticky_topic' => 1,
-								'_wpnonce' => wp_create_nonce('asgaros_forum_unsticky_topic')
+								'_wpnonce' => wp_create_nonce('asgaros_forum_unsticky_topic'),
 							)).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Unsticky', 'asgaros-forum');
@@ -1785,7 +1785,7 @@ class AsgarosForum {
 							// Sticky button.
 							$menu .= '<a class="button button-neutral topic-button-sticky" href="'.$this->get_link('topic', $this->current_topic, array(
 								'sticky_topic' => 1,
-								'_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic')
+								'_wpnonce' => wp_create_nonce('asgaros_forum_sticky_topic'),
 							)).'">';
 								$menu .= '<span class="menu-icon fas fa-thumbtack"></span>';
 								$menu .= __('Sticky', 'asgaros-forum');
@@ -1799,7 +1799,7 @@ class AsgarosForum {
                     if ($this->permissions->can_open_topic($current_user_id, $this->current_topic)) {
                         $menu .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array(
 							'open_topic' => 1,
-							'_wpnonce' => wp_create_nonce('asgaros_forum_open_topic')
+							'_wpnonce' => wp_create_nonce('asgaros_forum_open_topic'),
 						)).'">';
                             $menu .= '<span class="menu-icon fas fa-unlock"></span>';
                             $menu .= __('Open', 'asgaros-forum');
@@ -1810,7 +1810,7 @@ class AsgarosForum {
                     if ($this->permissions->can_close_topic($current_user_id, $this->current_topic)) {
                         $menu .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array(
 							'close_topic' => 1,
-							'_wpnonce' => wp_create_nonce('asgaros_forum_close_topic')
+							'_wpnonce' => wp_create_nonce('asgaros_forum_close_topic'),
 						)).'">';
                             $menu .= '<span class="menu-icon fas fa-lock"></span>';
                             $menu .= __('Close', 'asgaros-forum');
@@ -1832,7 +1832,7 @@ class AsgarosForum {
                 if (!$this->approval->is_topic_approved($this->current_topic)) {
                     $menu .= '<a class="button button-green" href="'.$this->get_link('topic', $this->current_topic, array(
 						'approve_topic' => 1,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_approve_topic')
+						'_wpnonce' => wp_create_nonce('asgaros_forum_approve_topic'),
 					)).'">';
                         $menu .= '<span class="menu-icon fas fa-check"></span>';
                         $menu .= __('Approve', 'asgaros-forum');
@@ -1861,7 +1861,7 @@ class AsgarosForum {
                     $delete_post_link = $this->get_link('topic', $this->current_topic, array(
 						'post' => $post_id,
 						'remove_post' => 1,
-						'_wpnonce' => wp_create_nonce('asgaros_forum_delete_post')
+						'_wpnonce' => wp_create_nonce('asgaros_forum_delete_post'),
 					));
 
                     $menu .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$delete_post_link.'">';
@@ -1993,7 +1993,7 @@ class AsgarosForum {
             'menu_link_text'    => esc_html__('Forum', 'asgaros-forum'),
             'menu_url'          => $home_url,
             'menu_login_status' => 0,
-            'menu_new_tab'      => false
+            'menu_new_tab'      => false,
         );
     }
 
@@ -2006,7 +2006,7 @@ class AsgarosForum {
                 'menu_link_text'    => esc_html__('Logout', 'asgaros-forum'),
                 'menu_url'          => $logout_url,
                 'menu_login_status' => 1,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }
@@ -2024,7 +2024,7 @@ class AsgarosForum {
                 'menu_link_text'    => esc_html__('Login', 'asgaros-forum'),
                 'menu_url'          => $login_url,
                 'menu_login_status' => 2,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }
@@ -2042,7 +2042,7 @@ class AsgarosForum {
                 'menu_link_text'    => esc_html__('Register', 'asgaros-forum'),
                 'menu_url'          => $register_url,
                 'menu_login_status' => 2,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }
@@ -2396,7 +2396,7 @@ class AsgarosForum {
 		echo '<label for="forum_reassign1">'.esc_html__('Reassign all forum posts to:', 'asgaros-forum').'</label>&nbsp;';
         wp_dropdown_users(array(
 			'name' => 'forum_reassign_user',
-			'exclude' => $userids
+			'exclude' => $userids,
 		));
 		echo '</li>';
 
