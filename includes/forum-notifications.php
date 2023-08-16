@@ -1,7 +1,9 @@
 <?php
 
 // TODO: Maybe use AsgarosForumUserQuery to increase performance.
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumNotifications {
     private $asgarosforum = null;

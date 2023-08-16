@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 add_filter('mycred_all_references', 'mycred_all_asgarosforum_references', 20, 1);
 add_filter('mycred_setup_hooks', 'mycred_setup_asgarosforum_hook', 20, 1);

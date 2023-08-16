@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForum {
     public $version               = '2.6.0';
@@ -1948,15 +1950,21 @@ class AsgarosForum {
 
     public function drawMenuEntries($menu_entries) {
         // Ensure that menu-entries are not empty.
-        if (empty($menu_entries) || !is_array($menu_entries)) return;
+        if (empty($menu_entries) || !is_array($menu_entries)) { return;
+        }
 
         foreach ($menu_entries as $menu_entry) {
             // Check menu entry.
-            if (empty($menu_entry)) continue;
-            if (!isset($menu_entry['menu_new_tab'])) $menu_entry['menu_new_tab']           = false;
-            if (!isset($menu_entry['menu_url'])) $menu_entry['menu_url']                   = '/';
-            if (!isset($menu_entry['menu_login_status'])) $menu_entry['menu_login_status'] = 0;
-            if (!isset($menu_entry['menu_link_text'])) $menu_entry['menu_link_text']       = __('Link Text Missing', 'asgaros-forum');
+            if (empty($menu_entry)) { continue;
+            }
+            if (!isset($menu_entry['menu_new_tab'])) { $menu_entry['menu_new_tab'] = false;
+            }
+            if (!isset($menu_entry['menu_url'])) { $menu_entry['menu_url'] = '/';
+            }
+            if (!isset($menu_entry['menu_login_status'])) { $menu_entry['menu_login_status'] = 0;
+            }
+            if (!isset($menu_entry['menu_link_text'])) { $menu_entry['menu_link_text'] = __('Link Text Missing', 'asgaros-forum');
+            }
 
             // Check login status.
             $login_status      = is_user_logged_in();

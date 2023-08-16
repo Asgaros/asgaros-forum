@@ -26,7 +26,9 @@
  * along with Asgaros Forum. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Include Asgaros Forum core files.
 require 'includes/forum.php';
