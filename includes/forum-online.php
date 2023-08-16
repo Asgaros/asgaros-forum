@@ -3,18 +3,18 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumOnline {
-    private $asgarosforum = null;
-    private $current_user_id = null;
-    private $current_time_stamp = null;
-    public $functionality_enabled = false;
-    private $interval_update = false;
-    private $interval_online = false;
-    private $online_users = array();
-    private $online_guests = array();
+    private $asgarosforum          = null;
+    private $current_user_id       = null;
+    private $current_time_stamp    = null;
+    public $functionality_enabled  = false;
+    private $interval_update       = false;
+    private $interval_online       = false;
+    private $online_users          = array();
+    private $online_guests         = array();
     private $online_guests_changed = false;
 
     public function __construct($object) {
-		$this->asgarosforum = $object;
+		$this->asgarosforum    = $object;
         $this->interval_update = (1 * MINUTE_IN_SECONDS);
         $this->interval_online = (10 * MINUTE_IN_SECONDS);
 
@@ -29,7 +29,7 @@ class AsgarosForumOnline {
     public function update_online_status() {
         if ($this->functionality_enabled) {
             // Set some initial data.
-            $this->current_user_id = get_current_user_id();
+            $this->current_user_id    = get_current_user_id();
             $this->current_time_stamp = $this->asgarosforum->current_time();
 
             // Load list of online users.
@@ -83,7 +83,7 @@ class AsgarosForumOnline {
                 // Add the user to the online list when he is not already included.
                 if (!isset($this->online_guests[$unique_id]) || ((strtotime($this->current_time_stamp) - strtotime($this->online_guests[$unique_id])) > $this->interval_update)) {
                     $this->online_guests[$unique_id] = $this->current_time_stamp;
-                    $this->online_guests_changed = true;
+                    $this->online_guests_changed     = true;
                 }
             }
 
@@ -106,10 +106,10 @@ class AsgarosForumOnline {
         $minimum_check_time = date_i18n('Y-m-d H:i:s', (strtotime($this->current_time_stamp) - $this->interval_online));
 
         // Get list of online users.
-        $query = new AsgarosForumUserQuery(array('meta_key' => 'asgarosforum_online'));
+        $query        = new AsgarosForumUserQuery(array('meta_key' => 'asgarosforum_online'));
         $results_flag = $query->results;
 
-        $query = new AsgarosForumUserQuery(array(
+        $query         = new AsgarosForumUserQuery(array(
 			'meta_key'     => 'asgarosforum_online_timestamp',
 			'meta_value'   => $minimum_check_time,
 			'meta_compare' => '>=',
@@ -135,7 +135,7 @@ class AsgarosForumOnline {
 
     public function render_online_information() {
         if ($this->functionality_enabled) {
-            $currently_online_users = (!empty($this->online_users)) ? get_users(array('include' => $this->online_users)) : false;
+            $currently_online_users  = (!empty($this->online_users)) ? get_users(array('include' => $this->online_users)) : false;
             $currently_online_guests = (!empty($this->online_guests)) ? $this->online_guests : false;
 
             echo '<div id="statistics-online-users">';
@@ -174,7 +174,7 @@ class AsgarosForumOnline {
 					} else {
 						$loop_counter++;
 
-						$users_counter = count($currently_online_users);
+						$users_counter        = count($currently_online_users);
 						$users_counter_output = sprintf(_n('%s User', '%s Users', $users_counter, 'asgaros-forum'), number_format_i18n($users_counter));
 						echo esc_html($users_counter_output);
 					}
@@ -187,7 +187,7 @@ class AsgarosForumOnline {
                         echo ', ';
                     }
 
-                    $guests_counter = count($currently_online_guests);
+                    $guests_counter        = count($currently_online_guests);
                     $guests_counter_output = sprintf(_n('%s Guest', '%s Guests', $guests_counter, 'asgaros-forum'), number_format_i18n($guests_counter));
                     echo esc_html($guests_counter_output);
                 }
@@ -217,7 +217,7 @@ class AsgarosForumOnline {
 
             // Use registration date when there is no timestamp yet.
             if (!$user_time_stamp) {
-                $user_data = get_userdata($user_id);
+                $user_data       = get_userdata($user_id);
                 $user_time_stamp = $user_data->user_registered;
             }
 

@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 ?>
 <div class="wrap" id="af-options">
     <?php
-    $title = __('Appearance', 'asgaros-forum');
+    $title        = __('Appearance', 'asgaros-forum');
     $titleUpdated = __('Appearance updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
     ?>

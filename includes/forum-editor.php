@@ -188,7 +188,7 @@ class AsgarosForumEditor {
 		if (!$this->checkPermissions($editor_view) && !$inOtherView) {
 			$this->asgarosforum->render_notice(__('You are not allowed to do this.', 'asgaros-forum'));
         } else {
-            $post = false;
+            $post    = false;
             $subject = (isset($_POST['subject'])) ? sanitize_text_field($_POST['subject']) : '';
             $message = (isset($_POST['message'])) ? wp_kses_post($_POST['message']) : '';
 

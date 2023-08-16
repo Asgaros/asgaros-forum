@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumNotifications {
     private $asgarosforum = null;
-    public $mailing_list = array();
+    public $mailing_list  = array();
 
     public function __construct($object) {
         $this->asgarosforum = $object;
@@ -16,7 +16,7 @@ class AsgarosForumNotifications {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('subscriptions');
+        $element_link  = $this->asgarosforum->get_link('subscriptions');
         $element_title = __('Subscriptions', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -43,8 +43,8 @@ class AsgarosForumNotifications {
 
         echo '<span id="topic-subscription" class="fas fa-envelope"></span>';
 
-        $link = '';
-        $text = '';
+        $link               = '';
+        $text               = '';
         $subscription_level = $this->get_subscription_level();
 
         if ($subscription_level == 3) {
@@ -73,8 +73,8 @@ class AsgarosForumNotifications {
     public function show_forum_subscription_link($element_id) {
         echo '<span id="forum-subscription" class="fas fa-envelope"></span>';
 
-        $link = '';
-        $text = '';
+        $link               = '';
+        $text               = '';
         $subscription_level = $this->get_subscription_level();
 
         if ($subscription_level > 1) {
@@ -208,14 +208,14 @@ class AsgarosForumNotifications {
         }
 
         // Load required data.
-        $post = $this->asgarosforum->content->get_post($post_id);
+        $post  = $this->asgarosforum->content->get_post($post_id);
         $topic = $this->asgarosforum->content->get_topic($post->parent_id);
         $forum = $this->asgarosforum->content->get_forum($topic->parent_id);
 
         // Get more data.
-        $post_link = $this->asgarosforum->rewrite->get_post_link($post_id, $topic->id);
-        $topic_name = esc_html(stripslashes($topic->name));
-        $forum_name = esc_html(stripslashes($forum->name));
+        $post_link   = $this->asgarosforum->rewrite->get_post_link($post_id, $topic->id);
+        $topic_name  = esc_html(stripslashes($topic->name));
+        $forum_name  = esc_html(stripslashes($forum->name));
         $author_name = $this->asgarosforum->getUsername($post->author_id);
 
         // Prepare subject.
@@ -223,7 +223,7 @@ class AsgarosForumNotifications {
         $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
 
         // Prepare message-content.
-        $message_content = wpautop(stripslashes($post->text));
+        $message_content  = wpautop(stripslashes($post->text));
         $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
 
         // Prepare message-template.
@@ -314,14 +314,14 @@ class AsgarosForumNotifications {
         }
 
         // Load required data.
-        $post = $this->asgarosforum->content->get_first_post($topic_id);
+        $post  = $this->asgarosforum->content->get_first_post($topic_id);
         $topic = $this->asgarosforum->content->get_topic($post->parent_id);
         $forum = $this->asgarosforum->content->get_forum($topic->parent_id);
 
         // Get more data.
-        $topic_link = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
-        $topic_name = esc_html(stripslashes($topic->name));
-        $forum_name = esc_html(stripslashes($forum->name));
+        $topic_link  = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
+        $topic_name  = esc_html(stripslashes($topic->name));
+        $forum_name  = esc_html(stripslashes($forum->name));
         $author_name = $this->asgarosforum->getUsername($post->author_id);
 
         // Prepare subject.
@@ -329,7 +329,7 @@ class AsgarosForumNotifications {
         $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
 
         // Prepare message-content.
-        $message_content = wpautop(stripslashes($post->text));
+        $message_content  = wpautop(stripslashes($post->text));
         $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
 
         // Prepare message-template.
@@ -506,7 +506,7 @@ class AsgarosForumNotifications {
         $sender_name = wp_specialchars_decode(esc_html(stripslashes($this->asgarosforum->options['notification_sender_name'])), ENT_QUOTES);
         $sender_mail = wp_specialchars_decode(esc_html(stripslashes($this->asgarosforum->options['notification_sender_mail'])), ENT_QUOTES);
 
-        $header = array();
+        $header   = array();
         $header[] = 'From: '.$sender_name.' <'.$sender_mail.'>';
 
         return $header;
@@ -533,7 +533,7 @@ class AsgarosForumNotifications {
         // When site-owner notifications are enabled and we are the site owner, we need to print a notice.
         if ($this->asgarosforum->options['admin_subscriptions']) {
             // Get data of current user.
-            $current_user = wp_get_current_user();
+            $current_user                  = wp_get_current_user();
             $receivers_admin_notifications = explode(',', $this->asgarosforum->options['receivers_admin_notifications']);
 
             // Check if the user is a receiver of administrative notifications.
@@ -580,9 +580,9 @@ class AsgarosForumNotifications {
         echo '</div>';
 
         // Topic subscriptions list always available when we are not subscribed to everything.
-        $title = __('Notify about new posts in:', 'asgaros-forum');
+        $title            = __('Notify about new posts in:', 'asgaros-forum');
         $subscribedTopics = get_user_meta($user_id, 'asgarosforum_subscription_topic');
-        $all = ($subscription_level == 3) ? true : false;
+        $all              = ($subscription_level == 3) ? true : false;
 
         if (!empty($subscribedTopics)) {
             $subscribedTopics = $this->asgarosforum->getSpecificTopics($subscribedTopics);
@@ -591,9 +591,9 @@ class AsgarosForumNotifications {
 
         $this->render_subscriptions_list($title, $subscribedTopics, 'topic', $all);
 
-        $title = __('Notify about new topics in:', 'asgaros-forum');
+        $title            = __('Notify about new topics in:', 'asgaros-forum');
         $subscribedForums = get_user_meta($user_id, 'asgarosforum_subscription_forum');
-        $all = ($subscription_level > 1) ? true : false;
+        $all              = ($subscription_level > 1) ? true : false;
 
         if (!empty($subscribedForums)) {
             $subscribedForums = $this->asgarosforum->getSpecificForums($subscribedForums);
@@ -623,7 +623,7 @@ class AsgarosForumNotifications {
     public function get_subscription_level() {
         $user_id = get_current_user_id();
 
-        $subscription_level = 1;
+        $subscription_level       = 1;
         $subscription_level_check = get_user_meta($user_id, 'asgarosforum_subscription_global_topics', true);
 
         if (!empty($subscription_level_check)) {

@@ -3,9 +3,9 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumContent {
-    private $asgarosforum = null;
+    private $asgarosforum         = null;
     private static $taxonomy_name = 'asgarosforum-category';
-    private $action = false;
+    private $action               = false;
     private $data_subject;
     private $data_content;
 
@@ -170,10 +170,10 @@ class AsgarosForumContent {
     }
 
     private function insert_data() {
-        $link = '';
-        $redirect = '';
+        $link        = '';
+        $redirect    = '';
         $upload_list = $this->asgarosforum->uploads->get_upload_list();
-        $author_id = $this->asgarosforum->permissions->currentUserID;
+        $author_id   = $this->asgarosforum->permissions->currentUserID;
 
         if ($this->get_action() === 'add_topic') {
             $add_topic = array(
@@ -198,7 +198,7 @@ class AsgarosForumContent {
 
                 // Assign the inserted IDs.
                 $this->asgarosforum->current_topic = $inserted_ids->topic_id;
-                $this->asgarosforum->current_post = $inserted_ids->post_id;
+                $this->asgarosforum->current_post  = $inserted_ids->post_id;
 
                 // Upload files.
                 $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $add_topic['upload_list']);
@@ -317,7 +317,7 @@ class AsgarosForumContent {
 
             // Check if edit post if cancelled
             if ($edit_post['edit_post']) {
-                $date = $this->asgarosforum->current_time();
+                $date        = $this->asgarosforum->current_time();
                 $upload_list = $this->asgarosforum->uploads->upload_files($this->asgarosforum->current_post, $edit_post['upload_list']);
                 $this->asgarosforum->db->update($this->asgarosforum->tables->posts, array(
 					'text'        => $edit_post['content'],
@@ -420,7 +420,7 @@ class AsgarosForumContent {
         );
 
         // Save the ID of the new topic.
-        $inserted_ids = new stdClass();
+        $inserted_ids           = new stdClass();
         $inserted_ids->topic_id = $this->asgarosforum->db->insert_id;
 
         // Now create a post inside this topic and save its ID as well.
@@ -517,12 +517,12 @@ class AsgarosForumContent {
     public function get_categories($enable_filtering = true) {
         $ids_categories_excluded = array();
         $ids_categories_included = array();
-        $meta_query_filter = array();
+        $meta_query_filter       = array();
 
         if ($enable_filtering) {
             $ids_categories_excluded = apply_filters('asgarosforum_filter_get_categories', array());
             $ids_categories_included = $this->asgarosforum->shortcode->includeCategories;
-            $meta_query_filter = $this->get_categories_filter();
+            $meta_query_filter       = $this->get_categories_filter();
         }
 
         $categories_list = get_terms('asgarosforum-category', array(
@@ -549,7 +549,7 @@ class AsgarosForumContent {
     }
 
     public function get_categories_ids() {
-        $categories = $this->get_categories(true);
+        $categories     = $this->get_categories(true);
         $categories_ids = array();
 
         foreach ($categories as $category) {

@@ -3,11 +3,11 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumRewrite {
-    private $asgarosforum = null;
+    private $asgarosforum  = null;
     public $use_permalinks = false;
-    private $links = array();
-    public $slug_cache = array();
-    private $view_mapping = array();
+    private $links         = array();
+    public $slug_cache     = array();
+    private $view_mapping  = array();
 
     public function __construct($object) {
 		$this->asgarosforum = $object;
@@ -128,7 +128,7 @@ class AsgarosForumRewrite {
         // Set the current view.
         if (!empty($_GET['view'])) {
             $view = sanitize_key($_GET['view']);
-            $key = array_search($view, $this->view_mapping);
+            $key  = array_search($view, $this->view_mapping);
 
             if ($key == false) {
                 $this->asgarosforum->current_view = $view;
@@ -158,7 +158,7 @@ class AsgarosForumRewrite {
             $this->maybe_301_redirect();
 
             // Create base urls.
-            $home_url = $this->get_link('home');
+            $home_url    = $this->get_link('home');
             $current_url = $this->get_link('current');
 
             // Remove the home url from the beginning of the current url.
@@ -245,7 +245,7 @@ class AsgarosForumRewrite {
 
                     // Append trailing slash to URL.
                     $trailing_slash = apply_filters('asgarosforum_seo_trailing_slash', '/');
-                    $link = $link.$trailing_slash;
+                    $link           = $link.$trailing_slash;
                 } else {
                     $link = add_query_arg('id', $element_id, $link);
                 }

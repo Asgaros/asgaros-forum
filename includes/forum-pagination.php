@@ -41,40 +41,40 @@ class AsgarosForumPagination {
 
     public function renderPagination($location, $sourceID = false, $element_counter = false) {
         $current_page = $this->asgarosforum->current_page;
-        $num_pages = 0;
-        $select_url = $this->asgarosforum->get_link('current', false, false, '', false);
+        $num_pages    = 0;
+        $select_url   = $this->asgarosforum->get_link('current', false, false, '', false);
 
         if ($location == $this->asgarosforum->tables->posts) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $sourceID));
+            $count     = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['posts_per_page']);
         } else if ($location == $this->asgarosforum->tables->topics) {
-            $count = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND approved = 1 AND sticky = 0;", $sourceID));
+            $count     = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(*) FROM {$location} WHERE parent_id = %d AND approved = 1 AND sticky = 0;", $sourceID));
             $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'search') {
-            $categories = $this->asgarosforum->content->get_categories();
+            $categories       = $this->asgarosforum->content->get_categories();
             $categoriesFilter = array();
 
             foreach ($categories as $category) {
                 $categoriesFilter[] = $category->term_id;
             }
 
-            $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
+            $where                 = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
             $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 
             $query_match_name = "SELECT id AS topic_id FROM {$this->asgarosforum->tables->topics} WHERE MATCH (name) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
             $query_match_text = "SELECT parent_id AS topic_id FROM {$this->asgarosforum->tables->posts} WHERE MATCH (text) AGAINST ('{$this->asgarosforum->search->search_keywords_for_query}*' IN BOOLEAN MODE)";
-            $count = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM (({$query_match_name}) UNION ({$query_match_text})) AS su, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE su.topic_id = t.id AND t.parent_id = f.id AND t.approved = 1 {$where} {$shortcodeSearchFilter};");
-            $count = (int) $count;
-            $num_pages = ceil($count / $this->asgarosforum->options['topics_per_page']);
+            $count            = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM (({$query_match_name}) UNION ({$query_match_text})) AS su, {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE su.topic_id = t.id AND t.parent_id = f.id AND t.approved = 1 {$where} {$shortcodeSearchFilter};");
+            $count            = (int) $count;
+            $num_pages        = ceil($count / $this->asgarosforum->options['topics_per_page']);
         } else if ($location === 'members') {
-            $count = count($this->asgarosforum->memberslist->memberslist);
+            $count     = count($this->asgarosforum->memberslist->memberslist);
             $num_pages = ceil($count / $this->asgarosforum->options['members_per_page']);
         } else if ($location === 'activity') {
-            $count = $this->asgarosforum->activity->count_activity_data(true);
+            $count     = $this->asgarosforum->activity->count_activity_data(true);
             $num_pages = ceil($count / $this->asgarosforum->options['activities_per_page']);
         } else if ($location === 'history') {
-            $user_id = $this->asgarosforum->current_element;
-            $count = $this->asgarosforum->profile->count_post_history_by_user($user_id);
+            $user_id   = $this->asgarosforum->current_element;
+            $count     = $this->asgarosforum->profile->count_post_history_by_user($user_id);
             $num_pages = ceil($count / 50);
         } else if ($location === 'unread') {
             $num_pages = ceil($element_counter / 50);

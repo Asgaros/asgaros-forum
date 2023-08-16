@@ -30,7 +30,7 @@ class AsgarosForumSpoilers {
         $atts['title'] = (!empty($atts['title'])) ? $atts['title'] : __('Spoiler', 'asgaros-forum');
 
         // Generate output.
-        $output = '';
+        $output  = '';
         $output .= '<div class="spoiler">';
     	$output .= '<div class="spoiler-head closed"><span>'.$atts['title'].'</span></div>';
     	$output .= '<div class="spoiler-body">';

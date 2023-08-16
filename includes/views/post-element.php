@@ -107,7 +107,7 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
         // Post message.
         echo '<div class="post-message">';
             // Initial escaping.
-            $allowed_html = wp_kses_allowed_html('post');
+            $allowed_html           = wp_kses_allowed_html('post');
             $allowed_html['iframe'] = array(
 				'width'           => array(),
 				'height'          => array(),
@@ -115,8 +115,8 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
 				'frameborder'     => array(),
 				'allowfullscreen' => array(),
 			);
-            $post_content = wp_kses($post->text, $allowed_html);
-            $post_content = stripslashes($post_content);
+            $post_content           = wp_kses($post->text, $allowed_html);
+            $post_content           = stripslashes($post_content);
 
             echo '<div id="post-quote-container-'.esc_attr($post->id).'" style="display: none;"><blockquote><div class="quotetitle">'.esc_html__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
 

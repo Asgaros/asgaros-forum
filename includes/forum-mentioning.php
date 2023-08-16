@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumMentioning {
     private $asgarosforum = null;
-    private $regex_users = '#@([^\r\n\t\s\0<>\[\]!,\.\(\)\'\"\|\?\@]+)($|[\r\n\t\s\0<>\[\]!,\.\(\)\'\"\|\?\@])#isu';
+    private $regex_users  = '#@([^\r\n\t\s\0<>\[\]!,\.\(\)\'\"\|\?\@]+)($|[\r\n\t\s\0<>\[\]!,\.\(\)\'\"\|\?\@])#isu';
 
     public function __construct($object) {
         $this->asgarosforum = $object;
@@ -78,10 +78,10 @@ class AsgarosForumMentioning {
 
     public function mentioning_callback($data) {
         // Build response-array.
-        $response = array();
+        $response           = array();
         $response['status'] = false;
-		$response['data'] = array();
-		$user_ids = array();
+		$response['data']   = array();
+		$user_ids           = array();
 
 		// Get moderators.
 		$moderators = $this->asgarosforum->permissions->get_users_by_role('moderator');
@@ -128,10 +128,10 @@ class AsgarosForumMentioning {
         $user_query = new AsgarosForumUserQuery($user_query);
 
 		foreach ($user_query->results as $user) {
-			$result          = new stdClass();
-			$result->ID      = $user->user_nicename;
-            $result->image   = get_avatar_url($user->ID, array('size' => 30));
-			$result->name    = $user->display_name;
+			$result        = new stdClass();
+			$result->ID    = $user->user_nicename;
+            $result->image = get_avatar_url($user->ID, array('size' => 30));
+			$result->name  = $user->display_name;
 
 			$response['data'][] = $result;
 		}
@@ -190,9 +190,9 @@ class AsgarosForumMentioning {
         $receivers = false;
 
         // Load required data.
-        $post = $this->asgarosforum->content->get_post($post_id);
+        $post  = $this->asgarosforum->content->get_post($post_id);
         $topic = $this->asgarosforum->content->get_topic($post->parent_id);
-        $text = stripslashes($post->text);
+        $text  = stripslashes($post->text);
 
         // Try to remove blockquotes to prevent unnecessary mentionings.
         // This functionality requires the libxml and dom extensions of PHP.
@@ -249,7 +249,7 @@ class AsgarosForumMentioning {
                 $post_link = $this->asgarosforum->rewrite->get_post_link($post_id, $topic->id);
 
                 // Prepare message-content.
-                $message_content = wpautop(stripslashes($post->text));
+                $message_content  = wpautop(stripslashes($post->text));
                 $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
 
                 // Create mail content.

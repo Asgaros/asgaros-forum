@@ -3,9 +3,9 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumBreadCrumbs {
-    private $asgarosforum = null;
-    public $breadcrumbs_level = 4;
-    public $breadcrumbs_links = array();
+    private $asgarosforum        = null;
+    public $breadcrumbs_level    = 4;
+    public $breadcrumbs_links    = array();
     private $breadcrumb_position = 0;
 
     public function __construct($object) {
@@ -31,7 +31,7 @@ class AsgarosForumBreadCrumbs {
         }
 
         if ($this->breadcrumbs_level >= 4) {
-            $element_link = $this->asgarosforum->get_link('home');
+            $element_link  = $this->asgarosforum->get_link('home');
             $element_title = stripslashes($this->asgarosforum->options['forum_title']);
             $this->add_breadcrumb($element_link, $element_title);
         }
@@ -51,39 +51,39 @@ class AsgarosForumBreadCrumbs {
 
         // Define forum breadcrumbs.
         if ($this->breadcrumbs_level >= 3 && $this->asgarosforum->parent_forum && $this->asgarosforum->parent_forum > 0) {
-            $element_link = $this->asgarosforum->get_link('forum', $this->asgarosforum->parent_forum);
+            $element_link  = $this->asgarosforum->get_link('forum', $this->asgarosforum->parent_forum);
             $element_title = $category_prefix.esc_html(stripslashes($this->asgarosforum->parent_forum_name));
             $this->add_breadcrumb($element_link, $element_title);
             $category_prefix = '';
         }
 
         if ($this->breadcrumbs_level >= 2 && $this->asgarosforum->current_forum) {
-            $element_link = $this->asgarosforum->get_link('forum', $this->asgarosforum->current_forum);
+            $element_link  = $this->asgarosforum->get_link('forum', $this->asgarosforum->current_forum);
             $element_title = $category_prefix.esc_html(stripslashes($this->asgarosforum->current_forum_name));
             $this->add_breadcrumb($element_link, $element_title);
         }
 
         if ($this->breadcrumbs_level >= 1 && $this->asgarosforum->current_topic) {
-            $name = stripslashes($this->asgarosforum->current_topic_name);
-            $element_link = $this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic);
+            $name          = stripslashes($this->asgarosforum->current_topic_name);
+            $element_link  = $this->asgarosforum->get_link('topic', $this->asgarosforum->current_topic);
             $element_title = esc_html($this->asgarosforum->cut_string($name));
             $this->add_breadcrumb($element_link, $element_title);
         }
 
         if ($this->asgarosforum->current_view === 'addpost') {
-            $element_link = $this->asgarosforum->get_link('current');
+            $element_link  = $this->asgarosforum->get_link('current');
             $element_title = __('Post Reply', 'asgaros-forum');
             $this->add_breadcrumb($element_link, $element_title);
         } else if ($this->asgarosforum->current_view === 'editpost') {
-            $element_link = $this->asgarosforum->get_link('current');
+            $element_link  = $this->asgarosforum->get_link('current');
             $element_title = __('Edit Post', 'asgaros-forum');
             $this->add_breadcrumb($element_link, $element_title);
         } else if ($this->asgarosforum->current_view === 'addtopic') {
-            $element_link = $this->asgarosforum->get_link('current');
+            $element_link  = $this->asgarosforum->get_link('current');
             $element_title = __('New Topic', 'asgaros-forum');
             $this->add_breadcrumb($element_link, $element_title);
         } else if ($this->asgarosforum->current_view === 'movetopic') {
-            $element_link = $this->asgarosforum->get_link('current');
+            $element_link  = $this->asgarosforum->get_link('current');
             $element_title = __('Move Topic', 'asgaros-forum');
             $this->add_breadcrumb($element_link, $element_title);
         }

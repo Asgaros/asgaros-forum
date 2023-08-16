@@ -14,7 +14,7 @@ class AsgarosForumApproval {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('unapproved');
+        $element_link  = $this->asgarosforum->get_link('unapproved');
         $element_title = __('Unapproved Topics', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -88,17 +88,17 @@ class AsgarosForumApproval {
     // Sends a notification about a new unapproved topic.
     public function notify_about_new_unapproved_topic($topic_id) {
         // Load required data.
-        $post = $this->asgarosforum->content->get_first_post($topic_id);
+        $post  = $this->asgarosforum->content->get_first_post($topic_id);
         $topic = $this->asgarosforum->content->get_topic($post->parent_id);
 
         // Get more data.
-        $topic_link = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
-        $topic_name = esc_html(stripslashes($topic->name));
-        $author_name = $this->asgarosforum->getUsername($post->author_id);
+        $topic_link           = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
+        $topic_name           = esc_html(stripslashes($topic->name));
+        $author_name          = $this->asgarosforum->getUsername($post->author_id);
         $notification_subject = __('New unapproved topic', 'asgaros-forum');
 
         // Prepare message-content.
-        $message_content = wpautop(stripslashes($post->text));
+        $message_content  = wpautop(stripslashes($post->text));
         $message_content .= $this->asgarosforum->uploads->show_uploaded_files($post->id, $post->uploads);
 
         // Prepare message-template.
@@ -156,8 +156,8 @@ class AsgarosForumApproval {
     public function notice_for_topic_creator() {
         if (!empty($_GET['new_unapproved_topic'])) {
             $notice = __('Thank you for your topic. Your topic will be visible as soon as it gets approved.', 'asgaros-forum');
-            $link = false;
-            $icon = 'fas fa-eye';
+            $link   = false;
+            $icon   = 'fas fa-eye';
             $this->asgarosforum->add_notice($notice, $link, $icon);
         }
     }
@@ -173,8 +173,8 @@ class AsgarosForumApproval {
 
         if (!empty($unapproved_topics)) {
             $notice = __('There are unapproved topics.', 'asgaros-forum');
-            $link = $this->asgarosforum->rewrite->get_link('unapproved');
-            $icon = 'fas fa-eye';
+            $link   = $this->asgarosforum->rewrite->get_link('unapproved');
+            $icon   = 'fas fa-eye';
             $this->asgarosforum->add_notice($notice, $link, $icon);
         }
     }
@@ -182,7 +182,7 @@ class AsgarosForumApproval {
     // Renders a view with all unapproved topics.
     public function show_unapproved_topics() {
         // Load unread topics.
-        $unapproved_topics = $this->get_unapproved_topics();
+        $unapproved_topics         = $this->get_unapproved_topics();
         $unapproved_topics_counter = count($unapproved_topics);
 
         // Render pagination.
@@ -200,12 +200,12 @@ class AsgarosForumApproval {
 
         if ($unapproved_topics_counter > 0) {
             $page_elements = 50;
-            $page_start = $this->asgarosforum->current_page * $page_elements;
-            $data_sliced = array_slice($unapproved_topics, $page_start, $page_elements);
+            $page_start    = $this->asgarosforum->current_page * $page_elements;
+            $data_sliced   = array_slice($unapproved_topics, $page_start, $page_elements);
 
             foreach ($data_sliced as $topic) {
                 $topic_title = esc_html(stripslashes($topic->name));
-                $first_post = $this->asgarosforum->content->get_first_post($topic->id);
+                $first_post  = $this->asgarosforum->content->get_first_post($topic->id);
 
                 echo '<div class="content-element unapproved-topic topic-normal">';
                     echo '<div class="topic-status fas fa-eye unread"></div>';

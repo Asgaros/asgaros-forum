@@ -7,9 +7,9 @@ add_filter('mycred_setup_hooks', 'mycred_setup_asgarosforum_hook', 20, 1);
 add_action('mycred_load_hooks', 'mycred_load_asgarosforum_hook', 20);
 
 function mycred_all_asgarosforum_references($references) {
-    $references['new_forum_topic'] = __('Forum Topics (Asgaros Forum)', 'asgaros-forum');
-    $references['new_forum_post'] = __('Forum Posts (Asgaros Forum)', 'asgaros-forum');
-    $references['received_like'] = __('Received Likes (Asgaros Forum)', 'asgaros-forum');
+    $references['new_forum_topic']  = __('Forum Topics (Asgaros Forum)', 'asgaros-forum');
+    $references['new_forum_post']   = __('Forum Posts (Asgaros Forum)', 'asgaros-forum');
+    $references['received_like']    = __('Received Likes (Asgaros Forum)', 'asgaros-forum');
     $references['received_dislike'] = __('Received Dislikes (Asgaros Forum)', 'asgaros-forum');
 
     return $references;
@@ -123,7 +123,7 @@ function mycred_load_asgarosforum_hook() {
             }
 
             $balance = $this->core->get_users_balance($user_id, $this->mycred_type);
-            $layout = $this->core->plural().': '.$this->core->format_creds($balance);
+            $layout  = $this->core->plural().': '.$this->core->format_creds($balance);
 
             echo '<small class="users-mycred-balance">'.$layout.'</small>';
         }
@@ -526,9 +526,9 @@ function mycred_load_asgarosforum_hook() {
             }
 
             $data['new_post']['author'] = (isset($data['new_post']['author'])) ? 1 : 0;
-            $data['show_points'] = (isset($data['show_points'])) ? 1 : 0;
-            $data['show_badges'] = (isset($data['show_badges'])) ? 1 : 0;
-            $data['show_ranks'] = (isset($data['show_ranks'])) ? 1 : 0;
+            $data['show_points']        = (isset($data['show_points'])) ? 1 : 0;
+            $data['show_badges']        = (isset($data['show_badges'])) ? 1 : 0;
+            $data['show_ranks']         = (isset($data['show_ranks'])) ? 1 : 0;
 
             return $data;
         }

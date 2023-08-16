@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumReactions {
-    private $asgarosforum = null;
+    private $asgarosforum   = null;
     private $reactions_list = array();
     private $post_reactions = array();
 
@@ -78,7 +78,7 @@ class AsgarosForumReactions {
 
     public function reaction_callback($data) {
         // Build response-array.
-        $response = array();
+        $response           = array();
         $response['status'] = false;
 
         // Ensure user is logged-in.
@@ -101,7 +101,7 @@ class AsgarosForumReactions {
 
                 // Build updated reactions for posts.
                 $response['data']['reactions'] = $this->render_reactions($post_id, $post_object->author_id);
-                $response['data']['summary'] = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($post_id) : '';
+                $response['data']['summary']   = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($post_id) : '';
             }
         }
 
@@ -133,7 +133,7 @@ class AsgarosForumReactions {
             $counter = (isset($this->post_reactions[$post_id][$key])) ? number_format_i18n(count($this->post_reactions[$post_id][$key])) : 0;
 
             // Generate reaction-HTML.
-            $output = '<span class="reaction '.$key.'">';
+            $output  = '<span class="reaction '.$key.'">';
             $output .= '<span class="reaction-icon '.$reaction['icon'].' '.$status.'">';
             $output .= '<span class="screen-reader-text">'.$reaction['screen_reader_text'].'</span>';
             $output .= '</span>';
@@ -172,7 +172,7 @@ class AsgarosForumReactions {
         $output = '';
 
         // Build arrays with names.
-        $reaction_names = array();
+        $reaction_names         = array();
         $reaction_names_grouped = array();
 
         foreach ($this->reactions_list as $key => $reaction) {
@@ -180,7 +180,7 @@ class AsgarosForumReactions {
                 $reaction_names_grouped[$key] = array();
 
                 foreach ($this->post_reactions[$post_id][$key] as $userId) {
-                    $reaction_names[] = $this->asgarosforum->get_plain_username($userId);
+                    $reaction_names[]               = $this->asgarosforum->get_plain_username($userId);
                     $reaction_names_grouped[$key][] = $this->asgarosforum->get_plain_username($userId);
                 }
             }

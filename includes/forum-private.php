@@ -29,7 +29,7 @@ class AsgarosForumPrivate {
 	public function is_private_forum($forum_id) {
 		if (!isset($this->cache_is_private_forum[$forum_id])) {
 			// Get private-status of all forums.
-			$query = "SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums};";
+			$query   = "SELECT `id`, `forum_status` FROM {$this->asgarosforum->tables->forums};";
 			$results = $this->asgarosforum->db->get_results($query);
 
 			// Set private-status for all forums.
@@ -58,8 +58,8 @@ class AsgarosForumPrivate {
 		}
 
 		// Get counts for posts in own topics in all forums.
-		$query = "SELECT t.`parent_id` AS `forum_id`, COUNT(*) AS `post_counter` FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.`parent_id` = t.`id` AND t.`author_id` = %d AND t.`approved` = 1 GROUP BY t.`parent_id`;";
-		$query = $this->asgarosforum->db->prepare($query, get_current_user_id());
+		$query   = "SELECT t.`parent_id` AS `forum_id`, COUNT(*) AS `post_counter` FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.`parent_id` = t.`id` AND t.`author_id` = %d AND t.`approved` = 1 GROUP BY t.`parent_id`;";
+		$query   = $this->asgarosforum->db->prepare($query, get_current_user_id());
 		$results = $this->asgarosforum->db->get_results($query);
 
 		// Prepare array for further processing.
@@ -86,8 +86,8 @@ class AsgarosForumPrivate {
 		}
 
 		// Get counts for own topics in all forums.
-		$query = "SELECT `parent_id` AS `forum_id`, COUNT(*) AS `topic_counter` FROM {$this->asgarosforum->tables->topics} WHERE `author_id` = %d AND `approved` = 1 GROUP BY `parent_id`;";
-		$query = $this->asgarosforum->db->prepare($query, get_current_user_id());
+		$query   = "SELECT `parent_id` AS `forum_id`, COUNT(*) AS `topic_counter` FROM {$this->asgarosforum->tables->topics} WHERE `author_id` = %d AND `approved` = 1 GROUP BY `parent_id`;";
+		$query   = $this->asgarosforum->db->prepare($query, get_current_user_id());
 		$results = $this->asgarosforum->db->get_results($query);
 
 		// Prepare array for further processing.
@@ -114,8 +114,8 @@ class AsgarosForumPrivate {
 		}
 
 		// Get last post for own topics in all forums.
-		$query = "SELECT t.`parent_id` AS `forum_id`, MAX(p.`id`) AS `id` FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.`parent_id` = t.`id` AND t.`author_id` = %d AND t.`approved` = 1 GROUP BY t.`parent_id`;";
-		$query = $this->asgarosforum->db->prepare($query, get_current_user_id());
+		$query   = "SELECT t.`parent_id` AS `forum_id`, MAX(p.`id`) AS `id` FROM {$this->asgarosforum->tables->posts} AS p, {$this->asgarosforum->tables->topics} AS t WHERE p.`parent_id` = t.`id` AND t.`author_id` = %d AND t.`approved` = 1 GROUP BY t.`parent_id`;";
+		$query   = $this->asgarosforum->db->prepare($query, get_current_user_id());
 		$results = $this->asgarosforum->db->get_results($query);
 
 		// Prepare array for further processing.

@@ -18,15 +18,15 @@ class AsgarosForumDatabase {
 	}
 
     private function setTables() {
-        $this->tables = new stdClass();
-        $this->tables->forums           = $this->db->prefix.'forum_forums';
-        $this->tables->topics           = $this->db->prefix.'forum_topics';
-        $this->tables->posts            = $this->db->prefix.'forum_posts';
-        $this->tables->reports          = $this->db->prefix.'forum_reports';
-        $this->tables->reactions        = $this->db->prefix.'forum_reactions';
-        $this->tables->polls            = $this->db->prefix.'forum_polls';
-        $this->tables->polls_options    = $this->db->prefix.'forum_polls_options';
-        $this->tables->polls_votes      = $this->db->prefix.'forum_polls_votes';
+        $this->tables                = new stdClass();
+        $this->tables->forums        = $this->db->prefix.'forum_forums';
+        $this->tables->topics        = $this->db->prefix.'forum_topics';
+        $this->tables->posts         = $this->db->prefix.'forum_posts';
+        $this->tables->reports       = $this->db->prefix.'forum_reports';
+        $this->tables->reactions     = $this->db->prefix.'forum_reactions';
+        $this->tables->polls         = $this->db->prefix.'forum_polls';
+        $this->tables->polls_options = $this->db->prefix.'forum_polls_options';
+        $this->tables->polls_votes   = $this->db->prefix.'forum_polls_votes';
     }
 
     public function getTables() {
@@ -89,7 +89,7 @@ class AsgarosForumDatabase {
 
     public function buildDatabase() {
         global $asgarosforum;
-        $first_time_installation = false;
+        $first_time_installation    = false;
         $database_version_installed = get_option('asgarosforum_db_version');
 
         // Set flag when it its a first-time-installation.
@@ -251,7 +251,7 @@ class AsgarosForumDatabase {
 
                 // Create a new example category first.
                 $defaultCategoryName = __('Custom Usergroups', 'asgaros-forum');
-                $defaultCategory = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
+                $defaultCategory     = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
 
                 // Ensure that no error happened.
                 if (!is_wp_error($defaultCategory)) {
@@ -271,7 +271,7 @@ class AsgarosForumDatabase {
                     } else {
                         // Add an example usergroup.
                         $defaultUserGroupName = __('Example Usergroup', 'asgaros-forum');
-                        $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#256db3');
+                        $defaultUserGroup     = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#256db3');
                     }
                 }
 
@@ -326,7 +326,7 @@ class AsgarosForumDatabase {
                         update_term_meta($new_category['term_id'], 'category_access', 'everyone');
                         update_term_meta($new_category['term_id'], 'order', 1);
 
-                        $default_forum_name = __('First Forum', 'asgaros-forum');
+                        $default_forum_name        = __('First Forum', 'asgaros-forum');
                         $default_forum_description = __('My first forum.', 'asgaros-forum');
 
                         $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'fas fa-comments', 1, 'normal');

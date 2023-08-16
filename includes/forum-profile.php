@@ -44,12 +44,12 @@ class AsgarosForumProfile {
     }
 
     private function get_title_suffix() {
-        $suffix = '';
+        $suffix   = '';
         $userData = $this->get_user_data($this->asgarosforum->current_element);
 
         if ($userData) {
             $user_name = apply_filters('asgarosforum_filter_username', $userData->display_name, $userData);
-            $suffix = ': '.$user_name;
+            $suffix    = ': '.$user_name;
         }
 
         return $suffix;
@@ -57,21 +57,21 @@ class AsgarosForumProfile {
 
     // Sets the breadcrumbs.
     public function add_breadcrumbs_profile() {
-        $elementLink = $this->asgarosforum->get_link('current');
+        $elementLink  = $this->asgarosforum->get_link('current');
         $elementTitle = __('Profile', 'asgaros-forum').$this->get_title_suffix();
         $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
     }
 
     public function add_breadcrumbs_history() {
-        $elementLink = $this->asgarosforum->get_link('current');
+        $elementLink  = $this->asgarosforum->get_link('current');
         $elementTitle = __('Post History', 'asgaros-forum').$this->get_title_suffix();
         $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
     }
 
     public function show_profile_header($user_data) {
-        $userOnline = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? 'user-online' : 'user-offline';
+        $userOnline       = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? 'user-online' : 'user-offline';
         $background_style = '';
-        $user_id = $user_data->ID;
+        $user_id          = $user_data->ID;
 
         echo '<div id="profile-header" class="'.esc_attr($userOnline).'">';
             if ($this->asgarosforum->options['enable_avatars']) {
@@ -152,12 +152,12 @@ class AsgarosForumProfile {
             // Now load history-data based for an user based on the categories which are accessible for the current user.
             $accessible_categories = implode(',', $accessible_categories);
 
-			$query = '';
+			$query       = '';
             $query_limit = '';
 
             if ($limit) {
                 $elements_maximum = 50;
-                $elements_start = $this->asgarosforum->current_page * $elements_maximum;
+                $elements_start   = $this->asgarosforum->current_page * $elements_maximum;
 
                 $query_limit = "LIMIT {$elements_start}, {$elements_maximum}";
             }
@@ -364,11 +364,11 @@ class AsgarosForumProfile {
                     // Check if the current user can ban this user.
                     if ($this->asgarosforum->permissions->can_ban_user($current_user_id, $userData->ID)) {
                         if ($this->asgarosforum->permissions->isBanned($userData->ID)) {
-                            $url = $this->getProfileLink($userData, array('unban_user' => $userData->ID));
+                            $url       = $this->getProfileLink($userData, array('unban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'unban_user_'.$userData->ID);
                             echo '<a class="danger-link" href="'.esc_url($nonce_url).'">'.esc_html__('Unban User', 'asgaros-forum').'</a>';
                         } else {
-                            $url = $this->getProfileLink($userData, array('ban_user' => $userData->ID));
+                            $url       = $this->getProfileLink($userData, array('ban_user' => $userData->ID));
                             $nonce_url = wp_nonce_url($url, 'ban_user_'.$userData->ID);
                             echo '<a class="danger-link" href="'.esc_url($nonce_url).'">'.esc_html__('Ban User', 'asgaros-forum').'</a>';
                         }

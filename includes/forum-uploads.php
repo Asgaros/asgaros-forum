@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumUploads {
-	private $asgarosforum = null;
+	private $asgarosforum  = null;
 	private $upload_folder = 'asgarosforum';
 	private $upload_path;
 	private $upload_url;
@@ -16,10 +16,10 @@ class AsgarosForumUploads {
 	}
 
 	public function initialize() {
-		$this->upload_folder = apply_filters('asgarosforum_filter_upload_folder', $this->upload_folder);
-		$upload_dir = wp_upload_dir();
-		$this->upload_path = $upload_dir['basedir'].'/'.$this->upload_folder.'/';
-		$this->upload_url = $upload_dir['baseurl'].'/'.$this->upload_folder.'/';
+		$this->upload_folder            = apply_filters('asgarosforum_filter_upload_folder', $this->upload_folder);
+		$upload_dir                     = wp_upload_dir();
+		$this->upload_path              = $upload_dir['basedir'].'/'.$this->upload_folder.'/';
+		$this->upload_url               = $upload_dir['baseurl'].'/'.$this->upload_folder.'/';
 		$this->upload_allowed_filetypes = explode(',', $this->asgarosforum->options['allowed_filetypes']);
 	}
 
@@ -115,7 +115,7 @@ class AsgarosForumUploads {
 	}
 
 	public function upload_files($post_id, $uploadList) {
-		$path = $this->upload_path.$post_id.'/';
+		$path  = $this->upload_path.$post_id.'/';
 		$links = array();
 		$files = $uploadList;
 
@@ -168,11 +168,11 @@ class AsgarosForumUploads {
     }
 
 	public function show_uploaded_files($post_id, $post_uploads) {
-		$path = $this->upload_path.$post_id.'/';
-        $url = $this->upload_url.$post_id.'/';
-        $uploads = maybe_unserialize($post_uploads);
+		$path          = $this->upload_path.$post_id.'/';
+        $url           = $this->upload_url.$post_id.'/';
+        $uploads       = maybe_unserialize($post_uploads);
         $uploadedFiles = '';
-		$output = '';
+		$output        = '';
 
         if (!empty($uploads) && is_dir($path)) {
 			// Generate special message instead of file-list when hiding uploads for guests.
@@ -211,9 +211,9 @@ class AsgarosForumUploads {
 
 		// Show list of uploaded files first. Also shown when uploads are disabled to manage existing files if it was enabled before.
 		if ($postObject && $this->asgarosforum->current_view === 'editpost') {
-			$path = $this->upload_path.$postObject->id.'/';
-	        $url = $this->upload_url.$postObject->id.'/';
-	        $uploads = maybe_unserialize($postObject->uploads);
+			$path          = $this->upload_path.$postObject->id.'/';
+	        $url           = $this->upload_url.$postObject->id.'/';
+	        $uploads       = maybe_unserialize($postObject->uploads);
 	        $uploadedFiles = '';
 
 			if (!empty($uploads) && is_dir($path)) {

@@ -84,7 +84,7 @@ class AsgarosForumUnread {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('unread');
+        $element_link  = $this->asgarosforum->get_link('unread');
         $element_title = __('Unread Topics', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -192,7 +192,7 @@ class AsgarosForumUnread {
 
     public function get_status_post($post_id, $post_author, $post_date, $topic_id) {
         // If post has been written before last read-marker: read
-        $date_post = strtotime($post_date);
+        $date_post  = strtotime($post_date);
         $date_visit = strtotime($this->get_last_visit());
 
         if ($date_post < $date_visit) {
@@ -246,7 +246,7 @@ class AsgarosForumUnread {
     // Renders a view with all unread topics.
     public function show_unread_topics() {
         // Load unread topics.
-        $unread_topics = $this->get_unread_topics();
+        $unread_topics         = $this->get_unread_topics();
         $unread_topics_counter = count($unread_topics);
 
         // Render pagination.
@@ -263,8 +263,8 @@ class AsgarosForumUnread {
 
         if ($unread_topics_counter > 0) {
             $page_elements = 50;
-            $page_start = $this->asgarosforum->current_page * $page_elements;
-            $data_sliced = array_slice($unread_topics, $page_start, $page_elements);
+            $page_start    = $this->asgarosforum->current_page * $page_elements;
+            $data_sliced   = array_slice($unread_topics, $page_start, $page_elements);
 
             foreach ($data_sliced as $topic) {
                 $topic_title = esc_html(stripslashes($topic->topic_name));
@@ -273,8 +273,8 @@ class AsgarosForumUnread {
                     echo '<div class="topic-status far fa-comments unread"></div>';
                     echo '<div class="topic-name">';
                         $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->topic_id);
-                        $link = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
-                        $human_time_diff = $this->asgarosforum->get_activity_timestamp($first_unread_post->date);
+                        $link              = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
+                        $human_time_diff   = $this->asgarosforum->get_activity_timestamp($first_unread_post->date);
 
                         if ($this->asgarosforum->is_topic_sticky($topic->topic_id)) {
                             echo '<span class="topic-icon fas fa-thumbtack"></span>';

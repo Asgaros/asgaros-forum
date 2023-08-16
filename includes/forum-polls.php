@@ -32,7 +32,7 @@ class AsgarosForumPolls {
         }
 
         // Set IDs.
-        $post_id = $this->asgarosforum->current_post;
+        $post_id  = $this->asgarosforum->current_post;
         $topic_id = $this->asgarosforum->current_topic;
 
         if ($editor_view === 'addtopic') {
@@ -225,9 +225,9 @@ class AsgarosForumPolls {
         $has_poll = $this->has_poll($topic_id);
 
         // Prepare variables.
-        $poll_valid = true;
-        $poll_title = '';
-        $poll_options = array();
+        $poll_valid    = true;
+        $poll_title    = '';
+        $poll_options  = array();
         $poll_multiple = 0;
 
         // Try to set poll-title.
@@ -414,12 +414,12 @@ class AsgarosForumPolls {
             // Show poll-results.
             echo '<div id="poll-results">';
                 foreach ($poll->options as $key => $option) {
-                    $percentage = 0;
+                    $percentage     = 0;
                     $percentage_css = 0;
 
                     // Only calculate percentage-values when there are votes.
                     if ($poll->total_votes > 0) {
-                        $percentage = ($option->votes / $poll->total_votes) * 100;
+                        $percentage     = ($option->votes / $poll->total_votes) * 100;
                         $percentage_css = number_format($percentage, 2);
                     }
 
@@ -512,7 +512,7 @@ class AsgarosForumPolls {
         $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id};");
 
         // Get total participants.
-        $participants = $this->asgarosforum->db->get_results("SELECT user_id, COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id} GROUP BY user_id;");
+        $participants             = $this->asgarosforum->db->get_results("SELECT user_id, COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id} GROUP BY user_id;");
         $poll->total_participants = count($participants);
 
         return $poll;
@@ -522,7 +522,7 @@ class AsgarosForumPolls {
     public function get_bar_color() {
         $this->get_bar_color_counter++;
 
-        $colors = array();
+        $colors   = array();
         $colors[] = '#4661EE';
         $colors[] = '#EC5657';
         $colors[] = '#1BCDD1';

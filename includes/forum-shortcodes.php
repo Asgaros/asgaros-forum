@@ -3,10 +3,10 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumShortcodes {
-    private $asgarosforum = null;
-    private $postObject = null;
+    private $asgarosforum         = null;
+    private $postObject           = null;
     public $shortcodeSearchFilter = '';
-    public $includeCategories = array();
+    public $includeCategories     = array();
 
     public function __construct($object) {
 		$this->asgarosforum = $object;
@@ -36,7 +36,7 @@ class AsgarosForumShortcodes {
     }
 
     public function handleAttributes() {
-        $atts = array();
+        $atts    = array();
         $pattern = get_shortcode_regex();
 
         if (preg_match_all('/'.$pattern.'/s', $this->postObject->post_content, $matches) && array_key_exists(2, $matches) && (in_array('forum', $matches[2]) || in_array('Forum', $matches[2]))) {
@@ -47,11 +47,11 @@ class AsgarosForumShortcodes {
                 $atts = array_change_key_case((array)$atts, CASE_LOWER);
 
                 if (!empty($atts['post']) && ctype_digit($atts['post'])) {
-                    $postID = $atts['post'];
+                    $postID                           = $atts['post'];
                     $this->asgarosforum->current_view = 'post';
                     $this->asgarosforum->setParents($postID, 'post');
                 } else if (!empty($atts['topic']) && ctype_digit($atts['topic'])) {
-                    $topicID = $atts['topic'];
+                    $topicID      = $atts['topic'];
                     $allowedViews = array('movetopic', 'addpost', 'editpost', 'topic', 'profile', 'history');
 
                     // Ensure that we are in the correct element.
@@ -64,10 +64,10 @@ class AsgarosForumShortcodes {
                     }
 
                     // Configure components.
-                    $this->asgarosforum->options['enable_search'] = false;
+                    $this->asgarosforum->options['enable_search']       = false;
                     $this->asgarosforum->breadcrumbs->breadcrumbs_level = 1;
                 } else if (!empty($atts['forum']) && ctype_digit($atts['forum'])) {
-                    $forumID = $atts['forum'];
+                    $forumID      = $atts['forum'];
                     $allowedViews = array('forum', 'addtopic', 'movetopic', 'addpost', 'editpost', 'topic', 'search', 'subscriptions', 'profile', 'members', 'history');
 
                     // Ensure that we are in the correct element.
@@ -81,7 +81,7 @@ class AsgarosForumShortcodes {
 
                     // Configure components.
                     $this->asgarosforum->breadcrumbs->breadcrumbs_level = ($this->asgarosforum->parent_forum != $forumID) ? 2 : 3;
-                    $this->shortcodeSearchFilter = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
+                    $this->shortcodeSearchFilter                        = 'AND (f.id = '.$forumID.' OR f.parent_forum = '.$forumID.')';
                 } else if (!empty($atts['category'])) {
                     $this->includeCategories = explode(',', $atts['category']);
 
@@ -89,12 +89,12 @@ class AsgarosForumShortcodes {
 
                     // Ensure that we are in the correct category or view, otherwise show overview.
                     if (!in_array($this->asgarosforum->current_category, $this->includeCategories) && !in_array($this->asgarosforum->current_view, $category_doesnt_matter_views)) {
-                        $this->asgarosforum->current_category   = false;
-                        $this->asgarosforum->parent_forum       = false;
-                        $this->asgarosforum->current_forum      = false;
-                        $this->asgarosforum->current_topic      = false;
-                        $this->asgarosforum->current_post       = false;
-                        $this->asgarosforum->current_view       = 'overview';
+                        $this->asgarosforum->current_category = false;
+                        $this->asgarosforum->parent_forum     = false;
+                        $this->asgarosforum->current_forum    = false;
+                        $this->asgarosforum->current_topic    = false;
+                        $this->asgarosforum->current_post     = false;
+                        $this->asgarosforum->current_view     = 'overview';
                     }
                 }
             }

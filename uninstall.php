@@ -85,7 +85,7 @@ function deleteData() {
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_polls_votes;");
 
     // Delete uploaded files
-    $upload_dir = wp_upload_dir();
+    $upload_dir  = wp_upload_dir();
     $upload_path = $upload_dir['basedir'].'/asgarosforum/';
     recursiveDelete($upload_path);
 

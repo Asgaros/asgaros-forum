@@ -4,9 +4,9 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumAdmin {
     private $asgarosforum = null;
-    public $saved = false;
-    public $error = false;
-    public $option_views = false;
+    public $saved         = false;
+    public $error         = false;
+    public $option_views  = false;
 
     public function __construct($object) {
         $this->asgarosforum = $object;
@@ -365,13 +365,13 @@ class AsgarosForumAdmin {
                 } else if (is_bool($v)) {
                     $saved_ops[$k] = (bool)$_POST[$k];
                 } else if ($k === 'allowed_filetypes') {
-                    $tmp = strtolower(sanitize_text_field($_POST[$k]));
+                    $tmp           = strtolower(sanitize_text_field($_POST[$k]));
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
 				} else if (in_array($k, array('signatures_html_tags', 'mail_template_new_post_message', 'mail_template_new_topic_message', 'mail_template_mentioned_message'), true)) {
-					$tmp = wp_kses_post($_POST[$k]);
+					$tmp           = wp_kses_post($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
 				} else {
-                    $tmp = sanitize_text_field($_POST[$k]);
+                    $tmp           = sanitize_text_field($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 }
             } else {
@@ -392,7 +392,7 @@ class AsgarosForumAdmin {
 
         foreach ($this->asgarosforum->appearance->options_default as $k => $v) {
             if (isset($_POST[$k])) {
-				$tmp = sanitize_text_field($_POST[$k]);
+				$tmp           = sanitize_text_field($_POST[$k]);
                 $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
             } else {
                 $saved_ops[$k] = $v;
@@ -405,10 +405,10 @@ class AsgarosForumAdmin {
 
     /* STRUCTURE */
     public function save_category() {
-        $category_id        = sanitize_key($_POST['category_id']);
-        $category_name      = sanitize_text_field($_POST['category_name']);
-        $category_access    = sanitize_key($_POST['category_access']);
-        $category_order     = (is_numeric($_POST['category_order'])) ? sanitize_key($_POST['category_order']) : 1;
+        $category_id     = sanitize_key($_POST['category_id']);
+        $category_name   = sanitize_text_field($_POST['category_name']);
+        $category_access = sanitize_key($_POST['category_access']);
+        $category_order  = (is_numeric($_POST['category_order'])) ? sanitize_key($_POST['category_order']) : 1;
 
         if (!empty($category_name)) {
             if ($category_id === 'new') {
@@ -435,20 +435,20 @@ class AsgarosForumAdmin {
 
     public function save_forum() {
         // ID of the forum.
-        $forum_id           = sanitize_key($_POST['forum_id']);
+        $forum_id = sanitize_key($_POST['forum_id']);
 
         // Determine parent IDs.
-        $parent_ids          = explode('_', sanitize_key($_POST['forum_parent']));
+        $parent_ids         = explode('_', sanitize_key($_POST['forum_parent']));
         $forum_category     = $parent_ids[0];
         $forum_parent_forum = $parent_ids[1];
 
         // Additional data.
-        $forum_name         = sanitize_text_field($_POST['forum_name']);
-        $forum_description  = sanitize_text_field($_POST['forum_description']);
-        $forum_icon         = sanitize_text_field($_POST['forum_icon']);
-        $forum_icon         = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
-        $forum_status       = sanitize_key($_POST['forum_status']);
-        $forum_order        = (is_numeric($_POST['forum_order'])) ? sanitize_key($_POST['forum_order']) : 0;
+        $forum_name        = sanitize_text_field($_POST['forum_name']);
+        $forum_description = sanitize_text_field($_POST['forum_description']);
+        $forum_icon        = sanitize_text_field($_POST['forum_icon']);
+        $forum_icon        = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
+        $forum_status      = sanitize_key($_POST['forum_status']);
+        $forum_order       = (is_numeric($_POST['forum_order'])) ? sanitize_key($_POST['forum_order']) : 0;
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {

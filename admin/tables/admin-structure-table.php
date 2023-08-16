@@ -29,7 +29,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $forumIcon = trim(esc_html(stripslashes($item['icon'])));
         $forumIcon = (empty($forumIcon)) ? 'fas fa-comments' : $forumIcon;
 
-        $columnHTML = '';
+        $columnHTML  = '';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_description" value="'.esc_html(stripslashes($item['description'])).'">';
         $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_icon" value="'.$forumIcon.'">';
@@ -44,8 +44,8 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         }
 
         $columnHTML .= '<span class="make-bold">';
-        $forum_icon = trim(esc_html(stripslashes($item['icon'])));
-        $forum_icon = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
+        $forum_icon  = trim(esc_html(stripslashes($item['icon'])));
+        $forum_icon  = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
         $columnHTML .= '<span class="forum-icon '.$forum_icon.'"></span>';
 
         $columnHTML .= esc_html(stripslashes($item['name'])).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.$item['id'].')</span></span>';
@@ -81,7 +81,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
     }
 
     public function column_actions($item) {
-        $actionHTML = '';
+        $actionHTML  = '';
         $actionHTML .= '<a href="#" class="forum-delete-link link-delete" data-value-id="'.$item['id'].'" data-value-category="'.$item['parent_id'].'" data-value-editor-title="'.__('Delete Forum', 'asgaros-forum').'">';
         $actionHTML .= __('Delete Forum', 'asgaros-forum');
         $actionHTML .= '</a>';
@@ -114,7 +114,7 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
     public function prepare_items() {
         global $asgarosforum;
 
-        $columns = $this->get_columns();
+        $columns               = $this->get_columns();
         $this->_column_headers = array($columns);
 
         $data = array();

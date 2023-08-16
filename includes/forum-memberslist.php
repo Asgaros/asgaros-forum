@@ -4,9 +4,9 @@ if (!defined('ABSPATH')) exit;
 
 class AsgarosForumMembersList {
     private $asgarosforum = null;
-    public $filter_type = 'role';
-    public $filter_name = 'all';
-    public $memberslist = array();
+    public $filter_type   = 'role';
+    public $filter_name   = 'all';
+    public $memberslist   = array();
 
     public function __construct($object) {
         $this->asgarosforum = $object;
@@ -25,7 +25,7 @@ class AsgarosForumMembersList {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('members');
+        $element_link  = $this->asgarosforum->get_link('members');
         $element_title = __('Members', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -193,7 +193,7 @@ class AsgarosForumMembersList {
 
     public function show_memberslist() {
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('members');
-        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
+        $paginationRendering  = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
 
         $this->show_filters();
@@ -206,7 +206,7 @@ class AsgarosForumMembersList {
             $this->asgarosforum->render_notice(__('No users found!', 'asgaros-forum'));
         } else {
             $start = $this->asgarosforum->current_page * $this->asgarosforum->options['members_per_page'];
-            $end = $this->asgarosforum->options['members_per_page'];
+            $end   = $this->asgarosforum->options['members_per_page'];
 
             $dataSliced = array_slice($data, $start, $end);
 
@@ -304,11 +304,11 @@ class AsgarosForumMembersList {
             }
 
             // Obtain a list of columns for array_multisort().
-            $columnForumPosts = array();
+            $columnForumPosts  = array();
             $columnDisplayName = array();
 
             foreach ($allUsers as $key => $user) {
-                $columnForumPosts[$key] = $user->forum_posts;
+                $columnForumPosts[$key]  = $user->forum_posts;
                 $columnDisplayName[$key] = $user->display_name;
             }
 
@@ -325,7 +325,7 @@ class AsgarosForumMembersList {
     public function maybe_filter_siteadmins($users) {
         if ($this->asgarosforum->options['memberslist_filter_siteadmins'] && $users) {
             $siteAdmins = $this->asgarosforum->permissions->get_users_by_role('siteadmin');
-            $users = array_diff_key($users, $siteAdmins);
+            $users      = array_diff_key($users, $siteAdmins);
         }
 
         return $users;

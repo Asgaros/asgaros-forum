@@ -62,7 +62,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 	}
 
 	public function update($new_instance, $old_instance) {
-		$instance = array();
+		$instance          = array();
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		return $instance;
 	}

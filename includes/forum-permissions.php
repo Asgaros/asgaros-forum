@@ -171,8 +171,8 @@ class AsgarosForumPermissions {
 		}
 
         // Otherwise decision based on current time.
-        $date_creation = strtotime($date_creation);
-        $date_now = strtotime($this->asgarosforum->current_time());
+        $date_creation   = strtotime($date_creation);
+        $date_now        = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
         if ($time_limitation < $date_difference) {
@@ -219,9 +219,9 @@ class AsgarosForumPermissions {
         }
 
         // Otherwise decision based on current time.
-        $date_creation = ($post_date) ? $post_date : $this->asgarosforum->get_post_date($post_id);
-        $date_creation = strtotime($date_creation);
-        $date_now = strtotime($this->asgarosforum->current_time());
+        $date_creation   = ($post_date) ? $post_date : $this->asgarosforum->get_post_date($post_id);
+        $date_creation   = strtotime($date_creation);
+        $date_now        = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
         if ($time_limitation < $date_difference) {
@@ -273,9 +273,9 @@ class AsgarosForumPermissions {
         }
 
         // Otherwise decision based on current time.
-        $date_creation = ($post_date) ? $post_date : $first_post->date;
-        $date_creation = strtotime($date_creation);
-        $date_now = strtotime($this->asgarosforum->current_time());
+        $date_creation   = ($post_date) ? $post_date : $first_post->date;
+        $date_creation   = strtotime($date_creation);
+        $date_now        = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
         if ($time_limitation < $date_difference) {
@@ -322,9 +322,9 @@ class AsgarosForumPermissions {
         }
 
         // Otherwise decision based on current time.
-        $date_creation = ($post_date) ? $post_date : $this->asgarosforum->get_post_date($post_id);
-        $date_creation = strtotime($date_creation);
-        $date_now = strtotime($this->asgarosforum->current_time());
+        $date_creation   = ($post_date) ? $post_date : $this->asgarosforum->get_post_date($post_id);
+        $date_creation   = strtotime($date_creation);
+        $date_now        = strtotime($this->asgarosforum->current_time());
         $date_difference = $date_now - $date_creation;
 
         if ($time_limitation < $date_difference) {
@@ -537,13 +537,13 @@ class AsgarosForumPermissions {
     public function change_ban_status() {
         if (!empty($_GET['ban_user'])) {
             $user_id = get_current_user_id();
-            $ban_id = sanitize_key($_GET['ban_user']);
+            $ban_id  = sanitize_key($_GET['ban_user']);
 
             $this->ban_user($user_id, $ban_id);
         }
 
         if (!empty($_GET['unban_user'])) {
-            $user_id = get_current_user_id();
+            $user_id  = get_current_user_id();
             $unban_id = sanitize_key($_GET['unban_user']);
 
             $this->unban_user($user_id, $unban_id);
@@ -565,31 +565,31 @@ class AsgarosForumPermissions {
         switch ($role) {
             case 'all':
                 $query = new AsgarosForumUserQuery(array('fields' => array('ID', 'display_name')));
-                $data = $query->results;
+                $data  = $query->results;
                 break;
             case 'role':
                 $query = new AsgarosForumUserQuery(array(
 					'fields'   => array('ID', 'display_name'),
 					'meta_key' => 'asgarosforum_role',
 				));
-                $data = $query->results;
+                $data  = $query->results;
                 break;
             case 'siteadmin':
                 $query = new AsgarosForumUserQuery(array(
 					'fields' => array('ID', 'display_name'),
 					'role'   => 'administrator',
 				));
-                $data = $query->results;
+                $data  = $query->results;
                 break;
             case 'normal':
-                $users_all = $this->get_users_by_role('all');
-                $users_role = $this->get_users_by_role('role');
+                $users_all       = $this->get_users_by_role('all');
+                $users_role      = $this->get_users_by_role('role');
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
 
                 $data = array_diff_key($users_all, $users_role, $users_siteadmin);
                 break;
             case 'moderator':
-                $query = new AsgarosForumUserQuery(array(
+                $query           = new AsgarosForumUserQuery(array(
 					'fields'     => array('ID', 'display_name'),
 					'meta_key'   => 'asgarosforum_role',
 					'meta_value' => 'moderator',
@@ -600,23 +600,23 @@ class AsgarosForumPermissions {
                 $data = array_diff_key($users_moderator, $users_siteadmin);
                 break;
             case 'administrator':
-                $query = new AsgarosForumUserQuery(array(
+                $query               = new AsgarosForumUserQuery(array(
 					'fields'     => array('ID', 'display_name'),
 					'meta_key'   => 'asgarosforum_role',
 					'meta_value' => 'administrator',
 				));
                 $users_administrator = $query->results;
-                $users_siteadmin = $this->get_users_by_role('siteadmin');
+                $users_siteadmin     = $this->get_users_by_role('siteadmin');
 
                 $data = array_unique(($users_administrator + $users_siteadmin), SORT_REGULAR);
                 break;
             case 'banned':
-                $query = new AsgarosForumUserQuery(array(
+                $query           = new AsgarosForumUserQuery(array(
 					'fields'     => array('ID', 'display_name'),
 					'meta_key'   => 'asgarosforum_role',
 					'meta_value' => 'banned',
 				));
-                $users_banned = $query->results;
+                $users_banned    = $query->results;
                 $users_siteadmin = $this->get_users_by_role('siteadmin');
 
                 $data = array_diff_key($users_banned, $users_siteadmin);
@@ -649,25 +649,25 @@ class AsgarosForumPermissions {
         $views['forum-user-role'] = '<b>'.__('Forum Roles:', 'asgaros-forum').'</b>&nbsp;';
 
         // Normal users.
-        $users = $this->get_users_by_role('normal');
-        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'normal') ? 'class="current"' : '';
+        $users                     = $this->get_users_by_role('normal');
+        $cssClass                  = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'normal') ? 'class="current"' : '';
         $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=normal').'">'.__('Users', 'asgaros-forum').'</a> ('.count($users).')';
 
         // Moderators.
-        $users = $this->get_users_by_role('moderator');
-        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'moderator') ? 'class="current"' : '';
+        $users                     = $this->get_users_by_role('moderator');
+        $cssClass                  = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'moderator') ? 'class="current"' : '';
         $views['forum-user-role'] .= '&nbsp;|&nbsp;';
         $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=moderator').'">'.__('Moderators', 'asgaros-forum').'</a> ('.count($users).')';
 
         // Administrators.
-        $users = $this->get_users_by_role('administrator');
-        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'administrator') ? 'class="current"' : '';
+        $users                     = $this->get_users_by_role('administrator');
+        $cssClass                  = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'administrator') ? 'class="current"' : '';
         $views['forum-user-role'] .= '&nbsp;|&nbsp;';
         $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=administrator').'">'.__('Administrators', 'asgaros-forum').'</a> ('.count($users).')';
 
         // Banned.
-        $users = $this->get_users_by_role('banned');
-        $cssClass = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'banned') ? 'class="current"' : '';
+        $users                     = $this->get_users_by_role('banned');
+        $cssClass                  = (!empty($_GET['forum-user-role']) && $_GET['forum-user-role'] == 'banned') ? 'class="current"' : '';
         $views['forum-user-role'] .= '&nbsp;|&nbsp;';
         $views['forum-user-role'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-role=banned').'">'.__('Banned', 'asgaros-forum').'</a> ('.count($users).')';
 
@@ -680,7 +680,7 @@ class AsgarosForumPermissions {
         if (!$this->asgarosforum->prevent_query_modifications) {
             if ($pagenow == 'users.php') {
                 if (!empty($_GET['forum-user-role'])) {
-        			$role = sanitize_key($_GET['forum-user-role']);
+        			$role  = sanitize_key($_GET['forum-user-role']);
                     $users = $this->get_users_by_role($role);
 
                     if (!empty($users)) {
@@ -690,7 +690,7 @@ class AsgarosForumPermissions {
                             $user_ids[] = $user->ID;
                         }
 
-                        $ids = implode(',', wp_parse_id_list($user_ids));
+                        $ids                 = implode(',', wp_parse_id_list($user_ids));
                         $Query->query_where .= " AND $wpdb->users.ID IN ($ids)";
                     } else {
                         $Query->query_where .= " AND $wpdb->users.ID IN (-1)";
@@ -701,10 +701,10 @@ class AsgarosForumPermissions {
     }
 
     public function bulk_actions_users($bulk_actions) {
-        $bulk_actions['forum_role_assign_normal'] = __('Assign forum role:', 'asgaros-forum').' '.__('User', 'asgaros-forum');
-        $bulk_actions['forum_role_assign_moderator'] = __('Assign forum role:', 'asgaros-forum').' '.__('Moderator', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_normal']        = __('Assign forum role:', 'asgaros-forum').' '.__('User', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_moderator']     = __('Assign forum role:', 'asgaros-forum').' '.__('Moderator', 'asgaros-forum');
         $bulk_actions['forum_role_assign_administrator'] = __('Assign forum role:', 'asgaros-forum').' '.__('Administrator', 'asgaros-forum');
-        $bulk_actions['forum_role_assign_banned'] = __('Assign forum role:', 'asgaros-forum').' '.__('Banned', 'asgaros-forum');
+        $bulk_actions['forum_role_assign_banned']        = __('Assign forum role:', 'asgaros-forum').' '.__('Banned', 'asgaros-forum');
 
         return $bulk_actions;
     }

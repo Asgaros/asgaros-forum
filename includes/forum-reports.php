@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 class AsgarosForumReports {
-    private $asgarosforum = null;
+    private $asgarosforum         = null;
     private $current_user_reports = false;
 
     public function __construct($object) {
@@ -14,7 +14,7 @@ class AsgarosForumReports {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('reports');
+        $element_link  = $this->asgarosforum->get_link('reports');
         $element_title = __('Reports', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -29,7 +29,7 @@ class AsgarosForumReports {
 
                 if (!$this->report_exists($post_id, $reporter_id)) {
                     $report_message = __('Are you sure that you want to report this post?', 'asgaros-forum');
-                    $report_href = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array(
+                    $report_href    = $this->asgarosforum->rewrite->get_link('topic', $topic_id, array(
 						'post'       => $post_id,
 						'report_add' => 1,
 						'part'       => ($this->asgarosforum->current_page + 1),
@@ -77,7 +77,7 @@ class AsgarosForumReports {
             $report = $this->get_report($post_id, $reporter_id);
 
             $author_name = $this->asgarosforum->getUsername($report['author_id']);
-            $reporter = get_userdata($report['reporters']);
+            $reporter    = get_userdata($report['reporters']);
 
             $replacements = array(
                 '###AUTHOR###'   => $author_name,
@@ -157,12 +157,12 @@ class AsgarosForumReports {
 
     // Returns data of a specific report.
     public function get_report($post_id, $reporter_ids) {
-        $post_object    = $this->asgarosforum->content->get_post($post_id);
-        $topic_object   = $this->asgarosforum->content->get_topic($post_object->parent_id);
-        $post_link      = $this->asgarosforum->rewrite->get_post_link($post_id, $topic_object->id, false, array('highlight_post' => $post_id));
+        $post_object  = $this->asgarosforum->content->get_post($post_id);
+        $topic_object = $this->asgarosforum->content->get_topic($post_object->parent_id);
+        $post_link    = $this->asgarosforum->rewrite->get_post_link($post_id, $topic_object->id, false, array('highlight_post' => $post_id));
 
         // Prepare message-content.
-        $report_content = wpautop(stripslashes($post_object->text));
+        $report_content  = wpautop(stripslashes($post_object->text));
         $report_content .= $this->asgarosforum->uploads->show_uploaded_files($post_object->id, $post_object->uploads);
 
         $report = array(
@@ -200,8 +200,8 @@ class AsgarosForumReports {
 
         if ($reports_counter > 0) {
             $notice = __('There are reports.', 'asgaros-forum');
-            $link = $this->asgarosforum->rewrite->get_link('reports');
-            $icon = 'fas fa-exclamation-triangle';
+            $link   = $this->asgarosforum->rewrite->get_link('reports');
+            $icon   = 'fas fa-exclamation-triangle';
             $this->asgarosforum->add_notice($notice, $link, $icon);
         }
     }
@@ -218,7 +218,7 @@ class AsgarosForumReports {
                 $report = $this->get_report($post_id, $reporter_ids);
 
                 echo '<div class="report-element">';
-                    $post_link = '<a href="'.$report['post_link'].'" title="'.$report['topic_name'].'">'.$report['topic_name'].'</a>';
+                    $post_link   = '<a href="'.$report['post_link'].'" title="'.$report['topic_name'].'">'.$report['topic_name'].'</a>';
                     $post_author = $this->asgarosforum->getUsername($report['author_id']);
 
                     echo '<div class="report-source">';

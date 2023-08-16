@@ -90,9 +90,9 @@ class AsgarosForumUserQuery {
 		switch ($type) {
 			// 'alphabetical' sorts depend on the xprofile setup.
 			case 'alphabetical':
-				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
+				$sql['select']  = "SELECT u.ID FROM {$wpdb->users} u";
 				$sql['orderby'] = 'ORDER BY u.display_name';
-				$sql['order'] = 'ASC';
+				$sql['order']   = 'ASC';
 
 				// To ensure that spam/deleted/non-activated users
 				// are filtered out, we add an appropriate sub-query.
@@ -117,21 +117,21 @@ class AsgarosForumUserQuery {
 		if (count($include_ids) === 1 && reset($include_ids) === 0) {
 			$sql['where'][] = $this->no_results['where'];
 		} else if (!empty($include_ids)) {
-			$include_ids = implode(',', wp_parse_id_list($include_ids));
+			$include_ids    = implode(',', wp_parse_id_list($include_ids));
 			$sql['where'][] = "u.ID IN ({$include_ids})";
 		}
 
 		// 'exclude' - User ids to exclude from the results.
 		if ($exclude !== false) {
-			$exclude_ids = implode(',', wp_parse_id_list($exclude));
+			$exclude_ids    = implode(',', wp_parse_id_list($exclude));
 			$sql['where'][] = "u.ID NOT IN ({$exclude_ids})";
 		}
 
 		// 'search_terms' searches user_login and user_nicename.
 		if ($search_terms !== false) {
-			$search_terms = $wpdb->esc_like(wp_kses_normalize_entities($search_terms));
+			$search_terms         = $wpdb->esc_like(wp_kses_normalize_entities($search_terms));
 			$search_terms_nospace = $search_terms.'%';
-			$search_terms_space = '% '.$search_terms.'%';
+			$search_terms_space   = '% '.$search_terms.'%';
 
 			$matched_user_ids = $wpdb->get_col($wpdb->prepare(
 				"SELECT ID FROM {$wpdb->users} WHERE ( user_login LIKE %s OR user_login LIKE %s OR user_nicename LIKE %s OR user_nicename LIKE %s )",
@@ -141,7 +141,7 @@ class AsgarosForumUserQuery {
 				$search_terms_space
 			));
 
-			$match_in_clause = empty($matched_user_ids) ? 'NULL' : implode(',', $matched_user_ids);
+			$match_in_clause        = empty($matched_user_ids) ? 'NULL' : implode(',', $matched_user_ids);
 			$sql['where']['search'] = "u.ID IN ({$match_in_clause})";
 		}
 
@@ -218,7 +218,7 @@ class AsgarosForumUserQuery {
 		// Match up to the user ids from the main query.
 		foreach ($this->user_ids as $key => $uid) {
 			if (isset($r[$uid])) {
-				$r[$uid]->ID = (int)$uid;
+				$r[$uid]->ID         = (int)$uid;
 				$this->results[$uid] = $r[$uid];
 			// Remove user ID from original user_ids property.
 			} else {

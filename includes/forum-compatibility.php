@@ -123,7 +123,7 @@ class AsgarosForumCompatibility {
 
             // Check if the content template has the forum-shortcode.
             if (has_shortcode($ct_content, 'forum') || has_shortcode($ct_content, 'Forum')) {
-                $this->asgarosforum->executePlugin = true;
+                $this->asgarosforum->executePlugin       = true;
                 $this->asgarosforum->options['location'] = $post->ID;
             }
         }

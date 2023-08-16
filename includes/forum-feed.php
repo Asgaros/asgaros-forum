@@ -32,12 +32,12 @@ class AsgarosForumFeed {
             switch ($this->asgarosforum->current_view) {
                 case 'topic':
                     $title = $this->asgarosforum->current_topic_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
-                    $link = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
+                    $link  = $this->asgarosforum->rewrite->get_link('topic', $this->asgarosforum->current_topic, array('showfeed' => 'rss2'));
                     echo '<link rel="alternate" type="application/rss+xml" title="'.esc_attr($title).'" href="'.esc_url($link).'" />'.PHP_EOL;
                     break;
                 case 'forum':
                     $title = $this->asgarosforum->current_forum_name.' &#8211; '.$this->asgarosforum->options['forum_title'];
-                    $link = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
+                    $link  = $this->asgarosforum->rewrite->get_link('forum', $this->asgarosforum->current_forum, array('showfeed' => 'rss2'));
                     echo '<link rel="alternate" type="application/rss+xml" title="'.esc_attr($title).'" href="'.esc_url($link).'" />'.PHP_EOL;
                     break;
             }
@@ -93,7 +93,7 @@ class AsgarosForumFeed {
 
             if ($this->asgarosforum->current_view === 'forum') {
                 $query_post_content = "SELECT p.text FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1";
-                $query_post_date = "SELECT p.date FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1";
+                $query_post_date    = "SELECT p.date FROM {$this->asgarosforum->tables->posts} AS p WHERE p.parent_id = t.id ORDER BY p.id ASC LIMIT 1";
 
                 $feed_data = $this->asgarosforum->db->get_results("SELECT t.id, t.name, ({$query_post_content}) AS text, ({$query_post_date}) AS date, t.author_id FROM {$this->asgarosforum->tables->topics} AS t WHERE t.parent_id = {$this->asgarosforum->current_forum} AND t.approved = 1 ORDER BY t.id DESC LIMIT 0, 50;");
             } else if ($this->asgarosforum->current_view === 'topic') {
