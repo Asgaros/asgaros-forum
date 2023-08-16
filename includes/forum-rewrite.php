@@ -345,7 +345,7 @@ class AsgarosForumRewrite {
         // Modify the suggested slug when it already exists.
         if (!empty($this->slug_cache[$type]) && in_array($slug, $this->slug_cache[$type])) {
             $max = 1;
-            while (in_array(($slug.'-'.++$max), $this->slug_cache[$type]));
+            while (in_array(($slug.'-'.(++$max)), $this->slug_cache[$type]));
             $slug .= '-'.$max;
         }
 
