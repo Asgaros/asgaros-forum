@@ -367,7 +367,7 @@ class AsgarosForumAdmin {
                 } else if ($k === 'allowed_filetypes') {
                     $tmp = strtolower(sanitize_text_field($_POST[$k]));
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
-				} else if (in_array($k, array('signatures_html_tags', 'mail_template_new_post_message', 'mail_template_new_topic_message', 'mail_template_mentioned_message'))) {
+				} else if (in_array($k, array('signatures_html_tags', 'mail_template_new_post_message', 'mail_template_new_topic_message', 'mail_template_mentioned_message'), true)) {
 					$tmp = wp_kses_post($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
 				} else {

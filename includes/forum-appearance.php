@@ -71,7 +71,7 @@ class AsgarosForumAppearance {
 			$prevent_indexing = false;
 			$blocked_views_for_searchengines = array('addtopic', 'movetopic', 'addpost', 'editpost', 'search');
 
-			if (in_array($this->asgarosforum->current_view, $blocked_views_for_searchengines)) {
+			if (in_array($this->asgarosforum->current_view, $blocked_views_for_searchengines, true)) {
 				$prevent_indexing = true;
 			}
 
@@ -81,7 +81,7 @@ class AsgarosForumAppearance {
 
 			$profile_views = array('profile', 'history');
 
-			if ($this->asgarosforum->options['hide_profiles_from_guests'] && in_array($this->asgarosforum->current_view, $profile_views)) {
+			if ($this->asgarosforum->options['hide_profiles_from_guests'] && in_array($this->asgarosforum->current_view, $profile_views, true)) {
 				$prevent_indexing = true;
 			}
 
