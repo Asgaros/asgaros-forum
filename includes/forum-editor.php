@@ -132,45 +132,38 @@ class AsgarosForumEditor {
                 // Error when the user is not logged-in and guest-posting is disabled.
                 if (!is_user_logged_in() && !$this->asgarosforum->options['allow_guest_postings']) {
                     return false;
-                    break;
                 }
 
                 // Error when the user is banned.
                 if ($this->asgarosforum->permissions->isBanned('current')) {
                     return false;
-                    break;
                 }
 
                 // Error when the forum is closed.
                 if (!$this->asgarosforum->forumIsOpen()) {
                     return false;
-                    break;
                 }
                 break;
             case 'addpost':
                 // Error when user is not logged-in and guest-posting is disabled.
                 if (!is_user_logged_in() && !$this->asgarosforum->options['allow_guest_postings']) {
                     return false;
-                    break;
                 }
 
                 // Error when the user is banned.
                 if ($this->asgarosforum->permissions->isBanned('current')) {
                     return false;
-                    break;
                 }
 
                 // Error when the topic is closed and the user is not a moderator.
                 if ($this->asgarosforum->is_topic_closed($this->asgarosforum->current_topic) && !$this->asgarosforum->permissions->isModerator('current')) {
                     return false;
-                    break;
                 }
                 break;
             case 'editpost':
                 // Error when user is not logged-in.
                 if (!is_user_logged_in()) {
                     return false;
-                    break;
                 }
 
                 // Error when the user cannot edit a post.
@@ -178,7 +171,6 @@ class AsgarosForumEditor {
 
                 if (!$this->asgarosforum->permissions->can_edit_post($user_id, $this->asgarosforum->current_post)) {
                     return false;
-                    break;
                 }
                 break;
         }

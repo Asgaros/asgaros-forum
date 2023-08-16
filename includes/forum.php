@@ -1659,10 +1659,8 @@ class AsgarosForum {
         switch ($timestamp_mode) {
             case 'relative':
                 return sprintf(__('%s ago', 'asgaros-forum'), human_time_diff(strtotime($timestamp), current_time('timestamp')));
-            break;
             case 'actual':
                 return $this->format_date($timestamp, true);
-            break;
         }
     }
 
