@@ -1348,12 +1348,12 @@ class AsgarosForum {
     }
 
     public function getSpecificForums($ids) {
-        $results = $this->db->get_results("SELECT id, parent_id AS category_id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).") ORDER BY id ASC;");
+        $results = $this->db->get_results("SELECT id, parent_id AS category_id, name FROM {$this->tables->forums} WHERE id IN (".implode(',', $ids).') ORDER BY id ASC;');
         return $results;
     }
 
     public function getSpecificTopics($ids) {
-        $results = $this->db->get_results("SELECT t.id, f.parent_id AS category_id, t.name FROM {$this->tables->topics} AS t LEFT JOIN {$this->tables->forums} AS f ON (f.id = t.parent_id) WHERE t.id IN (".implode(',', $ids).") ORDER BY t.id ASC;");
+        $results = $this->db->get_results("SELECT t.id, f.parent_id AS category_id, t.name FROM {$this->tables->topics} AS t LEFT JOIN {$this->tables->forums} AS f ON (f.id = t.parent_id) WHERE t.id IN (".implode(',', $ids).') ORDER BY t.id ASC;');
         return $results;
     }
 
@@ -1491,9 +1491,9 @@ class AsgarosForum {
 
 		if ($this->options['highlight_admin']) {
             if ($this->permissions->isAdministrator($user->ID)) {
-                $username_highlight = "highlight-admin";
+                $username_highlight = 'highlight-admin';
             } else if ($this->permissions->isModerator($user->ID)) {
-                $username_highlight = "highlight-moderator";
+                $username_highlight = 'highlight-moderator';
             }
         }
 
@@ -1552,7 +1552,7 @@ class AsgarosForum {
             $this->lastpost_forum_cache();
 
             if (isset($this->lastpost_forum_cache[$forum_id])) {
-                $this->get_lastpost_in_forum_cache[$forum_id] = $this->db->get_row("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.id = ".$this->lastpost_forum_cache[$forum_id]." AND t.id = p.parent_id;");
+                $this->get_lastpost_in_forum_cache[$forum_id] = $this->db->get_row("SELECT p.id, p.date, p.parent_id, p.author_id, t.name FROM {$this->tables->posts} AS p, {$this->tables->topics} AS t WHERE p.id = ".$this->lastpost_forum_cache[$forum_id].' AND t.id = p.parent_id;');
             } else {
                 $this->get_lastpost_in_forum_cache[$forum_id] = false;
             }
@@ -2356,11 +2356,11 @@ class AsgarosForum {
         // Check if users have posts or topics.
         $users_have_content = false;
 
-		if ($this->db->get_var("SELECT ID FROM {$this->tables->posts} WHERE author_id IN(".implode(',', $userids).") LIMIT 1;")) {
+		if ($this->db->get_var("SELECT ID FROM {$this->tables->posts} WHERE author_id IN(".implode(',', $userids).') LIMIT 1;')) {
 			$users_have_content = true;
 		}
 
-        if ($this->db->get_var("SELECT ID FROM {$this->tables->topics} WHERE author_id IN(".implode(',', $userids).") LIMIT 1;")) {
+        if ($this->db->get_var("SELECT ID FROM {$this->tables->topics} WHERE author_id IN(".implode(',', $userids).') LIMIT 1;')) {
 			$users_have_content = true;
 		}
 

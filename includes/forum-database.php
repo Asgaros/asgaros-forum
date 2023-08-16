@@ -109,7 +109,7 @@ class AsgarosForumDatabase {
 
             $sql = array();
 
-            $sql[] = "CREATE TABLE ".$this->tables->forums." (
+            $sql[] = 'CREATE TABLE '.$this->tables->forums." (
             id int(11) NOT NULL auto_increment,
             name varchar(255) NOT NULL default '',
             parent_id int(11) NOT NULL default '0',
@@ -123,7 +123,7 @@ class AsgarosForumDatabase {
             KEY parent_id (parent_id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->topics." (
+            $sql[] = 'CREATE TABLE '.$this->tables->topics." (
             id int(11) NOT NULL auto_increment,
             parent_id int(11) NOT NULL default '0',
             author_id int(11) NOT NULL default '0',
@@ -139,7 +139,7 @@ class AsgarosForumDatabase {
             KEY sticky (sticky)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->posts." (
+            $sql[] = 'CREATE TABLE '.$this->tables->posts." (
             id int(11) NOT NULL auto_increment,
             text longtext,
             parent_id int(11) NOT NULL default '0',
@@ -158,13 +158,13 @@ class AsgarosForumDatabase {
             KEY parent_id_id (parent_id, id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->reports." (
+            $sql[] = 'CREATE TABLE '.$this->tables->reports." (
             post_id int(11) NOT NULL default '0',
             reporter_id int(11) NOT NULL default '0',
             PRIMARY KEY  (post_id, reporter_id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->reactions." (
+            $sql[] = 'CREATE TABLE '.$this->tables->reactions." (
             post_id int(11) NOT NULL default '0',
             user_id int(11) NOT NULL default '0',
             reaction varchar(20) NOT NULL default '',
@@ -173,21 +173,21 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (post_id, user_id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->polls." (
+            $sql[] = 'CREATE TABLE '.$this->tables->polls." (
             id int(11) NOT NULL default '0',
             title varchar(255) NOT NULL default '',
             multiple int(1) NOT NULL default '0',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->polls_options." (
+            $sql[] = 'CREATE TABLE '.$this->tables->polls_options." (
             id int(11) NOT NULL auto_increment,
             poll_id int(11) NOT NULL default '0',
             title varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->polls_votes." (
+            $sql[] = 'CREATE TABLE '.$this->tables->polls_votes." (
             poll_id int(11) NOT NULL default '0',
             option_id int(11) NOT NULL default '0',
             user_id int(11) NOT NULL default '0',
@@ -234,7 +234,7 @@ class AsgarosForumDatabase {
 
             // Create forum slugs.
             if ($database_version_installed < 6 && !$first_time_installation) {
-                $forums = $this->db->get_results("SELECT id, name FROM ".$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
+                $forums = $this->db->get_results('SELECT id, name FROM '.$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
 
                 foreach ($forums as $forum) {
                     $slug = $asgarosforum->rewrite->create_unique_slug($forum->name, $this->tables->forums, 'forum');

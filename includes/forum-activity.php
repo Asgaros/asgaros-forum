@@ -116,7 +116,7 @@ class AsgarosForumActivity {
 			// Build query-part for pagination.
 			$number_of_topics = $this->asgarosforum->options['activities_per_page'];
 			$topic_offset = $this->asgarosforum->current_page * $number_of_topics;
-			$query_limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $topic_offset, $number_of_topics);
+			$query_limit = $this->asgarosforum->db->prepare('LIMIT %d, %d', $topic_offset, $number_of_topics);
 
 			// Build final query and get results.
 			$query = '';

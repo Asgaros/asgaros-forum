@@ -102,7 +102,7 @@ class AsgarosForumSearch {
 
             $start = $this->asgarosforum->current_page * $this->asgarosforum->options['topics_per_page'];
             $end = $this->asgarosforum->options['topics_per_page'];
-            $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $start, $end);
+            $limit = $this->asgarosforum->db->prepare('LIMIT %d, %d', $start, $end);
 
             $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 

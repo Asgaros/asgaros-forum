@@ -91,8 +91,8 @@ class AsgarosForumUserQuery {
 			// 'alphabetical' sorts depend on the xprofile setup.
 			case 'alphabetical' :
 				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
-				$sql['orderby'] = "ORDER BY u.display_name";
-				$sql['order'] = "ASC";
+				$sql['orderby'] = 'ORDER BY u.display_name';
+				$sql['order'] = 'ASC';
 
 				// To ensure that spam/deleted/non-activated users
 				// are filtered out, we add an appropriate sub-query.
@@ -157,7 +157,7 @@ class AsgarosForumUserQuery {
 			$found_user_ids = $wpdb->get_col($meta_sql);
 
 			if (!empty($found_user_ids)) {
-				$sql['where'][] = "u.ID IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
+				$sql['where'][] = 'u.ID IN ('.implode(',', wp_parse_id_list($found_user_ids)).')';
 			} else {
 				$sql['where'][] = '1 = 0';
 			}
@@ -169,7 +169,7 @@ class AsgarosForumUserQuery {
 			$found_user_ids = $wpdb->get_col($meta_sql);
 
 			if (!empty($found_user_ids)) {
-				$sql['where'][] = "u.ID IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
+				$sql['where'][] = 'u.ID IN ('.implode(',', wp_parse_id_list($found_user_ids)).')';
 			} else {
 				$sql['where'][] = '1 = 0';
 			}
@@ -177,7 +177,7 @@ class AsgarosForumUserQuery {
 
 		// 'per_page', 'page' - handles LIMIT.
 		if (!empty($per_page) && !empty($page)) {
-			$sql['limit'] = $wpdb->prepare("LIMIT %d, %d", (int) (($page - 1)*$per_page), (int) $per_page);
+			$sql['limit'] = $wpdb->prepare('LIMIT %d, %d', (int) (($page - 1)*$per_page), (int) $per_page);
 		} else {
 			$sql['limit'] = '';
 		}
@@ -248,9 +248,9 @@ class AsgarosForumUserQuery {
 		// fetch the resulting values for use in the template functions.
 		if (!empty($this->query_vars['meta_key'])) {
 			$meta_sql = array(
-				'select' => "SELECT user_id, meta_key, meta_value",
+				'select' => 'SELECT user_id, meta_key, meta_value',
 				'from'   => "FROM $wpdb->usermeta",
-				'where'  => $wpdb->prepare("WHERE meta_key = %s", $this->query_vars['meta_key']),
+				'where'  => $wpdb->prepare('WHERE meta_key = %s', $this->query_vars['meta_key']),
 			);
 
 			if ($this->query_vars['meta_value'] !== false) {

@@ -155,7 +155,7 @@ class AsgarosForumContent {
 			$user_id = $this->asgarosforum->permissions->currentUserID;
 
             if (!$this->asgarosforum->permissions->check_minimum_time($user_id)) {
-                $this->asgarosforum->add_notice(__("The minimum time between new posts didn't pass yet.", "asgaros-forum"));
+                $this->asgarosforum->add_notice(__("The minimum time between new posts didn't pass yet.", 'asgaros-forum'));
                 return false;
             }
 		}
@@ -642,7 +642,7 @@ class AsgarosForumContent {
         $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
 
         // Build final query and get results.
-        $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.parent_id = f.id AND f.parent_id IN ({$ids_categories}) AND t.approved = 1 AND ((t.sticky = 2) OR (t.parent_id = %d AND t.sticky = 1)) ORDER BY ".$query_order.";";
+        $query = "SELECT t.id, t.name, t.views, t.sticky, t.closed, t.author_id, ({$query_answers}) AS answers FROM {$this->asgarosforum->tables->topics} AS t, {$this->asgarosforum->tables->forums} AS f WHERE t.parent_id = f.id AND f.parent_id IN ({$ids_categories}) AND t.approved = 1 AND ((t.sticky = 2) OR (t.parent_id = %d AND t.sticky = 1)) ORDER BY ".$query_order.';';
 		$query = $this->asgarosforum->db->prepare($query, $forum_id);
 		$query = apply_filters('asgarosforum_overwrite_get_sticky_topics_query', $query, $forum_id, $query_answers, $query_order);
 
@@ -666,7 +666,7 @@ class AsgarosForumContent {
 
     public function get_topics($forum_id, $topic_offset, $number_of_topics) {
         // Build query-part for pagination.
-        $query_limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $topic_offset, $number_of_topics);
+        $query_limit = $this->asgarosforum->db->prepare('LIMIT %d, %d', $topic_offset, $number_of_topics);
 
         // Build query-part for ordering.
         $query_order = "(SELECT MAX(id) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id) DESC";

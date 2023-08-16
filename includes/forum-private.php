@@ -162,7 +162,7 @@ class AsgarosForumPrivate {
 		}
 
 		// Prepare list with IDs of already visited topics.
-		$visited_topics = "0";
+		$visited_topics = '0';
 
 		if (!empty($this->asgarosforum->unread->excluded_items) && !is_string($this->asgarosforum->unread->excluded_items)) {
 			$visited_topics = implode(',', array_keys($this->asgarosforum->unread->excluded_items));

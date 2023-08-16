@@ -276,7 +276,7 @@ class AsgarosForumRewrite {
         if (!$post_page) {
             // Get all post ids of the topic.
             if (empty($this->cache_get_post_link_ids[$topic_id])) {
-                $this->cache_get_post_link_ids[$topic_id] = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = ".$topic_id." ORDER BY id ASC;");
+                $this->cache_get_post_link_ids[$topic_id] = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = ".$topic_id.' ORDER BY id ASC;');
             }
 
             // Now get the position of the post.
@@ -333,7 +333,7 @@ class AsgarosForumRewrite {
     public function create_unique_slug($name, $location, $type) {
         // Cache all existing slugs if not already done.
         if (empty($this->slug_cache[$type])) {
-            $this->slug_cache[$type] = $this->asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug <> '';");
+            $this->slug_cache[$type] = $this->asgarosforum->db->get_col("SELECT slug FROM {$location} WHERE slug <> '';");
         }
 
         // Suggest a new slug for the element.

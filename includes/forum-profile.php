@@ -152,8 +152,8 @@ class AsgarosForumProfile {
             // Now load history-data based for an user based on the categories which are accessible for the current user.
             $accessible_categories = implode(',', $accessible_categories);
 
-			$query = "";
-            $query_limit = "";
+			$query = '';
+            $query_limit = '';
 
             if ($limit) {
                 $elements_maximum = 50;
