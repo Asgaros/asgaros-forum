@@ -481,6 +481,11 @@ if (!defined('ABSPATH')) {
                             </td>
                         </tr>
 
+                        <tr class="delete-topic-option" <?php if (!$delete_topic_option) { echo 'style="display: none;"'; } ?>>
+                            <th><label for="delete_topics_without_replies"><?php esc_html_e('Users can only delete own topics without replies', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="delete_topics_without_replies" id="delete_topics_without_replies" <?php checked(!empty($this->asgarosforum->options['delete_topics_without_replies'])); ?>></td>
+                        </tr>
+
                         <tr>
                             <th><label for="enable_open_topic"><?php esc_html_e('Users can open their own topics', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="enable_open_topic" id="enable_open_topic" <?php checked(!empty($this->asgarosforum->options['enable_open_topic'])); ?>></td>

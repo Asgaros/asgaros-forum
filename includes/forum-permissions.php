@@ -267,6 +267,15 @@ class AsgarosForumPermissions {
             return false;
         }
 
+        // Disallow if topic has replies and the option prevents deletion of topics having replies
+        if ($this->asgarosforum->options['delete_topics_without_replies']) {
+            $replies = $this->asgarosforum->content->count_topic_replies($topic_id);
+
+            if ($replies > 0) {
+                return false;
+            }
+        }
+
         // Allow when there is no time limitation.
         $time_limitation = $this->asgarosforum->options['time_limit_delete_topics'];
 

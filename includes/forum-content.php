@@ -691,4 +691,10 @@ class AsgarosForumContent {
     public function count_posts_by_user($user_id) {
         return $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT COUNT(id) FROM {$this->asgarosforum->tables->posts} WHERE author_id = %d;", $user_id));
     }
+
+    public function count_topic_replies($topic_id) {
+        global $wpdb;
+
+        return $wpdb->get_var($wpdb->prepare("SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = %d;", $topic_id));
+    }
 }

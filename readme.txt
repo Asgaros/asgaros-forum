@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Added: Option which allows users to only delete own topics without replies
 * Improved compatibility with WP-Sweep
 * Removed: Themes functionality
 * Performance improvements and code optimizations

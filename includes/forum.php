@@ -108,6 +108,7 @@ class AsgarosForum {
         'time_limit_delete_posts'          => 180,
         'enable_delete_topic'              => false,
         'time_limit_delete_topics'         => 180,
+        'delete_topics_without_replies'    => false,
         'enable_open_topic'                => false,
         'enable_close_topic'               => false,
         'show_description_in_forum'        => false,
