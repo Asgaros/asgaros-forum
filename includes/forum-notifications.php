@@ -223,6 +223,7 @@ class AsgarosForumNotifications {
         // Prepare subject.
         $notification_subject = $this->asgarosforum->options['mail_template_new_post_subject'];
         $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
+        $notification_subject = str_replace('###FORUM###', wp_specialchars_decode($forum_name, ENT_QUOTES), $notification_subject);
 
         // Prepare message-content.
         $message_content  = wpautop(stripslashes($post->text));
@@ -329,6 +330,7 @@ class AsgarosForumNotifications {
         // Prepare subject.
         $notification_subject = $this->asgarosforum->options['mail_template_new_topic_subject'];
         $notification_subject = str_replace('###TITLE###', wp_specialchars_decode($topic_name, ENT_QUOTES), $notification_subject);
+        $notification_subject = str_replace('###FORUM###', wp_specialchars_decode($forum_name, ENT_QUOTES), $notification_subject);
 
         // Prepare message-content.
         $message_content  = wpautop(stripslashes($post->text));

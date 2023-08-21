@@ -85,6 +85,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Option which allows users to only delete own topics without replies
+* Added: Support for forum name in title of notifications
 * Improved compatibility with WP-Sweep
 * Removed: Themes functionality
 * Performance improvements and code optimizations
