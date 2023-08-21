@@ -195,11 +195,11 @@ class AsgarosForumReactions {
             if (count($reaction_names) === 1) {
                 $output .= sprintf(__('%s has reacted to this post.', 'asgaros-forum'), $reaction_names[0]);
             } else if (count($reaction_names) === 2) {
-                $output .= sprintf(__('%s and %s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1]);
+                $output .= sprintf(__('%1$s and %2$s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1]);
             } else if (count($reaction_names) === 3) {
-                $output .= sprintf(__('%s, %s and %s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], $reaction_names[2]);
+                $output .= sprintf(__('%1$s, %2$s and %3$s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], $reaction_names[2]);
             } else {
-                $output .= sprintf(__('%s, %s and %s other users have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], count($reaction_names) - 2);
+                $output .= sprintf(__('%1$s, %2$s and %3$s other users have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], count($reaction_names) - 2);
             }
 
             $output .= '</div>';

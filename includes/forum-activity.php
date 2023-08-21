@@ -79,14 +79,14 @@ class AsgarosForumActivity {
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comments '.esc_attr($read_status).'"></span>';
-                    echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
+                    echo sprintf(__('New topic %1$s created by %2$s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 } else {
                     $link      = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comment '.esc_attr($read_status).'"></span>';
-                    echo sprintf(__('%s replied in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
+                    echo sprintf(__('%1$s replied in %2$s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 }
             }

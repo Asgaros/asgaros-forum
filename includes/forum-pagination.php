@@ -99,7 +99,7 @@ class AsgarosForumPagination {
 				$out .= '<a href="'.$link.'"><i class="fas fa-step-backward"></i> '.__('Previous', 'asgaros-forum').'</a>';
 			}
 
-			$out .= '<strong>'.sprintf(__('Page %s of %s', 'asgaros-forum'), number_format_i18n($current_page + 1), number_format_i18n($num_pages)).'</strong>';
+			$out .= '<strong>'.sprintf(__('Page %1$s of %2$s', 'asgaros-forum'), number_format_i18n($current_page + 1), number_format_i18n($num_pages)).'</strong>';
 
 			// Next page
 			if (($current_page + 1) < $num_pages) {

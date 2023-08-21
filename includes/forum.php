@@ -678,7 +678,7 @@ class AsgarosForum {
 
                 if ($show_register) {
                     $register_link = '<u><a class="'.$show_register['menu_class'].'" href="'.$show_register['menu_url'].'">'.$show_register['menu_link_text'].'</a></u>';
-                    $notice        = sprintf(esc_html__('Please %s or %s to create posts and topics.', 'asgaros-forum'), $login_link, $register_link);
+                    $notice        = sprintf(esc_html__('Please %1$s or %2$s to create posts and topics.', 'asgaros-forum'), $login_link, $register_link);
                 } else {
                     $notice = sprintf(esc_html__('Please %s to create posts and topics.', 'asgaros-forum'), $login_link);
                 }
