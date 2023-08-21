@@ -45,11 +45,11 @@ class AsgarosForumStatistics {
         global $wpdb;
 
         // Initialize counters class.
-        $counters = new stdClass();
+        $counters         = new stdClass();
         $counters->topics = 0;
-        $counters->posts = 0;
-        $counters->views = 0;
-        $counters->users = 0;
+        $counters->posts  = 0;
+        $counters->views  = 0;
+        $counters->users  = 0;
 
         // Create counters query.
         $queryTopics = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->topics;
