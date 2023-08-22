@@ -111,10 +111,6 @@ class AsgarosForumAdmin {
         echo '</div>';
     }
 
-	public function has_user_profile_fields($user_id) {
-		return false;
-	}
-
     public function user_profile_fields($user) {
 		echo '<h2>'.esc_html__('Forum', 'asgaros-forum').'</h2>';
 		echo '<table class="form-table">';

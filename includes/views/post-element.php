@@ -187,11 +187,8 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
                 echo '<div class="signature">'.wp_kses_post($signature).'</div>';
             }
         }
-        ?>
-    </div>
-</div>
 
-<?php
+    echo '</div>';
+echo '</div>';
 
 do_action('asgarosforum_after_post');
-?>
