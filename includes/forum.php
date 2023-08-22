@@ -1986,7 +1986,7 @@ class AsgarosForum {
         }
     }
 
-    public function homeLink(){
+    public function homeLink() {
         $home_url = $this->get_link('home');
 
         return array(
