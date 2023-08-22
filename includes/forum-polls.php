@@ -522,7 +522,7 @@ class AsgarosForumPolls {
 
     private $get_bar_color_counter = 0;
     public function get_bar_color() {
-        $this->get_bar_color_counter++;
+        ++$this->get_bar_color_counter;
 
         $colors   = array();
         $colors[] = '#4661EE';

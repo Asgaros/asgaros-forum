@@ -104,7 +104,7 @@ class AsgarosForumBreadCrumbs {
     }
 
     public function render_breadcrumb($element) {
-        $this->breadcrumb_position++;
+        ++$this->breadcrumb_position;
 
         echo '<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
             echo '<a itemprop="item" href="'.esc_url($element['link']).'" title="'.esc_attr($element['title']).'">';

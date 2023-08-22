@@ -165,7 +165,7 @@ class AsgarosForumOnline {
 					// Show the names of online users.
 					if ($this->asgarosforum->options['statistics_show_online_usernames']) {
 						foreach ($currently_online_users as $online_user) {
-							$loop_counter++;
+							++$loop_counter;
 
 							if ($loop_counter > 1) {
 								echo ', ';
@@ -174,7 +174,7 @@ class AsgarosForumOnline {
 							echo $this->asgarosforum->renderUsername($online_user);
 						}
 					} else {
-						$loop_counter++;
+						++$loop_counter;
 
 						$users_counter        = count($currently_online_users);
 						$users_counter_output = sprintf(_n('%s User', '%s Users', $users_counter, 'asgaros-forum'), number_format_i18n($users_counter));
@@ -183,7 +183,7 @@ class AsgarosForumOnline {
                 }
 
                 if ($currently_online_guests) {
-                    $loop_counter++;
+                    ++$loop_counter;
 
                     if ($loop_counter > 1) {
                         echo ', ';

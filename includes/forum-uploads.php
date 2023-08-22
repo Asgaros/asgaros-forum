@@ -221,7 +221,7 @@ class AsgarosForumUploads {
 			if (!empty($uploads) && is_dir($path)) {
 				foreach ($uploads as $upload) {
 	                if (is_file($path.wp_basename($upload))) {
-						$uploadedFilesCounter++;
+						++$uploadedFilesCounter;
 	                    $uploadedFiles .= '<li>';
 	                    $uploadedFiles .= '<a href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
 	                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
@@ -261,7 +261,7 @@ class AsgarosForumUploads {
 				$flag = 'none';
 
 				if ($this->asgarosforum->options['uploads_maximum_number'] == 0 || $uploadedFilesCounter < $this->asgarosforum->options['uploads_maximum_number']) {
-					$uploadedFilesCounter++;
+					++$uploadedFilesCounter;
 					echo '<input type="file" name="forumfile[]"><br>';
 
 					if ($this->asgarosforum->options['uploads_maximum_number'] == 0 || $uploadedFilesCounter < $this->asgarosforum->options['uploads_maximum_number']) {

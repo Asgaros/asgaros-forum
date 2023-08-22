@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$counter++;
+++$counter;
 
 // Special CSS-class for first post-element in view.
 $first_post_class = ($counter == 1) ? 'first-post' : '';

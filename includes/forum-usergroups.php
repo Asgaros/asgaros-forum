@@ -700,7 +700,7 @@ class AsgarosForumUserGroups {
             $loopCounter = 0;
 
             foreach ($usergroups as $term) {
-                $loopCounter++;
+                ++$loopCounter;
                 $cssClass     = (!empty($_GET['forum-user-group']) && $_GET['forum-user-group'] == $term->term_id) ? 'class="current"' : '';
                 $usersCounter = self::countUsersOfUserGroup($term->term_id);
 
