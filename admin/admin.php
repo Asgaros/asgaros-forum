@@ -372,12 +372,10 @@ class AsgarosForumAdmin {
                     $tmp           = sanitize_text_field($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 }
+            } else if (is_bool($v)) {
+                $saved_ops[$k] = false;
             } else {
-                if (is_bool($v)) {
-                    $saved_ops[$k] = false;
-                } else {
-                    $saved_ops[$k] = $v;
-                }
+                $saved_ops[$k] = $v;
             }
         }
 

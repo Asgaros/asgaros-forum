@@ -851,65 +851,63 @@ class AsgarosForum {
 
         if ($this->has_error()) {
             $this->render_error();
+        } else if ($this->current_view === 'post') {
+            $this->showSinglePost();
         } else {
-            if ($this->current_view === 'post') {
-                $this->showSinglePost();
-            } else {
-                $this->render_notices();
-                $this->showMainTitleAndDescription();
+            $this->render_notices();
+            $this->showMainTitleAndDescription();
 
-                switch ($this->current_view) {
-                    case 'search':
-                        $this->search->show_search_results();
-                        break;
-                    case 'subscriptions':
-                        $this->notifications->show_subscription_overview();
-                        break;
-                    case 'movetopic':
-                        $this->showMoveTopic();
-                        break;
-                    case 'forum':
-                        $this->show_forum();
-                        break;
-                    case 'topic':
-                        $this->showTopic();
-                        break;
-                    case 'addtopic':
-                    case 'addpost':
-                    case 'editpost':
-                        $this->editor->showEditor($this->current_view);
-                        break;
-                    case 'profile':
-                        $this->profile->show_profile();
-                        break;
-                    case 'history':
-                        $this->profile->show_history();
-                        break;
-                    case 'members':
-                        $this->memberslist->show_memberslist();
-                        break;
-                    case 'activity':
-                        $this->activity->show_activity();
-                        break;
-                    case 'unread':
-                        $this->unread->show_unread_topics();
-                        break;
-                    case 'unapproved':
-                        $this->approval->show_unapproved_topics();
-                        break;
-                    case 'reports':
-                        $this->reports->show_reports();
-                        break;
-                    default:
-                        $this->overview();
-                        break;
-                }
-
-                // Action hook for optional bottom navigation elements.
-                echo '<div id="bottom-navigation">';
-                do_action('asgarosforum_bottom_navigation', $this->current_view);
-                echo '</div>';
+            switch ($this->current_view) {
+                case 'search':
+                    $this->search->show_search_results();
+                    break;
+                case 'subscriptions':
+                    $this->notifications->show_subscription_overview();
+                    break;
+                case 'movetopic':
+                    $this->showMoveTopic();
+                    break;
+                case 'forum':
+                    $this->show_forum();
+                    break;
+                case 'topic':
+                    $this->showTopic();
+                    break;
+                case 'addtopic':
+                case 'addpost':
+                case 'editpost':
+                    $this->editor->showEditor($this->current_view);
+                    break;
+                case 'profile':
+                    $this->profile->show_profile();
+                    break;
+                case 'history':
+                    $this->profile->show_history();
+                    break;
+                case 'members':
+                    $this->memberslist->show_memberslist();
+                    break;
+                case 'activity':
+                    $this->activity->show_activity();
+                    break;
+                case 'unread':
+                    $this->unread->show_unread_topics();
+                    break;
+                case 'unapproved':
+                    $this->approval->show_unapproved_topics();
+                    break;
+                case 'reports':
+                    $this->reports->show_reports();
+                    break;
+                default:
+                    $this->overview();
+                    break;
             }
+
+            // Action hook for optional bottom navigation elements.
+            echo '<div id="bottom-navigation">';
+            do_action('asgarosforum_bottom_navigation', $this->current_view);
+            echo '</div>';
         }
 
         do_action('asgarosforum_content_bottom');
@@ -1806,17 +1804,15 @@ class AsgarosForum {
                             $menu .= __('Open', 'asgaros-forum');
                         $menu     .= '</a>';
                     }
-                } else {
+                } else if ($this->permissions->can_close_topic($current_user_id, $this->current_topic)) {
                     // Close button.
-                    if ($this->permissions->can_close_topic($current_user_id, $this->current_topic)) {
-                        $menu     .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array(
-							'close_topic' => 1,
-							'_wpnonce'    => wp_create_nonce('asgaros_forum_close_topic'),
-						)).'">';
-                            $menu .= '<span class="menu-icon fas fa-lock"></span>';
-                            $menu .= __('Close', 'asgaros-forum');
-                        $menu     .= '</a>';
-                    }
+                    $menu     .= '<a class="button button-neutral" href="'.$this->get_link('topic', $this->current_topic, array(
+                        'close_topic' => 1,
+                        '_wpnonce'    => wp_create_nonce('asgaros_forum_close_topic'),
+                    )).'">';
+                        $menu .= '<span class="menu-icon fas fa-lock"></span>';
+                        $menu .= __('Close', 'asgaros-forum');
+                    $menu     .= '</a>';
                 }
             }
 
@@ -1827,18 +1823,16 @@ class AsgarosForum {
                     $menu .= __('Reply', 'asgaros-forum');
                 $menu     .= '</a>';
             }
-        } else {
-            if ($this->permissions->isModerator('current') && $show_all_buttons) {
-                // Approve button.
-                if (!$this->approval->is_topic_approved($this->current_topic)) {
-                    $menu     .= '<a class="button button-green" href="'.$this->get_link('topic', $this->current_topic, array(
-						'approve_topic' => 1,
-						'_wpnonce'      => wp_create_nonce('asgaros_forum_approve_topic'),
-					)).'">';
-                        $menu .= '<span class="menu-icon fas fa-check"></span>';
-                        $menu .= __('Approve', 'asgaros-forum');
-                    $menu     .= '</a>';
-                }
+        } else if ($this->permissions->isModerator('current') && $show_all_buttons) {
+            // Approve button.
+            if (!$this->approval->is_topic_approved($this->current_topic)) {
+                $menu     .= '<a class="button button-green" href="'.$this->get_link('topic', $this->current_topic, array(
+                    'approve_topic' => 1,
+                    '_wpnonce'      => wp_create_nonce('asgaros_forum_approve_topic'),
+                )).'">';
+                    $menu .= '<span class="menu-icon fas fa-check"></span>';
+                    $menu .= __('Approve', 'asgaros-forum');
+                $menu     .= '</a>';
             }
         }
 
