@@ -194,8 +194,8 @@ class AsgarosForum {
         $this->tables = $database->getTables();
         $this->db     = $wpdb;
 
-        $this->plugin_url  = plugin_dir_url(dirname(__FILE__));
-        $this->plugin_path = plugin_dir_path(dirname(__FILE__));
+        $this->plugin_url  = plugin_dir_url(__DIR__);
+        $this->plugin_path = plugin_dir_path(__DIR__);
         $this->load_options();
         $this->date_format = get_option('date_format');
         $this->time_format = get_option('time_format');

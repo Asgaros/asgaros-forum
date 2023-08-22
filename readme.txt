@@ -4,7 +4,7 @@ Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
 Tested up to: 6.3
-Requires PHP: 5.2
+Requires PHP: 5.3
 Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -90,6 +90,7 @@ You can find a list of available hooks and filters on this site:
 * Improved compatibility with WP-Sweep
 * Removed: Themes functionality
 * Performance improvements and code optimizations
+* The required minimum PHP version is now 5.3
 = 2.6.0 =
 * Fixed: Minor display issues
 * Fixed: Wrong stylings when using custom colors
