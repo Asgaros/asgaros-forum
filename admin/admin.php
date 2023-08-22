@@ -10,8 +10,8 @@ class AsgarosForumAdmin {
     public $error         = false;
     public $option_views  = false;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         // Set the views for the available options.
         $this->set_option_views();

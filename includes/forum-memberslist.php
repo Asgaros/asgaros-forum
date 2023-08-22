@@ -10,8 +10,8 @@ class AsgarosForumMembersList {
     public $filter_name   = 'all';
     public $memberslist   = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         // Set filter based on URL parameters.
         add_action('asgarosforum_prepare_members', array($this, 'load_members'));

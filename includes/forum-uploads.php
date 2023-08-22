@@ -11,8 +11,8 @@ class AsgarosForumUploads {
 	private $upload_url;
 	private $upload_allowed_filetypes;
 
-	public function __construct($object) {
-		$this->asgarosforum = $object;
+	public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
 		add_action('init', array($this, 'initialize'));
 	}

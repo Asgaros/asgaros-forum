@@ -9,8 +9,8 @@ class AsgarosForumReactions {
     private $reactions_list = array();
     private $post_reactions = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         // Build reactions-list.
         $this->reactions_list['down'] = array(

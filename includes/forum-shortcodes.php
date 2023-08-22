@@ -10,8 +10,8 @@ class AsgarosForumShortcodes {
     public $shortcodeSearchFilter = '';
     public $includeCategories     = array();
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
     }
@@ -22,8 +22,8 @@ class AsgarosForumShortcodes {
         add_shortcode('Forum', array($this->asgarosforum, 'forum'));
     }
 
-    public function checkForShortcode($object = false) {
-        $this->postObject = $object;
+    public function checkForShortcode($postObject = false) {
+        $this->postObject = $postObject;
 
         // If no post-object is set, use the location.
         if (!$this->postObject && $this->asgarosforum->options['location']) {

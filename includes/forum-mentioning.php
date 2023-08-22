@@ -8,8 +8,8 @@ class AsgarosForumMentioning {
     private $asgarosforum = null;
     private $regex_users  = '#@([^\r\n\t\s\0<>\[\]!,\.\(\)\'\"\|\?\@]+)($|[\r\n\t\s\0<>\[\]!,\.\(\)\'\"\|\?\@])#isu';
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_enqueue_css_js', array($this, 'enqueue_css_js'));
         add_filter('tiny_mce_before_init', array($this, 'add_mentioning_to_editor'));
@@ -161,12 +161,12 @@ class AsgarosForumMentioning {
         return $content;
     }
 
-    private function create_link($match) {
-        $link = $match[0];
-        $user = get_user_by('slug', $match[1]);
+    private function create_link($userMatchData) {
+        $link = $userMatchData[0];
+        $user = get_user_by('slug', $userMatchData[1]);
 
         if ($user) {
-            $link = $this->asgarosforum->renderUsername($user, '@'.$match[1]).$match[2];
+            $link = $this->asgarosforum->renderUsername($user, '@'.$userMatchData[1]).$userMatchData[2];
         }
 
         return $link;

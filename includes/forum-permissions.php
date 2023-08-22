@@ -8,8 +8,8 @@ class AsgarosForumPermissions {
     private $asgarosforum = null;
     public $currentUserID;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
         add_action('asgarosforum_prepare_profile', array($this, 'change_ban_status'));

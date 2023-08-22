@@ -10,8 +10,8 @@ class AsgarosForumBreadCrumbs {
     public $breadcrumbs_links    = array();
     private $breadcrumb_position = 0;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
     }
 
     public function add_breadcrumb($link, $title) {

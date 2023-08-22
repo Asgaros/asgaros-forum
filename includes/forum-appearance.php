@@ -23,8 +23,8 @@ class AsgarosForumAppearance {
 		'custom_css'                    => '',
 	);
 
-	public function __construct($object) {
-		$this->asgarosforum = $object;
+	public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
 		add_action('init', array($this, 'initialize'));
 	}

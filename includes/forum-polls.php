@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumPolls {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_editor_custom_content_bottom', array($this, 'editor_poll_form'), 10, 1);
         add_action('asgarosforum_after_add_topic_submit', array($this, 'editor_poll_process'), 10, 6);

@@ -8,8 +8,8 @@ class AsgarosForumReports {
     private $asgarosforum         = null;
     private $current_user_reports = false;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_breadcrumbs_reports', array($this, 'add_breadcrumbs'));
         add_action('asgarosforum_prepare_overview', array($this, 'register_notice'));

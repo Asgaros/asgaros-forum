@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumPagination {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
     }
 
     public function renderTopicOverviewPagination($topic_id, $topic_counter) {

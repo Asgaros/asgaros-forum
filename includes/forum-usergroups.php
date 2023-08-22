@@ -8,8 +8,8 @@ class AsgarosForumUserGroups {
     private static $asgarosforum = null;
     private static $taxonomyName = 'asgarosforum-usergroup';
 
-    public function __construct($object) {
-		self::$asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		self::$asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
 
@@ -249,21 +249,21 @@ class AsgarosForumUserGroups {
     }
 
     // Returns all or specific usergroups.
-    public static function getUserGroups($include = array(), $visible_groups_only = false) {
+    public static function getUserGroups($includedGroups = array(), $visible_groups_only = false) {
         $userGroups = false;
 
         // First load all terms.
         if ($visible_groups_only) {
             $userGroups = get_terms(self::$taxonomyName, array(
 				'hide_empty' => false,
-				'include'    => $include,
+				'include'    => $includedGroups,
 				'meta_key'   => 'usergroup-visibility',
 				'meta_value' => 'normal',
 			));
         } else {
             $userGroups = get_terms(self::$taxonomyName, array(
 				'hide_empty' => false,
-				'include'    => $include,
+				'include'    => $includedGroups,
 			));
         }
 

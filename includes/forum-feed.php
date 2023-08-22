@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumFeed {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_wp_head', array($this, 'add_feed_link'));
         add_action('asgarosforum_bottom_navigation', array($this, 'show_feed_navigation'), 20, 1);

@@ -15,8 +15,8 @@ class AsgarosForumOnline {
     private $online_guests         = array();
     private $online_guests_changed = false;
 
-    public function __construct($object) {
-		$this->asgarosforum    = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum    = $asgarosForumObject;
         $this->interval_update = (1 * MINUTE_IN_SECONDS);
         $this->interval_online = (10 * MINUTE_IN_SECONDS);
 

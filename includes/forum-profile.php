@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumProfile {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_breadcrumbs_profile', array($this, 'add_breadcrumbs_profile'));
         add_action('asgarosforum_breadcrumbs_history', array($this, 'add_breadcrumbs_history'));

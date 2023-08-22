@@ -9,8 +9,8 @@ class AsgarosForumNotifications {
     private $asgarosforum = null;
     public $mailing_list  = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_prepare_subscriptions', array($this, 'set_subscription_level'));
         add_action('asgarosforum_bottom_navigation', array($this, 'show_subscription_navigation'), 10, 1);

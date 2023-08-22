@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumStatistics {
     private static $asgarosforum = null;
 
-    public function __construct($object) {
-		self::$asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		self::$asgarosforum = $asgarosForumObject;
     }
 
     public static function showStatistics() {

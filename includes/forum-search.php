@@ -9,8 +9,8 @@ class AsgarosForumSearch {
     public $search_keywords_for_query  = '';
     public $search_keywords_for_output = '';
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
         add_action('asgarosforum_breadcrumbs_search', array($this, 'add_breadcrumbs'));

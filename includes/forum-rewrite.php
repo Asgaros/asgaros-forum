@@ -11,8 +11,8 @@ class AsgarosForumRewrite {
     public $slug_cache     = array();
     private $view_mapping  = array();
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         // Build view-mapping.
         $this->build_view_mapping();

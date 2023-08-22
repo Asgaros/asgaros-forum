@@ -9,8 +9,8 @@ class AsgarosForumUnread {
     private $user_id;
     public $excluded_items = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_prepare', array($this, 'prepare_unread_status'));
         add_action('asgarosforum_prepare_markallread', array($this, 'mark_all_read'));

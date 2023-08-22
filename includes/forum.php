@@ -1391,14 +1391,14 @@ class AsgarosForum {
         }
     }
 
-    public function cut_string($string, $length = 33, $at_next_space = false) {
+    public function cut_string($originalString, $length = 33, $at_next_space = false) {
         $string_length = 0;
 
         // Get string-length first.
         if (function_exists('mb_strlen')) {
-            $string_length = mb_strlen($string, 'UTF-8');
+            $string_length = mb_strlen($originalString, 'UTF-8');
         } else {
-            $string_length = strlen($string);
+            $string_length = strlen($originalString);
         }
 
         // Only cut string if it is longer than defined.
@@ -1409,27 +1409,27 @@ class AsgarosForum {
 
                 // Get position of space.
                 if (function_exists('mb_strpos')) {
-                    $space_position = mb_strpos($string, ' ', $length, 'UTF-8');
+                    $space_position = mb_strpos($originalString, ' ', $length, 'UTF-8');
                 } else {
-                    $space_position = strpos($string, ' ', $length);
+                    $space_position = strpos($originalString, ' ', $length);
                 }
 
                 if ($space_position) {
                     $length = $space_position;
                 } else {
-                    return $string;
+                    return $originalString;
                 }
             }
 
             // Return substring.
             if (function_exists('mb_substr')) {
-                return mb_substr($string, 0, $length, 'UTF-8').' &#8230;';
+                return mb_substr($originalString, 0, $length, 'UTF-8').' &#8230;';
             } else {
-                return substr($string, 0, $length).' &#8230;';
+                return substr($originalString, 0, $length).' &#8230;';
             }
         }
 
-        return $string;
+        return $originalString;
     }
 
     // TODO: Clean up the complete username logic ...
@@ -2279,14 +2279,14 @@ class AsgarosForum {
     }
 
     // Prevents oembed dataparsing for links which points to the own forum.
-    public function prevent_oembed_dataparse($return, $data, $url) {
+    public function prevent_oembed_dataparse($returnString, $data, $url) {
         $url_check = strpos($url, $this->rewrite->get_link('home'));
 
         if ($url_check !== false) {
             return $url;
         }
 
-        return $return;
+        return $returnString;
     }
 
     public function create_file($path, $content) {

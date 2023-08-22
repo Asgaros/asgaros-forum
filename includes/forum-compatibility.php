@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumCompatibility {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         $this->compatibility_autoptimize();
         $this->compatibility_yoastseo();

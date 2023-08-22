@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumEditor {
 	private $asgarosforum = null;
 
-	public function __construct($object) {
-		$this->asgarosforum = $object;
+	public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_filter('mce_buttons', array($this, 'default_mce_buttons'), 1, 2);
 		add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);

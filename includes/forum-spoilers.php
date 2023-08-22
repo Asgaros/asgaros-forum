@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 class AsgarosForumSpoilers {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
     }
