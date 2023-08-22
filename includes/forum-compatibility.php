@@ -186,8 +186,8 @@ class AsgarosForumCompatibility {
     public function comp_wpsweep_excluded_termids($term_ids) {
         // Exclude usergroups.
         $usergroup_term_ids = get_terms(
-            'asgarosforum-usergroup',
             array(
+                'taxonomy'   => 'asgarosforum-usergroup',
                 'hide_empty' => false,
                 'fields'     => 'ids',
             ),
@@ -195,8 +195,8 @@ class AsgarosForumCompatibility {
 
         // Exclude categories.
         $category_term_ids = get_terms(
-            'asgarosforum-category',
             array(
+                'taxonomy'   => 'asgarosforum-category',
                 'hide_empty' => false,
                 'fields'     => 'ids',
             ),

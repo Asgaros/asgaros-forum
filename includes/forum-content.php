@@ -527,7 +527,8 @@ class AsgarosForumContent {
             $meta_query_filter       = $this->get_categories_filter();
         }
 
-        $categories_list = get_terms('asgarosforum-category', array(
+        $categories_list = get_terms(array(
+            'taxonomy'   => 'asgarosforum-category',
             'hide_empty' => false,
             'exclude'    => $ids_categories_excluded,
             'include'    => $ids_categories_included,

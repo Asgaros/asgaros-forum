@@ -254,14 +254,16 @@ class AsgarosForumUserGroups {
 
         // First load all terms.
         if ($visible_groups_only) {
-            $userGroups = get_terms(self::$taxonomyName, array(
+            $userGroups = get_terms(array(
+                'taxonomy'   => self::$taxonomyName,
 				'hide_empty' => false,
 				'include'    => $includedGroups,
 				'meta_key'   => 'usergroup-visibility',
 				'meta_value' => 'normal',
 			));
         } else {
-            $userGroups = get_terms(self::$taxonomyName, array(
+            $userGroups = get_terms(array(
+                'taxonomy'   => self::$taxonomyName,
 				'hide_empty' => false,
 				'include'    => $includedGroups,
 			));
@@ -280,7 +282,8 @@ class AsgarosForumUserGroups {
 
     // Returns all usergroups of a specific category.
     public static function getUserGroupsOfCategory($categoryID) {
-        return get_terms(self::$taxonomyName, array(
+        return get_terms(array(
+            'taxonomy'   => self::$taxonomyName,
 			'hide_empty' => false,
 			'parent'     => $categoryID,
 		));
@@ -288,7 +291,8 @@ class AsgarosForumUserGroups {
 
     // Returns all usergroups categories.
     public static function getUserGroupCategories($hide_empty = false) {
-        $userGroupCategories = get_terms(self::$taxonomyName, array(
+        $userGroupCategories = get_terms(array(
+            'taxonomy'   => self::$taxonomyName,
 			'hide_empty' => false,
 			'parent'     => 0,
 		));
