@@ -273,7 +273,7 @@ window.FontAwesomeConfig = {
         // Clears all form-elements inside of a selected DOM-element.
         function clear_form_elements(selector) {
             $(selector).find(':input').each(function() {
-                switch(this.type) {
+                switch (this.type) {
                     case 'password':
                     case 'text':
                     case 'textarea':
