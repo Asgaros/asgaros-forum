@@ -2341,7 +2341,7 @@ class AsgarosForum {
 
     public function delete_file($path) {
         if (file_exists($path)) {
-            unlink($path);
+            wp_delete_file($path);
         }
     }
 

@@ -32,7 +32,7 @@ class AsgarosForumUploads {
             $files = array_diff(scandir($path), array('.', '..'));
 
             foreach ($files as $file) {
-                unlink($path.$file);
+                wp_delete_file($path.$file);
             }
 
             rmdir($path);
@@ -145,7 +145,7 @@ class AsgarosForumUploads {
 
 	            foreach ($deleted_files as $file) {
 	                if (is_file($path.wp_basename($file))) {
-	                    unlink($path.wp_basename($file));
+	                    wp_delete_file($path.wp_basename($file));
 	                }
 	            }
 	        }

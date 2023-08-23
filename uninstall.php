@@ -23,7 +23,7 @@ if (function_exists('is_multisite') && is_multisite()) {
 
 function recursiveDelete($str) {
     if (is_file($str)) {
-        return @unlink($str);
+        return wp_delete_file($str);
     } else if (is_dir($str)) {
         $scan = glob(rtrim($str, '/').'/*');
 
