@@ -241,7 +241,7 @@ class AsgarosForumMembersList {
 
                     echo '<div class="member-posts">';
                         $member_posts_i18n = number_format_i18n($element->forum_posts);
-                        echo sprintf(_n('%s Post', '%s Posts', absint($element->forum_posts), 'asgaros-forum'), esc_html($member_posts_i18n));
+                        printf(_n('%s Post', '%s Posts', absint($element->forum_posts), 'asgaros-forum'), esc_html($member_posts_i18n));
                     echo '</div>';
 
                     if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {

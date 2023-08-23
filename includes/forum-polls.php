@@ -446,7 +446,7 @@ class AsgarosForumPolls {
 
                             if ($can_see_results) {
                                 echo '<small class="poll-result-numbers">';
-                                    echo sprintf(_n('%s Vote', '%s Votes', absint($option->votes), 'asgaros-forum'), esc_html(number_format_i18n($option->votes)));
+                                    printf(_n('%s Vote', '%s Votes', absint($option->votes), 'asgaros-forum'), esc_html(number_format_i18n($option->votes)));
                                     echo '&nbsp;&middot;&nbsp;';
                                     echo esc_html(number_format_i18n($percentage, 2)).'%';
                                 echo '</small>';
@@ -463,7 +463,7 @@ class AsgarosForumPolls {
 
                 if ($can_see_results) {
                     echo '<div class="poll-result-total">';
-                        echo sprintf(_n('%s Participant', '%s Participants', absint($poll->total_participants), 'asgaros-forum'), esc_html(number_format_i18n($poll->total_participants)));
+                        printf(_n('%s Participant', '%s Participants', absint($poll->total_participants), 'asgaros-forum'), esc_html(number_format_i18n($poll->total_participants)));
                     echo '</div>';
                 }
 

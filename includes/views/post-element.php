@@ -166,9 +166,9 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
 
                         // Show who edited a post (when the information exist in the database).
                         if ($post->author_edit) {
-                            echo sprintf(__('Last edited on %1$s by %2$s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                            printf(__('Last edited on %1$s by %2$s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
                         } else {
-                            echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
+                            printf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
                         }
 
                         echo '</span>';

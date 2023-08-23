@@ -992,9 +992,9 @@ class AsgarosForum {
 
 					// Show forum stats.
 					echo '<small class="forum-stats">';
-						echo sprintf(_n('%s Topic', '%s Topics', absint($count_topics), 'asgaros-forum'), esc_html($count_topics_i18n));
+						printf(_n('%s Topic', '%s Topics', absint($count_topics), 'asgaros-forum'), esc_html($count_topics_i18n));
 						echo '&nbsp;&middot;&nbsp;';
-						echo sprintf(_n('%s Post', '%s Posts', absint($count_posts), 'asgaros-forum'), esc_html($count_posts_i18n));
+						printf(_n('%s Post', '%s Posts', absint($count_posts), 'asgaros-forum'), esc_html($count_posts_i18n));
 					echo '</small>';
 
 					echo '<small class="forum-lastpost-small">';
@@ -1071,12 +1071,12 @@ class AsgarosForum {
                 // Show topic stats.
                 echo '<small class="topic-stats">';
                     $count_answers_i18n = number_format_i18n($topic_object->answers);
-                    echo sprintf(_n('%s Reply', '%s Replies', absint($topic_object->answers), 'asgaros-forum'), esc_html($count_answers_i18n));
+                    printf(_n('%s Reply', '%s Replies', absint($topic_object->answers), 'asgaros-forum'), esc_html($count_answers_i18n));
 
                     if ($this->options['count_topic_views']) {
                         $count_views_i18n = number_format_i18n($topic_object->views);
                         echo '&nbsp;&middot;&nbsp;';
-                        echo sprintf(_n('%s View', '%s Views', absint($topic_object->views), 'asgaros-forum'), esc_html($count_views_i18n));
+                        printf(_n('%s View', '%s Views', absint($topic_object->views), 'asgaros-forum'), esc_html($count_views_i18n));
                     }
                 echo '</small>';
 
