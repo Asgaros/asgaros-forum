@@ -6,7 +6,7 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 
 if (function_exists('is_multisite') && is_multisite()) {
     global $wpdb;
-    $old_blog =  $wpdb->blogid;
+    $old_blog = $wpdb->blogid;
 
     // Get all blog ids
     $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
@@ -85,17 +85,14 @@ function deleteData() {
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_polls_votes;");
 
     // Delete uploaded files
-    $upload_dir = wp_upload_dir();
+    $upload_dir  = wp_upload_dir();
     $upload_path = $upload_dir['basedir'].'/asgarosforum/';
     recursiveDelete($upload_path);
-
-    // Delete themes
-    $theme_path = WP_CONTENT_DIR.'/themes-asgarosforum';
-    recursiveDelete($theme_path);
 
     // Delete data which has been used in old versions of the plugin.
     delete_metadata('user', 0, 'asgarosforum_lastvisit', '', true);
     delete_metadata('user', 0, 'asgarosforum_moderator', '', true);
     delete_metadata('user', 0, 'asgarosforum_banned', '', true);
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}forum_threads;");
+    recursiveDelete(WP_CONTENT_DIR.'/themes-asgarosforum');
 }

@@ -3,9 +3,9 @@ Contributors: Asgaros, qualmy91
 Donate link: https://www.asgaros.de/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 6.1
+Tested up to: 6.3
 Requires PHP: 5.2
-Stable tag: 2.4.1
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,8 +71,6 @@ You can help to translate Asgaros Forum on this site:
 Please only use this site and dont send me your own .po/.mo files because it is hard to maintain if I get multiple translation-files for a language.
 = Please approve my translations =
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
-= How can I add my own theme? =
-You can add own themes for your forum in the `/wp-content/themes-asgarosforum` directory (for example: `/wp-content/themes-asgarosforum/my-theme`). All themes in the `/wp-content/themes-asgarosforum` can be activated in the forum options. Each theme must have the following files: `style.css`, `widgets.css` and `editor.css`.
 = Which hooks and filters are available? =
 You can find a list of available hooks and filters on this site:
 [https://www.asgaros.de/support/?view=thread&id=407](https://www.asgaros.de/support/?view=thread&id=407).
@@ -86,6 +84,29 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Added: Option which allows users to only delete own topics without replies
+* Added: Support for forum name in title of notifications
+* Fixed: Deprecated error message in statistics
+* Improved compatibility with WP-Sweep
+* Removed: Themes functionality
+* Performance improvements and code optimizations
+= 2.6.0 =
+* Fixed: Minor display issues
+* Fixed: Wrong stylings when using custom colors
+* Compatibility with WordPress 6.3
+= 2.5.1 =
+* Fixed: Wrong stylings when using custom colors
+* Fixed: Display issues on mobile navigation
+* Fixed: Potential error in title generation
+= 2.5.0 =
+* Revised topic view
+* Fixed: Wrong HTML output in forum navigation
+* Added: Option to define minimum time between new posts
+* Changed: Time limit for editing/deleting topics/posts from minutes to seconds
+* Minor design changes
+* Improved mobile design
+* Performance improvements and code optimizations
+* Compatibility with WordPress 6.2
 = 2.4.1 =
 * Fixed: Multiple warnings in widgets
 * Fixed: Wrong stylings when using custom colors
@@ -511,7 +532,7 @@ You can find a list of available hooks and filters on this site:
 * Minor design changes
 * Minor design changes in the administration area
 * Improved application of custom appearance-settings
-* Mobile-theme improvements
+* Improved mobile design
 * Improve first-time installation-process
 * Screen-reader accessibility improvements
 * Performance improvements and code optimizations

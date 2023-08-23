@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumStatistics {
     private static $asgarosforum = null;
 
-    public function __construct($object) {
-		self::$asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		self::$asgarosforum = $asgarosForumObject;
     }
 
     public static function showStatistics() {
@@ -40,18 +42,46 @@ class AsgarosForumStatistics {
     }
 
     public static function getData() {
-        $queryTopics = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->topics;
-        $queryPosts = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->posts;
+        global $wpdb;
 
-        $queryViews = '0';
+        // Initialize counters class.
+        $counters         = new stdClass();
+        $counters->topics = 0;
+        $counters->posts  = 0;
+        $counters->views  = 0;
+        $counters->users  = 0;
+
+        // Create counters query.
+        $queryTopics = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->topics;
+        $queryPosts  = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->posts;
 
         if (self::$asgarosforum->options['count_topic_views']) {
             $queryViews = 'SELECT SUM(views) FROM '.self::$asgarosforum->tables->topics;
         }
 
-        $data = self::$asgarosforum->db->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
-        $data->users = self::$asgarosforum->count_users();
-        return $data;
+        $results = $wpdb->get_row("SELECT ({$queryTopics}) AS topics, ({$queryPosts}) AS posts, ({$queryViews}) AS views");
+
+        // Count users.
+        $results->users = self::$asgarosforum->count_users();
+
+        // Fill values.
+        if (!empty($results->topics)) {
+            $counters->topics = $results->topics;
+        }
+
+        if (!empty($results->posts)) {
+            $counters->posts = $results->posts;
+        }
+
+        if (!empty($results->views)) {
+            $counters->views = $results->views;
+        }
+
+        if (!empty($results->users)) {
+            $counters->users = $results->users;
+        }
+
+        return $counters;
     }
 
     public static function renderStatisticsElement($title, $data, $iconClass) {

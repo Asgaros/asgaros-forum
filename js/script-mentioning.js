@@ -50,8 +50,8 @@ window.asgaros = window.asgaros || {};
 					var line;
 					var iframeOffset;
 					var move;
-					var $view = $('#atwho-ground-'+this.id+' .atwho-view');
-					var $body = $('body');
+					var $view          = $('#atwho-ground-'+this.id+' .atwho-view');
+					var $body          = $('body');
 					var atwhoDataValue = this.$inputor.data('atwho');
 
 					if ('undefined' !== atwhoDataValue && 'undefined' !== atwhoDataValue.iframe && null !== atwhoDataValue.iframe) {
@@ -61,7 +61,7 @@ window.asgaros = window.asgaros || {};
 						iframeOffset = $(atwhoDataValue.iframe).offset();
 						if ('undefined' !== iframeOffset) {
 							caret.left += iframeOffset.left;
-							caret.top += iframeOffset.top;
+							caret.top  += iframeOffset.top;
 						}
 					} else {
 						caret = this.$inputor.caret('offset');
@@ -88,7 +88,7 @@ window.asgaros = window.asgaros || {};
 						line = 19;
 					}
 
-					offset.top = caret.top + line;
+					offset.top   = caret.top + line;
 					offset.left += move;
 				}
 			},

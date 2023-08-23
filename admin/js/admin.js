@@ -10,7 +10,7 @@ window.FontAwesomeConfig = {
         if (wp && wp.codeEditor) {
             if ($('textarea[data-code-editor-mode]').length) {
                 wp.codeEditor.defaultSettings.codemirror.mode = $('textarea[data-code-editor-mode]').attr('data-code-editor-mode');
-                var editor = wp.codeEditor.initialize($('textarea[data-code-editor-mode]'));
+                var editor                                    = wp.codeEditor.initialize($('textarea[data-code-editor-mode]'));
             }
         }
 
@@ -35,15 +35,6 @@ window.FontAwesomeConfig = {
 
         // Adding color picker
         $('.color-picker').wpColorPicker();
-
-        // Show/hide color pickers
-        $('select[name="theme"]').change(function() {
-            if ($('select[name="theme"]').val() === 'default') {
-                $('#af-options .custom-color-selector').show();
-            } else {
-                $('#af-options .custom-color-selector').hide();
-            }
-        });
 
         // Show/hide options.
         $('.show_hide_initiator').change(function() {
@@ -101,23 +92,23 @@ window.FontAwesomeConfig = {
         $('.forum-editor-link').click(function() {
             resetEditor();
 
-            var forum_id                = $(this).attr('data-value-id');
-            var forum_category          = $(this).attr('data-value-category');
-            var forum_parent_forum      = $(this).attr('data-value-parent-forum');
-            var forum_name              = '';
-            var forum_description       = '';
-            var forum_icon              = 'fas fa-comments';
-            var forum_status            = 'normal';
-            var forum_order             = '1';
-            var forum_count_subforums   = '0';
+            var forum_id              = $(this).attr('data-value-id');
+            var forum_category        = $(this).attr('data-value-category');
+            var forum_parent_forum    = $(this).attr('data-value-parent-forum');
+            var forum_name            = '';
+            var forum_description     = '';
+            var forum_icon            = 'fas fa-comments';
+            var forum_status          = 'normal';
+            var forum_order           = '1';
+            var forum_count_subforums = '0';
 
             if (forum_id !== 'new') {
-                forum_name              = $('#forum_'+forum_id+'_name').val();
-                forum_description       = $('#forum_'+forum_id+'_description').val();
-                forum_icon              = $('#forum_'+forum_id+'_icon').val();
-                forum_status            = $('#forum_'+forum_id+'_status').val();
-                forum_order             = $('#forum_'+forum_id+'_order').val();
-                forum_count_subforums   = $('#forum_'+forum_id+'_count_subforums').val();
+                forum_name            = $('#forum_'+forum_id+'_name').val();
+                forum_description     = $('#forum_'+forum_id+'_description').val();
+                forum_icon            = $('#forum_'+forum_id+'_icon').val();
+                forum_status          = $('#forum_'+forum_id+'_status').val();
+                forum_order           = $('#forum_'+forum_id+'_order').val();
+                forum_count_subforums = $('#forum_'+forum_id+'_count_subforums').val();
             }
 
             // Create parent-dropdown.
@@ -185,20 +176,20 @@ window.FontAwesomeConfig = {
         $('.usergroup-editor-link').click(function() {
             resetEditor();
 
-            var usergroup_id            = $(this).attr('data-value-id');
-            var usergroup_category      = $(this).attr('data-value-category');
-            var usergroup_name          = '';
-            var usergroup_color         = '#444444';
-            var usergroup_visibility    = '';
-            var usergroup_auto_add      = '';
-            var usergroup_icon          = '';
+            var usergroup_id         = $(this).attr('data-value-id');
+            var usergroup_category   = $(this).attr('data-value-category');
+            var usergroup_name       = '';
+            var usergroup_color      = '#444444';
+            var usergroup_visibility = '';
+            var usergroup_auto_add   = '';
+            var usergroup_icon       = '';
 
             if (usergroup_id !== 'new') {
-                usergroup_name          = $('#usergroup_'+usergroup_id+'_name').val();
-                usergroup_color         = $('#usergroup_'+usergroup_id+'_color').val();
-                usergroup_visibility    = $('#usergroup_'+usergroup_id+'_visibility').val();
-                usergroup_auto_add      = $('#usergroup_'+usergroup_id+'_auto_add').val();
-                usergroup_icon          = $('#usergroup_'+usergroup_id+'_icon').val();
+                usergroup_name       = $('#usergroup_'+usergroup_id+'_name').val();
+                usergroup_color      = $('#usergroup_'+usergroup_id+'_color').val();
+                usergroup_visibility = $('#usergroup_'+usergroup_id+'_visibility').val();
+                usergroup_auto_add   = $('#usergroup_'+usergroup_id+'_auto_add').val();
+                usergroup_icon       = $('#usergroup_'+usergroup_id+'_icon').val();
             }
 
             $('#usergroup-editor input[name=usergroup_id]').val(usergroup_id);
@@ -230,17 +221,17 @@ window.FontAwesomeConfig = {
         $('.ad-editor-link').click(function() {
             resetEditor();
 
-            var ad_id           = $(this).attr('data-value-id');
-            var ad_name         = '';
-            var ad_code         = '';
-            var ad_active       = '1';
-            var ad_locations    = '';
+            var ad_id        = $(this).attr('data-value-id');
+            var ad_name      = '';
+            var ad_code      = '';
+            var ad_active    = '1';
+            var ad_locations = '';
 
             if (ad_id !== 'new') {
-                ad_name         = $('#ad_'+ad_id+'_name').val();
-                ad_code         = $('#ad_'+ad_id+'_code').val();
-                ad_active       = $('#ad_'+ad_id+'_active').val();
-                ad_locations    = $('#ad_'+ad_id+'_locations').val().split(',');
+                ad_name      = $('#ad_'+ad_id+'_name').val();
+                ad_code      = $('#ad_'+ad_id+'_code').val();
+                ad_active    = $('#ad_'+ad_id+'_active').val();
+                ad_locations = $('#ad_'+ad_id+'_locations').val().split(',');
             }
 
             $('#ad-editor input[name=ad_id]').val(ad_id);
@@ -290,8 +281,8 @@ window.FontAwesomeConfig = {
         $('.forum-delete-link').click(function() {
             resetEditor();
 
-            var forum_id        = $(this).attr('data-value-id');
-            var forum_category  = $(this).attr('data-value-category');
+            var forum_id       = $(this).attr('data-value-id');
+            var forum_category = $(this).attr('data-value-category');
 
             $('#forum-delete input[name=forum-id]').val(forum_id);
             $('#forum-delete input[name=forum-category]').val(forum_category);

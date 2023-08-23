@@ -1,15 +1,17 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumMembersList {
     private $asgarosforum = null;
-    public $filter_type = 'role';
-    public $filter_name = 'all';
-    public $memberslist = array();
+    public $filter_type   = 'role';
+    public $filter_name   = 'all';
+    public $memberslist   = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         // Set filter based on URL parameters.
         add_action('asgarosforum_prepare_members', array($this, 'load_members'));
@@ -25,7 +27,7 @@ class AsgarosForumMembersList {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('members');
+        $element_link  = $this->asgarosforum->get_link('members');
         $element_title = __('Members', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -50,7 +52,7 @@ class AsgarosForumMembersList {
                             if ($this->is_filter_available($input_filter_name)) {
                                 $this->filter_name = $input_filter_name;
                             }
-                        break;
+                            break;
                     }
                 } else if ($input_filter_type === 'group') {
                     $this->filter_type = 'group';
@@ -73,7 +75,7 @@ class AsgarosForumMembersList {
                 'menu_link_text'    => esc_html__('Members', 'asgaros-forum'),
                 'menu_url'          => $membersLink,
                 'menu_login_status' => $loginStatus,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }
@@ -181,7 +183,10 @@ class AsgarosForumMembersList {
             echo '<b>';
         }
 
-		echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('members', false, array('filter_type' => $filter_type, 'filter_name' => $filter_name))).'">'.esc_html($title).'</a>';
+		echo '<a href="'.esc_url($this->asgarosforum->rewrite->get_link('members', false, array(
+			'filter_type' => $filter_type,
+			'filter_name' => $filter_name,
+		))).'">'.esc_html($title).'</a>';
 
 		if ($filter_type === $this->filter_type && $filter_name == $this->filter_name) {
             echo '</b>';
@@ -190,7 +195,7 @@ class AsgarosForumMembersList {
 
     public function show_memberslist() {
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('members');
-        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
+        $paginationRendering  = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
 
         $this->show_filters();
@@ -203,7 +208,7 @@ class AsgarosForumMembersList {
             $this->asgarosforum->render_notice(__('No users found!', 'asgaros-forum'));
         } else {
             $start = $this->asgarosforum->current_page * $this->asgarosforum->options['members_per_page'];
-            $end = $this->asgarosforum->options['members_per_page'];
+            $end   = $this->asgarosforum->options['members_per_page'];
 
             $dataSliced = array_slice($data, $start, $end);
 
@@ -224,13 +229,13 @@ class AsgarosForumMembersList {
                         $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($element->ID, 'all', true);
 
                         if (!empty($usergroups)) {
-                            echo '<small>';
+                            echo '<span class="member-usergroups">';
 
                             foreach ($usergroups as $usergroup) {
                                 echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
                             }
 
-                            echo '</small>';
+                            echo '</span>';
                         }
                     echo '</div>';
 
@@ -301,11 +306,11 @@ class AsgarosForumMembersList {
             }
 
             // Obtain a list of columns for array_multisort().
-            $columnForumPosts = array();
+            $columnForumPosts  = array();
             $columnDisplayName = array();
 
             foreach ($allUsers as $key => $user) {
-                $columnForumPosts[$key] = $user->forum_posts;
+                $columnForumPosts[$key]  = $user->forum_posts;
                 $columnDisplayName[$key] = $user->display_name;
             }
 
@@ -322,7 +327,7 @@ class AsgarosForumMembersList {
     public function maybe_filter_siteadmins($users) {
         if ($this->asgarosforum->options['memberslist_filter_siteadmins'] && $users) {
             $siteAdmins = $this->asgarosforum->permissions->get_users_by_role('siteadmin');
-            $users = array_diff_key($users, $siteAdmins);
+            $users      = array_diff_key($users, $siteAdmins);
         }
 
         return $users;

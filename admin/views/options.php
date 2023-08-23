@@ -1,11 +1,13 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 ?>
 <div class="wrap" id="af-options">
     <?php
-    $title = __('Settings', 'asgaros-forum');
+    $title        = __('Settings', 'asgaros-forum');
     $titleUpdated = __('Settings updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
     ?>
@@ -74,7 +76,12 @@ if (!defined('ABSPATH')) exit;
                             <td>
                                 <?php
                                 // Set a post_status argument because of a core bug. See: https://core.trac.wordpress.org/ticket/8592
-                                wp_dropdown_pages(array('selected' => esc_attr($this->asgarosforum->options['location']), 'name' => 'location', 'id' => 'location', 'post_status' => array('publish', 'pending', 'draft', 'private')));
+                                wp_dropdown_pages(array(
+									'selected'    => esc_attr($this->asgarosforum->options['location']),
+									'name'        => 'location',
+									'id'          => 'location',
+									'post_status' => array('publish', 'pending', 'draft', 'private'),
+								));
                                 echo '<span class="description">'.esc_html__('Page which contains the [forum]-shortcode.', 'asgaros-forum').'</span>';
                                 ?>
                             </td>
@@ -419,6 +426,14 @@ if (!defined('ABSPATH')) exit;
                 <div class="tab" id="tab-permissions" style="display: <?php echo esc_attr($display); ?>;">
                     <?php $this->render_options_header('permissions'); ?>
                     <table>
+						<tr>
+                            <th><label for="minimum_time_between_posts"><?php esc_html_e('Minimum time between new posts (in seconds):', 'asgaros-forum'); ?></label></th>
+                            <td>
+                                <input type="number" name="minimum_time_between_posts" id="minimum_time_between_posts" value="<?php echo absint($this->asgarosforum->options['minimum_time_between_posts']); ?>" size="3" min="0">
+                                <span class="description"><?php esc_html_e('(0 = No minimum time)', 'asgaros-forum'); ?></span>
+                            </td>
+                        </tr>
+
                         <tr>
                             <th><label for="enable_edit_post"><?php esc_html_e('Users can edit their own posts', 'asgaros-forum'); ?></label></th>
                             <td><input type="checkbox" name="enable_edit_post" id="enable_edit_post" class="show_hide_initiator" data-hide-class="edit-post-option" <?php checked(!empty($this->asgarosforum->options['enable_edit_post'])); ?>></td>
@@ -429,10 +444,10 @@ if (!defined('ABSPATH')) exit;
                         ?>
 
                         <tr class="edit-post-option" <?php if (!$edit_post_option) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="time_limit_edit_posts"><?php esc_html_e('Time limitation for editing posts (in minutes):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="time_limit_edit_posts"><?php esc_html_e('Time limit for editing posts (in seconds):', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="time_limit_edit_posts" id="time_limit_edit_posts" value="<?php echo absint($this->asgarosforum->options['time_limit_edit_posts']); ?>" size="3" min="0">
-                                <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                                <span class="description"><?php esc_html_e('(0 = No limit)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
 
@@ -446,10 +461,10 @@ if (!defined('ABSPATH')) exit;
                         ?>
 
                         <tr class="delete-post-option" <?php if (!$delete_post_option) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="time_limit_delete_posts"><?php esc_html_e('Time limitation for deleting posts (in minutes):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="time_limit_delete_posts"><?php esc_html_e('Time limit for deleting posts (in seconds):', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="time_limit_delete_posts" id="time_limit_delete_posts" value="<?php echo absint($this->asgarosforum->options['time_limit_delete_posts']); ?>" size="3" min="0">
-                                <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                                <span class="description"><?php esc_html_e('(0 = No limit)', 'asgaros-forum'); ?></span>
                             </td>
                         </tr>
 
@@ -463,11 +478,16 @@ if (!defined('ABSPATH')) exit;
                         ?>
 
                         <tr class="delete-topic-option" <?php if (!$delete_topic_option) { echo 'style="display: none;"'; } ?>>
-                            <th><label for="time_limit_delete_topics"><?php esc_html_e('Time limitation for deleting topics (in minutes):', 'asgaros-forum'); ?></label></th>
+                            <th><label for="time_limit_delete_topics"><?php esc_html_e('Time limit for deleting topics (in seconds):', 'asgaros-forum'); ?></label></th>
                             <td>
                                 <input type="number" name="time_limit_delete_topics" id="time_limit_delete_topics" value="<?php echo absint($this->asgarosforum->options['time_limit_delete_topics']); ?>" size="3" min="0">
-                                <span class="description"><?php esc_html_e('(0 = No limitation)', 'asgaros-forum'); ?></span>
+                                <span class="description"><?php esc_html_e('(0 = No limit)', 'asgaros-forum'); ?></span>
                             </td>
+                        </tr>
+
+                        <tr class="delete-topic-option" <?php if (!$delete_topic_option) { echo 'style="display: none;"'; } ?>>
+                            <th><label for="delete_topics_without_replies"><?php esc_html_e('Users can only delete own topics without replies', 'asgaros-forum'); ?></label></th>
+                            <td><input type="checkbox" name="delete_topics_without_replies" id="delete_topics_without_replies" <?php checked(!empty($this->asgarosforum->options['delete_topics_without_replies'])); ?>></td>
                         </tr>
 
                         <tr>

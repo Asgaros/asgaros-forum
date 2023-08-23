@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumActivity {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_breadcrumbs_activity', array($this, 'add_breadcrumbs'));
     }
@@ -16,35 +18,35 @@ class AsgarosForumActivity {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('activity');
+        $element_link  = $this->asgarosforum->get_link('activity');
         $element_title = __('Activity', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
 
     public function show_activity() {
-        $activity_days = (int) $this->asgarosforum->options['activity_days'];
+        $activity_days      = (int) $this->asgarosforum->options['activity_days'];
         $activity_days_i18n = number_format_i18n($activity_days);
 
 		$activity_days_singular = __('Activity in the last day.', 'asgaros-forum');
-		$activity_days_plural = sprintf(__('Activity in the last %s days.', 'asgaros-forum'), $activity_days_i18n);
-		$activity_days_string = ($activity_days === 1) ? $activity_days_singular : $activity_days_plural;
+		$activity_days_plural   = sprintf(__('Activity in the last %s days.', 'asgaros-forum'), $activity_days_i18n);
+		$activity_days_string   = ($activity_days === 1) ? $activity_days_singular : $activity_days_plural;
 
         echo '<div class="main-description">'.sprintf($activity_days_string, $activity_days_i18n).'</div>';
 
         $pagination_rendering = $this->asgarosforum->pagination->renderPagination('activity');
-        $paginationRendering = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
+        $paginationRendering  = ($pagination_rendering) ? '<div class="pages-and-menu">'.$pagination_rendering.'<div class="clear"></div></div>' : '';
         echo $paginationRendering;
 
         $data = $this->load_activity_data();
 
         if (!empty($data)) {
-            $date_today = gmdate($this->asgarosforum->date_format);
+            $date_today     = gmdate($this->asgarosforum->date_format);
             $date_yesterday = gmdate($this->asgarosforum->date_format, strtotime('-1 days'));
-            $last_time = false;
-            $first_group = true;
+            $last_time      = false;
+            $first_group    = true;
 
             foreach ($data as $activity) {
-                $current_time = gmdate($this->asgarosforum->date_format, strtotime($activity->date));
+                $current_time    = gmdate($this->asgarosforum->date_format, strtotime($activity->date));
                 $human_time_diff = $this->asgarosforum->get_activity_timestamp($activity->date, 'relative');
 
                 if ($current_time == $date_today) {
@@ -69,22 +71,22 @@ class AsgarosForumActivity {
                 }
 
                 $name_author = $this->asgarosforum->getUsername($activity->author_id);
-                $name_topic = esc_html(stripslashes($activity->name));
+                $name_topic  = esc_html(stripslashes($activity->name));
                 $read_status = $this->asgarosforum->unread->get_status_post($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
 
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
-                    $link = $this->asgarosforum->get_link('topic', $activity->parent_id);
+                    $link      = $this->asgarosforum->get_link('topic', $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comments '.esc_attr($read_status).'"></span>';
-                    echo sprintf(__('New topic %s created by %s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
+                    echo sprintf(__('New topic %1$s created by %2$s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 } else {
-                    $link = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
+                    $link      = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comment '.esc_attr($read_status).'"></span>';
-                    echo sprintf(__('%s replied in %s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
+                    echo sprintf(__('%1$s replied in %2$s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 }
             }
@@ -110,13 +112,13 @@ class AsgarosForumActivity {
 
             // Calculate activity end-time.
             $time_current = time();
-            $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
-            $time_end = gmdate('Y-m-d H:i:s', $time_end);
+            $time_end     = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
+            $time_end     = gmdate('Y-m-d H:i:s', $time_end);
 
 			// Build query-part for pagination.
 			$number_of_topics = $this->asgarosforum->options['activities_per_page'];
-			$topic_offset = $this->asgarosforum->current_page * $number_of_topics;
-			$query_limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $topic_offset, $number_of_topics);
+			$topic_offset     = $this->asgarosforum->current_page * $number_of_topics;
+			$query_limit      = $this->asgarosforum->db->prepare('LIMIT %d, %d', $topic_offset, $number_of_topics);
 
 			// Build final query and get results.
 			$query = '';
@@ -146,8 +148,8 @@ class AsgarosForumActivity {
 
             // Calculate activity end-time.
             $time_current = time();
-            $time_end = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
-            $time_end = gmdate('Y-m-d H:i:s', $time_end);
+            $time_end     = $time_current - ((int) $this->asgarosforum->options['activity_days'] * 24 * 60 * 60);
+            $time_end     = gmdate('Y-m-d H:i:s', $time_end);
 
 			// Build final query and get results.
 			$query = '';
@@ -176,7 +178,7 @@ class AsgarosForumActivity {
                 'menu_link_text'    => esc_html__('Activity', 'asgaros-forum'),
                 'menu_url'          => $activity_link,
                 'menu_login_status' => 0,
-                'menu_new_tab'      => false
+                'menu_new_tab'      => false,
             );
         }
     }

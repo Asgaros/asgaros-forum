@@ -1,24 +1,26 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumReactions {
-    private $asgarosforum = null;
+    private $asgarosforum   = null;
     private $reactions_list = array();
     private $post_reactions = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         // Build reactions-list.
         $this->reactions_list['down'] = array(
-            'icon' => 'fas fa-thumbs-down',
-            'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum')
+            'icon'               => 'fas fa-thumbs-down',
+            'screen_reader_text' => __('Click for thumbs down.', 'asgaros-forum'),
         );
 
         $this->reactions_list['up'] = array(
-            'icon' => 'fas fa-thumbs-up',
-            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum')
+            'icon'               => 'fas fa-thumbs-up',
+            'screen_reader_text' => __('Click for thumbs up.', 'asgaros-forum'),
         );
 
         add_action('init', array($this, 'initialize'));
@@ -68,9 +70,9 @@ class AsgarosForumReactions {
                 'asgaros-forum/v1',
                 '/reaction/(?P<post_id>\d+)/(?P<reaction>[a-zA-Z0-9-]+)',
                 array(
-                    'methods' => 'POST',
-                    'callback' => array($this, 'reaction_callback'),
-                    'permission_callback' => '__return_true'
+                    'methods'             => 'POST',
+                    'callback'            => array($this, 'reaction_callback'),
+                    'permission_callback' => '__return_true',
                 )
             );
         }
@@ -78,7 +80,7 @@ class AsgarosForumReactions {
 
     public function reaction_callback($data) {
         // Build response-array.
-        $response = array();
+        $response           = array();
         $response['status'] = false;
 
         // Ensure user is logged-in.
@@ -101,7 +103,7 @@ class AsgarosForumReactions {
 
                 // Build updated reactions for posts.
                 $response['data']['reactions'] = $this->render_reactions($post_id, $post_object->author_id);
-                $response['data']['summary'] = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($post_id) : '';
+                $response['data']['summary']   = ($this->asgarosforum->options['reactions_show_names']) ? $this->render_reactions_summary($post_id) : '';
             }
         }
 
@@ -133,7 +135,7 @@ class AsgarosForumReactions {
             $counter = (isset($this->post_reactions[$post_id][$key])) ? number_format_i18n(count($this->post_reactions[$post_id][$key])) : 0;
 
             // Generate reaction-HTML.
-            $output = '<span class="reaction '.$key.'">';
+            $output  = '<span class="reaction '.$key.'">';
             $output .= '<span class="reaction-icon '.$reaction['icon'].' '.$status.'">';
             $output .= '<span class="screen-reader-text">'.$reaction['screen_reader_text'].'</span>';
             $output .= '</span>';
@@ -172,7 +174,7 @@ class AsgarosForumReactions {
         $output = '';
 
         // Build arrays with names.
-        $reaction_names = array();
+        $reaction_names         = array();
         $reaction_names_grouped = array();
 
         foreach ($this->reactions_list as $key => $reaction) {
@@ -180,7 +182,7 @@ class AsgarosForumReactions {
                 $reaction_names_grouped[$key] = array();
 
                 foreach ($this->post_reactions[$post_id][$key] as $userId) {
-                    $reaction_names[] = $this->asgarosforum->get_plain_username($userId);
+                    $reaction_names[]               = $this->asgarosforum->get_plain_username($userId);
                     $reaction_names_grouped[$key][] = $this->asgarosforum->get_plain_username($userId);
                 }
             }
@@ -193,11 +195,11 @@ class AsgarosForumReactions {
             if (count($reaction_names) === 1) {
                 $output .= sprintf(__('%s has reacted to this post.', 'asgaros-forum'), $reaction_names[0]);
             } else if (count($reaction_names) === 2) {
-                $output .= sprintf(__('%s and %s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1]);
+                $output .= sprintf(__('%1$s and %2$s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1]);
             } else if (count($reaction_names) === 3) {
-                $output .= sprintf(__('%s, %s and %s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], $reaction_names[2]);
+                $output .= sprintf(__('%1$s, %2$s and %3$s have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], $reaction_names[2]);
             } else {
-                $output .= sprintf(__('%s, %s and %s other users have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], count($reaction_names) - 2);
+                $output .= sprintf(__('%1$s, %2$s and %3$s other users have reacted to this post.', 'asgaros-forum'), $reaction_names[0], $reaction_names[1], count($reaction_names) - 2);
             }
 
             $output .= '</div>';
@@ -270,14 +272,24 @@ class AsgarosForumReactions {
 		// Get the current time.
         $date = $this->asgarosforum->current_time();
 
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction, 'author_id' => $author_id, 'datestamp' => $date), array('%d', '%d', '%s', '%d', '%s'));
+        $this->asgarosforum->db->insert($this->asgarosforum->tables->reactions, array(
+			'post_id'   => $post_id,
+			'user_id'   => $user_id,
+			'reaction'  => $reaction,
+			'author_id' => $author_id,
+			'datestamp' => $date,
+		), array('%d', '%d', '%s', '%d', '%s'));
 
         do_action('asgarosforum_after_add_reaction', $post_id, $user_id, $reaction);
     }
 
     public function remove_reaction($post_id, $user_id, $reaction) {
 
-        $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array('post_id' => $post_id, 'user_id' => $user_id, 'reaction' => $reaction), array('%d', '%d', '%s'));
+        $this->asgarosforum->db->delete($this->asgarosforum->tables->reactions, array(
+			'post_id'  => $post_id,
+			'user_id'  => $user_id,
+			'reaction' => $reaction,
+		), array('%d', '%d', '%s'));
 
         do_action('asgarosforum_after_remove_reaction', $post_id, $user_id, $reaction);
     }
@@ -286,7 +298,13 @@ class AsgarosForumReactions {
 		// Get the current time.
         $date = $this->asgarosforum->current_time();
 
-        $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array('reaction' => $reaction, 'datestamp' => $date), array('post_id' => $post_id, 'user_id' => $user_id), array('%s', '%s'), array('%d', '%d'));
+        $this->asgarosforum->db->update($this->asgarosforum->tables->reactions, array(
+			'reaction'  => $reaction,
+			'datestamp' => $date,
+		), array(
+			'post_id' => $post_id,
+			'user_id' => $user_id,
+		), array('%s', '%s'), array('%d', '%d'));
 
         do_action('asgarosforum_after_update_reaction', $post_id, $user_id, $reaction);
     }

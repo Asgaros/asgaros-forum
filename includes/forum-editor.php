@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumEditor {
 	private $asgarosforum = null;
 
-	public function __construct($object) {
-		$this->asgarosforum = $object;
+	public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_filter('mce_buttons', array($this, 'default_mce_buttons'), 1, 2);
 		add_filter('mce_buttons', array($this, 'add_mce_buttons'), 9999, 2);
@@ -49,7 +51,7 @@ class AsgarosForumEditor {
 			'wp_add_media',
 			'wp_adv',
 			'wp_help',
-			'wp_more'
+			'wp_more',
 		);
 
         if ($this->asgarosforum->executePlugin && $editor_id === 'message') {
@@ -72,7 +74,7 @@ class AsgarosForumEditor {
 				'undo',
 				'redo',
 				'blockquote',
-				'link'
+				'link',
 			);
 
 			// Find non-default editor buttons.
@@ -130,45 +132,38 @@ class AsgarosForumEditor {
                 // Error when the user is not logged-in and guest-posting is disabled.
                 if (!is_user_logged_in() && !$this->asgarosforum->options['allow_guest_postings']) {
                     return false;
-                    break;
                 }
 
                 // Error when the user is banned.
                 if ($this->asgarosforum->permissions->isBanned('current')) {
                     return false;
-                    break;
                 }
 
                 // Error when the forum is closed.
                 if (!$this->asgarosforum->forumIsOpen()) {
                     return false;
-                    break;
                 }
                 break;
             case 'addpost':
                 // Error when user is not logged-in and guest-posting is disabled.
                 if (!is_user_logged_in() && !$this->asgarosforum->options['allow_guest_postings']) {
                     return false;
-                    break;
                 }
 
                 // Error when the user is banned.
                 if ($this->asgarosforum->permissions->isBanned('current')) {
                     return false;
-                    break;
                 }
 
                 // Error when the topic is closed and the user is not a moderator.
                 if ($this->asgarosforum->is_topic_closed($this->asgarosforum->current_topic) && !$this->asgarosforum->permissions->isModerator('current')) {
                     return false;
-                    break;
                 }
                 break;
             case 'editpost':
                 // Error when user is not logged-in.
                 if (!is_user_logged_in()) {
                     return false;
-                    break;
                 }
 
                 // Error when the user cannot edit a post.
@@ -176,7 +171,6 @@ class AsgarosForumEditor {
 
                 if (!$this->asgarosforum->permissions->can_edit_post($user_id, $this->asgarosforum->current_post)) {
                     return false;
-                    break;
                 }
                 break;
         }
@@ -188,21 +182,21 @@ class AsgarosForumEditor {
 		if (!$this->checkPermissions($editor_view) && !$inOtherView) {
 			$this->asgarosforum->render_notice(__('You are not allowed to do this.', 'asgaros-forum'));
         } else {
-            $post = false;
+            $post    = false;
             $subject = (isset($_POST['subject'])) ? sanitize_text_field($_POST['subject']) : '';
             $message = (isset($_POST['message'])) ? wp_kses_post($_POST['message']) : '';
 
             if ($editor_view === 'addpost') {
                 if (!isset($_POST['message']) && isset($_GET['quote'])) {
 					// We also select against the topic to ensure that we can only quote posts from the current topic.
-                    $quoteData = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare("SELECT text, author_id, date FROM ".$this->asgarosforum->tables->posts." WHERE id = %d AND parent_id = %d;", absint($_GET['quote']), $this->asgarosforum->current_topic));
+                    $quoteData = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare('SELECT text, author_id, date FROM '.$this->asgarosforum->tables->posts.' WHERE id = %d AND parent_id = %d;', absint($_GET['quote']), $this->asgarosforum->current_topic));
 
                     if ($quoteData) {
                         $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->asgarosforum->getUsername($quoteData->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->asgarosforum->format_date($quoteData->date)).'</div>'.stripslashes($quoteData->text).'</blockquote><br>';
 					}
                 }
             } else if ($editor_view === 'editpost') {
-                $post = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare("SELECT id, text, parent_id, author_id, uploads FROM ".$this->asgarosforum->tables->posts." WHERE id = %d;", $this->asgarosforum->current_post));
+                $post = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare('SELECT id, text, parent_id, author_id, uploads FROM '.$this->asgarosforum->tables->posts.' WHERE id = %d;', $this->asgarosforum->current_post));
 
 				if (!isset($_POST['message'])) {
                     $message = $post->text;

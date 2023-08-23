@@ -1,14 +1,16 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumSearch {
-    private $asgarosforum = null;
-    public $search_keywords_for_query = '';
+    private $asgarosforum              = null;
+    public $search_keywords_for_query  = '';
     public $search_keywords_for_output = '';
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
         add_action('asgarosforum_breadcrumbs_search', array($this, 'add_breadcrumbs'));
@@ -16,14 +18,14 @@ class AsgarosForumSearch {
 
     public function initialize() {
         if (!empty($_GET['keywords'])) {
-            $keywords = sanitize_text_field($_GET['keywords']);
-            $this->search_keywords_for_query = esc_sql($keywords);
+            $keywords                         = sanitize_text_field($_GET['keywords']);
+            $this->search_keywords_for_query  = esc_sql($keywords);
             $this->search_keywords_for_output = stripslashes(esc_html($keywords));
         }
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('current');
+        $element_link  = $this->asgarosforum->get_link('current');
         $element_title = __('Search', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -86,7 +88,7 @@ class AsgarosForumSearch {
 
     public function get_search_results() {
         if (!empty($this->search_keywords_for_query)) {
-            $categories = $this->asgarosforum->content->get_categories();
+            $categories       = $this->asgarosforum->content->get_categories();
             $categoriesFilter = array();
 
             foreach ($categories as $category) {
@@ -101,14 +103,14 @@ class AsgarosForumSearch {
             $where = 'AND f.parent_id IN ('.implode(',', $categoriesFilter).')';
 
             $start = $this->asgarosforum->current_page * $this->asgarosforum->options['topics_per_page'];
-            $end = $this->asgarosforum->options['topics_per_page'];
-            $limit = $this->asgarosforum->db->prepare("LIMIT %d, %d", $start, $end);
+            $end   = $this->asgarosforum->options['topics_per_page'];
+            $limit = $this->asgarosforum->db->prepare('LIMIT %d, %d', $start, $end);
 
             $shortcodeSearchFilter = $this->asgarosforum->shortcode->shortcodeSearchFilter;
 
-            $match_name = "MATCH (name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
-            $match_text = "MATCH (text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
-            $query_answers = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
+            $match_name       = "MATCH (name) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $match_text       = "MATCH (text) AGAINST ('{$this->search_keywords_for_query}*' IN BOOLEAN MODE)";
+            $query_answers    = "SELECT (COUNT(*) - 1) FROM {$this->asgarosforum->tables->posts} WHERE parent_id = t.id";
             $query_match_name = "SELECT id AS topic_id, {$match_name} AS score_name, 0 AS score_text FROM {$this->asgarosforum->tables->topics} WHERE {$match_name} GROUP BY topic_id";
             $query_match_text = "SELECT parent_id AS topic_id, 0 AS score_name, {$match_text} AS score_text FROM {$this->asgarosforum->tables->posts} WHERE {$match_text} GROUP BY topic_id";
 

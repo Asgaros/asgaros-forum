@@ -1,16 +1,18 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumRewrite {
-    private $asgarosforum = null;
+    private $asgarosforum  = null;
     public $use_permalinks = false;
-    private $links = array();
-    public $slug_cache = array();
-    private $view_mapping = array();
+    private $links         = array();
+    public $slug_cache     = array();
+    private $view_mapping  = array();
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         // Build view-mapping.
         $this->build_view_mapping();
@@ -129,7 +131,7 @@ class AsgarosForumRewrite {
         // Set the current view.
         if (!empty($_GET['view'])) {
             $view = sanitize_key($_GET['view']);
-            $key = array_search($view, $this->view_mapping);
+            $key  = array_search($view, $this->view_mapping);
 
             if ($key == false) {
                 $this->asgarosforum->current_view = $view;
@@ -150,7 +152,7 @@ class AsgarosForumRewrite {
 
         // Fallback for old view-name.
         if ($this->asgarosforum->current_view == 'thread') {
-             $this->asgarosforum->current_view = 'topic';
+            $this->asgarosforum->current_view = 'topic';
         }
 
         // Try to set current elements based on permalinks.
@@ -159,7 +161,7 @@ class AsgarosForumRewrite {
             $this->maybe_301_redirect();
 
             // Create base urls.
-            $home_url = $this->get_link('home');
+            $home_url    = $this->get_link('home');
             $current_url = $this->get_link('current');
 
             // Remove the home url from the beginning of the current url.
@@ -246,7 +248,7 @@ class AsgarosForumRewrite {
 
                     // Append trailing slash to URL.
                     $trailing_slash = apply_filters('asgarosforum_seo_trailing_slash', '/');
-                    $link = $link.$trailing_slash;
+                    $link           = $link.$trailing_slash;
                 } else {
                     $link = add_query_arg('id', $element_id, $link);
                 }
@@ -277,7 +279,7 @@ class AsgarosForumRewrite {
         if (!$post_page) {
             // Get all post ids of the topic.
             if (empty($this->cache_get_post_link_ids[$topic_id])) {
-                $this->cache_get_post_link_ids[$topic_id] = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = ".$topic_id." ORDER BY id ASC;");
+                $this->cache_get_post_link_ids[$topic_id] = $this->asgarosforum->db->get_col("SELECT id FROM {$this->asgarosforum->tables->posts} WHERE parent_id = ".$topic_id.' ORDER BY id ASC;');
             }
 
             // Now get the position of the post.
@@ -334,7 +336,7 @@ class AsgarosForumRewrite {
     public function create_unique_slug($name, $location, $type) {
         // Cache all existing slugs if not already done.
         if (empty($this->slug_cache[$type])) {
-            $this->slug_cache[$type] = $this->asgarosforum->db->get_col("SELECT slug FROM ".$location." WHERE slug <> '';");
+            $this->slug_cache[$type] = $this->asgarosforum->db->get_col("SELECT slug FROM {$location} WHERE slug <> '';");
         }
 
         // Suggest a new slug for the element.
@@ -344,7 +346,7 @@ class AsgarosForumRewrite {
         // Modify the suggested slug when it already exists.
         if (!empty($this->slug_cache[$type]) && in_array($slug, $this->slug_cache[$type])) {
             $max = 1;
-            while (in_array(($slug.'-'.++$max), $this->slug_cache[$type]));
+            while (in_array(($slug.'-'.(++$max)), $this->slug_cache[$type]));
             $slug .= '-'.$max;
         }
 

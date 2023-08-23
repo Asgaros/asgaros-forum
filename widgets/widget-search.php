@@ -1,16 +1,20 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumSearch_Widget extends WP_Widget {
 	public function __construct() {
-		$widget_ops = array('classname' => 'asgarosforumsearch_widget', 'description' => __('A search form for Asgaros Forum.', 'asgaros-forum'));
+		$widget_ops = array(
+			'classname'   => 'asgarosforumsearch_widget',
+			'description' => __('A search form for Asgaros Forum.', 'asgaros-forum'),
+		);
 		parent::__construct('asgarosforumsearch_widget', __('Asgaros Forum: Search', 'asgaros-forum'), $widget_ops);
 	}
 
 	public function widget($args, $instance) {
 		global $asgarosforum;
-		extract($args);
 
 		// Generate title.
 		$title = empty($instance['title']) ? '' : $instance['title'];
@@ -20,10 +24,10 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 			$title = __('Forum Search', 'asgaros-forum');
 		}
 
-		echo $before_widget;
-		echo $before_title;
+		echo $args['before_widget'];
+		echo $args['before_title'];
 		echo esc_html($title);
-		echo $after_title;
+		echo $args['after_title'];
 
 		$locationSetUp = AsgarosForumWidgets::setUpLocation();
 
@@ -47,7 +51,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 			esc_html_e('The forum has not been configured correctly.', 'asgaros-forum');
 		}
 
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
 	public function form($instance) {
@@ -60,7 +64,7 @@ class AsgarosForumSearch_Widget extends WP_Widget {
 	}
 
 	public function update($new_instance, $old_instance) {
-		$instance = array();
+		$instance          = array();
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		return $instance;
 	}

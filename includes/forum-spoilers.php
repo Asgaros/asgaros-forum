@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumSpoilers {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-		$this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+		$this->asgarosforum = $asgarosForumObject;
 
         add_action('init', array($this, 'initialize'));
     }
@@ -21,7 +23,7 @@ class AsgarosForumSpoilers {
         // Set title-attribute.
         $atts = shortcode_atts(
             array(
-                'title' => __('Spoiler', 'asgaros-forum')
+                'title' => __('Spoiler', 'asgaros-forum'),
             ),
             $atts,
             'spoiler'
@@ -30,7 +32,7 @@ class AsgarosForumSpoilers {
         $atts['title'] = (!empty($atts['title'])) ? $atts['title'] : __('Spoiler', 'asgaros-forum');
 
         // Generate output.
-        $output = '';
+        $output  = '';
         $output .= '<div class="spoiler">';
     	$output .= '<div class="spoiler-head closed"><span>'.$atts['title'].'</span></div>';
     	$output .= '<div class="spoiler-body">';

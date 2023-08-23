@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumUserQuery {
 	// TODO: Check required variables.
@@ -20,7 +22,10 @@ class AsgarosForumUserQuery {
 	public $uid_clauses = array();
 
 	// Standard response when the query should not return any rows.
-	protected $no_results = array('join' => '', 'where' => '0 = 1');
+	protected $no_results = array(
+		'join'  => '',
+		'where' => '0 = 1',
+	);
 
 	// Constructor.
 	public function __construct($query = null) {
@@ -31,19 +36,19 @@ class AsgarosForumUserQuery {
 
 		// TODO: Check required arguments.
 		$this->query_vars = wp_parse_args($query, array(
-			'fields'            => array('ID'),
-			'type'              => 'default',
-			'per_page'          => 0,
-			'page'              => 1,
-			'search_terms'      => false,
-			'include'           => false,
-			'exclude'           => false,
-			'user_ids'          => false,
-			'meta_key'          => false,
-			'meta_value'        => false,
-			'meta_compare'      => '=',
-			'role'              => false,
-			'populate_extras'   => false
+			'fields'          => array('ID'),
+			'type'            => 'default',
+			'per_page'        => 0,
+			'page'            => 1,
+			'search_terms'    => false,
+			'include'         => false,
+			'exclude'         => false,
+			'user_ids'        => false,
+			'meta_key'        => false,
+			'meta_value'      => false,
+			'meta_compare'    => '=',
+			'role'            => false,
+			'populate_extras' => false,
 		));
 
 		// Get user ids. If the user_ids param is present, we skip the query.
@@ -79,17 +84,17 @@ class AsgarosForumUserQuery {
 			'where'   => array('1=1'),
 			'orderby' => '',
 			'order'   => '',
-			'limit'   => ''
+			'limit'   => '',
 		);
 
 		// Determines the sort order, which means it also determines where the
 		// user IDs are drawn from (the SELECT and WHERE statements).
 		switch ($type) {
 			// 'alphabetical' sorts depend on the xprofile setup.
-			case 'alphabetical' :
-				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
-				$sql['orderby'] = "ORDER BY u.display_name";
-				$sql['order'] = "ASC";
+			case 'alphabetical':
+				$sql['select']  = "SELECT u.ID FROM {$wpdb->users} u";
+				$sql['orderby'] = 'ORDER BY u.display_name';
+				$sql['order']   = 'ASC';
 
 				// To ensure that spam/deleted/non-activated users
 				// are filtered out, we add an appropriate sub-query.
@@ -102,7 +107,7 @@ class AsgarosForumUserQuery {
 				$sql['where'][] = "u.ID IN ( SELECT ID FROM {$wpdb->users} WHERE {$user_status_filter} )";
 				break;
 			// Any other 'type' falls through.
-			default :
+			default:
 				$sql['select'] = "SELECT u.ID FROM {$wpdb->users} u";
 				break;
 		}
@@ -114,21 +119,21 @@ class AsgarosForumUserQuery {
 		if (count($include_ids) === 1 && reset($include_ids) === 0) {
 			$sql['where'][] = $this->no_results['where'];
 		} else if (!empty($include_ids)) {
-			$include_ids = implode(',', wp_parse_id_list($include_ids));
+			$include_ids    = implode(',', wp_parse_id_list($include_ids));
 			$sql['where'][] = "u.ID IN ({$include_ids})";
 		}
 
 		// 'exclude' - User ids to exclude from the results.
 		if ($exclude !== false) {
-			$exclude_ids = implode(',', wp_parse_id_list($exclude));
+			$exclude_ids    = implode(',', wp_parse_id_list($exclude));
 			$sql['where'][] = "u.ID NOT IN ({$exclude_ids})";
 		}
 
 		// 'search_terms' searches user_login and user_nicename.
 		if ($search_terms !== false) {
-			$search_terms = $wpdb->esc_like(wp_kses_normalize_entities($search_terms));
+			$search_terms         = $wpdb->esc_like(wp_kses_normalize_entities($search_terms));
 			$search_terms_nospace = $search_terms.'%';
-			$search_terms_space = '% '.$search_terms.'%';
+			$search_terms_space   = '% '.$search_terms.'%';
 
 			$matched_user_ids = $wpdb->get_col($wpdb->prepare(
 				"SELECT ID FROM {$wpdb->users} WHERE ( user_login LIKE %s OR user_login LIKE %s OR user_nicename LIKE %s OR user_nicename LIKE %s )",
@@ -138,7 +143,7 @@ class AsgarosForumUserQuery {
 				$search_terms_space
 			));
 
-			$match_in_clause = empty($matched_user_ids) ? 'NULL' : implode(',', $matched_user_ids);
+			$match_in_clause        = empty($matched_user_ids) ? 'NULL' : implode(',', $matched_user_ids);
 			$sql['where']['search'] = "u.ID IN ({$match_in_clause})";
 		}
 
@@ -154,7 +159,7 @@ class AsgarosForumUserQuery {
 			$found_user_ids = $wpdb->get_col($meta_sql);
 
 			if (!empty($found_user_ids)) {
-				$sql['where'][] = "u.ID IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
+				$sql['where'][] = 'u.ID IN ('.implode(',', wp_parse_id_list($found_user_ids)).')';
 			} else {
 				$sql['where'][] = '1 = 0';
 			}
@@ -166,7 +171,7 @@ class AsgarosForumUserQuery {
 			$found_user_ids = $wpdb->get_col($meta_sql);
 
 			if (!empty($found_user_ids)) {
-				$sql['where'][] = "u.ID IN (".implode(',', wp_parse_id_list($found_user_ids)).")";
+				$sql['where'][] = 'u.ID IN ('.implode(',', wp_parse_id_list($found_user_ids)).')';
 			} else {
 				$sql['where'][] = '1 = 0';
 			}
@@ -174,7 +179,7 @@ class AsgarosForumUserQuery {
 
 		// 'per_page', 'page' - handles LIMIT.
 		if (!empty($per_page) && !empty($page)) {
-			$sql['limit'] = $wpdb->prepare("LIMIT %d, %d", (int) (($page - 1)*$per_page), (int) $per_page);
+			$sql['limit'] = $wpdb->prepare('LIMIT %d, %d', (int) (($page - 1)*$per_page), (int) $per_page);
 		} else {
 			$sql['limit'] = '';
 		}
@@ -201,7 +206,7 @@ class AsgarosForumUserQuery {
 			'fields'      => $this->query_vars['fields'],
 			'include'     => $this->user_ids,
 			'count_total' => false,
-			'orderby'     => 'ID'
+			'orderby'     => 'ID',
 		));
 
 		$this->total_users = count($wp_user_query->results);
@@ -215,7 +220,7 @@ class AsgarosForumUserQuery {
 		// Match up to the user ids from the main query.
 		foreach ($this->user_ids as $key => $uid) {
 			if (isset($r[$uid])) {
-				$r[$uid]->ID = (int)$uid;
+				$r[$uid]->ID         = (int) $uid;
 				$this->results[$uid] = $r[$uid];
 			// Remove user ID from original user_ids property.
 			} else {
@@ -234,7 +239,7 @@ class AsgarosForumUserQuery {
 		}
 
 		// Bail if the populate_extras flag is set to false.
-		if (!(bool)$this->query_vars['populate_extras']) {
+		if (!(bool) $this->query_vars['populate_extras']) {
 			return;
 		}
 
@@ -245,9 +250,9 @@ class AsgarosForumUserQuery {
 		// fetch the resulting values for use in the template functions.
 		if (!empty($this->query_vars['meta_key'])) {
 			$meta_sql = array(
-				'select' => "SELECT user_id, meta_key, meta_value",
+				'select' => 'SELECT user_id, meta_key, meta_value',
 				'from'   => "FROM $wpdb->usermeta",
-				'where'  => $wpdb->prepare("WHERE meta_key = %s", $this->query_vars['meta_key'])
+				'where'  => $wpdb->prepare('WHERE meta_key = %s', $this->query_vars['meta_key']),
 			);
 
 			if ($this->query_vars['meta_value'] !== false) {

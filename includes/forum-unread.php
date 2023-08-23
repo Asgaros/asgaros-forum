@@ -1,14 +1,16 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumUnread {
     private $asgarosforum = null;
     private $user_id;
     public $excluded_items = array();
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_prepare', array($this, 'prepare_unread_status'));
         add_action('asgarosforum_prepare_markallread', array($this, 'mark_all_read'));
@@ -84,7 +86,7 @@ class AsgarosForumUnread {
     }
 
     public function add_breadcrumbs() {
-        $element_link = $this->asgarosforum->get_link('unread');
+        $element_link  = $this->asgarosforum->get_link('unread');
         $element_title = __('Unread Topics', 'asgaros-forum');
         $this->asgarosforum->breadcrumbs->add_breadcrumb($element_link, $element_title);
     }
@@ -95,7 +97,7 @@ class AsgarosForumUnread {
         } else if (isset($_COOKIE['asgarosforum_unread_cleared'])) {
             return sanitize_text_field($_COOKIE['asgarosforum_unread_cleared']);
         } else {
-            return "1000-01-01 00:00:00";
+            return '1000-01-01 00:00:00';
         }
     }
 
@@ -132,14 +134,14 @@ class AsgarosForumUnread {
 		}
 
 		// Prepare list with IDs of already visited topics.
-		$visited_topics = "0";
+		$visited_topics = '0';
 
 		if (!empty($this->excluded_items) && !is_string($this->excluded_items)) {
 			$visited_topics = implode(',', array_keys($this->excluded_items));
 		}
 
 		// Try to find a post in a topic which has not been visited yet since last marking.
-		$sql = "";
+		$sql = '';
 
 		// We need to use slightly different queries here because we cant determine if a post was created by the visiting guest.
 		if ($this->user_id) {
@@ -155,7 +157,7 @@ class AsgarosForumUnread {
 		}
 
 		// Get last post of all topics which have been visited since last marking.
-		$sql = "";
+		$sql = '';
 
 		// Again we need to use slightly different queries here because we cant determine if a post was created by the visiting guest.
 		if ($this->user_id) {
@@ -192,7 +194,7 @@ class AsgarosForumUnread {
 
     public function get_status_post($post_id, $post_author, $post_date, $topic_id) {
         // If post has been written before last read-marker: read
-        $date_post = strtotime($post_date);
+        $date_post  = strtotime($post_date);
         $date_visit = strtotime($this->get_last_visit());
 
         if ($date_post < $date_visit) {
@@ -246,7 +248,7 @@ class AsgarosForumUnread {
     // Renders a view with all unread topics.
     public function show_unread_topics() {
         // Load unread topics.
-        $unread_topics = $this->get_unread_topics();
+        $unread_topics         = $this->get_unread_topics();
         $unread_topics_counter = count($unread_topics);
 
         // Render pagination.
@@ -263,8 +265,8 @@ class AsgarosForumUnread {
 
         if ($unread_topics_counter > 0) {
             $page_elements = 50;
-            $page_start = $this->asgarosforum->current_page * $page_elements;
-            $data_sliced = array_slice($unread_topics, $page_start, $page_elements);
+            $page_start    = $this->asgarosforum->current_page * $page_elements;
+            $data_sliced   = array_slice($unread_topics, $page_start, $page_elements);
 
             foreach ($data_sliced as $topic) {
                 $topic_title = esc_html(stripslashes($topic->topic_name));
@@ -273,8 +275,8 @@ class AsgarosForumUnread {
                     echo '<div class="topic-status far fa-comments unread"></div>';
                     echo '<div class="topic-name">';
                         $first_unread_post = $this->asgarosforum->content->get_first_unread_post($topic->topic_id);
-                        $link = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
-                        $human_time_diff = $this->asgarosforum->get_activity_timestamp($first_unread_post->date);
+                        $link              = $this->asgarosforum->rewrite->get_post_link($first_unread_post->id, $first_unread_post->parent_id);
+                        $human_time_diff   = $this->asgarosforum->get_activity_timestamp($first_unread_post->date);
 
                         if ($this->asgarosforum->is_topic_sticky($topic->topic_id)) {
                             echo '<span class="topic-icon fas fa-thumbtack"></span>';
@@ -333,7 +335,7 @@ class AsgarosForumUnread {
 				$unread_topics = $this->asgarosforum->db->get_results("SELECT MAX(p.id) AS max_id, t.id AS topic_id, t.name AS topic_name, t.sticky, t.closed, f.id AS forum_id, f.name AS forum_name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE f.parent_id IN ({$ids_categories}) AND p.date > '{$this->get_last_visit()}' AND t.approved = 1 AND f.forum_status <> 'private' GROUP BY p.parent_id ORDER BY MAX(p.id) DESC;");
 			} else {
 				// For everyone else only include data from topics of private forums if they got created by the current user.
-				$unread_topics = $this->asgarosforum->db->get_results("SELECT MAX(p.id) AS max_id, t.id AS topic_id, t.name AS topic_name, t.sticky, t.closed, f.id AS forum_id, f.name AS forum_name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE f.parent_id IN ({$ids_categories}) AND p.date > '{$this->get_last_visit()}' AND t.approved = 1 AND (f.forum_status <> 'private' OR (f.forum_status = 'private' AND t.author_id = ".get_current_user_id().")) GROUP BY p.parent_id ORDER BY MAX(p.id) DESC;");
+				$unread_topics = $this->asgarosforum->db->get_results("SELECT MAX(p.id) AS max_id, t.id AS topic_id, t.name AS topic_name, t.sticky, t.closed, f.id AS forum_id, f.name AS forum_name FROM {$this->asgarosforum->tables->posts} AS p LEFT JOIN {$this->asgarosforum->tables->topics} AS t ON (t.id = p.parent_id) LEFT JOIN {$this->asgarosforum->tables->forums} AS f ON (f.id = t.parent_id) WHERE f.parent_id IN ({$ids_categories}) AND p.date > '{$this->get_last_visit()}' AND t.approved = 1 AND (f.forum_status <> 'private' OR (f.forum_status = 'private' AND t.author_id = ".get_current_user_id().')) GROUP BY p.parent_id ORDER BY MAX(p.id) DESC;');
 			}
         }
 

@@ -10,7 +10,7 @@ window.FontAwesomeConfig = {
             e.preventDefault();
 
             // Get relevant data first.
-            var post_id = $(this).attr('data-post-id');
+            var post_id  = $(this).attr('data-post-id');
             var reaction = $(this).attr('data-reaction');
 
             $.ajax({
@@ -138,7 +138,7 @@ window.FontAwesomeConfig = {
         });
 
         $('.uploaded-files a.delete').click(function() {
-            var filename= $(this).attr('data-filename');
+            var filename = $(this).attr('data-filename');
             $('.files-to-delete').append('<input type="hidden" name="deletefile[]" value="'+filename+'">');
             $(this).parent().remove();
 
@@ -170,13 +170,13 @@ window.FontAwesomeConfig = {
         $('#forum-editor-form').preventDoubleSubmission();
 
         function checkUploadsMaximumNumber() {
-            var linkElement = $('a#add_file_link');
+            var linkElement   = $('a#add_file_link');
             var maximumNumber = linkElement.attr('data-maximum-number');
 
             if (maximumNumber > 0) {
                 var inputsNumber = $('.editor-row-uploads input[type="file"]').length;
-                var filesNumber = $('.uploaded-files li').length;
-                var totalNumber = inputsNumber + filesNumber;
+                var filesNumber  = $('.uploaded-files li').length;
+                var totalNumber  = inputsNumber + filesNumber;
 
                 if (totalNumber >= maximumNumber) {
                     linkElement.hide();
@@ -297,11 +297,11 @@ window.FontAwesomeConfig = {
         // Creates a Modal.
         function show_modal(modal_content) {
             var modalHTML = '';
-            modalHTML += '<div class="modal-layer">';
-            modalHTML += '<div class="modal-content">';
-            modalHTML += modal_content;
-            modalHTML += '</div>';
-            modalHTML += '</div>';
+            modalHTML    += '<div class="modal-layer">';
+            modalHTML    += '<div class="modal-content">';
+            modalHTML    += modal_content;
+            modalHTML    += '</div>';
+            modalHTML    += '</div>';
 
             $('#af-wrapper').append(modalHTML);
         }

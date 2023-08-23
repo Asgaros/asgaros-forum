@@ -1,15 +1,17 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumAdmin {
     private $asgarosforum = null;
-    public $saved = false;
-    public $error = false;
-    public $option_views = false;
+    public $saved         = false;
+    public $error         = false;
+    public $option_views  = false;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         // Set the views for the available options.
         $this->set_option_views();
@@ -31,74 +33,74 @@ class AsgarosForumAdmin {
 
     public function set_option_views() {
         $this->option_views = array(
-            'general' => array(
+            'general'       => array(
                 'label' => __('General', 'asgaros-forum'),
-                'icon' => 'fas fa-sliders-h'
+                'icon'  => 'fas fa-sliders-h',
             ),
-            'features' => array(
+            'features'      => array(
                 'label' => __('Features', 'asgaros-forum'),
-                'icon' => 'fas fa-plug'
+                'icon'  => 'fas fa-plug',
             ),
-            'urls' => array(
+            'urls'          => array(
                 'label' => __('URLs & SEO', 'asgaros-forum'),
-                'icon' => 'fas fa-link'
+                'icon'  => 'fas fa-link',
             ),
-            'permissions' => array(
+            'permissions'   => array(
                 'label' => __('Permissions', 'asgaros-forum'),
-                'icon' => 'fas fa-user-shield'
+                'icon'  => 'fas fa-user-shield',
             ),
-            'breadcrumbs' => array(
+            'breadcrumbs'   => array(
                 'label' => __('Breadcrumbs', 'asgaros-forum'),
-                'icon' => 'fas fa-map-marked'
+                'icon'  => 'fas fa-map-marked',
             ),
             'notifications' => array(
                 'label' => __('Notifications', 'asgaros-forum'),
-                'icon' => 'fas fa-envelope'
+                'icon'  => 'fas fa-envelope',
             ),
-            'mentioning' => array(
+            'mentioning'    => array(
                 'label' => __('Mentioning', 'asgaros-forum'),
-                'icon' => 'fas fa-at'
+                'icon'  => 'fas fa-at',
             ),
-            'memberslist' => array(
+            'memberslist'   => array(
                 'label' => __('Members List', 'asgaros-forum'),
-                'icon' => 'fas fa-users'
+                'icon'  => 'fas fa-users',
             ),
-            'profiles' => array(
+            'profiles'      => array(
                 'label' => __('Profiles', 'asgaros-forum'),
-                'icon' => 'fas fa-user'
+                'icon'  => 'fas fa-user',
             ),
-            'uploads' => array(
+            'uploads'       => array(
                 'label' => __('Uploads', 'asgaros-forum'),
-                'icon' => 'fas fa-upload'
+                'icon'  => 'fas fa-upload',
             ),
-            'reports' => array(
+            'reports'       => array(
                 'label' => __('Reports', 'asgaros-forum'),
-                'icon' => 'fas fa-exclamation-triangle'
+                'icon'  => 'fas fa-exclamation-triangle',
             ),
-            'signatures' => array(
+            'signatures'    => array(
                 'label' => __('Signatures', 'asgaros-forum'),
-                'icon' => 'fas fa-signature'
+                'icon'  => 'fas fa-signature',
             ),
-            'activity' => array(
+            'activity'      => array(
                 'label' => __('Activity', 'asgaros-forum'),
-                'icon' => 'fas fa-bullhorn'
+                'icon'  => 'fas fa-bullhorn',
             ),
-            'polls' => array(
+            'polls'         => array(
                 'label' => __('Polls', 'asgaros-forum'),
-                'icon' => 'fas fa-poll-h'
+                'icon'  => 'fas fa-poll-h',
             ),
-            'spoilers' => array(
+            'spoilers'      => array(
                 'label' => __('Spoilers', 'asgaros-forum'),
-                'icon' => 'fas fa-eye-slash'
+                'icon'  => 'fas fa-eye-slash',
             ),
-            'reputation' => array(
+            'reputation'    => array(
                 'label' => __('Reputation', 'asgaros-forum'),
-                'icon' => 'fas fa-medal'
+                'icon'  => 'fas fa-medal',
             ),
-            'statistics' => array(
+            'statistics'    => array(
                 'label' => __('Statistics', 'asgaros-forum'),
-                'icon' => 'fas fa-chart-pie'
-            )
+                'icon'  => 'fas fa-chart-pie',
+            ),
         );
     }
 
@@ -108,10 +110,6 @@ class AsgarosForumAdmin {
             echo esc_html($this->option_views[$option]['label']);
         echo '</div>';
     }
-
-	public function has_user_profile_fields($user_id) {
-		return false;
-	}
 
     public function user_profile_fields($user) {
 		echo '<h2>'.esc_html__('Forum', 'asgaros-forum').'</h2>';
@@ -361,25 +359,23 @@ class AsgarosForumAdmin {
         foreach ($this->asgarosforum->options_default as $k => $v) {
             if (isset($_POST[$k])) {
                 if (is_numeric($v)) {
-                    $saved_ops[$k] = ((int)$_POST[$k] >= 0) ? (int)$_POST[$k] : $v;
+                    $saved_ops[$k] = ((int) $_POST[$k] >= 0) ? (int) $_POST[$k] : $v;
                 } else if (is_bool($v)) {
-                    $saved_ops[$k] = (bool)$_POST[$k];
+                    $saved_ops[$k] = (bool) $_POST[$k];
                 } else if ($k === 'allowed_filetypes') {
-                    $tmp = strtolower(sanitize_text_field($_POST[$k]));
+                    $tmp           = strtolower(sanitize_text_field($_POST[$k]));
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
-				} else if (in_array($k, array('signatures_html_tags', 'mail_template_new_post_message', 'mail_template_new_topic_message', 'mail_template_mentioned_message'))) {
-					$tmp = wp_kses_post($_POST[$k]);
+				} else if (in_array($k, array('signatures_html_tags', 'mail_template_new_post_message', 'mail_template_new_topic_message', 'mail_template_mentioned_message'), true)) {
+					$tmp           = wp_kses_post($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
 				} else {
-                    $tmp = sanitize_text_field($_POST[$k]);
+                    $tmp           = sanitize_text_field($_POST[$k]);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
                 }
+            } else if (is_bool($v)) {
+                $saved_ops[$k] = false;
             } else {
-                if (is_bool($v)) {
-                    $saved_ops[$k] = false;
-                } else {
-                    $saved_ops[$k] = $v;
-                }
+                $saved_ops[$k] = $v;
             }
         }
 
@@ -392,7 +388,7 @@ class AsgarosForumAdmin {
 
         foreach ($this->asgarosforum->appearance->options_default as $k => $v) {
             if (isset($_POST[$k])) {
-				$tmp = sanitize_text_field($_POST[$k]);
+				$tmp           = sanitize_text_field($_POST[$k]);
                 $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
             } else {
                 $saved_ops[$k] = $v;
@@ -405,10 +401,10 @@ class AsgarosForumAdmin {
 
     /* STRUCTURE */
     public function save_category() {
-        $category_id        = sanitize_key($_POST['category_id']);
-        $category_name      = sanitize_text_field($_POST['category_name']);
-        $category_access    = sanitize_key($_POST['category_access']);
-        $category_order     = (is_numeric($_POST['category_order'])) ? sanitize_key($_POST['category_order']) : 1;
+        $category_id     = sanitize_key($_POST['category_id']);
+        $category_name   = sanitize_text_field($_POST['category_name']);
+        $category_access = sanitize_key($_POST['category_access']);
+        $category_order  = (is_numeric($_POST['category_order'])) ? sanitize_key($_POST['category_order']) : 1;
 
         if (!empty($category_name)) {
             if ($category_id === 'new') {
@@ -435,20 +431,20 @@ class AsgarosForumAdmin {
 
     public function save_forum() {
         // ID of the forum.
-        $forum_id           = sanitize_key($_POST['forum_id']);
+        $forum_id = sanitize_key($_POST['forum_id']);
 
         // Determine parent IDs.
-        $parent_ids          = explode('_', sanitize_key($_POST['forum_parent']));
+        $parent_ids         = explode('_', sanitize_key($_POST['forum_parent']));
         $forum_category     = $parent_ids[0];
         $forum_parent_forum = $parent_ids[1];
 
         // Additional data.
-        $forum_name         = sanitize_text_field($_POST['forum_name']);
-        $forum_description  = sanitize_text_field($_POST['forum_description']);
-        $forum_icon         = sanitize_text_field($_POST['forum_icon']);
-        $forum_icon         = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
-        $forum_status       = sanitize_key($_POST['forum_status']);
-        $forum_order        = (is_numeric($_POST['forum_order'])) ? sanitize_key($_POST['forum_order']) : 0;
+        $forum_name        = sanitize_text_field($_POST['forum_name']);
+        $forum_description = sanitize_text_field($_POST['forum_description']);
+        $forum_icon        = sanitize_text_field($_POST['forum_icon']);
+        $forum_icon        = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
+        $forum_status      = sanitize_key($_POST['forum_status']);
+        $forum_order       = (is_numeric($_POST['forum_order'])) ? sanitize_key($_POST['forum_order']) : 0;
 
         if (!empty($forum_name)) {
             if ($forum_id === 'new') {
@@ -457,7 +453,15 @@ class AsgarosForumAdmin {
                 // Update forum.
                 $this->asgarosforum->db->update(
                     $this->asgarosforum->tables->forums,
-                    array('name' => $forum_name, 'description' => $forum_description, 'icon' => $forum_icon, 'sort' => $forum_order, 'forum_status' => $forum_status, 'parent_id' => $forum_category, 'parent_forum' => $forum_parent_forum),
+                    array(
+						'name'         => $forum_name,
+						'description'  => $forum_description,
+						'icon'         => $forum_icon,
+						'sort'         => $forum_order,
+						'forum_status' => $forum_status,
+						'parent_id'    => $forum_category,
+						'parent_forum' => $forum_parent_forum,
+					),
                     array('id' => $forum_id),
                     array('%s', '%s', '%s', '%d', '%s', '%d', '%d'),
                     array('%d')

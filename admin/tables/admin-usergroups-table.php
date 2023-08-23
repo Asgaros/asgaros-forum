@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 if (!class_exists('WP_List_Table')) {
     require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
@@ -14,9 +16,9 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
 
         parent::__construct(
             array(
-                'singular'  => 'usergroup',
-                'plural'    => 'usergroups',
-                'ajax'      => false
+                'singular' => 'usergroup',
+                'plural'   => 'usergroups',
+                'ajax'     => false,
             )
         );
     }
@@ -28,7 +30,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
     public function column_name($item) {
         $users_i18n = number_format_i18n($item['users']);
 
-        $columnHTML = '';
+        $columnHTML  = '';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_color" value="'.esc_html(stripslashes($item['color'])).'">';
         $columnHTML .= '<input type="hidden" id="usergroup_'.$item['term_id'].'_visibility" value="'.esc_html(stripslashes($item['visibility'])).'">';
@@ -73,7 +75,7 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
     }
 
     public function column_actions($item) {
-        $columnHTML = '';
+        $columnHTML  = '';
         $columnHTML .= '<a href="#" class="usergroup-delete-link link-delete" data-value-id="'.$item['term_id'].'" data-value-editor-title="'.__('Delete Usergroup', 'asgaros-forum').'">'.__('Delete', 'asgaros-forum').'</a>';
         $columnHTML .= ' &middot; ';
         $columnHTML .= '<a href="#" class="usergroup-editor-link" data-value-id="'.$item['term_id'].'" data-value-category="'.$item['parent'].'" data-value-editor-title="'.__('Edit Usergroup', 'asgaros-forum').'">'.__('Edit', 'asgaros-forum').'</a>';
@@ -83,29 +85,29 @@ class Asgaros_Forum_Admin_UserGroups_Table extends WP_List_Table {
 
     public function get_columns() {
         $columns = array(
-            'name'          => __('Name:', 'asgaros-forum'),
-            'visibility'    => __('Visibility:', 'asgaros-forum'),
-            'auto_add'      => __('Automatically Add:', 'asgaros-forum'),
-            'actions'       => __('Actions:', 'asgaros-forum')
+            'name'       => __('Name:', 'asgaros-forum'),
+            'visibility' => __('Visibility:', 'asgaros-forum'),
+            'auto_add'   => __('Automatically Add:', 'asgaros-forum'),
+            'actions'    => __('Actions:', 'asgaros-forum'),
         );
 
         return $columns;
     }
 
     public function prepare_items() {
-        $columns = $this->get_columns();
+        $columns               = $this->get_columns();
         $this->_column_headers = array($columns);
 
         $data = array();
 
         foreach ($this->table_data as $usergroup) {
-            $usergroup = (array)$usergroup; // Convert object to array.
-            $usergroup['color'] = AsgarosForumUserGroups::getUserGroupColor($usergroup['term_id']);
+            $usergroup               = (array) $usergroup; // Convert object to array.
+            $usergroup['color']      = AsgarosForumUserGroups::getUserGroupColor($usergroup['term_id']);
             $usergroup['visibility'] = AsgarosForumUserGroups::get_usergroup_visibility($usergroup['term_id']);
-            $usergroup['auto_add'] = AsgarosForumUserGroups::get_usergroup_auto_add($usergroup['term_id']);
-            $usergroup['users'] = AsgarosForumUserGroups::countUsersOfUserGroup($usergroup['term_id']);
-            $usergroup['icon'] = AsgarosForumUserGroups::get_usergroup_icon($usergroup['term_id']);
-            $data[] = $usergroup;
+            $usergroup['auto_add']   = AsgarosForumUserGroups::get_usergroup_auto_add($usergroup['term_id']);
+            $usergroup['users']      = AsgarosForumUserGroups::countUsersOfUserGroup($usergroup['term_id']);
+            $usergroup['icon']       = AsgarosForumUserGroups::get_usergroup_icon($usergroup['term_id']);
+            $data[]                  = $usergroup;
         }
 
         $this->items = $data;

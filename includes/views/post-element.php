@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 $counter++;
 
@@ -15,69 +17,77 @@ if (!empty($_GET['highlight_post']) && $_GET['highlight_post'] == $post->id) {
 }
 
 // Special CSS-class for online users.
-$user_online_class = ($this->online->is_user_online($post->author_id)) ? 'user-online' : '';
+$user_online_class = ($this->online->is_user_online($post->author_id)) ? 'user-online' : 'user-offline';
 
 $user_data = get_userdata($post->author_id);
 
 echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_post_class).'" id="postid-'.esc_attr($post->id).'">';
-    echo '<div class="post-author '.esc_attr($user_online_class).'">';
-        // Show avatar if activated.
-        if ($this->options['enable_avatars']) {
-			echo '<div class="post-author-block-avatar">';
-				$avatar_size = apply_filters('asgarosforum_filter_avatar_size', 120);
+	echo '<div class="forum-post-header-container">';
+		echo '<div class="post-author '.esc_attr($user_online_class).'">';
+			// Show avatar if activated.
+			if ($this->options['enable_avatars']) {
+				$avatar_size = apply_filters('asgarosforum_filter_avatar_size', 64);
 				echo get_avatar($post->author_id, $avatar_size, '', '', array('force_display' => true));
-			echo '</div>';
-        }
+			}
 
-		echo '<div class="post-author-blocks">';
-			echo '<div class="post-author-block-name">';
-				// Show username.
-				$username = apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
-				echo wp_kses_post($username);
+			echo '<div class="post-author-blocks">';
+				echo '<div class="post-author-block-name">';
+					// Show username.
+					$username = apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
+					echo wp_kses_post($username);
 
-				// Mentioning name.
-				if ($user_data != false) {
-					$this->mentioning->render_nice_name($post->author_id);
-				}
-			echo '</div>';
-
-			if ($user_data != false) {
-				echo '<div class="post-author-block-meta">';
-					// Show reputation badges.
-					$this->render_reputation_badges($post->author_posts);
-
-					// Show author posts counter if activated.
-					if ($this->options['show_author_posts_counter']) {
-						$author_posts_i18n = number_format_i18n($post->author_posts);
-						echo '<small class="post-counter">'.sprintf(_n('%s Post', '%s Posts', absint($post->author_posts), 'asgaros-forum'), esc_html($author_posts_i18n)).'</small>';
-					}
-
-					// Show marker for topic-author.
-					if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
-						echo '<small class="topic-author">'.esc_html__('Topic Author', 'asgaros-forum').'</small>';
-					}
-
-					// Show marker for banned user.
-					if ($this->permissions->isBanned($post->author_id)) {
-						echo '<small class="banned">'.esc_html__('Banned', 'asgaros-forum').'</small>';
+					// Mentioning name.
+					if ($user_data != false) {
+						$this->mentioning->render_nice_name($post->author_id);
 					}
 				echo '</div>';
 
-				// Show groups of user.
-				$usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id, 'all', true);
-
-				if (!empty($usergroups)) {
-					echo '<div class="post-author-block-group">';
-						foreach ($usergroups as $usergroup) {
-							echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+				if ($user_data != false) {
+					echo '<div class="post-author-block-meta">';
+						// Show author posts counter if activated.
+						if ($this->options['show_author_posts_counter']) {
+							$author_posts_i18n = number_format_i18n($post->author_posts);
+							echo '<span class="post-counter">'.sprintf(_n('%s Post', '%s Posts', absint($post->author_posts), 'asgaros-forum'), esc_html($author_posts_i18n)).'</span>';
 						}
+
+						// Show reputation badges.
+						$this->render_reputation_badges($post->author_posts);
+					echo '</div>';
+
+					echo '<div class="post-author-block-group">';
+
+						// Show marker for banned user.
+						if ($this->permissions->isBanned($post->author_id)) {
+							echo '<span class="af-usergroup-tag banned">';
+								echo '<i class="fa-solid fa-ban"></i>';
+								echo esc_html__('Banned', 'asgaros-forum');
+							echo '</span>';
+						}
+
+						// Show marker for topic-author.
+						if ($this->current_view != 'post' && $this->options['highlight_authors'] && ($counter > 1 || $this->current_page > 0) && $topicStarter != 0 && $topicStarter == $post->author_id) {
+							echo '<span class="af-usergroup-tag topic-author">';
+								echo '<i class="fa-solid fa-pen-fancy"></i>';
+								echo esc_html__('Topic Author', 'asgaros-forum');
+							echo '</span>';
+						}
+
+						// Show groups of user.
+						$usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($post->author_id, 'all', true);
+
+						if (!empty($usergroups)) {
+							foreach ($usergroups as $usergroup) {
+								echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
+							}
+						}
+
 					echo '</div>';
 				}
-			}
 
-			do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
+				do_action('asgarosforum_after_post_author', $post->author_id, $post->author_posts);
+			echo '</div>';
 		echo '</div>';
-    echo '</div>';
+	echo '</div>';
 
     echo '<div class="post-wrapper">';
         // Post header.
@@ -99,10 +109,16 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
         // Post message.
         echo '<div class="post-message">';
             // Initial escaping.
-            $allowed_html = wp_kses_allowed_html('post');
-            $allowed_html['iframe'] = array('width' => array(), 'height' => array(), 'src' => array(), 'frameborder' => array(), 'allowfullscreen' => array());
-            $post_content = wp_kses($post->text, $allowed_html);
-            $post_content = stripslashes($post_content);
+            $allowed_html           = wp_kses_allowed_html('post');
+            $allowed_html['iframe'] = array(
+				'width'           => array(),
+				'height'          => array(),
+				'src'             => array(),
+				'frameborder'     => array(),
+				'allowfullscreen' => array(),
+			);
+            $post_content           = wp_kses($post->text, $allowed_html);
+            $post_content           = stripslashes($post_content);
 
             echo '<div id="post-quote-container-'.esc_attr($post->id).'" style="display: none;"><blockquote><div class="quotetitle">'.esc_html__('Quote from', 'asgaros-forum').' '.$this->getUsername($post->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->format_date($post->date)).'</div>'.wpautop($post_content).'</blockquote><br></div>';
 
@@ -150,7 +166,7 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
 
                         // Show who edited a post (when the information exist in the database).
                         if ($post->author_edit) {
-                            echo sprintf(__('Last edited on %s by %s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
+                            echo sprintf(__('Last edited on %1$s by %2$s', 'asgaros-forum'), $this->format_date($post->date_edit), $this->getUsername($post->author_edit));
                         } else {
                             echo sprintf(__('Last edited on %s', 'asgaros-forum'), $this->format_date($post->date_edit));
                         }
@@ -171,11 +187,8 @@ echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_
                 echo '<div class="signature">'.wp_kses_post($signature).'</div>';
             }
         }
-        ?>
-    </div>
-</div>
 
-<?php
+    echo '</div>';
+echo '</div>';
 
 do_action('asgarosforum_after_post');
-?>

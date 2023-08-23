@@ -1,8 +1,12 @@
-<?php if (!defined('ABSPATH')) exit; ?>
+<?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 
 <div class="wrap" id="af-structure">
     <?php
-    $title = __('Usergroups', 'asgaros-forum');
+    $title        = __('Usergroups', 'asgaros-forum');
     $titleUpdated = __('Usergroups updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
     ?>

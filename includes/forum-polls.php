@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumPolls {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         add_action('asgarosforum_editor_custom_content_bottom', array($this, 'editor_poll_form'), 10, 1);
         add_action('asgarosforum_after_add_topic_submit', array($this, 'editor_poll_process'), 10, 6);
@@ -32,7 +34,7 @@ class AsgarosForumPolls {
         }
 
         // Set IDs.
-        $post_id = $this->asgarosforum->current_post;
+        $post_id  = $this->asgarosforum->current_post;
         $topic_id = $this->asgarosforum->current_topic;
 
         if ($editor_view === 'addtopic') {
@@ -147,7 +149,11 @@ class AsgarosForumPolls {
         // Insert poll.
         $this->asgarosforum->db->insert(
             $this->asgarosforum->tables->polls,
-            array('id' => $topic_id, 'title' => $title, 'multiple' => $multiple),
+            array(
+				'id'       => $topic_id,
+				'title'    => $title,
+				'multiple' => $multiple,
+			),
             array('%d', '%s', '%d')
         );
 
@@ -155,7 +161,10 @@ class AsgarosForumPolls {
         foreach ($options as $option) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_options,
-                array('poll_id' => $topic_id, 'title' => $option),
+                array(
+					'poll_id' => $topic_id,
+					'title'   => $option,
+				),
                 array('%d', '%s')
             );
         }
@@ -165,7 +174,10 @@ class AsgarosForumPolls {
         // Update poll.
         $this->asgarosforum->db->update(
             $this->asgarosforum->tables->polls,
-            array('title' => $title, 'multiple' => $multiple),
+            array(
+				'title'    => $title,
+				'multiple' => $multiple,
+			),
             array('id' => $poll_id),
             array('%s', '%d'),
             array('%d')
@@ -176,7 +188,10 @@ class AsgarosForumPolls {
             $this->asgarosforum->db->update(
                 $this->asgarosforum->tables->polls_options,
                 array('title' => $value),
-                array('id' => $key, 'poll_id' => $poll_id),
+                array(
+					'id'      => $key,
+					'poll_id' => $poll_id,
+				),
                 array('%s'),
                 array('%d', '%d')
             );
@@ -212,9 +227,9 @@ class AsgarosForumPolls {
         $has_poll = $this->has_poll($topic_id);
 
         // Prepare variables.
-        $poll_valid = true;
-        $poll_title = '';
-        $poll_options = array();
+        $poll_valid    = true;
+        $poll_title    = '';
+        $poll_options  = array();
         $poll_multiple = 0;
 
         // Try to set poll-title.
@@ -328,7 +343,11 @@ class AsgarosForumPolls {
         foreach ($votes as $vote) {
             $this->asgarosforum->db->insert(
                 $this->asgarosforum->tables->polls_votes,
-                array('poll_id' => $poll->id, 'option_id' => $vote, 'user_id' => $user_id),
+                array(
+					'poll_id'   => $poll->id,
+					'option_id' => $vote,
+					'user_id'   => $user_id,
+				),
                 array('%d', '%d', '%d')
             );
         }
@@ -397,12 +416,12 @@ class AsgarosForumPolls {
             // Show poll-results.
             echo '<div id="poll-results">';
                 foreach ($poll->options as $key => $option) {
-                    $percentage = 0;
+                    $percentage     = 0;
                     $percentage_css = 0;
 
                     // Only calculate percentage-values when there are votes.
                     if ($poll->total_votes > 0) {
-                        $percentage = ($option->votes / $poll->total_votes) * 100;
+                        $percentage     = ($option->votes / $poll->total_votes) * 100;
                         $percentage_css = number_format($percentage, 2);
                     }
 
@@ -495,7 +514,7 @@ class AsgarosForumPolls {
         $poll->total_votes = $this->asgarosforum->db->get_var("SELECT COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id};");
 
         // Get total participants.
-        $participants = $this->asgarosforum->db->get_results("SELECT user_id, COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id} GROUP BY user_id;");
+        $participants             = $this->asgarosforum->db->get_results("SELECT user_id, COUNT(*) FROM {$this->asgarosforum->tables->polls_votes} WHERE poll_id = {$poll->id} GROUP BY user_id;");
         $poll->total_participants = count($participants);
 
         return $poll;
@@ -505,7 +524,7 @@ class AsgarosForumPolls {
     public function get_bar_color() {
         $this->get_bar_color_counter++;
 
-        $colors = array();
+        $colors   = array();
         $colors[] = '#4661EE';
         $colors[] = '#EC5657';
         $colors[] = '#1BCDD1';

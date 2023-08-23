@@ -1,8 +1,12 @@
-<?php if (!defined('ABSPATH')) exit; ?>
+<?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 
 <div class="wrap" id="af-structure">
     <?php
-    $title = __('Structure', 'asgaros-forum');
+    $title        = __('Structure', 'asgaros-forum');
     $titleUpdated = __('Structure updated.', 'asgaros-forum');
     $this->render_admin_header($title, $titleUpdated);
 
@@ -114,9 +118,9 @@
 
                                 // Available options for forum-status.
                                 $forum_status_options = array(
-									'normal'    => __('Normal', 'asgaros-forum'),
-									'closed'    => __('Closed', 'asgaros-forum'),
-									'approval'  => __('Approval', 'asgaros-forum'),
+									'normal'   => __('Normal', 'asgaros-forum'),
+									'closed'   => __('Closed', 'asgaros-forum'),
+									'approval' => __('Approval', 'asgaros-forum'),
                                 );
 
                                 $forum_status_options = apply_filters('asgarosforum_filter_forum_status_options', $forum_status_options);
@@ -181,8 +185,8 @@
     if (!empty($categories)) {
         foreach ($categories as $category) {
             $term_meta = get_term_meta($category->term_id);
-            $access = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
-            $order = (!empty($term_meta['order'][0])) ? $term_meta['order'][0] : 1;
+            $access    = (!empty($term_meta['category_access'][0])) ? $term_meta['category_access'][0] : 'everyone';
+            $order     = (!empty($term_meta['order'][0])) ? $term_meta['order'][0] : 1;
             echo '<input type="hidden" id="category_'.esc_attr($category->term_id).'_name" value="'.esc_html(stripslashes($category->name)).'">';
             echo '<input type="hidden" id="category_'.esc_attr($category->term_id).'_access" value="'.esc_attr($access).'">';
             echo '<input type="hidden" id="category_'.esc_attr($category->term_id).'_order" value="'.esc_attr($order).'">';

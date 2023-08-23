@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumCompatibility {
     private $asgarosforum = null;
 
-    public function __construct($object) {
-        $this->asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        $this->asgarosforum = $asgarosForumObject;
 
         $this->compatibility_autoptimize();
         $this->compatibility_yoastseo();
@@ -15,6 +17,7 @@ class AsgarosForumCompatibility {
         $this->compatibility_permalinkmanager();
         $this->compatibility_allinoneseopack();
         $this->compatibility_sassysocialshare();
+        $this->compatibility_wpsweep();
     }
 
     // AUTOPTIMIZE
@@ -122,7 +125,7 @@ class AsgarosForumCompatibility {
 
             // Check if the content template has the forum-shortcode.
             if (has_shortcode($ct_content, 'forum') || has_shortcode($ct_content, 'Forum')) {
-                $this->asgarosforum->executePlugin = true;
+                $this->asgarosforum->executePlugin       = true;
                 $this->asgarosforum->options['location'] = $post->ID;
             }
         }
@@ -173,5 +176,34 @@ class AsgarosForumCompatibility {
         }
 
         return $post_url;
+    }
+
+    // WP-SWEEP
+    public function compatibility_wpsweep() {
+        add_filter('wp_sweep_excluded_termids', array($this, 'comp_wpsweep_excluded_termids'));
+    }
+
+    public function comp_wpsweep_excluded_termids($term_ids) {
+        // Exclude usergroups.
+        $usergroup_term_ids = get_terms(
+            'asgarosforum-usergroup',
+            array(
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ),
+        );
+
+        // Exclude categories.
+        $category_term_ids = get_terms(
+            'asgarosforum-category',
+            array(
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ),
+        );
+
+        $term_ids = array_merge($term_ids, $usergroup_term_ids, $category_term_ids);
+
+        return $term_ids;
     }
 }

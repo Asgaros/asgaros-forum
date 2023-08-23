@@ -1,12 +1,14 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumWidgets {
     private static $asgarosforum = null;
 
-    public function __construct($object) {
-        self::$asgarosforum = $object;
+    public function __construct($asgarosForumObject) {
+        self::$asgarosforum = $asgarosForumObject;
 
         add_action('widgets_init', array($this, 'initializeWidgets'));
     }

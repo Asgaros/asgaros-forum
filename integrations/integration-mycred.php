@@ -1,15 +1,17 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 add_filter('mycred_all_references', 'mycred_all_asgarosforum_references', 20, 1);
 add_filter('mycred_setup_hooks', 'mycred_setup_asgarosforum_hook', 20, 1);
 add_action('mycred_load_hooks', 'mycred_load_asgarosforum_hook', 20);
 
 function mycred_all_asgarosforum_references($references) {
-    $references['new_forum_topic'] = __('Forum Topics (Asgaros Forum)', 'asgaros-forum');
-    $references['new_forum_post'] = __('Forum Posts (Asgaros Forum)', 'asgaros-forum');
-    $references['received_like'] = __('Received Likes (Asgaros Forum)', 'asgaros-forum');
+    $references['new_forum_topic']  = __('Forum Topics (Asgaros Forum)', 'asgaros-forum');
+    $references['new_forum_post']   = __('Forum Posts (Asgaros Forum)', 'asgaros-forum');
+    $references['received_like']    = __('Received Likes (Asgaros Forum)', 'asgaros-forum');
     $references['received_dislike'] = __('Received Dislikes (Asgaros Forum)', 'asgaros-forum');
 
     return $references;
@@ -19,7 +21,7 @@ function mycred_setup_asgarosforum_hook($installed) {
     $installed['hook_asgarosforum'] = array(
         'title'       => __('Asgaros Forum', 'asgaros-forum'),
         'description' => __('Awards %_plural% for Asgaros Forum actions.', 'asgaros-forum'),
-        'callback'    => array('MyCRED_AsgarosForum')
+        'callback'    => array('MyCRED_AsgarosForum'),
     );
 
     return $installed;
@@ -36,41 +38,41 @@ function mycred_load_asgarosforum_hook() {
             parent::__construct(array(
                 'id'       => 'hook_asgarosforum',
                 'defaults' => array(
-                    'new_topic'     => array(
-                        'creds'     => 1,
-                        'log'       => __('%plural% for new forum topic', 'asgaros-forum'),
-                        'limit'     => '0/x'
+                    'new_topic'        => array(
+                        'creds' => 1,
+                        'log'   => __('%plural% for new forum topic', 'asgaros-forum'),
+                        'limit' => '0/x',
                     ),
-                    'delete_topic'  => array(
-                        'creds'     => -1,
+                    'delete_topic'     => array(
+                        'creds' => -1,
 						/* translators: singular label of point-type for deduction when deleting forum topic */
-                        'log'       => __('%singular% deduction for deleted forum topic', 'asgaros-forum')
+                        'log'   => __('%singular% deduction for deleted forum topic', 'asgaros-forum'),
                     ),
-                    'new_post'      => array(
-                        'creds'     => 1,
-                        'log'       => __('%plural% for new forum post', 'asgaros-forum'),
-                        'author'    => 0,
-                        'limit'     => '0/x'
+                    'new_post'         => array(
+                        'creds'  => 1,
+                        'log'    => __('%plural% for new forum post', 'asgaros-forum'),
+                        'author' => 0,
+                        'limit'  => '0/x',
                     ),
-                    'delete_post'   => array(
-                        'creds'     => -1,
+                    'delete_post'      => array(
+                        'creds' => -1,
 						/* translators: singular label of point-type for deduction when deleting forum post */
-                        'log'       => __('%singular% deduction for deleted forum post', 'asgaros-forum')
+                        'log'   => __('%singular% deduction for deleted forum post', 'asgaros-forum'),
                     ),
-                    'received_like' => array(
-                        'creds'     => 1,
-                        'log'       => __('%plural% for received forum post like', 'asgaros-forum'),
-                        'limit'     => '0/x'
+                    'received_like'    => array(
+                        'creds' => 1,
+                        'log'   => __('%plural% for received forum post like', 'asgaros-forum'),
+                        'limit' => '0/x',
                     ),
-                    'received_dislike'   => array(
-                        'creds'     => -1,
+                    'received_dislike' => array(
+                        'creds' => -1,
 						/* translators: singular label of point-type for deduction when receiving forum post dislike */
-                        'log'       => __('%singular% deduction for received forum post dislike', 'asgaros-forum')
+                        'log'   => __('%singular% deduction for received forum post dislike', 'asgaros-forum'),
                     ),
-                    'show_points'   => 0,
-                    'show_badges'   => 0,
-                    'show_ranks'    => 0
-                )
+                    'show_points'      => 0,
+                    'show_badges'      => 0,
+                    'show_ranks'       => 0,
+                ),
             ), $hook_prefs, $type);
         }
 
@@ -123,7 +125,7 @@ function mycred_load_asgarosforum_hook() {
             }
 
             $balance = $this->core->get_users_balance($user_id, $this->mycred_type);
-            $layout = $this->core->plural().': '.$this->core->format_creds($balance);
+            $layout  = $this->core->plural().': '.$this->core->format_creds($balance);
 
             echo '<small class="users-mycred-balance">'.$layout.'</small>';
         }
@@ -218,7 +220,7 @@ function mycred_load_asgarosforum_hook() {
                 return;
             }
 
-            if ((bool)$this->prefs['new_post']['author'] === false && $this->asgarosforum->get_topic_starter($topic_id) == $author_id) {
+            if ((bool) $this->prefs['new_post']['author'] === false && $this->asgarosforum->get_topic_starter($topic_id) == $author_id) {
                 return;
             }
 
@@ -526,9 +528,9 @@ function mycred_load_asgarosforum_hook() {
             }
 
             $data['new_post']['author'] = (isset($data['new_post']['author'])) ? 1 : 0;
-            $data['show_points'] = (isset($data['show_points'])) ? 1 : 0;
-            $data['show_badges'] = (isset($data['show_badges'])) ? 1 : 0;
-            $data['show_ranks'] = (isset($data['show_ranks'])) ? 1 : 0;
+            $data['show_points']        = (isset($data['show_points'])) ? 1 : 0;
+            $data['show_badges']        = (isset($data['show_badges'])) ? 1 : 0;
+            $data['show_ranks']         = (isset($data['show_ranks'])) ? 1 : 0;
 
             return $data;
         }

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class AsgarosForumDatabase {
     private $db;
@@ -18,15 +20,15 @@ class AsgarosForumDatabase {
 	}
 
     private function setTables() {
-        $this->tables = new stdClass();
-        $this->tables->forums           = $this->db->prefix.'forum_forums';
-        $this->tables->topics           = $this->db->prefix.'forum_topics';
-        $this->tables->posts            = $this->db->prefix.'forum_posts';
-        $this->tables->reports          = $this->db->prefix.'forum_reports';
-        $this->tables->reactions        = $this->db->prefix.'forum_reactions';
-        $this->tables->polls            = $this->db->prefix.'forum_polls';
-        $this->tables->polls_options    = $this->db->prefix.'forum_polls_options';
-        $this->tables->polls_votes      = $this->db->prefix.'forum_polls_votes';
+        $this->tables                = new stdClass();
+        $this->tables->forums        = $this->db->prefix.'forum_forums';
+        $this->tables->topics        = $this->db->prefix.'forum_topics';
+        $this->tables->posts         = $this->db->prefix.'forum_posts';
+        $this->tables->reports       = $this->db->prefix.'forum_reports';
+        $this->tables->reactions     = $this->db->prefix.'forum_reactions';
+        $this->tables->polls         = $this->db->prefix.'forum_polls';
+        $this->tables->polls_options = $this->db->prefix.'forum_polls_options';
+        $this->tables->polls_votes   = $this->db->prefix.'forum_polls_votes';
     }
 
     public function getTables() {
@@ -37,7 +39,7 @@ class AsgarosForumDatabase {
         if (function_exists('is_multisite') && is_multisite()) {
             // Check if it is a network activation. If so, run the database-creation for each id.
             if ($networkwide) {
-                $old_blog =  $this->db->blogid;
+                $old_blog = $this->db->blogid;
 
                 // Get all blog ids
                 $blogids = $this->db->get_col('SELECT blog_id FROM '.$this->db->blogs);
@@ -89,7 +91,7 @@ class AsgarosForumDatabase {
 
     public function buildDatabase() {
         global $asgarosforum;
-        $first_time_installation = false;
+        $first_time_installation    = false;
         $database_version_installed = get_option('asgarosforum_db_version');
 
         // Set flag when it its a first-time-installation.
@@ -109,7 +111,7 @@ class AsgarosForumDatabase {
 
             $sql = array();
 
-            $sql[] = "CREATE TABLE ".$this->tables->forums." (
+            $sql[] = 'CREATE TABLE '.$this->tables->forums." (
             id int(11) NOT NULL auto_increment,
             name varchar(255) NOT NULL default '',
             parent_id int(11) NOT NULL default '0',
@@ -123,7 +125,7 @@ class AsgarosForumDatabase {
             KEY parent_id (parent_id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->topics." (
+            $sql[] = 'CREATE TABLE '.$this->tables->topics." (
             id int(11) NOT NULL auto_increment,
             parent_id int(11) NOT NULL default '0',
             author_id int(11) NOT NULL default '0',
@@ -139,7 +141,7 @@ class AsgarosForumDatabase {
             KEY sticky (sticky)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->posts." (
+            $sql[] = 'CREATE TABLE '.$this->tables->posts." (
             id int(11) NOT NULL auto_increment,
             text longtext,
             parent_id int(11) NOT NULL default '0',
@@ -158,13 +160,13 @@ class AsgarosForumDatabase {
             KEY parent_id_id (parent_id, id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->reports." (
+            $sql[] = 'CREATE TABLE '.$this->tables->reports." (
             post_id int(11) NOT NULL default '0',
             reporter_id int(11) NOT NULL default '0',
             PRIMARY KEY  (post_id, reporter_id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->reactions." (
+            $sql[] = 'CREATE TABLE '.$this->tables->reactions." (
             post_id int(11) NOT NULL default '0',
             user_id int(11) NOT NULL default '0',
             reaction varchar(20) NOT NULL default '',
@@ -173,21 +175,21 @@ class AsgarosForumDatabase {
             PRIMARY KEY  (post_id, user_id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->polls." (
+            $sql[] = 'CREATE TABLE '.$this->tables->polls." (
             id int(11) NOT NULL default '0',
             title varchar(255) NOT NULL default '',
             multiple int(1) NOT NULL default '0',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->polls_options." (
+            $sql[] = 'CREATE TABLE '.$this->tables->polls_options." (
             id int(11) NOT NULL auto_increment,
             poll_id int(11) NOT NULL default '0',
             title varchar(255) NOT NULL default '',
             PRIMARY KEY  (id)
             ) $charset_collate;";
 
-            $sql[] = "CREATE TABLE ".$this->tables->polls_votes." (
+            $sql[] = 'CREATE TABLE '.$this->tables->polls_votes." (
             poll_id int(11) NOT NULL default '0',
             option_id int(11) NOT NULL default '0',
             user_id int(11) NOT NULL default '0',
@@ -203,12 +205,12 @@ class AsgarosForumDatabase {
                 // Try to create a new page for the forum.
                 $page_id = wp_insert_post(
                     array(
-                        'post_content'      => '[forum]',
-                        'post_title'        => 'Forum',
-                        'post_status'       => 'publish',
-                        'post_type'         => 'page',
-                        'comment_status'    => 'closed',
-                        'ping_status'       => 'closed'
+                        'post_content'   => '[forum]',
+                        'post_title'     => 'Forum',
+                        'post_status'    => 'publish',
+                        'post_type'      => 'page',
+                        'comment_status' => 'closed',
+                        'ping_status'    => 'closed',
                     )
                 );
 
@@ -234,7 +236,7 @@ class AsgarosForumDatabase {
 
             // Create forum slugs.
             if ($database_version_installed < 6 && !$first_time_installation) {
-                $forums = $this->db->get_results("SELECT id, name FROM ".$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
+                $forums = $this->db->get_results('SELECT id, name FROM '.$this->tables->forums." WHERE slug = '' ORDER BY id ASC;");
 
                 foreach ($forums as $forum) {
                     $slug = $asgarosforum->rewrite->create_unique_slug($forum->name, $this->tables->forums, 'forum');
@@ -251,7 +253,7 @@ class AsgarosForumDatabase {
 
                 // Create a new example category first.
                 $defaultCategoryName = __('Custom Usergroups', 'asgaros-forum');
-                $defaultCategory = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
+                $defaultCategory     = AsgarosForumUserGroups::insertUserGroupCategory($defaultCategoryName);
 
                 // Ensure that no error happened.
                 if (!is_wp_error($defaultCategory)) {
@@ -271,7 +273,7 @@ class AsgarosForumDatabase {
                     } else {
                         // Add an example usergroup.
                         $defaultUserGroupName = __('Example Usergroup', 'asgaros-forum');
-                        $defaultUserGroup = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#256db3');
+                        $defaultUserGroup     = AsgarosForumUserGroups::insertUserGroup($defaultCategory['term_id'], $defaultUserGroupName, '#256db3');
                     }
                 }
 
@@ -326,7 +328,7 @@ class AsgarosForumDatabase {
                         update_term_meta($new_category['term_id'], 'category_access', 'everyone');
                         update_term_meta($new_category['term_id'], 'order', 1);
 
-                        $default_forum_name = __('First Forum', 'asgaros-forum');
+                        $default_forum_name        = __('First Forum', 'asgaros-forum');
                         $default_forum_description = __('My first forum.', 'asgaros-forum');
 
                         $asgarosforum->content->insert_forum($new_category['term_id'], $default_forum_name, $default_forum_description, 0, 'fas fa-comments', 1, 'normal');
@@ -348,13 +350,13 @@ class AsgarosForumDatabase {
             if ($database_version_installed < 26 && !$first_time_installation) {
                 // Convert moderators.
                 $get_moderators = get_users(array(
-                    'fields'            => array('ID'),
-                    'meta_query'        => array(
+                    'fields'     => array('ID'),
+                    'meta_query' => array(
                         array(
-                            'key'       => 'asgarosforum_moderator',
-                            'compare'   => 'EXISTS'
-                        )
-                    )
+                            'key'     => 'asgarosforum_moderator',
+                            'compare' => 'EXISTS',
+                        ),
+                    ),
                 ));
 
                 if (!empty($get_moderators)) {
@@ -367,13 +369,13 @@ class AsgarosForumDatabase {
 
                 // Convert banned users.
                 $get_banned = get_users(array(
-                    'fields'            => array('ID'),
-                    'meta_query'        => array(
+                    'fields'     => array('ID'),
+                    'meta_query' => array(
                         array(
-                            'key'       => 'asgarosforum_banned',
-                            'compare'   => 'EXISTS'
-                        )
-                    )
+                            'key'     => 'asgarosforum_banned',
+                            'compare' => 'EXISTS',
+                        ),
+                    ),
                 ));
 
                 if (!empty($get_banned)) {

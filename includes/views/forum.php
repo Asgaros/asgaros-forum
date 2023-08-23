@@ -1,17 +1,19 @@
 <?php
 
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Get topics.
 $number_of_topics = $this->options['topics_per_page'];
-$topic_offset = $this->current_page * $number_of_topics;
-$topics = $this->content->get_topics($this->current_forum, $topic_offset, $number_of_topics);
+$topic_offset     = $this->current_page * $number_of_topics;
+$topics           = $this->content->get_topics($this->current_forum, $topic_offset, $number_of_topics);
 
 $topics_sticky = $this->content->get_sticky_topics($this->current_forum);
 
 // Set counter.
 $counter_normal = count($topics);
-$counter_total = count($topics_sticky) + $counter_normal;
+$counter_total  = count($topics_sticky) + $counter_normal;
 
 // Load editor.
 $this->editor->showEditor('addtopic', true);
