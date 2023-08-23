@@ -2243,7 +2243,7 @@ class AsgarosForum {
                 if ($contentType === 'post' || $contentType === 'topic' || $contentType === 'forum') {
                     // Generate description.
                     $description               = $results->current_description;
-                    $description               = strip_tags($description);
+                    $description               = wp_strip_all_tags($description);
                     $description               = esc_html($description);
                     $description               = str_replace(array("\r", "\n"), '', $description);
                     $this->current_description = $this->cut_string($description, 155, true);
@@ -2520,7 +2520,7 @@ class AsgarosForum {
         if ($this->options['signatures_html_allowed']) {
             $signature = strip_tags($signature, $this->options['signatures_html_tags']);
         } else {
-            $signature = esc_html(strip_tags($signature));
+            $signature = esc_html(wp_strip_all_tags($signature));
         }
 
         // Trim it.

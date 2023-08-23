@@ -249,7 +249,7 @@ class AsgarosForumPolls {
 
             // Assign not-empty poll-options to array.
             foreach ($available_poll_options as $key => $value) {
-                $poll_option = trim(strip_tags($value));
+                $poll_option = trim(wp_strip_all_tags($value));
 
                 if (!empty($poll_option)) {
                     $poll_options[$key] = $poll_option;

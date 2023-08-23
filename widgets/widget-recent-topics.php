@@ -113,7 +113,7 @@ class AsgarosForumRecentTopics_Widget extends WP_Widget {
                 $output .= '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$this->asgarosforum->getUsername($element->author_id).'</b></span>';
 
                 if ($show_excerpt) {
-                    $text = esc_html(stripslashes(strip_tags(strip_shortcodes($element->text))));
+                    $text = esc_html(stripslashes(wp_strip_all_tags(strip_shortcodes($element->text))));
                     $text = $this->asgarosforum->cut_string($text, $excerpt_length);
 
                     if (!empty($text)) {

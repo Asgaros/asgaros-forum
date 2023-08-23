@@ -211,7 +211,7 @@ class AsgarosForumProfile {
                                     $link = $this->asgarosforum->rewrite->get_post_link($post->id, $post->parent_id);
 
                                     echo '<a class="history-title" href="'.esc_url($link).'">';
-									echo esc_html($this->asgarosforum->cut_string(esc_html(stripslashes(strip_tags($post->text))), 100));
+									echo esc_html($this->asgarosforum->cut_string(esc_html(stripslashes(wp_strip_all_tags($post->text))), 100));
 									echo '</a>';
 
                                     $topic_link = $this->asgarosforum->rewrite->get_link('topic', $post->parent_id);

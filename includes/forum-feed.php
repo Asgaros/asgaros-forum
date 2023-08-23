@@ -114,7 +114,7 @@ class AsgarosForumFeed {
                         }
 
                         echo '<pubDate>'.esc_html(mysql2date('D, d M Y H:i:s +0000', $element->date, false)).'</pubDate>'.PHP_EOL;
-                        echo '<description><![CDATA['.esc_html(strip_tags($element->text)).']]></description>'.PHP_EOL;
+                        echo '<description><![CDATA['.esc_html(wp_strip_all_tags($element->text)).']]></description>'.PHP_EOL;
                         echo '<dc:creator>'.esc_html($this->asgarosforum->get_plain_username($element->author_id)).'</dc:creator>'.PHP_EOL;
 
                         if ($this->asgarosforum->current_view === 'forum') {
