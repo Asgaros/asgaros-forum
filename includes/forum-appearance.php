@@ -93,10 +93,10 @@ class AsgarosForumAppearance {
 
 			// Create meta-tags.
 			echo '<link rel="canonical" href="'.esc_url($link).'" />'.PHP_EOL;
-			echo '<meta name="description" content="'.esc_attr($description).'" />'.PHP_EOL;
+			echo '<meta name="description" content="'.stripslashes(esc_attr($description)).'" />'.PHP_EOL;
 			echo '<meta property="og:url" content="'.esc_url($link).'" />'.PHP_EOL;
 			echo '<meta property="og:title" content="'.esc_attr($title).'" />'.PHP_EOL;
-			echo '<meta property="og:description" content="'.esc_attr($description).'" />'.PHP_EOL;
+			echo '<meta property="og:description" content="'.stripslashes(esc_attr($description)).'" />'.PHP_EOL;
 			echo '<meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'" />'.PHP_EOL;
 
             // Try to set og:image-tag when we are in a topic. A check for the element-ID
@@ -114,7 +114,7 @@ class AsgarosForumAppearance {
 			}
 
 			echo '<meta name="twitter:title" content="'.esc_attr($title).'" />'.PHP_EOL;
-			echo '<meta name="twitter:description" content="'.esc_attr($description).'" />'.PHP_EOL;
+			echo '<meta name="twitter:description" content="'.stripslashes(esc_attr($description)).'" />'.PHP_EOL;
 
 			do_action('asgarosforum_wp_head');
 
