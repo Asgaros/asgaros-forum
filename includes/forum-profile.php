@@ -354,7 +354,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
 	# because display name was not getting updated if not default.
 	# Reloading the page fixed that, but then later it just goes
 	# into a reload loop.  So deleting.  Display name issue not serious.	
-		echo '<script>location.reload();</script>';
+	#	echo '<script>location.reload();</script>';
   	} else {
   		echo '<p class="error">' . implode("<br />", $error) . '</p>';
 	}
