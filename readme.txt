@@ -1,11 +1,11 @@
 === Asgaros Forum ===
 Contributors: Asgaros, qualmy91
-Donate link: https://www.asgaros.de/donate/
+Donate link: https://asgaros.com/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
 Tested up to: 6.3
 Requires PHP: 5.3
-Stable tag: 2.6.0
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,8 +15,8 @@ Asgaros Forum is the best forum-plugin for WordPress! It comes with dozens of fe
 Asgaros Forum is the perfect WordPress plugin if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and perfectly integrated into WordPress.
 
 = Support, Demo & Documentation =
-* [Support & Demo](https://www.asgaros.de/support/)
-* [Documentation](https://www.asgaros.de/docs/)
+* [Support & Demo](https://asgaros.com/support/)
+* [Documentation](https://asgaros.com/docs/)
 
 = Features =
 * Simple Content Management
@@ -73,7 +73,7 @@ Please only use this site and dont send me your own .po/.mo files because it is 
 You can approve translations by yourself if you are a Project Translation Editor (PTE). Please contact me in the forums if you are a native speaker and want to become a PTE.
 = Which hooks and filters are available? =
 You can find a list of available hooks and filters on this site:
-[https://www.asgaros.de/support/?view=thread&id=407](https://www.asgaros.de/support/?view=thread&id=407).
+[https://asgaros.com/support/topic/list-of-available-hooks-and-filters/](https://asgaros.com/support/topic/list-of-available-hooks-and-filters/).
 
 == Screenshots ==
 1. The forum overview
@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.7.0 =
 * Added: Option which allows users to only delete own topics without replies
 * Added: Support for forum name in title of notifications
 * Fixed: Malformed meta descriptions when using some special characters
@@ -176,7 +177,7 @@ You can find a list of available hooks and filters on this site:
 * Fixed: Warnings related to the currently implemented security-improvements
 * Fixed: Forum-icons could not get saved correctly
 * Fixed: Correctly save allowed html-tags for signatures in forum-settings
-* Removed: [Advertising functionality](https://www.asgaros.de/support/topic/removal-of-advertising-functionality/)
+* Removed: [Advertising functionality](https://asgaros.com/support/topic/removal-of-advertising-functionality/)
 * Performance improvements and code optimizations
 = 1.15.17 =
 * Fixed: Add missing sanitizing for input data

@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.asgaros.de" target="_blank" rel="noopener noreferrer"><img src="admin/images/logo.png" alt="Asgaros Forum"></a></p>
+<p align="center"><a href="https://asgaros.com" target="_blank" rel="noopener noreferrer"><img src="admin/images/logo.png" alt="Asgaros Forum"></a></p>
 
 [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/asgaros-forum)](https://wordpress.org/plugins/asgaros-forum/)
 [![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/rating/asgaros-forum)](https://wordpress.org/plugins/asgaros-forum/)
@@ -14,8 +14,8 @@ Asgaros Forum is a lightweight and simple plugin to extend WordPress with the fu
 Asgaros Forum is the perfect WordPress plugin if you want to extend your website with a lightweight and feature-rich discussion board. It is easy to set up, super fast and perfectly integrated into WordPress.
 
 ### Support, Demo & Documentation
-* [Support & Demo](https://www.asgaros.de/support/)
-* [Documentation](https://www.asgaros.de/docs/)
+* [Support & Demo](https://asgaros.com/support/)
+* [Documentation](https://asgaros.com/docs/)
 * [Available Hooks](hooks.md)
 
 ### Features
