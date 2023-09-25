@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Changed: Ensure that asgarosforum_filter_profile_link filtering is always performed
 = 2.7.0 =
 * Added: Option which allows users to only delete own topics without replies
 * Added: Support for forum name in title of notifications
