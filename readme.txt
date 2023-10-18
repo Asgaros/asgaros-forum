@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: PHP parse error in forum-compatibility.php
 * Fixed: Prevent forum administrators from allowing dangerous file extensions for uploads
 * Changed: Ensure that asgarosforum_filter_profile_link filtering is always performed
 = 2.7.0 =

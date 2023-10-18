@@ -190,7 +190,7 @@ class AsgarosForumCompatibility {
                 'taxonomy'   => 'asgarosforum-usergroup',
                 'hide_empty' => false,
                 'fields'     => 'ids',
-            ),
+            )
         );
 
         // Exclude categories.
@@ -199,7 +199,7 @@ class AsgarosForumCompatibility {
                 'taxonomy'   => 'asgarosforum-category',
                 'hide_empty' => false,
                 'fields'     => 'ids',
-            ),
+            )
         );
 
         $term_ids = array_merge($term_ids, $usergroup_term_ids, $category_term_ids);
