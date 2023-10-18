@@ -86,6 +86,7 @@ You can find a list of available hooks and filters on this site:
 == Changelog ==
 * Fixed: PHP parse error in forum-compatibility.php
 * Fixed: Prevent forum administrators from allowing dangerous file extensions for uploads
+* Changed: Improved file size error handling during file uploads
 * Changed: Ensure that asgarosforum_filter_profile_link filtering is always performed
 = 2.7.0 =
 * Added: Option which allows users to only delete own topics without replies

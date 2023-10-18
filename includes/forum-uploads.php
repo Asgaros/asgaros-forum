@@ -67,7 +67,7 @@ class AsgarosForumUploads {
 				$file_names = array_map('sanitize_file_name', $_FILES['forumfile']['name']);
 
 				foreach ($file_names as $index => $tmpName) {
-					if (!empty($_FILES['forumfile']['error'][$index]) && $_FILES['forumfile']['error'][$index] == 2) {
+					if (!empty($_FILES['forumfile']['error'][$index]) && in_array($_FILES['forumfile']['error'][$index], [1, 2])) {
 						return false;
 					} else if (empty($_FILES['forumfile']['error'][$index]) && !empty($file_names[$index])) {
 						$maximumFileSize = $this->get_maximum_size_in_bytes();
