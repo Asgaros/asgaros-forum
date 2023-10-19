@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 6.3
 Requires PHP: 5.3
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,10 +84,11 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.7.1 =
 * Fixed: PHP parse error in forum-compatibility.php
 * Fixed: Prevent forum administrators from allowing dangerous file extensions for uploads
-* Changed: Improved file size error handling during file uploads
-* Changed: Ensure that asgarosforum_filter_profile_link filtering is always performed
+* Fixed: Improved file size error handling during file uploads
+* Fixed: Ensure that asgarosforum_filter_profile_link filtering is always performed
 = 2.7.0 =
 * Added: Option which allows users to only delete own topics without replies
 * Added: Support for forum name in title of notifications
