@@ -70,7 +70,7 @@ class AsgarosForumUploads {
 					if (!empty($_FILES['forumfile']['error'][$index]) && in_array($_FILES['forumfile']['error'][$index], [1, 2])) {
 						return false;
 					} else if (empty($_FILES['forumfile']['error'][$index]) && !empty($file_names[$index])) {
-						$maximumFileSize = $this->get_maximum_size_in_bytes();
+						$maximumFileSize = min($this->get_maximum_size_in_bytes(), wp_max_upload_size());
 
 						if ($maximumFileSize != 0 && $_FILES['forumfile']['size'][$index] > $maximumFileSize) {
 							return false;
