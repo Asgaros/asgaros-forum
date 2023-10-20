@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: PHP warning and database error in statistics
 = 2.7.1 =
 * Fixed: PHP parse error in forum-compatibility.php
 * Fixed: Prevent forum administrators from allowing dangerous file extensions for uploads
