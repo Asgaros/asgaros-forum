@@ -354,8 +354,13 @@ class AsgarosForumAdmin {
 
     /* OPTIONS */
     public function save_options() {
+        // Will contain the updated options.
         $saved_ops = array();
 
+        // Contains the previous options.
+        $previous_options = $this->asgarosforum->options;
+
+        // Process updated options.
         foreach ($this->asgarosforum->options_default as $k => $v) {
             if (isset($_POST[$k])) {
                 if (is_numeric($v)) {
@@ -364,6 +369,7 @@ class AsgarosForumAdmin {
                     $saved_ops[$k] = (bool) $_POST[$k];
                 } else if ($k === 'allowed_filetypes') {
                     $tmp           = strtolower(sanitize_text_field($_POST[$k]));
+                    $tmp           = $this->maybeFilterAllowedFileExtensions($tmp, $previous_options['allowed_filetypes']);
                     $saved_ops[$k] = (!empty($tmp)) ? $tmp : $v;
 				} else if (in_array($k, array('signatures_html_tags', 'mail_template_new_post_message', 'mail_template_new_topic_message', 'mail_template_mentioned_message'), true)) {
 					$tmp           = wp_kses_post($_POST[$k]);
@@ -381,6 +387,44 @@ class AsgarosForumAdmin {
 
         $this->asgarosforum->save_options($saved_ops);
         $this->saved = true;
+    }
+
+    public function maybeFilterAllowedFileExtensions($allowedFileExtensions, $previousAllowedFileExtensions) {
+        // Abort if user is site administrator.
+        if ($this->asgarosforum->permissions->isSiteAdministrator(get_current_user_id())) {
+            return $allowedFileExtensions;
+        }
+
+        // Get all allowed mime types.
+        $allowed_mime_types_tmp = get_allowed_mime_types();
+
+        // Parse allowed mime types for better processing.
+        $allowed_mime_types = [];
+
+        foreach ($allowed_mime_types_tmp as $key => $value) {
+            $extensions = explode('|', $key);
+
+            foreach ($extensions as $extension) {
+                $allowed_mime_types[] = $extension;
+            }
+        }
+
+        // Filter allowed file extensions.
+        $previousExtensionsArray = explode(',', $previousAllowedFileExtensions);
+        $fileExtensionsArray = explode(',', $allowedFileExtensions);
+        $fileExtensionsFiltered = [];
+
+        foreach ($fileExtensionsArray as $fileExtension) {
+            // Allow the file extension if it is within the allowed mime types or if it was allowed previously by a site administrator to prevent reverting an allowed state.
+            if (in_array($fileExtension, $allowed_mime_types) || in_array($fileExtension, $previousExtensionsArray)) {
+                $fileExtensionsFiltered[] = $fileExtension;
+            }
+        }
+
+        // Convert array back to string.
+        $fileExtensionsFiltered = implode(',', $fileExtensionsFiltered);
+
+        return $fileExtensionsFiltered;
     }
 
     public function save_appearance() {

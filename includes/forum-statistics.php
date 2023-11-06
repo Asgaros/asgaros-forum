@@ -54,6 +54,7 @@ class AsgarosForumStatistics {
         // Create counters query.
         $queryTopics = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->topics;
         $queryPosts  = 'SELECT COUNT(*) FROM '.self::$asgarosforum->tables->posts;
+        $queryViews  = 0;
 
         if (self::$asgarosforum->options['count_topic_views']) {
             $queryViews = 'SELECT SUM(views) FROM '.self::$asgarosforum->tables->topics;

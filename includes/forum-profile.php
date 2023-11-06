@@ -692,14 +692,13 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && $_POS
     }
 
     public function getProfileLink($userObject, $additional_parameters = false) {
-        if ($this->hideProfileLink() || !$this->functionalityEnabled()) {
-            return false;
-        } else {
-            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID, $additional_parameters, '', false);
-            $profileLink = apply_filters('asgarosforum_filter_profile_link', $profileLink, $userObject);
+        $profileLink = false;
 
-            return $profileLink;
+        if ($this->functionalityEnabled() && !$this->hideProfileLink()) {
+            $profileLink = $this->asgarosforum->get_link('profile', $userObject->ID, $additional_parameters, '', false);
         }
+
+        return apply_filters('asgarosforum_filter_profile_link', $profileLink, $userObject);
     }
 
     public function get_history_link($userObject) {
