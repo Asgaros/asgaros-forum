@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Performance improvements and code optimizations
 = 2.7.2 =
 * Fixed: PHP warning and database error in statistics
 = 2.7.1 =
