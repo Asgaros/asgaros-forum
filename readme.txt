@@ -84,6 +84,8 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.8.0 =
+* Fixed: PHP Object Injection
 * Performance improvements and code optimizations
 * Compatibility with WordPress 6.4
 = 2.7.2 =
