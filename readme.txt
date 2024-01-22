@@ -3,9 +3,9 @@ Contributors: Asgaros, qualmy91
 Donate link: https://asgaros.com/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 5.3
-Stable tag: 2.7.2
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,10 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 2.8.0 =
+* Fixed: PHP Object Injection
+* Performance improvements and code optimizations
+* Compatibility with WordPress 6.4
 = 2.7.2 =
 * Fixed: PHP warning and database error in statistics
 = 2.7.1 =
