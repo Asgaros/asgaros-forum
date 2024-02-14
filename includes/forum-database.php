@@ -29,6 +29,7 @@ class AsgarosForumDatabase {
         $this->tables->polls         = $this->db->prefix.'forum_polls';
         $this->tables->polls_options = $this->db->prefix.'forum_polls_options';
         $this->tables->polls_votes   = $this->db->prefix.'forum_polls_votes';
+        $this->tables->edit_history   = $this->db->prefix.'forum_edit_history';
     }
 
     public function getTables() {
@@ -83,6 +84,7 @@ class AsgarosForumDatabase {
         $tables[] = $this->db->prefix.'forum_polls';
         $tables[] = $this->db->prefix.'forum_polls_options';
         $tables[] = $this->db->prefix.'forum_polls_votes';
+        $tables[] = $this->db->prefix.'forum_edit_history';
 
         // Delete data which has been used in old versions of the plugin.
         $tables[] = $this->db->prefix.'forum_threads';
@@ -158,6 +160,17 @@ class AsgarosForumDatabase {
             KEY forum_id (forum_id),
             KEY forum_id_id (forum_id, id),
             KEY parent_id_id (parent_id, id)
+            ) $charset_collate;";
+
+            $sql[] = 'CREATE TABLE '.$this->tables->edit_history." (
+            id int(11) NOT NULL auto_increment,
+            post_id int(11) NOT NULL default '0',
+            user_id int(11) NOT NULL default '0',
+            edited_content longtext NOT NULL,
+            edit_timestamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+            PRIMARY KEY (id),
+            KEY post_id (post_id),
+            KEY user_id (user_id)
             ) $charset_collate;";
 
             $sql[] = 'CREATE TABLE '.$this->tables->reports." (

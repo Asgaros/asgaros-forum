@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -56,7 +55,16 @@ class AsgarosForumContent {
         if (isset($_POST['message'])) {
             $this->data_content = apply_filters('asgarosforum_filter_content_before_insert', wp_kses_post($_POST['message']));
         }
+        // Add the following lines to set the original content for edit history
+    if ($this->get_action() === 'edit_post') {
+        $this->original_content = $this->asgarosforum->db->get_var(
+            $this->asgarosforum->db->prepare(
+                "SELECT text FROM {$this->asgarosforum->tables->posts} WHERE id = %d",
+                $this->asgarosforum->current_post
+            )
+        );
     }
+}
 
     private function prepare_execution() {
         // Cancel if there is already an error.
@@ -360,7 +368,15 @@ class AsgarosForumContent {
 
         wp_safe_redirect($redirect);
         exit;
+    // Add the following block to insert data into edit history table for edits
+    if ($this->get_action() === 'edit_post') {
+        $this->asgarosforum->db->insert_edit_history(
+            $this->asgarosforum->current_post,
+            $this->asgarosforum->permissions->currentUserID,
+            $this->original_content
+        );
     }
+}
 
     //======================================================================
     // FUNCTIONS FOR INSERTING CONTENT.
@@ -433,28 +449,49 @@ class AsgarosForumContent {
     }
 
     // Inserts a new post.
-    public function insert_post($topic_id, $forum_id, $text, $author_id = false, $uploads = array()) {
-        // Set the author ID.
-        if (!$author_id) {
-            $author_id = $this->asgarosforum->permissions->currentUserID;
-        }
-
-        // Get the current time.
-        $date = $this->asgarosforum->current_time();
-
-        // Insert the post.
-        $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array(
-			'text'      => $text,
-			'parent_id' => $topic_id,
-			'forum_id'  => $forum_id,
-			'date'      => $date,
-			'author_id' => $author_id,
-			'uploads'   => maybe_serialize($uploads),
-		), array('%s', '%d', '%d', '%s', '%d', '%s'));
-
-        // Return the ID of the inserted post.
-        return $this->asgarosforum->db->insert_id;
+public function insert_post($topic_id, $forum_id, $text, $author_id = false, $uploads = array()) {
+    // Set the author ID.
+    if (!$author_id) {
+        $author_id = $this->asgarosforum->permissions->currentUserID;
     }
+
+    // Get the current time.
+    $date = $this->asgarosforum->current_time();
+
+    // Insert the post.
+    $this->asgarosforum->db->insert($this->asgarosforum->tables->posts, array(
+        'text'      => $text,
+        'parent_id' => $topic_id,
+        'forum_id'  => $forum_id,
+        'date'      => $date,
+        'author_id' => $author_id,
+        'uploads'   => maybe_serialize($uploads),
+    ), array('%s', '%d', '%d', '%s', '%d', '%s'));
+
+    // Return the ID of the inserted post.
+    $post_id = $this->asgarosforum->db->insert_id;
+
+    /// Insert into edit_history table.
+    $this->insert_edit_history($post_id, $text, $author_id);
+
+
+    return $post_id;
+}
+
+// New function to insert into edit_history table.
+private function insert_edit_history($post_id, $text, $editor) {
+    $date = $this->asgarosforum->current_time();
+
+    // If there are no uploads, initialize an empty array.
+    $uploads = empty($uploads) ? array() : $uploads;
+
+    $this->asgarosforum->db->insert($this->asgarosforum->tables->edit_history, array(
+        'post_id'        => $post_id,
+        'user_id'        => $editor,
+        'edited_content' => $text,
+        'edit_timestamp' => $date,
+    ), array('%d', '%d', '%s', '%s'));
+}
 
     //======================================================================
     // FUNCTIONS TO CHECK CONTENT-RELATED THINGS.

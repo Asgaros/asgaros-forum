@@ -140,6 +140,7 @@ class AsgarosForum {
         'view_name_members'                => 'members',
         'view_name_profile'                => 'profile',
         'view_name_history'                => 'history',
+        'view_name_edithistory'            => 'edithistory',
         'view_name_unread'                 => 'unread',
         'view_name_unapproved'             => 'unapproved',
         'view_name_reports'                => 'reports',
@@ -422,6 +423,8 @@ class AsgarosForum {
         // Set all base links.
         if ($this->executePlugin || get_post($this->options['location'])) {
             $this->rewrite->set_links();
+
+            
         }
 
         if (!$this->executePlugin) {
@@ -470,6 +473,11 @@ class AsgarosForum {
                     $this->current_view = 'overview';
                 }
                 break;
+                case 'edithistory':
+                    if (!$this->profile->functionalityEnabled()) {
+                        $this->current_view = 'overview';
+                    }
+                    break;
             case 'members':
                 // Go back to the overview when this functionality is not enabled.
                 if (!$this->memberslist->functionality_enabled()) {
@@ -771,6 +779,8 @@ class AsgarosForum {
                 $mainTitle = $this->profile->get_profile_title();
             } else if ($this->current_view === 'history') {
                 $mainTitle = $this->profile->get_history_title();
+            }else if ($this->current_view === 'edithistory') {
+                $mainTitle = $this->profile->get_edithistory_title();
             } else if ($this->current_view === 'members') {
                 $mainTitle = __('Members', 'asgaros-forum');
             } else if ($this->current_view === 'activity') {
@@ -884,6 +894,9 @@ class AsgarosForum {
                 case 'history':
                     $this->profile->show_history();
                     break;
+                case 'edithistory':
+                    $this->profile->show_edithistory();
+                    break;    
                 case 'members':
                     $this->memberslist->show_memberslist();
                     break;
@@ -1842,56 +1855,68 @@ class AsgarosForum {
         return $menu;
     }
 
+    public function get_edit_history_link($post_id) {
+        return home_url('/forum/edithistory/' . $post_id);
+    }
+    
     // Generate post menu.
     public function show_post_menu($post_id, $author_id, $counter, $post_date) {
         $menu = '';
-
+    
         // Only show post-menu when the topic is approved.
         if ($this->approval->is_topic_approved($this->current_topic)) {
             if (is_user_logged_in()) {
                 $current_user_id = get_current_user_id();
-
+    
                 if ($this->permissions->can_delete_post($current_user_id, $post_id, $author_id, $post_date) && ($counter > 1 || $this->current_page >= 1)) {
                     // Delete button.
                     $delete_post_link = $this->get_link('topic', $this->current_topic, array(
-						'post'        => $post_id,
-						'remove_post' => 1,
-						'_wpnonce'    => wp_create_nonce('asgaros_forum_delete_post'),
-					));
-
+                        'post'        => $post_id,
+                        'remove_post' => 1,
+                        '_wpnonce'    => wp_create_nonce('asgaros_forum_delete_post'),
+                    ));
+    
                     $menu     .= '<a class="delete-forum-post" onclick="return confirm(\''.__('Are you sure you want to remove this?', 'asgaros-forum').'\');" href="'.$delete_post_link.'">';
                         $menu .= '<span class="menu-icon fas fa-trash-alt"></span>';
                         $menu .= __('Delete', 'asgaros-forum');
                     $menu     .= '</a>';
                 }
-
+    
                 if ($this->permissions->can_edit_post($current_user_id, $post_id, $author_id, $post_date)) {
                     // Edit button.
                     $menu     .= '<a href="'.$this->get_link('editpost', $post_id, array('part' => ($this->current_page + 1))).'">';
                         $menu .= '<span class="menu-icon fas fa-pencil-alt"></span>';
                         $menu .= __('Edit', 'asgaros-forum');
                     $menu     .= '</a>';
-                }
+    
+                    // Edit History link.
+                $edit_history_link = $this->get_edit_history_link($post_id);
+                $menu     .= '<a href="'.$edit_history_link.'">';
+                    $menu .= '<span class="menu-icon fas fa-history"></span>';
+                    $menu .= __('Edit History', 'asgaros-forum');
+                $menu .= '</a>';   
             }
 
-            if ($this->permissions->isModerator('current') || (!$this->is_topic_closed($this->current_topic) && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
-                // Quote button.
-                $menu     .= '<a class="forum-editor-quote-button" data-value-id="'.$post_id.'" href="'.$this->get_link('addpost', $this->current_topic, array('quote' => $post_id)).'">';
-                    $menu .= '<span class="menu-icon fas fa-quote-left"></span>';
-                    $menu .= __('Quote', 'asgaros-forum');
-                $menu     .= '</a>';
-            }
         }
 
-        // Show report button.
-        $menu .= $this->reports->render_report_button($post_id, $this->current_topic);
-
-        $menu = (!empty($menu)) ? '<div class="forum-post-menu">'.$menu.'</div>' : $menu;
-        $menu = apply_filters('asgarosforum_filter_post_menu', $menu);
-
-        return $menu;
+        if ($this->permissions->isModerator('current') || (!$this->is_topic_closed($this->current_topic) && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
+            // Quote button.
+            $menu     .= '<a class="forum-editor-quote-button" data-value-id="'.$post_id.'" href="'.$this->get_link('addpost', $this->current_topic, array('quote' => $post_id)).'">';
+                $menu .= '<span class="menu-icon fas fa-quote-left"></span>';
+                $menu .= __('Quote', 'asgaros-forum');
+            $menu     .= '</a>';
+        }
     }
 
+    // Show report button.
+    $menu .= $this->reports->render_report_button($post_id, $this->current_topic);
+
+    $menu = (!empty($menu)) ? '<div class="forum-post-menu">'.$menu.'</div>' : $menu;
+    $menu = apply_filters('asgarosforum_filter_post_menu', $menu);
+
+    return $menu;
+}
+    
     public function showHeader() {
         echo '<div id="forum-header">';
             echo '<div id="forum-navigation-mobile">';
