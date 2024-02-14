@@ -217,24 +217,29 @@ class AsgarosForumUnread {
 
     public function show_unread_controls() {
         echo '<div id="read-unread">';
-            echo '<span class="indicator unread"></span>';
-            echo '<span class="indicator-label">'.esc_html__('New posts', 'asgaros-forum').'</span>';
-            echo '<span class="indicator read"></span>';
-            echo '<span class="indicator-label">'.esc_html__('Nothing new', 'asgaros-forum').'</span>';
-
-            echo '<span class="indicator-label">';
-                echo '<span class="fas fa-check"></span>';
-                echo '<a href="'.esc_url($this->asgarosforum->get_link('markallread')).'">'.esc_html__('Mark All Read', 'asgaros-forum').'</a>';
-            echo '</span>';
-
-            echo '<span class="indicator-label">';
-                echo '<span class="fas fa-history"></span>';
-                echo '<a href="'.esc_url($this->asgarosforum->get_link('unread')).'">'.esc_html__('Show Unread Topics', 'asgaros-forum').'</a>';
-            echo '</span>';
-
-            echo '<div class="clear"></div>';
+        echo '<span class="indicator unread"></span>';
+        echo '<span class="indicator-label">'.esc_html__('New posts', 'asgaros-forum').'</span>';
+        echo '<span class="indicator read"></span>';
+        echo '<span class="indicator-label">'.esc_html__('Nothing new', 'asgaros-forum').'</span>';
+    
+        echo '<span class="indicator-label">';
+        echo '<a href="'.esc_url($this->asgarosforum->get_link('markallread')).'">';
+        echo '<span class="fas fa-check"></span>';
+        echo esc_html__('Mark All Read', 'asgaros-forum');
+        echo '</a>';
+        echo '</span>';
+    
+        echo '<span class="indicator-label">';
+        echo '<a href="'.esc_url($this->asgarosforum->get_link('unread')).'">';
+        echo '<span class="fas fa-history"></span>';
+        echo esc_html__('Show Unread Topics', 'asgaros-forum');
+        echo '</a>';
+        echo '</span>';
+    
+        echo '<div class="clear"></div>';
         echo '</div>';
     }
+    
 
     public function show_unread_menu() {
         echo '<div class="forum-menu">';

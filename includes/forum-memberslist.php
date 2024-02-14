@@ -214,43 +214,45 @@ class AsgarosForumMembersList {
 
             foreach ($dataSliced as $element) {
                 $userOnline = ($this->asgarosforum->online->is_user_online($element->ID)) ? 'user-online' : 'user-offline';
-
+            
                 echo '<div class="content-element member '.esc_attr($userOnline).'">';
-                    if ($this->asgarosforum->options['enable_avatars']) {
-                        echo '<div class="member-avatar">';
-                        echo get_avatar($element->ID, 60, '', '', array('force_display' => true));
-                        echo '</div>';
-                    }
-
-                    echo '<div class="member-name">';
-                        echo $this->asgarosforum->getUsername($element->ID);
-                        echo '<small>'.$this->asgarosforum->permissions->getForumRole($element->ID).'</small>';
-
-                        $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($element->ID, 'all', true);
-
-                        if (!empty($usergroups)) {
-                            echo '<span class="member-usergroups">';
-
-                            foreach ($usergroups as $usergroup) {
-                                echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
-                            }
-
-                            echo '</span>';
-                        }
+                if ($this->asgarosforum->options['enable_avatars']) {
+                    echo '<div class="member-avatar">';
+                    // Make the avatar clickable and link to the user's profile.
+                    echo '<a href="'.esc_url($this->asgarosforum->get_link('profile', $element->ID)).'">';
+                    echo get_avatar($element->ID, 60, '', '', array('force_display' => true));
+                    echo '</a>';
                     echo '</div>';
-
-                    echo '<div class="member-posts">';
-                        $member_posts_i18n = number_format_i18n($element->forum_posts);
-                        printf(_n('%s Post', '%s Posts', absint($element->forum_posts), 'asgaros-forum'), esc_html($member_posts_i18n));
-                    echo '</div>';
-
-                    if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {
-                        echo '<div class="member-last-seen">';
-                            echo '<i>'.esc_html($this->asgarosforum->online->last_seen($element->ID)).'</i>';
-                        echo '</div>';
+                }
+            
+                echo '<div class="member-name">';
+                echo $this->asgarosforum->getUsername($element->ID);
+                echo '<small>'.$this->asgarosforum->permissions->getForumRole($element->ID).'</small>';
+            
+                $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($element->ID, 'all', true);
+            
+                if (!empty($usergroups)) {
+                    echo '<span class="member-usergroups">';
+                    foreach ($usergroups as $usergroup) {
+                        echo AsgarosForumUserGroups::render_usergroup_tag($usergroup);
                     }
+                    echo '</span>';
+                }
+                echo '</div>';
+            
+                echo '<div class="member-posts">';
+                $member_posts_i18n = number_format_i18n($element->forum_posts);
+                printf(_n('%s Post', '%s Posts', absint($element->forum_posts), 'asgaros-forum'), esc_html($member_posts_i18n));
+                echo '</div>';
+            
+                if ($this->asgarosforum->online->functionality_enabled && $this->asgarosforum->options['show_last_seen']) {
+                    echo '<div class="member-last-seen">';
+                    echo '<i>'.esc_html($this->asgarosforum->online->last_seen($element->ID)).'</i>';
+                    echo '</div>';
+                }
                 echo '</div>';
             }
+            
         }
 
         echo '</div>';

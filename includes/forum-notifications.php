@@ -38,17 +38,15 @@ class AsgarosForumNotifications {
 
     // Generates an (un)subscription link based on subscription status for topics.
     public function show_topic_subscription_link($topic_id) {
-        // Dont show the subscription-link when the topic is not approved.
+        // Don't show the subscription-link when the topic is not approved.
         if (!$this->asgarosforum->approval->is_topic_approved($topic_id)) {
             return;
         }
-
-        echo '<span id="topic-subscription" class="fas fa-envelope"></span>';
-
+    
         $link               = '';
         $text               = '';
         $subscription_level = $this->get_subscription_level();
-
+    
         if ($subscription_level == 3) {
             $link = $this->asgarosforum->get_link('subscriptions');
             $text = __('You are subscribed to <b>all</b> topics.', 'asgaros-forum');
@@ -65,18 +63,17 @@ class AsgarosForumNotifications {
             ));
             $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
         }
-
-        echo '<a href="'.esc_url($link).'">'.wp_kses_post($text).'</a>';
+    
+        echo '<a href="'.esc_url($link).'"><span id="topic-subscription" class="fas fa-envelope"></span>' . wp_kses_post($text) . '</a>';
     }
+    
 
     // Generates an (un)subscription link based on subscription status for forums.
     public function show_forum_subscription_link($element_id) {
-        echo '<span id="forum-subscription" class="fas fa-envelope"></span>';
-
         $link               = '';
         $text               = '';
         $subscription_level = $this->get_subscription_level();
-
+    
         if ($subscription_level > 1) {
             $link = $this->asgarosforum->get_link('subscriptions');
             $text = __('You are subscribed to <b>all</b> forums.', 'asgaros-forum');
@@ -93,9 +90,10 @@ class AsgarosForumNotifications {
             ));
             $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
         }
-
-        echo '<a href="'.esc_url($link).'">'.wp_kses_post($text).'</a>';
+    
+        echo '<a href="'.esc_url($link).'"><span id="forum-subscription" class="fas fa-envelope"></span>' . wp_kses_post($text) . '</a>';
     }
+    
 
     // Generates an subscription option in the editor based on subscription status.
     public function show_editor_subscription_option() {
