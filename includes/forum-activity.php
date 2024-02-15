@@ -48,7 +48,7 @@ class AsgarosForumActivity {
             foreach ($data as $activity) {
                 $current_time    = gmdate($this->asgarosforum->date_format, strtotime($activity->date));
                 $human_time_diff = $this->asgarosforum->get_activity_timestamp($activity->date, 'relative');
-
+            
                 if ($current_time == $date_today) {
                     $current_time = __('Today', 'asgaros-forum');
                 } else if ($current_time == $date_yesterday) {
@@ -56,40 +56,44 @@ class AsgarosForumActivity {
                 } else {
                     $current_time = $human_time_diff;
                 }
-
+            
                 if ($last_time != $current_time) {
                     $last_time = $current_time;
-
+            
                     if ($first_group) {
                         $first_group = false;
                     } else {
                         echo '</div>';
                     }
-
+            
                     echo '<div class="title-element">'.esc_html($current_time).'</div>';
                     echo '<div class="content-container">';
                 }
-
+            
                 $name_author = $this->asgarosforum->getUsername($activity->author_id);
                 $name_topic  = esc_html(stripslashes($activity->name));
                 $read_status = $this->asgarosforum->unread->get_status_post($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
-
+                $avatar      = get_avatar($activity->author_id, 32); // Change the size (32) as needed
+            
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link      = $this->asgarosforum->get_link('topic', $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
-                    echo '<span class="activity-icon fas fa-comments '.esc_attr($read_status).'"></span>';
+                    echo '<a href="'.$link.'"><span class="activity-icon fas fa-comments '.esc_attr($read_status).'"></span></a>';
+                    echo $avatar; // Display avatar
                     echo sprintf(__('New topic %1$s created by %2$s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 } else {
                     $link      = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
-                    echo '<span class="activity-icon fas fa-comment '.esc_attr($read_status).'"></span>';
+                    echo '<a href="'.$link.'"><span class="activity-icon fas fa-comment '.esc_attr($read_status).'"></span></a>';
+                    echo $avatar; // Display avatar
                     echo sprintf(__('%1$s replied in %2$s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 }
             }
+            
 
             echo '</div>';
         } else {
