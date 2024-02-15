@@ -368,6 +368,7 @@ class AsgarosForumContent {
 
         wp_safe_redirect($redirect);
         exit;
+        
     // Add the following block to insert data into edit history table for edits
     if ($this->get_action() === 'edit_post') {
         $this->asgarosforum->db->insert_edit_history(

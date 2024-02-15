@@ -1896,7 +1896,6 @@ class AsgarosForum {
                     $menu .= __('Edit History', 'asgaros-forum');
                 $menu .= '</a>';   
             }
-
         }
 
         if ($this->permissions->isModerator('current') || (!$this->is_topic_closed($this->current_topic) && ((is_user_logged_in() && !$this->permissions->isBanned('current')) || (!is_user_logged_in() && $this->options['allow_guest_postings'])))) {
