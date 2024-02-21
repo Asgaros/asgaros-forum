@@ -163,9 +163,9 @@ class AsgarosForumDatabase {
             ) $charset_collate;";
 
             $sql[] = 'CREATE TABLE '.$this->tables->edit_history." (
-            id int(11) NOT NULL auto_increment,
-            post_id int(11) NOT NULL default '0',
-            user_id int(11) NOT NULL default '0',
+            id int NOT NULL auto_increment,
+            post_id int NOT NULL default (0),
+            user_id int NOT NULL default (0),
             edited_content longtext NOT NULL,
             edit_timestamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
             PRIMARY KEY (id),
