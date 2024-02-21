@@ -167,7 +167,7 @@ class AsgarosForumDatabase {
             post_id int NOT NULL default (0),
             user_id int NOT NULL default (0),
             edited_content longtext NOT NULL,
-            edit_timestamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+           edit_timestamp datetime DEFAULT '1970-01-01 00:00:00' NOT NULL,
             PRIMARY KEY (id),
             KEY post_id (post_id),
             KEY user_id (user_id)
