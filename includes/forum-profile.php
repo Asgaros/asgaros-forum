@@ -74,45 +74,47 @@ class AsgarosForumProfile {
         $userOnline       = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? 'user-online' : 'user-offline';
         $background_style = '';
         $user_id          = $user_data->ID;
-
+    
         echo '<div id="profile-header" class="'.esc_attr($userOnline).'">';
+    
+        if (is_user_logged_in()) {
             if ($this->asgarosforum->options['enable_avatars']) {
-
                 $url = get_avatar_url($user_id, 480);
-
+    
                 // Add filter for custom profile header
                 $url = apply_filters('asgarosforum_filter_profile_header_image', $url, $user_id);
-
+    
                 $background_style = 'style="background-image: url(\''.$url.'\');"';
             }
-
+    
             echo '<div class="background-avatar" '.wp_kses_post($background_style).'></div>';
             echo '<div class="background-contrast"></div>';
-
+    
             // Show avatar.
             if ($this->asgarosforum->options['enable_avatars']) {
                 echo get_avatar($user_data->ID, 160, '', '', array('force_display' => true));
             }
-
-            echo '<div class="user-info">';
-                $user_name = apply_filters('asgarosforum_filter_username', $user_data->display_name, $user_data);
-                echo '<div class="profile-display-name">'.esc_html($user_name).'</div>';
-
-                echo '<div class="profile-forum-role">';
-                $count_posts = $this->asgarosforum->countPostsByUser($user_id);
-                $this->asgarosforum->render_reputation_badges($count_posts);
-
-				$role = $this->asgarosforum->permissions->getForumRole($user_id);
-
-                // Special styling for banned users.
-                if ($this->asgarosforum->permissions->get_forum_role($user_id) === 'banned') {
-                    echo '<span class="af-usergroup-tag banned"><i class="fa-solid fa-ban"></i>'.esc_html($role).'</span>';
-                } else {
-					echo esc_html($role);
-				}
-
-                echo '</div>';
-            echo '</div>';
+        }
+    
+        echo '<div class="user-info">';
+        $user_name = apply_filters('asgarosforum_filter_username', $user_data->display_name, $user_data);
+        echo '<div class="profile-display-name">'.esc_html($user_name).'</div>';
+    
+        echo '<div class="profile-forum-role">';
+        $count_posts = $this->asgarosforum->countPostsByUser($user_id);
+        $this->asgarosforum->render_reputation_badges($count_posts);
+    
+        $role = $this->asgarosforum->permissions->getForumRole($user_id);
+    
+        // Special styling for banned users.
+        if ($this->asgarosforum->permissions->get_forum_role($user_id) === 'banned') {
+            echo '<span class="af-usergroup-tag banned"><i class="fa-solid fa-ban"></i>'.esc_html($role).'</span>';
+        } else {
+            echo esc_html($role);
+        }
+    
+        echo '</div>';
+        echo '</div>';
         echo '</div>';
     }
 
