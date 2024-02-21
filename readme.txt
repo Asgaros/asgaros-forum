@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Added: Show avatars in activity view
 = 2.8.0 =
 * Fixed: PHP Object Injection
 * Performance improvements and code optimizations
