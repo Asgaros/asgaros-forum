@@ -1578,12 +1578,12 @@ class AsgarosForum {
                 echo '<a href="'.esc_url($post_link).'">'.esc_html($this->get_activity_timestamp($lastpost->date)).'</a>';
                 echo '&nbsp;&middot;&nbsp;';
                 echo $this->getUsername($lastpost->author_id);
-            } else {
+            }  else {
                 // Avatar
-                if ($this->options['enable_avatars']) {
-                    echo '<div class="forum-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
+                if ($this->options['enable_avatars'] && is_user_logged_in()) {
+                    $avatar_html = get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true));
+                    echo '<div class="forum-poster-avatar"><a href="'.esc_url($post_link).'">'.$avatar_html.'</a></div>';
                 }
-
                 // Summary
                 echo '<div class="forum-poster-summary">';
                 echo '<a href="'.esc_url($post_link).'">'.esc_html($this->cut_string(stripslashes($lastpost->name), 25)).'</a><br>';
@@ -1620,10 +1620,9 @@ class AsgarosForum {
                 echo $this->getUsername($lastpost->author_id);
             } else {
                 // Avatar
-                if ($this->options['enable_avatars']) {
+                if ($this->options['enable_avatars'] && is_user_logged_in()) {
                     echo '<div class="topic-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
                 }
-
                 // Summary
                 echo '<div class="forum-poster-summary">';
                 echo '<a href="'.esc_url($post_link).'">'.esc_html($this->get_activity_timestamp($lastpost->date)).'</a><br>';

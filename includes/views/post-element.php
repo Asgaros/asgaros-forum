@@ -21,26 +21,34 @@ $user_online_class = ($this->online->is_user_online($post->author_id)) ? 'user-o
 
 $user_data = get_userdata($post->author_id);
 
-echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_post_class).'" id="postid-'.esc_attr($post->id).'">';
-	echo '<div class="forum-post-header-container">';
-		echo '<div class="post-author '.esc_attr($user_online_class).'">';
-			// Show avatar if activated.
-			if ($this->options['enable_avatars']) {
-				$avatar_size = apply_filters('asgarosforum_filter_avatar_size', 64);
-				echo get_avatar($post->author_id, $avatar_size, '', '', array('force_display' => true));
-			}
+        echo '<div class="post-element '.esc_attr($highlight_class).' '.esc_attr($first_post_class).'" id="postid-'.esc_attr($post->id).'">';
+        echo '<div class="forum-post-header-container">';
+        echo '<div class="post-author '.esc_attr($user_online_class).'">';
+            
+        // Show avatar if activated, and make it clickable
+        if ($this->options['enable_avatars'] && is_user_logged_in()) {
+            $avatar_size = apply_filters('asgarosforum_filter_avatar_size', 64);
+            
+            // Get the user profile link
+            $profile_link = get_author_posts_url($post->author_id);
 
-			echo '<div class="post-author-blocks">';
-				echo '<div class="post-author-block-name">';
-					// Show username.
-					$username = apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
-					echo wp_kses_post($username);
+            // Wrap the avatar in an anchor tag with the profile link
+            echo '<a href="' . esc_url($profile_link) . '">';
+            echo get_avatar($post->author_id, $avatar_size, '', '', array('force_display' => true));
+            echo '</a>';
+        }
 
-					// Mentioning name.
-					if ($user_data != false) {
-						$this->mentioning->render_nice_name($post->author_id);
-					}
-				echo '</div>';
+        echo '<div class="post-author-blocks">';
+        echo '<div class="post-author-block-name">';
+        // Show username.
+        $username = apply_filters('asgarosforum_filter_post_username', $this->getUsername($post->author_id), $post->author_id);
+        echo wp_kses_post($username);
+
+        // Mentioning name.
+        if ($user_data != false) {
+            $this->mentioning->render_nice_name($post->author_id);
+        }
+        echo '</div>';
 
 				if ($user_data != false) {
 					echo '<div class="post-author-block-meta">';
