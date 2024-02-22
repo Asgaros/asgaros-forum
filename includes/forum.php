@@ -977,12 +977,13 @@ class AsgarosForum {
                 $forum_link = $this->get_link('forum', absint($forum->id));
 
 				echo '<div class="forum-status '.esc_attr($unread_status).'">';
-                    echo '<i class="'.esc_attr($forum_icon).'"></i>';
+                // Make the forum icon clickable
+                echo '<a href="'.esc_url($forum_link).'"><i class="'.esc_attr($forum_icon).'"></i></a>';
                 echo '</div>';
-				echo '<div class="forum-name">';
-					echo '<a class="forum-title" href="'.esc_url($forum_link).'">';
-                        echo esc_html(stripslashes($forum->name));
-                    echo '</a>';
+                echo '<div class="forum-name">';
+                echo '<a class="forum-title" href="'.esc_url($forum_link).'">';
+                echo esc_html(stripslashes($forum->name));
+                echo '</a>';
 
 					// Show the description of the forum when it is not empty.
 					$forum_description = stripslashes($forum->description);
@@ -1034,8 +1035,9 @@ class AsgarosForum {
         $topic_title   = esc_html(stripslashes($topic_object->name));
 
         echo '<div class="content-element topic '.esc_attr($topic_type).'">';
-            echo '<div class="topic-status '.esc_attr($unread_status).'"><i class="far fa-comments"></i></div>';
-            echo '<div class="topic-name">';
+        // Make the topic icon clickable
+        echo '<div class="topic-status '.esc_attr($unread_status).'"><a href="'.esc_url($this->get_link('topic', absint($topic_object->id))).'"><i class="far fa-comments"></i></a></div>';
+        echo '<div class="topic-name">';
                 if ($this->is_topic_sticky($topic_object->id)) {
                     echo '<span class="topic-icon fas fa-thumbtack" title="'.esc_attr__('This topic is pinned', 'asgaros-forum').'"></span>';
                 }
@@ -1579,9 +1581,10 @@ class AsgarosForum {
                 echo '&nbsp;&middot;&nbsp;';
                 echo $this->getUsername($lastpost->author_id);
             } else {
-                // Avatar
-                if ($this->options['enable_avatars']) {
-                    echo '<div class="forum-poster-avatar">'.get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true)).'</div>';
+                // Make overview Avatar clickable
+                if ($this->options['enable_avatars'] && is_user_logged_in()) {
+                    $avatar_html = get_avatar($lastpost->author_id, 40, '', '', array('force_display' => true));
+                    echo '<div class="forum-poster-avatar"><a href="'.esc_url($post_link).'">'.$avatar_html.'</a></div>';
                 }
 
                 // Summary

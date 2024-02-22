@@ -66,7 +66,8 @@ class AsgarosForumNotifications {
             $text = __('<b>Subscribe</b> to this topic.', 'asgaros-forum');
         }
 
-        echo '<a href="'.esc_url($link).'">'.wp_kses_post($text).'</a>';
+        //Make subscription clickable
+        echo '<a href="'.esc_url($link).'"><span id="topic-subscription" class="fas fa-envelope"></span>' . wp_kses_post($text) . '</a>';
     }
 
     // Generates an (un)subscription link based on subscription status for forums.
@@ -94,7 +95,8 @@ class AsgarosForumNotifications {
             $text = __('<b>Subscribe</b> to this forum.', 'asgaros-forum');
         }
 
-        echo '<a href="'.esc_url($link).'">'.wp_kses_post($text).'</a>';
+        //Make subscription clickable
+        echo '<a href="'.esc_url($link).'"><span id="forum-subscription" class="fas fa-envelope"></span>' . wp_kses_post($text) . '</a>';
     }
 
     // Generates an subscription option in the editor based on subscription status.

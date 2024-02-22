@@ -95,7 +95,11 @@ class AsgarosForumBreadCrumbs {
         // Render breadcrumbs links.
         echo '<div id="forum-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
             echo '<span class="screen-reader-text">'.esc_html__('Forum breadcrumbs - You are here:', 'asgaros-forum').'</span>';
+           
+            // Make the home icon clickable
+        echo '<a itemprop="item" href="' . esc_url($this->breadcrumbs_links[0]['link']) . '" title="' . esc_attr($this->breadcrumbs_links[0]['title']) . '">';
             echo '<span class="breadcrumb-icon fas fa-home"></span>';
+        echo '</a>';
 
             foreach ($this->breadcrumbs_links as $element) {
                 $this->render_breadcrumb($element);

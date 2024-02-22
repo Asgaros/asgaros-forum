@@ -218,8 +218,11 @@ class AsgarosForumMembersList {
                 echo '<div class="content-element member '.esc_attr($userOnline).'">';
                     if ($this->asgarosforum->options['enable_avatars']) {
                         echo '<div class="member-avatar">';
-                        echo get_avatar($element->ID, 60, '', '', array('force_display' => true));
-                        echo '</div>';
+                        // Make the avatar clickable and link to the user's profile.
+                    echo '<a href="'.esc_url($this->asgarosforum->get_link('profile', $element->ID)).'">';
+                    echo get_avatar($element->ID, 60, '', '', array('force_display' => true));
+                    echo '</a>';
+                    echo '</div>';
                     }
 
                     echo '<div class="member-name">';

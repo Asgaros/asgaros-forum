@@ -356,6 +356,7 @@ class AsgarosForumProfile {
 
                     $current_user_id = get_current_user_id();
 
+                    //Make edit profile icon clickable
                     if ($userData->ID == $current_user_id) {
                         echo '<a href="'.esc_url(get_edit_profile_url()).'" class="edit-profile-link">';
                             echo '<span class="fas fa-pencil-alt"></span>';
