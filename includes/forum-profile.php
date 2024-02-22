@@ -12,6 +12,7 @@ class AsgarosForumProfile {
 
         add_action('asgarosforum_breadcrumbs_profile', array($this, 'add_breadcrumbs_profile'));
         add_action('asgarosforum_breadcrumbs_history', array($this, 'add_breadcrumbs_history'));
+        add_action('asgarosforum_breadcrumbs_edithistory', array($this, 'add_breadcrumbs_edithistory'));
     }
 
     // Checks if the profile functionality is enabled.
@@ -45,6 +46,12 @@ class AsgarosForumProfile {
         return $currentTitle;
     }
 
+    public function get_edithistory_title() {
+        $currentTitle = __('Edit History', 'asgaros-forum').$this->get_title_suffix();
+
+        return $currentTitle;
+    }
+
     private function get_title_suffix() {
         $suffix   = '';
         $userData = $this->get_user_data($this->asgarosforum->current_element);
@@ -69,6 +76,13 @@ class AsgarosForumProfile {
         $elementTitle = __('Post History', 'asgaros-forum').$this->get_title_suffix();
         $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
     }
+
+    public function add_breadcrumbs_edithistory() {
+        $elementLink  = $this->asgarosforum->get_link('current');
+        $elementTitle = __('Edit History', 'asgaros-forum').$this->get_title_suffix();
+        $this->asgarosforum->breadcrumbs->add_breadcrumb($elementLink, $elementTitle);
+    }
+    
 
     public function show_profile_header($user_data) {
         $userOnline       = ($this->asgarosforum->online->is_user_online($user_data->ID)) ? 'user-online' : 'user-offline';
@@ -120,6 +134,7 @@ class AsgarosForumProfile {
         echo '<div id="profile-navigation">';
             $profile_link = $this->getProfileLink($user_data);
             $history_link = $this->get_history_link($user_data);
+            $edit_history_link = $this->get_edit_history_link($user_data->ID);
 
             // Profile link.
             if ($this->asgarosforum->current_view === 'profile') {
@@ -135,12 +150,22 @@ class AsgarosForumProfile {
                 echo '<a href="'.esc_url($history_link).'">'.esc_html__('Post History', 'asgaros-forum').'</a>';
             }
 
+            // if ($this->asgarosforum->current_view === 'edithistory') {
+            //     echo '<a class="active" href="'.esc_url($edit_history_link).'">'.esc_html__('Edit History', 'asgaros-forum').'</a>';
+            // } else {
+            //     echo '<a href="'.esc_url($edit_history_link).'">'.esc_html__('Edit History', 'asgaros-forum').'</a>';
+            // }
+
             do_action('asgarosforum_custom_profile_menu');
         echo '</div>';
     }
 
     public function count_post_history_by_user($user_id) {
         return count($this->get_post_history_by_user($user_id));
+    }
+
+    public function count_edit_history_by_user($user_id) {
+        return count($this->get_edit_history_by_user($user_id));
     }
 
     public function get_post_history_by_user($user_id, $limit = false) {
@@ -176,6 +201,33 @@ class AsgarosForumProfile {
         }
     }
 
+    public function get_edit_history_by_user($user_id, $limit = false, $post_id = null) {
+        $query       = '';
+        $query_limit = '';
+    
+        if ($limit) {
+            $elements_maximum = 50;
+            $elements_start   = $this->asgarosforum->current_page * $elements_maximum;
+    
+            $query_limit = "LIMIT {$elements_start}, {$elements_maximum}";
+        }
+    
+        $conditions = "WHERE p.author_id = %d";
+    
+        if ($post_id !== null) {
+            $conditions .= " AND h.post_id = %d";
+        }
+    
+        $query = "SELECT p.id, h.edited_content, h.edit_timestamp FROM {$this->asgarosforum->tables->edit_history} AS h
+                  LEFT JOIN {$this->asgarosforum->tables->posts} AS p ON h.post_id = p.id
+                  {$conditions} ORDER BY h.edit_timestamp DESC {$query_limit};";
+    
+        $prepared_query = $this->asgarosforum->db->prepare($query, $user_id, $post_id);
+    
+        return $this->asgarosforum->db->get_results($prepared_query);
+    }
+    
+    
     public function show_history() {
         $user_id = $this->asgarosforum->current_element;
 
@@ -237,6 +289,83 @@ class AsgarosForumProfile {
         }
     }
 
+    public function store_edit_history($post_id, $user_id) {
+        $edited_content = $this->asgarosforum->db->get_var($this->asgarosforum->db->prepare("SELECT text FROM {$this->asgarosforum->tables->posts} WHERE id = %d", $post_id));
+    
+        $history_data = array(
+            'post_id'        => $post_id,
+            'user_id'        => $user_id,
+            'edited_content' => $edited_content,
+            'edit_timestamp' => current_time('mysql'),
+        );
+    
+        $result = $this->asgarosforum->db->insert($this->asgarosforum->tables->edit_history, $history_data);
+    
+    }
+    
+    public function show_edithistory() {
+        $user_id = get_current_user_id();
+    
+        if ($user_id) {
+            $post_id = $this->asgarosforum->current_element; // Get the selected post ID
+    
+            // Get edit history for a specific post.
+            $edit_history = $this->get_edit_history_by_post($post_id, false);
+    
+            // Rest of your code
+            if ($edit_history) {
+                echo '<div class="edit-history">';
+    
+                foreach ($edit_history as $edit) {
+                    echo '<div class="edit-entry">';
+                    echo '<p>Edited on: ' . esc_html($edit->edit_timestamp) . '</p>';
+                    echo '<p>Original content: ' . esc_html($edit->edited_content) . '</p>';
+                    
+                    echo '</div>';
+                }
+    
+                echo '</div>';
+            } else {
+                echo '<p>No edit history available for this post.</p>';
+            }
+        } else {
+            echo '<p>User not logged in.</p>';
+        }
+    }
+    
+    
+// Get edit history for a specific post.
+public function get_edit_history_by_post($post_id, $limit = false) {
+    global $wpdb;
+    $query       = '';
+    $query_limit = '';
+    if ($limit) {
+        $elements_maximum = 50;
+        $elements_start   = $this->asgarosforum->current_page * $elements_maximum;
+
+        $query_limit = "LIMIT {$elements_start}, {$elements_maximum}";
+    }
+
+    $query = "SELECT u.display_name, h.edit_timestamp, h.edited_content FROM {$this->asgarosforum->tables->edit_history} AS h
+              LEFT JOIN {$wpdb->users} AS u ON h.user_id = u.ID
+              WHERE h.post_id = %d
+              ORDER BY h.edit_timestamp DESC {$query_limit};";
+
+    return $wpdb->get_results($wpdb->prepare($query, $post_id));
+}
+
+
+// Assuming you have an update post function somewhere, modify it to include the following:
+
+    public function update_post($post_id, $data) {
+        // Your existing update post code...
+    
+        // Store edit history when post is updated.
+        $user_id = get_current_user_id(); // You may need to adjust this based on your logic.
+        $this->asgarosforum->profile->store_edit_history($post_id, $user_id);
+    }
+    
+    
     // Shows the profile of a user.
     public function show_profile() {
         $user_id = $this->asgarosforum->current_element;
@@ -423,6 +552,16 @@ class AsgarosForumProfile {
             return $profileLink;
         }
     }
+
+    public function get_edit_history_link($user_id, $post_id = null) {
+        $url = home_url('/forum/edithistory/' . $user_id);
+    
+        if ($post_id !== null) {
+            $url .= '?post_id=' . $post_id; // Add post ID as a query parameter
+        }
+    
+        return esc_url($url);
+    }    
 
     // Renders a link to the own profile. The own profile is always available, even when the profile functionality is disabled.
     public function myProfileLink() {
