@@ -77,9 +77,11 @@ class AsgarosForumActivity {
                 // Get avatar if enabled.
                 $avatar = '';
 
+                /*
                 if ($this->asgarosforum->options['enable_avatars']) {
                     $avatar = get_avatar($activity->author_id, 16, '', '', array('force_display' => true));
                 }
+                */
 
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link      = $this->asgarosforum->get_link('topic', $activity->parent_id);
