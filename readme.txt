@@ -85,6 +85,7 @@ You can find a list of available hooks and filters on this site:
 
 == Changelog ==
 * Added: Show avatars in activity view
+* Fixed: Cross-Site Request Forgery vulnerability when marking topics as read
 * Compatibility with WordPress 6.5
 = 2.8.0 =
 * Fixed: PHP Object Injection

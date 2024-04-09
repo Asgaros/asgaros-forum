@@ -51,15 +51,19 @@ class AsgarosForumUnread {
     }
 
     public function mark_all_read() {
-        $current_time = $this->asgarosforum->current_time();
+        if (!empty($_REQUEST['_wpnonce'])) {
+            if (wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'asgaros_forum_markallread')) {
+                $current_time = $this->asgarosforum->current_time();
 
-        if ($this->user_id) {
-            update_user_meta($this->user_id, 'asgarosforum_unread_cleared', $current_time);
-            delete_user_meta($this->user_id, 'asgarosforum_unread_exclude');
-        } else {
-            setcookie('asgarosforum_unread_cleared', $current_time, 2147483647, COOKIEPATH, COOKIE_DOMAIN);
-            unset($_COOKIE['asgarosforum_unread_exclude']);
-            setcookie('asgarosforum_unread_exclude', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
+                if ($this->user_id) {
+                    update_user_meta($this->user_id, 'asgarosforum_unread_cleared', $current_time);
+                    delete_user_meta($this->user_id, 'asgarosforum_unread_exclude');
+                } else {
+                    setcookie('asgarosforum_unread_cleared', $current_time, 2147483647, COOKIEPATH, COOKIE_DOMAIN);
+                    unset($_COOKIE['asgarosforum_unread_exclude']);
+                    setcookie('asgarosforum_unread_exclude', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
+                }
+            }
         }
 
         // Redirect to the forum overview.
@@ -224,7 +228,7 @@ class AsgarosForumUnread {
 
             echo '<span class="indicator-label">';
                 echo '<span class="fas fa-check"></span>';
-                echo '<a href="'.esc_url($this->asgarosforum->get_link('markallread')).'">'.esc_html__('Mark All Read', 'asgaros-forum').'</a>';
+                echo '<a href="'.esc_url($this->asgarosforum->get_link('markallread', false, array('_wpnonce' => wp_create_nonce('asgaros_forum_markallread')))).'">'.esc_html__('Mark All Read', 'asgaros-forum').'</a>';
             echo '</span>';
 
             echo '<span class="indicator-label">';
@@ -238,7 +242,7 @@ class AsgarosForumUnread {
 
     public function show_unread_menu() {
         echo '<div class="forum-menu">';
-            echo '<a class="button button-normal" href="'.esc_url($this->asgarosforum->get_link('markallread')).'">';
+            echo '<a class="button button-normal" href="'.esc_url($this->asgarosforum->get_link('markallread', false, array('_wpnonce' => wp_create_nonce('asgaros_forum_markallread')))).'">';
                 echo '<span class="menu-icon fas fa-check"></span>';
                 echo esc_html__('Mark All Read', 'asgaros-forum');
             echo '</a>';
