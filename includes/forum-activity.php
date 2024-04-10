@@ -74,11 +74,21 @@ class AsgarosForumActivity {
                 $name_topic  = esc_html(stripslashes($activity->name));
                 $read_status = $this->asgarosforum->unread->get_status_post($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
 
+                // Get avatar if enabled.
+                $avatar = '';
+
+                /*
+                if ($this->asgarosforum->options['enable_avatars']) {
+                    $avatar = get_avatar($activity->author_id, 16, '', '', array('force_display' => true));
+                }
+                */
+
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link      = $this->asgarosforum->get_link('topic', $activity->parent_id);
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comments '.esc_attr($read_status).'"></span>';
+                    echo $avatar;
                     echo sprintf(__('New topic %1$s created by %2$s.', 'asgaros-forum'), $link_html, $name_author).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 } else {
@@ -86,6 +96,7 @@ class AsgarosForumActivity {
                     $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comment '.esc_attr($read_status).'"></span>';
+                    echo $avatar;
                     echo sprintf(__('%1$s replied in %2$s.', 'asgaros-forum'), $name_author, $link_html).' <i class="activity-time">'.esc_html($this->asgarosforum->get_activity_timestamp($activity->date)).'</i>';
                     echo '</div>';
                 }
