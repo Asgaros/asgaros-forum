@@ -163,15 +163,15 @@ class AsgarosForumDatabase {
             ) $charset_collate;";
 
             $sql[] = 'CREATE TABLE '.$this->tables->edit_history." (
-            id int NOT NULL auto_increment,
-            post_id int NOT NULL default (0),
-            user_id int NOT NULL default (0),
-            edited_content longtext NOT NULL,
-           edit_timestamp datetime DEFAULT '1970-01-01 00:00:00' NOT NULL,
-            PRIMARY KEY (id),
-            KEY post_id (post_id),
-            KEY user_id (user_id)
-            ) $charset_collate;";
+                id int NOT NULL auto_increment,
+                post_id int NOT NULL default (0),
+                user_id int NOT NULL default (0),
+                edited_content longtext NOT NULL,
+               edit_timestamp datetime DEFAULT '1970-01-01 00:00:00' NOT NULL,
+                PRIMARY KEY (id),
+                KEY post_id (post_id),
+                KEY user_id (user_id)
+                ) $charset_collate;";
 
             $sql[] = 'CREATE TABLE '.$this->tables->reports." (
             post_id int(11) NOT NULL default '0',
