@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: _load_textdomain_just_in_time PHP notice
 * Compatibility with WordPress 6.7
 = 2.9.0 =
 * Fixed: Cross-Site Request Forgery vulnerability when marking topics as read
