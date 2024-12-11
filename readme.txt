@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros,
 Requires at least: 4.9
 Tested up to: 6.7
 Requires PHP: 5.3
-Stable tag: 2.9.0
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+= 3.0.0 =
 * Fixed: _load_textdomain_just_in_time PHP notice
 * Compatibility with WordPress 6.7
 = 2.9.0 =
