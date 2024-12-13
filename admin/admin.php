@@ -14,8 +14,8 @@ class AsgarosForumAdmin {
         $this->asgarosforum = $asgarosForumObject;
 
         // Set the views for the available options.
-        $this->set_option_views();
-
+        add_action('init', array($this, 'set_option_views'));
+        
         add_action('wp_loaded', array($this, 'save_settings'));
         add_action('admin_menu', array($this, 'add_admin_pages'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));

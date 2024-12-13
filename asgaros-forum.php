@@ -4,7 +4,7 @@
  * Plugin Name: Asgaros Forum
  * Plugin URI: https://asgaros.com
  * Description: Asgaros Forum is the best forum solution for WordPress! It comes with dozens of features in a beautiful design and stays slight, simple and fast.
- * Version: 2.9.0
+ * Version: 3.0.0
  * Author: Thomas Belser
  * Author URI: https://asgaros.com
  * License: GPL2
