@@ -151,6 +151,14 @@ class AsgarosForumUploads {
 	            }
 	        }
 
+            // Early cancel conditions ...
+            if ($this->asgarosforum->options['uploads_maximum_number'] > 0) {
+                // ... if more existing and new files are passed than allowed.
+                if ((count($links) + count($files)) > $this->asgarosforum->options['uploads_maximum_number']) {
+                    return $links;
+                }
+            }
+
 			// Upload new files.
 	        if (!empty($files)) {
 				$temporary_file_paths = array_map('sanitize_text_field', $_FILES['forumfile']['tmp_name']);
