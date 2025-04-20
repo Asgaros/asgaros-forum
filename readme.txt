@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Fixed: Deleted files did not get removed from filesystem in some cases
 * Fixed: It is not longer possible to upload more files than allowed by modifying requests
 * Compatibility with WordPress 6.8
 = 3.0.0 =

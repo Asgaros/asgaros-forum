@@ -139,7 +139,7 @@ window.FontAwesomeConfig = {
 
         $('.uploaded-files a.delete').click(function() {
             var filename = $(this).attr('data-filename');
-            $('.files-to-delete').append('<input type="hidden" name="deletefile[]" value="'+filename+'">');
+            $('#files-to-delete').append('<input type="hidden" name="deletefile[]" value="'+filename+'">');
             $(this).parent().remove();
 
             // Check if we can add more upload elements.

@@ -239,9 +239,9 @@ class AsgarosForumUploads {
 	            }
 
 				if (!empty($uploadedFiles)) {
+                    echo '<div id="files-to-delete"></div>';
 	                echo '<div class="editor-row">';
 	                	echo '<span class="row-title">'.esc_html__('Uploaded files:', 'asgaros-forum').'</span>';
-	                	echo '<div class="files-to-delete"></div>';
 	                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
 	                echo '</div>';
 	            }
