@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://asgaros.com/donate/
 Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
 Requires at least: 4.9
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.3
 Stable tag: 3.0.0
 License: GPLv2 or later
@@ -84,6 +84,7 @@ You can find a list of available hooks and filters on this site:
 6. Manage general options
 
 == Changelog ==
+* Compatibility with WordPress 6.8
 = 3.0.0 =
 * Fixed: _load_textdomain_just_in_time PHP notice
 * Compatibility with WordPress 6.7
