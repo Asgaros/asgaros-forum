@@ -8,6 +8,8 @@
 [![GitHub issues](https://img.shields.io/github/issues-raw/Asgaros/asgaros-forum)](https://github.com/Asgaros/asgaros-forum/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/Asgaros/asgaros-forum)](https://github.com/Asgaros/asgaros-forum/pulls)
 
+[This is version 3.1 with added front-end edit-profile capability.]
+
 Asgaros Forum is a lightweight and simple plugin to extend WordPress with the function of a forum.
 
 ## Description
