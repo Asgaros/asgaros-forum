@@ -445,21 +445,22 @@ class AsgarosForumUserGroups {
   	}
 
     public function manageUsersCustomColumn($output, $column_name, $user_id) {
-		if ($column_name === 'forum-user-groups') {
+        if ($column_name === 'forum-user-groups') {
             $usergroups = self::getUserGroupsOfUser($user_id);
 
-    		if (!empty($usergroups)) {
-        		foreach ($usergroups as $usergroup) {
-        			$link    = add_query_arg(array('forum-user-group' => $usergroup->term_id), admin_url('users.php'));
-        			$output .= '<a href="'.$link.'" title="'.$usergroup->name.'">';
+            if (!empty($usergroups)) {
+                foreach ($usergroups as $usergroup) {
+                    $link    = esc_url(add_query_arg(array('forum-user-group' => $usergroup->term_id), admin_url('users.php')));
+                    $title   = esc_attr($usergroup->name);
+                    $output .= '<a href="'.$link.'" title="'.$title.'">';
                     $output .= self::render_usergroup_tag($usergroup);
                     $output .= '</a>';
-        		}
+                }
             }
-		}
+        }
 
         return $output;
-	}
+    }
 
     public static function saveUserGroup() {
 		// Ensure usergroup-ID is set.
@@ -621,25 +622,25 @@ class AsgarosForumUserGroups {
 
         if (!empty($userGroupCategories)) {
             $output .= '<tr class="usergroups-editor">';
-            $output .= '<th><label>'.__('Usergroups', 'asgaros-forum').'</label></th>';
+            $output .= '<th><label>'.esc_html__('Usergroups', 'asgaros-forum').'</label></th>';
             $output .= '<td>';
 
             foreach ($userGroupCategories as $category) {
-                $output .= '<span class="usergroup-category-name">'.$category->name.':</span>';
+                $output .= '<span class="usergroup-category-name">'.esc_html($category->name).':</span>';
 
                 $userGroups = self::getUserGroupsOfCategory($category->term_id);
 
                 foreach ($userGroups as $usergroup) {
                     $is_user_in_usergroup = self::isUserInUserGroup($userID, $usergroup->term_id);
-                    $label_id             = self::$taxonomyName.'-'.$usergroup->term_id;
+                    $label_id             = esc_attr(self::$taxonomyName.'-'.$usergroup->term_id);
 
-    				$output .= '<input type="checkbox" name="'.self::$taxonomyName.'[]" id="'.$label_id.'" value="'.$usergroup->term_id.'" '.checked(true, $is_user_in_usergroup, false).'>';
+                    $output .= '<input type="checkbox" name="'.esc_attr(self::$taxonomyName).'[]" id="'.$label_id.'" value="'.esc_attr($usergroup->term_id).'" '.checked(true, $is_user_in_usergroup, false).'>';
                     $output .= '<label for="'.$label_id.'">';
                     $output .= self::render_usergroup_tag($usergroup);
                     $output .= '</label>';
                     $output .= '<br>';
                 }
-			}
+            }
 
             $output .= '</td>';
     		$output .= '</tr>';
@@ -650,35 +651,38 @@ class AsgarosForumUserGroups {
 
     // Renders the tag for a usergroup which can be used inside profiles, posts and in the administration area.
     public static function render_usergroup_tag($usergroup_object, $font_weight = 'normal') {
-        $color = self::getUserGroupColor($usergroup_object->term_id);
-        $icon  = self::get_usergroup_icon($usergroup_object->term_id);
+        $color = esc_attr(self::getUserGroupColor($usergroup_object->term_id));
+        $icon  = esc_attr(self::get_usergroup_icon($usergroup_object->term_id));
+        $name  = esc_html($usergroup_object->name);
+        $term_id = esc_attr($usergroup_object->term_id);
+        $font_weight = esc_attr($font_weight);
 
         // If the memberslist is enabled and we are inside the front-end, we will
         // generate a link to the memberslist filtered by the selected usergroup.
         if (self::$asgarosforum->memberslist->functionality_enabled() && !is_admin()) {
-            $link = self::$asgarosforum->rewrite->get_link('members', false, array(
-				'filter_type' => 'group',
-				'filter_name' => $usergroup_object->term_id,
-			));
+            $link = esc_url(self::$asgarosforum->rewrite->get_link('members', false, array(
+                'filter_type' => 'group',
+                'filter_name' => $usergroup_object->term_id,
+            )));
 
-            $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; background-color: '.$color.'40 !important; font-weight: '.$font_weight.' !important;">';
+            $output = '<a href="'.$link.'" class="af-usergroup-tag usergroup-tag-'.$term_id.'" style="color: '.$color.' !important; background-color: '.$color.'40 !important; font-weight: '.$font_weight.' !important;">';
 
             if ($icon) {
                 $output .= '<i class="'.$icon.'"></i>';
             }
 
-            $output .= $usergroup_object->name;
+            $output .= $name;
             $output .= '</a>';
 
             return $output;
         } else {
-            $output = '<span class="af-usergroup-tag usergroup-tag-'.$usergroup_object->term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">';
+            $output = '<span class="af-usergroup-tag usergroup-tag-'.$term_id.'" style="color: '.$color.' !important; border-color: '.$color.' !important; font-weight: '.$font_weight.' !important;">';
 
             if ($icon) {
                 $output .= '<i class="'.$icon.'"></i>';
             }
 
-            $output .= $usergroup_object->name;
+            $output .= $name;
             $output .= '</span>';
 
             return $output;
@@ -695,25 +699,27 @@ class AsgarosForumUserGroups {
         $usergroups = self::getUserGroups();
 
         if ($usergroups) {
-            $views['forum-user-group'] = '<b>'.__('Forum Usergroups:', 'asgaros-forum').'</b>&nbsp;';
+            $views['forum-user-group'] = '<b>'.esc_html__('Forum Usergroups:', 'asgaros-forum').'</b>&nbsp;';
 
             $loopCounter = 0;
 
             foreach ($usergroups as $term) {
                 ++$loopCounter;
                 $cssClass     = (!empty($_GET['forum-user-group']) && $_GET['forum-user-group'] == $term->term_id) ? 'class="current"' : '';
-                $usersCounter = self::countUsersOfUserGroup($term->term_id);
+                $usersCounter = esc_html(self::countUsersOfUserGroup($term->term_id));
+                $term_id = esc_attr($term->term_id);
+                $term_name = esc_html($term->name);
 
                 if ($loopCounter > 1) {
                     $views['forum-user-group'] .= '&nbsp;|&nbsp;';
                 }
 
-                $views['forum-user-group'] .= '<a '.$cssClass.' href="'.admin_url('users.php?forum-user-group='.$term->term_id).'">'.$term->name.'</a> ('.$usersCounter.')';
+                $views['forum-user-group'] .= '<a '.$cssClass.' href="'.esc_url(admin_url('users.php?forum-user-group='.$term_id)).'">'.$term_name.'</a> ('.$usersCounter.')';
             }
         }
 
-		return $views;
-	}
+        return $views;
+    }
 
     // Delete assigned terms when deleting a user.
     public function delete_term_relationships($user_id) {

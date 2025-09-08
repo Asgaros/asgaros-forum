@@ -3,12 +3,31 @@ window.asgaros = window.asgaros || {};
 (function(asgaros, $) {
 	var mentionsQueryCache = [];
 
+	// Simple HTML escape function
+	function escapeHTML(str) {
+		return String(str).replace(/[&<>'"]/g, function(tag) {
+			const chars = {
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				'"': '&quot;',
+				'\'': '&#39;'
+			};
+			return chars[tag] || tag;
+		});
+	}
+
 	// Adds @mentions to form inputs.
 	$.fn.suggestions = function() {
 		var opts = {
 			at:					'@',
 			delay:				200,
-			displayTpl:			'<li data-value="@${ID}"><img src="${image}"><span class="username">@${ID}</span><small>${name}</small></li>',
+			displayTpl: function(data) {
+				var id = escapeHTML(data.ID);
+				var image = escapeHTML(data.image);
+				var name = escapeHTML(data.name);
+				return '<li data-value="@'+id+'"><img src="'+image+'"><span class="username">@'+id+'</span><small>'+name+'</small></li>';
+			},
 			hideWithoutSuffix:	true,
 			insertTpl:			'@${ID}',
 			limit:				10,

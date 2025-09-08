@@ -182,8 +182,8 @@ class AsgarosForumReactions {
                 $reaction_names_grouped[$key] = array();
 
                 foreach ($this->post_reactions[$post_id][$key] as $userId) {
-                    $reaction_names[]               = $this->asgarosforum->get_plain_username($userId);
-                    $reaction_names_grouped[$key][] = $this->asgarosforum->get_plain_username($userId);
+                    $reaction_names[]               = esc_html($this->asgarosforum->get_plain_username($userId));
+                    $reaction_names_grouped[$key][] = esc_html($this->asgarosforum->get_plain_username($userId));
                 }
             }
         }
