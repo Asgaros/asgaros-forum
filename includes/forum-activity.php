@@ -70,7 +70,7 @@ class AsgarosForumActivity {
                     echo '<div class="content-container">';
                 }
 
-                $name_author = $this->asgarosforum->getUsername($activity->author_id);
+                $name_author = esc_html($this->asgarosforum->getUsername($activity->author_id));
                 $name_topic  = esc_html(stripslashes($activity->name));
                 $read_status = $this->asgarosforum->unread->get_status_post($activity->id, $activity->author_id, $activity->date, $activity->parent_id);
 
@@ -85,7 +85,7 @@ class AsgarosForumActivity {
 
                 if ($this->asgarosforum->is_first_post($activity->id, $activity->parent_id)) {
                     $link      = $this->asgarosforum->get_link('topic', $activity->parent_id);
-                    $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
+                    $link_html = '<a href="'.esc_url($link).'">'.esc_html($name_topic).'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comments '.esc_attr($read_status).'"></span>';
                     echo $avatar;
@@ -93,7 +93,7 @@ class AsgarosForumActivity {
                     echo '</div>';
                 } else {
                     $link      = $this->asgarosforum->rewrite->get_post_link($activity->id, $activity->parent_id);
-                    $link_html = '<a href="'.$link.'">'.$name_topic.'</a>';
+                    $link_html = '<a href="'.esc_url($link).'">'.esc_html($name_topic).'</a>';
                     echo '<div class="content-element activity-element">';
                     echo '<span class="activity-icon fas fa-comment '.esc_attr($read_status).'"></span>';
                     echo $avatar;

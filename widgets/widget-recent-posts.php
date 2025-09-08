@@ -114,15 +114,15 @@ class AsgarosForumRecentPosts_Widget extends WP_Widget {
                 $page = ceil($element->post_counter / $this->asgarosforum->options['posts_per_page']);
                 $link = $this->asgarosforum->get_link('topic', $element->parent_id, array('part' => $page), '#postid-'.$element->id);
 
-                $output .= '<span class="post-link"><a href="'.$link.'" title="'.esc_html(stripslashes($element->name)).'">'.esc_html($this->asgarosforum->cut_string(stripslashes($element->name), $title_length)).'</a></span>';
-                $output .= '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.$this->asgarosforum->getUsername($element->author_id).'</b></span>';
+                $output .= '<span class="post-link"><a href="'.esc_url($link).'" title="'.esc_attr(stripslashes($element->name)).'">'.esc_html($this->asgarosforum->cut_string(stripslashes($element->name), $title_length)).'</a></span>';
+                $output .= '<span class="post-author">'.__('by', 'asgaros-forum').'&nbsp;<b>'.esc_html($this->asgarosforum->getUsername($element->author_id).'</b></span>');
 
                 if ($show_excerpt) {
                     $text = esc_html(stripslashes(wp_strip_all_tags(strip_shortcodes($element->text))));
                     $text = $this->asgarosforum->cut_string($text, $excerpt_length);
 
                     if (!empty($text)) {
-                        $output .= '<span class="post-excerpt">'.$text.'&nbsp;<a class="post-read-more" href="'.$link.'">'.__('Read More', 'asgaros-forum').'</a></span>';
+                        $output .= '<span class="post-excerpt">'.esc_html($text).'&nbsp;<a class="post-read-more" href="'.esc_url($link).'">'.__('Read More', 'asgaros-forum').'</a></span>';
                     }
                 }
 
