@@ -1,7 +1,7 @@
 === Asgaros Forum ===
 Contributors: Asgaros, qualmy91
 Donate link: https://asgaros.com/donate/
-Tags: forum, forums, discussion, multisite, community, bulletin, board, asgaros, support
+Tags: forum, forums, discussion, community, asgaros
 Requires at least: 4.9
 Tested up to: 6.8
 Requires PHP: 5.3
