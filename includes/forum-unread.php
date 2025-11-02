@@ -46,6 +46,13 @@ class AsgarosForumUnread {
             // Get IDs of excluded topics.
             if (isset($_COOKIE['asgarosforum_unread_exclude'])) {
                 $this->excluded_items = (array) json_decode(sanitize_text_field(stripslashes($_COOKIE['asgarosforum_unread_exclude'])));
+
+                // Remove all elements which are not integers to avoid SQL injections.
+                foreach ($this->excluded_items as $key => $value) {
+                    if (!is_int($key) || !is_int($value)) {
+                        unset($this->excluded_items[$key]);
+                    }
+                }
             }
         }
     }
