@@ -74,6 +74,8 @@ You can approve translations by yourself if you are a Project Translation Editor
 = Which hooks and filters are available? =
 You can find a list of available hooks and filters on this site:
 [https://asgaros.com/support/topic/list-of-available-hooks-and-filters/](https://asgaros.com/support/topic/list-of-available-hooks-and-filters/).
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the Asgaros Forum plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/4c152c79-b349-41f8-bff2-f2b9882cbb18). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Screenshots ==
 1. The forum overview
