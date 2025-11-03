@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, community, asgaros
 Requires at least: 4.9
 Tested up to: 6.8
 Requires PHP: 5.3
-Stable tag: 3.2.0
+Stable tag: 3.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,8 @@ Please report security bugs found in the source code of the Asgaros Forum plugin
 6. Manage general options
 
 == Changelog ==
+= 3.2.1 =
+* Changed: Updated FAQ
 = 3.2.0 =
 * Fixed: Unauthenticated SQL Injection vulnerability
 = 3.1.0 =
