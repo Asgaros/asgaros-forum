@@ -29,7 +29,11 @@ class AsgarosForumSpoilers {
             'spoiler'
         );
 
-        $atts['title'] = (!empty($atts['title'])) ? $atts['title'] : __('Spoiler', 'asgaros-forum');
+        if (!empty($atts['title'])) {
+            $atts['title'] = esc_attr($atts['title']);
+        } else {
+            $atts['title'] = __('Spoiler', 'asgaros-forum');
+        }
 
         // Generate output.
         $output  = '';

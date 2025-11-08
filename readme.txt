@@ -86,6 +86,7 @@ Please report security bugs found in the source code of the Asgaros Forum plugin
 6. Manage general options
 
 == Changelog ==
+* Fixed: Cross Site Scripting vulnerability within the spoiler title
 * Changed: Updated FAQ
 = 3.2.1 =
 * Changed: Updated FAQ
