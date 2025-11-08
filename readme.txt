@@ -87,6 +87,7 @@ Please report security bugs found in the source code of the Asgaros Forum plugin
 
 == Changelog ==
 * Fixed: Cross Site Scripting vulnerability within the spoiler title
+* Fixed: Cross-Site Request Forgery in subscription settings
 * Changed: Updated FAQ
 = 3.2.1 =
 * Changed: Updated FAQ

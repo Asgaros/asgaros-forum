@@ -556,6 +556,7 @@ class AsgarosForumNotifications {
 
         echo '<div id="subscriptions-panel" class="content-container">';
             echo '<form method="post" action="'.esc_url($this->asgarosforum->get_link('subscriptions')).'">';
+                wp_nonce_field('asgaros_forum_change_subscription_level');
                 echo '<div class="action-panel">';
                     echo '<label class="action-panel-option">';
                         echo '<input type="radio" name="subscription_level" value="1" '.checked($subscription_level, 1, false).'>'.esc_html__('Individual Subscriptions', 'asgaros-forum');
@@ -605,17 +606,19 @@ class AsgarosForumNotifications {
 
     public function set_subscription_level() {
         if (isset($_POST['subscription_level'])) {
-            $user_id = get_current_user_id();
+            if (isset($_REQUEST['_wpnonce']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'asgaros_forum_change_subscription_level')) {
+                $user_id = get_current_user_id();
 
-            if ($_POST['subscription_level'] == 1) {
-                delete_user_meta($user_id, 'asgarosforum_subscription_global_posts');
-                delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
-            } else if ($_POST['subscription_level'] == 2) {
-                delete_user_meta($user_id, 'asgarosforum_subscription_global_posts');
-                update_user_meta($user_id, 'asgarosforum_subscription_global_topics', 1);
-            } else if ($_POST['subscription_level'] == 3) {
-                update_user_meta($user_id, 'asgarosforum_subscription_global_posts', 1);
-                delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
+                if ($_POST['subscription_level'] == 1) {
+                    delete_user_meta($user_id, 'asgarosforum_subscription_global_posts');
+                    delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
+                } else if ($_POST['subscription_level'] == 2) {
+                    delete_user_meta($user_id, 'asgarosforum_subscription_global_posts');
+                    update_user_meta($user_id, 'asgarosforum_subscription_global_topics', 1);
+                } else if ($_POST['subscription_level'] == 3) {
+                    update_user_meta($user_id, 'asgarosforum_subscription_global_posts', 1);
+                    delete_user_meta($user_id, 'asgarosforum_subscription_global_topics');
+                }
             }
         }
     }
