@@ -9,6 +9,8 @@ Stable tag: 3.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+[This is version 3.1 with added front-end edit-profile capability.]
+
 Asgaros Forum is the best forum-plugin for WordPress! It comes with dozens of features in a beautiful design and stays simple and fast.
 
 == Description ==
