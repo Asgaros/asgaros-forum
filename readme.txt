@@ -86,6 +86,7 @@ Please report security bugs found in the source code of the Asgaros Forum plugin
 6. Manage general options
 
 == Changelog ==
+* Removed: Statusbar from editor
 = 3.4.0 =
 * Added: Missing notices in administration area when changing configurations
 * Changed: Switched to native WordPress admin notice functions
