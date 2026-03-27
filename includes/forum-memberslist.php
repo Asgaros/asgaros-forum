@@ -223,8 +223,8 @@ class AsgarosForumMembersList {
                     }
 
                     echo '<div class="member-name">';
-                        echo $this->asgarosforum->getUsername($element->ID);
-                        echo '<small>'.$this->asgarosforum->permissions->getForumRole($element->ID).'</small>';
+                        echo esc_html($this->asgarosforum->getUsername($element->ID));
+                        echo '<small>'.esc_html($this->asgarosforum->permissions->getForumRole($element->ID)).'</small>';
 
                         $usergroups = AsgarosForumUserGroups::getUserGroupsOfUser($element->ID, 'all', true);
 

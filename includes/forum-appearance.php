@@ -55,7 +55,7 @@ class AsgarosForumAppearance {
 			echo '<!-- Asgaros Forum - SEO: BEGIN -->'.PHP_EOL;
 
 			$link  = ($this->asgarosforum->current_page > 0) ? $this->asgarosforum->get_link('current') : esc_url(remove_query_arg('part', $this->asgarosforum->get_link('current', false, false, '', false)));
-			$title = ($this->asgarosforum->getMetaTitle()) ? $this->asgarosforum->getMetaTitle() : get_the_title();
+			$title = ($this->asgarosforum->getMetaTitle()) ? stripslashes($this->asgarosforum->getMetaTitle()) : stripslashes(get_the_title());
 
 			// By default use the page title as description.
 			$description = $title;
@@ -66,7 +66,7 @@ class AsgarosForumAppearance {
 			if ($this->asgarosforum->current_view === 'overview' && !empty($forum_description)) {
 				$description = $forum_description;
 			} else if ($this->asgarosforum->current_description && $this->asgarosforum->error === false) {
-				$description = $this->asgarosforum->current_description;
+				$description = stripslashes($this->asgarosforum->current_description);
 			}
 
 			// Prevent indexing of some views, when there is an error or for other configurations.
@@ -93,10 +93,10 @@ class AsgarosForumAppearance {
 
 			// Create meta-tags.
 			echo '<link rel="canonical" href="'.esc_url($link).'" />'.PHP_EOL;
-			echo '<meta name="description" content="'.stripslashes(esc_attr($description)).'" />'.PHP_EOL;
+			echo '<meta name="description" content="'.esc_attr($description).'" />'.PHP_EOL;
 			echo '<meta property="og:url" content="'.esc_url($link).'" />'.PHP_EOL;
 			echo '<meta property="og:title" content="'.esc_attr($title).'" />'.PHP_EOL;
-			echo '<meta property="og:description" content="'.stripslashes(esc_attr($description)).'" />'.PHP_EOL;
+			echo '<meta property="og:description" content="'.esc_attr($description).'" />'.PHP_EOL;
 			echo '<meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'" />'.PHP_EOL;
 
             // Try to set og:image-tag when we are in a topic. A check for the element-ID
@@ -114,7 +114,7 @@ class AsgarosForumAppearance {
 			}
 
 			echo '<meta name="twitter:title" content="'.esc_attr($title).'" />'.PHP_EOL;
-			echo '<meta name="twitter:description" content="'.stripslashes(esc_attr($description)).'" />'.PHP_EOL;
+			echo '<meta name="twitter:description" content="'.esc_attr($description).'" />'.PHP_EOL;
 
 			do_action('asgarosforum_wp_head');
 

@@ -192,7 +192,7 @@ class AsgarosForumEditor {
                     $quoteData = $this->asgarosforum->db->get_row($this->asgarosforum->db->prepare('SELECT text, author_id, date FROM '.$this->asgarosforum->tables->posts.' WHERE id = %d AND parent_id = %d;', absint($_GET['quote']), $this->asgarosforum->current_topic));
 
                     if ($quoteData) {
-                        $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.$this->asgarosforum->getUsername($quoteData->author_id).' '.sprintf(__('on %s', 'asgaros-forum'), $this->asgarosforum->format_date($quoteData->date)).'</div>'.stripslashes($quoteData->text).'</blockquote><br>';
+                        $message = '<blockquote><div class="quotetitle">'.__('Quote from', 'asgaros-forum').' '.esc_html($this->asgarosforum->getUsername($quoteData->author_id)).' '.sprintf(__('on %s', 'asgaros-forum'), $this->asgarosforum->format_date($quoteData->date)).'</div>'.stripslashes($quoteData->text).'</blockquote><br>';
 					}
                 }
             } else if ($editor_view === 'editpost') {

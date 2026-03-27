@@ -96,7 +96,7 @@ class AsgarosForumApproval {
         // Get more data.
         $topic_link           = $this->asgarosforum->rewrite->get_link('topic', $topic_id);
         $topic_name           = esc_html(stripslashes($topic->name));
-        $author_name          = $this->asgarosforum->getUsername($post->author_id);
+        $author_name          = esc_html($this->asgarosforum->getUsername($post->author_id));
         $notification_subject = __('New unapproved topic', 'asgaros-forum');
 
         // Prepare message-content.
@@ -216,7 +216,7 @@ class AsgarosForumApproval {
                         echo '<small>';
 
                         // Author
-                        echo esc_html__('By', 'asgaros-forum').'&nbsp;'.$this->asgarosforum->getUsername($first_post->author_id);
+                        echo esc_html__('By', 'asgaros-forum').'&nbsp;'.esc_html($this->asgarosforum->getUsername($first_post->author_id));
 
                         // Creation time
                         echo '&nbsp;&middot;&nbsp;';

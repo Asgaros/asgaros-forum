@@ -1436,12 +1436,12 @@ class AsgarosForum {
             $user = get_userdata($user_id);
 
             if ($user) {
-                return $user->display_name;
+                return esc_html($user->display_name);
             } else {
-                return __('Deleted user', 'asgaros-forum');
+                return esc_html(__('Deleted user', 'asgaros-forum'));
             }
         } else {
-            return __('Guest', 'asgaros-forum');
+            return esc_html(__('Guest', 'asgaros-forum'));
         }
     }
 
@@ -1478,7 +1478,7 @@ class AsgarosForum {
             $user_name = $custom_name;
         }
 
-        $renderedUserName = $user_name;
+        $renderedUserName = esc_html($user_name);
 
 		// Generate profile link.
         $profile_link = $this->profile->getProfileLink($user);
@@ -1499,7 +1499,7 @@ class AsgarosForum {
         }
 
 		// Generate output.
-        $renderedUserName = '<a class="profile-link '.$username_highlight.'" href="'.$profile_link.'">'.$user_name.'</a>';
+        $renderedUserName = '<a class="profile-link '.esc_attr($username_highlight).'" href="'.esc_url($profile_link).'">'.$renderedUserName.'</a>';
 
         return $renderedUserName;
     }
@@ -2250,9 +2250,9 @@ class AsgarosForum {
 
                     $this->current_category   = $results->current_category;
                     $this->parent_forum       = $results->parent_forum;
-                    $this->parent_forum_name  = $results->parent_forum_name;
+                    $this->parent_forum_name  = esc_html($results->parent_forum_name);
                     $this->current_forum      = $results->current_forum;
-                    $this->current_forum_name = $results->current_forum_name;
+                    $this->current_forum_name = esc_html($results->current_forum_name);
                 }
 
                 $this->current_topic      = ($contentType === 'post' || $contentType === 'topic') ? $results->current_topic : false;

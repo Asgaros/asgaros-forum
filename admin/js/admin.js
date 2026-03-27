@@ -330,8 +330,7 @@ window.FontAwesomeConfig = {
 
         function setEditorTitle(objectElement) {
             var editor_title = $(objectElement).attr('data-value-editor-title');
-
-            $('#editor-container .settings-header').html(editor_title);
+            $('#editor-container .settings-header').text(editor_title);
         }
 
         function resetEditor() {

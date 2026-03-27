@@ -245,7 +245,7 @@ class AsgarosForumMentioning {
                 $receivers = $this->asgarosforum->notifications->mailing_list;
 
                 // Get author-username.
-                $author_name = $this->asgarosforum->getUsername($post->author_id);
+                $author_name = esc_html($this->asgarosforum->getUsername($post->author_id));
 
                 // Get post-link.
                 $post_link = $this->asgarosforum->rewrite->get_post_link($post_id, $topic->id);
