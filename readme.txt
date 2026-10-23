@@ -3,7 +3,7 @@ Contributors: Asgaros, qualmy91
 Donate link: https://asgaros.com/donate/
 Tags: forum, forums, discussion, community, asgaros
 Requires at least: 6.4
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 5.3
 Stable tag: 3.4.0
 License: GPLv2 or later
@@ -88,6 +88,7 @@ Please report security bugs found in the source code of the Asgaros Forum plugin
 == Changelog ==
 * Fixed: Broken access control in forum subscription feature
 * Removed: Statusbar from editor
+* Compatibility with WordPress 7.1
 = 3.4.0 =
 * Added: Missing notices in administration area when changing configurations
 * Changed: Switched to native WordPress admin notice functions
