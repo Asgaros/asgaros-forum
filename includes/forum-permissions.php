@@ -519,6 +519,17 @@ class AsgarosForumPermissions {
         return false;
     }
 
+    // Checks if a user can access a category.
+    public function can_access_category($user_id, $category_id) {
+        $category_access_level = get_term_meta($category_id, 'category_access', true);
+
+        if ($category_access_level === 'moderator' && !$this->isModerator($user_id)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function ban_user($user_id, $ban_id) {
         // Verify nonce first.
         if (!empty($_REQUEST['_wpnonce']) && wp_verify_nonce(sanitize_key($_REQUEST['_wpnonce']), 'ban_user_'.$ban_id)) {

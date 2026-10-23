@@ -625,6 +625,7 @@ class AsgarosForum {
         }
 
         // Check category access.
+        // Can be possibly combined with the can_access_category() function.
         $this->category_access_level = get_term_meta($this->current_category, 'category_access', true);
 
         if ($this->category_access_level) {

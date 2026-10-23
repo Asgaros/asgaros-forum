@@ -154,13 +154,27 @@ class AsgarosForumNotifications {
 
     // Subscribes the current user to the current forum.
     public function subscribe_forum($forum_id) {
-        // Check first if this forum exists.
-        if ($this->asgarosforum->content->forum_exists($forum_id)) {
-            // Only subscribe user if he is not already subscribed for this forum.
-            if (!$this->is_subscribed('forum', $forum_id)) {
-                add_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum', $forum_id);
-            }
+        // Cancel if this forum does not exist.
+        if (!$this->asgarosforum->content->forum_exists($forum_id)) {
+            return;
         }
+
+        // Cancel if this user cannot access this category.
+        $forum = $this->asgarosforum->content->get_forum($forum_id);
+        $user_id = get_current_user_id();
+        $category_id = $forum->parent_id;
+
+        if (!$this->asgarosforum->permissions->can_access_category($user_id, $category_id)) {
+            return;
+        }
+
+        // Cancel if the user is already subscribed to this forum.
+        if ($this->is_subscribed('forum', $forum_id)) {
+            return;
+        }
+        
+        // Subscribe to this forum.
+        add_user_meta(get_current_user_id(), 'asgarosforum_subscription_forum', $forum_id);
     }
 
     // Unsubscribes the current user from the current topic.
