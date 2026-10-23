@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 class AsgarosForum {
-    public $version               = '3.4.0';
+    public $version               = '3.5.0';
     public $executePlugin         = false;
     public $db                    = null;
     public $tables                = null;

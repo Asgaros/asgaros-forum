@@ -5,7 +5,7 @@ Tags: forum, forums, discussion, community, asgaros
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 5.3
-Stable tag: 3.4.0
+Stable tag: 3.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,7 @@ Please report security bugs found in the source code of the Asgaros Forum plugin
 6. Manage general options
 
 == Changelog ==
+= 3.5.0 =
 * Fixed: Broken access control in forum subscription feature
 * Removed: Statusbar from editor
 * Compatibility with WordPress 7.1
