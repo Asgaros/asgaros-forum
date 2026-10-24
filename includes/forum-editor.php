@@ -120,6 +120,9 @@ class AsgarosForumEditor {
 		if ($this->asgarosforum->executePlugin) {
 			// Ensure that the editor is toggled.
 			$args['wordpress_adv_hidden'] = false;
+
+            // Remove statusbar.
+            $args['statusbar'] = false;
 		}
 
 		return $args;
