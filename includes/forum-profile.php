@@ -280,9 +280,10 @@ class AsgarosForumProfile {
 
                     // Show website.
                     if (!empty($userData->user_url)) {
+                        $safe_url = esc_url($userData->user_url);
                         $profileRows['website'] = array(
                             'title' => __('Website:', 'asgaros-forum'),
-                            'value' => '<a href="'.$userData->user_url.'" rel="nofollow" target="_blank">'.$userData->user_url.'</a>',
+                            'value' => '<a href="'.$safe_url.'" rel="nofollow" target="_blank">'.$safe_url.'</a>',
                         );
                     }
 
@@ -396,7 +397,12 @@ class AsgarosForumProfile {
                     }
                 }
             } else {
-                echo wp_kses_post($cellValue);
+                // Only allow safe HTML for website links, otherwise escape.
+                if ($type === 'website') {
+                    echo wp_kses($cellValue, array('a' => array('href' => array(), 'rel' => array(), 'target' => array())));
+                } else {
+                    echo wp_kses_post($cellValue);
+                }
             }
 
             echo '</div>';

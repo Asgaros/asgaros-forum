@@ -32,12 +32,12 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $forumIcon = (empty($forumIcon)) ? 'fas fa-comments' : $forumIcon;
 
         $columnHTML  = '';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_description" value="'.esc_html(stripslashes($item['description'])).'">';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_icon" value="'.$forumIcon.'">';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_status" value="'.esc_html(stripslashes($item['forum_status'])).'">';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_order" value="'.esc_html(stripslashes($item['sort'])).'">';
-        $columnHTML .= '<input type="hidden" id="forum_'.$item['id'].'_count_subforums" value="'.esc_html(stripslashes($item['count_subforums'])).'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.(int)$item['id'].'_name" value="'.esc_html(stripslashes($item['name'])).'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.(int)$item['id'].'_description" value="'.esc_html(stripslashes($item['description'])).'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.(int)$item['id'].'_icon" value="'.$forumIcon.'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.(int)$item['id'].'_status" value="'.esc_html(stripslashes($item['forum_status'])).'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.(int)$item['id'].'_order" value="'.esc_html(stripslashes($item['sort'])).'">';
+        $columnHTML .= '<input type="hidden" id="forum_'.(int)$item['id'].'_count_subforums" value="'.esc_html(stripslashes($item['count_subforums'])).'">';
 
         if ($item['parent_forum']) {
             $columnHTML .= '<div class="subforum">';
@@ -50,14 +50,14 @@ class Asgaros_Forum_Admin_Structure_Table extends WP_List_Table {
         $forum_icon  = (empty($forum_icon)) ? 'fas fa-comments' : $forum_icon;
         $columnHTML .= '<span class="forum-icon '.$forum_icon.'"></span>';
 
-        $columnHTML .= esc_html(stripslashes($item['name'])).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.$item['id'].')</span></span>';
+        $columnHTML .= esc_html(stripslashes($item['name'])).' <span class="element-id">('.__('ID', 'asgaros-forum').': '.(int)$item['id'].')</span></span>';
         $columnHTML .= '<br>';
         $columnHTML .= '<span class="forum-description">';
 
         if (empty($item['description'])) {
             $columnHTML .= '<span class="element-id">'.__('No description yet ...', 'asgaros-forum').'</span>';
         } else {
-            $columnHTML .= stripslashes($item['description']);
+            $columnHTML .= esc_html(stripslashes($item['description']));
         }
 
         $columnHTML .= '</span>';

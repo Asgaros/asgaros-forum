@@ -34,7 +34,7 @@ class AsgarosForumBreadCrumbs {
 
         if ($this->breadcrumbs_level >= 4) {
             $element_link  = $this->asgarosforum->get_link('home');
-            $element_title = stripslashes($this->asgarosforum->options['forum_title']);
+            $element_title = esc_html(stripslashes($this->asgarosforum->options['forum_title']));
             $this->add_breadcrumb($element_link, $element_title);
         }
 

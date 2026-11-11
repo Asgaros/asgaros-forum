@@ -127,7 +127,7 @@ function mycred_load_asgarosforum_hook() {
             $balance = $this->core->get_users_balance($user_id, $this->mycred_type);
             $layout  = $this->core->plural().': '.$this->core->format_creds($balance);
 
-            echo '<small class="users-mycred-balance">'.$layout.'</small>';
+            echo '<small class="users-mycred-balance">'.esc_html($layout).'</small>';
         }
 
         public function show_points_profile($user_data) {
@@ -159,12 +159,12 @@ function mycred_load_asgarosforum_hook() {
             }
 
             $rank_id = mycred_get_users_rank_id($user_id);
-            echo mycred_get_rank_logo($rank_id);
+            echo wp_kses_post(mycred_get_rank_logo($rank_id));
         }
 
         public function show_ranks_profile($user_data) {
             $rank_id = mycred_get_users_rank_id($user_data->ID);
-            $this->asgarosforum->profile->renderProfileRow(__('Rank:', 'asgaros-forum'), mycred_get_rank_logo($rank_id));
+            $this->asgarosforum->profile->renderProfileRow(__('Rank:', 'asgaros-forum'), wp_kses_post(mycred_get_rank_logo($rank_id)));
         }
 
         public function new_topic($post_id, $topic_id, $subject, $content, $link, $author_id) {

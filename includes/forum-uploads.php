@@ -179,76 +179,81 @@ class AsgarosForumUploads {
     }
 
 	public function show_uploaded_files($post_id, $post_uploads) {
-		$path          = $this->upload_path.$post_id.'/';
+        $path          = $this->upload_path.$post_id.'/';
         $url           = $this->upload_url.$post_id.'/';
         $uploads       = maybe_unserialize($post_uploads);
         $uploadedFiles = '';
-		$output        = '';
+        $output        = '';
 
         if (!empty($uploads) && is_dir($path)) {
-			// Generate special message instead of file-list when hiding uploads for guests.
-			if (!is_user_logged_in() && $this->asgarosforum->options['hide_uploads_from_guests']) {
-				$uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'</li>';
-			} else {
-				foreach ($uploads as $upload) {
-	                if (is_file($path.wp_basename($upload))) {
-						$file_extension = strtolower(pathinfo($path.wp_basename($upload), PATHINFO_EXTENSION));
-						$imageThumbnail = ($this->asgarosforum->options['uploads_show_thumbnails'] && $file_extension !== 'pdf') ? wp_get_image_editor($path.wp_basename($upload)) : false;
+            // Generate special message instead of file-list when hiding uploads for guests.
+            if (!is_user_logged_in() && $this->asgarosforum->options['hide_uploads_from_guests']) {
+                $uploadedFiles .= '<li>'.__('You need to login to have access to uploads.', 'asgaros-forum').'</li>';
+            } else {
+                foreach ($uploads as $upload) {
+                    if (is_file($path.wp_basename($upload))) {
+                        $file_extension = strtolower(pathinfo($path.wp_basename($upload), PATHINFO_EXTENSION));
+                        $imageThumbnail = ($this->asgarosforum->options['uploads_show_thumbnails'] && $file_extension !== 'pdf') ? wp_get_image_editor($path.wp_basename($upload)) : false;
 
-						$uploadedFiles .= '<li class="uploaded-file">';
+                        $safe_upload = esc_html($upload);
+                        $safe_url = esc_url($url . utf8_uri_encode($upload));
 
-						if ($imageThumbnail && !is_wp_error($imageThumbnail)) {
-							$uploadedFiles .= '<a href="'.$url.utf8_uri_encode($upload).'" target="_blank"><img class="resize" src="'.$url.utf8_uri_encode($upload).'" alt="'.$upload.'"></a>';
-						} else {
-							$uploadedFiles .= '<a href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a>';
-						}
+                        $uploadedFiles .= '<li class="uploaded-file">';
 
-						$uploadedFiles .= '</li>';
-	                }
-	            }
-			}
+                        if ($imageThumbnail && !is_wp_error($imageThumbnail)) {
+                            $uploadedFiles .= '<a href="'.$safe_url.'" target="_blank"><img class="resize" src="'.$safe_url.'" alt="'.$safe_upload.'"></a>';
+                        } else {
+                            $uploadedFiles .= '<a href="'.$safe_url.'" target="_blank">'.$safe_upload.'</a>';
+                        }
 
-			if (!empty($uploadedFiles)) {
+                        $uploadedFiles .= '</li>';
+                    }
+                }
+            }
+
+            if (!empty($uploadedFiles)) {
                 $output .= '<strong class="uploaded-files-title">'.__('Uploaded files:', 'asgaros-forum').'</strong>';
                 $output .= '<ul>'.$uploadedFiles.'</ul>';
-			}
+            }
         }
 
-		return $output;
+        return $output;
     }
 
-	public function show_editor_upload_form($postObject) {
-		$uploadedFilesCounter = 0;
+    public function show_editor_upload_form($postObject) {
+        $uploadedFilesCounter = 0;
 
-		// Show list of uploaded files first. Also shown when uploads are disabled to manage existing files if it was enabled before.
-		if ($postObject && $this->asgarosforum->current_view === 'editpost') {
-			$path          = $this->upload_path.$postObject->id.'/';
-	        $url           = $this->upload_url.$postObject->id.'/';
-	        $uploads       = maybe_unserialize($postObject->uploads);
-	        $uploadedFiles = '';
+        // Show list of uploaded files first. Also shown when uploads are disabled to manage existing files if it was enabled before.
+        if ($postObject && $this->asgarosforum->current_view === 'editpost') {
+            $path          = $this->upload_path.$postObject->id.'/';
+            $url           = $this->upload_url.$postObject->id.'/';
+            $uploads       = maybe_unserialize($postObject->uploads);
+            $uploadedFiles = '';
 
-			if (!empty($uploads) && is_dir($path)) {
-				foreach ($uploads as $upload) {
-	                if (is_file($path.wp_basename($upload))) {
-						++$uploadedFilesCounter;
-	                    $uploadedFiles .= '<li>';
-	                    $uploadedFiles .= '<a href="'.$url.utf8_uri_encode($upload).'" target="_blank">'.$upload.'</a> &middot; <a data-filename="'.$upload.'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
-	                    $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.$upload.'">';
-	                    $uploadedFiles .= '</li>';
-	                }
-	            }
+            if (!empty($uploads) && is_dir($path)) {
+                foreach ($uploads as $upload) {
+                    if (is_file($path.wp_basename($upload))) {
+                        ++$uploadedFilesCounter;
+                        $safe_upload = esc_html($upload);
+                        $safe_url = esc_url($url . utf8_uri_encode($upload));
+                        $uploadedFiles .= '<li>';
+                        $uploadedFiles .= '<a href="'.$safe_url.'" target="_blank">'.$safe_upload.'</a> &middot; <a data-filename="'.esc_attr($upload).'" class="delete">['.__('Delete', 'asgaros-forum').']</a>';
+                        $uploadedFiles .= '<input type="hidden" name="existingfile[]" value="'.esc_attr($upload).'">';
+                        $uploadedFiles .= '</li>';
+                    }
+                }
 
-				if (!empty($uploadedFiles)) {
+                if (!empty($uploadedFiles)) {
                     echo '<div id="files-to-delete"></div>';
-	                echo '<div class="editor-row">';
-	                	echo '<span class="row-title">'.esc_html__('Uploaded files:', 'asgaros-forum').'</span>';
-	                	echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
-	                echo '</div>';
-	            }
-			}
-		}
+                    echo '<div class="editor-row">';
+                        echo '<span class="row-title">'.esc_html__('Uploaded files:', 'asgaros-forum').'</span>';
+                        echo '<ul class="uploaded-files">'.$uploadedFiles.'</ul>';
+                    echo '</div>';
+                }
+            }
+        }
 
-		// Show upload controls.
+        // Show upload controls.
         if ($this->asgarosforum->options['allow_file_uploads']) {
 			// Dont show upload controls under certain conditions.
 			if (!is_user_logged_in() && $this->asgarosforum->options['upload_permission'] != 'everyone') {
