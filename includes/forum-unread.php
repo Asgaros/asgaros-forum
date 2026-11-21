@@ -106,7 +106,14 @@ class AsgarosForumUnread {
         if ($this->user_id) {
             return get_user_meta($this->user_id, 'asgarosforum_unread_cleared', true);
         } else if (isset($_COOKIE['asgarosforum_unread_cleared'])) {
-            return sanitize_text_field($_COOKIE['asgarosforum_unread_cleared']);
+            $last_visit = sanitize_text_field($_COOKIE['asgarosforum_unread_cleared']);
+
+            // Ensure the value is a valid datetime before it gets used inside unprepared queries.
+            if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/', $last_visit)) {
+                return $last_visit;
+            }
+
+            return '1000-01-01 00:00:00';
         } else {
             return '1000-01-01 00:00:00';
         }
